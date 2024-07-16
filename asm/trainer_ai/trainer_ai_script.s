@@ -82,7 +82,7 @@ Basic_CheckForImmunity:
     IfLoadedEqualTo ABILITY_FLASH_FIRE, Basic_CheckFireAbsorption
     IfLoadedEqualTo ABILITY_WONDER_GUARD, Basic_CheckWonderGuard
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckGroundAbsorption
-    IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckWaterAbsorption2 ; BUG: This line should branch on Dry Skin rather than Levitate
+    IfLoadedEqualTo ABILITY_DRY_SKIN, Basic_CheckWaterAbsorption2
     GoTo Basic_NoImmunityAbility
 
 Basic_CheckElectricAbsorption:
@@ -1175,23 +1175,23 @@ Basic_CheckMetalBurst:
     ; If the target is immune to Metal Burst due to its typing (?), score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
 
-    ; If the target's ability is Stall or they are holding a Shiny Stone, score -10.
-    ; BUG: This should use the command LoadHeldItemEffect to check for the Lagging Tail
-    ; effect.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfHeldItemEqualTo AI_BATTLER_DEFENDER, ITEM_SHINY_STONE, ScoreMinus10
+    ; If the target is holding a Lagging Tail, score -10.
+	LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedInTable Basic_LaggingTailItemEffect, ScoreMinus10
 
-    ; If the attacker's ability is Stall or they are holding a Shiny Stone, terminate.
-    ; BUG: This should use the command LoadHeldItemEffect to check for the Lagging Tail
-    ; effect.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_SHINY_STONE, Basic_CheckMetalBurst_Terminate
+    ; If the attacker is holding a Lagging Tail, terminate.
+	LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedInTable Basic_LaggingTailItemEffect, Basic_CheckMetalBurst_Terminate
 
     ; If the attacker is faster than the target, score -10.
     IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus10
 
 Basic_CheckMetalBurst_Terminate:
-    PopOrEnd 
+    PopOrEnd
+	
+Basic_LaggingTailItemEffect:
+    TableEntry HOLD_EFFECT_PRIORITY_DOWN
+    TableEntry TABLE_END
 
 Basic_CheckEmbargo:
     ; If the target is already under the respective effect, score -10.
@@ -3614,15 +3614,14 @@ Expert_Spikes_End:
     PopOrEnd 
 
 Expert_Foresight:
-    ; If the attacker has a Ghost typing, 47.3% chance of score +2.
-    ; BUG: This should instead check the opponent's typing.
+    ; If the defender has a Ghost typing, 47.3% chance of score +2.
     ;
     ; If the target's Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
     ;
     ; Otherwise, score -2.
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_GHOST, Expert_Foresight_FirstRoll
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_GHOST, Expert_Foresight_FirstRoll
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_Foresight_SecondRoll
     AddToMoveScore -2
@@ -3785,8 +3784,6 @@ Expert_SunnyDay:
     ;
     ; If the attacker has the ability Flower Gift or is statused and has the ability Leaf Guard,
     ; score +1.
-    ; BUG: This should check instead if the attacker is NOT statused, as Leaf Guard has no
-    ; effect on existing status conditions.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_SunnyDay_ScoreMinus1
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_HAILING, Expert_SunnyDay_ScorePlus1
@@ -3795,7 +3792,7 @@ Expert_SunnyDay:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_FLOWER_GIFT, Expert_SunnyDay_ScorePlus1
     IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Expert_SunnyDay_End
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_SunnyDay_ScorePlus1
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_SunnyDay_ScorePlus1
     GoTo Expert_SunnyDay_End
 
 Expert_SunnyDay_ScorePlus1:
@@ -4126,9 +4123,8 @@ Expert_Hail_End:
     PopOrEnd 
 
 Expert_Facade:
-    ; If the opponent has a status condition which would boost Facade, score +2.
-    ; BUG: This should instead check if the attacker has such a status condition.
-    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_FACADE_BOOST, Expert_Facade_End
+    ; If the attacker has a status condition which would boost Facade, score +2.
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_FACADE_BOOST, Expert_Facade_End
     AddToMoveScore 2
 
 Expert_Facade_End:
@@ -4353,7 +4349,6 @@ Expert_Trick_FlavorBerries:
     TableEntry TABLE_END
 
 Expert_Trick_DisruptiveItems:
-    ; BUG: This list does not include Macho Brace.
     TableEntry HOLD_EFFECT_CHOICE_ATK
     TableEntry HOLD_EFFECT_CHOICE_SPATK
     TableEntry HOLD_EFFECT_CHOICE_SPEED
@@ -4367,6 +4362,7 @@ Expert_Trick_DisruptiveItems:
     TableEntry HOLD_EFFECT_LVLUP_SPDEF_EV_UP
     TableEntry HOLD_EFFECT_LVLUP_SPEED_EV_UP
     TableEntry HOLD_EFFECT_LVLUP_HP_EV_UP
+	TableEntry HOLD_EFFECT_EVS_UP_SPEED_DOWN
     TableEntry TABLE_END
 
 Expert_Trick_PoisoningItems:
@@ -4625,17 +4621,15 @@ Expert_WaterSpout:
     ; If the attacker is slower than its opponent and the opponent's HP <= 70%, score -1.
     ;
     ; If the attacker is faster than its opponent and the opponent's HP <= 50%, score -1.
-    ;
-    ; BUG: This should instead check for the user's HP.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_WaterSpout_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_WaterSpout_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_WaterSpout_ScoreMinus1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_WaterSpout_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_WaterSpout_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_WaterSpout_End
     GoTo Expert_WaterSpout_ScoreMinus1
 
 Expert_WaterSpout_SlowerCheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_WaterSpout_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_WaterSpout_End
 
 Expert_WaterSpout_ScoreMinus1:
     AddToMoveScore -1
@@ -7282,16 +7276,14 @@ TagStrategy_SpreadElectricMove:
     IfLoadedEqualTo AI_HAVE, ScorePlus3
 	CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LIGHTNING_ROD
     IfLoadedEqualTo AI_HAVE, ScorePlus3
+	FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_GROUND
+    IfLoadedEqualTo AI_HAVE, ScorePlus3
+	
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_WATER
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
 
-    ; BUG: This should be before the checks for all other types; in its present position, the
-    ; vanilla trainer AI will never use Discharge if their partner is, e.g., Swampert or Gliscor
-    ; (which should be treated as Immune to the move, but are not).
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_GROUND
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
     AddToMoveScore -3
 
 TagStrategy_CheckElectric_End:
@@ -7318,7 +7310,7 @@ TagStrategy_CheckPartnerStormDrain:
 TagStrategy_SpreadWaterMove:
     ; If our partner has Dry Skin or Water Absorb, score +3
     ;
-    ; If our partner otherwise has a Ground or Fire typing, score -10
+    ; If our partner otherwise has a Ground, Rock or Fire typing, score -10
     ;
     ; Else, score -3
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_DRY_SKIN
@@ -7328,10 +7320,11 @@ TagStrategy_SpreadWaterMove:
 	CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_STORM_DRAIN
     IfLoadedEqualTo AI_HAVE, ScorePlus3
 
-    ; BUG: This should also include a similar check for the Rock type
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_GROUND
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
+    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+	FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
     AddToMoveScore -3
 
@@ -7617,11 +7610,11 @@ TagStrategy_PartnerPoisonStatus:
     ;  - Has the Poison Heal ability
     ;  - Is not currently statused
     ;  - Is not holding a Toxic Orb
-    ;  - Is at 81% HP or greater
+    ;  - Is at 91% HP or less
+	;  - Is not Steel or Poison type
     ;
     ; Otherwise, score -30
     ;
-    ; BUG: This routine should also consider if the partner has a Poison or Steel typing.
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_POISON_HEAL
     IfLoadedNotEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
 
@@ -7630,6 +7623,18 @@ TagStrategy_PartnerPoisonStatus:
     IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_TOXIC_ORB, TagStrategy_PartnerScoreMinus30
 
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 91, TagStrategy_PartnerScoreMinus30
+	
+	LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_STEEL, TagStrategy_PartnerScoreMinus30
+	
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_STEEL, TagStrategy_PartnerScoreMinus30
+	
+	LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_POISON, TagStrategy_PartnerScoreMinus30
+	
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_POISON, TagStrategy_PartnerScoreMinus30
 
     GoTo ScorePlus5
 
