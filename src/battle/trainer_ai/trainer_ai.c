@@ -3745,12 +3745,13 @@ static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *bat
  */
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i;
+    int i, j;
     u8 aiSlot1, aiSlot2;
     u8 moveType;
     u8 ability;
-    u8 checkAbility;
-    int start, end;
+    u8 checkAbility[3];
+    // u8 checkAbility, checkAbility2, checkAbility3;
+    int start, end, checkAbilityCount;
     Pokemon *mon;
 
     // If we have a super-effective move against either opponent, do not switch ~33% of the time.
@@ -3770,18 +3771,30 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
 
     moveType = MOVE_DATA(battleCtx->moveHit[battler]).type;
     if (moveType == TYPE_FIRE) {
-        checkAbility = ABILITY_FLASH_FIRE;
+        checkAbility[0] = ABILITY_FLASH_FIRE;
+        checkAbilityCount = 1;
     } else if (moveType == TYPE_WATER) {
-        checkAbility = ABILITY_WATER_ABSORB;
+        checkAbility[0] = ABILITY_WATER_ABSORB;
+        checkAbility[1] = ABILITY_STORM_DRAIN;
+        checkAbility[2] = ABILITY_DRY_SKIN;
+        checkAbilityCount = 3;
     } else if (moveType == TYPE_ELECTRIC) {
-        checkAbility = ABILITY_VOLT_ABSORB;
+        checkAbility[0] = ABILITY_VOLT_ABSORB;
+        checkAbility[1] = ABILITY_LIGHTNING_ROD;
+        checkAbilityCount = 2;
+    } else if (moveType == TYPE_GROUND) {
+        checkAbility[0] = ABILITY_LEVITATE;
+        checkAbilityCount = 1;
     } else {
         return ABILITY_NONE;
     }
 
     // If our ability absorbs the type of the last move that hit us, do not switch.
-    if (Battler_Ability(battleCtx, battler) == checkAbility) {
-        return FALSE;
+    for (j = 0; j < checkAbilityCount; j++) {
+        if (Battler_Ability(battleCtx, battler) == checkAbility[j]) {
+            return FALSE;
+            break;
+        }
     }
 
     aiSlot1 = battler;
@@ -3808,10 +3821,13 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
                 && i != battleCtx->aiSwitchedPartySlot[aiSlot2]) {
             ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
-            // Switch to a matching Pokemon 50% of the time.
-            if (checkAbility == ability && (BattleSystem_RandNext(battleSys) & 1)) {
-                battleCtx->aiSwitchedPartySlot[battler] = i;
-                return TRUE;
+            for (j = 0; j < checkAbilityCount; j++) {
+                // Switch to a matching Pokemon 50% of the time.
+                if (checkAbility[j] == ability && (BattleSystem_RandNext(battleSys) & 1)) {
+                    battleCtx->aiSwitchedPartySlot[battler] = i;
+                    return TRUE;
+                    break;
+                }
             }
         }
     }
@@ -4207,7 +4223,7 @@ static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler)
             }
 
             if (item == ITEM_FULL_RESTORE) {
-                if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP / 4)
+                if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP / 3)
                         && battleCtx->battleMons[battler].curHP) {
                     AI_CONTEXT.usedItemType[battler >> 1] = ITEM_TYPE_FULL_RESTORE;
                     result = TRUE;
@@ -4215,11 +4231,11 @@ static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler)
             } else if (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HP_RESTORE)) {
                 hpRestore = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HP_RESTORED);
 
-                // Use an HP restore item if the battler is at less than 1/4 HP or if the full HP restore
+                // Use an HP restore item if the battler is at less than 1/3 HP or if the full HP restore
                 // value of the item would be used.
                 if (hpRestore) {
                     if (battleCtx->battleMons[battler].curHP
-                            && (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP / 4)
+                            && (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP / 3)
                                 || (battleCtx->battleMons[battler].maxHP - battleCtx->battleMons[battler].curHP) > hpRestore)) {
                         AI_CONTEXT.usedItemType[battler >> 1] = ITEM_TYPE_RECOVER_HP;
                         result = TRUE;

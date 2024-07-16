@@ -2283,6 +2283,9 @@ Expert_BypassAccuracyMove_End:
     PopOrEnd 
 
 Expert_StatusAttackDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the target is at any stat stage other than +0, additional score -1. Also, further modify
     ; the score according to all of the following which apply:
     ; - If the attacker's HP is at 90% or lower, additional score -1.
@@ -2291,6 +2294,12 @@ Expert_StatusAttackDown:
     ; If the target's HP is at 70% or lower, additional score -2.
     ;
     ; If the move last used by the target was not a Special move, 50% chance of score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_StatusAttackDown_CheckTargetHP
     AddToMoveScore -1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_StatusAttackDown_CheckTargetStatStage
@@ -2324,11 +2333,20 @@ Expert_StatusAttackDown_PreSplitPhysicalTypes:
     TableEntry TABLE_END
 
 Expert_StatusDefenseDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the attacker's HP is < 70%, 80.5% chance of additional score -2.
     ;
     ; If the target's stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
     ;
     ; If the target's HP is < 70%, score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusDefenseDown_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 3, Expert_StatusDefenseDown_CheckTargetHP
 
@@ -2344,9 +2362,18 @@ Expert_StatusDefenseDown_End:
     PopOrEnd 
 
 Expert_SpeedDownOnHit:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the target is immune to or would resist the move, do not apply any further modifiers.
     ;
     ; Treat the exact moves Icy Wind, Rock Tomb, and Mud Shot as Speed-reducing status moves.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_SpeedDownOnHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SpeedDownOnHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_SpeedDownOnHit_End
@@ -2359,9 +2386,18 @@ Expert_SpeedDownOnHit_End:
     PopOrEnd 
 
 Expert_StatusSpeedDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the attacker is slower than its target, 72.7% chance of score +2.
     ;
     ; If the attacker is faster than its target, score -3.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_StatusSpeedDown_TryScorePlus2
     AddToMoveScore -3
     GoTo Expert_StatusSpeedDown_End
@@ -2374,6 +2410,9 @@ Expert_StatusSpeedDown_End:
     PopOrEnd 
 
 Expert_StatusSpAttackDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the target is at any stat stage other than +0, additional score -1. Also, further modify
     ; the score according to all of the following which apply:
     ; - If the attacker's HP is at 90% or lower, additional score -1.
@@ -2382,6 +2421,12 @@ Expert_StatusSpAttackDown:
     ; If the target's HP is at 70% or lower, additional score -2.
     ;
     ; If the move last used by the target was not a Physical move, 50% chance of score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_StatusSpAttackDown_CheckTargetHP
     AddToMoveScore -1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_StatusSpAttackDown_CheckTargetStatStage
@@ -2417,11 +2462,20 @@ Expert_StatusSpAttackDown_PreSplitSpecialTypes:
     TableEntry TABLE_END
 
 Expert_StatusSpDefenseDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the attacker's HP is < 70%, 80.5% chance of additional score -2.
     ;
     ; If the target's stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
     ;
     ; If the target's HP is < 70%, score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusSpDefenseDown_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 3, Expert_StatusSpDefenseDown_CheckTargetHP
 
@@ -2437,6 +2491,9 @@ Expert_StatusSpDefenseDown_End:
     PopOrEnd 
 
 Expert_StatusAccuracyDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the target's HP is <= 70% and the attacker's HP is NOT >= 70%, 60.9% chance of additional
     ; score -1.
     ;
@@ -2454,6 +2511,12 @@ Expert_StatusAccuracyDown:
     ; - If the attacker is at exactly +0 stat stage, no further score modifiers.
     ; - If either the attacker's HP or the target's HP are < 40%, score -2.
     ; - Otherwise, ~72.7% chance of score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusAccuracyDown_TryScoreMinus1
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusAccuracyDown_CheckUserAccuracy
 
@@ -2506,11 +2569,20 @@ Expert_StatusAccuracyDown_End:
     PopOrEnd 
 
 Expert_StatusEvasionDown:
+	; If the defender has Clear Body or White Smoke, score -3
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the attacker's HP is < 70%, 80.5% chance of additional score -2.
     ;
     ; Otherwise, if the target's stat stage is -3 or lower, 80.5% chance of additional score -2.
     ;
     ; If the target's HP is <= 70%, score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusEvasionDown_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 3, Expert_StatusEvasionDown_CheckTargetHP
 
@@ -6129,6 +6201,8 @@ Expert_MagnetRise_End:
     PopOrEnd 
 
 Expert_Defog:
+	; If the defender has Defiant or Competitive, score -10
+	;
     ; If the opponent's side of the field is under the effect of Light Screen or Reflect:
     ; - If the attacker's HP < 30% and there are no remaining party members:
     ;   - 80.5% chance of additional score -2.
@@ -6148,6 +6222,10 @@ Expert_Defog:
     ; Otherwise:
     ; - 80.5% chance of additional score -2.
     ; - If the opponent's HP <= 70% score -2.
+	LoadBattlerAbility AI_BATTLER_DEFENDER
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_Defog_ScreenScrubbing
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_Defog_ScreenScrubbing
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_ScoreMinus2AndEnd
