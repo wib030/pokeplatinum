@@ -1,0 +1,22 @@
+{
+    "name": "Octazooka",
+    "class": "CLASS_SPECIAL",
+    "type": "TYPE_WATER",
+    "power": 100,
+    "accuracy": 90,
+    "pp": 10,
+    "effect": {
+        "type": "BATTLE_EFFECT_HIGH_CRITICAL",
+        "chance": 0
+    },
+    "range": "RANGE_SINGLE_TARGET",
+    "priority": 0,
+    "flags": [
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE"
+    ],
+    "contest": {
+        "effect": 4,
+        "type": "CONTEST_TYPE_TOUGH"
+    }
+}

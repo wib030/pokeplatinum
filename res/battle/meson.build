@@ -1,0 +1,2 @@
+subdir('moves')
+subdir('scripts')

@@ -1,0 +1,41 @@
+{
+    "name": "Liz & Liv",
+    "class": "TRAINER_CLASS_TWINS",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_TAG_STRATEGY"
+    ],
+    "double_battle": true,
+    "party": [
+        {
+            "species": "SPECIES_PLUSLE",
+            "form": 0,
+            "level": 12,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_THUNDER_WAVE",
+				"MOVE_GRASS_KNOT",
+				"MOVE_HELPING_HAND",
+				"MOVE_QUICK_ATTACK"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_MINUN",
+            "form": 0,
+            "level": 12,
+            "item": "ITEM_METRONOME",
+            "moves": [
+                "MOVE_DISCHARGE",
+				"MOVE_GRASS_KNOT",
+				"MOVE_SWIFT",
+				"MOVE_SIGNAL_BEAM"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}

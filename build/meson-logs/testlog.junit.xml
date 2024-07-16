@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites tests="3" errors="0" failures="0"><testsuite name="pokeplatinum" tests="3" errors="0" failures="0" skipped="0" time="0.10887002944946289"><testcase name="SBIN Checksums" classname="pokeplatinum" time="0.10887002944946289" /><testcase name="Filesystem Checksums" classname="pokeplatinum" time="0.25692272186279297" /><testcase name="ROM Checksum" classname="pokeplatinum" time="0.2558300495147705" /></testsuite></testsuites>

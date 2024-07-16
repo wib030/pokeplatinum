@@ -1,0 +1,26 @@
+{
+    "name": "Samantha",
+    "class": "TRAINER_CLASS_LASS",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_SUNKERN",
+            "form": 0,
+            "level": 7,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_WORRY_SEED",
+				"MOVE_SWEET_SCENT",
+				"MOVE_MEGA_DRAIN",
+				"MOVE_GRASS_WHISTLE"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}

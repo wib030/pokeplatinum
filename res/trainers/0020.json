@@ -1,0 +1,27 @@
+{
+    "name": "Kelsey",
+    "class": "TRAINER_CLASS_BATTLE_GIRL",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MACHOP",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_PROTECT",
+				"MOVE_ROLLING_KICK",
+				"MOVE_BULLET_PUNCH",
+				"MOVE_FIRE_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "Twineedle",
+    "class": "CLASS_PHYSICAL",
+    "type": "TYPE_BUG",
+    "power": 25,
+    "accuracy": 100,
+    "pp": 20,
+    "effect": {
+        "type": "BATTLE_EFFECT_POISON_MULTI_HIT",
+        "chance": 20
+    },
+    "range": "RANGE_SINGLE_TARGET",
+    "priority": 0,
+    "flags": [
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
+    ],
+    "contest": {
+        "effect": 7,
+        "type": "CONTEST_TYPE_COOL"
+    }
+}

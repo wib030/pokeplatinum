@@ -1,0 +1,6 @@
+#ifndef POKEPLATINUM_STRUCT_020308A0_DECL_H
+#define POKEPLATINUM_STRUCT_020308A0_DECL_H
+
+typedef struct BattleFrontierStage BattleFrontierStage;
+
+#endif // POKEPLATINUM_STRUCT_020308A0_DECL_H

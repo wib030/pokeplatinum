@@ -1,0 +1,9 @@
+cd /c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum
+./build.sh rom
+
+(or whatever ur path is lol)
+
+./config.sh
+./clean.sh
+
+these are for early setup ^

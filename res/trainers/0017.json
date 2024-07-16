@@ -1,0 +1,40 @@
+{
+    "name": "Siena",
+    "class": "TRAINER_CLASS_PICNICKER",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_TOGEPI",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_SOFTBOILED",
+				"MOVE_SUNNY_DAY",
+				"MOVE_DREAM_EATER",
+				"MOVE_METRONOME"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_TORCHIC",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_EMBER",
+				"MOVE_SMELLING_SALT",
+				"MOVE_FOCUS_ENERGY"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}

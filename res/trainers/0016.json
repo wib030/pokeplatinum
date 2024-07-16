@@ -1,0 +1,31 @@
+{
+    "name": "Damper",
+    "class": "TRAINER_CLASS_CAMPER",
+    "items": [
+        "ITEM_FRESH_WATER",
+		"ITEM_FRESH_WATER"
+    ],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_WEATHER"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_PSYDUCK",
+            "form": 0,
+            "level": 17,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_WATER_GUN",
+				"MOVE_WATER_SPORT",
+				"MOVE_RAIN_DANCE",
+				"MOVE_WHIRLPOOL"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}

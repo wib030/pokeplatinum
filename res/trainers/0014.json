@@ -1,0 +1,41 @@
+{
+    "name": "Taylor",
+    "class": "TRAINER_CLASS_AROMA_LADY",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_SETUP_FIRST_TURN"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_ODDISH",
+            "form": 0,
+            "level": 9,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWEET_SCENT",
+				"MOVE_CHARM",
+				"MOVE_TICKLE",
+				"MOVE_ABSORB"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_CHERUBI",
+            "form": 0,
+            "level": 11,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_TACKLE",
+				"MOVE_AROMATHERAPY",
+				"MOVE_LEECH_SEED",
+				"MOVE_SWEET_SCENT"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}

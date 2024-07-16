@@ -1,0 +1,24 @@
+{
+    "name": "Nickelless",
+    "class": "TRAINER_CLASS_HIKER",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+        "AI_FLAG_DAMAGE_PRIORITY"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_DELCATTY",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_PAY_DAY"
+            ],
+            "power": 30,
+            "ball_seal": 0
+        }
+    ]
+}

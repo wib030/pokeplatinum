@@ -1,0 +1,8 @@
+[wrap-git]
+url = https://github.com/lhearachel/constgen.git
+revision = main
+depth = 1
+directory = constgen
+
+[provide]
+program_names = constgen_py

@@ -1,0 +1,6 @@
+#ifndef POKEPLATINUM_STRUCT_02098700_DECL_H
+#define POKEPLATINUM_STRUCT_02098700_DECL_H
+
+typedef struct HeightWeightData HeightWeightData;
+
+#endif // POKEPLATINUM_STRUCT_02098700_DECL_H

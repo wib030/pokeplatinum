@@ -1,0 +1,24 @@
+{
+    "name": "Andrew",
+    "class": "TRAINER_CLASS_FISHERMAN",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MAGIKARP",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": [
+                "MOVE_SPLASH",
+				"MOVE_BOUNCE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        }
+    ]
+}

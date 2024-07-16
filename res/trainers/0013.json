@@ -1,0 +1,41 @@
+{
+    "name": "Blandon",
+    "class": "TRAINER_CLASS_BUG_CATCHER",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+        "AI_FLAG_EVAL_ATTACK"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_NINCADA",
+            "form": 0,
+            "level": 12,
+            "item": "ITEM_SILVERPOWDER",
+            "moves": [
+                "MOVE_MUD_SLAP",
+                "MOVE_SILVER_WIND",
+                "MOVE_ABSORB",
+				"MOVE_SAND_ATTACK"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_PINECO",
+            "form": 0,
+            "level": 12,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_TACKLE",
+				"MOVE_PROTECT",
+				"MOVE_SELFDESTRUCT",
+				"MOVE_BUG_BITE"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}

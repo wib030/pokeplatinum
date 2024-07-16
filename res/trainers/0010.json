@@ -1,0 +1,80 @@
+{
+    "name": "Tyler",
+    "class": "TRAINER_CLASS_YOUNGSTER",
+    "items": [
+        "ITEM_FRESH_WATER"
+    ],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MAGIKARP",
+            "form": 0,
+            "level": 6,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MAGIKARP",
+            "form": 0,
+            "level": 6,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MAGIKARP",
+            "form": 0,
+            "level": 6,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_FEEBAS",
+            "form": 0,
+            "level": 6,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_FEEBAS",
+            "form": 0,
+            "level": 6,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_FEEBAS",
+            "form": 0,
+            "level": 6,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        }
+    ]
+}

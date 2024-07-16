@@ -1,0 +1,24 @@
+{
+    "name": "Joe",
+    "class": "TRAINER_CLASS_FISHERMAN",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MUDKIP",
+            "form": 0,
+            "level": 17,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_BIDE",
+				"MOVE_REST"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        }
+    ]
+}
