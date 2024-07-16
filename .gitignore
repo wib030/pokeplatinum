@@ -12,6 +12,9 @@
 /subprojects/SDATTool/
 /subprojects/knarc/
 
+# Built rom
+/build/pokeplatinum.us.nds
+
 # CLion folders
 .idea/
 cmake-build-debug/
