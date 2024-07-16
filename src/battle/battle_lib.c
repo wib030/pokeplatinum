@@ -2304,6 +2304,11 @@ int BattleSystem_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battl
                 && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0) {
             invalidMoves |= FlagIndex(i);
         }
+		
+		if (itemEffect == HOLD_EFFECT_RAISE_SPD_NO_STATUS
+                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0) {
+            invalidMoves |= FlagIndex(i);
+        }
 
         if (Move_Imprisoned(battleSys, battleCtx, battler, battleCtx->battleMons[battler].moves[i])
                 && (opMask & CHECK_INVALID_IMPRISONED)) {
@@ -2677,8 +2682,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     } else if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_IGNORE_IMMUNITIES) == FALSE) {
         if ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) && movePower) {
-            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FILTER) == TRUE
-                    || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOLID_ROCK) == TRUE) {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FILTER) == TRUE) {
                 damage = BattleSystem_Divide(damage * 3, 4);
             }
 
@@ -6864,6 +6868,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             && (defenderParams.species == SPECIES_LATIOS || defenderParams.species == SPECIES_LATIAS)) {
         spDefenseStat = spDefenseStat * 150 / 100;
     }
+	if (defenderParams.heldItemEffect == HOLD_EFFECT_RAISE_SPD_NO_STATUS) {
+        spDefenseStat = spDefenseStat * 150 / 100;
+    }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_CLAMPERL_SPATK
             && attackerParams.species == SPECIES_CLAMPERL) {
         spAttackStat *= 2;
@@ -6967,7 +6974,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 	if (moveType == TYPE_PSYCHIC
             && attackerParams.ability == ABILITY_TANGLED_FEET
             && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 150 / 100;
+        movePower = movePower * 200 / 100;
     }
 
     if (moveType == TYPE_FIRE
@@ -7077,9 +7084,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
-    if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
-        defenseStat = defenseStat / 2;
-    }
+    //if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
+    //    defenseStat = defenseStat / 2;
+    //}
 
     if (moveClass == CLASS_PHYSICAL) {
         if (criticalMul > 1) {

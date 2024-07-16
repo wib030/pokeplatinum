@@ -3413,12 +3413,19 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
             }
 			
 			if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY)
+			&& (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MOLD_BREAKER)
 			&& (battleCtx->battleMons[battleCtx->defender].curHP == battleCtx->battleMons[battleCtx->defender].maxHP)
 			&& (battleCtx->damage >= battleCtx->battleMons[battleCtx->defender].maxHP))
 			{
 				DEFENDER_TURN_FLAGS.enduring = TRUE;
 			}
         }
+		
+		if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY)
+		&& (battleCtx->battleMons[battleCtx->defender].curHP < battleCtx->battleMons[battleCtx->defender].maxHP))
+		{
+			DEFENDER_TURN_FLAGS.enduring = FALSE;
+		}
 
         if ((DEFENDER_TURN_FLAGS.enduring || DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
                 && DEFENDING_MON.curHP + battleCtx->damage <= 0) {

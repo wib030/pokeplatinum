@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_SOUNDPROOF",
-        "ABILITY_NONE"
+        "ABILITY_FOREWARN",
+        "ABILITY_SOUNDPROOF"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

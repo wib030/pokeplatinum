@@ -35,7 +35,7 @@
         "EGG_GROUP_MONSTER"
     ],
     "abilities": [
-        "ABILITY_SOLID_ROCK",
+        "ABILITY_FILTER",
         "ABILITY_ROCK_HEAD"
     ],
     "great_marsh_flee_rate": 0,

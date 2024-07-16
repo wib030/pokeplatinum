@@ -2576,5 +2576,11 @@
 #define pl_msg_00000368_01283 1283
 // The foe’s {STRVAR_1 1, 0, 0}’s headache intensified!
 #define pl_msg_00000368_01284 1284
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} ignores the\nrecharge turn!
+#define pl_msg_00000368_01285 1285
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} ignores\nthe recharge turn!
+#define pl_msg_00000368_01286 1286
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} ignores\nthe recharge turn!
+#define pl_msg_00000368_01287 1287
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H

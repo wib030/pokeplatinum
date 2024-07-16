@@ -238,7 +238,7 @@
 #define pl_msg_00000611_00114 114
 // ICE BODY
 #define pl_msg_00000611_00115 115
-// SOLID ROCK
+// RELENTLESS
 #define pl_msg_00000611_00116 116
 // SNOW WARNING
 #define pl_msg_00000611_00117 117

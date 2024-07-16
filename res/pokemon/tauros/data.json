@@ -101,7 +101,7 @@
             "41": "MOVE_SWAGGER",
             "48": "MOVE_THRASH",
 			"51": "MOVE_SHEER_COLD",
-            "55": "MOVE_GIGA_IMPACT"
+            "53": "MOVE_GIGA_IMPACT"
         },
         "tutor": [
             "MOVE_ICY_WIND",

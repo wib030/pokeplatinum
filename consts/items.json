@@ -151,7 +151,8 @@
                 "HOLD_EFFECT_EVOLVE_MAGMAR",
                 "HOLD_EFFECT_EVOLVE_PORYGON2",
                 "HOLD_EFFECT_EVOLVE_DUSCLOPS",
-				"HOLD_EFFECT_NORMAL_HIT_GHOST"
+				"HOLD_EFFECT_NORMAL_HIT_GHOST",
+				"HOLD_EFFECT_RAISE_SPD_NO_STATUS"
             ]
         },
         "@Item": {
