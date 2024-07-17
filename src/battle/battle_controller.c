@@ -1474,7 +1474,7 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
             if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CHIP) && battleCtx->battleMons[battler].curHP) {
                 battleCtx->msgBattlerTemp = battler;
 
-                PrepareSubroutineSequence(battleCtx, subscript_curse_damage);
+                PrepareSubroutineSequence(battleCtx, subscript_chip_damage);
                 state = STATE_BREAK_OUT;
             }
 

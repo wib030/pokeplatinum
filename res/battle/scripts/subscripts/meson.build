@@ -298,4 +298,9 @@ subscript_files = files(
     'subscript_overworld_sun.s',
     'subscript_overworld_trick_room.s',
     'subscript_giratina_form_change.s',
+	'subscript_chip_damage.s',
+	'subscript_apply_chip.s',
+	'subscript_defiant_activate.s',
+	'subscript_comp_activate.s',
+	'subscript_growth.s',
 )

@@ -4382,7 +4382,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 				&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 				&& battleCtx->battleMons[battleCtx->defender].defiantFlag == TRUE) {
-			*subscript = subscript_mean_look;
+			*subscript = subscript_defiant_activate;
 			result = TRUE;
 			battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
 		}
@@ -4393,7 +4393,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 				&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 				&& battleCtx->battleMons[battleCtx->defender].defiantFlag == TRUE) {
-			*subscript = subscript_mean_look;
+			*subscript = subscript_comp_activate;
 			result = TRUE;
 			battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
 		}
@@ -6098,7 +6098,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 		break;
 		
 	case FLING_EFFECT_CHIP:
-			battleCtx->flingScript = subscript_curse_ghost;
+			battleCtx->flingScript = subscript_apply_chip;
 		break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:
