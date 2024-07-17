@@ -2306,7 +2306,8 @@ int BattleSystem_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battl
         }
 		
 		if (itemEffect == HOLD_EFFECT_RAISE_SPD_NO_STATUS
-                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0) {
+		&& (opMask & CHECK_INVALID_ASS_VEST)
+        && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0) {
             invalidMoves |= FlagIndex(i);
         }
 
@@ -2348,16 +2349,14 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
 {
     BOOL result = TRUE;
 
-    if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_DISABLED) & FlagIndex(moveSlot)
-	&& (Battler_HeldItemEffect(battleCtx, battleCtx->defender) != HOLD_EFFECT_RAISE_SPD_NO_STATUS)) {
+    if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_DISABLED) & FlagIndex(moveSlot)) {
         msgOut->tags = TAG_NICKNAME_MOVE;
         msgOut->id = 609; // "{0}'s {1} is disabled!"
         msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, battler);
         msgOut->params[1] = battleCtx->battleMons[battler].moves[moveSlot];
         result = FALSE;
     }
-	else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_DISABLED) & FlagIndex(moveSlot)
-	&& (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_RAISE_SPD_NO_STATUS)) {
+	else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ASS_VEST) & FlagIndex(moveSlot)) {
         msgOut->tags = TAG_NICKNAME_MOVE;
         msgOut->id = 1288; // "{0} can't use {1}!"
         msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, battler);
