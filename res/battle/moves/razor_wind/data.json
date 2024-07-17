@@ -6,8 +6,8 @@
     "accuracy": 70,
     "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_THUNDER",
-        "chance": 10
+        "type": "BATTLE_EFFECT_UNUSED_133",
+        "chance": 30
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,

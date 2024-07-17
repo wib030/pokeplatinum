@@ -2584,9 +2584,9 @@
 #define pl_msg_00000368_01287 1287
 // {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r
 #define pl_msg_00000368_01288 1288
-// The wild {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r
+// {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r
 #define pl_msg_00000368_01289 1289
-// The foe’s {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r
+// {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r
 #define pl_msg_00000368_01290 1290
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H

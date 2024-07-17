@@ -304,5 +304,4 @@ subscript_files = files(
 	'subscript_comp_activate.s',
 	'subscript_growth.s',
 	'subscript_infatuate_hit.s',
-	'subscript_assvest_disable.s',
 )

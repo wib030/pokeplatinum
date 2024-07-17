@@ -23,7 +23,7 @@
             "species": "SPECIES_EMPOLEON",
             "form": 0,
             "level": 15,
-            "item": "ITEM_NONE",
+            "item": "ITEM_MAGMA_STONE",
             "moves": [
 				"MOVE_DISABLE"
             ],

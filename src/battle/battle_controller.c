@@ -2937,7 +2937,8 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
         return 0;
     }
 
-    if (NO_CLOUD_NINE && WEATHER_IS_SUN && MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER) {
+    if ((NO_CLOUD_NINE && WEATHER_IS_SUN && MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER)
+	|| (NO_CLOUD_NINE && WEATHER_IS_SUN && MOVE_DATA(move).effect == BATTLE_EFFECT_UNUSED_133)) {
         hitRate = 50;
     }
 
@@ -3042,7 +3043,8 @@ static int BattleController_CheckMoveHitOverrides(BattleSystem *battleSys, Battl
     }
 
     if (NO_CLOUD_NINE) {
-        if (WEATHER_IS_RAIN && MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER) {
+        if ((WEATHER_IS_RAIN && MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER)
+		|| (WEATHER_IS_RAIN && MOVE_DATA(move).effect == BATTLE_EFFECT_UNUSED_133)) {
             battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
         }
 
