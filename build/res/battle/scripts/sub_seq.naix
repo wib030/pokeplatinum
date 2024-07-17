@@ -308,5 +308,7 @@
 #define subscript_defiant_activate 299
 #define subscript_comp_activate 300
 #define subscript_growth 301
+#define subscript_infatuate_hit 302
+#define subscript_assvest_disable 303
 
 #endif // NARC_SUB_SEQ_NAIX_

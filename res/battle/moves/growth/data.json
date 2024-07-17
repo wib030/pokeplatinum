@@ -6,7 +6,7 @@
     "accuracy": 0,
     "pp": 40,
     "effect": {
-        "type": "BATTLE_EFFECT_RANDOM_POWER_10_CASES",
+        "type": "BATTLE_EFFECT_UNUSED_131",
         "chance": 0
     },
     "range": "RANGE_USER",

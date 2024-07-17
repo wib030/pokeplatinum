@@ -6,7 +6,7 @@
     "accuracy": 100,
     "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE",
+        "type": "BATTLE_EFFECT_UNUSED_110",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",

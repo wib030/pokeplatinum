@@ -150,4 +150,5 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_LUNAR_DANCE]                      = subscript_lunar_dance,
     [MOVE_SUBSCRIPT_PTR_GIVE_TARGET_OWN_STATUS]           = subscript_give_target_own_status,
 	[MOVE_SUBSCRIPT_PTR_GROWTH]                           = subscript_growth,
+	[MOVE_SUBSCRIPT_INFATUATE_HIT]                        = subscript_infatuate_hit,
 };

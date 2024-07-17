@@ -2562,7 +2562,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
 
             battleCtx->statusCheckState++;
             break;
-
+			
         case CHECK_STATUS_STATE_DISABLE:
             if (ATTACKING_MON.moveEffectsData.disabledMove == battleCtx->moveTemp) {
                 battleCtx->moveFailFlags[battleCtx->attacker].disabled = TRUE;

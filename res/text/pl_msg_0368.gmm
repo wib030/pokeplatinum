@@ -5166,4 +5166,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} ignores\nthe recharge turn!</language>
 	</row>
+	<row id="pl_msg_00000368_01288" index="1288">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r</language>
+	</row>
+	<row id="pl_msg_00000368_01289" index="1289">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r</language>
+	</row>
+	<row id="pl_msg_00000368_01290" index="1290">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r</language>
+	</row>
 </body>
