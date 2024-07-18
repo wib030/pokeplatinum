@@ -1500,11 +1500,11 @@ Basic_CheckDefog:
     IfLoadedEqualTo 0, ScoreMinus10
 
     ; If the target''s side of the field has none of Spikes, Stealth Rock, or Toxic Spikes
-    ; active, score -10.
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Basic_CheckDefog_Terminate
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Basic_CheckDefog_Terminate
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Basic_CheckDefog_Terminate
-    GoTo ScoreMinus10
+    ; active, score -6.
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Basic_CheckDefog_Terminate
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Basic_CheckDefog_Terminate
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Basic_CheckDefog_Terminate
+    GoTo ScoreMinus6
 
 Basic_CheckDefog_Terminate:
     PopOrEnd 
@@ -6261,7 +6261,7 @@ Expert_Defog:
 
  Expert_Defog_CheckHazardsScore:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_Defog_HazardsScoreMinus10
+    IfLoadedEqualTo 0, Expert_Defog_HazardsScoreMinus12
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_HazardsScoreSpikesTryMinus2
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_HazardsScoreStealthRockTryMinus2
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_HazardsScoreToxicSpikesTryMinus2
@@ -6288,14 +6288,14 @@ Expert_Defog_TryHazardsScoreMinus2:
     IfRandomLessThan 13, Expert_Defog_HazardsScoreMinus2
 
 Expert_Defog_CheckDefiant:
-    AddToMoveScore -10
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 2, Expert_Defog_HazardsScorePlus10
-    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 12, Expert_Defog_HazardsScorePlus10
+    AddToMoveScore -12
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 2, Expert_Defog_HazardsScorePlus12
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 12, Expert_Defog_HazardsScorePlus12
 
 Expert_Defog_CheckCompetitive:
-    AddToMoveScore -10
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 2, Expert_Defog_HazardsScorePlus10
-    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 12, Expert_Defog_HazardsScorePlus10
+    AddToMoveScore -12
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 2, Expert_Defog_HazardsScorePlus12
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 12, Expert_Defog_HazardsScorePlus12
 
 Expert_Defog_ScreenScrubbing:
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Defog_ScreenScrubbingCheckHazards
@@ -6336,11 +6336,11 @@ Expert_Defog_HazardsScoreMinus2:
 Expert_Defog_HazardsScorePlus2:
     AddToMoveScore 2
 
-Expert_Defog_HazardsScoreMinus10:
-    AddToMoveScore -10
+Expert_Defog_HazardsScoreMinus12:
+    AddToMoveScore -12
 
-Expert_Defog_HazardsScorePlus10:
-    AddToMoveScore 10
+Expert_Defog_HazardsScorePlus12:
+    AddToMoveScore 12
 
 Expert_Defog_End:
     PopOrEnd 
