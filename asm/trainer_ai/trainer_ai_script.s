@@ -1495,7 +1495,7 @@ Basic_CheckRapidSpin:
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, ScorePlus5
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Basic_RapidSpin_TryScorePlus4
     IfSpeedCompareEqualTo COMPARE_SPEED_TIE, ScorePlus5
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, 12, ScoreMinus6
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus6
     GoTo Basic_RapidSpin_End
 
 Basic_RapidSpin_TryScorePlus4:
