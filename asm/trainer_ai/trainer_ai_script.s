@@ -136,6 +136,8 @@ Basic_CheckSoundproof:
     IfMoveEqualTo MOVE_GRASS_WHISTLE, ScoreMinus10
     IfMoveEqualTo MOVE_BUG_BUZZ, ScoreMinus10
     IfMoveEqualTo MOVE_CHATTER, ScoreMinus10
+    IfMoveEqualTo MOVE_HYPER_VOICE, ScoreMinus10
+    IfMoveEqualTo MOVE_PERISH_SONG, ScoreMinus10
 
 Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
@@ -1658,7 +1660,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN, Expert_StatusEvasionDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESET_STAT_CHANGES, Expert_Haze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Expert_Bide
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Expert_ForceSwitch
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Expert_Phaze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
@@ -2599,56 +2601,89 @@ Expert_StatusEvasionDown_End:
     PopOrEnd 
 
 Expert_Haze:
-    ; If any of the attacker''s stat stages are at +3 or higher, or any of the target''s stat stages
-    ; are at -3 or lower, 80.4% chance of additional score -3.
+    ; If any of the attacker''s stat stages are at +2 or higher, or any of the target''s stat stages
+    ; are at -2 or lower, 80.4% chance of additional score -3.
     ;
-    ; If any of the attacker''s stat stages are at -3 or lower, or any of the target''s stat stages
-    ; are at +3 or higher, 80.4% chance of additional score +3.
+    ; If any of the attacker''s stat stages are at -2 or lower, or any of the target''s stat stages
+    ; are at +2 or higher, 95% chance of additional score +3.
+    ;
+    ; If any of the attacker''s stat stages are at -1 or lower, or any of the target''s stat stages
+    ; are at +1 or higher, 50% chance of additional score +1.
     ;
     ; Otherwise, score -1.
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 4, Expert_Haze_TryScoreMinus3
+
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_Haze_AntiBatonPass
+
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_Haze_TryScoreMinus3
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_Haze_TryScoreMinus3
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 7, Expert_Haze_TryScoreMinus3
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_Haze_TryScoreMinus3
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_Haze_TryScoreMinus3
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_Haze_TryScoreMinus3
+    
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 5, Expert_Haze_TryScoreMinus3
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 5, Expert_Haze_TryScoreMinus3
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 5, Expert_Haze_TryScoreMinus3
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 5, Expert_Haze_TryScoreMinus3
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 5, Expert_Haze_TryScoreMinus3
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 5, Expert_Haze_TryScoreMinus3
     GoTo Expert_Haze_CheckToEncourage
 
-Expert_Haze_TryScoreMinus3:
-    IfRandomLessThan 50, Expert_Haze_CheckToEncourage
-    AddToMoveScore -3
-
 Expert_Haze_CheckToEncourage:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 7, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 7, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 7, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 7, Expert_Haze_TryScorePlus3
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 5, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 7, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 7, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 7, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 7, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 7, Expert_Haze_TryScorePlus3
+
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 5, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 5, Expert_Haze_TryScorePlus3
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 5, Expert_Haze_TryScorePlus3
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 5, Expert_Haze_TryScorePlus3
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 5, Expert_Haze_TryScorePlus3
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 5, Expert_Haze_TryScorePlus3
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 5, Expert_Haze_TryScorePlus3
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 5, Expert_Haze_TryScorePlus3
+
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_Haze_TryScorePlus1
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 6, Expert_Haze_TryScorePlus1
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_Haze_TryScorePlus1
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_Haze_TryScorePlus1
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 6, Expert_Haze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 6, Expert_Haze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 6, Expert_Haze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_Haze_TryScorePlus1
+
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 6, Expert_Haze_TryScorePlus1
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 6, Expert_Haze_TryScorePlus1
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 6, Expert_Haze_TryScorePlus1
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 6, Expert_Haze_TryScorePlus1
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 6, Expert_Haze_TryScorePlus1
+
     IfRandomLessThan 50, Expert_Haze_End
     AddToMoveScore -1
     GoTo Expert_Haze_End
 
+Expert_Haze_AntiBatonPass:
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadEffectOfLoadedMove
+    IfLoadedEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Haze_TryScoreMinus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 6, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 6, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 6, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_Haze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 6, Expert_Haze_TryScorePlus3
+    IfRandomLessThan 50, Expert_Haze_CheckToEncourage
+    AddToMoveScore -1
+    GoTo Expert_Haze_End
+
+Expert_Haze_TryScoreMinus3:
+    IfRandomLessThan 50, Expert_Haze_CheckToEncourage
+    AddToMoveScore -3
+    GoTo Expert_Haze_CheckToEncourage
+
 Expert_Haze_TryScorePlus3:
-    IfRandomLessThan 243, Expert_Haze_End
+    IfRandomLessThan 12, Expert_Haze_End
     AddToMoveScore 3
 
 Expert_Haze_TryScorePlus1:
@@ -2667,13 +2702,16 @@ Expert_Bide:
 Expert_Bide_End:
     PopOrEnd 
 
-Expert_ForceSwitch:
-    ; If the target has been in battle for longer than more than 3 turns, 75% chance of score +2.
+Expert_Phaze:
+    ; Don''t use phaze if enemy is on their last mon.
+    ; 
+    ; If target is immune to phaze via Ingrain or Suction Cups, there is a 1/3 chance to peek
+    ; its item. If the item is Shed Shell, then +2 and proceed as usual. Otherwise, -3.
     ;
     ; If the target''s side of the field has Spikes, Stealth Rock, or Toxic Spikes set, 50% chance of
-    ; score +2.
+    ; score +1.
     ;
-    ; If the target has a stat stage of +3 or higher in any of the following stats, 50% chance of
+    ; If the target has a stat stage of +2 or higher in any of the following stats, 50% chance of
     ; score +2:
     ; - Attack
     ; - Defense
@@ -2682,28 +2720,91 @@ Expert_ForceSwitch:
     ; - Evasion
     ;
     ; Otherwise, score -3.
-    LoadBattlerTurnCount AI_BATTLER_DEFENDER
-    IfLoadedGreaterThan 3, Expert_ForceSwitch_75PercentScorePlus2
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_ForceSwitch_50PercentScorePlus2
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_ForceSwitch_50PercentScorePlus2
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_ForceSwitch_50PercentScorePlus2
+
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+
+    IfMoveEffect AI_BATTLER_DEFENDER, BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_Phaze_TryCheckItem
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_SUCTION_CUPS, Expert_Phaze_TryCheckItem
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_Phaze_AntiBatonPass
+    GoTo Expert_Phaze_CheckToDiscourage
+
+Expert_Phaze_CheckToDiscourage:
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, ScoreMinus2
+    IfHasSuperEffectiveMove Expert_Phaze_TryScoreMinus1
+    GoTo Expert_Phaze_CheckToEncourage
+    
+Expert_Phaze_CheckToEncourage:
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 7, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 7, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 7, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 7, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 7, Expert_Phaze_TryScorePlus3
+
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_Phaze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_Phaze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 6, Expert_Phaze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 6, Expert_Phaze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 6, Expert_Phaze_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_Phaze_TryScorePlus1
+
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Phaze_TryScorePlus1
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Phaze_TryScorePlus1
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Phaze_TryScorePlus1
+
+    IfRandomLessThan 50, Expert_Phaze_End
+    AddToMoveScore -1
+    GoTo Expert_Phaze_End
+
+Expert_Phaze_AntiBatonPass:
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadEffectOfLoadedMove
+    IfLoadedEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, ScorePlus5
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus3
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_AQUA_RING, ScorePlus3
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_FOCUS_ENERGY, ScorePlus3
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_ABILITY_SUPPRESSED, ScorePlus2
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MAGNET_RISE, ScorePlus2
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 6, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 6, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 6, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_Phaze_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 6, Expert_Phaze_TryScorePlus3
+    IfRandomLessThan 50, Expert_Phaze_CheckToDiscourage
+    AddToMoveScore -1
+    GoTo Expert_Phaze_End
+
+Expert_Phaze_TryScorePlus3:
+    IfRandomLessThan 12, Expert_Phaze_End
+    AddToMoveScore 3
+    GoTo Expert_Phaze_End
+
+Expert_Phaze_TryScorePlus1:
+    IfRandomLessThan 128, Expert_Phaze_End
+    AddToMoveScore 1
+    GoTo Expert_Phaze_End
+
+Expert_Phaze_TryScoreMinus1:
+    IfRandomLessThan 128, Expert_Phaze_CheckToEncourage
+    AddToMoveScore -1
+    GoTo Expert_Phaze_End
+
+Expert_Phaze_TryCheckItem:
+    IfRandomLessThan 85, Expert_Phaze_CheckItem
     AddToMoveScore -3
-    GoTo Expert_ForceSwitch_End
+    GoTo Expert_Phaze_End
 
-Expert_ForceSwitch_75PercentScorePlus2:
-    IfRandomLessThan 64, Expert_ForceSwitch_50PercentScorePlus2
+Expert_Phaze_CheckItem:
+    LoadHeldItem AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo ITEM_SHED_SHELL, ScoreMinus3
     AddToMoveScore 2
+    GoTo Expert_Phaze_CheckToEncourage
 
-Expert_ForceSwitch_50PercentScorePlus2:
-    IfRandomLessThan 128, Expert_ForceSwitch_End
-    AddToMoveScore 2
-
-Expert_ForceSwitch_End:
+Expert_Phaze_End:
     PopOrEnd 
 
 Expert_Conversion:
@@ -6376,33 +6477,86 @@ Expert_Captivate_End:
     PopOrEnd 
 
 Expert_StealthRock:
-    ; 50% chance to ignore all further score modifiers.
+    ; Don''t use if defender is on their last mon.
     ;
-    ; Start at score +1.
+    ; Check if defender knows Rapid Spin, Defog, or Taunt.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+    ; If Rapid Spin, check if attacker has a move that punishes on contact.
+    ; If attacker does have move that punishes on contact, try to click rocks into a spinner.
     ;
-    ; Try to prioritize early in match.
+    ; Similar for Defog, but with Defiant / Competitive
     ;
-    ; Try not to use into spinners and defoggers.
+    ; If defender knows Taunt, try rocks 25% of the time, otherwise score -1.
+    ;
+    ; Try rocks has 50% chance to default to +1 score if Stealth Rocks is not already up.
+    ;
+    ; 90% chance to add +4 score during the first 3 turns of a battle.
+    ;
+    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ;
+    ; If the attacker has just switched in, 33% chance of additional score +1.
 
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, ScoreMinus10
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_StealthRock_CheckRapidSpin
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_StealthRock_CheckDefog
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_StealthRock_TryScoreMinus1
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckToEncourage:
     LoadTurnCount
-    IfLoadedLessThan 4, Expert_StealthRock_TryScorePlus3
+    IfLoadedLessThan 4, Expert_StealthRock_TryScorePlus4
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StealthRock_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StealthRock_TryScorePlus1
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, ScoreMinus3
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, ScoreMinus3
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_StealthRock_TryScorePlus1
     IfRandomLessThan 128, Expert_StealthRock_End
     AddToMoveScore 1
     GoTo Expert_StealthRock_End
 
-Expert_StealthRock_TryScorePlus1:
-    IfRandomLessThan 64, Expert_StealthRock_End
-    AddToMoveScore 1
+Expert_StealthRock_CheckRapidSpin:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, Expert_StealthRock_CheckToEncourage
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, Expert_StealthRock_CheckToEncourage
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable StealthRock_AbilityPunish_RapidSpin, Expert_StealthRock_CheckToEncourage
+    IfRandomLessThan 25, Expert_StealthRock_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_StealthRock_End
 
-Expert_StealthRock_TryScorePlus3:
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, ScoreMinus10
-    AddToMoveScore 3
+StealthRock_AbilityPunish_RapidSpin:
+    TableEntry ABILITY_EFFECT_SPORE
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_STATIC
+    TableEntry ABILITY_POISON_POINT
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_HONEY_GATHER
+
+Expert_StealthRock_CheckDefog:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable StealthRock_AbilityPunish_Defog, Expert_StealthRock_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_StealthRock_End
+
+StealthRock_AbilityPunish_Defog:
+    TableEntry ABILITY_KLUTZ
+    TableEntry ABILITY_STALL
+
+Expert_StealthRock_TryScorePlus1:
+    IfRandomLessThan 85, Expert_StealthRock_End
+    AddToMoveScore 1
+    GoTo Expert_StealthRock_End
+
+Expert_StealthRock_TryScorePlus4:
+    IfRandomLessThan 25, Expert_StealthRock_End
+    AddToMoveScore 4
+    GoTo Expert_StealthRock_End
+
+Expert_StealthRock_TryScoreMinus1:
+    IfRandomLessThan 64, Expert_StealthRock_CheckToEncourage
+    AddToMoveScore -1
     GoTo Expert_StealthRock_End
 
 Expert_StealthRock_End:
@@ -6411,36 +6565,93 @@ Expert_StealthRock_End:
     PopOrEnd
 
 Expert_Spikes:
-    ; 50% chance to ignore all further score modifiers.
+    ; Don''t use if defender is on their last mon.
     ;
-    ; Start at score +1.
+    ; Check if defender knows Rapid Spin, Defog, or Taunt.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+    ; If Rapid Spin, check if attacker has a move that punishes on contact.
+    ; If attacker does have move that punishes on contact, try to click spikes into a spinner.
     ;
-    ; Try to prioritize early in match.
+    ; Similar for Defog, but with Defiant / Competitive
     ;
-    ; Try not to use into spinners and defoggers.
+    ; If defender knows Taunt, try spikes 25% of the time, otherwise score -1.
+    ;
+    ; Try spikes has 50% chance to default to +1 score if Stealth Rocks is not already up.
+    ;
+    ; 90% chance to add +score during the first 3 turns of a battle.
+    ; The +score here depends on number of spikes currently up, with first and last layers
+    ; valued highest.
+    ;
+    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ;
+    ; If the attacker has just switched in, 33% chance of additional score +1.
 
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, ScoreMinus10
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_Spikes_CheckRapidSpin
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_Spikes_CheckDefog
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_Spikes_TryScoreMinus1
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckRapidSpin:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, Expert_Spikes_CheckToEncourage
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, Expert_Spikes_CheckToEncourage
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Spikes_AbilityPunish_RapidSpin, Expert_Spikes_CheckToEncourage
+    IfRandomLessThan 25, Expert_Spikes_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_Spikes_End
+
+Spikes_AbilityPunish_RapidSpin:
+    TableEntry ABILITY_EFFECT_SPORE
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_STATIC
+    TableEntry ABILITY_POISON_POINT
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_HONEY_GATHER
+
+Expert_Spikes_CheckDefog:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Spikes_AbilityPunish_Defog, Expert_Spikes_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_Spikes_End
+
+Spikes_AbilityPunish_Defog:
+    TableEntry ABILITY_KLUTZ
+    TableEntry ABILITY_STALL
+
+
+Expert_Spikes_CheckToEncourage:
     LoadTurnCount
     IfLoadedLessThan 4, Expert_Spikes_SpikesScore
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_Spikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_Spikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, ScoreMinus3
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, ScoreMinus3
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_Spikes_TryScorePlus1
     IfRandomLessThan 128, Expert_Spikes_End
     AddToMoveScore 1
     GoTo Expert_Spikes_SpikesScore
 
 Expert_Spikes_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Spikes_SpikesScore
+    IfRandomLessThan 85, Expert_Spikes_End
     AddToMoveScore 1
+    GoTo Expert_Spikes_End
 
 Expert_Spikes_SpikesScore:
+    IfRandomLessThan 25, Expert_Spikes_End
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES
     IfLoadedEqualTo 0, ScorePlus3
     IfLoadedEqualTo 1, ScorePlus1
     IfLoadedEqualTo 2, ScorePlus2
     AddToMoveScore -3
+    GoTo Expert_Spikes_End
+
+Expert_Spikes_TryScoreMinus1:
+    IfRandomLessThan 64, Expert_Spikes_CheckToEncourage
+    AddToMoveScore -1
     GoTo Expert_Spikes_End
     
 Expert_Spikes_End:
@@ -6449,35 +6660,89 @@ Expert_Spikes_End:
     PopOrEnd
 
 Expert_ToxicSpikes:
-    ; 50% chance to ignore all further score modifiers.
+    ; Don''t use if defender is on their last mon.
     ;
-    ; Start at score +1.
+    ; Check if defender knows Rapid Spin, Defog, or Taunt.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+    ; If Rapid Spin, check if attacker has a move that punishes on contact.
+    ; If attacker does have move that punishes on contact, try to click toxic spikes into a spinner.
     ;
-    ; Try to prioritize early in match.
+    ; Similar for Defog, but with Defiant / Competitive
     ;
-    ; Try not to use into spinners and defoggers.
+    ; If defender knows Taunt, try toxic spikes 25% of the time, otherwise score -1.
+    ;
+    ; Try toxic spikes has 50% chance to default to +1 score if Stealth Rocks is not already up.
+    ;
+    ; 90% chance to add +score during the first 3 turns of a battle.
+    ; The +score here depends on number of toxic spikes currently up, with first layer valued most.
+    ;
+    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ;
+    ; If the attacker has just switched in, 33% chance of additional score +1.
 
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, ScoreMinus10
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_ToxicSpikes_CheckRapidSpin
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_ToxicSpikes_CheckDefog
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_ToxicSpikes_TryScoreMinus1
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckRapidSpin:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, Expert_ToxicSpikes_CheckToEncourage
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, Expert_ToxicSpikes_CheckToEncourage
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable ToxicSpikes_AbilityPunish_RapidSpin, Expert_ToxicSpikes_CheckToEncourage
+    IfRandomLessThan 25, Expert_ToxicSpikes_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_ToxicSpikes_End
+
+ToxicSpikes_AbilityPunish_RapidSpin:
+    TableEntry ABILITY_EFFECT_SPORE
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_STATIC
+    TableEntry ABILITY_POISON_POINT
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_HONEY_GATHER
+
+Expert_ToxicSpikes_CheckDefog:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable ToxicSpikes_AbilityPunish_Defog, Expert_ToxicSpikes_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_ToxicSpikes_End
+
+ToxicSpikes_AbilityPunish_Defog:
+    TableEntry ABILITY_KLUTZ
+    TableEntry ABILITY_STALL
+
+Expert_ToxicSpikes_CheckToEncourage:
     LoadTurnCount
     IfLoadedLessThan 4, Expert_ToxicSpikes_ToxicSpikesScore
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_ToxicSpikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_ToxicSpikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, ScoreMinus3
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, ScoreMinus3
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_ToxicSpikes_TryScorePlus1
     IfRandomLessThan 128, Expert_ToxicSpikes_End
     AddToMoveScore 1
     GoTo Expert_ToxicSpikes_ToxicSpikesScore
 
 Expert_ToxicSpikes_TryScorePlus1:
-    IfRandomLessThan 64, Expert_ToxicSpikes_ToxicSpikesScore
+    IfRandomLessThan 85, Expert_ToxicSpikes_ToxicSpikesScore
     AddToMoveScore 1
 
 Expert_ToxicSpikes_ToxicSpikesScore:
+    IfRandomLessThan 25, Expert_Spikes_End
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
     IfLoadedEqualTo 0, ScorePlus3
-    IfLoadedEqualTo 1, ScorePlus3
+    IfLoadedEqualTo 1, ScorePlus1
     AddToMoveScore -3
+    GoTo Expert_ToxicSpikes_End
+
+Expert_ToxicSpikes_TryScoreMinus1:
+    IfRandomLessThan 64, Expert_ToxicSpikes_CheckToEncourage
+    AddToMoveScore -1
     GoTo Expert_ToxicSpikes_End
     
 Expert_ToxicSpikes_End:

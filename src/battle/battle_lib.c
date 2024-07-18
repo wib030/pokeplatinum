@@ -3528,6 +3528,7 @@ static u16 sSoundMoves[] = {
     MOVE_HYPER_VOICE,
     MOVE_BUG_BUZZ,
     MOVE_CHATTER,
+    MOVE_PERISH_SONG,
 };
 
 static u16 sPowderMoves[] = {
