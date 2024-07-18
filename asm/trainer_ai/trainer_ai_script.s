@@ -6269,18 +6269,16 @@ Expert_Defog:
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_HazardsScorePlus2
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_HazardsScorePlus2
     GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
+    
 
 Expert_Defog_HazardsScoreSpikesTryMinus2:
-    IfMoveEffectKnown, AI_BATTLER_ATTACKER, BATTLE_EFFECT_SET_SPIKES, Expert_Defog_CheckUserHPAndOpponentEvasion
-    GoTo Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+    IfMoveEffectNotKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SET_SPIKES, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
 
 Expert_Defog_HazardsScoreStealthRockTryMinus2:
-    IfMoveEffectKnown, AI_BATTLER_ATTACKER, BATTLE_EFFECT_STEALTH_ROCK, Expert_Defog_CheckUserHPAndOpponentEvasion
-    GoTo Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+    IfMoveEffectNotKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STEALTH_ROCK, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
 
 Expert_Defog_HazardsScoreToxicSpikesTryMinus2:
-    IfMoveEffectKnown, AI_BATTLER_ATTACKER, BATTLE_EFFECT_TOXIC_SPIKES, Expert_Defog_CheckUserHPAndOpponentEvasion
-    GoTo Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+    IfMoveEffectNotKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_TOXIC_SPIKES, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
 
 Expert_Defog_CheckEnemyTeamAliveAndTryMinus2:
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
