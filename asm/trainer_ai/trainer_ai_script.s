@@ -285,7 +285,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_STAT_CHANGES, Basic_CheckStatStageImbalance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Basic_CheckAquaRing
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, Basic_CheckMagnetRise
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Basic_CheckDefog
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Basic_CheckRapidSpin
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRICK_ROOM, Basic_CheckTrickRoom
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Basic_CheckCaptivate
@@ -1482,29 +1481,7 @@ Basic_CheckMagnetRise:
     IfLoadedEqualTo TYPE_FLYING, ScoreMinus10
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
     IfLoadedEqualTo TYPE_FLYING, ScoreMinus10
-    PopOrEnd 
-
-Basic_CheckDefog:
-    ; If the target''s Evasion is not at -6 or their side of the field has Light Screen or
-    ; Reflect, ignore all other checks.
-    IfStatStageNotEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 0, Basic_CheckDefog_Terminate
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Basic_CheckDefog_Terminate
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Basic_CheckDefog_Terminate
-
-    ; If the current weather is Deep Fog, ignore all other checks.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_DEEP_FOG, Basic_CheckDefog_Terminate
-
-    ; If the target is on their last Pokemon, score -10.
-    CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedEqualTo 0, ScoreMinus10
-
-    ; If the target''s side of the field has none of Spikes, Stealth Rock, or Toxic Spikes
-    ; active, score -6.
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Basic_CheckDefog_Terminate
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Basic_CheckDefog_Terminate
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Basic_CheckDefog_Terminate
-    GoTo ScoreMinus6
+    PopOrEnd
 
 Basic_CheckDefog_Terminate:
     PopOrEnd 
