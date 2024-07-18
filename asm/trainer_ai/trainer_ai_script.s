@@ -69,7 +69,7 @@ Basic_Main:
 
 Basic_CheckForImmunity:
     ; Check for any immunity to the current move based on move type and what
-    ; we know the battler's ability to be (if we do at all).
+    ; we know the battler''s ability to be (if we do at all).
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_NoImmunityAbility
@@ -286,6 +286,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Basic_CheckAquaRing
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, Basic_CheckMagnetRise
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Basic_CheckDefog
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Basic_CheckRapidSpin
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRICK_ROOM, Basic_CheckTrickRoom
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Basic_CheckCaptivate
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Basic_CheckStealthRock
@@ -477,8 +478,8 @@ Basic_CheckClearBodyEffect:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_STALL, ScoreMinus12
+	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckStatStageImbalance:
@@ -573,13 +574,13 @@ Basic_CheckOHKOWouldFail_Levels:
     PopOrEnd 
 
 Basic_CheckMagnitude:
-    ; If the target's ability is Levitate and the attacker's ability is not Mold Breaker, score -10.
+    ; If the target''s ability is Levitate and the attacker''s ability is not Mold Breaker, score -10.
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckNonStandardDamageOrChargeTurn
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus10
 
 Basic_CheckNonStandardDamageOrChargeTurn:
-    ; If the target is immune to this move by its typing or due to the target's ability being
+    ; If the target is immune to this move by its typing or due to the target''s ability being
     ; Wonder Guard, score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -641,7 +642,7 @@ Basic_CheckCannotParalyze_ImmuneToStatus:
     PopOrEnd 
 
 Basic_CheckCannotSubstitute:
-    ; If the attacker's Substitute would fail, score -8/-10.
+    ; If the attacker''s Substitute would fail, score -8/-10.
     IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScoreMinus8
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 26, ScoreMinus10
     PopOrEnd 
@@ -767,7 +768,7 @@ Basic_CheckAlreadyUnderSafeguard:
     PopOrEnd 
 
 Basic_CheckMemento:
-    ; If the target's ability blocks the stat drop and the attacker does not have Mold Breaker,
+    ; If the target''s ability blocks the stat drop and the attacker does not have Mold Breaker,
     ; score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckMemento_CheckStatStages
@@ -778,10 +779,10 @@ Basic_CheckMemento:
 	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
 
 Basic_CheckMemento_CheckStatStages:
-    ; If the target's Attack is already at -6, score -10.
+    ; If the target''s Attack is already at -6, score -10.
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 0, ScoreMinus10
 
-    ; If the target's SpAttack is already at -6, score -8.
+    ; If the target''s SpAttack is already at -6, score -8.
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 0, ScoreMinus8
 
     ; If the attacker is on their last Pokemon, score -10.
@@ -796,12 +797,12 @@ Basic_CheckBatonPass:
     PopOrEnd 
 
 Basic_CheckRainDance:
-    ; If the attacker's ability is Swift Swim or Hydration, skip the defender-Hydration check below.
+    ; If the attacker''s ability is Swift Swim or Hydration, skip the defender-Hydration check below.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_SWIFT_SWIM, Basic_CheckCurrentWeatherIsRain
     IfLoadedEqualTo ABILITY_HYDRATION, Basic_CheckCurrentWeatherIsRain
 
-    ; If the target's ability is Hydration and they are currently statused, score -8.
+    ; If the target''s ability is Hydration and they are currently statused, score -8.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo ABILITY_HYDRATION, Basic_CheckCurrentWeatherIsRain
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus8
@@ -813,14 +814,14 @@ Basic_CheckCurrentWeatherIsRain:
     PopOrEnd 
 
 Basic_CheckSunnyDay:
-    ; If the attacker's ability is any of Flower Gift, Leaf Guard, or Solar Power, skip the defender-
+    ; If the attacker''s ability is any of Flower Gift, Leaf Guard, or Solar Power, skip the defender-
     ; Hydration check below.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_FLOWER_GIFT, Basic_CheckCurrentWeatherIsSun
     IfLoadedEqualTo ABILITY_LEAF_GUARD, Basic_CheckCurrentWeatherIsSun
     IfLoadedEqualTo ABILITY_SOLAR_POWER, Basic_CheckCurrentWeatherIsSun
 
-    ; If the target's ability is Hydration and they are currently statused, score -10.
+    ; If the target''s ability is Hydration and they are currently statused, score -10.
     ; Why does this consider Hydration? This is clearly a bug, but what was the intention?
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo ABILITY_HYDRATION, Basic_CheckCurrentWeatherIsSun
@@ -839,7 +840,7 @@ Basic_CheckFutureSight:
     PopOrEnd 
 
 Basic_CheckFirstTurnInBattle:
-    ; If it is not the attacker's first turn in battle, score -10.
+    ; If it is not the attacker''s first turn in battle, score -10.
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo FALSE, ScoreMinus10
     PopOrEnd 
@@ -867,12 +868,12 @@ Basic_CheckHail:
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_HAILING, ScoreMinus8
 
-    ; If any opposing battler's ability is Ice Body, score -8.
+    ; If any opposing battler''s ability is Ice Body, score -8.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo ABILITY_ICE_BODY, Basic_CheckHail_Terminate
     AddToMoveScore -8
 
-    ; If an attacker's ability is also Ice Body, score +8 (undo the previous modifier).
+    ; If an attacker''s ability is also Ice Body, score +8 (undo the previous modifier).
     ; This feels like a bug of misintention; the intention here seems to be for an attacker with
     ; Ice Body to have an incentive to use Hail, but that is not realized. Instead, such an
     ; attacker can only have a disincentive undone.
@@ -908,7 +909,7 @@ Basic_CheckHelpingHand:
     PopOrEnd 
 
 Basic_CheckCanRemoveItem:
-    ; If the defender's ability is Sticky Hold or they do not have a held item, score -10.
+    ; If the defender''s ability is Sticky Hold or they do not have a held item, score -10.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_STICKY_HOLD, ScoreMinus10
     LoadHeldItem AI_BATTLER_DEFENDER
@@ -943,7 +944,7 @@ Basic_CheckCanMudSport:
     PopOrEnd 
 
 Basic_CheckTickle:
-    ; If the target's ability is Clear Body or White Smoke and the attacker's ability is not
+    ; If the target''s ability is Clear Body or White Smoke and the attacker''s ability is not
     ; Mold Breaker, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckTickle_CheckStatStages
@@ -954,14 +955,14 @@ Basic_CheckTickle:
 	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
 
 Basic_CheckTickle_CheckStatStages:
-    ; If the target's Attack is at -6, score -10.
-    ; If the target's Defense is at -6, score -8.
+    ; If the target''s Attack is at -6, score -10.
+    ; If the target''s Defense is at -6, score -8.
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 0, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 0, ScoreMinus8
     PopOrEnd 
 
 Basic_CheckCosmicPower:
-    ; If the attacker's ability is Simple and either Defense or SpDefense are already at
+    ; If the attacker''s ability is Simple and either Defense or SpDefense are already at
     ; +3, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckCosmicPower_NoSimple
@@ -970,14 +971,14 @@ Basic_CheckCosmicPower:
     PopOrEnd 
 
 Basic_CheckCosmicPower_NoSimple:
-    ; If the attacker's Defense is already at +6, score -10.
-    ; If the attacker's SpDefense is already at +6, score -8.
+    ; If the attacker''s Defense is already at +6, score -10.
+    ; If the attacker''s SpDefense is already at +6, score -8.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus8
     PopOrEnd 
 
 Basic_CheckBulkUp:
-    ; If the attacker's ability is Simple and either Attack or Defense are already at
+    ; If the attacker''s ability is Simple and either Attack or Defense are already at
     ; +3, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckBulkUp_NoSimple
@@ -986,8 +987,8 @@ Basic_CheckBulkUp:
     PopOrEnd 
 
 Basic_CheckBulkUp_NoSimple:
-    ; If the attacker's Attack is already at +6, score -10.
-    ; If the attacker's Defense is already at +6, score -8.
+    ; If the attacker''s Attack is already at +6, score -10.
+    ; If the attacker''s Defense is already at +6, score -8.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, ScoreMinus8
     PopOrEnd 
@@ -998,7 +999,7 @@ Basic_CheckWaterSport:
     PopOrEnd 
 
 Basic_CheckCalmMind:
-    ; If the attacker's ability is Simple and either SpAttack or SpDefense are already at
+    ; If the attacker''s ability is Simple and either SpAttack or SpDefense are already at
     ; +3, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckCalmMind_NoSimple
@@ -1007,8 +1008,8 @@ Basic_CheckCalmMind:
     PopOrEnd 
 
 Basic_CheckCalmMind_NoSimple:
-    ; If the attacker's SpAttack is already at +6, score -10.
-    ; If the attacker's SpDefense is already at +6, score -8.
+    ; If the attacker''s SpAttack is already at +6, score -10.
+    ; If the attacker''s SpDefense is already at +6, score -8.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus8
     PopOrEnd 
@@ -1017,7 +1018,7 @@ Basic_CheckDragonDance:
     ; If Trick Room is in effect, score -10.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
 
-    ; If the attacker's ability is Simple and either Attack or Speed are already at
+    ; If the attacker''s ability is Simple and either Attack or Speed are already at
     ; +3, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckDragonDance_NoSimple
@@ -1026,8 +1027,8 @@ Basic_CheckDragonDance:
     PopOrEnd 
 
 Basic_CheckDragonDance_NoSimple:
-    ; If the attacker's Attack is already at +6, score -10.
-    ; If the attacker's Speed is already at +6, score -8.
+    ; If the attacker''s Attack is already at +6, score -10.
+    ; If the attacker''s Speed is already at +6, score -8.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus8
     PopOrEnd 
@@ -1055,7 +1056,7 @@ Basic_CheckHealingWish:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, ScoreMinus10
 
-    ; If none of the attacker's party members are statused or at less than 100% HP,
+    ; If none of the attacker''s party members are statused or at less than 100% HP,
     ; score additional -10.
     IfPartyMemberStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Basic_CheckHealingWish_Terminate
     IfAnyPartyMemberIsWounded AI_BATTLER_ATTACKER, Basic_CheckHealingWish_Terminate
@@ -1065,7 +1066,7 @@ Basic_CheckHealingWish_Terminate:
     PopOrEnd 
 
 Basic_CheckNaturalGift:
-    ; If the attacker does not have an eligible berry or the target is immune to that berry's
+    ; If the attacker does not have an eligible berry or the target is immune to that berry''s
     ; Natural Gift type, score -10.
     LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedNotInTable Basic_NaturalGiftBerries, ScoreMinus10
@@ -1140,7 +1141,7 @@ Basic_NaturalGiftBerries:
     TableEntry TABLE_END
 
 Basic_CheckTailwind:
-    ; If Trick Room is currently active or Tailwind is already active for the attacker's side
+    ; If Trick Room is currently active or Tailwind is already active for the attacker''s side
     ; of the field, score -10.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TAILWIND, ScoreMinus10
@@ -1150,7 +1151,7 @@ Basic_CheckAcupressure:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_SIMPLE, Basic_CheckAcupressure_Simple
 
-    ; If any of the attacker's stat stages are already at +6, score -10.
+    ; If any of the attacker''s stat stages are already at +6, score -10.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
@@ -1161,7 +1162,7 @@ Basic_CheckAcupressure:
     PopOrEnd 
 
 Basic_CheckAcupressure_Simple:
-    ; If the attacker's ability is Simple and any stat stage is already at +3, score -10.
+    ; If the attacker''s ability is Simple and any stat stage is already at +3, score -10.
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, ScoreMinus10
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 8, ScoreMinus10
@@ -1197,7 +1198,7 @@ Basic_CheckEmbargo:
     ; If the target is already under the respective effect, score -10.
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_EMBARGO, ScoreMinus10
 
-    ; If a recyclable item for the target's side exists, terminate.
+    ; If a recyclable item for the target''s side exists, terminate.
     LoadRecycleItem AI_BATTLER_DEFENDER
     IfLoadedEqualTo ITEM_NONE, Basic_CheckEmbargo_Terminate
 
@@ -1216,7 +1217,7 @@ Basic_CheckFling:
     LoadFlingPower AI_BATTLER_ATTACKER
     IfLoadedLessThan 10, ScoreMinus10
 
-    ; If the attacker's ability is Multitype, score -10.
+    ; If the attacker''s ability is Multitype, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MULTITYPE, ScoreMinus10
 
@@ -1317,7 +1318,7 @@ Basic_CheckCanPsychoShift:
     ; If the target is protected by Safeguard, score -10.
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
 
-    ; Branch according to the attacker's status condition.
+    ; Branch according to the attacker''s status condition.
     IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Basic_PsychoShift_Poison
     IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Basic_PsychoShift_Burn
     IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_PARALYSIS, Basic_PsychoShift_Paralysis
@@ -1353,7 +1354,7 @@ Basic_PsychoShift_Burn:
     GoTo Basic_PsychoShift_Terminate
 
 Basic_PsychoShift_Paralysis:
-    ; If the target's ability is Limber, score -10.
+    ; If the target''s ability is Limber, score -10.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
 
@@ -1391,7 +1392,7 @@ Basic_CheckLuckyChant:
     PopOrEnd 
 
 Basic_CheckCopycat:
-    ; If it's the first turn of the battle and the attacker is faster than its target, score -10.
+    ; If it''s the first turn of the battle and the attacker is faster than its target, score -10.
     LoadTurnCount 
     IfLoadedNotEqualTo 0, Basic_CheckCopycat_Terminate
     IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus10
@@ -1453,7 +1454,7 @@ Basic_CheckWorrySeed_Terminate:
     PopOrEnd 
 
 Basic_CheckToxicSpikes:
-    ; If the target's side of the field already has 2 layers of Toxic Spikes, score -10.
+    ; If the target''s side of the field already has 2 layers of Toxic Spikes, score -10.
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
     IfLoadedEqualTo 2, ScoreMinus10
 
@@ -1472,11 +1473,11 @@ Basic_CheckMagnetRise:
     ; If the attacker is already under the effect, score -10.
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_MAGNET_RISE, ScoreMinus10
 
-    ; If the attacker's ability is Levitate, score -10.
+    ; If the attacker''s ability is Levitate, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus10
 
-    ; If either of the attacker's types are Flying, score -10.
+    ; If either of the attacker''s types are Flying, score -10.
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
     IfLoadedEqualTo TYPE_FLYING, ScoreMinus10
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
@@ -1484,7 +1485,7 @@ Basic_CheckMagnetRise:
     PopOrEnd 
 
 Basic_CheckDefog:
-    ; If the target's Evasion is not at -6 or their side of the field has Light Screen or
+    ; If the target''s Evasion is not at -6 or their side of the field has Light Screen or
     ; Reflect, ignore all other checks.
     IfStatStageNotEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 0, Basic_CheckDefog_Terminate
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Basic_CheckDefog_Terminate
@@ -1498,7 +1499,7 @@ Basic_CheckDefog:
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
 
-    ; If the target's side of the field has none of Spikes, Stealth Rock, or Toxic Spikes
+    ; If the target''s side of the field has none of Spikes, Stealth Rock, or Toxic Spikes
     ; active, score -10.
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Basic_CheckDefog_Terminate
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Basic_CheckDefog_Terminate
@@ -1508,6 +1509,29 @@ Basic_CheckDefog:
 Basic_CheckDefog_Terminate:
     PopOrEnd 
 
+Basic_CheckRapidSpin:
+    ; If the user''s speed is not at +6 or their side of the field has Hazards, or if the user
+    ; is under the effect of a binding move or Leech Seed, ignore
+
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, ScorePlus2
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_BIND, ScorePlus2
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, ScorePlus2
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, ScorePlus2
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, ScorePlus2
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Basic_RapidSpin_TryScorePlus1
+    IfSpeedCompareEqualTo COMPARE_SPEED_TIE, ScorePlus2
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Basic_RapidSpin_TryScorePlus1
+    GoTo Basic_RapidSpin_End
+
+Basic_RapidSpin_TryScorePlus1:
+    IfRandomLessThan 70, Basic_RapidSpin_End
+    AddToMoveScore 1
+
+Basic_RapidSpin_End:
+    PopOrEnd
+
+    
+
 Basic_CheckTrickRoom:
     ; If the attacker is faster than the target, score -10.
     ; Treat speed ties as being faster than the target.
@@ -1516,7 +1540,7 @@ Basic_CheckTrickRoom:
     PopOrEnd 
 
 Basic_CheckCaptivate:
-    ; If the target's ability is any of Oblivious, Clear Body, or White Smoke and the attacker's
+    ; If the target''s ability is any of Oblivious, Clear Body, or White Smoke and the attacker''s
     ; ability is not Mold Breaker, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckGender
@@ -1548,7 +1572,7 @@ Basic_CheckCaptivate_CheckStatStage:
     PopOrEnd 
 
 Basic_CheckStealthRock:
-    ; If the target's side of the field is already under the effect of Stealth Rock, score -10.
+    ; If the target''s side of the field is already under the effect of Stealth Rock, score -10.
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, ScoreMinus10
 
     ; If the target is on their last Pokemon, score -10.
@@ -1564,7 +1588,7 @@ Basic_CheckLunarDance:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, ScoreMinus10
 
-    ; If none of the attacker's party members are statused, at less than 100% HP, or at
+    ; If none of the attacker''s party members are statused, at less than 100% HP, or at
     ; less than full PP on all of their moves, score -10.
     IfAnyPartyMemberIsWounded AI_BATTLER_ATTACKER, Basic_CheckLunarDance_Terminate
     IfPartyMemberStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Basic_CheckLunarDance_Terminate
@@ -1604,7 +1628,11 @@ ScoreMinus10:
 
 ScoreMinus12:
     AddToMoveScore -12
-    PopOrEnd 
+    PopOrEnd
+    
+ScoreMinus20:
+    AddToMoveScore -20
+    PopOrEnd
 
 ScoreMinus30:
     AddToMoveScore -30
@@ -1847,11 +1875,11 @@ Expert_DrainMove_End:
     PopOrEnd 
 
 Expert_Explosion:
-    ; If the target's Evasion is at +1 stage or higher, additional score -1 to all further modifiers.
+    ; If the target''s Evasion is at +1 stage or higher, additional score -1 to all further modifiers.
     ;
-    ; If the target's Evasion is at +3 stages or higher, 50% chance of additional score -1 to all further modifiers.
+    ; If the target''s Evasion is at +3 stages or higher, 50% chance of additional score -1 to all further modifiers.
     ;
-    ; Apply an additional modifier according to the user's current HP (as a percentage):
+    ; Apply an additional modifier according to the user''s current HP (as a percentage):
     ;
     ; | User HP (%)   | Additional Qualifier | Modifier                 |
     ; | ------------: | -------------------- | ------------------------ |
@@ -1863,7 +1891,7 @@ Expert_Explosion:
     ;
     IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Explosion_CheckUserHighHP
     AddToMoveScore -1
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 10, Expert_Explosion_CheckUserHighHP
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 9, Expert_Explosion_CheckUserHighHP
     IfRandomLessThan 128, Expert_Explosion_CheckUserHighHP
     AddToMoveScore -1
 
@@ -1988,9 +2016,9 @@ Expert_StatusAttackUp:
     ;
     ; If the attacker is at 100% HP, 50% chance of additional score +2.
     ;
-    ; If the attacker's HP is > 70%, no further score changes.
+    ; If the attacker''s HP is > 70%, no further score changes.
     ;
-    ; If the attacker's HP is < 40%, additional score -2.
+    ; If the attacker''s HP is < 40%, additional score -2.
     ;
     ; Otherwise, ~84.4% chance of additional score -2.
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 9, Expert_StatusAttackUp_CheckUserAtMaxHP
@@ -2019,13 +2047,13 @@ Expert_StatusDefenseUp:
     ;
     ; If the attacker is at 100% HP, 50% chance of additional score +2.
     ;
-    ; If the attacker's HP is >= 70%, ~78.1% chance to suppress all further score modifiers.
+    ; If the attacker''s HP is >= 70%, ~78.1% chance to suppress all further score modifiers.
     ;
-    ; If the attacker's HP is < 40%, additional score -2.
+    ; If the attacker''s HP is < 40%, additional score -2.
     ;
     ; Otherwise:
-    ; - If the target's last-used move was a Status move, ~76.6% chance of score -2.
-    ; - If the target's last-used move was a Special move, 58.6% chance of score -2.
+    ; - If the target''s last-used move was a Status move, ~76.6% chance of score -2.
+    ; - If the target''s last-used move was a Special move, 58.6% chance of score -2.
     ; - Otherwise, score -2.
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 9, Expert_StatusDefenseUp_CheckUserAtMaxHP
     IfRandomLessThan 100, Expert_StatusDefenseUp_CheckUserHighHP
@@ -2091,9 +2119,9 @@ Expert_StatusSpAttackUp:
     ;
     ; If the attacker is at 100% HP, 50% chance of additional score +2.
     ;
-    ; If the attacker's HP is > 70%, no further score changes.
+    ; If the attacker''s HP is > 70%, no further score changes.
     ;
-    ; If the attacker's HP is < 40%, additional score -2.
+    ; If the attacker''s HP is < 40%, additional score -2.
     ;
     ; Otherwise, ~84.4% chance of additional score -2.
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 9, Expert_StatusSpAttackUp_CheckUserAtMaxHP
@@ -2122,13 +2150,13 @@ Expert_StatusSpDefenseUp:
     ;
     ; If the attacker is at 100% HP, 50% chance of additional score +2.
     ;
-    ; If the attacker's HP is >= 70%, ~78.1% chance to suppress all further score modifiers.
+    ; If the attacker''s HP is >= 70%, ~78.1% chance to suppress all further score modifiers.
     ;
-    ; If the attacker's HP is < 40%, additional score -2.
+    ; If the attacker''s HP is < 40%, additional score -2.
     ;
     ; Otherwise:
-    ; - If the target's last-used move was a Status move, ~76.6% chance of score -2.
-    ; - If the target's last-used move was a Physical move, 58.6% chance of score -2.
+    ; - If the target''s last-used move was a Status move, ~76.6% chance of score -2.
+    ; - If the target''s last-used move was a Physical move, 58.6% chance of score -2.
     ; - Otherwise, score -2.
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 9, Expert_StatusSpDefenseUp_CheckUserAtMaxHP
     IfRandomLessThan 100, Expert_StatusSpDefenseUp_CheckUserHighHP
@@ -2177,7 +2205,7 @@ Expert_StatusSpDefenseUp_PreSplitPhysicalTypes:
 Expert_StatusAccuracyUp:
     ; If the attacker is at +3 stat stage or higher, ~80.5% chance of additional score -2.
     ;
-    ; If the attacker's HP is at < 70%, score -2.
+    ; If the attacker''s HP is at < 70%, score -2.
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 9, Expert_StatusAccuracyUp_TryScoreMinus2
     IfRandomLessThan 50, Expert_StatusAccuracyUp_TryScoreMinus2
     AddToMoveScore -2
@@ -2190,13 +2218,13 @@ Expert_StatusAccuracyUp_End:
     PopOrEnd 
 
 Expert_StatusEvasionUp:
-    ; If the attacker's HP is >= 90%, ~60.9% chance of additional score +3.
+    ; If the attacker''s HP is >= 90%, ~60.9% chance of additional score +3.
     ;
     ; If the attacker is at +3 stat stage or higher, 50% chance of additional score -1.
     ;
     ; If the target is Badly Poisoned:
-    ; - If the attacker's HP is > 50%, ~80.5% chance of additional score +3.
-    ; - If the attacker's HP is <= 50%, ~55.3% chance of additional score +3.
+    ; - If the attacker''s HP is > 50%, ~80.5% chance of additional score +3.
+    ; - If the attacker''s HP is <= 50%, ~55.3% chance of additional score +3.
     ;
     ; If the target is affected by Leech Seed, ~72.7% chance of additional score +3.
     ;
@@ -2204,9 +2232,9 @@ Expert_StatusEvasionUp:
     ;
     ; If the target is affected by Curse, ~72.7% chance of additional score +3.
     ;
-    ; If the attacker's HP is > 70%, suppress all further modifiers. Otherwise:
+    ; If the attacker''s HP is > 70%, suppress all further modifiers. Otherwise:
     ; - If the attacker is at exactly +0 stat stage, no further score modifiers.
-    ; - If either the attacker's HP or the target's HP are < 40%, score -2.
+    ; - If either the attacker''s HP or the target''s HP are < 40%, score -2.
     ; - Otherwise, ~72.7% chance of score -2.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_StatusEvasionUp_CheckUserStatStage
     IfRandomLessThan 100, Expert_StatusEvasionUp_CheckUserStatStage
@@ -2288,10 +2316,10 @@ Expert_StatusAttackDown:
 	;
     ; If the target is at any stat stage other than +0, additional score -1. Also, further modify
     ; the score according to all of the following which apply:
-    ; - If the attacker's HP is at 90% or lower, additional score -1.
+    ; - If the attacker''s HP is at 90% or lower, additional score -1.
     ; - If the target is at -3 stat stage or lower, 80.5% chance of additional score -2.
     ;
-    ; If the target's HP is at 70% or lower, additional score -2.
+    ; If the target''s HP is at 70% or lower, additional score -2.
     ;
     ; If the move last used by the target was not a Special move, 50% chance of score -2.
 	LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -2336,11 +2364,11 @@ Expert_StatusDefenseDown:
 	; If the defender has Clear Body or White Smoke, score -3
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the attacker's HP is < 70%, 80.5% chance of additional score -2.
+    ; If the attacker''s HP is < 70%, 80.5% chance of additional score -2.
     ;
-    ; If the target's stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
+    ; If the target''s stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
     ;
-    ; If the target's HP is < 70%, score -2.
+    ; If the target''s HP is < 70%, score -2.
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
@@ -2415,10 +2443,10 @@ Expert_StatusSpAttackDown:
 	;
     ; If the target is at any stat stage other than +0, additional score -1. Also, further modify
     ; the score according to all of the following which apply:
-    ; - If the attacker's HP is at 90% or lower, additional score -1.
+    ; - If the attacker''s HP is at 90% or lower, additional score -1.
     ; - If the target is at -3 stat stage or lower, 80.5% chance of additional score -2.
     ;
-    ; If the target's HP is at 70% or lower, additional score -2.
+    ; If the target''s HP is at 70% or lower, additional score -2.
     ;
     ; If the move last used by the target was not a Physical move, 50% chance of score -2.
 	LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -2465,11 +2493,11 @@ Expert_StatusSpDefenseDown:
 	; If the defender has Clear Body or White Smoke, score -3
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the attacker's HP is < 70%, 80.5% chance of additional score -2.
+    ; If the attacker''s HP is < 70%, 80.5% chance of additional score -2.
     ;
-    ; If the target's stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
+    ; If the target''s stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
     ;
-    ; If the target's HP is < 70%, score -2.
+    ; If the target''s HP is < 70%, score -2.
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
@@ -2494,7 +2522,7 @@ Expert_StatusAccuracyDown:
 	; If the defender has Clear Body or White Smoke, score -3
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the target's HP is <= 70% and the attacker's HP is NOT >= 70%, 60.9% chance of additional
+    ; If the target''s HP is <= 70% and the attacker''s HP is NOT >= 70%, 60.9% chance of additional
     ; score -1.
     ;
     ; If the attacker is at -2 accuracy or lower, 68.75% chance of additional score -2.
@@ -2507,9 +2535,9 @@ Expert_StatusAccuracyDown:
     ;
     ; If the target is affected by Curse, ~72.7% chance of additional score +2.
     ;
-    ; If the attacker's HP is > 70%, suppress all further modifiers. Otherwise:
+    ; If the attacker''s HP is > 70%, suppress all further modifiers. Otherwise:
     ; - If the attacker is at exactly +0 stat stage, no further score modifiers.
-    ; - If either the attacker's HP or the target's HP are < 40%, score -2.
+    ; - If either the attacker''s HP or the target''s HP are < 40%, score -2.
     ; - Otherwise, ~72.7% chance of score -2.
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
@@ -2572,11 +2600,11 @@ Expert_StatusEvasionDown:
 	; If the defender has Clear Body or White Smoke, score -3
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the attacker's HP is < 70%, 80.5% chance of additional score -2.
+    ; If the attacker''s HP is < 70%, 80.5% chance of additional score -2.
     ;
-    ; Otherwise, if the target's stat stage is -3 or lower, 80.5% chance of additional score -2.
+    ; Otherwise, if the target''s stat stage is -3 or lower, 80.5% chance of additional score -2.
     ;
-    ; If the target's HP is <= 70%, score -2.
+    ; If the target''s HP is <= 70%, score -2.
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
@@ -2598,10 +2626,10 @@ Expert_StatusEvasionDown_End:
     PopOrEnd 
 
 Expert_Haze:
-    ; If any of the attacker's stat stages are at +3 or higher, or any of the target's stat stages
+    ; If any of the attacker''s stat stages are at +3 or higher, or any of the target''s stat stages
     ; are at -3 or lower, 80.4% chance of additional score -3.
     ;
-    ; If any of the attacker's stat stages are at -3 or lower, or any of the target's stat stages
+    ; If any of the attacker''s stat stages are at -3 or lower, or any of the target''s stat stages
     ; are at +3 or higher, 80.4% chance of additional score +3.
     ;
     ; Otherwise, score -1.
@@ -2644,7 +2672,7 @@ Expert_Haze_End:
     PopOrEnd 
 
 Expert_Bide:
-    ; If the attacker's HP is <= 90%, score -2.
+    ; If the attacker''s HP is <= 90%, score -2.
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Bide_End
     AddToMoveScore -2
 
@@ -2654,7 +2682,7 @@ Expert_Bide_End:
 Expert_ForceSwitch:
     ; If the target has been in battle for longer than more than 3 turns, 75% chance of score +2.
     ;
-    ; If the target's side of the field has Spikes, Stealth Rock, or Toxic Spikes set, 50% chance of
+    ; If the target''s side of the field has Spikes, Stealth Rock, or Toxic Spikes set, 50% chance of
     ; score +2.
     ;
     ; If the target has a stat stage of +3 or higher in any of the following stats, 50% chance of
@@ -2691,7 +2719,7 @@ Expert_ForceSwitch_End:
     PopOrEnd 
 
 Expert_Conversion:
-    ; If the attacker's HP is <= 90%, additional score -2.
+    ; If the attacker''s HP is <= 90%, additional score -2.
     ;
     ; If it is NOT the first global turn of the battle, ~78.1% chance of score -2.
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Conversion_CheckTurnCount
@@ -2759,8 +2787,8 @@ Expert_Recovery_End:
 
 Expert_ToxicLeechSeed:
     ; If the attacker has at least one damaging move, apply all of the following which apply:
-    ; - If the attacker's HP <= 50%, 80.5% chance of additional score -3.
-    ; - If the defender's HP <= 50%, 80.5% chance of additional score -3.
+    ; - If the attacker''s HP <= 50%, 80.5% chance of additional score -3.
+    ; - If the defender''s HP <= 50%, 80.5% chance of additional score -3.
     ;
     ; If the attacker knows a move that either increases its Special Defense by 1 stage or acts as
     ; Protect, 76.6% chance of score +2. (Note: no such move exists in Vanilla that only raises
@@ -2788,11 +2816,11 @@ Expert_ToxicLeechSeed_End:
     PopOrEnd 
 
 Expert_LightScreen:
-    ; If the attacker's HP is < 50%, score -2.
+    ; If the attacker''s HP is < 50%, score -2.
     ;
-    ; If the attacker's HP is >= 90%, 50% of additional score +1.
+    ; If the attacker''s HP is >= 90%, 50% of additional score +1.
     ;
-    ; If the opponent's last-used move was a Special move, 75% chance of score +1.
+    ; If the opponent''s last-used move was a Special move, 75% chance of score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_LightScreen_ScoreMinus2
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_LightScreen_CheckLastUsedMove
     IfRandomLessThan 128, Expert_LightScreen_CheckLastUsedMove
@@ -2825,12 +2853,12 @@ Expert_LightScreen_PreSplitSpecialTypes:
 Expert_Rest:
     ; If the attacker is faster than its target:
     ; - If the attacker is at full HP, 60.9% chance of score -8 and terminate.
-    ; - If the attacker's HP is > 50%, score -3 and terminate.
-    ; - If the attacker's HP is >= 40%, 72.7% chance of score -3 and terminate.
+    ; - If the attacker''s HP is > 50%, score -3 and terminate.
+    ; - If the attacker''s HP is >= 40%, 72.7% chance of score -3 and terminate.
     ;
     ; If the attacker is slower than its target:
-    ; - If the attacker's HP > 70%, score -3 and terminate.
-    ; - If the attacker's HP >= 60%, 80.5% chance of score -3 and terminate.
+    ; - If the attacker''s HP > 70%, score -3 and terminate.
+    ; - If the attacker''s HP >= 60%, 80.5% chance of score -3 and terminate.
     ;
     ; If the opponent does not know Snatch, 96.1% chance of score +3.
     ;
@@ -2924,7 +2952,7 @@ Expert_HighCritical_End:
 
 Expert_Swagger:
     ; If the attacker knows Psych Up:
-    ; - If the target's attack stat is -3 or higher, score -5 and terminate.
+    ; - If the target''s attack stat is -3 or higher, score -5 and terminate.
     ; - If it is the first turn of the battle, score +5.
     ; - Otherwise, score +3.
     ;
@@ -2939,15 +2967,15 @@ Expert_Flatter:
     AddToMoveScore 1
 
 Expert_StatusConfuse:
-    ; If the target's HP is <= 70%, 50% chance of additional score -1.
+    ; If the target''s HP is <= 70%, 50% chance of additional score -1.
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusConfuse_End
     IfRandomLessThan 128, Expert_StatusConfuse_CheckHP
     AddToMoveScore -1
 
 Expert_StatusConfuse_CheckHP:
-    ; If the target's HP is <= 50%, additional score -1.
+    ; If the target''s HP is <= 50%, additional score -1.
     ;
-    ; If the target's HP is also <= 30%, additional score -1.
+    ; If the target''s HP is also <= 30%, additional score -1.
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_StatusConfuse_End
     AddToMoveScore -1
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_StatusConfuse_End
@@ -2971,11 +2999,11 @@ Expert_Swagger_End:
     PopOrEnd 
 
 Expert_Reflect:
-    ; If the attacker's HP is < 50%, score -2.
+    ; If the attacker''s HP is < 50%, score -2.
     ;
-    ; If the attacker's HP is >= 90%, 50% of additional score +1.
+    ; If the attacker''s HP is >= 90%, 50% of additional score +1.
     ;
-    ; If the opponent's last-used move was a Physical move, 75% chance of score +1.
+    ; If the opponent''s last-used move was a Physical move, 75% chance of score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Reflect_ScoreMinus2
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_Reflect_CheckLastUsedMove
     IfRandomLessThan 128, Expert_Reflect_CheckLastUsedMove
@@ -3007,7 +3035,7 @@ Expert_Reflect_PreSplitPhysicalTypes:
     TableEntry TABLE_END
 
 Expert_StatusPoison:
-    ; If the attacker's HP is < 50% or the defender's HP is <= 50%, score -1.
+    ; If the attacker''s HP is < 50% or the defender''s HP is <= 50%, score -1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_StatusPoison_ScoreMinus1
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_StatusPoison_End
 
@@ -3020,7 +3048,7 @@ Expert_StatusPoison_End:
 Expert_StatusParalyze:
     ; If the attacker is slower than its target, 92.2% chance of score +3.
     ;
-    ; If the attacker's HP is <= 70%, score -1.
+    ; If the attacker''s HP is <= 70%, score -1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_StatusParalyze_TryScorePlus3
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusParalyze_End
     AddToMoveScore -1
@@ -3036,9 +3064,9 @@ Expert_StatusParalyze_End:
 Expert_VitalThrow:
     ; If the attacker is slower than its target, no change.
     ;
-    ; If the attacker's HP > 60%, no change.
+    ; If the attacker''s HP > 60%, no change.
     ;
-    ; If the attacker's HP < 40%, 80.5% chance of score -1.
+    ; If the attacker''s HP < 40%, 80.5% chance of score -1.
     ;
     ; Otherwise, 23.9% chance of score -1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_VitalThrow_End
@@ -3056,8 +3084,8 @@ Expert_VitalThrow_End:
 Expert_Substitute:
     ; If the attacker knows specifically Focus Punch, 62.5% chance of additional score +1.
     ;
-    ; If the attacker's HP <= 90%, roll for a 60.9% chance of additional score -1 a number of times
-    ; corresponding to the attacker's HP:
+    ; If the attacker''s HP <= 90%, roll for a 60.9% chance of additional score -1 a number of times
+    ; corresponding to the attacker''s HP:
     ; - > 70%: roll once
     ; - > 50%: roll twice
     ; - <= 50%: roll thrice
@@ -3124,11 +3152,11 @@ Expert_Substitute_End:
 Expert_RechargeTurn:
     ; If the opponent would resist or is immune to the move, score -1.
     ;
-    ; If the attacker's ability is Truant, 68.75% chance of score +1.
+    ; If the attacker''s ability is Truant, 68.75% chance of score +1.
     ;
-    ; If the attacker is slower than the opponent and the attacker's HP is >= 60%, score -1.
+    ; If the attacker is slower than the opponent and the attacker''s HP is >= 60%, score -1.
     ;
-    ; If the attacker is faster than the opponent and the attacker's HP is > 40%, score -1.
+    ; If the attacker is faster than the opponent and the attacker''s HP is > 40%, score -1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_RechargeTurn_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_RechargeTurn_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_RechargeTurn_ScoreMinus1
@@ -3155,9 +3183,9 @@ Expert_RechargeTurn_End:
 Expert_Disable:
     ; If the attacker is slower than the opponent, score +0 and terminate.
     ;
-    ; If the opponent's last-used move was a Status move, 60.9% chance of score -1.
+    ; If the opponent''s last-used move was a Status move, 60.9% chance of score -1.
     ;
-    ; If the opponent's last-used move was a Damaging move, score +1.
+    ; If the opponent''s last-used move was a Damaging move, score +1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Disable_End
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
     LoadPowerOfLoadedMove 
@@ -3175,17 +3203,17 @@ Expert_Disable_End:
 Expert_Counter:
     ; If the opponent is asleep, confused, or infatuated, score -1 and terminate.
     ;
-    ; If the attacker's HP <= 30%, 96.1% chance of additional score -1.
+    ; If the attacker''s HP <= 30%, 96.1% chance of additional score -1.
     ;
-    ; If the attacker's HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
+    ; If the attacker''s HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
     ;
     ; If the attacker knows specifically Mirror Coat, 60.9% chance of score +4.
     ;
-    ; If the opponent's last-used move was a Status move:
+    ; If the opponent''s last-used move was a Status move:
     ; - If the opponent is Taunted, 60.9% chance of additional score +1.
     ; - If the opponent does NOT have a type which is considered a Physical type, 49% chance of score +4.
     ;
-    ; If the opponent's last-used move was a Damaging move:
+    ; If the opponent''s last-used move was a Damaging move:
     ; - If the opponent is Taunted, 60.9% chance of additional score +1.
     ; - If the last-used move was a Special move, score -1.
     ; - If the last-used move was a Physical move, 60.9% chance of score +1.
@@ -3259,7 +3287,7 @@ Expert_Encore:
     ;
     ; If the attacker is slower than the opponent, score -2.
     ;
-    ; If the opponent's last-used move is not one of a specific set of effects, score -2.
+    ; If the opponent''s last-used move is not one of a specific set of effects, score -2.
     ;
     ; Otherwise, 88.3% chance of score +3.
     IfBattlerUnderEffect AI_BATTLER_DEFENDER, CHECK_DISABLE, Expert_Encore_TryScorePlus3
@@ -3365,13 +3393,13 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry TABLE_END
 
 Expert_PainSplit:
-    ; If the opponent's HP < 80%, score -1.
+    ; If the opponent''s HP < 80%, score -1.
     ;
     ; If the attacker is slower than its opponent:
-    ; - If the attacker's HP > 60%, score -1.
+    ; - If the attacker''s HP > 60%, score -1.
     ; - Otherwise, score +1.
     ;
-    ; If the attacker's HP > 40%, score -1.
+    ; If the attacker''s HP > 40%, score -1.
     ;
     ; Otherwise, score -1.
     IfHPPercentLessThan AI_BATTLER_DEFENDER, 80, Expert_PainSplit_ScoreMinus1
@@ -3415,11 +3443,11 @@ Expert_SleepTalk:
 Expert_DestinyBond:
     ; Start at score -1. If the attacker is slower than its opponent, terminate.
     ;
-    ; If the attacker's HP > 70%, terminate. Otherwise, 50% chance of additional score +1.
+    ; If the attacker''s HP > 70%, terminate. Otherwise, 50% chance of additional score +1.
     ;
-    ; If the attacker's HP > 50%, terminate. Otherwise, 50% chance of additional score +1.
+    ; If the attacker''s HP > 50%, terminate. Otherwise, 50% chance of additional score +1.
     ;
-    ; If the attacker's HP > 30%, terminate. Otherwise, 60.9% chance of additional score +2.
+    ; If the attacker''s HP > 30%, terminate. Otherwise, 60.9% chance of additional score +2.
     AddToMoveScore -1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DestinyBond_End
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_DestinyBond_End
@@ -3441,15 +3469,15 @@ Expert_DestinyBond_End:
 
 Expert_Reversal:
     ; If the attacker is slower than its opponent:
-    ; - If the attacker's HP > 60%, score -1.
-    ; - If the attacker's HP > 40%, score +0.
+    ; - If the attacker''s HP > 60%, score -1.
+    ; - If the attacker''s HP > 40%, score +0.
     ; - Otherwise, 60.9% chance of score +1.
     ;
     ; If the attacker is faster than its opponent:
-    ; - If the attacker's HP > 33%, score -1.
-    ; - If the attacker's HP > 20%, score +0.
-    ; - If the attacker's HP >= 8%, 60.9% chance of score +1.
-    ; - If the attacker's HP < 8%, 60.9% chance of score +2, 39.1% chance of score +1.
+    ; - If the attacker''s HP > 33%, score -1.
+    ; - If the attacker''s HP > 20%, score +0.
+    ; - If the attacker''s HP >= 8%, 60.9% chance of score +1.
+    ; - If the attacker''s HP < 8%, 60.9% chance of score +2, 39.1% chance of score +1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Reversal_SlowerCheckHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 33, Expert_Reversal_ScoreMinus1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 20, Expert_Reversal_End
@@ -3486,7 +3514,7 @@ Expert_HealBell_End:
     PopOrEnd 
 
 Expert_Thief:
-    ; If the opponent's held item does NOT have one of the encouraged effects, score -2.
+    ; If the opponent''s held item does NOT have one of the encouraged effects, score -2.
     ;
     ; Otherwise, 80.5% chance of score +1.
     LoadHeldItemEffect AI_BATTLER_DEFENDER
@@ -3531,18 +3559,18 @@ Expert_Thief_EncouragedItemEffects:
 
 Expert_Curse:
     ; If the attacker has a Ghost typing:
-    ; - If the attacker's HP > 80%, score +0.
+    ; - If the attacker''s HP > 80%, score +0.
     ; - Otherwise, score -1.
     ;
-    ; If the attacker's Defense stat stage is at +3 or higher, score +0 and terminate.
+    ; If the attacker''s Defense stat stage is at +3 or higher, score +0 and terminate.
     ;
     ; If the attacker knows the move Gyro Ball or Trick Room, 87.5% chance of additional score +1.
     ;
     ; 50% chance from here-on of additional score +1.
     ;
-    ; If the attacker's Defense stat stage is at +1 or lower, 50% chance of additional score +1.
+    ; If the attacker''s Defense stat stage is at +1 or lower, 50% chance of additional score +1.
     ;
-    ; If the attacker's Defense stat stage is at +0 or lower, 50% chance of additional score +1.
+    ; If the attacker''s Defense stat stage is at +0 or lower, 50% chance of additional score +1.
     ; (This is cumulative with the previous check.)
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
@@ -3688,7 +3716,7 @@ Expert_Spikes_End:
 Expert_Foresight:
     ; If the defender has a Ghost typing, 47.3% chance of score +2.
     ;
-    ; If the target's Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
+    ; If the target''s Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
     ;
     ; Otherwise, score -2.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
@@ -3710,9 +3738,9 @@ Expert_Foresight_End:
     PopOrEnd 
 
 Expert_Endure:
-    ; If the attacker's HP < 4%, score -1.
+    ; If the attacker''s HP < 4%, score -1.
     ;
-    ; If the attacker's HP < 35%, 72.7% chance of score +1.
+    ; If the attacker''s HP < 35%, 72.7% chance of score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 4, Expert_Endure_ScoreMinus1
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 35, Expert_Endure_TryScorePlus1
 
@@ -3728,13 +3756,13 @@ Expert_Endure_End:
     PopOrEnd 
 
 Expert_BatonPass:
-    ; If any of the attacker's stat stages are at +3 or higher, 68.75% chance of score +2 if either
+    ; If any of the attacker''s stat stages are at +3 or higher, 68.75% chance of score +2 if either
     ; of the following is true:
     ; - The attacker is slower than its target and has HP <= 70%
     ; - The attacker is faster than its target and has HP <= 60%
     ; If neither are true, score +0.
     ;
-    ; If any of the attacker's stat stages are at +2, score -2 if either of the following is true:
+    ; If any of the attacker''s stat stages are at +2, score -2 if either of the following is true:
     ; - The attacker is slower than its target and has HP <= 70%
     ; - The attacker is faster than its target and has HP <= 60%
     ; If neither are true, score +0.
@@ -3783,9 +3811,9 @@ Expert_BatonPass_End:
     PopOrEnd 
 
 Expert_Pursuit:
-    ; If it is the attacker's first turn in battle, 50% chance of additional score +1.
+    ; If it is the attacker''s first turn in battle, 50% chance of additional score +1.
     ;
-    ; If it is NOT the attacker's first turn in battle and the opponent has a Ghost or Psychic
+    ; If it is NOT the attacker''s first turn in battle and the opponent has a Ghost or Psychic
     ; typing, 50% chance of additional score +1.
     ;
     ; If the opponent knows specifically the move U-turn, 50% chance of additional score +1.
@@ -3817,7 +3845,7 @@ Expert_RainDance:
     ; If the attacker is slower than its opponent and has the ability Swift Swim, score +1 and
     ; terminate.
     ;
-    ; If the attacker's HP < 40%, score -1.
+    ; If the attacker''s HP < 40%, score -1.
     ;
     ; If the current weather is Hail, Sun, or Sandstorm, score +1.
     ;
@@ -3850,7 +3878,7 @@ Expert_RainDance_End:
     PopOrEnd 
 
 Expert_SunnyDay:
-    ; If the attacker's HP < 40%, score -1.
+    ; If the attacker''s HP < 40%, score -1.
     ;
     ; If the current weather is Hail, Rain, or Sandstorm, score +1.
     ;
@@ -3891,7 +3919,7 @@ Expert_BellyDrum_End:
 Expert_PsychUp:
     ; If the opponent has any of Attack, Defense, SpAttack, SpDefense, or Evasion at +3 stages or
     ; higher:
-    ; - If the attacker's Evasion stat is at +0 stages or lower, score +2.
+    ; - If the attacker''s Evasion stat is at +0 stages or lower, score +2.
     ; - If the attacker has any of Attack, Defense, SpAttack, or SpDefense at +0 stages or lower,
     ; score +1.
     ; - Otherwise, 80.4% chance of score -2.
@@ -3929,17 +3957,17 @@ Expert_PsychUp_End:
 Expert_MirrorCoat:
     ; If the opponent is asleep, confused, or infatuated, score -1 and terminate.
     ;
-    ; If the attacker's HP <= 30%, 96.1% chance of additional score -1.
+    ; If the attacker''s HP <= 30%, 96.1% chance of additional score -1.
     ;
-    ; If the attacker's HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
+    ; If the attacker''s HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
     ;
     ; If the attacker knows specifically Counter, 60.9% chance of score +4.
     ;
-    ; If the opponent's last-used move was a Status move:
+    ; If the opponent''s last-used move was a Status move:
     ; - If the opponent is Taunted, 60.9% chance of additional score +1.
     ; - If the opponent does NOT have a type which is considered a Special type, 49% chance of score +4.
     ;
-    ; If the opponent's last-used move was a Damaging move:
+    ; If the opponent''s last-used move was a Damaging move:
     ; - If the opponent is Taunted, 60.9% chance of additional score +1.
     ; - If the last-used move was a Physical move, score -1.
     ; - If the last-used move was a Special move, 60.9% chance of score +1.
@@ -4016,7 +4044,7 @@ Expert_ChargeTurnNoInvuln:
     ;
     ; If the opponent knows the move Protect, score -2.
     ;
-    ; If the attacker's HP <= 38%, score -1.
+    ; If the attacker''s HP <= 38%, score -1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_ChargeTurnNoInvuln_ScoreMinus2
@@ -4078,10 +4106,10 @@ Expert_ChargeTurnWithInvuln:
     ; - Curse
     ; - Leech Seed
     ;
-    ; If the current weather is Sand or Hail and the attacker's type makes them immune to the
+    ; If the current weather is Sand or Hail and the attacker''s type makes them immune to the
     ; corresponding damage effect, 68.75% chance of score +1.
     ;
-    ; If the attacker is faster than its opponent and the opponent's last-used move is not an
+    ; If the attacker is faster than its opponent and the opponent''s last-used move is not an
     ; always-hit effect (e.g. Aerial Ace), 68.75% chance of score +1.
     IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnNoInvuln_ScorePlus2
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ShadowForce
@@ -4149,12 +4177,12 @@ Expert_ChargeTurnWithInvuln_SandImmuneTypes:
     TableEntry TABLE_END
 
 Expert_FakeOut:
-    ; Score +2.
-    AddToMoveScore 2
+    ; Score +4.
+    AddToMoveScore 4
     PopOrEnd 
 
 Expert_SpitUp:
-    ; If the attacker's Stockpile count is 2 or higher, 68.75% chance of score +2.
+    ; If the attacker''s Stockpile count is 2 or higher, 68.75% chance of score +2.
     LoadStockpileCount AI_BATTLER_ATTACKER
     IfLoadedLessThan 2, Expert_SpitUp_End
     IfRandomLessThan 80, Expert_SpitUp_End
@@ -4164,7 +4192,7 @@ Expert_SpitUp_End:
     PopOrEnd 
 
 Expert_Hail:
-    ; If the attacker's HP < 40%, score -1 and terminate.
+    ; If the attacker''s HP < 40%, score -1 and terminate.
     ;
     ; If the current weather is Sun, Rain, or Sand, additional score +1. If the attacker also knows
     ; the move Blizzard, additional score +2.
@@ -4211,7 +4239,7 @@ Expert_FocusPunch:
     ;
     ; If the opponent is confused or infatuated, 60.9% chance of score +1.
     ;
-    ; If it is not the attacker's first turn in battle, 21.875% chance of score +1.
+    ; If it is not the attacker''s first turn in battle, 21.875% chance of score +1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_FocusPunch_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_FocusPunch_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_FocusPunch_ScoreMinus1
@@ -4547,7 +4575,7 @@ Expert_Ingrain:
 Expert_Superpower:
     ; If the opponent would resist or is immune to the move, score -1.
     ;
-    ; If the attacker's Attack stat stage is at -1 or lower, score -1.
+    ; If the attacker''s Attack stat stage is at -1 or lower, score -1.
     ;
     ; If the attacker is slower than its opponent and has HP >= 60%, score -1.
     ;
@@ -4570,11 +4598,11 @@ Expert_Superpower_End:
     PopOrEnd 
 
 Expert_MagicCoat:
-    ; If the opponent's HP <= 30%, 60.9% chance of additional score -1.
+    ; If the opponent''s HP <= 30%, 60.9% chance of additional score -1.
     ;
-    ; If it is the attacker's first turn in battle, 41.4% chance of score +1.
+    ; If it is the attacker''s first turn in battle, 41.4% chance of score +1.
     ;
-    ; If it is not the attacker's first turn in battle, 88.3% chance of score -1.
+    ; If it is not the attacker''s first turn in battle, 88.3% chance of score -1.
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_MagicCoat_CheckUserFirstTurn
     IfRandomLessThan 100, Expert_MagicCoat_CheckUserFirstTurn
     AddToMoveScore -1
@@ -4595,7 +4623,7 @@ Expert_MagicCoat_End:
     PopOrEnd 
 
 Expert_Recycle:
-    ; If the attacker's Recyclable item is *not* any of the following, score -2:
+    ; If the attacker''s Recyclable item is *not* any of the following, score -2:
     ; - Chesto Berry
     ; - Lum Berry
     ; - Starf Berry
@@ -4637,7 +4665,7 @@ Expert_Revenge_End:
     PopOrEnd 
 
 Expert_BrickBreak:
-    ; If the opponent's side of the field is under the effect of Reflect or Light Screen, score +1.
+    ; If the opponent''s side of the field is under the effect of Reflect or Light Screen, score +1.
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScorePlus1
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_ScorePlus1
     GoTo Expert_BrickBreak_End
@@ -4649,7 +4677,7 @@ Expert_BrickBreak_End:
     PopOrEnd 
 
 Expert_KnockOff:
-    ; If the opponent's HP >= 30% and it is not the attacker's first turn in battle, 29.7% chance of
+    ; If the opponent''s HP >= 30% and it is not the attacker''s first turn in battle, 29.7% chance of
     ; score +1.
     IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_KnockOff_End
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
@@ -4661,14 +4689,14 @@ Expert_KnockOff_End:
     PopOrEnd 
 
 Expert_Endeavor:
-    ; If the opponent's HP < 70%, score -1 and terminate.
+    ; If the opponent''s HP < 70%, score -1 and terminate.
     ;
     ; If the attacker is slower than its opponent:
-    ; - If the attacker's HP > 50%, score -1.
+    ; - If the attacker''s HP > 50%, score -1.
     ; - Otherwise, score +1.
     ;
     ; If the attacker is faster than its opponent:
-    ; - If the attacker's HP > 40%, score -1.
+    ; - If the attacker''s HP > 40%, score -1.
     ; - Otherwise, score +1.
     IfHPPercentLessThan AI_BATTLER_DEFENDER, 70, Expert_Endeavor_ScoreMinus1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Endeavor_SlowerCheckHP
@@ -4690,9 +4718,9 @@ Expert_Endeavor_End:
 Expert_WaterSpout:
     ; If the opponent resists or is immune to the move, score -1.
     ;
-    ; If the attacker is slower than its opponent and the opponent's HP <= 70%, score -1.
+    ; If the attacker is slower than its opponent and the opponent''s HP <= 70%, score -1.
     ;
-    ; If the attacker is faster than its opponent and the opponent's HP <= 50%, score -1.
+    ; If the attacker is faster than its opponent and the opponent''s HP <= 50%, score -1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_WaterSpout_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_WaterSpout_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_WaterSpout_ScoreMinus1
@@ -4710,7 +4738,7 @@ Expert_WaterSpout_End:
     PopOrEnd 
 
 Expert_Imprison:
-    ; If it is not the attacker's first turn in battle, 60.9% chance of score +2.
+    ; If it is not the attacker''s first turn in battle, 60.9% chance of score +2.
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedGreaterThan FALSE, Expert_Imprison_End
     IfRandomLessThan 100, Expert_Imprison_End
@@ -4720,7 +4748,7 @@ Expert_Imprison_End:
     PopOrEnd 
 
 Expert_Refresh:
-    ; If the opponent's HP < 50%, score -1.
+    ; If the opponent''s HP < 50%, score -1.
     IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_Refresh_ScoreMinus1
     GoTo Expert_Refresh_End
 
@@ -4731,18 +4759,18 @@ Expert_Refresh_End:
     PopOrEnd 
 
 Expert_Snatch:
-    ; If it is the attacker's first turn in battle, 41.4% chance of score +2.
+    ; If it is the attacker''s first turn in battle, 41.4% chance of score +2.
     ;
     ; 11.7% chance of score +0 and terminate.
     ;
     ; If the attacker is slower than its opponent:
-    ; - If the opponent's HP > 25%, 88.3% chance of score -2.
+    ; - If the opponent''s HP > 25%, 88.3% chance of score -2.
     ; - If the opponent knows a flat-Recovery move or Defense Curl, 41.4% chance of score +2.
     ; - Otherwise, 10.2% chance of score +1.
     ;
     ; If the attacker is faster than its opponent:
     ; - If the attacker is not at full HP, 88.3% chance of score -2.
-    ; - If the opponent's HP < 70%, 88.3% chance of score -2.
+    ; - If the opponent''s HP < 70%, 88.3% chance of score -2.
     ; - Otherwise, 67.6% chance of score -2.
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo TRUE, Expert_Snatch_TryScorePlus2
@@ -4777,7 +4805,7 @@ Expert_Snatch_End:
     PopOrEnd 
 
 Expert_MudSport:
-    ; If the attacker's HP < 50%, score -1.
+    ; If the attacker''s HP < 50%, score -1.
     ;
     ; If the opponent has an Electric typing, score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_MudSport_ScoreMinus1
@@ -4800,9 +4828,9 @@ Expert_MudSport_End:
 Expert_Overheat:
     ; If the opponent resists or is immune to the move, score -1.
     ;
-    ; If the attacker is faster than its opponent and the attacker's HP is <= 60%, score -1.
+    ; If the attacker is faster than its opponent and the attacker''s HP is <= 60%, score -1.
     ;
-    ; If the attacker is slower than its opponent and the attacker's HP is <= 80%, score -1.
+    ; If the attacker is slower than its opponent and the attacker''s HP is <= 80%, score -1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Overheat_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Overheat_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Overheat_ScoreMinus1
@@ -4820,7 +4848,7 @@ Expert_Overheat_End:
     PopOrEnd 
 
 Expert_WaterSport:
-    ; If the attacker's HP < 50%, score -1.
+    ; If the attacker''s HP < 50%, score -1.
     ;
     ; If the opponent has a Fire typing, score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_WaterSport_ScoreMinus1
@@ -4843,7 +4871,7 @@ Expert_WaterSport_End:
 Expert_DragonDance:
     ; If the attacker is slower than its opponent, 50% chance of score +1.
     ;
-    ; If the attacker's HP <= 50%, 72.7% chance of score -1.
+    ; If the attacker''s HP <= 50%, 72.7% chance of score -1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DragonDance_TryScorePlus1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_DragonDance_End
     IfRandomLessThan 70, Expert_DragonDance_End
@@ -4861,7 +4889,7 @@ Expert_Gravity:
     ; If the opponent has Levitate, is under the effect of Magnet Rise, or has a Flying typing, 75%
     ; chance of score +1.
     ;
-    ; If the attacker's HP >= 60%, 37.5% chance of score +1.
+    ; If the attacker''s HP >= 60%, 37.5% chance of score +1.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LEVITATE, Expert_Gravity_TryScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MAGNET_RISE, Expert_Gravity_TryScorePlus1
@@ -4883,7 +4911,7 @@ Expert_Gravity_End:
 Expert_MiracleEye:
     ; If the opponent has a Dark typing, 47.3% chance of score +2.
     ;
-    ; If the opponent's Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
+    ; If the opponent''s Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
     ;
     ; Otherwise, score -2.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
@@ -4951,7 +4979,7 @@ Expert_GyroBall:
 Expert_Brine:
     ; If the opponent resists or is immune to the move, score -1.
     ;
-    ; If the opponent's HP <= 50%, 50% chance of score +1, 50% chance of score +2.
+    ; If the opponent''s HP <= 50%, 50% chance of score +1, 50% chance of score +2.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Brine_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Brine_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Brine_ScoreMinus1
@@ -4981,9 +5009,9 @@ Expert_Feint:
     ; Otherwise, if the opponent is not at maximum HP and is holding Leftovers or Black Sludge, 50%
     ; chance of additional score +1.
     ;
-    ; If the opponent's Protect chain is 0, 50% chance of score +1.
+    ; If the opponent''s Protect chain is 0, 50% chance of score +1.
     ;
-    ; If the opponent's Protect chain is 1, 25% chance of score +1.
+    ; If the opponent''s Protect chain is 1, 25% chance of score +1.
     ;
     ; Otherwise, score -2.
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_Feint_CheckConditions
@@ -5035,7 +5063,7 @@ Expert_Feint_GradualRecoveryItems:
 Expert_Pluck:
     ; If the opponent resists or is immune to the move, score -1.
     ;
-    ; If it is the attacker's first turn in battle, 75% chance of additional score +1.
+    ; If it is the attacker''s first turn in battle, 75% chance of additional score +1.
     ;
     ; 50% chance of score +1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Pluck_ScoreMinus1
@@ -5062,9 +5090,9 @@ Expert_Tailwind:
     ;
     ; If the attacker is faster than its opponent, score -1.
     ;
-    ; If the attacker's HP <= 30%, score -1.
+    ; If the attacker''s HP <= 30%, score -1.
     ;
-    ; If the attacker's HP > 75%, score +1.
+    ; If the attacker''s HP > 75%, score +1.
     ;
     ; Otherwise, 75% chance of score +1.
     IfRandomLessThan 64, Expert_Tailwind_End
@@ -5084,9 +5112,9 @@ Expert_Tailwind_End:
     PopOrEnd 
 
 Expert_Acupressure:
-    ; If the attacker's HP <= 50%, score -1.
+    ; If the attacker''s HP <= 50%, score -1.
     ;
-    ; If the attacker's HP > 90%, 75% chance of score +1.
+    ; If the attacker''s HP > 90%, 75% chance of score +1.
     ;
     ; Otherwise, 37.5% chance of score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_Acupressure_ScoreMinus1
@@ -5111,13 +5139,13 @@ Expert_MetalBurst:
     ; - Focus Punch
     ; - Vital Throw
     ;
-    ; If the attacker's HP <= 30%, 96% chance of additional score -1.
+    ; If the attacker''s HP <= 30%, 96% chance of additional score -1.
     ;
-    ; If the attacker's HP <= 50%, 60.9% chance of additional score -1.
+    ; If the attacker''s HP <= 50%, 60.9% chance of additional score -1.
     ;
-    ; If the attacker's HP > 50%, 25% chance of additional score +1.
+    ; If the attacker''s HP > 50%, 25% chance of additional score +1.
     ;
-    ; If the opponent's last-used move was not a Status move and they are not Taunted, 60.9% chance
+    ; If the opponent''s last-used move was not a Status move and they are not Taunted, 60.9% chance
     ; of additional score +1.
     ;
     ; If the opponent is not Taunted, 60.9% chance of score +1.
@@ -5169,9 +5197,9 @@ Expert_UTurn:
     ;
     ; If no party member deals more damage than the attacker, 75% chance of score -2 and terminate.
     ;
-    ; If the opponent's HP > 70%, 75% chance of additional score +1.
+    ; If the opponent''s HP > 70%, 75% chance of additional score +1.
     ;
-    ; If the opponent's HP > 30%, 50% chance of additional score +1. (Cumulative with the prior check)
+    ; If the opponent''s HP > 30%, 50% chance of additional score +1. (Cumulative with the prior check)
     ;
     ; Otherwise, 25% chance of additional score +1.
     ;
@@ -5247,7 +5275,7 @@ Expert_CloseCombat_End:
 Expert_Payback:
     ; If the opponent resists or is immune to the move, score -1.
     ;
-    ; If the attacker is slower than its opponent and the attacker's HP >= 30%, 75% chance of
+    ; If the attacker is slower than its opponent and the attacker''s HP >= 30%, 75% chance of
     ; score +1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Payback_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Payback_ScoreMinus1
@@ -5268,7 +5296,7 @@ Expert_Assurance:
     ; If the opponent resists or is immune to the move, score -1.
     ;
     ; If the attacker is slower than its opponent:
-    ; - If the attacker's ability is Rough Skin, 50% chance of score +1.
+    ; - If the attacker''s ability is Rough Skin, 50% chance of score +1.
     ; - If the attacker is holding a Jaboca Berry or Rowap Berry, 50% chance of score +1.
     ; - Otherwise, 25% chance of score +1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Assurance_ScoreMinus1
@@ -5309,20 +5337,20 @@ Expert_Embargo_End:
 Expert_Fling:
     ; If the opponent resists or is immune to the move and the attacker is holding an item other than
     ; any of the following, score -1:
-    ; - King's Rock
+    ; - King''s Rock
     ; - Razor Fang
     ; - Poison Barb
     ; - Toxic Orb
     ; - Flame Orb
     ; - Light Ball
     ;
-    ; If the attacker's item would grant Fling < 30 base power, score -2.
+    ; If the attacker''s item would grant Fling < 30 base power, score -2.
     ;
-    ; If the attacker's item would grant Fling > 90 base power, 75% chance of score +1, and:
+    ; If the attacker''s item would grant Fling > 90 base power, 75% chance of score +1, and:
     ; - If the opponent is weak to the move, additional score +4.
     ; - Otherwise, 50% chance of additional score +1.
     ;
-    ; If the attacker's item would grant Fling > 60 base power, 75% chance of score +1.
+    ; If the attacker''s item would grant Fling > 60 base power, 75% chance of score +1.
     ;
     ; Otherwise, 50% chance of score -1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Fling_CheckAttackerItem
@@ -5374,7 +5402,7 @@ Expert_Fling_DesirableFlingEffects:
 Expert_PsychoShift:
     ; If the attacker does not have any status condition, score -10.
     ;
-    ; If the opponent's HP >= 30%, 50% chance of score +1.
+    ; If the opponent''s HP >= 30%, 50% chance of score +1.
     IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScoreMinus10
     IfRandomLessThan 128, Expert_PsychoShift_End
     IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_PsychoShift_End
@@ -5392,12 +5420,12 @@ Expert_TrumpCard:
     ;
     ; If the move has 3 PP remaining, 60.9% chance of score +1.
     ;
-    ; If the opponent's ability is Pressure, 88.3% chance of additional score +1.
+    ; If the opponent''s ability is Pressure, 88.3% chance of additional score +1.
     ;
-    ; If the opponent's Evasion stat stage is +5 or higher or the attacker's Accuracy stat stage is
+    ; If the opponent''s Evasion stat stage is +5 or higher or the attacker''s Accuracy stat stage is
     ; -5 or lower, 60.9% chance of score +2, 39.1% chance of score +1.
     ;
-    ; If the opponent's Evasion stat stage is +3 or higher or the attacker's Accuracy stat stage is
+    ; If the opponent''s Evasion stat stage is +3 or higher or the attacker''s Accuracy stat stage is
     ; -3 or lower, 60.9% chance of score +1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_TrumpCard_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_TrumpCard_ScoreMinus1
@@ -5483,14 +5511,14 @@ Expert_HealBlock_End:
 Expert_WringOut:
     ; If the opponent resists or is immune to the move, score -1.
     ;
-    ; If the opponent's HP < 50%, score -1.
+    ; If the opponent''s HP < 50%, score -1.
     ;
     ; If the opponent is at full HP:
     ; - Start with 90.2% chance of score +1.
     ; - If the attacker is faster than its opponent, additional score +2.
     ; - If the attacker is slower than its opponent, additional score +1.
     ;
-    ; If the opponent's HP > 85%, 90.2% chance of score +1.
+    ; If the opponent''s HP > 85%, 90.2% chance of score +1.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_WringOut_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_WringOut_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_WringOut_ScoreMinus1
@@ -5518,11 +5546,11 @@ Expert_WringOut_End:
     PopOrEnd 
 
 Expert_PowerTrick:
-    ; If the attacker's HP > 90%, 62.5% chance of score +1.
+    ; If the attacker''s HP > 90%, 62.5% chance of score +1.
     ;
-    ; If the attacker's HP > 60%, 50% chance of score +1.
+    ; If the attacker''s HP > 60%, 50% chance of score +1.
     ;
-    ; If the attacker's HP > 30%, 35.9% chance of score +1.
+    ; If the attacker''s HP > 30%, 35.9% chance of score +1.
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_PowerTrick_LikelyScorePlus1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_PowerTrick_CoinFlipScorePlus1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_PowerTrick_UnlikelyScorePlus1
@@ -5549,13 +5577,13 @@ Expert_PowerTrick_End:
 Expert_GastroAcid:
     ; 25% chance of score +0 and terminate.
     ;
-    ; If the opponent's HP > 70%, score +1.
+    ; If the opponent''s HP > 70%, score +1.
     ;
-    ; If the opponent's HP <= 70%, 50% chance of score +0, 50% chance of score -1.
+    ; If the opponent''s HP <= 70%, 50% chance of score +0, 50% chance of score -1.
     ;
-    ; If the opponent's HP <= 50%, 50% chance of score -1, 50% chance of score -2.
+    ; If the opponent''s HP <= 50%, 50% chance of score -1, 50% chance of score -2.
     ;
-    ; If the opponent's HP <= 30%, 50% chance of score -2, 50% chance of score -3.
+    ; If the opponent''s HP <= 30%, 50% chance of score -2, 50% chance of score -3.
     IfRandomLessThan 64, Expert_GastroAcid_End
     AddToMoveScore 1
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_GastroAcid_End
@@ -5572,7 +5600,7 @@ Expert_GastroAcid_End:
     PopOrEnd 
 
 Expert_LuckyChant:
-    ; If the attacker's HP < 70%, score -1.
+    ; If the attacker''s HP < 70%, score -1.
     ;
     ; If the opponent knows a move with a high critical-hit ratio, score +1.
     ;
@@ -5599,7 +5627,7 @@ Expert_MeFirst:
     ;
     ; If the attacker deals more damage than its opponent, 87.5% chance of additional score +1.
     ;
-    ; If the opponent's last-used move was a Damaging move, 50% chance of additional score +1.
+    ; If the opponent''s last-used move was a Damaging move, 50% chance of additional score +1.
     ;
     ; 75% chance of score +1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_MeFirst_ScoreMinus2
@@ -5629,11 +5657,11 @@ Expert_MeFirst_End:
 
 Expert_Copycat:
     ; If the attacker is slower than its opponent, deals less damage than its opponent, and the
-    ; opponent's last-used move is not an encouraged move, 68.75% chance of score -1.
+    ; opponent''s last-used move is not an encouraged move, 68.75% chance of score -1.
     ;
     ; If the attacker is faster than its opponent:
     ; - If the attacker deals more damage than its opponent, 87.5% chance of score +2.
-    ; - If the opponent's last-used move is an encouraged move, 50% chance of score +2.
+    ; - If the opponent''s last-used move is an encouraged move, 50% chance of score +2.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Copycat_CheckMoveEncouraged
     IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_TryScorePlus2
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
@@ -6051,7 +6079,7 @@ Expert_LastResort_End:
 Expert_WorrySeed:
     ; If the opponent knows the move Rest, additional score +1.
     ;
-    ; If the attacker's HP >= 50%, 50% chance of additional score +1.
+    ; If the attacker''s HP >= 50%, 50% chance of additional score +1.
     ;
     ; 75% chance of score +1.
     IfMoveNotKnown AI_BATTLER_DEFENDER, MOVE_REST, Expert_WorrySeed_CheckUserHP
@@ -6122,7 +6150,7 @@ Expert_HeartSwap:
     ; - SpAttack
     ; - SpDefense
     ;
-    ; If the attacker's Evasion stat is at +0 stage or lower, score +2.
+    ; If the attacker''s Evasion stat is at +0 stage or lower, score +2.
     ;
     ; Otherwise, 80.5% chance of score -2.
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 7, Expert_HeartSwap_CheckUserStages
@@ -6157,7 +6185,7 @@ Expert_HeartSwap_End:
     PopOrEnd 
 
 Expert_AquaRing:
-    ; If the attacker's HP >= 30%, 50% chance of score +1.
+    ; If the attacker''s HP >= 30%, 50% chance of score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 30, Expert_AquaRing_End
     IfRandomLessThan 128, Expert_AquaRing_End
     AddToMoveScore 1
@@ -6166,7 +6194,7 @@ Expert_AquaRing_End:
     PopOrEnd 
 
 Expert_MagnetRise:
-    ; If the attacker's HP < 50%, ignore all further score changes.
+    ; If the attacker''s HP < 50%, ignore all further score changes.
     ;
     ; If the opponent knows one of the following moves, additional score +1:
     ; - Earthquake
@@ -6203,35 +6231,71 @@ Expert_MagnetRise_End:
 Expert_Defog:
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the opponent's side of the field is under the effect of Light Screen or Reflect:
-    ; - If the attacker's HP < 30% and there are no remaining party members:
+    ; If the opponent''s side of the field is under the effect of Light Screen or Reflect:
+    ; - If the attacker''s HP < 30% and there are no remaining party members:
     ;   - 80.5% chance of additional score -2.
-    ;   - If the opponent's HP > 70%, score -2.
+    ;   - If the opponent''s HP > 70%, score -2.
     ; - Start at score +1.
     ; - If the opponent has at least one remaining party member and their side of the field is
     ; under the effect of Spikes, Stealth Rock, or Toxic Spikes, 50% chance of score -1.
     ; - Proceed to the final if-block below.
     ;
-    ; If the opponent's side of the field is under the effect of Spikes, Stealth Rock, or Toxic
+    ; If the opponent''s side of the field is under the effect of Spikes, Stealth Rock, or Toxic
     ; Spikes, additional score -2.
     ;
     ; If all of the following conditions are met, score -2:
-    ; - The attacker's HP >= 70%
-    ; - The opponent's Evasion stat is at -2 stage or greater
-    ; - The opponent's HP <= 70%
+    ; - The attacker''s HP >= 70%
+    ; - The opponent''s Evasion stat is at -2 stage or greater
+    ; - The opponent''s HP <= 70%
     ; Otherwise:
     ; - 80.5% chance of additional score -2.
-    ; - If the opponent's HP <= 70% score -2.
+    ; - If the opponent''s HP <= 70% score -2.
+
 	LoadBattlerAbility AI_BATTLER_DEFENDER
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_KLUTZ, Expert_Defog_CheckCompetitive
+	IfLoadedEqualTo ABILITY_STALL, Expert_Defog_CheckDefiant
 	
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_Defog_ScreenScrubbing
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_Defog_ScreenScrubbing
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_ScoreMinus2AndEnd
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScoreMinus2AndEnd
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScoreMinus2AndEnd
+    GoTo Expert_Defog_CheckHazardsScore
+
+ Expert_Defog_CheckHazardsScore:
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, Expert_Defog_HazardsScoreMinus10
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_HazardsScoreSpikesTryMinus2
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_HazardsScoreStealthRockTryMinus2
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_HazardsScoreToxicSpikesTryMinus2
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_HazardsScorePlus2
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_HazardsScorePlus2
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_HazardsScorePlus2
     GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
+    
+
+Expert_Defog_HazardsScoreSpikesTryMinus2:
+    IfMoveEffectNotKnown, AI_BATTLER_ATTACKER, BATTLE_EFFECT_SET_SPIKES, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+
+Expert_Defog_HazardsScoreStealthRockTryMinus2:
+    IfMoveEffectNotKnown, AI_BATTLER_ATTACKER, BATTLE_EFFECT_STEALTH_ROCK, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+
+Expert_Defog_HazardsScoreToxicSpikesTryMinus2:
+    IfMoveEffectNotKnown, AI_BATTLER_ATTACKER, BATTLE_EFFECT_TOXIC_SPIKES, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+
+Expert_Defog_CheckEnemyTeamAliveAndTryMinus2:
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 0, Expert_Defog_TryHazardsScoreMinus2
+
+Expert_Defog_TryHazardsScoreMinus2:
+    IfRandomLessThan 13, Expert_Defog_HazardsScoreMinus2
+
+Expert_Defog_CheckDefiant:
+    AddToMoveScore -10
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 2, Expert_Defog_HazardsScorePlus10
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 12, Expert_Defog_HazardsScorePlus10
+
+Expert_Defog_CheckCompetitive:
+    AddToMoveScore -10
+    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 2, Expert_Defog_HazardsScorePlus10
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 12, Expert_Defog_HazardsScorePlus10
 
 Expert_Defog_ScreenScrubbing:
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Defog_ScreenScrubbingCheckHazards
@@ -6247,26 +6311,36 @@ Expert_Defog_ScreenScrubbingCheckHazards:
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_TryScoreMinus1
     GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
 
-Expert_Defog_ScoreMinus2AndEnd:
-    AddToMoveScore -2
-    GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
-
 Expert_Defog_TryScoreMinus1:
     IfRandomLessThan 128, Expert_Defog_CheckUserHPAndOpponentEvasion
     AddToMoveScore -1
     GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
 
 Expert_Defog_CheckUserHPAndOpponentEvasion:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_Defog_TryScoreMinus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Defog_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 3, Expert_Defog_CheckOpponentHP
+    GoTo Expert_Defog_End
 
 Expert_Defog_TryScoreMinus2:
     IfRandomLessThan 50, Expert_Defog_CheckOpponentHP
     AddToMoveScore -2
 
 Expert_Defog_CheckOpponentHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_Defog_End
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_Defog_End
+    IfRandomLessThan 128, ScoreMinus2
+    GoTo Expert_Defog_End
+
+Expert_Defog_HazardsScoreMinus2:
     AddToMoveScore -2
+
+Expert_Defog_HazardsScorePlus2:
+    AddToMoveScore 2
+
+Expert_Defog_HazardsScoreMinus10:
+    AddToMoveScore -10
+
+Expert_Defog_HazardsScorePlus10:
+    AddToMoveScore 10
 
 Expert_Defog_End:
     PopOrEnd 
@@ -6274,7 +6348,7 @@ Expert_Defog_End:
 Expert_TrickRoom:
     ; If the battle is a Double Battle, ignore all further score modifiers.
     ;
-    ; If the attacker's HP <= 30% and there are no remaining party members, score +0.
+    ; If the attacker''s HP <= 30% and there are no remaining party members, score +0.
     ;
     ; If the attacker is faster than its opponent, score -1.
     ;
@@ -6318,14 +6392,14 @@ Expert_Blizzard_End:
     PopOrEnd 
 
 Expert_Captivate:
-    ; If the opponent's SpAttack stat stage is at any value other than +0:
+    ; If the opponent''s SpAttack stat stage is at any value other than +0:
     ; - Start at score -1.
-    ; - If the attacker's HP <= 90%, additional score -1.
-    ; - If the opponent's SpAttack stat stage is at -3 or lower, 80.5% chance of additional score -2.
+    ; - If the attacker''s HP <= 90%, additional score -1.
+    ; - If the opponent''s SpAttack stat stage is at -3 or lower, 80.5% chance of additional score -2.
     ;
-    ; If the opponent's HP <= 70%, additional score -2.
+    ; If the opponent''s HP <= 70%, additional score -2.
     ;
-    ; If the opponent's last-used move was a Physical move, 75% chance of score -1.
+    ; If the opponent''s last-used move was a Physical move, 75% chance of score -1.
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_Captivate_CheckOpponentHP
     AddToMoveScore -1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Captivate_CheckLowStatStage
@@ -6355,6 +6429,8 @@ Expert_StealthRock:
     ; Start at score +1.
     ;
     ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+    LoadTurnCount
+    IfLoadedLessThan 4, Expert_StealthRock_TryScorePlus3
     IfRandomLessThan 128, Expert_StealthRock_End
     AddToMoveScore 1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StealthRock_TryScorePlus1
@@ -6364,6 +6440,11 @@ Expert_StealthRock:
 Expert_StealthRock_TryScorePlus1:
     IfRandomLessThan 64, Expert_StealthRock_End
     AddToMoveScore 1
+
+Expert_StealthRock_TryScorePlus3:
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, ScoreMinus10
+    AddToMoveScore 3
+    GoTo Expert_StealthRock_End
 
 Expert_StealthRock_End:
     PopOrEnd 
@@ -6389,9 +6470,9 @@ Expert_RecoilMove_End:
     PopOrEnd 
 
 Expert_HealingWish:
-    ; If the attacker's HP >= 80% and the attacker is faster than its opponent, 25% of score -5.
+    ; If the attacker''s HP >= 80% and the attacker is faster than its opponent, 25% of score -5.
     ;
-    ; If the attacker's HP > 50%, 80.5% chance of score -1.
+    ; If the attacker''s HP > 50%, 80.5% chance of score -1.
     ;
     ; 75% chance to ignore this section of modifiers:
     ; - Start at score +1.
@@ -6399,7 +6480,7 @@ Expert_HealingWish:
     ; additional score +1.
     ; - If a party member deals more damage than the attacker, 50% chance of additional score +1.
     ;
-    ; If the attacker's HP <= 30%, 50% chance of score +1.
+    ; If the attacker''s HP <= 30%, 50% chance of score +1.
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 80, Expert_HealingWish_HappyPath
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_HealingWish_HappyPath
     IfRandomLessThan 192, Expert_HealingWish_End
@@ -6535,7 +6616,7 @@ SetupFirstTurn_Main:
     LoadTurnCount 
     IfLoadedNotEqualTo 0, SetupFirstTurn_Terminate
 
-    ; If the current move's effect is not known tobe a setup move, break.
+    ; If the current move''s effect is not known tobe a setup move, break.
     LoadCurrentMoveEffect 
     IfLoadedNotInTable SetupFirstTurn_SetupEffects, SetupFirstTurn_Terminate
 
@@ -6608,6 +6689,9 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_GIVE_GROUND_IMMUNITY
     TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN
     TableEntry BATTLE_EFFECT_WHIRLPOOL
+    TableEntry BATTLE_EFFECT_STEALTH_ROCK
+    TableEntry BATTLE_EFFECT_SET_SPIKES
+    TableEntry BATTLE_EFFECT_TOXIC_SPIKES
     TableEntry TABLE_END
 
 DamagePriority_Main:
@@ -6710,10 +6794,10 @@ BatonPass_SetupAtHighHP:
     GoTo ScorePlus1
 
 BatonPass_EvalProtect:
-    ; If the current move's effect is Protect and the last move that we used
-    ; is either Detect or Protect, score -2.
+    ; If the current move''s effect is Protect and the last move that we used
+    ; is either Detect or Protect, score -10.
     LoadBattlerPreviousMove AI_BATTLER_ATTACKER
-    IfLoadedInTable BatonPass_ProtectDetect, ScoreMinus2
+    IfLoadedInTable BatonPass_ProtectDetect, ScoreMinus10
 
     ; Else, score +2.
     AddToMoveScore 2
@@ -6725,9 +6809,9 @@ BatonPass_ProtectDetect:
     TableEntry TABLE_END
 
 BatonPass_EvalBatonPass:
-    ; On turn 1 of the entire battle, score -2.
+    ; On turn 1 of the entire battle, score -10.
     LoadTurnCount 
-    IfLoadedEqualTo 0, ScoreMinus2
+    IfLoadedEqualTo 0, ScoreMinus10
 
     ; Score +1 for each positive stat stage for Attack or Special Attack
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScorePlus3
@@ -7089,7 +7173,7 @@ TagStrategy_TrickRoom:
     IfHPPercentEqualTo AI_BATTLER_DEFENDER_PARTNER, 0, ScoreMinus30
     IfHPPercentEqualTo AI_BATTLER_DEFENDER, 0, ScoreMinus30
 
-    ; Branch according to the attacker's Speed-ordering in battle
+    ; Branch according to the attacker''s Speed-ordering in battle
     LoadBattlerSpeedRank AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, TagStrategy_TrickRoom_SelfMovesFirst
     IfLoadedEqualTo 1, TagStrategy_TrickRoom_SelfMovesSecond
@@ -7138,22 +7222,22 @@ TagStrategy_TrickRoom_End:
 
 TagStrategy_FollowMe:
     ; If the move is Follow Me, apply a score modifier according to the following conditional tree:
-    ;  - If the attacker's HP > 90%, and:
-    ;    - If the partner's HP > 90%, 75% chance of score -1
-    ;    - If the partner's HP is between 50% and 90%, 75% chance of score +1
-    ;    - If the partner's HP is between 30% and 50%, 75% chance of score +2
-    ;    - If the partner's HP is < 30%, 75% chance of score +3
-    ;  - If the attacker's HP is between 50% and 90%, and:
-    ;    - If the partner's HP > 90%, 75% chance of score -2
-    ;    - If the partner's HP is between 50% and 90%, 75% chance of score -1
-    ;    - If the partner's HP is between 30% and 50%, 75% chance of score +1
-    ;    - If the partner's HP is < 30%, 75% chance of score +2
-    ;  - If the attacker's HP is between 30% and 50%, and:
-    ;    - If the partner's HP > 90%, 75% chance of score -2
-    ;    - If the partner's HP is between 50% and 90%, 75% chance of score -2
-    ;    - If the partner's HP is between 30% and 50%, 75% chance of score +1
-    ;    - If the partner's HP is < 30%, 75% chance of score +2
-    ;  - If the attacker's HP < 30%, 75% chance of score -5
+    ;  - If the attacker''s HP > 90%, and:
+    ;    - If the partner''s HP > 90%, 75% chance of score -1
+    ;    - If the partner''s HP is between 50% and 90%, 75% chance of score +1
+    ;    - If the partner''s HP is between 30% and 50%, 75% chance of score +2
+    ;    - If the partner''s HP is < 30%, 75% chance of score +3
+    ;  - If the attacker''s HP is between 50% and 90%, and:
+    ;    - If the partner''s HP > 90%, 75% chance of score -2
+    ;    - If the partner''s HP is between 50% and 90%, 75% chance of score -1
+    ;    - If the partner''s HP is between 30% and 50%, 75% chance of score +1
+    ;    - If the partner''s HP is < 30%, 75% chance of score +2
+    ;  - If the attacker''s HP is between 30% and 50%, and:
+    ;    - If the partner''s HP > 90%, 75% chance of score -2
+    ;    - If the partner''s HP is between 50% and 90%, 75% chance of score -2
+    ;    - If the partner''s HP is between 30% and 50%, 75% chance of score +1
+    ;    - If the partner''s HP is < 30%, 75% chance of score +2
+    ;  - If the attacker''s HP < 30%, 75% chance of score -5
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, TagStrategy_FollowMe_SelfHighHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, TagStrategy_FollowMe_SelfMediumHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, TagStrategy_FollowMe_SelfLowHP
@@ -7320,9 +7404,9 @@ TagStrategy_SkillSwap:
 TagStrategy_CheckElectricMove:
     ; If the move is Discharge, handle it similarly to Earthquake. Otherwise, apply all of the
     ; following which are met:
-    ;  - The target's partner would redirect the move with Lightning Rod, score -1; additional
-    ;    score -8 if the target's partner is also a Ground type
-    ;  - The attacker's partner has Lightning Rod, score -10
+    ;  - The target''s partner would redirect the move with Lightning Rod, score -1; additional
+    ;    score -8 if the target''s partner is also a Ground type
+    ;  - The attacker''s partner has Lightning Rod, score -10
     IfMoveEqualTo MOVE_DISCHARGE, TagStrategy_SpreadElectricMove
     CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_LIGHTNING_ROD
     IfLoadedEqualTo AI_HAVE, TagStrategy_TargetProtectedByLightningRod
@@ -7370,8 +7454,8 @@ TagStrategy_CheckElectric_End:
 TagStrategy_CheckWaterMove:
     ; If the move is Surf, handle it similarly to Earthquake. Otherwise, apply all of the
     ; following which are met:
-    ;  - The target's partner would redirect the move with Storm Drain, score -1
-    ;  - The attacker's partner has Storm Drain, score -10
+    ;  - The target''s partner would redirect the move with Storm Drain, score -1
+    ;  - The attacker''s partner has Storm Drain, score -10
     IfMoveEqualTo MOVE_SURF, TagStrategy_SpreadWaterMove
     CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_STORM_DRAIN
     IfLoadedEqualTo AI_NOT_HAVE, TagStrategy_CheckPartnerStormDrain
@@ -7410,7 +7494,7 @@ TagStrategy_CheckWater_End:
     PopOrEnd 
 
 TagStrategy_CheckFireMove:
-    ; If the AI's Flash Fire has been activated, score additional +1 on top of all further modifiers
+    ; If the AI''s Flash Fire has been activated, score additional +1 on top of all further modifiers
     ;
     ; If the move is Lava Plume, then:
     ;  - If our partner has Dry Skin or Flash Fire, score +3
@@ -7477,9 +7561,9 @@ TagStrategy_CheckPartnerElectricAbsorption:
     ;
     ; If our partner has Volt Absorb:
     ;  - If our partner is at 100% HP, score -10
-    ;  - If our partner's HP >90%, no score change
-    ;  - If our partner's HP >75%, 25% chance of score +3, 75% chance of no change
-    ;  - If our partner's HP >50%, 50% chance of score +3, 50% chance of no change
+    ;  - If our partner''s HP >90%, no score change
+    ;  - If our partner''s HP >75%, 25% chance of score +3, 75% chance of no change
+    ;  - If our partner''s HP >50%, 50% chance of score +3, 50% chance of no change
     ;  - Else, 75% chance of score +3, 25% chance of no change
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_MOTOR_DRIVE
     IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerMotorDrive
@@ -7524,9 +7608,9 @@ TagStrategy_CheckPartnerLightningRodAbsorb:
 TagStrategy_CheckPartnerWaterAbsorption:
     ; If our partner has Water Absorb or Dry Skin:
     ;  - If our partner is at 100% HP, score -10
-    ;  - If our partner's HP >90%, no score change
-    ;  - If our partner's HP >75%, 25% chance of score +3, 75% chance of no change
-    ;  - If our partner's HP >50%, 50% chance of score +3, 50% chance of no change
+    ;  - If our partner''s HP >90%, no score change
+    ;  - If our partner''s HP >75%, 25% chance of score +3, 75% chance of no change
+    ;  - If our partner''s HP >50%, 50% chance of score +3, 50% chance of no change
     ;  - Else, 75% chance of score +3, 25% chance of no change
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_WATER_ABSORB
     IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerWaterAbsorb
@@ -7743,7 +7827,7 @@ TagStrategy_PartnerSwagger:
     ;
     ; Otherwise, no score changes
     ;
-    ; Curiously, this does not consider if our partner's ability is Own Tempo.
+    ; Curiously, this does not consider if our partner''s ability is Own Tempo.
     IfHeldItemEqualTo AI_BATTLER_DEFENDER, ITEM_PERSIM_BERRY, TagStrategy_PartnerSwagger_TryScorePlus3
     IfHeldItemEqualTo AI_BATTLER_DEFENDER, ITEM_LUM_BERRY, TagStrategy_PartnerSwagger_TryScorePlus3
     GoTo TagStrategy_PartnerScoreMinus30
@@ -7759,7 +7843,7 @@ TagStrategy_PartnerTrick:
     PopOrEnd 
 
 TagStrategy_PartnerGastroAcid:
-    ; If our partner's ability is already suppressed, score -30
+    ; If our partner''s ability is already suppressed, score -30
     ;
     ; If our partner has Truant or Slow Start, score +5
     ;
@@ -7785,9 +7869,9 @@ TagStrategy_PartnerAcupressure:
     ;
     ; Else if our partner has any stat at +6 stages, score -30
     ;
-    ; Else if our partner's HP is 50% or lower, score -1
+    ; Else if our partner''s HP is 50% or lower, score -1
     ;
-    ; Else if our partner's HP is 91% or higher, 68.75% chance of score +2, 31.25% chance of no score change
+    ; Else if our partner''s HP is 91% or higher, 68.75% chance of score +2, 31.25% chance of no score change
     ;
     ; Else 31.25% chance of score +2, 68.75% chance of no score change
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SIMPLE
@@ -7833,7 +7917,7 @@ TagStrategy_PartnerScoreMinus30:
 CheckHP_Main:
     IfTargetIsPartner TagStrategy_Partner
 
-    ; Which moves apply to the routine depends on the attacker's HP percentage
+    ; Which moves apply to the routine depends on the attacker''s HP percentage
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, CheckHP_GT70Percent ; >70%
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, CheckHP_31To70Percent ; 31-70%
     LoadCurrentMoveEffect 
@@ -7856,8 +7940,8 @@ CheckHP_TryScoreMinus2:
     AddToMoveScore -2
 
 CheckHP_Target:
-    ; The second round is similar to the first, but looks at the target's HP instead of
-    ; the attacker's.
+    ; The second round is similar to the first, but looks at the target''s HP instead of
+    ; the attacker''s.
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, CheckHP_Target_GT70Percent
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, CheckHP_Target_31To70Percent
     LoadCurrentMoveEffect 
@@ -8120,7 +8204,7 @@ Weather_Main:
     LoadTurnCount 
     IfLoadedNotEqualTo 0, Weather_Terminate
 
-    ; For each weather, don't try to set it if it's already active from the field.
+    ; For each weather, don''t try to set it if it''s already active from the field.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Weather_Sun
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Weather_Rain
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SANDSTORM, Weather_Sand
@@ -8147,7 +8231,7 @@ Weather_Hail:
     GoTo Weather_ScorePlus5
 
 Weather_ScorePlus5:
-    ; On the attacker's first turn only, score +5.
+    ; On the attacker''s first turn only, score +5.
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo FALSE, Weather_Terminate
     AddToMoveScore 5
