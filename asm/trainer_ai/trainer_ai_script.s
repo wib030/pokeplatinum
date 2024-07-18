@@ -1487,19 +1487,20 @@ Basic_CheckRapidSpin:
     ; If the user''s speed is not at +6 or their side of the field has Hazards, or if the user
     ; is under the effect of a binding move or Leech Seed, ignore
 
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, ScorePlus2
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_BIND, ScorePlus2
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, ScorePlus2
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, ScorePlus2
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, ScorePlus2
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Basic_RapidSpin_TryScorePlus1
-    IfSpeedCompareEqualTo COMPARE_SPEED_TIE, ScorePlus2
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Basic_RapidSpin_TryScorePlus1
+    AddToMoveScore -3
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, ScorePlus5
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_BIND, ScorePlus5
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, ScorePlus5
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, ScorePlus5
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, ScorePlus5
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Basic_RapidSpin_TryScorePlus4
+    IfSpeedCompareEqualTo COMPARE_SPEED_TIE, ScorePlus5
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, 12, ScoreMinus6
     GoTo Basic_RapidSpin_End
 
-Basic_RapidSpin_TryScorePlus1:
-    IfRandomLessThan 70, Basic_RapidSpin_End
-    AddToMoveScore 1
+Basic_RapidSpin_TryScorePlus4:
+    IfRandomLessThan 160, Basic_RapidSpin_End
+    AddToMoveScore 4
 
 Basic_RapidSpin_End:
     PopOrEnd
