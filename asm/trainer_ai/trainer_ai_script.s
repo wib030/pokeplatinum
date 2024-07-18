@@ -1505,8 +1505,6 @@ Basic_RapidSpin_TryScorePlus4:
 Basic_RapidSpin_End:
     PopOrEnd
 
-    
-
 Basic_CheckTrickRoom:
     ; If the attacker is faster than the target, score -10.
     ; Treat speed ties as being faster than the target.
