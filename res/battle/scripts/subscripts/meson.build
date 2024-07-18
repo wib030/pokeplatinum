@@ -306,4 +306,5 @@ subscript_files = files(
 	'subscript_infatuate_hit.s',
 	'subscript_defiant_activate_intimidate.s',
 	'subscript_comp_activate_intimidate.s',
+	'subscript_blocked_by_goggles.s',
 )

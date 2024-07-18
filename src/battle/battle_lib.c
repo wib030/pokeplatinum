@@ -3530,6 +3530,14 @@ static u16 sSoundMoves[] = {
     MOVE_CHATTER,
 };
 
+static u16 sPowderMoves[] = {
+    MOVE_POISON_POWDER,
+    MOVE_SLEEP_POWDER,
+    MOVE_STUN_SPORE,
+    MOVE_SPORE,
+    MOVE_COTTON_SPORE,
+};
+
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
     int subscript = NULL, moveType;
@@ -3573,6 +3581,18 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
             }
         }
     }
+	
+	if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
+	{
+        for (int i = 0; i < NELEMS(sPowderMoves); i++)
+		{
+			if (sPowderMoves[i] == battleCtx->moveCur)
+			{
+				subscript = subscript_blocked_by_goggles;
+				break;
+			}
+		}
+	}
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE
             && moveType == TYPE_ELECTRIC
@@ -5001,6 +5021,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 result = TRUE;
             }
             break;
+			
         }
 
         if (result == TRUE) {

@@ -311,5 +311,6 @@
 #define subscript_infatuate_hit 302
 #define subscript_defiant_activate_intimidate 303
 #define subscript_comp_activate_intimidate 304
+#define subscript_blocked_by_goggles 305
 
 #endif // NARC_SUB_SEQ_NAIX_

@@ -12,12 +12,9 @@
             "species": "SPECIES_MILTANK",
             "form": 0,
             "level": 15,
-            "item": "ITEM_NONE",
+            "item": "ITEM_MAGMA_STONE",
             "moves": [
-				"MOVE_TOXIC_SPIKES",
-				"MOVE_STEALTH_ROCK",
-				"MOVE_RAPID_SPIN",
-				"MOVE_CLOSE_COMBAT"
+				"MOVE_COTTON_SPORE"
             ],
             "power": 255,
             "ball_seal": 0
