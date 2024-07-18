@@ -3684,23 +3684,6 @@ Expert_Protect_ScoreMinus2:
 Expert_Protect_End:
     PopOrEnd 
 
-Expert_Spikes:
-    ; 50% chance of score +0 and terminate. Otherwise, start at score +1.
-    ;
-    ; If the attacker knows either Roar or Whirlwind, 75% chance of additional score +1.
-    IfRandomLessThan 128, Expert_Spikes_End
-    AddToMoveScore 1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_Spikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_Spikes_TryScorePlus1
-    GoTo Expert_Spikes_End
-
-Expert_Spikes_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Spikes_End
-    AddToMoveScore 1
-
-Expert_Spikes_End:
-    PopOrEnd 
-
 Expert_Foresight:
     ; If the defender has a Ghost typing, 47.3% chance of score +2.
     ;
@@ -6103,25 +6086,6 @@ Expert_SuckerPunch_ScoreMinus1:
 Expert_SuckerPunch_End:
     PopOrEnd 
 
-Expert_ToxicSpikes:
-    ; 50% chance to ignore all further scoring.
-    ;
-    ; Start at score +1.
-    ;
-    ; If the attacker knows specifically the moves Roar or Whirlwind, 75% chance of additional score +1.
-    IfRandomLessThan 128, Expert_ToxicSpikes_End
-    AddToMoveScore 1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_ToxicSpikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_ToxicSpikes_TryScorePlus1
-    GoTo Expert_ToxicSpikes_End
-
-Expert_ToxicSpikes_TryScorePlus1:
-    IfRandomLessThan 64, Expert_ToxicSpikes_End
-    AddToMoveScore 1
-
-Expert_ToxicSpikes_End:
-    PopOrEnd 
-
 Expert_HeartSwap:
     ; If the opponent does not have any of the following stats at +2 stage or greater and is not
     ; under the effect of Focus Energy, score -2 and terminate:
@@ -6446,16 +6410,16 @@ Expert_StealthRock_End:
     PopOrEnd 
     PopOrEnd
 
-    Expert_Spikes:
-    ; 50% chance to ignore all further score modifiers.
-    ;
-    ; Start at score +1.
-    ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
-    ;
-    ; Try to prioritize early in match.
-    ;
-    ; Try not to use into spinners and defoggers.
+Expert_Spikes:
+; 50% chance to ignore all further score modifiers.
+;
+; Start at score +1.
+;
+; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+;
+; Try to prioritize early in match.
+;
+; Try not to use into spinners and defoggers.
 
     LoadTurnCount
     IfLoadedLessThan 4, Expert_Spikes_SpikesScore
@@ -6479,21 +6443,21 @@ Expert_Spikes_SpikesScore:
     AddToMoveScore -3
     GoTo Expert_Spikes_End
     
-Expert_ToxicSpikes_End:
+Expert_Spikes_End:
     PopOrEnd 
     PopOrEnd 
     PopOrEnd
 
-    Expert_ToxicSpikes:
-    ; 50% chance to ignore all further score modifiers.
-    ;
-    ; Start at score +1.
-    ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
-    ;
-    ; Try to prioritize early in match.
-    ;
-    ; Try not to use into spinners and defoggers.
+Expert_ToxicSpikes:
+; 50% chance to ignore all further score modifiers.
+;
+; Start at score +1.
+;
+; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+;
+; Try to prioritize early in match.
+;
+; Try not to use into spinners and defoggers.
 
     LoadTurnCount
     IfLoadedLessThan 4, Expert_ToxicSpikes_ToxicSpikesScore
@@ -6512,8 +6476,7 @@ Expert_ToxicSpikes_TryScorePlus1:
 Expert_ToxicSpikes_ToxicSpikesScore:
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
     IfLoadedEqualTo 0, ScorePlus3
-    IfLoadedEqualTo 1, ScorePlus1
-    IfLoadedEqualTo 2, ScorePlus2
+    IfLoadedEqualTo 1, ScorePlus3
     AddToMoveScore -3
     GoTo Expert_ToxicSpikes_End
     
