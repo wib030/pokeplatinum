@@ -312,5 +312,6 @@
 #define subscript_defiant_activate_intimidate 303
 #define subscript_comp_activate_intimidate 304
 #define subscript_blocked_by_goggles 305
+#define subscript_grass_powder_immune 306
 
 #endif // NARC_SUB_SEQ_NAIX_

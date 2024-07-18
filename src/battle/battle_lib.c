@@ -3593,6 +3593,18 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 			}
 		}
 	}
+	
+	if (MON_HAS_TYPE(battleCtx->defender, TYPE_GRASS))
+	{
+        for (int i = 0; i < NELEMS(sPowderMoves); i++)
+		{
+			if (sPowderMoves[i] == battleCtx->moveCur)
+			{
+				subscript = subscript_grass_powder_immune;
+				break;
+			}
+		}
+	}
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE
             && moveType == TYPE_ELECTRIC

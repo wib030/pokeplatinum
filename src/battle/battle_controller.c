@@ -3419,25 +3419,32 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
 			&& (battleCtx->battleMons[battleCtx->defender].curHP == battleCtx->battleMons[battleCtx->defender].maxHP)
 			&& (battleCtx->damage >= battleCtx->battleMons[battleCtx->defender].maxHP))
 			{
-				DEFENDER_TURN_FLAGS.enduring = TRUE;
+				DEFENDER_TURN_FLAGS.enduring_ability = TRUE;
 			}
         }
 		
 		if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY)
 		&& (battleCtx->battleMons[battleCtx->defender].curHP < battleCtx->battleMons[battleCtx->defender].maxHP))
 		{
-			DEFENDER_TURN_FLAGS.enduring = FALSE;
+			DEFENDER_TURN_FLAGS.enduring_ability = FALSE;
 		}
 
-        if ((DEFENDER_TURN_FLAGS.enduring || DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
+        if ((DEFENDER_TURN_FLAGS.enduring || DEFENDER_TURN_FLAGS.enduring_ability || DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
                 && DEFENDING_MON.curHP + battleCtx->damage <= 0) {
             battleCtx->damage = (DEFENDING_MON.curHP - 1) * -1;
 			
-            if (DEFENDER_TURN_FLAGS.enduring) {
+            if (DEFENDER_TURN_FLAGS.enduring)
+			{
                 battleCtx->moveStatusFlags |= MOVE_STATUS_ENDURED;
-			} else {
+			}
+			else if (DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
+			{
                 battleCtx->moveStatusFlags |= MOVE_STATUS_ENDURED_ITEM;
             }
+			else if (DEFENDER_TURN_FLAGS.enduring_ability)
+			{
+				battleCtx->moveStatusFlags |= MOVE_STATUS_ENDURED_ABILITY;
+			}
         }
 
         battleCtx->storedDamage[battleCtx->defender] += battleCtx->damage;

@@ -2588,5 +2588,11 @@
 #define pl_msg_00000368_01289 1289
 // {STRVAR_1 1, 0, 0}’s Assault Vest prevents the\nuse of {STRVAR_1 6, 1, 0}!\r
 #define pl_msg_00000368_01290 1290
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} endured the\nhit!
+#define pl_msg_00000368_01291 1291
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} endured\nthe hit!
+#define pl_msg_00000368_01292 1292
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} endured\nthe hit!
+#define pl_msg_00000368_01293 1293
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H
