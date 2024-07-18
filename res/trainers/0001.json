@@ -9,23 +9,29 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_EMPOLEON",
-            "form": 0,
-            "level": 15,
-            "item": "ITEM_NONE",
-            "moves": [
-				"MOVE_HEADBUTT"
-            ],
-            "power": 255,
-            "ball_seal": 0
-        },
-		{
             "species": "SPECIES_MILTANK",
             "form": 0,
             "level": 15,
             "item": "ITEM_NONE",
             "moves": [
-				"MOVE_HEADBUTT"
+				"MOVE_TOXIC_SPIKES",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_RAPID_SPIN",
+				"MOVE_CLOSE_COMBAT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_YANMA",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_NONE",
+            "moves": [
+				"MOVE_TOXIC_SPIKES",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_RAPID_SPIN",
+				"MOVE_CLOSE_COMBAT"
             ],
             "power": 255,
             "ball_seal": 0
