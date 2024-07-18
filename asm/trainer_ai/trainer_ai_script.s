@@ -1483,9 +1483,6 @@ Basic_CheckMagnetRise:
     IfLoadedEqualTo TYPE_FLYING, ScoreMinus10
     PopOrEnd
 
-Basic_CheckDefog_Terminate:
-    PopOrEnd 
-
 Basic_CheckRapidSpin:
     ; If the user''s speed is not at +6 or their side of the field has Hazards, or if the user
     ; is under the effect of a binding move or Leech Seed, ignore
