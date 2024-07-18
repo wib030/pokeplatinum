@@ -6411,15 +6411,15 @@ Expert_StealthRock_End:
     PopOrEnd
 
 Expert_Spikes:
-; 50% chance to ignore all further score modifiers.
-;
-; Start at score +1.
-;
-; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
-;
-; Try to prioritize early in match.
-;
-; Try not to use into spinners and defoggers.
+    ; 50% chance to ignore all further score modifiers.
+    ;
+    ; Start at score +1.
+    ;
+    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+    ;
+    ; Try to prioritize early in match.
+    ;
+    ; Try not to use into spinners and defoggers.
 
     LoadTurnCount
     IfLoadedLessThan 4, Expert_Spikes_SpikesScore
@@ -6449,15 +6449,15 @@ Expert_Spikes_End:
     PopOrEnd
 
 Expert_ToxicSpikes:
-; 50% chance to ignore all further score modifiers.
-;
-; Start at score +1.
-;
-; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
-;
-; Try to prioritize early in match.
-;
-; Try not to use into spinners and defoggers.
+    ; 50% chance to ignore all further score modifiers.
+    ;
+    ; Start at score +1.
+    ;
+    ; If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
+    ;
+    ; Try to prioritize early in match.
+    ;
+    ; Try not to use into spinners and defoggers.
 
     LoadTurnCount
     IfLoadedLessThan 4, Expert_ToxicSpikes_ToxicSpikesScore
