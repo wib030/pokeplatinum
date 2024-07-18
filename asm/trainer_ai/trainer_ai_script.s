@@ -2652,7 +2652,7 @@ Expert_Haze_TryScorePlus3:
     AddToMoveScore 3
 
 Expert_Haze_TryScorePlus1:
-    IfRandomLessThan128, Expert_Haze_End
+    IfRandomLessThan 128, Expert_Haze_End
     AddToMoveScore 1
 
 
