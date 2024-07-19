@@ -5664,6 +5664,7 @@ static BOOL BtlCmd_Transform(BattleSystem * battleSys, BattleContext * battleCtx
     ATTACKING_MON.moldBreakerAnnounced = FALSE;
     ATTACKING_MON.pressureAnnounced = FALSE;
 	ATTACKING_MON.defiantFlag = FALSE;
+	ATTACKING_MON.wpolicyFlag = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
     ATTACKING_MON.moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     ATTACKING_MON.slowStartAnnounced = FALSE;

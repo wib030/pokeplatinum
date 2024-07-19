@@ -107,6 +107,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
 	battleCtx->battleMons[battler].defiantFlag = FALSE;
+	battleCtx->battleMons[battler].wpolicyFlag = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -2704,6 +2705,14 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             if (attackerItemEffect == HOLD_EFFECT_POWER_UP_SE) {
                 damage = damage * (100 + attackerItemPower) / 100;
             }
+			
+			if ((defenderItemEffect == HOLD_EFFECT_WEAK_RAISE_SPA_ATK)
+			&& (DEFENDING_MON.curHP)
+			&& (movePower)
+			&& (battleCtx->battleMons[defender].wpolicyFlag == FALSE))
+			{
+				battleCtx->battleMons[defender].wpolicyFlag = TRUE;
+			}
         }
 
         if ((*moveStatusMask & MOVE_STATUS_NOT_VERY_EFFECTIVE) && movePower) {
@@ -5036,7 +5045,6 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             break;
 			
         }
-
         if (result == TRUE) {
             battleCtx->msgBattlerTemp = battler;
             battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
@@ -5554,6 +5562,19 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
             result = TRUE;
         }
         break;
+		
+	case HOLD_EFFECT_WEAK_RAISE_SPA_ATK:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
+			&& (battleCtx->battleMons[battleCtx->defender].wpolicyFlag == TRUE))
+			{
+				*subscript = subscript_weakness_policy_activate;
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+				result = TRUE;
+				battleCtx->battleMons[battleCtx->defender].wpolicyFlag = FALSE;
+			}
+			break;
 
     default:
         break;
@@ -6713,7 +6734,7 @@ static const ItemEffectTypePair sTypeBoostingItems[] = {
     { HOLD_EFFECT_ARCEUS_ELECTRIC,     TYPE_ELECTRIC },
     { HOLD_EFFECT_ARCEUS_GRASS,        TYPE_GRASS    },
     { HOLD_EFFECT_ARCEUS_ICE,          TYPE_ICE      },
-    { HOLD_EFFECT_ARCEUS_FIGHTING,        TYPE_FIGHTING },
+    { HOLD_EFFECT_ARCEUS_FIGHTING,     TYPE_FIGHTING },
     { HOLD_EFFECT_ARCEUS_POISON,       TYPE_POISON   },
     { HOLD_EFFECT_ARCEUS_GROUND,       TYPE_GROUND   },
     { HOLD_EFFECT_ARCEUS_FLYING,       TYPE_FLYING   },

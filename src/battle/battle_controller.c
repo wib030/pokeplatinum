@@ -844,6 +844,7 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
 		for (battler = 0; battler < maxBattlers; battler++)
 			{
                 battleCtx->battleMons[battler].defiantFlag = FALSE;
+				battleCtx->battleMons[battler].wpolicyFlag = FALSE;
             }
 
             battleCtx->turnStartCheckState++;

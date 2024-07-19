@@ -5,7 +5,7 @@
 _000:
     PrintAttackMessage 
     Wait 
-    WaitButtonABTime 15
+    WaitButtonABTime 30
     // It doesn’t affect {0}...
     PrintMessage pl_msg_00000368_00027, TAG_NICKNAME, BTLSCR_DEFENDER
     Wait 
