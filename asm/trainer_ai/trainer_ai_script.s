@@ -4249,8 +4249,43 @@ Expert_ChargeTurnWithInvuln_SandImmuneTypes:
     TableEntry TABLE_END
 
 Expert_FakeOut:
-    ; Score +4.
-    AddToMoveScore 4
+    ; Score +5.
+    ; 
+    ; Deprioritize if not first turn out
+    ;
+    ; Deprioritize if negative contact ability
+    ; Unless attacker is holding protective pads
+    ; or unless Fake Out can kill anyway
+
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo FALSE, ScoreMinus10
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable FakeOut_AbilityPunish, Expert_FakeOut_WillItKill
+    AddToMoveScore 5
+    GoTo Expert_FakeOut_End
+
+Expert_FakeOut_WillItKill:
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScorePlus5
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_FakeOut_End
+    IfCurrentMoveKills USE_MAX_DAMAGE, Expert_FakeOut_TryScorePlus3
+    GoTo ScoreMinus1
+
+Expert_FakeOut_TryScorePlus3:
+    IfRandomLessThan 128, ScorePlus3
+    GoTo Expert_FakeOut_End
+    
+FakeOut_AbilityPunish:
+    TableEntry ABILITY_EFFECT_SPORE
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_STATIC
+    TableEntry ABILITY_POISON_POINT
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_SHELL_ARMOR
+    TableEntry ABILITY_INNER_FOCUS
+    TableEntry ABILITY_STEADFAST
+
+Expert_FakeOut_End:
     PopOrEnd 
 
 Expert_SpitUp:
@@ -6517,14 +6552,82 @@ Expert_StealthRock_CheckToEncourage:
 
 Expert_StealthRock_CheckRapidSpin:
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_StealthRock_CheckToEncourage
+    IfLoadedEqualTo TYPE_GHOST, Expert_StealthRock_CheckItem
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_StealthRock_CheckToEncourage
+    IfLoadedEqualTo TYPE_GHOST, Expert_StealthRock_CheckItem
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_ABILITY_SUPPRESSED, ScoreMinus3
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedInTable StealthRock_AbilityPunish_RapidSpin, Expert_StealthRock_CheckToEncourage
+    IfLoadedInTable StealthRock_AbilityPunish_RapidSpin, Expert_StealthRock_CheckAbilityImmunity
     IfRandomLessThan 25, Expert_StealthRock_CheckToEncourage
     AddToMoveScore -8
     GoTo Expert_StealthRock_End
+
+Expert_StealthRock_CheckItem:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NORMAL_HIT_GHOST, ScoreMinus3
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckAbilityImmunity:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScoreMinus3
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_POINT, Expert_StealthRock_CheckPoisonPoint
+    IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_StealthRock_CheckFlameBody
+    IfLoadedEqualTo ABILITY_STATIC, Expert_StealthRock_CheckStatic
+    IfLoadedEqualTo ABILITY_SHELL_ARMOR, Expert_StealthRock_CheckFreshMilk
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckPoisonPoint:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_STEEL, ScoreMinus3
+    IfLoadedEqualTo TYPE_POISON, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckFlameBody:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_FIRE, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckStatic:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckFreshMilk:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_STALL, ScoreMinus3
+    IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus3
+    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus3
+    LoadGender AI_BATTLER_ATTACKER
+    IfLoadedEqualTo GENDER_MALE, Expert_StealthRock_CheckFreshMilk_BothMale
+    IfLoadedEqualTo GENDER_FEMALE, Expert_StealthRock_CheckFreshMilk_BothFemale
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckFreshMilk_BothMale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_MALE, ScoreMinus3
+    GoTo Expert_StealthRock_CheckToEncourage
+
+Expert_StealthRock_CheckFreshMilk_BothFemale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_FEMALE, ScoreMinus3
+    GoTo Expert_StealthRock_CheckToEncourage
 
 StealthRock_AbilityPunish_RapidSpin:
     TableEntry ABILITY_EFFECT_SPORE
@@ -6532,7 +6635,7 @@ StealthRock_AbilityPunish_RapidSpin:
     TableEntry ABILITY_STATIC
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
-    TableEntry ABILITY_HONEY_GATHER
+    TableEntry ABILITY_SHELL_ARMOR
 
 Expert_StealthRock_CheckDefog:
     LoadAbility AI_BATTLER_ATTACKER
@@ -6850,7 +6953,7 @@ Expert_CheckCannotAttract_Terminate:
 EvalAttack_Main:
     ; Never target the partner.
     IfTargetIsPartner Terminate
-
+ 
     IfCurrentMoveKills USE_MAX_DAMAGE, EvalAttack_CheckForKill
 
     ; If this move does not out-damage all other moves, score -1.
