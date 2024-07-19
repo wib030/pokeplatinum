@@ -9,12 +9,14 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_HIPPOWDON",
+            "species": "SPECIES_RAICHU",
             "form": 0,
             "level": 15,
             "item": "ITEM_NONE",
             "moves": [
-				"MOVE_PROTECT"
+				"MOVE_FAKE_OUT",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_THUNDER_PUNCH"
             ],
             "power": 255,
             "ball_seal": 0
