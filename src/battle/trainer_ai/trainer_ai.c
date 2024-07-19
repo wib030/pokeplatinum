@@ -4030,7 +4030,8 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SHADOW_TAG)
             || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_MAGNET_PULL)
-                && MON_HAS_TYPE(battler, TYPE_STEEL))) {
+                && MON_HAS_TYPE(battler, TYPE_STEEL))
+            && battleCtx-BattleMons[battler].heldItem != ITEM_SHED_SHELL) {
         return FALSE;
     }
 
