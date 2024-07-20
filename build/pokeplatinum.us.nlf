@@ -6,9 +6,9 @@ H,"main_header.sbin","main_files.sbin",462
 7,"*","../subprojects/NitroSDK-4.2.30001/components/ichneumon_sub.sbin","*","../subprojects/NitroSDK-4.2.30001/components/ichneumon_sub_defs.sbin","*"
 
 # File Images
-F,00000000,00004000,ff,ffff,ffff,"main_header.sbin","*",669a39f3,512,1
+F,00000000,00004000,ff,ffff,ffff,"main_header.sbin","*",669a4371,512,1
 F,00004000,00106484,ff,ffff,0008,"main.sbin","*",669a37d7,512,1
-F,00106600,00107540,ff,ffff,0014,"main_table.sbin","*",669a39f3,512,1
+F,00106600,00107540,ff,ffff,0014,"main_table.sbin","*",669a4371,512,1
 F,00107600,00107620,ff,0000,ffff,"overlay0.sbin","*",669a37d7,512,1
 F,00107800,00107820,ff,0001,ffff,"overlay1.sbin","*",669a37d7,512,1
 F,00107a00,00107a20,ff,0002,ffff,"overlay2.sbin","*",669a37d7,512,1
@@ -132,7 +132,7 @@ F,00408800,0040a140,ff,0077,ffff,"overlay119.sbin","*",669a37d7,512,1
 F,0040a200,0040a6c0,ff,0078,ffff,"overlay120.sbin","*",669a37d7,512,1
 F,0040a800,0040ae40,ff,0079,ffff,"overlay121.sbin","*",669a37d7,512,1
 F,0040b000,004327fc,ff,ffff,000c,"../subprojects/NitroSDK-4.2.30001/components/ichneumon_sub.sbin","*",6659ca16,512,1
-F,00432800,004343b4,ff,ffff,0010,"main_files.sbin","*",669a39f3,512,1
+F,00432800,004343b4,ff,ffff,0010,"main_files.sbin","*",669a4371,512,1
 F,00434400,00435270,ff,ffff,0012,"*FILEALLOC","*",00000000,512,1
 F,00435400,00435c40,ff,ffff,001a,"platinum.us/banner.bnr","*",666bb7ee,512,1
 F,00435e00,00435fea,ff,012c,ffff,"res/prebuilt/data/UTF16.dat","/data/UTF16.dat",6659c9d2,512,0
@@ -384,7 +384,7 @@ F,04130400,0413bad4,ff,018e,ffff,"res/prebuilt/graphic/worldtrade.narc","/graphi
 F,0413bc00,0414082c,ff,018f,ffff,"res/prebuilt/itemtool/itemdata/item_data.narc","/itemtool/itemdata/item_data.narc",6659c9d2,512,0
 F,04140a00,041a2450,ff,0190,ffff,"res/prebuilt/itemtool/itemdata/item_icon.narc","/itemtool/itemdata/item_icon.narc",6659c9d2,512,0
 F,041a2600,041a2b34,ff,0191,ffff,"res/items/nuts_data.narc","/itemtool/itemdata/nuts_data.narc",666bb7ef,512,0
-F,041a2c00,041a78dc,ff,0192,ffff,"res/items/pl_item_data.narc","/itemtool/itemdata/pl_item_data.narc",669a15fc,512,0
+F,041a2c00,041a78dc,ff,0192,ffff,"res/items/pl_item_data.narc","/itemtool/itemdata/pl_item_data.narc",669a4371,512,0
 F,041a7a00,04236878,ff,019f,ffff,"res/pokemon/pl_poke_icon.narc","/poketool/icongra/pl_poke_icon.narc",666bb823,512,0
 F,04236a00,042c3af0,ff,01a0,ffff,"res/prebuilt/poketool/icongra/poke_icon.narc","/poketool/icongra/poke_icon.narc",6659c9d2,512,0
 F,042c3c00,042d20ec,ff,01ab,ffff,"res/prebuilt/poketool/pokefoot/pokefoot.narc","/poketool/pokefoot/pokefoot.narc",6659c9d2,512,0
