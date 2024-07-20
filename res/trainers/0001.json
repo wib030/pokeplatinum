@@ -12,7 +12,7 @@
             "species": "SPECIES_NIDOKING",
             "form": 0,
             "level": 15,
-            "item": "ITEM_LIFE_ORB",
+            "item": "ITEM_RED_CHAIN",
             "moves": [
 				"MOVE_ICY_WIND"
             ],

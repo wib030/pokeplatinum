@@ -2594,5 +2594,17 @@
 #define pl_msg_00000368_01292 1292
 // The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} endured\nthe hit!
 #define pl_msg_00000368_01293 1293
+// {STRVAR_1 1, 0, 0} floats in the air with\nits {STRVAR_1 5, 1, 0}!
+#define pl_msg_00000368_01294 1294
+// The wild {STRVAR_1 1, 0, 0} floats in the air\nwith its {STRVAR_1 5, 1, 0}!
+#define pl_msg_00000368_01295 1295
+// The foe’s {STRVAR_1 1, 0, 0} floats in the air\nwith its {STRVAR_1 5, 1, 0}!
+#define pl_msg_00000368_01296 1296
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!
+#define pl_msg_00000368_01297 1297
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!
+#define pl_msg_00000368_01298 1298
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!
+#define pl_msg_00000368_01299 1299
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H

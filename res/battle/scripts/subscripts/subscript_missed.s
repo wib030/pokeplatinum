@@ -34,8 +34,14 @@ _063:
 
 _069:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_LEVITATED, _081
+	CheckItemHoldEffect CHECK_HAVE, BTLSCR_DEFENDER, HOLD_EFFECT_LEVITATE_POPPED_IF_HIT, _078
     // {0} makes Ground moves miss by using {1}!
     PrintMessage pl_msg_00000368_00021, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
+    GoTo _179
+	
+_078:
+    // {0} makes Ground moves miss by using {1}!
+    PrintMessage pl_msg_00000368_00021, TAG_NICKNAME_ITEM, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     GoTo _179
 
 _081:

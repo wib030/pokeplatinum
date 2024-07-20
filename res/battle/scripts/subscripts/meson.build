@@ -309,4 +309,6 @@ subscript_files = files(
 	'subscript_blocked_by_goggles.s',
 	'subscript_grass_powder_immune.s',
 	'subscript_weakness_policy_activate.s',
+	'subscript_air_balloon.s',
+	'subscript_air_balloon_burst.s',
 )

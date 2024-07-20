@@ -314,5 +314,7 @@
 #define subscript_blocked_by_goggles 305
 #define subscript_grass_powder_immune 306
 #define subscript_weakness_policy_activate 307
+#define subscript_air_balloon 308
+#define subscript_air_balloon_burst 309
 
 #endif // NARC_SUB_SEQ_NAIX_

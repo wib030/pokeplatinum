@@ -5190,4 +5190,28 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} endured\nthe hit!</language>
 	</row>
+	<row id="pl_msg_00000368_01294" index="1294">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} floats in the air with\nits {STRVAR_1 5, 1, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01295" index="1295">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} floats in the air\nwith its {STRVAR_1 5, 1, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01296" index="1296">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} floats in the air\nwith its {STRVAR_1 5, 1, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01297" index="1297">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!</language>
+	</row>
+	<row id="pl_msg_00000368_01298" index="1298">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!</language>
+	</row>
+	<row id="pl_msg_00000368_01299" index="1299">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!</language>
+	</row>
 </body>
