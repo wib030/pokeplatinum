@@ -127,7 +127,14 @@
                 "ABILITY_MULTITYPE",
                 "ABILITY_FLOWER_GIFT",
                 "ABILITY_BAD_DREAMS",
-				"ABILITY_SLUSH_RUSH"
+				"ABILITY_SLUSH_RUSH",
+				"ABILITY_MULTISCALE",
+				"ABILITY_POISON_TOUCH",
+				"ABILITY_DEFIANT",
+				"ABILITY_COMPETITIVE",
+				"ABILITY_FRESH_MILK",
+				"ABILITY_HEADACHE",
+				"ABILITY_RELENTLESS"
             ]
         }
     }

@@ -1626,6 +1626,12 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
             ATTACKING_MON.moveEffectsData.meFirst = 0;
         }
     }
+	
+	if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_MULTISCALE)
+	&& (battleCtx->battleMons[battleCtx->defender].curHP == battleCtx->battleMons[battleCtx->defender].maxHP))
+	{
+		battleCtx->damage /= 2;
+	}
 }
 
 /**
@@ -3126,7 +3132,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
     }
 	
-	if ((((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STALL) || (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_KLUTZ)))
+	if ((((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_DEFIANT) || (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COMPETITIVE)))
 		&& (stageChange < 0)
 		&& (battleCtx->defender != battleCtx->attacker)
 		&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
@@ -8140,7 +8146,7 @@ static BOOL BtlCmd_GenerateEndOfBattleItem(BattleSystem *battleSys, BattleContex
             }
         }
 		
-		if (ability == ABILITY_SHELL_ARMOR
+		if (ability == ABILITY_FRESH_MILK
                 && species != SPECIES_NONE
                 && species != SPECIES_EGG
                 && item == ITEM_NONE) {

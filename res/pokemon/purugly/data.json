@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_THICK_FAT",
-        "ABILITY_STALL"
+        "ABILITY_DEFIANT"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

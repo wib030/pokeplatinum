@@ -256,5 +256,19 @@
 #define pl_msg_00000610_00123 123
 // Slush Rush
 #define pl_msg_00000610_00124 124
+// Multiscale
+#define pl_msg_00000610_00125 125
+// Poison Touch
+#define pl_msg_00000610_00126 126
+// Defiant
+#define pl_msg_00000610_00127 127
+// Competitive
+#define pl_msg_00000610_00128 128
+// Fresh Milk
+#define pl_msg_00000610_00129 129
+// Headache
+#define pl_msg_00000610_00130 130
+// Relentless
+#define pl_msg_00000610_00131 131
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0610_H

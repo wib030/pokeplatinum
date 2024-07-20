@@ -35,7 +35,7 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_STALL",
+        "ABILITY_DEFIANT",
         "ABILITY_ANGER_POINT"
     ],
     "great_marsh_flee_rate": 0,

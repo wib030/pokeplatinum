@@ -256,5 +256,19 @@
 #define pl_msg_00000612_00123 123
 // Doubles the Pokémon’s\nSpeed in hail.
 #define pl_msg_00000612_00124 124
+// Halves damage taken\nat full HP.
+#define pl_msg_00000612_00125 125
+// 30% chance to poison foe\nwhen making contact.
+#define pl_msg_00000612_00126 126
+// DEFIANT
+#define pl_msg_00000611_00127 127
+// COMPETITIVE
+#define pl_msg_00000611_00128 128
+// FRESH MILK
+#define pl_msg_00000611_00129 129
+// HEADACHE
+#define pl_msg_00000611_00130 130
+// RELENTLESS
+#define pl_msg_00000610_00131 131
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H

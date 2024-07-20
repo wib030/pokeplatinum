@@ -479,8 +479,8 @@ Basic_CheckClearBodyEffect:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus12
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus12
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus12
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckStatStageImbalance:
@@ -776,8 +776,8 @@ Basic_CheckMemento:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
 
 Basic_CheckMemento_CheckStatStages:
     ; If the target''s Attack is already at -6, score -10.
@@ -952,8 +952,8 @@ Basic_CheckTickle:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
 
 Basic_CheckTickle_CheckStatStages:
     ; If the target''s Attack is at -6, score -10.
@@ -2300,8 +2300,8 @@ Expert_StatusAttackDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_StatusAttackDown_CheckTargetHP
     AddToMoveScore -1
@@ -2347,8 +2347,8 @@ Expert_StatusDefenseDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusDefenseDown_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 3, Expert_StatusDefenseDown_CheckTargetHP
@@ -2374,8 +2374,8 @@ Expert_SpeedDownOnHit:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_SpeedDownOnHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SpeedDownOnHit_End
@@ -2398,8 +2398,8 @@ Expert_StatusSpeedDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_StatusSpeedDown_TryScorePlus2
     AddToMoveScore -3
@@ -2427,8 +2427,8 @@ Expert_StatusSpAttackDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_StatusSpAttackDown_CheckTargetHP
     AddToMoveScore -1
@@ -2476,8 +2476,8 @@ Expert_StatusSpDefenseDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusSpDefenseDown_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 3, Expert_StatusSpDefenseDown_CheckTargetHP
@@ -2517,8 +2517,8 @@ Expert_StatusAccuracyDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusAccuracyDown_TryScoreMinus1
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusAccuracyDown_CheckUserAccuracy
@@ -2583,8 +2583,8 @@ Expert_StatusEvasionDown:
 	LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus10
-	IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
 	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusEvasionDown_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 3, Expert_StatusEvasionDown_CheckTargetHP
@@ -4281,7 +4281,7 @@ FakeOut_AbilityPunish:
     TableEntry ABILITY_STATIC
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
-    TableEntry ABILITY_SHELL_ARMOR
+    TableEntry ABILITY_FRESH_MILK
     TableEntry ABILITY_INNER_FOCUS
     TableEntry ABILITY_STEADFAST
 
@@ -4671,7 +4671,7 @@ Expert_ChangeUserAbility_DesirableAbilities:
     TableEntry ABILITY_UNAWARE
     TableEntry ABILITY_TINTED_LENS
     TableEntry ABILITY_FILTER
-    TableEntry ABILITY_SOLID_ROCK
+    TableEntry ABILITY_RELENTLESS
     TableEntry ABILITY_RECKLESS
     TableEntry TABLE_END
 
@@ -6340,8 +6340,8 @@ Expert_Defog:
     ; - If the opponent''s HP <= 70% score -2.
 
 	LoadBattlerAbility AI_BATTLER_DEFENDER
-	IfLoadedEqualTo ABILITY_KLUTZ, Expert_Defog_CheckCompetitive
-	IfLoadedEqualTo ABILITY_STALL, Expert_Defog_CheckDefiant
+	IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_Defog_CheckCompetitive
+	IfLoadedEqualTo ABILITY_DEFIANT, Expert_Defog_CheckDefiant
 	
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_Defog_ScreenScrubbing
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_Defog_ScreenScrubbing
@@ -6576,7 +6576,7 @@ Expert_StealthRock_CheckAbilityImmunity:
     IfLoadedEqualTo ABILITY_POISON_POINT, Expert_StealthRock_CheckPoisonPoint
     IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_StealthRock_CheckFlameBody
     IfLoadedEqualTo ABILITY_STATIC, Expert_StealthRock_CheckStatic
-    IfLoadedEqualTo ABILITY_SHELL_ARMOR, Expert_StealthRock_CheckFreshMilk
+    IfLoadedEqualTo ABILITY_FRESH_MILK, Expert_StealthRock_CheckFreshMilk
     GoTo Expert_StealthRock_CheckToEncourage
 
 Expert_StealthRock_CheckPoisonPoint:
@@ -6611,8 +6611,8 @@ Expert_StealthRock_CheckStatic:
 
 Expert_StealthRock_CheckFreshMilk:
     LoadAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_STALL, ScoreMinus3
-    IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus3
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus3
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus3
     IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus3
     LoadGender AI_BATTLER_ATTACKER
     IfLoadedEqualTo GENDER_MALE, Expert_StealthRock_CheckFreshMilk_BothMale
@@ -6635,7 +6635,7 @@ StealthRock_AbilityPunish_RapidSpin:
     TableEntry ABILITY_STATIC
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
-    TableEntry ABILITY_SHELL_ARMOR
+    TableEntry ABILITY_FRESH_MILK
 
 Expert_StealthRock_CheckDefog:
     LoadAbility AI_BATTLER_ATTACKER
@@ -6644,7 +6644,7 @@ Expert_StealthRock_CheckDefog:
     GoTo Expert_StealthRock_End
 
 StealthRock_AbilityPunish_Defog:
-    TableEntry ABILITY_KLUTZ
+    TableEntry ABILITY_DEFIANT
     TableEntry ABILITY_STALL
 
 Expert_StealthRock_TryScorePlus1:
@@ -6723,8 +6723,8 @@ Expert_Spikes_CheckDefog:
     GoTo Expert_Spikes_End
 
 Spikes_AbilityPunish_Defog:
-    TableEntry ABILITY_KLUTZ
-    TableEntry ABILITY_STALL
+    TableEntry ABILITY_COMPETITIVE
+    TableEntry ABILITY_DEFIANT
 
 
 Expert_Spikes_CheckToEncourage:
@@ -6817,8 +6817,8 @@ Expert_ToxicSpikes_CheckDefog:
     GoTo Expert_ToxicSpikes_End
 
 ToxicSpikes_AbilityPunish_Defog:
-    TableEntry ABILITY_KLUTZ
-    TableEntry ABILITY_STALL
+    TableEntry ABILITY_COMPETITIVE
+    TableEntry ABILITY_DEFIANT
 
 Expert_ToxicSpikes_CheckToEncourage:
     LoadTurnCount
@@ -7798,7 +7798,7 @@ TagStrategy_SkillSwap:
     IfLoadedEqualTo ABILITY_PURE_POWER, ScorePlus2
     IfLoadedEqualTo ABILITY_HUGE_POWER, ScorePlus2
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, ScorePlus2
-    IfLoadedEqualTo ABILITY_SOLID_ROCK, ScorePlus2
+    IfLoadedEqualTo ABILITY_RELENTLESS, ScorePlus2
     IfLoadedEqualTo ABILITY_FILTER, ScorePlus2
     IfLoadedEqualTo ABILITY_FLOWER_GIFT, ScorePlus2
     PopOrEnd 

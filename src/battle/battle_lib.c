@@ -4436,7 +4436,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         }
         break;
 		
-	case ABILITY_STALL:
+	case ABILITY_DEFIANT:
 			if (DEFENDING_MON.curHP
 				&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 				&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
@@ -4447,7 +4447,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 		}
 		break;
 		
-	case ABILITY_KLUTZ:
+	case ABILITY_COMPETITIVE:
 			if (DEFENDING_MON.curHP
 				&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 				&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
@@ -4477,7 +4477,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         }
         break;
 		
-	case ABILITY_SHELL_ARMOR:
+	case ABILITY_FRESH_MILK:
         if (ATTACKING_MON.curHP
                 && (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) == FALSE
                 && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
@@ -4512,6 +4512,28 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         }
         break;
     }
+	
+	switch (Battler_Ability(battleCtx, battleCtx->attacker))
+	{
+		case ABILITY_POISON_TOUCH:
+			if (DEFENDING_MON.curHP
+			&& DEFENDING_MON.status == MON_CONDITION_NONE
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+				battleCtx->sideEffectMon = battleCtx->defender;
+				battleCtx->msgBattlerTemp = battleCtx->attacker;
+
+				*subscript = subscript_poison;
+				result = TRUE;
+			}
+			break;
+	}
 
     return result;
 }
@@ -7044,7 +7066,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 150 / 100;
     }
 	if (moveType == TYPE_PSYCHIC
-            && attackerParams.ability == ABILITY_TANGLED_FEET
+            && attackerParams.ability == ABILITY_HEADACHE
             && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
         movePower = movePower * 200 / 100;
     }

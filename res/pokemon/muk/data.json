@@ -35,8 +35,8 @@
         "EGG_GROUP_AMORPHOUS"
     ],
     "abilities": [
-        "ABILITY_POISON_POINT",
-        "ABILITY_STICKY_HOLD"
+        "ABILITY_POISON_TOUCH",
+        "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

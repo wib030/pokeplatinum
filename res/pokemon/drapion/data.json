@@ -35,7 +35,7 @@
         "EGG_GROUP_WATER_3"
     ],
     "abilities": [
-        "ABILITY_STALL",
+        "ABILITY_DEFIANT",
         "ABILITY_SNIPER"
     ],
     "great_marsh_flee_rate": 0,
