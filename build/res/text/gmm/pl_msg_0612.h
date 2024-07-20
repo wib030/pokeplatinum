@@ -254,5 +254,7 @@
 #define pl_msg_00000612_00122 122
 // Reduces a sleeping foe’s\nHP.
 #define pl_msg_00000612_00123 123
+// Doubles the Pokémon’s\nSpeed in hail.
+#define pl_msg_00000612_00124 124
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H

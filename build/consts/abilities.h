@@ -129,6 +129,7 @@ enum Ability {
     ABILITY_MULTITYPE = 121,
     ABILITY_FLOWER_GIFT = 122,
     ABILITY_BAD_DREAMS = 123,
+    ABILITY_SLUSH_RUSH = 124,
 };
 
 #endif

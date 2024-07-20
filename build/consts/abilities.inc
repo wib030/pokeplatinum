@@ -128,5 +128,6 @@
     .equ ABILITY_MULTITYPE, 121
     .equ ABILITY_FLOWER_GIFT, 122
     .equ ABILITY_BAD_DREAMS, 123
+    .equ ABILITY_SLUSH_RUSH, 124
 
     .endif

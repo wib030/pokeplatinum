@@ -497,4 +497,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Bad Dreams</language>
 	</row>
+	<row id="pl_msg_00000610_00124" index="124">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Slush Rush</language>
+	</row>
 </body>

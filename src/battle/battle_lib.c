@@ -1231,11 +1231,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
     if (NO_CLOUD_NINE) {
         if ((battler1Ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
+				|| (battler1Ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
                 || (battler1Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
             battler1Speed *= 2; //battler1Speed = battler1Speed * 15 / 10;
         }
 
         if ((battler2Ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
+				|| (battler2Ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
                 || (battler2Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
             battler2Speed *= 2; //battler1Speed = battler1Speed * 15 / 10;
         }
