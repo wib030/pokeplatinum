@@ -4785,6 +4785,7 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
                     && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
                     && battleCtx->attacker != battleCtx->defender
                     && ATTACKING_MON.curHP < ATTACKING_MON.maxHP
+					&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
                     && ATTACKING_MON.curHP) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt * -1, itemPower);
                 battleCtx->msgBattlerTemp = battleCtx->attacker;
@@ -4805,6 +4806,7 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
                     && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                     && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
                     && CURRENT_MOVE_DATA.class != CLASS_STATUS
+					&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
                     && ATTACKING_MON.curHP) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battleCtx->attacker].maxHP * -1, 10);
                 battleCtx->msgBattlerTemp = battleCtx->attacker;

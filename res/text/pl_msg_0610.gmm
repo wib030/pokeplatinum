@@ -529,4 +529,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Relentless</language>
 	</row>
+	<row id="pl_msg_00000610_00132" index="132">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sheer Force</language>
+	</row>
 </body>

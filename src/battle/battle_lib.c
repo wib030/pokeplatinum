@@ -7584,6 +7584,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
             && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
             && battleCtx->attacker != battleCtx->defender
             && ATTACKING_MON.curHP < ATTACKING_MON.maxHP
+			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
             && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt * -1, attackerItemPower);
         battleCtx->msgBattlerTemp = battleCtx->attacker;
@@ -7595,6 +7596,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
             && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
             && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
             && CURRENT_MOVE_DATA.class != CLASS_STATUS
+			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
             && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 10);
         battleCtx->msgBattlerTemp = battleCtx->attacker;

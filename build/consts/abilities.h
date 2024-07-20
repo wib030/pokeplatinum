@@ -137,6 +137,7 @@ enum Ability {
     ABILITY_FRESH_MILK = 129,
     ABILITY_HEADACHE = 130,
     ABILITY_RELENTLESS = 131,
+    ABILITY_SHEER_FORCE = 132,
 };
 
 #endif

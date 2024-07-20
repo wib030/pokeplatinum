@@ -1599,6 +1599,11 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
 		battleCtx->damage = battleCtx->damage * 15 / 10;
 	}
 	
+	if ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->attacker].sheerForceFlag == TRUE))
+	{
+		battleCtx->damage = battleCtx->damage * 13 / 10;
+	}
+	
 	if ((battleCtx->moveCur == MOVE_FLING)
 	&& (Battler_ItemFlingEffect(battleCtx, battleCtx->attacker) == FLING_EFFECT_WAKE_UP_SLAP)
 	&& (DEFENDING_MON.status & MON_CONDITION_SLEEP))
@@ -2349,6 +2354,78 @@ static BOOL BtlCmd_GoToSubscript(BattleSystem *battleSys, BattleContext *battleC
 static BOOL BtlCmd_GoToEffectScript(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+	
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE)
+	{
+		switch (CURRENT_MOVE_DATA.effect)
+		{
+			case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+			case BATTLE_EFFECT_RAISE_ATTACK_HIT:
+			case BATTLE_EFFECT_RAISE_SP_ATK_HIT:
+			case BATTLE_EFFECT_RAISE_DEF_HIT:
+			case BATTLE_EFFECT_LOWER_SPEED_HIT:
+			case BATTLE_EFFECT_LOWER_SP_ATK_HIT:
+			case BATTLE_EFFECT_LOWER_SP_DEF_HIT:
+			case BATTLE_EFFECT_LOWER_SP_DEF_2_HIT:
+			case BATTLE_EFFECT_LOWER_DEFENSE_HIT:
+			case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+			case BATTLE_EFFECT_LOWER_ATTACK_HIT:
+			case BATTLE_EFFECT_FLINCH_HIT:
+			case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+			case BATTLE_EFFECT_FLINCH_BURN_HIT:
+			case BATTLE_EFFECT_FLINCH_FREEZE_HIT:
+			case BATTLE_EFFECT_FLINCH_PARALYZE_HIT:
+			case BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT:
+			case BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE:
+			case BATTLE_EFFECT_THAW_AND_BURN_HIT:
+			case BATTLE_EFFECT_BURN_HIT:
+			case BATTLE_EFFECT_PARALYZE_HIT:
+			case BATTLE_EFFECT_POISON_HIT:
+			case BATTLE_EFFECT_BADLY_POISON_HIT:
+			case BATTLE_EFFECT_FREEZE_HIT:
+			case BATTLE_EFFECT_CONFUSE_HIT:
+			case BATTLE_EFFECT_THUNDER:
+			case BATTLE_EFFECT_BLIZZARD:
+			case BATTLE_EFFECT_BOUNCE:
+			case BATTLE_EFFECT_CHATTER:
+			case BATTLE_EFFECT_SECRET_POWER:
+			case BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP:
+			case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+			case BATTLE_EFFECT_TRI_ATTACK:
+			case BATTLE_EFFECT_UNUSED_96:
+			case BATTLE_EFFECT_UNUSED_110:
+			case BATTLE_EFFECT_UNUSED_133:
+				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIT;
+				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
+				break;
+			
+			case BATTLE_EFFECT_RECOIL_BURN_HIT:
+			case BATTLE_EFFECT_RECOIL_PARALYZE_HIT:
+				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_RECOIL_THIRD;
+				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
+				break;
+			
+			case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
+				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT;
+				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
+				break;
+			
+			case BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT:
+			case BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT:
+				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIGH_CRITICAL;
+				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
+				break;
+				
+			case BATTLE_EFFECT_POISON_MULTI_HIT:
+				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIT_TWICE;
+				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
+				break;
+				
+			default:
+				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = FALSE;
+				break;
+		}
+	}
 
     BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__BE_SEQ, CURRENT_MOVE_DATA.effect);
 
