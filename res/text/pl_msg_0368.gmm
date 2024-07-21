@@ -5136,11 +5136,11 @@
 	</row>
 	<row id="pl_msg_00000368_01280" index="1280">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!</language>
 	</row>
 	<row id="pl_msg_00000368_01281" index="1281">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!</language>
 	</row>
 	<row id="pl_msg_00000368_01282" index="1282">
 		<attribute name="window_context_name">used</attribute>

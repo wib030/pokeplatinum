@@ -5619,6 +5619,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 		
 	case HOLD_EFFECT_WEAK_RAISE_SPA_ATK:
 			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
 			&& (battleCtx->battleMons[battleCtx->defender].wpolicyFlag == TRUE))
@@ -5633,11 +5634,24 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 			
 	case HOLD_EFFECT_LEVITATE_POPPED_IF_HIT:
 			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
 			{
 				*subscript = subscript_air_balloon_burst;
 				battleCtx->msgBattlerTemp = battleCtx->defender;
 				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+				result = TRUE;	
+			}
+			
+	case HOLD_EFFECT_SWITCH_ATTACKER_HIT:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
+			&& (BattleSystem_AnyReplacementMons(battleSys, battleCtx, battleCtx->attacker) == TRUE)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				*subscript = subscript_hold_up_card;
 				result = TRUE;	
 			}
 

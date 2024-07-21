@@ -311,4 +311,5 @@ subscript_files = files(
 	'subscript_weakness_policy_activate.s',
 	'subscript_air_balloon.s',
 	'subscript_air_balloon_burst.s',
+	'subscript_hold_up_card.s',
 )

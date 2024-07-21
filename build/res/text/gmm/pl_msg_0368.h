@@ -2566,9 +2566,9 @@
 #define pl_msg_00000368_01278 1278
 // {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
 #define pl_msg_00000368_01279 1279
-// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
 #define pl_msg_00000368_01280 1280
-// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
 #define pl_msg_00000368_01281 1281
 // {STRVAR_1 1, 0, 0}’s headache intensified!
 #define pl_msg_00000368_01282 1282

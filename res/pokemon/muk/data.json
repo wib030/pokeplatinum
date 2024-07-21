@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_POISON_TOUCH",
-        "ABILITY_NONE"
+        "ABILITY_STENCH"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
