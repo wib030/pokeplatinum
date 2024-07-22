@@ -83,6 +83,8 @@ Basic_CheckForImmunity:
     IfLoadedEqualTo ABILITY_WONDER_GUARD, Basic_CheckWonderGuard
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckGroundAbsorption
     IfLoadedEqualTo ABILITY_DRY_SKIN, Basic_CheckWaterAbsorption2
+    LoadHeldItem AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ITEM_RED_CHAIN, Basic_CheckGroundAbsorption
     GoTo Basic_NoImmunityAbility
 
 Basic_CheckElectricAbsorption:
@@ -3978,12 +3980,108 @@ Expert_SunnyDay_End:
     PopOrEnd 
 
 Expert_BellyDrum:
-    ; If the attacker is at less than 90% HP, score -2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_BellyDrum_ScoreMinus2
+    ; If the attacker is at less than 74% HP, score -2.
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 10, Expert_BellyDrum_End
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus10
+    LoadHeldItemEffect
+    IfLoadedNotInTable Expert_BellyDrum_DesirableItems, Expert_BellyDrum_Item_TryScoreMinus1
+    GoTo Expert_BellyDrum_StatusCheck
+
+Expert_BellyDrum_Item_TryScoreMinus1:
+    IfRandomLessThan 85, Expert_BellyDrum_StatusCheck
+    AddToMoveScore -1
+    GoTo Expert_BellyDrum_StatusCheck
+
+Expert_BellyDrum_StatusCheck:
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CONFUSION, Expert_BellyDrum_StatusTryScoreMinus1
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_ATTRACT, Expert_BellyDrum_StatusTryScoreMinus1
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_YAWN, Expert_BellyDrum_StatusTryScoreMinus1
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_BellyDrum_FieldCheck
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CURSE, Expert_BellyDrum_StatusTryScoreMinus3
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_BellyDrum_StatusTryScoreMinus1
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_BellyDrum_FieldCheck
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_BellyDrum_StatusTryScoreMinus1
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_BellyDrum_StatusTryScorePlus1
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_BellyDrum_StatusTryScorePlus1
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_PARALYSIS, Expert_BellyDrum_StatusTryScorePlus1
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_AQUA_RING, Expert_BellyDrum_StatusTryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_BellyDrum_StatusTryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_BellyDrum_StatusTryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_BellyDrum_StatusTryScorePlus1
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_BellyDrum_FieldCheck
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_BellyDrum_StatusTryScorePlus1
+    GoTo Expert_BellyDrum_FieldCheck
+
+Expert_BellyDrum_StatusTryScoreMinus1:
+    IfRandomLessThan 170, Expert_BellyDrum_FieldCheck
+    AddToMoveScore -1
+    GoTo Expert_BellyDrum_FieldCheck
+
+Expert_BellyDrum_StatusTryScorePlus1:
+    IfRandomLessThan 64, Expert_BellyDrum_FieldCheck
+    AddToMoveScore 1
+    GoTo Expert_BellyDrum_FieldCheck
+
+Expert_BellyDrum_StatusTryScoreMinus3:
+    IfHPPercentLessThan 76, ScoreMinus12
+    IfRandomLessThan 205, Expert_BellyDrum_FieldCheck
+    AddToMoveScore -3
+    GoTo Expert_BellyDrum_FieldCheck
+
+Expert_BellyDrum_FieldCheck:
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_FUTURE_SIGHT, Expert_BellyDrum_TryScoreMinus1
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_REFLECT, Expert_BellyDrum_TryScorePlus1
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BellyDrum_TryScorePlus1
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_BellyDrum_TryScorePlus1
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SET_SUBSTITUTE, Expert_BellyDrum_TryScoreMinus1
+    GoTo Expert_BellyDrum_HPCheck
+
+Expert_BellyDrum_TryScoreMinus1:
+    IfRandomLessThan 170, Expert_BellyDrum_HPCheck
+    AddToMoveScore -1
+    GoTo Expert_BellyDrum_HPCheck
+
+Expert_BellyDrum_HPCheck:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_BellyDrum_ScoreMinus12
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 74, Expert_BellyDrum_Item_ScorePlus1
+    LoadHeldItem AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ITEM_SITRUS_BERRY, ScorePlus1
+    GoTo Expert_BellyDrum_End
+
+Expert_BellyDrum_Item_ScorePlus1:
+    LoadHeldItemEffect
+    IfLoadedInTable Expert_BellyDrum_DesirableItems, ScorePlus1
     GoTo Expert_BellyDrum_End
 
 Expert_BellyDrum_ScoreMinus2:
     AddToMoveScore -2
+
+Expert_BellyDrum_ScoreMinus12:
+    AddToMoveScore -12
+
+Expert_BellyDrum_DesirableItems:
+    TableEntry ITEM_AGUAV_BERRY
+    TableEntry ITEM_FIGY_BERRY
+    TableEntry ITEM_WIKI_BERRY
+    TableEntry ITEM_MAGO_BERRY
+    TableEntry ITEM_IAPAPA_BERRY
+    TableEntry ITEM_SITRUS_BERRY
+    TableEntry ITEM_STARF_BERRY
+    TableEntry ITEM_LIECHI_BERRY
+    TableEntry ITEM_GANLON_BERRY
+    TableEntry ITEM_SALAC_BERRY
+    TableEntry ITEM_PETAYA_BERRY
+    TableEntry ITEM_APICOT_BERRY
+    TableEntry ITEM_LANSAT_BERRY
+    TableEntry ITEM_CUSTAP_BERRY
+    TableEntry ITEM_MICLE_BERRY
+    TableEntry ITEM_ORAN_BERRY
+    TableEntry ITEM_BERRY_JUICE
+    TableEntry TABLE_END
 
 Expert_BellyDrum_End:
     PopOrEnd 
@@ -4752,6 +4850,25 @@ Expert_Recycle_DesirableItems:
     TableEntry ITEM_CHESTO_BERRY
     TableEntry ITEM_LUM_BERRY
     TableEntry ITEM_STARF_BERRY
+    TableEntry ITEM_SITRUS_BERRY
+    TableEntry ITEM_CUSTAP_BERRY
+    TableEntry ITEM_RED_CHAIN
+    TableEntry ITEM_LEPPA_BERRY
+    TableEntry ITEM_MICLE_BERRY
+    TableEntry ITEM_AGUAV_BERRY
+    TableEntry ITEM_FIGY_BERRY
+    TableEntry ITEM_WIKI_BERRY
+    TableEntry ITEM_MAGO_BERRY
+    TableEntry ITEM_IAPAPA_BERRY
+    TableEntry ITEM_LIECHI_BERRY
+    TableEntry ITEM_GANLON_BERRY
+    TableEntry ITEM_SALAC_BERRY
+    TableEntry ITEM_PETAYA_BERRY
+    TableEntry ITEM_APICOT_BERRY
+    TableEntry ITEM_LANSAT_BERRY
+    TableEntry ITEM_JABOCA_BERRY
+    TableEntry ITEM_ROWAP_BERRY
+    TableEntry ITEM_SEAL_BAG
     TableEntry TABLE_END
 
 Expert_Revenge:
