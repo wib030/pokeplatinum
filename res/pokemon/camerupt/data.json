@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_FLASH_FIRE",
-        "ABILITY_FLASH_FIRE"
+        "ABILITY_SHEER_FORCE",
+        "ABILITY_SHEER_FORCE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

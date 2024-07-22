@@ -6870,6 +6870,16 @@ static const u16 sPunchingMoves[] = {
     MOVE_SKY_UPPERCUT
 };
 
+static const u16 sBitingMoves[] = {
+    MOVE_BITE,
+	MOVE_CRUNCH,
+	MOVE_FIRE_FANG,
+	MOVE_HYPER_FANG,
+	MOVE_ICE_FANG,
+	MOVE_POISON_FANG,
+	MOVE_THUNDER_FANG
+};
+
 typedef struct DamageCalcParams {
     u16 species;
     s16 curHP;
@@ -7215,6 +7225,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             break;
         }
     }
+	
+	for (i = 0; i < NELEMS(sBitingMoves); i++) {
+        if (sBitingMoves[i] == move && attackerParams.ability == ABILITY_STRONG_JAW) {
+            movePower = movePower * 15 / 10;
+            break;
+        }
+    }
 
     if (NO_CLOUD_NINE) {
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
@@ -7224,6 +7241,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
                 && (defenderParams.type1 == TYPE_ROCK || defenderParams.type2 == TYPE_ROCK)) {
             spDefenseStat = spDefenseStat * 15 / 10;
+        }
+		
+		if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
+				&& (attackerParams.ability == ABILITY_SAND_FORCE)
+				&& ((moveType == TYPE_ROCK) || (moveType == TYPE_GROUND) || (moveType == TYPE_STEEL))) {
+            movePower = movePower * 13 / 10;
         }
 
         if ((fieldConditions & FIELD_CONDITION_SUNNY)

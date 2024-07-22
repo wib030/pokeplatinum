@@ -274,5 +274,9 @@
 #define pl_msg_00000610_00132 132
 // Corrosion
 #define pl_msg_00000610_00133 133
+// Strong Jaw
+#define pl_msg_00000610_00134 134
+// Sand Force
+#define pl_msg_00000610_00135 135
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0610_H
