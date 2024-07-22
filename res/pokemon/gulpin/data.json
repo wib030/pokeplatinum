@@ -35,8 +35,8 @@
         "EGG_GROUP_AMORPHOUS"
     ],
     "abilities": [
-        "ABILITY_LIQUID_OOZE",
-        "ABILITY_STICKY_HOLD"
+        "ABILITY_CORROSION",
+        "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

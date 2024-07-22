@@ -135,7 +135,8 @@
 				"ABILITY_FRESH_MILK",
 				"ABILITY_HEADACHE",
 				"ABILITY_RELENTLESS",
-				"ABILITY_SHEER_FORCE"
+				"ABILITY_SHEER_FORCE",
+				"ABILITY_CORROSION"
             ]
         }
     }

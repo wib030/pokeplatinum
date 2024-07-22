@@ -2597,6 +2597,14 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
             && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
     }
+	
+	if ((Battler_Ability(battleCtx, attacker) == ABILITY_CORROSION)
+	&& MOVE_DATA(battleCtx->moveCur).type == TYPE_POISON
+	&& sTypeMatchupMultipliers[chartEntry][1] == TYPE_STEEL
+    && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE)
+	{
+		result = FALSE;
+	}
 
     return result;
 }
