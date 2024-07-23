@@ -3984,7 +3984,7 @@ Expert_BellyDrum:
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 10, Expert_BellyDrum_End
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus10
-    LoadHeldItemEffect
+    LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedNotInTable Expert_BellyDrum_DesirableItems, Expert_BellyDrum_Item_TryScoreMinus1
     GoTo Expert_BellyDrum_StatusCheck
 
@@ -4027,7 +4027,7 @@ Expert_BellyDrum_StatusTryScorePlus1:
     GoTo Expert_BellyDrum_FieldCheck
 
 Expert_BellyDrum_StatusTryScoreMinus3:
-    IfHPPercentLessThan 76, ScoreMinus12
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 76, Expert_BellyDrum_ScoreMinus12
     IfRandomLessThan 205, Expert_BellyDrum_FieldCheck
     AddToMoveScore -3
     GoTo Expert_BellyDrum_FieldCheck
@@ -4044,6 +4044,11 @@ Expert_BellyDrum_TryScoreMinus1:
     IfRandomLessThan 170, Expert_BellyDrum_HPCheck
     AddToMoveScore -1
     GoTo Expert_BellyDrum_HPCheck
+	
+Expert_BellyDrum_TryScorePlus1:
+    IfRandomLessThan 170, Expert_BellyDrum_HPCheck
+    AddToMoveScore +1
+    GoTo Expert_BellyDrum_HPCheck
 
 Expert_BellyDrum_HPCheck:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_BellyDrum_ScoreMinus12
@@ -4053,7 +4058,7 @@ Expert_BellyDrum_HPCheck:
     GoTo Expert_BellyDrum_End
 
 Expert_BellyDrum_Item_ScorePlus1:
-    LoadHeldItemEffect
+    LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedInTable Expert_BellyDrum_DesirableItems, ScorePlus1
     GoTo Expert_BellyDrum_End
 

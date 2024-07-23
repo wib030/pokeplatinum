@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_VOLT_ABSORB",
-        "ABILITY_NONE"
+        "ABILITY_VOLT_ABSORB"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

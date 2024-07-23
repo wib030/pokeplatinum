@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_ROCK_HEAD",
-        "ABILITY_NONE"
+        "ABILITY_ROCK_HEAD"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

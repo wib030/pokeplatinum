@@ -2606,5 +2606,11 @@
 #define pl_msg_00000368_01298 1298
 // The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} popped!
 #define pl_msg_00000368_01299 1299
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 6, 1, 0}\nwas bounced back by Magic Bounce!
+#define pl_msg_00000368_01300 1300
+// The wild {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 6, 1, 0} was bounced back by\fMagic Bounce!
+#define pl_msg_00000368_01301 1301
+// The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 6, 1, 0} was bounced back by\fMagic Bounce!
+#define pl_msg_00000368_01302 1302
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H

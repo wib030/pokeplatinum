@@ -4030,13 +4030,13 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SHADOW_TAG)
                 && battleCtx->battleMons[battler].ability != ABILITY_SHADOW_TAG)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP)
-                && battleCtx->battleMons[battler].type != TYPE_FLYING
+                && !MON_HAS_TYPE(battler, TYPE_FLYING)
                 && battleCtx->battleMons[battler].ability != ABILITY_LEVITATE
-                && battleCtx->battleMons[battler].heldItem != ITEM_RED_CHAIN)
+                && Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_MAGNET_PULL)
                 && MON_HAS_TYPE(battler, TYPE_STEEL)))
-            && battleCtx->battleMons[battler].heldItem != ITEM_SHED_SHELL
-            && battleCtx->battleMons[battler].ability != ABILITY_NEUTRALIZING_GAS) {
+            && battleCtx->battleMons[battler].heldItem != ITEM_SHED_SHELL) {
+            //&& battleCtx->battleMons[battler].ability != ABILITY_NEUTRALIZING_GAS) {
         return FALSE;
     }
 

@@ -545,4 +545,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Sand Force</language>
 	</row>
+	<row id="pl_msg_00000610_00136" index="136">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Magic Bounce</language>
+	</row>
 </body>

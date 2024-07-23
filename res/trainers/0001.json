@@ -9,6 +9,20 @@
     "double_battle": false,
     "party": [
 		{
+            "species": "SPECIES_DUNSPARCE",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_SHED_SHELL",
+            "moves": [
+				"MOVE_HEADBUTT",
+				"MOVE_BODY_SLAM",
+				"MOVE_PROTECT",
+				"MOVE_SUBSTITUTE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
             "species": "SPECIES_SWALOT",
             "form": 0,
             "level": 20,

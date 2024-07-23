@@ -138,7 +138,8 @@
 				"ABILITY_SHEER_FORCE",
 				"ABILITY_CORROSION",
 				"ABILITY_STRONG_JAW",
-				"ABILITY_SAND_FORCE"
+				"ABILITY_SAND_FORCE",
+				"ABILITY_MAGIC_BOUNCE"
             ]
         }
     }

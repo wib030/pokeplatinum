@@ -141,6 +141,7 @@ enum Ability {
     ABILITY_CORROSION = 133,
     ABILITY_STRONG_JAW = 134,
     ABILITY_SAND_FORCE = 135,
+    ABILITY_MAGIC_BOUNCE = 136,
 };
 
 #endif

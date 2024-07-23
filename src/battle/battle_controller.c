@@ -3090,7 +3090,8 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
 
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
             && DEFENDER_TURN_FLAGS.magicCoat
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_MAGIC_COAT)) {
+            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_MAGIC_COAT)
+			|| ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_MAGIC_BOUNCE) && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_MAGIC_COAT))) {
         DEFENDER_TURN_FLAGS.magicCoat = FALSE;
 
         battleCtx->moveProtect[battleCtx->attacker] = FALSE;
