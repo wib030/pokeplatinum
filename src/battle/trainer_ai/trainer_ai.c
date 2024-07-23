@@ -194,6 +194,9 @@ static void AICmd_CheckIfHighestDamageWithPartner(BattleSystem *battleSys, Battl
 static void AICmd_IfBattlerFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -331,6 +334,9 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerFainted,
     AICmd_IfBattlerNotFainted,
     AICmd_LoadAbility,
+    AICmd_IfBattlerHasPhysicalAttack,
+    AICmd_IfBattlerHasSpecialAttack,
+    AICmd_IfBattlerHasStatusAttack
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -2440,6 +2446,177 @@ static void AICmd_IfBattlerHasEqualStat(BattleSystem *battleSys, BattleContext *
 
     if (aiStat == battlerStat) {
         AIScript_Iter(battleCtx, jump);
+    }
+}
+
+// Conditional jump in trainer_ai_script if battler has a physical move 
+
+static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    int i;
+
+    switch (inBattler) {
+        case AI_BATTLER_ATTACKER:
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        case AI_BATTLER_ATTACKER_PARTNER:
+            if (battleCtx->battlemons[battler].curHP == 0) {
+                break;
+            }
+            
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        case AI_BATTLER_DEFENDER:
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+// Conditional jump in trainer_ai_script if battler has a special move 
+
+static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    int i;
+
+    switch (inBattler) {
+        case AI_BATTLER_ATTACKER:
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        case AI_BATTLER_ATTACKER_PARTNER:
+            if (battleCtx->battlemons[battler].curHP == 0) {
+                break;
+            }
+            
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        case AI_BATTLER_DEFENDER:
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+// Conditional jump in trainer_ai_script if battler has a status move 
+
+static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    int i;
+
+    switch (inBattler) {
+        case AI_BATTLER_ATTACKER:
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        case AI_BATTLER_ATTACKER_PARTNER:
+            if (battleCtx->battlemons[battler].curHP == 0) {
+                break;
+            }
+            
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        case AI_BATTLER_DEFENDER:
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                    break;
+                }
+            }
+
+            if (i < LEARNED_MOVES_MAX) {
+                AIScript_Iter(battleCtx, jump);
+            }
+            break;
+
+        default:
+            break;
     }
 }
 
