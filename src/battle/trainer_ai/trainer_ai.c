@@ -58,6 +58,25 @@ static const u16 sAltPowerCalcMoves[] = {
 	0xFFFF
 };
 
+static const u16 sChipDamageMoves[] = {
+    BATTLE_EFFECT_STATUS_BADLY_POISON,
+    BATTLE_EFFECT_STATUS_POISON,
+    BATTLE_EFFECT_STATUS_BURN,
+    BATTLE_EFFECT_CURSE,
+    BATTLE_EFFECT_STATUS_LEECH_SEED,
+    BATTLE_EFFECT_STATUS_NIGHTMARE,
+    BATTLE_EFFECT_BIND_HIT,
+    BATTLE_EFFECT_WHIRLPOOL,
+    0xFFFF
+};
+
+static const u16 sRemoveAbilityMoves[] = {
+    BATTLE_EFFECT_SUPRESS_ABILITY,
+    BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA,
+    BATTLE_EFFECT_SWITCH_ABILITIES,
+    0xFFFF
+};
+
 typedef void (*AICommandFunc)(BattleSystem*, BattleContext*);
 
 enum AIEvalStep {
@@ -3380,7 +3399,7 @@ static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
 /**
  * @brief Check if an AI's battler cannot damage the opponent's Pokemon due to
  * Wonder Guard. If so, check for any living party member that can deal damage
- * to that Pokemon, and switch to that mon 66% of the time.
+ * to that Pokemon, and switch to that mon 92% of the time.
  * 
  * This routine does NOT apply to double-battles.
  * 
@@ -3428,6 +3447,8 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                 for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                     move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
                     moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+                    moveClass = MOVE_DATA(move).class;
+                    moveEffect = MOVE_DATA(move).effect;
 
                     if (move) {
                         effectiveness = 0;
@@ -3441,10 +3462,26 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                             BattleMon_Get(battleCtx, BATTLER_OPP(battler), BATTLEMON_TYPE_2, NULL),
                             &effectiveness);
 
-                        // If this party member has a super-effective move, switch 2/3 of the time
-                        if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 3 < 2) {
+                        // If this party member has a super-effective move, switch 11/12 of the time
+                        if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 12 < 11) {
                             battleCtx->aiSwitchedPartySlot[battler] = i;
                             return TRUE;
+                        }
+                        // If this party member has chip damage or ability-removing move, switch 1/3 of the time
+                        else if (moveClass == CLASS_STATUS) {
+                            int chipDamageIdx;
+                            int removeAbilityIdx;
+                            for (chipDamageIdx = 0; sChipDamageMoves[chipDamageIdx] != 0xFFFF; chipDamageIdx++) {
+                                if (moveEffect == sChipDamageMoves[chipDamageIdx] && (effectiveness & ~MOVE_STATUS_IMMUNE)
+                                    && BattleSystem_RandNext(battleSys) % 3 < 1) {
+                                    return TRUE;
+                                }
+                            }
+                            for (removeAbilityIdx = 0; sRemoveAbilityMoves[removeAbilityIdx] != 0xFFFF; removeAbilityIdx++) {
+                                if (moveEffect == sRemoveAbilityMoves[removeAbilityIdx] && BattleSystem_RandNext(battleSys) % 3 < 1) {
+                                    return TRUE;
+                                }
+                            }
                         }
                     }
                 }
@@ -4006,6 +4043,31 @@ static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *batt
 }
 
 /**
+ * @brief Check if the AI's current battler is heavily attacking
+ * stat-boosted (that is if the sum of its total positive stat stage 
+ * changes to Attack and Special Attack is greater than or equal to 4.)
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The AI's current battler.
+ * @return          TRUE if the AI has a high number of positive stat stages;
+ *                  FALSE otherwise.
+ */
+static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int stat;
+    u8 numAttackingBoosts = 0;
+
+    for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
+        if (battleCtx->battleMons[battler].statBoosts[stat] > 6 && (stat = BATTLE_STAT_ATTACK || stat = BATTLE_STAT_SP_ATTACK)) {
+                numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+        }
+    }
+
+    return numAttackingBoosts >= 4;
+}
+
+/**
  * @brief Check if the AI should switch for turn.
  * 
  * @param battleSys 
@@ -4093,8 +4155,8 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return FALSE;
         }
 
-        // Never switch if the active battler has 4+ positive stat stages.
-        if (AI_IsHeavilyStatBoosted(battleSys, battleCtx, battler)) {
+        // Never switch if the active battler has 4+ positive stat stages to an attacking stat.
+        if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
             return FALSE;
         }
 
