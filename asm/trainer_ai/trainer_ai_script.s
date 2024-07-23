@@ -4052,9 +4052,10 @@ Expert_BellyDrum_TryScorePlus1:
 
 Expert_BellyDrum_HPCheck:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_BellyDrum_ScoreMinus12
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 74, Expert_BellyDrum_Item_ScorePlus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 76, Expert_BellyDrum_Item_ScorePlus1
     LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_SITRUS_BERRY, ScorePlus1
+    IfRandomLessThan 128, ScorePlus1
     GoTo Expert_BellyDrum_End
 
 Expert_BellyDrum_Item_ScorePlus1:
@@ -4092,39 +4093,129 @@ Expert_BellyDrum_End:
     PopOrEnd 
 
 Expert_PsychUp:
-    ; If the opponent has any of Attack, Defense, SpAttack, SpDefense, or Evasion at +3 stages or
-    ; higher:
-    ; - If the attacker''s Evasion stat is at +0 stages or lower, score +2.
-    ; - If the attacker has any of Attack, Defense, SpAttack, or SpDefense at +0 stages or lower,
-    ; score +1.
-    ; - Otherwise, 80.4% chance of score -2.
-    ;
-    ; Otherwise, score -2.
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_PsychUp_CheckUserStatStages
-    GoTo Expert_PsychUp_ScoreMinus2
+    ; If opponent has 3 > 2 > 1 or more stat stages to evasion or an 
+    ; attacking stat than us, 90% > 75% > 33% chance for +2 > +1 > +1 score
+    ; If opponent has 3 > 2 > 1 or more stat stages to a defense stat
+    ; than us, 66% > 50% > 25% chance for +2 > +1 > +1 score
+    ; for each stat, if there is no stat boost to gain, 1/6 chance for -1 score
+    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION
+    IfLoadedGreaterThan 2, Expert_PsychUp_Evasion_HighDiff
+    IfLoadedGreaterThan 1, Expert_PsychUp_Evasion_MediumDiff
+    IfLoadedGreaterThan 0, Expert_PsychUp_Evasion_LowDiff
+    IfRandomLessThan 213, Expert_PsychUp_CheckAttack
+    AddToMoveScore -1
+    GoTo Expert_PsychUp_CheckAttack
 
-Expert_PsychUp_CheckUserStatStages:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_PsychUp_ScorePlus2
-    IfRandomLessThan 50, Expert_PsychUp_End
-    GoTo Expert_PsychUp_ScoreMinus2
+Expert_PsychUp_Evasion_HighDiff:
+    IfRandomLessThan 25, Expert_PsychUp_CheckAttack
+    AddToMoveScore 2
+    GoTo Expert_PsychUp_CheckAttack
 
-Expert_PsychUp_ScorePlus2:
+Expert_PsychUp_Evasion_MediumDiff:
+    IfRandomLessThan 64, Expert_PsychUp_CheckAttack
     AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckAttack
 
-Expert_PsychUp_ScorePlus1:
+Expert_PsychUp_Evasion_LowDiff:
+    IfRandomLessThan 170, Expert_PsychUp_CheckAttack
     AddToMoveScore 1
-    PopOrEnd 
+    GoTo Expert_PsychUp_CheckAttack
 
-Expert_PsychUp_ScoreMinus2:
-    AddToMoveScore -2
+Expert_PsychUp_CheckAttack:
+    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK
+    IfLoadedGreaterThan 2, Expert_PsychUp_Attack_HighDiff
+    IfLoadedGreaterThan 1, Expert_PsychUp_Attack_MediumDiff
+    IfLoadedGreaterThan 0, Expert_PsychUp_Attack_LowDiff
+    IfRandomLessThan 213, Expert_PsychUp_CheckSpecialAttack
+    AddToMoveScore -1
+    GoTo Expert_PsychUp_CheckSpecialAttack
+
+Expert_PsychUp_Attack_HighDiff:
+    IfRandomLessThan 25, Expert_PsychUp_CheckSpecialAttack
+    AddToMoveScore 2
+    GoTo Expert_PsychUp_CheckSpecialAttack
+
+Expert_PsychUp_Attack_MediumDiff:
+    IfRandomLessThan 64, Expert_PsychUp_CheckSpecialAttack
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckSpecialAttack
+
+Expert_PsychUp_Attack_LowDiff:
+    IfRandomLessThan 170, Expert_PsychUp_CheckSpecialAttack
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckSpecialAttack
+
+Expert_PsychUp_CheckSpecialAttack:
+    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
+    IfLoadedGreaterThan 2, Expert_PsychUp_Special_AttackHighDiff
+    IfLoadedGreaterThan 1, Expert_PsychUp_Special_AttackMediumDiff
+    IfLoadedGreaterThan 0, Expert_PsychUp_Special_AttackLowDiff
+    IfRandomLessThan 213, Expert_PsychUp_CheckDefense
+    AddToMoveScore -1
+    GoTo Expert_PsychUp_CheckDefense
+
+Expert_PsychUp_Special_AttackHighDiff:
+    IfRandomLessThan 25, Expert_PsychUp_CheckDefense
+    AddToMoveScore 2
+    GoTo Expert_PsychUp_CheckDefense
+
+Expert_PsychUp_Special_AttackMediumDiff:
+    IfRandomLessThan 64, Expert_PsychUp_CheckDefense
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckDefense
+
+Expert_PsychUp_Special_AttackLowDiff:
+    IfRandomLessThan 170, Expert_PsychUp_CheckDefense
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckDefense
+
+Expert_PsychUp_CheckDefense:
+    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE
+    IfLoadedGreaterThan 2, Expert_PsychUp_DefenseHighDiff
+    IfLoadedGreaterThan 1, Expert_PsychUp_DefenseMediumDiff
+    IfLoadedGreaterThan 0, Expert_PsychUp_DefenseLowDiff
+    IfRandomLessThan 213, Expert_PsychUp_CheckSpecialDefense
+    AddToMoveScore -1
+    GoTo Expert_PsychUp_CheckSpecialDefense
+
+Expert_PsychUp_DefenseHighDiff:
+    IfRandomLessThan 85, Expert_PsychUp_CheckSpecialDefense
+    AddToMoveScore 2
+    GoTo Expert_PsychUp_CheckSpecialDefense
+
+Expert_PsychUp_DefenseMediumDiff:
+    IfRandomLessThan 128, Expert_PsychUp_CheckSpecialDefense
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckSpecialDefense
+
+Expert_PsychUp_DefenseLowDiff:
+    IfRandomLessThan 192, Expert_PsychUp_CheckSpecialDefense
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_CheckSpecialDefense
+
+Expert_PsychUp_CheckSpecialDefense:
+    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE
+    IfLoadedGreaterThan 2, Expert_PsychUp_SpecialDefenseHighDiff
+    IfLoadedGreaterThan 1, Expert_PsychUp_SpecialDefenseMediumDiff
+    IfLoadedGreaterThan 0, Expert_PsychUp_SpecialDefenseLowDiff
+    IfRandomLessThan 213, Expert_PsychUp_End
+    AddToMoveScore -1
+    GoTo Expert_PsychUp_End
+
+Expert_PsychUp_SpecialDefenseHighDiff:
+    IfRandomLessThan 85, Expert_PsychUp_End
+    AddToMoveScore 2
+    GoTo Expert_PsychUp_End
+
+Expert_PsychUp_SpecialDefenseMediumDiff:
+    IfRandomLessThan 128, Expert_PsychUp_End
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_End
+
+Expert_PsychUp_SpecialDefenseLowDiff:
+    IfRandomLessThan 192, Expert_PsychUp_End
+    AddToMoveScore 1
+    GoTo Expert_PsychUp_End
 
 Expert_PsychUp_End:
     PopOrEnd 
