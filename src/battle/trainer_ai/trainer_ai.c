@@ -3767,7 +3767,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
 {
     int i, j;
     u16 move;
-    int moveType;
+    int moveType, moveClass, moveEffect;
     u32 effectiveness;
     Pokemon *mon;
 
@@ -4414,7 +4414,7 @@ static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleCont
     u8 numAttackingBoosts = 0;
 
     for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
-        if (battleCtx->battleMons[battler].statBoosts[stat] > 6 && (stat = BATTLE_STAT_ATTACK || stat = BATTLE_STAT_SP_ATTACK)) {
+        if (battleCtx->battleMons[battler].statBoosts[stat] > 6 && (stat == BATTLE_STAT_ATTACK || stat == BATTLE_STAT_SP_ATTACK)) {
                 numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
         }
     }
