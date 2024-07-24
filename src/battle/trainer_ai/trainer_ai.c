@@ -200,6 +200,7 @@ static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContex
 static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, BattleContext  *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -342,7 +343,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerHasStatusAttack,
     AICmd_IfBattlerHasNoPhysicalAttack,
     AICmd_IfBattlerHasNoSpecialAttack,
-    AICmd_IfBattlerHasNoStatusAttack
+    AICmd_IfBattlerHasNoStatusAttack,
+    AICmd_IfToxicSpikesClearerAliveInParty
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3139,6 +3141,57 @@ static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx)
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+}
+
+static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    int i = 0;
+    int partyMax;
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    Party *party = BattleSystem_Party(battleSys, battler);
+    u8 battlerSlot, partnerSlot;
+
+    battlerSlot = battleCtx->selectedPartySlot[battler];
+
+    if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+        partnerSlot = battleCtx->selectedPartySlot[BattleSystem_Partner(battleSys, battler)];
+    }
+    else {
+        partnerSlot = battlerSlot;
+    }
+
+    partyMax = BattleSystem_PartyCount(battleSys, battler);
+
+    for (i = 0; i < partyMax; i++) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+        if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+            && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+            && (Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL) == TYPE_POISON
+                || Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL) == TYPE_POISON)) {
+                if (Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL) == TYPE_FLYING
+                    || Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL) == TYPE_FLYING
+                    || BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
+                    || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_LEVITATE) {
+                    if (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
+                        break;
+                    }
+                }
+                else {
+                    break;
+                }
+        }
+    }
+
+    if (i < partyMax) {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 /**

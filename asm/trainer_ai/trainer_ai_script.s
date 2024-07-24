@@ -6750,11 +6750,15 @@ Expert_StealthRock:
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_StealthRock_CheckRapidSpin
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_StealthRock_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_StealthRock_TryScoreMinus1
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, Expert_StealthRock_CheckToEncourage
+    IfRandomLessThan 64, Expert_StealthRock_CheckToEncourage
+    AddToMoveScore -1
     GoTo Expert_StealthRock_CheckToEncourage
 
 Expert_StealthRock_CheckToEncourage:
     LoadTurnCount
-    IfLoadedLessThan 4, Expert_StealthRock_TryScorePlus4
+    IfLoadedLessThan 3, Expert_StealthRock_TryScorePlus4
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StealthRock_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StealthRock_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
@@ -6849,6 +6853,7 @@ StealthRock_AbilityPunish_RapidSpin:
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
     TableEntry ABILITY_FRESH_MILK
+    TableEntry TABLE_END
 
 Expert_StealthRock_CheckDefog:
     LoadAbility AI_BATTLER_ATTACKER
@@ -6859,6 +6864,7 @@ Expert_StealthRock_CheckDefog:
 StealthRock_AbilityPunish_Defog:
     TableEntry ABILITY_DEFIANT
     TableEntry ABILITY_STALL
+    TableEntry TABLE_END
 
 Expert_StealthRock_TryScorePlus1:
     IfRandomLessThan 85, Expert_StealthRock_End
@@ -6902,24 +6908,97 @@ Expert_Spikes:
     ;
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
+    LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES
+    IfLoadedEqualTo 3, ScoreMinus10
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, ScoreMinus10
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_Spikes_CheckRapidSpin
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_Spikes_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_Spikes_TryScoreMinus1
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, Expert_Spikes_CheckToEncourage
+    IfRandomLessThan 64, Expert_Spikes_CheckToEncourage
+    AddToMoveScore -1
     GoTo Expert_Spikes_CheckToEncourage
 
 Expert_Spikes_CheckRapidSpin:
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_Spikes_CheckToEncourage
+    IfLoadedEqualTo TYPE_GHOST, Expert_Spikes_CheckItem
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_Spikes_CheckToEncourage
+    IfLoadedEqualTo TYPE_GHOST, Expert_Spikes_CheckItem
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_ABILITY_SUPPRESSED, ScoreMinus3
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedInTable Spikes_AbilityPunish_RapidSpin, Expert_Spikes_CheckToEncourage
+    IfLoadedInTable Spikes_AbilityPunish_RapidSpin, Expert_Spikes_CheckAbilityImmunity
     IfRandomLessThan 25, Expert_Spikes_CheckToEncourage
     AddToMoveScore -8
     GoTo Expert_Spikes_End
+
+Expert_Spikes_CheckItem:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NORMAL_HIT_GHOST, ScoreMinus3
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckAbilityImmunity:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScoreMinus3
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_POINT, Expert_Spikes_CheckPoisonPoint
+    IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_Spikes_CheckFlameBody
+    IfLoadedEqualTo ABILITY_STATIC, Expert_Spikes_CheckStatic
+    IfLoadedEqualTo ABILITY_FRESH_MILK, Expert_Spikes_CheckFreshMilk
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckPoisonPoint:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_STEEL, ScoreMinus3
+    IfLoadedEqualTo TYPE_POISON, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckFlameBody:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_FIRE, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckStatic:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckFreshMilk:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus3
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus3
+    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus3
+    LoadGender AI_BATTLER_ATTACKER
+    IfLoadedEqualTo GENDER_MALE, Expert_Spikes_CheckFreshMilk_BothMale
+    IfLoadedEqualTo GENDER_FEMALE, Expert_Spikes_CheckFreshMilk_BothFemale
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckFreshMilk_BothMale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_MALE, ScoreMinus3
+    GoTo Expert_Spikes_CheckToEncourage
+
+Expert_Spikes_CheckFreshMilk_BothFemale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_FEMALE, ScoreMinus3
+    GoTo Expert_Spikes_CheckToEncourage
 
 Spikes_AbilityPunish_RapidSpin:
     TableEntry ABILITY_EFFECT_SPORE
@@ -6927,7 +7006,8 @@ Spikes_AbilityPunish_RapidSpin:
     TableEntry ABILITY_STATIC
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
-    TableEntry ABILITY_HONEY_GATHER
+    TableEntry ABILITY_FRESH_MILK
+    TableEntry TABLE_END
 
 Expert_Spikes_CheckDefog:
     LoadAbility AI_BATTLER_ATTACKER
@@ -6938,11 +7018,12 @@ Expert_Spikes_CheckDefog:
 Spikes_AbilityPunish_Defog:
     TableEntry ABILITY_COMPETITIVE
     TableEntry ABILITY_DEFIANT
+    TableEntry TABLE_END
 
 
 Expert_Spikes_CheckToEncourage:
     LoadTurnCount
-    IfLoadedLessThan 4, Expert_Spikes_SpikesScore
+    IfLoadedLessThan 3, Expert_Spikes_SpikesScore
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_Spikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_Spikes_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
@@ -6998,22 +7079,99 @@ Expert_ToxicSpikes:
 
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, ScoreMinus10
+    LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
+    IfLoadedEqualTo 2, ScoreMinus10
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_ToxicSpikes_CheckRapidSpin
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_ToxicSpikes_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_ToxicSpikes_TryScoreMinus1
+    IfToxicSpikesClearerAliveInParty AI_BATTLER_DEFENDER, Expert_ToxicSpikes_TryScoreMinus1
+    IfRandomLessThan 64, Expert_ToxicSpikes_CheckToEncourage
+    AddToMoveScore 2
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, Expert_StealthRock_CheckToEncourage
+    IfRandomLessThan 64, Expert_StealthRock_CheckToEncourage
+    AddToMoveScore -2
     GoTo Expert_ToxicSpikes_CheckToEncourage
+
 
 Expert_ToxicSpikes_CheckRapidSpin:
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_ToxicSpikes_CheckToEncourage
+    IfLoadedEqualTo TYPE_GHOST, Expert_ToxicSpikes_CheckItem
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_ToxicSpikes_CheckToEncourage
+    IfLoadedEqualTo TYPE_GHOST, Expert_ToxicSpikes_CheckItem
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_ABILITY_SUPPRESSED, ScoreMinus3
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedInTable ToxicSpikes_AbilityPunish_RapidSpin, Expert_ToxicSpikes_CheckToEncourage
+    IfLoadedInTable Spikes_AbilityPunish_RapidSpin, Expert_ToxicSpikes_CheckAbilityImmunity
     IfRandomLessThan 25, Expert_ToxicSpikes_CheckToEncourage
     AddToMoveScore -8
     GoTo Expert_ToxicSpikes_End
+
+Expert_ToxicSpikes_CheckItem:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NORMAL_HIT_GHOST, ScoreMinus3
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckAbilityImmunity:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScoreMinus3
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_POINT, Expert_ToxicSpikes_CheckPoisonPoint
+    IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_ToxicSpikes_CheckFlameBody
+    IfLoadedEqualTo ABILITY_STATIC, Expert_ToxicSpikes_CheckStatic
+    IfLoadedEqualTo ABILITY_FRESH_MILK, Expert_ToxicSpikes_CheckFreshMilk
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckPoisonPoint:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_STEEL, ScoreMinus3
+    IfLoadedEqualTo TYPE_POISON, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckFlameBody:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_FIRE, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckStatic:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckFreshMilk:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus3
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus3
+    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus3
+    LoadGender AI_BATTLER_ATTACKER
+    IfLoadedEqualTo GENDER_MALE, Expert_ToxicSpikes_CheckFreshMilk_BothMale
+    IfLoadedEqualTo GENDER_FEMALE, Expert_ToxicSpikes_CheckFreshMilk_BothFemale
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckFreshMilk_BothMale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_MALE, ScoreMinus3
+    GoTo Expert_ToxicSpikes_CheckToEncourage
+
+Expert_ToxicSpikes_CheckFreshMilk_BothFemale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_FEMALE, ScoreMinus3
+    GoTo Expert_ToxicSpikes_CheckToEncourage
 
 ToxicSpikes_AbilityPunish_RapidSpin:
     TableEntry ABILITY_EFFECT_SPORE
@@ -7021,7 +7179,8 @@ ToxicSpikes_AbilityPunish_RapidSpin:
     TableEntry ABILITY_STATIC
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
-    TableEntry ABILITY_HONEY_GATHER
+    TableEntry ABILITY_FRESH_MILK
+    TableEntry TABLE_END
 
 Expert_ToxicSpikes_CheckDefog:
     LoadAbility AI_BATTLER_ATTACKER
@@ -7032,10 +7191,11 @@ Expert_ToxicSpikes_CheckDefog:
 ToxicSpikes_AbilityPunish_Defog:
     TableEntry ABILITY_COMPETITIVE
     TableEntry ABILITY_DEFIANT
+    TableEntry TABLE_END
 
 Expert_ToxicSpikes_CheckToEncourage:
     LoadTurnCount
-    IfLoadedLessThan 4, Expert_ToxicSpikes_ToxicSpikesScore
+    IfLoadedLessThan 3, Expert_ToxicSpikes_ToxicSpikesScore
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_ToxicSpikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_ToxicSpikes_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
@@ -7047,9 +7207,10 @@ Expert_ToxicSpikes_CheckToEncourage:
 Expert_ToxicSpikes_TryScorePlus1:
     IfRandomLessThan 85, Expert_ToxicSpikes_ToxicSpikesScore
     AddToMoveScore 1
+    GoTo Expert_ToxicSpikes_ToxicSpikesScore
 
 Expert_ToxicSpikes_ToxicSpikesScore:
-    IfRandomLessThan 25, Expert_Spikes_End
+    IfRandomLessThan 25, Expert_ToxicSpikes_End
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
     IfLoadedEqualTo 0, ScorePlus3
     IfLoadedEqualTo 1, ScorePlus1

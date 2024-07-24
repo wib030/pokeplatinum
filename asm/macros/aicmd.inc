@@ -663,6 +663,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfToxicSpikesClearerAliveInParty battler, jump
+    .long 115
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
