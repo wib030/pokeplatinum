@@ -636,3 +636,39 @@
     .macro LabelDistance dst, src
     .long (\dst-\src) / 4
     .endm
+
+    .macro IfBattlerHasPhysicalAttack battler, jump
+    .long 109
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasSpecialAttack battler, jump
+    .long 110
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasStatusAttack battler, jump
+    .long 111
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasNoPhysicalAttack battler, jump
+    .long 112
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasNoSpecialAttack battler, jump
+    .long 113
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasNoStatusAttack battler, jump
+    .long 114
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
