@@ -2480,7 +2480,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
-            if (battleCtx->battlemons[battler].curHP == 0) {
+            if (battleCtx->battleMons[battler].curHP == 0) {
                 break;
             }
             
@@ -2537,7 +2537,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
-            if (battleCtx->battlemons[battler].curHP == 0) {
+            if (battleCtx->battleMons[battler].curHP == 0) {
                 break;
             }
             
@@ -2594,7 +2594,7 @@ static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleConte
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
-            if (battleCtx->battlemons[battler].curHP == 0) {
+            if (battleCtx->battleMons[battler].curHP == 0) {
                 break;
             }
             
@@ -2651,7 +2651,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
-            if (battleCtx->battlemons[battler].curHP == 0) {
+            if (battleCtx->battleMons[battler].curHP == 0) {
                 break;
             }
             
@@ -2709,7 +2709,7 @@ static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContex
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
-            if (battleCtx->battlemons[battler].curHP == 0) {
+            if (battleCtx->battleMons[battler].curHP == 0) {
                 break;
             }
             
@@ -2766,7 +2766,7 @@ static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleCont
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
-            if (battleCtx->battlemons[battler].curHP == 0) {
+            if (battleCtx->battleMons[battler].curHP == 0) {
                 break;
             }
             
