@@ -2469,7 +2469,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     break;
                 }
             }
@@ -2485,7 +2485,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                 if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     break;
                 }
             }
@@ -2497,7 +2497,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
 
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     break;
                 }
             }
@@ -2526,7 +2526,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     break;
                 }
             }
@@ -2542,7 +2542,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                 if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     break;
                 }
             }
@@ -2554,7 +2554,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
 
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_PHYSICAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     break;
                 }
             }
@@ -2583,7 +2583,7 @@ static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleConte
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
                     break;
                 }
             }
@@ -2599,7 +2599,7 @@ static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleConte
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                 if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
                     break;
                 }
             }
@@ -2611,7 +2611,7 @@ static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleConte
 
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
                     break;
                 }
             }
@@ -2640,7 +2640,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
                     break;
                 }
             }
@@ -2656,7 +2656,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                 if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
                     break;
                 }
             }
@@ -2668,7 +2668,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
 
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_SPECIAL) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
                     break;
                 }
             }
@@ -2698,7 +2698,7 @@ static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContex
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_STATUS) {
                     break;
                 }
             }
@@ -2714,7 +2714,7 @@ static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContex
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                 if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_STATUS) {
                     break;
                 }
             }
@@ -2726,7 +2726,7 @@ static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContex
 
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_STATUS) {
                     break;
                 }
             }
@@ -2755,7 +2755,7 @@ static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleCont
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_STATUS) {
                     break;
                 }
             }
@@ -2771,7 +2771,7 @@ static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleCont
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                 if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_STATUS) {
                     break;
                 }
             }
@@ -2783,7 +2783,7 @@ static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleCont
 
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                if (battleCtx->battleMons[battler].moves[i].class == CLASS_STATUS) {
+                if (MOVE_DATA(battleMons[battler].moves[i]).class == CLASS_STATUS) {
                     break;
                 }
             }
