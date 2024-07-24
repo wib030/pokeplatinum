@@ -280,5 +280,9 @@
 #define pl_msg_00000610_00135 135
 // Magic Bounce
 #define pl_msg_00000610_00136 136
+// Hotheaded
+#define pl_msg_00000610_00137 137
+// Imposter
+#define pl_msg_00000610_00138 138
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0610_H

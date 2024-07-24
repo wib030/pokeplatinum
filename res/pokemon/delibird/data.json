@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_VITAL_SPIRIT",
-        "ABILITY_HUSTLE"
+        "ABILITY_SLUSH_RUSH",
+        "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

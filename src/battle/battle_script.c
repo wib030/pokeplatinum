@@ -1582,7 +1582,7 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
 	
 	if (battleCtx->criticalMul == 2)
 	{
-		battleCtx->damage = battleCtx->damage * 13 / 10;
+		battleCtx->damage = battleCtx->damage * 4 / 3;
 	}
 	else if (battleCtx->criticalMul == 3)
 	{
@@ -3019,6 +3019,11 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
                     hits = (BattleSystem_RandNext(battleSys) & 3) + 2;
                 }
             }
+			
+			if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_SWITCH_ATTACKER_HIT)
+			{
+				hits = 1;
+			}
         }
 
         battleCtx->multiHitCounter = hits;
@@ -5748,6 +5753,7 @@ static BOOL BtlCmd_Transform(BattleSystem * battleSys, BattleContext * battleCtx
     ATTACKING_MON.pressureAnnounced = FALSE;
 	ATTACKING_MON.defiantFlag = FALSE;
 	ATTACKING_MON.wpolicyFlag = FALSE;
+	ATTACKING_MON.sheerForceFlag = FALSE;
 	ATTACKING_MON.airBalloonAnnounced = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
     ATTACKING_MON.moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
@@ -6595,7 +6601,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
 	
 	if (battleCtx->criticalMul == 2)
 	{
-		battleCtx->damage = battleCtx->damage * 13 / 10;
+		battleCtx->damage = battleCtx->damage * 4 / 3;
 	}
 	else if (battleCtx->criticalMul == 3)
 	{

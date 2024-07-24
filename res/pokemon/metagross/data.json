@@ -35,7 +35,7 @@
         "EGG_GROUP_MINERAL"
     ],
     "abilities": [
-        "ABILITY_CLEAR_BODY",
+        "ABILITY_SAND_FORCE",
         "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,

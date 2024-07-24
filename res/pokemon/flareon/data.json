@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_ROCK_HEAD",
-        "ABILITY_ROCK_HEAD"
+        "ABILITY_HOTHEADED",
+        "ABILITY_HOTHEADED"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

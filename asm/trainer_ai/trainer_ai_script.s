@@ -219,7 +219,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PASS_STATS_AND_STATUS, Basic_CheckBatonPass
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_10_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Basic_CheckCanRecoverHP
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_133, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_134, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Basic_CheckRainDance
@@ -1720,7 +1719,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_BatonPass
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_BEFORE_SWITCH, Expert_Pursuit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_Synthesis
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_133, Expert_Synthesis
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_134, Expert_Synthesis
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Expert_RainDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_SunnyDay
@@ -7077,6 +7075,7 @@ Expert_RecoilMove:
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_RecoilMove_End
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_ROCK_HEAD, Expert_RecoilMove_ScorePlus1
+	IfLoadedEqualTo ABILITY_HOTHEADED, Expert_RecoilMove_ScorePlus1
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_RecoilMove_ScorePlus1
     GoTo Expert_RecoilMove_End
 

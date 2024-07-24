@@ -845,6 +845,9 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
 			{
                 battleCtx->battleMons[battler].defiantFlag = FALSE;
 				battleCtx->battleMons[battler].wpolicyFlag = FALSE;
+				battleCtx->battleMons[battler].sheerForceFlag = FALSE;
+				battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
+				battleCtx->battleMons[battler].imposterFlag = FALSE;
             }
 
             battleCtx->turnStartCheckState++;
@@ -3052,6 +3055,16 @@ static int BattleController_CheckMoveHitOverrides(BattleSystem *battleSys, Battl
         if (WEATHER_IS_HAIL && MOVE_DATA(move).effect == BATTLE_EFFECT_BLIZZARD) {
             battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
         }
+    }
+	
+	if (battleCtx->moveCur == MOVE_TOXIC && MON_HAS_TYPE(battleCtx->attacker, TYPE_POISON))
+	{
+        battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
+    }
+	
+	if (battleCtx->moveCur == MOVE_THUNDER_WAVE && MON_HAS_TYPE(battleCtx->attacker, TYPE_ELECTRIC))
+	{
+        battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
     }
 
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_BYPASSED_ACCURACY) == FALSE

@@ -317,5 +317,6 @@
 #define subscript_air_balloon 308
 #define subscript_air_balloon_burst 309
 #define subscript_hold_up_card 310
+#define subscript_imposter_transform 311
 
 #endif // NARC_SUB_SEQ_NAIX_

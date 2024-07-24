@@ -531,7 +531,7 @@
 	</row>
 	<row id="pl_msg_00000610_00132" index="132">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Sheer Force</language>
+		<language name="English">SHEER FORCE</language>
 	</row>
 	<row id="pl_msg_00000610_00133" index="133">
 		<attribute name="window_context_name">used</attribute>
@@ -548,5 +548,13 @@
 	<row id="pl_msg_00000610_00136" index="136">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">MAGIC BOUNCE</language>
+	</row>
+	<row id="pl_msg_00000610_00137" index="137">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">HOTHEADED</language>
+	</row>
+	<row id="pl_msg_00000610_00138" index="138">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">IMPOSTER</language>
 	</row>
 </body>

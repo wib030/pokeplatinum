@@ -35,7 +35,7 @@
         "EGG_GROUP_WATER_1"
     ],
     "abilities": [
-        "ABILITY_BATTLE_ARMOR",
+        "ABILITY_SLUSH_RUSH",
         "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,

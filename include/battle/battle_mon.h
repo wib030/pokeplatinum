@@ -99,6 +99,7 @@ typedef struct BattleMon {
 	u32 wpolicyFlag : 1;
 	u32 sheerForceFlag : 1;
 	u32 airBalloonAnnounced : 1;
+	u32 imposterFlag : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];

@@ -549,4 +549,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">MAGIC BOUNCE</language>
 	</row>
+	<row id="pl_msg_00000610_00137" index="137">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">HOTHEADED</language>
+	</row>
+	<row id="pl_msg_00000610_00138" index="138">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">IMPOSTER</language>
+	</row>
 </body>

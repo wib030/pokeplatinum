@@ -108,6 +108,9 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
 	battleCtx->battleMons[battler].defiantFlag = FALSE;
 	battleCtx->battleMons[battler].wpolicyFlag = FALSE;
+	battleCtx->battleMons[battler].sheerForceFlag = FALSE;
+	battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
+	battleCtx->battleMons[battler].imposterFlag = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -3753,6 +3756,7 @@ enum {
     SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
 	SWITCH_IN_CHECK_STATE_AIR_BALLOON,
+	SWITCH_IN_CHECK_STATE_IMPOSTER,
 
     SWITCH_IN_CHECK_STATE_DONE,
 };
@@ -3770,7 +3774,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int subscript;
     int result;
     int battler;
+	int battlero;
     int maxBattlers;
+	int imposter1Pos;
+	int imposter2Pos;
 
     maxBattlers = BattleSystem_MaxBattlers(battleSys);
     subscript = NULL;
@@ -4291,6 +4298,59 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 					battleCtx->battleMons[battler].airBalloonAnnounced = TRUE;
 					battleCtx->msgBattlerTemp = battler;
 					subscript = subscript_air_balloon;
+					result = SWITCH_IN_CHECK_RESULT_BREAK;
+					break;
+				}
+            }
+			
+			if (i == maxBattlers)
+			{
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_IMPOSTER:
+			for (i = 0; i < maxBattlers; i++)
+			{
+                battler = battleCtx->monSpeedOrder[i];
+				
+                if ((Battler_Ability(battleCtx, battler) == ABILITY_IMPOSTER)
+				&& (battleCtx->battleMons[battler].imposterFlag == FALSE))
+				{
+					imposter1Pos = BattleSystem_BattlerSlot(battleSys, battler);
+						if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_ENEMY_SIDE_SLOT_1)
+						{
+							imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_2;
+						}
+						else if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_ENEMY_SIDE_SLOT_2)
+						{
+							imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_1;
+						}
+						else if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_PLAYER_SIDE_SLOT_1)
+						{
+							imposter2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_2;
+						}
+						else if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_PLAYER_SIDE_SLOT_2)
+						{
+							imposter2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_1;
+						}
+						
+					for (int o = 0; o < maxBattlers; o++)
+					{
+						battlero = battleCtx->monSpeedOrder[o];
+						
+						if ((battler != battlero)
+						&& (Battler_Side(battleSys, battlero) != Battler_Side(battleSys, battler))
+						&& (imposter2Pos == BattleSystem_BattlerSlot(battleSys, battlero)))
+						{
+							battleCtx->defender = battlero;
+							break;
+						}
+					}
+					
+					battleCtx->battleMons[battler].imposterFlag = TRUE;
+					battleCtx->attacker = battler;
+					subscript = subscript_imposter_transform;
 					result = SWITCH_IN_CHECK_RESULT_BREAK;
 					break;
 				}
@@ -5629,7 +5689,9 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 			if (DEFENDING_MON.curHP
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
 			&& (battleCtx->battleMons[battleCtx->defender].wpolicyFlag == TRUE))
 			{
 				*subscript = subscript_weakness_policy_activate;
@@ -5643,6 +5705,8 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 	case HOLD_EFFECT_LEVITATE_POPPED_IF_HIT:
 			if (DEFENDING_MON.curHP
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
 			{
 				*subscript = subscript_air_balloon_burst;
@@ -5657,6 +5721,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
 			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
 			&& (BattleSystem_AnyReplacementMons(battleSys, battleCtx, battleCtx->attacker) == TRUE)
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
 			{
 				*subscript = subscript_hold_up_card;
@@ -7237,16 +7302,15 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 15 / 10;
         }
+		
+		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_SAND_FORCE) {
+            attackStat = attackStat * 13 / 10;
+			spAttackStat = spAttackStat * 13 / 10;
+        }
 
         if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
                 && (defenderParams.type1 == TYPE_ROCK || defenderParams.type2 == TYPE_ROCK)) {
             spDefenseStat = spDefenseStat * 15 / 10;
-        }
-		
-		if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
-				&& (attackerParams.ability == ABILITY_SAND_FORCE)
-				&& ((moveType == TYPE_ROCK) || (moveType == TYPE_GROUND) || (moveType == TYPE_STEEL))) {
-            movePower = movePower * 13 / 10;
         }
 
         if ((fieldConditions & FIELD_CONDITION_SUNNY)
@@ -7709,6 +7773,45 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
         *subscript = subscript_transfer_sticky_barb;
         result = TRUE;
     }
+	
+	if (defenderItemEffect == HOLD_EFFECT_WEAK_RAISE_SPA_ATK
+			&& (DEFENDING_MON.curHP)
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (battleCtx->battleMons[battleCtx->defender].wpolicyFlag == TRUE))
+			{
+				*subscript = subscript_weakness_policy_activate;
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+				result = TRUE;
+				battleCtx->battleMons[battleCtx->defender].wpolicyFlag = FALSE;
+			}
+			
+	if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
+			&& (DEFENDING_MON.curHP)
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				*subscript = subscript_air_balloon_burst;
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+				result = TRUE;	
+			}
+			
+	if (defenderItemEffect == HOLD_EFFECT_SWITCH_ATTACKER_HIT
+			&& (DEFENDING_MON.curHP)
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
+			&& (BattleSystem_AnyReplacementMons(battleSys, battleCtx, battleCtx->attacker) == TRUE)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				*subscript = subscript_hold_up_card;
+				result = TRUE;
+			}
 
     return result;
 }
