@@ -7284,11 +7284,22 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 75 / 100;
     }
 
-    for (i = 0; i < NELEMS(sPunchingMoves); i++) {
-        if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST) {
-            movePower = movePower * 12 / 10;
+    for (i = 0; i < NELEMS(sPunchingMoves); i++)
+	{
+        if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST)
+		{
+            movePower = movePower * 13 / 10;
             break;
         }
+    }
+	
+	for (i = 0; i < NELEMS(sPunchingMoves); i++)
+	{
+		if (sPunchingMoves[i] == move && attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_EFFECT)
+		{
+			 movePower = movePower * 12 / 10;
+            break;
+		}
     }
 	
 	for (i = 0; i < NELEMS(sBitingMoves); i++) {
