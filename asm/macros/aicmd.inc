@@ -627,16 +627,6 @@
     .long \battler
     .endm
 
-    .equ TABLE_END, 0xFFFFFFFF
-
-    .macro TableEntry entry
-    .long \entry
-    .endm
-
-    .macro LabelDistance dst, src
-    .long (\dst-\src) / 4
-    .endm
-
     .macro IfBattlerHasPhysicalAttack battler, jump
     .long 109
     .long \battler
@@ -671,4 +661,14 @@
     .long 114
     .long \battler
     .long (\jump-.) / 4 - 1
+    .endm
+
+    .equ TABLE_END, 0xFFFFFFFF
+
+    .macro TableEntry entry
+    .long \entry
+    .endm
+
+    .macro LabelDistance dst, src
+    .long (\dst-\src) / 4
     .endm

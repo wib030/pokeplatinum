@@ -4122,7 +4122,7 @@ Expert_PsychUp_Evasion_LowDiff:
     GoTo Expert_PsychUp_CheckAttack
 
 Expert_PsychUp_CheckAttack:
-    IfBattlerHasNoPhysicalAttack, AI_BATTLER_ATTACKER, Expert_PsychUp_CheckSpecialAttack
+    IfBattlerHasNoPhysicalAttack AI_BATTLER_ATTACKER, Expert_PsychUp_CheckSpecialAttack
     DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK
     IfLoadedGreaterThan 2, Expert_PsychUp_Attack_HighDiff
     IfLoadedGreaterThan 1, Expert_PsychUp_Attack_MediumDiff
@@ -4147,7 +4147,7 @@ Expert_PsychUp_Attack_LowDiff:
     GoTo Expert_PsychUp_CheckSpecialAttack
 
 Expert_PsychUp_CheckSpecialAttack:
-    IfBattlerHasNoSpecialAttack, AI_BATTLER_ATTACKER, Expert_PsychUp_CheckDefense
+    IfBattlerHasNoSpecialAttack AI_BATTLER_ATTACKER, Expert_PsychUp_CheckDefense
     DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
     IfLoadedGreaterThan 2, Expert_PsychUp_Special_AttackHighDiff
     IfLoadedGreaterThan 1, Expert_PsychUp_Special_AttackMediumDiff
