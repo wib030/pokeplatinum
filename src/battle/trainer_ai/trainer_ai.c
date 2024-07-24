@@ -4330,10 +4330,10 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
  */
 static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    // Don't switch if we aren't asleep, don't have Natural Cure, or are below 50% HP.
+    // Don't switch if we aren't asleep, don't have Natural Cure, or are below 40% HP.
     if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) == FALSE
             || Battler_Ability(battleCtx, battler) != ABILITY_NATURAL_CURE
-            || battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP / 2)) {
+            || battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP * 2 / 5)) {
         return FALSE;
     }
 
@@ -4603,13 +4603,16 @@ int TrainerAI_PickCommand(BattleSystem *battleSys, int battler)
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler)
 {
     int i;
-    u8 aliveMons = 0;
+    u8 aliveMons, deadMons;
     u16 item;
     u8 hpRestore;
     BOOL result;
     Party *party;
     Pokemon *mon;
     BattleContext *battleCtx;
+
+    aliveMons = 0;
+    deadMons = 0;
 
     battleCtx = battleSys->battleCtx;
     AI_CONTEXT.usedItemCondition[battler >> 1] = 0;
@@ -4634,6 +4637,9 @@ static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler)
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
             aliveMons++;
+        }
+        else {
+            deadMons++;
         }
     }
 
@@ -4732,7 +4738,8 @@ static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler)
                     AI_CONTEXT.usedItemType[battler >> 1] = ITEM_TYPE_GUARD_SPEC;
                     result = TRUE;
                 }
-            } else {
+            }
+            else {
                 // Unrecognized item type
                 AI_CONTEXT.usedItemType[battler >> 1] = ITEM_TYPE_MAX;
             }
