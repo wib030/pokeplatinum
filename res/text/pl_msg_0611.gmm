@@ -557,4 +557,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">IMPOSTER</language>
 	</row>
+	<row id="pl_msg_00000610_00139" index="139">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEGA LAUNCHER</language>
+	</row>
 </body>

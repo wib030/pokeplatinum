@@ -35,7 +35,7 @@
         "EGG_GROUP_WATER_1"
     ],
     "abilities": [
-        "ABILITY_TORRENT",
+        "ABILITY_MEGA_LAUNCHER",
         "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
@@ -72,10 +72,12 @@
             "TM55",
             "TM56",
             "TM58",
+			"TM59",
             "TM68",
             "TM72",
             "TM74",
             "TM78",
+			"TM79",
             "TM80",
             "TM82",
             "TM83",
@@ -89,7 +91,11 @@
             "HM08"
         ],
         "level_up": {
-            "1": "MOVE_FLASH_CANNON",
+            "1": [ 
+				"MOVE_FLASH_CANNON",
+				"MOVE_DRAGON_PULSE",
+				"MOVE_DARK_PULSE"
+			],
             "4": "MOVE_TAIL_WHIP",
             "7": "MOVE_BUBBLE",
             "10": "MOVE_WITHDRAW",
