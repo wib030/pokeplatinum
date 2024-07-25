@@ -9,7 +9,7 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_DITTO",
+            "species": "SPECIES_CAMERUPT",
             "form": 0,
             "level": 15,
             "item": "ITEM_NONE",
@@ -20,7 +20,7 @@
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_DITTO",
+            "species": "SPECIES_CHANSEY",
             "form": 0,
             "level": 15,
             "item": "ITEM_NONE",

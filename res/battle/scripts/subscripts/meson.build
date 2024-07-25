@@ -313,4 +313,7 @@ subscript_files = files(
 	'subscript_air_balloon_burst.s',
 	'subscript_hold_up_card.s',
 	'subscript_imposter_transform.s',
+	'subscript_gravity_start_fling.s',
+	'subscript_trick_room_start_fling.s',
+	'subscript_infatuate_fling.s',
 )

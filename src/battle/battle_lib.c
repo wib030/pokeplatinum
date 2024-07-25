@@ -6272,15 +6272,16 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         break;
 		
 	case FLING_EFFECT_TRICK_ROOM:
-            battleCtx->flingScript = subscript_overworld_trick_room;
+            battleCtx->flingScript = subscript_trick_room_start_fling;
         break;
 		
 	case FLING_EFFECT_GRAVITY:
-			battleCtx->flingScript = subscript_gravity_start;
+			battleCtx->flingScript = subscript_gravity_start_fling;
 		break;
 		
 	case FLING_EFFECT_INFATUATION:
-			battleCtx->flingScript = subscript_infatuate;
+			battleCtx->sideEffectMon = battleCtx->defender;
+			battleCtx->flingScript = subscript_infatuate_fling;
         break;
 		
 	case FLING_EFFECT_HAZE:
@@ -7297,7 +7298,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 	{
 		if (sPunchingMoves[i] == move && attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_EFFECT)
 		{
-			 movePower = movePower * 12 / 10;
+			movePower = movePower * 12 / 10;
             break;
 		}
     }

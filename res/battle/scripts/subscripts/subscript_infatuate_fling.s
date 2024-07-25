@@ -1,0 +1,30 @@
+    .include "macros/btlcmd.inc"
+
+    .data
+
+_000:
+	UpdateVarFromVar OPCODE_SET, BTLVAR_MSG_BATTLER_TEMP, BTLVAR_ATTACKER
+    CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_OBLIVIOUS, _055
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _108
+    TryAttract _108
+	PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_INFATUATED
+	Wait
+    // {0} fell in love!
+    PrintMessage pl_msg_00000368_00162, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    GoTo _047
+
+_047:
+    Wait 
+    WaitButtonABTime 30
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_SIDE_EFFECT_MON_SELF_TURN_STATUS_FLAGS, SELF_TURN_FLAG_INFATUATED
+    End
+
+_055:
+    // {0}’s {1} prevents romance!
+    PrintMessage pl_msg_00000368_00647, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    Wait 
+    WaitButtonABTime 30
+    End 
+
+_108:
+    End

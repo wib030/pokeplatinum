@@ -318,5 +318,8 @@
 #define subscript_air_balloon_burst 309
 #define subscript_hold_up_card 310
 #define subscript_imposter_transform 311
+#define subscript_gravity_start_fling 312
+#define subscript_trick_room_start_fling 313
+#define subscript_infatuate_fling 314
 
 #endif // NARC_SUB_SEQ_NAIX_
