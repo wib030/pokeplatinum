@@ -98,6 +98,8 @@ enum {
 #define FLING_EFFECT_NIGHTMARE			39
 #define FLING_EFFECT_CONFUSION			40
 #define FLING_EFFECT_CHIP				41
+#define FLING_EFFECT_LOWER_EVASION		42
+#define FLING_EFFECT_LOWER_ACC		    43
 
 #define PLUCK_EFFECT_NONE                0
 #define PLUCK_EFFECT_PRZ_RESTORE         1

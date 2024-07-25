@@ -321,5 +321,7 @@
 #define subscript_gravity_start_fling 312
 #define subscript_trick_room_start_fling 313
 #define subscript_infatuate_fling 314
+#define subscript_fling_lower_evasion 315
+#define subscript_fling_lower_acc 316
 
 #endif // NARC_SUB_SEQ_NAIX_

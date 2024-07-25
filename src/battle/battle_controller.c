@@ -3060,11 +3060,13 @@ static int BattleController_CheckMoveHitOverrides(BattleSystem *battleSys, Battl
 	if (battleCtx->moveCur == MOVE_TOXIC && MON_HAS_TYPE(battleCtx->attacker, TYPE_POISON))
 	{
         battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
+		return 0;
     }
 	
 	if (battleCtx->moveCur == MOVE_THUNDER_WAVE && MON_HAS_TYPE(battleCtx->attacker, TYPE_ELECTRIC))
 	{
         battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
+		return 0;
     }
 
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_BYPASSED_ACCURACY) == FALSE

@@ -6324,6 +6324,16 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 	case FLING_EFFECT_CHIP:
 			battleCtx->flingScript = subscript_apply_chip;
 		break;
+		
+	case FLING_EFFECT_LOWER_EVASION:
+			battleCtx->sideEffectMon = battleCtx->defender;
+			battleCtx->flingScript = subscript_fling_lower_evasion;
+		break;
+		
+	case FLING_EFFECT_LOWER_ACC:
+			battleCtx->sideEffectMon = battleCtx->defender;
+			battleCtx->flingScript = subscript_fling_lower_acc;
+		break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
