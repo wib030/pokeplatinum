@@ -7,11 +7,11 @@
         },
         {
             "level": 16,
-            "species": "SPECIES_GEODUDE"
+            "species": "SPECIES_GLIGAR"
         },
         {
             "level": 18,
-            "species": "SPECIES_GLIGAR"
+            "species": "SPECIES_DUNSPARCE"
         },
         {
             "level": 17,
@@ -27,11 +27,11 @@
         },
         {
             "level": 18,
-            "species": "SPECIES_NIDORAN_F"
+            "species": "SPECIES_SNUBBULL"
         },
         {
             "level": 18,
-            "species": "SPECIES_NIDORAN_M"
+            "species": "SPECIES_TEDDIURSA"
         },
         {
             "level": 19,

@@ -7,7 +7,7 @@
         },
         {
             "level": 38,
-            "species": "SPECIES_GRAVELER"
+            "species": "SPECIES_GOLEM"
         },
         {
             "level": 37,
@@ -15,11 +15,11 @@
         },
         {
             "level": 36,
-            "species": "SPECIES_JIGGLYPUFF"
+            "species": "SPECIES_WIGGLYTUFF"
         },
         {
             "level": 39,
-            "species": "SPECIES_MACHOKE"
+            "species": "SPECIES_MACHAMP"
         },
         {
             "level": 39,
@@ -27,7 +27,7 @@
         },
         {
             "level": 36,
-            "species": "SPECIES_NOSEPASS"
+            "species": "SPECIES_PROBOPASS"
         },
         {
             "level": 37,
@@ -35,7 +35,7 @@
         },
         {
             "level": 38,
-            "species": "SPECIES_CHINGLING"
+            "species": "SPECIES_CHIMECHO"
         },
         {
             "level": 39,
@@ -43,7 +43,7 @@
         },
         {
             "level": 38,
-            "species": "SPECIES_GOLBAT"
+            "species": "SPECIES_CROBAT"
         },
         {
             "level": 40,

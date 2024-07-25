@@ -11,35 +11,35 @@
         },
         {
             "level": 39,
-            "species": "SPECIES_SUDOWOODO"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_EXPLOUD"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_CACTURNE"
-        },
-        {
-            "level": 40,
-            "species": "SPECIES_CACTURNE"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_CHIMECHO"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_CHIMECHO"
-        },
-        {
-            "level": 40,
             "species": "SPECIES_ABSOL"
+        },
+        {
+            "level": 38,
+            "species": "SPECIES_DRATINI"
+        },
+        {
+            "level": 38,
+            "species": "SPECIES_KECLEON"
+        },
+        {
+            "level": 40,
+            "species": "SPECIES_CARNIVINE"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_CHIMECHO"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_CHIMECHO"
+        },
+        {
+            "level": 40,
+            "species": "SPECIES_CASTFORM"
         },
         {
             "level": 39,
-            "species": "SPECIES_ABSOL"
+            "species": "SPECIES_CASTFORM"
         },
         {
             "level": 40,

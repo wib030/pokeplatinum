@@ -2544,38 +2544,57 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
         int totalMonsGainingExp = 0;
         int totalMonsWithExpShare = 0;
 		int gainingExp = 1;
+		int thisBattlerGaining = 0;
+		
+		Pokemon *cMon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[battleCtx->attacker]);
+		int levelCur = Pokemon_GetValue(cMon, MON_DATA_LEVEL, NULL);
+		
+		TrainerInfo *trInfo = BattleSystem_TrainerInfo(battleSys, 0);
+		int badges = TrainerInfo_BadgeCount(trInfo);
 
         for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, BATTLER_US)); i++) {
+			thisBattlerGaining = 0;
             Pokemon *mon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, i);
-			Pokemon *cMon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[battleCtx->attacker]);
+			int levelCurMon = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
 			
-			TrainerInfo *trInfo = BattleSystem_TrainerInfo(battleSys, 0);
-			int badges = TrainerInfo_BadgeCount(trInfo);
-			int levelCur = Pokemon_GetValue(cMon, MON_DATA_LEVEL, NULL);
-			
-			if (((badges == 0) && (levelCur >= 13))
-			|| ((badges == 1) && (levelCur >= 22))
-			|| ((badges == 2) && (levelCur >= 26))
-			|| ((badges == 3) && (levelCur >= 31))
-			|| ((badges == 4) && (levelCur >= 36))
-			|| ((badges == 5) && (levelCur >= 45))
-			|| ((badges == 6) && (levelCur >= 49))
-			|| ((badges == 7) && (levelCur >= 54)))
-			{
-					gainingExp = 0;
-			}
-
             if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)) {
                 if (battleCtx->sideGetExpMask[(battleCtx->faintedMon >> 1) & 1] & FlagIndex(i)) {
                     totalMonsGainingExp++;
+					thisBattlerGaining = 1;
                 }
 
                 u16 item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
                 if (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_EXP_SHARE) {
                     totalMonsWithExpShare++;
+					thisBattlerGaining = 1;
                 }
             }
+			
+			if ((thisBattlerGaining == 1)
+			&& (((badges == 0) && (levelCurMon >= 13))
+			|| ((badges == 1) && (levelCurMon >= 22))
+			|| ((badges == 2) && (levelCurMon >= 26))
+			|| ((badges == 3) && (levelCurMon >= 31))
+			|| ((badges == 4) && (levelCurMon >= 36))
+			|| ((badges == 5) && (levelCurMon >= 45))
+			|| ((badges == 6) && (levelCurMon >= 49))
+			|| ((badges == 7) && (levelCurMon >= 54))))
+			{
+				gainingExp = 0;
+			}
         }
+		
+		if (((badges == 0) && (levelCur >= 13))
+		|| ((badges == 1) && (levelCur >= 22))
+		|| ((badges == 2) && (levelCur >= 26))
+		|| ((badges == 3) && (levelCur >= 31))
+		|| ((badges == 4) && (levelCur >= 36))
+		|| ((badges == 5) && (levelCur >= 45))
+		|| ((badges == 6) && (levelCur >= 49))
+		|| ((badges == 7) && (levelCur >= 54)))
+		{
+			gainingExp = 0;
+		}
 
         u16 exp = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, MON_DATA_PERSONAL_BASE_EXP);
         exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 7;

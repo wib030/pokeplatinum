@@ -99,12 +99,12 @@
         {
             "level_max": 30,
             "level_min": 20,
-            "species": "SPECIES_TENTACOOL"
+            "species": "SPECIES_CARVANHA"
         },
         {
             "level_max": 30,
             "level_min": 20,
-            "species": "SPECIES_SEEL"
+            "species": "SPECIES_HORSEA"
         },
         {
             "level_max": 40,
