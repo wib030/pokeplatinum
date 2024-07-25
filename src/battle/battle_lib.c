@@ -2652,16 +2652,74 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
-    if (((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE) || ((defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT) && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)))
-            && moveType == TYPE_GROUND
+    if (moveType == TYPE_GROUND) {
+        if (((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE) || ((defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT) && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)))
+            && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED
+            && (battleCtx->battleMons[defender].moveEffectsMask & ~MOVE_EFFECT_INGRAIN)) {
+               
+            *moveStatusMask |= MOVE_STATUS_LEVITATED;
+        }
+        else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
+            && (battleCtx->battleMons[defender].moveEffectsMask & ~MOVE_EFFECT_INGRAIN)
             && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
-        *moveStatusMask |= MOVE_STATUS_LEVITATED;
-    } else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
-            && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
-            && moveType == TYPE_GROUND
-            && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
-        *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
-    } else {
+                
+            *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
+        }
+    }
+    else if (moveType == TYPE_WATER) {
+        if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WATER_ABSORB) == TRUE)
+            || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
+        }
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
+        }
+    }
+    else if (moveType == TYPE_ELECTRIC) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
+        }
+        if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE)
+            || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE)
+    }
+    else if (moveType == TYPE_NORMAL) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+        }
+        if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY;
+        }
+        if (attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM;
+        }
+    }
+    else if (moveType == TYPE_POISON) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_CORROSION) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+        }
+    }
+    else if (moveType == TYPE_FIRE) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FLASH_FIRE) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY;
+        }
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE) {
+            
+            *moveStatusMask |= MOVE_STATUS_TYPE_WEAKNESS_ABILITY;
+        }
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_HEATPROOF) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+        }
+    }
+    else {
         chartEntry = 0;
 
         while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
