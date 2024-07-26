@@ -4865,7 +4865,14 @@ BOOL BattleSystem_SynchronizeStatus(BattleSystem *battleSys, BattleContext *batt
             nextSeq = subscript_burn;
         } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_PARALYSIS) {
             nextSeq = subscript_paralyze;
+        } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_SLEEP) {
+            nextSeq = subscript_sleep;
+        } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_FREEZE) {
+            nextSeq = subscript_freeze;
+        } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_TOXIC) {
+            nextSeq = subscript_badly_poison;
         }
+
 
         if (nextSeq) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
