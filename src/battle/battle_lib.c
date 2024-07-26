@@ -7606,14 +7606,37 @@ int BattleSystem_CalcDamageVariance(BattleSystem *battleSys, BattleContext *batt
     return damage;
 }
 
-// each value here is implicitly 1 / N
-static const u8 sCriticalStageRates[] = {
-    16, // neutral
-     8, // +1
-     4, // +2
-     3, // +3
-     2, // +4
+// each probability here is implicitly P / Q
+static const u8 sCriticalStageRates[][2] = {
+//    Q     P
+    { 16,   1 }, // neutral
+    { 16,   3 }, // +1
+    { 2,    1 }, // +2
+    { 1,    1 }, // +3
+    { 1,    1 }, // +4
 };
+
+// This section builds a new table that achieves the above crit rates by
+// applying the modulo function twice.
+enum { iMax = sizeof(sCriticalStageRates) / sizeof(sCriticalStageRates[0]) };
+
+u8 sCriticalStageModuli[iMax][2];
+
+for (int i = 0; i < iMax; i++) {
+    sCriticalStageModuli[i][0] = sCriticalStageRates[i][0];
+    
+    if (sCriticalStageRates[i][1] == 1) {
+        sCriticalStageModuli[i][1] = sCriticalStageRates[i][0];
+    }
+    else {
+        if (sCriticalStageRates[i][0] % sCriticalStageRates[i][1] == 0) {
+            sCriticalStageModuli[i][1] = sCriticalStageRates[i][0];
+        }
+        else {
+            sCriticalStageModuli[i][1] = 1 + sCriticalStageRates[i][0] / sCriticalStageRates[i][1];
+        }
+    }
+}
 
 int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int criticalStage, u32 sideConditions)
 {
@@ -7644,7 +7667,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
         effectiveCritStage = 4;
     }
 
-    if (BattleSystem_RandNext(battleSys) % sCriticalStageRates[effectiveCritStage] == 0
+    if ((BattleSystem_RandNext(battleSys) % sCriticalStageModuli[effectiveCritStage][0]) % sCriticalStageModuli[effectiveCritStage][1] == 0
             && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == FALSE
             && (sideConditions & SIDE_CONDITION_LUCKY_CHANT) == FALSE
             && (defenderMoveEffects & MOVE_EFFECT_NO_CRITICAL) == FALSE) {
