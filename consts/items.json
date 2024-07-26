@@ -154,7 +154,7 @@
 				"HOLD_EFFECT_NORMAL_HIT_GHOST",
 				"HOLD_EFFECT_RAISE_SPD_NO_STATUS",
 				"HOLD_EFFECT_NO_WEATHER_CHIP_POWDER",
-				"HOLD_EFFECT_NO_CONTACT_EFFECT",
+				"HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH",
 				"HOLD_EFFECT_WEAK_RAISE_SPA_ATK",
 				"HOLD_EFFECT_LEVITATE_POPPED_IF_HIT",
 				"HOLD_EFFECT_SWITCH_ATTACKER_HIT"
@@ -593,19 +593,19 @@
                 "ITEM_HM07",
                 "ITEM_HM08",
                 "ITEM_EXPLORER_KIT",
-                "ITEM_LOOT_SACK",
-                "ITEM_RULE_BOOK",
+                "ITEM_LOADED_GLOVES", // was ITEM_LOOT_SACK
+                "ITEM_AIR_BALLOON", // was ITEM_RULE_BOOK
                 "ITEM_POKE_RADAR",
                 "ITEM_POINT_CARD",
                 "ITEM_JOURNAL",
                 "ITEM_SEAL_CASE",
                 "ITEM_FASHION_CASE",
-                "ITEM_SEAL_BAG",
+                "ITEM_WEAKNESS_POLICY", // was ITEM_SEAL_BAG
                 "ITEM_PAL_PAD",
                 "ITEM_WORKS_KEY",
                 "ITEM_OLD_CHARM",
                 "ITEM_GALACTIC_KEY",
-                "ITEM_RED_CHAIN",
+                "ITEM_RED_CARD", // was ITEM_RED_CHAIN
                 "ITEM_TOWN_MAP",
                 "ITEM_VS_SEEKER",
                 "ITEM_COIN_CASE",
@@ -622,7 +622,7 @@
                 "ITEM_AZURE_FLUTE",
                 "ITEM_S_S_TICKET",
                 "ITEM_CONTEST_PASS",
-                "ITEM_MAGMA_STONE",
+                "ITEM_ASSAULT_VEST", // was ITEM_MAGMA_STONE
                 "ITEM_PARCEL",
                 "ITEM_COUPON_1",
                 "ITEM_COUPON_2",
