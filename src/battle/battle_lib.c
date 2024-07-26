@@ -2622,12 +2622,31 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     u8 defenderItemEffect;
     u8 attackerItemPower;
     u8 defenderItemPower;
+	
+	static u16 sPowderMoves[] = {
+		MOVE_POISON_POWDER,
+		MOVE_SLEEP_POWDER,
+		MOVE_STUN_SPORE,
+		MOVE_SPORE,
+		MOVE_COTTON_SPORE,
+	};
+	
+	int powderMove = FALSE;
 
     totalMul = 1;
 
     if (move == MOVE_STRUGGLE) {
         return damage;
     }
+	
+	for (int i = 0; i < NELEMS(sPowderMoves); i++)
+	{
+		if (sPowderMoves[i] == battleCtx->moveCur)
+		{
+			powderMove = TRUE;
+			break;
+		}
+	}
 
     attackerItemEffect = Battler_HeldItemEffect(battleCtx, attacker);
     attackerItemPower = Battler_HeldItemPower(battleCtx, attacker, ITEM_POWER_CHECK_ALL);
@@ -2721,6 +2740,11 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             *moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
         }
     }
+	else if ((powderMove == TRUE)
+	&& (MON_HAS_TYPE(battleCtx->defender, TYPE_GRASS) || (defenderItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)))
+	{
+		*moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+	}
     else {
         chartEntry = 0;
 
