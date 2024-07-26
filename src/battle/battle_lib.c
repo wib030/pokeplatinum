@@ -2684,6 +2684,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
         if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE)
             || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE))
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
     }
     else if (moveType == TYPE_NORMAL) {
         if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE)) {
