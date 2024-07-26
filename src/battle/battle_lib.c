@@ -2683,12 +2683,12 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
         }
         if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE)
-            || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE))
-
+            || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE) {
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
+		}
     }
     else if (moveType == TYPE_NORMAL) {
-        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE)) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE) {
 
             *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
         }
