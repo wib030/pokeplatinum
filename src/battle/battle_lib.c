@@ -7609,7 +7609,7 @@ int BattleSystem_CalcDamageVariance(BattleSystem *battleSys, BattleContext *batt
 // each probability here is implicitly P / Q
 static const u8 sCriticalStageRates[][2] = {
 //    Q     P
-    { 16,   1 }, // neutral
+    { 24,   1 }, // neutral
     { 16,   3 }, // +1
     { 2,    1 }, // +2
     { 1,    1 }, // +3
