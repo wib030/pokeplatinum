@@ -111,6 +111,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].sheerForceFlag = FALSE;
 	battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
 	battleCtx->battleMons[battler].imposterFlag = FALSE;
+	battleCtx->battleMons[battler].rivalryFlag = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -4715,6 +4716,26 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				result = TRUE;
 			}
 			break;
+			
+		case ABILITY_RIVALRY:
+			if (ATTACKING_MON.curHP
+			&& (battleCtx->battleMons[battleCtx->attacker].rivalryFlag == TRUE)
+            && (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) == FALSE
+            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+            && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+            && DEFENDING_MON.curHP
+            && BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+				battleCtx->sideEffectMon = battleCtx->attacker;
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+				
+				*subscript = subscript_infatuate_always;
+				result = TRUE;
+			}
+			break;
 	}
 
     return result;
@@ -7381,17 +7402,24 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     spDefenseStage += 6;
 
     if (attackerParams.ability == ABILITY_RIVALRY
-            && attackerParams.gender == defenderParams.gender
-            && attackerParams.gender != GENDER_NONE
-            && defenderParams.gender != GENDER_NONE) {
-        movePower = movePower * 125 / 100;
+    && attackerParams.gender == defenderParams.gender
+    && attackerParams.gender != GENDER_NONE
+    && defenderParams.gender != GENDER_NONE)
+	{
+        movePower = movePower * 150 / 100;
+		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = TRUE;
     }
-    if (attackerParams.ability == ABILITY_RIVALRY
-            && attackerParams.gender != defenderParams.gender
-            && attackerParams.gender != GENDER_NONE
-            && defenderParams.gender != GENDER_NONE) {
-        movePower = movePower * 75 / 100;
-    }
+	else
+	{
+		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = FALSE;
+	}
+	
+   // if (attackerParams.ability == ABILITY_RIVALRY
+   //         && attackerParams.gender != defenderParams.gender
+   //         && attackerParams.gender != GENDER_NONE
+   //         && defenderParams.gender != GENDER_NONE) {
+   //     movePower = movePower * 75 / 100;
+   // }
 
     for (i = 0; i < NELEMS(sPunchingMoves); i++)
 	{

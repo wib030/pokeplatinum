@@ -2612,5 +2612,11 @@
 #define pl_msg_00000368_01301 1301
 // The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 6, 1, 0} was bounced back by\fMagic Bounce!
 #define pl_msg_00000368_01302 1302
+// {STRVAR_1 1, 0, 0} was infatuated by its\n{STRVAR_1 5, 1, 0}!
+#define pl_msg_00000368_01303 1303
+// The wild {STRVAR_1 1, 0, 0} was infatuated\nby its {STRVAR_1 5, 1, 0}!
+#define pl_msg_00000368_01304 1304
+// The foe’s {STRVAR_1 1, 0, 0} was infatuated\nby its {STRVAR_1 5, 1, 0}!
+#define pl_msg_00000368_01305 1305
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H

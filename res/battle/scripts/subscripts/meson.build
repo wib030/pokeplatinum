@@ -318,4 +318,5 @@ subscript_files = files(
 	'subscript_infatuate_fling.s',
 	'subscript_fling_lower_evasion.s',
 	'subscript_fling_lower_acc.s',
+	'subscript_infatuate_always.s',
 )

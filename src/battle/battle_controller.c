@@ -848,6 +848,7 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
 				battleCtx->battleMons[battler].sheerForceFlag = FALSE;
 				battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
 				battleCtx->battleMons[battler].imposterFlag = FALSE;
+				battleCtx->battleMons[battler].rivalryFlag = FALSE;
             }
 
             battleCtx->turnStartCheckState++;
