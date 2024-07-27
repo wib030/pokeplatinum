@@ -7620,6 +7620,15 @@ static const u8 sCriticalStageRates[][2] = {
 // applying the modulo function twice.
 enum { iMax = sizeof(sCriticalStageRates) / sizeof(sCriticalStageRates[0]) };
 
+static const u8 sCriticalStageModuli[iMax][2] = {
+    { 24,   24 },
+    { 16,   16 },
+    { 2,    2 },
+    { 1,    1 },
+    { 1,    1 },
+};
+
+/*
 u8 sCriticalStageModuli[iMax][2];
 
 for (int i = 0; i < iMax; i++) {
@@ -7637,6 +7646,7 @@ for (int i = 0; i < iMax; i++) {
         }
     }
 }
+*/
 
 int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int criticalStage, u32 sideConditions)
 {
