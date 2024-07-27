@@ -35,6 +35,7 @@ static const u16 sRarePickupItems[] = {
     ITEM_TM01,
     ITEM_LEFTOVERS,
     ITEM_TM26,
+    ITEM_AIR_BALLOON,
 };
 
 static const u8 sCommonPickupRate[] = {
