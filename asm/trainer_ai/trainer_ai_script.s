@@ -84,7 +84,7 @@ Basic_CheckForImmunity:
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckGroundAbsorption
     IfLoadedEqualTo ABILITY_DRY_SKIN, Basic_CheckWaterAbsorption2
     LoadHeldItem AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ITEM_RED_CHAIN, Basic_CheckGroundAbsorption
+    IfLoadedEqualTo ITEM_AIR_BALLOON, Basic_CheckGroundAbsorption
     GoTo Basic_NoImmunityAbility
 
 Basic_CheckElectricAbsorption:
@@ -4460,7 +4460,7 @@ Expert_FakeOut:
 
 Expert_FakeOut_WillItKill:
     LoadHeldItemEffect AI_BATTLER_ATTACKER
-    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScorePlus5
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH, ScorePlus5
     IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_FakeOut_End
     IfCurrentMoveKills USE_MAX_DAMAGE, Expert_FakeOut_TryScorePlus3
     GoTo ScoreMinus1
@@ -4948,7 +4948,7 @@ Expert_Recycle_DesirableItems:
     TableEntry ITEM_STARF_BERRY
     TableEntry ITEM_SITRUS_BERRY
     TableEntry ITEM_CUSTAP_BERRY
-    TableEntry ITEM_RED_CHAIN
+    TableEntry ITEM_AIR_BALLOON
     TableEntry ITEM_LEPPA_BERRY
     TableEntry ITEM_MICLE_BERRY
     TableEntry ITEM_AGUAV_BERRY
@@ -4964,7 +4964,7 @@ Expert_Recycle_DesirableItems:
     TableEntry ITEM_LANSAT_BERRY
     TableEntry ITEM_JABOCA_BERRY
     TableEntry ITEM_ROWAP_BERRY
-    TableEntry ITEM_SEAL_BAG
+    TableEntry ITEM_WEAKNESS_POLICY
     TableEntry TABLE_END
 
 Expert_Revenge:
@@ -6788,7 +6788,7 @@ Expert_StealthRock_CheckAbilityImmunity:
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
     LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScoreMinus3
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH, ScoreMinus3
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_POISON_POINT, Expert_StealthRock_CheckPoisonPoint
     IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_StealthRock_CheckFlameBody
@@ -6942,7 +6942,7 @@ Expert_Spikes_CheckAbilityImmunity:
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
     LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScoreMinus3
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH, ScoreMinus3
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_POISON_POINT, Expert_Spikes_CheckPoisonPoint
     IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_Spikes_CheckFlameBody
@@ -7115,7 +7115,7 @@ Expert_ToxicSpikes_CheckAbilityImmunity:
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
     LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_EFFECT, ScoreMinus3
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH, ScoreMinus3
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_POISON_POINT, Expert_ToxicSpikes_CheckPoisonPoint
     IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_ToxicSpikes_CheckFlameBody

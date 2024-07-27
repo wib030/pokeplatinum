@@ -593,19 +593,19 @@
                 "ITEM_HM07",
                 "ITEM_HM08",
                 "ITEM_EXPLORER_KIT",
-                "ITEM_LOADED_GLOVES", // was ITEM_LOOT_SACK
-                "ITEM_AIR_BALLOON", // was ITEM_RULE_BOOK
+                "ITEM_LOADED_GLOVES",
+                "ITEM_AIR_BALLOON",
                 "ITEM_POKE_RADAR",
                 "ITEM_POINT_CARD",
                 "ITEM_JOURNAL",
                 "ITEM_SEAL_CASE",
                 "ITEM_FASHION_CASE",
-                "ITEM_WEAKNESS_POLICY", // was ITEM_SEAL_BAG
+                "ITEM_WEAKNESS_POLICY",
                 "ITEM_PAL_PAD",
                 "ITEM_WORKS_KEY",
                 "ITEM_OLD_CHARM",
                 "ITEM_GALACTIC_KEY",
-                "ITEM_RED_CARD", // was ITEM_RED_CHAIN
+                "ITEM_RED_CARD",
                 "ITEM_TOWN_MAP",
                 "ITEM_VS_SEEKER",
                 "ITEM_COIN_CASE",
@@ -622,7 +622,7 @@
                 "ITEM_AZURE_FLUTE",
                 "ITEM_S_S_TICKET",
                 "ITEM_CONTEST_PASS",
-                "ITEM_ASSAULT_VEST", // was ITEM_MAGMA_STONE
+                "ITEM_ASSAULT_VEST",
                 "ITEM_PARCEL",
                 "ITEM_COUPON_1",
                 "ITEM_COUPON_2",
