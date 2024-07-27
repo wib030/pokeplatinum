@@ -4403,7 +4403,15 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 				&& (battleCtx->battleMons[battler].imposterFlag == FALSE))
 				{
 					imposter1Pos = BattleSystem_BattlerSlot(battleSys, battler);
-						if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_ENEMY_SIDE_SLOT_1)
+						if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_SOLO_ENEMY)
+						{
+							imposter2Pos = BATTLER_TYPE_SOLO_PLAYER;
+						}
+						else if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_SOLO_PLAYER)
+						{
+							imposter2Pos = BATTLER_TYPE_SOLO_ENEMY;
+						}
+						else if (BattleSystem_BattlerSlot(battleSys, battler) == BATTLER_TYPE_ENEMY_SIDE_SLOT_1)
 						{
 							imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_2;
 						}
