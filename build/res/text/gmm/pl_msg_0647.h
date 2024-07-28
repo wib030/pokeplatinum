@@ -622,7 +622,7 @@
 #define pl_msg_00000647_00306 306
 // Fire Chase
 #define pl_msg_00000647_00307 307
-// Hydro Cannon
+// Psystrike
 #define pl_msg_00000647_00308 308
 // Meteor Mash
 #define pl_msg_00000647_00309 309

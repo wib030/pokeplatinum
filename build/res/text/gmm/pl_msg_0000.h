@@ -1854,11 +1854,11 @@
 #define pl_msg_00000000_00922 922
 // The foe’s {STRVAR_1 1, 0, 0} used\nFire Chase!
 #define pl_msg_00000000_00923 923
-// {STRVAR_1 1, 0, 0} used\nHydro Cannon!
+// {STRVAR_1 1, 0, 0} used\nPsystrike!
 #define pl_msg_00000000_00924 924
-// The wild {STRVAR_1 1, 0, 0} used\nHydro Cannon!
+// The wild {STRVAR_1 1, 0, 0} used\nPsystrike!
 #define pl_msg_00000000_00925 925
-// The foe’s {STRVAR_1 1, 0, 0} used\nHydro Cannon!
+// The foe’s {STRVAR_1 1, 0, 0} used\nPsystrike!
 #define pl_msg_00000000_00926 926
 // {STRVAR_1 1, 0, 0} used\nMeteor Mash!
 #define pl_msg_00000000_00927 927

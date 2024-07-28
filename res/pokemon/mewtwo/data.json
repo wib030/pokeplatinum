@@ -135,7 +135,10 @@
                 "MOVE_POWER_SWAP",
                 "MOVE_GUARD_SWAP"
             ],
-            "66": "MOVE_AURA_SPHERE"
+            "66": [ 
+				"MOVE_AURA_SPHERE",
+				"MOVE_HYDRO_CANNON"
+			]
         },
         "tutor": [
             "MOVE_MUD_SLAP",

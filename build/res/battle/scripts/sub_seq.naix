@@ -323,6 +323,6 @@
 #define subscript_infatuate_fling 314
 #define subscript_fling_lower_evasion 315
 #define subscript_fling_lower_acc 316
-#define subscript_infatuate_always 317
+#define subscript_infatuate_rivalry 317
 
 #endif // NARC_SUB_SEQ_NAIX_

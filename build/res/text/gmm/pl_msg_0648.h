@@ -622,7 +622,7 @@
 #define pl_msg_00000648_00306 306
 // FIRE CHASE
 #define pl_msg_00000648_00307 307
-// HYDRO CANNON
+// PSYSTRIKE
 #define pl_msg_00000648_00308 308
 // METEOR MASH
 #define pl_msg_00000648_00309 309

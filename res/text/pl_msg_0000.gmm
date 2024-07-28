@@ -3699,15 +3699,15 @@
 	</row>
 	<row id="pl_msg_00000000_00924" index="924">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nHydro Cannon!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPsystrike!</language>
 	</row>
 	<row id="pl_msg_00000000_00925" index="925">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nHydro Cannon!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPsystrike!</language>
 	</row>
 	<row id="pl_msg_00000000_00926" index="926">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nHydro Cannon!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPsystrike!</language>
 	</row>
 	<row id="pl_msg_00000000_00927" index="927">
 		<attribute name="window_context_name">used</attribute>

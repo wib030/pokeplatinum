@@ -4746,7 +4746,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				battleCtx->sideEffectMon = battleCtx->attacker;
 				battleCtx->msgBattlerTemp = battleCtx->defender;
 				
-				*subscript = subscript_infatuate_always;
+				*subscript = subscript_infatuate_rivalry;
 				result = TRUE;
 			}
 			break;
@@ -7421,19 +7421,17 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     && defenderParams.gender != GENDER_NONE)
 	{
         movePower = movePower * 150 / 100;
+		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = FALSE;
+    }
+	
+	
+    if (attackerParams.ability == ABILITY_RIVALRY
+    && attackerParams.gender != defenderParams.gender
+    && attackerParams.gender != GENDER_NONE
+    && defenderParams.gender != GENDER_NONE)
+	{
 		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = TRUE;
     }
-	else
-	{
-		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = FALSE;
-	}
-	
-   // if (attackerParams.ability == ABILITY_RIVALRY
-   //         && attackerParams.gender != defenderParams.gender
-   //         && attackerParams.gender != GENDER_NONE
-   //         && defenderParams.gender != GENDER_NONE) {
-   //     movePower = movePower * 75 / 100;
-   // }
 
     for (i = 0; i < NELEMS(sPunchingMoves); i++)
 	{
@@ -7571,6 +7569,21 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             stageDivisor = spDefenseStat * sStatStageBoosts[spDefenseStage].numerator;
             stageDivisor /= sStatStageBoosts[spDefenseStage].denominator;
         }
+		
+		if (move == MOVE_HYDRO_CANNON)
+		{
+				if (criticalMul > 1) {
+				if (defenseStage < 6) {
+					stageDivisor = defenseStat * sStatStageBoosts[defenseStage].numerator;
+					stageDivisor /= sStatStageBoosts[defenseStage].denominator;
+				} else {
+					stageDivisor = defenseStat;
+				}
+			} else {
+				stageDivisor = defenseStat * sStatStageBoosts[defenseStage].numerator;
+				stageDivisor /= sStatStageBoosts[defenseStage].denominator;
+			}
+		}
 
         damage /= stageDivisor;
         damage /= 50;

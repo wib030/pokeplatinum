@@ -1,10 +1,10 @@
 {
-    "name": "Freeze Dry",
+    "name": "Psystrike",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_ICE",
-    "power": 90,
+    "type": "TYPE_PSYCHIC",
+    "power": 100,
     "accuracy": 100,
-    "pp": 20,
+    "pp": 10,
     "effect": {
         "type": "BATTLE_EFFECT_HIT",
         "chance": 0
