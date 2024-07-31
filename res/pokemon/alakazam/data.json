@@ -96,7 +96,6 @@
         "level_up": {
             "1": [
                 "MOVE_TELEPORT",
-                "MOVE_KINESIS",
                 "MOVE_CONFUSION"
             ],
             "16": "MOVE_CONFUSION",
@@ -104,7 +103,10 @@
             "24": "MOVE_PSYBEAM",
 			"26": "MOVE_MIRACLE_EYE",
             "28": "MOVE_REFLECT",
-            "30": "MOVE_RECOVER",
+            "30": [
+				"MOVE_RECOVER",
+				"MOVE_KINESIS"
+			],
             "34": "MOVE_PSYCHO_CUT",
             "36": "MOVE_CALM_MIND",
 			"38": "MOVE_MIND_READER",

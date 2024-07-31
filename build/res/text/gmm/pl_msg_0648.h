@@ -274,7 +274,7 @@
 #define pl_msg_00000648_00132 132
 // AMNESIA
 #define pl_msg_00000648_00133 133
-// KINESIS
+// PSYSHOCK
 #define pl_msg_00000648_00134 134
 // SOFT-BOILED
 #define pl_msg_00000648_00135 135

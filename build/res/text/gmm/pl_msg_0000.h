@@ -810,11 +810,11 @@
 #define pl_msg_00000000_00400 400
 // The foe’s {STRVAR_1 1, 0, 0} used\nAmnesia!
 #define pl_msg_00000000_00401 401
-// {STRVAR_1 1, 0, 0} used\nKinesis!
+// {STRVAR_1 1, 0, 0} used\nPsyshock!
 #define pl_msg_00000000_00402 402
-// The wild {STRVAR_1 1, 0, 0} used\nKinesis!
+// The wild {STRVAR_1 1, 0, 0} used\nPsyshock!
 #define pl_msg_00000000_00403 403
-// The foe’s {STRVAR_1 1, 0, 0} used\nKinesis!
+// The foe’s {STRVAR_1 1, 0, 0} used\nPsyshock!
 #define pl_msg_00000000_00404 404
 // {STRVAR_1 1, 0, 0} used\nSoft-Boiled!
 #define pl_msg_00000000_00405 405

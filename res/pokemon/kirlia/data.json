@@ -102,6 +102,7 @@
 			"27": "MOVE_MIRACLE_EYE",
             "31": "MOVE_PSYCHIC",
 			"33": "MOVE_MEAN_LOOK",
+			"34": "MOVE_KINESIS",
             "36": "MOVE_IMPRISON",
 			"37": "MOVE_MIND_READER",
             "39": "MOVE_FUTURE_SIGHT",

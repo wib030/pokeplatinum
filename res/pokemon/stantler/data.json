@@ -110,7 +110,10 @@
 				"MOVE_ICE_BALL",
 				"MOVE_ROOST"
 			],
-            "38": "MOVE_ZEN_HEADBUTT",
+            "38": [ 
+				"MOVE_ZEN_HEADBUTT",
+				"MOVE_KINESIS"
+			],
 			"40": "MOVE_BLIZZARD",
 			"41": "MOVE_MEAN_LOOK",
             "43": "MOVE_IMPRISON",

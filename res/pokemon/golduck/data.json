@@ -105,6 +105,7 @@
             "27": "MOVE_FURY_SWIPES",
             "31": "MOVE_SCREECH",
             "37": "MOVE_PSYCH_UP",
+			"39": "MOVE_KINESIS",
             "44": "MOVE_ZEN_HEADBUTT",
 			"48": "MOVE_MIND_READER",
             "50": "MOVE_AMNESIA",

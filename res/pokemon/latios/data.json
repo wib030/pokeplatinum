@@ -111,6 +111,7 @@
             "25": "MOVE_PROTECT",
             "30": "MOVE_REFRESH",
             "35": "MOVE_LUSTER_PURGE",
+			"38": "MOVE_KINESIS",
             "40": "MOVE_ZEN_HEADBUTT",
 			"42": "MOVE_MIND_READER",
             "45": "MOVE_RECOVER",

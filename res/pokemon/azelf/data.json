@@ -106,6 +106,7 @@
             "31": "MOVE_UPROAR",
             "36": "MOVE_FUTURE_SIGHT",
 			"40": "MOVE_MIND_READER",
+			"44": "MOVE_KINESIS",
             "46": "MOVE_NASTY_PLOT",
             "51": "MOVE_EXTRASENSORY",
 			"57": "MOVE_JUDGMENT",

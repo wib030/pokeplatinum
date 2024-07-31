@@ -102,6 +102,7 @@
             "36": "MOVE_PSYCHIC",
             "40": "MOVE_IRON_DEFENSE",
             "44": "MOVE_AGILITY",
+			"46": "MOVE_KINESIS",
             "48": "MOVE_METEOR_MASH",
             "52": "MOVE_ZEN_HEADBUTT",
             "56": "MOVE_HYPER_BEAM"

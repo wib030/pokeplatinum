@@ -110,6 +110,7 @@
             "37": "MOVE_RAIN_DANCE",
 			"40": "MOVE_EXTRASENSORY",
             "43": "MOVE_SWIFT",
+			"45": "MOVE_KINESIS",
             "51": "MOVE_NATURAL_GIFT",
 			"55": "MOVE_FUTURE_SIGHT",
             "57": "MOVE_ANCIENT_POWER",

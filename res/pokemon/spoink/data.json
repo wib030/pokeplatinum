@@ -102,6 +102,7 @@
             ],
             "34": "MOVE_PAYBACK",
 			"36": "MOVE_MIND_READER",
+			"38": "MOVE_KINESIS",
             "41": "MOVE_PSYCHIC",
             "46": "MOVE_POWER_GEM",
             "48": "MOVE_BOUNCE"

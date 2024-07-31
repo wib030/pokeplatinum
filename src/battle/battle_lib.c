@@ -6460,6 +6460,10 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 			battleCtx->sideEffectMon = battleCtx->defender;
 			battleCtx->flingScript = subscript_fling_lower_acc;
 		break;
+		
+	case FLING_EFFECT_INFLICT_CURSE:
+			battleCtx->flingScript = subscript_curse_ghost;
+		break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
@@ -7570,7 +7574,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             stageDivisor /= sStatStageBoosts[spDefenseStage].denominator;
         }
 		
-		if (move == MOVE_HYDRO_CANNON)
+		if ((move == MOVE_HYDRO_CANNON)
+		|| (move == MOVE_KINESIS))
 		{
 				if (criticalMul > 1) {
 				if (defenseStage < 6) {

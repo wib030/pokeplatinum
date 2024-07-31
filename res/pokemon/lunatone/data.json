@@ -103,7 +103,10 @@
             "34": "MOVE_COSMIC_POWER",
 			"37": "MOVE_MEAN_LOOK",
 			"39": "MOVE_MOONLIGHT",
-			"41": "MOVE_MIND_READER",
+			"41": [ 
+				"MOVE_MIND_READER",
+				"MOVE_KINESIS"
+			],
             "42": "MOVE_HEAL_BLOCK",
             "45": "MOVE_PSYCHIC",
             "53": "MOVE_FUTURE_SIGHT",

@@ -104,6 +104,7 @@
             "40": "MOVE_IRON_DEFENSE",
             "44": "MOVE_AGILITY",
             "45": "MOVE_HAMMER_ARM",
+			"50": "MOVE_KINESIS",
             "53": "MOVE_METEOR_MASH",
             "62": "MOVE_ZEN_HEADBUTT",
             "71": "MOVE_HYPER_BEAM"

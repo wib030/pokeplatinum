@@ -106,6 +106,7 @@
 				"MOVE_NATURAL_GIFT"
 			],
 			"40": "MOVE_MEAN_LOOK",
+			"41": "MOVE_KINESIS",
 			"43": "MOVE_SOLAR_BEAM",
             "47": [
 				"MOVE_LEAF_STORM",

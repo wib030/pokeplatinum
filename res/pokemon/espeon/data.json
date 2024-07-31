@@ -98,7 +98,10 @@
             "25": "MOVE_PSYBEAM",
             "30": "MOVE_MORNING_SUN",
             "35": "MOVE_POWER_SWAP",
-			"40": "MOVE_PSYCHIC",
+			"40": [ 
+				"MOVE_PSYCHIC",
+				"MOVE_KINESIS"
+			],
 			"42": "MOVE_MIND_READER",
             "45": "MOVE_FUTURE_SIGHT",
             "50": "MOVE_WEATHER_BALL",

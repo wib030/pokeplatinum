@@ -105,7 +105,10 @@
             "31": "MOVE_EMBARGO",
             "34": "MOVE_COSMIC_POWER",
 			"39": "MOVE_MORNING_SUN",
-			"41": "MOVE_MIND_READER",
+			"41": [ 
+				"MOVE_MIND_READER",
+				"MOVE_KINESIS"
+			],
             "42": "MOVE_HEAL_BLOCK",
             "45": "MOVE_ROCK_SLIDE",
             "53": "MOVE_SOLAR_BEAM",

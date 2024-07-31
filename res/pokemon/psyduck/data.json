@@ -95,6 +95,7 @@
             "22": "MOVE_WATER_PULSE",
             "27": "MOVE_FURY_SWIPES",
             "31": "MOVE_SCREECH",
+			"33": "MOVE_KINESIS",
             "35": "MOVE_PSYCH_UP",
             "40": "MOVE_ZEN_HEADBUTT",
 			"42": "MOVE_MIND_READER",

@@ -97,7 +97,10 @@
             "30": "MOVE_PSYWAVE",
             "33": "MOVE_TELEPORT",
 			"36": "MOVE_MIND_READER",
-            "38": "MOVE_HEAL_BELL",
+            "38": [ 
+				"MOVE_HEAL_BELL",
+				"MOVE_KINESIS"
+			],
 			"40": "MOVE_RECOVER",
             "41": "MOVE_SAFEGUARD",
 			"43": "MOVE_MEAN_LOOK",
