@@ -3991,19 +3991,19 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                             result = SWITCH_IN_CHECK_RESULT_BREAK;
                         }
                         break;
+						
+					 case ABILITY_ROCHE_RADIUS:
+						battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+						
+						if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+						{
+							battleCtx->sideEffectMon = battler;
+							subscript = subscript_gravity_ability_start;
+							result = SWITCH_IN_CHECK_RESULT_BREAK;
+						}
+						break;
                     }
                 }
-				
-				if (Battler_Ability(battleCtx, battler) == ABILITY_ROCHE_RADIUS)
-				{
-					if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
-					{
-						battleCtx->sideEffectMon = battler;
-						subscript = subscript_gravity_ability_start;
-						result = SWITCH_IN_CHECK_RESULT_BREAK;
-					}
-				}
-
                 if (result == SWITCH_IN_CHECK_RESULT_BREAK) {
                     battleCtx->msgBattlerTemp = battler;
                     break;
