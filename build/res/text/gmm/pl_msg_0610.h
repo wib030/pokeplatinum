@@ -286,5 +286,9 @@
 #define pl_msg_00000610_00138 138
 // Mega Launcher
 #define pl_msg_00000610_00139 139
+// Roche Radius
+#define pl_msg_00000610_00140 140
+// Tidal Force
+#define pl_msg_00000610_00142 141
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0610_H

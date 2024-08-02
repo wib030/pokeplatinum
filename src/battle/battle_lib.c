@@ -3989,6 +3989,16 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                             result = SWITCH_IN_CHECK_RESULT_BREAK;
                         }
                         break;
+						
+					case ABILITY_ROCHE_RADIUS:
+						battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+
+                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+						{
+                            subscript = subscript_gravity_ability_start;
+                            result = SWITCH_IN_CHECK_RESULT_BREAK;
+                        }
+						break;
                     }
                 }
 
@@ -7499,7 +7509,16 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             spDefenseStat = spDefenseStat * 15 / 10;
         }
     }
-
+	
+	if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+	&& (attackerParams.ability == ABILITY_TIDAL_FORCE))
+	{
+		int attackerWeightMod, defenderWeightMod;
+		int weightDiff = ATTACKING_MON.weight/DEFENDING_MON.weight;
+		
+		movePower = movePower * 13 / 10;
+	}
+	
     //if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
     //    defenseStat = defenseStat / 2;
     //}

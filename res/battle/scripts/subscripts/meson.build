@@ -319,4 +319,5 @@ subscript_files = files(
 	'subscript_fling_lower_evasion.s',
 	'subscript_fling_lower_acc.s',
 	'subscript_infatuate_rivalry.s',
+	'subscript_gravity_ability_start.s',
 )

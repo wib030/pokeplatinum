@@ -324,5 +324,6 @@
 #define subscript_fling_lower_evasion 315
 #define subscript_fling_lower_acc 316
 #define subscript_infatuate_rivalry 317
+#define subscript_gravity_ability_start 318
 
 #endif // NARC_SUB_SEQ_NAIX_
