@@ -5238,4 +5238,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was infatuated\nby its {STRVAR_1 5, 1, 0}!</language>
 	</row>
+	<row id="pl_msg_00000368_01306" index="1306">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} ignores\nIntimidate!</language>
+	</row>
+	<row id="pl_msg_00000368_01307" index="1307">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nignores Intimidate!</language>
+	</row>
+	<row id="pl_msg_00000368_01308" index="1308">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nignores Intimidate!</language>
+	</row>
 </body>

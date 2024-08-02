@@ -7317,10 +7317,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (attackerParams.ability == ABILITY_PLUS
             && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS)) {
         spAttackStat = spAttackStat * 150 / 100;
+		attackStat = attackStat * 150 / 100;
     }
     if (attackerParams.ability == ABILITY_MINUS
             && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS)) {
-        spAttackStat = spAttackStat * 150 / 100;
+        spDefenseStat = spDefenseStat * 150 / 100;
+		defenseStat = defenseStat * 150 / 100;
     }
 
     if (moveType == TYPE_ELECTRIC
@@ -7469,6 +7471,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (NO_CLOUD_NINE) {
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 15 / 10;
+			attackStat = attackStat * 15 / 10;
         }
 		
 		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_SAND_FORCE) {
@@ -7483,7 +7486,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         if ((fieldConditions & FIELD_CONDITION_SUNNY)
                 && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_FLOWER_GIFT)
-				&& Battler_Ability(battleCtx, attacker) != ABILITY_FLOWER_GIFT) {
+				&& attackerParams.ability != ABILITY_FLOWER_GIFT) {
             attackStat = attackStat * 15 / 10;
 			spAttackStat = spAttackStat * 15 / 10;
         }
@@ -7491,7 +7494,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((fieldConditions & FIELD_CONDITION_SUNNY)
                 && Battler_Ability(battleCtx, attacker) != ABILITY_MOLD_BREAKER
                 && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, defender, ABILITY_FLOWER_GIFT)
-				&& Battler_Ability(battleCtx, defender) == ABILITY_FLOWER_GIFT) {
+				&& defenderParams.ability == ABILITY_FLOWER_GIFT) {
 			defenseStat = defenseStat * 15 / 10;
             spDefenseStat = spDefenseStat * 15 / 10;
         }
