@@ -35,8 +35,8 @@
         "EGG_GROUP_MINERAL"
     ],
     "abilities": [
-        "ABILITY_DROUGHT",
-        "ABILITY_ROCHE_RADIUS"
+        "ABILITY_ROCHE_RADIUS",
+        "ABILITY_DROUGHT"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
