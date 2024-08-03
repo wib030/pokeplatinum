@@ -2675,13 +2675,13 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     if ((moveType == TYPE_GROUND)
     && ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE) || ((defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT) && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)))
     && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED
-    && (battleCtx->battleMons[defender].moveEffectsMask & ~MOVE_EFFECT_INGRAIN))
+    && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE)
 	{ 
-            *moveStatusMask |= MOVE_STATUS_LEVITATED;
+        *moveStatusMask |= MOVE_STATUS_LEVITATED;
     }
     else if ((moveType == TYPE_GROUND)
 	&& battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
-    && (battleCtx->battleMons[defender].moveEffectsMask & ~MOVE_EFFECT_INGRAIN)
+    && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN == FALSE)
     && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
 	{      
         *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
@@ -2846,7 +2846,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
     }
 	
     if (attackerAbility != ABILITY_MOLD_BREAKER
-            && (defenderAbility == ABILITY_LEVITATE || Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+            && (defenderAbility == ABILITY_LEVITATE)
             && moveType == TYPE_GROUND
             && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE
             && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
@@ -4390,6 +4390,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 battler = battleCtx->monSpeedOrder[i];
 				
                 if ((BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+				&& ((battleCtx->battleMons[battler].moveEffectsData.embargoTurns == 0))
 				&& (battleCtx->battleMons[battler].airBalloonAnnounced == FALSE))
 				{
 					battleCtx->battleMons[battler].airBalloonAnnounced = TRUE;
@@ -4720,6 +4721,19 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
             result = TRUE;
         }
         break;
+		
+	case ABILITY_PROHIBITION:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (battleCtx->battleMons[battleCtx->attacker].moveEffectsData.embargoTurns == 0)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				*subscript = subscript_embargo_start_ability;
+				result = TRUE;
+			}
+			break;
     }
 	
 	switch (Battler_Ability(battleCtx, battleCtx->attacker))
@@ -4759,6 +4773,20 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				battleCtx->msgBattlerTemp = battleCtx->defender;
 				
 				*subscript = subscript_infatuate_rivalry;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_FREE_SAMPLE:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				*subscript = subscript_pluck_ability;
 				result = TRUE;
 			}
 			break;
@@ -5852,6 +5880,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
 				result = TRUE;	
 			}
+			break;
 			
 	case HOLD_EFFECT_SWITCH_ATTACKER_HIT:
 			if (DEFENDING_MON.curHP
@@ -5865,6 +5894,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 				*subscript = subscript_hold_up_card;
 				result = TRUE;	
 			}
+			break;
 
     default:
         break;
@@ -5938,7 +5968,7 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
 static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
 {
     return ((Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
-					&& Battler_HeldItemEffect(battleCtx, battleCtx->defender) != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
+					&& Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
                     && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
                     && MON_IS_NOT_TYPE(battler, TYPE_FLYING))
             || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_SPEED_DOWN_GROUNDED

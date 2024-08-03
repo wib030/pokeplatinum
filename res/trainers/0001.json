@@ -9,12 +9,12 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_SOLROCK",
+            "species": "SPECIES_ALTARIA",
             "form": 0,
             "level": 15,
             "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
-				"MOVE_DISABLE"
+				"MOVE_MAGNITUDE"
             ],
             "power": 255,
             "ball_seal": 0
@@ -23,9 +23,20 @@
             "species": "SPECIES_LUNATONE",
             "form": 0,
             "level": 15,
-            "item": "ITEM_NONE",
+            "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
-				"MOVE_POWER_GEM"
+				"MOVE_MAGNITUDE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SOLROCK",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_WEAKNESS_POLICY",
+            "moves": [
+				"MOVE_MAGNITUDE"
             ],
             "power": 255,
             "ball_seal": 0

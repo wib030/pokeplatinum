@@ -569,4 +569,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Tidal Force</language>
 	</row>
+	<row id="pl_msg_00000610_00143" index="143">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Free Sample</language>
+	</row>
+	<row id="pl_msg_00000610_00144" index="144">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Prohibition</language>
+	</row>
 </body>

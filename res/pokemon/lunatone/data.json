@@ -35,8 +35,8 @@
         "EGG_GROUP_MINERAL"
     ],
     "abilities": [
-        "ABILITY_TIDAL_FORCE",
-        "ABILITY_LEVITATE"
+        "ABILITY_LEVITATE",
+        "ABILITY_TIDAL_FORCE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
