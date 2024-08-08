@@ -1,0 +1,17 @@
+    .include "macros/btlcmd.inc"
+
+    .data
+
+_000:
+    CompareMonDataToValue OPCODE_FLAG_SET, BTLSCR_DEFENDER, BATTLEMON_MOVE_EFFECTS_MASK, MOVE_EFFECT_INGRAIN, _019
+	PlayBattleAnimation BTLSCR_DEFENDER, BATTLE_ANIMATION_DAMAGE_INGRAIN
+	Wait
+    UpdateMonData OPCODE_FLAG_ON, BTLSCR_DEFENDER, BATTLEMON_MOVE_EFFECTS_MASK, MOVE_EFFECT_INGRAIN
+    // {0} planted its roots!
+    PrintMessage pl_msg_00000368_00536, TAG_NICKNAME, BTLSCR_DEFENDER
+	Wait 
+    WaitButtonABTime 30
+    End 
+
+_019:
+    End

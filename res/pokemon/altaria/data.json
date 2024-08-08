@@ -35,7 +35,7 @@
         "EGG_GROUP_DRAGON"
     ],
     "abilities": [
-        "ABILITY_PROHIBITION",
+        "ABILITY_BOYCOTT",
         "ABILITY_NATURAL_CURE"
     ],
     "great_marsh_flee_rate": 0,

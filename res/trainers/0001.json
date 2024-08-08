@@ -9,23 +9,23 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_ELECTIVIRE",
-            "form": 0,
-            "level": 15,
-            "item": "ITEM_WEAKNESS_POLICY",
-            "moves": [
-				"MOVE_SPLASH"
-            ],
-            "power": 255,
-            "ball_seal": 0
-        },
-		{
             "species": "SPECIES_ALTARIA",
             "form": 0,
             "level": 15,
             "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
 				"MOVE_MAGNITUDE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ELECTIVIRE",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_WEAKNESS_POLICY",
+            "moves": [
+				"MOVE_SPLASH"
             ],
             "power": 255,
             "ball_seal": 0

@@ -4722,7 +4722,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         }
         break;
 		
-	case ABILITY_PROHIBITION:
+	case ABILITY_BOYCOTT:
 			if (DEFENDING_MON.curHP
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
@@ -6505,6 +6505,10 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 		
 	case FLING_EFFECT_INFLICT_CURSE:
 			battleCtx->flingScript = subscript_curse_ghost;
+		break;
+		
+	case FLING_EFFECT_INFLICT_INGRAIN:
+			battleCtx->flingScript = subscript_ingrain_fling;
 		break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:

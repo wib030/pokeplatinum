@@ -292,7 +292,7 @@
 #define pl_msg_00000610_00142 141
 // Free Sample
 #define pl_msg_00000610_00143 142
-// Prohibition
+// Boycott
 #define pl_msg_00000610_00144 143
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0610_H
