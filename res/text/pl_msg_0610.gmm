@@ -561,20 +561,24 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Mega Launcher</language>
 	</row>
-	<row id="pl_msg_00000610_00140" index="141">
+	<row id="pl_msg_00000610_00140" index="140">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Roche Radius</language>
 	</row>
-	<row id="pl_msg_00000610_00142" index="142">
+	<row id="pl_msg_00000610_00142" index="141">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Tidal Force</language>
 	</row>
-	<row id="pl_msg_00000610_00143" index="143">
+	<row id="pl_msg_00000610_00143" index="142">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Free Sample</language>
 	</row>
-	<row id="pl_msg_00000610_00144" index="144">
+	<row id="pl_msg_00000610_00144" index="143">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boycott</language>
+	</row>
+	<row id="pl_msg_00000610_00145" index="144">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Flare Boost</language>
 	</row>
 </body>

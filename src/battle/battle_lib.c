@@ -7354,6 +7354,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (attackerParams.ability == ABILITY_GUTS && attackerParams.statusMask) {
         attackStat = attackStat * 150 / 100;
     }
+	
+	if (attackerParams.ability == ABILITY_FLARE_BOOST && attackerParams.statusMask & MON_CONDITION_BURN) {
+        spAttackStat = spAttackStat * 150 / 100;
+    }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MARVEL_SCALE) == TRUE
             && defenderParams.statusMask) {

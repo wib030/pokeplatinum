@@ -149,6 +149,7 @@ enum Ability {
     ABILITY_TIDAL_FORCE = 141,
     ABILITY_FREE_SAMPLE = 142,
     ABILITY_BOYCOTT = 143,
+    ABILITY_FLARE_BOOST = 144,
 };
 
 #endif

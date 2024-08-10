@@ -148,5 +148,6 @@
     .equ ABILITY_TIDAL_FORCE, 141
     .equ ABILITY_FREE_SAMPLE, 142
     .equ ABILITY_BOYCOTT, 143
+    .equ ABILITY_FLARE_BOOST, 144
 
     .endif

@@ -146,7 +146,8 @@
 				"ABILITY_ROCHE_RADIUS",
 				"ABILITY_TIDAL_FORCE",
 				"ABILITY_FREE_SAMPLE",
-				"ABILITY_BOYCOTT"
+				"ABILITY_BOYCOTT",
+				"ABILITY_FLARE_BOOST"
             ]
         }
     }
