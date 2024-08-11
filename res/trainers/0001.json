@@ -14,7 +14,7 @@
             "level": 15,
             "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
-				"MOVE_MAGNITUDE"
+				"MOVE_SPLASH"
             ],
             "power": 255,
             "ball_seal": 0

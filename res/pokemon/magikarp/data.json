@@ -47,8 +47,9 @@
         "tms": [],
         "level_up": {
             "1": "MOVE_SPLASH",
-            "15": "MOVE_TACKLE",
-            "30": "MOVE_FLAIL"
+            "4": "MOVE_TACKLE",
+            "10": "MOVE_FLAIL",
+			"15": "MOVE_BOUNCE"
         },
         "tutor": [
             "MOVE_BOUNCE"
