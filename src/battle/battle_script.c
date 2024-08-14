@@ -3046,19 +3046,19 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
 			{
                 hits = (hitChance & 1) + 4;
 			}
-
-            // Below check must be at the end of setting hit count to prevent being overwritten.
-            // If this value is overwritten, remaining hits will be non-zero on target switch.
-            if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_SWITCH_ATTACKER_HIT)
-			{
-				hits = 1;
-			}
         }
-
         battleCtx->multiHitCounter = hits;
         battleCtx->multiHitNumHits = hits;
         battleCtx->multiHitAccuracyCheck = flags;
     }
+
+    // Below check must be at the end of setting hit count to prevent being overwritten.
+    // If this value is overwritten, remaining hits will be non-zero on target switch.
+    if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_SWITCH_ATTACKER_HIT)
+	{
+		battleCtx->multiHitCounter = 1;
+        battleCtx->multiHitNumHits = 1;
+	}
 
     return FALSE;
 }
