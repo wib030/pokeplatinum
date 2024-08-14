@@ -3043,6 +3043,20 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
 			{
 				hits = 1;
 			}
+			
+			if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_LOADED_DICE)
+			{
+				int diceHits = BattleSystem_RandNext(battleSys) & 1;
+				
+				if (diceHits == 0)
+				{
+					hits = 4;
+				}
+				else
+				{
+					hits = 5;
+				}
+			}
         }
 
         battleCtx->multiHitCounter = hits;

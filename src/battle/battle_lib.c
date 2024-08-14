@@ -1236,14 +1236,16 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (NO_CLOUD_NINE) {
         if ((battler1Ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
 				|| (battler1Ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
+				|| (battler1Ability == ABILITY_CHLOROPLAST && WEATHER_IS_SUN)
                 || (battler1Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
-            battler1Speed *= 2; //battler1Speed = battler1Speed * 15 / 10;
+            battler1Speed *= 2;
         }
 
         if ((battler2Ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
 				|| (battler2Ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
+				|| (battler2Ability == ABILITY_CHLOROPLAST && WEATHER_IS_SUN)
                 || (battler2Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
-            battler2Speed *= 2; //battler1Speed = battler1Speed * 15 / 10;
+            battler2Speed *= 2;
         }
     }
 
@@ -1267,7 +1269,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
         battler1Speed = battler1Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
-        battler1Speed /= 2; //battler1Speed /= 4;
+        battler1Speed /= 2;
     }
 
     if (battler1Ability == ABILITY_SLOW_START
@@ -7439,7 +7441,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 	if (moveType == TYPE_PSYCHIC
             && attackerParams.ability == ABILITY_HEADACHE
             && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 200 / 100;
+        movePower = movePower * 2;
+    }
+	if (moveType == TYPE_GRASS
+            && attackerParams.ability == ABILITY_CHLOROPLAST) {
+        movePower = movePower * 150 / 100;
     }
 
     if (moveType == TYPE_FIRE

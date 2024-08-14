@@ -113,7 +113,8 @@
     },
     "evolutions": [
         [
-            "EVO_ELECTRIC_FIELD",
+            "EVO_LEVEL_UP",
+            28,
             "SPECIES_PROBOPASS"
         ],
 		[

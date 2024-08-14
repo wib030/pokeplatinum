@@ -108,7 +108,7 @@
     "evolutions": [
         [
             "EVO_LEVEL_UP",
-            24,
+            22,
             "SPECIES_PARASECT"
         ]
     ],

@@ -260,41 +260,43 @@
 #define pl_msg_00000612_00125 125
 // 30% chance to poison foe\nwhen making contact.
 #define pl_msg_00000612_00126 126
-// DEFIANT
+// +2 Attack when a stat is\nlowered by a foe.
 #define pl_msg_00000611_00127 127
-// COMPETITIVE
+// +2 Sp. Atk when a stat is\nlowered by a foe.
 #define pl_msg_00000611_00128 128
-// FRESH MILK
+// Contact with the Pokémon\nmay cause infatuation.
 #define pl_msg_00000611_00129 129
-// HEADACHE
+// Psychic moves 2x power\nwhen at 1/2 HP or less.
 #define pl_msg_00000611_00130 130
-// RELENTLESS
+// Ignores the recharge\nturn of moves.
 #define pl_msg_00000610_00131 131
-// SHEER FORCE
+// Trades added effects\nfor 1.3x move power.
 #define pl_msg_00000610_00132 132
-// CORROSION
+// Allows users Poison\nmoves to hit Steel-types.
 #define pl_msg_00000610_00133 133
-// STRONG JAW
+// Biting moves gain\n1.5x power.
 #define pl_msg_00000610_00134 134
-// SAND FORCE
+// Users ATK and SP. ATK\nstats 1.3x in Sandstorm.
 #define pl_msg_00000610_00135 135
-// MAGIC BOUNCE
+// Bounces back certain moves\nused near this Pokémon.
 #define pl_msg_00000610_00136 136
-// HOTHEADED
+// Protects the Pokémon\nfrom recoil damage.
 #define pl_msg_00000610_00137 137
-// IMPOSTER
+// Transforms into the\nfoe opposite on switch-in.
 #define pl_msg_00000610_00138 138
-// MEGA LAUNCHER
+// Pulse moves gain\n1.5x power.
 #define pl_msg_00000610_00139 139
-// ROCHE RADIUS
+// Intensifies gravity\non switch-in.
 #define pl_msg_00000610_00140 140
-// TIDAL FORCE
-#define pl_msg_00000610_00142 141
-// FREE SAMPLE
-#define pl_msg_00000610_00143 142
-// PROHIBITION
-#define pl_msg_00000610_00144 143
-// FLARE BOOST
-#define pl_msg_00000610_00145 144
+// 1.3x move power when\nGravity is active.
+#define pl_msg_00000610_00141 141
+// 30% chance to eat foe’s\nberry when making contact.
+#define pl_msg_00000610_00142 142
+// Inflicts Embargo on\nattacker when damaged.
+#define pl_msg_00000610_00143 143
+// Boosts Sp. Attack by\n1.5x when burned.
+#define pl_msg_00000610_00144 144
+// Boosts Grass moves.\n2x Speed in Sun.
+#define pl_msg_00000610_00145 145
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H

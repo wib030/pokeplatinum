@@ -511,74 +511,78 @@
 	</row>
 	<row id="pl_msg_00000611_00127" index="127">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">DEFIANT</language>
+		<language name="English">+2 Attack when a stat is\nlowered by a foe.</language>
 	</row>
 	<row id="pl_msg_00000611_00128" index="128">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">COMPETITIVE</language>
+		<language name="English">+2 Sp. Atk when a stat is\nlowered by a foe.</language>
 	</row>
 	<row id="pl_msg_00000611_00129" index="129">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">FRESH MILK</language>
+		<language name="English">Contact with the Pokémon\nmay cause infatuation.</language>
 	</row>
 	<row id="pl_msg_00000611_00130" index="130">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">HEADACHE</language>
+		<language name="English">Psychic moves 2x power\nwhen at 1/2 HP or less.</language>
 	</row>
 	<row id="pl_msg_00000610_00131" index="131">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">RELENTLESS</language>
+		<language name="English">Ignores the recharge\nturn of moves.</language>
 	</row>
 	<row id="pl_msg_00000610_00132" index="132">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SHEER FORCE</language>
+		<language name="English">Trades added effects\nfor 1.3x move power.</language>
 	</row>
 	<row id="pl_msg_00000610_00133" index="133">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">CORROSION</language>
+		<language name="English">Allows users Poison\nmoves to hit Steel-types.</language>
 	</row>
 	<row id="pl_msg_00000610_00134" index="134">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">STRONG JAW</language>
+		<language name="English">Biting moves gain\n1.5x power.</language>
 	</row>
 	<row id="pl_msg_00000610_00135" index="135">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SAND FORCE</language>
+		<language name="English">Users ATK and SP. ATK\nstats 1.3x in Sandstorm.</language>
 	</row>
 	<row id="pl_msg_00000610_00136" index="136">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">MAGIC BOUNCE</language>
+		<language name="English">Bounces back certain moves\nused near this Pokémon.</language>
 	</row>
 	<row id="pl_msg_00000610_00137" index="137">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">HOTHEADED</language>
+		<language name="English">Protects the Pokémon\nfrom recoil damage.</language>
 	</row>
 	<row id="pl_msg_00000610_00138" index="138">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">IMPOSTER</language>
+		<language name="English">Transforms into the\nfoe opposite on switch-in.</language>
 	</row>
 	<row id="pl_msg_00000610_00139" index="139">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">MEGA LAUNCHER</language>
+		<language name="English">Pulse moves gain\n1.5x power.</language>
 	</row>
 	<row id="pl_msg_00000610_00140" index="140">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">ROCHE RADIUS</language>
+		<language name="English">Intensifies gravity\non switch-in.</language>
 	</row>
-	<row id="pl_msg_00000610_00142" index="141">
+	<row id="pl_msg_00000610_00141" index="141">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">TIDAL FORCE</language>
+		<language name="English">1.3x move power when\nGravity is active.</language>
 	</row>
-	<row id="pl_msg_00000610_00143" index="142">
+	<row id="pl_msg_00000610_00142" index="142">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">FREE SAMPLE</language>
+		<language name="English">30% chance to eat foe’s\nberry when making contact.</language>
 	</row>
-	<row id="pl_msg_00000610_00144" index="143">
+	<row id="pl_msg_00000610_00143" index="143">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">PROHIBITION</language>
+		<language name="English">Inflicts Embargo on\nattacker when damaged.</language>
 	</row>
-	<row id="pl_msg_00000610_00145" index="144">
+	<row id="pl_msg_00000610_00144" index="144">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">FLARE BOOST</language>
+		<language name="English">Boosts Sp. Attack by\n1.5x when burned.</language>
+	</row>
+	<row id="pl_msg_00000610_00145" index="145">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts Grass moves.\n2x Speed in Sun.</language>
 	</row>
 </body>

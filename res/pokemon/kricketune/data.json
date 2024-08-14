@@ -82,9 +82,9 @@
 				"MOVE_FRENZY_PLANT",
                 "MOVE_BIDE"
             ],
-            "10": "MOVE_FURY_CUTTER",
+			"10": "MOVE_FOCUS_ENERGY",
             "18": "MOVE_SING",
-            "22": "MOVE_FOCUS_ENERGY",
+			"22": "MOVE_FURY_CUTTER",
             "26": "MOVE_SLASH",
             "30": "MOVE_X_SCISSOR",
 			"32": "MOVE_LEECH_LIFE",

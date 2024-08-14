@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 19,
+            "level": 24,
             "species": "SPECIES_STARAVIA"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GEODUDE"
+            "level": 23,
+            "species": "SPECIES_PONYTA"
         },
         {
-            "level": 21,
+            "level": 25,
             "species": "SPECIES_SCYTHER"
         },
         {
-            "level": 20,
-            "species": "SPECIES_PONYTA"
-        },
-        {
-            "level": 20,
-            "species": "SPECIES_ROSELIA"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_PONYTA"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_SCYTHER"
-        },
-        {
-            "level": 21,
-            "species": "SPECIES_ROSELIA"
-        },
-        {
-            "level": 21,
-            "species": "SPECIES_PONYTA"
-        },
-        {
-            "level": 19,
+            "level": 23,
             "species": "SPECIES_CHANSEY"
         },
         {
-            "level": 21,
+            "level": 23,
+            "species": "SPECIES_ROSELIA"
+        },
+        {
+            "level": 22,
             "species": "SPECIES_PONYTA"
         },
         {
-            "level": 21,
+            "level": 22,
+            "species": "SPECIES_SCYTHER"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_ROSELIA"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_PONYTA"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_CHANSEY"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_PONYTA"
+        },
+        {
+            "level": 25,
             "species": "SPECIES_CHANSEY"
         }
     ],
