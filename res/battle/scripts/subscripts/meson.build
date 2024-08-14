@@ -323,4 +323,5 @@ subscript_files = files(
 	'subscript_pluck_ability.s',
 	'subscript_embargo_start_ability.s',
 	'subscript_ingrain_fling.s',
+	'subscript_pluck_ability_alt.s',
 )

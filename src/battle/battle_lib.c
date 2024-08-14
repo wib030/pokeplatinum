@@ -1450,6 +1450,16 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
             result = COMPARE_SPEED_SLOWER;
         } else if (battler1LaggingTail == FALSE && battler2LaggingTail) {
             result = COMPARE_SPEED_FASTER;
+        } else if (battler1Ability == ABILITY_STALL && battler2Ability == ABILITY_STALL) {
+            if (battler1Speed > battler2Speed) {
+                result = COMPARE_SPEED_SLOWER;
+            } else if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
+                result = COMPARE_SPEED_TIE;
+            }
+        } else if (battler1Ability == ABILITY_STALL && battler2Ability != ABILITY_STALL) {
+            result = COMPARE_SPEED_SLOWER;
+        } else if (battler1Ability != ABILITY_STALL && battler2Ability == ABILITY_STALL) {
+            result = COMPARE_SPEED_FASTER;
         } else if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
             if (battler1Speed > battler2Speed) {
                 result = COMPARE_SPEED_SLOWER;
@@ -1597,7 +1607,14 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
         result = TRUE;
     } else if (battleCtx->sideEffectIndirectFlags) {
         if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE) {
-            effectChance = CURRENT_MOVE_DATA.effectChance * 2;
+            if (CURRENT_MOVE_DATA.effectChance >= 50)
+			{
+				effectChance = 100;
+			}
+			else
+			{
+				effectChance = CURRENT_MOVE_DATA.effectChance * 2;
+			}
         } else {
             effectChance = CURRENT_MOVE_DATA.effectChance;
         }
@@ -2798,7 +2815,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     } else if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_IGNORE_IMMUNITIES) == FALSE) {
         if ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) && movePower) {
-            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FILTER) == TRUE) {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FILTER) == TRUE
+                    || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOLID_ROCK) == TRUE) {
                 damage = BattleSystem_Divide(damage * 3, 4);
             }
 
@@ -2852,7 +2870,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
             && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
     }
-	else if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
+	else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
             && moveType == TYPE_GROUND
             && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE
             && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
@@ -4734,6 +4752,20 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				result = TRUE;
 			}
 			break;
+			
+	case ABILITY_FREE_SAMPLE:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& ((CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH))
+			&& BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				*subscript = subscript_pluck_ability_alt;
+				result = TRUE;
+			}
+			break;
     }
 	
 	switch (Battler_Ability(battleCtx, battleCtx->attacker))
@@ -5331,8 +5363,8 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 result = TRUE;
             }
             break;
-			
         }
+		
         if (result == TRUE) {
             battleCtx->msgBattlerTemp = battler;
             battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
@@ -6306,7 +6338,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     }
 
     if (result == TRUE) {
-        if ((ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_EMBARGO)) {
+        if (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_EMBARGO) {
             battleCtx->scriptTemp = 0;
         } else {
             battleCtx->scriptTemp = nextSeq;
@@ -8251,7 +8283,7 @@ static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, 
             && damage) {
         damage = BattleSystem_Divide(damage * mul, 10);
     }
-	
+
     switch (mul) {
     case TYPE_MULTI_IMMUNE:
         *moveStatus |= MOVE_STATUS_INEFFECTIVE;

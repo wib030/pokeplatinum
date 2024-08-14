@@ -328,5 +328,6 @@
 #define subscript_pluck_ability 319
 #define subscript_embargo_start_ability 320
 #define subscript_ingrain_fling 321
+#define subscript_pluck_ability_alt 322
 
 #endif // NARC_SUB_SEQ_NAIX_
