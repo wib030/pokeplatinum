@@ -3023,6 +3023,7 @@ static BOOL BtlCmd_WaitCatchMonTask(BattleSystem *battleSys, BattleContext *batt
 static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+    int hitChance = BattleSystem_RandNext(battleSys) % 10;
     int hits = BattleScript_Read(battleCtx);
     int flags = BattleScript_Read(battleCtx);
 
@@ -3030,32 +3031,27 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
         if (hits == 0) {
             if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
                 hits = 5;
-            } else {
-                hits = BattleSystem_RandNext(battleSys) & 3;
-                if (hits < 2) { // 2 or 3 hits
-                    hits += 2;
-                } else { // 4 or 5 hits
-                    hits = (BattleSystem_RandNext(battleSys) & 3) + 2;
+            } 
+            else {
+                hits = 2;
+                if (hitChance < 7) { // 70% chance for 2 or 3 hits
+                    hits += hitChance & 1; // 2 or 3 hits
+                }
+                else { // 30% chance for 4 or 5 hits
+                    hits += (hitChance & 1) + 2; // 4 or 5 hits
                 }
             }
 			
-			if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_SWITCH_ATTACKER_HIT)
-			{
-				hits = 1;
-			}
-			
 			if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_LOADED_DICE)
 			{
-				int diceHits = BattleSystem_RandNext(battleSys) & 1;
-				
-				if (diceHits == 0)
-				{
-					hits = 4;
-				}
-				else
-				{
-					hits = 5;
-				}
+                hits = (hitChance & 1) + 4;
+			}
+
+            // Below check must be at the end of setting hit count to prevent being overwritten.
+            // If this value is overwritten, remaining hits will be non-zero on target switch.
+            if (Battler_HeldItemEffect(battleCtx, battleCtx->defender) == HOLD_EFFECT_SWITCH_ATTACKER_HIT)
+			{
+				hits = 1;
 			}
         }
 
