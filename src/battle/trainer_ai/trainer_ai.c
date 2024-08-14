@@ -3193,6 +3193,45 @@ static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, Batt
         AIScript_Iter(battleCtx, jump);
     }
 }
+/*
+static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int val = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u16 moveType, moveClass, moveEffect, moveScore;
+    u32 moveEffectivenes;
+
+    AI_CONTEXT.calcTemp = 0;
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    Party *party = BattleSystem_Party(battleSys, battler);
+    move = AI_CONTEXT.move;
+
+    moveClass = MOVE_DATA(move).class;
+    moveEffect = MOVE_DATA(move).effect;
+    moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+    
+    int i, partyMax;
+
+    partyMax = BattleSystem_PartyCount(battleSys, battler);
+
+    for (i = 0; i < partyMax; i++) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+        if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+        && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+        && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+            if (moveClass == CLASS_STATUS) {
+
+            }
+        }
+    }
+
+}
+*/
 
 /**
  * @brief Push an address for the AI script onto the cursor stack.
