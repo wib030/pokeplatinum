@@ -8668,13 +8668,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
     // Must keep C89-style declaration to match
     int i, j;
-    u8 defender, defenderType1, defenderType2;
-    u8 monType1, monType2;
+    u8 defender, defenderType1, defenderType2, defenderAbility;
+    u8 monType1, monType2, monAbility;
     u16 monSpecies;
     u16 move;
     int moveType;
     u8 battlersDisregarded;
-    u8 score, maxScore;
+    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore;
     u8 picked = 6;
     u8 slot1, slot2;
     u32 moveStatusFlags;
@@ -8720,15 +8720,340 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     && i != battleCtx->aiSwitchedPartySlot[slot2]) {
                 defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
                 defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+                defenderAbility = Battler_Ability(battleCtx, defender);
                 monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
                 monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+                monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
                 // Bug: this operation potentially overflows when considering a mono-type Pokemon
                 // with a quad-effective matchup against a defender. e.g., Machamp (Fighting/Fighting)
                 // vs. Bastiodon (Rock/Steel) would see 160 + 160 = 320, which overflows to an
                 // incorrect matchup-score of 65.
-                score = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
-                score += BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
+
+                // Above bug should be fixed now that score is u16.
+                // Changed monotype scoring to consider its matchup 1.5x instead of 2x
+                // For instance, now Machamp and Poliwrath have the same score vs. Bastiodon
+                attackScoreType1 = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
+                attackScoreType2 = BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
+                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2);
+                defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2);
+
+                if (monAbility != ABILITY_MOLD_BREAKER) 
+                {
+                    if (monType1 == TYPE_NORMAL
+                        || monType1 == TYPE_FIGHTING
+                        || monType2 == TYPE_NORMAL
+                        || monType2 == TYPE_FIGHTING) {
+                            if (defenderType1 == TYPE_GHOST
+                                || defenderType2 == TYPE_GHOST) {
+                                if (monAbility == ABILITY_SCRAPPY
+                                || BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_NORMAL_HIT_GHOST) {
+                                    if (monType1 == TYPE_NORMAL
+                                        || monType1 == TYPE_FIGHTING) {
+                                            attackScoreType1 = 40;
+                                        }
+                                    if (monType2 == TYPE_NORMAL
+                                        || monType2 == TYPE_FIGHTING) {
+                                            attackScoreType2 = 40;
+                                        }
+                                    }
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_WATER
+                        || monType2 == TYPE_WATER) {
+                        if (defenderAbility == ABILITY_WATER_ABSORB
+                            || defenderAbility == ABILITY_STORM_DRAIN
+                            || defenderAbility == ABILITY_DRY_SKIN) {
+                                if (monType1 == TYPE_WATER) {
+                                    attackScoreType1 = 0;
+                                }
+                                if (monType2 == TYPE_WATER) {
+                                    attackScoreType2 = 0;
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_FIRE
+                        || monType2 == TYPE_FIRE) {
+                            if (defenderAbility == ABILITY_FLASH_FIRE) {
+                                if (monType1 == TYPE_FIRE) {
+                                    attackScoreType1 = 0;
+                                }
+                                if (monType2 == TYPE_FIRE) {
+                                    attackScoreType2 = 0;
+                                }
+                            }
+                            if (defenderAbility == ABILITY_DRY_SKIN) {
+                                if (monType1 == TYPE_FIRE) {
+                                    attackScoreType1 *= 5 / 4;
+                                }
+                                if (monType2 == TYPE_FIRE) {
+                                    attackScoreType2 *= 5 / 4;
+                                }
+                            }
+                            if (defenderAbility == ABILITY_HEATPROOF
+                                || defenderAbility == ABILITY_THICK_FAT) {
+                                if (monType1 == TYPE_FIRE) {
+                                    attackScoreType1 /= 2;
+                                }
+                                if (monType2 == TYPE_FIRE) {
+                                    attackScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_GROUND
+                        || monType2 == TYPE_GROUND) {
+                            if ((defenderAbility == ABILITY_LEVITATE
+                                || Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
+                                || defenderType1 == TYPE_FLYING
+                                || defenderType2 == TYPE_FLYING)
+                                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+                                && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                                ) {
+                                    if (monType1 == TYPE_GROUND) {
+                                        attackScoreType1 = 0;
+                                    }
+                                    if (monType2 == TYPE_GROUND) {
+                                        attackScoreType2 = 0;
+                                    }
+                                }
+                            if ((defenderType1 == TYPE_FLYING
+                                || defenderType2 == TYPE_FLYING)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+                                || (Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_SPEED_DOWN_GROUNDED))
+                            ) {
+                                if (monType1 == TYPE_GROUND) {
+                                    attackScoreType1 = 40;
+                                }
+                                if (monType2 == TYPE_GROUND) {
+                                    attackScoreType2 = 40;
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_ELECTRIC
+                        || monType2 == TYPE_ELECTRIC) {
+                            if (defenderAbility == ABILITY_VOLT_ABSORB
+                                || defenderAbility == ABILITY_LIGHTNING_ROD) {
+                                    if (monType1 == TYPE_ELECTRIC) {
+                                        attackScoreType1 = 0;
+                                    }
+                                    if (monType2 == TYPE_ELECTRIC) {
+                                        attackScoreType2 = 0;
+                                    }
+                                }
+                    }
+                    if (monType1 == TYPE_ICE
+                        || monType2 == TYPE_ICE) {
+                            if (defenderAbility == ABILITY_THICK_FAT) {
+                                if (monType1 == TYPE_ICE) {
+                                    attackScoreType1 /= 2;
+                                }
+                                if (monType2 == TYPE_ICE) {
+                                    attackScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (defenderAbility == ABILITY_FILTER) {
+                        if (defendScoreType1 > 40) {
+                            defendScoreType1 *= 3 / 4;
+                        }
+                        if (defendScoreType2 > 40) {
+                            defendScoreType2 *= 3 / 4;
+                        }
+                    }
+                }
+                if (defenderType1 == TYPE_NORMAL
+                    || defenderType1 == TYPE_FIGHTING
+                    || defenderType2 == TYPE_NORMAL
+                    || defenderType2 == TYPE_FIGHTING) {
+                        if (monType1 == TYPE_GHOST
+                            || monType2 == TYPE_GHOST) {
+                            if (defenderAbility == ABILITY_SCRAPPY
+                            || Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_NORMAL_HIT_GHOST) {
+                                if (defenderType1 == TYPE_NORMAL
+                                    || defenderType1 == TYPE_FIGHTING) {
+                                        defendScoreType1 = 40;
+                                    }
+                                if (defenderType2 == TYPE_NORMAL
+                                    || defenderType2 == TYPE_FIGHTING) {
+                                        defendScoreType2 = 40;
+                                    }
+                                }
+                            }
+                        }
+                }
+                if (defenderAbility != ABILITY_MOLD_BREAKER)
+                {
+                    if (defenderType1 == TYPE_WATER
+                        || defenderType2 == TYPE_WATER) {
+                        if (monAbility == ABILITY_WATER_ABSORB
+                            || monAbility == ABILITY_STORM_DRAIN
+                            || monAbility == ABILITY_DRY_SKIN) {
+                                if (defenderType1 == TYPE_WATER) {
+                                    defendScoreType1 = 0;
+                                }
+                                if (defenderType2 == TYPE_WATER) {
+                                    defendScoreType2 = 0;
+                                }
+                            }
+                    }
+                    if (defenderType1 == TYPE_FIRE
+                        || defenderType2 == TYPE_FIRE) {
+                            if (monAbility == ABILITY_FLASH_FIRE) {
+                                if (defenderType1 == TYPE_FIRE) {
+                                    defendScoreType1 = 0;
+                                }
+                                if (defenderType2 == TYPE_FIRE) {
+                                    defendScoreType2 = 0;
+                                }
+                            }
+                            if (monAbility == ABILITY_DRY_SKIN) {
+                                if (defenderType1 == TYPE_FIRE) {
+                                    defendScoreType1 *= 5 / 4;
+                                }
+                                if (defenderType2 == TYPE_FIRE) {
+                                    defendScoreType2 *= 5 / 4;
+                                }
+                            }
+                            if (monAbility == ABILITY_HEATPROOF
+                                || monAbility == ABILITY_THICK_FAT) {
+                                if (defenderType1 == TYPE_FIRE) {
+                                    defendScoreType1 /= 2;
+                                }
+                                if (defenderType2 == TYPE_FIRE) {
+                                    defendScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (defenderType1 == TYPE_GROUND
+                        || defenderType2 == TYPE_GROUND) {
+                            if ((monAbility == ABILITY_LEVITATE
+                                || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_NORMAL_HIT_GHOST)
+                                || monType1 == TYPE_FLYING
+                                || monType2 == TYPE_FLYING)
+                                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+                                && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                                ) {
+                                    if (defenderType1 == TYPE_GROUND) {
+                                        defendScoreType1 = 0;
+                                    }
+                                    if (defenderType2 == TYPE_GROUND) {
+                                        defendScoreType2 = 0;
+                                    }
+                                }
+                            if ((monType1 == TYPE_FLYING
+                                || monType2 == TYPE_FLYING)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+                                || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED))
+                            ) {
+                                if (defenderType1 == TYPE_GROUND) {
+                                    defendScoreType1 = 40;
+                                }
+                                if (defenderType2 == TYPE_GROUND) {
+                                    defendScoreType2 = 40;
+                                }
+                            }
+                    }
+                    if (defenderType1 == TYPE_ELECTRIC
+                        || defenderType2 == TYPE_ELECTRIC) {
+                            if (monAbility == ABILITY_VOLT_ABSORB
+                                || monAbility == ABILITY_LIGHTNING_ROD) {
+                                    if (defenderType1 == TYPE_ELECTRIC) {
+                                        defendScoreType1 = 0;
+                                    }
+                                    if (defenderType2 == TYPE_ELECTRIC) {
+                                        defendScoreType2 = 0;
+                                    }
+                                }
+                    }
+                    if (defenderType1 == TYPE_ICE
+                        || defenderType2 == TYPE_ICE) {
+                            if (monAbility == ABILITY_THICK_FAT) {
+                                if (defenderType1 == TYPE_ICE) {
+                                    defendScoreType1 /= 2;
+                                }
+                                if (defenderType2 == TYPE_ICE) {
+                                    defendScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (monAbility == ABILITY_FILTER) {
+                        if (attackScoreType1 > 40) {
+                            attackScoreType1 *= 3 / 4;
+                        }
+                        if (attackScoreType2 > 40) {
+                            attackScoreType2 *= 3 / 4;
+                        }
+                }
+                if (monAbility == ABILITY_TINTED_LENS
+                    || defenderAbility == ABILITY_TINTED_LENS) {
+                        if (monAbility == ABILITY_TINTED_LENS) {
+                            if (attackScoreType1 < 40) {
+                                attackScoreType1 *= 2;
+                            }
+                            if (attackScoreType2 < 40) {
+                                attackScoreType2 *= 2;
+                            }
+                        }
+                        if (defenderAbility == ABILITY_TINTED_LENS) {
+                            if (defendScoreType1 < 40) {
+                                defendScoreType1 *= 2;
+                            }
+                            if (defendScoreType2 < 40) {
+                                defendScoreType2 *= 2;
+                            }
+                        }
+                }
+
+                // Add attack score for type 1
+                score = attackScoreType1;
+
+                // Add attack score for type 2
+                if (monType1 == monType2) {
+                    if (scoreType1 > 40) {
+                        score += (scoreType2 / 2) + (BattleSystem_RandNext(battleSys) & 1);
+                    }
+                    else if (scoreType1 == 40) {
+                        score += scoreType2 - (BattleSystem_RandNext(battleSys) & 1);
+                    }
+                    else {
+                        score += scoreType2 + (BattleSystem_RandNext(battleSys) & 7);
+                    }
+                }
+                else {
+                    score += scoreType2;
+                }
+                // Slightly favor offense
+                score += (BattleSystem_RandNext(battleSys) & 7);
+
+                // Subtract defend score for type 1
+                if (score <= defendScoreType1 + 1) {
+                    score = 0;
+                }
+                else {
+                    score -= defendScoreType1;
+                }
+
+                // Subtract defend score for type 2
+                if (score <= defendScoreType2 + 1) {
+                    score = 0;
+                }
+                else {
+                    if (defenderType1 == defenderType2) {
+                        if (defendScoreType1 > 40) {
+                            score -= (defendScoreType2 / 2) - (BattleSystem_RandNext(battleSys) & 1);
+                        }
+                        else if (defendScoreType1 == 40) {
+                            score -= defendScoreType2 - (BattleSystem_RandNext(battleSys) & 1);
+                        }
+                        else {
+                            score -= defendScoreType2 - (BattleSystem_RandNext(battleSys) & 7);
+                        }
+                    }
+                    else {
+                        score -= defendScoreType2;
+                    }
+                }
 
                 if (maxScore < score) {
                     maxScore = score;
@@ -8754,6 +9079,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         moveType,
                         Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
                         Battler_Ability(battleCtx, defender),
+                        BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT),
                         Battler_HeldItemEffect(battleCtx, defender),
                         BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
                         BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),
@@ -8822,7 +9148,14 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         score,
                         &moveStatusFlags);
 
-                    if (moveStatusFlags & MOVE_STATUS_IMMUNE) {
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                         && (moveStatusFlags & ~MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY)
+                         && (moveStatusFlags & ~MOVE_STATUS_TYPE_IGNORE_IMMUNITY)
+                         && (moveStatusFlags & ~MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM))
+                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
+                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
+                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)
+                        ) {
                         score = 0;
                     }
                 }
