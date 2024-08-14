@@ -2848,7 +2848,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     return damage;
 }
 
-void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inType, int attackerAbility, int defenderAbility, int defenderItemEffect, int defenderType1, int defenderType2, u32 *moveStatusMask)
+void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inType, int attackerAbility, int defenderAbility, int attackerItemEffect, int defenderItemEffect, int defenderType1, int defenderType2, u32 *moveStatusMask)
 {
     int chartEntry;
     u8 moveType;
@@ -2882,7 +2882,8 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 
         while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
             if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                if (attackerAbility == ABILITY_SCRAPPY) {
+                if (attackerAbility == ABILITY_SCRAPPY
+                    || attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) {
                     break;
                 } else {
                     chartEntry++;
