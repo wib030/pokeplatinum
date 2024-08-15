@@ -2848,7 +2848,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     return damage;
 }
 
-void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inType, int attackerAbility, int defenderAbility, int attackerItemEffect, int defenderItemEffect, int defenderType1, int defenderType2, u32 *moveStatusMask)
+void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inType, int attackerAbility, int defenderAbility, int defenderItemEffect, int defenderType1, int defenderType2, u32 *moveStatusMask)
 {
     int chartEntry;
     u8 moveType;
@@ -2882,8 +2882,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 
         while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
             if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                if (attackerAbility == ABILITY_SCRAPPY
-                    || attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) {
+                if (attackerAbility == ABILITY_SCRAPPY) {
                     break;
                 } else {
                     chartEntry++;
@@ -9078,7 +9077,6 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         moveType,
                         Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
                         Battler_Ability(battleCtx, defender),
-                        BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT),
                         Battler_HeldItemEffect(battleCtx, defender),
                         BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
                         BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),

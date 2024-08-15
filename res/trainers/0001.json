@@ -9,13 +9,85 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_EXPLOUD",
+            "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 15,
-            "item": "ITEM_CLEANSE_TAG",
+            "level": 100,
+            "item": "ITEM_FLAME_ORB",
             "moves": [
-				"MOVE_HYPER_BEAM",
-				"MOVE_ACID"
+				"MOVE_CLOSE_COMBAT",
+				"MOVE_STONE_EDGE",
+				"MOVE_BULK_UP",
+				"MOVE_ICE_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HERACROSS",
+            "form": 0,
+            "level": 100,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+				"MOVE_CLOSE_COMBAT",
+				"MOVE_MEGAHORN",
+				"MOVE_NIGHT_SLASH",
+				"MOVE_EARTHQUAKE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BRELOOM",
+            "form": 0,
+            "level": 100,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+				"MOVE_MACH_PUNCH",
+				"MOVE_SEED_BOMB",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_STONE_EDGE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SWAMPERT",
+            "form": 0,
+            "level": 100,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+				"MOVE_WATERFALL",
+				"MOVE_EARTHQUAKE",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_SHEER_COLD"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LOPUNNY",
+            "form": 0,
+            "level": 100,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+				"MOVE_FAKE_OUT",
+				"MOVE_CLOSE_COMBAT",
+				"MOVE_U_TURN",
+				"MOVE_HEADBUTT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TAUROS",
+            "form": 0,
+            "level": 100,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+				"MOVE_EXTREME_SPEED",
+				"MOVE_THRASH",
+				"MOVE_ZEN_HEADBUTT",
+				"MOVE_SHEER_COLD"
             ],
             "power": 255,
             "ball_seal": 0

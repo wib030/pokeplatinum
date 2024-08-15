@@ -3,8 +3,6 @@
     .data
 
 _000:
-	PlayBattleAnimation BTLSCR_MSG_TEMP, BATTLE_ANIMATION_RESTORE_HP
-    Wait
     // {0} restored HP using its {1}!
     PrintMessage pl_msg_00000368_00635, TAG_NICKNAME_ABILITY, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait 
