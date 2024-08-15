@@ -3193,7 +3193,7 @@ static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, Batt
         AIScript_Iter(battleCtx, jump);
     }
 }
-
+/*
 static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -3231,6 +3231,7 @@ static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleCont
     }
 
 }
+*/
 
 
 /**
