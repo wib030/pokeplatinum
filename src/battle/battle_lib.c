@@ -8931,7 +8931,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_NORMAL_HIT_GHOST)
                                 || monType1 == TYPE_FLYING
                                 || monType2 == TYPE_FLYING)
-                                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
                                 && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
                                 ) {
                                     if (defenderType1 == TYPE_GROUND) {
