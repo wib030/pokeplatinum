@@ -3193,7 +3193,7 @@ static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, Batt
         AIScript_Iter(battleCtx, jump);
     }
 }
-/*
+
 static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -3231,7 +3231,7 @@ static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleCont
     }
 
 }
-*/
+
 
 /**
  * @brief Push an address for the AI script onto the cursor stack.
@@ -4400,7 +4400,6 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
                             moveType,
                             Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
                             Battler_Ability(battleCtx, battleCtx->moveHitBattler[battler]),
-                            BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(battleCtx->moveHitBattler[battler], MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT),
                             BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT),
                             Battler_HeldItemEffect(battleCtx, battleCtx->moveHitBattler[battler]),
                             BattleMon_Get(battleCtx, battleCtx->moveHitBattler[battler], BATTLEMON_TYPE_1, NULL),
