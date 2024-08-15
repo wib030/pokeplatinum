@@ -8807,8 +8807,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 || Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
                                 || defenderType1 == TYPE_FLYING
                                 || defenderType2 == TYPE_FLYING)
-                                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
-                                && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+                                && ((Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED))
                                 ) {
                                     if (monType1 == TYPE_GROUND) {
                                         attackScoreType1 = 0;
@@ -9010,18 +9010,18 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                 // Add attack score for type 2
                 if (monType1 == monType2) {
-                    if (scoreType1 > 40) {
-                        score += (scoreType2 / 2) + (BattleSystem_RandNext(battleSys) & 1);
+                    if (attackScoreType1 > 40) {
+                        score += (attackScoreType2 / 2) + (BattleSystem_RandNext(battleSys) & 1);
                     }
-                    else if (scoreType1 == 40) {
-                        score += scoreType2 - (BattleSystem_RandNext(battleSys) & 1);
+                    else if (attackScoreType1 == 40) {
+                        score += attackScoreType2 - (BattleSystem_RandNext(battleSys) & 1);
                     }
                     else {
-                        score += scoreType2 + (BattleSystem_RandNext(battleSys) & 7);
+                        score += attackScoreType2 + (BattleSystem_RandNext(battleSys) & 7);
                     }
                 }
                 else {
-                    score += scoreType2;
+                    score += attackScoreType2;
                 }
                 // Slightly favor offense
                 score += (BattleSystem_RandNext(battleSys) & 7);
