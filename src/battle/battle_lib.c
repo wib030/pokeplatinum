@@ -8735,8 +8735,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 // For instance, now Machamp and Poliwrath have the same score vs. Bastiodon
                 attackScoreType1 = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
                 attackScoreType2 = BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
-                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2);
-                defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2);
+                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2) * 2 / 5;
+                defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2) * 2 / 5;
 
                 if (monAbility != ABILITY_MOLD_BREAKER) 
                 {
