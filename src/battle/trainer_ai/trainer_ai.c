@@ -3201,7 +3201,7 @@ static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleCont
     int inBattler = AIScript_Read(battleCtx);
     int val = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
-    u16 moveType, moveClass, moveEffect, moveScore;
+    u16 move, moveType, moveClass, moveEffect, moveScore;
     u32 moveEffectivenes;
 
     AI_CONTEXT.calcTemp = 0;
