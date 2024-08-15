@@ -8751,11 +8751,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                     if (monType1 == TYPE_NORMAL
                                         || monType1 == TYPE_FIGHTING) {
                                             attackScoreType1 = 40;
-                                        }
+                                    }
                                     if (monType2 == TYPE_NORMAL
                                         || monType2 == TYPE_FIGHTING) {
                                             attackScoreType2 = 40;
-                                        }
                                     }
                                 }
                             }
@@ -8771,7 +8770,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 if (monType2 == TYPE_WATER) {
                                     attackScoreType2 = 0;
                                 }
-                            }
+                        }
                     }
                     if (monType1 == TYPE_FIRE
                         || monType2 == TYPE_FIRE) {
@@ -8816,7 +8815,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                     if (monType2 == TYPE_GROUND) {
                                         attackScoreType2 = 0;
                                     }
-                                }
+                            }
                             if ((defenderType1 == TYPE_FLYING
                                 || defenderType2 == TYPE_FLYING)
                                 && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
@@ -8840,7 +8839,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                     if (monType2 == TYPE_ELECTRIC) {
                                         attackScoreType2 = 0;
                                     }
-                                }
+                            }
                     }
                     if (monType1 == TYPE_ICE
                         || monType2 == TYPE_ICE) {
@@ -8873,11 +8872,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 if (defenderType1 == TYPE_NORMAL
                                     || defenderType1 == TYPE_FIGHTING) {
                                         defendScoreType1 = 40;
-                                    }
+                                }
                                 if (defenderType2 == TYPE_NORMAL
                                     || defenderType2 == TYPE_FIGHTING) {
                                         defendScoreType2 = 40;
-                                    }
                                 }
                             }
                         }
@@ -8895,7 +8893,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 if (defenderType2 == TYPE_WATER) {
                                     defendScoreType2 = 0;
                                 }
-                            }
+                        }
                     }
                     if (defenderType1 == TYPE_FIRE
                         || defenderType2 == TYPE_FIRE) {
@@ -8932,20 +8930,20 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 || monType1 == TYPE_FLYING
                                 || monType2 == TYPE_FLYING)
                                 && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
-                                && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
-                                ) {
+                                && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)) 
+                            {
                                     if (defenderType1 == TYPE_GROUND) {
                                         defendScoreType1 = 0;
                                     }
                                     if (defenderType2 == TYPE_GROUND) {
                                         defendScoreType2 = 0;
                                     }
-                                }
+                            }
                             if ((monType1 == TYPE_FLYING
                                 || monType2 == TYPE_FLYING)
                                 && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
-                                || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED))
-                            ) {
+                                || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED)))
+                            {
                                 if (defenderType1 == TYPE_GROUND) {
                                     defendScoreType1 = 40;
                                 }
@@ -8957,14 +8955,15 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     if (defenderType1 == TYPE_ELECTRIC
                         || defenderType2 == TYPE_ELECTRIC) {
                             if (monAbility == ABILITY_VOLT_ABSORB
-                                || monAbility == ABILITY_LIGHTNING_ROD) {
+                                || monAbility == ABILITY_LIGHTNING_ROD) 
+                            {
                                     if (defenderType1 == TYPE_ELECTRIC) {
                                         defendScoreType1 = 0;
                                     }
                                     if (defenderType2 == TYPE_ELECTRIC) {
                                         defendScoreType2 = 0;
                                     }
-                                }
+                            }
                     }
                     if (defenderType1 == TYPE_ICE
                         || defenderType2 == TYPE_ICE) {
@@ -8984,6 +8983,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         if (attackScoreType2 > 40) {
                             attackScoreType2 *= 3 / 4;
                         }
+                    }
                 }
                 if (monAbility == ABILITY_TINTED_LENS
                     || defenderAbility == ABILITY_TINTED_LENS) {
@@ -9058,12 +9058,11 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 if (maxScore < score) {
                     maxScore = score;
                     picked = i;
-                }
-            } else {
+                } else {
                 battlersDisregarded |= FlagIndex(i);
+                }
             }
         }
-
         if (picked != 6) {
             // Determine if this mon has any super-effective moves against the defender
             mon = BattleSystem_PartyPokemon(battleSys, battler, picked);
