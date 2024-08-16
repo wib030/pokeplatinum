@@ -3896,13 +3896,17 @@ static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i, j;
+    int chipDamageIdx, removeAbilityIdx;
     u16 move;
     int moveType, moveClass, moveEffect;
     u32 effectiveness;
     Pokemon *mon;
 
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        return FALSE;
+        // Sometimes we will want to switch, even in doubles.
+        if (BattleSystem_RandNext(battleSys) % 5 == 0) {
+            return FALSE;
+        }
     }
 
     if (battleCtx->battleMons[BATTLER_OPP(battler)].ability == ABILITY_WONDER_GUARD) {
@@ -3910,12 +3914,39 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             move = battleCtx->battleMons[battler].moves[i];
             moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+            moveClass = MOVE_DATA(move).class;
+            moveEffect = MOVE_DATA(move).effect;
 
             if (move) {
                 effectiveness = 0;
                 BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
 
-                if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                if (moveClass == CLASS_STATUS
+                    || moveEffect == BATTLE_EFFECT_BIND_HIT
+                    || moveEffect == BATTLE_EFFECT_WHIRLPOOL) {
+                    for (chipDamageIdx = 0; sChipDamageMoves[chipDamageIdx] != 0xFFFF; chipDamageIdx++) {
+                        if (moveEffect == sChipDamageMoves[chipDamageIdx] 
+                            && (effectiveness & ~MOVE_STATUS_IMMUNE)) {
+                            if (moveEffect == BATTLE_EFFECT_CURSE) {
+                                if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
+                                    return FALSE;
+                                }
+                            }
+                            else {
+                                return FALSE;
+                            }
+                        }
+                    }
+                    for (removeAbilityIdx = 0; sRemoveAbilityMoves[removeAbilityIdx] != 0xFFFF; removeAbilityIdx++) {
+                        if (moveEffect == sRemoveAbilityMoves[removeAbilityIdx]
+                            && moveEffect != BATTLE_EFFECT_SWITCH_ABILITIES) {
+                                return FALSE;
+                        }
+                    }
+                }
+
+                if (MOVE_DATA(move).power
+                    && (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)) {
                     return FALSE;
                 }
             }
@@ -3953,18 +3984,29 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                             return TRUE;
                         }
                         // If this party member has chip damage or ability-removing move, switch 1/3 of the time
-                        else if (moveClass == CLASS_STATUS) {
-                            int chipDamageIdx;
-                            int removeAbilityIdx;
+                        else if (moveClass == CLASS_STATUS
+                                || moveEffect == BATTLE_EFFECT_BIND_HIT
+                                || moveEffect == BATTLE_EFFECT_WHIRLPOOL) {
                             for (chipDamageIdx = 0; sChipDamageMoves[chipDamageIdx] != 0xFFFF; chipDamageIdx++) {
-                                if (moveEffect == sChipDamageMoves[chipDamageIdx] && (effectiveness & ~MOVE_STATUS_IMMUNE)
-                                    && BattleSystem_RandNext(battleSys) % 3 < 1) {
-                                    return TRUE;
+                                if (moveEffect == sChipDamageMoves[chipDamageIdx] && (effectiveness & ~MOVE_STATUS_IMMUNE)) {
+                                    if (battleSystem_RandNext(battleSys) % 3 == 0) {
+                                        if (moveEffect == BATTLE_EFFECT_CURSE) {
+                                            if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
+                                                return TRUE;
+                                            }
+                                        }
+                                        else {
+                                        return TRUE;
+                                        }
+                                    }
                                 }
                             }
                             for (removeAbilityIdx = 0; sRemoveAbilityMoves[removeAbilityIdx] != 0xFFFF; removeAbilityIdx++) {
-                                if (moveEffect == sRemoveAbilityMoves[removeAbilityIdx] && BattleSystem_RandNext(battleSys) % 3 < 1) {
-                                    return TRUE;
+                                if (moveEffect == sRemoveAbilityMoves[removeAbilityIdx]
+                                    && moveEffect != BATTLE_EFFECT_SWITCH_ABILITIES) {
+                                        if (BattleSystem_RandNext(battleSys) % 3 == 0) {
+                                            return TRUE;
+                                        }
                                 }
                             }
                         }
