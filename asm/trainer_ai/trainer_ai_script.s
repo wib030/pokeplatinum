@@ -3251,6 +3251,7 @@ Expert_RechargeTurn:
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_RechargeTurn_ScoreMinus1
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_TRUANT, Expert_RechargeTurn_TryScorePlus1
+	IfLoadedEqualTo ABILITY_RELENTLESS, Expert_RechargeTurn_CheckRelentless
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_RechargeTurn_CheckUserHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_RechargeTurn_ScoreMinus1
     GoTo Expert_RechargeTurn_End
@@ -3267,7 +3268,12 @@ Expert_RechargeTurn_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_RechargeTurn_End:
-    PopOrEnd 
+    PopOrEnd
+	
+Expert_RechargeTurn_CheckRelentless:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_RechargeTurn_End
+	AddToMoveScore 5
+    GoTo Expert_RechargeTurn_End
 
 Expert_Disable:
     ; If the attacker is slower than the opponent, score +0 and terminate.
