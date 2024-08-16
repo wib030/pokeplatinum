@@ -1267,6 +1267,40 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     u8 criticalMul);
 
 /**
+ * @brief Calculate the base damage for a move using the general damage formula if it were cast by a
+ * party member.
+ * 
+ * Same formula as BattleSystem_CalcMoveDamage().
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param move              The move being calculated
+ * @param sideConditions    State of the side conditions mask at the time of calculation
+ * @param fieldConditions   State of the field conditions mask at the time of calculation
+ * @param inPower           Input power for variable base-power moves
+ * @param inType            Input type for variable type moves (e.g. Hidden Power)
+ * @param attacker
+ * @param defender 
+ * @param criticalMul       Critical multiplier; must always be >= 1, 1 == no crit,
+ *                          2+ signifies a crit
+ * @param partySlot         The slot number of the party member to use in the calculation.
+ * @return The computed base damage for the move
+ */
+int BattleSystem_CalcPartyMemberMoveDamage(
+    BattleSystem *battleSys,
+    BattleContext *battleCtx,
+    int move,
+    u32 sideConditions,
+    u32 fieldConditions,
+    u16 inPower,
+    u8 inType,
+    u8 attacker,
+    u8 defender,
+    u8 criticalMul,
+    int partySlot);
+
+
+/**
  * @brief Incorporate random variance in the given damage value.
  * 
  * A random factor in the range of [0.85, 1] will be used to vary the output
