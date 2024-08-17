@@ -7513,7 +7513,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
     if (move == MOVE_FOCUS_PUNCH) {
         if (defenseStage > 0) {
-            defenseStage = 0
+            defenseStage = 0;
         }
     }
 

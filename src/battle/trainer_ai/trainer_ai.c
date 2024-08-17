@@ -3989,7 +3989,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                                 || moveEffect == BATTLE_EFFECT_WHIRLPOOL) {
                             for (chipDamageIdx = 0; sChipDamageMoves[chipDamageIdx] != 0xFFFF; chipDamageIdx++) {
                                 if (moveEffect == sChipDamageMoves[chipDamageIdx] && (effectiveness & ~MOVE_STATUS_IMMUNE)) {
-                                    if (battleSystem_RandNext(battleSys) % 3 == 0) {
+                                    if (BattleSystem_RandNext(battleSys) % 3 == 0) {
                                         if (moveEffect == BATTLE_EFFECT_CURSE) {
                                             if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
                                                 return TRUE;
