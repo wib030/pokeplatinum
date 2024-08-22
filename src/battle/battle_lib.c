@@ -8851,6 +8851,12 @@ static int MapSideEffectToSubscript(BattleContext *battleCtx, enum SideEffectTyp
  */
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus)
 {
+	//if ((battleCtx->moveCur == MOVE_ICE_BEAM)
+	//&& (BattleMon_Get(battleCtx, battleCtx->defender, BATTLEMON_TYPE_1, NULL) == TYPE_WATER || BattleMon_Get(battleCtx, battleCtx->defender, BATTLEMON_TYPE_2, NULL) == TYPE_WATER))
+	//{
+	//	mul = TYPE_MULTI_SUPER_EFF;
+	//}
+	
 	if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_IGNORE_IMMUNITIES) == FALSE
             && damage) {
