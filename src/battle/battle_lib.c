@@ -112,6 +112,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
 	battleCtx->battleMons[battler].imposterFlag = FALSE;
 	battleCtx->battleMons[battler].rivalryFlag = FALSE;
+	battleCtx->battleMons[battler].colorChangeFlag = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -3864,6 +3865,7 @@ enum {
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
 	SWITCH_IN_CHECK_STATE_AIR_BALLOON,
 	SWITCH_IN_CHECK_STATE_IMPOSTER,
+	SWITCH_IN_CHECK_STATE_COLOR_CHANGE,
 
     SWITCH_IN_CHECK_STATE_DONE,
 };
@@ -3880,11 +3882,12 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int i;
     int subscript;
     int result;
-    int battler;
-	int battlero;
+    int battler, battlero;
     int maxBattlers;
-	int imposter1Pos;
-	int imposter2Pos;
+	int imposter1Pos, imposter2Pos;
+	int colorChange1Pos, colorChange2Pos;
+	int colorChangeTarget = NULL;
+	int targetType1, targetType2;
 
     maxBattlers = BattleSystem_MaxBattlers(battleSys);
     subscript = NULL;
@@ -4485,6 +4488,87 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 					subscript = subscript_imposter_transform;
 					result = SWITCH_IN_CHECK_RESULT_BREAK;
 					break;
+				}
+            }
+			
+			if (i == maxBattlers)
+			{
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_COLOR_CHANGE:
+			for (i = 0; i < maxBattlers; i++)
+			{
+                battler = battleCtx->monSpeedOrder[i];
+				
+                if ((Battler_Ability(battleCtx, battler) == ABILITY_COLOR_CHANGE)
+				&& (battleCtx->battleMons[battler].colorChangeFlag == FALSE))
+				{
+					colorChange1Pos = BattleSystem_BattlerSlot(battleSys, battler);
+					
+					switch (BattleSystem_BattlerSlot(battleSys, battler))
+					{
+							case BATTLER_TYPE_SOLO_ENEMY:
+								colorChange2Pos = BATTLER_TYPE_SOLO_PLAYER;
+								break;
+								
+							case BATTLER_TYPE_SOLO_PLAYER:
+								colorChange2Pos = BATTLER_TYPE_SOLO_ENEMY;
+								break;
+								
+							case BATTLER_TYPE_ENEMY_SIDE_SLOT_1:
+								colorChange2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_2;
+								break;
+								
+							case BATTLER_TYPE_ENEMY_SIDE_SLOT_2:
+								colorChange2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_1;
+								break;
+								
+							case BATTLER_TYPE_PLAYER_SIDE_SLOT_1:
+								colorChange2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_2;
+								break;
+								
+							case BATTLER_TYPE_PLAYER_SIDE_SLOT_2:
+								colorChange2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_1;
+								break;
+								
+							default:
+								break;
+					}
+						
+					for (int o = 0; o < maxBattlers; o++)
+					{
+						battlero = battleCtx->monSpeedOrder[o];
+						
+						if ((battler != battlero)
+						&& (Battler_Side(battleSys, battlero) != Battler_Side(battleSys, battler))
+						&& (colorChange2Pos == BattleSystem_BattlerSlot(battleSys, battlero)))
+						{
+							targetType1 = BattleMon_Get(battleCtx, battlero, 27, NULL);
+							targetType2 = BattleMon_Get(battleCtx, battlero, 28, NULL);
+							break;
+						}
+					}
+					
+					if (BattleMon_Get(battleCtx, battler, 27, NULL) != targetType1)
+					{
+						colorChangeTarget = targetType1;
+					}
+					else if (BattleMon_Get(battleCtx, battler, 28, NULL) != targetType2)
+					{
+						colorChangeTarget = targetType2;
+					}
+					
+					if (colorChangeTarget != NULL)
+					{
+						battleCtx->battleMons[battler].colorChangeFlag = TRUE;
+						battleCtx->defender = battler;
+						battleCtx->msgTemp = colorChangeTarget;
+						subscript = subscript_color_change;
+						result = SWITCH_IN_CHECK_RESULT_BREAK;
+						break;
+					}
 				}
             }
 			

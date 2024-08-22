@@ -9,7 +9,7 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_LEDIAN",
+            "species": "SPECIES_STANTLER",
             "form": 0,
             "level": 100,
             "item": "ITEM_NONE",
