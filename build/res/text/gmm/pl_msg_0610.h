@@ -292,11 +292,15 @@
 #define pl_msg_00000610_00141 141
 // Free Sample
 #define pl_msg_00000610_00142 142
-// Boycott
+// Shakedown
 #define pl_msg_00000610_00143 143
 // Flare Boost
 #define pl_msg_00000610_00144 144
 // Chloroplast
 #define pl_msg_00000610_00145 145
+// Random Select
+#define pl_msg_00000610_00146 146
+// Cotton Down
+#define pl_msg_00000610_00147 147
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0610_H

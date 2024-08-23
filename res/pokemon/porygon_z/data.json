@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_ADAPTABILITY",
-        "ABILITY_DOWNLOAD"
+        "ABILITY_FLARE_BOOST"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

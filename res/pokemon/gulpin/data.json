@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_CORROSION",
-        "ABILITY_NONE"
+        "ABILITY_FREE_SAMPLE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

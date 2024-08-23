@@ -35,7 +35,7 @@
         "EGG_GROUP_FAIRY"
     ],
     "abilities": [
-        "ABILITY_THICK_FAT",
+        "ABILITY_SHAKEDOWN",
         "ABILITY_HUGE_POWER"
     ],
     "great_marsh_flee_rate": 60,

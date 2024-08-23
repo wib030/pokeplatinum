@@ -575,7 +575,7 @@
 	</row>
 	<row id="pl_msg_00000610_00143" index="143">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Inflicts Embargo on\nattacker when damaged.</language>
+		<language name="English">Inflicts Embargo on\ndefender when attacking.</language>
 	</row>
 	<row id="pl_msg_00000610_00144" index="144">
 		<attribute name="window_context_name">used</attribute>
@@ -584,5 +584,13 @@
 	<row id="pl_msg_00000610_00145" index="145">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boosts Grass moves.\n2x Speed in Sun.</language>
+	</row>
+	<row id="pl_msg_00000610_00146" index="146">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Changes to a random\nAbility on switch-in.</language>
+	</row>
+	<row id="pl_msg_00000610_00147" index="147">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Lowers attackers Attack\nstat when damaged.</language>
 	</row>
 </body>

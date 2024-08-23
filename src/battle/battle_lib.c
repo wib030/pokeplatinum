@@ -113,6 +113,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].imposterFlag = FALSE;
 	battleCtx->battleMons[battler].rivalryFlag = FALSE;
 	battleCtx->battleMons[battler].colorChangeFlag = FALSE;
+	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -3850,6 +3851,7 @@ enum {
 
     SWITCH_IN_CHECK_STATE_FIELD_WEATHER = SWITCH_IN_CHECK_STATE_START,
     SWITCH_IN_CHECK_STATE_TRACE,
+	SWITCH_IN_CHECK_STATE_RANDOM_ABILITY,
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
     SWITCH_IN_CHECK_STATE_INTIMIDATE,
     SWITCH_IN_CHECK_STATE_DOWNLOAD,
@@ -3888,6 +3890,9 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 	int colorChange1Pos, colorChange2Pos;
 	int colorChangeTarget = NULL;
 	int targetType1, targetType2;
+	int abilityMax = ABILITY_COTTON_DOWN;
+	int abilityChosen;
+	int randomAbilityActivated = FALSE;
 
     maxBattlers = BattleSystem_MaxBattlers(battleSys);
     subscript = NULL;
@@ -3968,6 +3973,47 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             }
 
             if (i == maxBattlers) {
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_RANDOM_ABILITY:
+			for (i = 0; i < maxBattlers; i++) {
+                battler = battleCtx->monSpeedOrder[i];
+				randomAbilityActivated = FALSE;
+
+                if (battleCtx->battleMons[battler].randomAbilityAnnounced == FALSE
+                && battleCtx->battleMons[battler].curHP
+                && Battler_Ability(battleCtx, battler) == ABILITY_RANDOM_SELECT)
+				{
+					do
+					{
+						abilityChosen = BattleSystem_RandNext(battleSys) % abilityMax;
+						
+						if ((abilityChosen != ABILITY_NONE)
+						&& (abilityChosen != ABILITY_RANDOM_SELECT)
+						&& (abilityChosen != ABILITY_TRACE)
+						&& (abilityChosen != ABILITY_MULTITYPE)
+						&& (abilityChosen != ABILITY_IMPOSTER)
+						&& (abilityChosen != ABILITY_FLOWER_GIFT)
+						&& (abilityChosen != ABILITY_WONDER_GUARD)
+						&& (abilityChosen != ABILITY_FORECAST))
+						{
+							randomAbilityActivated = TRUE;
+						}
+					} while (randomAbilityActivated == FALSE);
+					
+					battleCtx->battleMons[battler].randomAbilityAnnounced = TRUE;
+					battleCtx->sideEffectMon = battler;
+					battleCtx->calcTemp = abilityChosen;
+					subscript = subscript_random_ability;
+					result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+                }
+            }
+			
+			if (i == maxBattlers)
+			{
                 battleCtx->switchInCheckState++;
             }
             break;
@@ -4624,7 +4670,8 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         return result;
     }
 
-    switch (Battler_Ability(battleCtx, battleCtx->defender)) {
+    switch (Battler_Ability(battleCtx, battleCtx->defender))
+	{
     case ABILITY_STATIC:
         if (ATTACKING_MON.curHP
                 && ATTACKING_MON.status == MON_CONDITION_NONE
@@ -4816,8 +4863,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
                 && BattleSystem_CountAbility(battleSys, battleCtx, 8, 0, ABILITY_DAMP) == 0
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                 && ATTACKING_MON.curHP
-                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-                && ((CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH))) {
+                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
             battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 4);
             battleCtx->msgBattlerTemp = battleCtx->attacker;
 
@@ -4825,19 +4871,6 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
             result = TRUE;
         }
         break;
-		
-	case ABILITY_BOYCOTT:
-			if (DEFENDING_MON.curHP
-			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-			&& (battleCtx->battleMons[battleCtx->attacker].moveEffectsData.embargoTurns == 0)
-			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
-			{
-				*subscript = subscript_embargo_start_ability;
-				result = TRUE;
-			}
-			break;
 			
 	case ABILITY_FREE_SAMPLE:
 			if (DEFENDING_MON.curHP
@@ -4849,6 +4882,20 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			&& BattleSystem_RandNext(battleSys) % 10 < 3)
 			{
 				*subscript = subscript_pluck_ability_alt;
+				result = TRUE;
+			}
+			break;
+			
+	case ABILITY_COTTON_DOWN:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& ((CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)))
+			{
+				*subscript = subscript_cotton_down_activate;
+				battleCtx->sideEffectMon = battleCtx->attacker;
 				result = TRUE;
 			}
 			break;
@@ -4905,6 +4952,19 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			&& BattleSystem_RandNext(battleSys) % 10 < 3)
 			{
 				*subscript = subscript_pluck_ability;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_SHAKEDOWN:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (battleCtx->battleMons[battleCtx->defender].moveEffectsData.embargoTurns == 0)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				*subscript = subscript_embargo_start_ability;
 				result = TRUE;
 			}
 			break;
@@ -7519,7 +7579,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     if (moveType == TYPE_WATER) {
 
         if (attackerParams.ability == ABILITY_TORRENT
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
             movePower = movePower * 3 / 2;
         }
 
@@ -7531,7 +7591,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     }
     if (moveType == TYPE_BUG
             && attackerParams.ability == ABILITY_SWARM
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
         movePower = movePower * 3 / 2;
     }
 	if (moveType == TYPE_PSYCHIC
@@ -7543,7 +7603,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     if (moveType == TYPE_GRASS) {
 
         if (attackerParams.ability == ABILITY_OVERGROW
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
             movePower = movePower * 3 / 2;
         }
 
@@ -7563,7 +7623,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         }
 
         if (attackerParams.ability == ABILITY_BLAZE
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
             movePower = movePower * 3 / 2;
         }
         
@@ -8071,22 +8131,22 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if (moveType == TYPE_GRASS
             && attackerParams.ability == ABILITY_OVERGROW
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
         movePower = movePower * 150 / 100;
     }
     if (moveType == TYPE_FIRE
             && attackerParams.ability == ABILITY_BLAZE
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
         movePower = movePower * 150 / 100;
     }
     if (moveType == TYPE_WATER
             && attackerParams.ability == ABILITY_TORRENT
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
         movePower = movePower * 150 / 100;
     }
     if (moveType == TYPE_BUG
             && attackerParams.ability == ABILITY_SWARM
-            && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
+            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
         movePower = movePower * 150 / 100;
     }
 	if (moveType == TYPE_PSYCHIC

@@ -292,11 +292,15 @@
 #define pl_msg_00000610_00141 141
 // 30% chance to eat foe’s\nberry when making contact.
 #define pl_msg_00000610_00142 142
-// Inflicts Embargo on\nattacker when damaged.
+// Inflicts Embargo on\ndefender when attacking.
 #define pl_msg_00000610_00143 143
 // Boosts Sp. Attack by\n1.5x when burned.
 #define pl_msg_00000610_00144 144
 // Boosts Grass moves.\n2x Speed in Sun.
 #define pl_msg_00000610_00145 145
+// Changes to a random\nAbility on switch-in.
+#define pl_msg_00000610_00146 146
+// Lowers attackers Attack\nstat when damaged.
+#define pl_msg_00000610_00147 147
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H

@@ -102,6 +102,7 @@ typedef struct BattleMon {
 	u32 imposterFlag : 1;
 	u32 rivalryFlag : 1;
 	u32 colorChangeFlag : 1;
+	u32 randomAbilityAnnounced : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];

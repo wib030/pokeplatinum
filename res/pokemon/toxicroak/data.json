@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_DRY_SKIN",
-        "ABILITY_NONE"
+        "ABILITY_SHAKEDOWN"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
