@@ -3997,6 +3997,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						&& (abilityChosen != ABILITY_IMPOSTER)
 						&& (abilityChosen != ABILITY_FLOWER_GIFT)
 						&& (abilityChosen != ABILITY_WONDER_GUARD)
+						&& (abilityChosen != ABILITY_KLUTZ)
+						&& (abilityChosen != ABILITY_STALL)
+						&& (abilityChosen != ABILITY_SHELL_ARMOR)
+						&& (abilityChosen != ABILITY_TANGLED_FEET)
+						&& (abilityChosen != ABILITY_SOLID_ROCK)
 						&& (abilityChosen != ABILITY_FORECAST))
 						{
 							randomAbilityActivated = TRUE;
