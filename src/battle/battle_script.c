@@ -3243,19 +3243,19 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
     }
 	
-	if ((((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_DEFIANT) || (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COMPETITIVE)))
+	if ((((Battler_Ability(battleCtx, battleCtx->sideEffectMon) == ABILITY_DEFIANT) || (Battler_Ability(battleCtx, battleCtx->sideEffectMon) == ABILITY_COMPETITIVE)))
 		&& (stageChange < 0)
-		&& (battleCtx->defender != battleCtx->attacker)
+		&& (battleCtx->attacker != battleCtx->sideEffectMon)
 		&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 		&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-		&& (battleCtx->attacker != BattleSystem_Partner(battleSys, battleCtx->defender))
-		&& (battleCtx->battleMons[battleCtx->defender].defiantFlag == FALSE))
+		&& (battleCtx->attacker != BattleSystem_Partner(battleSys, battleCtx->sideEffectMon))
+		&& (battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag == FALSE))
 		{
-			battleCtx->battleMons[battleCtx->defender].defiantFlag = TRUE;
+			battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag = TRUE;
 		}
 		else
 		{
-			battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+			battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag = FALSE;
 		}
 	
     if (stageChange > 0) {
