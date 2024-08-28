@@ -1421,7 +1421,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
                     } else {
                         tmpAbility = ABILITY_NONE;
                     }
-                } else if (ability1) {
+                } else if (ability1 && (BattleSystem_RandNext(battleSys) & 1)) {
                     tmpAbility = ability1;
                 } else {
                     tmpAbility = ability2;
@@ -3235,25 +3235,32 @@ static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleCont
 {
     AIScript_Iter(battleCtx, 1);
 
-    int inBattler = AIScript_Read(battleCtx);
+    // int inBattler = AIScript_Read(battleCtx);
     int val = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u16 move, moveType, moveClass, moveEffect, moveScore;
     u32 moveEffectivenes;
+    int attacker, defender;
+
+    moveScore = 40;
 
     AI_CONTEXT.calcTemp = 0;
 
-    u8 battler = AIScript_Battler(battleCtx, inBattler);
-    Party *party = BattleSystem_Party(battleSys, battler);
+    attacker = AI_CONTEXT.atacker;
+    defender = AI_CONTEXT.defender;
+
+    Party *party = BattleSystem_Party(battleSys, attacker);
+    Party *defenderParty = BattleSystem_Party(battleSys, defender);
     move = AI_CONTEXT.move;
 
     moveClass = MOVE_DATA(move).class;
     moveEffect = MOVE_DATA(move).effect;
     moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
     
-    int i, partyMax;
+    int i, j, partyMax, defenderPartyMax;
 
-    partyMax = BattleSystem_PartyCount(battleSys, battler);
+    partyMax = BattleSystem_PartyCount(battleSys, attacker);
+    defenderPartyMax = BattleSystem_PartyCount(battleSys, defender);
 
     for (i = 0; i < partyMax; i++) {
         Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
@@ -3262,7 +3269,22 @@ static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleCont
         && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
         && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
             if (moveClass == CLASS_STATUS) {
+                for (j = 0; j < defenderPartyMax; j++) {
+                    Pokemon *defenderMon = Party_GetPokemonBySlotIndex(defenderParty, j);
+                    if (Pokemon_GetValue(defenderMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                        // -14 score for each statused mon in the enemy party
+                        if (moveScore >= 14) {
+                            moveScore -= 14;
+                        }
+                        else {
+                            if (moveType )
+                        }
 
+                    }
+                }
+                if (battleCtx->battleMons[AI_CONTEXT.defender].status & MON_CONDITION_ANY) {
+                    if (moveScore >= )
+                }
             }
         }
     }
