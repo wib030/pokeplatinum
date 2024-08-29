@@ -2503,7 +2503,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
 
         case CHECK_STATUS_STATE_FREEZE:
             if (ATTACKING_MON.status & MON_CONDITION_FREEZE) {
-                if (BattleSystem_RandNext(battleSys) % 3 != 0) {
+                if (BattleSystem_RandNext(battleSys) % 5 > 2) {
                     if (moveEffect != BATTLE_EFFECT_THAW_AND_BURN_HIT
                             && moveEffect != BATTLE_EFFECT_RECOIL_BURN_HIT) {
                         LOAD_SUBSEQ(subscript_frozen);
