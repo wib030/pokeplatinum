@@ -2624,5 +2624,11 @@
 #define pl_msg_00000368_01307 1307
 // The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nignores Intimidate!
 #define pl_msg_00000368_01308 1308
+// {STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!
+#define pl_msg_00000368_01309 1309
+// {STRVAR_1 1, 0, 0} was shaken down\nby the wild {STRVAR_1 1, 1, 0}!
+#define pl_msg_00000368_01310 1310
+// {STRVAR_1 1, 0, 0} was shaken down\nby the foe’s {STRVAR_1 1, 1, 0}!
+#define pl_msg_00000368_01311 1311
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H

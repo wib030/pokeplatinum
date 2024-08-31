@@ -5250,4 +5250,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nignores Intimidate!</language>
 	</row>
+	<row id="pl_msg_00000368_01309" index="1309">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01310" index="1310">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was shaken down\nby the wild {STRVAR_1 1, 1, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01311" index="1311">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was shaken down\nby the foe’s {STRVAR_1 1, 1, 0}!</language>
+	</row>
 </body>
