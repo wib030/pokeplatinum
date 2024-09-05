@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_SERENE_GRACE",
-        "ABILITY_NONE"
+        "ABILITY_PICKUP"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
