@@ -1,9 +1,7 @@
 {
     "name": "Travon",
     "class": "TRAINER_CLASS_SCIENTIST",
-    "items": [
-        "ITEM_X_SPECIAL"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT"
@@ -11,12 +9,29 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_KADABRA",
+            "species": "SPECIES_SLOWPOKE",
             "form": 0,
-            "level": 20,
-            "item": null,
+            "level": 22,
+            "item": "ITEM_CHESTO_BERRY",
             "moves": [
-                "MOVE_CONFUSION"
+                "MOVE_CONFUSION",
+				"MOVE_WHIRLPOOL",
+				"MOVE_BELLY_DRUM",
+				"MOVE_REST"
+            ],
+            "power": 20,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SLOWPOKE",
+            "form": 0,
+            "level": 22,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_CONFUSION",
+				"MOVE_WHIRLPOOL",
+				"MOVE_BELLY_DRUM",
+				"MOVE_REST"
             ],
             "power": 20,
             "ball_seal": 0
