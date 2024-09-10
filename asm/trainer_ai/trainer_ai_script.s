@@ -4055,7 +4055,7 @@ Expert_BellyDrum_TryScorePlus1:
     GoTo Expert_BellyDrum_HPCheck
 
 Expert_BellyDrum_HPCheck:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_BellyDrum_ScoreMinus12
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_BellyDrum_ScoreMinus12HPCheck
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 76, Expert_BellyDrum_Item_ScorePlus1
     LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_SITRUS_BERRY, ScorePlus1
@@ -4067,11 +4067,13 @@ Expert_BellyDrum_Item_ScorePlus1:
     IfLoadedInTable Expert_BellyDrum_DesirableItems, ScorePlus1
     GoTo Expert_BellyDrum_End
 
-Expert_BellyDrum_ScoreMinus2:
-    AddToMoveScore -2
-
 Expert_BellyDrum_ScoreMinus12:
     AddToMoveScore -12
+	GoTo Expert_BellyDrum_FieldCheck
+	
+Expert_BellyDrum_ScoreMinus12HPCheck:
+    AddToMoveScore -12
+	GoTo Expert_BellyDrum_End
 
 Expert_BellyDrum_DesirableItems:
     TableEntry ITEM_AGUAV_BERRY

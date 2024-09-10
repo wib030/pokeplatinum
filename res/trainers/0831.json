@@ -15,9 +15,7 @@
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_CONFUSION",
-				"MOVE_WHIRLPOOL",
-				"MOVE_BELLY_DRUM",
-				"MOVE_REST"
+				"MOVE_BELLY_DRUM"
             ],
             "power": 20,
             "ball_seal": 0
@@ -29,9 +27,7 @@
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_CONFUSION",
-				"MOVE_WHIRLPOOL",
-				"MOVE_BELLY_DRUM",
-				"MOVE_REST"
+				"MOVE_BELLY_DRUM"
             ],
             "power": 20,
             "ball_seal": 0
