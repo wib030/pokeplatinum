@@ -2557,7 +2557,8 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
             Pokemon *mon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, i);
 			int levelCurMon = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
 			
-            if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)) {
+            if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL))
+			{
                 if (battleCtx->sideGetExpMask[(battleCtx->faintedMon >> 1) & 1] & FlagIndex(i)) {
                     totalMonsGainingExp++;
 					thisBattlerGaining = 1;
@@ -2565,7 +2566,7 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
 
                 u16 item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
                 if (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_EXP_SHARE) {
-                    totalMonsWithExpShare++;
+					totalMonsWithExpShare++;
 					thisBattlerGaining = 1;
                 }
             }
@@ -2599,34 +2600,53 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
         u16 exp = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, MON_DATA_PERSONAL_BASE_EXP);
         exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 7;
 		
+		if (((badges == 0) && (levelCur <= 6))
+		|| ((badges == 1) && (levelCur >= 11))
+		|| ((badges == 2) && (levelCur >= 13))
+		|| ((badges == 3) && (levelCur >= 15))
+		|| ((badges == 4) && (levelCur >= 18))
+		|| ((badges == 5) && (levelCur >= 22))
+		|| ((badges == 6) && (levelCur >= 24))
+		|| ((badges == 7) && (levelCur >= 27)))
+		{
+			 exp = exp * 3 / 2; //1.5x experience
+		}
+		
 		if (gainingExp == 0)
 		{
 			exp = 0;
 		}
 
-        if (totalMonsWithExpShare) {
+        if (totalMonsWithExpShare)
+		{
             battleCtx->gainedExp = (exp / 2) / totalMonsGainingExp;
 
-            if (battleCtx->gainedExp == 0) {
+            if (battleCtx->gainedExp == 0)
+			{
                 battleCtx->gainedExp = 1;
             }
 
             battleCtx->sharedExp = (exp / 2) / totalMonsWithExpShare;
 
-            if (battleCtx->sharedExp == 0) {
+            if (battleCtx->sharedExp == 0)
+			{
                 battleCtx->sharedExp = 1;
             }
-        } else {
+        }
+		else
+		{
             battleCtx->gainedExp = exp / totalMonsGainingExp;
 
-            if (battleCtx->gainedExp == 0) {
+            if (battleCtx->gainedExp == 0)
+			{
                 battleCtx->gainedExp = 1;
             }
 
             battleCtx->sharedExp = 0;
         }
-		
-    } else {
+    }
+	else
+	{
         BattleScript_Iter(battleCtx, jump);
     }
 

@@ -35,7 +35,7 @@
         "EGG_GROUP_FLYING"
     ],
     "abilities": [
-        "ABILITY_MAGIC_GUARD",
+        "ABILITY_MAGIC_BOUNCE",
         "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
@@ -107,10 +107,11 @@
             "42": "MOVE_FUTURE_SIGHT",
 			"44": "MOVE_PSYCHIC",
             "47": "MOVE_OMINOUS_WIND",
-            "54": [
+            "49": [
                 "MOVE_POWER_SWAP",
                 "MOVE_GUARD_SWAP"
-            ]
+            ],
+			"51": "MOVE_KINESIS"
         },
         "tutor": [
             "MOVE_OMINOUS_WIND",

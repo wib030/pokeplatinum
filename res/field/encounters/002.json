@@ -170,12 +170,12 @@
         {
             "level_max": 25,
             "level_min": 10,
-            "species": "SPECIES_REMORAID"
+            "species": "SPECIES_RELICANTH"
         },
         {
             "level_max": 25,
             "level_min": 10,
-            "species": "SPECIES_REMORAID"
+            "species": "SPECIES_RELICANTH"
         }
     ],
     "super_rod_rate": 100,
