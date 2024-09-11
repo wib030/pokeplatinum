@@ -4388,15 +4388,15 @@
 	</row>
 	<row id="pl_msg_00000368_01093" index="1093">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} maxed its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} drastically raised its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01094" index="1094">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} maxed its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} drastically raised\nits {STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01095" index="1095">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} maxed its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} drastically raised\nits {STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01096" index="1096">
 		<attribute name="window_context_name">used</attribute>

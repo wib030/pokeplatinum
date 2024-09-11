@@ -2192,11 +2192,11 @@
 #define pl_msg_00000368_01091 1091
 // The foe’s {STRVAR_1 1, 0, 0} is hurt\nby its {STRVAR_1 5, 1, 0}!
 #define pl_msg_00000368_01092 1092
-// {STRVAR_1 1, 0, 0} maxed its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!
+// {STRVAR_1 1, 0, 0} drastically raised its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!
 #define pl_msg_00000368_01093 1093
-// The wild {STRVAR_1 1, 0, 0} maxed its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!
+// The wild {STRVAR_1 1, 0, 0} drastically raised\nits {STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!
 #define pl_msg_00000368_01094 1094
-// The foe’s {STRVAR_1 1, 0, 0} maxed its\n{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!
+// The foe’s {STRVAR_1 1, 0, 0} drastically raised\nits {STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!
 #define pl_msg_00000368_01095 1095
 // {STRVAR_1 1, 0, 0} lost some HP\nbecause of its {STRVAR_1 5, 1, 0}!
 #define pl_msg_00000368_01096 1096

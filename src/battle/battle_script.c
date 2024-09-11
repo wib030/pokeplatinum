@@ -2600,14 +2600,15 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
         u16 exp = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, MON_DATA_PERSONAL_BASE_EXP);
         exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 7;
 		
-		if (((badges == 0) && (levelCur <= 6))
-		|| ((badges == 1) && (levelCur >= 11))
-		|| ((badges == 2) && (levelCur >= 13))
-		|| ((badges == 3) && (levelCur >= 15))
-		|| ((badges == 4) && (levelCur >= 18))
-		|| ((badges == 5) && (levelCur >= 22))
-		|| ((badges == 6) && (levelCur >= 24))
-		|| ((badges == 7) && (levelCur >= 27)))
+		if (((badges == 0) && (levelCur <= 6)) //Half the level cap of 13
+		|| ((badges == 1) && (levelCur <= 11)) //Half the level cap of 22
+		|| ((badges == 2) && (levelCur <= 13)) //Half the level cap of 26
+		|| ((badges == 3) && (levelCur <= 15)) //Half the level cap of 31
+		|| ((badges == 4) && (levelCur <= 18)) //Half the level cap of 36
+		|| ((badges == 5) && (levelCur <= 22)) //Half the level cap of 45
+		|| ((badges == 6) && (levelCur <= 24)) //Half the level cap of 49
+		|| ((badges == 7) && (levelCur <= 27)) //Half the level cap of 54
+		|| ((badges == 8) && (levelCur <= 27))) //Half the previous level cap of 54
 		{
 			 exp = exp * 3 / 2; //1.5x experience
 		}
