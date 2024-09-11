@@ -2702,7 +2702,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     }
     else if ((moveType == TYPE_GROUND)
 	&& battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
-    && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN == FALSE)
+    && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
     && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
 	{      
         *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
