@@ -278,7 +278,7 @@
 #define pl_msg_00000610_00134 134
 // Users ATK and SP. ATK\nstats 1.3x in Sandstorm.
 #define pl_msg_00000610_00135 135
-// Bounces back certain moves\nused near this Pokémon.
+// Bounces back certain\nmoves near this Pokémon.
 #define pl_msg_00000610_00136 136
 // Protects the Pokémon\nfrom recoil damage.
 #define pl_msg_00000610_00137 137

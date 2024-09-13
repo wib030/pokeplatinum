@@ -547,7 +547,7 @@
 	</row>
 	<row id="pl_msg_00000610_00136" index="136">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bounces back certain moves\nused near this Pokémon.</language>
+		<language name="English">Bounces back certain\nmoves near this Pokémon.</language>
 	</row>
 	<row id="pl_msg_00000610_00137" index="137">
 		<attribute name="window_context_name">used</attribute>

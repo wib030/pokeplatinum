@@ -2601,14 +2601,14 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
         exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 7;
 		
 		if (((badges == 0) && (levelCur <= 6)) //Level cap of 13
-		|| ((badges == 1) && (levelCur <= 14)) //Level cap of 22
-		|| ((badges == 2) && (levelCur <= 18)) //Level cap of 26
-		|| ((badges == 3) && (levelCur <= 22)) //Level cap of 31
-		|| ((badges == 4) && (levelCur <= 26)) //Level cap of 36
-		|| ((badges == 5) && (levelCur <= 30)) //Level cap of 45
-		|| ((badges == 6) && (levelCur <= 34)) //Level cap of 49
-		|| ((badges == 7) && (levelCur <= 38)) //Level cap of 54
-		|| ((badges == 8) && (levelCur <= 42)))
+		|| ((badges == 1) && (levelCur <= 16)) //Level cap of 22
+		|| ((badges == 2) && (levelCur <= 20)) //Level cap of 26
+		|| ((badges == 3) && (levelCur <= 24)) //Level cap of 31
+		|| ((badges == 4) && (levelCur <= 28)) //Level cap of 36
+		|| ((badges == 5) && (levelCur <= 32)) //Level cap of 45
+		|| ((badges == 6) && (levelCur <= 36)) //Level cap of 49
+		|| ((badges == 7) && (levelCur <= 40)) //Level cap of 54
+		|| ((badges == 8) && (levelCur <= 44)))
 		{
 			 exp = exp * 3 / 2; //1.5x experience
 		}
