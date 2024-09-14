@@ -2559,7 +2559,6 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_GHOST,    TYPE_NORMAL,    TYPE_MULTI_IMMUNE       },
     { TYPE_GHOST,    TYPE_PSYCHIC,   TYPE_MULTI_SUPER_EFF    },
     { TYPE_GHOST,    TYPE_DARK,      TYPE_MULTI_NOT_VERY_EFF },
-    { TYPE_GHOST,    TYPE_STEEL,     TYPE_MULTI_BASE_DAMAGE },
     { TYPE_GHOST,    TYPE_GHOST,     TYPE_MULTI_SUPER_EFF    },
     { TYPE_DRAGON,   TYPE_DRAGON,    TYPE_MULTI_SUPER_EFF    },
     { TYPE_DRAGON,   TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
@@ -2567,7 +2566,6 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_DARK,     TYPE_PSYCHIC,   TYPE_MULTI_SUPER_EFF    },
     { TYPE_DARK,     TYPE_GHOST,     TYPE_MULTI_SUPER_EFF    },
     { TYPE_DARK,     TYPE_DARK,      TYPE_MULTI_NOT_VERY_EFF },
-    { TYPE_DARK,     TYPE_STEEL,     TYPE_MULTI_BASE_DAMAGE },
     { TYPE_STEEL,    TYPE_FIRE,      TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL,    TYPE_WATER,     TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL,    TYPE_ELECTRIC,  TYPE_MULTI_NOT_VERY_EFF },
@@ -3754,13 +3752,13 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 	if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE
             && moveType == TYPE_ELECTRIC
             && attacker != defender) {
-        subscript = subscript_lightning_rod_redirected;
+        subscript = subscript_lightning_rod_boost;
     }
 	
 	if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN) == TRUE
             && moveType == TYPE_WATER
             && attacker != defender) {
-        subscript = subscript_lightning_rod_redirected;
+        subscript = subscript_lightning_rod_boost;
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE
