@@ -2762,6 +2762,16 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 	{
 		*moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
     }
+    else if ((moveType == TYPE_FIRE)
+	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE))
+	{
+		*moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+    }
+    else if ((moveType == TYPE_ICE)
+	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE))
+	{
+		*moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+    }
 	else if ((powderMove == TRUE)
 	&& (MON_HAS_TYPE(battleCtx->defender, TYPE_GRASS) || (defenderItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)))
 	{
