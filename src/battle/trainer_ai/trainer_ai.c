@@ -4053,7 +4053,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i, j;
-    u8 defender1, defender2;
+    u8 defender1, defender2, defender;
     u8 aiSlot1, aiSlot2;
     u16 move;
     int type;
@@ -4078,25 +4078,132 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         move = battleCtx->battleMons[battler].moves[i];
         type = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
 
-        if (move && MOVE_DATA(move).power) {
-            numMoves++;
+        // Check if there is a choice-locked move.
+        if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
 
-            effectiveness = 0;
-            if (battleCtx->battleMons[defender1].curHP) {
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender1, 0, &effectiveness);
+            // Only the choice-locked move need be considered.
+            if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove == battleCtx->battleMons[battler].moves[i]) {
+
+                effectiveness = 0;
+                if (battleCtx->battleMons[defender1].curHP) {
+                    BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender1, 0, &effectiveness);
+                }
+
+                // Here we check through all the possible move status flags that could be tripped by ApplyTypeChart.
+                // Switch if the move has less than neutral effectiveness when it connects.
+                if ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
+                    || (effectiveness & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
+                    || (effectiveness & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)) {
+                        
+                    return TRUE;
+                }
+
+                else if (effectiveness & MOVE_STATUS_WONDER_GUARD) {
+
+                    return TRUE;
+                }
+
+                else if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY)
+                    && ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE)) {
+                        
+                    return TRUE;
+                }
+
+                else if ((effectiveness & MOVE_STATUS_IMMUNE)
+                    && ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE)
+                    && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE)
+                    && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)) {
+
+                    return TRUE;
+                }
+
+                else if ((effectiveness & MOVE_STATUS_LEVITATED)
+                    || (effectiveness & MOVE_STATUS_MAGNET_RISE)) {
+
+                    return TRUE;
+                }
+
+                else if (effectiveness & MOVE_STATUS_INEFFECTIVE) {
+                        
+                    return TRUE;
+                }
+
             }
+           
+        }
 
-            if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                return FALSE;
-            }
+        // Otherwise, there is no choice locked move. Calculate switch as usual
+        else {
 
-            effectiveness = 0;
-            if (battleCtx->battleMons[defender2].curHP) {
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender2, 0, &effectiveness);
-            }
+            if (move && MOVE_DATA(move).power) {
 
-            if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                return FALSE;
+                for (j = 0; j < 2; j++) {
+
+                    effectiveness = 0;
+
+                    if (j = 0) {
+                        defender = defender1;
+                    }
+
+                    if (j = 1) {
+                        defender = defender2;
+                    }
+
+                    if (battleCtx->battleMons[defender].curHP) {
+                        BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
+                    }
+
+                    if ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE) {
+
+                        // Move is immune but not resisted
+                        if (effectiveness & MOVE_STATUS_IMMUNE) {
+
+                            // Factor immunity ignoring for ability and items (i.e. Normal or Poison type)
+                            if ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)
+                            || (effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY)) {
+
+                                // 1 in 3 chance to consider a switch for each neutral move.
+                                // Explanation of switch chances in comment block below.
+                                if (BattleSystem_RandNext(battleSys) % 3 < 2) {
+
+                                    return FALSE;
+                                }
+                            }
+                        }
+
+                        // Move is either basic effectiveness or super effective at this point
+                        else {
+                            // Check that no immunity abilities or items will activate
+                            if (((effectiveness & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_LEVITATED) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_MAGNET_RISE) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) == FALSE)
+                            ){
+                                numMoves++;
+                                if ((effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY)
+                                || (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                                    // Always stay in if we have a better-than-neutral hit
+                                    return FALSE;
+                                }
+                                // The move should be a neutral hit at this point
+                                else {
+                                    // Each neutral move gives a 2/3 chance not to switch,
+                                    // or a 1/3 chance to still consider switching.
+                                    // This means 33% chance to switch with 1 neutral,
+                                    // 11% chance to switch with 2 neutral,
+                                    // 3.7% chance to switch with 3 neutral,
+                                    // and 1.2% chance to switch with 4 neutral.
+                                    if (BattleSystem_RandNext(battleSys) % 3 < 2) {
+
+                                        return FALSE;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -4178,7 +4285,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     // For each of the AI's active party Pokemon on the bench, check if any of them have a
     // damaging move which is normally-effective against either of the player's active
     // Pokemon on the battlefield. If any such Pokemon on the bench exists, switch to it
-    // 50% of the time.
+    // 33% of the time.
     for (i = start; i < end; i++) {
         mon = BattleSystem_PartyPokemon(battleSys, battler, i);
 
@@ -4207,7 +4314,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             &effectiveness);
                     }
 
-                    if (effectiveness == 0 && BattleSystem_RandNext(battleSys) % 2 == 0) {
+                    if (effectiveness == 0 && BattleSystem_RandNext(battleSys) % 3 == 0) {
                         battleCtx->aiSwitchedPartySlot[battler] = i;
                         return TRUE;
                     }
@@ -4225,7 +4332,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             &effectiveness);
                     }
 
-                    if (effectiveness == 0 && BattleSystem_RandNext(battleSys) % 2 == 0) {
+                    if (effectiveness == 0 && BattleSystem_RandNext(battleSys) % 3 == 0) {
                         battleCtx->aiSwitchedPartySlot[battler] = i;
                         return TRUE;
                     }
