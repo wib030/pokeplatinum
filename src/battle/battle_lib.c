@@ -2743,7 +2743,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 		*moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM;
     }
     else if ((moveType == TYPE_POISON)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_CORROSION) == TRUE))
+	&& (Battler_Ability(battleCtx, attacker) == ABILITY_CORROSION))
 	{
         *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
     }
@@ -2756,21 +2756,6 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE))
 	{
 		*moveStatusMask |= MOVE_STATUS_TYPE_WEAKNESS_ABILITY;
-    }
-    else if ((moveType == TYPE_FIRE)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_HEATPROOF) == TRUE))
-	{
-		*moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
-    }
-    else if ((moveType == TYPE_FIRE)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE))
-	{
-		*moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
-    }
-    else if ((moveType == TYPE_ICE)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE))
-	{
-		*moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
     }
 	else if ((powderMove == TRUE)
 	&& (MON_HAS_TYPE(battleCtx->defender, TYPE_GRASS) || (defenderItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)))

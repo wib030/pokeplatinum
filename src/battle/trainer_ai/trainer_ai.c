@@ -4183,7 +4183,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             ){
                                 numMoves++;
                                 if ((effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY)
-                                || (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                                || (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)) {
                                     // Always stay in if we have a better-than-neutral hit
                                     return FALSE;
                                 }
