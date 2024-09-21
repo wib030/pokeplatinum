@@ -4208,7 +4208,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    // If we have more than 1 attacking move, do not switch.
+    // If we have more than 1 neutral attacking move, do not switch.
     if (numMoves < 2) {
         return FALSE;
     }
@@ -4621,6 +4621,102 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
     return FALSE;
 }
 
+
+/**
+ * @brief Check if the AI has a party member with a super-effective move, constrained
+ * to mons with a certain effectiveness matchup against the move that last hit us.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler               The AI's battler.
+ * @param checkEffectiveness    The desired effectiveness mask against the last move.
+ * @param rand                  Random odds to switch, if conditions are met.
+ * @return TRUE if the AI should switch, FALSE if not.
+ */
+ /*
+static BOOL AI_HasPartyMemberWithHigherSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand)
+{
+    int i, j;
+    u8 aiSlot1, aiSlot2;
+    u16 move;
+    int moveType;
+    u32 effectiveness;
+    int start, end;
+    Pokemon *mon;
+
+    if (battleCtx->moveHit[battler] == MOVE_NONE || battleCtx->moveHitBattler[battler] == BATTLER_NONE) {
+        return FALSE;
+    }
+
+    // If the last move that hit us is a status move, do not switch.
+    if (MOVE_DATA(battleCtx->moveHit[battler]).power == 0) {
+        return FALSE;
+    }
+
+    aiSlot1 = battler;
+    if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG) || (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_2vs2)) {
+        aiSlot2 = aiSlot1;
+    } else {
+        aiSlot2 = BattleSystem_Partner(battleSys, battler);
+    }
+
+    start = 0;
+    end = BattleSystem_PartyCount(battleSys, battler);
+
+    for (i = start; i < end; i++) {
+        mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+
+        if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                && i != battleCtx->selectedPartySlot[aiSlot1]
+                && i != battleCtx->selectedPartySlot[aiSlot2]
+                && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
+                && i != battleCtx->aiSwitchedPartySlot[aiSlot2]) {
+            effectiveness = 0;
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, battleCtx->moveHitBattler[battler], battleCtx->moveHit[battler]);
+
+            BattleSystem_CalcEffectiveness(battleCtx,
+                battleCtx->moveHit[battler],
+                moveType,
+                Battler_Ability(battleCtx, battleCtx->moveHitBattler[battler]),
+                Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
+                BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT),
+                Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL),
+                Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL),
+                &effectiveness);
+
+            if (effectiveness & checkEffectiveness) {
+                for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                    move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                    moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
+                    if (move) {
+                        effectiveness = 0;
+                        BattleSystem_CalcEffectiveness(battleCtx,
+                            move,
+                            moveType,
+                            Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
+                            Battler_Ability(battleCtx, battleCtx->moveHitBattler[battler]),
+                            Battler_HeldItemEffect(battleCtx, battleCtx->moveHitBattler[battler]),
+                            BattleMon_Get(battleCtx, battleCtx->moveHitBattler[battler], BATTLEMON_TYPE_1, NULL),
+                            BattleMon_Get(battleCtx, battleCtx->moveHitBattler[battler], BATTLEMON_TYPE_2, NULL),
+                            &effectiveness);
+
+                        if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % rand == 0) {
+                            battleCtx->aiSwitchedPartySlot[battler] = i;
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return FALSE;
+}
+*/
+
 /**
  * @brief Check if the AI's battler is asleep and has Natural Cure + an eligible switch.
  * 
@@ -4723,6 +4819,214 @@ static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleCont
     return numAttackingBoosts >= 4;
 }
 
+static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int i, pivotMoves, moveEffect, moveType, hpRange, switchTurn;
+    u8 ability;
+    u16 move;
+    u32 abilityFieldCondition, effectiveness;
+
+    ability = battleCtx->battleMons[battler].ability;
+
+    if (ability == ABILITY_SAND_STREAM) {
+        abilityFieldCondition = FIELD_CONDITION_SANDSTORM;
+    }
+    else if (ability == ABILITY_DRIZZLE) {
+        abilityFieldCondition = FIELD_CONDITION_RAINING;
+    }
+    else if (ability == ABILITY_DROUGHT) {
+        abilityFieldCondition = FIELD_CONDITION_SUNNY;
+    }
+    else if (ability == ABILITY_SNOW_WARNING) {
+        abilityFieldCondition = FIELD_CONDITION_HAILING;
+    }
+    else {
+        abilityFieldCondition = 0;
+    }
+
+    if (abilityFieldCondition) {
+        
+        pivotMoves = 0;
+        effectiveness = 0;
+        switchTurn = battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber;
+        switchTurn += BattleSystem_RandNext(battleSys) % 2;
+        switchTurn += BattleSystem_RandNext(battleSys) % 2;
+        switchTurn += (BattleSystem_RandNext(battleSys) % 2) * (BattleSystem_RandNext(battleSys) % 2);
+
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+            move = battleCtx->battleMons[battler].moves[i];
+            moveEffect = MOVE_DATA(move).effect;
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+
+            if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+
+                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
+
+                // Only count pivot moves that actually hit.
+                // i.e., ignore Volt Switch vs. Ground and Volt Absorb / Lightning Rod / Motor Drive
+                if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
+                    
+                    pivotMoves++;
+                }
+            }
+        }
+
+        // If we have a pivot move like U-turn or Volt Switch, we should
+        // deprioritize a hard switch when we are faster
+        if (pivotMoves > 0) {
+            
+            if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler, BATTLER_OPP(battler), TRUE) == COMPARE_SPEED_FASTER) {
+
+                return FALSE;
+            }
+            else {
+
+                hpRange = (battleCtx->battleMons[battler].maxHP * 2 / 5) + (((battleCtx->battleMons[battler].maxHP / 10) * (BattleSystem_RandNext(battleSys) % 11)) / 10);
+                // Hard switch if our weathermon is at or below 40 - 50%
+                if (battleCtx->battleMons[battler].curHP <= hpRange) {
+                    
+                    return TRUE;
+                }
+                else {
+
+                    return FALSE;
+                }
+            }
+        }
+        else {
+            
+            if (battleCtx->totalTurns >= switchTurn) {
+
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler) {
+    
+    int i, partyCount;
+    u8 ability, desiredWeatherAbility;
+    u32 abilityFieldCondition, fieldConditions;
+    Pokemon *mon;
+
+    partyCount = BattleSystem_PartyCount(battleSys, battler);
+    ability = battleCtx->battleMons[battler].ability;
+    desiredWeatherAbility = ABILITY_NONE;
+
+    if (ability == ABILITY_SAND_FORCE
+        || ability == ABILITY_SAND_VEIL) {
+
+        abilityFieldCondition = FIELD_CONDITION_SANDSTORM;
+        desiredWeatherAbility = ABILITY_SAND_STREAM;
+    }
+    else if (ability == ABILITY_SWIFT_SWIM
+        || ability == ABILITY_RAIN_DISH
+        || ability == ABILITY_DRY_SKIN
+        || ability == ABILITY_HYDRATION) {
+
+        abilityFieldCondition = FIELD_CONDITION_RAINING;
+        desiredWeatherAbility = ABILITY_DRIZZLE;
+    }
+    else if (ability == ABILITY_CHLOROPHYLL
+        || ability == ABILITY_SOLAR_POWER
+        || ability == ABILITY_LEAF_GUARD
+        || ability == ABILITY_FLOWER_GIFT) {
+
+        abilityFieldCondition = FIELD_CONDITION_SUNNY;
+        desiredWeatherAbility = ABILITY_DROUGHT;
+    }
+    else if (ability == ABILITY_ICE_BODY
+        || ability == ABILITY_SNOW_CLOAK
+        || ability == ABILITY_SLUSH_RUSH) {
+
+        abilityFieldCondition = FIELD_CONDITION_HAILING;
+        desiredWeatherAbility = ABILITY_SNOW_WARNING;
+    }
+    else if (ability == ABILITY_FORECAST) {
+        
+        abilityFieldCondition = FIELD_CONDITION_CASTFORM;
+    }
+    else {
+        abilityFieldCondition = 0;
+    }
+
+    // Don't switch if the field condition we need is active
+    if (battleCtx->fieldConditionsMask & abilityFieldCondition) {
+
+        return FALSE;
+    }
+    // The field condition we need is not active
+    else {
+
+        for (i = 0; i < partyCount; i++) {
+
+            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+
+            // Only consider alive teammates
+            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+
+                // If our weather setter is alive, we should consider switching
+                if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == desiredWeatherAbility) {
+
+                    // These abilities don't care that much, so they only switch sometimes
+                    if (ability == ABILITY_SAND_FORCE
+                        || ability == ABILITY_SAND_VEIL
+                        || ability == ABILITY_SNOW_CLOAK) {
+
+                        if ((((BattleSystem_RandNext(battleSys) % 6) == 0)
+                            && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
+                        ) {
+                            return TRUE;
+                        }
+                    }
+                    else {
+                        // Don't switch if heavily boosted
+                        if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8)) {
+                                
+                            return TRUE;
+                        }
+                    }
+                }
+
+                // Castform will need to switch more because he sucks
+                if (ability == ABILITY_FORECAST) {
+
+                    if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DROUGHT
+                        || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DRIZZLE
+                        || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_SNOW_WARNING) {
+
+                        if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8)) {
+                            
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // At this point, our weather setter doesn't exist or is KO'd. No need to switch.
+    return FALSE;
+}
+
 /**
  * @brief Check if the AI should switch for turn.
  * 
@@ -4801,6 +5105,14 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         }
 
         if (AI_IsAsleepWithNaturalCure(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (AI_ShouldSwitchWeatherSetter(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (AI_ShouldSwitchWeatherDependent(battleSys, battleCtx, battler) {
             return TRUE;
         }
 
