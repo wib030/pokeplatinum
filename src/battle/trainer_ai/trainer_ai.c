@@ -4979,7 +4979,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                         || ability == ABILITY_SAND_VEIL
                         || ability == ABILITY_SNOW_CLOAK) {
 
-                        if ((((BattleSystem_RandNext(battleSys) % 6) == 0)
+                        if (((BattleSystem_RandNext(battleSys) % 6) == 0)
                             && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
@@ -4995,7 +4995,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8)) {
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
                                 
                             return TRUE;
                         }
@@ -5013,7 +5013,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8)) {
+                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
                             
                             return TRUE;
                         }
@@ -5112,7 +5112,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (AI_ShouldSwitchWeatherDependent(battleSys, battleCtx, battler) {
+        if (AI_ShouldSwitchWeatherDependent(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
