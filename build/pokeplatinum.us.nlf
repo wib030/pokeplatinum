@@ -6,9 +6,9 @@ H,"main_header.sbin","main_files.sbin",462
 7,"*","../subprojects/NitroSDK-4.2.30001/components/ichneumon_sub.sbin","*","../subprojects/NitroSDK-4.2.30001/components/ichneumon_sub_defs.sbin","*"
 
 # File Images
-F,00000000,00004000,ff,ffff,ffff,"main_header.sbin","*",66ef653a,512,1
+F,00000000,00004000,ff,ffff,ffff,"main_header.sbin","*",66f3c4f6,512,1
 F,00004000,00106484,ff,ffff,0008,"main.sbin","*",66ef6538,512,1
-F,00106600,00107540,ff,ffff,0014,"main_table.sbin","*",66ef653a,512,1
+F,00106600,00107540,ff,ffff,0014,"main_table.sbin","*",66f3c4f6,512,1
 F,00107600,00107620,ff,0000,ffff,"overlay0.sbin","*",66ef6538,512,1
 F,00107800,00107820,ff,0001,ffff,"overlay1.sbin","*",66ef6538,512,1
 F,00107a00,00107a20,ff,0002,ffff,"overlay2.sbin","*",66ef6538,512,1
@@ -132,7 +132,7 @@ F,0040bc00,0040d540,ff,0077,ffff,"overlay119.sbin","*",66ef6538,512,1
 F,0040d600,0040dac0,ff,0078,ffff,"overlay120.sbin","*",66ef6538,512,1
 F,0040dc00,0040e240,ff,0079,ffff,"overlay121.sbin","*",66ef6538,512,1
 F,0040e400,00435bfc,ff,ffff,000c,"../subprojects/NitroSDK-4.2.30001/components/ichneumon_sub.sbin","*",6659ca16,512,1
-F,00435c00,004377b4,ff,ffff,0010,"main_files.sbin","*",66ef653a,512,1
+F,00435c00,004377b4,ff,ffff,0010,"main_files.sbin","*",66f3c4f6,512,1
 F,00437800,00438670,ff,ffff,0012,"*FILEALLOC","*",00000000,512,1
 F,00438800,00439040,ff,ffff,001a,"platinum.us/banner.bnr","*",66c72551,512,1
 F,00439200,004393ea,ff,012c,ffff,"res/prebuilt/data/UTF16.dat","/data/UTF16.dat",6659c9d2,512,0
@@ -299,8 +299,8 @@ F,0371de00,0371eb14,ff,01a2,ffff,"res/prebuilt/poketool/personal/growtbl.narc","
 F,0371ec00,0371f914,ff,01a4,ffff,"res/pokemon/pl_growtbl.narc","/poketool/personal/pl_growtbl.narc",66c72555,512,0
 F,0371fa00,0371fdf8,ff,01a6,ffff,"res/prebuilt/poketool/personal/pms.narc","/poketool/personal/pms.narc",6659c9d2,512,0
 F,0371fe00,03724e4c,ff,01a7,ffff,"res/pokemon/wotbl.narc","/poketool/personal/wotbl.narc",66e5668d,512,0
-F,03725000,0372b5b4,ff,01b7,ffff,"res/trainers/trdata.narc","/poketool/trainer/trdata.narc",66ed1f9d,512,0
-F,0372b600,037327d4,ff,01b8,ffff,"res/trainers/trpoke.narc","/poketool/trainer/trpoke.narc",66ed1f9d,512,0
+F,03725000,0372b5b4,ff,01b7,ffff,"res/trainers/trdata.narc","/poketool/trainer/trdata.narc",66f3c4f6,512,0
+F,0372b600,037327c0,ff,01b8,ffff,"res/trainers/trpoke.narc","/poketool/trainer/trpoke.narc",66f3c4f6,512,0
 F,03732800,03734f40,ff,01bb,ffff,"res/prebuilt/poketool/trmsg/trtbl.narc","/poketool/trmsg/trtbl.narc",6659c9d2,512,0
 F,03735000,0373577c,ff,01bc,ffff,"res/prebuilt/poketool/trmsg/trtblofs.narc","/poketool/trmsg/trtblofs.narc",6659c9d2,512,0
 F,03735800,0373a704,ff,0099,ffff,"res/prebuilt/battle/graphic/b_bag_gra.narc","/battle/graphic/b_bag_gra.narc",6659c9d2,512,0
