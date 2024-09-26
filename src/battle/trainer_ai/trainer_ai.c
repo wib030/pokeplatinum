@@ -5006,6 +5006,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
         desiredWeatherAbility = ABILITY_DRIZZLE;
     }
     else if (ability == ABILITY_CHLOROPHYLL
+		|| ability == ABILITY_CHLOROPLAST
         || ability == ABILITY_SOLAR_POWER
         || ability == ABILITY_LEAF_GUARD
         || ability == ABILITY_FLOWER_GIFT) {
