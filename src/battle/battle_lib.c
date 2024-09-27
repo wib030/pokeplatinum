@@ -9412,7 +9412,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     u16 move;
     int moveType;
     u8 battlersDisregarded;
-    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore;
+    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore, speedMultiplier;
     u8 picked = 6;
     u8 slot1, slot2;
     u32 moveStatusFlags;
@@ -9462,6 +9462,22 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
                 monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
                 monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+                // 1.1x if faster
+                if (battleCtx->battleMons[battler].defender > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                    speedMultiplier = 11;
+                }
+                // 1.0x if same speed
+                else if (battleCtx->battleMons[battler].defender == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                    speedMultiplier = 10;
+                }
+                // 0.9x if slower
+                else {
+                    
+                    speedMultiplier = 9;
+                }
 
                 // Bug: this operation potentially overflows when considering a mono-type Pokemon
                 // with a quad-effective matchup against a defender. e.g., Machamp (Fighting/Fighting)
@@ -9760,8 +9776,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 else {
                     score += attackScoreType2;
                 }
+
                 // Slightly favor offense
                 score += (BattleSystem_RandNext(battleSys) & 7);
+
+                // Apply speed multiplier
+                score *= speedMultiplier;
+                score /= 10;
 
                 // Subtract defend score for type 1
                 if (score <= defendScoreType1 + 1) {
