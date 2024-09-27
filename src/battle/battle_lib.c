@@ -3878,7 +3878,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 	int colorChange1Pos, colorChange2Pos;
 	int colorChangeTarget = NULL;
 	int targetType1, targetType2;
-	int abilityMax = ABILITY_COTTON_DOWN;
+	int abilityMax = ABILITY_SHARPNESS;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
@@ -7303,6 +7303,21 @@ static const u16 sBitingMoves[] = {
 	MOVE_THUNDER_FANG
 };
 
+static const u16 sSlicingMoves[] = {
+    MOVE_AERIAL_ACE,
+	MOVE_AIR_CUTTER,
+	MOVE_AIR_SLASH,
+	MOVE_FURY_CUTTER,
+	MOVE_LEAF_BLADE,
+	MOVE_NIGHT_SLASH,
+	MOVE_PSYCHO_CUT,
+	MOVE_SLASH,
+	MOVE_X_SCISSOR,
+	MOVE_CROSS_POISON,
+	MOVE_CUT,
+	MOVE_RAZOR_LEAF
+};
+
 static const u16 sPulseMoves[] = {
     MOVE_AURA_SPHERE,
 	MOVE_DARK_PULSE,
@@ -7694,6 +7709,13 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
 	for (i = 0; i < NELEMS(sBitingMoves); i++) {
         if (sBitingMoves[i] == move && attackerParams.ability == ABILITY_STRONG_JAW) {
+            movePower = movePower * 3 / 2;
+            break;
+        }
+    }
+	
+	for (i = 0; i < NELEMS(sSlicingMoves); i++) {
+        if (sSlicingMoves[i] == move && attackerParams.ability == ABILITY_SHARPNESS) {
             movePower = movePower * 3 / 2;
             break;
         }
@@ -8248,6 +8270,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
 	for (i = 0; i < NELEMS(sBitingMoves); i++) {
         if (sBitingMoves[i] == move && attackerParams.ability == ABILITY_STRONG_JAW) {
+            movePower = movePower * 15 / 10;
+            break;
+        }
+    }
+	
+	for (i = 0; i < NELEMS(sSlicingMoves); i++) {
+        if (sSlicingMoves[i] == move && attackerParams.ability == ABILITY_SHARPNESS) {
             movePower = movePower * 15 / 10;
             break;
         }

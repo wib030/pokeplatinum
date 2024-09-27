@@ -6045,6 +6045,13 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
             if (Battler_Ability(battleCtx, battler) == ABILITY_SOLAR_POWER) {
                 battleCtx->scriptTemp = WEATHER_EFFECT_SOLAR_POWER;
             }
+			
+			if (battleCtx->battleMons[battler].curHP
+            && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+            && Battler_Ability(battleCtx, battler) == ABILITY_PHOTOSYNTHESIS)
+			{
+                battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+            }
         }
 
         if (WEATHER_IS_HAIL

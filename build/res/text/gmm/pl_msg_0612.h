@@ -302,5 +302,9 @@
 #define pl_msg_00000610_00146 146
 // Lowers attackers Attack\nstat when damaged.
 #define pl_msg_00000610_00147 147
+// Recovers 1/16 of Max\nHP each turn in sun.
+#define pl_msg_00000610_00148 148
+// Slicing moves gain\n1.5x power.
+#define pl_msg_00000610_00149 149
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H

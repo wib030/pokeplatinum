@@ -593,4 +593,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">COTTON DOWN</language>
 	</row>
+	<row id="pl_msg_00000610_00148" index="148">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">PHOTOSYNTHESIS</language>
+	</row>
+	<row id="pl_msg_00000610_00149" index="149">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SHARPNESS</language>
+	</row>
 </body>

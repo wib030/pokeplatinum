@@ -593,4 +593,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Lowers attackers Attack\nstat when damaged.</language>
 	</row>
+	<row id="pl_msg_00000610_00148" index="148">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Recovers 1/16 of Max\nHP each turn in sun.</language>
+	</row>
+	<row id="pl_msg_00000610_00149" index="149">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Slicing moves gain\n1.5x power.</language>
+	</row>
 </body>
