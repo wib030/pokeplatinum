@@ -4082,7 +4082,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                             return TRUE;
                         }
                         // If this party member has chip damage or ability-removing move, switch 1/3 of the time
-                        else if (moveClass == CLASS_STATUS
+                        if (moveClass == CLASS_STATUS
                                 || moveEffect == BATTLE_EFFECT_BIND_HIT
                                 || moveEffect == BATTLE_EFFECT_WHIRLPOOL) {
                             for (chipDamageIdx = 0; sChipDamageMoves[chipDamageIdx] != 0xFFFF; chipDamageIdx++) {
@@ -4090,10 +4090,12 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                                     if (BattleSystem_RandNext(battleSys) % 3 == 0) {
                                         if (moveEffect == BATTLE_EFFECT_CURSE) {
                                             if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
+                                                battleCtx->aiSwitchedPartySlot[battler] = i
                                                 return TRUE;
                                             }
                                         }
                                         else {
+                                        battleCtx->aiSwitchedPartySlot[battler] = i
                                         return TRUE;
                                         }
                                     }
@@ -4103,6 +4105,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                                 if (moveEffect == sRemoveAbilityMoves[removeAbilityIdx]
                                     && moveEffect != BATTLE_EFFECT_SWITCH_ABILITIES) {
                                         if (BattleSystem_RandNext(battleSys) % 3 == 0) {
+                                            battleCtx->aiSwitchedPartySlot[battler] = i
                                             return TRUE;
                                         }
                                 }
@@ -4960,6 +4963,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                 // Hard switch if our weathermon is at or below 40 - 50%
                 if (battleCtx->battleMons[battler].curHP <= hpRange) {
                     
+                    battleCtx->aiSwitchedPartySlot[battler] = 6
                     return TRUE;
                 }
                 else {
@@ -4972,6 +4976,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
             
             if (battleCtx->totalTurns >= switchTurn) {
 
+                battleCtx->aiSwitchedPartySlot[battler] = 6
                 return TRUE;
             }
         }
