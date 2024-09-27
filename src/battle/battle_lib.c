@@ -8512,7 +8512,7 @@ enum { iMax = sizeof(sCriticalStageRates) / sizeof(sCriticalStageRates[0]) };
 
 static const u8 sCriticalStageModuli[iMax][2] = {
     { 24,   24 },
-    { 16,   16 },
+    { 16,   6 },
     { 2,    2 },
     { 1,    1 },
     { 1,    1 },
