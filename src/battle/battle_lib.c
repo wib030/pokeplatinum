@@ -9480,12 +9480,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
                 // 1.1x if faster
-                if (Pokemon_GetValue(defender, MON_DATA_SPEED, NULL) > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                     speedMultiplier = 11;
                 }
                 // 1.0x if same speed
-                else if (Pokemon_GetValue(defender, MON_DATA_SPEED, NULL) == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                     speedMultiplier = 10;
                 }
