@@ -4966,7 +4966,6 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                 // Hard switch if our weathermon is at or below 40 - 50%
                 if (battleCtx->battleMons[battler].curHP <= hpRange) {
                     
-                    battleCtx->aiSwitchedPartySlot[battler] = 6;
                     return TRUE;
                 }
                 else {
@@ -4979,7 +4978,6 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
             
             if (battleCtx->totalTurns >= switchTurn) {
 
-                battleCtx->aiSwitchedPartySlot[battler] = 6;
                 return TRUE;
             }
         }
