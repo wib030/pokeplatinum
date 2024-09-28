@@ -9,35 +9,39 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_MEGANIUM",
+            "species": "SPECIES_FLOATZEL",
             "form": 0,
-            "level": 10,
-            "item": "ITEM_NONE",
+            "level": 100,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-				"MOVE_U_TURN",
-				"MOVE_MEGA_DRAIN"
+				"MOVE_AQUA_JET",
+				"MOVE_AQUA_TAIL",
+				"MOVE_CRUNCH",
+				"MOVE_ICE_FANG"
             ],
             "power": 255,
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_VILEPLUME",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 10,
-            "item": "ITEM_NONE",
+            "level": 100,
+            "item": "ITEM_DAMP_ROCK",
             "moves": [
-				"MOVE_SPLASH"
+				"MOVE_U_TURN"
             ],
             "power": 255,
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_CLAYDOL",
+            "species": "SPECIES_MUK",
             "form": 0,
-            "level": 10,
-            "item": "ITEM_NONE",
+            "level": 100,
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-				"MOVE_SPLASH"
+				"MOVE_TOXIC_SPIKES",
+				"MOVE_POISON_JAB",
+				"MOVE_TOXIC"
             ],
             "power": 255,
             "ball_seal": 0
