@@ -35,7 +35,7 @@
         "EGG_GROUP_GRASS"
     ],
     "abilities": [
-        "ABILITY_MAGIC_GUARD",
+        "ABILITY_PHOTOSYNTHESIS",
         "ABILITY_MAGIC_GUARD"
     ],
     "great_marsh_flee_rate": 0,

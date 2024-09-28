@@ -4092,12 +4092,12 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                                     if (BattleSystem_RandNext(battleSys) % 3 == 0) {
                                         if (moveEffect == BATTLE_EFFECT_CURSE) {
                                             if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
-                                                battleCtx->aiSwitchedPartySlot[battler] = i
+                                                battleCtx->aiSwitchedPartySlot[battler] = i;
                                                 return TRUE;
                                             }
                                         }
                                         else {
-                                        battleCtx->aiSwitchedPartySlot[battler] = i
+                                        battleCtx->aiSwitchedPartySlot[battler] = i;
                                         return TRUE;
                                         }
                                     }
@@ -4107,7 +4107,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                                 if (moveEffect == sRemoveAbilityMoves[removeAbilityIdx]
                                     && moveEffect != BATTLE_EFFECT_SWITCH_ABILITIES) {
                                         if (BattleSystem_RandNext(battleSys) % 3 == 0) {
-                                            battleCtx->aiSwitchedPartySlot[battler] = i
+                                            battleCtx->aiSwitchedPartySlot[battler] = i;
                                             return TRUE;
                                         }
                                 }
@@ -5015,6 +5015,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     }
     else if (ability == ABILITY_CHLOROPHYLL
 		|| ability == ABILITY_CHLOROPLAST
+		|| ability == ABILITY_PHOTOSYNTHESIS
         || ability == ABILITY_SOLAR_POWER
         || ability == ABILITY_LEAF_GUARD
         || ability == ABILITY_FLOWER_GIFT) {

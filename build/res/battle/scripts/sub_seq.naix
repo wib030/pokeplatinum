@@ -332,5 +332,6 @@
 #define subscript_cotton_down_activate 323
 #define subscript_random_ability 324
 #define subscript_lightning_rod_boost 325
+#define subscript_bind_start_ability 326
 
 #endif // NARC_SUB_SEQ_NAIX_

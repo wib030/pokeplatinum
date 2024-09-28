@@ -601,4 +601,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Slicing moves gain\n1.5x power.</language>
 	</row>
+	<row id="pl_msg_00000610_00150" index="150">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Inflicts Wrap on contact\nwith Grass move.</language>
+	</row>
 </body>

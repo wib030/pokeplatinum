@@ -9,25 +9,24 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_VILEPLUME",
+            "species": "SPECIES_MEGANIUM",
             "form": 0,
             "level": 10,
-            "item": "ITEM_HEAT_ROCK",
+            "item": "ITEM_NONE",
             "moves": [
-				"MOVE_SPLASH",
-				"MOVE_SUNNY_DAY"
+				"MOVE_U_TURN",
+				"MOVE_MEGA_DRAIN"
             ],
             "power": 255,
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_MACHAMP",
+            "species": "SPECIES_VILEPLUME",
             "form": 0,
             "level": 10,
             "item": "ITEM_NONE",
             "moves": [
-				"MOVE_PECK",
-				"MOVE_BRICK_BREAK"
+				"MOVE_SPLASH"
             ],
             "power": 255,
             "ball_seal": 0

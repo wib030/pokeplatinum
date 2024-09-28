@@ -3878,7 +3878,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 	int colorChange1Pos, colorChange2Pos;
 	int colorChangeTarget = NULL;
 	int targetType1, targetType2;
-	int abilityMax = ABILITY_SHARPNESS;
+	int abilityMax = ABILITY_STRANGLE_WEED;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
@@ -4958,6 +4958,22 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
 			{
 				*subscript = subscript_embargo_start_ability;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_STRANGLE_WEED:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& (MOVE_DATA(battleCtx->moveCur).type == TYPE_GRASS)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				battleCtx->sideEffectMon = battleCtx->defender;
+				battleCtx->msgMoveTemp = MOVE_WRAP;
+				*subscript = subscript_bind_start_ability;
 				result = TRUE;
 			}
 			break;
@@ -9464,12 +9480,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
                 // 1.1x if faster
-                if (battleCtx->battleMons[battler].defender > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                if (Pokemon_GetValue(defender, MON_DATA_SPEED, NULL) > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                     speedMultiplier = 11;
                 }
                 // 1.0x if same speed
-                else if (battleCtx->battleMons[battler].defender == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                else if (Pokemon_GetValue(defender, MON_DATA_SPEED, NULL) == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                     speedMultiplier = 10;
                 }

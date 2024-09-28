@@ -327,4 +327,5 @@ subscript_files = files(
 	'subscript_cotton_down_activate.s',
 	'subscript_random_ability.s',
 	'subscript_lightning_rod_boost.s',
+	'subscript_bind_start_ability.s',
 )

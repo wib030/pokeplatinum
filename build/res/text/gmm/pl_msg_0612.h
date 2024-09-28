@@ -306,5 +306,7 @@
 #define pl_msg_00000610_00148 148
 // Slicing moves gain\n1.5x power.
 #define pl_msg_00000610_00149 149
+// Inflicts Wrap on contact\nwith Grass move.
+#define pl_msg_00000610_00150 150
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H
