@@ -262,6 +262,8 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
 static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
 
@@ -4082,7 +4084,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
                             return TRUE;
                         }
                         // If this party member has chip damage or ability-removing move, switch 1/3 of the time
-                        else if (moveClass == CLASS_STATUS
+                        if (moveClass == CLASS_STATUS
                                 || moveEffect == BATTLE_EFFECT_BIND_HIT
                                 || moveEffect == BATTLE_EFFECT_WHIRLPOOL) {
                             for (chipDamageIdx = 0; sChipDamageMoves[chipDamageIdx] != 0xFFFF; chipDamageIdx++) {
@@ -4548,7 +4550,8 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
     } else if (moveType == TYPE_ELECTRIC) {
         checkAbility[0] = ABILITY_VOLT_ABSORB;
         checkAbility[1] = ABILITY_LIGHTNING_ROD;
-        checkAbilityCount = 2;
+        checkAbility[2] = ABILITY_MOTOR_DRIVE;
+        checkAbilityCount = 3;
     } else if (moveType == TYPE_GROUND) {
         checkAbility[0] = ABILITY_LEVITATE;
         checkAbilityCount = 1;
@@ -5007,6 +5010,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     }
     else if (ability == ABILITY_CHLOROPHYLL
 		|| ability == ABILITY_CHLOROPLAST
+        || ability == ABILITY_PHOTOSYNTHESIS
         || ability == ABILITY_SOLAR_POWER
         || ability == ABILITY_LEAF_GUARD
         || ability == ABILITY_FLOWER_GIFT) {
