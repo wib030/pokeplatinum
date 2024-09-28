@@ -5068,7 +5068,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
                         ) {
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
+
                             return TRUE;
                         }
                     }
@@ -5080,7 +5080,6 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
                             
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
                             return TRUE;
                         }
                     }
@@ -5099,7 +5098,6 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
                             && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
                             
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
                             return TRUE;
                         }
                     }
