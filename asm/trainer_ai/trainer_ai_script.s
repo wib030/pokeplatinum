@@ -1817,6 +1817,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_HealingWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHADOW_FORCE, Expert_ShadowForce
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_96, Expert_LovelyPunch
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN, Expert_FuryCutter
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -3681,10 +3682,12 @@ Expert_Curse:
 Expert_Curse_ChanceForScoreMinus1:
     IfRandomLessThan 85, Expert_Curse_End
     AddToMoveScore -1
+    GoTo Expert_Curse_End
 
 Expert_Curse_ChanceForScoreMinus2:
     IfRandomLessThan 170, Expert_Curse_End
     AddToMoveScore -2
+    GoTo Expert_Curse_End
 
 Expert_Curse_HighChanceScorePlus1:
     IfRandomLessThan 32, Expert_Curse_CheckDefenseStage
@@ -7341,6 +7344,29 @@ Expert_CheckCannotAttract_BothFemale:
     GoTo ScoreMinus2
 
 Expert_CheckCannotAttract_Terminate:
+    PopOrEnd
+
+Expert_FuryCutter:
+    ;Cancel chain if highly resisted, otherwise try to maintain chain
+    ;Extra chance to start a chain on 4x damage
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, ScoreMinus1
+    LoadBattlerPreviousMove AI_BATTLER_ATTACKER
+    LoadEffectOfLoadedMove
+    IfLoadedEqualTo BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN, Expert_FuryCutterChanceForStreak
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Expert_FuryCutterChanceForPlus1
+    GoTo Expert_FuryCutterEnd
+
+Expert_FuryCutterChanceForStreak:
+    IfRandomLessThan 25, Expert_FuryCutterEnd
+    AddToMoveScore 3
+    GoTo Expert_FuryCutterEnd
+
+Expert_FuryCutterChanceForPlus1:
+    IfRandomLessThan 64, Expert_FuryCutterEnd
+    AddToMoveScore 1
+    GoTo Expert_FuryCutterEnd
+
+Expert_FuryCutterEnd:
     PopOrEnd
 
 EvalAttack_Main:
