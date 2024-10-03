@@ -5028,86 +5028,198 @@ static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleCont
 static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i, pivotMoves, moveEffect, moveType, hpRange, switchTurn;
-    u8 ability;
+    u8 ability, heldItemEffect;
     u16 move;
-    u32 abilityFieldCondition, effectiveness;
+    u32 desiredFieldCondition, effectiveness;
+    bool moveSetter, defenderContactAbility, hasNonContactPivot;
 
     ability = battleCtx->battleMons[battler].ability;
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    moveSetter = FALSE;
 
     if (ability == ABILITY_SAND_STREAM) {
-        abilityFieldCondition = FIELD_CONDITION_SANDSTORM;
+        desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
     }
     else if (ability == ABILITY_DRIZZLE) {
-        abilityFieldCondition = FIELD_CONDITION_RAINING;
+        desiredFieldCondition = FIELD_CONDITION_RAINING;
     }
     else if (ability == ABILITY_DROUGHT) {
-        abilityFieldCondition = FIELD_CONDITION_SUNNY;
+        desiredFieldCondition = FIELD_CONDITION_SUNNY;
     }
     else if (ability == ABILITY_SNOW_WARNING) {
-        abilityFieldCondition = FIELD_CONDITION_HAILING;
+        desiredFieldCondition = FIELD_CONDITION_HAILING;
     }
     else {
-        abilityFieldCondition = 0;
+        desiredFieldCondition = 0;
     }
 
-    if (abilityFieldCondition) {
-        
-        pivotMoves = 0;
-        effectiveness = 0;
-        switchTurn = battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber;
-        switchTurn += BattleSystem_RandNext(battleSys) % 2;
-        switchTurn += BattleSystem_RandNext(battleSys) % 2;
-        switchTurn += (BattleSystem_RandNext(battleSys) % 2) * (BattleSystem_RandNext(battleSys) % 2);
+    if (heldItemEffect == HOLD_EFFECT_EXTEND_RAIN ||
+        heldItemEffect == HOLD_EFFECT_EXTEND_SUN ||
+        heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM ||
+        heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
 
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
 
             move = battleCtx->battleMons[battler].moves[i];
             moveEffect = MOVE_DATA(move).effect;
-            moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
 
-            if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+            if (moveEffect == BATTLE_EFFECT_WEATHER_SANDSTORM
+                && heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM) {
 
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
-
-                // Only count pivot moves that actually hit.
-                // i.e., ignore Volt Switch vs. Ground and Volt Absorb / Lightning Rod / Motor Drive
-                if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                    
-                    pivotMoves++;
+                    desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
+                    moveSetter = TRUE;
+                    break;
                 }
-            }
+            if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
+                && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
+
+                    desiredFieldCondition = FIELD_CONDITION_RAINING;
+                    moveSetter = TRUE;
+                    break;
+                }
+            if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
+                && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
+
+                    desiredFieldCondition = FIELD_CONDITION_SUNNY;
+                    moveSetter = TRUE;
+                    break;
+                }
+            if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
+                && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
+
+                    desiredFieldCondition = FIELD_CONDITION_HAILING;
+                    moveSetter = TRUE;
+                    break;
+                }
         }
+    }
 
-        // If we have a pivot move like U-turn or Volt Switch, we should
-        // deprioritize a hard switch when we are faster
-        if (pivotMoves > 0) {
-            
-            if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler, BATTLER_OPP(battler), TRUE) == COMPARE_SPEED_FASTER) {
+    if (desiredFieldCondition) {
 
-                return FALSE;
-            }
-            else {
+        switchTurn = battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber;
+        switchTurn += BattleSystem_RandNext(battleSys) % 2;
+        switchTurn += BattleSystem_RandNext(battleSys) % 2;
+        switchTurn += (BattleSystem_RandNext(battleSys) % 2) * (BattleSystem_RandNext(battleSys) % 2);
 
-                hpRange = (battleCtx->battleMons[battler].maxHP * 2 / 5) + (((battleCtx->battleMons[battler].maxHP / 10) * (BattleSystem_RandNext(battleSys) % 11)) / 10);
-                // Hard switch if our weathermon is at or below 40 - 50%
-                if (battleCtx->battleMons[battler].curHP <= hpRange) {
+        if (battleCtx->totalTurns >= switchTurn) {
+
+            pivotMoves = 0;
+            effectiveness = 0;
+            hasNonContactPivot = FALSE;
+
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+                move = battleCtx->battleMons[battler].moves[i];
+                moveEffect = MOVE_DATA(move).effect;
+                moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+
+                if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+
+                    BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
+
+                    // Only count pivot moves that actually hit.
+                    // i.e., ignore Volt Switch vs. Ground and Volt Absorb / Lightning Rod / Motor Drive
+                    if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
                     
-                    battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
-                    return TRUE;
-                }
-                else {
+                        if ((MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) == FALSE) {
 
+                            hasNonContactPivot = TRUE;
+                        }
+                        pivotMoves++;
+                    }
+                }
+            }
+
+            hpRange = (battleCtx->battleMons[battler].maxHP * 2 / 5) + (((battleCtx->battleMons[battler].maxHP / 10) * (BattleSystem_RandNext(battleSys) % 11)) / 10);
+
+            if (moveSetter) {
+                // We set field condition with move and our field condition is up
+                if (battleCtx->fieldConditionsMask & desiredFieldCondition) {
+
+                    if (pivotMoves > 0) {
+
+                        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler, BATTLER_OPP(battler), TRUE) == COMPARE_SPEED_FASTER) {
+
+                            // Hard switch 2/3 the time if target has negative contact ability
+                            if (AI_TargetHasRelevantContactAbility(battleSys, battleCtx, battler)
+                                && (hasNonContactPivot == FALSE)
+                                && ((BattleSystem_RandNext(battleSys) % 3) != 0)) {
+
+                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                                return TRUE;
+                            }
+                            else {
+
+                                return FALSE;
+                            }
+                        }
+                        else {
+
+                            // Hard switch if our weathermon is at or below a random percent from 40 - 50%
+                            if (battleCtx->battleMons[battler].curHP <= hpRange) {
+
+                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                                return TRUE;
+                            }
+                            else {
+
+                                return FALSE;
+                            }
+                        }
+                    }
+                    else {
+
+                        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                        return TRUE;
+                    }
+                }
+                // At this point, we are a move setter but our effect is not up, so we shouldn't switch
+                else {
+                    
                     return FALSE;
                 }
-            }
-        }
-        else {
-            
-            if (battleCtx->totalTurns >= switchTurn) {
 
-                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
                 return TRUE;
             }
+            // We are an ability setter at this point
+            else {
+                // If we have a pivot move like U-turn or Volt Switch, we should
+                // deprioritize a hard switch when we are faster
+                if (pivotMoves > 0) {
+            
+                    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler, BATTLER_OPP(battler), TRUE) == COMPARE_SPEED_FASTER) {
+
+                        // Hard switch 2/3 the time if target has negative contact ability
+                        if (AI_TargetHasRelevantContactAbility(battleSys, battleCtx, battler)
+                            && (hasNonContactPivot == FALSE)
+                            && ((BattleSystem_RandNext(battleSys) % 3) != 0)) {
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+                        else {
+
+                            return FALSE;
+                        }
+                    }
+                    else {
+
+                        // Hard switch if our weathermon is at or below 40 - 50%
+                        if (battleCtx->battleMons[battler].curHP <= hpRange) {
+                    
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+                        else {
+
+                            return FALSE;
+                        }
+                    }
+                }
+            }
+
+            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+            return TRUE;
         }
     }
 
