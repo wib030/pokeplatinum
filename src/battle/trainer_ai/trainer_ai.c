@@ -260,6 +260,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
+static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -4702,6 +4703,130 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
     return FALSE;
 }
 
+
+static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    u8 ability, defenderAbility, type1, type2, gender, defenderGender;
+    u16 move;
+    int i, moveClass;
+    bool hasPhysicalMove;
+
+
+    ability = battleCtx->battleMons[battler].ability;
+    defenderAbility = battleCtx->battleMons[BATTLER_OPP(battler)].ability;
+    type1 = battleCtx->battleMons[battler].type1;
+    type2 = battleCtx->battleMons[battler].type2;
+    gender = battleCtx->battleMons[battler].gender;
+    defenderGender = battleCtx->battleMons[BATTLER_OPP(battler)].gender;
+
+    if (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH) {
+
+        return FALSE;
+    }
+
+    if (defenderAbility == ABILITY_STATIC
+        || defenderAbility == ABILITY_ROUGH_SKIN
+        || defenderAbility == ABILITY_EFFECT_SPORE
+        || defenderAbility == ABILITY_POISON_POINT
+        || defenderAbility == ABILITY_FLAME_BODY
+        || defenderAbility == ABILITY_CUTE_CHARM
+        || defenderAbility == ABILITY_FRESH_MILK
+        || defenderAbility == ABILITY_FREE_SAMPLE
+        || defenderAbility == ABILITY_SHAKEDOWN
+        || defenderAbility == ABILITY_COTTON_DOWN) {
+
+        if (defenderAbility == ABILITY_STATIC) {
+            
+            if (type1 == TYPE_ELECTRIC || type2 == TYPE_ELECTRIC) {
+
+                return FALSE;
+            }
+        }
+        else if (defenderAbility == ABILITY_FLAME_BODY) {
+
+            if (type1 == TYPE_FIRE || type2 == TYPE_FIRE) {
+
+                return FALSE;
+            }
+        }
+        else if (defenderAbility == ABILITY_POISON_POINT) {
+
+            if (type1 == TYPE_POISON || type2 == TYPE_POISON
+                || type1 == TYPE_STEEL || type2 == TYPE_STEEL
+                || ability == ABILITY_POISON_HEAL) {
+
+                    return FALSE;
+            }
+        }
+        else if (defenderAbility == ABILITY_CUTE_CHARM
+            || defenderAbility == ABILITY_FRESH_MILK) {
+
+            if (gender == GENDER_NONE
+                || defenderGender == GENDER_NONE
+                || (gender == defenderGender)) {
+
+                return FALSE;
+            }
+        }
+        else if (defenderAbility == ABILITY_FREE_SAMPLE) {
+
+            if (battleCtx-battleMons[battler].heldItem == ITEM_NONE) {
+
+                return FALSE;
+            }
+        }
+        else if (defenderAbility == ABILITY_COTTON_DOWN) {
+
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+
+                return FALSE;
+            }
+            if (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED] < 4) {
+
+                return FALSE;
+            }
+        }
+        else if (ability == ABILITY_MAGIC_GUARD) {
+
+            if (defenderAbility == ABILITY_ROUGH_SKIN
+                || defenderAbility == ABILITY_POISON_POINT) {
+
+                return FALSE;
+            }
+            if (defenderAbility == ABILITY_FLAME_BODY) {
+
+                hasPhysicalMove = FALSE;
+
+                for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+                    move = battleCtx->battleMons[battler].moves[i];
+                    moveClass = MOVE_DATA(move).class;
+
+                    if (moveClass == CLASS_PHYSICAL) {
+
+                        hasPhysicalMove = TRUE;
+                        break;
+                    }
+                }
+
+                if (hasPhysicalMove == FALSE) {
+
+                    return FALSE;
+                }
+            }
+        }
+        else {
+
+            return TRUE;
+        }
+    }
+    else {
+
+        return FALSE;
+    }
+
+    return FALSE;
+}
 
 /**
  * @brief Check if the AI has a party member with a super-effective move, constrained
