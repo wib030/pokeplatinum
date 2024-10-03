@@ -7347,8 +7347,8 @@ Expert_CheckCannotAttract_Terminate:
     PopOrEnd
 
 Expert_FuryCutter:
-    ;Cancel chain if highly resisted, otherwise try to maintain chain
-    ;Extra chance to start a chain on 4x damage
+    ; Cancel chain if highly resisted, otherwise try to maintain chain
+    ; Extra chance to start a chain on 4x damage
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, ScoreMinus1
     LoadBattlerPreviousMove AI_BATTLER_ATTACKER
     LoadEffectOfLoadedMove
