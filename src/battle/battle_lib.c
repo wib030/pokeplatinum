@@ -9479,20 +9479,42 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
                 monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
-                // 1.1x if faster
-                if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                // If trick room is up, we need to flip our speed check multipliers
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
 
-                    speedMultiplier = 11;
-                }
-                // 1.0x if same speed
-                else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                    // 0.9x if faster
+                    if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
-                    speedMultiplier = 10;
+                        speedMultiplier = 9;
+                    }
+                    // 1.0x if tie
+                    else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 10;
+                    }
+                    // 1.1x if slower
+                    else {
+
+                        speedMultiplier = 11;
+                    }
                 }
-                // 0.9x if slower
+                // Trick Room is not up in this case.
                 else {
+                    // 1.1x if faster
+                    if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 11;
+                    }
+                    // 1.0x if same speed
+                    else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 10;
+                    }
+                    // 0.9x if slower
+                    else {
                     
-                    speedMultiplier = 9;
+                        speedMultiplier = 9;
+                    }
                 }
 
                 // Bug: this operation potentially overflows when considering a mono-type Pokemon
