@@ -700,8 +700,8 @@ Basic_CheckCurse:
     ; That is, if either Attack or Defense are already +2, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckCurse_NoSimple
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckCurse_NoSimple:
@@ -3671,10 +3671,20 @@ Expert_Curse:
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 9, Expert_Curse_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 66, Expert_Curse_End
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_Curse_ChanceForScoreMinus1
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_Curse_ChanceForScoreMinus2
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_GYRO_BALL, Expert_Curse_HighChanceScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_TRICK_ROOM, Expert_Curse_HighChanceScorePlus1
     GoTo Expert_Curse_FlipCoinScorePlus1
+
+Expert_Curse_ChanceForScoreMinus1:
+    IfRandomLessThan 85, Expert_Curse_End
+    AddToMoveScore -1
+
+Expert_Curse_ChanceForScoreMinus2:
+    IfRandomLessThan 170, Expert_Curse_End
+    AddToMoveScore -2
 
 Expert_Curse_HighChanceScorePlus1:
     IfRandomLessThan 32, Expert_Curse_CheckDefenseStage
