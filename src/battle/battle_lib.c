@@ -9943,9 +9943,9 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         &moveStatusFlags);
 
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
-                         && (moveStatusFlags & ~MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY)
-                         && (moveStatusFlags & ~MOVE_STATUS_TYPE_IGNORE_IMMUNITY)
-                         && (moveStatusFlags & ~MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM))
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)) == FALSE)
                         || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
                         || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
                         || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)
