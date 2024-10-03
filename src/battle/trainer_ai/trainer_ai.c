@@ -5228,8 +5228,9 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
 static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler) {
     
-    int i, partyCount;
-    u8 ability, desiredWeatherAbility;
+    int i, j, partyCount, moveEffect, desiredMoveEffect;
+    u8 ability, desiredWeatherAbility, heldItemEffect, desiredWeatherItemEffect;
+    u16 move;
     u32 abilityFieldCondition, fieldConditions;
     Pokemon *mon;
 
@@ -5242,6 +5243,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
         abilityFieldCondition = FIELD_CONDITION_SANDSTORM;
         desiredWeatherAbility = ABILITY_SAND_STREAM;
+        desiredWeatherItemEffect = HOLD_EFFECT_EXTEND_SANDSTORM;
+        desiredMoveEffect = BATTLE_EFFECT_WEATHER_SANDSTORM;
     }
     else if (ability == ABILITY_SWIFT_SWIM
         || ability == ABILITY_RAIN_DISH
@@ -5250,6 +5253,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
         abilityFieldCondition = FIELD_CONDITION_RAINING;
         desiredWeatherAbility = ABILITY_DRIZZLE;
+        desiredWeatherItemEffect = HOLD_EFFECT_EXTEND_RAIN;
+        desiredMoveEffect = BATTLE_EFFECT_WEATHER_RAIN;
     }
     else if (ability == ABILITY_CHLOROPHYLL
 		|| ability == ABILITY_CHLOROPLAST
@@ -5260,6 +5265,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
         abilityFieldCondition = FIELD_CONDITION_SUNNY;
         desiredWeatherAbility = ABILITY_DROUGHT;
+        desiredWeatherItemEffect = HOLD_EFFECT_EXTEND_SUN;
+        desiredMoveEffect = BATTLE_EFFECT_WEATHER_SUN;
     }
     else if (ability == ABILITY_ICE_BODY
         || ability == ABILITY_SNOW_CLOAK
@@ -5267,6 +5274,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
         abilityFieldCondition = FIELD_CONDITION_HAILING;
         desiredWeatherAbility = ABILITY_SNOW_WARNING;
+        desiredWeatherItemEffect = HOLD_EFFECT_EXTEND_HAIL;
+        desiredMoveEffect = BATTLE_EFFECT_WEATHER_HAIL;
     }
     else if (ability == ABILITY_FORECAST) {
         
@@ -5274,6 +5283,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     }
     else {
         abilityFieldCondition = 0;
+        desiredWeatherItemEffect = 0;
+        desiredMoveEffect = 0;
     }
 
     // Don't switch if the field condition we need is active
@@ -5283,10 +5294,11 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     }
     // The field condition we need is not active
     else {
-
+        
         for (i = 0; i < partyCount; i++) {
 
             mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+            heldItemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
 
             // Only consider alive teammates
             if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
@@ -5323,6 +5335,46 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             
                             battleCtx->aiSwitchedPartySlot[battler] = i;
                             return TRUE;
+                        }
+                    }
+                }
+
+                if (heldItemEffect == desiredWeatherItemEffect) {
+
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++ ) {
+
+                        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                        moveEffect = MOVE_DATA(move).effect;
+
+                        if (moveEffect == desiredMoveEffect) {
+
+                            if (ability == ABILITY_SAND_FORCE
+                                || ability == ABILITY_SAND_VEIL
+                                || ability == ABILITY_SNOW_CLOAK) {
+
+                                if (((BattleSystem_RandNext(battleSys) % 6) == 0)
+                                    && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
+                                ) {
+
+                                    battleCtx->aiSwitchedPartySlot[battler] = i;
+                                    return TRUE;
+                                }
+                            }
+                            else {
+                                // Don't switch if heavily boosted
+                                if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
+                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
+                            
+                                    battleCtx->aiSwitchedPartySlot[battler] = i;
+                                    return TRUE;
+                            }
                         }
                     }
                 }
