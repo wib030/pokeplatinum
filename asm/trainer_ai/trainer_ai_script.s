@@ -3672,7 +3672,7 @@ Expert_Curse:
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 66, Expert_Curse_End
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_Curse_ChanceForScoreMinus1
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_Curse_ChanceForScoreMinus1
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_Curse_ChanceForScoreMinus2
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_GYRO_BALL, Expert_Curse_HighChanceScorePlus1
