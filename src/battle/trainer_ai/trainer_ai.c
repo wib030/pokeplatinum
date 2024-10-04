@@ -4709,7 +4709,7 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
     u8 ability, defenderAbility, type1, type2, gender, defenderGender;
     u16 move;
     int i, moveClass;
-    bool hasPhysicalMove;
+    int hasPhysicalMove;
 
 
     ability = battleCtx->battleMons[battler].ability;
@@ -4770,7 +4770,7 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
         }
         else if (defenderAbility == ABILITY_FREE_SAMPLE) {
 
-            if (battleCtx-battleMons[battler].heldItem == ITEM_NONE) {
+            if (battleCtx->battleMons[battler].heldItem == ITEM_NONE) {
 
                 return FALSE;
             }
@@ -4795,7 +4795,7 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
             }
             if (defenderAbility == ABILITY_FLAME_BODY) {
 
-                hasPhysicalMove = FALSE;
+                hasPhysicalMove = 0;
 
                 for (i = 0; i < LEARNED_MOVES_MAX; i++) {
 
@@ -4804,12 +4804,12 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
 
                     if (moveClass == CLASS_PHYSICAL) {
 
-                        hasPhysicalMove = TRUE;
+                        hasPhysicalMove = 1;
                         break;
                     }
                 }
 
-                if (hasPhysicalMove == FALSE) {
+                if (hasPhysicalMove == 0) {
 
                     return FALSE;
                 }
@@ -5014,7 +5014,8 @@ static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *batt
 static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int stat;
-    u8 numAttackingBoosts = 0;
+    u8 numAttackingBoosts;
+	numAttackingBoosts = 0;
 
     for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
         if (battleCtx->battleMons[battler].statBoosts[stat] > 6 && (stat == BATTLE_STAT_ATTACK || stat == BATTLE_STAT_SP_ATTACK)) {
@@ -5031,11 +5032,11 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
     u8 ability, heldItemEffect;
     u16 move;
     u32 desiredFieldCondition, effectiveness;
-    bool moveSetter, defenderContactAbility, hasNonContactPivot;
+    int moveSetter, defenderContactAbility, hasNonContactPivot;
 
     ability = battleCtx->battleMons[battler].ability;
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
-    moveSetter = FALSE;
+    moveSetter = 0;
 
     if (ability == ABILITY_SAND_STREAM) {
         desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
@@ -5067,28 +5068,28 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                 && heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM) {
 
                     desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
-                    moveSetter = TRUE;
+                    moveSetter = 1;
                     break;
                 }
             if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
                 && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
 
                     desiredFieldCondition = FIELD_CONDITION_RAINING;
-                    moveSetter = TRUE;
+                    moveSetter = 1;
                     break;
                 }
             if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
                 && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
 
                     desiredFieldCondition = FIELD_CONDITION_SUNNY;
-                    moveSetter = TRUE;
+                    moveSetter = 1;
                     break;
                 }
             if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
                 && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
 
                     desiredFieldCondition = FIELD_CONDITION_HAILING;
-                    moveSetter = TRUE;
+                    moveSetter = 1;
                     break;
                 }
         }
@@ -5105,7 +5106,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
             pivotMoves = 0;
             effectiveness = 0;
-            hasNonContactPivot = FALSE;
+            hasNonContactPivot = 0;
 
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
 
@@ -5123,7 +5124,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                     
                         if ((MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) == FALSE) {
 
-                            hasNonContactPivot = TRUE;
+                            hasNonContactPivot = 1;
                         }
                         pivotMoves++;
                     }
@@ -5142,7 +5143,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
                             // Hard switch 2/3 the time if target has negative contact ability
                             if (AI_TargetHasRelevantContactAbility(battleSys, battleCtx, battler)
-                                && (hasNonContactPivot == FALSE)
+                                && (hasNonContactPivot == 0)
                                 && ((BattleSystem_RandNext(battleSys) % 3) != 0)) {
 
                                 battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
@@ -5191,7 +5192,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
                         // Hard switch 2/3 the time if target has negative contact ability
                         if (AI_TargetHasRelevantContactAbility(battleSys, battleCtx, battler)
-                            && (hasNonContactPivot == FALSE)
+                            && (hasNonContactPivot == 0)
                             && ((BattleSystem_RandNext(battleSys) % 3) != 0)) {
 
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
@@ -5400,6 +5401,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
             }
         }
     }
+	}
 
     // At this point, our weather setter doesn't exist or is KO'd. No need to switch.
     return FALSE;
@@ -5415,8 +5417,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
  */
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i;
-    int alivePartyMons;
+    int i, alivePartyMons;
     u8 aiSlot1, aiSlot2;
     int start, end;
     Pokemon *mon;
