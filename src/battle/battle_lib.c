@@ -9471,7 +9471,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     && battleCtx->selectedPartySlot[slot1] != i
                     && battleCtx->selectedPartySlot[slot2] != i
                     && i != battleCtx->aiSwitchedPartySlot[slot1]
-                    && i != battleCtx->aiSwitchedPartySlot[slot2]) {
+                    && i != battleCtx->aiSwitchedPartySlot[slot2]
+                    && i != battleCtx->selectedPartySlot[battler]) {
                 defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
                 defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
                 defenderAbility = Battler_Ability(battleCtx, defender);
@@ -9915,7 +9916,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 && battleCtx->selectedPartySlot[slot1] != i
                 && battleCtx->selectedPartySlot[slot2] != i
                 && i != battleCtx->aiSwitchedPartySlot[slot1]
-                && i != battleCtx->aiSwitchedPartySlot[slot2]) {
+                && i != battleCtx->aiSwitchedPartySlot[slot2]
+                && i != battleCtx->selectedPartySlot[battler]) {
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
                 moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
