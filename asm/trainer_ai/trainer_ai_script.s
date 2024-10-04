@@ -5916,26 +5916,91 @@ Expert_PowerTrick_End:
     PopOrEnd 
 
 Expert_GastroAcid:
-    ; 25% chance of score +0 and terminate.
+    ; Check if target has a strongly beneficial ability
     ;
-    ; If the opponent''s HP > 70%, score +1.
+    ; If not, score -12
     ;
-    ; If the opponent''s HP <= 70%, 50% chance of score +0, 50% chance of score -1.
+    ; If yes, check if we outspeed. If we outspeed, score +3
     ;
-    ; If the opponent''s HP <= 50%, 50% chance of score -1, 50% chance of score -2.
+    ; If we don''t outspeed, check if we''re at high or low HP
     ;
-    ; If the opponent''s HP <= 30%, 50% chance of score -2, 50% chance of score -3.
-    IfRandomLessThan 64, Expert_GastroAcid_End
-    AddToMoveScore 1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_GastroAcid_End
-    IfRandomLessThan 128, Expert_GastroAcid_ContinueHPCheck
-    AddToMoveScore -1
+    ; If we are at high or low HP, score +2
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable Expert_GastroAcid_AbilityChecklist, Expert_GastroAcid_SpeedCheck
+    IfLoadedEqualTo ABILITY_NONE, ScoreMinus12
+    IfRandomLessThan 5, Expert_GastroAcid_SpeedCheck
+    AddToMoveScore -3
+    GoTo Expert_GastroAcid_End
 
-Expert_GastroAcid_ContinueHPCheck:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_GastroAcid_End
-    AddToMoveScore -1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_GastroAcid_End
-    AddToMoveScore -1
+Expert_GastroAcid_SpeedCheck:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_GastroAcid_HPCheck
+    IfRandomLessThan 16, Expert_GastroAcid_End
+    AddToMoveScore +3
+    GoTo Expert_GastroAcid_End
+
+Expert_GastroAcid_HPCheck:
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 80, Expert_GastroAcid_TryScorePlus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 30, Expert_GastroAcid_TryScorePlus2
+    IfRandomLessThan 32, Expert_GastroAcid_TryScorePlus2
+    GoTo Expert_GastroAcid_End
+
+Expert_GastroAcid_TryScorePlus2:
+    IfRandomLessThan 128, Expert_GastroAcid_End
+    AddToMoveScore +2
+    GoTo Expert_GastroAcid_End
+    
+Expert_GastroAcid_AbilityChecklist:
+    TableEntry ABILITY_HUGE_POWER
+    TableEntry ABILITY_GUTS
+    TableEntry ABILITY_MAGIC_GUARD
+    TableEntry ABILITY_MARVEL_SCALE
+    TableEntry ABILITY_SPEED_BOOST
+    TableEntry ABILITY_FLASH_FIRE
+    TableEntry ABILITY_SHADOW_TAG
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_WONDER_GUARD
+    TableEntry ABILITY_LEVITATE
+    TableEntry ABILITY_SWIFT_SWIM
+    TableEntry ABILITY_MAGNET_PULL
+    TableEntry ABILITY_PRESSURE
+    TableEntry ABILITY_THICK_FAT
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_HUSTLE
+    TableEntry ABILITY_ARENA_TRAP
+    TableEntry ABILITY_PURE_POWER
+    TableEntry ABILITY_UNBURDEN
+    TableEntry ABILITY_HEATPROOF
+    TableEntry ABILITY_SIMPLE
+    TableEntry ABILITY_POISON_HEAL
+    TableEntry ABILITY_ADAPTABILITY
+    TableEntry ABILITY_SKILL_LINK
+    TableEntry ABILITY_SOLAR_POWER
+    TableEntry ABILITY_NORMALIZE
+    TableEntry ABILITY_NO_GUARD
+    TableEntry ABILITY_TECHNICIAN
+    TableEntry ABILITY_UNAWARE
+    TableEntry ABILITY_TINTED_LENS
+    TableEntry ABILITY_ICE_BODY
+    TableEntry ABILITY_FLOWER_GIFT
+    TableEntry ABILITY_BAD_DREAMS
+    TableEntry ABILITY_SLUSH_RUSH
+    TableEntry ABILITY_MULTISCALE
+    TableEntry ABILITY_DEFIANT
+    TableEntry ABILITY_COMPETITIVE
+    TableEntry ABILITY_FRESH_MILK
+    TableEntry ABILITY_RELENTLESS
+    TableEntry ABILITY_SHEER_FORCE
+    TableEntry ABILITY_CORROSION
+    TableEntry ABILITY_STRONG_JAW
+    TableEntry ABILITY_IRON_FIST
+    TableEntry ABILITY_HOTHEADED
+    TableEntry ABILITY_MEGA_LAUNCHER
+    TableEntry ABILITY_FREE_SAMPLE
+    TableEntry ABILITY_SHAKEDOWN
+    TableEntry ABILITY_FLARE_BOOST
+    TableEntry ABILITY_SHARPNESS
+    TableEntry ABILITY_STRANGLE_WEED
+    TableEntry TABLE_END
 
 Expert_GastroAcid_End:
     PopOrEnd 
