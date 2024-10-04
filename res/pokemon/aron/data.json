@@ -85,8 +85,9 @@
 			"3": "MOVE_FRENZY_PLANT",
             "4": "MOVE_HARDEN",
             "8": "MOVE_MUD_SLAP",
-            "11": "MOVE_HEADBUTT",
-            "15": "MOVE_METAL_CLAW",
+			"10": "MOVE_METAL_BURST",
+            "12": "MOVE_METAL_CLAW",
+			"15": "MOVE_HEADBUTT",
             "18": "MOVE_IRON_DEFENSE",
             "22": "MOVE_ROAR",
             "25": "MOVE_TAKE_DOWN",
@@ -94,8 +95,7 @@
             "32": "MOVE_PROTECT",
             "36": "MOVE_METAL_SOUND",
             "39": "MOVE_IRON_TAIL",
-            "43": "MOVE_DOUBLE_EDGE",
-            "46": "MOVE_METAL_BURST"
+            "43": "MOVE_DOUBLE_EDGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

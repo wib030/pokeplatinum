@@ -84,7 +84,7 @@
         "level_up": {
             "1": [
                 "MOVE_SCREECH",
-                "MOVE_ABSORB",
+                "MOVE_FRENZY_PLANT",
                 "MOVE_SUPERSONIC",
                 "MOVE_ASTONISH"
             ],

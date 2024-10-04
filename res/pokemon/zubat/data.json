@@ -81,10 +81,9 @@
         ],
         "level_up": {
             "1": [ 
-				"MOVE_ABSORB",
+				"MOVE_FRENZY_PLANT",
 				"MOVE_GUST"
 			],
-			"3": "MOVE_FRENZY_PLANT",
             "5": "MOVE_SUPERSONIC",
             "9": "MOVE_ASTONISH",
             "13": "MOVE_BITE",
