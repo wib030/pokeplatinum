@@ -7358,7 +7358,7 @@ Expert_FuryCutter:
 
 Expert_FuryCutterChanceForStreak:
     IfRandomLessThan 25, Expert_FuryCutterEnd
-    AddToMoveScore 3
+    AddToMoveScore 12
     GoTo Expert_FuryCutterEnd
 
 Expert_FuryCutterChanceForPlus1:
