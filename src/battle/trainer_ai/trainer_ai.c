@@ -5037,6 +5037,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
     ability = battleCtx->battleMons[battler].ability;
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
     moveSetter = 0;
+    desiredFieldCondition = 0
 
     if (ability == ABILITY_SAND_STREAM) {
         desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
@@ -5233,6 +5234,9 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     partyCount = BattleSystem_PartyCount(battleSys, battler);
     ability = battleCtx->battleMons[battler].ability;
     desiredWeatherAbility = ABILITY_NONE;
+    abilityFieldCondition = 0;
+    desiredWeatherItemEffect = 0;
+    desiredMoveEffect = 0;
 
     if (ability == ABILITY_SAND_FORCE
         || ability == ABILITY_SAND_VEIL) {
