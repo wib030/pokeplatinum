@@ -4290,7 +4290,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     }
 
     // If we have more than 1 neutral attacking move, do not switch.
-    if (numMoves < 2) {
+    if (numMoves < 1) {
         return FALSE;
     }
 
@@ -5037,7 +5037,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
     ability = battleCtx->battleMons[battler].ability;
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
     moveSetter = 0;
-    desiredFieldCondition = 0
+    desiredFieldCondition = 0;
 
     if (ability == ABILITY_SAND_STREAM) {
         desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
@@ -5071,28 +5071,28 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                     desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
                     moveSetter = 1;
                     break;
-                }
+            }
             if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
                 && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
 
                     desiredFieldCondition = FIELD_CONDITION_RAINING;
                     moveSetter = 1;
                     break;
-                }
+            }
             if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
                 && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
 
                     desiredFieldCondition = FIELD_CONDITION_SUNNY;
                     moveSetter = 1;
                     break;
-                }
+            }
             if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
                 && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
 
                     desiredFieldCondition = FIELD_CONDITION_HAILING;
                     moveSetter = 1;
                     break;
-                }
+            }
         }
     }
 
