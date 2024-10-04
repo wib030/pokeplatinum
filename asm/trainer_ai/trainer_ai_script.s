@@ -3716,90 +3716,294 @@ Expert_Curse_End:
     PopOrEnd 
 
 Expert_Protect:
-    ; If the opponent knows either Feint or Shadow Force, 50% chance of additional score -2.
+    ; Attempts to rack up chip damage and passive healing.
     ;
-    ; If the attacker has used Protect more than once already, score -2 and terminate.
+    ; Special procedure to initialize status-item abilities like Guts and Poison Heal
+    ; as well as Speed Boost.
     ;
-    ; If the attacker is under any of the following effects and is also not Locked Onto by an
-    ; opponent, score -2 and terminate:
-    ; - Toxic
-    ; - Curse
-    ; - Perish Song
-    ; - Attract
-    ; - Leech Seed
-    ; - Yawn
+    ; Will try especially to block an incoming charge-turn move.
+    ; 
+    ; Ignores protect when opponent is Asleep or Frozen.
     ;
-    ; If the opponent knows a Recovery move (not weather-based or Rest) or Defense Curl and the
-    ; attacker is not Locked On to a target, score -2 and terminate.
+    ; Will attempt to stall out non-beneficial field effects, and ignore protect
+    ; while beneficial field effects are up.
     ;
-    ; If the opponent is under any of the following effects, additional score +2:
-    ; - Toxic
-    ; - Curse
-    ; - Perish Song
-    ; - Attract
-    ; - Leech Seed
-    ; - Yawn
-    ;
-    ; Otherwise, if the battle is doubles, additional score +2.
-    ;
-    ; Otherwise, if the attacker is Locked Onto by an opponent, additional score +2.
-    ;
-    ; Otherwise, 33.2% chance of additional score +2.
-    ;
-    ; 50% of additional score -1 from here-on.
-    ;
-    ; If the attacker used Protect last turn, score -1 and 50% chance of additional score -1.
+    ; Special procedure to give high chance of protect if wish has been used.
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FEINT, Expert_Protect_TryScoreMinus2
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_SHADOW_FORCE, Expert_Protect_TryScoreMinus2
+    LoadProtectChain AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 0, Expert_Protect_StreakBreaker
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_Protect_CheckItemStatusAbility
+    IfFieldConditionsMask FIELD_CONDITION_SANDSTORM, Expert_Protect_CheckSandstorm
+    IfFieldConditionsMask FIELD_CONDITION_HAILING, Expert_Protect_CheckHail
+    IfFieldConditionsMask FIELD_CONDITION_RAINING, Expert_Protect_CheckRain
+    IfFieldConditionsMask FIELD_CONDITION_SUNNY, Expert_Protect_CheckSun
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_Protect_CheckTrickRoom
+    IfFieldConditionsMask FIELD_CONDITION_GRAVITY, Expert_Protect_CheckGravity
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_WISH, Expert_Protect_WishTryScorePlus1
+    IfRandomLessThan 32, ScoreMinus2
     GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_StreakBreaker:
+    IfRandomLessThan 12, Expert_Protect_End
+    AddToMoveScore -12
+    GoTo Expert_Protect_End
+
+Expert_Protect_CheckItemStatusAbility:
+    IfRandomLessThan 16, Expert_Protect_CheckStatusConditions
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SPEED_BOOST, ScorePlus2
+    AddToMoveScore -1
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_Protect_CheckItem
+    AddToMoveScore 4
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Protect_ItemStatusAbilities, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    IfRandomLessThan 64, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_ItemStatusAbilities:
+    TableEntry ABILITY_GUTS
+    TableEntry ABILITY_MARVEL_SCALE
+    TableEntry ABILITY_FLARE_BOOST
+    TableEntry ABILITY_POISON_HEAL
+    TableEntry TABLE_END
+
+Expert_Protect_CheckSandstorm:
+    AddToMoveScore 2
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedInTable Expert_Protect_SandstormTypes, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedInTable Expert_Protect_SandstormTypes, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -4
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedInTable Expert_Protect_SandstormTypes, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedInTable Expert_Protect_SandstormTypes, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 4
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -4
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_SandstormTypes:
+    TableEntry TYPE_ROCK
+    TableEntry TYPE_GROUND
+    TableEntry TYPE_STEEL
+    TABLE_END
+
+Expert_Protect_CheckHail:
+    AddToMoveScore 2
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Protect_HailAbilities, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -4
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable Expert_Protect_HailAbilities, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 4
+    IfLoadedEqualTo ABILITY_SLUSH_RUSH, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_ICE, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_ICE, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -4
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ICE, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_ICE, Expert_Protect_CheckStatusConditions
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_BLIZZARD, Expert_Protect_CheckStatusConditions
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_SHEER_COLD, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_HailAbilities:
+    TableEntry ABILITY_SNOW_CLOAK
+    TableEntry ABILITY_ICE_BODY
+    TableEntry TABLE_END
+
+Expert_Protect_CheckRain:
+    AddToMoveScore 2
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Protect_RainAbilities, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -4
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable Expert_Protect_RainAbilities, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 4
+    IfLoadedEqualTo ABILITY_SWIFT_SWIM, Expert_Protect_CheckStatusConditions
+    IfLoadedEqualTo ABILITY_HYDRATION, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_WATER, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_WATER, Expert_Protect_CheckStatusConditions
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAZOR_WIND, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_RainAbilities:
+    TableEntry ABILITY_RAIN_DISH
+    TableEntry ABILITY_DRY_SKIN
+    TableEntry TABLE_END
 
 Expert_Protect_TryScoreMinus2:
     IfRandomLessThan 128, Expert_Protect_CheckStatusConditions
     AddToMoveScore -2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_CheckSun:
+    AddToMoveScore 2
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_PHOTOSYNTHESIS, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -4
+    IfLoadedEqualTo ABILITY_SOLAR_POWER, Expert_Protect_CheckStatusConditions
+    IfLoadedEqualTo ABILITY_DRY_SKIN, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 4
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable Expert_Protect_SunAbilities, Expert_Protect_CheckStatusConditions
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_SOLAR_BEAM, Expert_Protect_CheckStatusConditions
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_WEATHER_BALL, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_FIRE, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_FIRE, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_SunAbilities:
+    TableEntry ABILITY_CHLOROPHYLL
+    TableEntry ABILITY_SOLAR_POWER
+    TableEntry ABILITY_LEAF_GUARD
+    TableEntry ABILITY_FLOWER_GIFT
+    TableEntry ABILITY_CHLOROPLAST
+    TableEntry TABLE_END
+
+Expert_Protect_CheckTrickRoom:
+    AddToMoveScore 2
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    IfSpeedCompareEqualTo COMPARE_SPEED_TIE, Expert_Protect_CheckStatusConditions
+    IfRandomLessThan 64, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_CheckGravity:
+    AddToMoveScore 2
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GROUND, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GROUND, Expert_Protect_CheckStatusConditions
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_TIDAL_FORCE, Expert_Protect_CheckStatusConditions
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_LEVITATE, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_FLYING, Expert_Protect_CheckStatusConditions
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_FLYING, Expert_Protect_CheckStatusConditions
+    AddToMoveScore -2
+    IfRandomLessThan 224, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 1
+    GoTo Expert_Protect_CheckStatusConditions
+
+Expert_Protect_WishTryScorePlus1:
+    IfRandomLessThan 4, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 12
+    GoTo Expert_Protect_CheckStatusConditions
 
 Expert_Protect_CheckStatusConditions:
-    LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedGreaterThan 1, Expert_Protect_ScoreMinus2
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_TOXIC, Expert_Protect_CheckAttackerLockedOnto
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CURSE, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_CheckAttackerLockedOnto
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_ATTRACT, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_YAWN, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_Protect_CheckAttackerLockedOnto
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Protect_ScorePlus2
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_ScorePlus2
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_Protect_ScorePlus2
-    LoadBattleType 
-    IfLoadedMask BATTLE_TYPE_DOUBLES, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LOCK_ON, Expert_Protect_ScorePlus2
-    IfRandomLessThan 85, Expert_Protect_ScorePlus2
-    GoTo Expert_Protect_TryScoreMinus1
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_Protect_CheckPoisonHeal
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_Protect_CheckMagicGuard
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_CheckMagicGuard
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CURSE, Expert_Protect_CheckMagicGuard
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_BIND, Expert_Protect_CheckMagicGuard
+    AddToMoveScore 3
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_UNDERGROUND, Expert_Protect_CheckItem
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_UNDERWATER, Expert_Protect_CheckItem
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_AIRBORNE, Expert_Protect_CheckItem
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_CHARGE, Expert_Protect_CheckItem
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_MOVE_LOCKED, Expert_Protect_CheckItem
+    AddToMoveScore -3
+    IfRandomLessThan 8, Expert_Protect_CheckItem
+    AddToMoveScore 1
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY_POISON, Expert_Protect_CheckEnemyPoisonImmune
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_BURN, Expert_Protect_CheckEnemyMagicGuard
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Protect_CheckItem
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_AQUA_RING, Expert_Protect_CheckItem
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_INGRAIN, Expert_Protect_CheckItem
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_CheckItem
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_Protect_CheckEnemyMagicGuard
+    AddToMoveScore -16
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_SHADOW_FORCE, ScoreMinus12
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_YAWN, Expert_Protect_CheckItem
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_Protect_CheckItem
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_FREEZE, Expert_Protect_CheckItem
+    AddToMoveScore 14
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Protect_CheckItem
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_Protect_CheckItem
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Protect_CheckItem
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_Protect_CheckItem
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_IN_3_TURNS, Expert_Protect_CheckItem
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_Protect_CheckItem
+    AddToMoveScore -1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_Protect_CheckItem
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_Protect_CheckItem
+    AddToMoveScore 1
+    GoTo Expert_Protect_CheckItem
 
-Expert_Protect_ScorePlus2:
+Expert_Protect_CheckPoisonHeal:
     AddToMoveScore 2
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_Protect_CheckItem
+    AddToMoveScore -5
+    GoTo Expert_Protect_CheckItem
 
-Expert_Protect_TryScoreMinus1:
-    IfRandomLessThan 128, Expert_Protect_CheckEmptyChain
+Expert_Protect_CheckMagicGuard:
+    AddToMoveScore 1
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Protect_CheckItem
+    AddToMoveScore -6
+    GoTo Expert_Protect_CheckItem
+
+Expert_Protect_CheckEnemyPoisonImmune:
     AddToMoveScore -1
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_Protect_CheckItem
+    IfRandomLessThan 32, Expert_Protect_CheckItem
+    AddToMoveScore 1
+    GoTo Expert_Protect_CheckItem
 
-Expert_Protect_CheckEmptyChain:
-    LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_Protect_End
+Expert_Protect_CheckEnemyMagicGuard:
     AddToMoveScore -1
-    IfRandomLessThan 128, Expert_Protect_End
-    AddToMoveScore -1
-    GoTo Expert_Protect_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Protect_CheckItem
+    IfRandomLessThan 32, Expert_Protect_CheckItem
+    AddToMoveScore 1
+    GoTo Expert_Protect_CheckItem
 
-Expert_Protect_CheckAttackerLockedOnto:
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LOCK_ON, Expert_Protect_End
-
-Expert_Protect_ScoreMinus2:
+Expert_Protect_CheckItem:
+    IfRandomLessThan 192, Expert_Protect_End
+    AddToMoveScore 1
+    LoadHeldItem AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ITEM_LEFTOVERS, Expert_Protect_End
+    IfLoadedEqualTo ITEM_BLACK_SLUDGE, Expert_Protect_CheckBlackSludge
+    LoadHeldItem AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ITEM_STICKY_BARB, Expert_Protect_End
     AddToMoveScore -2
+    IfLoadedEqualTo ITEM_LEFTOVERS, Expert_Protect_End
+    IfLoadedEqualTo ITEM_BLACK_SLUDGE, Expert_Protect_End
+    AddToMoveScore 1
+    GoTo Expert_Protect_End
+    
+Expert_Protect_CheckBlackSludge:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_POISON, Expert_Protect_End
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_POISON, Expert_Protect_End
+    AddToMoveScore -3
+    GoTo Expert_Protect_End
 
 Expert_Protect_End:
     PopOrEnd 
@@ -5994,6 +6198,7 @@ Expert_GastroAcid_AbilityChecklist:
     TableEntry ABILITY_STRONG_JAW
     TableEntry ABILITY_IRON_FIST
     TableEntry ABILITY_HOTHEADED
+    TableEntry ABILITY_ROCK_HEAD
     TableEntry ABILITY_MEGA_LAUNCHER
     TableEntry ABILITY_FREE_SAMPLE
     TableEntry ABILITY_SHAKEDOWN
