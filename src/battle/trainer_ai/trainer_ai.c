@@ -5287,121 +5287,123 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
         desiredMoveEffect = 0;
     }
 
-    // Don't switch if the field condition we need is active
-    if (battleCtx->fieldConditionsMask & abilityFieldCondition) {
+    if (desiredWeatherAbility) {
 
-        return FALSE;
-    }
-    // The field condition we need is not active
-    else {
+        // Don't switch if the field condition we need is active
+        if (battleCtx->fieldConditionsMask & abilityFieldCondition) {
+
+            return FALSE;
+        }
+        // The field condition we need is not active
+        else {
         
-        for (i = 0; i < partyCount; i++) {
+            for (i = 0; i < partyCount; i++) {
 
-            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
-            heldItemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
+                mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+                heldItemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
 
-            // Only consider alive teammates
-            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
-                && i != battleCtx->selectedPartySlot[battler]) {
+                // Only consider alive teammates
+                if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                    && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                    && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                    && i != battleCtx->selectedPartySlot[battler]) {
 
-                // If our weather setter is alive, we should consider switching
-                if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == desiredWeatherAbility) {
+                    // If our weather setter is alive, we should consider switching
+                    if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == desiredWeatherAbility) {
 
-                    // These abilities don't care that much, so they only switch sometimes
-                    if (ability == ABILITY_SAND_FORCE
-                        || ability == ABILITY_SAND_VEIL
-                        || ability == ABILITY_SNOW_CLOAK) {
+                        // These abilities don't care that much, so they only switch sometimes
+                        if (ability == ABILITY_SAND_FORCE
+                            || ability == ABILITY_SAND_VEIL
+                            || ability == ABILITY_SNOW_CLOAK) {
 
-                        if (((BattleSystem_RandNext(battleSys) % 6) == 0)
-                            && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
-                        ) {
+                            if (((BattleSystem_RandNext(battleSys) % 6) == 0)
+                                && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
+                            ) {
 
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
-                            return TRUE;
+                                battleCtx->aiSwitchedPartySlot[battler] = i;
+                                return TRUE;
+                            }
                         }
-                    }
-                    else {
-                        // Don't switch if heavily boosted
-                        if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
+                        else {
+                            // Don't switch if heavily boosted
+                            if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
                             
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
-                            return TRUE;
+                                battleCtx->aiSwitchedPartySlot[battler] = i;
+                                return TRUE;
+                            }
                         }
                     }
-                }
 
-                if (heldItemEffect == desiredWeatherItemEffect) {
+                    if (heldItemEffect == desiredWeatherItemEffect) {
 
-                    for (j = 0; j < LEARNED_MOVES_MAX; j++ ) {
+                        for (j = 0; j < LEARNED_MOVES_MAX; j++ ) {
 
-                        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                        moveEffect = MOVE_DATA(move).effect;
+                            move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                            moveEffect = MOVE_DATA(move).effect;
 
-                        if (moveEffect == desiredMoveEffect) {
+                            if (moveEffect == desiredMoveEffect) {
 
-                            if (ability == ABILITY_SAND_FORCE
-                                || ability == ABILITY_SAND_VEIL
-                                || ability == ABILITY_SNOW_CLOAK) {
+                                if (ability == ABILITY_SAND_FORCE
+                                    || ability == ABILITY_SAND_VEIL
+                                    || ability == ABILITY_SNOW_CLOAK) {
 
-                                if (((BattleSystem_RandNext(battleSys) % 6) == 0)
-                                    && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
-                                ) {
+                                    if (((BattleSystem_RandNext(battleSys) % 6) == 0)
+                                        && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
+                                    ) {
 
-                                    battleCtx->aiSwitchedPartySlot[battler] = i;
-                                    return TRUE;
+                                        battleCtx->aiSwitchedPartySlot[battler] = i;
+                                        return TRUE;
+                                    }
+                                }
+                                else {
+                                    // Don't switch if heavily boosted
+                                    if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
+                            
+                                        battleCtx->aiSwitchedPartySlot[battler] = i;
+                                        return TRUE;
                                 }
                             }
-                            else {
-                                // Don't switch if heavily boosted
-                                if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
-                                    && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
-                            
-                                    battleCtx->aiSwitchedPartySlot[battler] = i;
-                                    return TRUE;
-                            }
                         }
                     }
-                }
 
-                // Castform will need to switch more because he sucks
-                if (ability == ABILITY_FORECAST) {
+                    // Castform will need to switch more because he sucks
+                    if (ability == ABILITY_FORECAST) {
 
-                    if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DROUGHT
-                        || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DRIZZLE
-                        || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_SNOW_WARNING) {
+                        if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DROUGHT
+                            || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DRIZZLE
+                            || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_SNOW_WARNING) {
 
-                        if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
-                            && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
+                            if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
                             
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
-                            return TRUE;
+                                battleCtx->aiSwitchedPartySlot[battler] = i;
+                                return TRUE;
+                            }
                         }
                     }
                 }
             }
         }
     }
-	}
 
     // At this point, our weather setter doesn't exist or is KO'd. No need to switch.
     return FALSE;
