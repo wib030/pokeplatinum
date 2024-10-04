@@ -5377,6 +5377,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             
                                         battleCtx->aiSwitchedPartySlot[battler] = i;
                                         return TRUE;
+                                    }
                                 }
                             }
                         }
