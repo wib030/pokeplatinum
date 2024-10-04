@@ -5179,8 +5179,6 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                     
                     return FALSE;
                 }
-
-                return TRUE;
             }
             // We are an ability setter at this point
             else {
@@ -5218,9 +5216,6 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                     }
                 }
             }
-
-            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
-            return TRUE;
         }
     }
 
@@ -5304,7 +5299,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
             // Only consider alive teammates
             if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                && i != battleCtx->selectedPartySlot[battler]) {
 
                 // If our weather setter is alive, we should consider switching
                 if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == desiredWeatherAbility) {
