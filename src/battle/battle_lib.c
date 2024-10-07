@@ -2705,33 +2705,6 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 	{      
         *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
     }
-    else if ((moveType == TYPE_WATER)
-	&& ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WATER_ABSORB) == TRUE)
-    || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE)))
-	{
-        *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
-    }
-	else if ((moveType == TYPE_WATER)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN == TRUE)))
-	{
-		*moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
-    }
-    else if ((moveType == TYPE_ELECTRIC)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE))
-	{
-        *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
-    }
-	else if ((moveType == TYPE_ELECTRIC)
-	&& ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE)
-    || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE))
-	{
-        *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
-	}
-    else if ((moveType == TYPE_FIRE)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FLASH_FIRE) == TRUE))
-	{
-		*moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY;
-    }
 	else if ((powderMove == TRUE)
 	&& (MON_HAS_TYPE(battleCtx->defender, TYPE_GRASS) || (defenderItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)))
 	{
@@ -2813,6 +2786,105 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     } else {
         *moveStatusMask &= ~MOVE_STATUS_SUPER_EFFECTIVE;
         *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
+    }
+
+    
+    if (moveType == TYPE_WATER)
+	{
+        if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WATER_ABSORB) == TRUE)
+            || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
+        }
+
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
+        }
+    }
+    if (moveType == TYPE_ELECTRIC)
+	{
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
+        }
+         
+        if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE)
+            || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
+        }
+    }
+    if (moveType == TYPE_FIRE)
+	{
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FLASH_FIRE) == TRUE)
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY;
+        }
+
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE) 
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_WEAKNESS_ABILITY;
+        }
+
+        if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_HEATPROOF) == TRUE)
+            || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE)) 
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+        }
+    }
+    if (moveType == TYPE_ICE) 
+    {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE)
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+        }
+    }
+    if (moveType == TYPE_NORMAL)
+    {
+        if (MON_HAS_TYPE(defender, TYPE_GHOST))
+        {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+            }
+
+            if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY;
+            }
+
+            if (attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM;
+            }
+        }
+    }
+    if (moveType == TYPE_FIGHTING)
+    {
+        if (MON_HAS_TYPE(defender, TYPE_GHOST))
+        {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+            }
+
+            if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY;
+            }
+        }
+    }
+    if (moveType == TYPE_POISON)
+    {
+        if (MON_HAS_TYPE(defender, TYPE_STEEL)
+            || MON_HAS_TYPE(defender, TYPE_POISON))
+        {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_CORROSION) == TRUE)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+            }
+        }
     }
 
     return damage;
