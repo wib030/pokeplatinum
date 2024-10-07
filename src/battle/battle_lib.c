@@ -2727,26 +2727,6 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 	{
         *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
 	}
-    else if ((moveType == TYPE_NORMAL)
-	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SCRAPPY) == TRUE))
-	{
-        *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
-    }
-	else if ((moveType == TYPE_NORMAL)
-	&& (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT))
-	{
-       *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY;
-    }
-    else if ((moveType == TYPE_NORMAL)
-	&& (attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST))
-	{
-		*moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM;
-    }
-    else if ((moveType == TYPE_POISON)
-	&& (Battler_Ability(battleCtx, attacker) == ABILITY_CORROSION))
-	{
-        *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
-    }
     else if ((moveType == TYPE_FIRE)
 	&& (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FLASH_FIRE) == TRUE))
 	{
