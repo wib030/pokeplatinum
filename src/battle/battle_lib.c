@@ -9697,6 +9697,566 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             }
                     }
                     if (defenderAbility == ABILITY_FILTER) {
+                        if (attackScoreType1 > 60) {
+                            attackScoreType1 *= 3 / 4;
+                        }
+                        if (attackScoreType2 > 60) {
+                            attackScoreType2 *= 3 / 4;
+                        }
+                    }
+                }
+                if (defenderType1 == TYPE_NORMAL
+                    || defenderType1 == TYPE_FIGHTING
+                    || defenderType2 == TYPE_NORMAL
+                    || defenderType2 == TYPE_FIGHTING) {
+                        if (monType1 == TYPE_GHOST
+                            || monType2 == TYPE_GHOST) {
+                            if (defenderAbility == ABILITY_SCRAPPY
+                            || Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_NORMAL_HIT_GHOST) {
+                                if (defenderType1 == TYPE_NORMAL
+                                    || defenderType1 == TYPE_FIGHTING) {
+                                    defendScoreType1 = 40;
+                                }
+                                if (defenderType2 == TYPE_NORMAL
+                                    || defenderType2 == TYPE_FIGHTING) {
+                                    defendScoreType2 = 40;
+                                }
+                            }
+                        }
+                }
+                if (defenderAbility != ABILITY_MOLD_BREAKER)
+                {
+                    if (defenderType1 == TYPE_WATER
+                        || defenderType2 == TYPE_WATER) {
+                        if (monAbility == ABILITY_WATER_ABSORB
+                            || monAbility == ABILITY_STORM_DRAIN
+                            || monAbility == ABILITY_DRY_SKIN) {
+                                if (defenderType1 == TYPE_WATER) {
+                                    defendScoreType1 = 0;
+                                }
+                                if (defenderType2 == TYPE_WATER) {
+                                    defendScoreType2 = 0;
+                                }
+                        }
+                    }
+                    if (defenderType1 == TYPE_FIRE
+                        || defenderType2 == TYPE_FIRE) {
+                            if (monAbility == ABILITY_FLASH_FIRE) {
+                                if (defenderType1 == TYPE_FIRE) {
+                                    defendScoreType1 = 0;
+                                }
+                                if (defenderType2 == TYPE_FIRE) {
+                                    defendScoreType2 = 0;
+                                }
+                            }
+                            if (monAbility == ABILITY_DRY_SKIN) {
+                                if (defenderType1 == TYPE_FIRE) {
+                                    defendScoreType1 *= 5 / 4;
+                                }
+                                if (defenderType2 == TYPE_FIRE) {
+                                    defendScoreType2 *= 5 / 4;
+                                }
+                            }
+                            if (monAbility == ABILITY_HEATPROOF
+                                || monAbility == ABILITY_THICK_FAT) {
+                                if (defenderType1 == TYPE_FIRE) {
+                                    defendScoreType1 /= 2;
+                                }
+                                if (defenderType2 == TYPE_FIRE) {
+                                    defendScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (defenderType1 == TYPE_GROUND
+                        || defenderType2 == TYPE_GROUND) {
+                            if ((monAbility == ABILITY_LEVITATE
+                                || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+                                || monType1 == TYPE_FLYING
+                                || monType2 == TYPE_FLYING)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+                                && (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)) 
+                            {
+                                    if (defenderType1 == TYPE_GROUND) {
+                                        defendScoreType1 = 0;
+                                    }
+                                    if (defenderType2 == TYPE_GROUND) {
+                                        defendScoreType2 = 0;
+                                    }
+                            }
+                            if ((monType1 == TYPE_FLYING
+                                || monType2 == TYPE_FLYING)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+                                || (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED)))
+                            {
+                                if (defenderType1 == TYPE_GROUND) {
+                                    defendScoreType1 = 40;
+                                }
+                                if (defenderType2 == TYPE_GROUND) {
+                                    defendScoreType2 = 40;
+                                }
+                            }
+                    }
+                    if (defenderType1 == TYPE_ELECTRIC
+                        || defenderType2 == TYPE_ELECTRIC) {
+                            if (monAbility == ABILITY_VOLT_ABSORB
+                                || monAbility == ABILITY_LIGHTNING_ROD) 
+                            {
+                                    if (defenderType1 == TYPE_ELECTRIC) {
+                                        defendScoreType1 = 0;
+                                    }
+                                    if (defenderType2 == TYPE_ELECTRIC) {
+                                        defendScoreType2 = 0;
+                                    }
+                            }
+                    }
+                    if (defenderType1 == TYPE_ICE
+                        || defenderType2 == TYPE_ICE) {
+                            if (monAbility == ABILITY_THICK_FAT) {
+                                if (defenderType1 == TYPE_ICE) {
+                                    defendScoreType1 /= 2;
+                                }
+                                if (defenderType2 == TYPE_ICE) {
+                                    defendScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (monAbility == ABILITY_FILTER) {
+                        if (attackScoreType1 > 60) {
+                            attackScoreType1 *= 3 / 4;
+                        }
+                        if (attackScoreType2 > 60) {
+                            attackScoreType2 *= 3 / 4;
+                        }
+                    }
+                }
+                if (monAbility == ABILITY_TINTED_LENS
+                    || defenderAbility == ABILITY_TINTED_LENS) {
+                        if (monAbility == ABILITY_TINTED_LENS) {
+                            if (attackScoreType1 < 40) {
+                                attackScoreType1 *= 2;
+                            }
+                            if (attackScoreType2 < 40) {
+                                attackScoreType2 *= 2;
+                            }
+                        }
+                        if (defenderAbility == ABILITY_TINTED_LENS) {
+                            if (defendScoreType1 < 40) {
+                                defendScoreType1 *= 2;
+                            }
+                            if (defendScoreType2 < 40) {
+                                defendScoreType2 *= 2;
+                            }
+                        }
+                }
+
+                // Add attack score for type 1
+                score = attackScoreType1;
+
+                // Add attack score for type 2
+                if (monType1 == monType2) {
+                    if (attackScoreType1 > 40) {
+                        score += (attackScoreType2 / 2) + (BattleSystem_RandNext(battleSys) % 2);
+                    }
+                    else if (attackScoreType1 == 40) {
+                        score += attackScoreType2 - (BattleSystem_RandNext(battleSys) % 2);
+                    }
+                    else {
+                        score += attackScoreType2 + (BattleSystem_RandNext(battleSys) & 7);
+                    }
+                }
+                else {
+                    score += attackScoreType2;
+                }
+
+                // Slightly favor offense
+                score += (BattleSystem_RandNext(battleSys) & 7);
+
+                // Apply speed multiplier
+                score *= speedMultiplier;
+                score /= 10;
+
+                // Subtract defend score for type 1
+                if (score <= defendScoreType1 + 1) {
+                    score = 0;
+                }
+                else {
+                    score -= defendScoreType1;
+                }
+
+                // Subtract defend score for type 2
+                if (score <= defendScoreType2 + 1) {
+                    score = 0;
+                }
+                else {
+                    if (defenderType1 == defenderType2) {
+                        if (defendScoreType1 > 40) {
+                            score -= (defendScoreType2 / 2) - (BattleSystem_RandNext(battleSys) % 2);
+                        }
+                        else if (defendScoreType1 == 40) {
+                            score -= defendScoreType2 - (BattleSystem_RandNext(battleSys) % 2);
+                        }
+                        else {
+                            score -= defendScoreType2 - (BattleSystem_RandNext(battleSys) & 7);
+                        }
+                    }
+                    else {
+                        score -= defendScoreType2;
+                    }
+                }
+
+                if (maxScore < score) {
+                    maxScore = score;
+                    picked = i;
+                } else {
+                battlersDisregarded |= FlagIndex(i);
+                }
+            }
+        }
+        if (picked != 6) {
+            // Determine if this mon has any super-effective moves against the defender
+            mon = BattleSystem_PartyPokemon(battleSys, battler, picked);
+
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
+                if (move) {
+                    moveStatusFlags = 0;
+                    BattleSystem_CalcEffectiveness(battleCtx,
+                        move,
+                        moveType,
+                        Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
+                        Battler_Ability(battleCtx, defender),
+                        Battler_HeldItemEffect(battleCtx, defender),
+                        BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
+                        BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),
+                        &moveStatusFlags);
+
+                    if (moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE) {
+                        break;
+                    }
+                }
+            }
+
+            // If this mon has no moves which would be super-effective against the
+            // defender, mark it as disregarded and move to the next in priority.
+            if (i == LEARNED_MOVES_MAX) {
+                battlersDisregarded |= FlagIndex(picked);
+            } else {
+                return picked;
+            }
+        } else {
+            // No valid battlers to further-evaluate, break out
+            battlersDisregarded = 0x3F;
+        }
+    }
+
+    maxScore = 0;
+    picked = 6;
+
+    // Stage 2: Loop through all the party slots and score them by how much damage would be done
+    // by the maximum non-critical roll of each of their moves if it were used by the battler
+    // which just fainted. Choose the Pokemon with the highest such score, breaking ties by
+    // party-order.
+    for (i = 0; i < partySize; i++) {
+        mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+        monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+
+        if (monSpecies != SPECIES_NONE
+                && monSpecies != SPECIES_EGG
+                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+                && battleCtx->selectedPartySlot[slot1] != i
+                && battleCtx->selectedPartySlot[slot2] != i
+                && i != battleCtx->aiSwitchedPartySlot[slot1]
+                && i != battleCtx->aiSwitchedPartySlot[slot2]
+                && i != battleCtx->selectedPartySlot[battler]) {
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
+                if (move && MOVE_DATA(move).power != 1) {
+                    score = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                        battleCtx->fieldConditionsMask,
+                        0,
+                        0,
+                        battler,
+                        defender,
+                        1);
+
+                    moveStatusFlags = 0;
+                    score = BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        move,
+                        moveType,
+                        battler,
+                        defender,
+                        score,
+                        &moveStatusFlags);
+
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)) == FALSE)
+                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
+                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
+                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)
+                        ) {
+                        score = 0;
+                    }
+                }
+
+                if (maxScore < score) {
+                    maxScore = score;
+                    picked = i;
+                }
+            }
+        }
+    }
+
+    return picked;
+}
+/*
+int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
+{
+    // Must keep C89-style declaration to match
+    int i, j;
+    u8 defender, defenderType1, defenderType2, defenderAbility;
+    u8 monType1, monType2, monAbility;
+    u8 battlerType1, battlerType2, battlerAbility;
+    u16 monSpecies;
+    u16 move;
+    int moveType;
+    u8 battlersDisregarded;
+    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore, speedMultiplier;
+    u16 currentScore, currentAttackScoreType1, currentAttackScoreType2, currentDefendScoreType1, currentDefendScoreType2, currentMaxScore, currentSpeedMultiplier;
+    u8 picked = 6;
+    u8 slot1, slot2;
+    u32 moveStatusFlags;
+    int partySize;
+    Pokemon *mon;
+    BattleContext *battleCtx;
+
+    battleCtx = BattleSystem_Context(battleSys);
+	
+    slot1 = battler;
+    if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
+            || (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_2vs2)) {
+        slot2 = slot1;
+    } else {
+        slot2 = BattleSystem_Partner(battleSys, battler);
+    }
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    partySize = BattleSystem_PartyCount(battleSys, battler);
+    battlersDisregarded = 0;
+
+    // Stage 1: Calculate the current battler's score.
+
+    defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+    defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+    defenderAbility = Battler_Ability(battleCtx, defender);
+    battlerType1 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL);
+    battlerType2 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL);
+
+
+    // Stage 2: Loop through all the party slots and find the one with the most favorable
+    // offensive type-matchup against the chosen defender which also has a super-effective
+    // move against that defender. Choose the Pokemon with the highest such score, breaking
+    // ties by party-order. If no such Pokemon exists, proceed to Stage 2.
+    //
+    // Mono-type Pokemon are regarded as being dual-type of the same type.
+    while (battlersDisregarded != 0x3F) {
+        maxScore = 0;
+        picked = 6;
+
+        for (i = 0; i < partySize; i++) {
+            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+            monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+
+            if (monSpecies != SPECIES_NONE
+                    && monSpecies != SPECIES_EGG
+                    && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+                    && (battlersDisregarded & FlagIndex(i)) == FALSE
+                    && battleCtx->selectedPartySlot[slot1] != i
+                    && battleCtx->selectedPartySlot[slot2] != i
+                    && i != battleCtx->aiSwitchedPartySlot[slot1]
+                    && i != battleCtx->aiSwitchedPartySlot[slot2]
+                    && i != battleCtx->selectedPartySlot[battler]) {
+                defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+                defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+                defenderAbility = Battler_Ability(battleCtx, defender);
+                monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+                monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+                monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+                // If trick room is up, we need to flip our speed check multipliers
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+
+                    // 0.9x if faster
+                    if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 9;
+                    }
+                    // 1.0x if tie
+                    else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 10;
+                    }
+                    // 1.1x if slower
+                    else {
+
+                        speedMultiplier = 11;
+                    }
+                }
+                // Trick Room is not up in this case.
+                else {
+                    // 1.1x if faster
+                    if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 11;
+                    }
+                    // 1.0x if same speed
+                    else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+
+                        speedMultiplier = 10;
+                    }
+                    // 0.9x if slower
+                    else {
+                    
+                        speedMultiplier = 9;
+                    }
+                }
+
+                // Bug: this operation potentially overflows when considering a mono-type Pokemon
+                // with a quad-effective matchup against a defender. e.g., Machamp (Fighting/Fighting)
+                // vs. Bastiodon (Rock/Steel) would see 160 + 160 = 320, which overflows to an
+                // incorrect matchup-score of 65.
+
+                // Above bug should be fixed now that score is u16.
+                // Changed monotype scoring to consider its matchup 1.5x instead of 2x
+                attackScoreType1 = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
+                attackScoreType2 = BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
+                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2) * 2 / 5;
+                defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2) * 2 / 5;
+
+                if (monAbility != ABILITY_MOLD_BREAKER) 
+                {
+                    if (monType1 == TYPE_NORMAL
+                        || monType1 == TYPE_FIGHTING
+                        || monType2 == TYPE_NORMAL
+                        || monType2 == TYPE_FIGHTING) {
+                            if (defenderType1 == TYPE_GHOST
+                                || defenderType2 == TYPE_GHOST) {
+                                if (monAbility == ABILITY_SCRAPPY
+                                || BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_NORMAL_HIT_GHOST) {
+                                    if (monType1 == TYPE_NORMAL
+                                        || monType1 == TYPE_FIGHTING) {
+                                            attackScoreType1 = 40;
+                                    }
+                                    if (monType2 == TYPE_NORMAL
+                                        || monType2 == TYPE_FIGHTING) {
+                                            attackScoreType2 = 40;
+                                    }
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_WATER
+                        || monType2 == TYPE_WATER) {
+                        if (defenderAbility == ABILITY_WATER_ABSORB
+                            || defenderAbility == ABILITY_STORM_DRAIN
+                            || defenderAbility == ABILITY_DRY_SKIN) {
+                                if (monType1 == TYPE_WATER) {
+                                    attackScoreType1 = 0;
+                                }
+                                if (monType2 == TYPE_WATER) {
+                                    attackScoreType2 = 0;
+                                }
+                        }
+                    }
+                    if (monType1 == TYPE_FIRE
+                        || monType2 == TYPE_FIRE) {
+                            if (defenderAbility == ABILITY_FLASH_FIRE) {
+                                if (monType1 == TYPE_FIRE) {
+                                    attackScoreType1 = 0;
+                                }
+                                if (monType2 == TYPE_FIRE) {
+                                    attackScoreType2 = 0;
+                                }
+                            }
+                            if (defenderAbility == ABILITY_DRY_SKIN) {
+                                if (monType1 == TYPE_FIRE) {
+                                    attackScoreType1 *= 5 / 4;
+                                }
+                                if (monType2 == TYPE_FIRE) {
+                                    attackScoreType2 *= 5 / 4;
+                                }
+                            }
+                            if (defenderAbility == ABILITY_HEATPROOF
+                                || defenderAbility == ABILITY_THICK_FAT) {
+                                if (monType1 == TYPE_FIRE) {
+                                    attackScoreType1 /= 2;
+                                }
+                                if (monType2 == TYPE_FIRE) {
+                                    attackScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_GROUND
+                        || monType2 == TYPE_GROUND) {
+                            if ((defenderAbility == ABILITY_LEVITATE
+                                || Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
+                                || defenderType1 == TYPE_FLYING
+                                || defenderType2 == TYPE_FLYING)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)
+                                && ((Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_SPEED_DOWN_GROUNDED))
+                                ) {
+                                    if (monType1 == TYPE_GROUND) {
+                                        attackScoreType1 = 0;
+                                    }
+                                    if (monType2 == TYPE_GROUND) {
+                                        attackScoreType2 = 0;
+                                    }
+                            }
+                            if ((defenderType1 == TYPE_FLYING
+                                || defenderType2 == TYPE_FLYING)
+                                && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+                                || (Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_SPEED_DOWN_GROUNDED))
+                            ) {
+                                if (monType1 == TYPE_GROUND) {
+                                    attackScoreType1 = 40;
+                                }
+                                if (monType2 == TYPE_GROUND) {
+                                    attackScoreType2 = 40;
+                                }
+                            }
+                    }
+                    if (monType1 == TYPE_ELECTRIC
+                        || monType2 == TYPE_ELECTRIC) {
+                            if (defenderAbility == ABILITY_VOLT_ABSORB
+                                || defenderAbility == ABILITY_LIGHTNING_ROD) {
+                                    if (monType1 == TYPE_ELECTRIC) {
+                                        attackScoreType1 = 0;
+                                    }
+                                    if (monType2 == TYPE_ELECTRIC) {
+                                        attackScoreType2 = 0;
+                                    }
+                            }
+                    }
+                    if (monType1 == TYPE_ICE
+                        || monType2 == TYPE_ICE) {
+                            if (defenderAbility == ABILITY_THICK_FAT) {
+                                if (monType1 == TYPE_ICE) {
+                                    attackScoreType1 /= 2;
+                                }
+                                if (monType2 == TYPE_ICE) {
+                                    attackScoreType2 /= 2;
+                                }
+                            }
+                    }
+                    if (defenderAbility == ABILITY_FILTER) {
                         if (defendScoreType1 > 40) {
                             defendScoreType1 *= 3 / 4;
                         }
@@ -9801,12 +10361,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             if (monAbility == ABILITY_VOLT_ABSORB
                                 || monAbility == ABILITY_LIGHTNING_ROD) 
                             {
-                                    if (defenderType1 == TYPE_ELECTRIC) {
-                                        defendScoreType1 = 0;
-                                    }
-                                    if (defenderType2 == TYPE_ELECTRIC) {
-                                        defendScoreType2 = 0;
-                                    }
+                                if (defenderType1 == TYPE_ELECTRIC) {
+                                    defendScoreType1 = 0;
+                                }
+                                if (defenderType2 == TYPE_ELECTRIC) {
+                                    defendScoreType2 = 0;
+                                }
                             }
                     }
                     if (defenderType1 == TYPE_ICE
@@ -9954,7 +10514,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     maxScore = 0;
     picked = 6;
 
-    // Stage 2: Loop through all the party slots and score them by how much damage would be done
+    // Stage 3: Loop through all the party slots and score them by how much damage would be done
     // by the maximum non-critical roll of each of their moves if it were used by the battler
     // which just fainted. Choose the Pokemon with the highest such score, breaking ties by
     // party-order.
@@ -10018,6 +10578,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
     return picked;
 }
+*/
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)
 {
