@@ -2877,8 +2877,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     }
     if (moveType == TYPE_POISON)
     {
-        if (MON_HAS_TYPE(defender, TYPE_STEEL)
-            || MON_HAS_TYPE(defender, TYPE_POISON))
+        if (MON_HAS_TYPE(defender, TYPE_STEEL))
         {
             if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_CORROSION) == TRUE)
             {
