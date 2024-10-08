@@ -2797,7 +2797,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
         }
 
-        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN == TRUE) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN == TRUE)) {
 
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
         }
@@ -2810,7 +2810,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
          
         if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE)
-            || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE)) {
+            || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MOTOR_DRIVE) == TRUE) {
 
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
         }
