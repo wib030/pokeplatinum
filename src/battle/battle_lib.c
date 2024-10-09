@@ -9968,12 +9968,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 && battleCtx->selectedPartySlot[slot2] != i
                 && i != battleCtx->aiSwitchedPartySlot[slot1]
                 && i != battleCtx->aiSwitchedPartySlot[slot2]
-                && i != battleCtx->selectedPartySlot[battler]) {
+                && i != battleCtx->selectedPartySlot[battler])
+        {
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
                 moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
-                if (move && MOVE_DATA(move).power != 1) {
+                if (move && (MOVE_DATA(move).power > 1)) {
                     score = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         move,
@@ -9998,12 +9999,25 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
                          && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
                          && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)) == FALSE)
+                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE))
                         || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
                         || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
                         || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)
-                        ) {
+                        ) 
+                    {
                         score = 0;
+                    }
+
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
+                        && (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY))
+                    {
+                        score /= 2;
+                    }
+
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
+                        && (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY))
+                    {
+                        score = score * 3 / 2;
                     }
                 }
 
