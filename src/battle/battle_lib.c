@@ -9485,18 +9485,31 @@ static BOOL BattleAI_AllMovesKnown(BattleContext *battleCtx, int battler)
 
     result = FALSE;
 
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+    // If there is a choice-locked move, we only need to know that.
+    if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
 
-        if (battleCtx->aiContext.battlerMoves[battler][i] == MOVE_NONE
-            && battleCtx->battleMons[battler].moves[i] != MOVE_NONE) {
+            if (battleCtx->aiContext.battlerMoves[battler][i] == battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
 
-            break;
+                result = TRUE;
+                break;
+            }
         }
     }
-    
-    if (i == LEARNED_MOVES_MAX) {
+    else {
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
 
-        result = TRUE;
+            if (battleCtx->aiContext.battlerMoves[battler][i] == MOVE_NONE
+                && battleCtx->battleMons[battler].moves[i] != MOVE_NONE) {
+
+                break;
+            }
+        }
+    
+        if (i == LEARNED_MOVES_MAX) {
+
+            result = TRUE;
+        }
     }
 
     return result;
