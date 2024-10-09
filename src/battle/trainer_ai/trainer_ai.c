@@ -1405,10 +1405,20 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
             tmpAbility = AI_CONTEXT.battlerAbilities[battler];
             AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
         } else {
-            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
+            // If the opponent has an ability that announces, we should already know about it (because it self-announces)
             if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
-                    || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
-                    || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP) {
+                || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
+                || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP
+                || battleCtx->battleMons[battler].ability == ABILITY_INTIMIDATE
+                || battleCtx->battleMons[battler].ability == ABILITY_TRACE
+                || battleCtx->battleMons[battler].ability == ABILITY_DOWNLOAD
+                || battleCtx->battleMons[battler].ability == ABILITY_ANTICIPATION
+                || battleCtx->battleMons[battler].ability == ABILITY_FOREWARN
+                || battleCtx->battleMons[battler].ability == ABILITY_SLOW_START
+                || battleCtx->battleMons[battler].ability == ABILITY_FRISK
+                || battleCtx->battleMons[battler].ability == ABILITY_MOLD_BREAKER
+                || battleCtx->battleMons[battler].ability == ABILITY_PRESSURE
+                || battleCtx->battleMons[battler].ability == ABILITY_RANDOM_SELECT) {
                 tmpAbility = battleCtx->battleMons[battler].ability;
             } else {
                 // Try to guess the opponent's ability (flip a coin)
@@ -1417,17 +1427,20 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
 
                 if (ability1 && ability2) {
                     // If the opponent has two abilities, but neither are the expected one,
-                    // prefer ability 1 for the final check
+                    // coinflip to pick.
                     if (ability1 != expected && ability2 != expected) {
-                        tmpAbility = ability1;
+                        if (BattleSystem_RandNext(battleSys) & 1)
+                        {
+                            tmpAbility = ability1;
+                        }
+                        else 
+                        {
+                            tmpAbility = ability2;
+                        }
                     // Otherwise, pretend that we don't know about it
                     } else {
                         tmpAbility = ABILITY_NONE;
                     }
-                } else if (ability1 && (BattleSystem_RandNext(battleSys) & 1)) {
-                    tmpAbility = ability1;
-                } else {
-                    tmpAbility = ability2;
                 }
             }
         }
