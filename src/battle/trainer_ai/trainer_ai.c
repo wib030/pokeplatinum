@@ -5160,7 +5160,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                                 && (hasNonContactPivot == 0)
                                 && ((BattleSystem_RandNext(battleSys) % 3) != 0)) {
 
-                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                                 return TRUE;
                             }
                             else {
@@ -5173,7 +5173,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                             // Hard switch if our weathermon is at or below a random percent from 40 - 50%
                             if (battleCtx->battleMons[battler].curHP <= hpRange) {
 
-                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                                 return TRUE;
                             }
                             else {
@@ -5184,7 +5184,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                     }
                     else {
 
-                        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                         return TRUE;
                     }
                 }
@@ -5207,7 +5207,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                             && (hasNonContactPivot == 0)
                             && ((BattleSystem_RandNext(battleSys) % 3) != 0)) {
 
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
                         }
                         else {
@@ -5220,7 +5220,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                         // Hard switch if our weathermon is at or below 40 - 50%
                         if (battleCtx->battleMons[battler].curHP <= hpRange) {
                     
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_PostKOSwitchIn(battleSys, battler);
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
                         }
                         else {
