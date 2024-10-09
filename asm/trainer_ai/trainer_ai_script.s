@@ -4687,7 +4687,7 @@ Expert_FakeOut_WillItKill:
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH, ScorePlus5
     IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_FakeOut_End
-    IfCurrentMoveKills USE_MAX_DAMAGE, Expert_FakeOut_TryScorePlus3
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_FakeOut_TryScorePlus3
     GoTo ScoreMinus1
 
 Expert_FakeOut_TryScorePlus3:
@@ -7643,7 +7643,7 @@ EvalAttack_Main:
     ; Never target the partner.
     IfTargetIsPartner Terminate
  
-    IfCurrentMoveKills USE_MAX_DAMAGE, EvalAttack_CheckForKill
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, EvalAttack_CheckForKill
 
     ; If this move does not out-damage all other moves, score -1.
     FlagMoveDamageScore FALSE
