@@ -9469,6 +9469,40 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
     return type;
 }
 
+/**
+ * @brief Check if the AI knows all of an opponent's moves.
+ * 
+ * @param battleCtx 
+ * @param battler   The battler to check the moves of.
+ * 
+ * @return TRUE if all of the battler's moves are known to the AI,
+ * FALSE otherwise. 
+ */
+static BOOL BattleAI_AllMovesKnown(BattleContext *battleCtx, int battler)
+{
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        if (battleCtx->aiContext.battlerMoves[battler][i] == MOVE_NONE
+            && battleCtx->battleMons[battler].moves[i] != MOVE_NONE) {
+
+            break;
+        }
+    }
+    
+    if (i == LEARNED_MOVES_MAX) {
+
+        result = TRUE;
+    }
+
+    return result;
+}
+
+
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
     // Must keep C89-style declaration to match
