@@ -10192,7 +10192,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                     score += moveScore;
                     
-                    if (battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
+                    if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
                         && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
                         break;
                     }
@@ -10422,7 +10422,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 // Changed monotype scoring to consider its matchup 1.5x instead of 2x
                 attackScoreType1 = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
                 attackScoreType2 = BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
-                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2 * 2 / 5;
+                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2) * 2 / 5;
                 defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2) * 2 / 5;
 
                 if (monAbility != ABILITY_MOLD_BREAKER) 
