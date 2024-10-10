@@ -9265,11 +9265,13 @@ static void BattleAI_ClearKnownMoves(BattleContext *battleCtx, u8 battler)
 
     for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
         
-        // Try to record known moves on switch out
-        if (battleCtx->aiContext.battlerMoves[battler][i] != MOVE_NONE) {
-            battleCtx->aiContext.battlerPartyMoves[battler][partySlot][i] = battleCtx->aiContext.battlerMoves[battler][i];
+        // Try to load known moves after switch in
+        if (battleCtx->aiContext.battlerPartyMoves[battler][partySlot][i] != MOVE_NONE) {
+            battleCtx->aiContext.battlerMoves[battler][i] = battleCtx->aiContext.battlerPartyMoves[battler][partySlot][i];
         }
-        battleCtx->aiContext.battlerMoves[battler][i] = MOVE_NONE;
+        else {
+            battleCtx->aiContext.battlerMoves[battler][i] = MOVE_NONE;
+        }
     }
 }
 
@@ -9285,11 +9287,13 @@ static void BattleAI_ClearKnownAbility(BattleContext *battleCtx, u8 battler)
 
     partySlot = battleCtx->selectedPartySlot[battler];
 
-    // Try to record known ability on switch out
-    if (battleCtx->aiContext.battlerAbilities[battler] != ABILITY_NONE) {
-        battleCtx->aiContext.battlerPartyAbilities[battler][partySlot] = battleCtx->aiContext.battlerAbilities[battler];
+    // Try to load known ability on switch in
+    if (battleCtx->aiContext.battlerPartyAbilities[battler][partySlot] != ABILITY_NONE) {
+        battleCtx->aiContext.battlerAbilities[battler] = battleCtx->aiContext.battlerPartyAbilities[battler][partySlot];
     }
-    battleCtx->aiContext.battlerAbilities[battler] = ABILITY_NONE;
+    else {
+        battleCtx->aiContext.battlerAbilities[battler] = ABILITY_NONE;
+    }
 }
 
 /**
@@ -9304,12 +9308,13 @@ static void BattleAI_ClearKnownItem(BattleContext *battleCtx, u8 battler)
 
     partySlot = battleCtx->selectedPartySlot[battler];
 
-    // Try to record known item on switch out
-    if (battleCtx->aiContext.battlerHeldItems[battler] != ITEM_NONE) {
-       battleCtx->aiContext.battlerPartyHeldItems[battler][partySlot] = battleCtx->aiContext.battlerHeldItems[battler];
+    // Try to load known item on switch in
+    if (battleCtx->aiContext.battlerPartyHeldItems[battler][partySlot] != ITEM_NONE) {
+       battleCtx->aiContext.battlerHeldItems[battler] = battleCtx->aiContext.battlerPartyHeldItems[battler][partySlot];
     }
-
-    battleCtx->aiContext.battlerHeldItems[battler] = ITEM_NONE;
+    else {
+        battleCtx->aiContext.battlerHeldItems[battler] = ITEM_NONE;
+    }
 }
 
 /**
