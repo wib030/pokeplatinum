@@ -605,4 +605,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">STRANGLE WEED</language>
 	</row>
+	<row id="pl_msg_00000610_00151" index="151">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">PEST</language>
+	</row>
 </body>

@@ -605,4 +605,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Inflicts Wrap on contact\nwith Grass move.</language>
 	</row>
+	<row id="pl_msg_00000610_00151" index="151">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Chance to endure a\nfinishing attack.</language>
+	</row>
 </body>

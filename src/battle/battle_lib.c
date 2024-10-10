@@ -3929,7 +3929,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 	int colorChange1Pos, colorChange2Pos;
 	int colorChangeTarget = NULL;
 	int targetType1, targetType2;
-	int abilityMax = ABILITY_STRANGLE_WEED;
+	int abilityMax = ABILITY_PEST;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
