@@ -2545,12 +2545,70 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
         int totalMonsWithExpShare = 0;
 		int gainingExp = 1;
 		int thisBattlerGaining = 0;
+        int boostLevel, capLevel;
 		
 		Pokemon *cMon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[battleCtx->attacker]);
 		int levelCur = Pokemon_GetValue(cMon, MON_DATA_LEVEL, NULL);
 		
 		TrainerInfo *trInfo = BattleSystem_TrainerInfo(battleSys, 0);
 		int badges = TrainerInfo_BadgeCount(trInfo);
+
+        u16 exp = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, MON_DATA_PERSONAL_BASE_EXP);
+        exp = exp * battleCtx->battleMons[battleCtx->faintedMon].level / 7;
+
+        // Set level floors and ceilings for xp modification here
+        switch (badges) {
+
+            default:
+                boostLevel = 0;
+                capLevel = 100;
+                break;
+
+            case 0:
+                boostLevel = 7;
+                capLevel = 12;
+                break;
+
+            case 1:
+                boostLevel = 17;
+                capLevel = 21;
+                break;
+
+            case 2:
+                boostLevel = 21;
+                capLevel = 25;
+                break;
+
+            case 3:
+                boostLevel = 25;
+                capLevel = 30;
+                break;
+
+            case 4:
+                boostLevel = 29;
+                capLevel = 35;
+                break;
+
+            case 5:
+                boostLevel = 33;
+                capLevel = 44;
+                break;
+
+            case 6:
+                boostLevel = 37;
+                capLevel = 48;
+                break;
+
+            case 7:
+                boostLevel = 41;
+                capLevel = 53;
+                break;
+
+            case 8:
+                boostLevel = 45;
+                capLevel = 100;
+                break;
+        }
 
         for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, BATTLER_US)); i++) {
 			thisBattlerGaining = 0;
@@ -2571,48 +2629,22 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
                 }
             }
 			
-			if ((thisBattlerGaining == 1)
-			&& (((badges == 0) && (levelCurMon >= 13))
-			|| ((badges == 1) && (levelCurMon >= 22))
-			|| ((badges == 2) && (levelCurMon >= 26))
-			|| ((badges == 3) && (levelCurMon >= 31))
-			|| ((badges == 4) && (levelCurMon >= 36))
-			|| ((badges == 5) && (levelCurMon >= 45))
-			|| ((badges == 6) && (levelCurMon >= 49))
-			|| ((badges == 7) && (levelCurMon >= 54))))
-			{
-				gainingExp = 0;
-			}
+			if (thisBattlerGaining == 1) {
+                if (levelCurMon > capLevel) {
+                    gainingExp = 0;
+                }
+            }
         }
-		
-		if (((badges == 0) && (levelCur >= 13))
-		|| ((badges == 1) && (levelCur >= 22))
-		|| ((badges == 2) && (levelCur >= 26))
-		|| ((badges == 3) && (levelCur >= 31))
-		|| ((badges == 4) && (levelCur >= 36))
-		|| ((badges == 5) && (levelCur >= 45))
-		|| ((badges == 6) && (levelCur >= 49))
-		|| ((badges == 7) && (levelCur >= 54)))
-		{
-			gainingExp = 0;
-		}
 
-        u16 exp = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, MON_DATA_PERSONAL_BASE_EXP);
-        exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 7;
-		
-		if (((badges == 0) && (levelCur <= 6)) //Level cap of 13
-		|| ((badges == 1) && (levelCur <= 16)) //Level cap of 22
-		|| ((badges == 2) && (levelCur <= 20)) //Level cap of 26
-		|| ((badges == 3) && (levelCur <= 24)) //Level cap of 31
-		|| ((badges == 4) && (levelCur <= 28)) //Level cap of 36
-		|| ((badges == 5) && (levelCur <= 32)) //Level cap of 45
-		|| ((badges == 6) && (levelCur <= 36)) //Level cap of 49
-		|| ((badges == 7) && (levelCur <= 40)) //Level cap of 54
-		|| ((badges == 8) && (levelCur <= 44)))
-		{
-			 exp = exp * 3 / 2; //1.5x experience
-		}
-		
+        if (levelCur < boostLevel) {
+            exp = exp * 3 / 2;
+        }
+        else {
+            if (levelCur > capLevel) {
+                gainingExp = 0;
+            }
+        }
+
 		if (gainingExp == 0)
 		{
 			exp = 0;
