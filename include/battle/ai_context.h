@@ -28,6 +28,10 @@ typedef struct AIContext {
     u8 battlerAbilities[MAX_BATTLERS];
     u16 battlerHeldItems[MAX_BATTLERS];
 
+    u16 battlerPartyMoves[MAX_BATTLERS][MAX_PARTY_SIZE][LEARNED_MOVES_MAX];
+    u8 battlerPartyAbilities[MAX_BATTLERS][MAX_PARTY_SIZE];
+    u16 battlerPartyHeldItems[MAX_BATTLERS][MAX_PARTY_SIZE];
+
     u16 trainerItems[MAX_OPPONENTS][MAX_TRAINER_ITEMS];
 
     u32 scriptStackPointer[8];
