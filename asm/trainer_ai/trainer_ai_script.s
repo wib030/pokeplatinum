@@ -3794,7 +3794,7 @@ Expert_Protect_SandstormTypes:
     TableEntry TYPE_ROCK
     TableEntry TYPE_GROUND
     TableEntry TYPE_STEEL
-    TABLE_END
+    TableEntry TABLE_END
 
 Expert_Protect_CheckHail:
     AddToMoveScore 2
