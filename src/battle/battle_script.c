@@ -12642,6 +12642,11 @@ static void BattleScript_UpdateFriendship(BattleSystem *battleSys, BattleContext
  */
 static void BattleAI_SetAbility(BattleContext *battleCtx, u8 battler, u8 ability)
 {
+    u8 partySlot;
+
+    partySlot = partySlot = battleCtx->selectedPartySlot[battler];
+
+    battleCtx->aiContext.battlerPartyAbilities[battler][partySlot] = ability;
     battleCtx->aiContext.battlerAbilities[battler] = ability;
 }
 
@@ -12655,6 +12660,11 @@ static void BattleAI_SetAbility(BattleContext *battleCtx, u8 battler, u8 ability
  */
 static void BattleAI_SetHeldItem(BattleContext *battleCtx, u8 battler, u16 item)
 {
+    u8 partySlot;
+
+    partySlot = partySlot = battleCtx->selectedPartySlot[battler];
+
+    battleCtx->aiContext.battlerPartyHeldItems[battler][partySlot] = item;
     battleCtx->aiContext.battlerHeldItems[battler] = item;
 }
 
