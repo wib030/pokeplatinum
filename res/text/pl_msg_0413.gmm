@@ -160,7 +160,7 @@
 	</row>
 	<row id="pl_msg_00000413_00039" index="39">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">a {COLOR 255}JIGGLYPUFF{COLOR 0}</language>
+		<language name="English">a {COLOR 255}WIBBLYPUFF{COLOR 0}</language>
 	</row>
 	<row id="pl_msg_00000413_00040" index="40">
 		<attribute name="window_context_name">used</attribute>
