@@ -3352,14 +3352,68 @@ static BOOL AIScript_PopCursor(BattleSystem *battleSys, BattleContext *battleCtx
  */
 static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
-        if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][i] == battleCtx->movePrevByBattler[AI_CONTEXT.defender]) {
-            break;
-        }
+    u8 partySlot;
+    u16 move;
+    int i, j, partyMax;
+    Pokemon *mon;
 
-        if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][i] == MOVE_NONE) {
-            AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][i] = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
-            break;
+    move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
+
+    // Here we want to just learn every instance of u-turn / volt switch
+    // on the opponent's team if they hit us with u-turn / volt switch
+    // because the active mon data is switched before the AI gets to run
+    // this code again.
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+        partyMax = BattleSystem_PartyCount(battleSys, battler);
+
+        for (i = 0; i < partyMax; i++) {
+            mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                
+                if(move == Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL)) {
+
+                    if(AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] != move) {
+
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    else {
+
+        partySlot = battleCtx->selectedPartySlot[AI_CONTEXT.defender];
+
+        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+            if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == move) {
+
+                if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == move) {
+
+                    break;
+                }
+                else {
+
+                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                    break;
+                }
+            }
+
+            if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == MOVE_NONE) {
+
+                if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
+
+                    AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                    break;
+                }
+
+                AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                break;
+            }
         }
     }
 }
