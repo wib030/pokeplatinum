@@ -4,5 +4,6 @@ static const u16 sWeightToPower[][2] = {
     {    500,     60 },
     {   1000,     80 },
     {   2000,    100 },
+    {   5000,    120 },
     { 0xFFFF, 0xFFFF },
 };

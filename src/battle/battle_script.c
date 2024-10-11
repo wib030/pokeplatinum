@@ -7310,7 +7310,7 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
     if (sWeightToPower[i][0] != 0xFFFF) {
         battleCtx->movePower = sWeightToPower[i][1];
     } else {
-        battleCtx->movePower = 120;
+        battleCtx->movePower = 150;
     }
 
     return FALSE;
