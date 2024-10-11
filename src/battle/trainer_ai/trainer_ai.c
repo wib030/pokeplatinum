@@ -3356,8 +3356,6 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
     u16 move;
     int i, j, partyMax;
     Pokemon *mon;
-	int inBattler = AIScript_Read(battleCtx);
-    u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
 
@@ -3366,7 +3364,7 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
     // because the active mon data is switched before the AI gets to run
     // this code again.
     if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
-        partyMax = BattleSystem_PartyCount(battleSys, battler);
+        partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
 
         for (i = 0; i < partyMax; i++) {
             mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
