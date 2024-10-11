@@ -2955,10 +2955,32 @@ Expert_Rest:
     ; If the opponent does not know Snatch, 96.1% chance of score +3.
     ;
     ; If the opponent knows Snatch, 77.3% chance of score +3.
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, ScoreMinus10
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_EARLY_BIRD, Expert_Rest_EarlyBird
+    LoadRecycleItem AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ITEM_CHESTO_BERRY, ScoreMinus12
+    LoadHeldItem
+    IfLoadedEqualTo ITEM_CHESTO_BERRY, Expert_Rest_Chesto
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SLEEP_TALK, Expert_Rest_SleepTalker
+    GoTo Expert_Rest_CheckSpeed
+
+Expert_Rest_EarlyBird:
+    IfRandomLessThan 128, Expert_Rest_CheckSpeed
+    AddToMoveScore 1
+    GoTo Expert_Rest_CheckSpeed
+
+Expert_Rest_Chesto:
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, ScoreMinus10
+    IfRandomLessThan 8, Expert_Rest_CheckSpeed
+    AddToMoveScore 2
+    GoTo Expert_Rest_CheckSpeed
+
+Expert_Rest_CheckSpeed:
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Rest_SlowerCheckHP
-    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Expert_Rest_FasterCheckHP
-    AddToMoveScore -8
-    GoTo Expert_Rest_End
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Rest_TryScorePlus3
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Rest_TryScorePlus1
+    GoTo Expert_Rest_CheckForSnatch
 
 Expert_Rest_FasterCheckHP:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Rest_CheckForSnatch
@@ -2970,21 +2992,24 @@ Expert_Rest_FasterScoreMinus3:
     GoTo Expert_Rest_End
 
 Expert_Rest_SlowerCheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 60, Expert_Rest_CheckForSnatch
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_Rest_SlowerScoreMinus3
-    IfRandomLessThan 50, Expert_Rest_CheckForSnatch
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Rest_TryScorePlus3
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 60, Expert_Rest_TryScorePlus1
+    GoTo Expert_Rest_CheckForSnatch
 
-Expert_Rest_SlowerScoreMinus3:
-    AddToMoveScore -3
-    GoTo Expert_Rest_End
-
-Expert_Rest_CheckForSnatch:
-    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Rest_TryScorePlus3
-    IfRandomLessThan 50, Expert_Rest_End
+Expert_Rest_TryScorePlus1:
+    IfRandomLessThan 32, Expert_Rest_CheckForSnatch
+    AddToMoveScore 1
+    Expert_Rest_CheckForSnatch
 
 Expert_Rest_TryScorePlus3:
-    IfRandomLessThan 10, Expert_Rest_End
+    IfRandomLessThan 8, Expert_Rest_CheckForSnatch
     AddToMoveScore 3
+    Expert_Rest_CheckForSnatch
+
+Expert_Rest_CheckForSnatch:
+    IfRandomLessThan 8, Expert_Rest_End
+    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, ScoreMinus3
+    GoTo Expert_Rest_End
 
 Expert_Rest_End:
     PopOrEnd 
