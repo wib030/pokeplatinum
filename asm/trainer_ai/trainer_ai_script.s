@@ -1819,6 +1819,7 @@ Expert_Main:
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_96, Expert_LovelyPunch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN, Expert_FuryCutter
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_SP_ATK_HIT, Expert_ChargeBeam
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Expert_WeightMove
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -7676,6 +7677,30 @@ Expert_ChargeBeam_CheckHP:
     GoTo Expert_ChargeBeam_End
 
 Expert_ChargeBeam_End:
+    PopOrEnd
+
+Expert_WeightMove:
+    ; If target''s weight is greater than 200 pounds, 75% chance for +1 score
+    ; and 56.25% chance for +2 score.
+    ; If target''s weight is less than 50 pounds, 93.75% chance for -1 score.
+    LoadWeight AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 2000, Expert_WeightMove_TryScorePlus2
+    IfLoadedLessThan 500, Expert_WeightMove_TryScoreMinus1
+    GoTo Expert_WeightMove_End
+
+Expert_WeightMove_TryScorePlus2:
+    IfRandomLessThan 64, Expert_WeightMove_End
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_WeightMove_End
+    AddToMoveScore 1
+    GoTo Expert_WeightMove_End
+
+Expert_WeightMove_TryScoreMinus1:
+    IfRandomLessThan 16, Expert_WeightMove_End
+    AddToMoveScore -1
+    GoTo Expert_WeightMove_End
+
+Expert_WeightMove_End:
     PopOrEnd
 
 EvalAttack_Main:

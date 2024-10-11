@@ -238,6 +238,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
 static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, BattleContext  *battleCtx);
+static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext  *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -384,7 +385,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerHasNoPhysicalAttack,
     AICmd_IfBattlerHasNoSpecialAttack,
     AICmd_IfBattlerHasNoStatusAttack,
-    AICmd_IfToxicSpikesClearerAliveInParty
+    AICmd_IfToxicSpikesClearerAliveInParty,
+    AICmd_LoadWeight
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3307,6 +3309,16 @@ static void AICmd_TeamMoveEffectivenessScore(BattleSystem *battleSys, BattleCont
 
 }
 */
+
+static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].weight;
+}
 
 
 /**

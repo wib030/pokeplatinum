@@ -669,6 +669,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro LoadWeight battler
+    .long 116
+    .long \battler
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
