@@ -3356,6 +3356,8 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
     u16 move;
     int i, j, partyMax;
     Pokemon *mon;
+	int inBattler = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
 
