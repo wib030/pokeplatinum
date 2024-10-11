@@ -4324,7 +4324,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 // 1 in 3 chance to consider a switch for each neutral move.
                                 // Explanation of switch chances in comment block below.
-                                if (BattleSystem_RandNext(battleSys) % 3 < 2) {
+                                if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
 
                                     return FALSE;
                                 }
@@ -4355,7 +4355,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     // 11% chance to switch with 2 neutral,
                                     // 3.7% chance to switch with 3 neutral,
                                     // and 1.2% chance to switch with 4 neutral.
-                                    if (BattleSystem_RandNext(battleSys) % 3 < 2) {
+                                    if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
 
                                         return FALSE;
                                     }
@@ -4415,9 +4415,12 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             &effectiveness);
                     }
 
-                    if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 3 < 2) {
-                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                        return TRUE;
+                    if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                        if (&& (BattleSystem_RandNext(battleSys) % 3) < 2 ) {
+                            
+                            battleCtx->aiSwitchedPartySlot[battler] = i;
+                            return TRUE;
+                        }
                     }
 
                     effectiveness = 0;
@@ -4433,9 +4436,12 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             &effectiveness);
                     }
 
-                    if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 3 < 2) {
-                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                        return TRUE;
+                    if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                        if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+                            
+                            battleCtx->aiSwitchedPartySlot[battler] = i;
+                            return TRUE;
+                        }
                     }
                 }
             }
