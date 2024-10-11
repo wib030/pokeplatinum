@@ -1818,6 +1818,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHADOW_FORCE, Expert_ShadowForce
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_96, Expert_LovelyPunch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN, Expert_FuryCutter
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_SP_ATK_HIT, Expert_ChargeBeam
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -7637,6 +7638,44 @@ Expert_FuryCutterChanceForPlus1:
     GoTo Expert_FuryCutterEnd
 
 Expert_FuryCutterEnd:
+    PopOrEnd
+
+
+Expert_ChargeBeam:
+    ;
+    ; If current Sp. Atk stage is less than +1, 75% chance for score +2
+    ; If current Sp. Atk stage is less than +2, 50% chance for score +1
+    ; 87.5% chance for score -1 if HP is less than 2/3
+    ; Be a little greedier for Charge Beam if we have Simple ability
+    ;
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SIMPLE, Expert_ChargeBeam_Simple
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_ChargeBeam_TryScorePlus2
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, Expert_ChargeBeam_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 11, ScoreMinus1
+    GoTo Expert_ChargeBeam_CheckHP
+
+Expert_ChargeBeam_Simple:
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, Expert_ChargeBeam_TryScorePlus2
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus1
+    GoTo Expert_ChargeBeam_CheckHP
+    
+
+Expert_ChargeBeam_TryScorePlus2:
+    IfRandomLessThan 64, Expert_ChargeBeam_CheckHP
+    AddToMoveScore 2
+    GoTo Expert_ChargeBeam_CheckHP
+
+Expert_ChargeBeam_TryScorePlus1:
+    IfRandomLessThan 128, Expert_ChargeBeam_CheckHP
+
+Expert_ChargeBeam_CheckHP:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 67, ScoreMinus1
+    IfRandomLessThan 32, Expert_ChargeBeam_End
+    AddToMoveScore 1
+    GoTo Expert_ChargeBeam_End
+
+Expert_ChargeBeam_End:
     PopOrEnd
 
 EvalAttack_Main:
