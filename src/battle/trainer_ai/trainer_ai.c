@@ -255,7 +255,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
-static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
+static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
@@ -4050,11 +4050,11 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
  * @param battler   The AI's battler.
  * @return TRUE if the AI has a switch to make, FALSE otherwise.
  */
-static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
+static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_PERISH_SONG)
             && battleCtx->battleMons[battler].moveEffectsData.perishSongTurns == 0) {
-        battleCtx->aiSwitchedPartySlot[battler] = 6;
+        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
         return TRUE;
     }
 
@@ -5028,14 +5028,14 @@ static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *b
     // Check for the move that last hit you; i.e., don't switch on your first turn.
     // Switch 50% of the time, and use post-KO switch logic.
     if (battleCtx->moveHit[battler] == MOVE_NONE && (BattleSystem_RandNext(battleSys) & 1)) {
-        battleCtx->aiSwitchedPartySlot[battler] = 6;
+        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
         return TRUE;
     }
 
     // If the last move that hit you is a status move, switch 50% of the time, following
     // post-KO switch logic.
     if (MOVE_DATA(battleCtx->moveHit[battler]).power == 0 && (BattleSystem_RandNext(battleSys) & 1)) {
-        battleCtx->aiSwitchedPartySlot[battler] = 6;
+        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
         return TRUE;
     }
 
@@ -5053,7 +5053,7 @@ static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *b
 
     // Randomly switch 50% of the time, following post-KO switch logic.
     if (BattleSystem_RandNext(battleSys) & 1) {
-        battleCtx->aiSwitchedPartySlot[battler] = 6;
+        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
         return TRUE;
     }
 
@@ -5555,7 +5555,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
     }
 
     if (alivePartyMons) {
-        if (AI_PerishSongKO(battleCtx, battler)) {
+        if (AI_PerishSongKO(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
