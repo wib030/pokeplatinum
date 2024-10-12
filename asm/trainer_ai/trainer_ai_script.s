@@ -2960,7 +2960,7 @@ Expert_Rest:
     IfLoadedEqualTo ABILITY_EARLY_BIRD, Expert_Rest_EarlyBird
     LoadRecycleItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_CHESTO_BERRY, ScoreMinus12
-    LoadHeldItem
+    LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_CHESTO_BERRY, Expert_Rest_Chesto
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SLEEP_TALK, Expert_Rest_SleepTalker
     GoTo Expert_Rest_CheckSpeed
@@ -2999,12 +2999,12 @@ Expert_Rest_SlowerCheckHP:
 Expert_Rest_TryScorePlus1:
     IfRandomLessThan 32, Expert_Rest_CheckForSnatch
     AddToMoveScore 1
-    Expert_Rest_CheckForSnatch
+    GoTo Expert_Rest_CheckForSnatch
 
 Expert_Rest_TryScorePlus3:
     IfRandomLessThan 8, Expert_Rest_CheckForSnatch
     AddToMoveScore 3
-    Expert_Rest_CheckForSnatch
+    GoTo Expert_Rest_CheckForSnatch
 
 Expert_Rest_CheckForSnatch:
     IfRandomLessThan 8, Expert_Rest_End
