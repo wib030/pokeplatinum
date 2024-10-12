@@ -5,8 +5,8 @@
         "attack": 59,
         "defense": 85,
         "speed": 67,
-        "special_attack": 79,
-        "special_defense": 105
+        "special_attack": 109,
+        "special_defense": 125
     },
     "types": [
         "TYPE_BUG",

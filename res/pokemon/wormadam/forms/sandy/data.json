@@ -2,7 +2,7 @@
     "name": "Wormadam",
     "base_stats": {
         "hp": 80,
-        "attack": 79,
+        "attack": 99,
         "defense": 105,
         "speed": 67,
         "special_attack": 59,
