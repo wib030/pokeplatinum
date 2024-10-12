@@ -7691,9 +7691,9 @@ Expert_ChargeBeam_TryScorePlus1:
     IfRandomLessThan 128, Expert_ChargeBeam_CheckHP
 
 Expert_ChargeBeam_CheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 67, ScoreMinus1
     IfRandomLessThan 32, Expert_ChargeBeam_End
     AddToMoveScore 1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 67, ScoreMinus1
     GoTo Expert_ChargeBeam_End
 
 Expert_ChargeBeam_End:
