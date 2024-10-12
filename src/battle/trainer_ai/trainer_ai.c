@@ -4416,7 +4416,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     }
 
                     if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
-                        if (&& (BattleSystem_RandNext(battleSys) % 3) < 2 ) {
+                        if ((BattleSystem_RandNext(battleSys) % 3) < 2 ) {
                             
                             battleCtx->aiSwitchedPartySlot[battler] = i;
                             return TRUE;
