@@ -8435,6 +8435,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         if ((sideConditions & SIDE_CONDITION_REFLECT) != FALSE
                 && criticalMul == 1
+				&& move != MOVE_FOCUS_PUNCH
                 && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
             if ((battleType & BATTLE_TYPE_DOUBLES)
                     && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
