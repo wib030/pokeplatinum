@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_SNOW_WARNING",
-        "ABILITY_INTIMIDATE"
+        "ABILITY_ILLUMINATE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
