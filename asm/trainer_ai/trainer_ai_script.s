@@ -2957,15 +2957,15 @@ Expert_Rest:
     ; If the opponent knows Snatch, 77.3% chance of score +3.
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, ScoreMinus10
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_EARLY_BIRD, Expert_Rest_EarlyBird
+    IfLoadedEqualTo ABILITY_EARLY_BIRD, Expert_Rest_EarlyBirdSleepTalk
     LoadRecycleItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_CHESTO_BERRY, ScoreMinus12
     LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_CHESTO_BERRY, Expert_Rest_Chesto
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SLEEP_TALK, Expert_Rest_SleepTalker
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SLEEP_TALK, Expert_Rest_EarlyBirdSleepTalk
     GoTo Expert_Rest_CheckSpeed
 
-Expert_Rest_EarlyBird:
+Expert_Rest_EarlyBirdSleepTalk:
     IfRandomLessThan 128, Expert_Rest_CheckSpeed
     AddToMoveScore 1
     GoTo Expert_Rest_CheckSpeed
@@ -2981,11 +2981,6 @@ Expert_Rest_CheckSpeed:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Rest_TryScorePlus3
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Rest_TryScorePlus1
     GoTo Expert_Rest_CheckForSnatch
-
-Expert_Rest_FasterCheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Rest_CheckForSnatch
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Rest_FasterScoreMinus3
-    IfRandomLessThan 70, Expert_Rest_CheckForSnatch
 
 Expert_Rest_FasterScoreMinus3:
     AddToMoveScore -3
