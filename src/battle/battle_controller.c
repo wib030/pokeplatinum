@@ -2949,8 +2949,13 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
     hitRate /= HitRateByStage[sumStages].denominator;
 
     if (Battler_Ability(battleCtx, attacker) == ABILITY_COMPOUND_EYES) {
-        hitRate = hitRate * 130 / 100;
+        hitRate = hitRate * 13 / 10;
     }
+	
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_ILLUMINATE))
+	{
+		hitRate = hitRate * 13 / 10;
+	}
 
     if (NO_CLOUD_NINE) {
         if (WEATHER_IS_SAND && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SAND_VEIL) == TRUE) {
