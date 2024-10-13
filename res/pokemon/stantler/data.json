@@ -94,7 +94,6 @@
         ],
         "level_up": {
             "1": [ 
-				"MOVE_TACKLE",
 				"MOVE_PRESENT",
 				"MOVE_HAIL"
 			],
