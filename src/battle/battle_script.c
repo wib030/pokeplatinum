@@ -2590,22 +2590,22 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
                 break;
 
             case 5:
-                boostLevel = 33;
+                boostLevel = 41;
                 capLevel = 44;
                 break;
 
             case 6:
-                boostLevel = 37;
+                boostLevel = 47;
                 capLevel = 48;
                 break;
 
             case 7:
-                boostLevel = 41;
+                boostLevel = 51;
                 capLevel = 53;
                 break;
 
             case 8:
-                boostLevel = 45;
+                boostLevel = 65;
                 capLevel = 100;
                 break;
         }
