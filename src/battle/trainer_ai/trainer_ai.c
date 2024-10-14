@@ -4369,7 +4369,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     }
 
     // If we have more than 1 neutral attacking move, do not switch.
-    if (numMoves < 1) {
+    if (numMoves > 0) {
         return FALSE;
     }
 
@@ -5103,8 +5103,10 @@ static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleCont
 	numAttackingBoosts = 0;
 
     for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
-        if (battleCtx->battleMons[battler].statBoosts[stat] > 6 && (stat == BATTLE_STAT_ATTACK || stat == BATTLE_STAT_SP_ATTACK)) {
+        if (stat == BATTLE_STAT_ATTACK || stat == BATTLE_STAT_SP_ATTACK) {
+            if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
                 numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+            }
         }
     }
 
@@ -5401,25 +5403,26 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                             || ability == ABILITY_SAND_VEIL
                             || ability == ABILITY_SNOW_CLOAK) {
 
-                            if (((BattleSystem_RandNext(battleSys) % 6) == 0)
-                                && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                            if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
-                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
-                            ) {
-
-                                battleCtx->aiSwitchedPartySlot[battler] = i;
-                                return TRUE;
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)) 
+                            {
+                                if ((BattleSystem_RandNext(battleSys) % 6) == 0) {
+                                    
+                                    battleCtx->aiSwitchedPartySlot[battler] = i;
+                                    return TRUE;
+                                }
                             }
                         }
                         else {
                             // Don't switch if heavily boosted
-                            if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4)
+                            if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 4))
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 8)
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 8)
-                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8))) {
+                                && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 8)) {
                             
                                 battleCtx->aiSwitchedPartySlot[battler] = i;
                                 return TRUE;
@@ -5440,16 +5443,17 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                                     || ability == ABILITY_SAND_VEIL
                                     || ability == ABILITY_SNOW_CLOAK) {
 
-                                    if (((BattleSystem_RandNext(battleSys) % 6) == 0)
-                                        && (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                                    if (((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
                                         && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
                                         && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
                                         && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
-                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)
-                                    ) {
-
-                                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                                        return TRUE;
+                                        && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 7)) 
+                                    {
+                                        if ((BattleSystem_RandNext(battleSys) % 6) == 0) {
+                                            
+                                            battleCtx->aiSwitchedPartySlot[battler] = i;
+                                            return TRUE;
+                                        }
                                     }
                                 }
                                 else {
