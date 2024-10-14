@@ -10,7 +10,7 @@
     },
     "types": [
         "TYPE_STEEL",
-        "TYPE_ROCK"
+        "TYPE_STEEL"
     ],
     "catch_rate": 120,
     "base_exp_reward": 205,
@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_FILTER",
-        "ABILITY_ROCK_HEAD"
+        "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
