@@ -2,51 +2,51 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_CLEFABLE"
         },
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_EEVEE"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_ABSOL"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_DRATINI"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_KECLEON"
         },
         {
-            "level": 40,
+            "level": 51,
             "species": "SPECIES_CARNIVINE"
         },
         {
-            "level": 37,
+            "level": 48,
             "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 37,
+            "level": 48,
             "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 40,
+            "level": 51,
             "species": "SPECIES_CASTFORM"
         },
         {
-            "level": 39,
+            "level": 50,
             "species": "SPECIES_CASTFORM"
         },
         {
-            "level": 40,
+            "level": 51,
             "species": "SPECIES_ABSOL"
         },
         {
-            "level": 39,
+            "level": 50,
             "species": "SPECIES_ABSOL"
         }
     ],
@@ -97,28 +97,28 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_CHINCHOU"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_CHINCHOU"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_LANTURN"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_LANTURN"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_LANTURN"
         }
     ],

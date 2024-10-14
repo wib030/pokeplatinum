@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 39,
+            "level": 49,
             "species": "SPECIES_ELECTABUZZ"
         },
         {
-            "level": 40,
+            "level": 50,
             "species": "SPECIES_ELECTRIKE"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_TAUROS"
         },
         {
-            "level": 38,
+            "level": 48,
             "species": "SPECIES_MILTANK"
         },
         {
-            "level": 38,
+            "level": 48,
             "species": "SPECIES_VOLTORB"
         },
         {
-            "level": 39,
+            "level": 49,
             "species": "SPECIES_MAGNEMITE"
         },
         {
-            "level": 38,
+            "level": 48,
             "species": "SPECIES_LUXIO"
         },
         {
-            "level": 40,
+            "level": 50,
             "species": "SPECIES_LUXIO"
         },
         {
-            "level": 40,
+            "level": 50,
             "species": "SPECIES_PELIPPER"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_MAGNETON"
         },
         {
-            "level": 40,
+            "level": 50,
             "species": "SPECIES_PELIPPER"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_MAGNETON"
         }
     ],
@@ -97,28 +97,28 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 40,
-            "level_min": 30,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_TENTACOOL"
         },
         {
-            "level_max": 40,
-            "level_min": 30,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_WINGULL"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_TENTACRUEL"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_TENTACRUEL"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_PELIPPER"
         }
     ],
