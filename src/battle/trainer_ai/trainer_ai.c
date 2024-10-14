@@ -5098,14 +5098,52 @@ static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *batt
  */
 static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int stat;
+    int stat, i;
     u8 numAttackingBoosts;
 	numAttackingBoosts = 0;
+    BOOL hasPhysicalMove, hasSpecialMove;
+
+    hasPhysicalMove = FALSE;
+    hasSpecialMove = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
+            
+            if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                hasPhysicalMove = TRUE;
+            }
+        }
+
+        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
+            hasSpecialMove = TRUE;
+        }
+
+        if (hasPhysicalMove && hasSpecialMove) {
+            break;
+        }
+    }
 
     for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
-        if (stat == BATTLE_STAT_ATTACK || stat == BATTLE_STAT_SP_ATTACK) {
-            if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
-                numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+
+        if (stat == BATTLE_STAT_ATTACK) {
+
+            if (hasPhysicalMove) {
+
+                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
+
+                    numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+                }
+            }
+        }
+
+        if (stat == BATTLE_STAT_SP_ATTACK) {
+
+            if (hasSpecialMove) {
+
+                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
+                    numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+                }
             }
         }
     }
