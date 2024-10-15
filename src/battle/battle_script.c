@@ -1589,21 +1589,6 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
 		battleCtx->damage *= 2;
 	}
 	
-	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE)
-	{
-		battleCtx->damage = battleCtx->damage * 12 / 10;
-	}
-	
-	if ((battleCtx->moveCur == MOVE_KNOCK_OFF) && (battleCtx->battleMons[battleCtx->defender].heldItem != ITEM_NONE))
-	{
-		battleCtx->damage = battleCtx->damage * 15 / 10;
-	}
-	
-	if ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->attacker].sheerForceFlag == TRUE))
-	{
-		battleCtx->damage = battleCtx->damage * 13 / 10;
-	}
-	
 	if ((battleCtx->moveCur == MOVE_FLING)
 	&& (Battler_ItemFlingEffect(battleCtx, battleCtx->attacker) == FLING_EFFECT_WAKE_UP_SLAP)
 	&& (DEFENDING_MON.status & MON_CONDITION_SLEEP))

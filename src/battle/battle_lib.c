@@ -7758,6 +7758,21 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 	{
 		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = TRUE;
     }
+	
+	if (attackerParams.ability == ABILITY_NORMALIZE)
+	{
+		movePower = movePower * 12 / 10;
+	}
+	
+	if ((battleCtx->moveCur == MOVE_KNOCK_OFF) && (Battler_HeldItem(battleCtx, defender) != ITEM_NONE))
+	{
+		movePower = movePower * 15 / 10;
+	}
+	
+	if ((attackerParams.ability == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->attacker].sheerForceFlag == TRUE))
+	{
+		movePower = movePower * 13 / 10;
+	}
 
     for (i = 0; i < NELEMS(sPunchingMoves); i++)
 	{
@@ -8319,6 +8334,21 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 	{
 		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = TRUE;
     }
+	
+	if (attackerParams.ability == ABILITY_NORMALIZE)
+	{
+		movePower = movePower * 12 / 10;
+	}
+	
+	if ((battleCtx->moveCur == MOVE_KNOCK_OFF) && (Battler_HeldItem(battleCtx, defender) != ITEM_NONE))
+	{
+		movePower = movePower * 15 / 10;
+	}
+	
+	if ((attackerParams.ability == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->attacker].sheerForceFlag == TRUE))
+	{
+		movePower = movePower * 13 / 10;
+	}
 
     for (i = 0; i < NELEMS(sPunchingMoves); i++)
 	{
