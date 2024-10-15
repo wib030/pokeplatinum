@@ -239,6 +239,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
 static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, BattleContext  *battleCtx);
 static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext  *battleCtx);
+static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3320,6 +3321,25 @@ static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext *battleCtx)
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].weight;
+}
+
+static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    u8 side = Battler_Side(battleSys, battler);
+
+    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_WISH) {
+
+        if ((battleCtx->fieldConditions.wishTurns[battler] > 0)
+            && (battleCtx->fieldConditions.wishTurns[battler] <= 2)) {
+
+            AIScript_Iter(battleCtx, jump);
+        }
+    }
 }
 
 
