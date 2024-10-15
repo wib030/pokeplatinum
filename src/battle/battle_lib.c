@@ -7809,7 +7809,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 	
     if (attackerParams.ability == ABILITY_MEGA_LAUNCHER) {
         for (i = 0; i < NELEMS(sPulseMoves); i++) {
-            if (sPulseMoves[i] == move && ) {
+            if (sPulseMoves[i] == move) {
                 movePower = movePower * 3 / 2;
                 break;
             }

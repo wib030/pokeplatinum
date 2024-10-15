@@ -4299,7 +4299,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             && ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE)
                             && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE)
                             && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+                            && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)) {
 
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
