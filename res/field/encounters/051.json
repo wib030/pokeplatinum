@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 47,
+            "level": 57,
             "species": "SPECIES_GOLEM"
         },
         {
-            "level": 47,
+            "level": 57,
             "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_WOBBUFFET"
         },
         {
-            "level": 48,
+            "level": 58,
             "species": "SPECIES_VIBRAVA"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 48,
+            "level": 58,
             "species": "SPECIES_RHYDON"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_AERODACTYL"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_AZUMARILL"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_METANG"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_METANG"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_HITMONLEE"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_HITMONCHAN"
         }
     ],

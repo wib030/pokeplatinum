@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_MAGNETON"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_SKARMORY"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_SCIZOR"
         },
         {
-            "level": 44,
+            "level": 54,
             "species": "SPECIES_MAWILE"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_PROBOPASS"
         },
         {
-            "level": 44,
+            "level": 54,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_GOLEM"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_SHELGON"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_SHELGON"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_METANG"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_METANG"
         }
     ],

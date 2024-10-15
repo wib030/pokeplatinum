@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_AZUMARILL"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_CRADILY"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_ARMALDO"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_QUAGSIRE"
         },
         {
-            "level": 44,
+            "level": 54,
             "species": "SPECIES_SEALEO"
         },
         {
-            "level": 44,
+            "level": 54,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_GOLEM"
         },
         {
-            "level": 44,
+            "level": 54,
             "species": "SPECIES_PUPITAR"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_PUPITAR"
         },
         {
-            "level": 44,
+            "level": 54,
             "species": "SPECIES_LARVITAR"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_LARVITAR"
         }
     ],
@@ -98,27 +98,27 @@
     "surf_encounters": [
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_FLOATZEL"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_RELICANTH"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_HUNTAIL"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_GOREBYSS"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_CLAMPERL"
         }
     ],

@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_ROSELIA"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_BELLSPROUT"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_BELLSPROUT"
         },
         {
-            "level": 51,
+            "level": 61,
             "species": "SPECIES_PELIPPER"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_GASTRODON"
         },
         {
-            "level": 51,
+            "level": 61,
             "species": "SPECIES_GLOOM"
         },
         {
-            "level": 51,
+            "level": 61,
             "species": "SPECIES_WEEPINBELL"
         },
         {
-            "level": 52,
+            "level": 62,
             "species": "SPECIES_BEAUTIFLY"
         },
         {
-            "level": 52,
+            "level": 62,
             "species": "SPECIES_DUSTOX"
         },
         {
-            "level": 52,
+            "level": 62,
             "species": "SPECIES_BEAUTIFLY"
         },
         {
-            "level": 52,
+            "level": 62,
             "species": "SPECIES_DUSTOX"
         }
     ],

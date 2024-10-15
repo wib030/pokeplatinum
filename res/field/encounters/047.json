@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 40,
+            "level": 50,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_RHYHORN"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_CRANIDOS"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_SHIELDON"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_LAIRON"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 43,
+            "level": 53,
             "species": "SPECIES_RHYDON"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_GABITE"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_GABITE"
         },
         {
-            "level": 42,
+            "level": 52,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 41,
+            "level": 51,
             "species": "SPECIES_GABITE"
         }
     ],

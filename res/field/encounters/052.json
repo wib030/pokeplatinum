@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 47,
+            "level": 57,
             "species": "SPECIES_GOLEM"
         },
         {
-            "level": 47,
+            "level": 57,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_QUAGSIRE"
         },
         {
-            "level": 48,
+            "level": 58,
             "species": "SPECIES_FORRETRESS"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_MAGCARGO"
         },
         {
-            "level": 48,
+            "level": 58,
             "species": "SPECIES_DONPHAN"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_CROBAT"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_GABITE"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_GABITE"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_GABITE"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_GABITE"
         }
     ],

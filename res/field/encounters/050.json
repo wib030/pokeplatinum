@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 48,
+            "level": 58,
             "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 47,
+            "level": 57,
             "species": "SPECIES_AZUMARILL"
         },
         {
-            "level": 47,
+            "level": 57,
             "species": "SPECIES_CRADILY"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_ARMALDO"
         },
         {
-            "level": 48,
+            "level": 58,
             "species": "SPECIES_OMASTAR"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_KABUTOPS"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_PHIONE"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_RIOLU"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_AERODACTYL"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_AERODACTYL"
         },
         {
-            "level": 50,
+            "level": 60,
             "species": "SPECIES_DEWGONG"
         },
         {
-            "level": 49,
+            "level": 59,
             "species": "SPECIES_DEWGONG"
         }
     ],
@@ -98,27 +98,27 @@
     "surf_encounters": [
         {
             "level_max": 55,
-            "level_min": 35,
+            "level_min": 45,
             "species": "SPECIES_CLAMPERL"
         },
         {
             "level_max": 55,
-            "level_min": 35,
+            "level_min": 45,
             "species": "SPECIES_LUVDISC"
         },
         {
             "level_max": 55,
-            "level_min": 35,
+            "level_min": 45,
             "species": "SPECIES_LAPRAS"
         },
         {
             "level_max": 55,
-            "level_min": 35,
+            "level_min": 45,
             "species": "SPECIES_LAPRAS"
         },
         {
             "level_max": 55,
-            "level_min": 35,
+            "level_min": 45,
             "species": "SPECIES_LAPRAS"
         }
     ],

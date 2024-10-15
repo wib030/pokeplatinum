@@ -98,27 +98,27 @@
     "surf_encounters": [
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_LUVDISC"
         },
         {
             "level_max": 50,
-            "level_min": 30,
+            "level_min": 40,
             "species": "SPECIES_PELIPPER"
         },
         {
-            "level_max": 40,
-            "level_min": 30,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_SHELLDER"
         },
         {
-            "level_max": 40,
-            "level_min": 30,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_MANTYKE"
         },
         {
-            "level_max": 40,
-            "level_min": 30,
+            "level_max": 50,
+            "level_min": 40,
             "species": "SPECIES_MANTYKE"
         }
     ],
