@@ -5423,6 +5423,11 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                         pivotMoves++;
                     }
                 }
+
+                if (moveEffect == BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE) {
+                    pivotMoves++;
+                    hasNonContactPivot = 1;
+                }
             }
 
             hpRange = (battleCtx->battleMons[battler].maxHP * 2 / 5) + (((battleCtx->battleMons[battler].maxHP / 10) * (BattleSystem_RandNext(battleSys) % 11)) / 10);
