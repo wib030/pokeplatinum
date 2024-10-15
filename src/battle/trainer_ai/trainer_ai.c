@@ -1842,6 +1842,7 @@ static void AICmd_IfMoveKnown(BattleSystem *battleSys, BattleContext *battleCtx)
         }
         break;
 
+    case AI_BATTLER_DEFENDER_PARTNER:
     case AI_BATTLER_ATTACKER_PARTNER:
         if (battleCtx->battleMons[battler].curHP == 0) {
             break;
