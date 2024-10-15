@@ -1,7 +1,7 @@
 {
     "name": "Stantler",
     "base_stats": {
-        "hp": 93,
+        "hp": 73,
         "attack": 105,
         "defense": 82,
         "speed": 109,
