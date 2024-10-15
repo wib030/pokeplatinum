@@ -264,6 +264,7 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
 static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_IsModeratelyBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -5174,6 +5175,76 @@ static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleCont
     }
 
     return numAttackingBoosts >= 4;
+}
+
+/**
+ * @brief Check if the AI's current battler is moderately
+ * stat-boosted (that is if the sum of its total positive stat stage 
+ * changes to Attack and Special Attack is greater than or equal to 2.)
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The AI's current battler.
+ * @return          TRUE if the AI has a high number of positive stat stages;
+ *                  FALSE otherwise.
+ */
+static BOOL AI_IsModeratelyBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int stat, i;
+    u8 numBoosts;
+	numBoosts = 0;
+    BOOL hasPhysicalMove, hasSpecialMove;
+
+    hasPhysicalMove = FALSE;
+    hasSpecialMove = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
+            
+            if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                hasPhysicalMove = TRUE;
+            }
+        }
+
+        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
+            hasSpecialMove = TRUE;
+        }
+
+        if (hasPhysicalMove && hasSpecialMove) {
+            break;
+        }
+    }
+
+    for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
+
+        if (stat == BATTLE_STAT_ATTACK) {
+
+            if (hasPhysicalMove) {
+
+                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
+
+                    numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+                }
+            }
+        }
+
+        if (stat == BATTLE_STAT_SP_ATTACK) {
+
+            if (hasSpecialMove) {
+
+                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
+                    numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+                }
+            }
+        }
+
+        if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE || BATTLE_STAT_DEFENSE) {
+            numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+        }
+    }
+
+    return numBoosts >= 2;
 }
 
 static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
