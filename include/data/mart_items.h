@@ -44,23 +44,7 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 	{ ITEM_STARF_BERRY, 0x5 },
 	{ ITEM_JABOCA_BERRY, 0x4 },
 	{ ITEM_ROWAP_BERRY, 0x4 },
-	{ ITEM_CHILAN_BERRY, 0x5 },
-	{ ITEM_OCCA_BERRY, 0x7 },
-	{ ITEM_PASSHO_BERRY, 0x7 },
-	{ ITEM_WACAN_BERRY, 0x7 },
-	{ ITEM_RINDO_BERRY, 0x7 },
-	{ ITEM_YACHE_BERRY, 0x7 },
-	{ ITEM_CHOPLE_BERRY, 0x7 },
-	{ ITEM_KEBIA_BERRY, 0x7 },
-	{ ITEM_SHUCA_BERRY, 0x7 },
-	{ ITEM_COBA_BERRY, 0x7 },
-	{ ITEM_PAYAPA_BERRY, 0x7 },
-	{ ITEM_TANGA_BERRY, 0x7 },
-	{ ITEM_CHARTI_BERRY, 0x7 },
-	{ ITEM_KASIB_BERRY, 0x7 },
-	{ ITEM_HABAN_BERRY, 0x7 },
-	{ ITEM_COLBUR_BERRY, 0x7 },
-	{ ITEM_BABIRI_BERRY, 0x7 }
+	{ ITEM_CHILAN_BERRY, 0x5 }
 };
 
 const u16 JubilifeMartSpecialties[] = {
