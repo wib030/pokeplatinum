@@ -4263,72 +4263,89 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
             if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
 
                 // Only the choice-locked move need be considered.
-                if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove == battleCtx->battleMons[battler].moves[i]) {
+                if (move == battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
 
                     effectiveness = 0;
                     if (battleCtx->battleMons[defender].curHP) {
                         BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
                     }
 
-                    // Here we check through all the possible move status flags that could be tripped by ApplyTypeChart.
-                    // Switch if the move has less than neutral effectiveness when it connects.
-                    if ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
-                        || (effectiveness & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
-                        || (effectiveness & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)) {
+                    if (MOVE_DATA(move).power) {
+
+                        // Here we check through all the possible move status flags that could be tripped by ApplyTypeChart.
+                        // Switch if the move has less than neutral effectiveness when it connects.
+                        if ((effectiveness & MOVE_STATUS_IMMUNE)
+                            && ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
+                            && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+
+                        else if (effectiveness & MOVE_STATUS_WONDER_GUARD) {
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+
+                        else if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY)
+                            && ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE)) {
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+
+                        else if (effectiveness & MOVE_STATUS_DID_NOT_HIT) {
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+
+                        else if (effectiveness & MOVE_STATUS_NO_PP) {
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+
+                        else if (effectiveness & MOVE_STATUS_INEFFECTIVE) {
                         
-                        return TRUE;
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+
+                        else {
+                            return FALSE;
+                        }
                     }
+                    // Status move here
+                    else {
 
-                    else if (effectiveness & MOVE_STATUS_WONDER_GUARD) {
-
-                        return TRUE;
-                    }
-
-                    else if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY)
-                        && ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE)) {
-                        
-                        return TRUE;
-                    }
-
-                    else if ((effectiveness & MOVE_STATUS_IMMUNE)
-                        && ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE)
-                        && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE)
-                        && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)) {
-
-                        return TRUE;
-                    }
-
-                    else if ((effectiveness & MOVE_STATUS_LEVITATED)
-                        || (effectiveness & MOVE_STATUS_MAGNET_RISE)) {
-
-                        return TRUE;
-                    }
-
-                    else if (effectiveness & MOVE_STATUS_INEFFECTIVE) {
-                        
-                        return TRUE;
+                        if (effectiveness & MOVE_STATUS_NO_EFFECTS) {
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
+                        }
+                        else {
+                            return FALSE;
+                        }
                     }
                 }
             }
             else { // Otherwise, there is no choice locked move. Calculate switch as usual
 
-                if (move && MOVE_DATA(move).power) {
+                if (move) {
 
                     if (battleCtx->battleMons[defender].curHP) {
                         BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
                     }
 
-                    if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
+                    // Generic boosts matter regardless of move power
+                    if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler)) {
 
                         if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE) {
 
-                            if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
-                                && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY) == FALSE)
-                                && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY) == FALSE)
-                                && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY) == FALSE)
-                                && ((effectiveness & MOVE_STATUS_LEVITATED) == FALSE)
-                                && ((effectiveness & MOVE_STATUS_MAGNET_RISE) == FALSE)
-                                && ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) == FALSE)) {
+                            if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
                                 // Each non-immune move gives 2/3 chance not to switch
                                 // when attacker is heavily boosted
@@ -4339,53 +4356,87 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         }
                     }
 
-                    if ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE) {
+                    if (MOVE_DATA(move).power > 1) {
 
-                        // Move is immune but not resisted
-                        if (effectiveness & MOVE_STATUS_IMMUNE) {
+                        // Attacking stat boosts only matter if we are using a regular damaging move
+                        if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
 
-                            // Factor immunity ignoring for ability and items (i.e. Normal or Poison type)
-                            if ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)
-                            || (effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY)) {
+                            if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE) {
 
-                                // 1 in 3 chance to consider a switch for each neutral move.
-                                // Explanation of switch chances in comment block below.
-                                if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
-
-                                    return FALSE;
+                                if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
+                                
+                                    // Each non-immune move gives 3/4 chance not to switch
+                                    // when attacker is heavily boosted
+                                    if ((BattleSystem_RandNext(battleSys) % 4) < 3) {
+                                        return FALSE;
+                                    }
                                 }
                             }
                         }
 
-                        // Move is either basic effectiveness or super effective at this point
-                        else {
-                            // Check that no immunity abilities or items will activate
-                            if (((effectiveness & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_LEVITATED) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_MAGNET_RISE) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) == FALSE)
-                            ){
-                                numMoves++;
-                                if ((effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY)
-                                || (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)) {
-                                    // Always stay in if we have a better-than-neutral hit
-                                    return FALSE;
-                                }
-                                // The move should be a neutral hit at this point
-                                else {
-                                    // Each neutral move gives a 2/3 chance not to switch,
-                                    // or a 1/3 chance to still consider switching.
-                                    // This means 33% chance to switch with 1 neutral,
-                                    // 11% chance to switch with 2 neutral,
-                                    // 3.7% chance to switch with 3 neutral,
-                                    // and 1.2% chance to switch with 4 neutral.
+                        if ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE) {
+
+                            // Move is immune but not resisted
+                            if (effectiveness & MOVE_STATUS_IMMUNE) {
+
+                                // Factor immunity ignoring for ability and items (i.e. Normal or Poison type)
+                                if ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)
+                                || (effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY)) {
+
+                                    // 1 in 3 chance to consider a switch for each neutral move.
+                                    // Explanation of switch chances in comment block below.
                                     if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
 
                                         return FALSE;
                                     }
                                 }
+                            }
+
+                            // Move is either basic effectiveness or super effective at this point
+                            else {
+                                // Check that no immunity abilities or items will activate
+                                if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) == FALSE)
+                                {
+                                    numMoves++;
+                                    if ((effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY)
+                                    || (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)) {
+                                        // Always stay in if we have a better-than-neutral hit
+                                        return FALSE;
+                                    }
+                                    // The move should be a neutral hit at this point
+                                    else {
+                                        // Each neutral move gives a 2/3 chance not to switch,
+                                        // or a 1/3 chance to still consider switching.
+                                        // This means 33% chance to switch with 1 neutral,
+                                        // 11% chance to switch with 2 neutral,
+                                        // 3.7% chance to switch with 3 neutral,
+                                        // and 1.2% chance to switch with 4 neutral.
+                                        if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+
+                                            return FALSE;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // In this case, we have a fixed-damage or special-damage move.
+                    // Unfortunately, the bastards at GameFreak did not distinguish between fixed
+                    // damage moves and variable damage moves, so we will have to use a horrible
+                    // and slow move list to check!
+                    if (MOVE_DATA(move).power == 1) {
+
+                        if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
+                                
+                            // Each non-immune move gives 95% chance not to switch
+                            // when attacker is heavily boosted
+                            if ((BattleSystem_RandNext(battleSys) % 20) < 19) {
+                                return FALSE;
+                            }
+
+                            if ((effectiveness & MOVE_STATUS_RESISTED) == FALSE) {
+                                numMoves++;
                             }
                         }
                     }
