@@ -5506,7 +5506,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
                                     || ability == ABILITY_SAND_VEIL
                                     || ability == ABILITY_SNOW_CLOAK) {
 
-                                    if (((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
+                                    if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2))
                                         && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 7)
                                         && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 7)
                                         && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 7)
