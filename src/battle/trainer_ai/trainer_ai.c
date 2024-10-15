@@ -4394,8 +4394,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    // If we have more than 1 neutral attacking move, do not switch.
-    if (numMoves > 1) {
+    // If we have 1 or more neutral attacking moves, do not switch.
+    if (numMoves > 0) {
         return FALSE;
     }
 
