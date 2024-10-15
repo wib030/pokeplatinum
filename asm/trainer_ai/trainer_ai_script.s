@@ -293,6 +293,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Basic_CheckCaptivate
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Basic_CheckStealthRock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Basic_CheckLunarDance
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_Wish
     PopOrEnd 
 
 Basic_CheckCannotSleep:
@@ -1574,6 +1575,14 @@ Basic_CheckLunarDance:
 Basic_CheckLunarDance_Terminate:
     PopOrEnd 
 
+Basic_Wish:
+    IfWishActive AI_BATTLER_ATTACKER, ScoreMinus12
+    IfRandomLessThan 128, ScorePlus1
+    GoTo Basic_Wish_End
+
+Basic_Wish_End:
+    PopOrEnd
+
 ScoreMinus1:
     AddToMoveScore -1
     PopOrEnd 
@@ -1820,6 +1829,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN, Expert_FuryCutter
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_SP_ATK_HIT, Expert_ChargeBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Expert_WeightMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Expert_Wish
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -7722,6 +7732,52 @@ Expert_WeightMove_TryScoreMinus1:
 
 Expert_WeightMove_End:
     PopOrEnd
+
+Expert_Wish:
+    ; If wish is already active, score minus 12 and end
+    ;
+    ; If we''re slower, try to use wish slightly earlier
+    ; If we have substitute up, try to use wish
+    ;
+    ; If we have a move that synergizes with wish, such as
+    ; a pivot move or protect, 80% chance for score +1
+    ;
+    ; If our HP is low and we''re slower, 80% chance for
+    ; score -1
+    IfWishActive AI_BATTLER_ATTACKER, ScoreMinus12
+    IfRandomLessThan 16, Expert_Wish_CheckMoves
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus3
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Wish_Speedslower
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 80, Expert_Wish_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_Wish_CheckMoves
+
+Expert_Wish_Speedslower:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 20, Expert_Wish_TryScoreMinus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 80, ScorePlus1
+    IfRandomLessThan 154, Expert_Wish_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_Wish_CheckMoves
+
+Expert_Wish_CheckMoves:
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_HIT_BEFORE_SWITCH, Expert_Wish_TryScorePlus1
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_Wish_TryScorePlus1
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_Wish_TryScorePlus1
+    GoTo Expert_Wish_End
+
+Expert_Wish_TryScoreMinus1:
+    IfRandomLessThan 200, Expert_Wish_End
+    AddToMoveScore -1
+    GoTo Expert_Wish_End
+
+Expert_Wish_TryScorePlus1:
+    IfRandomLessThan 50, Expert_Wish_End
+    AddToMoveScore 1
+    GoTo Expert_Wish_End
+
+Expert_Wish_End:
+    PopOrEnd
+    
 
 EvalAttack_Main:
     ; Never target the partner.
