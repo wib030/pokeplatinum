@@ -2954,7 +2954,7 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
 	
 	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_ILLUMINATE))
 	{
-		hitRate = hitRate * 13 / 10;
+		hitRate = hitRate * 12 / 10;
 	}
 
     if (NO_CLOUD_NINE) {
