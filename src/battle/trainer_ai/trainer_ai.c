@@ -239,7 +239,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
 static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, BattleContext  *battleCtx);
 static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext  *battleCtx);
-static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx);
+// static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3323,6 +3323,7 @@ static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext *battleCtx)
     AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].weight;
 }
 
+/*
 static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -3340,7 +3341,15 @@ static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx
             AIScript_Iter(battleCtx, jump);
         }
     }
+
+   // .macro IfWishActive battler, jump
+   // .long 117
+   // .long \battler
+   // .long (\jump-.) / 4 - 1
+   // .endm
+   
 }
+*/
 
 
 /**

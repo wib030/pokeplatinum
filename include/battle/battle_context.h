@@ -18,12 +18,12 @@ typedef struct BattleContext BattleContext;
 
 typedef struct FieldConditions {
     u32 weatherTurns;
-    u8 futureSightTurns[MAX_BATTLERS] : 3;
-    u8 wishTurns[MAX_BATTLERS] : 3;
-    u16 futureSightMove[MAX_BATTLERS] : 1;
-    int futureSightAttacker[MAX_BATTLERS] : 2;
+    u8 futureSightTurns[MAX_BATTLERS];
+    u8 wishTurns[MAX_BATTLERS];
+    u16 futureSightMove[MAX_BATTLERS];
+    int futureSightAttacker[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
-    u8 wishTarget[MAX_BATTLERS] : 2;
+    u8 wishTarget[MAX_BATTLERS];
 } FieldConditions;
 
 typedef struct SideConditions {

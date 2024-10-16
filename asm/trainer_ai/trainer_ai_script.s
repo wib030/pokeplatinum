@@ -7744,7 +7744,7 @@ Expert_Wish:
     ;
     ; If our HP is low and we''re slower, 80% chance for
     ; score -1
-    IfWishActive AI_BATTLER_ATTACKER, ScoreMinus12
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_WISH, ScoreMinus20
     IfRandomLessThan 16, Expert_Wish_CheckMoves
     IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus3
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Wish_Speedslower
