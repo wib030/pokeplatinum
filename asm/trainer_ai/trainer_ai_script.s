@@ -3778,7 +3778,7 @@ Expert_Protect:
 
 Expert_Protect_StreakBreaker:
     IfRandomLessThan 12, Expert_Protect_End
-    AddToMoveScore -12
+    AddToMoveScore -30
     GoTo Expert_Protect_End
 
 Expert_Protect_CheckItemStatusAbility:
