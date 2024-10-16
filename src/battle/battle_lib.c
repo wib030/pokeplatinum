@@ -11061,13 +11061,13 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
 }
 
 /**
- * @brief Map the given move effect to an appropriate side condition.
+ * @brief Map the given battle effect to an appropriate side condition.
  * 
  * @param battleCtx 
- * @param effect    Move effect which should be mapped to a corresponding side condition
+ * @param effect    Battle effect which should be mapped to a corresponding side condition
  * @return The corresponding side condition 
  */
-static int MapMoveEffectToSideCondition(BattleContext *battleCtx, int effect)
+static int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
 {
     u32 sideCondition
 
@@ -11123,4 +11123,93 @@ static int MapMoveEffectToSideCondition(BattleContext *battleCtx, int effect)
     }
 
     return sideCondition;
+}
+
+/**
+ * @brief Map the given battle effect to an appropriate move effect.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding move effect
+ * @return The corresponding move effect
+ */
+static int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
+{
+    int moveEffect
+
+    switch (effect) {
+        
+        case (BATTLE_EFFECT_STATUS_LEECH_SEED):
+            moveEffect = MOVE_EFFECT_LEECH_SEED;
+            break;
+
+        case (BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS):
+            moveEffect = MOVE_EFFECT_LOCK_ON;
+            break;
+
+        case (BATTLE_EFFECT_ALL_FAINT_3_TURNS):
+            moveEffect = MOVE_EFFECT_PERISH_SONG;
+            break;
+
+        case (BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN):
+            moveEffect = MOVE_EFFECT_YAWN;
+            break;
+
+        case (BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE):
+            moveEffect = MOVE_EFFECT_IMPRISON;
+            break;
+
+        case (BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT):
+            moveEffect = MOVE_EFFECT_GRUDGE;
+            break;
+
+        case (BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE):
+            moveEffect = MOVE_EFFECT_MUD_SPORT;
+            break;
+
+        case (BATTLE_EFFECT_HALVE_FIRE_DAMAGE):
+            moveEffect = MOVE_EFFECT_WATER_SPORT;
+            break;
+
+        case (BATTLE_EFFECT_SUPRESS_ABILITY):
+            moveEffect = MOVE_EFFECT_ABILITY_SUPPRESSED;
+            break;
+
+        case (BATTLE_EFFECT_SWAP_ATK_DEF):
+            moveEffect = MOVE_EFFECT_POWER_TRICK;
+            break;
+
+        case (BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER):
+            moveEffect = MOVE_EFFECT_CHARGE;
+            break;
+
+        case (BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL):
+            moveEffect = MOVE_EFFECT_INGRAIN;
+            break;
+
+        case (BATTLE_EFFECT_RESTORE_HP_EVERY_TURN):
+            moveEffect = MOVE_EFFECT_AQUA_RING;
+            break;
+
+        case (BATTLE_EFFECT_PREVENT_HEALING):
+            moveEffect = MOVE_EFFECT_HEAL_BLOCK;
+            break;
+
+        case (BATTLE_EFFECT_PREVENT_ITEM_USE):
+            moveEffect = MOVE_EFFECT_EMBARGO;
+            break;
+
+        case (BATTLE_EFFECT_GIVE_GROUND_IMMUNITY):
+            moveEffect = MOVE_EFFECT_MAGNET_RISE;
+            break;
+
+        case (BATTLE_EFFECT_CAMOUFLAGE):
+            moveEffect = MOVE_EFFECT_CAMOUFLAGE;
+            break;
+
+        default:
+            moveEffect = MOVE_EFFECT_NONE;
+            break;
+    }
+
+    return moveEffect;
 }

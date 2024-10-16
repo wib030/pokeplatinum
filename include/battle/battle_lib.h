@@ -1518,12 +1518,21 @@ int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler);
 int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int move);
 
 /**
- * @brief Map the given move effect to an appropriate side condition.
+ * @brief Map the given battle effect to an appropriate side condition.
  * 
  * @param battleCtx 
- * @param effect    Move effect which should be mapped to a corresponding side condition
+ * @param effect    Battle effect which should be mapped to a corresponding side condition
  * @return The corresponding side condition 
  */
-static int MapMoveEffectToSideCondition(BattleContext *battleCtx, int effect);
+static int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect);
+
+/**
+ * @brief Map the given battle effect to an appropriate move effect.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding move effect
+ * @return The corresponding move effect
+ */
+static int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
