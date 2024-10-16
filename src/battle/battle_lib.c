@@ -7775,22 +7775,25 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 		movePower = movePower * 13 / 10;
 	}
 
-    for (i = 0; i < NELEMS(sPunchingMoves); i++)
-	{
-		if (sPunchingMoves[i] == move)
-		{
-			if (attackerParams.ability == ABILITY_IRON_FIST)
-			{
-				movePower = movePower * 13 / 10;
-			}
+    if ((attackerParams.ability == ABILITY_IRON_FIST)
+        || (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)) {
+        for (i = 0; i < NELEMS(sPunchingMoves); i++)
+	    {
+		    if (sPunchingMoves[i] == move)
+		    {
+			    if (attackerParams.ability == ABILITY_IRON_FIST)
+			    {
+				    movePower = movePower * 13 / 10;
+			    }
 
-			if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
-			{
-				movePower = movePower * 12 / 10;
-			}
-			break;
-		}
-	}
+			    if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
+			    {
+				    movePower = movePower * 12 / 10;
+			    }
+			    break;
+		    }
+	    }
+    }
   
     if (attackerParams.ability == ABILITY_STRONG_JAW) {
 	    for (i = 0; i < NELEMS(sBitingMoves); i++) {
