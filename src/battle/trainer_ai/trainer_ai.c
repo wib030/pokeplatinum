@@ -3332,10 +3332,13 @@ static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx
     u8 battler = AIScript_Battler(battleCtx, inBattler);
     u8 side = Battler_Side(battleSys, battler);
 
-    if ((battleCtx->fieldConditions.wishTurns[side] > 0)
-        && (battleCtx->fieldConditions.wishTurns[side] <= 2)) {
+    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_WISH) {
 
-        AIScript_Iter(battleCtx, jump);
+        if ((battleCtx->fieldConditions.wishTurns[battler] > 0)
+            && (battleCtx->fieldConditions.wishTurns[battler] <= 2)) {
+
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 
