@@ -11067,7 +11067,7 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
  * @param effect    Battle effect which should be mapped to a corresponding side condition
  * @return The corresponding side condition 
  */
-static int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
+int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
 {
     u32 sideCondition;
 
@@ -11132,7 +11132,7 @@ static int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
  * @param effect    Battle effect which should be mapped to a corresponding move effect
  * @return The corresponding move effect
  */
-static int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
+int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
 {
     int moveEffect;
 
