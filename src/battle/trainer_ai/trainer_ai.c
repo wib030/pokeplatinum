@@ -4246,11 +4246,11 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i, j;
-    u8 defender1, defender2, defender;
+    u8 defender1, defender2, defender, side;
     u8 aiSlot1, aiSlot2;
     u16 move;
-    int type;
-    u32 effectiveness;
+    int type, range, effect, moveEffect;
+    u32 effectiveness, sideCondition;
     int start, end;
     int numMoves;
     Pokemon *mon;
@@ -4270,6 +4270,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         move = battleCtx->battleMons[battler].moves[i];
         type = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+        range = MOVE_DATA(move).range;
+        effect = MOVE_DATA(move).effect;
 
         for (j = 0; j < 2; j++) {
 
@@ -4404,6 +4406,13 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             }
                         }
 
+                        // Pivot moves only care about immunity
+                        if((effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH)
+                            && ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)) {
+
+                            return FALSE;
+                        }
+
                         if ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE) {
 
                             // Move is immune but not resisted
@@ -4469,6 +4478,135 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 numMoves++;
                             }
                         }
+                    }
+
+                    if (MOVE_DATA(move).class == CLASS_STATUS) {
+                        switch (range) {
+
+                            case RANGE_OPPONENT_SIDE:
+
+                                side = Battler_Side(battleSys, defender);
+                                sideCondition = MapBattleEffectToSideCondition(battleCtx, effect);
+
+                                if (sideCondition != SIDE_CONDITION_NONE) {
+
+                                    if ((battleCtx->sideConditionsMask[side] & sideCondition)) {
+                                    
+                                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) > 0) {
+                                            return FALSE;
+                                        }
+                                    }
+                                }
+                                break;
+
+                            case RANGE_USER_SIDE:
+
+                                side = Battler_Side(battleSys, battler);
+                                sideCondition = MapBattleEffectToSideCondition(battleCtx, effect);
+
+                                if (sideCondition != SIDE_CONDITION_NONE) {
+
+                                    if ((battleCtx->sideConditionsMask[side] & sideCondition)) {
+                                    
+                                        return FALSE;
+                                    }
+
+                                    if ((effect == BATTLE_EFFECT_CURE_PARTY_STATUS)) {
+                                        Party * party;
+                                        party = BattleSystem_Party(battleSys, battler);
+                                        for (int i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+                                            Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+                                            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                                                && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY))
+                                            {
+                                                if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_GUTS
+                                                    && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & (MON_CONDITION_SLEEP | MON_CONDITION_FREEZE | MON_CONDITION_PARALYSIS))) 
+                                                {
+                                                    return FALSE;
+                                                }
+
+                                                if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_POISON_HEAL
+                                                    && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY_POISON)) 
+                                                {
+                                                    return FALSE;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                break;
+
+                            case RANGE_USER:
+
+                                moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
+                                
+                                if (moveEffect != MOVE_EFFECT_NONE) {
+                                    if ((battleCtx->battleMons[battler].moveEffectsMask & moveEffect)) {
+                                    
+                                        return FALSE;
+                                    }
+                                }
+
+                                if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP * 3 / 5)) {
+
+                                    switch (move) {
+                                        case MOVE_RECOVER:
+                                        case MOVE_SOFTBOILED:
+                                        case MOVE_REST:
+                                        case MOVE_MILK_DRINK:
+                                        case MOVE_MORNING_SUN:
+                                        case MOVE_SYNTHESIS:
+                                        case MOVE_MOONLIGHT:
+                                        case MOVE_HEAL_ORDER:
+                                        case MOVE_SLACK_OFF:
+                                        case MOVE_ROOST:
+                                        case MOVE_WISH:
+                                            if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+                                                return FALSE;
+                                            }
+                                            break;
+
+                                        case MOVE_SWALLOW:
+                                            if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+                                                if (battleCtx->battleMons[battler].moveEffectsData.stockpileCount) {
+                                                    return FALSE;
+                                                }
+                                            }
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                }
+
+                                switch (effect) {
+                                    case BATTLE_EFFECT_USE_LAST_USED_MOVE:
+                                    case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
+                                        return FALSE;
+                                        break;
+
+                                    case BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER:
+                                        ((BattleSystem_RandNext(battleSys) % 20) < 19) {
+                                            return FALSE;
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_PROTECT:
+                                        ((BattleSystem_RandNext(battleSys) % 2) == 0) {
+                                            return FALSE;
+                                        }
+                                        break;
+                                }
+
+                                // To do: still moves to add.
+                                // last move checked is Detect
+
+                                break;
+                        }                        
                     }
                 }
             }
