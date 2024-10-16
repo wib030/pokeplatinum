@@ -4590,13 +4590,13 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         break;
 
                                     case BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER:
-                                        ((BattleSystem_RandNext(battleSys) % 20) < 19) {
+                                        if ((BattleSystem_RandNext(battleSys) % 20) < 19) {
                                             return FALSE;
                                         }
                                         break;
 
                                     case BATTLE_EFFECT_PROTECT:
-                                        ((BattleSystem_RandNext(battleSys) % 2) == 0) {
+                                        if ((BattleSystem_RandNext(battleSys) % 2) == 0) {
                                             return FALSE;
                                         }
                                         break;

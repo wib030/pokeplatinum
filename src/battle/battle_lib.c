@@ -11069,7 +11069,7 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
  */
 static int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
 {
-    u32 sideCondition
+    u32 sideCondition;
 
     switch (effect) {
         
@@ -11134,7 +11134,7 @@ static int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
  */
 static int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
 {
-    int moveEffect
+    int moveEffect;
 
     switch (effect) {
         
