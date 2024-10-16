@@ -1576,7 +1576,7 @@ Basic_CheckLunarDance_Terminate:
     PopOrEnd 
 
 Basic_Wish:
-    IfWishActive AI_BATTLER_ATTACKER, ScoreMinus12
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_WISH, ScoreMinus20
     IfRandomLessThan 128, ScorePlus1
     GoTo Basic_Wish_End
 
