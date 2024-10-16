@@ -7765,7 +7765,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 		movePower = movePower * 12 / 10;
 	}
 	
-	if ((battleCtx->moveCur == MOVE_KNOCK_OFF) && (Battler_HeldItem(battleCtx, defender) != ITEM_NONE))
+	if (battleCtx->moveCur == MOVE_KNOCK_OFF && DEFENDING_MON.heldItem != ITEM_NONE)
 	{
 		movePower = movePower * 15 / 10;
 	}
@@ -8352,7 +8352,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 		movePower = movePower * 12 / 10;
 	}
 	
-	if ((battleCtx->moveCur == MOVE_KNOCK_OFF) && (Battler_HeldItem(battleCtx, defender) != ITEM_NONE))
+	if (battleCtx->moveCur == MOVE_KNOCK_OFF && DEFENDING_MON.heldItem != ITEM_NONE)
 	{
 		movePower = movePower * 15 / 10;
 	}
