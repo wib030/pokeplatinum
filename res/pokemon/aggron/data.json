@@ -1,7 +1,7 @@
 {
     "name": "Aggron",
     "base_stats": {
-        "hp": 100,
+        "hp": 80,
         "attack": 115,
         "defense": 180,
         "speed": 55,
