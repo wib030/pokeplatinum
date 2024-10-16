@@ -333,5 +333,6 @@
 #define subscript_random_ability 324
 #define subscript_lightning_rod_boost 325
 #define subscript_bind_start_ability 326
+#define subscript_color_change_before 327
 
 #endif // NARC_SUB_SEQ_NAIX_

@@ -2552,11 +2552,11 @@
 #define pl_msg_00000368_01271 1271
 // {STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\nthe foe’s {STRVAR_1 1, 1, 0}!
 #define pl_msg_00000368_01272 1272
-// {STRVAR_1 1, 0, 0} was hurt by the Sticky Barb!
+// {STRVAR_1 1, 0, 0} was hurt by the\nSticky Barb!
 #define pl_msg_00000368_01273 1273
-// {STRVAR_1 1, 0, 0} was hurt by the Sticky Barb!
+// The wild {STRVAR_1 1, 0, 0} was hurt by\nthe Sticky Barb!
 #define pl_msg_00000368_01274 1274
-// {STRVAR_1 1, 0, 0} was hurt by the Sticky Barb!
+// The foe’s {STRVAR_1 1, 0, 0} was hurt by\nthe Sticky Barb!
 #define pl_msg_00000368_01275 1275
 // {STRVAR_1 1, 0, 0} was freed of the Sticky Barb!
 #define pl_msg_00000368_01276 1276

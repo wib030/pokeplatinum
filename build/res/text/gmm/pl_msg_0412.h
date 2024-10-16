@@ -84,7 +84,7 @@
 #define pl_msg_00000412_00037 37
 // NINETALES
 #define pl_msg_00000412_00038 38
-// JIGGLYPUFF
+// WIBBLYPUFF
 #define pl_msg_00000412_00039 39
 // WIGGLYTUFF
 #define pl_msg_00000412_00040 40
