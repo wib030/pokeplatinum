@@ -1,20 +1,25 @@
 {
-    "name": "Kyle",
+    "name": "&WhitePants",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_PLUSLE",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ENCORE",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_METRONOME",
+				"MOVE_HELPING_HAND"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

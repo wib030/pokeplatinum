@@ -1,18 +1,25 @@
 {
     "name": "James",
     "class": "TRAINER_CLASS_CYCLIST_MALE",
-    "items": [],
+    "items": [
+		"ITEM_MOOMOO_MILK"
+	],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PONYTA",
+            "species": "SPECIES_MAGNEMITE",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_MAGNET",
+            "moves": [
+				"MOVE_SONIC_BOOM",
+				"MOVE_CHARGE_BEAM",
+				"MOVE_THUNDER_WAVE"
+            ],
             "power": 0,
             "ball_seal": 0
         }

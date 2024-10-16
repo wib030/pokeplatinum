@@ -1,18 +1,24 @@
 {
-    "name": "Megan",
+    "name": "Seabreeze",
     "class": "TRAINER_CLASS_CYCLIST_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAVIA",
+            "species": "SPECIES_GROWLITHE",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
+            "level": 22,
+            "item": "ITEM_NONE",
+            "moves": [
+				"MOVE_FLAME_WHEEL",
+				"MOVE_ODOR_SLEUTH",
+				"MOVE_MORNING_SUN",
+				"MOVE_HOWL"
+            ],
             "power": 0,
             "ball_seal": 0
         }

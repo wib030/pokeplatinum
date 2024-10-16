@@ -1,28 +1,40 @@
 {
-    "name": "John",
+    "name": "Jon",
     "class": "TRAINER_CLASS_CYCLIST_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_WEATHER"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_HOPPIP",
             "form": 0,
-            "level": 18,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_HEAT_ROCK",
+            "moves": [
+				"MOVE_SUNNY_DAY",
+				"MOVE_U_TURN",
+				"MOVE_LEECH_SEED",
+				"MOVE_BULLET_SEED"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STARAVIA",
+            "species": "SPECIES_HOUNDOUR",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_CHARCOAL",
+            "moves": [
+				"MOVE_FIRE_SPIN",
+				"MOVE_SMOG",
+				"MOVE_HIDDEN_POWER",
+				"MOVE_SOLAR_BEAM"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

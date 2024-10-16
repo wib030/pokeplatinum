@@ -4,22 +4,37 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_TAG_STRATEGY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PACHIRISU",
+            "species": "SPECIES_TOGETIC",
             "form": 0,
-            "level": 22,
-            "item": null,
+            "level": 20,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_SPARK",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_CHARM"
+				"MOVE_FOLLOW_ME",
+				"MOVE_HEAL_BELL",
+				"MOVE_ROOST",
+				"MOVE_AIR_CUTTER"
             ],
-            "power": 0,
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_RIOLU",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_NONE",
+            "moves": [
+				"MOVE_FOLLOW_ME",
+				"MOVE_VACUUM_WAVE",
+				"MOVE_IRON_DEFENSE",
+				"MOVE_HELPING_HAND"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,23 @@
 {
-    "name": "Jonathan",
+    "name": "Oldonathan",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_DONPHAN",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
+            "level": 25,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_BLOCK",
+				"MOVE_ROAR",
+				"MOVE_FURY_ATTACK"
+            ],
             "power": 0,
             "ball_seal": 0
         }

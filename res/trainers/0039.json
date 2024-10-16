@@ -1,20 +1,30 @@
 {
-    "name": "Robert",
+    "name": "Peeter",
     "class": "TRAINER_CLASS_HIKER",
-    "items": [],
+    "items": [
+		"ITEM_LEMONADE",
+		"ITEM_LEMONADE",
+		"ITEM_LEMONADE",
+		"ITEM_LEMONADE"
+	],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NOSEPASS",
+            "species": "SPECIES_SUNFLORA",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SUNNY_DAY",
+				"MOVE_SYNTHESIS",
+				"MOVE_WORRY_SEED",
+				"MOVE_GROWTH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

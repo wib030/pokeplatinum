@@ -1,29 +1,67 @@
 {
-    "name": "Alexander",
+    "name": "Dollarbob",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GRAVELER",
+            "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 47,
+            "item": "ITEM_CHOPLE_BERRY",
+            "moves": [
+                "MOVE_MEGAHORN",
+				"MOVE_ICE_BALL",
+				"MOVE_ROOST",
+				"MOVE_BODY_SLAM"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PROBOPASS",
+            "species": "SPECIES_LAPRAS",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 47,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+				"MOVE_WHIRLPOOL",
+				"MOVE_BLIZZARD",
+				"MOVE_CALM_MIND"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GLACEON",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_ICY_WIND",
+				"MOVE_MUD_SHOT",
+				"MOVE_HIDDEN_POWER",
+				"MOVE_BLIZZARD"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 3,
+            "level": 47,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_BLIZZARD",
+				"MOVE_ZAP_CANNON",
+				"MOVE_SHADOW_BALL",
+				"MOVE_SHOCK_WAVE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

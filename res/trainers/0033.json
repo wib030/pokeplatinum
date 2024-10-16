@@ -1,37 +1,61 @@
 {
-    "name": "Austin",
+    "name": "Baustin",
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUIZEL",
+            "species": "SPECIES_DUNSPARCE",
             "form": 0,
-            "level": 18,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 20,
+            "item": "ITEM_METRONOME",
+            "moves": [
+				"MOVE_TRUMP_CARD"
+            ],
+            "power": 50,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_SLOWKING",
             "form": 0,
-            "level": 18,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 20,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+				"MOVE_DRAIN_PUNCH",
+				"MOVE_RAIN_DANCE",
+				"MOVE_BELLY_DRUM",
+				"MOVE_MUD_SPORT"
+            ],
+            "power": 50,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GLIGAR",
+            "species": "SPECIES_DODUO",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 20,
+            "item": "ITEM_ROWAP_BERRY",
+            "moves": [
+				"MOVE_PECK",
+				"MOVE_FLAIL",
+				"MOVE_RETURN",
+				"MOVE_PURSUIT"
+            ],
+            "power": 50,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SEEDOT",
+            "form": 0,
+            "level": 23,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+				"MOVE_BIDE"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

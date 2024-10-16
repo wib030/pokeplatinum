@@ -4,8 +4,7 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT",
-        "AI_FLAG_DAMAGE_PRIORITY"
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [

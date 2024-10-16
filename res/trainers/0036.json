@@ -4,43 +4,63 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_TENTACOOL",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
+            "level": 18,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_STING",
+				"MOVE_CONSTRICT",
+				"MOVE_HAZE",
+				"MOVE_ACUPRESSURE"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GEODUDE",
-            "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_TENTACOOL",
             "form": 0,
             "level": 19,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_STING",
+				"MOVE_RAPID_SPIN",
+				"MOVE_KNOCK_OFF",
+				"MOVE_WHIRLPOOL"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_TENTACOOL",
             "form": 0,
-            "level": 19,
-            "item": null,
-            "moves": null,
+            "level": 20,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_STING",
+				"MOVE_RETURN",
+				"MOVE_FRUSTRATION",
+				"MOVE_ATTRACT"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_TENTACOOL",
+            "form": 0,
+            "level": 21,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_STING",
+				"MOVE_TOXIC_SPIKES",
+				"MOVE_REST",
+				"MOVE_SNORE"
+            ],
             "power": 0,
             "ball_seal": 0
         }

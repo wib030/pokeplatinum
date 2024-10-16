@@ -9,39 +9,12 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_FLOATZEL",
+            "species": "SPECIES_BLISSEY",
             "form": 0,
             "level": 100,
-            "item": "ITEM_LIFE_ORB",
+            "item": "ITEM_NONE",
             "moves": [
-				"MOVE_AQUA_JET",
-				"MOVE_AQUA_TAIL",
-				"MOVE_CRUNCH",
-				"MOVE_ICE_FANG"
-            ],
-            "power": 255,
-            "ball_seal": 0
-        },
-		{
-            "species": "SPECIES_PELIPPER",
-            "form": 0,
-            "level": 100,
-            "item": "ITEM_DAMP_ROCK",
-            "moves": [
-				"MOVE_U_TURN"
-            ],
-            "power": 255,
-            "ball_seal": 0
-        },
-		{
-            "species": "SPECIES_MUK",
-            "form": 0,
-            "level": 100,
-            "item": "ITEM_BLACK_SLUDGE",
-            "moves": [
-				"MOVE_TOXIC_SPIKES",
-				"MOVE_POISON_JAB",
-				"MOVE_TOXIC"
+				"MOVE_SPLASH"
             ],
             "power": 255,
             "ball_seal": 0

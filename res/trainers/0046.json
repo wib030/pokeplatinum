@@ -1,46 +1,67 @@
 {
-    "name": "Albert",
+    "name": "Owlbert",
     "class": "TRAINER_CLASS_BREEDER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUDEW",
+            "species": "SPECIES_HOOTHOOT",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_HYPNOSIS",
+				"MOVE_REFLECT",
+				"MOVE_DREAM_EATER",
+				"MOVE_NIGHT_SHADE"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BONSLY",
+            "species": "SPECIES_HOOTHOOT",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_FEATHER_DANCE",
+				"MOVE_ROOST",
+				"MOVE_PLUCK",
+				"MOVE_TAILWIND"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PICHU",
+            "species": "SPECIES_HOOTHOOT",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_MIRROR_MOVE",
+				"MOVE_REFLECT",
+				"MOVE_REST",
+				"MOVE_RECYCLE"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_EEVEE",
+            "species": "SPECIES_NOCTOWL",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_TOXIC",
+				"MOVE_FLY",
+				"MOVE_ROOST",
+				"MOVE_FEATHER_DANCE"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

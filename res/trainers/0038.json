@@ -1,29 +1,39 @@
 {
-    "name": "Helen",
+    "name": "Hellen",
     "class": "TRAINER_CLASS_BATTLE_GIRL",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_SHROOMISH",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 20,
+            "level": 22,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_WAKE_UP_SLAP",
+				"MOVE_HEADBUTT",
+				"MOVE_BULLET_SEED",
+				"MOVE_SYNTHESIS"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MEDITITE",
+            "species": "SPECIES_BUNEARY",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 20,
+            "level": 22,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ROCK_SMASH",
+				"MOVE_ENDURE",
+				"MOVE_ENDEAVOR",
+				"MOVE_QUICK_ATTACK"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

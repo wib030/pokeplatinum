@@ -1,29 +1,39 @@
 {
-    "name": "Justin",
+    "name": "Dustin",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_NOSEPASS",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_SMOOTH_ROCK",
+            "moves": [
+                "MOVE_SANDSTORM",
+				"MOVE_REST",
+				"MOVE_SNORE",
+				"MOVE_BLOCK"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_NOSEPASS",
+            "species": "SPECIES_DUSTOX",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_SILVERPOWDER",
+            "moves": [
+                "MOVE_CONFUSION",
+				"MOVE_TWISTER",
+				"MOVE_AIR_CUTTER",
+				"MOVE_OMINOUS_WIND"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

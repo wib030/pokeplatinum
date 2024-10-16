@@ -10,31 +10,31 @@
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_PLUSLE",
+            "species": "SPECIES_MINUN",
             "form": 0,
-            "level": 12,
-            "item": "ITEM_NONE",
+            "level": 13,
+            "item": "ITEM_CHESTO_BERRY",
             "moves": [
-                "MOVE_THUNDER_WAVE",
-				"MOVE_GRASS_KNOT",
-				"MOVE_HELPING_HAND",
-				"MOVE_QUICK_ATTACK"
+                "MOVE_HELPING_HAND",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_REST",
+				"MOVE_DISCHARGE"
             ],
-            "power": 0,
+            "power": 128,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MINUN",
+            "species": "SPECIES_PLUSLE",
             "form": 0,
-            "level": 12,
-            "item": "ITEM_METRONOME",
+            "level": 14,
+            "item": "ITEM_GANLON_BERRY",
             "moves": [
-                "MOVE_DISCHARGE",
+                "MOVE_CHARGE_BEAM",
 				"MOVE_GRASS_KNOT",
-				"MOVE_SWIFT",
-				"MOVE_SIGNAL_BEAM"
+				"MOVE_LAST_RESORT",
+				"MOVE_NATURAL_GIFT"
             ],
-            "power": 0,
+            "power": 128,
             "ball_seal": 0
         }
     ]

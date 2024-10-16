@@ -1,37 +1,53 @@
 {
-    "name": "Nicole",
+    "name": "Starly",
     "class": "TRAINER_CLASS_CYCLIST_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_STARYU",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_HONDEW_BERRY",
+            "moves": [
+				"MOVE_CAMOUFLAGE",
+				"MOVE_HIDDEN_POWER",
+				"MOVE_BRINE",
+				"MOVE_NATURAL_GIFT"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_STARYU",
             "form": 0,
-            "level": 18,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+				"MOVE_CAMOUFLAGE",
+				"MOVE_WHIRLPOOL",
+				"MOVE_SUBSTITUTE",
+				"MOVE_RECOVER"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_STARYU",
             "form": 0,
-            "level": 19,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_NONE",
+            "moves": [
+				"MOVE_CAMOUFLAGE",
+				"MOVE_HAIL",
+				"MOVE_LIGHT_SCREEN",
+				"MOVE_SWAGGER"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

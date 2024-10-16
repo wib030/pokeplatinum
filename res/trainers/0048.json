@@ -1,19 +1,72 @@
 {
-    "name": "Shelley",
+    "name": "Pasteur",
     "class": "TRAINER_CLASS_COWGIRL",
-    "items": [],
+    "items": [
+		"ITEM_MOOMOO_MILK",
+		"ITEM_MOOMOO_MILK",
+		"ITEM_MOOMOO_MILK",
+		"ITEM_MOOMOO_MILK"
+	],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PONYTA",
+            "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_MILK_DRINK",
+				"MOVE_CURSE",
+				"MOVE_DIZZY_PUNCH",
+				"MOVE_PUNISHMENT"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_MILK_DRINK",
+				"MOVE_WHIRLPOOL",
+				"MOVE_MUD_SLAP",
+				"MOVE_NONE"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_MILK_DRINK",
+				"MOVE_TOXIC",
+				"MOVE_PROTECT",
+				"MOVE_SUBSTITUTE"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_MILK_DRINK",
+				"MOVE_ATTRACT",
+				"MOVE_GROWL",
+				"MOVE_BODY_SLAM"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

@@ -1,45 +1,66 @@
 {
-    "name": "Jennifer",
+    "name": "Buzzy",
     "class": "TRAINER_CLASS_BREEDER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUDEW",
+            "species": "SPECIES_TEDDIURSA",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_HONEY",
+            "moves": [
+                "MOVE_ROCK_SLIDE",
+				"MOVE_SWEET_SCENT",
+				"MOVE_LICK",
+				"MOVE_COVET"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_COMBEE",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWEET_SCENT",
+				"MOVE_GUST",
+				"MOVE_BUG_BITE",
+				"MOVE_TAILWIND"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MIME_JR",
+            "species": "SPECIES_COMBEE",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_BUG_BITE",
+				"MOVE_ENDEAVOR",
+				"MOVE_AIR_CUTTER",
+				"MOVE_OMINOUS_WIND"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CLEFFA",
+            "species": "SPECIES_COMBEE",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_EEVEE",
-            "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWIFT",
+				"MOVE_MUD_SLAP",
+				"MOVE_STRING_SHOT",
+				"MOVE_SNORE"
+            ],
             "power": 0,
             "ball_seal": 0
         }
