@@ -11059,3 +11059,68 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
 
     return type;
 }
+
+/**
+ * @brief Map the given move effect to an appropriate side condition.
+ * 
+ * @param battleCtx 
+ * @param effect    Move effect which should be mapped to a corresponding side condition
+ * @return The corresponding side condition 
+ */
+static int MapMoveEffectToSideCondition(BattleContext *battleCtx, int effect)
+{
+    u32 sideCondition
+
+    switch (effect) {
+        
+        case (BATTLE_EFFECT_SET_REFLECT):
+            sideCondition = SIDE_CONDITION_REFLECT;
+            break;
+
+        case (BATTLE_EFFECT_SET_LIGHT_SCREEN):
+            sideCondition = SIDE_CONDITION_LIGHT_SCREEN;
+            break;
+
+        case (BATTLE_EFFECT_SET_SPIKES):
+            sideCondition = SIDE_CONDITION_SPIKES;
+            break;
+
+        case (BATTLE_EFFECT_PREVENT_STATUS):
+            sideCondition = SIDE_CONDITION_SAFEGUARD;
+            break;
+
+        case (BATTLE_EFFECT_HIT_IN_3_TURNS):
+            sideCondition = SIDE_CONDITION_FUTURE_SIGHT;
+            break;
+
+        case (BATTLE_EFFECT_HEAL_IN_3_TURNS):
+            sideCondition = SIDE_CONDITION_WISH;
+            break;
+
+        case (BATTLE_EFFECT_PREVENT_STAT_REDUCTION):
+            sideCondition = SIDE_CONDITION_MIST;
+            break;
+
+        case (BATTLE_EFFECT_STEALTH_ROCK):
+            sideCondition = SIDE_CONDITION_STEALTH_ROCK;
+            break;
+
+        case (BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS):
+            sideCondition = SIDE_CONDITION_TAILWIND;
+            break;
+
+        case (BATTLE_EFFECT_TOXIC_SPIKES):
+            sideCondition = SIDE_CONDITION_TOXIC_SPIKES;
+            break;
+
+        case (BATTLE_EFFECT_PREVENT_CRITS):
+            sideCondition = SIDE_CONDITION_LUCKY_CHANT;
+            break;
+
+        default:
+            sideCondition = SIDE_CONDITION_NONE;
+            break;
+    }
+
+    return sideCondition;
+}
