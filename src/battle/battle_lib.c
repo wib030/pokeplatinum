@@ -7774,20 +7774,22 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 		movePower = movePower * 13 / 10;
 	}
 
-    if (attackerParams.ability == ABILITY_IRON_FIST) {
-        for (i = 0; i < NELEMS(sPunchingMoves); i++)
-	    {
-            if (sPunchingMoves[i] == move)
-		    {
-                movePower = movePower * 13 / 10;
+    for (i = 0; i < NELEMS(sPunchingMoves); i++)
+	{
+		if (sPunchingMoves[i] == move)
+		{
+			if (attackerParams.ability == ABILITY_IRON_FIST)
+			{
+				movePower = movePower * 13 / 10;
+			}
 
-                if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH) {
-                    movePower = movePower * 12 / 10;
-                }
-                break;
-            }
-        }
-    }
+			if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
+			{
+				movePower = movePower * 12 / 10;
+			}
+			break;
+		}
+	}
   
     if (attackerParams.ability == ABILITY_STRONG_JAW) {
 	    for (i = 0; i < NELEMS(sBitingMoves); i++) {
@@ -8356,39 +8358,48 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 		movePower = movePower * 13 / 10;
 	}
 
-    for (i = 0; i < NELEMS(sPunchingMoves); i++)
+    
+	for (i = 0; i < NELEMS(sPunchingMoves); i++)
 	{
-        if (sPunchingMoves[i] == move)
+		if (sPunchingMoves[i] == move)
 		{
-            if (attackerParams.ability == ABILITY_IRON_FIST) {
-                movePower = movePower * 13 / 10;
-            }
-            
-            if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH) {
-                movePower = movePower * 12 / 10;
-            }
-            break;
-        }
-    }
+			if (attackerParams.ability == ABILITY_IRON_FIST)
+			{
+				movePower = movePower * 13 / 10;
+			}
 
-	for (i = 0; i < NELEMS(sBitingMoves); i++) {
-        if (sBitingMoves[i] == move && attackerParams.ability == ABILITY_STRONG_JAW) {
-            movePower = movePower * 15 / 10;
-            break;
+			if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
+			{
+				movePower = movePower * 12 / 10;
+			}
+			break;
+		}
+	}
+  
+    if (attackerParams.ability == ABILITY_STRONG_JAW) {
+	    for (i = 0; i < NELEMS(sBitingMoves); i++) {
+            if (sBitingMoves[i] == move) {
+                movePower = movePower * 3 / 2;
+                break;
+            }
         }
     }
 	
-	for (i = 0; i < NELEMS(sSlicingMoves); i++) {
-        if (sSlicingMoves[i] == move && attackerParams.ability == ABILITY_SHARPNESS) {
-            movePower = movePower * 15 / 10;
-            break;
+    if (attackerParams.ability == ABILITY_SHARPNESS) {
+	    for (i = 0; i < NELEMS(sSlicingMoves); i++) {
+            if (sSlicingMoves[i] == move) {
+                movePower = movePower * 3 / 2;
+                break;
+            }
         }
     }
 	
-	for (i = 0; i < NELEMS(sPulseMoves); i++) {
-        if (sPulseMoves[i] == move && attackerParams.ability == ABILITY_MEGA_LAUNCHER) {
-            movePower = movePower * 15 / 10;
-            break;
+    if (attackerParams.ability == ABILITY_MEGA_LAUNCHER) {
+        for (i = 0; i < NELEMS(sPulseMoves); i++) {
+            if (sPulseMoves[i] == move) {
+                movePower = movePower * 3 / 2;
+                break;
+            }
         }
     }
 
