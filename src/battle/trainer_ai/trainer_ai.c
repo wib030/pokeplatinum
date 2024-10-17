@@ -4606,6 +4606,20 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 // last move checked is Detect
 
                                 break;
+
+                            case RANGE_SINGLE_TARGET: 
+
+                                if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) > 0) {
+
+                                    switch (effect) {
+
+                                        case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
+                                            return FALSE;
+                                            break;
+                                    }
+                                }
+
+                                break;
                         }                        
                     }
                 }
