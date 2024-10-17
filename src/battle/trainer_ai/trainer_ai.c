@@ -4329,7 +4329,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             return TRUE;
                         }
 
-                        else if (effectiveness & MOVE_STATUS_DID_NOT_HIT) {
+                        else if (effectiveness & (MOVE_STATUS_DID_NOT_HIT | MOVE_STATUS_ABSORBED)) {
 
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
