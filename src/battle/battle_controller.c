@@ -3460,11 +3460,6 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
 		{
             DEFENDER_SELF_TURN_FLAGS.focusItemActivated = FALSE;
         }
-		
-		if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_PEST && (BattleSystem_RandNext(battleSys) % 100) > 10))
-		{
-            DEFENDER_TURN_FLAGS.enduring_ability = FALSE;
-        }
 
         if ((DEFENDER_TURN_FLAGS.enduring || DEFENDER_TURN_FLAGS.enduring_ability || DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
                 && DEFENDING_MON.curHP + battleCtx->damage <= 0) {
