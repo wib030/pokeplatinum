@@ -4609,7 +4609,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                             case RANGE_SINGLE_TARGET: 
 
-                                if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) > 0) {
+                                if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) == 0) {
 
                                     switch (effect) {
 
