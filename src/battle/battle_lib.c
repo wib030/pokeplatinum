@@ -9609,7 +9609,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     u16 move;
     int moveType;
     u8 battlersDisregarded;
-    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore, speedMultiplier;
+    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore, speedMultiplier, defenseMultiplier;
     u8 picked = 6;
     u8 slot1, slot2;
     u32 moveStatusFlags;
@@ -9668,16 +9668,19 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                         speedMultiplier = 9;
+                        defenseMultiplier = 5;
                     }
                     // 1.0x if tie
                     else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                         speedMultiplier = 10;
+                        defenseMultiplier = 4;
                     }
                     // 1.1x if slower
                     else {
 
                         speedMultiplier = 11;
+                        defenseMultiplier = 2;
                     }
                 }
                 // Trick Room is not up in this case.
@@ -9686,16 +9689,19 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                         speedMultiplier = 11;
+                        defenseMultiplier = 2;
                     }
                     // 1.0x if same speed
                     else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                         speedMultiplier = 10;
+                        defenseMultiplier = 4;
                     }
                     // 0.9x if slower
                     else {
                     
                         speedMultiplier = 9;
+                        defenseMultiplier = 5;
                     }
                 }
 
@@ -9708,8 +9714,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 // Changed monotype scoring to consider its matchup 1.5x instead of 2x
                 attackScoreType1 = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
                 attackScoreType2 = BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
-                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2) * 2 / 5;
-                defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2) * 2 / 5;
+                defendScoreType1 = BattleSystem_TypeMatchupMultiplier(defenderType1, monType1, monType2) * defenseMultiplier / 5;
+                defendScoreType2 = BattleSystem_TypeMatchupMultiplier(defenderType2, monType1, monType2) * defenseMultiplier / 5;
 
                 if (monAbility != ABILITY_MOLD_BREAKER) 
                 {
