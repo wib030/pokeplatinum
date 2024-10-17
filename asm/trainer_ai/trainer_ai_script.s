@@ -303,7 +303,21 @@ Basic_CheckCannotSleep:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_INSOMNIA, ScoreMinus10
     IfLoadedEqualTo ABILITY_VITAL_SPIRIT, ScoreMinus10
-    PopOrEnd 
+    IfMoveEqualTo MOVE_SLEEP_POWDER, Basic_CheckCannotSleep_PowderMove
+    IfMoveEqualTo MOVE_SPORE, Basic_CheckCannotSleep_PowderMove
+    GoTo Basic_CheckCannotSleep_End
+    
+Basic_CheckCannotSleep_PowderMove:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
+    GoTo Basic_CheckCannotSleep_End
+
+Basic_CheckCannotSleep_End:
+    PopOrEnd
 
 Basic_CheckCannotExplode:
     ; If the target is immune, score -10.
@@ -631,6 +645,7 @@ Basic_CheckCannotParalyze:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCannotParalyze_ImmuneToStatus
     IfMoveEqualTo MOVE_THUNDER_WAVE, Basic_CheckCannotParalyze_ThunderWave
+    IfMoveEqualTo MOVE_STUN_SPORE, Basic_CheckCannotParalyze_PowderMove
     GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
 Basic_CheckCannotParalyze_ThunderWave:
@@ -638,6 +653,15 @@ Basic_CheckCannotParalyze_ThunderWave:
     IfLoadedEqualTo ABILITY_MOTOR_DRIVE, ScoreMinus10
     IfLoadedEqualTo ABILITY_VOLT_ABSORB, ScoreMinus10
 	IfLoadedEqualTo ABILITY_LIGHTNING_ROD, ScoreMinus10
+
+Basic_CheckCannotParalyze_PowderMove:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadHeldItemEffect
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
+    GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
 Basic_CheckCannotParalyze_ImmuneToStatus:
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
@@ -1839,6 +1863,17 @@ Expert_StatusSleep:
     ; effects), 50% chance of score +1.
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_StatusSleep_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_NIGHTMARE, Expert_StatusSleep_TryScorePlus1
+    IfMoveEqualTo MOVE_SLEEP_POWDER, Expert_StatusSleep_PowderMove
+    IfMoveEqualTo MOVE_SPORE, Expert_StatusSleep_PowderMove
+    GoTo Expert_StatusSleep_End
+
+Expert_StatusSleep_PowderMove:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
     GoTo Expert_StatusSleep_End
 
 Expert_StatusSleep_TryScorePlus1:
@@ -3158,8 +3193,18 @@ Expert_Reflect_PreSplitPhysicalTypes:
 
 Expert_StatusPoison:
     ; If the attacker''s HP is < 50% or the defender''s HP is <= 50%, score -1.
+    IfMoveEqualTo MOVE_POISON_POWDER, Expert_StatusPoison_PowderMove
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_StatusPoison_ScoreMinus1
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_StatusPoison_End
+
+Expert_StatusPoison_PowderMove:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadHeldItemEffect
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
+    GoTo Expert_StatusPoison_End
 
 Expert_StatusPoison_ScoreMinus1:
     AddToMoveScore -1
@@ -3173,7 +3218,17 @@ Expert_StatusParalyze:
     ; If the attacker''s HP is <= 70%, score -1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_StatusParalyze_TryScorePlus3
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusParalyze_End
+    IfMoveEqualTo MOVE_STUN_SPORE, Expert_StatusParalyze_PowderMove
     AddToMoveScore -1
+    GoTo Expert_StatusParalyze_End
+
+Expert_StatusParalyze_PowderMove:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadHeldItemEffect
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
     GoTo Expert_StatusParalyze_End
 
 Expert_StatusParalyze_TryScorePlus3:
