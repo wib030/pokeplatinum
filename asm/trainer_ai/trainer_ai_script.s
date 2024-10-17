@@ -659,7 +659,7 @@ Basic_CheckCannotParalyze_PowderMove:
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadHeldItemEffect
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
     GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
@@ -3202,7 +3202,7 @@ Expert_StatusPoison_PowderMove:
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadHeldItemEffect
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
     GoTo Expert_StatusPoison_End
 
@@ -3227,7 +3227,7 @@ Expert_StatusParalyze_PowderMove:
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadHeldItemEffect
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
     GoTo Expert_StatusParalyze_End
 
