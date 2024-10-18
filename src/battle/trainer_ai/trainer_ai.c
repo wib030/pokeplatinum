@@ -4354,7 +4354,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     // Status move here
                     else {
 
-                        if (effectiveness & MOVE_STATUS_NO_EFFECTS) {
+                        if (effectiveness & (MOVE_STATUS_NO_EFFECTS | MOVE_STATUS_ABSORBED)) {
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
                         }
@@ -4584,7 +4584,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 }
 
                                 switch (effect) {
-                                    case BATTLE_EFFECT_USE_LAST_USED_MOVE:
                                     case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
                                         return FALSE;
                                         break;
@@ -4606,6 +4605,22 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 // last move checked is Detect
 
                                 break;
+
+                            case RANGE_SINGLE_TARGET_SPECIAL:
+                                
+                                moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
+
+                                switch (effect) {
+
+                                    case BATTLE_EFFECT_USE_LAST_USED_MOVE:
+                                        // if copycat move would be neutral or better
+                                        if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2) >= 40) {
+                                            return FALSE;
+                                        }
+                                        break;
+
+
+                                }
 
                             case RANGE_SINGLE_TARGET: 
 
