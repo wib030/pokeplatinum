@@ -4374,8 +4374,8 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
  */
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i, j;
-    u8 defender1, defender2, defender, side;
+    int i, j, k;
+    u8 defender1, defender2, defender, battlerPartner, side;
     u8 aiSlot1, aiSlot2;
     u16 move;
     int type, range, effect, moveEffect;
@@ -4414,6 +4414,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                 if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES)) {
                     defender = defender2;
+                    battlerPartner = BattleSystem_Partner(battleSys, battler);
                 }
                 else {
                     break;
@@ -4488,7 +4489,29 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             return TRUE;
                         }
                         else {
-                            return FALSE;
+                            moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
+                            if (moveEffect != MOVE_EFFECT_NONE) {
+                                if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                                    return FALSE;
+                                }
+                            }
+                            else {
+                                // For now, this code just checks if the target has no negative inflictable status
+                                // that could be applied. Later on, we'll need to check that the target won't
+                                // benefit from poison or burn, as well
+                                if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE) == FALSE) {
+                                    if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
+                                        if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
+                                            && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)) {
+                                            
+                                            return FALSE;
+                                        }
+                                    }
+                                }
+                            }
+
+                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                            return TRUE;
                         }
                     }
                 }
@@ -4610,6 +4633,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     }
 
                     if (MOVE_DATA(move).class == CLASS_STATUS) {
+                        Party *party;
+
                         switch (range) {
 
                             case RANGE_OPPONENT_SIDE:
@@ -4641,45 +4666,27 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     }
 
                                     if ((effect == BATTLE_EFFECT_CURE_PARTY_STATUS)) {
-                                        Party * party;
-                                        party = BattleSystem_Party(battleSys, battler);
-                                        for (int i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
-                                            Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
-
-                                            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
-                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
-                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
-                                                && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY))
-                                            {
-                                                if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_GUTS
-                                                    && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & (MON_CONDITION_SLEEP | MON_CONDITION_FREEZE | MON_CONDITION_PARALYSIS))) 
-                                                {
-                                                    return FALSE;
-                                                }
-
-                                                if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_POISON_HEAL
-                                                    && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY_POISON)) 
-                                                {
-                                                    return FALSE;
-                                                }
-                                            }
+                                        if (AI_CanCurePartyMemberStatus(battleSys, battleCtx, battler)) {
+                                            return FALSE;
                                         }
                                     }
                                 }
-
                                 break;
 
                             case RANGE_USER:
 
                                 moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
                                 
-                                if (moveEffect != MOVE_EFFECT_NONE) {
+                                // Imprison has a special case below
+                                if (moveEffect != MOVE_EFFECT_NONE
+                                    && moveEffect != MOVE_EFFECT_IMPRISON) {
                                     if ((battleCtx->battleMons[battler].moveEffectsMask & moveEffect)) {
                                     
                                         return FALSE;
                                     }
                                 }
 
+                                // Try to heal before switch out if we're low hp
                                 if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP * 3 / 5)) {
 
                                     switch (move) {
@@ -4694,13 +4701,13 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         case MOVE_SLACK_OFF:
                                         case MOVE_ROOST:
                                         case MOVE_WISH:
-                                            if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+                                            if ((BattleSystem_RandNext(battleSys) % 4) < 3) {
                                                 return FALSE;
                                             }
                                             break;
 
                                         case MOVE_SWALLOW:
-                                            if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+                                            if ((BattleSystem_RandNext(battleSys) % 4) < 3) {
                                                 if (battleCtx->battleMons[battler].moveEffectsData.stockpileCount) {
                                                     return FALSE;
                                                 }
@@ -4712,26 +4719,117 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     }
                                 }
 
+                                    // Baton pass is always viable
                                 switch (effect) {
                                     case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
                                         return FALSE;
                                         break;
 
+                                        // grudge will share destiny bond's script for now
+                                    case BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT:
+                                        // destiny bond (may change later)
                                     case BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER:
                                         if ((BattleSystem_RandNext(battleSys) % 20) < 19) {
                                             return FALSE;
                                         }
                                         break;
 
+                                        // protect and detect
                                     case BATTLE_EFFECT_PROTECT:
                                         if ((BattleSystem_RandNext(battleSys) % 2) == 0) {
                                             return FALSE;
                                         }
                                         break;
+
+                                        // endure
+                                    case BATTLE_EFFECT_SURVIVE_WITH_1_HP:
+                                        for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+                                            if (battleCtx->battleMons[battler].moves[k] == MOVE_ENDEAVOR) {
+                                                
+                                                // endure considered a viable move if we have endeavor that
+                                                // can hit the defender
+                                                if (((battleCtx->battleMons[defender].type1 != TYPE_GHOST)
+                                                    && (battleCtx->battleMons[defender].type2 != TYPE_GHOST))
+                                                    || (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_NORMAL_HIT_GHOST)
+                                                    || (battleCtx->battleMons[battler].ability == ABILITY_SCRAPPY)) {
+                                                        return FALSE;
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                        // Follow me is viable in doubles if partner is alive
+                                    case BATTLE_EFFECT_MAKE_GLOBAL_TARGET:
+                                        if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+                                            if (battleCtx->battleMons[battlerPartner].curHP > 0) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
+
+                                        // healing wish will need its own code later
+                                    case BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON:
+                                    case BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON:
+                                        if (AI_CanCurePartyMemberStatus(battleSys, battleCtx, battler)) {
+                                            return FALSE;
+                                        }
+                                        party = BattleSystem_Party(battleSys, battler);
+                                        for (int k = 0; k < BattleSystem_PartyCount(battleSys, battler); k++) {
+                                            Pokemon *mon = Party_GetPokemonBySlotIndex(party, k);
+
+                                            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                                                && k != battleCtx->selectedPartySlot[battler]
+                                                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) < Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL))
+                                            {
+                                                return false;
+                                            }
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE:
+                                        if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+                                            if (battleCtx->battleMons[battlerPartner].curHP > 0) {
+                                                if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                                                    if (AI_CanImprisonTarget(battleSys, battleCtx, battler, defender)) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                        // Ingrain and defensive boosting moves would be so insanely complicated to code
+                                        // for I'm not going to bother doing it right now. There will need to be a new script
+                                        // that checks if the current AI mon can basically defensively boost to the point where the
+                                        // current opponent cannot KO it. This factor would need to be calculated before the AI has
+                                        // accumulated any/many boosts.
+                                    case BATTLE_EFFECT_DEF_UP:
+                                    case BATTLE_EFFECT_SP_DEF_UP:
+                                    case BATTLE_EFFECT_DEF_UP_2:
+                                    case BATTLE_EFFECT_SP_DEF_UP_2:
+                                    case BATTLE_EFFECT_RESTORE_HP_EVERY_TURN:
+                                    case BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER:
+                                    case BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER:
+                                    case BATTLE_EFFECT_ATK_DEF_UP:
+                                    case BATTLE_EFFECT_SP_ATK_SP_DEF_UP:
+                                    case BATTLE_EFFECT_DEF_SPD_UP:
+                                    case BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL:
+                                        break;
+
+                                    case BATTLE_EFFECT_APPLY_MAGIC_COAT:
+                                        if (AI_CanMagicBounceTargetMove(battleSys, battleCtx, battler, defender) {
+                                            // idk 2/3 chance to magic bounce if we can bounce one of their moves
+                                            if ((BattleSystem_RandNext(battleSys) % 3) < 2 ) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
                                 }
 
                                 // To do: still moves to add.
-                                // last move checked is Detect
+                                // last move checked is Magic Coat
 
                                 break;
 
@@ -4747,22 +4845,16 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                             return FALSE;
                                         }
                                         break;
-
-
                                 }
 
                             case RANGE_SINGLE_TARGET: 
 
-                                if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) == 0) {
+                                switch (effect) {
 
-                                    switch (effect) {
-
-                                        case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
-                                            return FALSE;
-                                            break;
-                                    }
+                                    case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
+                                        return FALSE;
+                                        break;
                                 }
-
                                 break;
                         }                        
                     }
