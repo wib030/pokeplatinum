@@ -4131,7 +4131,7 @@ static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleC
             if (attackerMove == defenderMove) {
 
                 // We know the move for sure
-                if (defenderMove == AI_CONTEXT.battlerPartyMoves[targetPartySlot][j]) {
+                if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][targetPartySlot][j] == defenderMove) {
 
                     result = TRUE;
                 }
@@ -4172,15 +4172,15 @@ static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         defenderMove = battleCtx->battleMons[defender].moves[i];
 
-        if (MOVE_DATA(defenderMove).class == CLASS_STATUS)) {
-            range = MOVE_DATA(move).range;
+        if (MOVE_DATA(defenderMove).class == CLASS_STATUS) {
+            range = MOVE_DATA(defenderMove).range;
 
             // May be other applicable ranges of bounceable moves.
             if (range == RANGE_SINGLE_TARGET
                 || range == RANGE_OPPONENT_SIDE
                 || range == RANGE_ADJACENT_OPPONENTS) {
                 
-                if (defenderMove == AI_CONTEXT.battlerPartyMoves[targetPartySlot][i]) {
+                if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][targetPartySlot][i] == defenderMove) {
 
                 result = TRUE;
                 }
@@ -4783,7 +4783,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                 && k != battleCtx->selectedPartySlot[battler]
                                                 && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) < Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL))
                                             {
-                                                return false;
+                                                return FALSE;
                                             }
                                         }
                                         break;
@@ -4819,7 +4819,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         break;
 
                                     case BATTLE_EFFECT_APPLY_MAGIC_COAT:
-                                        if (AI_CanMagicBounceTargetMove(battleSys, battleCtx, battler, defender) {
+                                        if (AI_CanMagicBounceTargetMove(battleSys, battleCtx, battler, defender)) {
                                             // idk 2/3 chance to magic bounce if we can bounce one of their moves
                                             if ((BattleSystem_RandNext(battleSys) % 3) < 2 ) {
                                                 return FALSE;
