@@ -1,21 +1,39 @@
 {
-    "name": "Melissa",
+    "name": "Mei",
     "class": "TRAINER_CLASS_LADY",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHERUBI",
+            "species": "SPECIES_SNOVER",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SAFEGUARD",
+				"MOVE_ICY_WIND",
+				"MOVE_ICE_SHARD",
+				"MOVE_BULLET_SEED"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LAPRAS",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ICY_WIND",
+				"MOVE_BLOCK",
+				"MOVE_WHIRLPOOL",
+				"MOVE_BODY_SLAM"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

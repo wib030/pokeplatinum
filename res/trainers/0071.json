@@ -1,28 +1,39 @@
 {
-    "name": "Nathan",
+    "name": "For you",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 36,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_WILL_O_WISP",
+				"MOVE_PURSUIT",
+				"MOVE_SHADOW_CLAW",
+				"MOVE_FLASH"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_SNORLAX",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 36,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_COUNTER",
+				"MOVE_PURSUIT",
+				"MOVE_BRICK_BREAK",
+				"MOVE_FLAMETHROWER"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

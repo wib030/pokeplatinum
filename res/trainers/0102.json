@@ -1,28 +1,39 @@
 {
-    "name": "Caleb",
-    "class": "TRAINER_CLASS_POLICEMAN",
+    "name": "Entombed",
+    "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOOTHOOT",
+            "species": "SPECIES_HIPPOPOTAS",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_SOFT_SAND",
+            "moves": [
+                "MOVE_SAND_TOMB",
+				"MOVE_DIG",
+				"MOVE_TAKE_DOWN",
+				"MOVE_REVENGE"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_TRAPINCH",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_SOFT_SAND",
+            "moves": [
+                "MOVE_DIG",
+				"MOVE_FLAIL",
+				"MOVE_SAND_TOMB",
+				"MOVE_GIGA_DRAIN"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

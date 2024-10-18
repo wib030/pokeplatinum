@@ -4,17 +4,22 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_SANDSHREW",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 36,
+            "item": "ITEM_UPGRADE",
+            "moves": [
+                "MOVE_FRUSTRATION",
+				"MOVE_THIEF",
+				"MOVE_ENDURE",
+				"MOVE_FLING"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

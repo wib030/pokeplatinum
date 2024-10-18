@@ -1,21 +1,39 @@
 {
-    "name": "Jeffrey",
+    "name": "Lengthwise",
     "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MONFERNO",
+            "species": "SPECIES_HUNTAIL",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 32,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_DIVE",
+				"MOVE_BOUNCE",
+				"MOVE_SUCKER_PUNCH",
+				"MOVE_ROCK_TOMB"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_FURRET",
+            "form": 0,
+            "level": 32,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_FOLLOW_ME",
+				"MOVE_THUNDER",
+				"MOVE_SURF",
+				"MOVE_FOCUS_BLAST"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

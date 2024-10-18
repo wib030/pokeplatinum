@@ -9,31 +9,31 @@
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_SOLROCK",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 24,
+            "item": "ITEM_CHARCOAL",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_FIRE_SPIN",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_CALM_MIND",
+				"MOVE_HIDDEN_POWER"
             ],
-            "power": 0,
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_CASTFORM",
             "form": 0,
-            "level": 1,
+            "level": 24,
             "item": "ITEM_NONE",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_WEATHER_BALL",
+				"MOVE_SHOCK_WAVE",
+				"MOVE_ICY_WIND",
+				"MOVE_SOLAR_BEAM"
             ],
-            "power": 0,
+            "power": 100,
             "ball_seal": 0
         }
     ]

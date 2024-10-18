@@ -1,30 +1,25 @@
 {
-    "name": "Taylor",
+    "name": "Ryuga",
     "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CARNIVINE",
-            "form": 0,
-            "level": 28,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_CHARIZARD",
             "form": 0,
             "level": 30,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_DRAGON_RAGE",
+				"MOVE_FIRE_SPIN",
+				"MOVE_TWISTER",
+				"MOVE_RAPID_SPIN"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

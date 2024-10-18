@@ -1,46 +1,67 @@
 {
-    "name": "Travis",
+    "name": "Trash Man",
     "class": "TRAINER_CLASS_FISHERMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BARBOACH",
-            "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_WORMADAM",
+            "form": 2,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+				"MOVE_SPIKES",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_RAPID_SPIN"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BARBOACH",
-            "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 2,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_CONFUSE_RAY",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_PAIN_SPLIT",
+				"MOVE_ASTONISH"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_GRIMER",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_SLUDGE",
+				"MOVE_MUD_BOMB",
+				"MOVE_FLING",
+				"MOVE_SHADOW_SNEAK"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BARBOACH",
+            "species": "SPECIES_CASTFORM",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+				"MOVE_PSYCH_UP",
+				"MOVE_WEATHER_BALL",
+				"MOVE_SOLAR_BEAM"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

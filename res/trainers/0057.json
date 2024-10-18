@@ -1,28 +1,77 @@
 {
-    "name": "Amber",
+    "name": "Gnome",
     "class": "TRAINER_CLASS_BREEDER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGBY",
+            "species": "SPECIES_TOGETIC",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_TOGEPI",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SNUBBULL",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MAKUHITA",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DROWZEE",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HAPPINY",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_WHITE_HERB",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

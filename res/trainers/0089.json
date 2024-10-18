@@ -1,28 +1,39 @@
 {
-    "name": "Alex",
-    "class": "TRAINER_CLASS_POLICEMAN",
+    "name": "Game",
+    "class": "TRAINER_CLASS_IDOL",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOOTHOOT",
+            "species": "SPECIES_GALLADE",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SING",
+				"MOVE_CALM_MIND",
+				"MOVE_ATTRACT",
+				"MOVE_FOCUS_BLAST"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_VIGOROTH",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NUGGET",
+            "moves": [
+                "MOVE_ENCORE",
+				"MOVE_FOCUS_ENERGY",
+				"MOVE_UPROAR",
+				"MOVE_FLING"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

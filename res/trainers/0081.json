@@ -1,19 +1,25 @@
 {
-    "name": "Katherine",
+    "name": "Chatherine",
     "class": "TRAINER_CLASS_BIRD_KEEPER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NOCTOWL",
+            "species": "SPECIES_CHATOT",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 37,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_CHATTER",
+				"MOVE_SING",
+				"MOVE_UPROAR",
+				"MOVE_MIMIC"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,21 +1,39 @@
 {
-    "name": "Jeremy",
+    "name": "Slap",
     "class": "TRAINER_CLASS_GENTLEMAN",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHATOT",
+            "species": "SPECIES_HITMONTOP",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 32,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_FAKE_OUT",
+				"MOVE_ROCK_SMASH",
+				"MOVE_PURSUIT",
+				"MOVE_BULLET_PUNCH"
+            ],
+            "power": 100,
+            "ball_seal": 22
+        },
+		{
+            "species": "SPECIES_HARIYAMA",
+            "form": 0,
+            "level": 32,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_KNOCK_OFF",
+				"MOVE_WAKE_UP_SLAP",
+				"MOVE_ICE_PUNCH",
+				"MOVE_THUNDER_PUNCH"
+            ],
+            "power": 100,
             "ball_seal": 22
         }
     ]

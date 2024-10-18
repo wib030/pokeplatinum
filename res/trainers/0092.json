@@ -1,28 +1,39 @@
 {
-    "name": "Josh",
+    "name": "Drake",
     "class": "TRAINER_CLASS_FISHERMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDEEN",
+            "species": "SPECIES_TYROGUE",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWAGGER",
+				"MOVE_UPROAR",
+				"MOVE_MIMIC",
+				"MOVE_FRUSTRATION"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLDEEN",
+            "species": "SPECIES_GEODUDE",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWAGGER",
+				"MOVE_CURSE",
+				"MOVE_METRONOME",
+				"MOVE_FLAMETHROWER"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

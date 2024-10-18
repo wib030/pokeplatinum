@@ -3,25 +3,36 @@
     "class": "TRAINER_CLASS_BIRD_KEEPER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_DELIBIRD",
             "form": 0,
             "level": 17,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_PRESENT",
+				"MOVE_ICE_SHARD",
+				"MOVE_ICY_WIND",
+				"MOVE_PLUCK"
+            ],
             "power": 20,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_HOOTHOOT",
+            "species": "SPECIES_MEW",
             "form": 0,
             "level": 17,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_PURSUIT",
+				"MOVE_PLUCK",
+				"MOVE_MIRROR_MOVE",
+				"MOVE_SUCKER_PUNCH"
+            ],
             "power": 20,
             "ball_seal": 0
         }

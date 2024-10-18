@@ -1,28 +1,39 @@
 {
-    "name": "Teri & Tia",
+    "name": "Cir & Cull",
     "class": "TRAINER_CLASS_TWINS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_PIKACHU",
+            "species": "SPECIES_WHISMUR",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ICY_WIND",
+				"MOVE_ENDURE",
+				"MOVE_ENDEAVOR",
+				"MOVE_COUNTER"
+            ],
+            "power": 100,
             "ball_seal": 20
         },
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_NUMEL",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_MAGNITUDE",
+				"MOVE_YAWN",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_PROTECT"
+            ],
+            "power": 100,
             "ball_seal": 20
         }
     ]

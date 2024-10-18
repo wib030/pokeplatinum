@@ -1,28 +1,39 @@
 {
-    "name": "Kahlil",
+    "name": "Gooden",
     "class": "TRAINER_CLASS_BREEDER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ELEKID",
+            "species": "SPECIES_SILCOON",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_IRON_DEFENSE",
+				"MOVE_HARDEN",
+				"MOVE_POISON_STING",
+				"MOVE_STRING_SHOT"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_HAPPINY",
+            "species": "SPECIES_CASCOON",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_IRON_DEFENSE",
+				"MOVE_HARDEN",
+				"MOVE_POISON_STING",
+				"MOVE_STRING_SHOT"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

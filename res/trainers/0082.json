@@ -1,21 +1,39 @@
 {
-    "name": "Jason",
+    "name": "Winston",
     "class": "TRAINER_CLASS_RICH_BOY",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PRINPLUP",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+				"MOVE_ATTRACT",
+				"MOVE_STRENGTH",
+				"MOVE_MEDITATE"
+            ],
+            "power": 100,
+            "ball_seal": 23
+        },
+		{
+            "species": "SPECIES_PACHIRISU",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_DISCHARGE",
+				"MOVE_SHOCK_WAVE",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_PROTECT"
+            ],
+            "power": 100,
             "ball_seal": 23
         }
     ]

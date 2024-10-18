@@ -1,36 +1,52 @@
 {
-    "name": "Zach",
+    "name": "Zuzach",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_ZUBAT",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
+            "level": 17,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_PLUCK",
+				"MOVE_SUPER_FANG",
+				"MOVE_TAILWIND",
+				"MOVE_U_TURN"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_ZUBAT",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 17,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+				"MOVE_HIDDEN_POWER",
+				"MOVE_OMINOUS_WIND",
+				"MOVE_AIR_CUTTER"
+            ],
+            "power": 1,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_ZUBAT",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
+            "level": 17,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_CURSE",
+				"MOVE_QUICK_ATTACK",
+				"MOVE_CONFUSE_RAY",
+				"MOVE_BITE"
+            ],
             "power": 0,
             "ball_seal": 0
         }
