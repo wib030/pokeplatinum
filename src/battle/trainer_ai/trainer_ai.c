@@ -255,6 +255,9 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
+static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -4063,6 +4066,132 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
     default:
         result = TYPE_NORMAL;
         break;
+    }
+
+    return result;
+}
+
+static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int i;
+    Party *party;
+    BOOL result;
+
+    result = FALSE;
+
+    party = BattleSystem_Party(battleSys, battler);
+
+    for (int i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+        if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+            && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+            && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY))
+        {
+            if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_GUTS
+                && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & (MON_CONDITION_SLEEP | MON_CONDITION_FREEZE | MON_CONDITION_PARALYSIS))) 
+            {
+                result = TRUE;
+            }
+
+            if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_POISON_HEAL
+                && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY_POISON) == FALSE))
+            {
+                result = TRUE;
+            }
+        }
+    }
+
+    return result;
+}
+
+static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
+{
+    int i, j, targetPartySlot, side, maxBattlers, attackerMove, defenderMove;
+    BOOL result;
+
+    side = Battler_Side(battleSys, attacker);
+
+    // Early exit if an ally is being considered
+    if (side == Battler_Side(battleSys, defender)) {
+        return FALSE;
+    }
+
+    targetPartySlot = battleCtx->selectedPartySlot[defender];
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        attackerMove = battleCtx->battleMons[attacker].moves[i];
+
+        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+            defenderMove = battleCtx->battleMons[defender].moves[j];
+
+            if (attackerMove == defenderMove) {
+
+                // We know the move for sure
+                if (defenderMove == AI_CONTEXT.battlerPartyMoves[targetPartySlot][j]) {
+
+                    result = TRUE;
+                }
+                else {
+                    // Cheat and peek the move 50% of the time. "Intuition"
+                    if (BattleSystem_RandNext(battleSys) % 2 == 0) {
+                        result = TRUE;
+                    }
+                }
+
+                if (result == TRUE) {
+                    break;
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+
+static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
+{
+    int i, j, targetPartySlot, side, maxBattlers, attackerMove, defenderMove, range;
+    BOOL result;
+
+    side = Battler_Side(battleSys, attacker);
+
+    // Early exit if an ally is being considered
+    if (side == Battler_Side(battleSys, defender)) {
+        return FALSE;
+    }
+
+    targetPartySlot = battleCtx->selectedPartySlot[defender];
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        defenderMove = battleCtx->battleMons[defender].moves[i];
+
+        if (MOVE_DATA(defenderMove).class == CLASS_STATUS)) {
+            range = MOVE_DATA(move).range;
+
+            // May be other applicable ranges of bounceable moves.
+            if (range == RANGE_SINGLE_TARGET
+                || range == RANGE_OPPONENT_SIDE
+                || range == RANGE_ADJACENT_OPPONENTS) {
+                
+                if (defenderMove == AI_CONTEXT.battlerPartyMoves[targetPartySlot][i]) {
+
+                result = TRUE;
+                }
+                else {
+                    // Cheat and peek the move 50% of the time. "Intuition"
+                    if (BattleSystem_RandNext(battleSys) % 2 == 0) {
+                        result = TRUE;
+                    }
+                }
+            }
+        }
     }
 
     return result;
