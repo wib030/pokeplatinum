@@ -35,8 +35,8 @@
         "EGG_GROUP_GRASS"
     ],
     "abilities": [
-        "ABILITY_OVERGROW",
-        "ABILITY_NONE"
+        "ABILITY_PHOTOSYNTHESIS",
+        "ABILITY_OVERGROW"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
