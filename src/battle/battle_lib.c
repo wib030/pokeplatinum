@@ -7279,7 +7279,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                         && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_ROCK) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ROCK;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ROCK;
-                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 4;
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 3;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
