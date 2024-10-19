@@ -1249,6 +1249,32 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                 || (battler2Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
             battler2Speed *= 2;
         }
+		
+		//Special Castform section
+		
+		//Forecast in rain, hail or sand
+		if ((battler1Ability == ABILITY_FORECAST && WEATHER_IS_RAIN)
+		|| (battler1Ability == ABILITY_FORECAST && WEATHER_IS_HAIL)
+		|| (battler1Ability == ABILITY_FORECAST && WEATHER_IS_SAND))
+		{
+			battler1Speed = battler1Speed * 3 / 4;
+		}
+		if ((battler2Ability == ABILITY_FORECAST && WEATHER_IS_RAIN)
+		|| (battler2Ability == ABILITY_FORECAST && WEATHER_IS_HAIL)
+		|| (battler2Ability == ABILITY_FORECAST && WEATHER_IS_SAND))
+		{
+			battler2Speed = battler2Speed * 3 / 4;
+		}
+		
+		//Forecast in sun
+		if (battler1Ability == ABILITY_FORECAST && WEATHER_IS_SUN)
+		{
+			battler1Speed = battler1Speed * 11 / 10;
+		}
+		if (battler2Ability == ABILITY_FORECAST && WEATHER_IS_SUN)
+		{
+			battler2Speed = battler2Speed * 11 / 10;
+		}
     }
 
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
@@ -7135,7 +7161,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                         && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_ROCK) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ROCK;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ROCK;
-                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 3;
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 4;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
@@ -7832,6 +7858,56 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     }
 
     if (NO_CLOUD_NINE) {
+		//Special castform section
+		
+		//Rainy form
+		if ((fieldConditions & FIELD_CONDITION_RAINING) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat / 2;
+			spAttackStat = spAttackStat * 4 / 3;
+		}
+		if ((fieldConditions & FIELD_CONDITION_RAINING) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 3 / 2;
+			spDefenseStat = spDefenseStat * 3 / 2;
+		}
+		
+		//Sunny form
+		if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat * 3 / 2;
+			spAttackStat = spAttackStat * 3 / 2;
+		}
+		if ((fieldConditions & FIELD_CONDITION_SUNNY) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 3 / 4;
+			spDefenseStat = spDefenseStat * 3 / 4;
+		}
+		
+		//Snowy form
+		if ((fieldConditions & FIELD_CONDITION_HAILING) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat * 3 / 2;
+			spAttackStat = spAttackStat * 5 / 3;
+		}
+		if ((fieldConditions & FIELD_CONDITION_HAILING) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 3 / 2;
+			spDefenseStat = spDefenseStat * 4 / 3;
+		}
+		
+		//Sandy form
+		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat * 3 / 2;
+			spAttackStat = spAttackStat * 4 / 3;
+		}
+		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 5 / 3;
+			spDefenseStat = spDefenseStat * 5 / 3;
+		}
+		
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 3 / 2;
 			attackStat = attackStat * 3 / 2;
@@ -8417,6 +8493,56 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (NO_CLOUD_NINE) {
+		//Special castform section
+		
+		//Rainy form
+		if ((fieldConditions & FIELD_CONDITION_RAINING) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat / 2;
+			spAttackStat = spAttackStat * 4 / 3;
+		}
+		if ((fieldConditions & FIELD_CONDITION_RAINING) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 3 / 2;
+			spDefenseStat = spDefenseStat * 3 / 2;
+		}
+		
+		//Sunny form
+		if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat * 3 / 2;
+			spAttackStat = spAttackStat * 3 / 2;
+		}
+		if ((fieldConditions & FIELD_CONDITION_SUNNY) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 3 / 4;
+			spDefenseStat = spDefenseStat * 3 / 4;
+		}
+		
+		//Snowy form
+		if ((fieldConditions & FIELD_CONDITION_HAILING) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat * 3 / 2;
+			spAttackStat = spAttackStat * 5 / 3;
+		}
+		if ((fieldConditions & FIELD_CONDITION_HAILING) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 3 / 2;
+			spDefenseStat = spDefenseStat * 4 / 3;
+		}
+		
+		//Sandy form
+		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_FORECAST)
+		{
+			attackStat = attackStat * 3 / 2;
+			spAttackStat = spAttackStat * 4 / 3;
+		}
+		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && defenderParams.ability == ABILITY_FORECAST)
+		{
+			defenseStat = defenseStat * 5 / 3;
+			spDefenseStat = spDefenseStat * 5 / 3;
+		}
+		
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 15 / 10;
 			attackStat = attackStat * 15 / 10;
