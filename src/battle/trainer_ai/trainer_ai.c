@@ -6085,7 +6085,8 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
                         if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DROUGHT
                             || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_DRIZZLE
-                            || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_SNOW_WARNING) {
+                            || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_SNOW_WARNING
+							|| Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_SAND_STREAM) {
 
                             if ((battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP / 2)
                                 && (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 8)

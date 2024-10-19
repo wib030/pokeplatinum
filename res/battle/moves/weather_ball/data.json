@@ -2,7 +2,7 @@
     "name": "Weather Ball",
     "class": "CLASS_SPECIAL",
     "type": "TYPE_NORMAL",
-    "power": 50,
+    "power": 60,
     "accuracy": 100,
     "pp": 10,
     "effect": {

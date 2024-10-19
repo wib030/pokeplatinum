@@ -1,16 +1,16 @@
 {
     "name": "Castform",
     "base_stats": {
-        "hp": 70,
-        "attack": 70,
-        "defense": 70,
-        "speed": 70,
-        "special_attack": 70,
-        "special_defense": 70
+        "hp": 80,
+        "attack": 80,
+        "defense": 80,
+        "speed": 80,
+        "special_attack": 80,
+        "special_defense": 80
     },
     "types": [
-        "TYPE_NORMAL",
-        "TYPE_NORMAL"
+        "TYPE_FLYING",
+        "TYPE_FLYING"
     ],
     "catch_rate": 200,
     "base_exp_reward": 145,
@@ -58,6 +58,7 @@
             "TM22",
             "TM24",
             "TM25",
+			"TM26",
             "TM27",
             "TM30",
             "TM32",
@@ -65,38 +66,59 @@
             "TM35",
             "TM37",
             "TM38",
+			"TM39",
             "TM42",
             "TM43",
             "TM44",
             "TM45",
             "TM46",
             "TM53",
+			"TM57",
             "TM58",
+			"TM62",
+			"TM64",
             "TM70",
+			"TM71",
             "TM72",
             "TM73",
             "TM77",
             "TM78",
+			"TM80",
             "TM82",
             "TM83",
             "TM87",
             "TM90"
         ],
         "level_up": {
-            "1": "MOVE_TACKLE",
+            "1": "MOVE_GUST",
+			"5": "MOVE_CHARGE",
             "10": [
                 "MOVE_WATER_GUN",
                 "MOVE_EMBER",
-                "MOVE_POWDER_SNOW"
+                "MOVE_ICY_WIND",
+				"MOVE_SAND_TOMB"
             ],
-            "20": [
-                "MOVE_RAIN_DANCE",
-                "MOVE_SUNNY_DAY",
-                "MOVE_HAIL"
+			"13": "MOVE_TWISTER",
+			"16": [
+                "MOVE_HAZE",
+				"MOVE_MIST"
             ],
+			"18": "MOVE_SMOKE_SCREEN",
+			"20": "MOVE_AIR_CUTTER",
+			"22": "MOVE_WHIRLWIND",
             "24": "MOVE_WEATHER_BALL",
-			"30": "MOVE_MIND_READER",
-			"34": "MOVE_MIRACLE_EYE"
+			"26": "MOVE_MORNING_SUN",
+			"36": [
+                "MOVE_DISCHARGE",
+				"MOVE_LAVA_PLUME"
+            ],
+			"40": "MOVE_HEAT_WAVE",
+			"54": [
+                "MOVE_RAZOR_WIND",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_SHEER_COLD",
+				"MOVE_STONE_EDGE"
+            ]
         },
         "tutor": [
             "MOVE_ICY_WIND",

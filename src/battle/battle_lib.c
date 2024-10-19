@@ -7130,6 +7130,15 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
+                } else if (WEATHER_IS_SAND
+                        && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_ROCK
+                        && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_ROCK) {
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ROCK;
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ROCK;
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 3;
+                    *subscript = subscript_form_change;
+                    result = TRUE;
+                    break;
                 }
             } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_NORMAL
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_NORMAL) {
