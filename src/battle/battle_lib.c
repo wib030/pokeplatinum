@@ -4089,10 +4089,27 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             break;
 
         case SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES:
+			int baseCastform = 0;
+			int castformChecking;
+			
+			for (int j = 0; j < BattleSystem_MaxBattlers(battleSys); j++)
+			{
+				castformChecking = battleCtx->monSpeedOrder[j];
+
+				if (battleCtx->battleMons[castformChecking].species == SPECIES_CASTFORM
+				&& battleCtx->battleMons[castformChecking].curHP
+				&& Battler_Ability(battleCtx, castformChecking) == ABILITY_FORECAST
+				&& battleCtx->battleMons[castformChecking].formNum == 0)
+				{
+					baseCastform = 1;
+				}
+			}
+				
             for (i = 0; i < maxBattlers; i++) {
                 battler = battleCtx->monSpeedOrder[i];
-
+				
                 if (battleCtx->battleMons[battler].weatherAbilityAnnounced == FALSE
+						&& (baseCastform == 0)
                         && battleCtx->battleMons[battler].curHP) {
                     switch (Battler_Ability(battleCtx, battler)) {
                     case ABILITY_DRIZZLE:
