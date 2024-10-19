@@ -4634,6 +4634,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                     if (MOVE_DATA(move).class == CLASS_STATUS) {
                         Party *party;
+                        moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
 
                         switch (range) {
 
@@ -4674,8 +4675,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 break;
 
                             case RANGE_USER:
-
-                                moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
                                 
                                 // Imprison has a special case below
                                 if (moveEffect != MOVE_EFFECT_NONE
@@ -4834,8 +4833,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 break;
 
                             case RANGE_SINGLE_TARGET_SPECIAL:
-                                
-                                moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
 
                                 switch (effect) {
 
@@ -4849,7 +4846,25 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                             case RANGE_SINGLE_TARGET: 
 
+                                if (moveEffect != MOVE_EFFECT_NONE) {
+                                    if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                                        return FALSE;
+                                    }
+                                }
+                                else {
+                                    if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE) == FALSE) {
+                                        if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
+                                            if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
+                                                && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)) {
+                                            
+                                                return FALSE;
+                                            }
+                                        }
+                                    }
+                                }
+
                                 switch (effect) {
+
 
                                     case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
                                         return FALSE;
