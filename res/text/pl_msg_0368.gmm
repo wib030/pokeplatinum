@@ -5262,4 +5262,32 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">{STRVAR_1 1, 0, 0} was shaken down\nby the foe’s {STRVAR_1 1, 1, 0}!</language>
 	</row>
+	<row id="pl_msg_00000368_01312" index="1312">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Todays forecast is Sunny!</language>
+	</row>
+	<row id="pl_msg_00000368_01313" index="1313">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Todays forecast is Rainy!</language>
+	</row>
+	<row id="pl_msg_00000368_01314" index="1314">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Todays forecast is Snowy!</language>
+	</row>
+	<row id="pl_msg_00000368_01315" index="1315">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Todays forecast is Sandy!</language>
+	</row>
+	<row id="pl_msg_00000368_01316" index="1316">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!</language>
+	</row>
+	<row id="pl_msg_00000368_01317" index="1317">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!</language>
+	</row>
+	<row id="pl_msg_00000368_01318" index="1318">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!</language>
+	</row>
 </body>

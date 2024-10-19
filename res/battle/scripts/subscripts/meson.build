@@ -329,4 +329,5 @@ subscript_files = files(
 	'subscript_lightning_rod_boost.s',
 	'subscript_bind_start_ability.s',
 	'subscript_color_change_before.s',
+	'subscript_forecast_ignores.s',
 )

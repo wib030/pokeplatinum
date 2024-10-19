@@ -3918,6 +3918,7 @@ enum {
     SWITCH_IN_CHECK_STATE_TRACE,
 	SWITCH_IN_CHECK_STATE_RANDOM_ABILITY,
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
+	SWITCH_IN_CHECK_STATE_FORECAST,
     SWITCH_IN_CHECK_STATE_INTIMIDATE,
     SWITCH_IN_CHECK_STATE_DOWNLOAD,
     SWITCH_IN_CHECK_STATE_ANTICIPATION,
@@ -4096,8 +4097,8 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 			{
 				castformChecking = battleCtx->monSpeedOrder[j];
 
-				if (battleCtx->battleMons[castformChecking].species == SPECIES_CASTFORM
-				&& battleCtx->battleMons[castformChecking].curHP
+				if (battleCtx->battleMons[castformChecking].curHP
+				&& battleCtx->battleMons[castformChecking].species == SPECIES_CASTFORM
 				&& Battler_Ability(battleCtx, castformChecking) == ABILITY_FORECAST
 				&& battleCtx->battleMons[castformChecking].formNum == 0)
 				{
@@ -4109,43 +4110,70 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 battler = battleCtx->monSpeedOrder[i];
 				
                 if (battleCtx->battleMons[battler].weatherAbilityAnnounced == FALSE
-						&& (baseCastform == 0)
                         && battleCtx->battleMons[battler].curHP) {
                     switch (Battler_Ability(battleCtx, battler)) {
                     case ABILITY_DRIZZLE:
-                        battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
-
-                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) == FALSE) {
-                            subscript = subscript_drizzle;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
-                        }
+						battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+						if (baseCastform == 0)
+						{
+							if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) == FALSE) {
+								subscript = subscript_drizzle;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+						}
+						else
+						{
+							subscript = subscript_forecast_ignores;
+							result = SWITCH_IN_CHECK_RESULT_BREAK;
+						}
                         break;
 
                     case ABILITY_SAND_STREAM:
-                        battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
-
-                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) == FALSE) {
-                            subscript = subscript_sand_stream;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
-                        }
+						battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+						if (baseCastform == 0)
+						{
+							if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) == FALSE) {
+								subscript = subscript_sand_stream;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+						}
+						else
+						{
+							subscript = subscript_forecast_ignores;
+							result = SWITCH_IN_CHECK_RESULT_BREAK;
+						}
                         break;
 
                     case ABILITY_DROUGHT:
-                        battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
-
-                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE) {
-                            subscript = subscript_drought;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
-                        }
+						battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+						if (baseCastform == 0)
+						{
+							if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE) {
+								subscript = subscript_drought;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+						}
+						else
+						{
+							subscript = subscript_forecast_ignores;
+							result = SWITCH_IN_CHECK_RESULT_BREAK;
+						}
                         break;
 
                     case ABILITY_SNOW_WARNING:
-                        battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
-
-                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) == FALSE) {
-                            subscript = subscript_snow_warning;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
-                        }
+						battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+						if (baseCastform == 0)
+						{
+							if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) == FALSE) {
+								subscript = subscript_snow_warning;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+						}
+						else
+						{
+							subscript = subscript_forecast_ignores;
+							result = SWITCH_IN_CHECK_RESULT_BREAK;
+						}
                         break;
 						
 					 case ABILITY_ROCHE_RADIUS:
@@ -4156,6 +4184,71 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 							battleCtx->sideEffectMon = battler;
 							subscript = subscript_gravity_ability_start;
 							result = SWITCH_IN_CHECK_RESULT_BREAK;
+						}
+						break;
+                    }
+                }
+                if (result == SWITCH_IN_CHECK_RESULT_BREAK) {
+                    battleCtx->msgBattlerTemp = battler;
+                    break;
+                }
+            }
+
+            if (i == maxBattlers) {
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_FORECAST:
+            for (i = 0; i < maxBattlers; i++) {
+                battler = battleCtx->monSpeedOrder[i];
+				
+                if (battleCtx->battleMons[battler].weatherAbilityAnnounced == FALSE
+                        && battleCtx->battleMons[battler].curHP) {
+                    switch (Battler_Ability(battleCtx, battler)) {
+					case ABILITY_FORECAST:
+					
+						switch (battleCtx->battleMons[battler].heldItem)
+						{
+							case ITEM_DAMP_ROCK:
+								battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+							
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) == FALSE)
+								{
+									subscript = subscript_drizzle;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							break;
+							
+							case ITEM_HEAT_ROCK:
+								battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+							
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE)
+								{
+									subscript = subscript_drought;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							break;
+							
+							case ITEM_ICY_ROCK:
+								battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+							
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) == FALSE)
+								{
+									subscript = subscript_snow_warning;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							break;
+							
+							case ITEM_SMOOTH_ROCK:
+								battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+							
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) == FALSE)
+								{
+									subscript = subscript_sand_stream;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							break;
 						}
 						break;
                     }
@@ -6746,6 +6839,14 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 			battleCtx->flingScript = subscript_drought;
 		break;
 		
+	case FLING_EFFECT_SAND:
+			battleCtx->flingScript = subscript_sand_stream;
+		break;
+		
+	case FLING_EFFECT_HAIL:
+			battleCtx->flingScript = subscript_snow_warning;
+		break;
+		
 	case FLING_EFFECT_DEFOG:
 			battleCtx->flingScript = subscript_defog;
 		break;
@@ -7138,10 +7239,10 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                 && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FORECAST) {
             if (NO_CLOUD_NINE) {
                 if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM) == FALSE
-                        && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_NORMAL
-                        && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_NORMAL) {
-                    battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_NORMAL;
-                    battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_NORMAL;
+                        && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_FLYING
+                        && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_FLYING) {
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_FLYING;
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_FLYING;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 0;
                     *subscript = subscript_form_change;
                     result = TRUE;
@@ -7183,10 +7284,10 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     result = TRUE;
                     break;
                 }
-            } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_NORMAL
-                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_NORMAL) {
-                battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_NORMAL;
-                battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_NORMAL;
+            } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_FLYING
+                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_FLYING) {
+                battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_FLYING;
+                battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_FLYING;
                 battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 0;
                 *subscript = subscript_form_change;
                 result = TRUE;
@@ -7685,7 +7786,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         spAttackStat = spAttackStat * 3 / 2;
 		attackStat = attackStat * 3 / 2;
     }
-    if (attackerParams.ability == ABILITY_MINUS
+    if (defenderParams.ability == ABILITY_MINUS
             && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS)) {
         spDefenseStat = spDefenseStat * 3 / 2;
 		defenseStat = defenseStat * 3 / 2;
