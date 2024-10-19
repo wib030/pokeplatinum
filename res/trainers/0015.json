@@ -26,13 +26,13 @@
         {
             "species": "SPECIES_PLUSLE",
             "form": 0,
-            "level": 14,
-            "item": "ITEM_GANLON_BERRY",
+            "level": 13,
+            "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
                 "MOVE_CHARGE_BEAM",
 				"MOVE_GRASS_KNOT",
 				"MOVE_LAST_RESORT",
-				"MOVE_NATURAL_GIFT"
+				"MOVE_QUICK_ATTACK"
             ],
             "power": 128,
             "ball_seal": 0

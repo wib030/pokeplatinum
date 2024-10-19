@@ -3,10 +3,25 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-		"AI_FLAG_BASIC"
+		"AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
+		{
+            "species": "SPECIES_CASTFORM",
+            "form": 0,
+            "level": 100,
+            "item": "ITEM_SMOOTH_ROCK",
+            "moves": [
+				"MOVE_WEATHER_BALL",
+				"MOVE_EARTHQUAKE",
+				"MOVE_MORNING_SUN",
+				"MOVE_HEAT_WAVE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
 		{
             "species": "SPECIES_HOPPIP",
             "form": 0,
