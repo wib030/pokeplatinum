@@ -1,12 +1,12 @@
 {
     "name": "Miltank",
     "base_stats": {
-        "hp": 115,
+        "hp": 125,
         "attack": 95,
         "defense": 105,
         "speed": 100,
         "special_attack": 40,
-        "special_defense": 70
+        "special_defense": 80
     },
     "types": [
         "TYPE_NORMAL",
