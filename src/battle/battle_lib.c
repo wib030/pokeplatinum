@@ -7244,6 +7244,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_FLYING;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_FLYING;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 0;
+					battleCtx->msgTemp = TYPE_FLYING;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
@@ -7253,6 +7254,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_FIRE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_FIRE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 1;
+					battleCtx->msgTemp = TYPE_FIRE;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
@@ -7262,6 +7264,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_WATER;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_WATER;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 2;
+					battleCtx->msgTemp = TYPE_WATER;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
@@ -7271,6 +7274,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ICE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ICE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 3;
+					battleCtx->msgTemp = TYPE_ICE;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
@@ -7280,6 +7284,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ROCK;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ROCK;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 3;
+					battleCtx->msgTemp = TYPE_ROCK;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
@@ -7289,6 +7294,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                 battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_FLYING;
                 battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_FLYING;
                 battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 0;
+				battleCtx->msgTemp = TYPE_FLYING;
                 *subscript = subscript_form_change;
                 result = TRUE;
                 break;
