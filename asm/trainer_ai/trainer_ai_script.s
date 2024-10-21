@@ -2513,30 +2513,42 @@ Expert_StatusSpAttackDown_PreSplitSpecialTypes:
     TableEntry TABLE_END
 
 Expert_StatusSpDefenseDown:
-	; If the defender has Clear Body or White Smoke, score -3
-	; If the defender has Defiant or Competitive, score -10
+	; If the defender has Clear Body or White Smoke, score -10
+	; If the defender has Defiant, Competitive, or Magic Bounce score -12
 	;
-    ; If the attacker''s HP is < 70%, 80.5% chance of additional score -2.
+    ; If the attacker''s HP is <= 60%, 87.5% chance of additional score -2.
     ;
-    ; If the target''s stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
+    ; If the target''s stat stage is otherwise at -3 or lower, 75% chance of additional score -3.
     ;
-    ; If the target''s HP is < 70%, score -2.
+    ; If we have no special attacks and target is already at -2 or lower, score -12
 	LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
-	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
-	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
-	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
-	
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusSpDefenseDown_TryScoreMinus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 3, Expert_StatusSpDefenseDown_CheckTargetHP
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
+	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus12
+	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus12
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus12
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_StatusSpDefenseDown_DebuffNeeded
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 4, Expert_StatusSpDefenseDown_CheckTargetHP
+    IfBattlerHasNoSpecialAttack AI_BATTLER_ATTACKER, ScoreMinus12
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 0, Expert_StatusSpDefenseDown_TryScoreMinus3
+    GoTo ScoreMinus12
 
-Expert_StatusSpDefenseDown_TryScoreMinus2:
-    IfRandomLessThan 50, Expert_StatusSpDefenseDown_CheckTargetHP
-    AddToMoveScore -2
+Expert_StatusSpDefenseDown_TryScoreMinus3:
+    IfRandomLessThan 64, Expert_StatusSpDefenseDown_CheckTargetHP
+    AddToMoveScore -3
+    GoTo Expert_StatusSpDefenseDown_CheckTargetHP
+
+Expert_StatusSpDefenseDown_DebuffNeeded:
+    IfRandomLessThan 64, Expert_StatusSpDefenseDown_End
+    AddToMoveScore 2
+    GoTo Expert_StatusSpDefenseDown_End
 
 Expert_StatusSpDefenseDown_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusSpDefenseDown_End
-    AddToMoveScore -2
+    AddToMoveScore 1
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 60, Expert_StatusSpDefenseDown_End
+    IfRandomLessThan 32, Expert_StatusSpDefenseDown_End
+    AddToMoveScore -3
+    GoTo Expert_StatusSpDefenseDown_End
 
 Expert_StatusSpDefenseDown_End:
     PopOrEnd 
