@@ -4744,6 +4744,9 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                     // Baton pass is always viable
                                 switch (effect) {
+                                    default:
+                                        break;
+
                                     case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
                                         return FALSE;
                                         break;
@@ -4759,8 +4762,10 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                         // protect and detect
                                     case BATTLE_EFFECT_PROTECT:
-                                        if ((BattleSystem_RandNext(battleSys) % 2) == 0) {
-                                            return FALSE;
+                                        if (battleCtx->battleMons[battler].moveEffectsData.protectSuccessTurns == 0) {
+                                            if ((BattleSystem_RandNext(battleSys) % 3) == 0) {
+                                                return FALSE;
+                                            }
                                         }
                                         break;
 
@@ -4838,7 +4843,15 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     case BATTLE_EFFECT_ATK_DEF_UP:
                                     case BATTLE_EFFECT_SP_ATK_SP_DEF_UP:
                                     case BATTLE_EFFECT_DEF_SPD_UP:
+                                    case BATTLE_EFFECT_EVA_UP:
+                                    case BATTLE_EFFECT_EVA_UP_2:
+                                    case BATTLE_EFFECT_EVA_UP_2_MINIMIZE:
+                                    case BATTLE_EFFECT_ACC_UP:
+                                    case BATTLE_EFFECT_ACC_UP_2:
                                     case BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL:
+                                    case BATTLE_EFFECT_GIVE_GROUND_IMMUNITY:
+                                    case BATTLE_EFFECT_STOCKPILE:
+                                    case BATTLE_EFFECT_SET_SUBSTITUTE:
                                         break;
 
                                     case BATTLE_EFFECT_APPLY_MAGIC_COAT:
@@ -4849,10 +4862,49 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                             }
                                         }
                                         break;
+
+                                    case BATTLE_EFFECT_RECYCLE:
+                                        if (battleCtx->battleMons[battler].heldItem == ITEM_NONE) {
+                                            if (battleCtx->recycleItem[battler] != ITEM_NONE) {
+                                                // If not forced out by anything else, stay in to recycle
+                                                // our item maybe 25% of the time
+                                                if ((BattleSystem_RandNext(battleSys) % 4) == 0) {
+                                                    return FALSE;
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_HEAL_STATUS:
+                                        // If not forced out by anything else, try to stay in to refresh
+                                        // status 25% of the time
+                                        if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY) {
+                                            if ((BattleSystem_RandNext(battleSys) % 4) == 0) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_DO_NOTHING:
+                                        // Splash is always a joke move, so we don't need to switch in joke fights
+                                        return FALSE;
+                                        break;
+
+                                    case BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE:
+                                        return FALSE;
+                                        break;
+
+                                    case BATTLE_EFFECT_HEAL_IN_3_TURNS:
+                                        if (battleCtx->fieldConditions.wishTurns[battler] <= 0) {
+                                            if ((BattleSystem_RandNext(battleSys) % 2) == 0) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
                                 }
 
                                 // To do: still moves to add.
-                                // last move checked is Magic Coat
+                                // All self-target moves done for now, check Wish
 
                                 break;
 
