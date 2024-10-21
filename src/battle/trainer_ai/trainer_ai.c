@@ -2533,7 +2533,11 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-                    break;
+                    // ignore rapid spin
+                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                         
+                        break;
+                    }
                 }
             }
 
@@ -2548,8 +2552,12 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
             }
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-                    break;
+                if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
+                    // ignore rapid spin
+                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                         
+                        break;
+                    }
                 }
             }
 
@@ -2561,7 +2569,11 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-                    break;
+                    // ignore rapid spin
+                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                         
+                        break;
+                    }
                 }
             }
 
@@ -2590,7 +2602,11 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-                    break;
+                    // ignore rapid spin
+                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                         
+                        break;
+                    }
                 }
             }
 
@@ -2606,7 +2622,11 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
             
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                  if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-                    break;
+                    // ignore rapid spin
+                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                         
+                        break;
+                    }
                 }
             }
 
@@ -2618,7 +2638,11 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
         case AI_BATTLER_DEFENDER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-                    break;
+                    // ignore rapid spin
+                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                         
+                        break;
+                    }
                 }
             }
 
