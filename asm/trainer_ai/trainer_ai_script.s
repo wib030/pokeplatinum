@@ -1600,7 +1600,7 @@ Basic_CheckLunarDance_Terminate:
     PopOrEnd 
 
 Basic_Wish:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_WISH, ScoreMinus20
+    IfWishActive AI_BATTLER_ATTACKER, ScoreMinus20
     IfRandomLessThan 128, ScorePlus1
     GoTo Basic_Wish_End
 
@@ -3839,7 +3839,7 @@ Expert_Protect:
     IfFieldConditionsMask FIELD_CONDITION_SUNNY, Expert_Protect_CheckSun
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_Protect_CheckTrickRoom
     IfFieldConditionsMask FIELD_CONDITION_GRAVITY, Expert_Protect_CheckGravity
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_WISH, Expert_Protect_WishTryScorePlus1
+    IfWishActive AI_BATTLER_ATTACKER, Expert_Protect_WishTryScorePlus1
     IfRandomLessThan 32, ScoreMinus2
     GoTo Expert_Protect_CheckStatusConditions
 
@@ -7811,7 +7811,7 @@ Expert_Wish:
     ;
     ; If our HP is low and we''re slower, 80% chance for
     ; score -1
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_WISH, ScoreMinus20
+    IfWishActive AI_BATTLER_ATTACKER, ScoreMinus20
     IfRandomLessThan 16, Expert_Wish_CheckMoves
     IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus3
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Wish_Speedslower
