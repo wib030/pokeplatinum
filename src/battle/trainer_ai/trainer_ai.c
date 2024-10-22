@@ -2534,7 +2534,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     // ignore rapid spin
-                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                    if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                          
                         break;
                     }
@@ -2554,7 +2554,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     // ignore rapid spin
-                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                    if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                          
                         break;
                     }
@@ -2570,7 +2570,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     // ignore rapid spin
-                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                    if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                          
                         break;
                     }
@@ -2603,7 +2603,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     // ignore rapid spin
-                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                    if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                          
                         break;
                     }
@@ -2623,7 +2623,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                  if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     // ignore rapid spin
-                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                    if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                          
                         break;
                     }
@@ -2639,7 +2639,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
                 if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
                     // ignore rapid spin
-                    if (MOVE_DATA((battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                    if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                          
                         break;
                     }
