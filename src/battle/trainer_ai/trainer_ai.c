@@ -4392,8 +4392,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     int i, j, k;
     u8 defender1, defender2, defender, battlerPartner, side;
     u8 aiSlot1, aiSlot2;
-    u16 move;
-    int type, range, effect, moveEffect;
+    u16 move, sleepTalkMove;
+    int type, range, effect, moveEffect, partyCount;
     u32 effectiveness, sideCondition;
     int start, end;
     int numMoves;
@@ -4453,9 +4453,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         // Switch if the move has less than neutral effectiveness when it connects.
                         if ((effectiveness & MOVE_STATUS_IMMUNE)
                             && ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
-                            && ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)) {
+                            && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
@@ -4586,8 +4584,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             if (effectiveness & MOVE_STATUS_IMMUNE) {
 
                                 // Factor immunity ignoring for ability and items (i.e. Normal or Poison type)
-                                if ((effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM)
-                                || (effectiveness & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY)) {
+                                if ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) {
 
                                     // 1 in 3 chance to consider a switch for each neutral move.
                                     // Explanation of switch chances in comment block below.
@@ -4645,6 +4642,40 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 numMoves++;
                             }
                         }
+                        
+                        switch (effect) {
+                            default:
+                                break;
+
+                            // Bide
+                            case BATTLE_EFFECT_BIDE:
+                                // bide not already clicked on
+                                if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_BIDE) == FALSE) {
+                                    // Try not to start casting Bide below 60%
+                                    if (battleCtx->battleMons[battler].curHP > (battleCtx->battleMons[battler].maxHP * 3 / 5)) {
+                                    // If bide can hit, don't switch
+                                        if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                            || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                                                    
+                                                return FALSE;
+                                        }
+                                    }
+                                }
+                                // Bide is clicked on. Don't switch unless they are not attacking or
+                                // they will be immune due to switch or type change
+                                else {
+                                    // First check if bide can hit
+                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                                        // Don't switch if we have stored damage or the opponent is attacking
+                                        if ((battleCtx->storedDamage[battler] > 0) || (MOVE_DATA(battleCtx->moveHit[battler]).power > 0)) {
+                                            return FALSE;
+                                        }
+                                    }
+                                }
+                                break;
+                        }
                     }
 
                     if (MOVE_DATA(move).class == CLASS_STATUS) {
@@ -4660,9 +4691,9 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 if (sideCondition != SIDE_CONDITION_NONE) {
 
-                                    if ((battleCtx->sideConditionsMask[side] & sideCondition)) {
+                                    if ((battleCtx->sideConditionsMask[side] & sideCondition) == FALSE) {
                                     
-                                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) > 0) {
+                                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGIC_BOUNCE) == 0) {
                                             return FALSE;
                                         }
                                     }
@@ -4733,11 +4764,11 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     }
                                 }
 
-                                    // Baton pass is always viable
                                 switch (effect) {
                                     default:
                                         break;
 
+                                        // Baton pass is always viable
                                     case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
                                         return FALSE;
                                         break;
@@ -4793,7 +4824,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                             return FALSE;
                                         }
                                         party = BattleSystem_Party(battleSys, battler);
-                                        for (int k = 0; k < BattleSystem_PartyCount(battleSys, battler); k++) {
+                                        for (k = 0; k < BattleSystem_PartyCount(battleSys, battler); k++) {
                                             Pokemon *mon = Party_GetPokemonBySlotIndex(party, k);
 
                                             if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
@@ -4899,17 +4930,85 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 break;
 
+                            case RANGE_USER_OR_ALLY:
+                                switch (effect) {
+                                    default:
+                                        break;
+
+                                        // should always stay in for acupressure
+                                    case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+                                        return FALSE;
+                                        break;
+                                }
+                                break;
+
                             case RANGE_SINGLE_TARGET_SPECIAL:
 
                                 switch (effect) {
 
+                                    default:
+                                        break;
+
+                                        // Copycat
                                     case BATTLE_EFFECT_USE_LAST_USED_MOVE:
                                         // if copycat move would be neutral or better
                                         if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2) >= 40) {
                                             return FALSE;
                                         }
                                         break;
+
+                                        // Assist
+                                    case BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE:
+
+                                        partyCount = BattleSystem_PartyCount(battleSys, battler);
+                                        party = BattleSystem_Party(battleSys, battler);
+
+                                        // Basically, if we have a living teammate, consider assist viable
+                                        for (k = 0; k < partyCount; k++) {
+                                            Pokemon *mon = Party_GetPokemonBySlotIndex(party, k);
+
+                                            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                                                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                                                && k != battleCtx->selectedPartySlot[battler]
+                                                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) < Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL))
+                                            {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
+
+                                        // Metronome
+                                    case BATTLE_EFFECT_CALL_RANDOM_MOVE:
+                                        // We will consider Metronome always effective
+                                        return FALSE;
+                                        break;
+
+                                        // Sleep Talk
+                                    case BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP:
+                                        for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+                                            sleepTalkMove = battleCtx->battleMons[battler].moves[k];
+                                            effectiveness = 0;
+                                            BattleSystem_ApplyTypeChart(battleSys, battleCtx, sleepTalkMove, type, battler, defender, 0, &effectiveness);
+
+                                            // If we have a move that hits neutral, don't switch
+                                            if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                || (effective & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                                                    if ((effectiveness & MOVE_STATUS_RESISTED) == FALSE) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                        }
+                                        break;
                                 }
+
+                                // Me First has its own range?
+                            case RANGE_SINGLE_TARGET_ME_FIRST:
+                                if (battleCtx->battleMons[battler].speed >= battleCtx->battleMons[defender]) {
+                                    return FALSE;
+                                }
+                                break;
 
                             case RANGE_SINGLE_TARGET: 
 
@@ -4931,13 +5030,15 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 }
 
                                 switch (effect) {
-
+                                    default:
+                                        break;
 
                                     case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
                                         return FALSE;
                                         break;
                                 }
                                 break;
+
                         }                        
                     }
                 }
