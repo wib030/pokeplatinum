@@ -4584,7 +4584,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             if (effectiveness & MOVE_STATUS_IMMUNE) {
 
                                 // Factor immunity ignoring for ability and items (i.e. Normal or Poison type)
-                                if ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) {
+                                if (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) {
 
                                     // 1 in 3 chance to consider a switch for each neutral move.
                                     // Explanation of switch chances in comment block below.
@@ -4993,7 +4993,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                             // If we have a move that hits neutral, don't switch
                                             if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
-                                                || (effective & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                                                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
 
                                                     if ((effectiveness & MOVE_STATUS_RESISTED) == FALSE) {
                                                         return FALSE;
@@ -5005,7 +5005,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 // Me First has its own range?
                             case RANGE_SINGLE_TARGET_ME_FIRST:
-                                if (battleCtx->battleMons[battler].speed >= battleCtx->battleMons[defender]) {
+                                if (battleCtx->battleMons[battler].speed >= battleCtx->battleMons[defender].speed) {
                                     return FALSE;
                                 }
                                 break;
