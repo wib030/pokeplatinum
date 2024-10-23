@@ -9,7 +9,7 @@
         "type": "BATTLE_EFFECT_RESTORE_HP_EVERY_TURN",
         "chance": 0
     },
-    "range": "RANGE_USER",
+    "range": "RANGE_USER_OR_ALLY",
     "priority": 0,
     "flags": [
 		"MOVE_FLAG_CAN_SNATCH"
