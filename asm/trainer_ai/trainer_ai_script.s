@@ -4132,11 +4132,32 @@ Expert_Foresight_End:
     PopOrEnd 
 
 Expert_Endure:
-    ; If the attacker''s HP < 4%, score -1.
+    ; If the attacker''s HP < 12%, score -1.
     ;
     ; If the attacker''s HP < 35%, 72.7% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 4, Expert_Endure_ScoreMinus1
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_Endure_CheckPoisonHeal
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_Endure_CheckMagicGuard
+    LoadProtectChain AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 0, ScoreMinus12
+    GoTo Expert_Endure_CheckHP
+
+Expert_Endure_CheckPoisonHeal:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_Endure_CheckHP
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Endure_CheckHP
+    AddToMoveScore -12
+    GoTo Expert_Endure_End
+
+Expert_Endure_CheckMagicGuard:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Endure_CheckHP
+    AddToMoveScore -12
+    GoTo Expert_Endure_End
+
+Expert_Endure_CheckHP:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 12, Expert_Endure_ScoreMinus1
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 35, Expert_Endure_TryScorePlus1
+    GoTo Expert_Endure_End
 
 Expert_Endure_ScoreMinus1:
     AddToMoveScore -1
