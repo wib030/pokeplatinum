@@ -4432,6 +4432,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     battlerPartner = BattleSystem_Partner(battleSys, battler);
                 }
                 else {
+                    battlerPartner = battler;
                     break;
                 }
             }
@@ -4811,7 +4812,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         // Follow me is viable in doubles if partner is alive
                                     case BATTLE_EFFECT_MAKE_GLOBAL_TARGET:
                                         if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
-                                            if (battleCtx->battleMons[battlerPartner].curHP > 0) {
+                                            if (battleCtx->battleMons[battlerPartner].curHP > 0
+                                                && (battler != battlerPartner)) {
                                                 return FALSE;
                                             }
                                         }
@@ -4840,7 +4842,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                     case BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE:
                                         if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
-                                            if (battleCtx->battleMons[battlerPartner].curHP > 0) {
+                                            if (battleCtx->battleMons[battlerPartner].curHP > 0
+                                                && (battler != battlerPartner)) {
                                                 if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
                                                     if (AI_CanImprisonTarget(battleSys, battleCtx, battler, defender)) {
                                                         return FALSE;
