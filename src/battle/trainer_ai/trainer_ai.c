@@ -4423,6 +4423,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
             if (j == 0) {
                 defender = defender1;
+                battlerPartner = battler;
             }
 
             if (j == 1) {
