@@ -4686,8 +4686,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, effect);
 
                         if (effect == BATTLE_EFFECT_TRANSFER_STATUS) {
-                            if ((battleCtx->battleMons[battler].statusMask & MON_CONDITION_FREEZE) == FALSE) {
-                                moveStatus = battleCtx->battleMons[battler].statusMask;
+                            if ((battleCtx->battleMons[battler].status & MON_CONDITION_FREEZE) == FALSE) {
+                                moveStatus = battleCtx->battleMons[battler].status;
                             }
                         }
                         else {
@@ -4952,8 +4952,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                         // Aqua Ring
                                     case BATTLE_EFFECT_RESTORE_HP_EVERY_TURN:
-                                        if ((battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE)
-                                        || (battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE)) {
+                                        if (((battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE)
+                                        || (battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE) {
                                             return FALSE;
                                         }
                                         break;
@@ -4961,8 +4961,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         // Magnet Rise
                                     case BATTLE_EFFECT_GIVE_GROUND_IMMUNITY:
                                         // Try to stay in to cast it on our partner if we can
-                                        if (battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE) {
-                                            if ((battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE)
+                                        if ((battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE) {
+                                            if (((battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE)
                                             && ((battleCtx->battleMons[battlerPartner].type1 == TYPE_ELECTRIC)
                                                 || (battleCtx->battleMons[battlerPartner].type1 == TYPE_ROCK)
                                                 || (battleCtx->battleMons[battlerPartner].type1 == TYPE_STEEL)
@@ -4973,7 +4973,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                             }
                                         }
 
-                                        if (battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE) {
+                                        if ((battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE) {
                                             return FALSE;
                                         }
                                         break;
@@ -5054,8 +5054,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                 && (battler != battlerPartner)) {
                                                 for (k = 0; k < LEARNED_MOVES_MAX; k++) {
                                                     opponentMove = battleCtx->battleMons[defender].moves[k];
-                                                    if MOVE_DATA(opponentMove).class == CLASS_SPECIAL) {
-                                                        if(MOVE_DATA(opponentMove).flags & MOVE_FLAG_CAN_SNATCH) {
+                                                    if (MOVE_DATA(opponentMove).class == CLASS_SPECIAL) {
+                                                        if (MOVE_DATA(opponentMove).flags & MOVE_FLAG_CAN_SNATCH) {
                                                             return FALSE;
                                                         }
                                                     }
