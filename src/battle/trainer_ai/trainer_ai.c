@@ -4393,7 +4393,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     u8 defender1, defender2, defender, battlerPartner, side;
     u8 aiSlot1, aiSlot2;
     u16 move, opponentMove;
-    int type, range, effect, moveEffect, partyCount, opponentMoveType;
+    int type, range, effect, moveEffect, moveVolatileStatus, moveStatus, partyCount, opponentMoveType;
     u32 effectiveness, sideCondition;
     int start, end;
     int numMoves;
@@ -4683,6 +4683,16 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     if (MOVE_DATA(move).class == CLASS_STATUS) {
                         Party *party;
                         moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
+                        moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, effect);
+
+                        if (effect == BATTLE_EFFECT_TRANSFER_STATUS) {
+                            if ((battleCtx->battleMons[battler].statusMask & MON_CONDITION_FREEZE) == FALSE) {
+                                moveStatus = battleCtx->battleMons[battler].statusMask;
+                            }
+                        }
+                        else {
+                            moveStatus = MapBattleEffectToStatusCondition(battleCtx, effect);
+                        }
 
                         switch (range) {
 
@@ -4927,9 +4937,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         break;
                                 }
 
-                                // To do: still moves to add.
-                                // All self-target moves done for now, check Wish
-
                                 break;
 
                             case RANGE_USER_OR_ALLY:
@@ -4980,6 +4987,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     default:
                                         break;
 
+                                        // Mirror Move
+                                    case BATTLE_EFFECT_COPY_MOVE:
                                         // Copycat
                                     case BATTLE_EFFECT_USE_LAST_USED_MOVE:
                                         // if copycat move would be neutral or better
@@ -5054,8 +5063,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                             }
                                         }
                                         break;
-
-
                                 }
 
                                 // Me First has its own range?
@@ -5068,21 +5075,156 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             case RANGE_SINGLE_TARGET: 
 
                                 if (moveEffect != MOVE_EFFECT_NONE) {
-                                    if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
-                                        return FALSE;
+
+                                    if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE)) {
+
+                                        if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                           || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                                           if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                                                return FALSE;
+                                           }
+                                        }
                                     }
                                 }
-                                else {
-                                    if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE) == FALSE) {
-                                        if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
-                                            if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
-                                                && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)) {
+                                
+                                if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
+
+                                    if ((battleCtx->battleMons[defender].statusVolatile & moveVolatileStatus) == FALSE) {
+
+                                        if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                            || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                                            // For confusion and attraction, check immunity abilities
+                                            if (moveVolatileStatus & (VOLATILE_CONDITION_CONFUSION | VOLATILE_CONDITION_ATTRACT)) {
                                             
-                                                return FALSE;
+                                                if (moveVolatileStatus & VOLATILE_CONDITION_CONFUSION) {
+
+                                                    if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_OWN_TEMPO) == FALSE)
+                                                        && (battleCtx->battleMons[defender].ability != ABILITY_TANGLED_FEET)
+                                                        && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE)) {
+                                                        return FALSE;
+                                                    }
+                                                }
+
+                                                if (moveVolatileStatus & VOLATILE_CONDITION_ATTRACT) {
+
+                                                    if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_OBLIVIOUS) == FALSE)
+                                                        && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE)) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+                                            else {
+                                                if (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE) {
+                                                    return FALSE;
+                                                }
                                             }
                                         }
                                     }
                                 }
+
+                                if (moveStatus != MON_CONDITION_NONE) {
+
+                                    if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE)
+                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
+                                        && battleCtx->battleMons[defender].ability != ABILITY_NATURAL_CURE
+                                        && battleCtx->battleMons[defender].ability != ABILITY_HYDRATION
+                                        && battleCtx->battleMons[defender].ability != ABILITY_LEAF_GUARD) {
+
+                                        if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
+                                            // Only stay in to poison if it's relevant
+                                            if (moveStatus & MON_CONDITION_ANY_POISON) {
+
+                                                if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)
+                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_IMMUNITY) == FALSE)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE)) {
+
+                                                    if ((battleCtx->battleMons[defender].type1 != TYPE_POISON
+                                                        && battleCtx->battleMons[defender].type1 != TYPE_STEEL
+                                                        && battleCtx->battleMons[defender].type2 != TYPE_POISON
+                                                        && battleCtx->battleMons[defender].type2 != TYPE_STEEL)
+                                                        || battleCtx->battleMons[battler].ability == ABILITY_CORROSION) {
+                                                    
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+
+                                            // Only stay in to burn if it's relevant
+                                            if (moveStatus & MON_CONDITION_BURN) {
+
+                                                if ((battleCtx->battleMons[defender].ability != ABILITY_GUTS)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_FLARE_BOOST)
+                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_WATER_VEIL) == FALSE)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_HEATPROOF)) {
+
+                                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                                                        if (battleCtx->battleMons[defender].type1 != TYPE_FIRE
+                                                            && battleCtx->battleMons[defender].type2 != TYPE_FIRE) {
+
+                                                            for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+
+                                                                opponentMove = battleCtx->battleMons[defender].moves[k];
+
+                                                                if (MOVE_DATA(opponentMove).class == CLASS_PHYSICAL
+                                                                    && MOVE_DATA(opponentMove).power > 1) {
+
+                                                                    if (MOVE_DATA(opponentMove).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
+                                                                        return FALSE;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            // Only stay in to paralyze if it's relevant
+                                            if (moveStatus & MON_CONDITION_PARALYSIS) {
+
+                                                if ((battleCtx->battleMons[defender].ability != ABILITY_GUTS)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_QUICK_FEET)
+                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIMBER) == FALSE)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE)) {
+
+                                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                                                        if (battleCtx->battleMons[defender].type1 != TYPE_ELECTRIC
+                                                            && battleCtx->battleMons[defender].type2 != TYPE_ELECTRIC) {
+
+                                                            // Don't bother paralyzing stallmons
+                                                            if (battleCtx->battleMons[defender].speed > (battleCtx->battleMons[battler].speed * 3 / 4)) {
+                                                                return FALSE;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            if (moveStatus & MON_CONDITION_SLEEP) {
+
+                                                if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_INSOMNIA) == FALSE)
+                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_VITAL_SPIRIT) == FALSE)
+                                                    && (battleCtx->battleMons[defender].ability != ABILITY_EARLY_BIRD)) {
+
+                                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
 
                                 switch (effect) {
                                     default:
@@ -5091,8 +5233,78 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
                                         return FALSE;
                                         break;
+
+                                    case BATTLE_EFFECT_ATK_DEF_DOWN:
+
+                                    case BATTLE_EFFECT_ATK_DOWN:
+                                    case BATTLE_EFFECT_ATK_DOWN_2:
+                                    
+                                    case BATTLE_EFFECT_DEF_DOWN:
+                                    case BATTLE_EFFECT_DEF_DOWN_2:
+
+                                    case BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER:
+
+                                    case BATTLE_EFFECT_SP_DEF_DOWN_2:
+                                    
+                                    case BATTLE_EFFECT_SPEED_DOWN_2:
+                                    
+                                    case BATTLE_EFFECT_ACC_DOWN:
+
+                                    // Defog
+                                    case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
+
+                                    // Disable
+                                    case BATTLE_EFFECT_DISABLE:
+
+                                    // Embargo
+                                    case BATTLE_EFFECT_PREVENT_ITEM_USE:
+
+                                    // Encore
+                                    case BATTLE_EFFECT_ENCORE:
+
+                                    // Heart Swap
+                                    case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+
+                                    // Mimic
+                                    case BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE:
+
+                                    // Pain Split
+                                    case BATTLE_EFFECT_AVERAGE_HP:
+
+                                    // Power Swap
+                                    case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+
+                                    // Psych Up
+                                    case BATTLE_EFFECT_COPY_STAT_CHANGES:
+
+                                    // Roar and Whirlwind
+                                    case BATTLE_EFFECT_FORCE_SWITCH:
+
+                                    // Sketch
+                                    case BATTLE_EFFECT_LEARN_MOVE_PERMANENT:
+                                        // This would probably be buggy as hell. Don't use it.
+                                        break;
+
+                                    // Skill Swap
+                                    case BATTLE_EFFECT_SWITCH_ABILITIES:
+
+                                    // Spite
+                                    case BATTLE_EFFECT_DECREASE_LAST_MOVE_PP:
+
+                                    // Trick and Switcheroo
+                                    case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
+
+                                    // Worry Seed
+                                    case BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA:
+
+                                    // To Do:
+                                    // Fill in all the above move cases
+
+
                                 }
                                 break;
+
+
 
                         }                        
                     }
