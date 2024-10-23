@@ -9,7 +9,7 @@
         "type": "BATTLE_EFFECT_GIVE_GROUND_IMMUNITY",
         "chance": 0
     },
-    "range": "RANGE_USER",
+    "range": "RANGE_ALLY",
     "priority": 0,
     "flags": [
 		"MOVE_FLAG_CAN_SNATCH"
