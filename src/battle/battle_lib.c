@@ -11532,6 +11532,10 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
             volatileStatus = VOLATILE_CONDITION_FLINCH;
             break;
 
+        // Trap
+        case BATTLE_EFFECT_PREVENT_ESCAPE:
+            volatileStatus = BATTLE_EFFECT_PREVENT_ESCAPE;
+
         // Nightmare
         case BATTLE_EFFECT_STATUS_NIGHTMARE:
             volatileStatus = VOLATILE_CONDITION_NIGHTMARE;
