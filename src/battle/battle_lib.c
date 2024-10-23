@@ -11478,3 +11478,75 @@ int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
 
     return moveEffect;
 }
+
+
+/**
+ * @brief Map the given battle effect to an appropriate volatile status.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding volatile status
+ * @return The corresponding volatile status
+ */
+int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
+{
+    int volatileStatus;
+
+    switch (effect) {
+
+        default:
+            volatileStatus = VOLATILE_CONDITION_NONE;
+            break;
+        
+        // Confusion
+        case BATTLE_EFFECT_CHATTER:
+        case BATTLE_EFFECT_CONFUSE_HIT:
+        case BATTLE_EFFECT_UNUSED_133:
+        case BATTLE_EFFECT_CONFUSE_ALL:
+        case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+        case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
+        case BATTLE_EFFECT_STATUS_CONFUSE:
+            volatileStatus = VOLATILE_CONDITION_CONFUSION;
+            break;
+        
+        // Binding
+        case BATTLE_EFFECT_WHIRLPOOL:
+        case BATTLE_EFFECT_BIND_HIT:
+            volatileStatus = VOLATILE_CONDITION_BIND;
+            break;
+
+        // Infatuation
+        case BATTLE_EFFECT_UNUSED_96:
+        case BATTLE_EFFECT_INFATUATE:
+            volatileStatus = VOLATILE_CONDITION_ATTRACT;
+            break;
+
+        // Flinch
+        case BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE:
+        case BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP:
+        case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
+        case BATTLE_EFFECT_FLINCH_PARALYZE_HIT:
+        case BATTLE_EFFECT_FLINCH_FREEZE_HIT:
+        case BATTLE_EFFECT_FLINCH_BURN_HIT:
+        case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+        case BATTLE_EFFECT_FLINCH_HIT:
+            volatileStatus = VOLATILE_CONDITION_FLINCH;
+            break;
+
+        // Nightmare
+        case BATTLE_EFFECT_STATUS_NIGHTMARE:
+            volatileStatus = VOLATILE_CONDITION_NIGHTMARE;
+            break;
+
+        // Identified
+        case BATTLE_EFFECT_IGNORE_EVASION_REMOVE_GHOST_IMMUNE:
+            volatileStatus = VOLATILE_CONDITION_FORESIGHT;
+            break;
+
+        // Torment
+        case BATTLE_EFFECT_TORMENT:
+            volatileStatus = VOLATILE_CONDITION_TORMENT;
+            break;
+    }
+
+    return volatileStatus;
+}

@@ -1535,4 +1535,13 @@ int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect);
  */
 int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect);
 
+/**
+ * @brief Map the given battle effect to an appropriate volatile status.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding volatile status
+ * @return The corresponding volatile status
+ */
+int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
