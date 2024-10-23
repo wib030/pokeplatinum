@@ -11550,3 +11550,68 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
 
     return volatileStatus;
 }
+
+
+/**
+ * @brief Map the given battle effect to an appropriate status condition.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding status condition
+ * @return The corresponding status condition
+ */
+int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect)
+{
+    int statusCondition;
+
+    switch (effect) {
+
+        default:
+            statusCondition = MON_CONDITION_NONE;
+            break;
+        
+        // Sleep
+        case BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN:
+        case BATTLE_EFFECT_STATUS_SLEEP:
+            statusCondition = MON_CONDITION_SLEEP;
+            break;
+
+        // Poison
+        case BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT:
+        case BATTLE_EFFECT_POISON_MULTI_HIT:
+        case BATTLE_EFFECT_BADLY_POISON_HIT:
+        case BATTLE_EFFECT_POISON_HIT:
+        case BATTLE_EFFECT_STATUS_POISON:
+            statusCondition = MON_CONDITION_ANY_POISON;
+            break;
+
+        // Burn
+        case BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT:
+        case BATTLE_EFFECT_FLINCH_BURN_HIT:
+        case BATTLE_EFFECT_THAW_AND_BURN_HIT:
+        case BATTLE_EFFECT_RECOIL_BURN_HIT:
+        case BATTLE_EFFECT_BURN_HIT:
+        case BATTLE_EFFECT_STATUS_BURN:
+            statusCondition = MON_CONDITION_BURN;
+
+        // Freeze
+        case BATTLE_EFFECT_BLIZZARD:
+        case BATTLE_EFFECT_FLINCH_FREEZE_HIT:
+        case BATTLE_EFFECT_FREEZE_HIT:
+            statusCondition = MON_CONDITION_FREEZE;
+
+        // Paralysis
+        case BATTLE_EFFECT_BOUNCE:
+        case BATTLE_EFFECT_THUNDER:
+        case BATTLE_EFFECT_FLINCH_PARALYZE_HIT:
+        case BATTLE_EFFECT_RECOIL_PARALYZE_HIT:
+        case BATTLE_EFFECT_PARALYZE_HIT:
+        case BATTLE_EFFECT_STATUS_PARALYZE:
+            statusCondition = MON_CONDITION_PARALYSIS;
+
+        // Tri Attack
+        case BATTLE_EFFECT_TRI_ATTACK:
+            statusCondition = (MON_CONDITION_BURN | MON_CONDITION_FREEZE | MON_CONDITION_PARALYSIS);
+    }
+
+    return statusCondition;
+}
