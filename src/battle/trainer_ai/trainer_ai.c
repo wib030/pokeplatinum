@@ -4392,8 +4392,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     int i, j, k;
     u8 defender1, defender2, defender, battlerPartner, side;
     u8 aiSlot1, aiSlot2;
-    u16 move, sleepTalkMove;
-    int type, range, effect, moveEffect, partyCount;
+    u16 move, opponentMove;
+    int type, range, effect, moveEffect, partyCount, opponentMoveType;
     u32 effectiveness, sideCondition;
     int start, end;
     int numMoves;
@@ -4863,7 +4863,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     case BATTLE_EFFECT_SP_DEF_UP:
                                     case BATTLE_EFFECT_DEF_UP_2:
                                     case BATTLE_EFFECT_SP_DEF_UP_2:
-                                    case BATTLE_EFFECT_RESTORE_HP_EVERY_TURN:
                                     case BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER:
                                     case BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER:
                                     case BATTLE_EFFECT_ATK_DEF_UP:
@@ -4875,7 +4874,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     case BATTLE_EFFECT_ACC_UP:
                                     case BATTLE_EFFECT_ACC_UP_2:
                                     case BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL:
-                                    case BATTLE_EFFECT_GIVE_GROUND_IMMUNITY:
                                     case BATTLE_EFFECT_STOCKPILE:
                                     case BATTLE_EFFECT_SET_SUBSTITUTE:
                                         break;
@@ -4939,9 +4937,38 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     default:
                                         break;
 
-                                        // should always stay in for acupressure
+                                        // Acupressure
                                     case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+                                        // Always stay in for acupressure
                                         return FALSE;
+                                        break;
+
+                                        // Aqua Ring
+                                    case BATTLE_EFFECT_RESTORE_HP_EVERY_TURN:
+                                        if ((battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE)
+                                        || (battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE)) {
+                                            return FALSE;
+                                        }
+                                        break;
+
+                                        // Magnet Rise
+                                    case BATTLE_EFFECT_GIVE_GROUND_IMMUNITY:
+                                        // Try to stay in to cast it on our partner if we can
+                                        if (battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE) {
+                                            if ((battleCtx->battleMons[battlerPartner].moveEffectsMask & moveEffect) == FALSE)
+                                            && ((battleCtx->battleMons[battlerPartner].type1 == TYPE_ELECTRIC)
+                                                || (battleCtx->battleMons[battlerPartner].type1 == TYPE_ROCK)
+                                                || (battleCtx->battleMons[battlerPartner].type1 == TYPE_STEEL)
+                                                || (battleCtx->battleMons[battlerPartner].type2 == TYPE_ELECTRIC)
+                                                || (battleCtx->battleMons[battlerPartner].type2 == TYPE_ROCK)
+                                                || (battleCtx->battleMons[battlerPartner].type2 == TYPE_STEEL))) {
+                                                    return FALSE;
+                                            }
+                                        }
+
+                                        if (battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE) {
+                                            return FALSE;
+                                        }
                                         break;
                                 }
                                 break;
@@ -4990,6 +5017,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                         // Sleep Talk
                                     case BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP:
+                                        // This is actually redundant and a waste of time
+                                        /*
                                         for (k = 0; k < LEARNED_MOVES_MAX; k++) {
                                             sleepTalkMove = battleCtx->battleMons[battler].moves[k];
                                             effectiveness = 0;
@@ -5004,7 +5033,29 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                     }
                                                 }
                                         }
+                                        */
                                         break;
+
+                                        // Snatch
+                                    case BATTLE_EFFECT_STEAL_STATUS_MOVE:
+                                        // Snatch should only flag for not switching if it can be used to
+                                        // shut down an opponent for an ally in doubles
+                                        if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+                                            if (battleCtx->battleMons[battlerPartner].curHP > 0
+                                                && (battler != battlerPartner)) {
+                                                for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+                                                    opponentMove = battleCtx->battleMons[defender].moves[k];
+                                                    if MOVE_DATA(opponentMove).class == CLASS_SPECIAL) {
+                                                        if(MOVE_DATA(opponentMove).flags & MOVE_FLAG_CAN_SNATCH) {
+                                                            return FALSE;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+
+
                                 }
 
                                 // Me First has its own range?
