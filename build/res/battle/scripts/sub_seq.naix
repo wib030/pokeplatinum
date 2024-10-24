@@ -334,5 +334,7 @@
 #define subscript_lightning_rod_boost 325
 #define subscript_bind_start_ability 326
 #define subscript_color_change_before 327
+#define subscript_forecast_ignores 328
+#define subscript_atk_up_focus_energy 329
 
 #endif // NARC_SUB_SEQ_NAIX_

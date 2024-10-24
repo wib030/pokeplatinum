@@ -2630,5 +2630,19 @@
 #define pl_msg_00000368_01310 1310
 // {STRVAR_1 1, 0, 0} was shaken down\nby the foe’s {STRVAR_1 1, 1, 0}!
 #define pl_msg_00000368_01311 1311
+// Todays forecast is Sunny!
+#define pl_msg_00000368_01312 1312
+// Todays forecast is Rainy!
+#define pl_msg_00000368_01313 1313
+// Todays forecast is Snowy!
+#define pl_msg_00000368_01314 1314
+// Todays forecast is Sandy!
+#define pl_msg_00000368_01315 1315
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!
+#define pl_msg_00000368_01316 1316
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!
+#define pl_msg_00000368_01317 1317
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!
+#define pl_msg_00000368_01318 1318
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H
