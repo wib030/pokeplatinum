@@ -585,7 +585,7 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
         return BattleMon_Get(battleCtx, battler, battleCtx->scriptTemp, buf);
 
     case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
-        return battleMon->moveEffectsData.meditateCritBoostFlag;
+        return battleMon->meditateCritBoostFlag;
 
     default:
         GF_ASSERT(FALSE);
@@ -941,6 +941,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
     case BATTLEMON_TEMP:
         BattleMon_Set(battleCtx, battler, battleCtx->scriptTemp, buf);
         break;
+		
+	case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
+        mon->meditateCritBoostFlag = *(u8 *)buf;
+		break;
 
     default:
         GF_ASSERT(FALSE);
@@ -1161,6 +1165,10 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
     case BATTLEMON_FORM_NUM:
         mon->formNum += val;
         break;
+		
+	case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
+        mon->meditateCritBoostFlag += val;
+		break;
 
     default:
         GF_ASSERT(FALSE);
@@ -8942,7 +8950,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
             + (itemEffect == HOLD_EFFECT_CRITRATE_UP)
             + criticalStage
             + (attackerAbility == ABILITY_SUPER_LUCK)
-            + (battleCtx->battleMons[attacker].moveEffectsData.meditateCritBoostFlag != FALSE)
+            + (battleCtx->battleMons[attacker].meditateCritBoostFlag != FALSE)
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
 

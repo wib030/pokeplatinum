@@ -29,9 +29,13 @@ _046:
     GoTo _050
 	
 _050:
+	CompareMonDataToValue OPCODE_NEQ, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_MEDITATE_CRIT_RATE_BOOST, 0, _052
     UpdateMonData OPCODE_FLAG_ON, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_MEDITATE_CRIT_RATE_BOOST, 1
     // {0} is getting pumped!
     PrintMessage pl_msg_00000368_00276, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait 
     WaitButtonABTime 30
-    End 
+    End
+
+_052:
+	End

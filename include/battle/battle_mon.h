@@ -17,7 +17,6 @@ typedef struct MoveEffectsData {
     u32 stockpileCount : 3;
     u32 stockpileDefBoosts : 3;
     u32 stockpileSpDefBoosts : 3;
-    u32 meditateCritBoostFlag : 1;
     u32 truant : 1;
     u32 flashFire : 1;
     
@@ -104,6 +103,7 @@ typedef struct BattleMon {
 	u32 rivalryFlag : 1;
 	u32 colorChangeFlag : 1;
 	u32 randomAbilityAnnounced : 1;
+	u32 meditateCritBoostFlag : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];
