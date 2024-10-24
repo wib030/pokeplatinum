@@ -284,8 +284,8 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
         for (i = 0; i < battleParams->trainerData[battler].partySize; i++) {
             u16 species = trmon[i].species & 0x3FF;
             u8 form = (trmon[i].species & 0xFC00) >> 10;
-			u32 ability1 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_1);
-			u32 ability2 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_2);
+			//u32 ability1 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_1);
+			//u32 ability2 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_2);
 
             rnd = trmon[i].dv + trmon[i].level + species + battleParams->trainerIDs[battler];
             LCRNG_SetSeed(rnd);
@@ -300,7 +300,8 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 			//TRUE is whether or not to enable nature, rnd value decides the nature
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
-			Pokemon_SetValue(mon, MON_DATA_ABILITY, &ability1);
+			//This would set the ability to which one we want
+			//Pokemon_SetValue(mon, MON_DATA_ABILITY, &ability1);
 
             for (j = 0; j < 4; j++) {
                 Pokemon_SetMoveSlot(mon, trmon[i].moves[j], j);
