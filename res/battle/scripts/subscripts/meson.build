@@ -330,4 +330,5 @@ subscript_files = files(
 	'subscript_bind_start_ability.s',
 	'subscript_color_change_before.s',
 	'subscript_forecast_ignores.s',
+	'subscript_atk_up_focus_energy.s',
 )

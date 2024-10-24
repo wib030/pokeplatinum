@@ -9,4 +9,4 @@ _000:
 
 _010:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
-    End 
+    End

@@ -6,7 +6,7 @@
     "accuracy": 0,
     "pp": 40,
     "effect": {
-        "type": "BATTLE_EFFECT_ATK_UP",
+        "type": "BATTLE_EFFECT_UNUSED_134",
         "chance": 0
     },
     "range": "RANGE_USER",
