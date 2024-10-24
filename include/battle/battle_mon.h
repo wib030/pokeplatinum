@@ -17,6 +17,7 @@ typedef struct MoveEffectsData {
     u32 stockpileCount : 3;
     u32 stockpileDefBoosts : 3;
     u32 stockpileSpDefBoosts : 3;
+    u32 meditateCritBoostFlag : 1;
     u32 truant : 1;
     u32 flashFire : 1;
     

@@ -713,7 +713,8 @@
                 "BATTLEMON_SLOW_START_FINISHED",
                 "BATTLEMON_FORM_NUM",
                 "BATTLEMON_UNUSED_99",
-                "BATTLEMON_TEMP"
+                "BATTLEMON_TEMP",
+                "BATTLEMON_MEDITATE_CRIT_RATE_BOOST"
             ]
         },
         "@AfterMoveMessageType": {

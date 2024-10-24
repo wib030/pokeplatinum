@@ -113,6 +113,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].imposterFlag = FALSE;
 	battleCtx->battleMons[battler].rivalryFlag = FALSE;
 	battleCtx->battleMons[battler].colorChangeFlag = FALSE;
+    battleCtx->battleMons[battler].meditateCritBoostFlag = FALSE;
 	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
@@ -582,6 +583,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 
     case BATTLEMON_TEMP:
         return BattleMon_Get(battleCtx, battler, battleCtx->scriptTemp, buf);
+
+    case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
+        return battleMon->moveEffectsData.meditateCritBoostFlag;
 
     default:
         GF_ASSERT(FALSE);
@@ -8938,6 +8942,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
             + (itemEffect == HOLD_EFFECT_CRITRATE_UP)
             + criticalStage
             + (attackerAbility == ABILITY_SUPER_LUCK)
+            + (battleCtx->battleMons[attacker].moveEffectsData.meditateCritBoostFlag != FALSE)
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
 
