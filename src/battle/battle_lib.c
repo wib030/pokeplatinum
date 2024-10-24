@@ -1441,6 +1441,18 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 	{
 		MOVE_DATA(battler2Move).priority = -7;
 	}
+	
+	if ((battler1Move == MOVE_MAGNET_RISE)
+	&& (battler1Ability == ABILITY_MAGNET_PULL))
+	{
+		MOVE_DATA(battler1Move).priority += 1;
+	}
+	
+	if ((battler2Move == MOVE_MAGNET_RISE)
+	&& (battler2Ability == ABILITY_MAGNET_PULL))
+	{
+		MOVE_DATA(battler2Move).priority += 1;
+	}
 
     battleCtx->monSpeedValues[battler1] = battler1Speed;
     battleCtx->monSpeedValues[battler2] = battler2Speed;
