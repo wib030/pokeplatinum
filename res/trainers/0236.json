@@ -1,38 +1,67 @@
 {
-    "name": "Jo & Pat",
+    "name": "Bear & Rie",
     "class": "TRAINER_CLASS_DOUBLE_TEAM",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_LUMINEON",
+            "species": "SPECIES_ARCANINE",
             "form": 0,
-            "level": 50,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_SHUCA_BERRY",
             "moves": [
-                "MOVE_WATER_PULSE",
-                "MOVE_AQUA_RING",
-                "MOVE_CAPTIVATE",
-                "MOVE_SILVER_WIND"
+                "MOVE_CLOSE_COMBAT",
+				"MOVE_FLARE_BLITZ",
+				"MOVE_MORNING_SUN",
+				"MOVE_DRAGON_PULSE"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RAPIDASH",
+            "species": "SPECIES_WHISCASH",
             "form": 0,
-            "level": 50,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_RINDO_BERRY",
             "moves": [
-                "MOVE_FIRE_BLAST",
-                "MOVE_STOMP",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_IRON_TAIL"
+                "MOVE_ICY_WIND",
+				"MOVE_DRAGON_DANCE",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_EARTHQUAKE"
             ],
-            "power": 0,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GYARADOS",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_WACAN_BERRY",
+            "moves": [
+                "MOVE_DRAGON_DANCE",
+				"MOVE_AQUA_TAIL",
+				"MOVE_BOUNCE",
+				"MOVE_STONE_EDGE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SCIZOR",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_OCCA_BERRY",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+				"MOVE_BULLET_PUNCH",
+				"MOVE_BUG_BITE",
+				"MOVE_WING_ATTACK"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

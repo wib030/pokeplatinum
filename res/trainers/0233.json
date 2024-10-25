@@ -1,28 +1,81 @@
 {
-    "name": "Hana",
-    "class": "TRAINER_CLASS_BIRD_KEEPER",
+    "name": "Jackie",
+    "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NOCTOWL",
+            "species": "SPECIES_CHATOT",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 55,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_CHATTER",
+				"MOVE_HEAT_WAVE",
+				"MOVE_ENCORE",
+				"MOVE_U_TURN"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_TOGETIC",
+            "species": "SPECIES_MANTYKE",
             "form": 0,
-            "level": 47,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 55,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_CONFUSE_RAY",
+				"MOVE_TOXIC",
+				"MOVE_HAZE",
+				"MOVE_ICY_WIND"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_FURRET",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+				"MOVE_FOCUS_ENERGY",
+				"MOVE_SLASH",
+				"MOVE_BATON_PASS"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MANTINE",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_AGILITY",
+				"MOVE_HYDRO_PUMP",
+				"MOVE_ICY_WIND",
+				"MOVE_ROOST"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ZAPDOS",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_DISCHARGE",
+				"MOVE_ROOST",
+				"MOVE_HEAT_WAVE",
+				"MOVE_EXTRASENSORY"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

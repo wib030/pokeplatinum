@@ -1,54 +1,96 @@
 {
     "name": "Roark",
     "class": "TRAINER_CLASS_LEADER_ROARK",
-    "items": [
-        "ITEM_POTION",
-        "ITEM_POTION"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_NOSEPASS",
             "form": 0,
             "level": 12,
-            "item": null,
+            "item": "ITEM_SMOOTH_ROCK",
             "moves": [
                 "MOVE_STEALTH_ROCK",
-                "MOVE_ROCK_THROW"
+				"MOVE_THUNDER_WAVE",
+				"MOVE_ROCK_TOMB",
+				"MOVE_PAIN_SPLIT"
             ],
-            "power": 50,
+            "power": 100,
+            "ball_seal": 11
+        },
+        {
+            "species": "SPECIES_ARON",
+            "form": 0,
+            "level": 12,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_METAL_BURST",
+				"MOVE_ENDEAVOR",
+				"MOVE_METAL_CLAW",
+				"MOVE_ROAR"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_ONIX",
             "form": 0,
             "level": 12,
-            "item": null,
+            "item": "ITEM_FLAME_ORB",
             "moves": [
-                "MOVE_STEALTH_ROCK",
-                "MOVE_ROCK_THROW",
-                "MOVE_SCREECH"
+                "MOVE_MAGNITUDE",
+				"MOVE_ROCK_TOMB",
+				"MOVE_TORMENT",
+				"MOVE_PROTECT"
             ],
-            "power": 50,
+            "power": 100,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_CRANIDOS",
+		{
+            "species": "SPECIES_LILEEP",
             "form": 0,
-            "level": 14,
-            "item": null,
+            "level": 12,
+            "item": "ITEM_BIG_ROOT",
             "moves": [
-                "MOVE_HEADBUTT",
-                "MOVE_PURSUIT",
-                "MOVE_LEER"
+                "MOVE_MEGA_DRAIN",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_PAIN_SPLIT",
+				"MOVE_GASTRO_ACID"
             ],
-            "power": 50,
+            "power": 100,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_OMANYTE",
+            "form": 0,
+            "level": 12,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_BRINE",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_ROCK_POLISH",
+				"MOVE_MUD_SHOT"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ANORITH",
+            "form": 0,
+            "level": 13,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_ROCK_BLAST",
+				"MOVE_KNOCK_OFF",
+				"MOVE_CURSE",
+				"MOVE_FURY_CUTTER"
+            ],
+            "power": 100,
+            "ball_seal": 11
         }
     ]
 }

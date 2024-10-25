@@ -1,30 +1,39 @@
 {
-    "name": "Ondrej",
+    "name": "Edward",
     "class": "TRAINER_CLASS_DRAGON_TAMER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ALTARIA",
+            "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 55,
+            "item": "ITEM_IRON",
+            "moves": [
+                "MOVE_CROSS_POISON",
+				"MOVE_BITE",
+				"MOVE_ROOST",
+				"MOVE_WING_ATTACK"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GABITE",
+            "species": "SPECIES_CROBAT",
             "form": 0,
-            "level": 47,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 55,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_LEECH_LIFE",
+				"MOVE_POISON_FANG",
+				"MOVE_SUPER_FANG",
+				"MOVE_ROOST"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

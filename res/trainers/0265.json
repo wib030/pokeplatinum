@@ -1,31 +1,39 @@
 {
-    "name": "Curtis",
+    "name": "Burtis",
     "class": "TRAINER_CLASS_CAMPER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_ZUBAT",
             "form": 0,
             "level": 7,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_TAILWIND",
+				"MOVE_GUST",
+				"MOVE_QUICK_ATTACK",
+				"MOVE_FRENZY_PLANT"
+            ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL"
         },
         {
-            "species": "SPECIES_SHINX",
+            "species": "SPECIES_RATTATA",
             "form": 0,
-            "level": 7,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 9,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_ME_FIRST"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL"
         }
     ]
 }

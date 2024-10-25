@@ -1,85 +1,96 @@
 {
     "name": "Aaron",
     "class": "TRAINER_CLASS_ELITE_FOUR_AARON",
-    "items": [
-        "ITEM_FULL_RESTORE",
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_YANMEGA",
+            "species": "SPECIES_RHYPERIOR",
             "form": 0,
-            "level": 49,
-            "item": "ITEM_NONE",
+            "level": 57,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_AIR_SLASH",
-                "MOVE_BUG_BUZZ",
-                "MOVE_U_TURN",
-                "MOVE_DOUBLE_TEAM"
+                "MOVE_STEALTH_ROCK",
+				"MOVE_CLOSE_COMBAT",
+				"MOVE_STONE_EDGE",
+				"MOVE_EARTHQUAKE"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SCIZOR",
+            "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 49,
-            "item": "ITEM_NONE",
+            "level": 57,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_IRON_HEAD",
-                "MOVE_X_SCISSOR",
-                "MOVE_NIGHT_SLASH",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_KNOCK_OFF",
+				"MOVE_ICE_BALL",
+				"MOVE_PURSUIT",
+				"MOVE_BRICK_BREAK"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_VESPIQUEN",
+            "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 50,
-            "item": "ITEM_NONE",
+            "level": 57,
+            "item": "ITEM_AIR_BALLOON",
             "moves": [
-                "MOVE_ATTACK_ORDER",
-                "MOVE_DEFEND_ORDER",
-                "MOVE_HEAL_ORDER",
-                "MOVE_POWER_GEM"
+                "MOVE_NASTY_PLOT",
+				"MOVE_DISCHARGE",
+				"MOVE_SURF",
+				"MOVE_ENCORE"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_HERACROSS",
+            "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 51,
-            "item": "ITEM_NONE",
+            "level": 57,
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_MEGAHORN",
-                "MOVE_CLOSE_COMBAT",
-                "MOVE_NIGHT_SLASH",
-                "MOVE_STONE_EDGE"
+                "MOVE_DRAGON_DANCE",
+				"MOVE_OUTRAGE",
+				"MOVE_EARTHQUAKE",
+				"MOVE_ROOST"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_DRAPION",
+            "species": "SPECIES_TAUROS",
             "form": 0,
-            "level": 53,
+            "level": 57,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_X_SCISSOR",
-                "MOVE_CROSS_POISON",
-                "MOVE_ICE_FANG",
-                "MOVE_AERIAL_ACE"
+                "MOVE_EXTREME_SPEED",
+				"MOVE_PURSUIT",
+				"MOVE_EARTHQUAKE",
+				"MOVE_GIGA_IMPACT"
             ],
-            "power": 250,
+            "power": 255,
+            "ball_seal": 0,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_EMPOLEON",
+            "form": 0,
+            "level": 59,
+            "item": "ITEM_PETAYA_BERRY",
+            "moves": [
+                "MOVE_AGILITY",
+				"MOVE_HYDRO_PUMP",
+				"MOVE_ICE_BEAM",
+				"MOVE_SUBSTITUTE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

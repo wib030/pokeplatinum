@@ -1,40 +1,53 @@
 {
-    "name": "Henry",
+    "name": "TwiliteFan7",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_RHYDON",
+            "species": "SPECIES_MIGHTYENA",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_THICK_CLUB",
             "moves": [
-                "MOVE_STONE_EDGE",
-                "MOVE_EARTHQUAKE",
-                "MOVE_HAMMER_ARM",
-                "MOVE_TAKE_DOWN"
+                "MOVE_HOWL",
+				"MOVE_ODOR_SLEUTH",
+				"MOVE_ROAR",
+				"MOVE_BITE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CARNIVINE",
+            "species": "SPECIES_MIGHTYENA",
             "form": 0,
-            "level": 48,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_RARE_BONE",
             "moves": [
-                "MOVE_WRING_OUT",
-                "MOVE_CRUNCH",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_INGRAIN"
+                "MOVE_FIRE_FANG",
+				"MOVE_ICE_FANG",
+				"MOVE_THUNDER_FANG",
+				"MOVE_POISON_FANG"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MIGHTYENA",
+            "form": 0,
+            "level": 56,
+            "item": "ITEM_GANLON_BERRY",
+            "moves": [
+                "MOVE_CRUNCH",
+				"MOVE_ROCK_SMASH",
+				"MOVE_SECRET_POWER",
+				"MOVE_HOWL"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

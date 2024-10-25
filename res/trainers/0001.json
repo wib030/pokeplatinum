@@ -9,20 +9,7 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_ESPEON",
-            "form": 0,
-            "level": 1,
-            "item": "ITEM_FOCUS_SASH",
-            "moves": [
-				"MOVE_SPLASH"
-            ],
-            "power": 255,
-            "ball_seal": 0,
-			"ability": 1,
-			"ball_type": "ITEM_MASTER_BALL"
-        },
-		{
-            "species": "SPECIES_ESPEON",
+            "species": "SPECIES_HOPPIP",
             "form": 0,
             "level": 5,
             "item": "ITEM_HEAT_ROCK",
@@ -34,8 +21,7 @@
             ],
             "power": 0,
             "ball_seal": 0,
-			"ability": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_PREMIER_BALL"
         }
     ]
 }

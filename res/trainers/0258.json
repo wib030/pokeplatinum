@@ -1,20 +1,25 @@
 {
-    "name": "Philip",
+    "name": "Palm Andy",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_AMBIPOM",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 44,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_FURY_SWIPES",
+				"MOVE_FAKE_OUT",
+				"MOVE_TAUNT",
+				"MOVE_SCREECH"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

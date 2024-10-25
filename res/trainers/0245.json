@@ -3,31 +3,35 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_CRANIDOS",
             "form": 0,
             "level": 9,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_TACKLE",
-                "MOVE_DEFENSE_CURL"
+                "MOVE_STOMP",
+				"MOVE_ROAR",
+				"MOVE_LEER",
+				"MOVE_STEALTH_ROCK"
             ],
             "power": 10,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_LILEEP",
             "form": 0,
             "level": 9,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_ROCK_THROW",
-                "MOVE_TACKLE",
-                "MOVE_HARDEN"
+                "MOVE_STRING_SHOT",
+				"MOVE_CONSTRICT",
+				"MOVE_FLASH",
+				"MOVE_TICKLE"
             ],
             "power": 10,
             "ball_seal": 0

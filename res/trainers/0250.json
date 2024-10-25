@@ -1,58 +1,96 @@
 {
     "name": "Byron",
     "class": "TRAINER_CLASS_LEADER_BYRON",
-    "items": [
-        "ITEM_HYPER_POTION",
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNETON",
-            "form": 0,
-            "level": 37,
-            "item": "ITEM_NONE",
+            "species": "SPECIES_WORMADAM",
+            "form": 2,
+            "level": 43,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_FLASH_CANNON",
-                "MOVE_THUNDERBOLT",
-                "MOVE_TRI_ATTACK",
-                "MOVE_METAL_SOUND"
+                "MOVE_TOXIC_SPIKES",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_ENDEAVOR",
+				"MOVE_SUCKER_PUNCH"
+            ],
+            "power": 200,
+            "ball_seal": 24
+        },
+        {
+            "species": "SPECIES_PROBOPASS",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_SMOOTH_ROCK",
+            "moves": [
+                "MOVE_POWER_GEM",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_EARTH_POWER",
+				"MOVE_ZAP_CANNON"
             ],
             "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STEELIX",
+            "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 38,
-            "item": "ITEM_NONE",
+            "level": 43,
+            "item": "ITEM_SHUCA_BERRY",
             "moves": [
-                "MOVE_FLASH_CANNON",
-                "MOVE_ICE_FANG",
                 "MOVE_EARTHQUAKE",
-                "MOVE_SANDSTORM"
+				"MOVE_METEOR_MASH",
+				"MOVE_THUNDER_PUNCH",
+				"MOVE_AGILITY"
             ],
             "power": 200,
             "ball_seal": 0
         },
-        {
+		{
+            "species": "SPECIES_EMPOLEON",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_PETAYA_BERRY",
+            "moves": [
+                "MOVE_SURF",
+				"MOVE_ICE_BEAM",
+				"MOVE_AGILITY",
+				"MOVE_GRASS_KNOT"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SCIZOR",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_OCCA_BERRY",
+            "moves": [
+                "MOVE_BUG_BITE",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_ROCK_SMASH",
+				"MOVE_BULLET_PUNCH"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
             "species": "SPECIES_BASTIODON",
             "form": 0,
-            "level": 41,
-            "item": "ITEM_SITRUS_BERRY",
+            "level": 45,
+            "item": "ITEM_FLAME_ORB",
             "moves": [
-                "MOVE_METAL_BURST",
-                "MOVE_STONE_EDGE",
-                "MOVE_IRON_DEFENSE",
-                "MOVE_TAUNT"
+                "MOVE_RECOVER",
+				"MOVE_TORMENT",
+				"MOVE_PSYCHO_SHIFT",
+				"MOVE_SLAM"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 24
         }
     ]
 }

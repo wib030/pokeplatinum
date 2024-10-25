@@ -1,40 +1,81 @@
 {
-    "name": "Sydney",
+    "name": "0peraFan32",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFABLE",
+            "species": "SPECIES_WIGGLYTUFF",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_METRONOME",
             "moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_REFLECT",
-                "MOVE_LIGHT_SCREEN",
-                "MOVE_GRAVITY"
+                "MOVE_SING",
+				"MOVE_PERISH_SONG",
+				"MOVE_METRONOME",
+				"MOVE_HYPER_VOICE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_TORTERRA",
+            "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 48,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_DUBIOUS_DISC",
             "moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_CRUNCH",
-                "MOVE_LEECH_SEED",
-                "MOVE_SYNTHESIS"
+                "MOVE_SING",
+				"MOVE_TEETER_DANCE",
+				"MOVE_CAPTIVATE",
+				"MOVE_ENCORE"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_CLEFABLE",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_METRONOME",
+            "moves": [
+                "MOVE_SING",
+				"MOVE_METRONOME",
+				"MOVE_HYPER_VOICE",
+				"MOVE_UPROAR"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MAROWAK",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_METRONOME",
+            "moves": [
+                "MOVE_SING",
+				"MOVE_UPROAR",
+				"MOVE_ICY_WIND",
+				"MOVE_PERISH_SONG"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_KANGASKHAN",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_STICK",
+            "moves": [
+                "MOVE_SING",
+				"MOVE_HAMMER_ARM",
+				"MOVE_CRUSH_CLAW",
+				"MOVE_EARTHQUAKE"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

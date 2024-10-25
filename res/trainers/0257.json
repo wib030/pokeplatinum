@@ -1,22 +1,67 @@
 {
-    "name": "Gary",
+    "name": "Guile",
     "class": "TRAINER_CLASS_WORKER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_MEW",
             "form": 0,
-            "level": 37,
-            "item": null,
+            "level": 41,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_SPARK",
-                "MOVE_MAGNET_BOMB"
+                "MOVE_SONIC_BOOM",
+				"MOVE_SWAGGER",
+				"MOVE_SCREECH",
+				"MOVE_ENDURE"
             ],
-            "power": 10,
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MEW",
+            "form": 0,
+            "level": 41,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SONIC_BOOM",
+				"MOVE_SWAGGER",
+				"MOVE_SCREECH",
+				"MOVE_ENDURE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MEW",
+            "form": 0,
+            "level": 41,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SONIC_BOOM",
+				"MOVE_SWAGGER",
+				"MOVE_SCREECH",
+				"MOVE_ENDURE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MEW",
+            "form": 0,
+            "level": 41,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SONIC_BOOM",
+				"MOVE_SWAGGER",
+				"MOVE_SCREECH",
+				"MOVE_ENDURE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

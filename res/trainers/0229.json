@@ -1,40 +1,39 @@
 {
-    "name": "Clayton",
+    "name": "Dancer",
     "class": "TRAINER_CLASS_VETERAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_BRAVE_BIRD",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_DOUBLE_TEAM",
-                "MOVE_GROWL"
+                "MOVE_SWORDS_DANCE",
+				"MOVE_BRAVE_BIRD",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_NIGHT_SLASH"
             ],
-            "power": 100,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LICKILICKY",
+            "species": "SPECIES_LUCARIO",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 55,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_SLAM",
-                "MOVE_POWER_WHIP",
-                "MOVE_EARTHQUAKE",
-                "MOVE_BRICK_BREAK"
+                "MOVE_SWORDS_DANCE",
+				"MOVE_CLOSE_COMBAT",
+				"MOVE_EXTREME_SPEED",
+				"MOVE_CRUNCH"
             ],
-            "power": 100,
+            "power": 200,
             "ball_seal": 0
         }
     ]

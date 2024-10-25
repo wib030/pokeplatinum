@@ -10,13 +10,14 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_PIDGEY",
             "form": 0,
             "level": 7,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_QUICK_ATTACK",
-                "MOVE_GROWL"
+                "MOVE_TACKLE",
+				"MOVE_SAND_ATTACK",
+				"MOVE_FORESIGHT"
             ],
             "power": 30,
             "ball_seal": 0
@@ -25,13 +26,16 @@
             "species": "SPECIES_CHIMCHAR",
             "form": 0,
             "level": 9,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SCRATCH",
-                "MOVE_LEER"
+				"MOVE_LEER",
+				"MOVE_EMBER",
+				"MOVE_TAUNT"
             ],
             "power": 30,
-            "ball_seal": 0
+            "ball_seal": 6,
+			"ball_type": "ITEM_PREMIER_BALL"
         }
     ]
 }

@@ -1,20 +1,23 @@
 {
-    "name": "Jonathon",
+    "name": "Youngathon",
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_LARVITAR",
             "form": 0,
             "level": 11,
-            "item": null,
+            "item": "ITEM_POKE_DOLL",
             "moves": [
-                "MOVE_TACKLE",
-                "MOVE_DEFENSE_CURL"
+                "MOVE_UPROAR",
+				"MOVE_MIMIC",
+				"MOVE_SCREECH",
+				"MOVE_BITE"
             ],
             "power": 10,
             "ball_seal": 0
