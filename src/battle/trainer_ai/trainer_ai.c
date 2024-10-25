@@ -5273,7 +5273,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                             if (battleCtx->battleMons[defender].moveEffectsData.disabledTurns == 0) {
 
                                                 // 10% chance to swap out
-                                                if (BattleSystem_RandNext(battleSys) % 10) < 9) {
+                                                if ((BattleSystem_RandNext(battleSys) % 10) < 9) {
                                                     return FALSE;
                                                 }
                                             }
@@ -5289,7 +5289,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                     || battleCtx->recycleItem[defender] != ITEM_NONE) {
 
                                                     // 10% chance to swap out
-                                                    if (BattleSystem_RandNext(battleSys) % 10) < 9) {
+                                                    if ((BattleSystem_RandNext(battleSys) % 10) < 9) {
                                                     return FALSE;
                                                     }
                                                 }
@@ -5372,7 +5372,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                     opponentMoveType = MOVE_DATA(opponentMove).type;
 
                                                     if (MOVE_DATA(opponentMove).power > 0) {
-                                                        opponentDamage = BattleSystem_CalcMoveDamage(battleSys,
+                                                        opponentMoveDamage = BattleSystem_CalcMoveDamage(battleSys,
                                                         battleCtx,
                                                         opponentMove,
                                                         battleCtx->sideConditionsMask[side],
@@ -5383,17 +5383,17 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                         battler,
                                                         1);
 
-                                                        opponentDamage = BattleSystem_ApplyTypeChart(battleSys,
+                                                        opponentMoveDamage = BattleSystem_ApplyTypeChart(battleSys,
                                                         battleCtx,
                                                         opponentMove,
                                                         opponentMoveType,
                                                         defender,
                                                         battler,
-                                                        opponentDamage,
+                                                        opponentMoveDamage,
                                                         &opponentEffectiveness);
 
                                                         if ((opponentEffectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
-                                                            if (battleCtx->battleMons[battler].curHP < opponentDamage) {
+                                                            if (battleCtx->battleMons[battler].curHP < opponentMoveDamage) {
                                                                 break;
                                                             }
                                                         }
