@@ -1,30 +1,39 @@
 {
-    "name": "Bryan",
+    "name": "Bryam",
     "class": "TRAINER_CLASS_RUIN_MANIAC",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_HYPNO",
             "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_ESCAPE_ROPE",
+            "moves": [
+                "MOVE_HYPNOSIS",
+				"MOVE_FLING",
+				"MOVE_FLASH",
+				"MOVE_POUND"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CRANIDOS",
+            "species": "SPECIES_BAYLEEF",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_SWEET_SCENT",
+				"MOVE_POISON_POWDER",
+				"MOVE_LEECH_SEED",
+				"MOVE_WRING_OUT"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

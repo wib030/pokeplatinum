@@ -1,19 +1,39 @@
 {
-    "name": "Troy",
+    "name": "Toy",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_QUAGSIRE",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_EARTHQUAKE",
+				"MOVE_MUDDY_WATER",
+				"MOVE_RECOVER",
+				"MOVE_TOXIC"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
             "species": "SPECIES_GYARADOS",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_DRAGON_DANCE",
+				"MOVE_AQUA_TAIL",
+				"MOVE_SHEER_COLD",
+				"MOVE_EARTHQUAKE"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

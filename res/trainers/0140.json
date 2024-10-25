@@ -1,40 +1,78 @@
 {
-    "name": "Dalton",
+    "name": "hypeBoxer37",
     "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ELECTABUZZ",
+            "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_SWIFT",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_THUNDER_WAVE"
+                "MOVE_THUNDER_PUNCH"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MAGMAR",
+            "species": "SPECIES_MAGMORTAR",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_FLAMETHROWER",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_SMOG",
-                "MOVE_WILL_O_WISP"
+                "MOVE_FIRE_PUNCH"
             ],
-            "power": 50,
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HITMONCHAN",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_MACH_PUNCH"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LEDIAN",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_COMET_PUNCH"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MACHAMP",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_DYNAMIC_PUNCH"
+            ],
+            "power": 180,
+            "ball_seal": 0,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_GASTLY",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_ICE_PUNCH"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

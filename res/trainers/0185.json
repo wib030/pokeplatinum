@@ -3,26 +3,37 @@
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TENTACOOL",
+            "species": "SPECIES_ELECTRODE",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+				"MOVE_SURF",
+				"MOVE_ZAP_CANNON",
+				"MOVE_U_TURN"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_HYDRO_PUMP",
+				"MOVE_DRAGON_PULSE",
+				"MOVE_ICE_BEAM",
+				"MOVE_SIGNAL_BEAM"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

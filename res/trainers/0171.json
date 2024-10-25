@@ -1,51 +1,53 @@
 {
-    "name": "Shannon",
+    "name": "MaceWinDont",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHERRIM",
+            "species": "SPECIES_SANDSLASH",
             "form": 0,
-            "level": 34,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_PETAL_DANCE",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_LEECH_SEED"
+                "MOVE_CLOSE_COMBAT",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_RAPID_SPIN",
+				"MOVE_EARTHQUAKE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_AZUMARILL",
+            "species": "SPECIES_QWILFISH",
             "form": 0,
-            "level": 34,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_DOUBLE_EDGE",
-                "MOVE_BUBBLE_BEAM",
-                "MOVE_AQUA_RING"
+                "MOVE_TOXIC_SPIKES",
+				"MOVE_DESTINY_BOND",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_WATERFALL"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LOPUNNY",
+            "species": "SPECIES_CACNEA",
             "form": 0,
-            "level": 35,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_JUMP_KICK",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_CHARM"
+                "MOVE_DESTINY_BOND",
+				"MOVE_SPIKES",
+				"MOVE_NASTY_PLOT",
+				"MOVE_DARK_PULSE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         }
     ]

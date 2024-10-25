@@ -1,37 +1,67 @@
 {
-    "name": "Paul",
+    "name": "Master",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TENTACOOL",
+            "species": "SPECIES_GULPIN",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 35,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_GASTRO_ACID",
+				"MOVE_STOCKPILE",
+				"MOVE_ATTRACT",
+				"MOVE_SWALLOW"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PELIPPER",
+            "species": "SPECIES_VICTREEBEL",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 35,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ACID",
+				"MOVE_STOCKPILE",
+				"MOVE_SWALLOW",
+				"MOVE_TICKLE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_SHIFTRY",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 35,
+            "item": "ITEM_POWER_ANKLET",
+            "moves": [
+                "MOVE_HARDEN",
+				"MOVE_POUND",
+				"MOVE_FLING",
+				"MOVE_ATTRACT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MEOWTH",
+            "form": 0,
+            "level": 35,
+            "item": "ITEM_ODD_INCENSE",
+            "moves": [
+                "MOVE_CHARM",
+				"MOVE_ASSIST",
+				"MOVE_GUNK_SHOT",
+				"MOVE_ATTRACT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -1,28 +1,39 @@
 {
-    "name": "Wesley",
+    "name": "Wet Sonic",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_FLOATZEL",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_AQUA_TAIL",
+				"MOVE_LOW_KICK",
+				"MOVE_ICE_PUNCH",
+				"MOVE_CRUNCH"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_TENTACRUEL",
+            "species": "SPECIES_QWILFISH",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_STOCKPILE",
+				"MOVE_MINIMIZE",
+				"MOVE_TOXIC",
+				"MOVE_PAIN_SPLIT"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

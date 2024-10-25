@@ -1,23 +1,26 @@
 {
-    "name": "Carlos",
+    "name": "Dipper",
     "class": "TRAINER_CLASS_PI",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
         "AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDEEN",
+            "species": "SPECIES_LEDIAN",
             "form": 0,
             "level": 30,
-            "item": null,
+            "item": "ITEM_BRIGHTPOWDER",
             "moves": [
-                "MOVE_HORN_DRILL",
-                "MOVE_FLAIL"
+                "MOVE_DYNAMIC_PUNCH",
+				"MOVE_SUPERSONIC",
+				"MOVE_MEGA_PUNCH",
+				"MOVE_STRING_SHOT"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         }
     ]

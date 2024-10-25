@@ -1,37 +1,58 @@
 {
-    "name": "Luther",
+    "name": "Bother",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_WINGULL",
+            "species": "SPECIES_MASQUERAIN",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_U_TURN"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_STARAPTOR",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_U_TURN"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GASTRODON",
+            "species": "SPECIES_STARAPTOR",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_U_TURN"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_CHIMECHO",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_CURSE",
+				"MOVE_CALM_MIND",
+				"MOVE_RECOVER",
+				"MOVE_FUTURE_SIGHT"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

@@ -4,35 +4,50 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_HIPPOWDON",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 45,
+            "item": "ITEM_SOFT_SAND",
+            "moves": [
+                "MOVE_SAND_ATTACK",
+				"MOVE_HEADBUTT",
+				"MOVE_SUPERPOWER",
+				"MOVE_ATTRACT"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RIOLU",
+            "species": "SPECIES_LUDICOLO",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 45,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+				"MOVE_THUNDER_PUNCH",
+				"MOVE_DYNAMIC_PUNCH",
+				"MOVE_TICKLE"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 45,
+            "item": "ITEM_LUCKY_PUNCH",
+            "moves": [
+                "MOVE_BULLET_PUNCH",
+				"MOVE_SWAGGER",
+				"MOVE_BRICK_BREAK",
+				"MOVE_PURSUIT"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

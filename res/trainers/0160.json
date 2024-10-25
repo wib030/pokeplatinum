@@ -1,20 +1,52 @@
 {
-    "name": "Erik",
+    "name": "Reveal",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TENTACRUEL",
+            "species": "SPECIES_GALLADE",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ENCORE",
+				"MOVE_MEMENTO"
+            ],
+            "power": 200,
+            "ball_seal": 8
+        },
+		{
+            "species": "SPECIES_MOTHIM",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_FISSURE",
+				"MOVE_AGILITY",
+				"MOVE_RAZOR_WIND",
+				"MOVE_BUG_BUZZ"
+            ],
+            "power": 200,
+            "ball_seal": 8
+        },
+		{
+            "species": "SPECIES_PORYGON_Z",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_BLIZZARD",
+				"MOVE_THUNDER",
+				"MOVE_TRI_ATTACK",
+				"MOVE_AGILITY"
+            ],
+            "power": 200,
+            "ball_seal": 15
         }
     ]
 }

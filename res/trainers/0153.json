@@ -1,28 +1,39 @@
 {
-    "name": "Miguel",
+    "name": "Thief",
     "class": "TRAINER_CLASS_FISHERMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_KABUTOPS",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 38,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_KNOCK_OFF",
+				"MOVE_FURY_CUTTER",
+				"MOVE_CUT",
+				"MOVE_THIEF"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_EMPOLEON",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 38,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_BIDE",
+				"MOVE_PLUCK",
+				"MOVE_CUT",
+				"MOVE_KNOCK_OFF"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

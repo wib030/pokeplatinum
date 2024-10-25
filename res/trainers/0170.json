@@ -1,38 +1,67 @@
 {
-    "name": "Jake",
+    "name": "JakeTheDog8",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_JOLTEON",
             "form": 0,
-            "level": 35,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_TAKE_DOWN",
-                "MOVE_AERIAL_ACE",
-                "MOVE_ENDEAVOR",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_YAWN",
+				"MOVE_AGILITY",
+				"MOVE_CHARGE_BEAM",
+				"MOVE_BATON_PASS"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GIRAFARIG",
+            "species": "SPECIES_FURRET",
             "form": 0,
-            "level": 36,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_DOUBLE_HIT",
-                "MOVE_PSYCHIC"
+                "MOVE_KNOCK_OFF",
+				"MOVE_ASSIST",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_ME_FIRST"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_VAPOREON",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_ACID_ARMOR",
+				"MOVE_TOXIC",
+				"MOVE_MIMIC",
+				"MOVE_WISH"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SHUCKLE",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_ACUPRESSURE",
+				"MOVE_ENCORE",
+				"MOVE_REST",
+				"MOVE_ROCK_SLIDE"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,46 +1,79 @@
 {
-    "name": "George",
+    "name": "Fishin",
     "class": "TRAINER_CLASS_FISHERMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGIKARP",
+            "species": "SPECIES_LUMINEON",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_ATTRACT",
+				"MOVE_POUND",
+				"MOVE_BOUNCE",
+				"MOVE_SWEET_KISS"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_FINNEON",
+            "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_WATER_SPOUT"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_REMORAID",
+            "species": "SPECIES_LANTURN",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_AQUA_RING",
+				"MOVE_PROTECT",
+				"MOVE_STOCKPILE",
+				"MOVE_SWALLOW"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_VAPOREON",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_SAND_ATTACK",
+				"MOVE_TAIL_WHIP",
+				"MOVE_WHIRLPOOL",
+				"MOVE_TICKLE"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GOREBYSS",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_AGILITY",
+				"MOVE_BARRIER",
+				"MOVE_AMNESIA",
+				"MOVE_BATON_PASS"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

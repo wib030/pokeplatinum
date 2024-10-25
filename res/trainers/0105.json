@@ -1,28 +1,39 @@
 {
-    "name": "Haley",
+    "name": "Drownielle",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PSYDUCK",
+            "species": "SPECIES_LAIRON",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 35,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_ROAR",
+				"MOVE_TAKE_DOWN",
+				"MOVE_ENDEAVOR",
+				"MOVE_SCREECH"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_AZUMARILL",
+            "species": "SPECIES_STEELIX",
             "form": 0,
             "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_SCREECH",
+				"MOVE_FLAIL",
+				"MOVE_SELFDESTRUCT",
+				"MOVE_ROAR"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

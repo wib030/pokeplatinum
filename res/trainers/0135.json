@@ -1,54 +1,53 @@
 {
-    "name": "Maria",
-    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_FEMALE",
+    "name": "chaosMaria",
+    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 38,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_POWER_BAND",
             "moves": [
-                "MOVE_WATER_PULSE",
-                "MOVE_CONFUSION",
-                "MOVE_DISABLE",
-                "MOVE_SCREECH"
+                "MOVE_BEAT_UP",
+				"MOVE_SHADOW_CLAW",
+				"MOVE_SHADOW_BALL",
+				"MOVE_REVENGE"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RAPIDASH",
+            "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 39,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_RED_SCARF",
             "moves": [
-                "MOVE_FIRE_BLAST",
-                "MOVE_TAKE_DOWN",
-                "MOVE_FURY_ATTACK",
-                "MOVE_WILL_O_WISP"
+                "MOVE_ROLLOUT",
+				"MOVE_RAPID_SPIN",
+				"MOVE_U_TURN",
+				"MOVE_SPIKES"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SUDOWOODO",
+            "species": "SPECIES_BUIZEL",
             "form": 0,
-            "level": 38,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_FIRE_STONE",
             "moves": [
-                "MOVE_ROCK_SLIDE",
-                "MOVE_LOW_KICK",
-                "MOVE_FLAIL",
-                "MOVE_ENDURE"
+                "MOVE_ODOR_SLEUTH",
+				"MOVE_SUBSTITUTE",
+				"MOVE_DOUBLE_TEAM",
+				"MOVE_PURSUIT"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         }
     ]

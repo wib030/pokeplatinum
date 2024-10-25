@@ -1,20 +1,40 @@
 {
-    "name": "Matthew",
+    "name": "Mattsicle",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_CACTURNE",
             "form": 0,
-            "level": 39,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 5
+            "level": 45,
+            "item": "ITEM_OCCA_BERRY",
+            "moves": [
+                "MOVE_SOLAR_BEAM",
+				"MOVE_NASTY_PLOT",
+				"MOVE_SYNTHESIS",
+				"MOVE_DARK_PULSE"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_CROBAT",
+            "form": 0,
+            "level": 45,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_HAZE",
+				"MOVE_TOXIC",
+				"MOVE_SUPER_FANG",
+				"MOVE_ROOST"
+            ],
+            "power": 180,
+            "ball_seal": 0
         }
     ]
 }

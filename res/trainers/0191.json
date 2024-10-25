@@ -1,37 +1,50 @@
 {
-    "name": "Paige",
+    "name": "Keroro",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MARILL",
+            "species": "SPECIES_POLITOED",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_PERISH_SONG",
+				"MOVE_SURF",
+				"MOVE_ICY_WIND",
+				"MOVE_REST"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_WINGULL",
+            "species": "SPECIES_OMASTAR",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_MUDDY_WATER",
+				"MOVE_ICY_WIND",
+				"MOVE_POWER_GEM",
+				"MOVE_EARTH_POWER"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_WATER_SPOUT"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

@@ -1,5 +1,5 @@
 {
-    "name": "Colin",
+    "name": "Colon",
     "class": "TRAINER_CLASS_WORKER",
     "items": [],
     "ai_flags": [
@@ -8,20 +8,25 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_MACHOP",
             "form": 0,
-            "level": 6,
-            "item": null,
-            "moves": null,
+            "level": 10,
+            "item": "ITEM_LEPPA_BERRY",
+            "moves": [
+                "MOVE_NATURAL_GIFT",
+				"MOVE_MUD_SLAP"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_GEODUDE",
             "form": 0,
-            "level": 8,
-            "item": null,
-            "moves": null,
+            "level": 10,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_ROCK_SLIDE"
+            ],
             "power": 0,
             "ball_seal": 0
         }

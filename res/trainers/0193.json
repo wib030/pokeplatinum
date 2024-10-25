@@ -1,29 +1,41 @@
 {
-    "name": "Cassandra",
+    "name": "Nerf",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUMINEON",
+            "species": "SPECIES_SHARPEDO",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_AQUA_JET",
+				"MOVE_CRUNCH",
+				"MOVE_WATERFALL",
+				"MOVE_EARTHQUAKE"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PELIPPER",
+            "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 53,
+            "item": "ITEM_LIGHT_BALL",
+            "moves": [
+                "MOVE_FLING",
+				"MOVE_VITAL_THROW",
+				"MOVE_ROLLING_KICK",
+				"MOVE_FRUSTRATION"
+            ],
+            "power": 180,
+            "ball_seal": 0,
+			"ability": 1
         }
     ]
 }

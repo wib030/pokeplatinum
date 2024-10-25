@@ -1,40 +1,39 @@
 {
-    "name": "Blake",
+    "name": "bl4k3_g4m3r",
     "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AMBIPOM",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 39,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_DOUBLE_HIT",
-                "MOVE_U_TURN",
-                "MOVE_SAND_ATTACK",
-                "MOVE_SCREECH"
+                "MOVE_STOCKPILE",
+				"MOVE_ROOST",
+				"MOVE_FLY",
+				"MOVE_WATER_GUN"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PORYGON2",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_SCOPE_LENS",
             "moves": [
-                "MOVE_PSYBEAM",
-                "MOVE_SIGNAL_BEAM",
-                "MOVE_CONVERSION_2",
-                "MOVE_RECOVER"
+                "MOVE_OCTAZOOKA",
+				"MOVE_PSYBEAM",
+				"MOVE_ROCK_BLAST",
+				"MOVE_BULLET_SEED"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         }
     ]

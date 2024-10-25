@@ -1,47 +1,68 @@
 {
-    "name": "Jessica",
+    "name": "The King",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDEEN",
-            "form": 0,
-            "level": 30,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_GOLDEEN",
-            "form": 0,
-            "level": 30,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_GOLDEEN",
-            "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_SEAKING",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_AGILITY",
+				"MOVE_HORN_DRILL",
+				"MOVE_KNOCK_OFF",
+				"MOVE_AQUA_TAIL"
+            ],
+            "power": 200,
+            "ball_seal": 10
+        },
+        {
+            "species": "SPECIES_SLOWKING",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_CALM_MIND",
+				"MOVE_IRON_DEFENSE",
+				"MOVE_YAWN",
+				"MOVE_DREAM_EATER"
+            ],
+            "power": 200,
+            "ball_seal": 10
+        },
+        {
+            "species": "SPECIES_KINGLER",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_CRABHAMMER",
+				"MOVE_KNOCK_OFF",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_AGILITY"
+            ],
+            "power": 200,
+            "ball_seal": 10
+        },
+        {
+            "species": "SPECIES_KINGDRA",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_KINGS_ROCK",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+				"MOVE_DRAGON_BREATH",
+				"MOVE_MUDDY_WATER",
+				"MOVE_BOUNCE"
+            ],
+            "power": 200,
+            "ball_seal": 10
         }
     ]
 }

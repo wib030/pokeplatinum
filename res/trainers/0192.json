@@ -1,28 +1,83 @@
 {
-    "name": "Crystal",
+    "name": "Suicunt",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_WINGULL",
-            "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_UNOWN",
+            "form": 1,
+            "level": 53,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SEAKING",
-            "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_UNOWN",
+            "form": 14,
+            "level": 53,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 254,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 13,
+            "level": 53,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 4,
+            "level": 53,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 254,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 17,
+            "level": 53,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_SPLASH",
+				"MOVE_SPLASH",
+				"MOVE_SPLASH",
+				"MOVE_SPLASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 27,
+            "level": 53,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_SPLASH",
+				"MOVE_SPLASH",
+				"MOVE_SPLASH",
+				"MOVE_SPLASH"
+            ],
+            "power": 254,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,25 @@
 {
-    "name": "Ricardo",
+    "name": "Sheduardo",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TENTACRUEL",
+            "species": "SPECIES_SHEDINJA",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SHADOW_SNEAK",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_X_SCISSOR",
+				"MOVE_GRUDGE"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

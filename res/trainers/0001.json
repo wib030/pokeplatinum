@@ -17,7 +17,9 @@
 				"MOVE_SPLASH"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1,
+			"ball_type": "ITEM_MASTER_BALL"
         },
 		{
             "species": "SPECIES_ESPEON",
@@ -31,7 +33,9 @@
 				"MOVE_SUNNY_DAY"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

@@ -1,20 +1,22 @@
 {
-    "name": "Derek",
+    "name": "Erek",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_RIOLU",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 28,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_REVERSAL"
+            ],
+            "power": 150,
             "ball_seal": 0
         }
     ]

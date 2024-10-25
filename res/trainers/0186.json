@@ -1,37 +1,53 @@
 {
-    "name": "Colton",
+    "name": "Tamama",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_WINGULL",
+            "species": "SPECIES_VENUSAUR",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_GIGA_DRAIN",
+				"MOVE_SLUDGE_BOMB",
+				"MOVE_KNOCK_OFF",
+				"MOVE_SLEEP_POWDER"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_OCTILLERY",
+            "species": "SPECIES_POLIWRATH",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_AQUA_JET",
+				"MOVE_MACH_PUNCH",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_SHEER_COLD"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PELIPPER",
+            "species": "SPECIES_SEAKING",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_HORN_DRILL",
+				"MOVE_WATERFALL",
+				"MOVE_DRILL_PECK",
+				"MOVE_ICY_WIND"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

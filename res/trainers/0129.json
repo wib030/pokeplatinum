@@ -1,38 +1,53 @@
 {
-    "name": "Nathaniel",
+    "name": "& White Gi",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 28,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_WILL_O_WISP",
+				"MOVE_FIRE_SPIN",
+				"MOVE_SMOKE_SCREEN",
+				"MOVE_STEALTH_ROCK"
+            ],
+            "power": 150,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MEDITITE",
+            "species": "SPECIES_LEAFEON",
             "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_RAZOR_LEAF",
+				"MOVE_IRON_TAIL",
+				"MOVE_ATTRACT",
+				"MOVE_SYNTHESIS"
+            ],
+            "power": 150,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_FLAREON",
             "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_BITE",
+				"MOVE_QUICK_ATTACK",
+				"MOVE_ROCK_SMASH",
+				"MOVE_FLAMETHROWER"
+            ],
+            "power": 150,
             "ball_seal": 0
         }
     ]

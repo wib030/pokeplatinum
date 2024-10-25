@@ -1,28 +1,44 @@
 {
-    "name": "Dillon",
+    "name": "Bush",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_REMORAID",
+            "species": "SPECIES_LATIAS",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_FLY"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_FLOATZEL",
+            "species": "SPECIES_SUDOWOODO",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_EXPLOSION"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SUDOWOODO",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_EXPLOSION"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,39 @@
 {
-    "name": "Gabrielle",
+    "name": "Gabriella",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_GOLDUCK",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_CORNN_BERRY",
+            "moves": [
+                "MOVE_FURY_SWIPES",
+				"MOVE_ROLE_PLAY",
+				"MOVE_SCRATCH",
+				"MOVE_AERIAL_ACE"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLAZIKEN",
+            "form": 0,
+            "level": 53,
+            "item": "ITEM_CORNN_BERRY",
+            "moves": [
+                "MOVE_PECK",
+				"MOVE_SAND_ATTACK",
+				"MOVE_FEATHER_DANCE",
+				"MOVE_SCRATCH"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

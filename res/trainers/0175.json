@@ -1,36 +1,65 @@
 {
-    "name": "Cole",
+    "name": "Tackle",
     "class": "TRAINER_CLASS_FISHERMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_WURMPLE",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
+            "level": 50,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_TACKLE",
+				"MOVE_STRING_SHOT",
+				"MOVE_POISON_STING",
+				"MOVE_BUG_BITE"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_REMORAID",
+            "species": "SPECIES_WEEDLE",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
+            "level": 50,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_POISON_STING",
+				"MOVE_STRING_SHOT",
+				"MOVE_BUG_BITE"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_CATERPIE",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
+            "level": 50,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_TACKLE",
+				"MOVE_STRING_SHOT",
+				"MOVE_BUG_BITE",
+				"MOVE_SNORE"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BURMY",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_PROTECT",
+				"MOVE_HIDDEN_POWER",
+				"MOVE_BUG_BITE",
+				"MOVE_TACKLE"
+            ],
             "power": 0,
             "ball_seal": 0
         }

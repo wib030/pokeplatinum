@@ -1,20 +1,68 @@
 {
-    "name": "Erica",
+    "name": "Eel",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_FINNEON",
+            "species": "SPECIES_LUMINEON",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_U_TURN",
+				"MOVE_TAILWIND",
+				"MOVE_ICY_WIND",
+				"MOVE_SWEET_KISS"
+            ],
+            "power": 200,
+            "ball_seal": 21
+        },
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 2,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_ZAP_CANNON",
+				"MOVE_WILL_O_WISP",
+				"MOVE_HYDRO_PUMP",
+				"MOVE_DISCHARGE"
+            ],
+            "power": 200,
+            "ball_seal": 21
+        },
+		{
+            "species": "SPECIES_VAPOREON",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_U_TURN",
+				"MOVE_TOXIC",
+				"MOVE_WISH",
+				"MOVE_MUDDY_WATER"
+            ],
+            "power": 200,
+            "ball_seal": 21
+        },
+		{
+            "species": "SPECIES_LANTURN",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_ZAP_CANNON",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_CONFUSE_RAY",
+				"MOVE_SURF"
+            ],
+            "power": 200,
+            "ball_seal": 21
         }
     ]
 }

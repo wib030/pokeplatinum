@@ -10,9 +10,14 @@
         {
             "species": "SPECIES_GEODUDE",
             "form": 0,
-            "level": 9,
-            "item": null,
-            "moves": null,
+            "level": 11,
+            "item": "ITEM_ROCK_INCENSE",
+            "moves": [
+                "MOVE_ROCK_POLISH",
+				"MOVE_ROCK_TOMB",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_ROCK_SMASH"
+            ],
             "power": 0,
             "ball_seal": 0
         }

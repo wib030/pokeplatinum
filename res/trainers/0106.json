@@ -1,28 +1,39 @@
 {
-    "name": "Mary",
+    "name": "Mouthwash",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_FINNEON",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 35,
+            "item": "ITEM_WACAN_BERRY",
+            "moves": [
+                "MOVE_ROOST",
+				"MOVE_AQUA_RING",
+				"MOVE_BRINE",
+				"MOVE_KNOCK_OFF"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PELIPPER",
+            "species": "SPECIES_MANECTRIC",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 35,
+            "item": "ITEM_MAGNET",
+            "moves": [
+                "MOVE_DISCHARGE",
+				"MOVE_HIDDEN_POWER",
+				"MOVE_SIGNAL_BEAM",
+				"MOVE_LIGHT_SCREEN"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

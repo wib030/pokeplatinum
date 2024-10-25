@@ -1,26 +1,53 @@
 {
-    "name": "Laura",
-    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_FEMALE",
+    "name": "cartoonBoss",
+    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TROPIUS",
+            "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 42,
-            "item": null,
+            "level": 44,
+            "item": "ITEM_BLACKGLASSES",
             "moves": [
-                "MOVE_AIR_SLASH",
-                "MOVE_BODY_SLAM",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_SWEET_SCENT"
+                "MOVE_ENCORE",
+				"MOVE_HEADBUTT",
+				"MOVE_FOCUS_PUNCH",
+				"MOVE_PAYBACK"
             ],
-            "power": 50,
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MR_MIME",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_WISE_GLASSES",
+            "moves": [
+                "MOVE_MIND_READER",
+				"MOVE_COUNTER",
+				"MOVE_TORMENT",
+				"MOVE_SHADOW_BALL"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HONCHKROW",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_POWER_HERB",
+            "moves": [
+                "MOVE_SUCKER_PUNCH",
+				"MOVE_SUPERPOWER",
+				"MOVE_SKY_ATTACK",
+				"MOVE_PAYBACK"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

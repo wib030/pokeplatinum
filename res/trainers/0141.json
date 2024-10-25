@@ -1,54 +1,53 @@
 {
-    "name": "Olivia",
-    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_FEMALE",
+    "name": "DirtyDan5",
+    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_KIRLIA",
+            "species": "SPECIES_SNORLAX",
             "form": 0,
-            "level": 38,
-            "item": null,
+            "level": 45,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_FUTURE_SIGHT",
-                "MOVE_PSYCHIC",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_LUCKY_CHANT"
+                "MOVE_REST",
+				"MOVE_SLEEP_TALK",
+				"MOVE_PURSUIT",
+				"MOVE_GIGA_IMPACT"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SEAKING",
+            "species": "SPECIES_STARMIE",
             "form": 0,
-            "level": 39,
-            "item": null,
+            "level": 45,
+            "item": "ITEM_FRESH_WATER",
             "moves": [
-                "MOVE_WATERFALL",
-                "MOVE_POISON_JAB",
-                "MOVE_SUPERSONIC",
-                "MOVE_AQUA_RING"
+                "MOVE_ICY_WIND",
+				"MOVE_PAIN_SPLIT",
+				"MOVE_SWAGGER",
+				"MOVE_SKILL_SWAP"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BUNEARY",
-            "form": 0,
-            "level": 38,
-            "item": null,
+            "species": "SPECIES_ROTOM",
+            "form": 2,
+            "level": 45,
+            "item": "ITEM_FRESH_WATER",
             "moves": [
-                "MOVE_DIZZY_PUNCH",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_JUMP_KICK",
-                "MOVE_SHADOW_BALL"
+                "MOVE_UPROAR",
+				"MOVE_SNATCH",
+				"MOVE_ASTONISH",
+				"MOVE_PAIN_SPLIT"
             ],
-            "power": 50,
+            "power": 180,
             "ball_seal": 0
         }
     ]

@@ -1,28 +1,95 @@
 {
-    "name": "Aubree",
+    "name": "Days",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_BIBAREL",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_AMNESIA",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_GROWL",
+				"MOVE_REST"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_AZUMARILL",
+            "species": "SPECIES_WAILORD",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_BLOCK",
+				"MOVE_AMNESIA",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_GROWL"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLISSEY",
+            "form": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_CHARM",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_REST",
+				"MOVE_MINIMIZE"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BRONZONG",
+            "form": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_IMPRISON",
+				"MOVE_EARTHQUAKE",
+				"MOVE_IRON_DEFENSE",
+				"MOVE_CALM_MIND"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_GROWL",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_CAPTIVATE",
+				"MOVE_MILK_DRINK"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SNORLAX",
+            "form": 0,
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_AMNESIA",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_BLOCK",
+				"MOVE_REST"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]
