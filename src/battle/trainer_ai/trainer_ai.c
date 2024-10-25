@@ -4392,9 +4392,10 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     int i, j, k;
     u8 defender1, defender2, defender, battlerPartner, side;
     u8 aiSlot1, aiSlot2;
+    u8 defenderIVs[STAT_MAX];
     u16 move, opponentMove;
-    int type, range, effect, moveEffect, moveVolatileStatus, moveStatus, partyCount, opponentMoveType;
-    u32 effectiveness, sideCondition;
+    int type, range, effect, moveEffect, moveVolatileStatus, moveStatus, partyCount, opponentMoveType, opponentMoveDamage;
+    u32 effectiveness, sideCondition, opponentEffectiveness;
     int start, end;
     int numMoves;
     Pokemon *mon;
@@ -5249,36 +5250,163 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     case BATTLE_EFFECT_SPEED_DOWN_2:
                                     
                                     case BATTLE_EFFECT_ACC_DOWN:
+                                        break;
 
                                     // Defog
                                     case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
 
+                                        side = Battler_Side(battleSys, battler);
+
+                                        if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_DEFOGGABLE) {
+                                            
+                                            if (battleCtx->battleMons[defender].ability != ABILITY_DEFIANT
+                                                && battleCtx->battleMons[defender].ability != ABILITY_COMPETITIVE) {
+                                                    return FALSE;
+                                            }
+                                        }
+                                        break;
+
                                     // Disable
                                     case BATTLE_EFFECT_DISABLE:
 
+                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                            if (battleCtx->battleMons[defender].moveEffectsData.disabledTurns == 0) {
+
+                                                // 10% chance to swap out
+                                                if (BattleSystem_RandNext(battleSys) % 10) < 9) {
+                                                    return FALSE;
+                                                }
+                                            }
+                                        }
+                                        break;
+
                                     // Embargo
                                     case BATTLE_EFFECT_PREVENT_ITEM_USE:
+                                        
+                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                            if (battleCtx->battleMons[defender].moveEffectsData.embargoTurns == 0) {
+                                                if (battleCtx->battleMons[defender].heldItem == ITEM_NONE
+                                                    || battleCtx->recycleItem[defender] != ITEM_NONE) {
+
+                                                    // 10% chance to swap out
+                                                    if (BattleSystem_RandNext(battleSys) % 10) < 9) {
+                                                    return FALSE;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
 
                                     // Encore
                                     case BATTLE_EFFECT_ENCORE:
+                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                            if (battleCtx->battleMons[defender].moveEffectsData.encoredTurns == 0) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
 
                                     // Heart Swap
                                     case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                        if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, defender)) {
+                                            return FALSE;
+                                        }
+                                        if (AI_IsModeratelyBoosted(battleSys, battleCtx, defender)) {
+                                            if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler) == FALSE) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
 
                                     // Mimic
                                     case BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE:
+                                        if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2) >= 40) {
+                                            return FALSE;
+                                        }
+                                        break;
 
                                     // Pain Split
                                     case BATTLE_EFFECT_AVERAGE_HP:
+                                        // Stay in if we would stand to gain more than 25% HP back
+                                        if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[defender].curHP * 2 / 3)) {
+                                            return FALSE;
+                                        }
+                                        break;
+                                        
 
                                     // Power Swap
                                     case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+                                        if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, defender)) {
+                                            if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler) == FALSE) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
 
                                     // Psych Up
                                     case BATTLE_EFFECT_COPY_STAT_CHANGES:
+                                        if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, defender)) {
+                                            if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler) == FALSE) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        if (AI_IsModeratelyBoosted(battleSys, battleCtx, defender)) {
+                                            if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler) == FALSE) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
 
                                     // Roar and Whirlwind
                                     case BATTLE_EFFECT_FORCE_SWITCH:
+                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                            if (move != MOVE_ROAR || battleCtx->battleMons[defender].ability != ABILITY_SOUNDPROOF) {
+                                                // Stay in for Roar / Whirlwind if we live
+                                                for (k = 0; k < STAT_MAX; k++) {
+                                                    defenderIVs[k] = BattleMon_Get(battleCtx, defender, BATTLEMON_HP_IV + k, NULL);
+                                                }
+
+                                                for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+                                                    opponentEffectiveness = 0;
+                                                    opponentMove = battleCtx->battleMons[defender].moves[k];
+                                                    opponentMoveType = MOVE_DATA(opponentMove).type;
+
+                                                    if (MOVE_DATA(opponentMove).power > 0) {
+                                                        opponentDamage = BattleSystem_CalcMoveDamage(battleSys,
+                                                        battleCtx,
+                                                        opponentMove,
+                                                        battleCtx->sideConditionsMask[side],
+                                                        battleCtx->fieldConditionsMask,
+                                                        MOVE_DATA(opponentMove).power,
+                                                        opponentMoveType,
+                                                        defender,
+                                                        battler,
+                                                        1);
+
+                                                        opponentDamage = BattleSystem_ApplyTypeChart(battleSys,
+                                                        battleCtx,
+                                                        opponentMove,
+                                                        opponentMoveType,
+                                                        defender,
+                                                        battler,
+                                                        opponentDamage,
+                                                        &opponentEffectiveness);
+
+                                                        if ((opponentEffectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
+                                                            if (battleCtx->battleMons[battler].curHP < opponentDamage) {
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                if (k == LEARNED_MOVES_MAX) {
+                                                    return FALSE;
+                                                }
+                                            }
+                                        }
+                                        break;
+
 
                                     // Sketch
                                     case BATTLE_EFFECT_LEARN_MOVE_PERMANENT:
@@ -6135,7 +6263,7 @@ static BOOL AI_IsModeratelyBoosted(BattleSystem *battleSys, BattleContext *battl
         }
     }
 
-    for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
+    for (stat = BATTLE_STAT_HP; stat < NUM_BOOSTABLE_STATS; stat++) {
 
         if (stat == BATTLE_STAT_ATTACK) {
 
@@ -6158,7 +6286,7 @@ static BOOL AI_IsModeratelyBoosted(BattleSystem *battleSys, BattleContext *battl
             }
         }
 
-        if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE || BATTLE_STAT_DEFENSE) {
+        if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE || stat == BATTLE_STAT_EVASION) {
             numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
         }
     }
