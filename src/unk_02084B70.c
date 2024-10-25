@@ -1147,7 +1147,7 @@ static void sub_02086590 (GameWindowLayout * param0, Pokemon * param1, u32 param
 
     if (param0->unk_5A4->unk_24 != 0) {
         if (Item_IsHMMove(param0->unk_5A4->unk_26) == 0) {
-            Bag_SubtractItem(param0->unk_5A4->unk_04, param0->unk_5A4->unk_24, 1, 12);
+            //Bag_SubtractItem(param0->unk_5A4->unk_04, param0->unk_5A4->unk_24, 1, 12);
         }
 
         Pokemon_UpdateFriendship(param1, 4, (u16)sub_02086930(param0));
