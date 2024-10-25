@@ -60,6 +60,8 @@ def parse_party_mon(mon: dict, has_moves: bool, has_items: bool) -> bytes:
         binary_mon.extend(parse_poke_moves(mon['moves']))
     
     binary_mon.extend(j2b.parse_int(mon['ball_seal'], 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ability', 0), 2))
+    binary_mon.extend(j2b.parse_const(mon.get('ball_type', "ITEM_POKE_BALL"), 2, items.Item))
     return binary_mon
 
 

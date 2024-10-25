@@ -78,6 +78,8 @@ typedef struct TrainerMonWithMovesAndItem {
     u16 item; //< The Pokemon's held item.
     u16 moves[4]; //< The Pokemon's known moves.
     u16 cbSeal; //< Ball seal applied to the Pokemon.
+	u16 ability;
+	u16 ball_type;
 } TrainerMonWithMovesAndItem;
 
 #endif // POKEPLATINUM_STRUCT_TRAINER_DATA_H
