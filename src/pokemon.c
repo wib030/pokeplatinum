@@ -464,7 +464,7 @@ void Pokemon_CalcStats(Pokemon *mon)
     PokemonPersonalData_LoadForm(monSpecies, monForm, monPersonalData);
 
     int newMaxHp;
-    if (monSpecies == SPECIES_SHEDINJA) {
+    if ((monSpecies == SPECIES_SHEDINJA) || (monSpecies == SPECIES_PHIONE)) {
         newMaxHp = 1;
     } else {
         newMaxHp = ((2 * monPersonalData->baseHp + monHpIV + monHpEV / 4) * monLevel / 100 + monLevel + 10);
