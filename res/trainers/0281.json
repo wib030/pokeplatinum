@@ -1,10 +1,9 @@
 {
-    "name": "Zachery",
+    "name": "RowanFan3",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
@@ -12,28 +11,29 @@
         {
             "species": "SPECIES_ELECTABUZZ",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 52,
+            "item": "ITEM_ELECTIRIZER",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_SHOCK_WAVE",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_IRON_TAIL"
+                "MOVE_CROSS_CHOP",
+				"MOVE_MEDITATE",
+				"MOVE_MAGNET_RISE",
+				"MOVE_UPROAR"
             ],
-            "power": 60,
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MAGNETON",
+            "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 48,
-            "item": null,
+            "level": 52,
+            "item": "ITEM_YELLOW_SCARF",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_TRI_ATTACK",
-                "MOVE_MIRROR_SHOT"
+                "MOVE_DIG",
+				"MOVE_BIDE",
+				"MOVE_MUD_SLAP",
+				"MOVE_ROLLOUT"
             ],
-            "power": 60,
+            "power": 180,
             "ball_seal": 0
         }
     ]

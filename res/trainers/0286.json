@@ -1,10 +1,9 @@
 {
-    "name": "Jamie",
+    "name": "GrossGirl82",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
@@ -12,15 +11,57 @@
         {
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 60,
-            "item": null,
+            "level": 62,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+				"MOVE_BULLET_PUNCH",
+				"MOVE_EXPLOSION",
+				"MOVE_SCARY_FACE"
+            ],
+            "power": 200,
+            "ball_seal": 11
+        },
+		{
+            "species": "SPECIES_METAGROSS",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_SHUCA_BERRY",
+            "moves": [
+                "MOVE_AGILITY",
+				"MOVE_METEOR_MASH",
+				"MOVE_EARTHQUAKE",
+				"MOVE_THUNDER_PUNCH"
+            ],
+            "power": 200,
+            "ball_seal": 11
+        },
+		{
+            "species": "SPECIES_METAGROSS",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_COLBUR_BERRY",
+            "moves": [
+                "MOVE_AGILITY",
+				"MOVE_EARTHQUAKE",
+				"MOVE_ZEN_HEADBUTT",
+				"MOVE_ICE_PUNCH"
+            ],
+            "power": 200,
+            "ball_seal": 11
+        },
+		{
+            "species": "SPECIES_METAGROSS",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_METEOR_MASH",
-                "MOVE_HAMMER_ARM",
-                "MOVE_PSYCHIC",
-                "MOVE_MAGNET_RISE"
+				"MOVE_EARTHQUAKE",
+				"MOVE_PURSUIT",
+				"MOVE_PSYCHIC"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 11
         }
     ]

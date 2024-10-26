@@ -1,28 +1,39 @@
 {
-    "name": "Grunt",
+    "name": "Slop",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_SLUGMA",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 14,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_STOCKPILE",
+				"MOVE_SWALLOW",
+				"MOVE_SPIT_UP",
+				"MOVE_MEMENTO"
+            ],
+            "power": 40,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_GRIMER",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 13,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SNORE",
+				"MOVE_REST",
+				"MOVE_LICK",
+				"MOVE_POISON_GAS"
+            ],
+            "power": 40,
             "ball_seal": 0
         }
     ]

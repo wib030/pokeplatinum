@@ -1,40 +1,95 @@
 {
-    "name": "Ruben",
+    "name": "CrumbKING",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NUZLEAF",
+            "species": "SPECIES_MAMOSWINE",
             "form": 0,
-            "level": 56,
-            "item": null,
+            "level": 61,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_EXTRASENSORY",
-                "MOVE_FAKE_OUT",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_RAZOR_LEAF"
+                "MOVE_EARTHQUAKE",
+				"MOVE_ICE_BALL",
+				"MOVE_KNOCK_OFF",
+				"MOVE_ICE_SHARD"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 57,
-            "item": null,
+            "level": 61,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_AQUA_TAIL",
-                "MOVE_HYDRO_PUMP",
-                "MOVE_DRAGON_DANCE",
-                "MOVE_ICE_FANG"
+                "MOVE_MILK_DRINK",
+				"MOVE_BODY_SLAM",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_EARTHQUAKE"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SHELGON",
+            "form": 0,
+            "level": 61,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_WISH",
+				"MOVE_DRAGON_BREATH",
+				"MOVE_FLAMETHROWER",
+				"MOVE_PROTECT"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PARASECT",
+            "form": 0,
+            "level": 61,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_SPORE",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_LEECH_LIFE",
+				"MOVE_KNOCK_OFF"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 61,
+            "item": "ITEM_SHUCA_BERRY",
+            "moves": [
+                "MOVE_THUNDER_WAVE",
+				"MOVE_ENCORE",
+				"MOVE_WISH",
+				"MOVE_VOLT_TACKLE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_KABUTO",
+            "form": 0,
+            "level": 61,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_RAPID_SPIN",
+				"MOVE_KNOCK_OFF",
+				"MOVE_ICY_WIND",
+				"MOVE_TOXIC"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

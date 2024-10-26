@@ -1,26 +1,40 @@
 {
-    "name": "Cesar",
+    "name": "L3G10N",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 41,
+            "item": "ITEM_LIECHI_BERRY",
             "moves": [
-                "MOVE_METAL_CLAW",
-                "MOVE_X_SCISSOR",
-                "MOVE_SLASH",
-                "MOVE_PURSUIT"
+                "MOVE_WING_ATTACK",
+				"MOVE_BATON_PASS",
+				"MOVE_AGILITY",
+				"MOVE_SUBSTITUTE"
             ],
-            "power": 60,
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SCIZOR",
+            "form": 0,
+            "level": 41,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_BUG_BITE",
+				"MOVE_PURSUIT",
+				"MOVE_BULLET_PUNCH",
+				"MOVE_ROCK_SMASH"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

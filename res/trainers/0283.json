@@ -1,52 +1,56 @@
 {
-    "name": "Breanna",
+    "name": "RihannaFan6",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 35,
-            "item": null,
+            "level": 41,
+            "item": "ITEM_METRONOME",
             "moves": [
-                "MOVE_GYRO_BALL",
-                "MOVE_EXTRASENSORY",
-                "MOVE_CONFUSE_RAY"
+                "MOVE_SWAGGER",
+				"MOVE_PSYCH_UP",
+				"MOVE_IRON_HEAD",
+				"MOVE_ZEN_HEADBUTT"
             ],
-            "power": 60,
+            "power": 160,
+            "ball_seal": 0,
+			"ability": 1
+        },
+        {
+            "species": "SPECIES_BRONZONG",
+            "form": 0,
+            "level": 41,
+            "item": "ITEM_NEVERMELTICE",
+            "moves": [
+                "MOVE_CALM_MIND",
+				"MOVE_IRON_DEFENSE",
+				"MOVE_CONFUSION",
+				"MOVE_ANCIENT_POWER"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 36,
-            "item": null,
+            "level": 41,
+            "item": "ITEM_TM78",
             "moves": [
-                "MOVE_GYRO_BALL",
-                "MOVE_EXTRASENSORY",
-                "MOVE_CONFUSE_RAY"
+                "MOVE_TRICK_ROOM",
+				"MOVE_IRON_HEAD",
+				"MOVE_CONFUSE_RAY",
+				"MOVE_TOXIC"
             ],
-            "power": 60,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_BRONZOR",
-            "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": [
-                "MOVE_GYRO_BALL",
-                "MOVE_EXTRASENSORY",
-                "MOVE_CONFUSE_RAY"
-            ],
-            "power": 60,
-            "ball_seal": 0
+            "power": 160,
+            "ball_seal": 0,
+			"ability": 1
         }
     ]
 }

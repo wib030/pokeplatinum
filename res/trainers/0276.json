@@ -1,19 +1,39 @@
 {
-    "name": "Edwin",
+    "name": "Smash!",
     "class": "TRAINER_CLASS_COLLECTOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MUNCHLAX",
+            "species": "SPECIES_ARBOK",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_HYPNOSIS",
+				"MOVE_GLARE",
+				"MOVE_WRAP",
+				"MOVE_SLUDGE_BOMB"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HARIYAMA",
+            "form": 0,
+            "level": 26,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ARM_THRUST",
+				"MOVE_ROCK_CLIMB",
+				"MOVE_WAKE_UP_SLAP",
+				"MOVE_FAKE_OUT"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

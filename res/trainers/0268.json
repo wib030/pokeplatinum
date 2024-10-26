@@ -9,45 +9,59 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 46,
+            "item": "ITEM_CHOPLE_BERRY",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_ROOST",
+				"MOVE_MIND_READER",
+				"MOVE_HYPNOSIS",
+				"MOVE_PRESENT"
             ],
-            "power": 0,
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 46,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_ROOST",
+				"MOVE_MIND_READER",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_LAST_RESORT"
             ],
-            "power": 0,
+            "power": 160,
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 46,
+            "item": "ITEM_AIR_MAIL",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_ROOST",
+				"MOVE_MEGAHORN",
+				"MOVE_DOUBLE_KICK",
+				"MOVE_FLY"
             ],
-            "power": 0,
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ABOMASNOW",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_OCCA_BERRY",
+            "moves": [
+                "MOVE_OUTRAGE",
+				"MOVE_SKULL_BASH",
+				"MOVE_WOOD_HAMMER",
+				"MOVE_BLIZZARD"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

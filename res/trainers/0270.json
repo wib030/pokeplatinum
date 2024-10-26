@@ -1,54 +1,57 @@
 {
-    "name": "Savannah",
-    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_FEMALE",
-    "items": [],
+    "name": "sodaJerk88",
+    "class": "TRAINER_CLASS_SKIER_FEMALE",
+    "items": [
+		"ITEM_FULL_HEAL",
+		"ITEM_SODA_POP",
+		"ITEM_SODA_POP"
+	],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SNORUNT",
+            "species": "SPECIES_DEWGONG",
             "form": 0,
-            "level": 39,
-            "item": null,
+            "level": 46,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_ICE_FANG",
-                "MOVE_CRUNCH",
-                "MOVE_HAIL",
-                "MOVE_PROTECT"
+                "MOVE_RECOVER",
+				"MOVE_AQUA_RING",
+				"MOVE_DIVE",
+				"MOVE_STOCKPILE"
             ],
-            "power": 60,
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SNORUNT",
+            "species": "SPECIES_LAPRAS",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 46,
+            "item": "ITEM_SALAC_BERRY",
             "moves": [
-                "MOVE_ICE_FANG",
-                "MOVE_CRUNCH",
-                "MOVE_HAIL",
-                "MOVE_PROTECT"
+                "MOVE_DRAGON_DANCE",
+				"MOVE_AQUA_TAIL",
+				"MOVE_OUTRAGE",
+				"MOVE_ROCK_SMASH"
             ],
-            "power": 60,
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GLALIE",
+            "species": "SPECIES_WALREIN",
             "form": 0,
-            "level": 42,
-            "item": null,
+            "level": 46,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_ICE_FANG",
-                "MOVE_CRUNCH",
-                "MOVE_HAIL",
-                "MOVE_PROTECT"
+                "MOVE_AQUA_RING",
+				"MOVE_RECOVER",
+				"MOVE_STOCKPILE",
+				"MOVE_DIVE"
             ],
-            "power": 60,
+            "power": 160,
             "ball_seal": 0
         }
     ]

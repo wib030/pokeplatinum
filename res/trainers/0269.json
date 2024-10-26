@@ -1,26 +1,53 @@
 {
-    "name": "Isaiah",
+    "name": "IsaiahFan15",
     "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PILOSWINE",
+            "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 47,
+            "item": "ITEM_ICICLE_PLATE",
             "moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_FURY_ATTACK",
-                "MOVE_ICE_FANG",
-                "MOVE_ANCIENT_POWER"
+                "MOVE_DETECT",
+				"MOVE_ICY_WIND",
+				"MOVE_ROAR",
+				"MOVE_WISH"
             ],
-            "power": 60,
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DELIBIRD",
+            "form": 0,
+            "level": 46,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_PRESENT",
+				"MOVE_SWAGGER",
+				"MOVE_FUTURE_SIGHT",
+				"MOVE_MIMIC"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_JYNX",
+            "form": 0,
+            "level": 46,
+            "item": "ITEM_WISE_GLASSES",
+            "moves": [
+                "MOVE_TORMENT",
+				"MOVE_MEDITATE",
+				"MOVE_WISH",
+				"MOVE_ZEN_HEADBUTT"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

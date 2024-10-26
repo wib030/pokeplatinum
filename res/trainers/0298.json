@@ -1,19 +1,25 @@
 {
-    "name": "Grunt",
+    "name": "Spitter",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_SMEARGLE",
             "form": 0,
             "level": 13,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_DESTINY_KNOT",
+            "moves": [
+                "MOVE_BULLET_SEED",
+				"MOVE_SPIT_UP",
+				"MOVE_SWEET_KISS",
+				"MOVE_LICK"
+            ],
+            "power": 40,
             "ball_seal": 0
         }
     ]

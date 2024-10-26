@@ -3,8 +3,7 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-		"AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_BASIC"
     ],
     "double_battle": false,
     "party": [

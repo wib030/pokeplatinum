@@ -1,28 +1,39 @@
 {
-    "name": "Tony",
+    "name": "Humphrey",
     "class": "TRAINER_CLASS_GUITARIST",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_KRICKETUNE",
+            "species": "SPECIES_CHANSEY",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 38,
+            "item": "ITEM_METRONOME",
+            "moves": [
+                "MOVE_SING",
+				"MOVE_FLING",
+				"MOVE_SKILL_SWAP",
+				"MOVE_BLIZZARD"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_PERSIAN",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 38,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_FAKE_OUT",
+				"MOVE_SCREECH",
+				"MOVE_ROAR",
+				"MOVE_PETAL_DANCE"
+            ],
+            "power": 100,
             "ball_seal": 18
         }
     ]

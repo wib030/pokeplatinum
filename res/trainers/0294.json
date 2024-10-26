@@ -1,28 +1,68 @@
 {
-    "name": "Emma & Lil",
+    "name": "Lima & Bean",
     "class": "TRAINER_CLASS_TWINS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_TAG_STRATEGY"
     ],
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_BONSLY",
+            "species": "SPECIES_PIKACHU",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_FAKE_OUT",
+				"MOVE_FOLLOW_ME",
+				"MOVE_THUNDER_PUNCH",
+				"MOVE_PROTECT"
+            ],
+            "power": 80,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MIME_JR",
+            "species": "SPECIES_MAGBY",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_BELLY_DRUM",
+				"MOVE_FIRE_PUNCH",
+				"MOVE_MACH_PUNCH",
+				"MOVE_FAINT_ATTACK"
+            ],
+            "power": 80,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_CHIMECHO",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_REFLECT",
+				"MOVE_LIGHT_SCREEN",
+				"MOVE_ICY_WIND",
+				"MOVE_THUNDER_WAVE"
+            ],
+            "power": 80,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GOLBAT",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+				"MOVE_AIR_CUTTER",
+				"MOVE_OMINOUS_WIND",
+				"MOVE_HIDDEN_POWER"
+            ],
+            "power": 80,
             "ball_seal": 0
         }
     ]

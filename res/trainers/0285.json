@@ -1,41 +1,94 @@
 {
-    "name": "Destiny",
+    "name": "RaichuLuvr1",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ELECTABUZZ",
+            "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 52,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_SHOCK_WAVE",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_IRON_TAIL"
+                "MOVE_FAKE_OUT",
+				"MOVE_KNOCK_OFF",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_TEETER_DANCE"
             ],
-            "power": 60,
-            "ball_seal": 0
+            "power": 180,
+            "ball_seal": 6
         },
         {
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 48,
-            "item": null,
+            "level": 52,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_DIG",
-                "MOVE_THUNDER_WAVE",
-                "MOVE_LIGHT_SCREEN"
+                "MOVE_VOLT_TACKLE",
+				"MOVE_FLY",
+				"MOVE_DYNAMIC_PUNCH",
+				"MOVE_KNOCK_OFF"
             ],
-            "power": 60,
-            "ball_seal": 0
+            "power": 180,
+            "ball_seal": 6
+        },
+		{
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 52,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_THUNDER",
+				"MOVE_SURF",
+				"MOVE_GRASS_KNOT",
+				"MOVE_SIGNAL_BEAM"
+            ],
+            "power": 180,
+            "ball_seal": 6
+        },
+		{
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 52,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_DISCHARGE",
+				"MOVE_SURF"
+            ],
+            "power": 180,
+            "ball_seal": 6
+        },
+		{
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 52,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_ENCORE",
+				"MOVE_NASTY_PLOT",
+				"MOVE_THUNDERBOLT",
+				"MOVE_SURF"
+            ],
+            "power": 180,
+            "ball_seal": 6
+        },
+		{
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 52,
+            "item": "ITEM_PINK_SCARF",
+            "moves": [
+                "MOVE_ATTRACT",
+				"MOVE_TICKLE",
+				"MOVE_DOUBLE_SLAP",
+				"MOVE_SWEET_KISS"
+            ],
+            "power": 180,
+            "ball_seal": 6
         }
     ]
 }

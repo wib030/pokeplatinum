@@ -1,19 +1,39 @@
 {
-    "name": "Fernando",
+    "name": "Folgore",
     "class": "TRAINER_CLASS_COLLECTOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HERACROSS",
+            "species": "SPECIES_MR_MIME",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 26,
+            "item": "ITEM_LUCKY_PUNCH",
+            "moves": [
+                "MOVE_DOUBLE_SLAP",
+				"MOVE_SNATCH",
+				"MOVE_WAKE_UP_SLAP",
+				"MOVE_FAKE_OUT"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PSYDUCK",
+            "form": 0,
+            "level": 26,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+				"MOVE_ENCORE",
+				"MOVE_MIMIC",
+				"MOVE_CAPTIVATE"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

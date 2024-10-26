@@ -1,64 +1,64 @@
 {
-    "name": "Brady",
+    "name": "Bugby",
     "class": "TRAINER_CLASS_COLLECTOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SKORUPI",
+            "species": "SPECIES_ARIADOS",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_NIGHT_SHADE",
+				"MOVE_TOXIC_SPIKES",
+				"MOVE_POISON_JAB",
+				"MOVE_SUCKER_PUNCH"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_TANGELA",
+            "species": "SPECIES_GRAVELER",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_MAGNITUDE"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_YANMA",
+            "species": "SPECIES_VIBRAVA",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SAND_TOMB",
+				"MOVE_U_TURN",
+				"MOVE_FLY",
+				"MOVE_TOXIC"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CARNIVINE",
+            "species": "SPECIES_SCYTHER",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_CROAGUNK",
-            "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_TROPIUS",
-            "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_U_TURN",
+				"MOVE_FALSE_SWIPE",
+				"MOVE_WING_ATTACK",
+				"MOVE_BRICK_BREAK"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]
