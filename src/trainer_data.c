@@ -327,6 +327,34 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 			Pokemon_SetValue(mon, MON_DATA_POKEBALL, &trmon[i].ball_type);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
+			Pokemon_SetValue(mon, MON_DATA_FRIENDSHIP, &trmon[i].friendship);
+			
+			if (trmon[i].status != 0)
+			{
+				Pokemon_SetValue(mon, MON_DATA_STATUS_CONDITION, &trmon[i].status);
+			}
+			
+			if (trmon[i].ivHP < 32)
+			{
+				Pokemon_SetValue(mon, MON_DATA_HP_IV, &trmon[i].ivHP);
+				Pokemon_SetValue(mon, MON_DATA_ATK_IV, &trmon[i].ivATK);
+				Pokemon_SetValue(mon, MON_DATA_DEF_IV, &trmon[i].ivDEF);
+				Pokemon_SetValue(mon, MON_DATA_SPEED_IV, &trmon[i].ivSPEED);
+				Pokemon_SetValue(mon, MON_DATA_SPATK_IV, &trmon[i].ivSPATK);
+				Pokemon_SetValue(mon, MON_DATA_SPDEF_IV, &trmon[i].ivSPDEF);
+			}
+			
+			if (trmon[i].evHP < 253)
+			{
+				Pokemon_SetValue(mon, MON_DATA_HP_EV, &trmon[i].evHP);
+				Pokemon_SetValue(mon, MON_DATA_ATK_EV, &trmon[i].evATK);
+				Pokemon_SetValue(mon, MON_DATA_DEF_EV, &trmon[i].evDEF);
+				Pokemon_SetValue(mon, MON_DATA_SPEED_EV, &trmon[i].evSPEED);
+				Pokemon_SetValue(mon, MON_DATA_SPATK_EV, &trmon[i].evSPATK);
+				Pokemon_SetValue(mon, MON_DATA_SPDEF_EV, &trmon[i].evSPDEF);
+			}
+			
+			Pokemon_CalcLevelAndStats(mon);
             Party_AddPokemon(battleParams->parties[battler], mon);
         }
 

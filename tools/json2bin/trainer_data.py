@@ -62,6 +62,20 @@ def parse_party_mon(mon: dict, has_moves: bool, has_items: bool) -> bytes:
     binary_mon.extend(j2b.parse_int(mon['ball_seal'], 2))
     binary_mon.extend(j2b.parse_int(mon.get('ability', 0), 2))
     binary_mon.extend(j2b.parse_const(mon.get('ball_type', "ITEM_POKE_BALL"), 2, items.Item))
+    binary_mon.extend(j2b.parse_int(mon.get('status', 0), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ivHP', 32), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ivATK', 32), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ivDEF', 32), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ivSPEED', 32), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ivSPATK', 32), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('ivSPDEF', 32), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('evHP', 253), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('evATK', 253), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('evDEF', 253), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('evSPEED', 253), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('evSPATK', 253), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('evSPDEF', 253), 2))
+    binary_mon.extend(j2b.parse_int(mon.get('friendship', 70), 2))
     return binary_mon
 
 
