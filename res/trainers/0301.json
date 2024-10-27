@@ -9,45 +9,47 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_PLUSLE",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 52,
+            "item": "ITEM_SALAC_BERRY",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_NASTY_PLOT",
+				"MOVE_ENCORE",
+				"MOVE_THUNDERBOLT",
+				"MOVE_ICE_BEAM"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 200,
+            "ball_seal": 0,
+			"ability": 1
         },
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MINUN",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 52,
+            "item": "ITEM_QUICK_CLAW",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_THUNDER_WAVE",
+				"MOVE_FAKE_TEARS",
+				"MOVE_DISCHARGE",
+				"MOVE_WISH"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 200,
+            "ball_seal": 0,
+			"ability": 1
         },
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_PICHU",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 52,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_ENDEAVOR",
+				"MOVE_NASTY_PLOT",
+				"MOVE_THUNDER",
+				"MOVE_REVERSAL"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         }
     ]

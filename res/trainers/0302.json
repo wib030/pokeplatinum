@@ -1,28 +1,39 @@
 {
-    "name": "Preston",
+    "name": "Motorfred",
     "class": "TRAINER_CLASS_GUITARIST",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 10,
+            "level": 52,
+            "item": "ITEM_BLUE_SCARF",
+            "moves": [
+                "MOVE_SURF",
+				"MOVE_FLASH",
+				"MOVE_FLY",
+				"MOVE_STRENGTH"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_MAGNEZONE",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 10,
+            "level": 52,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_DISCHARGE",
+				"MOVE_THUNDERBOLT",
+				"MOVE_FLASH_CANNON",
+				"MOVE_TRI_ATTACK"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]
