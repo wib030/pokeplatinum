@@ -114,6 +114,169 @@ static const u16 sRemoveAbilityMoves[] = {
     0xFFFF
 };
 
+static const u8 sRemovableAbilities[] = {
+    ABILITY_SPEED_BOOST,
+    ABILITY_STURDY,
+    ABILITY_VOLT_ABSORB,
+    ABILITY_WATER_ABSORB,
+    ABILITY_COMPOUND_EYES,
+    ABILITY_IMMUNITY,
+    ABILITY_FLASH_FIRE,
+    ABILITY_SHIELD_DUST,
+    ABILITY_SHADOW_TAG,
+    ABILITY_ROUGH_SKIN,
+    ABILITY_WONDER_GUARD,
+    ABILITY_LEVITATE,
+    ABILITY_EFFECT_SPORE,
+    ABILITY_SYNCHRONIZE,
+    ABILITY_CLEAR_BODY,
+    ABILITY_NATURAL_CURE,
+    ABILITY_LIGHTNING_ROD,
+    ABILITY_SERENE_GRACE,
+    ABILITY_SWIFT_SWIM,
+    ABILITY_CHLOROPHYLL,
+    ABILITY_ILLUMINATE,
+    ABILITY_HUGE_POWER,
+    ABILITY_MAGNET_PULL,
+    ABILITY_SOUNDPROOF,
+    ABILITY_RAIN_DISH,
+    ABILITY_PRESSURE,
+    ABILITY_THICK_FAT,
+    ABILITY_EARLY_BIRD,
+    ABILITY_FLAME_BODY,
+    ABILITY_HYPER_CUTTER,
+    ABILITY_HUSTLE,
+    ABILITY_PLUS,
+    ABILITY_MINUS,
+    ABILITY_FORECAST,
+    ABILITY_SHED_SKIN,
+    ABILITY_GUTS,
+    ABILITY_MARVEL_SCALE,
+    ABILITY_ROCK_HEAD,
+    ABILITY_ARENA_TRAP,
+    ABILITY_WHITE_SMOKE,
+    ABILITY_PURE_POWER,
+    ABILITY_AIR_LOCK,
+    ABILITY_MOTOR_DRIVE,
+    ABILITY_RIVALRY,
+    ABILITY_SNOW_CLOAK,
+    ABILITY_GLUTTONY,
+    ABILITY_ANGER_POINT,
+    ABILITY_UNBURDEN,
+    ABILITY_HEATPROOF,
+    ABILITY_SIMPLE,
+    ABILITY_DRY_SKIN,
+    ABILITY_POISON_HEAL,
+    ABILITY_ADAPTABILITY,
+    ABILITY_SKILL_LINK,
+    ABILITY_HYDRATION,
+    ABILITY_SOLAR_POWER,
+    ABILITY_MAGIC_GUARD,
+    ABILITY_NO_GUARD,
+    ABILITY_TECHNICIAN,
+    ABILITY_LEAF_GUARD,
+    ABILITY_MOLD_BREAKER,
+    ABILITY_AFTERMATH,
+    ABILITY_UNAWARE,
+    ABILITY_TINTED_LENS,
+    ABILITY_FILTER,
+    ABILITY_SCRAPPY,
+    ABILITY_STORM_DRAIN,
+    ABILITY_ICE_BODY,
+    ABILITY_SOLID_ROCK,
+    ABILITY_RECKLESS,
+    ABILITY_FLOWER_GIFT,
+    ABILITY_BAD_DREAMS,
+    ABILITY_SLUSH_RUSH,
+    ABILITY_MULTISCALE,
+    ABILITY_POISON_TOUCH,
+    ABILITY_DEFIANT,
+    ABILITY_COMPETITIVE,
+    ABILITY_FRESH_MILK,
+    ABILITY_HEADACHE,
+    ABILITY_RELENTLESS,
+    ABILITY_SHEER_FORCE,
+    ABILITY_CORROSION,
+    ABILITY_STRONG_JAW,
+    ABILITY_HOTHEADED,
+    ABILITY_MEGA_LAUNCHER,
+    ABILITY_TIDAL_FORCE,
+    ABILITY_FREE_SAMPLE,
+    ABILITY_SHAKEDOWN,
+    ABILITY_FLARE_BOOST,
+    ABILITY_CHLOROPLAST,
+    ABILITY_PHOTOSYNTHESIS,
+    ABILITY_SHARPNESS,
+    ABILITY_STRANGLE_WEED,
+    ABILITY_PEST,
+    0xFFFF
+};
+
+static const u8 sPositiveHeldItemEffects[] = {
+    HOLD_EFFECT_HP_RESTORE,
+    HOLD_EFFECT_SLP_RESTORE,
+    HOLD_EFFECT_PP_RESTORE,
+    HOLD_EFFECT_STATUS_RESTORE,
+    HOLD_EFFECT_HP_PCT_RESTORE,
+    HOLD_EFFECT_WEAKEN_SE_FIRE,
+    HOLD_EFFECT_WEAKEN_SE_WATER,
+    HOLD_EFFECT_WEAKEN_SE_ELECTRIC,
+    HOLD_EFFECT_WEAKEN_SE_GRASS,
+    HOLD_EFFECT_WEAKEN_SE_ICE,
+    HOLD_EFFECT_WEAKEN_SE_FIGHT,
+    HOLD_EFFECT_WEAKEN_SE_GROUND,
+    HOLD_EFFECT_WEAKEN_SE_FLYING,
+    HOLD_EFFECT_WEAKEN_SE_ROCK,
+    HOLD_EFFECT_PINCH_ATK_UP,
+    HOLD_EFFECT_PINCH_SPEED_UP,
+    HOLD_EFFECT_PINCH_SPATK_UP,
+    HOLD_EFFECT_PINCH_RANDOM_UP,
+    HOLD_EFFECT_PINCH_PRIORITY,
+    HOLD_EFFECT_STATDOWN_RESTORE,
+    HOLD_EFFECT_SOMETIMES_PRIORITY,
+    HOLD_EFFECT_CHOICE_ATK,
+    HOLD_EFFECT_SOMETIMES_FLINCH,
+    HOLD_EFFECT_LATI_SPECIAL,
+    HOLD_EFFECT_CLAMPERL_SPATK,
+    HOLD_EFFECT_CLAMPERL_SPDEF,
+    HOLD_EFFECT_MAYBE_ENDURE,
+    HOLD_EFFECT_HP_RESTORE_GRADUAL,
+    HOLD_EFFECT_PIKA_SPATK_UP,
+    HOLD_EFFECT_HP_RESTORE_ON_DMG,
+    HOLD_EFFECT_POWER_UP_SE,
+    HOLD_EFFECT_EXTEND_SCREENS,
+    HOLD_EFFECT_HP_DRAIN_ON_ATK,
+    HOLD_EFFECT_CHARGE_SKIP,
+    HOLD_EFFECT_ENDURE,
+    HOLD_EFFECT_ACCURACY_UP_SLOWER,
+    HOLD_EFFECT_HP_RESTORE_PSN_TYPE,
+    HOLD_EFFECT_EXTEND_HAIL,
+    HOLD_EFFECT_EXTEND_SANDSTORM,
+    HOLD_EFFECT_EXTEND_SUN,
+    HOLD_EFFECT_EXTEND_RAIN,
+    HOLD_EFFECT_CHOICE_SPEED,
+    HOLD_EFFECT_SWITCH,
+    HOLD_EFFECT_CHOICE_SPATK,
+    HOLD_EFFECT_NORMAL_HIT_GHOST,
+    HOLD_EFFECT_NO_WEATHER_CHIP_POWDER,
+    HOLD_EFFECT_WEAK_RAISE_SPA_ATK,
+    HOLD_EFFECT_LEVITATE_POPPED_IF_HIT,
+    HOLD_EFFECT_SWITCH_ATTACKER_HIT,
+    HOLD_EFFECT_EVIOLITE,
+    HOLD_EFFECT_LOADED_DICE,
+    0xFFFF
+};
+
+static const u8 sNegativeHeldItemEffects[] = {
+    HOLD_EFFECT_PSN_USER,
+    HOLD_EFFECT_BRN_USER,
+    HOLD_EFFECT_PRIORITY_DOWN,
+    HOLD_EFFECT_SPEED_DOWN_GROUNDED,
+    HOLD_EFFECT_HP_RESTORE_PSN_TYPE,
+    HOLD_EFFECT_DMG_USER_CONTACT_XFR,
+    0xFFFF
+};
+
 typedef void (*AICommandFunc)(BattleSystem*, BattleContext*);
 
 enum AIEvalStep {
@@ -5413,20 +5576,30 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         // This would probably be buggy as hell. Don't use it.
                                         break;
 
+                                    // Worry Seed
+                                    case BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA:
                                     // Skill Swap
                                     case BATTLE_EFFECT_SWITCH_ABILITIES:
+                                        for (k = 0; sRemovableAbilities[k] != 0xFFFF; k++) {
+                                            if (battleCtx->battleMons[defender].ability == sRemovableAbilities[k]) {
+                                                return FALSE;
+                                            }
+                                        }
+                                        break;
+                                        
 
                                     // Spite
                                     case BATTLE_EFFECT_DECREASE_LAST_MOVE_PP:
+                                        // This would be so insanely niche
+                                        break;
 
                                     // Trick and Switcheroo
                                     case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
-
-                                    // Worry Seed
-                                    case BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA:
+                                        // They can't (yet), but maybe will add some rudimentary handling later
+                                        break;
 
                                     // To Do:
-                                    // Fill in all the above move cases
+                                    // Side and Field status moves.
 
 
                                 }
