@@ -3,18 +3,51 @@
     "class": "TRAINER_CLASS_BEAUTY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 29,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SKILL_SWAP",
+				"MOVE_NIGHT_SHADE"
+            ],
+            "power": 120,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PERSIAN",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_SLASH",
+				"MOVE_NIGHT_SLASH",
+				"MOVE_FAKE_OUT",
+				"MOVE_AERIAL_ACE"
+            ],
+            "power": 120,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ESPEON",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_PSYBEAM",
+				"MOVE_MORNING_SUN",
+				"MOVE_SHADOW_BALL",
+				"MOVE_HIDDEN_POWER"
+            ],
+            "power": 120,
+            "ball_seal": 0,
+			"ability": 1
         }
     ]
 }

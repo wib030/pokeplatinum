@@ -1,28 +1,40 @@
 {
-    "name": "Dean",
+    "name": "Sheldeon",
     "class": "TRAINER_CLASS_COLLECTOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_UMBREON",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+				"MOVE_WISH",
+				"MOVE_BODY_SLAM",
+				"MOVE_BATON_PASS"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_ESPEON",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_MAGIC_COAT",
+				"MOVE_PSYBEAM",
+				"MOVE_SUNNY_DAY",
+				"MOVE_HIDDEN_POWER"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

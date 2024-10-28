@@ -1,36 +1,37 @@
 {
-    "name": "Gerardo",
+    "name": "Gerard-0",
     "class": "TRAINER_CLASS_WORKER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_SHIELDON",
             "form": 0,
-            "level": 35,
-            "item": null,
+            "level": 41,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_SUPERSONIC",
-                "MOVE_MAGNET_BOMB",
-                "MOVE_SPARK"
+                "MOVE_METAL_BURST",
+				"MOVE_TAUNT"
             ],
-            "power": 10,
+            "power": 120,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_LAIRON",
             "form": 0,
-            "level": 35,
-            "item": null,
+            "level": 41,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_THUNDER_WAVE",
-                "MOVE_MAGNET_BOMB",
-                "MOVE_SPARK"
+                "MOVE_STEALTH_ROCK",
+				"MOVE_ROAR",
+				"MOVE_TOXIC",
+				"MOVE_SANDSTORM"
             ],
-            "power": 10,
+            "power": 120,
             "ball_seal": 0
         }
     ]

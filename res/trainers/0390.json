@@ -1,54 +1,53 @@
 {
-    "name": "Arthur",
+    "name": "PBSKidsFan2",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GASTRODON",
+            "species": "SPECIES_CLAYDOL",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_MUDDY_WATER",
-                "MOVE_RECOVER",
-                "MOVE_TOXIC",
-                "MOVE_WATER_PULSE"
+                "MOVE_TRICK_ROOM",
+				"MOVE_EARTH_POWER",
+				"MOVE_COSMIC_POWER",
+				"MOVE_STEALTH_ROCK"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BEEDRILL",
+            "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_POISON_JAB",
-                "MOVE_U_TURN",
-                "MOVE_AERIAL_ACE",
-                "MOVE_SWORDS_DANCE"
+                "MOVE_SOLAR_BEAM",
+				"MOVE_ERUPTION",
+				"MOVE_HEAT_WAVE",
+				"MOVE_ROCK_SLIDE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ELECTRODE",
+            "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 55,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_HYPER_BEAM",
-                "MOVE_ENDURE",
-                "MOVE_EXPLOSION"
+                "MOVE_TRICK_ROOM",
+				"MOVE_SHADOW_SNEAK",
+				"MOVE_SHADOW_CLAW",
+				"MOVE_KNOCK_OFF"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         }
     ]

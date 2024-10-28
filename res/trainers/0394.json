@@ -1,54 +1,53 @@
 {
-    "name": "Clarice",
+    "name": "trickyDick1",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SWALOT",
+            "species": "SPECIES_STEELIX",
             "form": 0,
-            "level": 53,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_GUNK_SHOT",
-                "MOVE_YAWN",
-                "MOVE_BODY_SLAM",
-                "MOVE_PROTECT"
+                "MOVE_GYRO_BALL",
+				"MOVE_EARTHQUAKE",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_CURSE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_NINETALES",
+            "species": "SPECIES_SUNFLORA",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_WILL_O_WISP",
-                "MOVE_FLAMETHROWER",
-                "MOVE_DARK_PULSE",
-                "MOVE_EXTRASENSORY"
+                "MOVE_SOLAR_BEAM",
+				"MOVE_GIGA_DRAIN",
+				"MOVE_EARTH_POWER",
+				"MOVE_SLUDGE_BOMB"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MAGNEZONE",
+            "species": "SPECIES_DUSKNOIR",
             "form": 0,
-            "level": 56,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_FLASH_CANNON",
-                "MOVE_MIRROR_COAT",
-                "MOVE_DISCHARGE",
-                "MOVE_HYPER_BEAM"
+                "MOVE_TRICK_ROOM",
+				"MOVE_SHADOW_PUNCH",
+				"MOVE_DRAIN_PUNCH",
+				"MOVE_FIRE_PUNCH"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         }
     ]

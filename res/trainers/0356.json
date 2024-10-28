@@ -3,7 +3,8 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
@@ -11,12 +12,14 @@
             "species": "SPECIES_MACHOP",
             "form": 0,
             "level": 8,
-            "item": null,
+            "item": "ITEM_DESTINY_KNOT",
             "moves": [
                 "MOVE_LOW_KICK",
-                "MOVE_LEER"
+				"MOVE_FLING",
+				"MOVE_THIEF",
+				"MOVE_ROLE_PLAY"
             ],
-            "power": 0,
+            "power": 20,
             "ball_seal": 0
         }
     ]

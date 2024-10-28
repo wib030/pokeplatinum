@@ -1,9 +1,7 @@
 {
-    "name": "Harrison",
+    "name": "Poindexter",
     "class": "TRAINER_CLASS_SCHOOL_KID_MALE",
-    "items": [
-        "ITEM_X_ATTACK"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT"
@@ -11,15 +9,22 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_ABRA",
             "form": 0,
-            "level": 6,
-            "item": null,
+            "level": 12,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_QUICK_ATTACK"
+                "MOVE_PSYCHIC"
             ],
-            "power": 10,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_LUXURY_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4
         }
     ]
 }

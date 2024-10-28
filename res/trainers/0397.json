@@ -1,5 +1,5 @@
 {
-    "name": "Deandre",
+    "name": "mimicry",
     "class": "TRAINER_CLASS_PSYCHIC_MALE",
     "items": [],
     "ai_flags": [
@@ -9,17 +9,45 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DUSKNOIR",
+            "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 56,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_YACHE_BERRY",
             "moves": [
-                "MOVE_SHADOW_PUNCH",
-                "MOVE_FIRE_PUNCH",
-                "MOVE_ICE_PUNCH",
-                "MOVE_THUNDER_PUNCH"
+                "MOVE_OUTRAGE",
+				"MOVE_EARTHQUAKE",
+				"MOVE_HEAT_WAVE",
+				"MOVE_ICY_WIND"
             ],
-            "power": 0,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_AERODACTYL",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ROCK_SLIDE",
+				"MOVE_EARTHQUAKE",
+				"MOVE_WING_ATTACK",
+				"MOVE_TAILWIND"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SCIZOR",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_BULLET_PUNCH",
+				"MOVE_CLOSE_COMBAT",
+				"MOVE_BUG_BITE",
+				"MOVE_KNOCK_OFF"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

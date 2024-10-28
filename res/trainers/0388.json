@@ -1,39 +1,53 @@
 {
-    "name": "Jonah",
+    "name": "Jerma985",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_QUAGSIRE",
+            "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 40,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_LAVA_PLUME",
+				"MOVE_IRON_TAIL",
+				"MOVE_YAWN",
+				"MOVE_SMOKE_SCREEN"
+            ],
+            "power": 120,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_NUZLEAF",
             "form": 0,
-            "level": 36,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 40,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_SOLAR_BEAM",
+				"MOVE_LEECH_SEED",
+				"MOVE_FALSE_SWIPE",
+				"MOVE_EXPLOSION"
+            ],
+            "power": 120,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_HIPPOPOTAS",
+            "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 40,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_FIRE_FANG",
+				"MOVE_SEISMIC_TOSS",
+				"MOVE_OUTRAGE",
+				"MOVE_FLY"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

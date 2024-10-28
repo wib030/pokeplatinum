@@ -1,30 +1,53 @@
 {
-    "name": "Joe",
+    "name": "Traitor Joe",
     "class": "TRAINER_CLASS_DRAGON_TAMER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DRATINI",
+            "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 52,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 60,
+            "item": "ITEM_SHELL_BELL",
+            "moves": [
+                "MOVE_GIGA_DRAIN",
+				"MOVE_BUG_BITE",
+				"MOVE_CRUNCH",
+				"MOVE_ROOST"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GABITE",
+            "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 56,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 60,
+            "item": "ITEM_RAZOR_FANG",
+            "moves": [
+                "MOVE_GIGA_DRAIN",
+				"MOVE_HEADBUTT",
+				"MOVE_ATTRACT",
+				"MOVE_DRAIN_PUNCH"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LEDIAN",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_REAPER_CLOTH",
+            "moves": [
+                "MOVE_GIGA_DRAIN",
+				"MOVE_BUG_BITE",
+				"MOVE_PSYBEAM",
+				"MOVE_STRING_SHOT"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

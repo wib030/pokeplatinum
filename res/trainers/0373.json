@@ -1,28 +1,53 @@
 {
-    "name": "Autumn",
+    "name": "Horned",
     "class": "TRAINER_CLASS_BIRD_KEEPER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MURKROW",
+            "species": "SPECIES_RHYDON",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ROCK_SLIDE",
+				"MOVE_EARTHQUAKE",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_ICY_WIND"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_XATU",
+            "species": "SPECIES_SEAKING",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MEGAHORN",
+				"MOVE_HORN_DRILL",
+				"MOVE_DRILL_PECK",
+				"MOVE_AQUA_TAIL"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_NIDOQUEEN",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_RECOVER",
+				"MOVE_EARTH_POWER",
+				"MOVE_FLAMETHROWER",
+				"MOVE_POISON_FANG"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

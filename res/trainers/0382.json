@@ -1,19 +1,25 @@
 {
-    "name": "Jamal",
+    "name": "Shelton",
     "class": "TRAINER_CLASS_COLLECTOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PORYGON",
+            "species": "SPECIES_PORYGON2",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_CHOPLE_BERRY",
+            "moves": [
+                "MOVE_RECYCLE",
+				"MOVE_RECOVER",
+				"MOVE_TOXIC",
+				"MOVE_PROTECT"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

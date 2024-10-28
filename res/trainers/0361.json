@@ -1,19 +1,50 @@
 {
-    "name": "Holly",
+    "name": "Canned Peas",
     "class": "TRAINER_CLASS_TUBER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_REMORAID",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_ROOST",
+				"MOVE_SURF",
+				"MOVE_MIMIC",
+				"MOVE_FLING"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_RELICANTH",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_AQUA_TAIL",
+				"MOVE_EARTHQUAKE",
+				"MOVE_STONE_EDGE",
+				"MOVE_BOUNCE"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PHIONE",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_EXPLOSION"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

@@ -1,22 +1,37 @@
 {
-    "name": "Zackary",
+    "name": "Clamper",
     "class": "TRAINER_CLASS_CAMPER",
-    "items": [],
+    "items": [
+		"ITEM_X_ATTACK"
+	],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AIPOM",
+            "species": "SPECIES_CLAMPERL",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 16,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_CLAMP"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ivHP": 0,
+			"ivATK": 31,
+			"ivDEF": 0,
+			"ivSPEED": 31,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 100,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

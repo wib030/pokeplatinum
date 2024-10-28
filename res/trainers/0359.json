@@ -1,19 +1,53 @@
 {
-    "name": "Conner",
+    "name": "Trombone",
     "class": "TRAINER_CLASS_TUBER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_REMORAID",
+            "species": "SPECIES_SOLROCK",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_MIND_READER",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_MORNING_SUN",
+				"MOVE_ROCK_SLIDE"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ESPEON",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_PSYCHIC",
+				"MOVE_FLAMETHROWER",
+				"MOVE_MIND_READER",
+				"MOVE_HIDDEN_POWER"
+            ],
+            "power": 254,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HOUNDOOM",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_HEAT_WAVE",
+				"MOVE_SUCKER_PUNCH",
+				"MOVE_DARK_PULSE",
+				"MOVE_SOLAR_BEAM"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

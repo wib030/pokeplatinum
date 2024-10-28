@@ -1,9 +1,7 @@
 {
     "name": "Christine",
     "class": "TRAINER_CLASS_SCHOOL_KID_FEMALE",
-    "items": [
-        "ITEM_POTION"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT"
@@ -11,13 +9,22 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BIDOOF",
+            "species": "SPECIES_BAGON",
             "form": 0,
-            "level": 6,
-            "item": null,
-            "moves": null,
-            "power": 10,
-            "ball_seal": 0
+            "level": 12,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_DRAGON_RAGE"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_LUXURY_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4
         }
     ]
 }

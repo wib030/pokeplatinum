@@ -1,21 +1,39 @@
 {
-    "name": "Diego",
+    "name": "Grassman",
     "class": "TRAINER_CLASS_CAMPER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AIPOM",
+            "species": "SPECIES_WORMADAM",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+				"MOVE_SPIKES",
+				"MOVE_PROTECT",
+				"MOVE_SEED_BOMB"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TROPIUS",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_WHIRLWIND",
+				"MOVE_ROOST",
+				"MOVE_SUBSTITUTE",
+				"MOVE_ROAR"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

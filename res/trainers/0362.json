@@ -1,54 +1,51 @@
 {
-    "name": "Armando",
+    "name": "Dr. Pig",
     "class": "TRAINER_CLASS_VETERAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MUK",
+            "species": "SPECIES_JUMPLUFF",
             "form": 0,
-            "level": 53,
-            "item": null,
+            "level": 61,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_ACID_ARMOR",
+                "MOVE_LEECH_SEED",
+				"MOVE_U_TURN"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_DEWGONG",
+            "form": 0,
+            "level": 61,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
                 "MOVE_TOXIC",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_DARK_PULSE"
+				"MOVE_RECOVER",
+				"MOVE_STOCKPILE",
+				"MOVE_ICY_WIND"
             ],
-            "power": 100,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MIGHTYENA",
+            "species": "SPECIES_ILLUMISE",
             "form": 0,
-            "level": 53,
-            "item": null,
+            "level": 61,
+            "item": "ITEM_TOXIC_ORB",
             "moves": [
-                "MOVE_SUCKER_PUNCH",
-                "MOVE_TAUNT",
-                "MOVE_ASSURANCE",
-                "MOVE_TAKE_DOWN"
+                "MOVE_SUBSTITUTE",
+				"MOVE_PROTECT",
+				"MOVE_SPIDER_WEB",
+				"MOVE_TOXIC"
             ],
-            "power": 100,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_LICKITUNG",
-            "form": 0,
-            "level": 56,
-            "item": null,
-            "moves": [
-                "MOVE_POWER_WHIP",
-                "MOVE_GIGA_IMPACT",
-                "MOVE_SURF",
-                "MOVE_FIRE_BLAST"
-            ],
-            "power": 100,
+            "power": 200,
             "ball_seal": 0
         }
     ]

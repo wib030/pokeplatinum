@@ -1,5 +1,5 @@
 {
-    "name": "Desiree",
+    "name": "zukan",
     "class": "TRAINER_CLASS_PSYCHIC_FEMALE",
     "items": [],
     "ai_flags": [
@@ -9,31 +9,45 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MR_MIME",
+            "species": "SPECIES_SPIRITOMB",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_REFLECT",
-                "MOVE_LIGHT_SCREEN",
-                "MOVE_DRAIN_PUNCH"
+                "MOVE_CALM_MIND",
+				"MOVE_WILL_O_WISP",
+				"MOVE_SHADOW_BALL",
+				"MOVE_ICY_WIND"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MISMAGIUS",
+            "species": "SPECIES_CARNIVINE",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_QUICK_CLAW",
             "moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_AERIAL_ACE",
-                "MOVE_SHOCK_WAVE"
+                "MOVE_STOCKPILE",
+				"MOVE_POWER_WHIP",
+				"MOVE_KNOCK_OFF",
+				"MOVE_SLUDGE_BOMB"
             ],
-            "power": 0,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_YANMEGA",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_AIR_SLASH",
+				"MOVE_BUG_BUZZ",
+				"MOVE_DETECT",
+				"MOVE_GIGA_DRAIN"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

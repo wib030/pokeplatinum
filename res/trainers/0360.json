@@ -1,28 +1,53 @@
 {
-    "name": "Mariel",
+    "name": "Marin",
     "class": "TRAINER_CLASS_TUBER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MARILL",
+            "species": "SPECIES_CORSOLA",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SPIKES",
+				"MOVE_ICY_WIND",
+				"MOVE_AQUA_RING",
+				"MOVE_INGRAIN"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MARILL",
+            "species": "SPECIES_WAILORD",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_AMNESIA",
+				"MOVE_DEFENSE_CURL",
+				"MOVE_REST",
+				"MOVE_WHIRLPOOL"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_AZUMARILL",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_BELLY_DRUM",
+				"MOVE_AQUA_JET",
+				"MOVE_SUCKER_PUNCH",
+				"MOVE_DYNAMIC_PUNCH"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

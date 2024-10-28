@@ -1,28 +1,53 @@
 {
-    "name": "Trenton",
+    "name": "Denton",
     "class": "TRAINER_CLASS_TUBER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SHELLOS",
+            "species": "SPECIES_QWILFISH",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+				"MOVE_POISON_JAB",
+				"MOVE_WATERFALL",
+				"MOVE_DESTINY_BOND"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SHELLOS",
+            "species": "SPECIES_DEWGONG",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_ICY_WIND",
+				"MOVE_STOCKPILE",
+				"MOVE_RECOVER",
+				"MOVE_ENCORE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SWAMPERT",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_SHELL_BELL",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+				"MOVE_MUDDY_WATER",
+				"MOVE_YAWN",
+				"MOVE_ENDEAVOR"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

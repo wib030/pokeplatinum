@@ -1,30 +1,40 @@
 {
-    "name": "Lawrence",
+    "name": "Demon",
     "class": "TRAINER_CLASS_CAMPER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AIPOM",
+            "species": "SPECIES_GIRAFARIG",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+				"MOVE_AGILITY",
+				"MOVE_BATON_PASS",
+				"MOVE_SPLASH"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_FLOATZEL",
+            "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 36,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_EARTH_POWER",
+				"MOVE_LAVA_PLUME",
+				"MOVE_ROCK_TOMB",
+				"MOVE_TOXIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

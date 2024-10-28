@@ -1,36 +1,39 @@
 {
-    "name": "Damian",
+    "name": "Grayle",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_WINGULL",
+            "species": "SPECIES_LUDICOLO",
             "form": 0,
-            "level": 31,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_WATER_PULSE",
-                "MOVE_WING_ATTACK",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_GIGA_DRAIN",
+				"MOVE_SURF",
+				"MOVE_COUNTER",
+				"MOVE_ICE_BEAM"
             ],
-            "power": 10,
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PELIPPER",
+            "species": "SPECIES_PSYDUCK",
             "form": 0,
-            "level": 31,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_WATER_PULSE",
-                "MOVE_WING_ATTACK",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_CONFUSION",
+				"MOVE_CALM_MIND",
+				"MOVE_YAWN",
+				"MOVE_SURF"
             ],
-            "power": 10,
+            "power": 100,
             "ball_seal": 0
         }
     ]

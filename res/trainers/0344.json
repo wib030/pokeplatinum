@@ -1,9 +1,7 @@
 {
-    "name": "Tiera",
+    "name": "Awake",
     "class": "TRAINER_CLASS_SCHOOL_KID_FEMALE",
-    "items": [
-        "ITEM_HYPER_POTION"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT"
@@ -13,15 +11,15 @@
         {
             "species": "SPECIES_PACHIRISU",
             "form": 0,
-            "level": 47,
-            "item": null,
+            "level": 52,
+            "item": "ITEM_CHESTO_BERRY",
             "moves": [
-                "MOVE_LAST_RESORT",
-                "MOVE_SUPER_FANG",
-                "MOVE_DISCHARGE",
-                "MOVE_SWEET_KISS"
+                "MOVE_TOXIC",
+				"MOVE_SUPER_FANG",
+				"MOVE_PROTECT",
+				"MOVE_REST"
             ],
-            "power": 10,
+            "power": 180,
             "ball_seal": 0
         }
     ]
