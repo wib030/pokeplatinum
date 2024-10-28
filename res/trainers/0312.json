@@ -1,24 +1,25 @@
 {
-    "name": "Jeffery",
+    "name": "Balder",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HERACROSS",
+            "species": "SPECIES_MONFERNO",
             "form": 0,
             "level": 28,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_BRICK_BREAK",
-                "MOVE_AERIAL_ACE",
-                "MOVE_LEER"
+                "MOVE_FAKE_OUT",
+				"MOVE_BLAZE_KICK",
+				"MOVE_ROCK_SMASH",
+				"MOVE_AERIAL_ACE"
             ],
-            "power": 40,
+            "power": 100,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,53 @@
 {
-    "name": "Marc",
+    "name": "Water Hater",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MANTYKE",
+            "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_FOLLOW_ME",
+				"MOVE_ROOST",
+				"MOVE_HEAT_WAVE",
+				"MOVE_DRAIN_PUNCH"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MEGANIUM",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_LIGHT_SCREEN",
+				"MOVE_REFLECT",
+				"MOVE_SYNTHESIS",
+				"MOVE_SOLAR_BEAM"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_RAMPARDOS",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ROCK_SLIDE",
+				"MOVE_FIRE_PUNCH",
+				"MOVE_SEED_BOMB",
+				"MOVE_SHEER_COLD"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

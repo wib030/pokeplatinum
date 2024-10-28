@@ -1,28 +1,40 @@
 {
-    "name": "Craig",
+    "name": "Crayg",
     "class": "TRAINER_CLASS_JOGGER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_FLOATZEL",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+				"MOVE_BATON_PASS",
+				"MOVE_BULK_UP",
+				"MOVE_AQUA_JET"
+            ],
+            "power": 80,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_WHISCASH",
             "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MAGNITUDE",
+				"MOVE_DRAGON_DANCE",
+				"MOVE_BOUNCE",
+				"MOVE_ROCK_SLIDE"
+            ],
+            "power": 80,
             "ball_seal": 0
         }
     ]

@@ -1,58 +1,102 @@
 {
     "name": "Wake",
     "class": "TRAINER_CLASS_LEADER_WAKE",
-    "items": [
-        "ITEM_HYPER_POTION",
-        "ITEM_HYPER_POTION"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GYARADOS",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 33,
-            "item": "ITEM_NONE",
+            "level": 35,
+            "item": "ITEM_DAMP_ROCK",
             "moves": [
-                "MOVE_WATERFALL",
-                "MOVE_BRINE",
-                "MOVE_BITE",
-                "MOVE_TWISTER"
+                "MOVE_ROOST",
+				"MOVE_BRINE",
+				"MOVE_U_TURN",
+				"MOVE_KNOCK_OFF"
             ],
-            "power": 150,
-            "ball_seal": 0
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
-            "species": "SPECIES_QUAGSIRE",
+            "species": "SPECIES_GASTRODON",
             "form": 0,
-            "level": 34,
-            "item": "ITEM_NONE",
+            "level": 35,
+            "item": "ITEM_RINDO_BERRY",
             "moves": [
-                "MOVE_MUD_SHOT",
-                "MOVE_ROCK_TOMB",
-                "MOVE_WATER_PULSE",
-                "MOVE_YAWN"
+                "MOVE_EARTH_POWER",
+				"MOVE_ICY_WIND",
+				"MOVE_PAIN_SPLIT",
+				"MOVE_MEMENTO"
             ],
-            "power": 150,
-            "ball_seal": 0
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
-            "species": "SPECIES_FLOATZEL",
+            "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 37,
-            "item": "ITEM_SITRUS_BERRY",
+            "level": 35,
+            "item": "ITEM_PETAYA_BERRY",
             "moves": [
-                "MOVE_BRINE",
-                "MOVE_ICE_FANG",
-                "MOVE_CRUNCH",
-                "MOVE_AQUA_JET"
+                "MOVE_OCTAZOOKA",
+				"MOVE_DRAGON_BREATH",
+				"MOVE_ICE_BEAM",
+				"MOVE_SUBSTITUTE"
             ],
-            "power": 150,
-            "ball_seal": 0
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
+        },
+		{
+            "species": "SPECIES_KINGLER",
+            "form": 0,
+            "level": 35,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_AQUA_JET",
+				"MOVE_HAMMER_ARM",
+				"MOVE_DIVE",
+				"MOVE_KNOCK_OFF"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
+        },
+		{
+            "species": "SPECIES_SLOWKING",
+            "form": 0,
+            "level": 35,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_FUTURE_SIGHT",
+				"MOVE_WHIRLPOOL",
+				"MOVE_RECYCLE",
+				"MOVE_REST"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
+        },
+		{
+            "species": "SPECIES_RELICANTH",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_LIECHI_BERRY",
+            "moves": [
+                "MOVE_STONE_EDGE",
+				"MOVE_AQUA_TAIL",
+				"MOVE_MAGNITUDE",
+				"MOVE_SUBSTITUTE"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

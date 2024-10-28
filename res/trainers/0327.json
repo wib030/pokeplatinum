@@ -3,26 +3,79 @@
     "class": "TRAINER_CLASS_PARASOL_LADY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDEEN",
-            "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 4,
+            "level": 30,
+            "item": "ITEM_LANSAT_BERRY",
+            "moves": [
+                "MOVE_RAZOR_WIND",
+				"MOVE_OMINOUS_WIND",
+				"MOVE_AIR_SLASH",
+				"MOVE_NATURAL_GIFT"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BIBAREL",
-            "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 1,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SUNNY_DAY",
+				"MOVE_WILL_O_WISP",
+				"MOVE_THUNDER",
+				"MOVE_FLASH"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 2,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+				"MOVE_HYDRO_PUMP",
+				"MOVE_MUD_SLAP",
+				"MOVE_TOXIC"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 3,
+            "level": 30,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_HAIL",
+				"MOVE_BLIZZARD",
+				"MOVE_REFLECT",
+				"MOVE_LIGHT_SCREEN"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 5,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_LEAF_STORM",
+				"MOVE_SECRET_POWER",
+				"MOVE_SIGNAL_BEAM",
+				"MOVE_PAIN_SPLIT"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

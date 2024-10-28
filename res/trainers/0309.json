@@ -1,49 +1,95 @@
 {
-    "name": "Colby",
+    "name": "Couch",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 23,
-            "item": null,
+            "level": 28,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_KARATE_CHOP",
-                "MOVE_LEER",
-                "MOVE_FORESIGHT"
+                "MOVE_ROLE_PLAY",
+				"MOVE_BODY_SLAM",
+				"MOVE_BULK_UP",
+				"MOVE_SUBMISSION"
             ],
-            "power": 40,
+            "power": 100,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 25,
-            "item": null,
+            "level": 28,
+            "item": "ITEM_MOOMOO_MILK",
             "moves": [
-                "MOVE_LOW_KICK",
-                "MOVE_FORESIGHT"
+                "MOVE_ATTRACT",
+				"MOVE_FLING",
+				"MOVE_STRENGTH",
+				"MOVE_SMELLING_SALT"
             ],
-            "power": 40,
+            "power": 100,
             "ball_seal": 0
         },
         {
+            "species": "SPECIES_LOPUNNY",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_LUCKY_EGG",
+            "moves": [
+                "MOVE_POUND",
+				"MOVE_SPLASH",
+				"MOVE_ENDURE",
+				"MOVE_ENCORE"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
             "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 27,
-            "item": null,
+            "level": 28,
+            "item": "ITEM_PROTEIN",
             "moves": [
-                "MOVE_SUBMISSION",
-                "MOVE_LEER",
-                "MOVE_FORESIGHT"
+                "MOVE_FLING",
+				"MOVE_LEER",
+				"MOVE_DIG",
+				"MOVE_DOUBLE_TEAM"
             ],
-            "power": 40,
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MACHOKE",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_FRESH_WATER",
+            "moves": [
+                "MOVE_HELPING_HAND",
+				"MOVE_FLING",
+				"MOVE_DOUBLE_EDGE",
+				"MOVE_WAKE_UP_SLAP"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MACHOKE",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_FOCUS_ENERGY",
+				"MOVE_MEDITATE",
+				"MOVE_SWAGGER",
+				"MOVE_ENDURE"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

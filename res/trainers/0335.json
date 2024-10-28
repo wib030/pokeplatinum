@@ -1,21 +1,39 @@
 {
-    "name": "Trey",
+    "name": "Sunyshore.c",
     "class": "TRAINER_CLASS_RICH_BOY",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUXRAY",
+            "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_POKE_DOLL",
+            "moves": [
+                "MOVE_FAKE_OUT",
+				"MOVE_VOLT_TACKLE",
+				"MOVE_FLY",
+				"MOVE_SURF"
+            ],
+            "power": 160,
+            "ball_seal": 4
+        },
+		{
+            "species": "SPECIES_CLEFABLE",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_POKE_DOLL",
+            "moves": [
+                "MOVE_METEOR_MASH",
+				"MOVE_COSMIC_POWER",
+				"MOVE_PRESENT",
+				"MOVE_SUBSTITUTE"
+            ],
+            "power": 160,
             "ball_seal": 4
         }
     ]

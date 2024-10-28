@@ -1,72 +1,100 @@
 {
     "name": "Candice",
     "class": "TRAINER_CLASS_LEADER_CANDICE",
-    "items": [
-        "ITEM_HYPER_POTION",
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SNEASEL",
+            "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 40,
-            "item": "ITEM_NONE",
+            "level": 47,
+            "item": "ITEM_KINGS_ROCK",
             "moves": [
-                "MOVE_SLASH",
-                "MOVE_AERIAL_ACE",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_ICE_SHARD"
+                "MOVE_BEAT_UP",
+				"MOVE_FAKE_OUT"
             ],
-            "power": 250,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
-            "species": "SPECIES_PILOSWINE",
+            "species": "SPECIES_MAMOSWINE",
             "form": 0,
-            "level": 40,
-            "item": "ITEM_NONE",
+            "level": 47,
+            "item": "ITEM_CHOPLE_BERRY",
             "moves": [
-                "MOVE_AVALANCHE",
-                "MOVE_STONE_EDGE",
                 "MOVE_EARTHQUAKE",
-                "MOVE_HAIL"
+				"MOVE_STEALTH_ROCK",
+				"MOVE_ICE_BALL",
+				"MOVE_KNOCK_OFF"
             ],
-            "power": 250,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_ABOMASNOW",
             "form": 0,
-            "level": 42,
-            "item": "ITEM_NONE",
+            "level": 47,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_AVALANCHE",
-                "MOVE_WOOD_HAMMER",
-                "MOVE_WATER_PULSE",
-                "MOVE_FOCUS_BLAST"
+                "MOVE_ICE_SHARD",
+				"MOVE_BLIZZARD",
+				"MOVE_GIGA_DRAIN",
+				"MOVE_EARTHQUAKE"
             ],
-            "power": 250,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
-            "species": "SPECIES_FROSLASS",
+            "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 44,
-            "item": "ITEM_SITRUS_BERRY",
+            "level": 47,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_BLIZZARD",
-                "MOVE_DOUBLE_TEAM",
-                "MOVE_SHADOW_BALL",
-                "MOVE_PSYCHIC"
+                "MOVE_ICY_WIND",
+				"MOVE_MUD_SHOT",
+				"MOVE_BLIZZARD",
+				"MOVE_YAWN"
             ],
-            "power": 250,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
+        },
+		{
+            "species": "SPECIES_STANTLER",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_MIND_READER",
+				"MOVE_SHEER_COLD",
+				"MOVE_EARTHQUAKE",
+				"MOVE_DISABLE"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
+        },
+		{
+            "species": "SPECIES_WALREIN",
+            "form": 0,
+            "level": 49,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_STOCKPILE",
+				"MOVE_RECOVER",
+				"MOVE_SUPER_FANG",
+				"MOVE_WHIRLPOOL"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

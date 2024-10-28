@@ -1,19 +1,25 @@
 {
-    "name": "Raul",
+    "name": "Printer",
     "class": "TRAINER_CLASS_JOGGER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAVIA",
+            "species": "SPECIES_FEAROW",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_BLACKGLASSES",
+            "moves": [
+                "MOVE_PURSUIT",
+				"MOVE_FAINT_ATTACK",
+				"MOVE_PLUCK",
+				"MOVE_ROOST"
+            ],
+            "power": 80,
             "ball_seal": 0
         }
     ]

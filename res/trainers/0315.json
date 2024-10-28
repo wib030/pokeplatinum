@@ -1,58 +1,102 @@
 {
     "name": "Gardenia",
     "class": "TRAINER_CLASS_LEADER_GARDENIA",
-    "items": [
-        "ITEM_SUPER_POTION",
-        "ITEM_SUPER_POTION"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TURTWIG",
+            "species": "SPECIES_SKIPLOOM",
             "form": 0,
             "level": 20,
-            "item": "ITEM_NONE",
+            "item": "ITEM_HEAT_ROCK",
             "moves": [
-                "MOVE_GRASS_KNOT",
-                "MOVE_RAZOR_LEAF",
                 "MOVE_SUNNY_DAY",
-                "MOVE_REFLECT"
+				"MOVE_LEECH_SEED",
+				"MOVE_GRASS_KNOT",
+				"MOVE_U_TURN"
             ],
-            "power": 50,
-            "ball_seal": 0
+            "power": 100,
+            "ball_seal": 1,
+			"ball_type": "ITEM_NEST_BALL"
         },
         {
+            "species": "SPECIES_TANGELA",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_MEGA_DRAIN",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_CONFUSION",
+				"MOVE_GROWTH"
+            ],
+            "power": 100,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
+        },
+        {
+            "species": "SPECIES_BELLSPROUT",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_MUSCLE_BAND",
+            "moves": [
+                "MOVE_BULLET_SEED",
+				"MOVE_KNOCK_OFF",
+				"MOVE_SWORDS_DANCE",
+				"MOVE_SUNNY_DAY"
+            ],
+            "power": 100,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
+        },
+		{
+            "species": "SPECIES_LOMBRE",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_MYSTIC_WATER",
+            "moves": [
+                "MOVE_FAKE_OUT",
+				"MOVE_WATER_PULSE",
+				"MOVE_ICY_WIND",
+				"MOVE_MEGA_DRAIN"
+            ],
+            "power": 100,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
+        },
+		{
             "species": "SPECIES_CHERRIM",
             "form": 0,
             "level": 20,
-            "item": "ITEM_NONE",
+            "item": "ITEM_OCCA_BERRY",
             "moves": [
-                "MOVE_GRASS_KNOT",
                 "MOVE_LEECH_SEED",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_SAFEGUARD"
+				"MOVE_SYNTHESIS",
+				"MOVE_GRASS_KNOT",
+				"MOVE_AROMATHERAPY"
             ],
-            "power": 50,
-            "ball_seal": 0
+            "power": 100,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
-        {
-            "species": "SPECIES_ROSERADE",
+		{
+            "species": "SPECIES_ROSELIA",
             "form": 0,
             "level": 22,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_MIRACLE_SEED",
             "moves": [
-                "MOVE_GRASS_KNOT",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_POISON_STING",
-                "MOVE_STUN_SPORE"
+                "MOVE_ACID",
+				"MOVE_MEGA_DRAIN",
+				"MOVE_MUD_SLAP",
+				"MOVE_HIDDEN_POWER"
             ],
-            "power": 50,
-            "ball_seal": 0
+            "power": 120,
+            "ball_seal": 1,
+			"ball_type": "ITEM_NEST_BALL"
         }
     ]
 }

@@ -1,46 +1,67 @@
 {
-    "name": "Meghan",
+    "name": "Megahan",
     "class": "TRAINER_CLASS_POKE_KID",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_PIKACHU",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 10,
+            "level": 52,
+            "item": "ITEM_LIGHT_BALL",
+            "moves": [
+                "MOVE_FAKE_OUT",
+				"MOVE_DISCHARGE",
+				"MOVE_KNOCK_OFF",
+				"MOVE_YAWN"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PIKACHU",
+            "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 10,
+            "level": 52,
+            "item": "ITEM_MICLE_BERRY",
+            "moves": [
+                "MOVE_DYNAMIC_PUNCH",
+				"MOVE_VOLT_TACKLE",
+				"MOVE_SURF",
+				"MOVE_KNOCK_OFF"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PIKACHU",
+            "species": "SPECIES_ROTOM",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 10,
+            "level": 52,
+            "item": "ITEM_ZAP_PLATE",
+            "moves": [
+                "MOVE_WILL_O_WISP",
+				"MOVE_SHADOW_BALL",
+				"MOVE_THUNDERBOLT",
+				"MOVE_SUCKER_PUNCH"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_PIKACHU",
+            "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 10,
+            "level": 52,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MAGNET_RISE",
+				"MOVE_DRAGON_PULSE",
+				"MOVE_THUNDERBOLT",
+				"MOVE_COUNTER"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

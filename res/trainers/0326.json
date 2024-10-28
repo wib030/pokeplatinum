@@ -1,29 +1,39 @@
 {
-    "name": "Louis",
+    "name": "Soil",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_NUMEL",
             "form": 0,
             "level": 14,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_EMBER",
+				"MOVE_MAGNITUDE",
+				"MOVE_YAWN",
+				"MOVE_ANCIENT_POWER"
+            ],
+            "power": 40,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_PHANPY",
             "form": 0,
             "level": 18,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_KNOCK_OFF",
+				"MOVE_ICE_SHARD",
+				"MOVE_ROCK_TOMB",
+				"MOVE_COUNTER"
+            ],
+            "power": 40,
             "ball_seal": 0
         }
     ]

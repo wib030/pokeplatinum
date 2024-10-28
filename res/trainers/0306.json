@@ -3,17 +3,23 @@
     "class": "TRAINER_CLASS_JOGGER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PIKACHU",
+            "species": "SPECIES_WYNAUT",
             "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ENCORE",
+				"MOVE_COUNTER",
+				"MOVE_MIRROR_COAT",
+				"MOVE_DESTINY_BOND"
+            ],
+            "power": 80,
             "ball_seal": 0
         }
     ]

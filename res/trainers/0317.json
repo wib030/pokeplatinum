@@ -4,52 +4,99 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEDITITE",
+            "species": "SPECIES_MONFERNO",
             "form": 0,
-            "level": 28,
-            "item": "ITEM_NONE",
+            "level": 30,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_DRAIN_PUNCH",
-                "MOVE_CONFUSION",
-                "MOVE_ROCK_TOMB",
-                "MOVE_FAKE_OUT"
+                "MOVE_FAKE_OUT",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_U_TURN",
+				"MOVE_ROCK_SMASH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_HARIYAMA",
             "form": 0,
-            "level": 29,
-            "item": "ITEM_NONE",
+            "level": 30,
+            "item": "ITEM_SALAC_BERRY",
             "moves": [
-                "MOVE_KARATE_CHOP",
-                "MOVE_ROCK_TOMB",
-                "MOVE_STRENGTH",
-                "MOVE_FOCUS_ENERGY"
+                "MOVE_BELLY_DRUM",
+				"MOVE_ARM_THRUST",
+				"MOVE_THUNDER_PUNCH",
+				"MOVE_KNOCK_OFF"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
+            "species": "SPECIES_HITMONTOP",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_RAPID_SPIN",
+				"MOVE_BULK_UP",
+				"MOVE_FORESIGHT",
+				"MOVE_REVENGE"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
+        },
+		{
+            "species": "SPECIES_HERACROSS",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_FURY_CUTTER",
+				"MOVE_AERIAL_ACE",
+				"MOVE_STONE_EDGE",
+				"MOVE_BRICK_BREAK"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
+        },
+		{
+            "species": "SPECIES_GALLADE",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_ASSAULT_VEST",
+            "moves": [
+                "MOVE_SHADOW_SNEAK",
+				"MOVE_DRAIN_PUNCH",
+				"MOVE_ZEN_HEADBUTT",
+				"MOVE_LEAF_BLADE"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
+        },
+		{
             "species": "SPECIES_LUCARIO",
             "form": 0,
-            "level": 32,
-            "item": "ITEM_NONE",
+            "level": 31,
+            "item": "ITEM_EXPERT_BELT",
             "moves": [
-                "MOVE_DRAIN_PUNCH",
-                "MOVE_FORCE_PALM",
-                "MOVE_METAL_CLAW",
-                "MOVE_BONE_RUSH"
+                "MOVE_AURA_SPHERE",
+				"MOVE_SHADOW_BALL",
+				"MOVE_CALM_MIND",
+				"MOVE_FLASH_CANNON"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 220,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

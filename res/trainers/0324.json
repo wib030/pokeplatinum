@@ -3,33 +3,37 @@
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHERUBI",
+            "species": "SPECIES_TREECKO",
             "form": 0,
             "level": 17,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_TACKLE",
-                "MOVE_LEECH_SEED"
+                "MOVE_BULLET_SEED",
+				"MOVE_PURSUIT",
+				"MOVE_SUNNY_DAY",
+				"MOVE_THUNDER_PUNCH"
             ],
-            "power": 20,
+            "power": 60,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ROSELIA",
+            "species": "SPECIES_BELLSPROUT",
             "form": 0,
             "level": 17,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_MEGA_DRAIN",
-                "MOVE_POISON_STING",
-                "MOVE_STUN_SPORE"
+                "MOVE_SEED_BOMB",
+				"MOVE_WEATHER_BALL",
+				"MOVE_SUCKER_PUNCH",
+				"MOVE_GROWTH"
             ],
-            "power": 20,
+            "power": 60,
             "ball_seal": 0
         }
     ]

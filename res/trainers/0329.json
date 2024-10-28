@@ -4,18 +4,22 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BIDOOF",
+            "species": "SPECIES_SANDSHREW",
             "form": 0,
             "level": 9,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_LAGGING_TAIL",
+            "moves": [
+                "MOVE_GYRO_BALL",
+				"MOVE_COUNTER",
+				"MOVE_SAND_ATTACK",
+				"MOVE_FOCUS_PUNCH"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]
