@@ -6817,16 +6817,24 @@ static BOOL BtlCmd_TrySwapItems(BattleSystem *battleSys, BattleContext *battleCt
     int attacking = Battler_Side(battleSys, battleCtx->attacker);
     int defending = Battler_Side(battleSys, battleCtx->defender);
 
-    if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
+    //if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE)
+	//{
+        //BattleScript_Iter(battleCtx, jumpOnFail);
+    //} 
+	
+	if ((battleCtx->sideConditions[attacking].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker]))
+    || (battleCtx->sideConditions[defending].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->defender])))
+	{
         BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if ((battleCtx->sideConditions[attacking].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker]))
-            || (battleCtx->sideConditions[defending].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->defender]))) {
+    }
+	else if ((ATTACKING_MON.heldItem == ITEM_NONE && DEFENDING_MON.heldItem == ITEM_NONE)
+    || BattleSystem_NotHoldingMail(battleCtx, battleCtx->attacker) == FALSE
+    || BattleSystem_NotHoldingMail(battleCtx, battleCtx->defender) == FALSE)
+	{
         BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if ((ATTACKING_MON.heldItem == ITEM_NONE && DEFENDING_MON.heldItem == ITEM_NONE)
-            || BattleSystem_NotHoldingMail(battleCtx, battleCtx->attacker) == FALSE
-            || BattleSystem_NotHoldingMail(battleCtx, battleCtx->defender) == FALSE) {
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE) {
+    }
+	else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE)
+	{
         BattleScript_Iter(battleCtx, jumpStickyHold);
     }
 
