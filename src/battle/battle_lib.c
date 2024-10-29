@@ -8951,6 +8951,18 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     u32 defenderMoveEffects;
     int criticalMul = 1;
     int attackerAbility;
+	int punchingMove = 0;
+	
+	if (itemEffect == HOLD_EFFECT_PUNCH_CRITRATE_UP)
+	{
+		for (int i = 0; i < NELEMS(sPunchingMoves); i++)
+		{
+			if (sPunchingMoves[i] == battleCtx->moveCur)
+			{
+				punchingMove = 1;
+			}
+		}
+	}
 
     item = Battler_HeldItem(battleCtx, attacker);
     itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
@@ -8964,6 +8976,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
             + (attackerAbility == ABILITY_SUPER_LUCK)
             + (battleCtx->battleMons[attacker].meditateCritBoostFlag != FALSE)
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
+			+ (4 * (punchingMove == 1))
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
 
     if (effectiveCritStage > 4) {
