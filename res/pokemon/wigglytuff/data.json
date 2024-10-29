@@ -35,8 +35,8 @@
         "EGG_GROUP_FAIRY"
     ],
     "abilities": [
-        "ABILITY_UNAWARE",
-        "ABILITY_COMPETITIVE"
+        "ABILITY_FREE_SAMPLE",
+        "ABILITY_FRISK"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
