@@ -4392,7 +4392,7 @@ static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContex
     for (k = 0; k < LEARNED_MOVES_MAX; k++) {
         effectiveness = 0;
         move = battleCtx->battleMons[defender].moves[k];
-        moveType = CalcMoveType(battleSys, battleCtx, attacker, move);
+        moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
         movePower = MOVE_DATA(move).power;
 
         if (movePower > 0) {
@@ -5676,7 +5676,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         // special gender consideration for Captivate
                                         if (battleCtx->battleMons[defender].gender != battleCtx->battleMons[battler].gender
                                             && battleCtx->battleMons[defender].gender != GENDER_NONE
-                                            && battleCtx->battleMons[battler].gender != GENDER_NONE)) {
+                                            && battleCtx->battleMons[battler].gender != GENDER_NONE) {
                                             if (AI_DoNotStatDrop(battleSys, battleCtx, move, battler, defender) == FALSE) {
 
                                                 // 80% chance to stay in for debuffing in doubles
