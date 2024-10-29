@@ -780,6 +780,67 @@
                 "BATTLE_STAT_MAX"
             ]
         },
+        "@BattleStatFlags": {
+            "type": "flags",
+            "values": [
+                "BATTLE_STAT_FLAG_NONE",
+                "BATTLE_STAT_FLAG_HP",
+                "BATTLE_STAT_FLAG_ATTACK",
+                "BATTLE_STAT_FLAG_DEFENSE",
+                "BATTLE_STAT_FLAG_SPEED",
+                "BATTLE_STAT_FLAG_SP_ATTACK",
+                "BATTLE_STAT_FLAG_SP_DEFENSE",
+                "BATTLE_STAT_FLAG_ACCURACY",
+                "BATTLE_STAT_FLAG_EVASION"
+            ],
+            "composites": {
+                "BATTLE_STAT_FLAG_ATK_AND_SPATK": {
+                    "op": "OR",
+                    "components": [
+                        "BATTLE_STAT_FLAG_ATTACK",
+                        "BATTLE_STAT_FLAG_SP_ATTACK"
+                    ]
+                },
+                "BATTLE_STAT_FLAG_ATK_AND_SPE": {
+                    "op": "OR",
+                    "components": [
+                        "BATTLE_STAT_FLAG_ATTACK",
+                        "BATTLE_STAT_FLAG_SPEED"
+                    ]
+                },
+                "BATTLE_STAT_FLAG_ATK_AND_DEF": {
+                    "op": "OR",
+                    "components": [
+                        "BATTLE_STAT_FLAG_ATTACK",
+                        "BATTLE_STAT_FLAG_DEFENSE"
+                    ]
+                },
+                "BATTLE_STAT_FLAG_DEF_AND_SPDEF": {
+                    "op": "OR",
+                    "components": [
+                        "BATTLE_STAT_FLAG_DEFENSE",
+                        "BATTLE_STAT_FLAG_SP_DEFENSE"
+                    ]
+                },
+                "BATTLE_STAT_FLAG_SPATK_AND_SPDEF": {
+                    "op": "OR",
+                    "components": [
+                        "BATTLE_STAT_FLAG_SP_ATTACK",
+                        "BATTLE_STAT_FLAG_SP_DEFENSE"
+                    ]
+                },
+                "BATTLE_STAT_FLAG_OMNIBOOST": {
+                    "op": "OR",
+                    "components": [
+                        "BATTLE_STAT_FLAG_SP_ATTACK",
+                        "BATTLE_STAT_FLAG_DEFENSE",
+                        "BATTLE_STAT_FLAG_SPEED",
+                        "BATTLE_STAT_FLAG_SP_ATTACK",
+                        "BATTLE_STAT_FLAG_SP_DEFENSE"
+                    ]
+                }
+            }
+        },
         "@CompareSpeedResult": {
             "type": "enum",
             "values": [

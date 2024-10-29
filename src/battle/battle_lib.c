@@ -11573,6 +11573,7 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
         // Trap
         case BATTLE_EFFECT_PREVENT_ESCAPE:
             volatileStatus = BATTLE_EFFECT_PREVENT_ESCAPE;
+            break;
 
         // Nightmare
         case BATTLE_EFFECT_STATUS_NIGHTMARE:
@@ -11634,12 +11635,14 @@ int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect)
         case BATTLE_EFFECT_BURN_HIT:
         case BATTLE_EFFECT_STATUS_BURN:
             statusCondition = MON_CONDITION_BURN;
+            break;
 
         // Freeze
         case BATTLE_EFFECT_BLIZZARD:
         case BATTLE_EFFECT_FLINCH_FREEZE_HIT:
         case BATTLE_EFFECT_FREEZE_HIT:
             statusCondition = MON_CONDITION_FREEZE;
+            break;
 
         // Paralysis
         case BATTLE_EFFECT_BOUNCE:
@@ -11649,11 +11652,98 @@ int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect)
         case BATTLE_EFFECT_PARALYZE_HIT:
         case BATTLE_EFFECT_STATUS_PARALYZE:
             statusCondition = MON_CONDITION_PARALYSIS;
+            break;
 
         // Tri Attack
         case BATTLE_EFFECT_TRI_ATTACK:
             statusCondition = (MON_CONDITION_BURN | MON_CONDITION_FREEZE | MON_CONDITION_PARALYSIS);
+            break;
     }
 
     return statusCondition;
+}
+
+/**
+ * @brief Map the given battle effect to an appropriate stat drop.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding stat drop
+ * @return The corresponding battle stat flag of the dropped stat
+ */
+int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
+{
+    int battleStatFlag;
+
+    switch (effect) {
+
+        default:
+            battleStatFlag = BATTLE_STAT_FLAG_NONE;
+            break;
+        
+        // Attack
+        case BATTLE_EFFECT_LOWER_ATTACK_HIT:
+        case BATTLE_EFFECT_ATK_DOWN_2:
+        case BATTLE_EFFECT_ATK_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
+            break;
+
+        // Defense
+        case BATTLE_EFFECT_LOWER_DEFENSE_HIT:
+        case BATTLE_EFFECT_DEF_DOWN_2:
+        case BATTLE_EFFECT_DEF_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
+            break;
+
+        // Special Attack
+        case BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER:
+        case BATTLE_EFFECT_LOWER_SP_ATK_HIT:
+        case BATTLE_EFFECT_SP_ATK_DOWN_2:
+        case BATTLE_EFFECT_SP_ATK_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
+            break;
+
+        // Special Defense
+        case BATTLE_EFFECT_LOWER_SP_DEF_2_HIT:
+        case BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER:
+        case BATTLE_EFFECT_LOWER_SP_DEF_HIT:
+        case BATTLE_EFFECT_SP_DEF_DOWN_2:
+        case BATTLE_EFFECT_SP_DEF_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_SP_DEFENSE;
+            break;
+
+        // Speed
+        case BATTLE_EFFECT_SPEED_DOWN_HIT:
+        case BATTLE_EFFECT_LOWER_SPEED_HIT:
+        case BATTLE_EFFECT_SPEED_DOWN_2:
+        case BATTLE_EFFECT_SPEED_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_SPEED;
+            break;
+
+        // Accuracy
+        case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+        case BATTLE_EFFECT_ACC_DOWN_2:
+        case BATTLE_EFFECT_ACC_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_ACCURACY;
+            break;
+
+        // Evasion
+        case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
+        case BATTLE_EFFECT_LOWER_EVASION_HIT:
+        case BATTLE_EFFECT_EVA_DOWN_2:
+        case BATTLE_EFFECT_EVA_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_EVASION;
+            break;
+
+        // Attack and Special Attack
+        case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
+            battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_SPATK;
+            break;
+
+        // Attack and Defense
+        case BATTLE_EFFECT_ATK_DEF_DOWN:
+            battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_DEF;
+            break;
+    }
+
+    return battleStatFlag;
 }
