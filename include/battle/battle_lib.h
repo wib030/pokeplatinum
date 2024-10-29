@@ -1553,4 +1553,13 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect);
  */
 int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect);
 
+/**
+ * @brief Map the given battle effect to an appropriate stat drop.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding stat drop
+ * @return The corresponding battle stat flag of the dropped stat
+ */
+int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
