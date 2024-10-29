@@ -421,6 +421,7 @@ static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1,
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
 static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int defender);
 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -4375,6 +4376,104 @@ static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *
     return result;
 }
 
+static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int k;
+    int moveType, moveDamage, movePower;
+    u8 side;
+    u16 move;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    side = Battler_Side(battleSys, defender);
+
+    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+        effectiveness = 0;
+        move = battleCtx->battleMons[defender].moves[k];
+        moveType = CalcMoveType(battleSys, battleCtx, attacker, move);
+        movePower = MOVE_DATA(move).power;
+
+        if (movePower > 0) {
+            moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+            battleCtx,
+            move,
+            battleCtx->sideConditionsMask[side],
+            battleCtx->fieldConditionsMask,
+            movePower,
+            moveType,
+            attacker,
+            defender,
+            1);
+
+            moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+            battleCtx,
+            move,
+            moveType,
+            attacker,
+            defender,
+            moveDamage,
+            &effectiveness);
+
+            if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
+                if ((moveDamage > battleCtx->battleMons[defender].curHP)
+                    || (moveDamage > (battleCtx->battleMons[defender].maxHP / 2))) {
+                    result = TRUE;
+                    break;
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int defender)
+{
+    BOOL result;
+
+    u8 attackerAbility, defenderAbility;
+    int effect;
+
+    result = FALSE;
+
+    attackerAbility = battleCtx->battleMons[attacker].ability;
+    defenderAbility = battleCtx->battleMons[defender].ability;
+    
+    effect = MOVE_DATA(move).effect;
+
+    if (attackerAbility != ABILITY_MOLD_BREAKER) {
+        switch (defenderAbility) {
+            default:
+                break;
+
+            case ABILITY_MAGIC_BOUNCE:
+                if (attackerAbility != ABILITY_DEFIANT
+                    && attackerAbility != ABILITY_COMPETITIVE) {
+                    result = TRUE;
+                }
+                break;
+
+            case ABILITY_HYPER_CUTTER:
+                if (MapBattleEffectToStatDrop(battleCtx, effect) & BATTLE_STAT_FLAG_ATTACK) {
+                    result = TRUE;
+                }
+                break;
+                
+            case ABILITY_DEFIANT:
+            case ABILITY_COMPETITIVE:
+            case ABILITY_CLEAR_BODY:
+            case ABILITY_WHITE_SMOKE:
+                result = TRUE;
+                break;
+        }
+    }
+
+    return result;
+}
+
 /**
  * @brief Check if Perish Song is active on a battler and the battler should
  * faint at the end of the turn. If so, treat the next switch as post-KO switch
@@ -4555,10 +4654,9 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     int i, j, k;
     u8 defender1, defender2, defender, battlerPartner, side;
     u8 aiSlot1, aiSlot2;
-    u8 defenderIVs[STAT_MAX];
     u16 move, opponentMove;
-    int type, range, effect, moveEffect, moveVolatileStatus, moveStatus, partyCount, opponentMoveType, opponentMoveDamage;
-    u32 effectiveness, sideCondition, opponentEffectiveness;
+    int type, range, effect, moveEffect, moveVolatileStatus, moveStatus, partyCount;
+    u32 effectiveness, sideCondition;
     int start, end;
     int numMoves;
     Pokemon *mon;
@@ -5395,7 +5493,10 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         break;
 
                                     case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
-                                        return FALSE;
+                                        if (battleCtx->battleMons[defender].ability != ABILITY_DEFIANT
+                                            && battleCtx->battleMons[defender].ability != ABILITY_COMPETITIVE) {
+                                                return FALSE;
+                                            }
                                         break;
 
                                     case BATTLE_EFFECT_ATK_DEF_DOWN:
@@ -5524,48 +5625,10 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     case BATTLE_EFFECT_FORCE_SWITCH:
                                         if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
                                             if (move != MOVE_ROAR || battleCtx->battleMons[defender].ability != ABILITY_SOUNDPROOF) {
-                                                // Stay in for Roar / Whirlwind if we live
-                                                for (k = 0; k < STAT_MAX; k++) {
-                                                    defenderIVs[k] = BattleMon_Get(battleCtx, defender, BATTLEMON_HP_IV + k, NULL);
-                                                }
-
-                                                for (k = 0; k < LEARNED_MOVES_MAX; k++) {
-                                                    opponentEffectiveness = 0;
-                                                    opponentMove = battleCtx->battleMons[defender].moves[k];
-                                                    opponentMoveType = MOVE_DATA(opponentMove).type;
-
-                                                    if (MOVE_DATA(opponentMove).power > 0) {
-                                                        opponentMoveDamage = BattleSystem_CalcMoveDamage(battleSys,
-                                                        battleCtx,
-                                                        opponentMove,
-                                                        battleCtx->sideConditionsMask[side],
-                                                        battleCtx->fieldConditionsMask,
-                                                        MOVE_DATA(opponentMove).power,
-                                                        opponentMoveType,
-                                                        defender,
-                                                        battler,
-                                                        1);
-
-                                                        opponentMoveDamage = BattleSystem_ApplyTypeChart(battleSys,
-                                                        battleCtx,
-                                                        opponentMove,
-                                                        opponentMoveType,
-                                                        defender,
-                                                        battler,
-                                                        opponentMoveDamage,
-                                                        &opponentEffectiveness);
-
-                                                        if ((opponentEffectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
-                                                            if (battleCtx->battleMons[battler].curHP < opponentMoveDamage) {
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                if (k == LEARNED_MOVES_MAX) {
+                                                if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, defender, battler) == FALSE) {
                                                     return FALSE;
                                                 }
+                                                break;
                                             }
                                         }
                                         break;
@@ -5600,13 +5663,108 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                     // To Do:
                                     // Side and Field status moves.
-
-
                                 }
                                 break;
 
+                            case RANGE_ADJACENT_OPPONENTS:
+                                switch (effect) {
+                                    default:
+                                        break;
 
+                                        // Captivate
+                                    case BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER:
+                                        // special gender consideration for Captivate
+                                        if (battleCtx->battleMons[defender].gender != battleCtx->battleMons[battler].gender
+                                            && battleCtx->battleMons[defender].gender != GENDER_NONE
+                                            && battleCtx->battleMons[battler].gender != GENDER_NONE)) {
+                                            if (AI_DoNotStatDrop(battleSys, battleCtx, move, battler, defender) == FALSE) {
 
+                                                // 80% chance to stay in for debuffing in doubles
+                                                if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+                                                    if ((BattleSystem_RandNext(battleSys) % 5) < 4) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                                else {
+                                                // 20% chance to stay in for debuffing in singles
+                                                    if ((BattleSystem_RandNext(battleSys) % 5) == 0) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                        // Growl
+                                    case BATTLE_EFFECT_ATK_DOWN:
+                                        // special Soundproof consideration for Growl
+                                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF) == 0) {
+                                            if (AI_DoNotStatDrop(battleSys, battleCtx, move, battler, defender) == FALSE) {
+                                                        
+                                                // 80% chance to stay in for debuffing in doubles
+                                                if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+                                                    if ((BattleSystem_RandNext(battleSys) % 5) < 4) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                                else {
+                                                // 20% chance to stay in for debuffing in singles
+                                                    if ((BattleSystem_RandNext(battleSys) % 5) == 0) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                        // String Shot
+                                    case BATTLE_EFFECT_SPEED_DOWN_2:
+                                        // special Trick Room consideration for String Shot
+                                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) == FALSE) {
+                                            if (AI_DoNotStatDrop(battleSys, battleCtx, move, battler, defender) == FALSE) {
+                                                        
+                                                // 80% chance to stay in for debuffing in doubles
+                                                if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+                                                    if ((BattleSystem_RandNext(battleSys) % 5) < 4) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                                else {
+                                                // 20% chance to stay in for debuffing in singles
+                                                    if ((BattleSystem_RandNext(battleSys) % 5) == 0) {
+                                                        return FALSE;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                        // Leer and Tail Whip
+                                    case BATTLE_EFFECT_DEF_DOWN:
+                                        // Sweet Scent
+                                    case BATTLE_EFFECT_EVA_DOWN:
+                                        if (AI_DoNotStatDrop(battleSys, battleCtx, move, battler, defender) == FALSE) {
+                                            
+                                            // 80% chance to stay in for debuffing in doubles
+                                            if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+                                                if ((BattleSystem_RandNext(battleSys) % 5) < 4) {
+                                                    return FALSE;
+                                                }
+                                            }
+                                            else {
+                                            // 20% chance to stay in for debuffing in singles
+                                                if ((BattleSystem_RandNext(battleSys) % 5) == 0) {
+                                                    return FALSE;
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                        // Heal Block
+                                    case BATTLE_EFFECT_PREVENT_HEALING:
+                                        break;
+                                }
+                                break;
                         }                        
                     }
                 }
