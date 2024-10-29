@@ -1,38 +1,53 @@
 {
-    "name": "Eddie",
+    "name": "MechaKnight",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MANKEY",
+            "species": "SPECIES_MIME_JR",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 68,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_BATON_PASS",
+                "MOVE_FUTURE_SIGHT",
+                "MOVE_FAKE_OUT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_MOTHIM",
             "form": 0,
-            "level": 53,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_AGILITY",
+                "MOVE_BUG_BUZZ",
+                "MOVE_RAZOR_WIND",
+                "MOVE_FISSURE"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_INFERNAPE",
+            "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 55,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_CALM_MIND",
+                "MOVE_SHADOW_BALL",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

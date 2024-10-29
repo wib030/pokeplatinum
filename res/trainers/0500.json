@@ -1,54 +1,53 @@
 {
-    "name": "Brenden",
+    "name": "No. 1",
     "class": "TRAINER_CLASS_VETERAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_FORRETRESS",
+            "species": "SPECIES_HERACROSS",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_FLASH_CANNON",
-                "MOVE_ROCK_SLIDE",
-                "MOVE_STEALTH_ROCK",
-                "MOVE_TOXIC_SPIKES"
-            ],
-            "power": 100,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_GYARADOS",
-            "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": [
+                "MOVE_MEGAHORN",
+                "MOVE_CLOSE_COMBAT",
                 "MOVE_EARTHQUAKE",
-                "MOVE_AQUA_TAIL",
-                "MOVE_ICE_FANG",
-                "MOVE_DRAGON_PULSE"
+                "MOVE_SHADOW_CLAW"
             ],
-            "power": 100,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_HIPPOWDON",
+            "species": "SPECIES_ZANGOOSE",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_FLAME_ORB",
             "moves": [
-                "MOVE_DIG",
-                "MOVE_CRUNCH",
-                "MOVE_PROTECT",
-                "MOVE_REST"
+                "MOVE_FACADE",
+                "MOVE_KNOCK_OFF",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_LAST_RESORT"
             ],
-            "power": 100,
+            "power": 200,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_FLYGON",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_OUTRAGE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_FLY",
+                "MOVE_FIRE_PUNCH"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,53 @@
 {
-    "name": "Grunt",
+    "name": "Wibboria",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 47,
+            "item": "ITEM_WACAN_BERRY",
+            "moves": [
+                "MOVE_KNOCK_OFF",
+                "MOVE_TAILWIND",
+                "MOVE_U_TURN",
+                "MOVE_ROOST"
+            ],
+            "power": 140,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LANTURN",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_DISCHARGE",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_WHIRLPOOL",
+                "MOVE_STOCKPILE"
+            ],
+            "power": 140,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TOXICROAK",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_SWORDS_DANCE"
+            ],
+            "power": 140,
             "ball_seal": 0
         }
     ]

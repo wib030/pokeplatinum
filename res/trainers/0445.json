@@ -1,20 +1,39 @@
 {
-    "name": "Kendal",
+    "name": "Ken",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TOXICROAK",
+            "species": "SPECIES_HITMONLEE",
             "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 40,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_BLAZE_KICK",
+                "MOVE_HI_JUMP_KICK",
+                "MOVE_KNOCK_OFF",
+                "MOVE_HELPING_HAND"
+            ],
+            "power": 120,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLAZIKEN",
+            "form": 0,
+            "level": 40,
+            "item": "ITEM_AMULET_COIN",
+            "moves": [
+                "MOVE_BLAZE_KICK",
+                "MOVE_MIRROR_MOVE",
+                "MOVE_DOUBLE_KICK",
+                "MOVE_PROTECT"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

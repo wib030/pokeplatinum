@@ -1,49 +1,53 @@
 {
-    "name": "Samson",
+    "name": "Herbert",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_WINGULL",
+            "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 29,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_WATER_PULSE",
-                "MOVE_WING_ATTACK",
-                "MOVE_SUPERSONIC"
+                "MOVE_ATTRACT",
+                "MOVE_SWEET_KISS",
+                "MOVE_AQUA_RING",
+                "MOVE_TOXIC"
             ],
-            "power": 10,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SHELLOS",
+            "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 30,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_POWER_HERB",
             "moves": [
-                "MOVE_WATER_PULSE",
-                "MOVE_MUD_BOMB",
-                "MOVE_RAIN_DANCE"
+                "MOVE_BOUNCE",
+                "MOVE_DIVE",
+                "MOVE_MUD_SPORT",
+                "MOVE_ICY_WIND"
             ],
-            "power": 10,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 31,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_MYSTIC_WATER",
             "moves": [
-                "MOVE_FURY_SWIPES",
-                "MOVE_CONFUSION",
-                "MOVE_WATER_PULSE"
+                "MOVE_SURF",
+                "MOVE_BLIZZARD",
+                "MOVE_AGILITY",
+                "MOVE_HIDDEN_POWER"
             ],
-            "power": 10,
+            "power": 200,
             "ball_seal": 0
         }
     ]

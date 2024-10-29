@@ -1,20 +1,54 @@
 {
-    "name": "Claire",
+    "name": "Gender",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_FLOATZEL",
+            "species": "SPECIES_GARDEVOIR",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 60,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_WISH",
+                "MOVE_ATTRACT",
+                "MOVE_SNATCH",
+                "MOVE_GRUDGE"
+            ],
+            "power": 200,
+            "ball_seal": 9
+        },
+		{
+            "species": "SPECIES_WORMADAM",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_ENDEAVOR",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "power": 200,
+            "ball_seal": 9
+        },
+		{
+            "species": "SPECIES_MR_MIME",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_ENIGMA_BERRY",
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_FAKE_OUT",
+                "MOVE_FLING"
+            ],
+            "power": 200,
+            "ball_seal": 15
         }
     ]
 }

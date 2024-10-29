@@ -1,28 +1,50 @@
 {
-    "name": "Grunt",
+    "name": "Paper",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_BEEDRILL",
             "form": 0,
-            "level": 16,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 20,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_TWINEEDLE",
+                "MOVE_PAYBACK",
+                "MOVE_BRICK_BREAK",
+                "MOVE_TOXIC"
+            ],
+            "power": 40,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_GEODUDE",
             "form": 0,
-            "level": 18,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_SELFDESTRUCT"
+            ],
+            "power": 40,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_CARNIVINE",
+            "form": 0,
+            "level": 22,
+            "item": "ITEM_POISON_BARB",
+            "moves": [
+                "MOVE_RAZOR_LEAF",
+                "MOVE_FLING",
+                "MOVE_PROTECT",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 40,
             "ball_seal": 0
         }
     ]

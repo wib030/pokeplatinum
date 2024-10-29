@@ -1,29 +1,53 @@
 {
-    "name": "Willie",
+    "name": "No. 2",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HERACROSS",
+            "species": "SPECIES_PINSIR",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_EARTHQUAKE",
+                "MOVE_SPIDER_WEB",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_KNOCK_OFF"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHAMP",
+            "species": "SPECIES_SEVIPER",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 60,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_POISON_JAB",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_KNOCK_OFF",
+                "MOVE_FLAMETHROWER"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GARCHOMP",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_EARTHQUAKE",
+                "MOVE_OUTRAGE",
+                "MOVE_FIRE_BLAST",
+                "MOVE_SURF"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,39 @@
 {
-    "name": "Nicola",
+    "name": "Cola",
     "class": "TRAINER_CLASS_BEAUTY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_LOPUNNY",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 50,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_ENDURE",
+                "MOVE_ENCORE",
+                "MOVE_BATON_PASS"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LOPUNNY",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_HI_JUMP_KICK",
+                "MOVE_QUICK_ATTACK",
+                "MOVE_ICE_PUNCH",
+                "MOVE_RETURN"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,39 @@
 {
-    "name": "Cassidy",
+    "name": "Crawfish",
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUNEARY",
+            "species": "SPECIES_SHELLDER",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ICICLE_SPEAR",
+                "MOVE_ROCK_BLAST",
+                "MOVE_SCREECH",
+                "MOVE_ICY_WIND"
+            ],
+            "power": 80,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_WARTORTLE",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_RAPID_SPIN",
+                "MOVE_AQUA_RING",
+                "MOVE_MIST",
+                "MOVE_BRINE"
+            ],
+            "power": 80,
             "ball_seal": 0
         }
     ]

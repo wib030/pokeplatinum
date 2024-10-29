@@ -1,24 +1,25 @@
 {
-    "name": "Jacky",
+    "name": "Circle Throw",
     "class": "TRAINER_CLASS_TUBER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BIBAREL",
-            "form": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 2,
             "level": 32,
-            "item": null,
+            "item": "ITEM_BLACKGLASSES",
             "moves": [
-                "MOVE_WATER_GUN",
-                "MOVE_ROLLOUT",
-                "MOVE_HYPER_FANG",
-                "MOVE_YAWN"
+                "MOVE_CHARGE_BEAM",
+                "MOVE_DARK_PULSE",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_HIDDEN_POWER"
             ],
-            "power": 10,
+            "power": 120,
             "ball_seal": 0
         }
     ]

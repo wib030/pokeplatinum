@@ -1,24 +1,24 @@
 {
-    "name": "Karina",
+    "name": "Careena",
     "class": "TRAINER_CLASS_PICNICKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PIPLUP",
+            "species": "SPECIES_MEW",
             "form": 0,
-            "level": 14,
-            "item": null,
+            "level": 15,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_BUBBLE",
-                "MOVE_PECK"
+                "MOVE_POISON_STING",
+                "MOVE_IRON_DEFENSE",
+                "MOVE_BUG_BITE"
             ],
-            "power": 0,
+            "power": 69,
             "ball_seal": 0
         }
     ]

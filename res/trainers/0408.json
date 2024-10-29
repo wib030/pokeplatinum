@@ -1,55 +1,83 @@
 {
-    "name": "Saturn",
+    "name": "Uranus",
     "class": "TRAINER_CLASS_COMMANDER_SATURN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 38,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_AIR_CUTTER",
-                "MOVE_BITE",
-                "MOVE_TOXIC",
-                "MOVE_SUPERSONIC"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_BRONZOR",
-            "form": 0,
-            "level": 38,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_GYRO_BALL",
-                "MOVE_SHADOW_BALL",
-                "MOVE_ROCK_TOMB",
-                "MOVE_IRON_DEFENSE"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_TOXICROAK",
-            "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_POISON_JAB",
-                "MOVE_REVENGE",
-                "MOVE_MUD_BOMB",
-                "MOVE_FAINT_ATTACK"
+                "MOVE_STEALTH_ROCK",
+				"MOVE_WHIRLWIND",
+				"MOVE_BRAVE_BIRD",
+				"MOVE_ROOST"
             ],
-            "power": 200,
+            "power": 160,
+            "ball_seal": 12
+        },
+        {
+            "species": "SPECIES_GOLEM",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_ROCK_POLISH",
+				"MOVE_STONE_EDGE",
+				"MOVE_EARTHQUAKE",
+				"MOVE_THUNDER_PUNCH"
+            ],
+            "power": 160,
+            "ball_seal": 0,
+			"ability": 1
+        },
+        {
+            "species": "SPECIES_ROSERADE",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_PETAYA_BERRY",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+				"MOVE_EXTRASENSORY",
+				"MOVE_MEGA_DRAIN",
+				"MOVE_SLUDGE_BOMB"
+            ],
+            "power": 160,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLASTOISE",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_WATER_SPOUT",
+				"MOVE_RECOVER",
+				"MOVE_EARTHQUAKE",
+				"MOVE_ICE_BEAM"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TOXICROAK",
+            "form": 0,
+            "level": 45,
+            "item": "ITEM_PAYAPA_BERRY",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+				"MOVE_SUCKER_PUNCH",
+				"MOVE_GUNK_SHOT",
+				"MOVE_CLOSE_COMBAT"
+            ],
+            "power": 180,
+            "ball_seal": 12
         }
     ]
 }

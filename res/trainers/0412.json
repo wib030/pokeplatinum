@@ -1,19 +1,25 @@
 {
-    "name": "Grunt",
+    "name": "Goober",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_GASTLY",
             "form": 0,
-            "level": 19,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 22,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_CURSE",
+                "MOVE_PROTECT",
+                "MOVE_HYPNOSIS",
+                "MOVE_CONFUSE_RAY"
+            ],
+            "power": 60,
             "ball_seal": 0
         }
     ]

@@ -1,20 +1,33 @@
 {
-    "name": "Bruce",
+    "name": "Almighty",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_ARCEUS",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 20,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SHADOW_FORCE",
+                "MOVE_SEISMIC_TOSS"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_MASTER_BALL",
+			"evHP": 0,
+			"evATK": 100,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

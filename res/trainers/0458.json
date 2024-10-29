@@ -1,21 +1,39 @@
 {
-    "name": "Tori",
+    "name": "Cori",
     "class": "TRAINER_CLASS_PICNICKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PSYDUCK",
+            "species": "SPECIES_CORSOLA",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_RECOVER",
+                "MOVE_ICY_WIND"
+            ],
+            "power": 100,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MR_MIME",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_REFLECT",
+                "MOVE_FOLLOW_ME",
+                "MOVE_CONFUSION"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

@@ -1,19 +1,54 @@
 {
-    "name": "Grunt",
+    "name": "Cool Grunt",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_AZUMARILL",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 42,
+            "item": "ITEM_BLACKGLASSES",
+            "moves": [
+                "MOVE_FLING",
+                "MOVE_WATERFALL",
+                "MOVE_ICE_PUNCH",
+                "MOVE_KNOCK_OFF"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DELCATTY",
+            "form": 0,
+            "level": 42,
+            "item": "ITEM_BLACKGLASSES",
+            "moves": [
+                "MOVE_FLING",
+                "MOVE_SKILL_SWAP",
+                "MOVE_TOXIC",
+                "MOVE_FRUSTRATION"
+            ],
+            "power": 180,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GLISCOR",
+            "form": 0,
+            "level": 42,
+            "item": "ITEM_BLACKGLASSES",
+            "moves": [
+                "MOVE_KNOCK_OFF",
+                "MOVE_EARTHQUAKE",
+                "MOVE_WING_ATTACK",
+                "MOVE_ROOST"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

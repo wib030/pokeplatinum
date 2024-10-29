@@ -1,30 +1,39 @@
 {
-    "name": "Gerald",
+    "name": "Derbert",
     "class": "TRAINER_CLASS_RUIN_MANIAC",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_BELLOSSOM",
             "form": 0,
-            "level": 19,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_HEART_MAIL",
+            "moves": [
+                "MOVE_FLASH",
+                "MOVE_TICKLE",
+                "MOVE_LEECH_SEED",
+                "MOVE_SWEET_SCENT"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_NUZLEAF",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_HARDEN",
+                "MOVE_GROWTH",
+                "MOVE_POUND",
+                "MOVE_FLASH"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

@@ -1,21 +1,40 @@
 {
-    "name": "Ana",
+    "name": "Nosepicker",
     "class": "TRAINER_CLASS_PICNICKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOOTHOOT",
+            "species": "SPECIES_PROBOPASS",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ROCK_POLISH",
+                "MOVE_MAGNET_RISE",
+                "MOVE_MAGNITUDE",
+                "MOVE_ANCIENT_POWER"
+            ],
+            "power": 100,
+            "ball_seal": 0,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_SANDSLASH",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_SAND_TOMB",
+                "MOVE_CRUSH_CLAW",
+                "MOVE_KNOCK_OFF"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

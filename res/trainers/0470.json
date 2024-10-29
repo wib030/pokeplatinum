@@ -4,65 +4,78 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAVIA",
-            "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": [
-                "MOVE_WING_ATTACK",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_ENDEAVOR",
-                "MOVE_DOUBLE_TEAM"
-            ],
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_BUIZEL",
-            "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": [
-                "MOVE_WATER_GUN",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_PURSUIT",
-                "MOVE_GROWL"
-            ],
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_PONYTA",
-            "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": [
-                "MOVE_EMBER",
-                "MOVE_TACKLE",
-                "MOVE_TAIL_WHIP",
-                "MOVE_GROWL"
-            ],
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_GROTLE",
             "form": 0,
             "level": 27,
-            "item": null,
+            "item": "ITEM_MIRACLE_SEED",
             "moves": [
-                "MOVE_RAZOR_LEAF",
-                "MOVE_TACKLE",
-                "MOVE_ABSORB",
-                "MOVE_WITHDRAW"
+                "MOVE_STEALTH_ROCK",
+                "MOVE_BULLET_SEED",
+                "MOVE_CURSE",
+                "MOVE_TOXIC"
             ],
-            "power": 50,
+            "power": 150,
+            "ball_seal": 6
+        },
+        {
+            "species": "SPECIES_SHUPPET",
+            "form": 0,
+            "level": 25,
+            "item": "ITEM_LIECHI_BERRY",
+            "moves": [
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_KNOCK_OFF",
+                "MOVE_WILL_O_WISP",
+                "MOVE_DESTINY_BOND"
+            ],
+            "power": 150,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_FLAAFFY",
+            "form": 0,
+            "level": 25,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_COUNTER",
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN"
+            ],
+            "power": 150,
+            "ball_seal": 21
+        },
+        {
+            "species": "SPECIES_PIDGEOTTO",
+            "form": 0,
+            "level": 25,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_U_TURN",
+                "MOVE_AIR_SLASH",
+                "MOVE_TWISTER",
+                "MOVE_OMINOUS_WIND"
+            ],
+            "power": 150,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_EEVEE",
+            "form": 0,
+            "level": 23,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_WISH",
+                "MOVE_YAWN",
+                "MOVE_RETURN",
+                "MOVE_DIG"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

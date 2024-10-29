@@ -1,28 +1,36 @@
 {
-    "name": "Fabian",
+    "name": "Davebert",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_SNEASEL",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SWAGGER",
+                "MOVE_PUNISHMENT",
+                "MOVE_ROCK_SMASH"
+            ],
+            "power": 120,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_SCYTHER",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_AGILITY",
+                "MOVE_FURY_CUTTER"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

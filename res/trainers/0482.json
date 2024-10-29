@@ -1,37 +1,55 @@
 {
-    "name": "Zachariah",
+    "name": "Flexor",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PELIPPER",
+            "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_BULK_UP",
+                "MOVE_ENCORE",
+                "MOVE_DYNAMIC_PUNCH",
+                "MOVE_BODY_SLAM"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ability": 1
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 53,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_BULK_UP",
+                "MOVE_POWER_TRICK",
+                "MOVE_FIRE_BLAST",
+                "MOVE_SUBSTITUTE"
+            ],
+            "power": 200,
+            "ball_seal": 0,
+			"ability": 1
         },
         {
-            "species": "SPECIES_GASTRODON",
+            "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 53,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_BULK_UP",
+                "MOVE_FLING",
+                "MOVE_SCARY_FACE",
+                "MOVE_TOXIC"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

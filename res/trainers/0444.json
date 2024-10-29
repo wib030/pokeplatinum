@@ -1,21 +1,49 @@
 {
-    "name": "Miles",
+    "name": "Zoroark",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 48,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 55,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_DYNAMIC_PUNCH",
+                "MOVE_FIRE_BLAST",
+                "MOVE_STONE_EDGE",
+                "MOVE_MEGA_KICK"
+            ],
+            "power": 200,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DITTO",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

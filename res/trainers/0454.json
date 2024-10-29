@@ -1,29 +1,39 @@
 {
-    "name": "Reginald",
+    "name": "Grindset",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_POWER_BAND",
+            "moves": [
+                "MOVE_BULK_UP",
+                "MOVE_MEDITATE",
+                "MOVE_ENDURE",
+                "MOVE_FOCUS_ENERGY"
+            ],
+            "power": 120,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_SACRED_ASH",
+            "moves": [
+                "MOVE_LEER",
+                "MOVE_TAUNT",
+                "MOVE_FORESIGHT",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

@@ -1,21 +1,25 @@
 {
-    "name": "Summer",
+    "name": "Delia",
     "class": "TRAINER_CLASS_PICNICKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_RAICHU",
+            "species": "SPECIES_MR_MIME",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_ENCORE",
+                "MOVE_MIND_READER",
+                "MOVE_CALM_MIND",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 140,
             "ball_seal": 0
         }
     ]

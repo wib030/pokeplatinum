@@ -1,28 +1,53 @@
 {
-    "name": "Grunt",
+    "name": "Swap",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOUNDOUR",
+            "species": "SPECIES_FLAREON",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 42,
+            "item": "ITEM_ZOOM_LENS",
+            "moves": [
+                "MOVE_HELPING_HAND",
+                "MOVE_COVET",
+                "MOVE_FAKE_TEARS",
+                "MOVE_HEAT_WAVE"
+            ],
+            "power": 140,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 36,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 42,
+            "item": "ITEM_POKE_DOLL",
+            "moves": [
+                "MOVE_FRUSTRATION",
+                "MOVE_ENDURE",
+                "MOVE_OUTRAGE",
+                "MOVE_BITE"
+            ],
+            "power": 140,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GALLADE",
+            "form": 0,
+            "level": 42,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_GRUDGE",
+                "MOVE_MEAN_LOOK",
+                "MOVE_ENCORE",
+                "MOVE_MEMENTO"
+            ],
+            "power": 140,
             "ball_seal": 0
         }
     ]

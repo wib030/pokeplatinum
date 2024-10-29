@@ -1,19 +1,25 @@
 {
-    "name": "Grunt",
+    "name": "Wibiados",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_ARIADOS",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 41,
+            "item": "ITEM_LAVA_COOKIE",
+            "moves": [
+                "MOVE_SPIDER_WEB",
+                "MOVE_LEECH_LIFE",
+                "MOVE_SCARY_FACE",
+                "MOVE_CONSTRICT"
+            ],
+            "power": 140,
             "ball_seal": 0
         }
     ]

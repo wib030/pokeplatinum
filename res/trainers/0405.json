@@ -4,52 +4,79 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 38,
-            "item": "ITEM_NONE",
+            "level": 43,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_AIR_CUTTER",
-                "MOVE_BITE",
-                "MOVE_TOXIC",
-                "MOVE_SUPERSONIC"
+                "MOVE_TOXIC_SPIKES",
+				"MOVE_WATER_PULSE",
+				"MOVE_SLUDGE_BOMB",
+				"MOVE_KNOCK_OFF"
             ],
-            "power": 200,
+            "power": 160,
+            "ball_seal": 5
+        },
+        {
+            "species": "SPECIES_DRAPION",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_POISON_FANG",
+				"MOVE_KNOCK_OFF",
+				"MOVE_ACUPRESSURE",
+				"MOVE_REST"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 38,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_GYRO_BALL",
-                "MOVE_EXTRASENSORY",
-                "MOVE_IRON_DEFENSE",
-                "MOVE_CONFUSE_RAY"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_PURUGLY",
-            "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_SLASH",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_HYPNOSIS",
-                "MOVE_FAKE_OUT"
+                "MOVE_BRAVE_BIRD",
+				"MOVE_QUICK_ATTACK",
+				"MOVE_ACUPRESSURE",
+				"MOVE_HI_JUMP_KICK"
             ],
-            "power": 200,
+            "power": 160,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GABITE",
+            "form": 0,
+            "level": 43,
+            "item": "ITEM_YACHE_BERRY",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+				"MOVE_ROAR",
+				"MOVE_OUTRAGE",
+				"MOVE_EARTHQUAKE"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PURUGLY",
+            "form": 0,
+            "level": 45,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_LAST_RESORT",
+				"MOVE_FAKE_OUT",
+				"MOVE_PAYBACK"
+            ],
+            "power": 180,
+            "ball_seal": 5,
+			"ability": 1
         }
     ]
 }
