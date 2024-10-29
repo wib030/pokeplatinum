@@ -3,17 +3,51 @@
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_MUK",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_NUGGET",
+            "moves": [
+                "MOVE_GUNK_SHOT",
+                "MOVE_ACID_ARMOR",
+                "MOVE_DIG",
+                "MOVE_FLING"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SWALOT",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_TOXIC",
+                "MOVE_ENCORE",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_BULLET_SEED"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_WEEZING",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SHADOW_BALL",
+                "MOVE_TORMENT"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

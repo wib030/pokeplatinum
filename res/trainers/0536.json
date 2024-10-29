@@ -1,19 +1,25 @@
 {
-    "name": "Ismael",
+    "name": "Slifer",
     "class": "TRAINER_CLASS_ARTIST",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_KRICKETUNE",
+            "species": "SPECIES_CORSOLA",
             "form": 0,
-            "level": 28,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_RECOVER",
+                "MOVE_AQUA_RING",
+                "MOVE_BRINE",
+                "MOVE_INGRAIN"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

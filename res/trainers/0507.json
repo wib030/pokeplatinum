@@ -1,19 +1,39 @@
 {
-    "name": "Grunt",
-    "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
+    "name": "Wibbifer",
+    "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 47,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_HYPNOSIS",
+                "MOVE_MEAN_LOOK",
+                "MOVE_DREAM_EATER",
+                "MOVE_FOCUS_PUNCH"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GARDEVOIR",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_HYPNOSIS",
+                "MOVE_MEAN_LOOK",
+                "MOVE_DREAM_EATER",
+                "MOVE_NIGHTMARE"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

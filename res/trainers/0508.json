@@ -1,28 +1,39 @@
 {
-    "name": "Grunt",
+    "name": "Wibant",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOUNDOUR",
+            "species": "SPECIES_WEEZING",
             "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 47,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_PAIN_SPLIT"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MURKROW",
+            "species": "SPECIES_ARCANINE",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_POWER_HERB",
+            "moves": [
+                "MOVE_MORNING_SUN",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_DRAGON_PULSE"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

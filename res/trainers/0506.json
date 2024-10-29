@@ -1,37 +1,40 @@
 {
-    "name": "Quentin",
+    "name": "Lips",
     "class": "TRAINER_CLASS_WORKER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_GRANBULL",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 40,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_CRUNCH",
+                "MOVE_SUPER_FANG",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_EARTHQUAKE"
+            ],
+            "power": 160,
+            "ball_seal": 0,
+			"ability": 1
         },
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_GRAVELER",
-            "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_COBA_BERRY",
+            "moves": [
+                "MOVE_MACH_PUNCH",
+                "MOVE_BULLET_SEED",
+                "MOVE_HELPING_HAND",
+                "MOVE_FORCE_PALM"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

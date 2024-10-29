@@ -5,26 +5,34 @@
         "ITEM_FULL_RESTORE"
     ],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFFA",
+            "species": "SPECIES_HAUNTER",
             "form": 0,
-            "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_EXPLOSION"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_ICY_WIND",
+                "MOVE_DEFOG",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

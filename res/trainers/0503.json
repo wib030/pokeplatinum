@@ -9,31 +9,31 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 38,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_ROCK_SMASH",
+                "MOVE_BULLET_PUNCH",
+                "MOVE_U_TURN",
+                "MOVE_ROOST"
             ],
-            "power": 0,
+            "power": 140,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MAGNEZONE",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 38,
+            "item": "ITEM_CUSTAP_BERRY",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_FLASH_CANNON",
+                "MOVE_DISCHARGE",
+                "MOVE_BARRIER",
+                "MOVE_HIDDEN_POWER"
             ],
-            "power": 0,
+            "power": 254,
             "ball_seal": 0
         }
     ]

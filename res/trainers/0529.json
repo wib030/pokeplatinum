@@ -3,17 +3,23 @@
     "class": "TRAINER_CLASS_ROUGHNECK",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFFA",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_TAMATO_BERRY",
+            "moves": [
+                "MOVE_ROLE_PLAY",
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_SNATCH",
+                "MOVE_REST"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

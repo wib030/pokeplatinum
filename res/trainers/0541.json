@@ -1,23 +1,44 @@
 {
-    "name": "Kendrick",
+    "name": "Kaiji",
     "class": "TRAINER_CLASS_PI",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_RISKY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_RHYHORN",
+            "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 31,
-            "item": null,
+            "level": 30,
+            "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_HORN_DRILL",
-                "MOVE_REVERSAL"
+                "MOVE_METRONOME"
             ],
-            "power": 50,
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_AMBIPOM",
+            "form": 0,
+            "level": 32,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

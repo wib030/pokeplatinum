@@ -1,19 +1,25 @@
 {
-    "name": "Braden",
+    "name": "Briden",
     "class": "TRAINER_CLASS_WORKER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STEELIX",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_POUND",
+                "MOVE_LICK",
+                "MOVE_SWEET_KISS",
+                "MOVE_LAST_RESORT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

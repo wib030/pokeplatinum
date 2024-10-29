@@ -3,35 +3,48 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MOTHIM",
+            "species": "SPECIES_SLUGMA",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_IRON_DEFENSE",
+                "MOVE_SMOKE_SCREEN",
+                "MOVE_REFLECT"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BARBOACH",
+            "species": "SPECIES_SHELLOS",
             "form": 0,
-            "level": 19,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_AMNESIA",
+                "MOVE_ICY_WIND",
+                "MOVE_CAPTIVATE",
+                "MOVE_WHIRLPOOL"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CHATOT",
+            "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_QUICK_POWDER",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

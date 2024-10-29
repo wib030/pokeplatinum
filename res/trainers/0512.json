@@ -1,28 +1,39 @@
 {
-    "name": "Grunt",
+    "name": "Wibnda",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MURKROW",
+            "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 39,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_CHOPLE_BERRY",
+            "moves": [
+                "MOVE_DIZZY_PUNCH",
+                "MOVE_TEETER_DANCE",
+                "MOVE_DYNAMIC_PUNCH",
+                "MOVE_SWAGGER"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 39,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_CHOPLE_BERRY",
+            "moves": [
+                "MOVE_DIZZY_PUNCH",
+                "MOVE_DYNAMIC_PUNCH",
+                "MOVE_SWAGGER",
+                "MOVE_MILK_DRINK"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

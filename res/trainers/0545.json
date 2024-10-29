@@ -1,21 +1,38 @@
 {
-    "name": "Roman",
+    "name": "Kyle",
     "class": "TRAINER_CLASS_RICH_BOY",
     "items": [
-        "ITEM_FULL_RESTORE"
+        "ITEM_SACRED_ASH"
     ],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LICKITUNG",
+            "species": "SPECIES_PHIONE",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_SELFDESTRUCT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SMEARGLE",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_DARK_VOID",
+                "MOVE_BELLY_DRUM",
+                "MOVE_SACRED_FIRE",
+                "MOVE_EARTHQUAKE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

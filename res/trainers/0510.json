@@ -1,37 +1,53 @@
 {
-    "name": "Grunt",
+    "name": "Wiboops",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_SHIFTRY",
             "form": 0,
-            "level": 37,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 47,
+            "item": "ITEM_MEADOW_PLATE",
+            "moves": [
+                "MOVE_FLING",
+                "MOVE_WHIRLWIND",
+                "MOVE_FAKE_OUT",
+                "MOVE_LOW_KICK"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MURKROW",
+            "species": "SPECIES_CRAWDAUNT",
             "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 47,
+            "item": "ITEM_SPLASH_PLATE",
+            "moves": [
+                "MOVE_FLING",
+                "MOVE_DRAGON_DANCE",
+                "MOVE_SUPERPOWER",
+                "MOVE_DIVE"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 39,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 47,
+            "item": "ITEM_FLAME_PLATE",
+            "moves": [
+                "MOVE_FLING",
+                "MOVE_DOUBLE_KICK",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_STONE_EDGE"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

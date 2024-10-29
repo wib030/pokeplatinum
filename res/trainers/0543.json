@@ -1,21 +1,22 @@
 {
     "name": "Rebecca",
     "class": "TRAINER_CLASS_SOCIALITE",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PURUGLY",
+            "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_METAL_POWDER",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

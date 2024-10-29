@@ -1,28 +1,53 @@
 {
-    "name": "Grunt",
+    "name": "Plastic",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_ARBOK",
             "form": 0,
-            "level": 39,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 49,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_GLARE",
+                "MOVE_CRUNCH"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_SABLEYE",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 49,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_PROTECT",
+                "MOVE_WILL_O_WISP",
+                "MOVE_RECOVER",
+                "MOVE_KNOCK_OFF"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TAUROS",
+            "form": 0,
+            "level": 49,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_EXTREME_SPEED",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_PURSUIT",
+                "MOVE_FACADE"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

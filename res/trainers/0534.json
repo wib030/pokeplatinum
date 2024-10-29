@@ -1,28 +1,39 @@
 {
-    "name": "Mike & Nat",
+    "name": "Coke & Cola",
     "class": "TRAINER_CLASS_YOUNG_COUPLE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_MURKROW",
+            "species": "SPECIES_POLIWHIRL",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 25,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+                "MOVE_ICY_WIND",
+                "MOVE_HELPING_HAND",
+                "MOVE_SUBSTITUTE"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MISDREAVUS",
+            "species": "SPECIES_QUAGSIRE",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 25,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SURF",
+                "MOVE_RECOVER",
+                "MOVE_MUD_BOMB",
+                "MOVE_ANCIENT_POWER"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

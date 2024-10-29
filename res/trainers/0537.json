@@ -1,37 +1,53 @@
 {
-    "name": "Kaylee",
+    "name": "Laylee",
     "class": "TRAINER_CLASS_BREEDER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AIPOM",
+            "species": "SPECIES_MARILL",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ICY_WIND",
+                "MOVE_TICKLE",
+                "MOVE_AMNESIA",
+                "MOVE_FUTURE_SIGHT"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_MARILL",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ENCORE",
+                "MOVE_TICKLE",
+                "MOVE_PERISH_SONG",
+                "MOVE_FUTURE_SIGHT"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SWABLU",
+            "species": "SPECIES_MARILL",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 29,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_BELLY_DRUM",
+                "MOVE_AQUA_JET",
+                "MOVE_BITE",
+                "MOVE_SUPERPOWER"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

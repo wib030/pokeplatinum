@@ -1,37 +1,53 @@
 {
-    "name": "Grunt",
+    "name": "Berry",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_SWAMPERT",
             "form": 0,
-            "level": 38,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+                "MOVE_EARTHQUAKE",
+                "MOVE_CURSE",
+                "MOVE_WATERFALL"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_CHIMECHO",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_TOXIC",
+                "MOVE_RECOVER",
+                "MOVE_MIND_READER"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_SPIKES",
+                "MOVE_WHIRLWIND",
+                "MOVE_ROOST",
+                "MOVE_BRAVE_BIRD"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

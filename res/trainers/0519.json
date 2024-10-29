@@ -1,20 +1,66 @@
 {
-    "name": "Grunt",
+    "name": "Goober",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_COUNTER",
+                "MOVE_PERISH_SONG",
+                "MOVE_SNATCH",
+                "MOVE_EXPLOSION"
+            ],
+            "power": 160,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GENGAR",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_PETAYA_BERRY",
+            "moves": [
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_SHADOW_BALL",
+                "MOVE_THUNDERBOLT",
+                "MOVE_SUBSTITUTE"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GENGAR",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_LUCKY_PUNCH",
+            "moves": [
+                "MOVE_FOCUS_PUNCH",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_ICE_PUNCH",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 20,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 2,
+			"ivSPDEF": 20,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

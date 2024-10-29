@@ -1,28 +1,39 @@
 {
-    "name": "Darryl",
+    "name": "Gamer",
     "class": "TRAINER_CLASS_CAMERAMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNEMITE",
-            "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 1,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_OVERHEAT",
+                "MOVE_SIGNAL_BEAM",
+                "MOVE_CHARGE_BEAM",
+                "MOVE_PSYCH_UP"
+            ],
+            "power": 120,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MR_MIME",
+            "species": "SPECIES_BASTIODON",
             "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 30,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SWAGGER",
+                "MOVE_BLOCK",
+                "MOVE_SCREECH",
+                "MOVE_DIG"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

@@ -1,37 +1,96 @@
 {
-    "name": "Grunt",
-    "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
+    "name": "Cool Grunt",
+    "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 39,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 49,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_PROTECT",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_ROOST",
+                "MOVE_U_TURN"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 49,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SKILL_SWAP",
+                "MOVE_WISH",
+                "MOVE_PROTECT",
+                "MOVE_NIGHT_SHADE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MURKROW",
+            "species": "SPECIES_AZUMARILL",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 49,
+            "item": "ITEM_BLACKGLASSES",
+            "moves": [
+                "MOVE_BELLY_DRUM",
+                "MOVE_SUPERPOWER",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_WATERFALL"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HERACROSS",
+            "form": 0,
+            "level": 49,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_MEGAHORN",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_EARTHQUAKE",
+                "MOVE_KNOCK_OFF"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 49,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_SURF",
+                "MOVE_NASTY_PLOT",
+                "MOVE_ENCORE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MAWILE",
+            "form": 0,
+            "level": 49,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_IRON_HEAD",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_SWORDS_DANCE",
+                "MOVE_THUNDER_PUNCH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

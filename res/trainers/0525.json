@@ -1,28 +1,92 @@
 {
-    "name": "Grunt",
-    "class": "TRAINER_CLASS_GALACTIC_GRUNT_FEMALE",
+    "name": "Spitter",
+    "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOUNDOUR",
+            "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_MAGMA_STORM",
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_SPIDER_WEB",
+                "MOVE_STEALTH_ROCK"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 48,
+            "item": "ITEM_LOADED_DICE",
+            "moves": [
+                "MOVE_BULLET_SEED",
+                "MOVE_MACH_PUNCH",
+                "MOVE_SWORDS_DANCE",
+                "MOVE_STONE_EDGE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_OCTILLERY",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_ASSAULT_VEST",
+            "moves": [
+                "MOVE_OCTAZOOKA",
+                "MOVE_ICE_BEAM",
+                "MOVE_ROCK_BLAST",
+                "MOVE_FLAMETHROWER"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_KINGDRA",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_LIECHI_BERRY",
+            "moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_OUTRAGE",
+                "MOVE_WATERFALL",
+                "MOVE_DRACO_METEOR"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LUVDISC",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_WATER_SPOUT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_VICTREEBEL",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_EARTHQUAKE",
+                "MOVE_LEAF_BLADE",
+                "MOVE_SWORDS_DANCE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

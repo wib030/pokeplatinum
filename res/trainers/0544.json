@@ -1,28 +1,39 @@
 {
-    "name": "Blythe",
+    "name": "Pestle",
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHINGLING",
+            "species": "SPECIES_MISMAGIUS",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_IMPRISON",
+                "MOVE_SHADOW_BALL",
+                "MOVE_CONFUSE_RAY"
+            ],
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BUNEARY",
+            "species": "SPECIES_ESPEON",
             "form": 0,
-            "level": 25,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 28,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_GRASS_KNOT",
+                "MOVE_SHADOW_BALL",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 100,
             "ball_seal": 0
         }
     ]

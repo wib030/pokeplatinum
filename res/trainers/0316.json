@@ -25,7 +25,7 @@
         },
         {
             "species": "SPECIES_GASTRODON",
-            "form": 0,
+            "form": 1,
             "level": 35,
             "item": "ITEM_RINDO_BERRY",
             "moves": [
