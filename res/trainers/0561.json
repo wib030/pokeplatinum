@@ -1,39 +1,53 @@
 {
-    "name": "Drake",
+    "name": "Josh",
     "class": "TRAINER_CLASS_DRAGON_TAMER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GIBLE",
+            "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 66,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_IRON_DEFENSE",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_FIRE_BLAST",
+                "MOVE_DRAGON_PULSE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GABITE",
+            "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 66,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SCARY_FACE",
+                "MOVE_BODY_SLAM",
+                "MOVE_WISH",
+                "MOVE_TOXIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_DRAGONAIR",
+            "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 66,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_OUTRAGE",
+                "MOVE_CRUNCH",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

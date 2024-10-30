@@ -1,27 +1,93 @@
 {
-    "name": "Saul",
+    "name": "BtrCallSaul",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TAUROS",
+            "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 61,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_ELECTIRIZER",
             "moves": [
-                "MOVE_THRASH",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_SWAGGER",
-                "MOVE_PAYBACK"
+                "MOVE_THIEF",
+                "MOVE_ICY_WIND",
+                "MOVE_REST",
+                "MOVE_KNOCK_OFF"
             ],
-            "power": 50,
-            "ball_seal": 12
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DITTO",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_METAL_POWDER",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ELEKID",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_MAGNET",
+            "moves": [
+                "MOVE_CHARGE_BEAM",
+                "MOVE_DISCHARGE",
+                "MOVE_THUNDER_SHOCK",
+                "MOVE_SHOCK_WAVE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ALAKAZAM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_WISE_GLASSES",
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_ROLE_PLAY",
+                "MOVE_ENCORE",
+                "MOVE_TAUNT"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLISSEY",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_BLUE_SCARF",
+            "moves": [
+                "MOVE_GROWL",
+                "MOVE_ATTRACT",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_SNATCH"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MANECTRIC",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_BLUE_SCARF",
+            "moves": [
+                "MOVE_ROAR",
+                "MOVE_UPROAR",
+                "MOVE_CURSE",
+                "MOVE_ODOR_SLEUTH"
+            ],
+            "power": 200,
+            "ball_seal": 0
         }
     ]
 }

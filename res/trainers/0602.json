@@ -1,27 +1,52 @@
 {
-    "name": "Sophia",
+    "name": "Rindo",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DELIBIRD",
+            "species": "SPECIES_MEW",
             "form": 0,
-            "level": 53,
-            "item": null,
-            "moves": null,
+            "level": 1,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH",
+                "MOVE_SPLASH",
+                "MOVE_SPLASH",
+                "MOVE_SPLASH"
+            ],
             "power": 0,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MANTINE",
+            "species": "SPECIES_MEW",
             "form": 0,
-            "level": 53,
-            "item": null,
-            "moves": null,
+            "level": 1,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH",
+                "MOVE_SPLASH",
+                "MOVE_SPLASH",
+                "MOVE_SPLASH"
+            ],
+            "power": 0,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MEW",
+            "form": 0,
+            "level": 1,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_SPLASH",
+                "MOVE_SPLASH",
+                "MOVE_SPLASH",
+                "MOVE_SPLASH"
+            ],
             "power": 0,
             "ball_seal": 0
         }

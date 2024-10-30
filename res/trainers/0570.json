@@ -1,31 +1,115 @@
 {
-    "name": "Stefan",
+    "name": "Wagsward4",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PUPITAR",
+            "species": "SPECIES_BLISSEY",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
+            "level": 68,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4
         },
         {
-            "species": "SPECIES_TORTERRA",
+            "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 61,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
+            "level": 68,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4
+        },
+		{
+            "species": "SPECIES_MACHAMP",
+            "form": 0,
+            "level": 68,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ability": 1,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 4
+        },
+		{
+            "species": "SPECIES_WIGGLYTUFF",
+            "form": 0,
+            "level": 68,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4
+        },
+		{
+            "species": "SPECIES_DUSKNOIR",
+            "form": 0,
+            "level": 68,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 252,
+			"evDEF": 4,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
+        },
+		{
+            "species": "SPECIES_MEW",
+            "form": 0,
+            "level": 68,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

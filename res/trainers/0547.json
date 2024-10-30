@@ -10,31 +10,31 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 28,
+            "item": "ITEM_PROTECTOR",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_FAKE_TEARS",
+                "MOVE_FOLLOW_ME",
+                "MOVE_PROTECT",
+                "MOVE_UPROAR"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_GROVYLE",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 28,
+            "item": "ITEM_CHARCOAL",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_LEAF_BLADE",
+                "MOVE_GRASS_WHISTLE",
+                "MOVE_DOUBLE_EDGE"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         }
     ]

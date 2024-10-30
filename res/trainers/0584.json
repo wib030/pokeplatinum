@@ -1,5 +1,5 @@
 {
-    "name": "Sterling",
+    "name": "Entry",
     "class": "TRAINER_CLASS_PSYCHIC_MALE",
     "items": [],
     "ai_flags": [
@@ -9,21 +9,41 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SOLROCK",
+            "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 66,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+                "MOVE_WHIRLWIND",
+                "MOVE_ROAR",
+                "MOVE_COSMIC_POWER"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GALLADE",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 66,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_WHIRLWIND",
+                "MOVE_ROAR",
+                "MOVE_ROOST"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SPINDA",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_ASSIST"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

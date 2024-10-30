@@ -1,6 +1,6 @@
 {
-    "name": "Daisy",
-    "class": "TRAINER_CLASS_PSYCHIC_FEMALE",
+    "name": "Daria",
+    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
@@ -9,22 +9,88 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SLOWPOKE",
+            "species": "SPECIES_CACTURNE",
             "form": 0,
-            "level": 52,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
+            "level": 65,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SPIKES",
+                "MOVE_ENCORE",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_GIGA_DRAIN"
+            ],
+            "power": 255,
+            "ball_seal": 7
         },
         {
-            "species": "SPECIES_SLOWBRO",
+            "species": "SPECIES_CRAWDAUNT",
             "form": 0,
-            "level": 56,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 65,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_AQUA_JET",
+                "MOVE_CRUNCH",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "power": 255,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SABLEYE",
+            "form": 0,
+            "level": 65,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_RECOVER",
+                "MOVE_KNOCK_OFF",
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_WILL_O_WISP"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LUXRAY",
+            "form": 0,
+            "level": 65,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_VOLT_TACKLE",
+                "MOVE_CRUNCH",
+                "MOVE_SUPERPOWER",
+                "MOVE_ZAP_CANNON"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HOUNDOOM",
+            "form": 0,
+            "level": 65,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_FLAMETHROWER",
+                "MOVE_DARK_PULSE",
+                "MOVE_NASTY_PLOT",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ABSOL",
+            "form": 0,
+            "level": 67,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_CRUNCH",
+                "MOVE_SUPERPOWER",
+                "MOVE_SHEER_COLD"
+            ],
+            "power": 255,
+            "ball_seal": 7
         }
     ]
 }

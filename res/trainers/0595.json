@@ -1,30 +1,90 @@
 {
-    "name": "Felicia",
-    "class": "TRAINER_CLASS_RANGER_FEMALE",
+    "name": "Noah",
+    "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SKIPLOOM",
+            "species": "SPECIES_TAUROS",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 64,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ENDEAVOR",
+                "MOVE_EXTREME_SPEED"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LOPUNNY",
+            "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 64,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_MILK_DRINK",
+                "MOVE_PRESENT",
+                "MOVE_METRONOME"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_NIDOQUEEN",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LUCKY_EGG",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_BEAT_UP",
+                "MOVE_MUD_SLAP",
+                "MOVE_SKULL_BASH"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_NIDOKING",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_SURF",
+                "MOVE_MUD_SLAP",
+                "MOVE_SLUDGE_BOMB"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GALLADE",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_MEMENTO"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GARDEVOIR",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_HYPNOSIS",
+                "MOVE_DREAM_EATER",
+                "MOVE_MEAN_LOOK"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,37 +1,81 @@
 {
-    "name": "Kurt",
+    "name": "Hell Shell",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_KRABBY",
-            "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_CORPHISH",
-            "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_KINGLER",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 62,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_CRABHAMMER",
+                "MOVE_KNOCK_OFF",
+                "MOVE_SUPERPOWER",
+                "MOVE_AGILITY"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_CRAWDAUNT",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_AQUA_JET",
+                "MOVE_CRUNCH",
+                "MOVE_WATERFALL",
+                "MOVE_DRAGON_DANCE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_CLOYSTER",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_WACAN_BERRY",
+            "moves": [
+                "MOVE_ICICLE_SPEAR",
+                "MOVE_ROCK_BLAST",
+                "MOVE_AGILITY",
+                "MOVE_EXPLOSION"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLASTOISE",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_ICY_WIND",
+                "MOVE_RECOVER",
+                "MOVE_EARTHQUAKE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_OMASTAR",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_RINDO_BERRY",
+            "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_ROCK_POLISH",
+                "MOVE_EARTH_POWER"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,28 +1,77 @@
 {
-    "name": "Joanna",
+    "name": "Imposter",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUVDISC",
+            "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 52,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 66,
+            "item": "ITEM_METAL_POWDER",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LAPRAS",
+            "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 66,
+            "item": "ITEM_QUICK_POWDER",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DITTO",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DITTO",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DITTO",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DITTO",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_TRANSFORM"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

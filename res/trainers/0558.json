@@ -1,10 +1,9 @@
 {
-    "name": "Darien",
+    "name": "Snack Wrap",
     "class": "TRAINER_CLASS_DRAGON_TAMER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
@@ -12,10 +11,29 @@
         {
             "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_WRAP",
+                "MOVE_ROOST",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_TWISTER"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DRAGONITE",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_WRAP",
+                "MOVE_TOXIC",
+                "MOVE_ROOST",
+                "MOVE_DOUBLE_TEAM"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

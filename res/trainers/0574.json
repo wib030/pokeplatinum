@@ -1,54 +1,67 @@
 {
-    "name": "Moira",
+    "name": "No1Moira",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SANDSLASH",
+            "species": "SPECIES_ARIADOS",
             "form": 0,
-            "level": 56,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_SLASH",
-                "MOVE_GYRO_BALL",
-                "MOVE_DIG",
-                "MOVE_X_SCISSOR"
+                "MOVE_SPIDER_WEB",
+                "MOVE_SPIKES",
+                "MOVE_POISON_FANG",
+                "MOVE_LEECH_LIFE"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GASTRODON",
+            "species": "SPECIES_NIDOQUEEN",
             "form": 0,
-            "level": 56,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_MUDDY_WATER",
                 "MOVE_RECOVER",
-                "MOVE_BODY_SLAM",
-                "MOVE_PROTECT"
+                "MOVE_EARTHQUAKE",
+                "MOVE_SUPER_FANG",
+                "MOVE_ROAR"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CLAYDOL",
+            "species": "SPECIES_ARBOK",
             "form": 0,
-            "level": 57,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_PSYCHIC",
-                "MOVE_ANCIENT_POWER",
-                "MOVE_COSMIC_POWER"
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_STOCKPILE",
+                "MOVE_SCARY_FACE",
+                "MOVE_WRAP"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SWALOT",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_AMNESIA",
+                "MOVE_ACID_ARMOR",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_RECOVER"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

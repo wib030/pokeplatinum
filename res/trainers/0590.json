@@ -1,25 +1,54 @@
 {
-    "name": "Jarrett",
+    "name": "Megan",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 60,
-            "item": null,
+            "level": 66,
+            "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_CROSS_CHOP",
-                "MOVE_FIRE_PUNCH",
-                "MOVE_ICE_PUNCH",
-                "MOVE_THUNDER_PUNCH"
+                "MOVE_FOCUS_BLAST",
+                "MOVE_FIRE_BLAST",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_VACUUM_WAVE"
             ],
-            "power": 30,
+            "power": 200,
+            "ball_seal": 0,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_MACHAMP",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_EARTHQUAKE",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MACHAMP",
+            "form": 0,
+            "level": 66,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+                "MOVE_FOCUS_PUNCH",
+                "MOVE_TOXIC",
+                "MOVE_ICE_PUNCH"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

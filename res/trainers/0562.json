@@ -1,39 +1,53 @@
 {
-    "name": "Kenny",
+    "name": "Pseudo",
     "class": "TRAINER_CLASS_DRAGON_TAMER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BAGON",
+            "species": "SPECIES_SCEPTILE",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 65,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_LEAF_STORM",
+                "MOVE_OUTRAGE"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SHELGON",
+            "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 65,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_DRAGON_PULSE",
+                "MOVE_FIRE_BLAST",
+                "MOVE_AIR_SLASH",
+                "MOVE_EARTHQUAKE"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_VIBRAVA",
+            "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 66,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_TOXIC",
+                "MOVE_MORNING_SUN",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,40 +1,44 @@
 {
-    "name": "Meagan",
+    "name": "BombrGrl91",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DELCATTY",
+            "species": "SPECIES_REGIROCK",
             "form": 0,
-            "level": 57,
-            "item": null,
+            "level": 63,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_CAPTIVATE",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_DOUBLE_EDGE"
+                "MOVE_EXPLOSION"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ABOMASNOW",
+            "species": "SPECIES_REGICE",
             "form": 0,
-            "level": 58,
-            "item": null,
+            "level": 63,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_ICE_SHARD",
-                "MOVE_AVALANCHE",
-                "MOVE_RAZOR_LEAF",
-                "MOVE_WATER_PULSE"
+                "MOVE_EXPLOSION"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_REGISTEEL",
+            "form": 0,
+            "level": 63,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_EXPLOSION"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

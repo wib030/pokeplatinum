@@ -1,36 +1,38 @@
 {
-    "name": "Emanuel",
+    "name": "Mortar",
     "class": "TRAINER_CLASS_VETERAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_TAG_STRATEGY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_ARCANINE",
             "form": 0,
             "level": 28,
-            "item": null,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_SEISMIC_TOSS",
-                "MOVE_LOW_KICK",
-                "MOVE_FORESIGHT"
+                "MOVE_WILL_O_WISP",
+                "MOVE_MORNING_SUN",
+                "MOVE_HELPING_HAND",
+                "MOVE_HEAT_WAVE"
             ],
             "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_MAGMORTAR",
             "form": 0,
             "level": 28,
-            "item": null,
+            "item": "ITEM_ZOOM_LENS",
             "moves": [
-                "MOVE_EXTRASENSORY",
-                "MOVE_TACKLE",
-                "MOVE_CONFUSE_RAY"
+                "MOVE_FOLLOW_ME",
+                "MOVE_FIRE_SPIN",
+                "MOVE_PSYCHIC",
+                "MOVE_HELPING_HAND"
             ],
             "power": 100,
             "ball_seal": 0
