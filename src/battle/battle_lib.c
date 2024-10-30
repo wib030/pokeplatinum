@@ -11429,6 +11429,63 @@ int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
 }
 
 /**
+ * @brief Map the given battle effect to an appropriate field condition.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding field condition
+ * @return The corresponding field condition 
+ */
+int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect)
+{
+    u32 fieldCondition;
+
+    switch (effect) {
+        
+        default:
+            fieldCondition = FIELD_CONDITION_NONE;
+            break;
+
+        // Rain
+        case (BATTLE_EFFECT_WEATHER_RAIN):
+            fieldCondition = FIELD_CONDITION_RAINING;
+            break;
+
+        // Sand
+        case (BATTLE_EFFECT_WEATHER_SANDSTORM):
+            fieldCondition = FIELD_CONDITION_SANDSTORM;
+            break;
+            
+        // Sun
+        case (BATTLE_EFFECT_WEATHER_SUN):
+            fieldCondition = FIELD_CONDITION_SUNNY;
+            break;
+
+        // Hail
+        case (BATTLE_EFFECT_WEATHER_HAIL):
+            fieldCondition = FIELD_CONDITION_HAILING;
+            break;
+
+        // Gravity
+        case (BATTLE_EFFECT_GRAVITY):
+            fieldCondition = FIELD_CONDITION_GRAVITY;
+            break;
+
+        // Trick Room
+        case (BATTLE_EFFECT_TRICK_ROOM):
+            fieldCondition = FIELD_CONDITION_TRICK_ROOM;
+            break;
+
+        // Uproar
+        case (BATTLE_EFFECT_UPROAR):
+            fieldCondition = FIELD_CONDITION_UPROAR;
+            break;
+
+    }
+
+    return fieldCondition;
+}
+
+/**
  * @brief Map the given battle effect to an appropriate move effect.
  * 
  * @param battleCtx 
