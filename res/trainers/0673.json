@@ -1,5 +1,5 @@
 {
-    "name": "Mitchell",
+    "name": "Psychic",
     "class": "TRAINER_CLASS_PSYCHIC_MALE",
     "items": [],
     "ai_flags": [
@@ -9,21 +9,25 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DUSCLOPS",
+            "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_KADABRA",
+            "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

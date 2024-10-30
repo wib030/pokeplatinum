@@ -1,54 +1,53 @@
 {
-    "name": "Maya",
+    "name": "flucientlux",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ROSERADE",
+            "species": "SPECIES_MANTINE",
             "form": 0,
-            "level": 59,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_SURF",
+                "MOVE_ICE_BEAM",
+                "MOVE_TOXIC",
+                "MOVE_AQUA_RING"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_LUDICOLO",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
                 "MOVE_GIGA_DRAIN",
-                "MOVE_LEECH_SEED",
-                "MOVE_TOXIC"
+                "MOVE_HYDRO_PUMP",
+                "MOVE_ICE_BEAM",
+                "MOVE_FOCUS_BLAST"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GARDEVOIR",
+            "species": "SPECIES_LUXRAY",
             "form": 0,
-            "level": 61,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_FLAME_ORB",
             "moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_CALM_MIND",
-                "MOVE_DOUBLE_TEAM"
+                "MOVE_VOLT_TACKLE",
+                "MOVE_CRUNCH",
+                "MOVE_ZAP_CANNON",
+                "MOVE_SUPERPOWER"
             ],
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_LICKILICKY",
-            "form": 0,
-            "level": 61,
-            "item": null,
-            "moves": [
-                "MOVE_SUPERSONIC",
-                "MOVE_STOMP",
-                "MOVE_SCREECH",
-                "MOVE_POWER_WHIP"
-            ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -1,37 +1,33 @@
 {
-    "name": "Kayla",
+    "name": "Okay",
     "class": "TRAINER_CLASS_CYCLIST_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PLUSLE",
-            "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_UNOWN",
+            "form": 14,
+            "level": 64,
+            "item": "ITEM_ODD_KEYSTONE",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 254,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_MINUN",
-            "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_RAICHU",
-            "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 10,
+            "level": 64,
+            "item": "ITEM_ODD_KEYSTONE",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

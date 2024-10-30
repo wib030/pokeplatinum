@@ -1,30 +1,39 @@
 {
-    "name": "Geoffrey",
+    "name": "Zorn",
     "class": "TRAINER_CLASS_DRAGON_TAMER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ALTARIA",
-            "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 61,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 74,
+            "item": "ITEM_STICK",
+            "moves": [
+                "MOVE_DIG",
+                "MOVE_ATTRACT",
+                "MOVE_BODY_SLAM",
+                "MOVE_ENDURE"
+            ],
+            "power": 255,
+            "ball_seal": 6
+        },
+        {
+            "species": "SPECIES_ALTARIA",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_DESTINY_KNOT",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_REFRESH",
+                "MOVE_FEATHER_DANCE",
+                "MOVE_DRAGON_RUSH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

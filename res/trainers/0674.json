@@ -1,5 +1,5 @@
 {
-    "name": "Mitchell",
+    "name": "Psychic",
     "class": "TRAINER_CLASS_PSYCHIC_MALE",
     "items": [],
     "ai_flags": [
@@ -9,30 +9,69 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GRUMPIG",
-            "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_DUSKNOIR",
+		{
+            "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ALAKAZAM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ALAKAZAM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ALAKAZAM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ALAKAZAM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

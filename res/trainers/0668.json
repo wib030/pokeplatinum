@@ -1,54 +1,53 @@
 {
-    "name": "Shannon",
+    "name": "MaceWinDont",
     "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHERRIM",
+            "species": "SPECIES_SANDSLASH",
             "form": 0,
-            "level": 52,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_SOLAR_BEAM",
-                "MOVE_MAGICAL_LEAF",
-                "MOVE_PETAL_DANCE",
-                "MOVE_SUNNY_DAY"
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_RAPID_SPIN",
+                "MOVE_SPIKES",
+                "MOVE_EARTHQUAKE"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_AZUMARILL",
+            "species": "SPECIES_QWILFISH",
             "form": 0,
-            "level": 52,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_ICE_BEAM",
-                "MOVE_DOUBLE_EDGE",
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_DESTINY_BOND",
                 "MOVE_AQUA_TAIL",
-                "MOVE_AQUA_RING"
+                "MOVE_POISON_JAB"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LOPUNNY",
+            "species": "SPECIES_CACNEA",
             "form": 0,
-            "level": 56,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_FOCUS_BAND",
             "moves": [
-                "MOVE_DIZZY_PUNCH",
-                "MOVE_JUMP_KICK",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_BOUNCE"
+                "MOVE_DESTINY_BOND",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_LEECH_SEED",
+                "MOVE_GIGA_DRAIN"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         }
     ]

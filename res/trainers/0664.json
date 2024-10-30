@@ -1,54 +1,52 @@
 {
-    "name": "Dennis",
+    "name": "lucientflux",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLIGAR",
+            "species": "SPECIES_MAGCARGO",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 54,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_SCREECH",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_POISON_STING"
+                "MOVE_RECOVER",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_YAWN",
+                "MOVE_ROCK_TOMB"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_FLOATZEL",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AQUA_JET",
-                "MOVE_SWIFT",
-                "MOVE_PURSUIT",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_AQUA_TAIL",
+                "MOVE_SUBSTITUTE",
+                "MOVE_FOCUS_PUNCH"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_DRIFBLIM",
+            "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 45,
-            "item": null,
+            "level": 54,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_SWALLOW",
-                "MOVE_GUST",
-                "MOVE_STOCKPILE",
+                "MOVE_ICY_WIND",
+                "MOVE_MUD_SHOT",
                 "MOVE_SHADOW_BALL"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         }
     ]
