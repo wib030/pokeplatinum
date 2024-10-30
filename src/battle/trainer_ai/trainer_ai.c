@@ -5772,7 +5772,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             case RANGE_ALLY:
                                 // Helping Hand only
                                 if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-                                    if (battleCtx->battleMons[battlerParner].curHP > 0) {
+                                    if (battleCtx->battleMons[battlerPartner].curHP > 0) {
                                         return FALSE;
                                     }
                                 }
