@@ -1,10 +1,9 @@
 {
-    "name": "Dalton",
+    "name": "hypeBoxer37",
     "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
@@ -12,29 +11,68 @@
         {
             "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_SWIFT",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_THUNDER_WAVE"
+                "MOVE_THUNDER_PUNCH"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MAGMORTAR",
+            "species": "SPECIES_INFERNAPE",
             "form": 0,
-            "level": 54,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_FLAMETHROWER",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_SMOG",
-                "MOVE_WILL_O_WISP"
+                "MOVE_FIRE_PUNCH"
             ],
-            "power": 50,
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BRELOOM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_MACH_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_WEAVILE",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_ICE_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MACHAMP",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_DYNAMIC_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_DUSKNOIR",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_BIG_ROOT",
+            "moves": [
+                "MOVE_DRAIN_PUNCH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

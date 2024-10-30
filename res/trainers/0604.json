@@ -1,37 +1,53 @@
 {
-    "name": "Lydia",
+    "name": "Top Surgery",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MARILL",
+            "species": "SPECIES_GARDEVOIR",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_SCOPE_LENS",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_ATTRACT",
+                "MOVE_CALM_MIND"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SPHEAL",
+            "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_HEADBUTT",
+                "MOVE_ATTRACT",
+                "MOVE_BODY_SLAM"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_WAILMER",
+            "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_HEADBUTT",
+                "MOVE_ATTRACT",
+                "MOVE_BODY_SLAM"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

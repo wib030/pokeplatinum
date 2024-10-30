@@ -4,23 +4,90 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ARCANINE",
+            "species": "SPECIES_SHUCKLE",
             "form": 0,
-            "level": 59,
-            "item": null,
+            "level": 60,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_EXTREME_SPEED",
-                "MOVE_FIRE_FANG",
-                "MOVE_HELPING_HAND",
-                "MOVE_AGILITY"
+                "MOVE_ACUPRESSURE",
+                "MOVE_SANDSTORM",
+                "MOVE_EARTHQUAKE"
             ],
-            "power": 30,
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_STANTLER",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_STICKY_BARB",
+            "moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_SKILL_SWAP",
+                "MOVE_GRAVITY",
+                "MOVE_ROAR"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TYRANITAR",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_STICKY_BARB",
+            "moves": [
+                "MOVE_ROAR",
+                "MOVE_SWAGGER",
+                "MOVE_SANDSTORM",
+                "MOVE_SNORE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BLISSEY",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_FLING",
+                "MOVE_RECYCLE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SPINDA",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_PERSIM_BERRY",
+            "moves": [
+                "MOVE_TEETER_DANCE",
+                "MOVE_SKILL_SWAP",
+                "MOVE_RECYCLE",
+                "MOVE_TRICK_ROOM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SHAYMIN",
+            "form": 1,
+            "level": 60,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_SEED_FLARE",
+                "MOVE_WORRY_SEED",
+                "MOVE_EARTH_POWER",
+                "MOVE_LEECH_SEED"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

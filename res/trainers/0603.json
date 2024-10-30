@@ -1,28 +1,67 @@
 {
-    "name": "Mallory",
+    "name": "Lifeguard",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SURSKIT",
+            "species": "SPECIES_STEELIX",
             "form": 0,
-            "level": 52,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 62,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_CURSE",
+                "MOVE_FLAIL",
+                "MOVE_AQUA_TAIL",
+                "MOVE_ROCK_TOMB"
+            ],
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LOMBRE",
+            "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 62,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_HOWL",
+                "MOVE_SCARY_FACE",
+                "MOVE_SWALLOW",
+                "MOVE_LAVA_PLUME"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BASTIODON",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_SCREECH",
+                "MOVE_CURSE",
+                "MOVE_OUTRAGE",
+                "MOVE_ROCK_TOMB"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GOLEM",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_MUD_SPORT",
+                "MOVE_SUNNY_DAY",
+                "MOVE_ROCK_TOMB",
+                "MOVE_FIRE_PUNCH"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

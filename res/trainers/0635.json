@@ -1,29 +1,38 @@
 {
-    "name": "Helen",
+    "name": "Hellen",
     "class": "TRAINER_CLASS_BATTLE_GIRL",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEDICHAM",
+            "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_WAKE_UP_SLAP",
+                "MOVE_SPORE",
+                "MOVE_BULLET_SEED",
+                "MOVE_SWORDS_DANCE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHAMP",
+            "species": "SPECIES_LOPUNNY",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 64,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_ENDURE",
+                "MOVE_ENDEAVOR",
+                "MOVE_QUICK_ATTACK"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

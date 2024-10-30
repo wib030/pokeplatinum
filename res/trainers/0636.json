@@ -3,26 +3,37 @@
     "class": "TRAINER_CLASS_BIRD_KEEPER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NOCTOWL",
+            "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 54,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_HI_JUMP_KICK",
+                "MOVE_DOUBLE_EDGE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_NOCTOWL",
+            "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 54,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_QUICK_ATTACK",
+                "MOVE_ACUPRESSURE",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_KNOCK_OFF"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -4,23 +4,48 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_LUCARIO",
             "form": 0,
-            "level": 41,
-            "item": null,
+            "level": 42,
+            "item": "ITEM_EXPERT_BELT",
             "moves": [
-                "MOVE_METAL_CLAW",
-                "MOVE_FORCE_PALM",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_BONE_RUSH"
+                "MOVE_AURA_SPHERE",
+                "MOVE_AGILITY",
+                "MOVE_SHADOW_BALL",
+                "MOVE_FOLLOW_ME"
             ],
-            "power": 30,
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SMEARGLE",
+            "form": 0,
+            "level": 46,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_DISCHARGE",
+                "MOVE_LAVA_PLUME",
+                "MOVE_TEETER_DANCE",
+                "MOVE_TRICK_ROOM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_JOLTEON",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_TICKLE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

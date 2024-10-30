@@ -1,19 +1,39 @@
 {
-    "name": "Ivan",
+    "name": "Kisser",
     "class": "TRAINER_CLASS_COLLECTOR",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 54,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_AURA_SPHERE",
+                "MOVE_NASTY_PLOT",
+                "MOVE_SHADOW_BALL",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_TOGEKISS",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SWEET_KISS",
+                "MOVE_ATTRACT",
+                "MOVE_CHARM",
+                "MOVE_CAPTIVATE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

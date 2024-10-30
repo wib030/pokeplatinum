@@ -1,46 +1,67 @@
 {
-    "name": "Albert",
+    "name": "Owlbert",
     "class": "TRAINER_CLASS_BREEDER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ROSERADE",
+            "species": "SPECIES_NOCTOWL",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_NIGHT_SHADE",
+                "MOVE_PSYCHO_SHIFT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SUDOWOODO",
+            "species": "SPECIES_NOCTOWL",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_NIGHT_SHADE",
+                "MOVE_PSYCHO_SHIFT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RAICHU",
+            "species": "SPECIES_NOCTOWL",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_NIGHT_SHADE",
+                "MOVE_PSYCHO_SHIFT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_UMBREON",
+            "species": "SPECIES_NOCTOWL",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_NIGHT_SHADE",
+                "MOVE_PSYCHO_SHIFT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

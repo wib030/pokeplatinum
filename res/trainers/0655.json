@@ -1,37 +1,48 @@
 {
-    "name": "John",
+    "name": "Jon",
     "class": "TRAINER_CLASS_CYCLIST_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_FARFETCHD",
+            "species": "SPECIES_JUMPLUFF",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_HEAT_ROCK",
+            "moves": [
+                "MOVE_SUNNY_DAY",
+                "MOVE_MEMENTO"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_DODRIO",
+            "species": "SPECIES_HOUNDOOM",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_FIRE_BLAST",
+                "MOVE_DARK_PULSE",
+                "MOVE_NASTY_PLOT",
+                "MOVE_REVERSAL"
+            ],
+            "power": 254,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_TYPHLOSION",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_BLAST_BURN"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

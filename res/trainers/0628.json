@@ -1,5 +1,5 @@
 {
-    "name": "Elizabeth",
+    "name": "Alittlebit",
     "class": "TRAINER_CLASS_AROMA_LADY",
     "items": [],
     "ai_flags": [
@@ -9,12 +9,17 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ROSELIA",
+            "species": "SPECIES_ROSERADE",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_MEGA_DRAIN",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_SHADOW_BALL",
+                "MOVE_SLEEP_POWDER"
+            ],
+            "power": 254,
             "ball_seal": 0
         }
     ]

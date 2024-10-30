@@ -1,54 +1,53 @@
 {
-    "name": "Dawn",
+    "name": "Lackey",
     "class": "TRAINER_CLASS_DP_PLAYER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_CLEFABLE",
             "form": 0,
-            "level": 25,
-            "item": null,
+            "level": 30,
+            "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_METRONOME",
-                "MOVE_GRAVITY",
-                "MOVE_WAKE_UP_SLAP",
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_REFLECT",
                 "MOVE_SING"
             ],
-            "power": 60,
+            "power": 100,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_KADABRA",
+            "species": "SPECIES_TROPIUS",
             "form": 0,
-            "level": 25,
-            "item": null,
+            "level": 30,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_PSYBEAM",
-                "MOVE_PSYCHO_CUT",
-                "MOVE_REFLECT",
-                "MOVE_LIGHT_SCREEN"
+                "MOVE_WHIRLWIND",
+                "MOVE_WING_ATTACK",
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_PROTECT"
             ],
-            "power": 60,
+            "power": 100,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_PRINPLUP",
             "form": 0,
-            "level": 27,
-            "item": null,
+            "level": 30,
+            "item": "ITEM_POWER_HERB",
             "moves": [
-                "MOVE_BUBBLE_BEAM",
-                "MOVE_METAL_CLAW",
-                "MOVE_PECK",
-                "MOVE_GROWL"
+                "MOVE_DIG",
+                "MOVE_YAWN",
+                "MOVE_ICY_WIND",
+                "MOVE_ENDURE"
             ],
-            "power": 60,
+            "power": 100,
             "ball_seal": 0
         }
     ]

@@ -1,28 +1,40 @@
 {
-    "name": "William",
+    "name": "Alley",
     "class": "TRAINER_CLASS_ARTIST",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MR_MIME",
+            "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SPORE",
+                "MOVE_TAIL_GLOW",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_BATON_PASS"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SUDOWOODO",
+            "species": "SPECIES_YANMEGA",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_SILVER_WIND",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_SHADOW_BALL",
+                "MOVE_PROTECT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

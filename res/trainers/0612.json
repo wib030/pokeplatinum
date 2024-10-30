@@ -4,23 +4,51 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_KADABRA",
+            "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 26,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_CONFUSION",
-                "MOVE_SHOCK_WAVE",
-                "MOVE_FLASH",
-                "MOVE_KINESIS"
+                "MOVE_HEART_SWAP",
+                "MOVE_ACUPRESSURE",
+                "MOVE_FLING",
+                "MOVE_RECYCLE"
             ],
-            "power": 30,
+            "power": 255,
+            "ball_seal": 36
+        },
+		{
+            "species": "SPECIES_PACHIRISU",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_DISCHARGE",
+                "MOVE_DIG",
+                "MOVE_FLATTER",
+                "MOVE_FLING"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DRIFBLIM",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SKILL_SWAP",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_EMBARGO",
+                "MOVE_EXPLOSION"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

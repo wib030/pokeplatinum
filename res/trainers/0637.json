@@ -3,50 +3,37 @@
     "class": "TRAINER_CLASS_BIRD_KEEPER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SKARMORY",
+            "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 59,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_NIGHT_SLASH",
-                "MOVE_SLASH",
-                "MOVE_AIR_SLASH",
-                "MOVE_STEEL_WING"
+                "MOVE_BRAVE_BIRD",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_HI_JUMP_KICK",
+                "MOVE_DOUBLE_EDGE"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_NOCTOWL",
+            "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 59,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_STARF_BERRY",
             "moves": [
-                "MOVE_HYPNOSIS",
-                "MOVE_PSYCHIC",
-                "MOVE_ROOST",
-                "MOVE_AIR_SLASH"
+                "MOVE_QUICK_ATTACK",
+                "MOVE_ACUPRESSURE",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_KNOCK_OFF"
             ],
-            "power": 50,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_NOCTOWL",
-            "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": [
-                "MOVE_HYPNOSIS",
-                "MOVE_PSYCHIC",
-                "MOVE_ROOST",
-                "MOVE_AIR_SLASH"
-            ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         }
     ]

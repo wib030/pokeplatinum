@@ -4,8 +4,8 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
@@ -13,13 +13,48 @@
             "species": "SPECIES_CHANSEY",
             "form": 0,
             "level": 20,
-            "item": null,
+            "item": "ITEM_LUCKY_PUNCH",
             "moves": [
-                "MOVE_EGG_BOMB",
+                "MOVE_FRUSTRATION",
+                "MOVE_COUNTER",
                 "MOVE_SOFTBOILED",
-                "MOVE_REFRESH"
+                "MOVE_HIDDEN_POWER"
             ],
-            "power": 30,
+            "power": 50,
+            "ball_seal": 0,
+			"ivHP": 15,
+			"ivATK": 30,
+			"ivDEF": 15,
+			"ivSPEED": 14,
+			"ivSPATK": 14,
+			"ivSPDEF": 15
+        },
+		{
+            "species": "SPECIES_JIGGLYPUFF",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_METRONOME",
+                "MOVE_DOUBLE_SLAP",
+                "MOVE_PRESENT",
+                "MOVE_FAINT_ATTACK"
+            ],
+            "power": 50,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SKORUPI",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": [
+                "MOVE_ACUPRESSURE",
+                "MOVE_PIN_MISSILE",
+                "MOVE_ROCK_SMASH",
+                "MOVE_WHIRLWIND"
+            ],
+            "power": 50,
             "ball_seal": 0
         }
     ]

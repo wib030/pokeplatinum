@@ -1,52 +1,54 @@
 {
-    "name": "William",
+    "name": "Alley",
     "class": "TRAINER_CLASS_ARTIST",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 60,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_OMINOUS_WIND",
-                "MOVE_ANCIENT_POWER",
-                "MOVE_SILVER_WIND",
-                "MOVE_BATON_PASS"
+                "MOVE_BATON_PASS",
+                "MOVE_SPORE",
+                "MOVE_TAIL_GLOW",
+                "MOVE_STEALTH_ROCK"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MR_MIME",
+            "species": "SPECIES_YANMEGA",
             "form": 0,
-            "level": 57,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_BUG_BUZZ",
+                "MOVE_FISSURE",
+                "MOVE_AIR_SLASH",
+                "MOVE_PROTECT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_ALAKAZAM",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_PSYCHIC",
-                "MOVE_LIGHT_SCREEN",
-                "MOVE_REFLECT",
-                "MOVE_MIMIC"
+                "MOVE_SHADOW_BALL",
+                "MOVE_ENERGY_BALL",
+                "MOVE_FOCUS_BLAST"
             ],
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_SUDOWOODO",
-            "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": [
-                "MOVE_ROCK_THROW",
-                "MOVE_FLAIL",
-                "MOVE_SUCKER_PUNCH",
-                "MOVE_MIMIC"
-            ],
-            "power": 0,
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -4,94 +4,93 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MUNCHLAX",
-            "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": [
-                "MOVE_BODY_SLAM",
-                "MOVE_STOCKPILE",
-                "MOVE_SWALLOW",
-                "MOVE_SCREECH"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_STARAPTOR",
-            "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": [
-                "MOVE_CLOSE_COMBAT",
-                "MOVE_AERIAL_ACE",
-                "MOVE_TAKE_DOWN",
-                "MOVE_QUICK_ATTACK"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_FLOATZEL",
-            "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": [
-                "MOVE_AQUA_JET",
-                "MOVE_PURSUIT",
-                "MOVE_BRICK_BREAK",
-                "MOVE_IRON_TAIL"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_HERACROSS",
-            "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": [
-                "MOVE_CLOSE_COMBAT",
-                "MOVE_BRICK_BREAK",
-                "MOVE_NIGHT_SLASH",
-                "MOVE_AERIAL_ACE"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_ROSERADE",
-            "form": 0,
-            "level": 40,
-            "item": null,
-            "moves": [
-                "MOVE_GIGA_DRAIN",
-                "MOVE_TOXIC",
-                "MOVE_INGRAIN",
-                "MOVE_GRASS_WHISTLE"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_INFERNAPE",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 50,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
+                "MOVE_TAUNT",
                 "MOVE_CLOSE_COMBAT",
-                "MOVE_PUNISHMENT",
-                "MOVE_FLAME_WHEEL",
+                "MOVE_OVERHEAT",
+                "MOVE_FAKE_OUT"
+            ],
+            "power": 255,
+            "ball_seal": 6
+        },
+        {
+            "species": "SPECIES_PIDGEOT",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_RAZOR_WIND",
+                "MOVE_U_TURN",
+                "MOVE_HEAT_WAVE",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_AMPHAROS",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_TOXIC",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "power": 255,
+            "ball_seal": 21
+        },
+        {
+            "species": "SPECIES_BANETTE",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_CHOICE_BAND",
+            "moves": [
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_SHADOW_CLAW",
+                "MOVE_KNOCK_OFF",
                 "MOVE_WILL_O_WISP"
             ],
-            "power": 200,
-            "ball_seal": 10
+            "power": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_VAPOREON",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_WISH",
+                "MOVE_U_TURN",
+                "MOVE_HAZE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_FLYGON",
+            "form": 0,
+            "level": 50,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_OUTRAGE"
+            ],
+            "power": 255,
+            "ball_seal": 21
         }
     ]
 }

@@ -9,45 +9,45 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_CORSOLA",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 62,
+            "item": "ITEM_RINDO_BERRY",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_RECOVER",
+                "MOVE_ICY_WIND",
+                "MOVE_STEALTH_ROCK"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_OMASTAR",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 62,
+            "item": "ITEM_RINDO_BERRY",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_POWER_GEM",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_MUDDY_WATER",
+                "MOVE_ICE_BEAM"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_KABUTOPS",
             "form": 0,
-            "level": 1,
-            "item": "ITEM_NONE",
+            "level": 62,
+            "item": "ITEM_RINDO_BERRY",
             "moves": [
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH",
-                "MOVE_SPLASH"
+                "MOVE_SWORDS_DANCE",
+                "MOVE_AQUA_TAIL",
+                "MOVE_RAIN_DANCE",
+                "MOVE_ROCK_SLIDE"
             ],
-            "power": 0,
+            "power": 200,
             "ball_seal": 0
         }
     ]

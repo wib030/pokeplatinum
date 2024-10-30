@@ -1,46 +1,67 @@
 {
-    "name": "Jennifer",
+    "name": "Buzzy",
     "class": "TRAINER_CLASS_BREEDER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ROSELIA",
+            "species": "SPECIES_URSARING",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_HONEY",
+            "moves": [
+                "MOVE_LICK",
+                "MOVE_BELLY_DRUM",
+                "MOVE_COVET",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MR_MIME",
+            "species": "SPECIES_VESPIQUEN",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_NET_BALL",
+            "moves": [
+                "MOVE_ATTACK_ORDER",
+                "MOVE_POISON_STING",
+                "MOVE_PURSUIT",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_VESPIQUEN",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_NET_BALL",
+            "moves": [
+                "MOVE_ATTACK_ORDER",
+                "MOVE_TOXIC",
+                "MOVE_PURSUIT",
+                "MOVE_HEAL_ORDER"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_ESPEON",
+            "species": "SPECIES_VESPIQUEN",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_NET_BALL",
+            "moves": [
+                "MOVE_BUG_BITE",
+                "MOVE_DESTINY_BOND",
+                "MOVE_ENDEAVOR",
+                "MOVE_GIGA_IMPACT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]
