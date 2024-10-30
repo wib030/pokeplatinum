@@ -4656,7 +4656,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     u8 aiSlot1, aiSlot2;
     u16 move, opponentMove;
     int type, range, effect, moveEffect, moveVolatileStatus, moveStatus, partyCount;
-    u32 effectiveness, sideCondition;
+    u32 effectiveness, sideCondition, fieldCondition;
     int start, end;
     int numMoves;
     Pokemon *mon;
@@ -4985,12 +4985,12 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     
                                         return FALSE;
                                     }
+                                }
 
-                                    if ((effect == BATTLE_EFFECT_CURE_PARTY_STATUS)) {
+                                if ((effect == BATTLE_EFFECT_CURE_PARTY_STATUS)) {
                                         if (AI_CanCurePartyMemberStatus(battleSys, battleCtx, battler)) {
                                             return FALSE;
                                         }
-                                    }
                                 }
                                 break;
 
@@ -5233,10 +5233,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                 || (battleCtx->battleMons[battlerPartner].type2 == TYPE_STEEL))) {
                                                     return FALSE;
                                             }
-                                        }
-
-                                        if ((battleCtx->battleMons[battler].moveEffectsMask & moveEffect) == FALSE) {
-                                            return FALSE;
                                         }
                                         break;
                                 }
@@ -5763,6 +5759,33 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         // Heal Block
                                     case BATTLE_EFFECT_PREVENT_HEALING:
                                         break;
+                                }
+                                break;
+
+                            case RANGE_ALL_ADJACENT:
+                                // Teeter Dance only
+                                if ((battleCtx->battleMons[defender].statusVolatile & moveVolatileStatus) == FALSE) {
+                                    return FALSE;
+                                }
+                                break;
+
+                            case RANGE_ALLY:
+                                // Helping Hand only
+                                if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+                                    if (battleCtx->battleMons[battlerParner].curHP > 0) {
+                                        return FALSE;
+                                    }
+                                }
+                                break;
+
+                            case RANGE_FIELD:
+
+                                fieldCondition = MapBattleEffectToFieldCondition(battleCtx, effect);
+
+                                if (fieldCondition != FIELD_CONDITION_NONE) {
+                                    if ((battleCtx->fieldConditionsMask & fieldCondition) == FALSE) {
+                                        return FALSE;
+                                    }
                                 }
                                 break;
                         }                        
