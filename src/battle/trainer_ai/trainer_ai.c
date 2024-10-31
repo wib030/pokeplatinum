@@ -408,6 +408,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AIScript_PushCursor(BattleSystem *battleSys, BattleContext *battleCtx, int address);
 static BOOL AIScript_PopCursor(BattleSystem *battleSys, BattleContext *battleCtx);
 static int AIScript_Read(BattleContext *battleCtx);
@@ -642,6 +643,12 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     u8 numMaxScoreMoves;
     u8 action = AI_ENEMY_ATTACK_1;
     u16 move;
+
+    if (battleCtx->totalTurns < 1) {
+        if (AI_CONTEXT.thinkingMask & AI_FLAG_OMNISCIENT) {
+            TrainerAI_RevealAllInfo(battleSys, battleCtx);
+        }
+    }
 
     TrainerAI_RecordLastMove(battleSys, battleCtx);
 
@@ -3638,6 +3645,45 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
 
                 AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
                 AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                break;
+            }
+        }
+    }
+}
+
+/**
+ * @brief Reveal all moves known by the opponent's party.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ */
+static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    u8 partySlot, ability;
+    u16 move, heldItem;
+    int i, j, partyMax;
+    Pokemon *mon;
+
+    partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
+
+    for (i = 0; i < partyMax; i++) {
+        mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+
+        heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+        ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+        AI_CONTEXT.battlerPartyAbilities[AI_CONTEXT.defender][i] = ability;
+        AI_CONTEXT.battlerPartyHeldItems[AI_CONTEXT.defender][i] = heldItem;
+
+        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+            move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+            if (move != MOVE_NONE) {
+
+                AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+            }
+            else {
                 break;
             }
         }
