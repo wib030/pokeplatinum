@@ -6769,8 +6769,8 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
         switchTurn = battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber;
         switchTurn += BattleSystem_RandNext(battleSys) % 2;
-        switchTurn += BattleSystem_RandNext(battleSys) % 2;
         switchTurn += (BattleSystem_RandNext(battleSys) % 2) * (BattleSystem_RandNext(battleSys) % 2);
+        switchTurn += (BattleSystem_RandNext(battleSys) % 2) * (BattleSystem_RandNext(battleSys) % 2) * (BattleSystem_RandNext(battleSys) % 2);
 
         if (battleCtx->totalTurns >= switchTurn) {
 
