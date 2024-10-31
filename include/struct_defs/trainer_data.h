@@ -28,7 +28,7 @@ typedef struct TrainerData {
 
     u32 battleType; //< The type of battle to be instantiated.
 
-    charcode_t name[TRAINER_NAME_LEN + 1]; //< The trainer's name.
+    charcode_t name[NPC_TRAINER_NAME_LEN]; //name[TRAINER_NAME_LEN + 1]; //< The trainer's name.
 
     Sentence winMsg; //< The message to display if the trainer wins.
     Sentence loseMsg; //< The message to display if the trainer loses.

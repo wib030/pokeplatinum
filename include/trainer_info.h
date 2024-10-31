@@ -6,7 +6,7 @@
 #include "strbuf.h"
 
 typedef struct TrainerInfo {
-    charcode_t name[TRAINER_NAME_LEN + 1];
+    charcode_t name[NPC_TRAINER_NAME_LEN]; //name[TRAINER_NAME_LEN + 1];
     u32 id;
     u32 money;
     u8 gender;

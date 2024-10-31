@@ -5,5 +5,6 @@
 #define TRAINER_NAME_LEN    7
 #define TABLET_NAME_LEN     10
 #define MOVE_NAME_LEN       16
+#define NPC_TRAINER_NAME_LEN 12
 
 #endif

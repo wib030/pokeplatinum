@@ -40,7 +40,7 @@ void TrainerInfo_Init(TrainerInfo *info)
 
 BOOL TrainerInfo_HasNoName(const TrainerInfo *info)
 {
-    for (int i = 0; i < TRAINER_NAME_LEN + 1; i++) {
+    for (int i = 0; i < NPC_TRAINER_NAME_LEN; i++) {
         if (info->name[i] != CHAR_EMPTY) {
             return FALSE;
         }
@@ -52,14 +52,14 @@ BOOL TrainerInfo_HasNoName(const TrainerInfo *info)
 void TrainerInfo_SetName(TrainerInfo *info, const charcode_t *name)
 {
     int len = GF_strlen(name);
-    GF_ASSERT(len < TRAINER_NAME_LEN + 1);
+    GF_ASSERT(len < NPC_TRAINER_NAME_LEN);
 
     GF_strcpy(info->name, name);
 }
 
 void TrainerInfo_SetNameFromStrbuf(TrainerInfo *info, const Strbuf *name)
 {
-    Strbuf_ToChars(name, info->name, TRAINER_NAME_LEN + 1);
+    Strbuf_ToChars(name, info->name, NPC_TRAINER_NAME_LEN);
 }
 
 const charcode_t* TrainerInfo_Name(const TrainerInfo *info)
@@ -74,7 +74,7 @@ void TrainerInfo_NameStrbuf(const TrainerInfo *info, Strbuf *name)
 
 Strbuf* TrainerInfo_NameNewStrbuf(const TrainerInfo *info, int heapID)
 {
-    Strbuf *name = Strbuf_Init(TRAINER_NAME_LEN + 1, heapID);
+    Strbuf *name = Strbuf_Init(NPC_TRAINER_NAME_LEN, heapID);
 
     TrainerInfo_NameStrbuf(info, name);
     return name;

@@ -43,7 +43,7 @@ void TrainerData_Encounter(BattleParams *battleParams, const SaveData *save, int
             GF_strcpy(battleParams->trainerData[i].name, rivalName);
         } else {
             Strbuf *trainerName = MessageLoader_GetNewStrbuf(msgLoader, battleParams->trainerIDs[i]);
-            Strbuf_ToChars(trainerName, battleParams->trainerData[i].name, TRAINER_NAME_LEN + 1);
+            Strbuf_ToChars(trainerName, battleParams->trainerData[i].name, NPC_TRAINER_NAME_LEN);
             Strbuf_Free(trainerName);
         }
 
