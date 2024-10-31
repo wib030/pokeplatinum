@@ -3584,11 +3584,12 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
 
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
 
-    // Here we want to just learn every instance of u-turn / volt switch
-    // on the opponent's team if they hit us with u-turn / volt switch
-    // because the active mon data is switched before the AI gets to run
-    // this code again.
-    if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+    // Here we want to just learn every instance of a given pivot move
+    // on the opponent's team if they use that pivot move because the 
+    // active mon data is switched before the AI gets to run this code
+    // again.
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH
+        || MOVE_DATA(move).effect == BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE) {
         partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
 
         for (i = 0; i < partyMax; i++) {
