@@ -3,35 +3,23 @@
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_COMBEE",
+            "species": "SPECIES_SUNFLORA",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 250,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_ROSELIA",
-            "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_BEAUTIFLY",
-            "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SUNNY_DAY",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_EARTH_POWER",
+                "MOVE_FIRE_BLAST"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -1,37 +1,92 @@
 {
-    "name": "Joanna",
+    "name": "Lifeguard",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUVDISC",
+            "species": "SPECIES_DUGTRIO",
             "form": 0,
-            "level": 57,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 74,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_MEMENTO"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_CORSOLA",
+		{
+            "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 74,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_HOWL",
+                "MOVE_SCARY_FACE",
+                "MOVE_SWALLOW",
+                "MOVE_LAVA_PLUME"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_LAPRAS",
+		{
+            "species": "SPECIES_BASTIODON",
             "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 74,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_SCREECH",
+                "MOVE_CURSE",
+                "MOVE_OUTRAGE",
+                "MOVE_ROCK_TOMB"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GOLEM",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_MUD_SPORT",
+                "MOVE_SUNNY_DAY",
+                "MOVE_ROCK_TOMB",
+                "MOVE_FIRE_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_STEELIX",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_CURSE",
+                "MOVE_FLAIL",
+                "MOVE_AQUA_TAIL",
+                "MOVE_ROCK_TOMB"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HEATRAN",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_IRON_BALL",
+            "moves": [
+                "MOVE_EXPLOSION",
+                "MOVE_ROAR",
+                "MOVE_ENDURE",
+                "MOVE_METAL_SOUND"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

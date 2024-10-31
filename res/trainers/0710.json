@@ -1,29 +1,52 @@
 {
-    "name": "Theodore",
+    "name": "Theodarn",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STEELIX",
+            "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_SAND_ATTACK",
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_ROOST",
+                "MOVE_TORMENT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STEELIX",
+            "species": "SPECIES_KRICKETUNE",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_METRONOME",
+            "moves": [
+                "MOVE_SING",
+                "MOVE_FURY_CUTTER",
+                "MOVE_SWORDS_DANCE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SPIRITOMB",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_FLASH",
+                "MOVE_HYPNOSIS",
+                "MOVE_SPITE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

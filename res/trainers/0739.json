@@ -1,10 +1,9 @@
 {
     "name": "Ashlee",
-    "class": "TRAINER_CLASS_RANGER_FEMALE",
+    "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,

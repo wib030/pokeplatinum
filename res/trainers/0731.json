@@ -1,55 +1,45 @@
 {
-    "name": "Melissa",
+    "name": "Mei",
     "class": "TRAINER_CLASS_LADY",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HOPPIP",
+            "species": "SPECIES_ABOMASNOW",
             "form": 0,
-            "level": 58,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_NEVERMELTICE",
             "moves": [
-                "MOVE_STUN_SPORE",
-                "MOVE_SUNNY_DAY",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_AERIAL_ACE"
+                "MOVE_ICY_WIND"
             ],
-            "power": 0,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_CHERRIM",
+		{
+            "species": "SPECIES_LAPRAS",
             "form": 0,
-            "level": 58,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_MOOMOO_MILK",
             "moves": [
-                "MOVE_SOLAR_BEAM",
-                "MOVE_SUNNY_DAY",
-                "MOVE_LEECH_SEED",
-                "MOVE_MAGICAL_LEAF"
+                "MOVE_ICY_WIND"
             ],
-            "power": 0,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_BELLOSSOM",
+		{
+            "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 58,
-            "item": null,
+            "level": 64,
+            "item": "ITEM_MOOMOO_MILK",
             "moves": [
-                "MOVE_PETAL_DANCE",
-                "MOVE_ATTRACT",
-                "MOVE_STUN_SPORE",
-                "MOVE_MAGICAL_LEAF"
+                "MOVE_ICY_WIND"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 6
         }
     ]
 }

@@ -33,7 +33,19 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_QUICK_BALL"
+			"ball_type": "ITEM_QUICK_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 50,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 50,
+			"evSPDEF": 0
         }
     ]
 }

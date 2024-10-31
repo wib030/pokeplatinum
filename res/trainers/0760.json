@@ -3,35 +3,50 @@
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_ELECTRODE",
             "form": 0,
-            "level": 52,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+                "MOVE_SURF",
+                "MOVE_ZAP_CANNON",
+                "MOVE_U_TURN"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_RELICANTH",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_AQUA_TAIL",
+                "MOVE_STONE_EDGE",
+                "MOVE_EARTHQUAKE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_TENTACRUEL",
+            "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_ICE_BEAM",
+                "MOVE_SIGNAL_BEAM"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

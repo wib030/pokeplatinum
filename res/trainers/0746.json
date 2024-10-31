@@ -1,37 +1,53 @@
 {
-    "name": "Zach",
+    "name": "Golzach",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_GOLBAT",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_POISON_FANG",
+                "MOVE_SUPER_FANG",
+                "MOVE_TAILWIND",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_GOLBAT",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_CONFUSE_RAY",
+                "MOVE_TOXIC",
+                "MOVE_TORMENT",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_GOLBAT",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_HEAT_WAVE",
+                "MOVE_SHADOW_BALL",
+                "MOVE_SLUDGE_BOMB"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

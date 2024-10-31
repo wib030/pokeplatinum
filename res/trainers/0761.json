@@ -1,28 +1,65 @@
 {
-    "name": "Glenn",
+    "name": "Takoyaki",
     "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_OCTILLERY",
+            "species": "SPECIES_SLOWBRO",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 74,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_IRON_DEFENSE",
+                "MOVE_CALM_MIND",
+                "MOVE_FUTURE_SIGHT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_POLITOED",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 74,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_WATER_SPOUT",
+                "MOVE_ENERGY_BALL"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_OCTILLERY",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_OCTAZOOKA",
+                "MOVE_ENERGY_BALL",
+                "MOVE_FIRE_BLAST",
+                "MOVE_CHARGE_BEAM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_OCTILLERY",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_OCTAZOOKA",
+                "MOVE_HAZE",
+                "MOVE_ENERGY_BALL",
+                "MOVE_PSYCHIC"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

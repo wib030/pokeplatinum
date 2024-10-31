@@ -1,29 +1,39 @@
 {
-    "name": "Theodore",
+    "name": "Theodarn",
     "class": "TRAINER_CLASS_HIKER",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_DAMAGE_PRIORITY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_SAND_ATTACK",
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_ROOST",
+                "MOVE_FALSE_SWIPE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STEELIX",
+            "species": "SPECIES_KRICKETUNE",
             "form": 0,
             "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SING",
+                "MOVE_FALSE_SWIPE",
+                "MOVE_FLASH",
+                "MOVE_DOUBLE_TEAM"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

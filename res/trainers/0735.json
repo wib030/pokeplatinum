@@ -1,39 +1,65 @@
 {
-    "name": "Kyler",
+    "name": "Funny",
     "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZANGOOSE",
+            "species": "SPECIES_SOLROCK",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 74,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+                "MOVE_BATON_PASS",
+                "MOVE_MORNING_SUN",
+                "MOVE_WILL_O_WISP"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_EXEGGUTOR",
+            "species": "SPECIES_TYPHLOSION",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 74,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_ERUPTION"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_POLIWRATH",
+            "species": "SPECIES_NIDOQUEEN",
             "form": 0,
-            "level": 62,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 74,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_RECOVER",
+                "MOVE_POISON_JAB",
+                "MOVE_SUPER_FANG",
+                "MOVE_EARTH_POWER"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ESPEON",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_TWISTEDSPOON",
+            "moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_FLAMETHROWER",
+                "MOVE_SHADOW_BALL",
+                "MOVE_SIGNAL_BEAM"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

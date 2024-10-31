@@ -1,28 +1,33 @@
 {
-    "name": "Teri & Tia",
+    "name": "Cir & Cull",
     "class": "TRAINER_CLASS_TWINS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_RAICHU",
+            "species": "SPECIES_EXPLOUD",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_ICY_WIND"
+            ],
+            "power": 255,
             "ball_seal": 20
         },
         {
-            "species": "SPECIES_CLEFABLE",
+            "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_BLAST_BURN"
+            ],
+            "power": 255,
             "ball_seal": 20
         }
     ]

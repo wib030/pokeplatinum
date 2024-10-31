@@ -1,10 +1,9 @@
 {
-    "name": "Anton",
+    "name": "t0ddDaMod",
     "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
@@ -12,13 +11,29 @@
         {
             "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 47,
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_ICE_BEAM",
-                "MOVE_CRUNCH"
+                "MOVE_TOXIC",
+                "MOVE_SUBSTITUTE",
+                "MOVE_PROTECT",
+                "MOVE_EXPLOSION"
             ],
-            "power": 50,
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_FROSLASS",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_LIECHI_BERRY",
+            "moves": [
+                "MOVE_WAKE_UP_SLAP",
+                "MOVE_ICE_SHARD",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_ICE_PUNCH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

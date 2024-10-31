@@ -1,5 +1,5 @@
 {
-    "name": "Travon",
+    "name": "Brick",
     "class": "TRAINER_CLASS_SCIENTIST",
     "items": [],
     "ai_flags": [
@@ -15,9 +15,11 @@
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_CONFUSION",
-				"MOVE_BELLY_DRUM"
+				"MOVE_BELLY_DRUM",
+				"MOVE_WHIRLPOOL",
+				"MOVE_REST"
             ],
-            "power": 20,
+            "power": 40,
             "ball_seal": 0
         },
 		{
@@ -27,9 +29,11 @@
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_CONFUSION",
-				"MOVE_BELLY_DRUM"
+				"MOVE_BELLY_DRUM",
+				"MOVE_WHIRLPOOL",
+				"MOVE_REST"
             ],
-            "power": 20,
+            "power": 40,
             "ball_seal": 0
         }
     ]

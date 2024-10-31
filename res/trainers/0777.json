@@ -1,54 +1,88 @@
 {
-    "name": "Armando",
+    "name": "Dr. Pig",
     "class": "TRAINER_CLASS_VETERAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NINJASK",
+            "species": "SPECIES_DUGTRIO",
             "form": 0,
-            "level": 59,
-            "item": null,
+            "level": 74,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
+                "MOVE_MEMENTO"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DEWGONG",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_TOXIC",
+                "MOVE_RECOVER",
+                "MOVE_STOCKPILE",
+                "MOVE_ICY_WIND"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ILLUMISE",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+                "MOVE_PROTECT",
+                "MOVE_SPIDER_WEB",
+                "MOVE_TOXIC"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_JIRACHI",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_IRON_HEAD"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_JUMPLUFF",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_LEECH_SEED",
+                "MOVE_U_TURN"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SMEARGLE",
+            "form": 0,
+            "level": 74,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+                "MOVE_SPORE",
                 "MOVE_BATON_PASS",
-                "MOVE_X_SCISSOR",
-                "MOVE_SWORDS_DANCE",
-                "MOVE_SILVER_WIND"
+                "MOVE_SUBSTITUTE"
             ],
-            "power": 100,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_ABSOL",
-            "form": 0,
-            "level": 59,
-            "item": null,
-            "moves": [
-                "MOVE_PSYCHO_CUT",
-                "MOVE_TAUNT",
-                "MOVE_NIGHT_SLASH",
-                "MOVE_QUICK_ATTACK"
-            ],
-            "power": 100,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_SLAKING",
-            "form": 0,
-            "level": 62,
-            "item": null,
-            "moves": [
-                "MOVE_COUNTER",
-                "MOVE_GIGA_IMPACT",
-                "MOVE_SHADOW_CLAW",
-                "MOVE_AERIAL_ACE"
-            ],
-            "power": 100,
+            "power": 255,
             "ball_seal": 0
         }
     ]

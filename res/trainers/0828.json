@@ -1,10 +1,9 @@
 {
-    "name": "Brenna",
-    "class": "TRAINER_CLASS_ACE_TRAINER_SNOW_FEMALE",
+    "name": "XxBeaterxX",
+    "class": "TRAINER_CLASS_ACE_TRAINER_FEMALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
@@ -12,42 +11,67 @@
         {
             "species": "SPECIES_SNEASEL",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 47,
+            "item": "ITEM_BLACKGLASSES",
             "moves": [
-                "MOVE_ICE_SHARD",
-                "MOVE_SLASH",
-                "MOVE_FAINT_ATTACK",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_BEAT_UP"
             ],
-            "power": 50,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SNORUNT",
+            "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 40,
-            "item": null,
+            "level": 46,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_ICE_FANG",
-                "MOVE_CRUNCH",
-                "MOVE_HAIL"
+                "MOVE_BEAT_UP"
             ],
-            "power": 50,
+            "power": 200,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SNOVER",
+            "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 41,
-            "item": null,
+            "level": 46,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_ICE_SHARD",
-                "MOVE_WOOD_HAMMER",
-                "MOVE_INGRAIN",
-                "MOVE_GRASS_WHISTLE"
+                "MOVE_BEAT_UP"
             ],
-            "power": 50,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_WEAVILE",
+            "form": 0,
+            "level": 46,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_BEAT_UP"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_WEAVILE",
+            "form": 0,
+            "level": 46,
+            "item": "ITEM_KINGS_ROCK",
+            "moves": [
+                "MOVE_BEAT_UP"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_WEAVILE",
+            "form": 0,
+            "level": 46,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_BEAT_UP"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

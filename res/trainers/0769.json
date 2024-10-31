@@ -3,35 +3,51 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_SCOPE_LENS",
+            "moves": [
+                "MOVE_LOCK_ON",
+                "MOVE_GUNK_SHOT",
+                "MOVE_BLIZZARD",
+                "MOVE_FIRE_BLAST"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BIBAREL",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 34,
+            "item": "ITEM_KINGS_ROCK",
+            "moves": [
+                "MOVE_SURF",
+                "MOVE_BLIZZARD",
+                "MOVE_ROCK_BLAST",
+                "MOVE_BULLET_SEED"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GRAVELER",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 100,
+            "level": 34,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_WATER_SPOUT",
+                "MOVE_FLAMETHROWER",
+                "MOVE_CHARGE_BEAM",
+                "MOVE_OCTAZOOKA"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

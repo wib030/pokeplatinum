@@ -1,37 +1,54 @@
 {
-    "name": "Grunt",
+    "name": "Hero",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_TAG_STRATEGY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_LEDIAN",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 40,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_U_TURN",
+                "MOVE_TOXIC_SPIKES"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_HOUNDOUR",
+            "species": "SPECIES_FURRET",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 40,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_FOLLOW_ME",
+                "MOVE_PROTECT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_LAST_RESORT"
+            ],
+            "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_STARAPTOR",
             "form": 0,
-            "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 40,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WING_ATTACK",
+                "MOVE_AGILITY",
+                "MOVE_ROOST"
+            ],
+            "power": 180,
             "ball_seal": 0
         }
     ]

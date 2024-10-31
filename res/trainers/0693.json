@@ -1,21 +1,92 @@
 {
-    "name": "Jeremy",
+    "name": "Slap",
     "class": "TRAINER_CLASS_GENTLEMAN",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHATOT",
+            "species": "SPECIES_DUGTRIO",
             "form": 0,
-            "level": 61,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_MEMENTO"
+            ],
+            "power": 255,
+            "ball_seal": 22
+        },
+		{
+            "species": "SPECIES_WOBBUFFET",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MIRROR_COAT",
+                "MOVE_COUNTER",
+                "MOVE_ENCORE",
+                "MOVE_DESTINY_BOND"
+            ],
+            "power": 255,
+            "ball_seal": 22
+        },
+		{
+            "species": "SPECIES_GLISCOR",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_SAND_ATTACK",
+                "MOVE_TORMENT",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
+            "ball_seal": 22
+        },
+		{
+            "species": "SPECIES_ZAPDOS",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_ROOST",
+                "MOVE_TOXIC",
+                "MOVE_FLASH"
+            ],
+            "power": 255,
+            "ball_seal": 22
+        },
+		{
+            "species": "SPECIES_SUICUNE",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_WHIRLPOOL"
+            ],
+            "power": 255,
+            "ball_seal": 22
+        },
+		{
+            "species": "SPECIES_DEOXYS",
+            "form": 2,
+            "level": 65,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_REST",
+                "MOVE_RECYCLE"
+            ],
+            "power": 255,
             "ball_seal": 22
         }
     ]

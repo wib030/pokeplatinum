@@ -4,8 +4,7 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT",
-		"AI_FLAG_RISKY"
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
@@ -18,16 +17,23 @@
                 "MOVE_FRUSTRATION",
                 "MOVE_COUNTER",
                 "MOVE_SOFTBOILED",
-                "MOVE_HIDDEN_POWER"
+                "MOVE_FIRE_PUNCH"
             ],
             "power": 50,
             "ball_seal": 0,
+			"friendship": 0,
 			"ivHP": 15,
-			"ivATK": 30,
+			"ivATK": 31,
 			"ivDEF": 15,
 			"ivSPEED": 14,
 			"ivSPATK": 14,
-			"ivSPDEF": 15
+			"ivSPDEF": 15,
+			"evHP": 0,
+			"evATK": 150,
+			"evDEF": 0,
+			"evSPEED": 50,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_JIGGLYPUFF",

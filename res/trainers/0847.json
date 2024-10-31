@@ -1,19 +1,53 @@
 {
-    "name": "Grunt",
+    "name": "Bug",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CROAGUNK",
+            "species": "SPECIES_WORMADAM",
+            "form": 1,
+            "level": 34,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_SPIDER_WEB",
+                "MOVE_RAPID_SPIN",
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_SPIKES"
+            ],
+            "power": 120,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ARIADOS",
             "form": 0,
-            "level": 31,
-            "item": null,
-            "moves": null,
-            "power": 30,
+            "level": 34,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_SPIDER_WEB",
+                "MOVE_CROSS_POISON",
+                "MOVE_PURSUIT",
+                "MOVE_DIG"
+            ],
+            "power": 120,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MOTHIM",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_SILVER_WIND",
+                "MOVE_PSYBEAM",
+                "MOVE_ROOST",
+                "MOVE_ENERGY_BALL"
+            ],
+            "power": 120,
             "ball_seal": 0
         }
     ]

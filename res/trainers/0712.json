@@ -1,28 +1,53 @@
 {
-    "name": "Brandon",
+    "name": "Blandon",
     "class": "TRAINER_CLASS_BUG_CATCHER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DUSTOX",
+            "species": "SPECIES_NINJASK",
             "form": 0,
-            "level": 21,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_SUBSTITUTE",
+                "MOVE_LEECH_LIFE",
+                "MOVE_SAND_ATTACK"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_KRICKETUNE",
+            "species": "SPECIES_PINECO",
             "form": 0,
-            "level": 23,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_EXPLOSION"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SHEDINJA",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_X_SCISSOR",
+                "MOVE_WILL_O_WISP"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

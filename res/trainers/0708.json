@@ -3,26 +3,78 @@
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ENDEAVOR",
+                "MOVE_VACUUM_WAVE",
+                "MOVE_FORESIGHT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_LOPUNNY",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_OVERHEAT",
+                "MOVE_VACUUM_WAVE",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PRIMEAPE",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_ICE_PUNCH",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_PUNISHMENT"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PRIMEAPE",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_MEDITATE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_PUNISHMENT",
+                "MOVE_ICE_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PRIMEAPE",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_FOCUS_PUNCH",
+                "MOVE_SUBSTITUTE",
+                "MOVE_ENCORE",
+                "MOVE_BULK_UP"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

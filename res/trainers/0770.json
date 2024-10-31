@@ -3,44 +3,65 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUXRAY",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_THUNDER_WAVE",
+                "MOVE_ICY_WIND",
+                "MOVE_RECOVER",
+                "MOVE_WATER_PULSE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BIBAREL",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_THUNDER_WAVE",
+                "MOVE_ICY_WIND",
+                "MOVE_RECOVER",
+                "MOVE_WATER_PULSE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_GOLEM",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 100,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+                "MOVE_CHARGE_BEAM",
+                "MOVE_WATER_SPOUT",
+                "MOVE_RECOVER"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 150,
+            "level": 54,
+            "item": "ITEM_MYSTIC_WATER",
+            "moves": [
+                "MOVE_WATER_SPOUT",
+                "MOVE_OCTAZOOKA",
+                "MOVE_ICE_BEAM",
+                "MOVE_RECOVER"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

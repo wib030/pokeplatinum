@@ -3,26 +3,37 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_LUXIO",
+            "species": "SPECIES_REMORAID",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_SCOPE_LENS",
+            "moves": [
+                "MOVE_LOCK_ON",
+                "MOVE_FIRE_BLAST",
+                "MOVE_BLIZZARD",
+                "MOVE_GUNK_SHOT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_BIBAREL",
+		{
+            "species": "SPECIES_REMORAID",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 50,
+            "level": 24,
+            "item": "ITEM_KINGS_ROCK",
+            "moves": [
+                "MOVE_SURF",
+                "MOVE_ICY_WIND",
+                "MOVE_BULLET_SEED",
+                "MOVE_ROCK_BLAST"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

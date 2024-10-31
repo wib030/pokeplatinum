@@ -1,19 +1,25 @@
 {
-    "name": "Andrea",
+    "name": "ROFLer",
     "class": "TRAINER_CLASS_SKIER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ABOMASNOW",
+            "species": "SPECIES_URSARING",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_CHOPLE_BERRY",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_FACADE",
+                "MOVE_HAMMER_ARM"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

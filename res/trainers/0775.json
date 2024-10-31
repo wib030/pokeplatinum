@@ -1,19 +1,39 @@
 {
-    "name": "Chelsea",
+    "name": "Atlas",
     "class": "TRAINER_CLASS_TUBER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AZUMARILL",
+            "species": "SPECIES_LUMINEON",
             "form": 0,
-            "level": 53,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_POWER_HERB",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_SWEET_KISS",
+                "MOVE_POUND",
+                "MOVE_BOUNCE"
+            ],
+            "power": 255,
+            "ball_seal": 9
+        },
+		{
+            "species": "SPECIES_LUMINEON",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_DESTINY_KNOT",
+            "moves": [
+                "MOVE_ATTRACT",
+                "MOVE_SWEET_KISS",
+                "MOVE_POUND",
+                "MOVE_SWEET_KISS"
+            ],
+            "power": 255,
             "ball_seal": 9
         }
     ]

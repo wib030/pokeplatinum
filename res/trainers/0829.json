@@ -1,9 +1,7 @@
 {
-    "name": "Darrius",
+    "name": "Eviol",
     "class": "TRAINER_CLASS_SCIENTIST",
-    "items": [
-        "ITEM_X_SPECIAL"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT"
@@ -11,17 +9,45 @@
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_PORYGON",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_EVERSTONE",
+            "moves": [
+                "MOVE_SPIKES",
+                "MOVE_TOXIC",
+                "MOVE_RECOVER",
+                "MOVE_ICY_WIND"
+            ],
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
             "species": "SPECIES_PORYGON2",
             "form": 0,
-            "level": 42,
-            "item": null,
+            "level": 47,
+            "item": "ITEM_EVERSTONE",
             "moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_SIGNAL_BEAM",
-                "MOVE_ICE_BEAM",
-                "MOVE_TRI_ATTACK"
+                "MOVE_RECOVER",
+                "MOVE_MAGIC_COAT",
+                "MOVE_DISCHARGE",
+                "MOVE_ICY_WIND"
             ],
-            "power": 0,
+            "power": 200,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PORYGON_Z",
+            "form": 0,
+            "level": 47,
+            "item": "ITEM_EVERSTONE",
+            "moves": [
+                "MOVE_TRI_ATTACK",
+                "MOVE_SHADOW_BALL",
+                "MOVE_AGILITY",
+                "MOVE_NASTY_PLOT"
+            ],
+            "power": 200,
             "ball_seal": 0
         }
     ]

@@ -1,86 +1,96 @@
 {
     "name": "Byron",
     "class": "TRAINER_CLASS_LEADER_BYRON",
-    "items": [
-        "ITEM_FULL_RESTORE",
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SKARMORY",
-            "form": 0,
-            "level": 61,
-            "item": "ITEM_NONE",
+            "species": "SPECIES_WORMADAM",
+            "form": 2,
+            "level": 65,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_NIGHT_SLASH",
-                "MOVE_DRILL_PECK",
-                "MOVE_ROCK_TOMB",
-                "MOVE_STEALTH_ROCK"
+                "MOVE_STEALTH_ROCK",
+                "MOVE_ENDEAVOR",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_SPIKES"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 24
         },
-        {
-            "species": "SPECIES_STEELIX",
-            "form": 0,
-            "level": 61,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_GYRO_BALL",
-                "MOVE_ICE_FANG",
-                "MOVE_DRAGON_BREATH",
-                "MOVE_SANDSTORM"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MAGNEZONE",
-            "form": 0,
-            "level": 62,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_FLASH_CANNON",
-                "MOVE_THUNDERBOLT",
-                "MOVE_SUPERSONIC",
-                "MOVE_THUNDER_WAVE"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_BASTIODON",
-            "form": 0,
-            "level": 63,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_METAL_BURST",
-                "MOVE_ANCIENT_POWER",
-                "MOVE_IRON_DEFENSE",
-                "MOVE_REST"
-            ],
-            "power": 200,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_AGGRON",
+		{
+            "species": "SPECIES_BRONZONG",
             "form": 0,
             "level": 65,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_METAL_BURST",
-                "MOVE_STONE_EDGE",
+                "MOVE_OVERHEAT",
                 "MOVE_EARTHQUAKE",
-                "MOVE_AVALANCHE"
+                "MOVE_SHADOW_BALL",
+                "MOVE_IMPRISON"
             ],
-            "power": 200,
+            "power": 255,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SCIZOR",
+            "form": 0,
+            "level": 65,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_BULLET_PUNCH",
+                "MOVE_U_TURN",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LUCARIO",
+            "form": 0,
+            "level": 65,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_AURA_SPHERE",
+                "MOVE_DARK_PULSE",
+                "MOVE_EXTREME_SPEED"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_REGISTEEL",
+            "form": 0,
+            "level": 65,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_JIRACHI",
+            "form": 0,
+            "level": 67,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_IRON_HEAD",
+                "MOVE_LAVA_PLUME",
+                "MOVE_REST"
+            ],
+            "power": 255,
+            "ball_seal": 24
         }
     ]
 }

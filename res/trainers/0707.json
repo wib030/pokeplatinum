@@ -3,26 +3,65 @@
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLDUCK",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ENDEAVOR",
+                "MOVE_VACUUM_WAVE",
+                "MOVE_FORESIGHT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BUNEARY",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_CHOICE_SPECS",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_OVERHEAT",
+                "MOVE_VACUUM_WAVE",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PRIMEAPE",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_FRUSTRATION",
+                "MOVE_TAUNT",
+                "MOVE_SPITE",
+                "MOVE_ENDURE"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"friendship": 0
+        },
+		{
+            "species": "SPECIES_PRIMEAPE",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_PAYBACK",
+                "MOVE_BULK_UP",
+                "MOVE_ICE_PUNCH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -3,17 +3,65 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_MEGANIUM",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_REFLECT",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_SYNTHESIS"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_JUMPLUFF",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+                "MOVE_LEECH_SEED",
+                "MOVE_TOXIC",
+                "MOVE_U_TURN"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_CASTFORM",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_HEAT_ROCK",
+            "moves": [
+                "MOVE_WEATHER_BALL",
+                "MOVE_THUNDERBOLT",
+                "MOVE_ICE_BEAM",
+                "MOVE_SOLAR_BEAM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_RAMPARDOS",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_SHELL_BELL",
+            "moves": [
+                "MOVE_HEAD_SMASH",
+                "MOVE_SHEER_COLD",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SWORDS_DANCE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

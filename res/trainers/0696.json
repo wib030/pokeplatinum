@@ -10,30 +10,45 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BASTIODON",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_TAUNT",
+                "MOVE_FACADE",
+                "MOVE_ENDURE",
+                "MOVE_PURSUIT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RAMPARDOS",
+            "species": "SPECIES_PROBOPASS",
             "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_IRON_HEAD",
+                "MOVE_PAIN_SPLIT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BRONZONG",
+            "species": "SPECIES_MANKEY",
             "form": 0,
-            "level": 53,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_ZINC",
+            "moves": [
+                "MOVE_FORESIGHT",
+                "MOVE_DEFENSE_CURL",
+                "MOVE_SMELLING_SALT",
+                "MOVE_SWAGGER"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

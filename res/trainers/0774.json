@@ -1,54 +1,53 @@
 {
-    "name": "Brian",
+    "name": "Brain",
     "class": "TRAINER_CLASS_VETERAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_TANGELA",
+            "species": "SPECIES_MANTINE",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 54,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_INGRAIN",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_ANCIENT_POWER",
-                "MOVE_TOXIC"
+                "MOVE_BULLET_SEED",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_GUNK_SHOT",
+                "MOVE_PSYBEAM"
             ],
-            "power": 100,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RAPIDASH",
+            "species": "SPECIES_CACTURNE",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 54,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_FIRE_SPIN",
-                "MOVE_STOMP",
-                "MOVE_TAKE_DOWN",
-                "MOVE_FIRE_BLAST"
+                "MOVE_PIN_MISSILE",
+                "MOVE_SEED_BOMB",
+                "MOVE_EMBARGO",
+                "MOVE_PAYBACK"
             ],
-            "power": 100,
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_FLOATZEL",
+            "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 44,
-            "item": null,
+            "level": 54,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_AQUA_JET",
-                "MOVE_WHIRLPOOL",
-                "MOVE_PURSUIT",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_OCTAZOOKA",
+                "MOVE_ICE_BEAM",
+                "MOVE_FLAMETHROWER",
+                "MOVE_FLASH_CANNON"
             ],
-            "power": 100,
+            "power": 255,
             "ball_seal": 0
         }
     ]

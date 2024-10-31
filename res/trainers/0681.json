@@ -1,28 +1,53 @@
 {
-    "name": "Marco",
+    "name": "Relaxer",
     "class": "TRAINER_CLASS_RANCHER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PONYTA",
+            "species": "SPECIES_SLAKING",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_LEMONADE",
+            "moves": [
+                "MOVE_SLACK_OFF",
+                "MOVE_YAWN",
+                "MOVE_BLOCK",
+                "MOVE_FLING"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_RAPIDASH",
+            "species": "SPECIES_SNORLAX",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SNORE",
+                "MOVE_AMNESIA",
+                "MOVE_DEFENSE_CURL"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_SLOWBRO",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_YAWN",
+                "MOVE_DISABLE",
+                "MOVE_SLACK_OFF",
+                "MOVE_BLOCK"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

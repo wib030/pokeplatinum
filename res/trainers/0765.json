@@ -3,17 +3,37 @@
     "class": "TRAINER_CLASS_YOUNGSTER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAVIA",
+            "species": "SPECIES_SKIPLOOM",
             "form": 0,
             "level": 24,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_HEAT_ROCK",
+            "moves": [
+                "MOVE_SUNNY_DAY",
+                "MOVE_ENCORE",
+                "MOVE_LEECH_SEED",
+                "MOVE_SOLAR_BEAM"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BAYLEEF",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SYNTHESIS",
+                "MOVE_TOXIC",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_SUBSTITUTE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -3,44 +3,79 @@
     "class": "TRAINER_CLASS_PARASOL_LADY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HIPPOWDON",
-            "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 4,
+            "level": 64,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_RAZOR_WIND",
+                "MOVE_NASTY_PLOT",
+                "MOVE_DISCHARGE",
+                "MOVE_OMINOUS_WIND"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_BIBAREL",
-            "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "species": "SPECIES_ROTOM",
+            "form": 1,
+            "level": 64,
+            "item": "ITEM_HEAT_ROCK",
+            "moves": [
+                "MOVE_SUNNY_DAY",
+                "MOVE_OVERHEAT",
+                "MOVE_ZAP_CANNON",
+                "MOVE_SWAGGER"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_MANTINE",
-            "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 2,
+            "level": 64,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_RAIN_DANCE",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_ZAP_CANNON",
+                "MOVE_THUNDER"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_SEAKING",
-            "form": 0,
-            "level": 50,
-            "item": null,
-            "moves": null,
-            "power": 0,
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 3,
+            "level": 64,
+            "item": "ITEM_ICY_ROCK",
+            "moves": [
+                "MOVE_HAIL",
+                "MOVE_BLIZZARD",
+                "MOVE_ZAP_CANNON",
+                "MOVE_WILL_O_WISP"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 5,
+            "level": 64,
+            "item": "ITEM_WHITE_HERB",
+            "moves": [
+                "MOVE_LEAF_STORM",
+                "MOVE_THUNDERBOLT",
+                "MOVE_NASTY_PLOT",
+                "MOVE_SHADOW_BALL"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

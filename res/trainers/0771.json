@@ -1,38 +1,40 @@
 {
-    "name": "Jared",
+    "name": "Jerk",
     "class": "TRAINER_CLASS_TUBER_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SHELLOS",
-            "form": 1,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_SHELLOS",
-            "form": 1,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_SHELLOS",
+            "species": "SPECIES_GIBLE",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 8
+            "level": 34,
+            "item": "ITEM_REPEL",
+            "moves": [
+                "MOVE_DRAGON_RAGE",
+                "MOVE_SCARY_FACE",
+                "MOVE_ATTRACT",
+                "MOVE_ROCK_SMASH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_MACHOKE",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_SHED_SHELL",
+            "moves": [
+                "MOVE_BULK_UP",
+                "MOVE_POWER_TRICK",
+                "MOVE_ATTRACT",
+                "MOVE_CAPTIVATE"
+            ],
+            "power": 255,
+            "ball_seal": 0
         }
     ]
 }

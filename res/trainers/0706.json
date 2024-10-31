@@ -3,26 +3,51 @@
     "class": "TRAINER_CLASS_LASS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PSYDUCK",
+            "species": "SPECIES_MANKEY",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ENCORE",
+                "MOVE_REVERSAL",
+                "MOVE_PAYBACK",
+                "MOVE_EARTHQUAKE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_BUNEARY",
+		{
+            "species": "SPECIES_MANKEY",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 24,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_SUBSTITUTE",
+                "MOVE_FOCUS_PUNCH",
+                "MOVE_FORESIGHT",
+                "MOVE_BULK_UP"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MANKEY",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_QUICK_CLAW",
+            "moves": [
+                "MOVE_U_TURN",
+                "MOVE_ENCORE",
+                "MOVE_TOXIC",
+                "MOVE_FIRE_PUNCH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

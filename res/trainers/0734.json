@@ -1,40 +1,54 @@
 {
-    "name": "Taylor",
+    "name": "Ryuga",
     "class": "TRAINER_CLASS_RANGER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CARNIVINE",
+            "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 60,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
+            "level": 64,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_RAPID_SPIN",
+                "MOVE_DARK_VOID",
+                "MOVE_BLAST_BURN",
+                "MOVE_AEROBLAST"
+            ],
+            "power": 255,
+            "ball_seal": 5
         },
         {
-            "species": "SPECIES_LUXRAY",
+            "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 62,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_RAPID_SPIN",
+                "MOVE_RAZOR_WIND",
+                "MOVE_MAGMA_STORM",
+                "MOVE_AURA_SPHERE"
+            ],
+            "power": 255,
+            "ball_seal": 13
         },
         {
-            "species": "SPECIES_DEWGONG",
+            "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 58,
-            "item": null,
-            "moves": null,
-            "power": 50,
-            "ball_seal": 0
+            "level": 64,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_BELLY_DRUM",
+                "MOVE_SHADOW_FORCE",
+                "MOVE_VOLT_TACKLE",
+                "MOVE_FLARE_BLITZ"
+            ],
+            "power": 255,
+            "ball_seal": 25
         }
     ]
 }

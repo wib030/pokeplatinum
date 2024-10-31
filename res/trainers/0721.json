@@ -1,9 +1,10 @@
 {
-    "name": "Danielle",
+    "name": "Pikachu",
     "class": "TRAINER_CLASS_POKE_KID",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
@@ -11,9 +12,28 @@
             "species": "SPECIES_PIKACHU",
             "form": 0,
             "level": 34,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "item": "ITEM_DAMP_ROCK",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_RAIN_DANCE",
+                "MOVE_THUNDER",
+                "MOVE_SURF"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_PIKACHU",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_LIGHT_BALL",
+            "moves": [
+                "MOVE_THUNDER",
+                "MOVE_SURF",
+                "MOVE_KNOCK_OFF",
+                "MOVE_NASTY_PLOT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

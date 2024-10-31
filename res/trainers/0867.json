@@ -1,86 +1,96 @@
 {
     "name": "Bertha",
     "class": "TRAINER_CLASS_ELITE_FOUR_BERTHA",
-    "items": [
-        "ITEM_FULL_RESTORE",
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_WHISCASH",
-            "form": 0,
-            "level": 66,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_EARTH_POWER",
-                "MOVE_AQUA_TAIL",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_SANDSTORM"
-            ],
-            "power": 250,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_GLISCOR",
-            "form": 0,
-            "level": 69,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_ICE_FANG",
-                "MOVE_FIRE_FANG",
-                "MOVE_THUNDER_FANG"
-            ],
-            "power": 250,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_HIPPOWDON",
+            "species": "SPECIES_DUSKNOIR",
             "form": 0,
             "level": 68,
-            "item": "ITEM_NONE",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_STONE_EDGE",
-                "MOVE_CRUNCH",
-                "MOVE_YAWN"
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_TAUNT",
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_SHADOW_SNEAK"
             ],
-            "power": 250,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 27
         },
-        {
-            "species": "SPECIES_GOLEM",
+		{
+            "species": "SPECIES_FLYGON",
             "form": 0,
             "level": 68,
-            "item": "ITEM_NONE",
+            "item": "ITEM_LIFE_ORB",
             "moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_OUTRAGE",
                 "MOVE_EARTHQUAKE",
-                "MOVE_FIRE_PUNCH",
-                "MOVE_THUNDER_PUNCH",
-                "MOVE_SANDSTORM"
+                "MOVE_U_TURN"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_RHYPERIOR",
+		{
+            "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 71,
-            "item": "ITEM_SITRUS_BERRY",
+            "level": 68,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_ROCK_WRECKER",
-                "MOVE_MEGAHORN",
-                "MOVE_AVALANCHE"
+                "MOVE_THUNDER",
+                "MOVE_CHARGE",
+                "MOVE_REFLECT",
+                "MOVE_DRAGON_PULSE"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_HARIYAMA",
+            "form": 0,
+            "level": 68,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_BELLY_DRUM",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_ICE_PUNCH",
+                "MOVE_THUNDER_PUNCH"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_DEOXYS",
+            "form": 2,
+            "level": 68,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+                "MOVE_PSYCHO_SHIFT",
+                "MOVE_RECOVER",
+                "MOVE_SEISMIC_TOSS"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_KYOGRE",
+            "form": 0,
+            "level": 70,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_WATER_SPOUT",
+                "MOVE_ICE_BEAM",
+                "MOVE_THUNDER",
+                "MOVE_SURF"
+            ],
+            "power": 255,
+            "ball_seal": 27
         }
     ]
 }

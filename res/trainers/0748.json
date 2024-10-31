@@ -1,37 +1,53 @@
 {
-    "name": "Zach",
+    "name": "Crozach",
     "class": "TRAINER_CLASS_NINJA_BOY",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GOLBAT",
+            "species": "SPECIES_CROBAT",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_POISON_FANG",
+                "MOVE_SUPER_FANG",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_CROBAT",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_CURSE",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_TORMENT",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_CROBAT",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_HEAT_WAVE",
+                "MOVE_AIR_SLASH",
+                "MOVE_SUPER_FANG"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -1,22 +1,45 @@
 {
-    "name": "Melissa",
+    "name": "Mei",
     "class": "TRAINER_CLASS_LADY",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CHERRIM",
+            "species": "SPECIES_SNOVER",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_NEVERMELTICE",
+            "moves": [
+                "MOVE_ICY_WIND"
+            ],
+            "power": 255,
             "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_LAPRAS",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_ICY_WIND"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_ICY_WIND"
+            ],
+            "power": 255,
+            "ball_seal": 6
         }
     ]
 }

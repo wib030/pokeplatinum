@@ -1,19 +1,23 @@
 {
-    "name": "Joseph",
+    "name": "Joe",
     "class": "TRAINER_CLASS_FISHERMAN",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SEAKING",
+            "species": "SPECIES_MARSHTOMP",
             "form": 0,
-            "level": 35,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 34,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_BIDE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

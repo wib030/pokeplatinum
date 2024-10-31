@@ -1,9 +1,7 @@
 {
-    "name": "Shaun",
+    "name": "Plug n Play",
     "class": "TRAINER_CLASS_SCIENTIST",
-    "items": [
-        "ITEM_X_ATTACK"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT"
@@ -11,21 +9,70 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNETON",
+            "species": "SPECIES_ELEKID",
             "form": 0,
-            "level": 46,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_REVIVE",
+            "moves": [
+                "MOVE_DISCHARGE",
+                "MOVE_SHOCK_WAVE",
+                "MOVE_THUNDER_SHOCK",
+                "MOVE_THUNDER_WAVE"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_KADABRA",
+		{
+            "species": "SPECIES_PINSIR",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_REVIVE",
+            "moves": [
+                "MOVE_FOCUS_ENERGY",
+                "MOVE_FLAIL",
+                "MOVE_IRON_DEFENSE",
+                "MOVE_ENDURE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 22,
+            "level": 54,
+            "item": "ITEM_REVIVE",
+            "moves": [
+                "MOVE_HIDDEN_POWER"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_ESPEON",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_REVIVE",
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_IRON_TAIL",
+                "MOVE_FLASH",
+                "MOVE_ENDURE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_BUTTERFREE",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_REVIVE",
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_IRON_DEFENSE",
+                "MOVE_ENDURE",
+                "MOVE_RAIN_DANCE"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -4,36 +4,50 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BRONZOR",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_TAUNT",
+                "MOVE_FACADE",
+                "MOVE_ENDURE",
+                "MOVE_PURSUIT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SHIELDON",
+            "species": "SPECIES_PROBOPASS",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_IRON_HEAD",
+                "MOVE_PAIN_SPLIT"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CRANIDOS",
+            "species": "SPECIES_MANKEY",
             "form": 0,
-            "level": 41,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_ZINC",
+            "moves": [
+                "MOVE_FORESIGHT",
+                "MOVE_DEFENSE_CURL",
+                "MOVE_SMELLING_SALT",
+                "MOVE_SWAGGER"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

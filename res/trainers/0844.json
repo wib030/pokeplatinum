@@ -1,28 +1,53 @@
 {
-    "name": "Dillan",
+    "name": "Middle",
     "class": "TRAINER_CLASS_WORKER",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_PUPITAR",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+                "MOVE_TOXIC",
+                "MOVE_EARTHQUAKE",
+                "MOVE_REST"
+            ],
+            "power": 160,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHOKE",
+            "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 40,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_WISH",
+                "MOVE_TOXIC",
+                "MOVE_ROAR",
+                "MOVE_DRAGON_CLAW"
+            ],
+            "power": 160,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_MAGMAR",
+            "form": 0,
+            "level": 40,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_LAVA_PLUME",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_MORNING_SUN",
+                "MOVE_BARRIER"
+            ],
+            "power": 160,
             "ball_seal": 0
         }
     ]

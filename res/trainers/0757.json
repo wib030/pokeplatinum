@@ -1,19 +1,39 @@
 {
-    "name": "Madison",
+    "name": "Basketball",
     "class": "TRAINER_CLASS_SKIER_FEMALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SNORUNT",
+            "species": "SPECIES_ELECTRODE",
             "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 54,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_ROLLOUT",
+                "MOVE_GYRO_BALL",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_MAGNET_RISE"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GLALIE",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_GYRO_BALL",
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_BLOCK",
+                "MOVE_DEFENSE_CURL"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

@@ -1,28 +1,53 @@
 {
-    "name": "Danny",
-    "class": "TRAINER_CLASS_POLICEMAN",
+    "name": "Kickstarter",
+    "class": "TRAINER_CLASS_CYCLIST_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_NOCTOWL",
+            "species": "SPECIES_HITMONLEE",
             "form": 0,
-            "level": 51,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_HI_JUMP_KICK",
+                "MOVE_ROLLING_KICK",
+                "MOVE_BLAZE_KICK",
+                "MOVE_LOW_KICK"
+            ],
+            "power": 255,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_MACHAMP",
+            "species": "SPECIES_STARMIE",
             "form": 0,
-            "level": 53,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 64,
+            "item": "ITEM_STARF_BERRY",
+            "moves": [
+                "MOVE_SWIFT",
+                "MOVE_WISH",
+                "MOVE_NATURAL_GIFT",
+                "MOVE_COSMIC_POWER"
+            ],
+            "power": 255,
+            "ball_seal": 10
+        },
+		{
+            "species": "SPECIES_TORKOAL",
+            "form": 0,
+            "level": 64,
+            "item": "ITEM_FRESH_WATER",
+            "moves": [
+                "MOVE_RETURN",
+                "MOVE_SECRET_POWER",
+                "MOVE_ENDURE",
+                "MOVE_ROLLOUT"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]
