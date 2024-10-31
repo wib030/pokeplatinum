@@ -47,9 +47,9 @@ FlagTable:
     LabelDistance Terminate,           FlagTable ; AI_FLAG_UNUSED_23
     LabelDistance Terminate,           FlagTable ; AI_FLAG_UNUSED_24
     LabelDistance Terminate,           FlagTable ; AI_FLAG_UNUSED_25
-    LabelDistance Terminate,           FlagTable ; AI_FLAG_UNUSED_26
-    LabelDistance Terminate,           FlagTable ; AI_FLAG_UNUSED_27
-    LabelDistance Terminate,           FlagTable ; AI_FLAG_UNUSED_28
+    LabelDistance Terminate,           FlagTable ; AI_FLAG_JOKE
+    LabelDistance Terminate,           FlagTable ; AI_FLAG_PRESCIENT
+    LabelDistance Terminate,           FlagTable ; AI_FLAG_OMNISCIENT
     LabelDistance RoamingPokemon_Main, FlagTable ; AI_FLAG_ROAMING_POKEMON
     LabelDistance Safari_Main,         FlagTable ; AI_FLAG_SAFARI
     LabelDistance CatchTutorial_Main,  FlagTable ; AI_FLAG_CATCH_TUTORIAL

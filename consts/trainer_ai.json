@@ -70,9 +70,9 @@
                 "AI_FLAG_UNUSED_23",
                 "AI_FLAG_UNUSED_24",
                 "AI_FLAG_UNUSED_25",
-                "AI_FLAG_UNUSED_26",
-                "AI_FLAG_UNUSED_27",
-                "AI_FLAG_UNUSED_28",
+                "AI_FLAG_JOKE",
+                "AI_FLAG_PRESCIENT",
+                "AI_FLAG_OMNISCIENT",
                 "AI_FLAG_ROAMING_POKEMON",
                 "AI_FLAG_SAFARI",
                 "AI_FLAG_CATCH_TUTORIAL"
