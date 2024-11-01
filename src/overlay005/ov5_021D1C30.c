@@ -986,7 +986,7 @@ static BOOL ov5_021D2B94 (FieldSystem * fieldSystem)
     case 2:
         ov5_021EF518(fieldSystem->unk_04->unk_20);
         sub_0203E880(fieldSystem, 2003, NULL);
-        return 1;
+        return 0;
     }
 
     return 0;
