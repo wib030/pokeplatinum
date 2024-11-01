@@ -63,7 +63,7 @@ enum CheckLevel {
 #define AI_FLAG_UNUSED_23 (1 << 23)
 #define AI_FLAG_UNUSED_24 (1 << 24)
 #define AI_FLAG_UNUSED_25 (1 << 25)
-#define AI_FLAG_UNUSED_26 (1 << 26)
+#define AI_FLAG_JOKE (1 << 26)
 #define AI_FLAG_PRESCIENT (1 << 27)
 #define AI_FLAG_OMNISCIENT (1 << 28)
 #define AI_FLAG_ROAMING_POKEMON (1 << 29)
