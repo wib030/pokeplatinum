@@ -972,6 +972,7 @@ static BOOL ov5_021D2B94 (FieldSystem * fieldSystem)
 
     (*v1)++;
     (*v1) %= 4;
+    (*v1) = 0;
 
     if (*v1 != 0) {
         return 0;
