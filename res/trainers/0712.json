@@ -20,7 +20,8 @@
                 "MOVE_SAND_ATTACK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_PINECO",
@@ -34,7 +35,8 @@
                 "MOVE_EXPLOSION"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
 		{
             "species": "SPECIES_SHEDINJA",
@@ -48,7 +50,8 @@
                 "MOVE_WILL_O_WISP"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

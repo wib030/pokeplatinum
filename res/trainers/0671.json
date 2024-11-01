@@ -18,7 +18,8 @@
                 "MOVE_LAST_RESORT"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_CARNIVINE",
@@ -32,7 +33,8 @@
                 "MOVE_SLUDGE_BOMB"
             ],
             "power": 255,
-            "ball_seal": 19
+            "ball_seal": 19,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_FLAREON",
@@ -46,7 +48,8 @@
                 "MOVE_WILL_O_WISP"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_VAPOREON",
@@ -60,7 +63,8 @@
                 "MOVE_ICY_WIND"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_ESPEON",
@@ -74,7 +78,8 @@
                 "MOVE_SAND_ATTACK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_UMBREON",
@@ -88,7 +93,8 @@
                 "MOVE_PURSUIT"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

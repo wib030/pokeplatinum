@@ -20,7 +20,8 @@
 				"MOVE_STEALTH_ROCK"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_LEAFEON",
@@ -34,7 +35,8 @@
 				"MOVE_SYNTHESIS"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_FLAREON",
@@ -48,7 +50,8 @@
 				"MOVE_FLAMETHROWER"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

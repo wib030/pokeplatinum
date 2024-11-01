@@ -20,7 +20,8 @@
                 "MOVE_GRUDGE"
             ],
             "power": 200,
-            "ball_seal": 9
+            "ball_seal": 9,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_WORMADAM",
@@ -34,7 +35,8 @@
                 "MOVE_SUCKER_PUNCH"
             ],
             "power": 200,
-            "ball_seal": 9
+            "ball_seal": 9,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_MR_MIME",
@@ -48,7 +50,8 @@
                 "MOVE_FLING"
             ],
             "power": 200,
-            "ball_seal": 15
+            "ball_seal": 15,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

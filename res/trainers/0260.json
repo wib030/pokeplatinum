@@ -19,7 +19,8 @@
 				"MOVE_STUN_SPORE"
             ],
             "power": 20,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_HEAL_BALL"
         }
     ]
 }

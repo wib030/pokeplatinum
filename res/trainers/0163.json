@@ -20,7 +20,8 @@
 				"MOVE_SWEET_KISS"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_ROTOM",
@@ -34,7 +35,8 @@
 				"MOVE_DISCHARGE"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_VAPOREON",
@@ -48,7 +50,8 @@
 				"MOVE_MUDDY_WATER"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_LANTURN",
@@ -62,7 +65,8 @@
 				"MOVE_SURF"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

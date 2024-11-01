@@ -20,7 +20,8 @@
                 "MOVE_ICE_PUNCH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_HITMONTOP",
@@ -34,7 +35,8 @@
                 "MOVE_ROCK_SLIDE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_LUCARIO",
@@ -48,7 +50,8 @@
                 "MOVE_FLASH_CANNON"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

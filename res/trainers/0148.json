@@ -20,7 +20,8 @@
 				"MOVE_ATTRACT"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_LUDICOLO",
@@ -34,7 +35,8 @@
 				"MOVE_TICKLE"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SCIZOR",
@@ -48,7 +50,8 @@
 				"MOVE_PURSUIT"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

@@ -1,22 +1,102 @@
 {
-    "name": "Liam",
+    "name": "SkarmBliss",
     "class": "TRAINER_CLASS_RICH_BOY",
-    "items": [
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_TENTACRUEL",
+            "form": 0,
+            "level": 33,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_RAPID_SPIN",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_HAZE"
+            ],
+            "power": 255,
+            "ball_seal": 6,
+			"ball_type": "ITEM_LUXURY_BALL"
+        },
+		{
+            "species": "SPECIES_GLISCOR",
+            "form": 0,
+            "level": 33,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+                "MOVE_ROOST",
+                "MOVE_KNOCK_OFF",
+                "MOVE_U_TURN"
+            ],
+            "power": 255,
+            "ball_seal": 6,
+			"ball_type": "ITEM_LUXURY_BALL"
+        },
+		{
+            "species": "SPECIES_WIGGLYTUFF",
+            "form": 0,
+            "level": 33,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_COSMIC_POWER",
+                "MOVE_WISH",
+                "MOVE_SUBSTITUTE",
+                "MOVE_BODY_SLAM"
+            ],
+            "power": 255,
+            "ball_seal": 6,
+			"ball_type": "ITEM_LUXURY_BALL"
+        },
+		{
+            "species": "SPECIES_SKARMORY",
+            "form": 0,
+            "level": 33,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SPIKES",
+                "MOVE_WHIRLWIND",
+                "MOVE_ROOST",
+                "MOVE_DRILL_PECK"
+            ],
+            "power": 255,
+            "ball_seal": 6,
+			"ball_type": "ITEM_LUXURY_BALL"
+        },
+		{
+            "species": "SPECIES_ROSERADE",
+            "form": 0,
+            "level": 33,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_LEECH_SEED",
+                "MOVE_SUBSTITUTE",
+                "MOVE_MEGA_DRAIN",
+                "MOVE_GROWTH"
+            ],
+            "power": 255,
+            "ball_seal": 6,
+			"ball_type": "ITEM_LUXURY_BALL"
+        },
+		{
             "species": "SPECIES_BLISSEY",
             "form": 0,
             "level": 35,
-            "item": "ITEM_RARE_CANDY",
-            "moves": null,
-            "power": 250,
-            "ball_seal": 26
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MINIMIZE",
+                "MOVE_SOFTBOILED",
+                "MOVE_AROMATHERAPY",
+                "MOVE_SEISMIC_TOSS"
+            ],
+            "power": 255,
+            "ball_seal": 26,
+			"ball_type": "ITEM_LUXURY_BALL"
         }
     ]
 }

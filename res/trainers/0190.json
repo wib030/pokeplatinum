@@ -20,7 +20,8 @@
 				"MOVE_REST"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_WAILORD",
@@ -34,7 +35,8 @@
 				"MOVE_GROWL"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_BLISSEY",
@@ -48,7 +50,8 @@
 				"MOVE_MINIMIZE"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_BRONZONG",
@@ -62,7 +65,8 @@
 				"MOVE_CALM_MIND"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_MILTANK",
@@ -76,7 +80,8 @@
 				"MOVE_MILK_DRINK"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_SNORLAX",
@@ -90,7 +95,8 @@
 				"MOVE_REST"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

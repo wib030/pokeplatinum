@@ -11,7 +11,7 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MILTANK",
             "form": 0,
             "level": 26,
             "item": "ITEM_MOOMOO_MILK",

@@ -20,7 +20,8 @@
 				"MOVE_AQUA_TAIL"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_WAILORD",
@@ -34,7 +35,8 @@
 				"MOVE_BOUNCE"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

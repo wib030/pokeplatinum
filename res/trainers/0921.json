@@ -1,58 +1,102 @@
 {
     "name": "Volkner",
     "class": "TRAINER_CLASS_LEADER_VOLKNER",
-    "items": [
-        "ITEM_FULL_RESTORE",
-        "ITEM_FULL_RESTORE"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_RAICHU",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_THUNDERBOLT",
+                "MOVE_ENCORE",
+                "MOVE_NASTY_PLOT"
+            ],
+            "power": 255,
+            "ball_seal": 4,
+			"ball_type": "ITEM_QUICK_BALL"
+        },
+		{
+            "species": "SPECIES_LANTURN",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_ICY_WIND",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_STOCKPILE"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL"
+        },
+		{
+            "species": "SPECIES_AMPHAROS",
+            "form": 0,
+            "level": 62,
+            "item": "ITEM_WHITE_HERB",
+            "moves": [
+                "MOVE_DRACO_METEOR",
+                "MOVE_ZAP_CANNON",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_MORNING_SUN"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL"
+        },
+		{
             "species": "SPECIES_LUXRAY",
             "form": 0,
-            "level": 56,
-            "item": "ITEM_NONE",
+            "level": 62,
+            "item": "ITEM_FLAME_ORB",
             "moves": [
-                "MOVE_ICE_FANG",
-                "MOVE_THUNDER_FANG",
+                "MOVE_VOLT_TACKLE",
                 "MOVE_CRUNCH",
-                "MOVE_FIRE_FANG"
+                "MOVE_SCARY_FACE",
+                "MOVE_SUPERPOWER"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL"
         },
-        {
-            "species": "SPECIES_JOLTEON",
-            "form": 0,
-            "level": 56,
-            "item": "ITEM_NONE",
+		{
+            "species": "SPECIES_ROTOM",
+            "form": 1,
+            "level": 62,
+            "item": "ITEM_LIGHT_CLAY",
             "moves": [
-                "MOVE_PIN_MISSILE",
-                "MOVE_CHARGE_BEAM",
-                "MOVE_DOUBLE_KICK",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_OVERHEAT",
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_ZAP_CANNON"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL"
         },
-        {
+		{
             "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 58,
-            "item": "ITEM_SITRUS_BERRY",
+            "level": 63,
+            "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_THUNDER_PUNCH",
-                "MOVE_FIRE_PUNCH",
-                "MOVE_BRICK_BREAK",
-                "MOVE_GIGA_IMPACT"
+                "MOVE_ROCK_SLIDE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_BULK_UP",
+                "MOVE_THUNDER_PUNCH"
             ],
-            "power": 200,
-            "ball_seal": 14
+            "power": 255,
+            "ball_seal": 4,
+			"ball_type": "ITEM_QUICK_BALL"
         }
     ]
 }

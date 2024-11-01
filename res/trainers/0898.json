@@ -1,25 +1,26 @@
 {
-    "name": "Sophie",
-    "class": "TRAINER_CLASS_MAID",
+    "name": "Sleeper",
+    "class": "TRAINER_CLASS_WAITRESS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 27,
-            "item": null,
+            "level": 30,
+            "item": "ITEM_NONE",
             "moves": [
-                "MOVE_METRONOME",
                 "MOVE_SING",
-                "MOVE_METEOR_MASH",
-                "MOVE_ENDURE"
+                "MOVE_WAKE_UP_SLAP",
+                "MOVE_NIGHTMARE",
+                "MOVE_DREAM_EATER"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 6
         }
     ]
 }

@@ -20,7 +20,8 @@
                 "MOVE_DESTINY_BOND"
             ],
             "power": 255,
-            "ball_seal": 3
+            "ball_seal": 3,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_DUSKNOIR",
@@ -34,7 +35,8 @@
                 "MOVE_ICE_PUNCH"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_SABLEYE",
@@ -48,7 +50,8 @@
                 "MOVE_KNOCK_OFF"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_BANETTE",
@@ -59,7 +62,8 @@
                 "MOVE_SHADOW_SNEAK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_MISMAGIUS",
@@ -73,7 +77,8 @@
                 "MOVE_ENERGY_BALL"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_DARKRAI",
@@ -87,7 +92,8 @@
                 "MOVE_FOCUS_BLAST"
             ],
             "power": 255,
-            "ball_seal": 3
+            "ball_seal": 3,
+			"ball_type": "ITEM_DUSK_BALL"
         }
     ]
 }

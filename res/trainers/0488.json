@@ -19,7 +19,8 @@
                 "MOVE_ROCK_SMASH"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_SCYTHER",
@@ -31,7 +32,8 @@
                 "MOVE_FURY_CUTTER"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

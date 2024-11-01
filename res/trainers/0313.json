@@ -20,7 +20,8 @@
 				"MOVE_SAFEGUARD"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_WOBBUFFET",
@@ -34,7 +35,8 @@
 				"MOVE_ENCORE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
                 "MOVE_HAZE"
             ],
             "power": 255,
-            "ball_seal": 23
+            "ball_seal": 23,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_MAMOSWINE",
@@ -34,7 +35,8 @@
                 "MOVE_SHEER_COLD"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_ABOMASNOW",
@@ -48,7 +50,8 @@
                 "MOVE_BLIZZARD"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_GLACEON",
@@ -61,7 +64,8 @@
                 "MOVE_MUD_SHOT"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_WEAVILE",
@@ -75,7 +79,8 @@
                 "MOVE_BRICK_BREAK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_REGICE",
@@ -89,7 +94,8 @@
                 "MOVE_REST"
             ],
             "power": 255,
-            "ball_seal": 23
+            "ball_seal": 23,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
 				"MOVE_BITE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_MIGHTYENA",
@@ -34,7 +35,8 @@
 				"MOVE_POISON_FANG"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_MIGHTYENA",
@@ -48,7 +50,8 @@
 				"MOVE_HOWL"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

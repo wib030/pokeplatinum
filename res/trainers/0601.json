@@ -17,7 +17,8 @@
                 "MOVE_TRANSFORM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_DITTO",
@@ -28,7 +29,8 @@
                 "MOVE_TRANSFORM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_DITTO",
@@ -39,7 +41,8 @@
                 "MOVE_TRANSFORM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_DITTO",
@@ -50,7 +53,8 @@
                 "MOVE_TRANSFORM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_DITTO",
@@ -61,7 +65,8 @@
                 "MOVE_TRANSFORM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_DITTO",
@@ -72,7 +77,8 @@
                 "MOVE_TRANSFORM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

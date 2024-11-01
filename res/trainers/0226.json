@@ -20,7 +20,8 @@
 				"MOVE_DESTINY_BOND"
             ],
             "power": 255,
-            "ball_seal": 7
+            "ball_seal": 7,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_CRAWDAUNT",
@@ -34,7 +35,8 @@
 				"MOVE_DRAGON_DANCE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_FEAROW",
@@ -48,7 +50,8 @@
 				"MOVE_ROOST"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_LUXRAY",
@@ -62,7 +65,8 @@
 				"MOVE_ICE_FANG"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_HOUNDOOM",
@@ -76,7 +80,8 @@
 				"MOVE_SUCKER_PUNCH"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_ABSOL",
@@ -90,7 +95,8 @@
 				"MOVE_CRUNCH"
             ],
             "power": 255,
-            "ball_seal": 7
+            "ball_seal": 7,
+			"ball_type": "ITEM_DUSK_BALL"
         }
     ]
 }

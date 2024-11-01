@@ -20,7 +20,8 @@
 				"MOVE_PURSUIT"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SUDOWOODO",
@@ -34,7 +35,8 @@
 				"MOVE_PSYCH_UP"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_KANGASKHAN",
@@ -48,7 +50,8 @@
 				"MOVE_COMET_PUNCH"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_URSARING",
@@ -62,7 +65,8 @@
 				"MOVE_FURY_SWIPES"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_LARVITAR",
@@ -76,7 +80,8 @@
 				"MOVE_IRON_HEAD"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_ARCANINE",
@@ -90,7 +95,8 @@
 				"MOVE_BODY_SLAM"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

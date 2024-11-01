@@ -17,7 +17,8 @@
                 "MOVE_ACUPRESSURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_SHUCKLE",
@@ -28,7 +29,8 @@
                 "MOVE_ACUPRESSURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_TENTACRUEL",
@@ -39,7 +41,8 @@
                 "MOVE_ACUPRESSURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_DODRIO",
@@ -50,7 +53,8 @@
                 "MOVE_ACUPRESSURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_TENTACRUEL",
@@ -61,7 +65,8 @@
                 "MOVE_ACUPRESSURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_DRAPION",
@@ -72,7 +77,8 @@
                 "MOVE_ACUPRESSURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

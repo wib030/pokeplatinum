@@ -20,7 +20,8 @@
 				"MOVE_ATTRACT"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_MACHOKE",
@@ -34,7 +35,8 @@
 				"MOVE_CAPTIVATE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

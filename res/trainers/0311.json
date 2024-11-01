@@ -20,7 +20,8 @@
 				"MOVE_PAYBACK"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_MANKEY",
@@ -34,7 +35,8 @@
 				"MOVE_SPITE"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

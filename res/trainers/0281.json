@@ -20,7 +20,8 @@
 				"MOVE_UPROAR"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_RAICHU",
@@ -34,7 +35,8 @@
 				"MOVE_ROLLOUT"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

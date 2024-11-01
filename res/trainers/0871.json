@@ -9,94 +9,93 @@
     ],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
         "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARAPTOR",
+            "species": "SPECIES_DIALGA",
             "form": 0,
-            "level": 81,
-            "item": "ITEM_NONE",
+            "level": 96,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_CLOSE_COMBAT",
-                "MOVE_BRAVE_BIRD",
-                "MOVE_QUICK_ATTACK",
-                "MOVE_U_TURN"
+                "MOVE_STEALTH_ROCK",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_THUNDERBOLT",
+                "MOVE_ROAR"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_FLOATZEL",
+		{
+            "species": "SPECIES_PALKIA",
             "form": 0,
-            "level": 79,
-            "item": "ITEM_NONE",
+            "level": 96,
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_AQUA_JET",
-                "MOVE_CRUNCH",
-                "MOVE_ICE_FANG",
-                "MOVE_BRICK_BREAK"
+                "MOVE_SPACIAL_REND",
+                "MOVE_SURF",
+                "MOVE_THUNDER",
+                "MOVE_FIRE_BLAST"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_HERACROSS",
+		{
+            "species": "SPECIES_HO_OH",
             "form": 0,
-            "level": 81,
-            "item": "ITEM_NONE",
+            "level": 96,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_MEGAHORN",
-                "MOVE_CLOSE_COMBAT",
-                "MOVE_NIGHT_SLASH",
-                "MOVE_STONE_EDGE"
+                "MOVE_TOXIC",
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_SACRED_FIRE",
+                "MOVE_ROOST"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_RAPIDASH",
+		{
+            "species": "SPECIES_LUGIA",
             "form": 0,
-            "level": 79,
-            "item": "ITEM_NONE",
+            "level": 96,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_FIRE_BLAST",
-                "MOVE_SUNNY_DAY",
-                "MOVE_MEGAHORN",
+                "MOVE_TOXIC",
+                "MOVE_REFLECT",
+                "MOVE_AEROBLAST",
+                "MOVE_ROOST"
+            ],
+            "power": 255,
+            "ball_seal": 0
+        },
+		{
+            "species": "SPECIES_GIRATINA",
+            "form": 0,
+            "level": 96,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_REST",
                 "MOVE_WILL_O_WISP"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
         },
-        {
-            "species": "SPECIES_SNORLAX",
+		{
+            "species": "SPECIES_ARCEUS",
             "form": 0,
-            "level": 83,
-            "item": "ITEM_NONE",
+            "level": 99,
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_GIGA_IMPACT",
-                "MOVE_CRUNCH",
-                "MOVE_EARTHQUAKE",
-                "MOVE_ZEN_HEADBUTT"
+                "MOVE_SWORDS_DANCE",
+                "MOVE_EXTREME_SPEED",
+                "MOVE_SHADOW_CLAW",
+                "MOVE_OVERHEAT"
             ],
-            "power": 250,
+            "power": 255,
             "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_TORTERRA",
-            "form": 0,
-            "level": 85,
-            "item": "ITEM_SITRUS_BERRY",
-            "moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_EARTHQUAKE",
-                "MOVE_CRUNCH",
-                "MOVE_STONE_EDGE"
-            ],
-            "power": 250,
-            "ball_seal": 24
         }
     ]
 }

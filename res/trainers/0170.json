@@ -20,7 +20,8 @@
 				"MOVE_BATON_PASS"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_FURRET",
@@ -34,7 +35,8 @@
 				"MOVE_ME_FIRST"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_VAPOREON",
@@ -48,7 +50,8 @@
 				"MOVE_WISH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_SHUCKLE",
@@ -62,7 +65,8 @@
 				"MOVE_ROCK_SLIDE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

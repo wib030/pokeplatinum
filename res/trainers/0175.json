@@ -20,7 +20,8 @@
 				"MOVE_BUG_BITE"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_WEEDLE",
@@ -33,7 +34,8 @@
 				"MOVE_BUG_BITE"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_CATERPIE",
@@ -47,7 +49,8 @@
 				"MOVE_SNORE"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
 		{
             "species": "SPECIES_BURMY",
@@ -61,7 +64,8 @@
 				"MOVE_TACKLE"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

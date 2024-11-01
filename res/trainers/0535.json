@@ -20,7 +20,8 @@
                 "MOVE_MUD_SHOT"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_HEAL_BALL"
         },
 		{
             "species": "SPECIES_WEAVILE",
@@ -34,7 +35,8 @@
                 "MOVE_BITE"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_HEAL_BALL"
         }
     ]
 }

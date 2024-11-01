@@ -18,7 +18,8 @@
                 "MOVE_NIGHT_SLASH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SKUNTANK",
@@ -30,7 +31,8 @@
                 "MOVE_NIGHT_SLASH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_ABSOL",
@@ -42,7 +44,8 @@
                 "MOVE_NIGHT_SLASH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_SHEDINJA",
@@ -54,7 +57,8 @@
                 "MOVE_NIGHT_SLASH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

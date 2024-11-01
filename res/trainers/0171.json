@@ -20,7 +20,8 @@
 				"MOVE_EARTHQUAKE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_QWILFISH",
@@ -34,7 +35,8 @@
 				"MOVE_WATERFALL"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_CACNEA",
@@ -48,7 +50,8 @@
 				"MOVE_DARK_PULSE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

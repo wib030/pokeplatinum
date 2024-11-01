@@ -1,46 +1,23 @@
 {
-    "name": "Tevin",
-    "class": "TRAINER_CLASS_CAMERAMAN",
+    "name": "Kaiji",
+    "class": "TRAINER_CLASS_PI",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_HITMONCHAN",
             "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MAGNETON",
-            "form": 0,
-            "level": 42,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MR_MIME",
-            "form": 0,
-            "level": 43,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MACHOKE",
-            "form": 0,
-            "level": 45,
-            "item": null,
-            "moves": null,
-            "power": 0,
+            "level": 32,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_DYNAMIC_PUNCH"
+            ],
+            "power": 255,
             "ball_seal": 0
         }
     ]

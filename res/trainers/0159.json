@@ -20,7 +20,8 @@
 				"MOVE_WILL_O_WISP"
             ],
             "power": 200,
-            "ball_seal": 8
+            "ball_seal": 8,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_CHARIZARD",
@@ -34,7 +35,8 @@
 				"MOVE_QUICK_ATTACK"
             ],
             "power": 200,
-            "ball_seal": 8
+            "ball_seal": 8,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_TYPHLOSION",
@@ -48,7 +50,8 @@
 				"MOVE_DIG"
             ],
             "power": 200,
-            "ball_seal": 8
+            "ball_seal": 8,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_INFERNAPE",
@@ -62,7 +65,8 @@
 				"MOVE_PUNISHMENT"
             ],
             "power": 200,
-            "ball_seal": 8
+            "ball_seal": 8,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

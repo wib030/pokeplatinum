@@ -20,7 +20,8 @@
 				"MOVE_HYPER_VOICE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SPINDA",
@@ -34,7 +35,8 @@
 				"MOVE_ENCORE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_CLEFABLE",
@@ -48,7 +50,8 @@
 				"MOVE_UPROAR"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_MAROWAK",
@@ -62,7 +65,8 @@
 				"MOVE_PERISH_SONG"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_KANGASKHAN",
@@ -76,7 +80,8 @@
 				"MOVE_EARTHQUAKE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
 				"MOVE_SEED_BOMB"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_AIPOM",
@@ -34,7 +35,8 @@
 				"MOVE_BEAT_UP"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_MEOWTH",
@@ -48,7 +50,8 @@
 				"MOVE_NIGHT_SLASH"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_SNEASEL",
@@ -62,7 +65,8 @@
 				"MOVE_POISON_JAB"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

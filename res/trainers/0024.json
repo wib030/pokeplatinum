@@ -17,8 +17,9 @@
                 "MOVE_DEFENSE_CURL",
 				"MOVE_ROLLOUT"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 50,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_SPHEAL",
@@ -29,8 +30,9 @@
                 "MOVE_DEFENSE_CURL",
 				"MOVE_ROLLOUT"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 50,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_WAILMER",
@@ -41,8 +43,9 @@
                 "MOVE_DEFENSE_CURL",
 				"MOVE_ROLLOUT"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 50,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

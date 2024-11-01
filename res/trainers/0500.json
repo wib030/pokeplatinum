@@ -20,7 +20,8 @@
                 "MOVE_SHADOW_CLAW"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
         {
             "species": "SPECIES_ZANGOOSE",
@@ -34,7 +35,8 @@
                 "MOVE_LAST_RESORT"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
         {
             "species": "SPECIES_FLYGON",
@@ -48,7 +50,8 @@
                 "MOVE_FIRE_PUNCH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         }
     ]
 }

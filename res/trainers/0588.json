@@ -20,7 +20,8 @@
                 "MOVE_SWORDS_DANCE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_GLACEON",
@@ -34,7 +35,8 @@
                 "MOVE_SWIFT"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_POLIWRATH",
@@ -48,7 +50,8 @@
                 "MOVE_DOUBLE_SLAP"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_ROSERADE",
@@ -62,7 +65,8 @@
                 "MOVE_MAGICAL_LEAF"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

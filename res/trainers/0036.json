@@ -20,7 +20,8 @@
 				"MOVE_ACUPRESSURE"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_TENTACOOL",
@@ -34,7 +35,8 @@
 				"MOVE_WHIRLPOOL"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_TENTACOOL",
@@ -48,7 +50,8 @@
 				"MOVE_ATTRACT"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_TENTACOOL",
@@ -62,7 +65,8 @@
 				"MOVE_SNORE"
             ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         }
     ]
 }

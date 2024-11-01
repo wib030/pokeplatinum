@@ -20,7 +20,8 @@
 				"MOVE_MILK_DRINK"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_MILTANK",
@@ -34,7 +35,8 @@
 				"MOVE_MILK_DRINK"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_MILTANK",
@@ -48,7 +50,8 @@
 				"MOVE_HAMMER_ARM"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_MILTANK",
@@ -59,7 +62,8 @@
                 "MOVE_BIDE"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
 				"MOVE_AQUA_TAIL"
             ],
             "power": 200,
-            "ball_seal": 10
+            "ball_seal": 10,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_SLOWKING",
@@ -34,7 +35,8 @@
 				"MOVE_DREAM_EATER"
             ],
             "power": 200,
-            "ball_seal": 10
+            "ball_seal": 10,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_KINGLER",
@@ -48,7 +50,8 @@
 				"MOVE_AGILITY"
             ],
             "power": 200,
-            "ball_seal": 10
+            "ball_seal": 10,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_KINGDRA",
@@ -62,7 +65,8 @@
 				"MOVE_BOUNCE"
             ],
             "power": 200,
-            "ball_seal": 10
+            "ball_seal": 10,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

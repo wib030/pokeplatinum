@@ -17,7 +17,8 @@
                 "MOVE_THUNDER_PUNCH"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_MAGMORTAR",
@@ -28,7 +29,8 @@
                 "MOVE_FIRE_PUNCH"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_HITMONCHAN",
@@ -39,7 +41,8 @@
                 "MOVE_MACH_PUNCH"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_LEDIAN",
@@ -50,7 +53,8 @@
                 "MOVE_COMET_PUNCH"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_MACHAMP",
@@ -62,7 +66,8 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ability": 1
+			"ability": 1,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_GASTLY",
@@ -73,7 +78,8 @@
                 "MOVE_ICE_PUNCH"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

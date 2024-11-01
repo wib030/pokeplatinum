@@ -20,7 +20,8 @@
 				"MOVE_KNOCK_OFF"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_LUMINEON",
@@ -34,7 +35,8 @@
 				"MOVE_SPLASH"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_LANTURN",
@@ -48,7 +50,8 @@
 				"MOVE_SWALLOW"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

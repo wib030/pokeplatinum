@@ -19,7 +19,8 @@
 				"MOVE_ROCK_SMASH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

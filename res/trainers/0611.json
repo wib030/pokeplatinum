@@ -19,7 +19,8 @@
                 "MOVE_TEETER_DANCE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_BLISSEY",
@@ -31,7 +32,8 @@
                 "MOVE_RECYCLE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_JIRACHI",
@@ -43,7 +45,8 @@
                 "MOVE_RECYCLE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_GENGAR",
@@ -54,7 +57,8 @@
                 "MOVE_PERISH_SONG"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_REGISTEEL",
@@ -65,7 +69,8 @@
                 "MOVE_EXPLOSION"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_WIGGLYTUFF",
@@ -76,7 +81,8 @@
                 "MOVE_PAIN_SPLIT"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         }
     ]
 }

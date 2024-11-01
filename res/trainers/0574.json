@@ -20,7 +20,8 @@
                 "MOVE_LEECH_LIFE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_NIDOQUEEN",
@@ -34,7 +35,8 @@
                 "MOVE_ROAR"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_ARBOK",
@@ -48,7 +50,8 @@
                 "MOVE_WRAP"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_SWALOT",
@@ -62,7 +65,8 @@
                 "MOVE_RECOVER"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

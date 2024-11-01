@@ -17,7 +17,8 @@
                 "MOVE_HIDDEN_POWER"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_UNOWN",
@@ -28,7 +29,8 @@
                 "MOVE_HIDDEN_POWER"
             ],
             "power": 254,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_UNOWN",
@@ -39,7 +41,8 @@
                 "MOVE_HIDDEN_POWER"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_UNOWN",
@@ -50,7 +53,8 @@
                 "MOVE_HIDDEN_POWER"
             ],
             "power": 254,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_UNOWN",
@@ -64,7 +68,8 @@
 				"MOVE_SPLASH"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_UNOWN",
@@ -78,7 +83,8 @@
 				"MOVE_SPLASH"
             ],
             "power": 254,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

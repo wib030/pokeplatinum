@@ -17,7 +17,8 @@
                 "MOVE_DESTINY_BOND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_FROSLASS",
@@ -28,7 +29,8 @@
                 "MOVE_DESTINY_BOND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_GENGAR",
@@ -39,7 +41,8 @@
                 "MOVE_DESTINY_BOND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
 				"MOVE_MEDITATE"
             ],
             "power": 100,
-            "ball_seal": 23
+            "ball_seal": 23,
+			"ball_type": "ITEM_LUXURY_BALL"
         },
 		{
             "species": "SPECIES_PACHIRISU",
@@ -34,7 +35,8 @@
 				"MOVE_PROTECT"
             ],
             "power": 100,
-            "ball_seal": 23
+            "ball_seal": 23,
+			"ball_type": "ITEM_LUXURY_BALL"
         }
     ]
 }

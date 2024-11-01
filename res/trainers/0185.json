@@ -20,7 +20,8 @@
 				"MOVE_U_TURN"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_KINGDRA",
@@ -34,7 +35,8 @@
 				"MOVE_SIGNAL_BEAM"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

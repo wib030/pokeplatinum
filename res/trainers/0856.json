@@ -20,7 +20,8 @@
                 "MOVE_SPIKES"
             ],
             "power": 255,
-            "ball_seal": 24
+            "ball_seal": 24,
+			"ball_type": "ITEM_TIMER_BALL"
         },
 		{
             "species": "SPECIES_BRONZONG",
@@ -34,7 +35,8 @@
                 "MOVE_IMPRISON"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_TIMER_BALL"
         },
 		{
             "species": "SPECIES_SCIZOR",
@@ -48,7 +50,8 @@
                 "MOVE_ROOST"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_TIMER_BALL"
         },
 		{
             "species": "SPECIES_LUCARIO",
@@ -62,7 +65,8 @@
                 "MOVE_EXTREME_SPEED"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_TIMER_BALL"
         },
 		{
             "species": "SPECIES_REGISTEEL",
@@ -76,7 +80,8 @@
                 "MOVE_SLEEP_TALK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_TIMER_BALL"
         },
 		{
             "species": "SPECIES_JIRACHI",
@@ -90,7 +95,8 @@
                 "MOVE_REST"
             ],
             "power": 255,
-            "ball_seal": 24
+            "ball_seal": 24,
+			"ball_type": "ITEM_TIMER_BALL"
         }
     ]
 }

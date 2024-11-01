@@ -20,7 +20,8 @@
                 "MOVE_TOXIC"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_LUVDISC",
@@ -34,7 +35,8 @@
                 "MOVE_ICY_WIND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_LUVDISC",
@@ -48,7 +50,8 @@
                 "MOVE_HIDDEN_POWER"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

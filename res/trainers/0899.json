@@ -1,25 +1,26 @@
 {
-    "name": "Emily",
-    "class": "TRAINER_CLASS_MAID",
+    "name": "Beamer",
+    "class": "TRAINER_CLASS_WAITRESS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 29,
-            "item": null,
+            "level": 30,
+            "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_METRONOME",
-                "MOVE_ENCORE",
-                "MOVE_METEOR_MASH",
-                "MOVE_ENDURE"
+                "MOVE_EXTRASENSORY",
+                "MOVE_SHADOW_BALL",
+                "MOVE_FLAMETHROWER",
+                "MOVE_UPROAR"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 6
         }
     ]
 }

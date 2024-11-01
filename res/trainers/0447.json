@@ -20,7 +20,8 @@
                 "MOVE_KNOCK_OFF"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SEVIPER",
@@ -34,7 +35,8 @@
                 "MOVE_FLAMETHROWER"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_GARCHOMP",
@@ -48,7 +50,8 @@
                 "MOVE_SURF"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
                 "MOVE_STEALTH_ROCK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
         {
             "species": "SPECIES_BRELOOM",
@@ -34,7 +35,8 @@
                 "MOVE_STONE_EDGE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
 		{
             "species": "SPECIES_OCTILLERY",
@@ -48,7 +50,8 @@
                 "MOVE_FLAMETHROWER"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
 		{
             "species": "SPECIES_KINGDRA",
@@ -62,7 +65,8 @@
                 "MOVE_DRACO_METEOR"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
 		{
             "species": "SPECIES_LUVDISC",
@@ -73,7 +77,8 @@
                 "MOVE_WATER_SPOUT"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
 		{
             "species": "SPECIES_VICTREEBEL",
@@ -87,7 +92,8 @@
                 "MOVE_SWORDS_DANCE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         }
     ]
 }

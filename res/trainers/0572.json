@@ -19,7 +19,8 @@
                 "MOVE_TOXIC"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_VAPOREON",
@@ -33,7 +34,8 @@
                 "MOVE_U_TURN"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_FLAREON",
@@ -47,7 +49,8 @@
                 "MOVE_WILL_O_WISP"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

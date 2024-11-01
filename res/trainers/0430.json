@@ -20,7 +20,8 @@
                 "MOVE_SUPER_FANG"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
         {
             "species": "SPECIES_BRELOOM",
@@ -34,7 +35,8 @@
                 "MOVE_SWORDS_DANCE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         },
 		{
             "species": "SPECIES_OCTILLERY",
@@ -48,7 +50,8 @@
                 "MOVE_WATER_SPOUT"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL"
         }
     ]
 }

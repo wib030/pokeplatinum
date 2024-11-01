@@ -9,7 +9,7 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MAGNEMITE",
             "form": 0,
             "level": 41,
             "item": "ITEM_FOCUS_SASH",
@@ -20,10 +20,11 @@
 				"MOVE_ENDURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MAGNEMITE",
             "form": 0,
             "level": 41,
             "item": "ITEM_FOCUS_SASH",
@@ -34,10 +35,11 @@
 				"MOVE_ENDURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MAGNEMITE",
             "form": 0,
             "level": 41,
             "item": "ITEM_FOCUS_SASH",
@@ -48,10 +50,11 @@
 				"MOVE_ENDURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
-            "species": "SPECIES_MEW",
+            "species": "SPECIES_MAGNEMITE",
             "form": 0,
             "level": 41,
             "item": "ITEM_FOCUS_SASH",
@@ -62,7 +65,8 @@
 				"MOVE_ENDURE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         }
     ]
 }

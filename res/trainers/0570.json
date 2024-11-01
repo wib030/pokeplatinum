@@ -23,7 +23,8 @@
 			"evDEF": 252,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 4
+			"evSPDEF": 4,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_TOGEKISS",
@@ -40,7 +41,8 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 252,
-			"evSPDEF": 4
+			"evSPDEF": 4,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_MACHAMP",
@@ -58,7 +60,8 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 4
+			"evSPDEF": 4,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_WIGGLYTUFF",
@@ -75,7 +78,8 @@
 			"evDEF": 252,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 4
+			"evSPDEF": 4,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_DUSKNOIR",
@@ -92,7 +96,8 @@
 			"evDEF": 4,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_MEW",
@@ -109,7 +114,8 @@
 			"evDEF": 4,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

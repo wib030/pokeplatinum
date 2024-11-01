@@ -17,7 +17,8 @@
                 "MOVE_FLARE_BLITZ"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_PHIONE",
@@ -28,7 +29,8 @@
                 "MOVE_AQUA_TAIL"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_AGGRON",
@@ -39,7 +41,8 @@
                 "MOVE_HEAD_SMASH"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

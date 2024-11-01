@@ -21,7 +21,8 @@
                 "MOVE_HEAT_WAVE"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
         {
             "species": "SPECIES_MAGMORTAR",
@@ -35,7 +36,8 @@
                 "MOVE_HELPING_HAND"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         }
     ]
 }

@@ -20,7 +20,8 @@
                 "MOVE_BODY_SLAM"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_AMPHAROS",
@@ -34,7 +35,8 @@
                 "MOVE_DISCHARGE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         }
     ]
 }

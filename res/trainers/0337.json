@@ -1,5 +1,5 @@
 {
-    "name": "Water Hater",
+    "name": "Water",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
@@ -20,7 +20,8 @@
 				"MOVE_DRAIN_PUNCH"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_REPEAT_BALL"
         },
 		{
             "species": "SPECIES_MEGANIUM",
@@ -34,7 +35,8 @@
 				"MOVE_SOLAR_BEAM"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_REPEAT_BALL"
         },
 		{
             "species": "SPECIES_RAMPARDOS",
@@ -48,7 +50,8 @@
 				"MOVE_SHEER_COLD"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_REPEAT_BALL"
         }
     ]
 }

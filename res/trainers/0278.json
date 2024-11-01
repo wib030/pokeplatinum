@@ -20,7 +20,8 @@
 				"MOVE_HIDDEN_POWER"
             ],
             "power": 80,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_FLOATZEL",
@@ -34,7 +35,8 @@
 				"MOVE_ROCK_SMASH"
             ],
             "power": 80,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_GLACEON",
@@ -48,7 +50,8 @@
 				"MOVE_SHADOW_BALL"
             ],
             "power": 80,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

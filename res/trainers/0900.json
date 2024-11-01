@@ -1,25 +1,26 @@
 {
-    "name": "Elena",
-    "class": "TRAINER_CLASS_MAID",
+    "name": "Bouncer",
+    "class": "TRAINER_CLASS_WAITRESS",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 31,
-            "item": null,
+            "level": 32,
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_METRONOME",
-                "MOVE_SWAGGER",
-                "MOVE_METEOR_MASH",
-                "MOVE_ENDURE"
+                "MOVE_GYRO_BALL",
+                "MOVE_BODY_SLAM",
+                "MOVE_ROLLOUT",
+                "MOVE_BOUNCE"
             ],
-            "power": 0,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 6
         }
     ]
 }

@@ -20,7 +20,8 @@
 				"MOVE_SUPER_FANG"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_GYARADOS",
@@ -32,7 +33,8 @@
 				"MOVE_BITE"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_FERALIGATR",
@@ -44,7 +46,8 @@
 				"MOVE_ICE_FANG"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_ARBOK",
@@ -58,7 +61,8 @@
 				"MOVE_POISON_FANG"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

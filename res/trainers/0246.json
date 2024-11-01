@@ -20,7 +20,8 @@
 				"MOVE_PAIN_SPLIT"
             ],
             "power": 100,
-            "ball_seal": 11
+            "ball_seal": 11,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
         {
             "species": "SPECIES_ARON",
@@ -34,7 +35,8 @@
 				"MOVE_ROAR"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
         {
             "species": "SPECIES_ONIX",
@@ -48,7 +50,8 @@
 				"MOVE_PROTECT"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_LILEEP",
@@ -62,7 +65,8 @@
 				"MOVE_GASTRO_ACID"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_OMANYTE",
@@ -76,7 +80,8 @@
 				"MOVE_MUD_SHOT"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_ANORITH",
@@ -90,7 +95,8 @@
 				"MOVE_FURY_CUTTER"
             ],
             "power": 100,
-            "ball_seal": 11
+            "ball_seal": 11,
+			"ball_type": "ITEM_PREMIER_BALL"
         }
     ]
 }

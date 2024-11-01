@@ -20,7 +20,8 @@
                 "MOVE_EARTHQUAKE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_STANTLER",
@@ -34,7 +35,8 @@
                 "MOVE_ROAR"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_TYRANITAR",
@@ -48,7 +50,8 @@
                 "MOVE_SNORE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_BLISSEY",
@@ -60,7 +63,8 @@
                 "MOVE_RECYCLE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_SPINDA",
@@ -74,7 +78,8 @@
                 "MOVE_TRICK_ROOM"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_SHAYMIN",
@@ -88,7 +93,8 @@
                 "MOVE_LEECH_SEED"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         }
     ]
 }

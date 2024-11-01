@@ -17,7 +17,8 @@
                 "MOVE_MEMENTO"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_LUCARIO",
@@ -37,7 +38,8 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 252,
-			"evSPDEF": 4
+			"evSPDEF": 4,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

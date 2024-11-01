@@ -20,7 +20,8 @@
 				"MOVE_BULLET_SEED"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_LUXURY_BALL"
         },
 		{
             "species": "SPECIES_LAPRAS",
@@ -34,7 +35,8 @@
 				"MOVE_BODY_SLAM"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_LUXURY_BALL"
         }
     ]
 }

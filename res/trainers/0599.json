@@ -20,7 +20,8 @@
                 "MOVE_TOXIC"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         },
         {
             "species": "SPECIES_GASTRODON",
@@ -34,7 +35,8 @@
                 "MOVE_MEMENTO"
             ],
             "power": 200,
-            "ball_seal": 1
+            "ball_seal": 1,
+			"ball_type": "ITEM_DIVE_BALL"
         },
 		{
             "species": "SPECIES_WHISCASH",
@@ -48,7 +50,8 @@
                 "MOVE_SPARK"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL"
         }
     ]
 }

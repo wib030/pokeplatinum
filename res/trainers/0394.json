@@ -20,7 +20,8 @@
 				"MOVE_CURSE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SUNFLORA",
@@ -34,7 +35,8 @@
 				"MOVE_SLUDGE_BOMB"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_DUSKNOIR",
@@ -48,7 +50,8 @@
 				"MOVE_FIRE_PUNCH"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

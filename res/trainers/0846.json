@@ -20,7 +20,8 @@
                 "MOVE_FOCUS_PUNCH"
             ],
             "power": 180,
-            "ball_seal": 13
+            "ball_seal": 13,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_BANETTE",
@@ -32,7 +33,8 @@
                 "MOVE_SHADOW_SNEAK"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_STEELIX",
@@ -45,7 +47,8 @@
                 "MOVE_STONE_EDGE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         }
     ]
 }

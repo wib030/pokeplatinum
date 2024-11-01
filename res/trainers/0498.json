@@ -20,7 +20,8 @@
                 "MOVE_TOXIC"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_CROCONAW",
@@ -34,7 +35,8 @@
                 "MOVE_DIVE"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         },
         {
             "species": "SPECIES_MARSHTOMP",
@@ -48,7 +50,8 @@
                 "MOVE_CURSE"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }

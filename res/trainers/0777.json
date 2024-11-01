@@ -18,7 +18,8 @@
                 "MOVE_MEMENTO"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_DEWGONG",
@@ -32,7 +33,8 @@
                 "MOVE_ICY_WIND"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_ILLUMISE",
@@ -46,7 +48,8 @@
                 "MOVE_TOXIC"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_JIRACHI",
@@ -57,7 +60,8 @@
                 "MOVE_IRON_HEAD"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_JUMPLUFF",
@@ -69,7 +73,8 @@
                 "MOVE_U_TURN"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         },
 		{
             "species": "SPECIES_SMEARGLE",
@@ -83,7 +88,8 @@
                 "MOVE_SUBSTITUTE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_SAFARI_BALL"
         }
     ]
 }
