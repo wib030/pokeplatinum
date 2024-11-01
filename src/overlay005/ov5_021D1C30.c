@@ -805,9 +805,9 @@ static BOOL ov5_021D2884 (FieldSystem * fieldSystem)
         return 1;
     }
 
-    if (ov5_021D2C14(fieldSystem) == 1) {
-        return 1;
-    }
+    // if (ov5_021D2C14(fieldSystem) == 1) {
+    //     return 1;
+    // }
 
     if (ov5_021D2ABC(fieldSystem) == 1) {
         return 1;
@@ -974,7 +974,7 @@ static BOOL ov5_021D2B94 (FieldSystem * fieldSystem)
     (*v1) %= 4;
 
     if (*v1 != 0) {
-        return 1;
+        return 0;
     }
 
     switch (sub_02054B04(v0, MapHeader_GetMapLabelTextID(fieldSystem->unk_1C->unk_00))) {
