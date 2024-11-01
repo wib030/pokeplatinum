@@ -979,17 +979,17 @@ static BOOL ov5_021D2B94 (FieldSystem * fieldSystem)
 
     switch (sub_02054B04(v0, MapHeader_GetMapLabelTextID(fieldSystem->unk_1C->unk_00))) {
     case 0:
-        return 1;
+        return 0;
     case 1:
         ov5_021EF518(fieldSystem->unk_04->unk_20);
-        return 1;
+        return 0;
     case 2:
         ov5_021EF518(fieldSystem->unk_04->unk_20);
         sub_0203E880(fieldSystem, 2003, NULL);
         return 1;
     }
 
-    return 1;
+    return 0;
 }
 
 static BOOL ov5_021D2C14 (FieldSystem * fieldSystem)
