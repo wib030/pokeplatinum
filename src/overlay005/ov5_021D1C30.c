@@ -802,7 +802,7 @@ static BOOL ov5_021D2884 (FieldSystem * fieldSystem)
     ov5_021EA714(fieldSystem, 5, 1);
 
     if (ov5_021D2B94(fieldSystem) == 1) {
-        return 0;
+        return 1;
     }
 
     if (ov5_021D2C14(fieldSystem) == 1) {
@@ -986,7 +986,7 @@ static BOOL ov5_021D2B94 (FieldSystem * fieldSystem)
     case 2:
         ov5_021EF518(fieldSystem->unk_04->unk_20);
         sub_0203E880(fieldSystem, 2003, NULL);
-        return 0;
+        return 1;
     }
 
     return 0;
