@@ -801,13 +801,13 @@ static BOOL ov5_021D2884 (FieldSystem * fieldSystem)
 
     ov5_021EA714(fieldSystem, 5, 1);
 
-    if (ov5_021D2B94(fieldSystem) == 1) {
-        return 1;
-    }
-
-    // if (ov5_021D2C14(fieldSystem) == 1) {
+    // if (ov5_021D2B94(fieldSystem) == 1) {
     //     return 1;
     // }
+
+     if (ov5_021D2C14(fieldSystem) == 1) {
+         return 1;
+     }
 
     if (ov5_021D2ABC(fieldSystem) == 1) {
         return 1;
