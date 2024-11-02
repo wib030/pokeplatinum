@@ -4,7 +4,8 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_WEATHER"
     ],
     "double_battle": false,
     "party": [
@@ -19,7 +20,7 @@
 				"MOVE_GRASS_KNOT",
 				"MOVE_U_TURN"
             ],
-            "power": 100,
+            "power": 200,
             "ball_seal": 1,
 			"ball_type": "ITEM_NEST_BALL"
         },
@@ -84,7 +85,7 @@
 			"ball_type": "ITEM_NEST_BALL"
         },
 		{
-            "species": "SPECIES_ROSELIA",
+            "species": "SPECIES_ROSERADE",
             "form": 0,
             "level": 22,
             "item": "ITEM_MIRACLE_SEED",
