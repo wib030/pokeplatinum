@@ -6049,6 +6049,8 @@ Expert_Fling_TryScorePlus1:
     GoTo Expert_Fling_End
 
 Expert_Fling_CheckAttackerItem:
+	LoadHeldItem AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Fling_InstantFling, Expert_Fling_ScorePlus12_End
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedInTable Expert_Fling_DesirableFlingEffects, Expert_Fling_End
     AddToMoveScore -1
@@ -6062,7 +6064,19 @@ Expert_Fling_DesirableFlingEffects:
     TableEntry HOLD_EFFECT_PSN_USER
     TableEntry HOLD_EFFECT_BRN_USER
     TableEntry HOLD_EFFECT_PIKA_SPATK_UP
+	TableEntry HOLD_EFFECT_DIALGA_BOOST
+	TableEntry HOLD_EFFECT_PALKIA_BOOST
+	TableEntry HOLD_EFFECT_GIRATINA_BOOST
     TableEntry TABLE_END
+	
+Expert_Fling_InstantFling:
+    TableEntry ITEM_BLACKGLASSES
+	TableEntry ITEM_MOOMOO_MILK
+    TableEntry TABLE_END
+	
+Expert_Fling_ScorePlus12_End:
+    AddToMoveScore 12
+    GoTo Expert_Fling_End
 
 Expert_PsychoShift:
     ; If the attacker does not have any status condition, score -10.
