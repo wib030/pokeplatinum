@@ -4268,26 +4268,22 @@ Expert_RainDance:
     ; score +1.
     IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_RainDance_OtherChecks
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_SWIFT_SWIM, Expert_RainDance_ScorePlus1
+    IfLoadedEqualTo ABILITY_SWIFT_SWIM, Expert_RainDance_TryScorePlus10
 
 Expert_RainDance_OtherChecks:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_RainDance_ScoreMinus1
     LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_HAILING, Expert_RainDance_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_RainDance_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_RainDance_ScorePlus1
+    IfLoadedNotEqualTo AI_WEATHER_RAINING, Expert_RainDance_TryScorePlus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_RAIN_DISH, Expert_RainDance_ScorePlus1
+    IfLoadedEqualTo ABILITY_RAIN_DISH, Expert_RainDance_TryScorePlus10
     IfLoadedNotEqualTo ABILITY_HYDRATION, Expert_RainDance_End
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_RainDance_ScorePlus1
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_RainDance_TryScorePlus10
     GoTo Expert_RainDance_End
 
 Expert_RainDance_ScorePlus1:
-    AddToMoveScore 1
+    AddToMoveScore 3
+    IfRandomLessThan 64, Expert_RainDance_End
+    AddToMoveScore 7
     GoTo Expert_RainDance_End
-
-Expert_RainDance_ScoreMinus1:
-    AddToMoveScore -1
 
 Expert_RainDance_End:
     PopOrEnd 
@@ -4299,25 +4295,43 @@ Expert_SunnyDay:
     ;
     ; If the attacker has the ability Flower Gift or is statused and has the ability Leaf Guard,
     ; score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_SunnyDay_ScoreMinus1
     LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_HAILING, Expert_SunnyDay_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_RAINING, Expert_SunnyDay_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_SunnyDay_ScorePlus1
+    IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_SunnyDay_TryScorePlus10\
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_FLOWER_GIFT, Expert_SunnyDay_ScorePlus1
+    IfLoadedEqualTo ABILITY_FLOWER_GIFT, Expert_SunnyDay_TryScorePlus10
     IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Expert_SunnyDay_End
-    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_SunnyDay_ScorePlus1
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_SunnyDay_TryScorePlus10
     GoTo Expert_SunnyDay_End
 
-Expert_SunnyDay_ScorePlus1:
-    AddToMoveScore 1
+Expert_SunnyDay_TryScorePlus10:
+    AddToMoveScore 3
+    IfRandomLessThan 64, Expert_SunnyDay_End
+    AddToMoveScore 7
     GoTo Expert_SunnyDay_End
-
-Expert_SunnyDay_ScoreMinus1:
-    AddToMoveScore -1
 
 Expert_SunnyDay_End:
+    PopOrEnd 
+
+Expert_Sandstorm:
+    ;
+    ; If the current weather is Hail, Rain, or Sun, score +1.
+    ;
+    ; If the attacker has the ability Flower Gift or is statused and has the ability Leaf Guard,
+    ; score +1.
+    LoadCurrentWeather 
+    IfLoadedNotEqualTo AI_WEATHER_SANDSTORM, Expert_Sandstorm_TryScorePlus10
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SAND_FORCE, Expert_Sandstorm_TryScorePlus10
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_Sandstorm_TryScorePlus10
+    GoTo Expert_Sandstorm_End
+
+Expert_Sandstorm_TryScorePlus10:
+    AddToMoveScore 3
+    IfRandomLessThan 64, Expert_Sandstorm_End
+    AddToMoveScore 7
+    GoTo Expert_Sandstorm_End
+
+Expert_Sandstorm_End:
     PopOrEnd 
 
 Expert_BellyDrum:
@@ -4838,32 +4852,31 @@ Expert_SpitUp_End:
     PopOrEnd 
 
 Expert_Hail:
-    ; If the attacker''s HP < 40%, score -1 and terminate.
     ;
     ; If the current weather is Sun, Rain, or Sand, additional score +1. If the attacker also knows
     ; the move Blizzard, additional score +2.
     ;
     ; If the attacker has the ability Ice Body, additional score +2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Hail_ScoreMinus1
     LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_Hail_ScorePlus1AndCheckBlizzard
-    IfLoadedEqualTo AI_WEATHER_RAINING, Expert_Hail_ScorePlus1AndCheckBlizzard
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_Hail_ScorePlus1AndCheckBlizzard
+    IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_Hail_TryScorePlus10
     GoTo Expert_Hail_End
 
-Expert_Hail_ScorePlus1AndCheckBlizzard:
-    AddToMoveScore 1
-    IfMoveNotKnown AI_BATTLER_ATTACKER, MOVE_BLIZZARD, Expert_Hail_CheckIceBody
-    AddToMoveScore 2
+Expert_Hail_TryScorePlus10:
+    AddToMoveScore 3
+    IfRandomLessThan 64, Expert_Hail_CheckBlizzard
+    AddToMoveScore 7
+    GoTo Expert_Hail_CheckBlizzard
+
+Expert_Hail_CheckBlizzard:
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_BLIZZARD, ScorePlus3
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SHEER_COLD, ScorePlus3
+    GoTo Expert_Hail_CheckIceBody
 
 Expert_Hail_CheckIceBody:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_ICE_BODY, Expert_Hail_End
     AddToMoveScore 2
     GoTo Expert_Hail_End
-
-Expert_Hail_ScoreMinus1:
-    AddToMoveScore -1
 
 Expert_Hail_End:
     PopOrEnd 
