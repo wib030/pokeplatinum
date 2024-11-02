@@ -4279,7 +4279,7 @@ Expert_RainDance_OtherChecks:
     IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_RainDance_TryScorePlus10
     GoTo Expert_RainDance_End
 
-Expert_RainDance_ScorePlus1:
+Expert_RainDance_TryScorePlus10:
     AddToMoveScore 3
     IfRandomLessThan 64, Expert_RainDance_End
     AddToMoveScore 7
@@ -4296,7 +4296,7 @@ Expert_SunnyDay:
     ; If the attacker has the ability Flower Gift or is statused and has the ability Leaf Guard,
     ; score +1.
     LoadCurrentWeather 
-    IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_SunnyDay_TryScorePlus10\
+    IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_SunnyDay_TryScorePlus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_FLOWER_GIFT, Expert_SunnyDay_TryScorePlus10
     IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Expert_SunnyDay_End
