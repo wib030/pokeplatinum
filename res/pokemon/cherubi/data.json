@@ -99,6 +99,11 @@
             "EVO_LEVEL_UP",
             25,
             "SPECIES_CHERRIM"
+        ],
+		[
+            "EVO_USE_ITEM",
+            "ITEM_LEAF_STONE",
+            "SPECIES_CHERRIM"
         ]
     ],
     "footprint": {
