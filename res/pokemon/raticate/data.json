@@ -2,7 +2,7 @@
     "name": "Raticate",
     "base_stats": {
         "hp": 55,
-        "attack": 101,
+        "attack": 61,
         "defense": 60,
         "speed": 102,
         "special_attack": 80,

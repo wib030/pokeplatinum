@@ -2,7 +2,7 @@
     "name": "Rattata",
     "base_stats": {
         "hp": 30,
-        "attack": 56,
+        "attack": 26,
         "defense": 35,
         "speed": 72,
         "special_attack": 25,
