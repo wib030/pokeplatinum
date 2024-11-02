@@ -3,7 +3,7 @@
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_FIGHTING",
     "power": 160,
-    "accuracy": 100,
+    "accuracy": 0,
     "pp": 20,
     "effect": {
         "type": "BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT",
