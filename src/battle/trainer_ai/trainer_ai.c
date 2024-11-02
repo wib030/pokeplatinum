@@ -6854,7 +6854,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
                     // Only count pivot moves that actually hit.
                     // i.e., ignore Volt Switch vs. Ground and Volt Absorb / Lightning Rod / Motor Drive
-                    if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
+                    if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                     
                         if ((MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) == FALSE) {
 
@@ -6953,6 +6953,11 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                             return FALSE;
                         }
                     }
+                }
+                else {
+
+                    battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                    return TRUE;
                 }
             }
         }
@@ -7077,11 +7082,13 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
             return FALSE;
         }
-        else if (moveSetter) {
-            return FALSE;
-        }
         // The field condition we need is not active
         else {
+
+            if (moveSetter) {
+
+                return FALSE;
+            }
             
             for (i = 0; i < partyCount; i++) {
 
