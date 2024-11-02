@@ -6045,7 +6045,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
 static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
         return TRUE;
     }
 
