@@ -3690,6 +3690,64 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
     }
 }
 
+
+/**
+ * @brief Reveal all moves known by the opponent's party.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ */
+ /*
+static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    u8 partySlot, ability, moveType;
+    u16 move, heldItem;
+    int i, j, partyMax;
+    int moveClass, effect;
+    Pokemon *mon;
+
+    partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
+
+    for (i = 0; i < partyMax; i++) {
+        mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+
+        heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+        ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+        AI_CONTEXT.battlerPartyAbilities[AI_CONTEXT.defender][i] = ability;
+        AI_CONTEXT.battlerPartyHeldItems[AI_CONTEXT.defender][i] = heldItem;
+
+        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+            move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, AI_CONTEXT.defender, move);
+            moveClass = MOVE_DATA(move).class;
+            effect = MOVE_DATA(move).effect;
+
+            if (moveClass != CLASS_STATUS) {
+
+                if (moveType == battleCtx->battleMons[AI_CONTEXT.defender].type1
+                || moveType == battleCtx->battleMons[AI_CONTEXT.defender].type2) {
+
+                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                }
+
+                if (effect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT
+                || effect == BATTLE_EFFECT_40_DAMAGE_FLAT
+                || effect == BATTLE_EFFECT_10_DAMAGE_FLAT) {
+
+                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                }
+
+            }
+            else {
+                break;
+            }
+        }
+    }
+}
+*/
+
 /**
  * @brief Read a word from the AI script at the current cursor position,
  * then increment the cursor.
@@ -6708,6 +6766,12 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
     moveSetter = 0;
     desiredFieldCondition = 0;
 
+    if (heldItemEffect == HOLD_EFFECT_NONE
+    && battleCtx->recycleItem[battler] != ITEM_NONE) {
+
+        heldItemEffect = BattleSystem_GetItemData(battleCtx, battleCtx->recycleItem[battler], ITEM_PARAM_HOLD_EFFECT);
+    }
+
     if (ability == ABILITY_SAND_STREAM) {
         desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
     }
@@ -6900,6 +6964,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler) {
     
     int i, j, partyCount, moveEffect, desiredMoveEffect;
+    int moveSetter;
     u8 ability, desiredWeatherAbility, heldItemEffect, desiredWeatherItemEffect;
     u16 move;
     u32 abilityFieldCondition, fieldConditions;
@@ -6908,9 +6973,16 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     partyCount = BattleSystem_PartyCount(battleSys, battler);
     ability = battleCtx->battleMons[battler].ability;
     desiredWeatherAbility = ABILITY_NONE;
-    abilityFieldCondition = 0;
+    abilityFieldCondition = 0;   
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    moveSetter = 0;
     desiredWeatherItemEffect = 0;
     desiredMoveEffect = 0;
+
+    if (heldItemEffect == HOLD_EFFECT_NONE
+        && battleCtx->recycleItem[battler] != ITEM_NONE) {
+        heldItemEffect = BattleSystem_GetItemData(battleCtx, battleCtx->recycleItem[battler], ITEM_PARAM_HOLD_EFFECT);
+    }
 
     if (ability == ABILITY_SAND_FORCE
         || ability == ABILITY_SAND_VEIL) {
@@ -6961,6 +7033,47 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
         desiredMoveEffect = 0;
     }
 
+    if (heldItemEffect == HOLD_EFFECT_EXTEND_RAIN ||
+    heldItemEffect == HOLD_EFFECT_EXTEND_SUN ||
+    heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM ||
+    heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        move = battleCtx->battleMons[battler].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (moveEffect == BATTLE_EFFECT_WEATHER_SANDSTORM
+            && heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM) {
+
+                desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
+                moveSetter = 1;
+                break;
+        }
+        if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
+            && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
+
+                desiredFieldCondition = FIELD_CONDITION_RAINING;
+                moveSetter = 1;
+                break;
+        }
+        if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
+            && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
+
+                desiredFieldCondition = FIELD_CONDITION_SUNNY;
+                moveSetter = 1;
+                break;
+        }
+        if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
+            && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
+
+                desiredFieldCondition = FIELD_CONDITION_HAILING;
+                moveSetter = 1;
+                break;
+        }
+    }
+}
+
     if (desiredWeatherAbility) {
 
         // Don't switch if the field condition we need is active
@@ -6968,9 +7081,12 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 
             return FALSE;
         }
+        else if (moveSetter) {
+            return FALSE;
+        }
         // The field condition we need is not active
         else {
-        
+            
             for (i = 0; i < partyCount; i++) {
 
                 mon = BattleSystem_PartyPokemon(battleSys, battler, i);
