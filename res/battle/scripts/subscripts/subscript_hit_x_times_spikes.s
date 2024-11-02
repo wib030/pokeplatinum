@@ -1,0 +1,34 @@
+    .include "macros/btlcmd.inc"
+
+    .data
+
+_000:
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_MULTI_HIT_SKIP_MESSAGE, _011
+    // Hit {0} time(s)!
+    PrintMessage pl_msg_00000368_00046, TAG_NUMBER, BTLSCR_MSG_TEMP
+    Wait 
+    WaitButtonABTime 30
+	TrySpikes _011
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+	UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_SPIKES
+    PlayMoveAnimation BTLSCR_MSG_TEMP
+	Wait
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+	// Spikes were scattered all around your team’s feet!
+    PrintMessage pl_msg_00000368_00427, TAG_NONE_SIDE_CONSCIOUS, BTLSCR_ATTACKER_ENEMY
+	Wait 
+    WaitButtonABTime 30
+	CompareVarToValue OPCODE_NEQ, BTLVAR_MSG_TEMP, 5, _011
+	TrySpikes _011
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+	UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_SPIKES
+    PlayMoveAnimation BTLSCR_MSG_TEMP
+	Wait
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+	// Spikes were scattered all around your team’s feet!
+    PrintMessage pl_msg_00000368_00427, TAG_NONE_SIDE_CONSCIOUS, BTLSCR_ATTACKER_ENEMY
+	Wait 
+    WaitButtonABTime 30
+
+_011:
+    End

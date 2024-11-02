@@ -331,4 +331,5 @@ subscript_files = files(
 	'subscript_color_change_before.s',
 	'subscript_forecast_ignores.s',
 	'subscript_atk_up_focus_energy.s',
+	'subscript_hit_x_times_spikes.s',
 )

@@ -2941,7 +2941,7 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
     }
 
     if ((NO_CLOUD_NINE && WEATHER_IS_SUN && MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER)
-	|| (NO_CLOUD_NINE && WEATHER_IS_SUN && MOVE_DATA(move).effect == BATTLE_EFFECT_UNUSED_133)) {
+	|| (NO_CLOUD_NINE && WEATHER_IS_SUN && MOVE_DATA(move).effect == BATTLE_EFFECT_HURRICANE)) {
         hitRate = 50;
     }
 
@@ -3052,7 +3052,7 @@ static int BattleController_CheckMoveHitOverrides(BattleSystem *battleSys, Battl
 
     if (NO_CLOUD_NINE) {
         if ((WEATHER_IS_RAIN && MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER)
-		|| (WEATHER_IS_RAIN && MOVE_DATA(move).effect == BATTLE_EFFECT_UNUSED_133)) {
+		|| (WEATHER_IS_RAIN && MOVE_DATA(move).effect == BATTLE_EFFECT_HURRICANE)) {
             battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
         }
 
@@ -3871,8 +3871,16 @@ static void BattleController_LoopMultiHit(BattleSystem *battleSys, BattleContext
                 battleCtx->commandNext = BATTLE_CONTROL_TRY_MOVE;
             } else {
                 battleCtx->msgTemp = battleCtx->multiHitNumHits;
-
-                LOAD_SUBSEQ(subscript_hit_x_times);
+				
+				if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_SPIKES_MULTI_HIT)
+				{
+					LOAD_SUBSEQ(subscript_hit_x_times_spikes);
+				}
+				else
+				{
+					LOAD_SUBSEQ(subscript_hit_x_times);
+				}
+				
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
                 battleCtx->commandNext = BATTLE_CONTROL_LOOP_FAINTED;
             }
@@ -3885,7 +3893,15 @@ static void BattleController_LoopMultiHit(BattleSystem *battleSys, BattleContext
                 battleCtx->msgTemp = battleCtx->multiHitNumHits - battleCtx->multiHitCounter;
             }
 
-            LOAD_SUBSEQ(subscript_hit_x_times);
+            if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_SPIKES_MULTI_HIT)
+			{
+				LOAD_SUBSEQ(subscript_hit_x_times_spikes);
+			}
+			else
+			{
+				LOAD_SUBSEQ(subscript_hit_x_times);
+			}
+			
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
             battleCtx->commandNext = BATTLE_CONTROL_LOOP_FAINTED;
         }

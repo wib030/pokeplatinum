@@ -11646,7 +11646,7 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
         // Confusion
         case BATTLE_EFFECT_CHATTER:
         case BATTLE_EFFECT_CONFUSE_HIT:
-        case BATTLE_EFFECT_UNUSED_133:
+        case BATTLE_EFFECT_HURRICANE:
         case BATTLE_EFFECT_CONFUSE_ALL:
         case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
         case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
@@ -11661,7 +11661,7 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
             break;
 
         // Infatuation
-        case BATTLE_EFFECT_UNUSED_96:
+        case BATTLE_EFFECT_INFATUATE_HIT:
         case BATTLE_EFFECT_INFATUATE:
             volatileStatus = VOLATILE_CONDITION_ATTRACT;
             break;

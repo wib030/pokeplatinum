@@ -10,4 +10,4 @@ _000:
     WaitButtonABTime 30
 
 _011:
-    End 
+    End

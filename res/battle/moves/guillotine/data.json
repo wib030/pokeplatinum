@@ -6,7 +6,7 @@
     "accuracy": 100,
     "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_UNUSED_96",
+        "type": "BATTLE_EFFECT_INFATUATE_HIT",
         "chance": 30
     },
     "range": "RANGE_SINGLE_TARGET",

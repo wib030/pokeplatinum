@@ -4,9 +4,9 @@
     "type": "TYPE_NORMAL",
     "power": 20,
     "accuracy": 100,
-    "pp": 15,
+    "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_MULTI_HIT",
+        "type": "BATTLE_EFFECT_SPIKES_MULTI_HIT",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",

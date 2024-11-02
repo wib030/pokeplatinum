@@ -2377,9 +2377,9 @@ static BOOL BtlCmd_GoToEffectScript(BattleSystem *battleSys, BattleContext *batt
 			case BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP:
 			case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
 			case BATTLE_EFFECT_TRI_ATTACK:
-			case BATTLE_EFFECT_UNUSED_96:
-			case BATTLE_EFFECT_UNUSED_110:
-			case BATTLE_EFFECT_UNUSED_133:
+			case BATTLE_EFFECT_INFATUATE_HIT:
+			case BATTLE_EFFECT_DISABLE_HIT:
+			case BATTLE_EFFECT_HURRICANE:
 				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIT;
 				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
 				break;
