@@ -6067,7 +6067,7 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
             && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
             && Battler_Ability(battleCtx, battler) == ABILITY_PHOTOSYNTHESIS)
 			{
-                battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+                battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
             }
         }
 
