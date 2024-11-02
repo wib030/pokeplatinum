@@ -7046,28 +7046,24 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
         if (moveEffect == BATTLE_EFFECT_WEATHER_SANDSTORM
             && heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM) {
 
-                desiredFieldCondition = FIELD_CONDITION_SANDSTORM;
                 moveSetter = 1;
                 break;
         }
         if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
             && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
 
-                desiredFieldCondition = FIELD_CONDITION_RAINING;
                 moveSetter = 1;
                 break;
         }
         if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
             && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
 
-                desiredFieldCondition = FIELD_CONDITION_SUNNY;
                 moveSetter = 1;
                 break;
         }
         if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
             && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
 
-                desiredFieldCondition = FIELD_CONDITION_HAILING;
                 moveSetter = 1;
                 break;
         }
