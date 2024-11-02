@@ -427,6 +427,7 @@ static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
@@ -6042,6 +6043,15 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     return FALSE;
 }
 
+static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 /**
  * @brief Check if an AI's battler has a super-effective move against either of the
  * opponent's Pokemon.
@@ -7270,7 +7280,14 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (AI_CannotDamageWonderGuard(battleSys, battleCtx, battler)) {
+        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_WONDER_GUARD) > 0) {
+
+            if (AI_CannotDamageWonderGuard(battleSys, battleCtx, battler)) {
+                return TRUE;
+            }
+        }
+
+        if (AI_ShouldSwitchYawn(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
