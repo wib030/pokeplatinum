@@ -39,7 +39,7 @@ _010:
 	
 _020:
     // Todays forecast is Snowy!
-    PrintMessage pl_msg_00000368_01314, TAG_NONE
+    PrintMessage pl_msg_00000368_01317, TAG_NONE
     Wait 
     WaitButtonABTime 30
 	PlayBattleAnimation BTLSCR_PLAYER, BATTLE_ANIMATION_WEATHER_HAIL

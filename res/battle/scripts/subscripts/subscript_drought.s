@@ -37,7 +37,7 @@ _010:
 	
 _020:
     // Todays forecast is Sunny!
-    PrintMessage pl_msg_00000368_01312, TAG_NONE
+    PrintMessage pl_msg_00000368_01315, TAG_NONE
     Wait 
     WaitButtonABTime 30
 	PlayBattleAnimation BTLSCR_PLAYER, BATTLE_ANIMATION_WEATHER_SUN

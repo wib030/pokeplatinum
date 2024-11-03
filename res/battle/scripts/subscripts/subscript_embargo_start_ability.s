@@ -9,7 +9,7 @@ _000:
     CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_HELD_ITEM, ITEM_GRISEOUS_ORB, _057
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_QUICK_CLAW, 0, _057
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_CUSTAP_BERRY, 0, _057
-	// {0} was shaked down by {1}!
+	// {0} was shaken down by {1}!
     PrintMessage pl_msg_00000368_01309, TAG_NICKNAME_NICKNAME, BTLSCR_DEFENDER, BTLSCR_ATTACKER
     Wait 
     WaitButtonABTime 30
