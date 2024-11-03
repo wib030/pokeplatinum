@@ -4,7 +4,8 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
@@ -36,7 +37,13 @@
             ],
             "power": 120,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 30,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 30,
+			"ivSPDEF": 31
         },
         {
             "species": "SPECIES_SABLEYE",
@@ -96,7 +103,13 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_LUXURY_BALL"
+			"ball_type": "ITEM_LUXURY_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30
         }
     ]
 }
