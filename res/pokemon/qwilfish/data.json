@@ -99,6 +99,7 @@
             ],
             "29": "MOVE_REVENGE",
             "33": "MOVE_BRINE",
+			"35": "MOVE_SPIKE_CANNON",
             "37": "MOVE_PIN_MISSILE",
             "41": "MOVE_TAKE_DOWN",
             "45": "MOVE_AQUA_TAIL",
