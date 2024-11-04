@@ -680,6 +680,13 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro AICmd_IfPartyMemberHasBattleEffect battler, battle_effect, jump
+    .long 118
+    .long \battler
+    .long \battle_effect
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

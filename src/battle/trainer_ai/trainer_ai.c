@@ -331,6 +331,7 @@ static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *b
 static void AICmd_IfMoveEffectivenessEquals(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberNotStatus(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentWeather(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveEffectEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveEffectNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -487,6 +488,7 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfMoveEffectivenessEquals,
     AICmd_IfPartyMemberStatus,
     AICmd_IfPartyMemberNotStatus,
+    AICmd_IfPartyMemberHasBattleEffect,
     AICmd_LoadCurrentWeather,
     AICmd_IfCurrentMoveEffectEqualTo,
     AICmd_IfCurrentMoveEffectNotEqualTo,
@@ -1779,6 +1781,56 @@ static void AICmd_IfPartyMemberNotStatus(BattleSystem *battleSys, BattleContext 
                 && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & statusMask) == FALSE) {
             AIScript_Iter(battleCtx, jump);
             return;
+        }
+    }
+}
+
+static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    Party *party; // this must be declared first to match
+    int inBattler = AIScript_Read(battleCtx);
+    int expected = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    int effect;
+    u16 move;
+
+    u8 slot1, slot2;
+    if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+        slot1 = battleCtx->selectedPartySlot[battler];
+        slot2 = battleCtx->selectedPartySlot[BattleSystem_Partner(battleSys, battler)];
+    } else {
+        slot1 = slot2 = battleCtx->selectedPartySlot[battler];
+    }
+
+    party = BattleSystem_Party(battleSys, battler);
+    for (int i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+        if (i != slot1 && i != slot2
+        && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+        && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+        && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+        && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
+
+            for (int j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+                if (move == MOVE_NONE) {
+                    break;
+                }
+
+                effect = MOVE_DATA(move).effect;
+
+                if (effect == expected) {
+                    
+                    AIScript_Iter(battleCtx, jump);
+                    return;
+                }
+            }
         }
     }
 }

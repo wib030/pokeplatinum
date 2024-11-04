@@ -5871,63 +5871,71 @@ Expert_MetalBurst_End:
     PopOrEnd 
 
 Expert_UTurn:
-    ; If the opponent resists or is immune to the move, score -1 and terminate.
+    ; If the opponent is immune to the move, score -10 and terminate.
     ;
-    ; If the attacker is the last living party member, score +2 and terminate.
+    ; If the attacker is the last living party member, terminate.
     ;
-    ; If the attacker has a super-effective move on its opponent, 75% chance of additional score -2.
+    ; If the attacker has another super-effective move on its opponent, 75% chance of additional score -2.
     ;
     ; If no party member deals more damage than the attacker, 75% chance of score -2 and terminate.
     ;
     ; If the opponent''s HP > 70%, 75% chance of additional score +1.
     ;
-    ; If the opponent''s HP > 30%, 50% chance of additional score +1. (Cumulative with the prior check)
+    ; If the opponent''s HP > 40%, 50% chance of additional score +1. (Cumulative with the prior check)
     ;
-    ; Otherwise, 25% chance of additional score +1.
-    ;
-    ; If the attacker is faster than its opponent, score +1. Otherwise, 50% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_UTurn_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_UTurn_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_UTurn_ScoreMinus1
+    ; If the attacker is faster than its opponent, 50% chance of score +1.
+    ; If the attacker is slower and has plenty of health, score +1.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, Expert_UTurn_End
     IfHasSuperEffectiveMove Expert_UTurn_TryScoreMinus2
     GoTo Expert_UTurn_CheckPartyDamage
 
-Expert_UTurn_ScoreMinus1:
-    AddToMoveScore -1
-    GoTo Expert_UTurn_End
-
 Expert_UTurn_TryScoreMinus2:
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Expert_UTurn_CheckPartyDamage
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Expert_UTurn_CheckPartyDamage
     IfRandomLessThan 64, Expert_UTurn_CheckPartyDamage
     AddToMoveScore -2
+    GoTo Expert_UTurn_End
 
 Expert_UTurn_CheckPartyDamage:
     IfPartyMemberDealsMoreDamage USE_MAX_DAMAGE, Expert_UTurn_CheckTargetHP
+    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn_CheckTargetHP
+    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_UTurn_CheckTargetHP
     IfRandomLessThan 64, Expert_UTurn_CheckTargetHP
     AddToMoveScore -2
     GoTo Expert_UTurn_End
 
 Expert_UTurn_CheckTargetHP:
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_UTurn_75PercentScorePlus1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_UTurn_50PercentScorePlus1
-    IfRandomLessThan 128, Expert_UTurn_CheckSpeed
-    GoTo Expert_UTurn_50PercentScorePlus1
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 40, Expert_UTurn_50PercentScorePlus1
+    GoTo Expert_UTurn_CheckSpeed
 
 Expert_UTurn_75PercentScorePlus1:
     IfRandomLessThan 64, Expert_UTurn_50PercentScorePlus1
     AddToMoveScore 1
+    GoTo Expert_UTurn_50PercentScorePlus1
 
 Expert_UTurn_50PercentScorePlus1:
     IfRandomLessThan 128, Expert_UTurn_CheckSpeed
     AddToMoveScore 1
+    GoTo Expert_UTurn_CheckSpeed
 
 Expert_UTurn_CheckSpeed:
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_UTurn_ScorePlus1
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_UTurn_FastScorePlus1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 45, Expert_UTurn_ScorePlus1
     IfRandomLessThan 128, Expert_UTurn_End
+    AddToMoveScore -1
+    GoTo Expert_UTurn_End
+
+Expert_UTurn_FastScorePlus1:
+    IfRandomLessThan 128, Expert_UTurn_End
+    AddToMoveScore 1
+    GoTo Expert_UTurn_End
 
 Expert_UTurn_ScorePlus1:
     AddToMoveScore 1
+    GoTo Expert_UTurn_End
 
 Expert_UTurn_End:
     PopOrEnd 
