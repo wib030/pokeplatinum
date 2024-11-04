@@ -26,12 +26,12 @@
             "species": "SPECIES_CASTFORM",
             "form": 0,
             "level": 24,
-            "item": "ITEM_NONE",
+            "item": "ITEM_SMOOTH_ROCK",
             "moves": [
                 "MOVE_WEATHER_BALL",
-				"MOVE_SHOCK_WAVE",
+				"MOVE_CHARGE_BEAM",
 				"MOVE_ICY_WIND",
-				"MOVE_SOLAR_BEAM"
+				"MOVE_SILVER_WIND"
             ],
             "power": 100,
             "ball_seal": 0
