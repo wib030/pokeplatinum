@@ -683,7 +683,7 @@
     .macro IfPartyMemberHasBattleEffect battler, move, jump
     .long 118
     .long \battler
-    .long \battle_effect
+    .long \move
     .long (\jump-.) / 4 - 1
     .endm
 
