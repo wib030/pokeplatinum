@@ -5900,8 +5900,9 @@ Expert_UTurn_TryScoreMinus2:
 
 Expert_UTurn_CheckPartyDamage:
     IfPartyMemberDealsMoreDamage USE_MAX_DAMAGE, Expert_UTurn_CheckTargetHP
-    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn_CheckTargetHP
-    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_UTurn_CheckTargetHP
+    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, MOVE_ZAP_CANNON, Expert_UTurn_CheckTargetHP
+    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, MOVE_U_TURN, Expert_UTurn_CheckTargetHP
+    IfPartyMemberHasBattleEffect AI_BATTLER_ATTACKER, MOVE_TELEPORT, Expert_UTurn_CheckTargetHP
     IfRandomLessThan 64, Expert_UTurn_CheckTargetHP
     AddToMoveScore -2
     GoTo Expert_UTurn_End
