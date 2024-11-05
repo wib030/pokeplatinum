@@ -3562,27 +3562,65 @@ static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleCo
         slot1 = slot2 = battleCtx->selectedPartySlot[battler];
     }
 
-    party = BattleSystem_Party(battleSys, battler);
-    for (i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
-        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+    switch (inBattler) {
+        default:
+            break;
 
-        if (i != slot1 && i != slot2
-        && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
-        && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
-        && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
-        && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
+        case AI_BATTLER_ATTACKER:
 
-            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+            party = BattleSystem_Party(battleSys, battler);
+            for (i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+                Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
 
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                if (i != slot1 && i != slot2
+                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
 
-                if (move == expected) {
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+                        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+                        if (move == expected) {
                     
-                    AIScript_Iter(battleCtx, jump);
-                    return;
+                            AIScript_Iter(battleCtx, jump);
+                            return;
+                        }
+                    }
                 }
             }
-        }
+            break;
+
+        case AI_BATTLER_DEFENDER_PARTNER:
+        case AI_BATTLER_ATTACKER_PARTNER:
+            if (battleCtx->battleMons[battler].curHP == 0) {
+                break;
+            }
+
+            party = BattleSystem_Party(battleSys, battler);
+            for (i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+                Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+                if (i != slot1 && i != slot2
+                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
+
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+                        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+                        if (move == expected) {
+                    
+                            AIScript_Iter(battleCtx, jump);
+                            return;
+                        }
+                    }
+                }
+            }
+            break;
     }
 }
 
