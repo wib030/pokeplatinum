@@ -1791,10 +1791,10 @@ static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleCo
 
     Party *party; // this must be declared first to match
     int inBattler = AIScript_Read(battleCtx);
-    int expected = AIScript_Read(battleCtx);
+    u16 expected = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int effect;
+    int i, j;
     u16 move;
 
     u8 slot1, slot2;
@@ -1806,7 +1806,7 @@ static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleCo
     }
 
     party = BattleSystem_Party(battleSys, battler);
-    for (int i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+    for (i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
         Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
 
         if (i != slot1 && i != slot2
@@ -1815,17 +1815,11 @@ static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleCo
         && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
         && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
 
-            for (int j = 0; j < LEARNED_MOVES_MAX; j++) {
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-                if (move == MOVE_NONE) {
-                    break;
-                }
-
-                effect = MOVE_DATA(move).effect;
-
-                if (effect == expected) {
+                if (move == expected) {
                     
                     AIScript_Iter(battleCtx, jump);
                     return;
