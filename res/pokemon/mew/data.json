@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_SYNCHRONIZE",
-        "ABILITY_RANDOM_SELECT"
+        "ABILITY_GENETIC_FREAK"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

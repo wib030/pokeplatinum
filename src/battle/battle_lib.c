@@ -4074,7 +4074,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 if (battleCtx->battleMons[battler].randomAbilityAnnounced == FALSE
                 && battleCtx->battleMons[battler].curHP
-                && Battler_Ability(battleCtx, battler) == ABILITY_RANDOM_SELECT)
+                && (Battler_Ability(battleCtx, battler) == ABILITY_RANDOM_SELECT || Battler_Ability(battleCtx, battler) == ABILITY_GENETIC_FREAK))
 				{
 					do
 					{
@@ -4082,6 +4082,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						
 						if ((abilityChosen != ABILITY_NONE)
 						&& (abilityChosen != ABILITY_RANDOM_SELECT)
+						&& (abilityChosen != ABILITY_GENETIC_FREAK)
 						&& (abilityChosen != ABILITY_TRACE)
 						&& (abilityChosen != ABILITY_MULTITYPE)
 						&& (abilityChosen != ABILITY_IMPOSTER)

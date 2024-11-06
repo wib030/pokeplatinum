@@ -609,4 +609,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">PEST</language>
 	</row>
+	<row id="pl_msg_00000610_00152" index="152">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GENETIC FREAK</language>
+	</row>
 </body>

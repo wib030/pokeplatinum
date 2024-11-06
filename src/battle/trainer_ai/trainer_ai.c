@@ -1600,6 +1600,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
                 || battleCtx->battleMons[battler].ability == ABILITY_FRISK
                 || battleCtx->battleMons[battler].ability == ABILITY_MOLD_BREAKER
                 || battleCtx->battleMons[battler].ability == ABILITY_PRESSURE
+				|| battleCtx->battleMons[battler].ability == ABILITY_GENETIC_FREAK
                 || battleCtx->battleMons[battler].ability == ABILITY_RANDOM_SELECT) {
                 tmpAbility = battleCtx->battleMons[battler].ability;
             } else {
