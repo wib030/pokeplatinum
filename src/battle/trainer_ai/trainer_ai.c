@@ -956,8 +956,17 @@ static void AICmd_IfHPPercentLessThan(BattleSystem *battleSys, BattleContext *ba
     u8 battler = AIScript_Battler(battleCtx, inBattler);
     u32 hpPercent = battleCtx->battleMons[battler].curHP * 100 / battleCtx->battleMons[battler].maxHP;
 
-    if (hpPercent < targetPercent) {
-        AIScript_Iter(battleCtx, jump);
+    if (battleCtx->battleMons[battler].maxHP == 1) {
+        if (battleCtx->battleMons[battler].heldItem != ITEM_FOCUS_SASH
+        && battleCtx->battleMons[battler].heldItem != ITEM_FOCUS_BAND) {
+
+            AIScript_Iter(battleCtx, jump);
+        }
+    }
+    else {
+        if (hpPercent < targetPercent) {
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 
@@ -971,8 +980,17 @@ static void AICmd_IfHPPercentGreaterThan(BattleSystem *battleSys, BattleContext 
     u8 battler = AIScript_Battler(battleCtx, inBattler);
     u32 hpPercent = battleCtx->battleMons[battler].curHP * 100 / battleCtx->battleMons[battler].maxHP;
 
-    if (hpPercent > targetPercent) {
-        AIScript_Iter(battleCtx, jump);
+    if (battleCtx->battleMons[battler].maxHP == 1) {
+        if (battleCtx->battleMons[battler].heldItem == ITEM_FOCUS_SASH
+        || battleCtx->battleMons[battler].heldItem == ITEM_FOCUS_BAND) {
+
+            AIScript_Iter(battleCtx, jump);
+        }
+    }
+    else {
+        if (hpPercent > targetPercent) {
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 
