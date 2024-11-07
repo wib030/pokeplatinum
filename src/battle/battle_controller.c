@@ -3447,7 +3447,7 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
 				DEFENDER_TURN_FLAGS.enduring_ability = TRUE;
 			}
 			
-			if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_PEST && (BattleSystem_RandNext(battleSys) % 100) < 10)
+			if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_PEST && (BattleSystem_RandNext(battleSys) % 100) < 20)
 			&& (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MOLD_BREAKER))
 			{
                 DEFENDER_TURN_FLAGS.enduring_ability = TRUE;
