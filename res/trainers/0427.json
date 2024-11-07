@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_FLAREON",
             "form": 0,
-            "level": 42,
+            "level": 43,
             "item": "ITEM_ZOOM_LENS",
             "moves": [
                 "MOVE_HELPING_HAND",
@@ -25,7 +26,7 @@
         {
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 42,
+            "level": 43,
             "item": "ITEM_POKE_DOLL",
             "moves": [
                 "MOVE_FRUSTRATION",
@@ -39,7 +40,7 @@
 		{
             "species": "SPECIES_GALLADE",
             "form": 0,
-            "level": 42,
+            "level": 43,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_GRUDGE",

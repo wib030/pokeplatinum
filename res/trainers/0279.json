@@ -5,14 +5,15 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
-		"AI_FLAG_BATON_PASS"
+		"AI_FLAG_BATON_PASS",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_WING_ATTACK",
@@ -27,7 +28,7 @@
 		{
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_BUG_BITE",

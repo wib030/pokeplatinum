@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_WORMADAM",
             "form": 2,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -26,7 +27,7 @@
         {
             "species": "SPECIES_PROBOPASS",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_SMOOTH_ROCK",
             "moves": [
                 "MOVE_POWER_GEM",
@@ -41,7 +42,7 @@
         {
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_SHUCA_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -56,7 +57,7 @@
 		{
             "species": "SPECIES_EMPOLEON",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_SURF",
@@ -71,7 +72,7 @@
 		{
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_OCCA_BERRY",
             "moves": [
                 "MOVE_BUG_BITE",

@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_HITMONCHAN",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_LUCKY_PUNCH",
             "moves": [
                 "MOVE_FAKE_OUT",
@@ -25,7 +26,7 @@
         {
             "species": "SPECIES_ROTOM",
             "form": 3,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_ELECTIRIZER",
             "moves": [
                 "MOVE_REFLECT",
@@ -39,7 +40,7 @@
         {
             "species": "SPECIES_DUSTOX",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_POKE_DOLL",
             "moves": [
                 "MOVE_CONFUSION",
@@ -53,7 +54,7 @@
         {
             "species": "SPECIES_TAUROS",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_BODY_SLAM",

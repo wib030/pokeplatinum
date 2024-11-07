@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_METRONOME",
             "moves": [
                 "MOVE_SWAGGER",
@@ -27,7 +28,7 @@
         {
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_NEVERMELTICE",
             "moves": [
                 "MOVE_CALM_MIND",
@@ -42,7 +43,7 @@
         {
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_TM78",
             "moves": [
                 "MOVE_TRICK_ROOM",

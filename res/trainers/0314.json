@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_BELDUM",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_STICK",
             "moves": [
                 "MOVE_IRON_HEAD",
@@ -24,7 +25,7 @@
 		{
             "species": "SPECIES_BRONZOR",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_IRON_PLATE",
             "moves": [
                 "MOVE_IRON_DEFENSE",

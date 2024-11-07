@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_GRUMPIG",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_ODOR_SLEUTH",
@@ -26,7 +27,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_ODOR_SLEUTH",

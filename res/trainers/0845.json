@@ -4,7 +4,8 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
@@ -47,7 +48,7 @@
                 "MOVE_SWORDS_DANCE",
                 "MOVE_SUCKER_PUNCH",
                 "MOVE_IRON_HEAD",
-                "MOVE_THUNDER_PUNCH"
+                "MOVE_DRAGON_RUSH"
             ],
             "power": 160,
             "ball_seal": 0,

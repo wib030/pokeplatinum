@@ -4,7 +4,8 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
@@ -62,10 +63,7 @@
             "level": 53,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_HIDDEN_POWER"
             ],
             "power": 255,
             "ball_seal": 0,
@@ -77,10 +75,7 @@
             "level": 53,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH",
-				"MOVE_SPLASH"
+                "MOVE_HIDDEN_POWER"
             ],
             "power": 254,
             "ball_seal": 0,

@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -25,7 +26,7 @@
         {
             "species": "SPECIES_GOLEM",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_ROCK_POLISH",
@@ -40,7 +41,7 @@
         {
             "species": "SPECIES_ROSERADE",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -54,7 +55,7 @@
 		{
             "species": "SPECIES_BLASTOISE",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_WATER_SPOUT",

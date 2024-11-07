@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_STARMIE",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_RECOVER",
@@ -26,7 +27,7 @@
         {
             "species": "SPECIES_POLITOED",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SURF",
@@ -41,7 +42,7 @@
         {
             "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_MIND_READER",

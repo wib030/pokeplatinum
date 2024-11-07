@@ -5,14 +5,15 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_BATON_PASS"
+		"AI_FLAG_BATON_PASS",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SKILL_SWAP",
@@ -27,7 +28,7 @@
         {
             "species": "SPECIES_SHEDINJA",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_SWORDS_DANCE",

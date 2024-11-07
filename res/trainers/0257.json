@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_MAGNEMITE",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SONIC_BOOM",
@@ -26,7 +27,7 @@
 		{
             "species": "SPECIES_MAGNEMITE",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SONIC_BOOM",
@@ -41,7 +42,7 @@
 		{
             "species": "SPECIES_MAGNEMITE",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SONIC_BOOM",
@@ -56,7 +57,7 @@
 		{
             "species": "SPECIES_MAGNEMITE",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SONIC_BOOM",

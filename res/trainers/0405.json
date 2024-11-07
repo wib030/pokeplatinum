@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -25,7 +26,7 @@
         {
             "species": "SPECIES_DRAPION",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_POISON_FANG",
@@ -39,7 +40,7 @@
         {
             "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_BRAVE_BIRD",
@@ -53,7 +54,7 @@
 		{
             "species": "SPECIES_GABITE",
             "form": 0,
-            "level": 43,
+            "level": 44,
             "item": "ITEM_YACHE_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",

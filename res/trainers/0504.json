@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-		"AI_FLAG_EXPERT"
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 40,
+            "level": 44,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_POUND",

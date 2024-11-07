@@ -4,14 +4,15 @@
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT"
+        "AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_LAVA_PLUME",
@@ -26,7 +27,7 @@
         {
             "species": "SPECIES_NUZLEAF",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_SOLAR_BEAM",
@@ -41,7 +42,7 @@
         {
             "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 40,
+            "level": 41,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_FIRE_FANG",

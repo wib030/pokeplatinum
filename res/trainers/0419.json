@@ -5,14 +5,15 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_RISKY"
+		"AI_FLAG_RISKY",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_AZUMARILL",
             "form": 0,
-            "level": 42,
+            "level": 44,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_FLING",
@@ -27,7 +28,7 @@
 		{
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 42,
+            "level": 44,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_FLING",
@@ -42,7 +43,7 @@
 		{
             "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 42,
+            "level": 44,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_KNOCK_OFF",
