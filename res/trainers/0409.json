@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SPIKES",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_GOLEM",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_ROCK_POLISH",
@@ -41,7 +41,7 @@
         {
             "species": "SPECIES_ROSERADE",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -55,7 +55,7 @@
 		{
             "species": "SPECIES_BLASTOISE",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_WATER_SPOUT",
@@ -69,7 +69,7 @@
 		{
             "species": "SPECIES_SALAMENCE",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -83,7 +83,7 @@
 		{
             "species": "SPECIES_TOXICROAK",
             "form": 0,
-            "level": 49,
+            "level": 50,
             "item": "ITEM_WIDE_LENS",
             "moves": [
                 "MOVE_SWORDS_DANCE",
