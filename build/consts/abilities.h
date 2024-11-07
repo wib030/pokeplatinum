@@ -157,6 +157,7 @@ enum Ability {
     ABILITY_SHARPNESS = 149,
     ABILITY_STRANGLE_WEED = 150,
     ABILITY_PEST = 151,
+    ABILITY_GENETIC_FREAK = 152,
 };
 
 #endif

@@ -336,5 +336,6 @@
 #define subscript_color_change_before 327
 #define subscript_forecast_ignores 328
 #define subscript_atk_up_focus_energy 329
+#define subscript_hit_x_times_spikes 330
 
 #endif // NARC_SUB_SEQ_NAIX_

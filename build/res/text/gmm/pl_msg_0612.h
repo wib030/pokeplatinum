@@ -310,5 +310,7 @@
 #define pl_msg_00000610_00150 150
 // Chance to endure a\nfinishing attack.
 #define pl_msg_00000610_00151 151
+// Changes to a random\nAbility on switch-in.
+#define pl_msg_00000610_00152 152
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H
