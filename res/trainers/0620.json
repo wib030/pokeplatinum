@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_EMPOLEON",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_AGILITY",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_PIDGEOT",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_RAZOR_WIND",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_THUNDERBOLT",
@@ -54,7 +54,7 @@
         {
             "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_SHADOW_SNEAK",
@@ -68,7 +68,7 @@
         {
             "species": "SPECIES_LEAFEON",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_LEAF_BLADE",
@@ -82,7 +82,7 @@
         {
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_LUM_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",

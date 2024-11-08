@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_DRAPION",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_ACUPRESSURE",
@@ -41,7 +41,7 @@
         {
             "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_FLAIL",
@@ -55,7 +55,7 @@
 		{
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_YACHE_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -69,7 +69,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 1,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_WIDE_LENS",
             "moves": [
                 "MOVE_OVERHEAT",
@@ -83,7 +83,7 @@
 		{
             "species": "SPECIES_PURUGLY",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_SUPER_FANG",
