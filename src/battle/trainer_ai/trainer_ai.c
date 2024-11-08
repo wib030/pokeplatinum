@@ -4882,9 +4882,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     if(battleCtx->battleMons[battler].moveEffectsData.tauntedTurns > 0) {
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             move = battleCtx->battleMons[battler].moves[i];
-            moveClass = MOVE_DATA(move).class;
             
-            if (moveClass != CLASS_STATUS) {
+            if (MOVE_DATA(move).class != CLASS_STATUS) {
                 break;
             }
         }
