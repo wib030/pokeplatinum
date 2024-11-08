@@ -4967,33 +4967,38 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     }
                     // Status move here
                     else {
-
-                        if (effectiveness & (MOVE_STATUS_NO_EFFECTS | MOVE_STATUS_ABSORBED)) {
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
-                        else {
-                            moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
-                            if (moveEffect != MOVE_EFFECT_NONE) {
-                                if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
-                                    return FALSE;
-                                }
+                        if (battleCtx->battleMons[battler].moveEffectsData.tauntedTurns == 0) {
+                            if (effectiveness & (MOVE_STATUS_NO_EFFECTS | MOVE_STATUS_ABSORBED)) {
+                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                                return TRUE;
                             }
                             else {
-                                // For now, this code just checks if the target has no negative inflictable status
-                                // that could be applied. Later on, we'll need to check that the target won't
-                                // benefit from poison or burn, as well
-                                if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE) == FALSE) {
-                                    if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
-                                        if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
-                                            && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)) {
+                                moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
+                                if (moveEffect != MOVE_EFFECT_NONE) {
+                                    if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                                        return FALSE;
+                                    }
+                                }
+                                else {
+                                    // For now, this code just checks if the target has no negative inflictable status
+                                    // that could be applied. Later on, we'll need to check that the target won't
+                                    // benefit from poison or burn, as well
+                                    if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE) == FALSE) {
+                                        if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
+                                            if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
+                                                && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)) {
                                             
-                                            return FALSE;
+                                                return FALSE;
+                                            }
                                         }
                                     }
                                 }
-                            }
 
+                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                                return TRUE;
+                            }
+                        }
+                        else {
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
                         }
@@ -5149,7 +5154,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         }
                     }
 
-                    if (MOVE_DATA(move).class == CLASS_STATUS) {
+                    if (MOVE_DATA(move).class == CLASS_STATUS
+                        && battleCtx->battleMons[battler].moveEffectsData.tauntedTurns == 0) {
                         Party *party;
                         moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
                         moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, effect);
