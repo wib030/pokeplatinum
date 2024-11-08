@@ -2,7 +2,7 @@
     "name": "Honchkrow",
     "base_stats": {
         "hp": 100,
-        "attack": 125,
+        "attack": 136,
         "defense": 72,
         "speed": 81,
         "special_attack": 105,
@@ -68,6 +68,7 @@
             "TM47",
             "TM49",
             "TM51",
+			"TM56",
             "TM58",
             "TM63",
             "TM66",
@@ -102,11 +103,11 @@
 				"MOVE_NASTY_PLOT",
 				"MOVE_FAINT_ATTACK"
 			],
-            "45": [ 
-				"MOVE_NIGHT_SLASH",
-				"MOVE_SUCKER_PUNCH"
-			],
-            "55": "MOVE_DARK_PULSE"
+            "45": "MOVE_NIGHT_SLASH",
+			"48": "MOVE_SUCKER_PUNCH",
+			"53": "MOVE_BRAVE_BIRD",
+            "55": "MOVE_DARK_PULSE",
+			"61": "MOVE_RAZOR_WIND"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
