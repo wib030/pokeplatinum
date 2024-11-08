@@ -102,12 +102,13 @@
             "22": "MOVE_FEINT",
             "25": "MOVE_CALM_MIND",
             "29": "MOVE_FORCE_PALM",
-            "32": "MOVE_HI_JUMP_KICK",
+            "32": "MOVE_JUMP_KICK",
             "36": "MOVE_PSYCH_UP",
 			"38": "MOVE_RECOVER",
             "42": "MOVE_POWER_TRICK",
             "49": "MOVE_REVERSAL",
-			"52": "MOVE_CLOSE_COMBAT"
+			"52": "MOVE_HI_JUMP_KICK",
+			"56": "MOVE_FAKE_OUT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
