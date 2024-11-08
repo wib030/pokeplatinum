@@ -4877,6 +4877,25 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         defender2 = BATTLER_PLAYER_SLOT_1;
     }
 
+
+    // Early exit case if taunted into all status moves
+    if(battleCtx->battleMons[battler].moveEffectsData.tauntedTurns > 0) {
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+            move = battleCtx->battleMons[battler].moves[i];
+            moveClass = MOVE_DATA(move).class;
+            
+            if (moveClass != CLASS_STATUS) {
+                break;
+            }
+        }
+
+        if (i == LEARNED_MOVES_MAX) {
+            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+            return TRUE;
+        }
+    }
+    
+
     // Check all of this mon's attacking moves for immunities. If any of our moves can deal damage to
     // either of the opponents' battlers, do not switch.
     numMoves = 0;
