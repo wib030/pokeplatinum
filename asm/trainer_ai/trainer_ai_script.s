@@ -4175,15 +4175,15 @@ Expert_Endure_End:
     PopOrEnd 
 
 Expert_BatonPass:
-    ; If any of the attacker''s stat stages are at +3 or higher, 68.75% chance of score +2 if either
+    ; If any of the attacker''s stat stages are at +3 or higher, 75% chance of score +2 if either
     ; of the following is true:
-    ; - The attacker is slower than its target and has HP <= 70%
-    ; - The attacker is faster than its target and has HP <= 60%
+    ; - The attacker is slower than its target and has HP <= 95%
+    ; - The attacker is faster than its target and has HP <= 75%
     ; If neither are true, score +0.
     ;
     ; If any of the attacker''s stat stages are at +2, score -2 if either of the following is true:
-    ; - The attacker is slower than its target and has HP <= 70%
-    ; - The attacker is faster than its target and has HP <= 60%
+    ; - The attacker is slower than its target and has HP <= 95%
+    ; - The attacker is faster than its target and has HP <= 75%
     ; If neither are true, score +0.
     ;
     ; Otherwise, score -2.
@@ -4195,15 +4195,17 @@ Expert_BatonPass:
     GoTo Expert_BatonPass_CheckMediumStatStage
 
 Expert_BatonPass_HighStatStage_CheckSpeedAndHP:
+    AddToMoveScore 2
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_BatonPass_HighStatStage_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_BatonPass_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_BatonPass_End
     GoTo Expert_BatonPass_HighStatStage_TryScorePlus2
 
 Expert_BatonPass_HighStatStage_SlowerCheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_BatonPass_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 95, Expert_BatonPass_End
+    GoTo Expert_BatonPass_HighStatStage_TryScorePlus2
 
 Expert_BatonPass_HighStatStage_TryScorePlus2:
-    IfRandomLessThan 80, Expert_BatonPass_End
+    IfRandomLessThan 64, Expert_BatonPass_End
     AddToMoveScore 2
     GoTo Expert_BatonPass_End
 
@@ -4213,18 +4215,38 @@ Expert_BatonPass_CheckMediumStatStage:
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
-    GoTo Expert_BatonPass_ScoreMinus2
+    IfRandomLessThan 192, Expert_BatonPass_CheckMoveEffects
+    AddToMoveScore -1
+    GoTo Expert_BatonPass_CheckMoveEffects
 
 Expert_BatonPass_MediumStatStage_CheckSpeedAndHP:
+    AddToMoveScore 1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_BatonPass_MediumStatStage_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_BatonPass_ScoreMinus2
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_BatonPass_ScoreMinus2
     GoTo Expert_BatonPass_End
 
 Expert_BatonPass_MediumStatStage_SlowerCheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_BatonPass_End
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 95, Expert_BatonPass_CheckMoveEffects
+    GoTo Expert_BatonPass_ScoreMinus2
 
 Expert_BatonPass_ScoreMinus2:
     AddToMoveScore -2
+    GoTo Expert_BatonPass_CheckMoveEffects
+
+Expert_BatonPass_CheckMoveEffects:
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_BATON_PASS_GOOD, Expert_BatonPass_TryScorePlus1
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_BatonPass_TryScorePlus2
+    GoTo Expert_BatonPass_End
+
+Expert_BatonPass_TryScorePlus1:
+    IfRandomLessThan 32, Expert_BatonPass_End
+    AddToMoveScore 1
+    GoTo Expert_BatonPass_End
+
+Expert_BatonPass_TryScorePlus2:
+    IfRandomLessThan 192, Expert_BatonPass_End
+    AddToMoveScore 2
+    GoTo Expert_BatonPass_End
 
 Expert_BatonPass_End:
     PopOrEnd 
