@@ -4883,7 +4883,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             move = battleCtx->battleMons[battler].moves[i];
             
-            if (MOVE_DATA(move).class != CLASS_STATUS) {
+            if (MOVE_DATA(move).class != CLASS_STATUS
+                || move == MOVE_NONE) {
                 break;
             }
         }
