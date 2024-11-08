@@ -98,18 +98,19 @@
 			"11": "MOVE_MAGNITUDE",
             "13": "MOVE_RAPID_SPIN",
             "15": "MOVE_SWIFT",
+			"17": "MOVE_FURY_CUTTER",
             "19": "MOVE_FURY_SWIPES",
             "21": "MOVE_ROLLOUT",
             "22": [ 
 				"MOVE_CRUSH_CLAW",
 				"MOVE_CURSE"
 			],
-            "28": "MOVE_FURY_CUTTER",
+			"24": "MOVE_SAND_TOMB",
+			"28": "MOVE_SLASH",
 			"30": "MOVE_SPIKES",
-            "33": "MOVE_SAND_TOMB",
 			"37": "MOVE_SANDSTORM",
-            "40": "MOVE_SLASH",
-            "45": "MOVE_GYRO_BALL",
+            "40": "MOVE_GYRO_BALL",
+			"50": "MOVE_EARTHQUAKE",
 			"52": "MOVE_CLOSE_COMBAT"
         },
         "tutor": [

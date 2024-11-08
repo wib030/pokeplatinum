@@ -86,17 +86,19 @@
                 "MOVE_FURY_CUTTER"
             ],
             "7": "MOVE_FURY_ATTACK",
-            "9": "MOVE_KNOCK_OFF",
-            "13": "MOVE_AERIAL_ACE",
+			"9": "MOVE_AERIAL_ACE",
+            "13": "MOVE_KNOCK_OFF",
             "19": "MOVE_SLASH",
             "21": "MOVE_AIR_CUTTER",
+			"23": "MOVE_QUICK_ATTACK",
             "25": "MOVE_SWORDS_DANCE",
 			"29": "MOVE_WING_ATTACK",
             "31": "MOVE_AGILITY",
             "33": "MOVE_NIGHT_SLASH",
             "37": "MOVE_AIR_SLASH",
             "43": "MOVE_FEINT",
-            "45": "MOVE_FALSE_SWIPE"
+            "45": "MOVE_FALSE_SWIPE",
+			"55": "MOVE_BRAVE_BIRD"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

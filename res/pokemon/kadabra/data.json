@@ -97,14 +97,14 @@
             ],
             "16": "MOVE_CONFUSION",
             "18": "MOVE_DISABLE",
-            "24": "MOVE_PSYBEAM",
+            "21": "MOVE_PSYBEAM",
+			"24": "MOVE_REFLECT",
 			"26": "MOVE_MIRACLE_EYE",
-            "28": "MOVE_REFLECT",
+			"28": "MOVE_PSYCHO_CUT",
             "30": [
 				"MOVE_RECOVER",
 				"MOVE_KINESIS"
 			],
-            "34": "MOVE_PSYCHO_CUT",
             "36": "MOVE_ROLE_PLAY",
 			"38": "MOVE_MIND_READER",
             "40": "MOVE_PSYCHIC",

@@ -102,7 +102,7 @@
             "41": "MOVE_ASSURANCE",
             "46": "MOVE_CAPTIVATE",
             "49": "MOVE_NIGHT_SLASH",
-            "54": "MOVE_FEINT"
+            "50": "MOVE_FEINT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -97,14 +97,14 @@
             "10": "MOVE_BITE",
             "13": "MOVE_PURSUIT",
             "16": "MOVE_HYPER_FANG",
-            "19": "MOVE_SUCKER_PUNCH",
+            "19": "MOVE_ASSURANCE",
             "20": "MOVE_SCARY_FACE",
             "24": "MOVE_CRUNCH",
-            "29": "MOVE_ASSURANCE",
-			"30": "MOVE_EXTREME_SPEED",
+            "29": "MOVE_SUCKER_PUNCH",
             "34": "MOVE_SUPER_FANG",
             "39": "MOVE_DOUBLE_EDGE",
             "44": "MOVE_ENDEAVOR",
+			"46": "MOVE_EXTREME_SPEED",
 			"50": "MOVE_SHEER_COLD"
         },
         "tutor": [

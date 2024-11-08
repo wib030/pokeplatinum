@@ -75,16 +75,19 @@
                 "MOVE_GROWL"
             ],
             "5": "MOVE_QUICK_ATTACK",
-            "10": "MOVE_RAGE",
-            "14": "MOVE_FURY_ATTACK",
-            "19": "MOVE_PURSUIT",
-            "23": "MOVE_UPROAR",
-            "28": "MOVE_ACUPRESSURE",
+            "8": "MOVE_RAGE",
+            "12": "MOVE_FURY_ATTACK",
+            "15": "MOVE_PURSUIT",
+			"19": "MOVE_PLUCK",
+			"22": "MOVE_DOUBLE_HIT",
+			"26": "MOVE_AGILITY",
+            "29": "MOVE_UPROAR",
 			"30": "MOVE_WING_ATTACK",
-            "32": "MOVE_DOUBLE_HIT",
-            "37": "MOVE_AGILITY",
+            "33": "MOVE_ACUPRESSURE",
+			"37": "MOVE_HI_JUMP_KICK",
             "41": "MOVE_DRILL_PECK",
-            "46": "MOVE_ENDEAVOR"
+            "46": "MOVE_ENDEAVOR",
+			"50": "MOVE_THRASH"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

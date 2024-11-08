@@ -93,12 +93,10 @@
                 "MOVE_STUN_SPORE",
                 "MOVE_SLEEP_POWDER"
             ],
+			"17": "MOVE_PSYBEAM",
             "18": "MOVE_SUPERSONIC",
             "22": "MOVE_WHIRLWIND",
-            "24": [ 
-				"MOVE_PSYBEAM",
-				"MOVE_AIR_SLASH"
-			],
+            "24": "MOVE_AIR_SLASH",
             "28": "MOVE_SILVER_WIND",
             "30": "MOVE_TAILWIND",
 			"32": "MOVE_WING_ATTACK",

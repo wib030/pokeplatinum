@@ -94,13 +94,13 @@
                 "MOVE_STUN_SPORE",
                 "MOVE_POISON_POWDER"
             ],
-            "17": "MOVE_SPORE",
-            "22": "MOVE_SLASH",
-			"23": "MOVE_LEECH_LIFE",
+            "22": "MOVE_SPORE",
+			"29": "MOVE_SLASH",
             "30": "MOVE_GROWTH",
+			"32": "MOVE_LEECH_LIFE",
             "39": "MOVE_GIGA_DRAIN",
-            "47": "MOVE_AROMATHERAPY",
-            "55": "MOVE_X_SCISSOR"
+            "42": "MOVE_AROMATHERAPY",
+            "50": "MOVE_X_SCISSOR"
         },
         "tutor": [
             "MOVE_FURY_CUTTER",

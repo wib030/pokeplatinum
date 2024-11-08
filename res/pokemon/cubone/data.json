@@ -87,7 +87,7 @@
         "level_up": {
             "1": [ 
 				"MOVE_GROWL",
-				"MOVE_MUD_SHOT"
+				"MOVE_MUD_SLAP"
 			],
             "3": "MOVE_TAIL_WHIP",
             "7": "MOVE_BONE_CLUB",

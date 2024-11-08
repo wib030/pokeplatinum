@@ -90,8 +90,8 @@
             "32": "MOVE_AGILITY",
             "38": "MOVE_AIR_SLASH",
             "44": "MOVE_ROOST",
-			"48": "MOVE_RAZOR_WIND",
             "50": "MOVE_TAILWIND",
+			"52": "MOVE_RAZOR_WIND",
             "56": "MOVE_HEAT_WAVE"
         },
         "tutor": [

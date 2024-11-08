@@ -90,14 +90,13 @@
             "28": "MOVE_SPIKES",
 			"30": "MOVE_TELEPORT",
 			"33": "MOVE_AGILITY",
+			"35": "MOVE_SPIKE_CANNON",
 			"37": "MOVE_ROCK_BLAST",
-            "40": [ 
-				"MOVE_SPIKE_CANNON",
-				"MOVE_IRON_DEFENSE"
-			],
+            "40": "MOVE_IRON_DEFENSE",
 			"44": "MOVE_BRINE",
-			"49": "MOVE_ICE_BEAM",
-			"51": "MOVE_SHEER_COLD"
+			"47": "MOVE_ICE_BEAM",
+			"49": "MOVE_ICE_BALL",
+			"53": "MOVE_SHEER_COLD"
         },
         "tutor": [
             "MOVE_DIVE",

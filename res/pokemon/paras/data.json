@@ -91,8 +91,8 @@
             ],
             "17": "MOVE_SPORE",
             "22": "MOVE_SLASH",
-			"23": "MOVE_LEECH_LIFE",
             "27": "MOVE_GROWTH",
+			"30": "MOVE_LEECH_LIFE",
             "33": "MOVE_GIGA_DRAIN",
             "38": "MOVE_AROMATHERAPY",
             "43": "MOVE_X_SCISSOR"
