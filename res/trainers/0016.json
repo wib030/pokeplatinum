@@ -19,7 +19,7 @@
             "level": 17,
             "item": "ITEM_DAMP_ROCK",
             "moves": [
-                "MOVE_WATER_GUN",
+                "MOVE_WATER_PULSE",
 				"MOVE_WATER_SPORT",
 				"MOVE_RAIN_DANCE",
 				"MOVE_WHIRLPOOL"

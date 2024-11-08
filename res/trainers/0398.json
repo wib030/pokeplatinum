@@ -16,9 +16,9 @@
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_CONFUSION",
-				"MOVE_WATER_GUN",
+				"MOVE_WATER_PULSE",
 				"MOVE_ICY_WIND",
-				"MOVE_DISABLE"
+				"MOVE_FURY_SWIPES"
             ],
             "power": 40,
             "ball_seal": 0

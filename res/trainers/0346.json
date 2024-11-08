@@ -28,7 +28,7 @@
             "item": "ITEM_EXPERT_BELT",
             "moves": [
                 "MOVE_SLASH",
-				"MOVE_NIGHT_SLASH",
+				"MOVE_FAINT_ATTACK",
 				"MOVE_FAKE_OUT",
 				"MOVE_AERIAL_ACE"
             ],
