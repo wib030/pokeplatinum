@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_CACTURNE",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SPIKES",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_CRAWDAUNT",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_KNOCK_OFF",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_FEAROW",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HORN_DRILL",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_LUXRAY",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_VOLT_TACKLE",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_HOUNDOOM",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_WHITE_HERB",
             "moves": [
                 "MOVE_NASTY_PLOT",

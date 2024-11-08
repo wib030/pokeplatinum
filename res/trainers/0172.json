@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_HUNTAIL",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_STARF_BERRY",
             "moves": [
                 "MOVE_IRON_DEFENSE",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_GYARADOS",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_MILOTIC",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_RECOVER",

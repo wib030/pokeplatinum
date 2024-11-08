@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ARCANINE",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_SHUCA_BERRY",
             "moves": [
                 "MOVE_CLOSE_COMBAT",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_WHISCASH",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_RINDO_BERRY",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_GYARADOS",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_WACAN_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_OCCA_BERRY",
             "moves": [
                 "MOVE_SWORDS_DANCE",

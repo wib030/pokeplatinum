@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_UNOWN",
             "form": 1,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_HIDDEN_POWER"
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_UNOWN",
             "form": 14,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_HIDDEN_POWER"
@@ -36,7 +36,7 @@
 		{
             "species": "SPECIES_UNOWN",
             "form": 13,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_HIDDEN_POWER"
@@ -48,7 +48,7 @@
 		{
             "species": "SPECIES_UNOWN",
             "form": 4,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_HIDDEN_POWER"
@@ -60,7 +60,7 @@
 		{
             "species": "SPECIES_UNOWN",
             "form": 17,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_HIDDEN_POWER"
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_UNOWN",
             "form": 27,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_HIDDEN_POWER"

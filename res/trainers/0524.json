@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_AERODACTYL",
             "form": 0,
-            "level": 48,
+            "level": 49,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TAUNT",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_HIPPOWDON",
             "form": 0,
-            "level": 48,
+            "level": 49,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_TORTERRA",
             "form": 0,
-            "level": 48,
+            "level": 49,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",

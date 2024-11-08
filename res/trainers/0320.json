@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_ELECTRODE",
             "form": 0,
-            "level": 53,
+            "level": 54,
             "item": "ITEM_CUSTAP_BERRY",
             "moves": [
                 "MOVE_SPIKES",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_LANTURN",
             "form": 0,
-            "level": 53,
+            "level": 54,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
@@ -43,7 +43,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 53,
+            "level": 54,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_DRACO_METEOR",
@@ -58,7 +58,7 @@
         {
             "species": "SPECIES_LUXRAY",
             "form": 0,
-            "level": 53,
+            "level": 54,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_VOLT_TACKLE",
@@ -73,7 +73,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 1,
-            "level": 53,
+            "level": 54,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_OVERHEAT",

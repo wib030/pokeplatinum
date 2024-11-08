@@ -18,7 +18,7 @@
                 "MOVE_DRAIN_PUNCH",
 				"MOVE_SHADOW_PUNCH",
 				"MOVE_TOXIC_SPIKES",
-				"MOVE_THUNDER_PUNCH"
+				"MOVE_ICE_PUNCH"
             ],
             "power": 200,
             "ball_seal": 0

@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_LUMINEON",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_ATTRACT",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_WATER_SPOUT"
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_LANTURN",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AQUA_RING",
@@ -55,7 +55,7 @@
         {
             "species": "SPECIES_VAPOREON",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_SAND_ATTACK",
@@ -70,7 +70,7 @@
 		{
             "species": "SPECIES_GOREBYSS",
             "form": 0,
-            "level": 50,
+            "level": 52,
             "item": "ITEM_STARF_BERRY",
             "moves": [
                 "MOVE_AGILITY",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_BIBAREL",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AMNESIA",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_WAILORD",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_BLOCK",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_BLISSEY",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_CHARM",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_IMPRISON",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_GROWL",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_SNORLAX",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AMNESIA",

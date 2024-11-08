@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PLUSLE",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_NASTY_PLOT",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_MINUN",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_THUNDER_WAVE",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_PICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_ENDEAVOR",

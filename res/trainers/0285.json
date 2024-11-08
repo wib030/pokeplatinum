@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_FAKE_OUT",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_VOLT_TACKLE",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_THUNDER",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_DISCHARGE",
@@ -70,7 +70,7 @@
 		{
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_ENCORE",
@@ -85,7 +85,7 @@
 		{
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 52,
+            "level": 53,
             "item": "ITEM_PINK_SCARF",
             "moves": [
                 "MOVE_ATTRACT",

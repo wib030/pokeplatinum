@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GOLDUCK",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CORNN_BERRY",
             "moves": [
                 "MOVE_FURY_SWIPES",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_CORNN_BERRY",
             "moves": [
                 "MOVE_PECK",

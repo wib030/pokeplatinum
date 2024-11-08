@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_WIDE_LENS",
             "moves": [
                 "MOVE_DYNAMIC_PUNCH",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 55,
+            "level": 56,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_TRANSFORM"

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SHEDINJA",
             "form": 0,
-            "level": 53,
+            "level": 55,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SHADOW_SNEAK",
@@ -22,7 +22,7 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_NET_BALL"
         }
     ]
 }
