@@ -49,6 +49,7 @@
             "TM06",
             "TM10",
             "TM11",
+			"TM12",
             "TM15",
             "TM17",
             "TM21",
@@ -85,16 +86,18 @@
                 "MOVE_LEER",
                 "MOVE_EMBER"
             ],
-            "7": "MOVE_EMBER",
-            "10": "MOVE_SMOKE_SCREEN",
-            "16": "MOVE_FAINT_ATTACK",
-            "19": "MOVE_FIRE_SPIN",
-            "25": "MOVE_CONFUSE_RAY",
-            "28": "MOVE_FIRE_PUNCH",
+            "5": "MOVE_EMBER",
+            "8": "MOVE_SMOKE_SCREEN",
+            "12": "MOVE_FAINT_ATTACK",
+            "15": "MOVE_FIRE_SPIN",
+            "22": "MOVE_CONFUSE_RAY",
+            "29": "MOVE_FIRE_PUNCH",
+			"33": "MOVE_KNOCK_OFF",
             "36": "MOVE_LAVA_PLUME",
 			"39": "MOVE_MORNING_SUN",
-            "41": "MOVE_FLAMETHROWER",
-            "49": "MOVE_SUNNY_DAY",
+			"42": "MOVE_SUNNY_DAY",
+			"46": "MOVE_TELEPORT",
+            "49": "MOVE_FLAMETHROWER",
             "54": "MOVE_FIRE_BLAST"
         },
         "tutor": [
@@ -103,7 +106,8 @@
             "MOVE_FIRE_PUNCH",
             "MOVE_SNORE",
             "MOVE_HELPING_HAND",
-            "MOVE_HEAT_WAVE"
+            "MOVE_HEAT_WAVE",
+			"MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [
@@ -116,12 +120,7 @@
             "EVO_USE_ITEM_NIGHT",
             "ITEM_MAGMARIZER",
             "SPECIES_MAGMORTAR"
-        ],
-		[
-			"EVO_LEVEL_UP",
-            42,
-			"SPECIES_MAGMORTAR"
-		]
+        ]
     ],
     "footprint": {
         "has_footprint": true,

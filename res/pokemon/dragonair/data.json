@@ -90,15 +90,15 @@
             ],
 			"3": "MOVE_FRENZY_PLANT",
             "5": "MOVE_THUNDER_WAVE",
-            "11": "MOVE_DRAGON_BREATH",
+            "15": "MOVE_DRAGON_BREATH",
             "21": "MOVE_BODY_SLAM",
             "25": "MOVE_AGILITY",
 			"32": "MOVE_DRAGON_RAGE",
-            "39": "MOVE_DRAGON_RUSH",
+            "44": "MOVE_DRAGON_RUSH",
             "47": "MOVE_SAFEGUARD",
             "53": "MOVE_DRAGON_DANCE",
-            "61": "MOVE_OUTRAGE",
-            "67": "MOVE_HYPER_BEAM"
+            "56": "MOVE_OUTRAGE",
+            "58": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_ICY_WIND",

@@ -92,18 +92,20 @@
                 "MOVE_SMOG",
                 "MOVE_LEER"
             ],
-            "7": "MOVE_EMBER",
-            "10": "MOVE_SMOKE_SCREEN",
-            "16": "MOVE_FAINT_ATTACK",
-            "19": "MOVE_FIRE_SPIN",
-            "25": "MOVE_CONFUSE_RAY",
-            "28": "MOVE_FIRE_PUNCH",
+            "5": "MOVE_EMBER",
+            "8": "MOVE_SMOKE_SCREEN",
+            "12": "MOVE_FAINT_ATTACK",
+            "15": "MOVE_FIRE_SPIN",
+            "22": "MOVE_CONFUSE_RAY",
+            "29": "MOVE_FIRE_PUNCH",
+			"33": "MOVE_KNOCK_OFF",
             "37": "MOVE_LAVA_PLUME",
 			"39": "MOVE_MORNING_SUN",
-            "43": "MOVE_FLAMETHROWER",
-            "52": "MOVE_SUNNY_DAY",
-            "58": "MOVE_FIRE_BLAST",
-            "67": "MOVE_HYPER_BEAM"
+            "42": "MOVE_SUNNY_DAY",
+			"46": "MOVE_TELEPORT",
+			"49": "MOVE_FLAMETHROWER",
+            "56": "MOVE_FIRE_BLAST",
+            "61": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
@@ -111,7 +113,8 @@
             "MOVE_FIRE_PUNCH",
             "MOVE_SNORE",
             "MOVE_HELPING_HAND",
-            "MOVE_HEAT_WAVE"
+            "MOVE_HEAT_WAVE",
+			"MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

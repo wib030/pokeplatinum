@@ -97,12 +97,12 @@
 				"MOVE_SPIKES"
 			],
             "34": "MOVE_SWEET_SCENT",
+			"38": "MOVE_GIGA_DRAIN",
             "40": "MOVE_LIGHT_SCREEN",
             "46": "MOVE_BODY_SLAM",
 			"50": "MOVE_AROMATHERAPY",
             "54": "MOVE_SAFEGUARD",
-			"60": "MOVE_GIGA_DRAIN",
-            "65": "MOVE_SOLAR_BEAM"
+            "58": "MOVE_SOLAR_BEAM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

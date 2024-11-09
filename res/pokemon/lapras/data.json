@@ -102,7 +102,7 @@
             "37": "MOVE_BRINE",
 			"39": "MOVE_RECOVER",
             "43": "MOVE_SAFEGUARD",
-            "49": "MOVE_HYDRO_PUMP",
+            "47": "MOVE_HYDRO_PUMP",
             "51": "MOVE_SHEER_COLD"
         },
         "tutor": [

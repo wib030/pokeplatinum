@@ -85,19 +85,21 @@
 				"MOVE_BUBBLE",
                 "MOVE_HARDEN"
             ],
-			"3": "MOVE_FRENZY_PLANT",
-            "4": "MOVE_ABSORB",
-			"7": "MOVE_ROCK_THROW",
-            "11": "MOVE_LEER",
+			"3": [ 
+				"MOVE_FRENZY_PLANT",
+				"MOVE_ABSORB"
+			],
+            "5": "MOVE_LEER",
+			"13": "MOVE_ROLLOUT",
             "16": "MOVE_MUD_SHOT",
-            "21": "MOVE_SAND_ATTACK",
-            "26": "MOVE_ENDURE",
+            "19": "MOVE_SAND_ATTACK",
+            "23": "MOVE_ENDURE",
+			"27": "MOVE_ANCIENT_POWER",
             "31": "MOVE_AQUA_JET",
-            "36": "MOVE_MEGA_DRAIN",
-			"38": "MOVE_LEECH_LIFE",
-            "41": "MOVE_METAL_SOUND",
-            "46": "MOVE_ANCIENT_POWER",
-            "51": "MOVE_WRING_OUT"
+            "33": "MOVE_MEGA_DRAIN",
+			"35": "MOVE_LEECH_LIFE",
+            "38": "MOVE_METAL_SOUND",
+            "44": "MOVE_WRING_OUT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

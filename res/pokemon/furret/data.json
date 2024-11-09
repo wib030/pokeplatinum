@@ -95,7 +95,8 @@
                 "MOVE_SCRATCH",
                 "MOVE_FORESIGHT",
                 "MOVE_DEFENSE_CURL",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_QUICK_ATTACK",
+				"MOVE_AGILITY"
             ],
             "4": "MOVE_DEFENSE_CURL",
             "7": "MOVE_QUICK_ATTACK",

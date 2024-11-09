@@ -80,10 +80,10 @@
         "level_up": {
             "1": [ 
 				"MOVE_TACKLE",
-				"MOVE_WATER_GUN"
+				"MOVE_DEFENSE_CURL"
 			],
-            "2": "MOVE_DEFENSE_CURL",
-            "7": "MOVE_TAIL_WHIP",
+            "3": "MOVE_TAIL_WHIP",
+			"5": "MOVE_WATER_GUN",
             "15": "MOVE_ROLLOUT",
 			"16": "MOVE_BITE",
             "18": "MOVE_BUBBLE_BEAM",

@@ -96,9 +96,9 @@
                 "MOVE_SCRATCH",
                 "MOVE_LEER"
             ],
-            "6": "MOVE_WATER_GUN",
-            "8": "MOVE_RAGE",
-            "13": "MOVE_BITE",
+            "3": "MOVE_WATER_GUN",
+            "5": "MOVE_RAGE",
+            "10": "MOVE_BITE",
             "15": "MOVE_SCARY_FACE",
             "21": "MOVE_ICE_FANG",
             "24": "MOVE_FLAIL",
@@ -106,11 +106,11 @@
             "32": "MOVE_CRUNCH",
             "37": "MOVE_SLASH",
             "45": "MOVE_SCREECH",
+			"48": "MOVE_WATERFALL",
             "50": "MOVE_THRASH",
 			"54": "MOVE_SHEER_COLD",
-            "58": "MOVE_WATERFALL",
-            "63": "MOVE_SUPERPOWER",
-            "71": "MOVE_HYDRO_PUMP"
+            "56": "MOVE_SUPERPOWER",
+            "58": "MOVE_HYDRO_PUMP"
         },
         "tutor": [
             "MOVE_DIVE",
