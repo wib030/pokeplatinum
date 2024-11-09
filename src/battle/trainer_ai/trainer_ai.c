@@ -4267,13 +4267,16 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         }
         break;
 
+
     case MOVE_HIDDEN_POWER:
+    /*
         power = ((ivs[STAT_HP] & 2) >> 1)
             | ((ivs[STAT_ATTACK] & 2) >> 0)
             | ((ivs[STAT_DEFENSE] & 2) << 1)
             | ((ivs[STAT_SPEED] & 2) << 2)
             | ((ivs[STAT_SPECIAL_ATTACK] & 2) << 3)
             | ((ivs[STAT_SPECIAL_DEFENSE] & 2) << 4);
+    */
         type = ((ivs[STAT_HP] & 1) >> 0)
             | ((ivs[STAT_ATTACK] & 1) << 1)
             | ((ivs[STAT_DEFENSE] & 1) << 2)
@@ -4281,7 +4284,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             | ((ivs[STAT_SPECIAL_ATTACK] & 1) << 4)
             | ((ivs[STAT_SPECIAL_DEFENSE] & 1) << 5);
 
-        power = power * 40 / 63 + 30;
+        // power = power * 40 / 63 + 30;
+        damage = MOVE_DATA(move).power;
         type = (type * 15 / 63) + 1;
 
         if (type >= TYPE_MYSTERY) {
@@ -4322,6 +4326,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         type = TYPE_NORMAL;
         break;
 
+    /*
     case MOVE_MAGNITUDE:
         // Simulate a Magnitude roll
         power = BattleSystem_RandNext(battleSys) % 100;
@@ -4344,6 +4349,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         type = TYPE_NORMAL;
         break;
+    */
 
     case MOVE_SONIC_BOOM:
         damage = 20;
@@ -4362,7 +4368,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         if (sWeightToPower[i][0] != 0xFFFF) {
             power = sWeightToPower[i][1];
         } else {
-            power = 120;
+            power = 150;
         }
 
         break;
@@ -4568,8 +4574,21 @@ static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *
                 result = TRUE;
             }
 
-            if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_POISON_HEAL
+            if ((Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_POISON_HEAL
+                || Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_MAGIC_GUARD)
                 && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY_POISON) == FALSE))
+            {
+                result = TRUE;
+            }
+
+            if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_QUICK_FEET
+                && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & ~MON_CONDITION_PARALYSIS)) 
+            {
+                result = TRUE;
+            }
+
+            if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_MARVEL_SCALE
+                && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED)) 
             {
                 result = TRUE;
             }
@@ -4644,6 +4663,10 @@ static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         defenderMove = battleCtx->battleMons[defender].moves[i];
+        
+        if (defenderMove == MOVE_NONE) {
+            break;
+        }
 
         if (MOVE_DATA(defenderMove).class == CLASS_STATUS) {
             range = MOVE_DATA(defenderMove).range;
@@ -4686,6 +4709,11 @@ static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContex
     for (k = 0; k < LEARNED_MOVES_MAX; k++) {
         effectiveness = 0;
         move = battleCtx->battleMons[defender].moves[k];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
         moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
         movePower = MOVE_DATA(move).power;
 
@@ -4988,6 +5016,11 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     numMoves = 0;
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         move = battleCtx->battleMons[battler].moves[i];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
         type = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
         range = MOVE_DATA(move).range;
         effect = MOVE_DATA(move).effect;
@@ -6516,6 +6549,11 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
             if (effectiveness & checkEffectiveness) {
                 for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                     move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+                    if (move == MOVE_NONE) {
+                        break;
+                    }
+
                     moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
                     if (move) {
