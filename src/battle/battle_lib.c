@@ -8251,10 +8251,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         }
     }
 
-    if (BattleMon_Get(battleCtx, attacker, BATTLEMON_FLASH_FIRE, NULL) && moveType == TYPE_FIRE) {
-        damage = damage * 3 / 2;
-    }
-
     return damage + 2;
 }
 
