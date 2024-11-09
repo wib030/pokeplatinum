@@ -3846,7 +3846,7 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
             effect = MOVE_DATA(move).effect;
             movePower = MOVE_DATA(move).power;
 
-            if  (movePower == 1) {
+            if (movePower == 1) {
                 movePower = BattleSystem_CalcMoveDamage(battleSys,
                 battleCtx,
                 move,
@@ -3860,7 +3860,7 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
             }
             
 
-            movePower = 
+            //movePower = 
 
             if (moveClass != CLASS_STATUS) {
 
@@ -3913,7 +3913,7 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                         break;
 
                     // Knock Off
-                    case BATTLE_EFFECT_FLING:
+                    case BATTLE_EFFECT_REMOVE_HELD_ITEM:
                         AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
                         break;
 
