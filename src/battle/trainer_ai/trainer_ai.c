@@ -416,6 +416,7 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
 static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx);
+static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AIScript_PushCursor(BattleSystem *battleSys, BattleContext *battleCtx, int address);
 static BOOL AIScript_PopCursor(BattleSystem *battleSys, BattleContext *battleCtx);
 static int AIScript_Read(BattleContext *battleCtx);
@@ -656,6 +657,10 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     if (battleCtx->totalTurns < 1) {
         if (AI_CONTEXT.thinkingMask & AI_FLAG_OMNISCIENT) {
             TrainerAI_RevealAllInfo(battleSys, battleCtx);
+        }
+
+        if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
+            TrainerAI_RevealBasicInfo(battleSys, battleCtx);
         }
     }
 
@@ -3800,21 +3805,24 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
 
 
 /**
- * @brief Reveal all moves known by the opponent's party.
+ * @brief Reveal fundamental moves known by the opponent's party, and their
+ * abilities.
  * 
  * @param battleSys 
  * @param battleCtx 
  */
- /*
+
 static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    u8 partySlot, ability, moveType;
+    u8 partySlot, ability, moveType, side;
     u16 move, heldItem;
     int i, j, partyMax;
-    int moveClass, effect;
+    int moveClass, effect, movePower;
     Pokemon *mon;
 
-    partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
+    partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.attacker);
+
+    side = Battler_Side(battleSys, AI_CONTEXT.defender);
 
     for (i = 0; i < partyMax; i++) {
         mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
@@ -3828,9 +3836,31 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
         for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
             move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-            moveType = TrainerAI_MoveType(battleSys, battleCtx, AI_CONTEXT.defender, move);
+
+            if (move == MOVE_NONE) {
+                break;
+            }
+
+            moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
             moveClass = MOVE_DATA(move).class;
             effect = MOVE_DATA(move).effect;
+            movePower = MOVE_DATA(move).power;
+
+            if  (movePower == 1) {
+                movePower = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                move,
+                battleCtx->sideConditionsMask[side],
+                battleCtx->fieldConditionsMask,
+                movePower,
+                moveType,
+                AI_CONTEXT.defender,
+                AI_CONTEXT.attacker,
+                1);
+            }
+            
+
+            movePower = 
 
             if (moveClass != CLASS_STATUS) {
 
@@ -3840,21 +3870,72 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                     AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
                 }
 
-                if (effect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT
-                || effect == BATTLE_EFFECT_40_DAMAGE_FLAT
-                || effect == BATTLE_EFFECT_10_DAMAGE_FLAT) {
-
+                if (MOVE_DATA(move).priority > 0) {
                     AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                }
+
+                if (ability == ABILITY_TECHNICIAN
+                && move)
+
+                switch (effect) {
+                    default:
+                        break;
+
+                    // True damage moves
+                    case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+                    case BATTLE_EFFECT_40_DAMAGE_FLAT:
+                    case BATTLE_EFFECT_10_DAMAGE_FLAT:
+                    case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+                    case BATTLE_EFFECT_HALVE_HP:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Trapping moves
+                    case BATTLE_EFFECT_HIT_BEFORE_SWITCH:
+                    case BATTLE_EFFECT_BIND_HIT:
+                    case BATTLE_EFFECT_WHIRLPOOL:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Hazard-setting hit
+                    case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Hazards clearing
+                    case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Fling
+                    case BATTLE_EFFECT_FLING:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Knock Off
+                    case BATTLE_EFFECT_FLING:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Speed Drop
+                    case BATTLE_EFFECT_LOWER_SPEED_HIT:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
                 }
 
             }
             else {
-                break;
+
+                if (MapBattleEffectToStatusCondition(battleCtx, effect) != MON_CONDITION_NONE
+                    || MapBattleEffectToVolatileStatus(battleCtx, effect) != VOLATILE_CONDITION_NONE
+                    || MapBattleEffectToSideCondition(battleCtx, effect) != SIDE_CONDITION_NONE
+                    || MapBattleEffectToFieldCondition(battleCtx, effect) != FIELD_CONDITION_NONE) {
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                }
             }
         }
     }
 }
-*/
 
 /**
  * @brief Read a word from the AI script at the current cursor position,
