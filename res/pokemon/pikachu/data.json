@@ -82,21 +82,23 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_NASTY_PLOT",
                 "MOVE_THUNDER_SHOCK",
                 "MOVE_GROWL"
             ],
             "5": "MOVE_TAIL_WHIP",
-            "10": "MOVE_THUNDER_WAVE",
-            "13": "MOVE_QUICK_ATTACK",
-            "18": "MOVE_DOUBLE_TEAM",
-            "26": "MOVE_THUNDERBOLT",
-            "29": "MOVE_FEINT",
-            "34": "MOVE_AGILITY",
+            "10": "MOVE_QUICK_ATTACK",
+			"18": "MOVE_THUNDER_WAVE",
+			"21": "MOVE_FEINT",
+			"23": "MOVE_DOUBLE_TEAM",
+			"26": "MOVE_SPARK",
+            "30": "MOVE_AGILITY",
+			"34": "MOVE_DISCHARGE",
 			"36": "MOVE_ZAP_CANNON",
-            "37": "MOVE_DISCHARGE",
-            "42": "MOVE_LIGHT_SCREEN",
-            "45": "MOVE_THUNDER",
-			"50": "MOVE_VOLT_TACKLE"
+			"42": "MOVE_THUNDERBOLT",
+            "48": "MOVE_THUNDER",
+			"51": "MOVE_VOLT_TACKLE",
+			"53": "MOVE_LIGHT_SCREEN"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

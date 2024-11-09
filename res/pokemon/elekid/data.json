@@ -82,15 +82,16 @@
 				"MOVE_THUNDER_SHOCK",
                 "MOVE_LEER"
             ],
-            "10": "MOVE_LOW_KICK",
-            "16": "MOVE_SWIFT",
-            "19": "MOVE_SHOCK_WAVE",
-            "25": "MOVE_LIGHT_SCREEN",
-            "28": "MOVE_THUNDER_PUNCH",
-            "34": "MOVE_DISCHARGE",
-            "37": "MOVE_THUNDERBOLT",
-            "43": "MOVE_SCREECH",
-            "46": "MOVE_THUNDER"
+            "8": "MOVE_LOW_KICK",
+            "12": "MOVE_SWIFT",
+            "15": "MOVE_SHOCK_WAVE",
+			"19": "MOVE_THUNDER_WAVE",
+            "26": "MOVE_LIGHT_SCREEN",
+            "29": "MOVE_THUNDER_PUNCH",
+            "33": "MOVE_DISCHARGE",
+			"36": "MOVE_SCREECH",
+            "40": "MOVE_THUNDERBOLT",
+            "43": "MOVE_THUNDER"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

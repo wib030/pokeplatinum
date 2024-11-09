@@ -107,9 +107,12 @@
             ],
             "4": "MOVE_COPYCAT",
             "8": "MOVE_MEDITATE",
-            "11": "MOVE_ENCORE",
-            "15": "MOVE_DOUBLE_SLAP",
-            "18": "MOVE_MIMIC",
+            "11": "MOVE_DOUBLE_SLAP",
+            "15": [ 
+				"MOVE_MIMIC",
+				"MOVE_PSYWAVE"
+			],
+			"18": "MOVE_ENCORE",
             "22": [
                 "MOVE_LIGHT_SCREEN",
                 "MOVE_REFLECT"

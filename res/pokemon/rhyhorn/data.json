@@ -94,15 +94,16 @@
                 "MOVE_HORN_ATTACK",
                 "MOVE_TAIL_WHIP"
             ],
-            "9": "MOVE_STOMP",
-            "13": "MOVE_FURY_ATTACK",
-            "21": "MOVE_SCARY_FACE",
+			"5": "MOVE_FURY_ATTACK",
+			"9": "MOVE_SCARY_FACE",
+            "13": "MOVE_STOMP",
+			"21": "MOVE_MAGNITUDE",
             "25": "MOVE_ROCK_BLAST",
-            "33": "MOVE_TAKE_DOWN",
-            "37": "MOVE_HORN_DRILL",
-            "45": "MOVE_STONE_EDGE",
-            "49": "MOVE_EARTHQUAKE",
-            "57": "MOVE_MEGAHORN"
+            "28": "MOVE_TAKE_DOWN",
+            "33": "MOVE_HORN_DRILL",
+            "41": "MOVE_STONE_EDGE",
+            "45": "MOVE_EARTHQUAKE",
+            "49": "MOVE_MEGAHORN"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

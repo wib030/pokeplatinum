@@ -74,17 +74,17 @@
         ],
         "level_up": {
             "1": "MOVE_BUBBLE",
-            "4": "MOVE_SMOKE_SCREEN",
-            "8": "MOVE_LEER",
-            "11": "MOVE_WATER_GUN",
-            "14": "MOVE_FOCUS_ENERGY",
-            "18": "MOVE_BUBBLE_BEAM",
+            "5": "MOVE_SMOKE_SCREEN",
+            "9": "MOVE_LEER",
+            "13": "MOVE_WATER_GUN",
+			"17": "MOVE_TWISTER",
+            "21": "MOVE_BUBBLE_BEAM",
             "23": "MOVE_AGILITY",
-            "26": "MOVE_TWISTER",
-            "30": "MOVE_BRINE",
-            "35": "MOVE_HYDRO_PUMP",
-            "38": "MOVE_DRAGON_DANCE",
-            "42": "MOVE_DRAGON_PULSE"
+			"26": "MOVE_FOCUS_ENERGY",
+            "31": "MOVE_BRINE",
+            "42": "MOVE_HYDRO_PUMP",
+            "46": "MOVE_DRAGON_DANCE",
+            "48": "MOVE_DRAGON_PULSE"
         },
         "tutor": [
             "MOVE_DIVE",

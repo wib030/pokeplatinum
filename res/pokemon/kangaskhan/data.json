@@ -105,18 +105,20 @@
 				"MOVE_POUND"
             ],
 			"4": "MOVE_GROWL",
-            "8": "MOVE_FAKE_OUT",
-            "12": "MOVE_BITE",
-            "16": "MOVE_STOMP",
-            "20": "MOVE_FOCUS_ENERGY",
-            "24": "MOVE_HEADBUTT",
-			"28": [
-				"MOVE_SUCKER_PUNCH",
+            "7": "MOVE_FAKE_OUT",
+            "13": "MOVE_BITE",
+			"19": "MOVE_DOUBLE_HIT",
+			"21": "MOVE_FOCUS_ENERGY",
+            "23": "MOVE_STOMP",
+            "25": "MOVE_HEADBUTT",
+			"27": "MOVE_MEGA_PUNCH",
+			"29": [
 				"MOVE_DIZZY_PUNCH",
 				"MOVE_GUILLOTINE"
 			],
             "32": "MOVE_SPIKES",
 			"36": "MOVE_CRUNCH",
+			"38": "MOVE_SUCKER_PUNCH",
             "40": "MOVE_ENDURE",
 			"44": "MOVE_REVERSAL",
             "48": "MOVE_OUTRAGE",
