@@ -45,6 +45,8 @@
 #include "battle/battle_lib.h"
 #include "battle/battle_display.h"
 #include "battle/battle_io.h"
+#include "data/terrain/to_move.h"
+#include "data/battle/weight_to_power.h"
 
 static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry);
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum SideEffectType type, u32 effect);
@@ -8267,6 +8269,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 {
     // vars have to all be declared C89-style to match
     int i;
+    int effect;
     s32 damage = 0;
     s32 stageDivisor = 0;
     u8 moveType;
@@ -8283,8 +8286,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     u16 movePower;
     u16 itemTmp;
     u32 battleType;
+    u32 moveStatusFlags;
     DamageCalcParams attackerParams;
     DamageCalcParams defenderParams;
+    u16 cumStatBoosts;
+    int terrain;
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
@@ -8325,11 +8331,126 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     battleType = BattleSystem_BattleType(battleSys);
 
-    // Assign power; prefer the input power (used by variable-power moves, e.g. Gyro Ball)
-    if (inPower == 0) {
-        movePower = MOVE_DATA(move).power;
-    } else {
+    effect = MOVE_DATA(move).effect;
+    cumStatBoosts = 0;
+
+    if (inPower != 0){
         movePower = inPower;
+    }
+    else {
+        movePower = MOVE_DATA(move).power;
+        // Assign power; prefer the input power (used by variable-power moves, e.g. Gyro Ball)
+        if (movePower == 1
+            || effect == BATTLE_EFFECT_NATURE_POWER) {
+            switch (effect) {
+                default:
+                break;
+
+                case BATTLE_EFFECT_40_DAMAGE_FLAT:
+                    damage = 40;
+                    return damage;
+                    break;
+
+                case BATTLE_EFFECT_10_DAMAGE_FLAT:
+                    damage = 10;
+                    return damage;
+                    break;
+
+                case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+                    damage = battleCtx->battleMons[attacker].level;
+                    return damage;
+                    break;
+
+                case BATTLE_EFFECT_HALVE_HP:
+                    damage = battleCtx->battleMons[defender].curHP / 2;
+                    return damage;
+                    break;
+
+                case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+                    if (battleCtx->battleMons[defender].curHP > battleCtx->battleMons[attacker].curHP) {
+                        damage = battleCtx->battleMons[defender].curHP - battleCtx->battleMons[attacker].curHP;
+                    }
+                    else {
+                        damage = 0;
+                    }
+                    return damage;
+                    break;
+
+                case BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED:
+                    movePower = 1 + 25 * battleCtx->monSpeedValues[battleCtx->defender] / battleCtx->monSpeedValues[battleCtx->attacker];
+                    if (battleCtx->movePower > 150) {
+                        battleCtx->movePower = 150;
+                    }
+                    break;
+
+                case BATTLE_EFFECT_FLING:
+                    movePower = Battler_ItemFlingPower(battleCtx, attacker);
+                    break;
+
+                case BATTLE_EFFECT_NATURAL_GIFT:
+                    movePower = Battler_NaturalGiftPower(battleCtx, attacker);
+                    break;
+
+                case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
+                    for (i = 0; i < NUM_BOOSTABLE_STATS; i++) {
+
+                        if (BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_STAGE + i, NULL) > 6) {
+                            cumStatBoosts += BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_STAGE + i, NULL) - 6;
+                        }
+                    }
+
+                    movePower = 20 * cumStatBoosts;
+                    break;
+
+                case BATTLE_EFFECT_NATURE_POWER:
+                    terrain = BattleSystem_Terrain(battleSys);
+
+                    if (terrain > TERRAIN_SPECIAL) {
+                        terrain = TERRAIN_SPECIAL;
+                    }
+
+                    move = sTerrainMove[terrain];
+
+                    damage = BattleSystem_CalcMoveDamage(battleSys,
+                            battleCtx,
+                            move,
+                            sideConditions,
+                            fieldConditions,
+                            inPower,
+                            inType,
+                            attacker,
+                            defender,
+                            criticalMul);
+
+                    return damage;
+                    break;
+
+                case BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL:
+                    movePower = 52;
+                    break;
+                
+                case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
+                    movePower = battleCtx->battleMons[attacker].friendship * 2 / 5;
+                    break;
+
+                case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
+                    movePower = (255 - battleCtx->battleMons[attacker].friendship) * 2 / 5;
+                    break;
+
+                case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
+                    for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
+                        if (sWeightToPower[i][0] >= battleCtx->battleMons[defender].weight) {
+                            break;
+                        }
+                    }
+                    if (sWeightToPower[i][0] != 0xFFFF) {
+                        movePower = sWeightToPower[i][1];
+                    } else {
+                        movePower = 150;
+                    }
+                    break;
+            }
+        }
     }
 
     if (attackerParams.ability == ABILITY_NORMALIZE) {
