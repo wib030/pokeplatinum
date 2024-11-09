@@ -8144,7 +8144,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
         if ((sideConditions & SIDE_CONDITION_REFLECT) != FALSE
                 && criticalMul == 1
-                && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
+                && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS
+                && MOVE_DATA(move).effect != BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT) {
             if ((battleType & BATTLE_TYPE_DOUBLES)
                     && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
                 damage = damage * 2 / 3;
@@ -8784,7 +8785,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((sideConditions & SIDE_CONDITION_REFLECT) != FALSE
                 && criticalMul == 1
 				&& move != MOVE_FOCUS_PUNCH
-                && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
+                && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS
+                && MOVE_DATA(move).effect != BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT) {
             if ((battleType & BATTLE_TYPE_DOUBLES)
                     && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
                 damage = damage * 2 / 3;
