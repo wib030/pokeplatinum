@@ -3389,6 +3389,19 @@ BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defend
     return result;
 }
 
+BOOL PartyMon_IgnorableAbility(BattleContext *battleCtx, Pokemon *mon, int defender, int ability)
+{
+    BOOL result = FALSE;
+
+    if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) != ABILITY_MOLD_BREAKER) {
+        if (Battler_Ability(battleCtx, defender) == ability) {
+            result = TRUE;
+        }
+    }
+
+    return result;
+}
+
 BOOL BattleSystem_AnyReplacementMons(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     // Declarations here are done C89-style to match.
@@ -7791,7 +7804,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
     }
 
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE
+    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_THICK_FAT) == TRUE
             && (moveType == TYPE_FIRE || moveType == TYPE_ICE)) {
         movePower /= 2;
     }
@@ -7807,7 +7820,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         spAttackStat = spAttackStat * 3 / 2;
     }
 
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MARVEL_SCALE) == TRUE
+    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_MARVEL_SCALE) == TRUE
             && defenderParams.statusMask) {
         defenseStat = defenseStat * 3 / 2;
     }
@@ -7874,11 +7887,11 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
     if (moveType == TYPE_FIRE) {
 
-        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_HEATPROOF) == TRUE) {
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_HEATPROOF) == TRUE) {
             movePower /= 2;
         }
         
-        if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE) {
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_DRY_SKIN) == TRUE) {
             movePower = movePower * 5 / 4;
         }
 
@@ -7892,7 +7905,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         }
     }
 
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SIMPLE) == TRUE) {
+    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_SIMPLE) == TRUE) {
         defenseStage *= 2;
         if (defenseStage < -6) {
             defenseStage = -6;

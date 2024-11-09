@@ -664,6 +664,21 @@ u8 Battler_Ability(BattleContext *battleCtx, int battler);
 BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defender, int ability);
 
 /**
+ * @brief Check if the given defender has the specified ability, treating it as
+ * ignorable.
+ * 
+ * The ability will be ignored if the party Pokemon has Mold Breaker.
+ * 
+ * @param battleCtx 
+ * @param mon
+ * @param defender 
+ * @param ability
+ * @return TRUE if the defender has the given ability and it is not ignored;
+ * FALSE if the ability is ignored, or if the defender does not have it.
+ */
+BOOL PartyMon_IgnorableAbility(BattleContext *battleCtx, Pokemon *mon, int defender, int ability);
+
+/**
  * @brief Checks if there are any Pokemon which can act as a replacement for a
  * fainted one.
  * 
