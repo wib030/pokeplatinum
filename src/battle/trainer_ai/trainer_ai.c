@@ -7504,8 +7504,9 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (AI_OnlyIneffectiveMoves(battleSys, battleCtx, battler)) {
-            return TRUE;
+        // Anything below this function is not run for Joke fights
+        if (AI_CONTEXT.thinkingMask & AI_FLAG_JOKE) {
+            return FALSE;
         }
 
         if (AI_HasAbsorbAbilityInParty(battleSys, battleCtx, battler)) {
@@ -7513,6 +7514,10 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         }
 
         if (AI_IsAsleepWithNaturalCure(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (AI_OnlyIneffectiveMoves(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
