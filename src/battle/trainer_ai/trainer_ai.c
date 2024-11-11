@@ -3926,6 +3926,11 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                     case BATTLE_EFFECT_LOWER_SPEED_HIT:
                         AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
                         break;
+
+                    // Explosion and Self Destruct
+                    case BATTLE_EFFECT_HALVE_DEFENSE:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
                 }
 
             }
@@ -3936,6 +3941,35 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                     || MapBattleEffectToSideCondition(battleCtx, effect) != SIDE_CONDITION_NONE
                     || MapBattleEffectToFieldCondition(battleCtx, effect) != FIELD_CONDITION_NONE) {
                         AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                }
+
+                switch (effect) {
+                    default:
+                        break;
+
+                    // Healing moves
+                    case BATTLE_EFFECT_RESTORE_HALF_HP:
+                    case BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN:
+                    case BATTLE_EFFECT_SWALLOW:
+                    case BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE:
+                    case BATTLE_EFFECT_HEAL_IN_3_TURNS:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Baton pass
+                    case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Defog
+                    case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
+
+                    // Encore
+                    case BATTLE_EFFECT_ENCORE:
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        break;
                 }
             }
         }
