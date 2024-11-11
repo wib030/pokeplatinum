@@ -598,6 +598,11 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
         if (invalidMoves & FlagIndex(i)) {
             AI_CONTEXT.moveScore[i] = 0;
         }
+        else {
+            if (AI_CONTEXT.moveScore[i] >= 0) {
+                AI_CONTEXT.moveScore[i] += 1;
+            }
+        }
 
         AI_CONTEXT.moveDamageRolls[i] = 100 - (BattleSystem_RandNext(battleSys) % 16);
     }
