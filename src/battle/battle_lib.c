@@ -8291,6 +8291,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     DamageCalcParams defenderParams;
     u16 cumStatBoosts;
     int terrain;
+    int naturePowerMove;
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
@@ -8332,6 +8333,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     battleType = BattleSystem_BattleType(battleSys);
 
     effect = MOVE_DATA(move).effect;
+    moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
 
     if (inPower != 0){
@@ -8341,10 +8343,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = MOVE_DATA(move).power;
         // Assign power; prefer the input power (used by variable-power moves, e.g. Gyro Ball)
         if (movePower == 1
-            || effect == BATTLE_EFFECT_NATURE_POWER) {
+            || effect == BATTLE_EFFECT_NATURE_POWER
+            || effect == BATTLE_EFFECT_AVERAGE_HP) {
             switch (effect) {
                 default:
-                break;
+                    break;
 
                 case BATTLE_EFFECT_40_DAMAGE_FLAT:
                     damage = 40;
@@ -8409,11 +8412,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         terrain = TERRAIN_SPECIAL;
                     }
 
-                    move = sTerrainMove[terrain];
+                    naturePowerMove = sTerrainMove[terrain];
 
                     damage = BattleSystem_CalcMoveDamage(battleSys,
                             battleCtx,
-                            move,
+                            naturePowerMove,
                             sideConditions,
                             fieldConditions,
                             inPower,
@@ -8449,389 +8452,663 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         movePower = 150;
                     }
                     break;
+
+                case BATTLE_EFFECT_AVERAGE_HP:
+                    if(battleCtx->battleMons[defender].curHP > battleCtx->battleMons[attacker].curHP) {
+                        movePower = (battleCtx->battleMons[defender].curHP - battleCtx-battleMons[attacker].curHP) / 2;
+                    }
+                    else {
+                        movePower = 0;
+                    }
+                    return movePower;
+                    break;
             }
         }
     }
 
-    if (attackerParams.ability == ABILITY_NORMALIZE) {
-        moveType = TYPE_NORMAL;
-    } else if (inType == TYPE_NORMAL) {
-        moveType = MOVE_DATA(move).type;
-    } else {
-        moveType = inType & 0x3F;
+    // Attacker ability
+    switch (attackerParams.ability) {
+        default:
+            break;
+
+        case ABILITY_NORMALIZE:
+            moveType = TYPE_NORMAL;
+
+            if (inType == TYPE_NORMAL) {
+                moveType = MOVE_DATA(move).type;
+            }
+            else {
+                moveType = inType & 0x3F;
+            }
+
+            if (moveType == TYPE_NORMAL) {
+                movePower = movePower * 6 / 5;
+            }
+            break;
+
+        case ABILITY_TECHNICIAN:
+            if (move != MOVE_STRUGGLE
+                && movePower <= 60) {
+                    movePower = movePower * 3 / 2;
+                }
+            break;
+
+        case ABILITY_PURE_POWER:
+        case ABILITY_HUGE_POWER:
+            attackStat *= 2;
+            break;
+
+        case ABILITY_SLOW_START:
+            if (BattleContext_Get(battleSys, battleCtx, BATTLECTX_TOTAL_TURNS, NULL)
+                - BattleMon_Get(battleCtx, attacker, BATTLEMON_SLOW_START_TURN_NUMBER, NULL)
+                < 5)
+            {
+                    attackStat /= 2;
+            }
+            break;
+
+        case ABILITY_HUSTLE:
+            attackStat = attackStat * 3 / 2;
+            break;
+
+        case ABILITY_GUTS:
+            if (attackerParams.statusMask) {
+                attackStat = attackStat * 3 / 2;
+            }
+            break;
+
+        case ABILITY_FLARE_BOOST:
+            if (attackerParams.statusMask & MON_CONDITION_BURN) {
+                spAttackStat = spAttackStat * 3 / 2;
+            }
+            break;
+
+        case ABILITY_PLUS:
+            if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS)) {
+            spAttackStat = spAttackStat * 3 / 2;
+		    attackStat = attackStat * 3 / 2;
+            }
+            break;
+
+        case ABILITY_OVERGROW:
+            if (moveType == TYPE_GRASS) {
+                if (attackerParams.curHP <= (attackerParams.maxHP / 2)) {
+                    movePower = movePower * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_BLAZE:
+            if (moveType == TYPE_FIRE) {
+                if (attackerParams.curHP <= (attackerParams.maxHP / 2)) {
+                    movePower = movePower * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_TORRENT:
+            if (moveType == TYPE_WATER) {
+                if (attackerParams.curHP <= (attackerParams.maxHP / 2)) {
+                    movePower = movePower * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_SWARM:
+            if (moveType == TYPE_BUG) {
+                if (attackerParams.curHP <= (attackerParams.maxHP / 2)) {
+                    movePower = movePower * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_HEADACHE:
+            if (moveType == TYPE_PSYCHIC) {
+                if (attackerParams.curHP <= (attackerParams.maxHP / 2)) {
+                    movePower *= 2;
+                }
+            }
+            break;
+
+        case ABILITY_CHLOROPLAST:
+            if (moveType == TYPE_GRASS) {
+                movePower = movePower * 3 / 2;
+            }
+            break;
+
+        case ABILITY_SIMPLE:
+            attackStage *= 2;
+            if (attackStage < -6) {
+                attackStage = -6;
+            }
+            if (attackStage > 6) {
+                attackStage = 6;
+            }
+
+            spAttackStage *= 2;
+            if (spAttackStage < -6) {
+                spAttackStage = -6;
+            }
+            if (spAttackStage > 6) {
+                spAttackStage = 6;
+            }
+            break;
+
+        case ABILITY_UNAWARE:
+            defenseStage = 0;
+            spDefenseStage = 0;
+            break;
+
+        case ABILITY_RIVALRY:
+            if (attackerParams.gender == defenderParams.gender
+                && attackerParams.gender != GENDER_NONE) {
+                    movePower = movePower * 3 / 2;
+		            battleCtx->battleMons[battleCtx->attacker].rivalryFlag = FALSE;
+                }
+            else {
+                battleCtx->battleMons[battleCtx->attacker].rivalryFlag = TRUE;
+            }
+            break;
+
+        case ABILITY_SHEER_FORCE:
+            if (battleCtx->battleMons[battleCtx->attacker].sheerForceFlag == TRUE) {
+                movePower = movePower * 13 / 10;
+            }
+            break;
+
+        case ABILITY_IRON_FIST:
+            for (i = 0; i < NELEMS(sPunchingMoves); i++) {
+                if (move == sPunchingMoves[i]) {
+                    movePower = movePower * 13 / 10;
+                    break;
+                }
+            }
+            break;
+
+        case ABILITY_STRONG_JAW:
+            for (i = 0; i < NELEMS(sBitingMoves); i++) {
+                if (move == sBitingMoves[i]) {
+                    movePower = movePower * 3 / 2;
+                    break;
+                }
+            }
+            break;
+
+        case ABILITY_SHARPNESS:
+            for (i = 0; i < NELEMS(sSlicingMoves); i++) {
+                if (sSlicingMoves[i] == move) {
+                    movePower = movePower * 3 / 2;
+                    break;
+                }
+            }
+            break;
+
+        case ABILITY_MEGA_LAUNCHER:
+            for (i = 0; i < NELEMS(sPulseMoves); i++) {
+                if (sPulseMoves[i] == move) {
+                    movePower = movePower * 3 / 2;
+                    break;
+                }
+            }
+            break;
+
+        case ABILITY_TIDAL_FORCE:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
+                movePower = movePower * 13 / 10;
+            }
+            break;
+
+        case ABILITY_FORECAST:
+            // Castform offensive boosts
+		    // Rainy form
+            if (NO_CLOUD_NINE) {
+		        if (fieldConditions & FIELD_CONDITION_RAINING)
+		        {
+			        attackStat = attackStat / 2;
+			        spAttackStat = spAttackStat * 4 / 3;
+		        }
+		        // Sunny form
+		        if (fieldConditions & FIELD_CONDITION_SUNNY)
+		        {
+			        attackStat = attackStat * 3 / 2;
+			        spAttackStat = spAttackStat * 3 / 2;
+		        }
+		        // Snowy form
+		        if (fieldConditions & FIELD_CONDITION_HAILING)
+		        {
+			        attackStat = attackStat * 3 / 2;
+			        spAttackStat = spAttackStat * 5 / 3;
+		        }
+		        // Sandy form
+		        if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_FORECAST)
+		        {
+			        attackStat = attackStat * 3 / 2;
+			        spAttackStat = spAttackStat * 4 / 3;
+		        }
+            }
+            break;
+
+        case ABILITY_SOLAR_POWER:
+            if (NO_CLOUD_NINE) {
+                if (fieldConditions & FIELD_CONDITION_SUNNY) {
+                    spAttackStat = spAttackStat * 3 / 2;
+			        attackStat = attackStat * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_SAND_FORCE:
+            if (NO_CLOUD_NINE) {
+                if (fieldConditions & FIELD_CONDITION_SANDSTORM) {
+                    attackStat = attackStat * 13 / 10;
+			        spAttackStat = spAttackStat * 13 / 10;
+                }
+            }
+            break;
+
+        // Flash fire will no longer apply when you don't have flash fire ability
+        case ABILITY_FLASH_FIRE:
+            if (BattleMon_Get(battleCtx, attacker, BATTLEMON_FLASH_FIRE, NULL) && moveType == TYPE_FIRE) {
+                movePower = movePower * 3 / 2;
+            }
+            break;
+    }
+
+    // Defender ignorable ability
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, defenderParams.ability) == TRUE) {
+
+        switch (defenderParams.ability) {
+            default:
+                break;
+
+            case ABILITY_MINUS:
+                if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, defender, ABILITY_PLUS)) {
+                spDefenseStat = spDefenseStat * 3 / 2;
+		        defenseStat = defenseStat * 3 / 2;
+                }
+                break;
+
+            case ABILITY_THICK_FAT:
+                if (moveType == TYPE_FIRE || moveType == TYPE_ICE) {
+                    movePower /= 2;
+                }
+                break;
+
+            case ABILITY_MARVEL_SCALE:
+                if (defenderParams.statusMask) {
+                    defenseStat = defenseStat * 3 / 2;
+                }
+                break;
+
+            case ABILITY_HEATPROOF:
+                if (moveType == TYPE_FIRE) {
+                    movePower /= 2;
+                }
+                break;
+
+            case ABILITY_DRY_SKIN:
+                if (moveType == TYPE_FIRE) {
+                    movePower = movePower * 5 / 4;
+                }
+                break;
+
+            case ABILITY_SIMPLE:
+                defenseStage *= 2;
+                if (defenseStage < -6) {
+                    defenseStage = -6;
+                }
+                if (defenseStage > 6) {
+                    defenseStage = 6;
+                }
+
+                spDefenseStage *= 2;
+                if (spDefenseStage < -6) {
+                    spDefenseStage = -6;
+                }
+                if (spDefenseStage > 6) {
+                    spDefenseStage = 6;
+                }
+                break;
+
+            case ABILITY_UNAWARE:
+                attackStage = 0;
+                spAttackStage = 0;
+                break;
+
+            case ABILITY_FLOWER_GIFT:
+                if (NO_CLOUD_NINE) {
+                    if (fieldConditions & FIELD_CONDITION_SUNNY) {
+                        defenseStat = defenseStat * 3 / 2;
+                        spDefenseStat = spDefenseStat * 3 / 2;
+                    }
+                }
+                break;
+        }
+    }
+    else {
+        switch (defenderParams.ability) {
+            default:
+                break;
+
+            case ABILITY_FORECAST:
+            // Castform defensive boosts
+                if (NO_CLOUD_NINE) {
+                    // Rainy form
+		            if (fieldConditions & FIELD_CONDITION_RAINING)
+		            {
+			            defenseStat = defenseStat * 3 / 2;
+			            spDefenseStat = spDefenseStat * 3 / 2;
+		            }
+                    // Sunny form
+                    if (fieldConditions & FIELD_CONDITION_SUNNY)
+		            {
+			            defenseStat = defenseStat * 3 / 4;
+			            spDefenseStat = spDefenseStat * 3 / 4;
+		            }
+                    // Snowy form
+                    if (fieldConditions & FIELD_CONDITION_HAILING)
+		            {
+			            defenseStat = defenseStat * 3 / 2;
+			            spDefenseStat = spDefenseStat * 4 / 3;
+		            }
+                    // Sandy form
+		            if (fieldConditions & FIELD_CONDITION_SANDSTORM)
+		            {
+			            defenseStat = defenseStat * 5 / 3;
+			            spDefenseStat = spDefenseStat * 5 / 3;
+		            }
+                }
+                break;
+        }
+    }
+
+    // Attacker item
+    switch (attackerParams.heldItemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_CHOICE_ATK:
+            attackStat = attackStat * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_CHOICE_SPATK:
+            spAttackStat = spAttackStat * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_LATI_SPECIAL:
+            if ((battleType & BATTLE_TYPE_FRONTIER) == FALSE) {
+                if (attackerParams.species == SPECIES_LATIOS || attackerParams.species == SPECIES_LATIAS) {
+                    spAttackStat = spAttackStat * 3 / 2;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_CLAMPERL_SPATK:
+            if (attackerParams.species == SPECIES_CLAMPERL) {
+                spAttackStat *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_PIKA_SPATK_UP:
+            if (attackerParams.species == SPECIES_PIKACHU) {
+                attackStat *= 2;
+                spAttackStat *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_CUBONE_ATK_UP:
+            if (attackerParams.species == SPECIES_CUBONE
+                || attackerParams.species == SPECIES_MAROWAK) {
+
+                attackStat *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_DIALGA_BOOST:
+            if ((moveType == TYPE_DRAGON || moveType == TYPE_STEEL)
+                && attackerParams.species == SPECIES_DIALGA) {
+
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_PALKIA_BOOST:
+            if ((moveType == TYPE_DRAGON || moveType == TYPE_WATER)
+                && attackerParams.species == SPECIES_PALKIA) {
+
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_GIRATINA_BOOST:
+            if ((moveType == TYPE_DRAGON || moveType == TYPE_GHOST)
+                && attackerParams.species == SPECIES_GIRATINA) {
+
+                if ((BattleMon_Get(battleCtx, attacker, BATTLEMON_VOLATILE_STATUS, NULL) & VOLATILE_CONDITION_TRANSFORM) == FALSE) {
+                    movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_POWER_UP_PHYS:
+            if (moveClass == CLASS_PHYSICAL) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_POWER_UP_SPEC:
+            if (moveClass == CLASS_SPECIAL) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+            for (i = 0; i < NELEMS(sPunchingMoves); i++) {
+                if (sPunchingMoves[i] == move) {
+                    movePower = movePower * 6 / 5;
+                    break;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_BUG:
+        case HOLD_EFFECT_ARCEUS_BUG:
+            if (moveType == TYPE_BUG) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_STEEL:
+        case HOLD_EFFECT_ARCEUS_STEEL:
+            if (moveType == TYPE_STEEL) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_GROUND:
+        case HOLD_EFFECT_ARCEUS_GROUND:
+            if (moveType == TYPE_GROUND) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_ROCK:
+        case HOLD_EFFECT_ARCEUS_ROCK:
+            if (moveType == TYPE_ROCK) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_GRASS:
+        case HOLD_EFFECT_ARCEUS_GRASS:
+            if (moveType == TYPE_GRASS) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_DARK:
+        case HOLD_EFFECT_ARCEUS_DARK:
+            if (moveType == TYPE_DARK) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_FIGHT:
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+            if (moveType == TYPE_FIGHTING) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_ELECTRIC:
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+            if (moveType == TYPE_ELECTRIC) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_WATER:
+        case HOLD_EFFECT_ARCEUS_WATER:
+            if (moveType == TYPE_WATER) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_FLYING:
+        case HOLD_EFFECT_ARCEUS_FLYING:
+            if (moveType == TYPE_FLYING) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_POISON:
+        case HOLD_EFFECT_ARCEUS_POISON:
+            if (moveType == TYPE_POISON) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_ICE:
+        case HOLD_EFFECT_ARCEUS_ICE:
+            if (moveType == TYPE_ICE) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_GHOST:
+        case HOLD_EFFECT_ARCEUS_GHOST:
+            if (moveType == TYPE_GHOST) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_PSYCHIC:
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+            if (moveType == TYPE_PSYCHIC) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+
+        case HOLD_EFFECT_STRENGTHEN_FIRE:
+        case HOLD_EFFECT_ARCEUS_FIRE:
+            if (moveType == TYPE_FIRE) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_DRAGON:
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+            if (moveType == TYPE_DRAGON) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_NORMAL:
+            if (moveType == TYPE_NORMAL) {
+                movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            }
+            break;
+    }
+
+    // Defender item
+    switch (defenderParams.heldItemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_LATI_SPECIAL:
+            if ((battleType & BATTLE_TYPE_FRONTIER) == FALSE) {
+                if (attackerParams.species == SPECIES_LATIOS || attackerParams.species == SPECIES_LATIAS) {
+                    spDefenseStat = spDefenseStat * 3 / 2;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_RAISE_SPD_NO_STATUS:
+            spDefenseStat = spDefenseStat * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_CLAMPERL_SPDEF:
+            if (defenderParams.species == SPECIES_CLAMPERL) {
+                spDefenseStat *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_DITTO_DEF_UP:
+            if (defenderParams.species == SPECIES_DITTO) {
+                defenseStat *= 2;
+            }
+            break;
     }
 
     GF_ASSERT(battleCtx->powerMul >= 10);
     movePower = movePower * battleCtx->powerMul / 10;
 
-    if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE) && moveType == TYPE_ELECTRIC) {
-        movePower *= 2;
+    switch (moveType) {
+        default:
+            break;
+
+        case TYPE_ELECTRIC:
+            if (battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE) {
+                movePower *= 2;
+            }
+            if (BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_MUD_SPORT)) {
+                movePower /= 2;
+            }
+            break;
+
+        case TYPE_FIRE:
+            if (BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_WATER_SPORT)) {
+                movePower /= 2;
+            }
+            break;
     }
 
     if (battleCtx->turnFlags[attacker].helpingHand) {
         movePower = movePower * 15 / 10;
     }
 
-    if (attackerParams.ability == ABILITY_TECHNICIAN
-            && move != MOVE_STRUGGLE
-            && movePower <= 60) {
-        movePower = movePower * 15 / 10;
-    }
-
-    moveClass = MOVE_DATA(move).class;
-
-    if (attackerParams.ability == ABILITY_HUGE_POWER || attackerParams.ability == ABILITY_PURE_POWER) {
-        attackStat = attackStat * 2;
-    }
-    if (attackerParams.ability == ABILITY_SLOW_START
-            && BattleContext_Get(battleSys, battleCtx, BATTLECTX_TOTAL_TURNS, NULL)
-                - BattleMon_Get(battleCtx, attacker, BATTLEMON_SLOW_START_TURN_NUMBER, NULL)
-                < 5) {
-        attackStat /= 2;
-    }
-
-    for (i = 0; i < NELEMS(sTypeBoostingItems); i++) {
-        if (attackerParams.heldItemEffect == sTypeBoostingItems[i].itemEffect
-                && moveType == sTypeBoostingItems[i].type) {
-            movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
-            break;
-        }
-    }
-
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_CHOICE_ATK) {
-        attackStat = attackStat * 150 / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_CHOICE_SPATK) {
-        spAttackStat = spAttackStat * 150 / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_LATI_SPECIAL
-            && (battleType & BATTLE_TYPE_FRONTIER) == FALSE
-            && (attackerParams.species == SPECIES_LATIOS || attackerParams.species == SPECIES_LATIAS)) {
-        spAttackStat = spAttackStat * 150 / 100;
-    }
-    if (defenderParams.heldItemEffect == HOLD_EFFECT_LATI_SPECIAL
-            && (battleType & BATTLE_TYPE_FRONTIER) == FALSE
-            && (defenderParams.species == SPECIES_LATIOS || defenderParams.species == SPECIES_LATIAS)) {
-        spDefenseStat = spDefenseStat * 150 / 100;
-    }
-	if (defenderParams.heldItemEffect == HOLD_EFFECT_RAISE_SPD_NO_STATUS) {
-        spDefenseStat = spDefenseStat * 150 / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_CLAMPERL_SPATK
-            && attackerParams.species == SPECIES_CLAMPERL) {
-        spAttackStat *= 2;
-    }
-    if (defenderParams.heldItemEffect == HOLD_EFFECT_CLAMPERL_SPDEF
-            && defenderParams.species == SPECIES_CLAMPERL) {
-        spDefenseStat *= 2;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_PIKA_SPATK_UP
-            && attackerParams.species == SPECIES_PIKACHU) {
-        movePower *= 2;
-    }
-    if (defenderParams.heldItemEffect == HOLD_EFFECT_DITTO_DEF_UP
-            && defenderParams.species == SPECIES_DITTO) {
-        defenseStat *= 2;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_CUBONE_ATK_UP
-            && (attackerParams.species == SPECIES_CUBONE || attackerParams.species == SPECIES_MAROWAK)) {
-        attackStat *= 2;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_DIALGA_BOOST
-            && (moveType == TYPE_DRAGON || moveType == TYPE_STEEL)
-            && attackerParams.species == SPECIES_DIALGA) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_PALKIA_BOOST
-            && (moveType == TYPE_DRAGON || moveType == TYPE_WATER)
-            && attackerParams.species == SPECIES_PALKIA) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_GIRATINA_BOOST
-            && (moveType == TYPE_DRAGON || moveType == TYPE_GHOST)
-            && (BattleMon_Get(battleCtx, attacker, BATTLEMON_VOLATILE_STATUS, NULL) & VOLATILE_CONDITION_TRANSFORM) == FALSE
-            && attackerParams.species == SPECIES_GIRATINA) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_POWER_UP_PHYS
-            && moveClass == CLASS_PHYSICAL) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
-    }
-    if (attackerParams.heldItemEffect == HOLD_EFFECT_POWER_UP_SPEC
-            && moveClass == CLASS_SPECIAL) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
-    }
-
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE
-            && (moveType == TYPE_FIRE || moveType == TYPE_ICE)) {
-        movePower /= 2;
-    }
-
-    if (attackerParams.ability == ABILITY_HUSTLE) {
-        attackStat = attackStat * 150 / 100;
-    }
-    if (attackerParams.ability == ABILITY_GUTS && attackerParams.statusMask) {
-        attackStat = attackStat * 150 / 100;
-    }
-	
-	if (attackerParams.ability == ABILITY_FLARE_BOOST && attackerParams.statusMask & MON_CONDITION_BURN) {
-        spAttackStat = spAttackStat * 150 / 100;
-    }
-
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MARVEL_SCALE) == TRUE
-            && defenderParams.statusMask) {
-        defenseStat = defenseStat * 150 / 100;
-    }
-
-    if (attackerParams.ability == ABILITY_PLUS
-            && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS)) {
-        spAttackStat = spAttackStat * 150 / 100;
-		attackStat = attackStat * 150 / 100;
-    }
-    if (attackerParams.ability == ABILITY_MINUS
-            && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS)) {
-        spDefenseStat = spDefenseStat * 150 / 100;
-		defenseStat = defenseStat * 150 / 100;
-    }
-
-    if (moveType == TYPE_ELECTRIC
-            && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_MUD_SPORT)) {
-        movePower /= 2;
-    }
-    if (moveType == TYPE_FIRE
-            && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_WATER_SPORT)) {
-        movePower /= 2;
-    }
-
-    if (moveType == TYPE_GRASS
-            && attackerParams.ability == ABILITY_OVERGROW
-            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 150 / 100;
-    }
-    if (moveType == TYPE_FIRE
-            && attackerParams.ability == ABILITY_BLAZE
-            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 150 / 100;
-    }
-    if (moveType == TYPE_WATER
-            && attackerParams.ability == ABILITY_TORRENT
-            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 150 / 100;
-    }
-    if (moveType == TYPE_BUG
-            && attackerParams.ability == ABILITY_SWARM
-            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 150 / 100;
-    }
-	if (moveType == TYPE_PSYCHIC
-            && attackerParams.ability == ABILITY_HEADACHE
-            && attackerParams.curHP <= (attackerParams.maxHP / 2)) {
-        movePower = movePower * 2;
-    }
-	if (moveType == TYPE_GRASS
-            && attackerParams.ability == ABILITY_CHLOROPLAST) {
-        movePower = movePower * 150 / 100;
-    }
-
-    if (moveType == TYPE_FIRE
-            && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_HEATPROOF) == TRUE) {
-        movePower /= 2;
-    }
-    if (moveType == TYPE_FIRE
-            && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE) {
-        movePower = movePower * 125 / 100;
-    }
-
-    if (attackerParams.ability == ABILITY_SIMPLE) {
-        attackStage *= 2;
-        if (attackStage < -6) {
-            attackStage = -6;
-        }
-        if (attackStage > 6) {
-            attackStage = 6;
-        }
-
-        spAttackStage *= 2;
-        if (spAttackStage < -6) {
-            spAttackStage = -6;
-        }
-        if (spAttackStage > 6) {
-            spAttackStage = 6;
-        }
-    }
-
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SIMPLE) == TRUE) {
-        defenseStage *= 2;
-        if (defenseStage < -6) {
-            defenseStage = -6;
-        }
-        if (defenseStage > 6) {
-            defenseStage = 6;
-        }
-
-        spDefenseStage *= 2;
-        if (spDefenseStage < -6) {
-            spDefenseStage = -6;
-        }
-        if (spDefenseStage > 6) {
-            spDefenseStage = 6;
-        }
-    }
-
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE) {
-        attackStage = 0;
-        spAttackStage = 0;
-    }
-
-    if ((attackerParams.ability == ABILITY_UNAWARE)
-	|| (battleCtx->moveCur == MOVE_FOCUS_PUNCH)) {
+    // Focus Punch
+    if (effect == BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT) {
         defenseStage = 0;
         spDefenseStage = 0;
+
+        if (attackStage < 0) {
+            attackStage = 0;
+        }
     }
 
     attackStage += 6;
     defenseStage += 6;
     spAttackStage += 6;
     spDefenseStage += 6;
-
-    if (attackerParams.ability == ABILITY_RIVALRY
-    && attackerParams.gender == defenderParams.gender
-    && attackerParams.gender != GENDER_NONE
-    && defenderParams.gender != GENDER_NONE)
-	{
-        movePower = movePower * 150 / 100;
-		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = FALSE;
-    }
 	
-	
-    if (attackerParams.ability == ABILITY_RIVALRY
-    && attackerParams.gender != defenderParams.gender
-    && attackerParams.gender != GENDER_NONE
-    && defenderParams.gender != GENDER_NONE)
-	{
-		battleCtx->battleMons[battleCtx->attacker].rivalryFlag = TRUE;
-    }
-	
-	if (attackerParams.ability == ABILITY_NORMALIZE)
-	{
-		movePower = movePower * 12 / 10;
-	}
-	
-	if (battleCtx->moveCur == MOVE_KNOCK_OFF && DEFENDING_MON.heldItem != ITEM_NONE)
+	if (move == MOVE_KNOCK_OFF && DEFENDING_MON.heldItem != ITEM_NONE)
 	{
 		movePower = movePower * 15 / 10;
 	}
-	
-	if ((attackerParams.ability == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->attacker].sheerForceFlag == TRUE))
-	{
-		movePower = movePower * 13 / 10;
-	}
-
-    
-	for (i = 0; i < NELEMS(sPunchingMoves); i++)
-	{
-		if (sPunchingMoves[i] == move)
-		{
-			if (attackerParams.ability == ABILITY_IRON_FIST)
-			{
-				movePower = movePower * 13 / 10;
-			}
-
-			if (attackerParams.heldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
-			{
-				movePower = movePower * 12 / 10;
-			}
-			break;
-		}
-	}
-  
-    if (attackerParams.ability == ABILITY_STRONG_JAW) {
-	    for (i = 0; i < NELEMS(sBitingMoves); i++) {
-            if (sBitingMoves[i] == move) {
-                movePower = movePower * 3 / 2;
-                break;
-            }
-        }
-    }
-	
-    if (attackerParams.ability == ABILITY_SHARPNESS) {
-	    for (i = 0; i < NELEMS(sSlicingMoves); i++) {
-            if (sSlicingMoves[i] == move) {
-                movePower = movePower * 3 / 2;
-                break;
-            }
-        }
-    }
-	
-    if (attackerParams.ability == ABILITY_MEGA_LAUNCHER) {
-        for (i = 0; i < NELEMS(sPulseMoves); i++) {
-            if (sPulseMoves[i] == move) {
-                movePower = movePower * 3 / 2;
-                break;
-            }
-        }
-    }
 
     if (NO_CLOUD_NINE) {
-		//Special castform section
-		
-		//Rainy form
-		if ((fieldConditions & FIELD_CONDITION_RAINING) && attackerParams.ability == ABILITY_FORECAST)
-		{
-			attackStat = attackStat / 2;
-			spAttackStat = spAttackStat * 4 / 3;
-		}
-		if ((fieldConditions & FIELD_CONDITION_RAINING) && defenderParams.ability == ABILITY_FORECAST)
-		{
-			defenseStat = defenseStat * 3 / 2;
-			spDefenseStat = spDefenseStat * 3 / 2;
-		}
-		
-		//Sunny form
-		if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_FORECAST)
-		{
-			attackStat = attackStat * 3 / 2;
-			spAttackStat = spAttackStat * 3 / 2;
-		}
-		if ((fieldConditions & FIELD_CONDITION_SUNNY) && defenderParams.ability == ABILITY_FORECAST)
-		{
-			defenseStat = defenseStat * 3 / 4;
-			spDefenseStat = spDefenseStat * 3 / 4;
-		}
-		
-		//Snowy form
-		if ((fieldConditions & FIELD_CONDITION_HAILING) && attackerParams.ability == ABILITY_FORECAST)
-		{
-			attackStat = attackStat * 3 / 2;
-			spAttackStat = spAttackStat * 5 / 3;
-		}
-		if ((fieldConditions & FIELD_CONDITION_HAILING) && defenderParams.ability == ABILITY_FORECAST)
-		{
-			defenseStat = defenseStat * 3 / 2;
-			spDefenseStat = spDefenseStat * 4 / 3;
-		}
-		
-		//Sandy form
-		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_FORECAST)
-		{
-			attackStat = attackStat * 3 / 2;
-			spAttackStat = spAttackStat * 4 / 3;
-		}
-		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && defenderParams.ability == ABILITY_FORECAST)
-		{
-			defenseStat = defenseStat * 5 / 3;
-			spDefenseStat = spDefenseStat * 5 / 3;
-		}
-		
-        if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
-            spAttackStat = spAttackStat * 15 / 10;
-			attackStat = attackStat * 15 / 10;
-        }
-		
-		if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_SAND_FORCE) {
-            attackStat = attackStat * 13 / 10;
-			spAttackStat = spAttackStat * 13 / 10;
-        }
 
         if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
                 && (defenderParams.type1 == TYPE_ROCK || defenderParams.type2 == TYPE_ROCK)) {
@@ -8844,22 +9121,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             attackStat = attackStat * 15 / 10;
 			spAttackStat = spAttackStat * 15 / 10;
         }
-
-        if ((fieldConditions & FIELD_CONDITION_SUNNY)
-                && Battler_Ability(battleCtx, attacker) != ABILITY_MOLD_BREAKER
-                && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, defender, ABILITY_FLOWER_GIFT)
-				&& defenderParams.ability == ABILITY_FLOWER_GIFT) {
-			defenseStat = defenseStat * 15 / 10;
-            spDefenseStat = spDefenseStat * 15 / 10;
-        }
     }
-	
-	if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
-	&& (attackerParams.ability == ABILITY_TIDAL_FORCE))
-	{
-		movePower = movePower * 13 / 10;
-	}
-	
+
     //if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
     //    defenseStat = defenseStat / 2;
     //}
@@ -8902,8 +9165,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((sideConditions & SIDE_CONDITION_REFLECT) != FALSE
                 && criticalMul == 1
 				&& move != MOVE_FOCUS_PUNCH
-                && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS
-                && MOVE_DATA(move).effect != BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT) {
+                && effect != BATTLE_EFFECT_REMOVE_SCREENS
+                && effect != BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT) {
             if ((battleType & BATTLE_TYPE_DOUBLES)
                     && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
                 damage = damage * 2 / 3;
@@ -9007,10 +9270,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 break;
             }
         }
-    }
-
-    if (BattleMon_Get(battleCtx, attacker, BATTLEMON_FLASH_FIRE, NULL) && moveType == TYPE_FIRE) {
-        damage = damage * 15 / 10;
     }
 
     return damage + 2;
@@ -11987,4 +12246,66 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
     }
 
     return battleStatFlag;
+}
+
+
+static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int k;
+    int moveType, moveDamage, movePower;
+    u8 side;
+    u16 move, item;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    side = Battler_Side(battleSys, defender);
+    
+    item = Battler_HeldItem(battleCtx, battler);
+
+    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+        effectiveness = 0;
+        move = battleCtx->battleMons[defender].moves[k];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveType = CalcMoveType(battleSys, battleCtx, item, move)
+        movePower = MOVE_DATA(move).power;
+
+        if (movePower > 0) {
+            moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+            battleCtx,
+            move,
+            battleCtx->sideConditionsMask[side],
+            battleCtx->fieldConditionsMask,
+            movePower,
+            moveType,
+            attacker,
+            defender,
+            1);
+
+            moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+            battleCtx,
+            move,
+            moveType,
+            attacker,
+            defender,
+            moveDamage,
+            &effectiveness);
+
+            if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
+                if ((moveDamage > battleCtx->battleMons[defender].curHP)
+                    || (moveDamage > (battleCtx->battleMons[defender].maxHP / 2))) {
+                    result = TRUE;
+                    break;
+                }
+            }
+        }
+    }
+
+    return result;
 }
