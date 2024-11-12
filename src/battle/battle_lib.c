@@ -8292,6 +8292,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     u16 cumStatBoosts;
     int terrain;
     int naturePowerMove;
+    int rnd;
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
@@ -8429,7 +8430,23 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     break;
 
                 case BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL:
-                    movePower = 52;
+                    rnd = BattleSystem_RandNext(battleSys) % 256;
+                    // 80 percentile
+                    if (rnd >= 204) {
+                        movePower = 0;
+                        break;
+                    }
+                    // 70 percentile
+                    if (rnd >= 178) {
+                        movePower = 120;
+                        break;
+                    }
+                    // 40 percentile
+                    if (rnd >= 102) {
+                        movePower = 80;
+                        break;
+                    }
+                    movePower = 40;
                     break;
                 
                 case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
