@@ -8403,7 +8403,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         }
                     }
 
-                    movePower = 20 + 20 * cumStatBoosts;
+                    movePower = 60 + 20 * cumStatBoosts;
                     break;
 
                 case BATTLE_EFFECT_NATURE_POWER:
