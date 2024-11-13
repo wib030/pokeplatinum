@@ -8472,7 +8472,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
                 case BATTLE_EFFECT_AVERAGE_HP:
                     if(battleCtx->battleMons[defender].curHP > battleCtx->battleMons[attacker].curHP) {
-                        movePower = (battleCtx->battleMons[defender].curHP - battleCtx-battleMons[attacker].curHP) / 2;
+                        movePower = (battleCtx->battleMons[defender].curHP - battleCtx->battleMons[attacker].curHP) / 2;
                     }
                     else {
                         movePower = 0;
@@ -12279,7 +12279,7 @@ static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleCo
 
     side = Battler_Side(battleSys, defender);
     
-    item = Battler_HeldItem(battleCtx, battler);
+    item = Battler_HeldItem(battleCtx, attacker);
 
     for (k = 0; k < LEARNED_MOVES_MAX; k++) {
         effectiveness = 0;
@@ -12289,7 +12289,7 @@ static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleCo
             break;
         }
 
-        moveType = CalcMoveType(battleSys, battleCtx, item, move)
+        moveType = CalcMoveType(battleSys, battleCtx, item, move);
         movePower = MOVE_DATA(move).power;
 
         if (movePower > 0) {

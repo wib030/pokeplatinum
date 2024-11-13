@@ -1,7 +1,7 @@
 {
     "name": "Present",
     "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_ICE",
     "power": 1,
     "accuracy": 100,
     "pp": 15,
