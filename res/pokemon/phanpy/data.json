@@ -80,12 +80,12 @@
                 "MOVE_DEFENSE_CURL"
             ],
             "6": "MOVE_FLAIL",
-            "10": "MOVE_TAKE_DOWN",
+			"10": "MOVE_ROLLOUT",
 			"12": "MOVE_MAGNITUDE",
-            "15": "MOVE_ROLLOUT",
-            "19": "MOVE_NATURAL_GIFT",
+			"15": "MOVE_NATURAL_GIFT",
+			"19": "MOVE_ENDURE",
             "24": "MOVE_BODY_SLAM",
-            "28": "MOVE_ENDURE",
+			"28": "MOVE_TAKE_DOWN",
             "33": "MOVE_CHARM",
             "37": "MOVE_LAST_RESORT",
             "42": "MOVE_DOUBLE_EDGE"

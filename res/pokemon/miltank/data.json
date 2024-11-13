@@ -91,7 +91,11 @@
             "HM06"
         ],
         "level_up": {
-            "1": "MOVE_TACKLE",
+            "1": [ 
+				"MOVE_TACKLE",
+				"MOVE_SEISMIC_TOSS",
+				"MOVE_PRESENT"
+			],
             "3": "MOVE_GROWL",
             "5": "MOVE_DEFENSE_CURL",
             "8": "MOVE_STOMP",
@@ -101,6 +105,7 @@
             "24": "MOVE_BODY_SLAM",
 			"26": "MOVE_GUILLOTINE",
             "29": "MOVE_ZEN_HEADBUTT",
+			"31": "MOVE_PUNISHMENT",
             "35": "MOVE_CAPTIVATE",
             "41": "MOVE_GYRO_BALL",
             "48": "MOVE_HEAL_BELL",

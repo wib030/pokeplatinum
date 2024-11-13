@@ -90,25 +90,28 @@
         "level_up": {
             "1": [ 
 				"MOVE_TACKLE",
-				"MOVE_BUBBLE"
+				"MOVE_HARDEN"
 			],
-            "4": "MOVE_HARDEN",
-            "13": "MOVE_RECOVER",
-            "16": "MOVE_REFRESH",
-            "20": "MOVE_ROCK_BLAST",
-			"23": "MOVE_RAPID_SPIN",
-            "25": "MOVE_BUBBLE_BEAM",
-            "28": "MOVE_LUCKY_CHANT",
-			"30": [
+            "4": "MOVE_BUBBLE",
+            "8": "MOVE_RECOVER",
+			"10": "MOVE_BUBBLE_BEAM",
+            "13": "MOVE_REFRESH",
+			"17": "MOVE_ANCIENT_POWER",
+			"20": "MOVE_RAPID_SPIN",
+            "23": "MOVE_LUCKY_CHANT",
+			"25": [
 				"MOVE_TOXIC_SPIKES",
 				"MOVE_SPIKES"
 			],
-            "32": "MOVE_ANCIENT_POWER",
+			"27": "MOVE_BRINE",
+			"29": "MOVE_IRON_DEFENSE",
+			"31": "MOVE_ROCK_BLAST",
+			"35": "MOVE_ENDURE",
             "37": "MOVE_AQUA_RING",
-            "40": "MOVE_SPIKE_CANNON",
-            "44": "MOVE_POWER_GEM",
-            "48": "MOVE_MIRROR_COAT",
-            "53": "MOVE_EARTH_POWER"
+            "39": "MOVE_SPIKE_CANNON",
+            "41": "MOVE_POWER_GEM",
+            "45": "MOVE_MIRROR_COAT",
+            "47": "MOVE_EARTH_POWER"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

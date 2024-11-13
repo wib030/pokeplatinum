@@ -85,18 +85,19 @@
                 "MOVE_HORN_ATTACK",
                 "MOVE_GROWL",
                 "MOVE_DEFENSE_CURL",
-                "MOVE_FLAIL"
+                "MOVE_FLAIL",
+				"MOVE_MAGNITUDE",
+				"MOVE_FURY_ATTACK"
             ],
             "6": "MOVE_RAPID_SPIN",
-            "10": "MOVE_KNOCK_OFF",
-            "15": "MOVE_ROLLOUT",
-            "19": "MOVE_MAGNITUDE",
+            "10": "MOVE_ROLLOUT",
+			"15": "MOVE_ASSURANCE",
+			"19": "MOVE_KNOCK_OFF",
             "24": "MOVE_BODY_SLAM",
-            "25": "MOVE_FURY_ATTACK",
-            "31": "MOVE_ASSURANCE",
-            "39": "MOVE_SCARY_FACE",
-            "46": "MOVE_EARTHQUAKE",
-            "54": "MOVE_GIGA_IMPACT"
+			"30": "MOVE_ICE_SHARD",
+            "37": "MOVE_SCARY_FACE",
+            "43": "MOVE_EARTHQUAKE",
+            "50": "MOVE_GIGA_IMPACT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

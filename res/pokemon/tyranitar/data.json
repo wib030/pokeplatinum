@@ -111,17 +111,22 @@
                 "MOVE_BITE",
                 "MOVE_LEER"
             ],
+            "3": "MOVE_FRENZY_PLANT",
             "5": "MOVE_SANDSTORM",
+			"7": "MOVE_ROCK_THROW",
             "10": "MOVE_SCREECH",
-            "14": "MOVE_ROCK_SLIDE",
-            "19": "MOVE_SCARY_FACE",
-            "23": "MOVE_THRASH",
-            "28": "MOVE_DARK_PULSE",
-            "34": "MOVE_PAYBACK",
+			"14": "MOVE_SCARY_FACE",
+            "19": "MOVE_ROCK_SLIDE",
+            "28": "MOVE_THRASH",
+            "32": "MOVE_DARK_PULSE",
+			"35": "MOVE_PURSUIT",
+            "37": "MOVE_PAYBACK",
             "41": "MOVE_CRUNCH",
             "47": "MOVE_EARTHQUAKE",
+			"50": "MOVE_DRAGON_DANCE",
             "54": "MOVE_STONE_EDGE",
-            "70": "MOVE_HYPER_BEAM"
+            "57": "MOVE_HYPER_BEAM",
+			"60": "MOVE_GIGA_IMPACT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
@@ -136,6 +141,7 @@
             "MOVE_OUTRAGE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
+			"MOVE_KNOCK_OFF",
             "MOVE_UPROAR"
         ]
     },

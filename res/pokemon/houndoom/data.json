@@ -88,21 +88,23 @@
             "1": [
                 "MOVE_THUNDER_FANG",
                 "MOVE_LEER",
+				"MOVE_NASTY_PLOT",
                 "MOVE_EMBER"
             ],
             "4": "MOVE_HOWL",
-            "9": "MOVE_SMOG",
-            "14": "MOVE_ROAR",
-            "17": "MOVE_BITE",
-            "22": "MOVE_ODOR_SLEUTH",
-            "28": "MOVE_BEAT_UP",
-            "32": "MOVE_FIRE_FANG",
-            "38": "MOVE_FAINT_ATTACK",
+            "8": "MOVE_SMOG",
+            "13": "MOVE_ROAR",
+            "16": "MOVE_BITE",
+            "20": "MOVE_ODOR_SLEUTH",
+            "26": "MOVE_BEAT_UP",
+            "28": "MOVE_FIRE_FANG",
+            "34": "MOVE_FAINT_ATTACK",
+			"38": "MOVE_EMBARGO",
 			"40": "MOVE_MORNING_SUN",
-            "44": "MOVE_EMBARGO",
-			"46": "MOVE_NASTY_PLOT",
+			"42": "MOVE_PUNISHMENT",
             "48": "MOVE_FLAMETHROWER",
-            "54": "MOVE_CRUNCH"
+			"50": "MOVE_NASTY_PLOT",
+			"54": "MOVE_CRUNCH"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

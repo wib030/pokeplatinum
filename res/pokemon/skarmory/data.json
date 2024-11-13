@@ -91,18 +91,20 @@
                 "MOVE_PECK"
             ],
             "6": "MOVE_SAND_ATTACK",
-            "9": "MOVE_SWIFT",
-            "12": "MOVE_AGILITY",
+            "9": "MOVE_METAL_CLAW",
+			"12": "MOVE_AIR_CUTTER",
             "17": "MOVE_FURY_ATTACK",
             "20": "MOVE_FEINT",
-            "23": "MOVE_AIR_CUTTER",
-			"25": "MOVE_WING_ATTACK",
+			"25": "MOVE_AGILITY",
             "28": "MOVE_SPIKES",
-            "31": "MOVE_METAL_SOUND",
+			"31": "MOVE_WING_ATTACK",
             "34": "MOVE_STEEL_WING",
-            "39": "MOVE_AIR_SLASH",
-            "42": "MOVE_SLASH",
-            "45": "MOVE_NIGHT_SLASH"
+			"37": "MOVE_WHIRLWIND",
+            "39": "MOVE_SLASH",
+			"42": "MOVE_METAL_SOUND",
+			"45": "MOVE_AIR_SLASH",
+            "53": "MOVE_NIGHT_SLASH",
+			"56": "MOVE_BRAVE_BIRD"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
