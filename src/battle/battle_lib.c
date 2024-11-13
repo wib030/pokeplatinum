@@ -12326,3 +12326,125 @@ static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleCo
 
     return result;
 }
+
+int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot)
+{
+    Pokemon *mon;
+    u8 side, ability, monType1, monType2, itemEffect;
+    u32 spikesCount, toxicSpikesCount;
+    BOOL stealthRocks;
+    int spikesDivisor, toxicSpikesDivisor, rocksMultiplier;
+    int damage;
+
+    side = Battler_Side(battleSys, battler);
+    mon = BattleSystem_PartyPokemon(battleSys, battler, partySlot);
+
+    ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+    monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+    itemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
+
+    damage = 0;
+
+    if (ability == ABILITY_MAGIC_GUARD
+        || ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) == FALSE)) 
+    {
+        return damage;
+    }
+
+    spikesCount =  battleCtx->sideConditions[side].spikesLayers;
+    toxicSpikesCount = battleCtx->sideConditions[side].toxicSpikesLayers;
+    
+    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK) {
+        stealthRocks = TRUE;
+    }
+    else {
+        stealthRocks = FALSE;
+    }
+
+    switch (spikesCount) {
+        default:
+            // Set to 255 as safeguard against div by 0
+            spikesDivisor = 255;
+            break;
+
+        case 1:
+            spikesDivisor = 8;
+            break;
+
+        case 2:
+            spikesDivisor = 6;
+            break;
+
+        case 3:
+            spikesDivisor = 4;
+            break;
+    }
+
+    switch (toxicSpikesCount) {
+        default:
+            // Set to 255 as safeguard against div by 0
+            toxicSpikesDivisor = 255;
+            break;
+
+        case 1:
+            toxicSpikesDivisor = 16;
+            break;
+
+        case 2:
+            toxicSpikesDivisor = 8;
+            break;
+    }
+
+    if (stealthRocks == TRUE) {
+
+        rocksMultiplier = BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, monType1, monType2);
+
+        damage += ((Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL) / 8) * rocksMultiplier / 40) * 3 / 4;
+        
+        if (damage < 1) {
+            damage += 1;
+        }
+    }
+
+    if (spikesLayers) {
+
+        if ((monType1 != TYPE_FLYING
+        && monType2 != TYPE_FLYING
+        && ability != ABILITY_LEVITATE
+        && itemEffect != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+        || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+        || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY))
+        {
+            damage += Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL) / spikesDivisor;
+
+            if (damage < 1) {
+                damage += 1;
+            }
+        }
+    }
+
+    if (toxicSpikesLayers) {
+        if (((monType1 != TYPE_FLYING
+            && monType2 != TYPE_FLYING
+            && ability != ABILITY_LEVITATE
+            && itemEffect != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+            || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+            || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY))
+            && ability != ABILITY_IMMUNITY
+            && ability != ABILITY_POISON_HEAL
+            && monType1 != TYPE_POISON
+            && monType2 != TYPE_POISON
+            && monType1 != TYPE_STEEL
+            && monType2 != TYPE_STEEL)
+        {
+            damage += Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL) / toxicSpikesDivisor;
+
+            if (damage < 1) {
+                damage += 1;
+            }
+        }
+    }
+
+    return damage;
+}

@@ -1586,4 +1586,16 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect);
  */
 int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect);
 
+/**
+* @brief Calculate the entry hazards damage for a party Pokemon in the given slot
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The currently-in battler slot number.
+* @param partySlot  The party slot number of the party Pokemon to use in calculation.
+* @return   The damage to be taken on switch in, with a bonus added for 2 layers of
+            toxic spikes.
+*/
+int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
