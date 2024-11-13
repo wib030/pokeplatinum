@@ -10885,11 +10885,13 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     u16 move;
     int moveType, movePower;
     u8 battlersDisregarded;
-    u16 score, attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2, maxScore, minScore, speedMultiplier, moveScore, rocksPenalty;
+    u16 attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2;
     u8 picked = 6;
     u8 slot1, slot2;
     u32 moveStatusFlags;
     int partySize;
+    int score, maxScore, minScore, moveScore, hpPercent, monCurHP, monMaxHP;
+    int hazardsBonus, sackBonu, speedMultiplier;
     Pokemon *mon;
     BattleContext *battleCtx;
 
@@ -10934,6 +10936,17 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 && i != battleCtx->aiSwitchedPartySlot[slot2]
                 && i != battleCtx->selectedPartySlot[battler]) {
 
+                hazardsBonus = 0;
+                sackBonus = 0;
+                monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+                monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+                if (monCurHP == 0) {
+                    monCurHP = 1;
+                }
+                if (monMaxHP == 0) {
+                    monMaxHP = 1;
+                }
+                hpPercent = monCurHP * 100) / monMaxHP;
                 score = 0;
 
                 for (j = 0; j < LEARNED_MOVES_MAX; j++) {
@@ -10979,11 +10992,27 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                 moveScore = 0;
                         }
 
+                        // Move score is % of mon's hp damage they'll take
+                        moveScore = moveScore * 100 / monMaxHP;
+
                         // Penalize choices that would lose more than half health from
                         // switching in.
                         if (moveScore > (Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL) / 2)) {
 
-                            moveScore += 160;
+                            moveScore += 100;
+                        }
+
+                        // Penalize choices that would result in a KO, except for Sacks
+                        if (moveScore > (monCurHP - Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i))) {
+                            if (hpPercent < 50) {
+                                sackBonus = (monMaxHP - monCurHP) * 100 / monMaxHP;
+                                if (moveScore < sackBonus) {
+                                    moveScore = 0;
+                                }
+                                else {
+                                    moveScore -= sackBonus;
+                                }
+                            }
                         }
                     }
 
@@ -10993,11 +11022,13 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                         if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_DEFOG
                             || Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_RAPID_SPIN) {
 
-                            if (score < 60) {
+                            hazardsBonus = (monMaxHP / 8) + 2;
+
+                            if (score < hazardsBonus) {
                                 score = 0;
                             }
                             else {
-                                score -= 60;
+                                score -= hazardsBonus);
                             }
                         }
                     }
@@ -11010,38 +11041,38 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                 if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
 
-                    // 0.9x if faster
+                    // 0.8x if faster
                     if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
-                        speedMultiplier = 9;
+                        speedMultiplier = 8;
                     }
                     // 1.0x if tie
                     else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                         speedMultiplier = 10;
                     }
-                    // 1.1x if slower
+                    // 1.2x if slower
                     else {
 
-                        speedMultiplier = 11;
+                        speedMultiplier = 12
                     }
                 }
                 // Trick Room is not up in this case.
                 else {
-                    // 1.1x if faster
+                    // 1.2x if faster
                     if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
-                        speedMultiplier = 11;
+                        speedMultiplier = 12;
                     }
                     // 1.0x if same speed
                     else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
 
                         speedMultiplier = 10;
                     }
-                    // 0.9x if slower
+                    // 0.8x if slower
                     else {
                     
-                        speedMultiplier = 9;
+                        speedMultiplier = 8;
                     }
                 }
 
@@ -11055,34 +11086,27 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TOXIC_SPIKES) {
                         if (monType1 == TYPE_POISON
                         || monType2 == TYPE_POISON) {
-                            if (score < 50) {
+                            if (score < hazardsBonus) {
                                 score = 0;
                             }
                             else {
-                                score -= 50;
+                                score -= hazardsBonus;
                             }
                         }
 
                         if (monType1 == TYPE_STEEL
                         || monType2 == TYPE_STEEL) {
-                            if (score < 30) {
+                            if (score < (hazardsBonus / 2)) {
                                 score = 0;
                             }
                             else {
-                                score -= 30;
+                                score -= (hazardsBonus / 2);
                             }
                         }
                     }
 
-                    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK) {
-                        if (monAbility != ABILITY_MAGIC_GUARD) {
-                            rocksPenalty = BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, monType1, monType2);
-                        }
-                        else {
-                            rocksPenalty = 0;
-                        }
-
-                        score += rocksPenalty;
+                    if (monAbility != ABILITY_MAGIC_GUARD) {
+                        score += Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i) * 200 / monMaxHP;
                     }
                 }
 
