@@ -90,17 +90,22 @@
                 "MOVE_TACKLE",
                 "MOVE_LEER",
                 "MOVE_HORN_ATTACK",
-                "MOVE_ENDURE"
+                "MOVE_ENDURE",
+				"MOVE_ARM_THRUST",
+				"MOVE_BULLET_SEED"
             ],
-            "7": "MOVE_FURY_ATTACK",
-            "13": "MOVE_AERIAL_ACE",
-            "19": "MOVE_BRICK_BREAK",
-            "25": "MOVE_COUNTER",
-            "31": "MOVE_TAKE_DOWN",
-            "37": "MOVE_CLOSE_COMBAT",
-            "43": "MOVE_REVERSAL",
-            "49": "MOVE_MEGAHORN",
-            "55": "MOVE_FEINT"
+			"7": "MOVE_FEINT",
+            "10": "MOVE_AERIAL_ACE",
+			"16": "MOVE_DOUBLE_HIT",
+			"19": "MOVE_COUNTER",
+			"22": "MOVE_FURY_CUTTER",
+			"25": "MOVE_FURY_ATTACK",
+            "28": "MOVE_BRICK_BREAK",
+			"31": "MOVE_PIN_MISSILE",
+            "34": "MOVE_TAKE_DOWN",
+			"37": "MOVE_MEGAHORN",
+            "43": "MOVE_CLOSE_COMBAT",
+            "46": "MOVE_REVERSAL"
         },
         "tutor": [
             "MOVE_FURY_CUTTER",

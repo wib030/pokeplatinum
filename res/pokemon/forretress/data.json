@@ -86,6 +86,8 @@
             "1": [
                 "MOVE_TOXIC_SPIKES",
                 "MOVE_TACKLE",
+				"MOVE_MIRROR_SHOT",
+				"MOVE_MAGNET_RISE",
                 "MOVE_PROTECT"
             ],
             "6": "MOVE_SELFDESTRUCT",
@@ -95,15 +97,14 @@
             "20": "MOVE_BIDE",
             "23": "MOVE_NATURAL_GIFT",
             "28": "MOVE_SPIKES",
-            "31": "MOVE_MIRROR_SHOT",
-            "33": "MOVE_PAYBACK",
-			"37": "MOVE_ZAP_CANNON",
-            "38": "MOVE_EXPLOSION",
-			"42": "MOVE_SPIDER_WEB",
-            "45": "MOVE_IRON_DEFENSE",
-            "50": "MOVE_GYRO_BALL",
-            "55": "MOVE_DOUBLE_EDGE",
-            "62": "MOVE_MAGNET_RISE"
+            "32": "MOVE_PAYBACK",
+			"34": "MOVE_ZAP_CANNON",
+            "36": "MOVE_EXPLOSION",
+			"40": "MOVE_SPIDER_WEB",
+            "42": "MOVE_IRON_DEFENSE",
+            "46": "MOVE_GYRO_BALL",
+            "50": "MOVE_DOUBLE_EDGE",
+            "56": "MOVE_MAGNET_RISE"
         },
         "tutor": [
             "MOVE_ROLLOUT",
