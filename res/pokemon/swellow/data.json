@@ -80,16 +80,19 @@
                 "MOVE_PECK",
                 "MOVE_GROWL",
                 "MOVE_FOCUS_ENERGY",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_QUICK_ATTACK",
+				"MOVE_AIR_SLASH"
             ],
-            "4": "MOVE_FOCUS_ENERGY",
-            "8": "MOVE_QUICK_ATTACK",
+            "5": "MOVE_FOCUS_ENERGY",
+            "9": "MOVE_QUICK_ATTACK",
             "13": "MOVE_PLUCK",
-            "19": "MOVE_DOUBLE_TEAM",
-            "28": "MOVE_ENDEAVOR",
-            "38": "MOVE_AERIAL_ACE",
-            "49": "MOVE_AGILITY",
-            "61": "MOVE_AIR_SLASH"
+            "17": "MOVE_DOUBLE_TEAM",
+			"21": "MOVE_AERIAL_ACE",
+            "25": "MOVE_ENDEAVOR",
+            "33": "MOVE_AGILITY",
+            "39": "MOVE_AIR_SLASH",
+			"51": "MOVE_BRAVE_BIRD",
+			"54": "MOVE_REVERSAL"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -84,23 +84,28 @@
             "1": [ 
 				"MOVE_HYPNOSIS",
 				"MOVE_TOXIC_SPIKES",
+				"MOVE_GUST",
 				"MOVE_FRENZY_PLANT"
 			],
-            "10": "MOVE_CONFUSION",
-            "13": "MOVE_GUST",
-            "17": "MOVE_PROTECT",
-            "20": "MOVE_MOONLIGHT",
-			"22": "MOVE_GIGA_DRAIN",
-            "24": "MOVE_PSYBEAM",
-            "27": "MOVE_WHIRLWIND",
-            "31": "MOVE_LIGHT_SCREEN",
-			"33": "MOVE_MEAN_LOOK",
-            "34": "MOVE_SILVER_WIND",
-			"35": "MOVE_FOLLOW_ME",
-			"36": "MOVE_SPIDER_WEB",
-            "38": "MOVE_TOXIC",
-			"40": "MOVE_FISSURE",
-            "41": "MOVE_BUG_BUZZ"
+            "12": "MOVE_CONFUSION",
+			"15": "MOVE_POISON_POWDER",
+			"17": "MOVE_MOONLIGHT",
+            "20": "MOVE_PROTECT",
+            "22": "MOVE_PSYBEAM",
+			"25": "MOVE_SILVER_WIND",
+			"27": "MOVE_LIGHT_SCREEN",
+            "29": "MOVE_WHIRLWIND",
+			"31": "MOVE_MEAN_LOOK",
+			"33": [ 
+				"MOVE_TOXIC",
+				"MOVE_GIGA_DRAIN"
+			],
+			"35": [ 
+				"MOVE_BUG_BUZZ",
+				"MOVE_SPIDER_WEB"
+			],
+			"37": "MOVE_FOLLOW_ME",
+			"40": "MOVE_FISSURE"
         },
         "tutor": [
             "MOVE_OMINOUS_WIND",

@@ -95,22 +95,27 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_FAINT_ATTACK",
-                "MOVE_WHIRLWIND",
-                "MOVE_NASTY_PLOT",
-                "MOVE_RAZOR_LEAF"
+                "MOVE_RAZOR_LEAF",
+				"MOVE_FAINT_ATTACK",
+				"MOVE_NASTY_PLOT",
+				"MOVE_WHIRLWIND",
+                "MOVE_POUND",
+				"MOVE_WORRY_SEED"
             ],
-			"13": "MOVE_NATURE_POWER",
-			"19": "MOVE_FAKE_OUT",
-			"25": "MOVE_TORMENT",
-			"31": "MOVE_FAINT_ATTACK",
-			"35": "MOVE_NIGHT_SLASH",
-			"43": "MOVE_SWAGGER",
-			"45": "MOVE_LEAF_BLADE",
-            "49": [ 
-				"MOVE_LEAF_STORM",
-				"MOVE_EXTRASENSORY"
-			]
+            "3": "MOVE_HARDEN",
+            "6": "MOVE_GROWTH",
+			"9": "MOVE_TORMENT",
+			"12": "MOVE_FAKE_OUT",
+            "16": "MOVE_NATURE_POWER",
+            "24": "MOVE_FAINT_ATTACK",
+			"28": "MOVE_LEAF_BLADE",
+			"30": "MOVE_DEFOG",
+            "32": "MOVE_SWAGGER",
+			"34": "MOVE_RAZOR_WIND",
+            "36": "MOVE_EXTRASENSORY",
+			"44": "MOVE_LEAF_STORM",
+			"50": "MOVE_TAILWIND",
+			"52": "MOVE_EXPLOSION"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

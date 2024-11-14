@@ -84,17 +84,22 @@
             "HM07"
         ],
         "level_up": {
-            "1": "MOVE_ASTONISH",
+            "1": [ 
+				"MOVE_ASTONISH",
+				"MOVE_ABSORB",
+				"MOVE_BUBBLE"
+			],
             "3": "MOVE_GROWL",
-            "5": "MOVE_ABSORB",
-            "7": "MOVE_NATURE_POWER",
-            "11": "MOVE_FAKE_OUT",
-            "15": "MOVE_FURY_SWIPES",
-            "19": "MOVE_WATER_SPORT",
-            "25": "MOVE_BUBBLE_BEAM",
-            "31": "MOVE_ZEN_HEADBUTT",
-            "37": "MOVE_UPROAR",
-            "45": "MOVE_HYDRO_PUMP"
+			"12": "MOVE_FURY_SWIPES",
+            "16": "MOVE_FAKE_OUT",
+            "20": "MOVE_WATER_SPORT",
+            "24": "MOVE_BUBBLE_BEAM",
+			"28": "MOVE_NATURE_POWER",
+			"30": "MOVE_GIGA_DRAIN",
+			"32": "MOVE_UPROAR",
+			"36": "MOVE_KNOCK_OFF",
+            "40": "MOVE_ZEN_HEADBUTT",
+            "44": "MOVE_HYDRO_PUMP"
         },
         "tutor": [
             "MOVE_DIVE",

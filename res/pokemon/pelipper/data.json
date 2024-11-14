@@ -86,14 +86,16 @@
             "1": [
                 "MOVE_GROWL",
                 "MOVE_WATER_GUN",
-                "MOVE_WATER_SPORT"
+                "MOVE_WATER_SPORT",
+				"MOVE_TAILWIND"
             ],
-            "6": "MOVE_SUPERSONIC",
-            "11": "MOVE_PLUCK",
-            "16": "MOVE_MIST",
-            "19": "MOVE_WATER_PULSE",
-            "24": "MOVE_PAYBACK",
-            "25": "MOVE_PROTECT",
+            "5": "MOVE_SUPERSONIC",
+            "8": "MOVE_PLUCK",
+            "12": "MOVE_MIST",
+            "15": "MOVE_WATER_PULSE",
+            "19": "MOVE_PURSUIT",
+			"22": "MOVE_BRINE",
+            "25": "MOVE_AIR_CUTTER",
 			"28": [
                 "MOVE_STOCKPILE",
                 "MOVE_SWALLOW",
@@ -101,10 +103,10 @@
             ],
             "31": "MOVE_ROOST",
 			"34": "MOVE_WING_ATTACK",
-            "43": "MOVE_FLING",
-            "50": "MOVE_TAILWIND",
-			"53": "MOVE_RAZOR_WIND",
-            "55": "MOVE_HYDRO_PUMP"
+			"38": "MOVE_AIR_SLASH",
+            "44": "MOVE_TAILWIND",
+			"50": "MOVE_HYDRO_PUMP",
+			"53": "MOVE_RAZOR_WIND"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

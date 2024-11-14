@@ -80,17 +80,21 @@
         "level_up": {
             "1": [
                 "MOVE_SCRATCH",
-                "MOVE_HARDEN"
+                "MOVE_HARDEN",
+				"MOVE_TOXIC_SPIKES",
+                "MOVE_SPIKES"
             ],
+			"3": "MOVE_FRENZY_PLANT",
             "9": "MOVE_SAND_ATTACK",
-            "14": "MOVE_FURY_SWIPES",
-			"23": "MOVE_LEECH_LIFE",
-            "25": "MOVE_SPITE",
-            "31": "MOVE_CONFUSE_RAY",
-            "38": "MOVE_SHADOW_SNEAK",
-            "45": "MOVE_GRUDGE",
-            "52": "MOVE_HEAL_BLOCK",
-            "59": "MOVE_SHADOW_BALL"
+            "13": "MOVE_FURY_SWIPES",
+            "17": "MOVE_SPITE",
+			"21": "MOVE_SHADOW_SNEAK",
+            "25": "MOVE_CONFUSE_RAY",
+			"31": "MOVE_SHADOW_BALL",
+			"33": "MOVE_LEECH_LIFE",
+			"37": "MOVE_GRUDGE",
+			"40": "MOVE_FISSURE",
+            "42": "MOVE_HEAL_BLOCK"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
