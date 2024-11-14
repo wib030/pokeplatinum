@@ -10879,11 +10879,11 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     // Must keep C89-style declaration to match
     int i, j;
     u8 defender, defenderType1, defenderType2, defenderAbility;
-    u8 monType1, monType2, monAbility;
+    u8 monType1, monType2, monAbility, monItemEffect;
     u8 battlerType1, battlerType2, battlerAbility, side;
-    u16 monSpecies;
+    u16 monSpecies, monSpeedStat;
     u16 move;
-    int moveType, movePower;
+    int moveType, movePower, moveEffect;
     u8 battlersDisregarded;
     u16 attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2;
     u8 picked = 6;
@@ -10936,6 +10936,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 && i != battleCtx->aiSwitchedPartySlot[slot2]
                 && i != battleCtx->selectedPartySlot[battler]) {
 
+                monItemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
+
                 hazardsBonus = 0;
                 sackBonus = 0;
                 monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
@@ -10962,6 +10964,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     else {
                         move = battleCtx->aiContext.battlerMoves[defender][j];
                     }
+
+                    moveEffect = MOVE_DATA(move).effect;
 
                     if (move && (movePower> 1)) {
 
@@ -11015,6 +11019,13 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                             }
                         }
                     }
+                    else {
+                        if (moveEffect == BATTLE_EFFECT_STATUS_BURN) {
+                            if (Battle_PartyMonIsPhysicalAttacker(battleSys, battleCtx, battler, i)) {
+                                moveScore = 200;
+                            }
+                        }
+                    }
 
                     score += moveScore;
 
@@ -11039,15 +11050,42 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     }
                 }
 
+                monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+                switch (monItemEffect) {
+                    default:
+                        break;
+
+                    case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+                    case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+                    case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+                    case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+                    case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+                    case HOLD_EFFECT_LVLUP_HP_EV_UP:
+                    case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+                    case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+                        monSpeedStat /= 2;
+                        break;
+
+                    case HOLD_EFFECT_DITTO_SPEED_UP:
+                        if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
+                            monSpeedStat *= 2;
+                        }
+                        break;
+
+                    case HOLD_EFFECT_CHOICE_SPEED:
+                        monSpeedStat = monSpeedStat * 3 / 2;
+                        break;
+                }
+
                 if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
 
                     // 0.8x if faster
-                    if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                    if (battleCtx->battleMons[defender].speed > monSpeedStat) {
 
                         speedMultiplier = 8;
                     }
                     // 1.0x if tie
-                    else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                    else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
 
                         speedMultiplier = 10;
                     }
@@ -11060,12 +11098,12 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 // Trick Room is not up in this case.
                 else {
                     // 1.2x if faster
-                    if (battleCtx->battleMons[defender].speed > Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                    if (battleCtx->battleMons[defender].speed > monSpeedStat) {
 
                         speedMultiplier = 12;
                     }
                     // 1.0x if same speed
-                    else if (battleCtx->battleMons[defender].speed == Pokemon_GetValue(mon, MON_DATA_SPEED, NULL)) {
+                    else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
 
                         speedMultiplier = 10;
                     }
@@ -12471,4 +12509,64 @@ int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, 
     }
 
     return damage;
+}
+
+BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot)
+{
+    int i, j;
+    u8 moveClass;
+    u16 move;
+    int moveEffect;
+    Pokemon *mon;
+    BOOL result;
+
+    result = FALSE;
+
+    mon = BattleSystem_PartyPokemon(battleSys, battler, partySlot);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveClass = MOVE_DATA(move).class;
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (moveClass == CLASS_PHYSICAL) {
+            switch (moveEffect) {
+                default:
+                    result = TRUE;
+                    break;
+
+                // Always utility moves
+                case BATTLE_EFFECT_BIDE:
+                case BATTLE_EFFECT_COUNTER:
+                case BATTLE_EFFECT_40_DAMAGE_FLAT:
+                case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+                case BATTLE_EFFECT_LEAVE_WITH_1_HP:
+                case BATTLE_EFFECT_REMOVE_PROTECT:
+                case BATTLE_EFFECT_METAL_BURST:
+                case BATTLE_EFFECT_MIRROR_COAT:
+                case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+                case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+                case BATTLE_EFFECT_HALVE_HP:
+                    break;
+
+                // Conditionally utility moves
+                case BATTLE_EFFECT_SWITCH_HIT:
+                case BATTLE_EFFECT_REMOVE_HELD_ITEM:
+                case BATTLE_EFFECT_RAISE_DEF_HIT:
+                case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+                case BATTLE_EFFECT_INFATUATE_HIT:
+                    if (Pokemon_GetValue(mon, MON_DATA_ATK_EV, NULL) > 0) {
+                        result = TRUE;
+                    }
+                    break;
+            }
+        }
+    }
+
+    return result;
 }
