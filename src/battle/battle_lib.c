@@ -10891,7 +10891,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     u32 moveStatusFlags;
     int partySize;
     int score, maxScore, minScore, moveScore, hpPercent, monCurHP, monMaxHP;
-    int hazardsBonus, sackBonu, speedMultiplier;
+    int hazardsBonus, sackBonus, speedMultiplier;
     Pokemon *mon;
     BattleContext *battleCtx;
 
@@ -10946,7 +10946,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 if (monMaxHP == 0) {
                     monMaxHP = 1;
                 }
-                hpPercent = monCurHP * 100) / monMaxHP;
+                hpPercent = (monCurHP * 100) / monMaxHP;
                 score = 0;
 
                 for (j = 0; j < LEARNED_MOVES_MAX; j++) {
@@ -11028,7 +11028,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                 score = 0;
                             }
                             else {
-                                score -= hazardsBonus);
+                                score -= hazardsBonus;
                             }
                         }
                     }
@@ -11054,7 +11054,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     // 1.2x if slower
                     else {
 
-                        speedMultiplier = 12
+                        speedMultiplier = 12;
                     }
                 }
                 // Trick Room is not up in this case.
@@ -12431,7 +12431,7 @@ int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, 
         }
     }
 
-    if (spikesLayers) {
+    if (spikesCount) {
 
         if ((monType1 != TYPE_FLYING
         && monType2 != TYPE_FLYING
@@ -12448,7 +12448,7 @@ int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, 
         }
     }
 
-    if (toxicSpikesLayers) {
+    if (toxicSpikesCount) {
         if (((monType1 != TYPE_FLYING
             && monType2 != TYPE_FLYING
             && ability != ABILITY_LEVITATE
