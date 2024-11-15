@@ -155,12 +155,12 @@
         {
             "level_max": 20,
             "level_min": 15,
-            "species": "SPECIES_MAGIKARP"
+            "species": "SPECIES_HUNTAIL"
         },
         {
             "level_max": 20,
             "level_min": 15,
-            "species": "SPECIES_REMORAID"
+            "species": "SPECIES_GOREBYSS"
         },
         {
             "level_max": 25,

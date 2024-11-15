@@ -15,7 +15,7 @@
             "level": 16,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
-                "MOVE_MOONLIGHT",
+                "MOVE_SPARK",
 				"MOVE_AIR_CUTTER",
 				"MOVE_SILVER_WIND",
 				"MOVE_CONFUSE_RAY"
