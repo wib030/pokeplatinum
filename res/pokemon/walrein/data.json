@@ -84,23 +84,27 @@
             "1": [
                 "MOVE_CRUNCH",
                 "MOVE_POWDER_SNOW",
-                "MOVE_GROWL",
+                "MOVE_AQUA_RING",
                 "MOVE_WATER_GUN",
+				"MOVE_ICE_FANG",
                 "MOVE_ENCORE"
             ],
-            "7": "MOVE_ENCORE",
-            "19": "MOVE_BODY_SLAM",
-            "25": "MOVE_AURORA_BEAM",
-            "31": "MOVE_HAIL",
-            "32": "MOVE_SWAGGER",
-			"35": "MOVE_ICE_BALL",
-            "39": [
+			"5": "MOVE_ROLLOUT",
+            "9": "MOVE_ENCORE",
+			"11": "MOVE_WHIRLPOOL",
+			"17": "MOVE_BRINE",
+            "21": "MOVE_AURORA_BEAM",
+			"26": "MOVE_BODY_SLAM",
+            "28": "MOVE_SWAGGER",
+			"31": [
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
+			"35": "MOVE_ICE_BALL",
+			"38": "MOVE_HAIL",
 			"40": "MOVE_RECOVER",
-            "44": "MOVE_ICE_FANG",
-            "42": "MOVE_BLIZZARD",
+			"42": "MOVE_SUPER_FANG",
+            "44": "MOVE_BLIZZARD",
             "48": "MOVE_SHEER_COLD"
         },
         "tutor": [

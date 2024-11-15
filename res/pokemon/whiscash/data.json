@@ -82,24 +82,28 @@
             "1": [
                 "MOVE_ZEN_HEADBUTT",
                 "MOVE_TICKLE",
-                "MOVE_MUD_SLAP"
+                "MOVE_MUD_SLAP",
+				"MOVE_THRASH"
             ],
             "6": [
                 "MOVE_MUD_SPORT",
                 "MOVE_WATER_SPORT"
             ],
-            "10": "MOVE_WATER_GUN",
-            "14": "MOVE_MUD_BOMB",
-            "18": "MOVE_AMNESIA",
-            "22": "MOVE_WATER_PULSE",
-            "26": "MOVE_MAGNITUDE",
-            "33": [
+            "9": "MOVE_WATER_GUN",
+            "13": "MOVE_MUD_BOMB",
+            "15": "MOVE_AMNESIA",
+            "17": "MOVE_WATER_PULSE",
+            "20": "MOVE_MAGNITUDE",
+            "25": [
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
-            "45": "MOVE_EARTHQUAKE",
-            "51": "MOVE_FUTURE_SIGHT",
-            "53": "MOVE_SHEER_COLD"
+            "34": "MOVE_EARTHQUAKE",
+			"39": "MOVE_MUDDY_WATER",
+			"45": "MOVE_FUTURE_SIGHT",
+			"50": "MOVE_DRAGON_DANCE",
+            "53": "MOVE_SHEER_COLD",
+			"55": "MOVE_AQUA_TAIL"
         },
         "tutor": [
             "MOVE_DIVE",

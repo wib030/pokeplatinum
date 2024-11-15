@@ -88,22 +88,23 @@
             "1": [
                 "MOVE_REVENGE",
                 "MOVE_POISON_STING",
-                "MOVE_LEER"
+				"MOVE_DESTINY_BOND",
+                "MOVE_NASTY_PLOT"
             ],
-            "5": "MOVE_ABSORB",
-            "9": "MOVE_GROWTH",
-            "13": "MOVE_LEECH_SEED",
-            "17": "MOVE_SAND_ATTACK",
-            "21": "MOVE_PIN_MISSILE",
-			"23": "MOVE_NEEDLE_ARM",
-            "25": "MOVE_INGRAIN",
-            "29": "MOVE_FAINT_ATTACK",
-            "35": "MOVE_SPIKES",
-            "41": "MOVE_SUCKER_PUNCH",
-            "47": "MOVE_PAYBACK",
+            "4": "MOVE_ABSORB",
+            "7": "MOVE_GROWTH",
+            "10": "MOVE_LEECH_SEED",
+            "13": "MOVE_SAND_ATTACK",
+			"16": "MOVE_NEEDLE_ARM",
+			"19": "MOVE_FAINT_ATTACK",
+            "22": "MOVE_INGRAIN",
+			"26": "MOVE_PAYBACK",
+            "30": "MOVE_SPIKES",
+			"34": "MOVE_SUCKER_PUNCH",
+			"38": "MOVE_PIN_MISSILE",
+			"49": "MOVE_COTTON_SPORE",
 			"51": "MOVE_DESTINY_BOND",
-            "59": "MOVE_COTTON_SPORE",
-            "65": "MOVE_SANDSTORM"
+            "54": "MOVE_SANDSTORM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -81,16 +81,18 @@
                 "MOVE_MUD_SPORT",
                 "MOVE_WATER_SPORT"
             ],
-            "14": "MOVE_MUD_BOMB",
-            "18": "MOVE_AMNESIA",
-            "22": "MOVE_WATER_PULSE",
-            "26": "MOVE_MAGNITUDE",
-            "31": [
+            "13": "MOVE_MUD_BOMB",
+            "15": "MOVE_AMNESIA",
+            "17": "MOVE_WATER_PULSE",
+            "20": "MOVE_MAGNITUDE",
+            "25": [
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
-            "39": "MOVE_EARTHQUAKE",
-            "43": "MOVE_FUTURE_SIGHT"
+            "32": "MOVE_EARTHQUAKE",
+			"35": "MOVE_MUDDY_WATER",
+            "39": "MOVE_FUTURE_SIGHT",
+			"44": "MOVE_AQUA_TAIL"
         },
         "tutor": [
             "MOVE_DIVE",

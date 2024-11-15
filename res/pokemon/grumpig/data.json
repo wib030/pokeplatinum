@@ -98,7 +98,7 @@
                 "MOVE_SPLASH",
                 "MOVE_PSYWAVE"
             ],
-            "7": "MOVE_PSYWAVE",
+            "3": "MOVE_PSYWAVE",
             "10": "MOVE_ODOR_SLEUTH",
             "14": "MOVE_PSYBEAM",
             "15": "MOVE_PSYCH_UP",
@@ -106,17 +106,18 @@
             "21": "MOVE_MAGIC_COAT",
             "26": "MOVE_ZEN_HEADBUTT",
 			"27": "MOVE_GUILLOTINE",
-            "29": [
+			"29": "MOVE_POWER_GEM",
+			"32": "MOVE_TEETER_DANCE",
+            "33": [
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
-            "37": "MOVE_PAYBACK",
+			"38": "MOVE_KINESIS",
 			"39": "MOVE_RECOVER",
-			"41": "MOVE_KINESIS",
+			"40": "MOVE_PAYBACK",
 			"42": "MOVE_MIND_READER",
-            "47": "MOVE_PSYCHIC",
-            "55": "MOVE_POWER_GEM",
-            "60": "MOVE_BOUNCE"
+            "44": "MOVE_PSYCHIC",
+            "50": "MOVE_BOUNCE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

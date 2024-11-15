@@ -88,21 +88,26 @@
             "HM06"
         ],
         "level_up": {
-            "1": "MOVE_TACKLE",
+            "1": [ 
+				"MOVE_TACKLE",
+				"MOVE_WISH",
+				"MOVE_ENCORE",
+				"MOVE_FAKE_OUT"
+			],
             "5": "MOVE_UPROAR",
-            "10": "MOVE_COPYCAT",
-            "14": "MOVE_FAINT_ATTACK",
-            "19": "MOVE_PSYBEAM",
-            "23": "MOVE_HYPNOSIS",
+            "7": "MOVE_COPYCAT",
+            "10": "MOVE_FAINT_ATTACK",
+            "14": "MOVE_PSYBEAM",
+            "19": "MOVE_HYPNOSIS",
+			"23": "MOVE_DIZZY_PUNCH",
 			"25": "MOVE_GUILLOTINE",
-            "28": "MOVE_DIZZY_PUNCH",
-            "32": "MOVE_SUCKER_PUNCH",
+            "28": "MOVE_SUCKER_PUNCH",
+			"32": "MOVE_TEETER_DANCE",
 			"34": "MOVE_MEAN_LOOK",
-            "37": "MOVE_TEETER_DANCE",
             "41": "MOVE_PSYCH_UP",
             "46": "MOVE_DOUBLE_EDGE",
-            "50": "MOVE_FLAIL",
-            "55": "MOVE_THRASH"
+			"48": "MOVE_THRASH",
+            "50": "MOVE_FLAIL"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

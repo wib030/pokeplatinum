@@ -88,10 +88,11 @@
 				"MOVE_WRAP",
 				"MOVE_CONFUSION"
 			],
-            "6": "MOVE_GROWL",
-            "9": "MOVE_ASTONISH",
-            "17": "MOVE_UPROAR",
-            "22": "MOVE_LAST_RESORT",
+            "4": "MOVE_GROWL",
+            "7": "MOVE_ASTONISH",
+			"13": "MOVE_YAWN",
+			"16": "MOVE_LAST_RESORT",
+            "19": "MOVE_UPROAR",
 			"24": "MOVE_MIND_READER"
         },
         "tutor": [

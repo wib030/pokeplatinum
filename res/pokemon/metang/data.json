@@ -96,16 +96,16 @@
                 "MOVE_METAL_CLAW",
                 "MOVE_CONFUSION"
             ],
-            "24": "MOVE_SCARY_FACE",
-            "28": "MOVE_PURSUIT",
-            "32": "MOVE_BULLET_PUNCH",
-            "36": "MOVE_PSYCHIC",
-            "40": "MOVE_IRON_DEFENSE",
-            "44": "MOVE_AGILITY",
-			"46": "MOVE_KINESIS",
-            "48": "MOVE_METEOR_MASH",
-            "52": "MOVE_ZEN_HEADBUTT",
-            "56": "MOVE_HYPER_BEAM"
+			"23": "MOVE_PURSUIT",
+            "26": "MOVE_BULLET_PUNCH",
+			"29": "MOVE_SCARY_FACE",
+			"32": "MOVE_ZEN_HEADBUTT",
+            "35": "MOVE_PSYCHIC",
+            "38": "MOVE_IRON_DEFENSE",
+            "41": "MOVE_AGILITY",
+			"44": "MOVE_METEOR_MASH",
+			"47": "MOVE_KINESIS",
+            "50": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

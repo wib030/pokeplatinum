@@ -88,20 +88,23 @@
             "1": [
                 "MOVE_FLASH",
 				"MOVE_FRENZY_PLANT",
-                "MOVE_TACKLE"
+                "MOVE_TACKLE",
+				"MOVE_ENCORE"
             ],
             "5": "MOVE_DOUBLE_TEAM",
-            "9": "MOVE_CONFUSE_RAY",
-            "13": "MOVE_MOONLIGHT",
-            "17": "MOVE_QUICK_ATTACK",
-            "21": "MOVE_TAIL_GLOW",
-            "25": "MOVE_SIGNAL_BEAM",
+            "8": "MOVE_CONFUSE_RAY",
+			"12": "MOVE_QUICK_ATTACK",
+			"15": "MOVE_SPARK",
+            "19": "MOVE_MOONLIGHT",
+            "22": "MOVE_TAIL_GLOW",
+            "26": "MOVE_SIGNAL_BEAM",
             "29": "MOVE_CHARGE_BEAM",
-            "33": "MOVE_HELPING_HAND",
+            "31": "MOVE_HELPING_HAND",
+			"33": "MOVE_ZEN_HEADBUTT",
 			"35": "MOVE_FISSURE",
-            "37": "MOVE_ZEN_HEADBUTT",
 			"39": "MOVE_SPIDER_WEB",
             "41": "MOVE_BUG_BUZZ",
+			"43": "MOVE_TRICK",
             "45": "MOVE_DISCHARGE"
         },
         "tutor": [

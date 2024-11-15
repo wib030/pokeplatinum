@@ -81,16 +81,18 @@
                 "MOVE_TACKLE"
             ],
             "5": "MOVE_EMBER",
-            "11": "MOVE_MAGNITUDE",
-            "15": "MOVE_FOCUS_ENERGY",
-            "21": "MOVE_TAKE_DOWN",
+			"8": "MOVE_FOCUS_ENERGY",
+            "12": "MOVE_MAGNITUDE",
+			"19": "MOVE_AMNESIA",
+			"22": "MOVE_LAVA_PLUME",
 			"23": "MOVE_BLAST_BURN",
-            "25": "MOVE_AMNESIA",
-            "31": "MOVE_LAVA_PLUME",
-            "35": "MOVE_EARTH_POWER",
-            "41": "MOVE_EARTHQUAKE",
-            "45": "MOVE_FLAMETHROWER",
-            "51": "MOVE_DOUBLE_EDGE"
+            "26": "MOVE_EARTH_POWER",
+			"29": "MOVE_CURSE",
+			"31": "MOVE_TAKE_DOWN",
+			"39": "MOVE_YAWN",
+            "40": "MOVE_EARTHQUAKE",
+            "43": "MOVE_FLAMETHROWER",
+            "47": "MOVE_DOUBLE_EDGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

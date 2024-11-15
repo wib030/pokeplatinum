@@ -93,24 +93,27 @@
             "1": [
                 "MOVE_TACKLE",
                 "MOVE_HARDEN",
-                "MOVE_CONFUSION"
+                "MOVE_CONFUSION",
+				"MOVE_ROCK_THROW",
+				"MOVE_KINESIS",
+				"MOVE_POWER_GEM"
             ],
-            "9": "MOVE_ROCK_THROW",
-            "12": "MOVE_HYPNOSIS",
-            "20": "MOVE_ROCK_POLISH",
-            "23": "MOVE_PSYWAVE",
-            "31": "MOVE_EMBARGO",
-            "34": "MOVE_COSMIC_POWER",
-			"37": "MOVE_MEAN_LOOK",
+            "5": "MOVE_HYPNOSIS",
+            "9": "MOVE_ROCK_POLISH",
+            "13": "MOVE_PSYWAVE",
+            "17": "MOVE_EMBARGO",
+			"21": "MOVE_ROCK_SLIDE",
+            "25": "MOVE_COSMIC_POWER",
+			"29": "MOVE_PSYCHIC",
+			"33": "MOVE_HEAL_BLOCK",
+			"35": "MOVE_MEAN_LOOK",
+			"37": "MOVE_STONE_EDGE",
 			"39": "MOVE_MOONLIGHT",
 			"41": [ 
-				"MOVE_MIND_READER",
-				"MOVE_KINESIS"
+				"MOVE_FUTURE_SIGHT",
+				"MOVE_MIND_READER"
 			],
-            "42": "MOVE_HEAL_BLOCK",
-            "45": "MOVE_PSYCHIC",
-            "53": "MOVE_FUTURE_SIGHT",
-            "56": "MOVE_EXPLOSION"
+            "45": "MOVE_EXPLOSION"
         },
         "tutor": [
             "MOVE_ROLLOUT",

@@ -77,24 +77,27 @@
         "level_up": {
             "1": [ 
 				"MOVE_GROWL",
-				"MOVE_THUNDER_SHOCK"
+				"MOVE_QUICK_ATTACK",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_THUNDER_SHOCK",
+				"MOVE_ZAP_CANNON"
 			],
-            "3": "MOVE_THUNDER_WAVE",
+			"3": "MOVE_HELPING_HAND",
 			"5": "MOVE_SWIFT",
-            "7": "MOVE_QUICK_ATTACK",
-            "10": "MOVE_HELPING_HAND",
-            "15": "MOVE_SPARK",
-            "17": "MOVE_ENCORE",
-            "21": "MOVE_FAKE_TEARS",
-            "24": "MOVE_COPYCAT",
+            "7": "MOVE_SPARK",
+            "10": "MOVE_ENCORE",
+            "13": "MOVE_FAKE_TEARS",
+            "16": "MOVE_COPYCAT",
+			"19": "MOVE_CHARM",
+			"22": "MOVE_SWEET_KISS",
+			"28": "MOVE_CHARGE",
+			"31": "MOVE_DISCHARGE",
             "32": "MOVE_ZAP_CANNON",
-			"31": "MOVE_FAKE_TEARS",
-            "35": "MOVE_CHARGE",
-            "38": "MOVE_THUNDER",
-            "42": "MOVE_BATON_PASS",
-            "44": "MOVE_AGILITY",
-            "48": "MOVE_LAST_RESORT",
-            "51": "MOVE_NASTY_PLOT"
+			"34": "MOVE_BATON_PASS",
+			"37": "MOVE_AGILITY",
+            "40": "MOVE_LAST_RESORT",
+			"43": "MOVE_THUNDER",
+            "46": "MOVE_NASTY_PLOT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

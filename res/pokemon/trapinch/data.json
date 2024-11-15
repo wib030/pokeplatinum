@@ -76,19 +76,22 @@
         "level_up": {
             "1": [ 
 				"MOVE_BITE",
-				"MOVE_MUD_SHOT"
+				"MOVE_FAINT_ATTACK",
+				"MOVE_FRENZY_PLANT",
+				"MOVE_SAND_ATTACK"
 			],
-            "9": "MOVE_SAND_ATTACK",
-			"12": "MOVE_MAGNITUDE",
-            "17": "MOVE_FAINT_ATTACK",
-            "25": "MOVE_SAND_TOMB",
-			"30": "MOVE_FEINT",
-            "33": "MOVE_CRUNCH",
-			"38": "MOVE_EARTH_POWER",
-            "41": "MOVE_DIG",
-			"44": "MOVE_EARTHQUAKE",
-            "49": "MOVE_SANDSTORM",
-            "57": "MOVE_HYPER_BEAM"
+            "5": "MOVE_MUD_SLAP",
+			"8": "MOVE_MAGNITUDE",
+            "12": "MOVE_SAND_TOMB",
+			"15": "MOVE_ROCK_SLIDE",
+			"19": "MOVE_DIG",
+			"22": "MOVE_CRUNCH",
+			"26": "MOVE_EARTH_POWER",
+			"29": "MOVE_FEINT",
+			"33": "MOVE_EARTHQUAKE",
+            "36": "MOVE_SANDSTORM",
+			"40": "MOVE_SUPERPOWER",
+            "43": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

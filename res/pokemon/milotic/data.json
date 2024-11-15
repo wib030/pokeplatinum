@@ -79,21 +79,24 @@
         "level_up": {
             "1": [
                 "MOVE_WATER_GUN",
-                "MOVE_WRAP"
+                "MOVE_WRAP",
+				"MOVE_MIRROR_COAT",
+				"MOVE_HAZE"
             ],
-            "5": "MOVE_WATER_SPORT",
-            "9": "MOVE_REFRESH",
-            "13": "MOVE_WATER_PULSE",
-            "17": "MOVE_TWISTER",
-            "21": "MOVE_RECOVER",
-            "25": "MOVE_CAPTIVATE",
-            "29": "MOVE_BRINE",
-            "33": "MOVE_RAIN_DANCE",
-            "37": "MOVE_HYDRO_PUMP",
-            "41": "MOVE_ATTRACT",
-			"43": "MOVE_MEAN_LOOK",
-            "45": "MOVE_SAFEGUARD",
-            "49": "MOVE_AQUA_RING"
+            "4": "MOVE_WATER_SPORT",
+            "7": "MOVE_REFRESH",
+			"10": "MOVE_WATER_PULSE",
+			"14": "MOVE_TWISTER",
+			"17": "MOVE_AQUA_RING",
+			"21": "MOVE_CAPTIVATE",
+			"24": "MOVE_WHIRLPOOL",
+            "27": "MOVE_RECOVER",
+            "31": "MOVE_BRINE",
+			"34": "MOVE_ATTRACT",
+			"37": "MOVE_SAFEGUARD",
+			"41": "MOVE_MEAN_LOOK",
+			"44": "MOVE_HYDRO_PUMP",
+			"47": "MOVE_RAIN_DANCE"
         },
         "tutor": [
             "MOVE_DIVE",

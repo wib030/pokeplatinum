@@ -90,21 +90,23 @@
         "level_up": {
             "1": [ 
 				"MOVE_CONFUSION",
+				"MOVE_HARDEN",
 				"MOVE_MUD_SLAP"
 			],
-            "3": "MOVE_HARDEN",
-            "5": "MOVE_RAPID_SPIN",
-            "11": "MOVE_PSYBEAM",
-            "15": "MOVE_ROCK_TOMB",
-            "19": "MOVE_SELFDESTRUCT",
-            "25": "MOVE_ANCIENT_POWER",
-            "31": "MOVE_POWER_TRICK",
+            "4": "MOVE_RAPID_SPIN",
+			"10": "MOVE_HEAL_BLOCK",
+            "13": "MOVE_ROCK_TOMB",
+			"16": "MOVE_PSYBEAM",
+			"19": "MOVE_ANCIENT_POWER",
+			"22": "MOVE_COSMIC_POWER",
+			"25": "MOVE_POWER_TRICK",
+            "28": "MOVE_SELFDESTRUCT",
+			"31": "MOVE_EXTRASENSORY",
 			"33": "MOVE_KINESIS",
-            "37": "MOVE_SANDSTORM",
-            "45": "MOVE_COSMIC_POWER",
-            "53": "MOVE_EARTH_POWER",
-            "61": "MOVE_HEAL_BLOCK",
-            "71": "MOVE_EXPLOSION"
+			"37": "MOVE_EARTH_POWER",
+            "40": "MOVE_SANDSTORM",
+			"43": "MOVE_IMPRISON",
+            "46": "MOVE_EXPLOSION"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

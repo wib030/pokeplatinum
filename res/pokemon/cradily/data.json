@@ -88,21 +88,23 @@
                 "MOVE_LEECH_SEED",
                 "MOVE_ACID"
             ],
-            "8": "MOVE_ACID",
-            "15": "MOVE_INGRAIN",
-            "22": "MOVE_CONFUSE_RAY",
+            "5": "MOVE_ACID",
+            "9": "MOVE_INGRAIN",
+            "13": "MOVE_CONFUSE_RAY",
+			"17": "MOVE_ANCIENT_POWER",
+			"21": "MOVE_BRINE",
+			"26": "MOVE_GIGA_DRAIN",
             "29": "MOVE_AMNESIA",
+			"31": "MOVE_GASTRO_ACID",
 			"33": [
                 "MOVE_STOCKPILE",
                 "MOVE_SPIT_UP",
                 "MOVE_SWALLOW"
             ],
-            "36": "MOVE_ANCIENT_POWER",
-			"43": "MOVE_RECOVER",
+			"42": "MOVE_RECOVER",
+			"44": "MOVE_ENERGY_BALL",
 			"45": "MOVE_POWER_GEM",
-            "46": "MOVE_GASTRO_ACID",
-			"53": "MOVE_WRING_OUT",
-            "56": "MOVE_ENERGY_BALL"
+			"53": "MOVE_WRING_OUT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

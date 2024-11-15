@@ -86,17 +86,16 @@
             "TM92"
         ],
         "level_up": {
-            "1": [ 
-				"MOVE_SPLASH",
-				"MOVE_PSYWAVE"
-			],
+            "1": "MOVE_SPLASH",
+			"3": "MOVE_PSYWAVE",
             "10": "MOVE_ODOR_SLEUTH",
             "14": "MOVE_PSYBEAM",
             "15": "MOVE_PSYCH_UP",
             "18": "MOVE_CONFUSE_RAY",
             "21": "MOVE_MAGIC_COAT",
             "26": "MOVE_ZEN_HEADBUTT",
-            "29": [
+			"29": "MOVE_POWER_GEM",
+            "33": [
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
@@ -104,7 +103,6 @@
 			"36": "MOVE_MIND_READER",
 			"38": "MOVE_KINESIS",
             "41": "MOVE_PSYCHIC",
-            "46": "MOVE_POWER_GEM",
             "48": "MOVE_BOUNCE"
         },
         "tutor": [

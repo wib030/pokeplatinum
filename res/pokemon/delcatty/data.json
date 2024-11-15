@@ -99,6 +99,7 @@
                 "MOVE_DOUBLE_SLAP"
             ],
 			"18": "MOVE_COPYCAT",
+			"20": "MOVE_FAINT_ATTACK",
 			"22": "MOVE_ASSIST",
 			"24": "MOVE_NIGHT_SHADE",
 			"25": [ 
@@ -106,16 +107,15 @@
 				"MOVE_GUILLOTINE"
 			],
 			"27": "MOVE_SHADOW_SNEAK",
-			"29": "MOVE_FAINT_ATTACK",
+			"28": "MOVE_WAKE_UP_SLAP",
 			"30": "MOVE_SHADOW_CLAW",
-			"32": "MOVE_WAKE_UP_SLAP",
-			"34": "MOVE_HYPNOSIS",
+			"32": "MOVE_HYPNOSIS",
+			"34": "MOVE_COVET",
 			"36": "MOVE_MEAN_LOOK",
-			"39": "MOVE_HEAL_BELL",
+			"37": "MOVE_HEAL_BELL",
 			"40": "MOVE_SKILL_SWAP",
-			"42": "MOVE_COVET",
-			"44": "MOVE_DOUBLE_EDGE",
-			"46": "MOVE_CAPTIVATE"
+			"42": "MOVE_DOUBLE_EDGE",
+			"44": "MOVE_CAPTIVATE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

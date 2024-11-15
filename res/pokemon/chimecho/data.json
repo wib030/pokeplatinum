@@ -87,25 +87,23 @@
         "level_up": {
             "1": [ 
 				"MOVE_WRAP",
-				"MOVE_WISH"
+				"MOVE_WISH",
+				"MOVE_CONFUSION"
 			],
-            "14": "MOVE_CONFUSION",
-            "17": "MOVE_UPROAR",
-            "22": "MOVE_TAKE_DOWN",
-            "25": "MOVE_YAWN",
-			"28": "MOVE_MIRACLE_EYE",
-            "30": "MOVE_PSYWAVE",
-            "33": "MOVE_TELEPORT",
+            "10": "MOVE_UPROAR",
+			"13": "MOVE_YAWN",
+			"16": "MOVE_PSYWAVE",
+            "19": "MOVE_TAKE_DOWN",
+			"22": "MOVE_EXTRASENSORY",
+			"27": "MOVE_HEAL_BELL",
+			"29": "MOVE_MIRACLE_EYE",
+            "32": "MOVE_TELEPORT",
+			"34": "MOVE_SAFEGUARD",
 			"36": "MOVE_MIND_READER",
-            "38": [ 
-				"MOVE_HEAL_BELL",
-				"MOVE_KINESIS"
-			],
+            "38": "MOVE_KINESIS",
 			"40": "MOVE_RECOVER",
-            "41": "MOVE_SAFEGUARD",
-			"43": "MOVE_MEAN_LOOK",
-            "46": "MOVE_EXTRASENSORY",
-            "49": "MOVE_HEALING_WISH"
+			"42": "MOVE_MEAN_LOOK",
+            "48": "MOVE_HEALING_WISH"
         },
         "tutor": [
             "MOVE_ICY_WIND",

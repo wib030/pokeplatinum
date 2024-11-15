@@ -86,20 +86,22 @@
         "level_up": {
             "1": [
                 "MOVE_GROWL",
-                "MOVE_TACKLE"
+                "MOVE_TACKLE",
+				"MOVE_ROCK_SLIDE"
             ],
-            "5": "MOVE_EMBER",
-            "11": "MOVE_MAGNITUDE",
-            "15": "MOVE_FOCUS_ENERGY",
-            "21": "MOVE_TAKE_DOWN",
+            "4": "MOVE_EMBER",
+			"8": "MOVE_FOCUS_ENERGY",
+            "12": "MOVE_MAGNITUDE",
+			"19": "MOVE_AMNESIA",
+			"22": "MOVE_LAVA_PLUME",
 			"23": "MOVE_BLAST_BURN",
-            "25": "MOVE_AMNESIA",
-            "31": "MOVE_LAVA_PLUME",
-            "33": "MOVE_ROCK_SLIDE",
+			"26": "MOVE_EARTH_POWER",
+			"29": "MOVE_CURSE",
+			"31": "MOVE_TAKE_DOWN",
 			"37": "MOVE_MORNING_SUN",
-            "39": "MOVE_EARTH_POWER",
-            "49": "MOVE_EARTHQUAKE",
-            "57": "MOVE_ERUPTION"
+			"39": "MOVE_YAWN",
+            "46": "MOVE_EARTHQUAKE",
+            "52": "MOVE_ERUPTION"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

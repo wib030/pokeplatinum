@@ -82,21 +82,23 @@
         "level_up": {
             "1": [ 
 				"MOVE_TACKLE",
+				"MOVE_HARDEN",
 				"MOVE_ODOR_SLEUTH"
 			],
-			"5": "MOVE_ROCK_THROW",
-            "7": "MOVE_HARDEN",
-            "19": "MOVE_BLOCK",
-            "25": "MOVE_THUNDER_WAVE",
-            "31": "MOVE_ROCK_SLIDE",
+			"4": "MOVE_ROCK_THROW",
+            "7": "MOVE_BLOCK",
+			"10": "MOVE_PAIN_SPLIT",
+            "13": "MOVE_THUNDER_WAVE",
+			"16": "MOVE_REST",
+			"19": "MOVE_SPARK",
+            "22": "MOVE_ROCK_SLIDE",
+			"25": "MOVE_POWER_GEM",
+			"28": "MOVE_ROCK_BLAST",
+			"31": "MOVE_DISCHARGE",
 			"34": "MOVE_ZAP_CANNON",
-            "37": "MOVE_SANDSTORM",
-            "43": "MOVE_REST",
-			"45": "MOVE_EARTH_POWER",
-            "49": "MOVE_POWER_GEM",
-            "55": "MOVE_DISCHARGE",
-            "58": "MOVE_STONE_EDGE",
-            "61": "MOVE_LOCK_ON"
+			"37": "MOVE_EARTH_POWER",
+            "40": "MOVE_STONE_EDGE",
+            "43": "MOVE_LOCK_ON"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -82,22 +82,26 @@
             "HM06"
         ],
         "level_up": {
-            "1": "MOVE_EMBER",
+            "1": [ 
+				"MOVE_EMBER",
+				"MOVE_YAWN"
+			],
             "4": "MOVE_SMOG",
             "7": "MOVE_WITHDRAW",
-            "12": "MOVE_CURSE",
-            "17": "MOVE_FIRE_SPIN",
-            "20": "MOVE_SMOKE_SCREEN",
-            "23": "MOVE_RAPID_SPIN",
+			"10": "MOVE_RAPID_SPIN",
+            "13": "MOVE_FIRE_SPIN",
+            "15": "MOVE_SMOKE_SCREEN",
+			"18": "MOVE_FLAME_WHEEL",
+			"22": "MOVE_CURSE",
 			"25": "MOVE_BLAST_BURN",
-            "28": "MOVE_FLAMETHROWER",
-            "33": "MOVE_BODY_SLAM",
-            "36": "MOVE_PROTECT",
-            "39": "MOVE_LAVA_PLUME",
-            "44": "MOVE_IRON_DEFENSE",
-            "49": "MOVE_AMNESIA",
-            "52": "MOVE_FLAIL",
-            "55": "MOVE_HEAT_WAVE"
+			"27": "MOVE_BODY_SLAM",
+			"30": "MOVE_LAVA_PLUME",
+			"34": "MOVE_FLAMETHROWER",
+            "38": "MOVE_IRON_DEFENSE",
+            "40": "MOVE_AMNESIA",
+            "42": "MOVE_FLAIL",
+            "45": "MOVE_HEAT_WAVE",
+			"48": "MOVE_EARTH_POWER"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

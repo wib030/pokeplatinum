@@ -78,25 +78,25 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
-				"MOVE_POUND",
-				"MOVE_ACID"
-			],
-            "6": "MOVE_YAWN",
-            "9": "MOVE_POISON_GAS",
-            "14": "MOVE_SLUDGE",
-            "17": "MOVE_AMNESIA",
-            "23": "MOVE_ENCORE",
-            "28": "MOVE_TOXIC",
-            "34": [
+            "1": "MOVE_POUND",
+			"3": "MOVE_POISON_STING",
+            "5": "MOVE_YAWN",
+            "8": "MOVE_POISON_GAS",
+            "10": "MOVE_SLUDGE",
+            "12": "MOVE_AMNESIA",
+            "10": "MOVE_ENCORE",
+            "25": "MOVE_TOXIC",
+            "28": [
                 "MOVE_STOCKPILE",
                 "MOVE_SPIT_UP",
                 "MOVE_SWALLOW"
             ],
-            "39": "MOVE_SLUDGE_BOMB",
-            "44": "MOVE_GASTRO_ACID",
-            "49": "MOVE_WRING_OUT",
-            "54": "MOVE_GUNK_SHOT"
+			"30": "MOVE_ACID_ARMOR",
+            "33": "MOVE_SLUDGE_BOMB",
+            "36": "MOVE_GASTRO_ACID",
+			"40": "MOVE_PAIN_SPLIT",
+            "44": "MOVE_WRING_OUT",
+            "49": "MOVE_GUNK_SHOT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
