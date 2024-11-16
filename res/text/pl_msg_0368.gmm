@@ -5302,4 +5302,28 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!</language>
 	</row>
+	<row id="pl_msg_00000368_01322" index="1322">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} reduced\nthe incoming damage!</language>
+	</row>
+	<row id="pl_msg_00000368_01323" index="1323">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nreduced the incoming damage!</language>
+	</row>
+	<row id="pl_msg_00000368_01324" index="1324">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nreduced the incoming damage!</language>
+	</row>
+	<row id="pl_msg_00000368_01325" index="1325">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} increased\nthe incoming damage!</language>
+	</row>
+	<row id="pl_msg_00000368_01326" index="1326">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nincreased the incoming damage!</language>
+	</row>
+	<row id="pl_msg_00000368_01327" index="1327">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nincreased the incoming damage!</language>
+	</row>
 </body>

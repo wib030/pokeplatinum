@@ -1622,6 +1622,20 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
 	{
 		battleCtx->damage /= 2;
 	}
+	
+	if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_UNOWN_ENERGY)
+	{
+		if (moveType == TYPE_NORMAL)
+		{
+			battleCtx->damage *= 2;
+			battleCtx->battleMons[battleCtx->defender].unownEnergyStrongFlag = TRUE;
+		}
+		else
+		{
+			battleCtx->damage /= 2;
+			battleCtx->battleMons[battleCtx->defender].unownEnergyWeakFlag = TRUE;
+		}
+	}
 }
 
 /**
@@ -5825,6 +5839,8 @@ static BOOL BtlCmd_Transform(BattleSystem * battleSys, BattleContext * battleCtx
 	ATTACKING_MON.rivalryFlag = FALSE;
 	ATTACKING_MON.colorChangeFlag = FALSE;
 	ATTACKING_MON.randomAbilityAnnounced = FALSE;
+	ATTACKING_MON.unownEnergyStrongFlag = FALSE;
+	ATTACKING_MON.unownEnergyWeakFlag = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
     ATTACKING_MON.moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     ATTACKING_MON.slowStartAnnounced = FALSE;

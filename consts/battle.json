@@ -714,7 +714,9 @@
                 "BATTLEMON_FORM_NUM",
                 "BATTLEMON_UNUSED_99",
                 "BATTLEMON_TEMP",
-                "BATTLEMON_MEDITATE_CRIT_RATE_BOOST"
+                "BATTLEMON_MEDITATE_CRIT_RATE_BOOST",
+				"BATTLEMON_UNOWN_ENERGY_STRONG_FLAG",
+				"BATTLEMON_UNOWN_ENERGY_WEAK_FLAG"
             ]
         },
         "@AfterMoveMessageType": {

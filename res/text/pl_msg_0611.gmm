@@ -613,4 +613,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">GENETIC FREAK</language>
 	</row>
+	<row id="pl_msg_00000610_00153" index="153">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">UNOWN ENERGY</language>
+	</row>
 </body>

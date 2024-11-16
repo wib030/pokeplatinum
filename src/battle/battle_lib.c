@@ -116,6 +116,8 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].rivalryFlag = FALSE;
 	battleCtx->battleMons[battler].colorChangeFlag = FALSE;
     battleCtx->battleMons[battler].meditateCritBoostFlag = FALSE;
+	battleCtx->battleMons[battler].unownEnergyStrongFlag = FALSE;
+	battleCtx->battleMons[battler].unownEnergyWeakFlag = FALSE;
 	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
@@ -588,6 +590,12 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 
     case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
         return battleMon->meditateCritBoostFlag;
+		
+	case BATTLEMON_UNOWN_ENERGY_STRONG_FLAG:
+        return battleMon->unownEnergyStrongFlag;
+		
+	case BATTLEMON_UNOWN_ENERGY_WEAK_FLAG:
+        return battleMon->unownEnergyWeakFlag;
 
     default:
         GF_ASSERT(FALSE);
@@ -947,6 +955,14 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 	case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
         mon->meditateCritBoostFlag = *(u8 *)buf;
 		break;
+		
+	case BATTLEMON_UNOWN_ENERGY_STRONG_FLAG:
+        mon->unownEnergyStrongFlag = *(u8 *)buf;
+		break;
+		
+	case BATTLEMON_UNOWN_ENERGY_WEAK_FLAG:
+        mon->unownEnergyWeakFlag = *(u8 *)buf;
+		break;
 
     default:
         GF_ASSERT(FALSE);
@@ -1170,6 +1186,14 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 		
 	case BATTLEMON_MEDITATE_CRIT_RATE_BOOST:
         mon->meditateCritBoostFlag += val;
+		break;
+		
+	case BATTLEMON_UNOWN_ENERGY_STRONG_FLAG:
+        mon->unownEnergyStrongFlag += val;
+		break;
+		
+	case BATTLEMON_UNOWN_ENERGY_WEAK_FLAG:
+        mon->unownEnergyWeakFlag += val;
 		break;
 
     default:
@@ -3995,7 +4019,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 	int colorChange1Pos, colorChange2Pos;
 	int colorChangeTarget = NULL;
 	int targetType1, targetType2;
-	int abilityMax = ABILITY_PEST;
+	int abilityMax = ABILITY_UNOWN_ENERGY;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
@@ -9842,19 +9866,14 @@ static int MapSideEffectToSubscript(BattleContext *battleCtx, enum SideEffectTyp
  */
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus)
 {
-	//if ((battleCtx->moveCur == MOVE_ICE_BEAM)
-	//&& (BattleMon_Get(battleCtx, battleCtx->defender, BATTLEMON_TYPE_1, NULL) == TYPE_WATER || BattleMon_Get(battleCtx, battleCtx->defender, BATTLEMON_TYPE_2, NULL) == TYPE_WATER))
-	//{
-	//	mul = TYPE_MULTI_SUPER_EFF;
-	//}
-	
 	if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_IGNORE_IMMUNITIES) == FALSE
             && damage) {
         damage = BattleSystem_Divide(damage * mul, 10);
     }
-
-    switch (mul) {
+	
+    switch (mul)
+	{
     case TYPE_MULTI_IMMUNE:
         *moveStatus |= MOVE_STATUS_INEFFECTIVE;
         *moveStatus &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
