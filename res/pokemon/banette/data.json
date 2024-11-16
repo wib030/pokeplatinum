@@ -110,6 +110,7 @@
             "40": "MOVE_SUCKER_PUNCH",
             "46": "MOVE_SNATCH",
             "52": "MOVE_GRUDGE",
+			"54": "MOVE_GUNK_SHOT",
 			"56": "MOVE_DESTINY_BOND",
             "58": "MOVE_TRICK"
         },
