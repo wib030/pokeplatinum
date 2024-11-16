@@ -28,12 +28,12 @@
             "species": "SPECIES_ARON",
             "form": 0,
             "level": 12,
-            "item": "ITEM_BERRY_JUICE",
+            "item": "ITEM_CUSTAP_BERRY",
             "moves": [
                 "MOVE_METAL_BURST",
 				"MOVE_ENDEAVOR",
 				"MOVE_METAL_CLAW",
-				"MOVE_ROAR"
+				"MOVE_ENDURE"
             ],
             "power": 100,
             "ball_seal": 0,
