@@ -43,7 +43,8 @@
             "level": 30,
             "item": "ITEM_NONE",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_HIDDEN_POWER",
+				"MOVE_METRONOME"
             ],
             "power": 100,
             "ball_seal": 0

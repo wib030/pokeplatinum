@@ -15,7 +15,10 @@
             "level": 75,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_ANCIENT_POWER",
+				"MOVE_MIRACLE_EYE",
+				"MOVE_COSMIC_POWER",
+				"MOVE_BLOCK"
             ],
             "power": 255,
             "ball_seal": 3

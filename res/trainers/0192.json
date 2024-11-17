@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_JOKE"
     ],
     "double_battle": false,
     "party": [
@@ -15,7 +16,7 @@
             "level": 55,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_METRONOME"
             ],
             "power": 255,
             "ball_seal": 0,
@@ -27,7 +28,7 @@
             "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_METRONOME"
             ],
             "power": 254,
             "ball_seal": 0,
@@ -39,7 +40,7 @@
             "level": 55,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_METRONOME"
             ],
             "power": 255,
             "ball_seal": 0,
@@ -51,7 +52,7 @@
             "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_METRONOME"
             ],
             "power": 254,
             "ball_seal": 0,
@@ -63,7 +64,7 @@
             "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_METRONOME"
             ],
             "power": 255,
             "ball_seal": 0,
@@ -75,7 +76,7 @@
             "level": 55,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_METRONOME"
             ],
             "power": 254,
             "ball_seal": 0,

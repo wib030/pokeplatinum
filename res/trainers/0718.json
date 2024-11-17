@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_VESPIQUEN",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_DEFEND_ORDER",

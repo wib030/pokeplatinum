@@ -69,11 +69,11 @@
             "species": "SPECIES_PURUGLY",
             "form": 0,
             "level": 45,
-            "item": "ITEM_SILK_SCARF",
+            "item": "ITEM_CLEANSE_TAG",
             "moves": [
                 "MOVE_LAST_RESORT",
 				"MOVE_FAKE_OUT",
-				"MOVE_PAYBACK"
+				"MOVE_PROTECT"
             ],
             "power": 180,
             "ball_seal": 5,

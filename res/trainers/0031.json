@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_JOKE"
     ],
     "double_battle": false,
     "party": [
@@ -13,9 +14,12 @@
             "species": "SPECIES_UNOWN",
             "form": 14,
             "level": 22,
-            "item": "ITEM_CHOICE_SPECS",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-				"MOVE_HIDDEN_POWER"
+				"MOVE_HIDDEN_POWER",
+				"MOVE_COSMIC_POWER",
+				"MOVE_MIRACLE_EYE",
+				"MOVE_BLOCK"
             ],
             "power": 200,
             "ball_seal": 0
@@ -24,7 +28,7 @@
             "species": "SPECIES_UNOWN",
             "form": 10,
             "level": 22,
-            "item": "ITEM_CHOICE_SCARF",
+            "item": "ITEM_CHOICE_SPECS",
             "moves": [
 				"MOVE_HIDDEN_POWER"
             ],

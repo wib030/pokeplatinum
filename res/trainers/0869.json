@@ -71,7 +71,7 @@
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_FAKE_OUT",
-                "MOVE_CLOSE_COMBAT",
+                "MOVE_HI_JUMP_KICK",
                 "MOVE_ICE_PUNCH",
                 "MOVE_RETURN"
             ],
