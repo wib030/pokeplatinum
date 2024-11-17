@@ -95,8 +95,8 @@
             "1": [
                 "MOVE_ICE_PUNCH",
                 "MOVE_POWDER_SNOW",
-                "MOVE_LEER",
-                "MOVE_RAZOR_LEAF",
+                "MOVE_GROWTH",
+                "MOVE_LEECH_SEED",
                 "MOVE_ICY_WIND"
             ],
             "5": "MOVE_RAZOR_LEAF",

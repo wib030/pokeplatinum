@@ -83,19 +83,20 @@
         "level_up": {
             "1": [
                 "MOVE_SPLASH",
-                "MOVE_POUND"
+                "MOVE_POUND",
+				"MOVE_DEFENSE_CURL"
             ],
-			"4": "MOVE_DEFENSE_CURL",
-            "8": "MOVE_ENDURE",
-			"12": "MOVE_ME_FIRST",
-            "16": "MOVE_QUICK_ATTACK",
-			"20": "MOVE_DOUBLE_KICK",
-            "24": "MOVE_CHARM",
-			"26": "MOVE_GUILLOTINE",
-            "28": "MOVE_BATON_PASS",
-            "32": "MOVE_HEADBUTT",
-            "36": "MOVE_AGILITY",
-            "40": "MOVE_U_TURN",
+            "6": "MOVE_ENDURE",
+			"9": "MOVE_ME_FIRST",
+            "11": "MOVE_QUICK_ATTACK",
+			"16": "MOVE_DOUBLE_KICK",
+            "21": "MOVE_CHARM",
+			"24": "MOVE_GUILLOTINE",
+            "26": "MOVE_BATON_PASS",
+			"28": "MOVE_JUMP_KICK",
+            "30": "MOVE_HEADBUTT",
+            "32": "MOVE_AGILITY",
+            "38": "MOVE_U_TURN",
             "44": "MOVE_FLATTER",
 			"48": "MOVE_BOUNCE",
             "52": "MOVE_HEALING_WISH"

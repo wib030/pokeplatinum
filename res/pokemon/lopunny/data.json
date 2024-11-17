@@ -93,23 +93,20 @@
 				"MOVE_MAGIC_COAT",
                 "MOVE_BATON_PASS"
             ],
-			"12": "MOVE_ME_FIRST",
-            "16": "MOVE_QUICK_ATTACK",
-			"20": [
-				"MOVE_DOUBLE_KICK",
-				"MOVE_CHARM"
-			],
-            "24": "MOVE_JUMP_KICK",
-			"26": "MOVE_FAKE_OUT",
-			"28": "MOVE_GUILLOTINE",
+			"9": "MOVE_ME_FIRST",
+            "11": "MOVE_QUICK_ATTACK",
+			"16": "MOVE_DOUBLE_KICK",
+			"21": "MOVE_CHARM",
+			"24": "MOVE_GUILLOTINE",
+            "28": "MOVE_JUMP_KICK",
             "32": "MOVE_HEADBUTT",
-            "36": "MOVE_AGILITY",
+            "34": "MOVE_AGILITY",
+			"36": "MOVE_FLATTER",
             "40": "MOVE_U_TURN",
-            "44": "MOVE_FLATTER",
-			"46": "MOVE_HI_JUMP_KICK",
+			"44": "MOVE_FAKE_OUT",
 			"48": "MOVE_BOUNCE",
             "52": "MOVE_HEALING_WISH",
-			"54": "MOVE_CLOSE_COMBAT"
+			"54": "MOVE_HI_JUMP_KICK"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

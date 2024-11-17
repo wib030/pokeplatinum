@@ -82,10 +82,10 @@
             "17": "MOVE_FURY_ATTACK",
             "21": "MOVE_CHATTER",
             "25": "MOVE_TAUNT",
-            "29": "MOVE_MIMIC",
+            "27": "MOVE_MIMIC",
+			"29": "MOVE_UPROAR",
             "33": "MOVE_ROOST",
-            "37": "MOVE_UPROAR",
-            "41": "MOVE_FEATHER_DANCE",
+            "37": "MOVE_FEATHER_DANCE",
             "45": "MOVE_HYPER_VOICE",
 			"55": "MOVE_RAZOR_WIND"
         },

@@ -55,6 +55,7 @@
             "TM23",
             "TM26",
             "TM27",
+			"TM28",
             "TM32",
             "TM37",
             "TM39",
@@ -82,8 +83,14 @@
             "7": "MOVE_BITE",
             "13": "MOVE_YAWN",
             "19": "MOVE_TAKE_DOWN",
-            "25": "MOVE_SAND_TOMB",
+            "25": "MOVE_CURSE",
+			"28": [
+                "MOVE_STOCKPILE",
+                "MOVE_SWALLOW",
+                "MOVE_SPIT_UP"
+            ],
             "31": "MOVE_CRUNCH",
+			"35": "MOVE_SLACK_OFF",
             "37": "MOVE_EARTHQUAKE",
             "44": "MOVE_DOUBLE_EDGE"
         },

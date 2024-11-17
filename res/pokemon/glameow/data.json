@@ -88,17 +88,18 @@
 				"MOVE_FAKE_OUT",
 				"MOVE_SCRATCH"
 			],
-            "8": "MOVE_GROWL",
-            "13": "MOVE_HYPNOSIS",
-            "17": "MOVE_FAINT_ATTACK",
-            "20": "MOVE_FURY_SWIPES",
-            "25": "MOVE_CHARM",
-            "29": "MOVE_ASSIST",
-            "32": "MOVE_CAPTIVATE",
+            "7": "MOVE_GROWL",
+            "11": "MOVE_HYPNOSIS",
+			"13": "MOVE_FURY_SWIPES",
+            "16": "MOVE_FAINT_ATTACK",
+            "19": "MOVE_CHARM",
+			"23": "MOVE_CAPTIVATE",
+            "26": "MOVE_ASSIST",
+			"31": "MOVE_KNOCK_OFF",
 			"34": "MOVE_MEAN_LOOK",
             "37": "MOVE_SLASH",
             "41": "MOVE_SUCKER_PUNCH",
-            "45": "MOVE_ATTRACT"
+            "44": "MOVE_ATTRACT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

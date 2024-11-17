@@ -46,7 +46,15 @@
     "learnset": {
         "tms": [],
         "level_up": {
-            "1": "MOVE_HIDDEN_POWER"
+            "1": "MOVE_HIDDEN_POWER",
+			"3": "MOVE_DISABLE",
+			"7": "MOVE_NATURE_POWER",
+			"10": "MOVE_SECRET_POWER",
+			"13": "MOVE_BLOCK",
+			"15": "MOVE_MIRACLE_EYE",
+			"20": "MOVE_COSMIC_POWER",
+			"23": "MOVE_ANCIENT_POWER",
+			"25": "MOVE_METRONOME"
         },
         "tutor": []
     },

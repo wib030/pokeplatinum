@@ -90,12 +90,13 @@
                 "MOVE_ENDURE"
             ],
             "6": "MOVE_COUNTER",
-            "11": "MOVE_FORCE_PALM",
-            "15": "MOVE_FEINT",
+			"11": "MOVE_FEINT",
+            "15": "MOVE_FORCE_PALM",
             "19": "MOVE_REVERSAL",
+			"21": "MOVE_COPYCAT",
             "24": "MOVE_SCREECH",
-            "29": "MOVE_COPYCAT",
-			"34": "MOVE_GUILLOTINE"
+			"34": "MOVE_GUILLOTINE",
+			"47": "MOVE_NASTY_PLOT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

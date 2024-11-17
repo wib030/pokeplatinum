@@ -76,15 +76,19 @@
         "level_up": {
             "1": [
                 "MOVE_TACKLE",
+				"MOVE_ABSORB",
                 "MOVE_GROWTH"
             ],
             "7": "MOVE_GROWTH",
             "10": "MOVE_LEECH_SEED",
             "13": "MOVE_HELPING_HAND",
+			"16": "MOVE_MEGA_DRAIN",
             "19": "MOVE_MAGICAL_LEAF",
             "22": "MOVE_SUNNY_DAY",
             "25": "MOVE_PETAL_DANCE",
+			"28": "MOVE_MORNING_SUN",
             "30": "MOVE_WORRY_SEED",
+			"33": "MOVE_GIGA_DRAIN",
             "35": "MOVE_TAKE_DOWN",
             "43": "MOVE_SOLAR_BEAM",
             "48": "MOVE_LUCKY_CHANT"

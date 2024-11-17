@@ -85,9 +85,9 @@
         "level_up": {
             "1": "MOVE_TACKLE",
             "3": "MOVE_SAND_ATTACK",
+			"7": "MOVE_SAND_TOMB",
             "13": "MOVE_SANDSTORM",
             "15": "MOVE_TAKE_DOWN",
-            "19": "MOVE_SAND_TOMB",
             "25": "MOVE_SLASH",
             "27": "MOVE_DRAGON_CLAW",
             "31": "MOVE_DIG",

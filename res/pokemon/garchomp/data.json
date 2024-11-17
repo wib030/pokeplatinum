@@ -94,20 +94,21 @@
         "level_up": {
             "1": [
                 "MOVE_FIRE_FANG",
-                "MOVE_TACKLE",
-                "MOVE_SAND_ATTACK",
+                "MOVE_THRASH",
+                "MOVE_IRON_HEAD",
                 "MOVE_SANDSTORM"
             ],
             "3": "MOVE_SAND_ATTACK",
+			"7": "MOVE_SAND_TOMB",
             "13": "MOVE_SANDSTORM",
             "15": "MOVE_TAKE_DOWN",
-            "19": "MOVE_SAND_TOMB",
             "28": "MOVE_SLASH",
             "33": "MOVE_DRAGON_CLAW",
 			"36": "MOVE_DRAGON_RAGE",
             "40": "MOVE_DIG",
             "48": "MOVE_CRUNCH",
-            "55": "MOVE_DRAGON_RUSH"
+            "53": "MOVE_DRAGON_RUSH",
+			"56": "MOVE_OUTRAGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
