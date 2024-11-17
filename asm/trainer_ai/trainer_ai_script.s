@@ -58,10 +58,6 @@ Basic_Main:
     ; Ignore this flag on partner battlers.
     IfTargetIsPartner Terminate
 
-    ; Skip damage scoring for OHKO moves (only Fissure and Horn Drill)
-    IfMoveEqualTo MOVE_FISSURE, Basic_CheckForImmunity
-    IfMoveEqualTo MOVE_HORN_DRILL, Basic_CheckForImmunity
-
     ; Score the move according to its damage. If the AI does not know any
     ; moves which are eligible for scoring, skip ahead.
     FlagMoveDamageScore FALSE
