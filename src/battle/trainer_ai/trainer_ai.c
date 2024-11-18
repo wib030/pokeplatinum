@@ -5053,7 +5053,29 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     // Check all of this mon's attacking moves for immunities. If any of our moves can deal damage to
     // either of the opponents' battlers, do not switch.
     numMoves = 0;
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+    for (j = 0; j < 2; j++) {
+
+        effectiveness = 0;
+
+        if (j == 0) {
+            defender = defender1;
+            battlerPartner = battler;
+        }
+
+        if (j == 1) {
+
+            if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES)) {
+                defender = defender2;
+                battlerPartner = BattleSystem_Partner(battleSys, battler);
+            }
+            else {
+                battlerPartner = battler;
+                break;
+            }
+        }
+
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         move = battleCtx->battleMons[battler].moves[i];
 
         if (move == MOVE_NONE) {
@@ -5064,29 +5086,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         range = MOVE_DATA(move).range;
         effect = MOVE_DATA(move).effect;
 
-        for (j = 0; j < 2; j++) {
-
-            effectiveness = 0;
-
-            if (j == 0) {
-                defender = defender1;
-                battlerPartner = battler;
-            }
-
-            if (j == 1) {
-
-                if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES)) {
-                    defender = defender2;
-                    battlerPartner = BattleSystem_Partner(battleSys, battler);
-                }
-                else {
-                    battlerPartner = battler;
-                    break;
-                }
-            }
-
             // Check if there is a choice-locked move.
-            if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
+            if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove != MOVE_NONE) {
 
                 // Only the choice-locked move need be considered.
                 if (move == battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove) {
@@ -5098,43 +5099,10 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                     if (MOVE_DATA(move).power) {
 
-                        // Here we check through all the possible move status flags that could be tripped by ApplyTypeChart.
                         // Switch if the move has less than neutral effectiveness when it connects.
-                        if ((effectiveness & MOVE_STATUS_IMMUNE)
-                            && ((effectiveness & MOVE_STATUS_NOT_VERY_EFFECTIVE) == FALSE)
+                        if ((effectiveness & (MOVE_STATUS_IMMUNE | MOVE_STATUS_RESISTED))
                             && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
-
-                        else if (effectiveness & MOVE_STATUS_WONDER_GUARD) {
-
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
-
-                        else if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY)
-                            && ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE)) {
-
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
-
-                        else if (effectiveness & (MOVE_STATUS_DID_NOT_HIT | MOVE_STATUS_ABSORBED)) {
-
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
-
-                        else if (effectiveness & MOVE_STATUS_NO_PP) {
-
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
-
-                        else if (effectiveness & MOVE_STATUS_INEFFECTIVE) {
-                        
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
                         }
@@ -5145,41 +5113,72 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     }
                     // Status move here
                     else {
-                        if (battleCtx->battleMons[battler].moveEffectsData.tauntedTurns == 0) {
-                            if (effectiveness & (MOVE_STATUS_NO_EFFECTS | MOVE_STATUS_ABSORBED)) {
-                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                                return TRUE;
+                        moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
+                        if (moveEffect != MOVE_EFFECT_NONE) {
+                            if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                                return FALSE;
                             }
-                            else {
-                                moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
-                                if (moveEffect != MOVE_EFFECT_NONE) {
-                                    if ((battleCtx->battleMons[defender].moveEffectsMask & moveEffect) == FALSE) {
+                        }
+                        moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, effect);
+                        moveStatus = MapBattleEffectToStatusCondition(battleCtx, effect);
+                        // For now, this code just checks if the target has no negative inflictable status
+                        // that could be applied. Later on, we'll need to check that the target won't
+                        // benefit from poison or burn, as well
+                        if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
+                            if ((battleCtx->battleMons[defender].statusVolatile & moveVolatileStatus) == FALSE) {
+                                return FALSE;
+                            }
+                        }
+
+                        if (moveStatus != MON_CONDITION_NONE) {
+                            if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
+                                if (moveStatus & MON_CONDITION_ANY_POISON) {
+                                    if (battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL
+                                    && battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD
+                                    && battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE
+                                    && battleCtx->battleMons[defender].ability != ABILITY_IMMUNITY
+                                    && battleCtx->battleMons[defender].ability != ABILITY_GUTS
+                                    && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
+                                    && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE
+                                    ) {
                                         return FALSE;
                                     }
                                 }
-                                else {
-                                    // For now, this code just checks if the target has no negative inflictable status
-                                    // that could be applied. Later on, we'll need to check that the target won't
-                                    // benefit from poison or burn, as well
-                                    if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE) == FALSE) {
-                                        if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
-                                            if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
-                                                && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)) {
-                                            
-                                                return FALSE;
-                                            }
-                                        }
+
+                                if (moveStatus & MON_CONDITION_BURN) {
+                                    if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD
+                                        && battleCtx->battleMons[defender].ability != ABILITY_GUTS
+                                        && battleCtx->battleMons[defender].ability != ABILITY_WATER_VEIL
+                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
+                                        && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE) {
+                                            return FALSE;
                                     }
                                 }
 
-                                battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                                return TRUE;
+                                if (moveStatus & MON_CONDITION_PARALYSIS) {
+                                    if (battleCtx->battleMons[defender].ability != ABILITY_LIMBER
+                                        && battleCtx->battleMons[defender].ability != ABILITY_GUTS
+                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
+                                        && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE) {
+                                            return FALSE;
+                                    }
+                                }
+
+                                if (moveStatus & MON_CONDITION_SLEEP) {
+                                    if (battleCtx->battleMons[defender].ability != ABILITY_INSOMNIA
+                                        && battleCtx->battleMons[defender].ability != ABILITY_VITAL_SPIRIT
+                                        && battleCtx->battleMons[defender].ability != ABILITY_EARLY_BIRD
+                                        && battleCtx->battleMons[defender].ability != ABILITY_GUTS
+                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
+                                        && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE) {
+                                            return FALSE;
+                                    }
+                                }
                             }
                         }
-                        else {
-                            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                            return TRUE;
-                        }
+
+                        battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                        return TRUE;
                     }
                 }
             }
