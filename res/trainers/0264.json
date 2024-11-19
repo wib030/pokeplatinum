@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 58,
+            "level": 61,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SPORE",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_AZUMARILL",
             "form": 0,
-            "level": 58,
+            "level": 61,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_WATERFALL",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_WIGGLYTUFF",
             "form": 0,
-            "level": 58,
+            "level": 61,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SEISMIC_TOSS",
@@ -54,7 +54,7 @@
         {
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 58,
+            "level": 61,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -68,7 +68,7 @@
         {
             "species": "SPECIES_NIDOKING",
             "form": 0,
-            "level": 58,
+            "level": 61,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -82,7 +82,7 @@
 		{
             "species": "SPECIES_LOPUNNY",
             "form": 0,
-            "level": 60,
+            "level": 62,
             "item": "ITEM_EXPERT_BELT",
             "moves": [
                 "MOVE_FAKE_OUT",
