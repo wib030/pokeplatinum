@@ -35,7 +35,7 @@
         "EGG_GROUP_GRASS"
     ],
     "abilities": [
-        "ABILITY_LEVITATE",
+        "ABILITY_FREE_SAMPLE",
         "ABILITY_STRONG_JAW"
     ],
     "great_marsh_flee_rate": 0,
@@ -79,14 +79,15 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_BIND",
+                "MOVE_THUNDER_FANG",
+				"MOVE_ICE_FANG",
+				"MOVE_FIRE_FANG",
                 "MOVE_GROWTH",
 				"MOVE_DEFOG"
             ],
 			"5": "MOVE_VINE_WHIP",
             "7": "MOVE_BITE",
 			"12": "MOVE_LEECH_SEED",
-			"15": "MOVE_MEGA_DRAIN",
             "17": "MOVE_SWEET_SCENT",
             "21": "MOVE_INGRAIN",
             "27": "MOVE_FAINT_ATTACK",
