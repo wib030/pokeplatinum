@@ -1609,4 +1609,15 @@ int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, 
 */
 BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot);
 
+/**
+* @brief Determine whether the given ability deters the given status.
+*
+* @param battleSys
+* @param battleCtx
+* @param ability            The ability of the mon being affected by the status.
+* @param statusCondition    The bitmask of the status condition.
+* @Return   The TRUE / FALSE result of whether the ability deters the given status.
+*/
+BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int statusCondition);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
