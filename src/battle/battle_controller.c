@@ -3179,12 +3179,14 @@ enum {
     BEFORE_MOVE_STATE_CHECK_TARGET_EXISTS,
     BEFORE_MOVE_STATE_CHECK_STOLEN,
     BEFORE_MOVE_STATE_REDIRECT_TARGET,
+	BEFORE_MOVE_STATE_COLOR_CHANGE,
 
     BEFORE_MOVE_END,
 };
 
 static void BattleController_BeforeMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+	u32 runMyScriptInstead = 0;
     switch (battleCtx->beforeMoveCheckState) {
     case BEFORE_MOVE_STATE_QUICK_CLAW:
         BattleController_LoadQuickClawCheck(battleSys, battleCtx);
@@ -3252,20 +3254,57 @@ static void BattleController_BeforeMove(BattleSystem *battleSys, BattleContext *
 
     case BEFORE_MOVE_STATE_REDIRECT_TARGET:
         BattleSystem_CheckRedirectionAbilities(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveCur);
-        battleCtx->beforeMoveCheckState = BEFORE_MOVE_START;
+		
+		battleCtx->beforeMoveCheckState++;
+	
+	case BEFORE_MOVE_STATE_COLOR_CHANGE:
+        if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE)
+		&& ((battleCtx->battleMons[battleCtx->defender].type1 != MOVE_DATA(battleCtx->moveCur).type)
+		|| (battleCtx->battleMons[battleCtx->defender].type2 != MOVE_DATA(battleCtx->moveCur).type)))
+		{
+			u8 moveType;
+			if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE)
+			{
+				moveType = TYPE_NORMAL;
+			}
+			else if (battleCtx->moveType)
+			{
+				moveType = battleCtx->moveType;
+			}
+			else
+			{
+				moveType = CURRENT_MOVE_DATA.type;
+			}
+			
+			battleCtx->battleMons[battleCtx->defender].type1 = moveType;
+			battleCtx->battleMons[battleCtx->defender].type2 = moveType;
+			LOAD_SUBSEQ(subscript_color_change_before);
+			battleCtx->msgTemp = moveType;
+			runMyScriptInstead = 1;
+		}
+		
+		battleCtx->beforeMoveCheckState = BEFORE_MOVE_START;
     }
-
-    if (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) {
+	
+	if (runMyScriptInstead == 1)
+	{
+		battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+		battleCtx->commandNext = BATTLE_CONTROL_BEFORE_MOVE;
+	}
+	else
+	{
+		if (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) {
         battleCtx->command = BATTLE_CONTROL_MOVE_FAILED;
-    } else {
-        battleCtx->battleStatusMask2 |= SYSCTL_MOVE_SUCCEEDED;
+		} else {
+			battleCtx->battleStatusMask2 |= SYSCTL_MOVE_SUCCEEDED;
 
-        BattleSystem_LoadScript(battleCtx, 0, battleCtx->moveCur);
-        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-        battleCtx->commandNext = BATTLE_CONTROL_TRY_MOVE;
-        
-        BattleSystem_UpdateLastResort(battleSys, battleCtx);
-    }
+			BattleSystem_LoadScript(battleCtx, 0, battleCtx->moveCur);
+			battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+			battleCtx->commandNext = BATTLE_CONTROL_TRY_MOVE;
+			
+			BattleSystem_UpdateLastResort(battleSys, battleCtx);
+		}
+	}
 
     BattleSystem_UpdateMetronomeCount(battleSys, battleCtx);
 }
