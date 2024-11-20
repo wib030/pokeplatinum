@@ -11,5 +11,5 @@ _000:
 	// {0} acquired {1}!
     PrintMessage pl_msg_00000368_01021, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     Wait 
-    WaitButtonABTime 30
+    WaitButtonABTime 60
     End 
