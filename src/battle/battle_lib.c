@@ -2708,6 +2708,60 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
     return result;
 }
 
+/**
+ * @brief Check if the basic type multiplier applies.
+ * 
+ * @param battleCtx 
+ * @param attacker      The battlemon whose party will be considered.
+ * @param defender 
+ * @param chartEntry    Index of the entry into the type-chart
+ * @param move          Current move being used, pass from parent function.
+ * @param partySlot     Party slot index of party mon.
+ * @return TRUE if there are no active effects to override the given chart-entry,
+ * FALSE if the chart-entry should be overriden
+ */
+static BOOL BasicTypeMulApplies_PartyMon(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int chartEntry, int move, int partySlot)
+{
+    int itemEffect = Battler_HeldItemEffect(battleCtx, defender);
+    BOOL result = TRUE;
+    Pokemon *mon;
+
+    mon = BattleSystem_PartyPokemon(battleSys, attacker, partySlot);
+
+    if ((itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED || (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN))
+            && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
+            && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
+        result = FALSE;
+    }
+
+    if (battleCtx->turnFlags[defender].roosting
+            && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING) {
+        result = FALSE;
+    }
+
+    if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+            && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
+            && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
+        result = FALSE;
+    }
+
+    if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MIRACLE_EYE)
+            && sTypeMatchupMultipliers[chartEntry][1] == TYPE_DARK
+            && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
+        result = FALSE;
+    }
+	
+	if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_CORROSION)
+	&& MOVE_DATA(move).type == TYPE_POISON
+	&& sTypeMatchupMultipliers[chartEntry][1] == TYPE_STEEL
+    && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE)
+	{
+		result = FALSE;
+	}
+
+    return result;
+}
+
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
 {
     int chartEntry;

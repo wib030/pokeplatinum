@@ -5106,7 +5106,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                             battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
                             return TRUE;
                         }
-
                         else {
                             return FALSE;
                         }
