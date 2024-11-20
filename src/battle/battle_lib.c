@@ -3019,6 +3019,270 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     return damage;
 }
 
+int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partySlot, u32 *moveStatusMask)
+{
+    int chartEntry;
+    int totalMul;
+    u8 moveType;
+    u32 movePower;
+    u8 attackerItemEffect;
+    u8 defenderItemEffect;
+    u8 attackerItemPower;
+    u8 defenderItemPower;
+    Pokemon *mon;
+    u8 monAbility;
+    u16 monItem;
+
+    mon = BattleSystem_PartyPokemon(battleSys, attacker, partySlot);
+    monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+	
+	static u16 sPowderMoves[] = {
+		MOVE_POISON_POWDER,
+		MOVE_SLEEP_POWDER,
+		MOVE_STUN_SPORE,
+		MOVE_SPORE,
+		MOVE_COTTON_SPORE,
+	};
+	
+	int powderMove = FALSE;
+
+    totalMul = 1;
+
+    if (move == MOVE_STRUGGLE) {
+        return damage;
+    }
+	
+	for (int i = 0; i < NELEMS(sPowderMoves); i++)
+	{
+		if (move == sPowderMoves[i])
+		{
+			powderMove = TRUE;
+			break;
+		}
+	}
+
+    attackerItemEffect = BattleSystem_GetItemData(battleCtx, monItem, ITEM_PARAM_HOLD_EFFECT);
+    attackerItemPower = BattleSystem_GetItemData(battleCtx, monItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+    defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
+    defenderItemPower = Battler_HeldItemPower(battleCtx, defender, ITEM_POWER_CHECK_ALL);
+
+    if (monAbility == ABILITY_NORMALIZE) {
+        moveType = TYPE_NORMAL;
+    } else if (inType) {
+        moveType = inType;
+    } else {
+        moveType = MOVE_DATA(move).type;
+    }
+
+    movePower = MOVE_DATA(move).power;
+
+    if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && MON_HAS_TYPE(attacker, moveType)) {
+        if (monAbility == ABILITY_ADAPTABILITY) {
+            damage *= 2;
+        } else {
+            damage = damage * 15 / 10;
+        }
+    }
+
+    if ((moveType == TYPE_GROUND)
+    && ((PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_LEVITATE) == TRUE) || ((defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT) && ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE)))
+    && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED
+    && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE)
+	{ 
+        *moveStatusMask |= MOVE_STATUS_LEVITATED;
+    }
+    else if ((moveType == TYPE_GROUND)
+	&& battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
+    && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
+    && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+	{      
+        *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
+    }
+	else if ((powderMove == TRUE)
+	&& (Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL) == TYPE_GRASS || Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL) == TYPE_GRASS)
+    || (defenderItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)))
+	{
+		*moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+	}
+    else {
+        chartEntry = 0;
+
+        while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
+            if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
+                // The Ghost-type immunities are listed separately and ignored as a batch
+                if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+                        || monAbility == ABILITY_SCRAPPY
+						|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
+                    break;
+                } else {
+                    chartEntry++;
+                    continue;
+                }
+            }
+
+            if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
+                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+                        && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partySlot) == TRUE) {
+                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                        totalMul *= 2;
+                    }
+                }
+
+                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                        && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                        && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partySlot) == TRUE) {
+                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                        totalMul *= 2;
+                    }
+                }
+            }
+
+            chartEntry++;
+        }
+    }
+
+    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_WONDER_GUARD) == TRUE
+            && ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE
+                || (*moveStatusMask & MOVE_STATUS_BASIC_EFFECTIVENESS) == MOVE_STATUS_BASIC_EFFECTIVENESS)
+            && movePower) {
+        *moveStatusMask |= MOVE_STATUS_WONDER_GUARD;
+    } else if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE
+            && (battleCtx->battleStatusMask & SYSCTL_IGNORE_IMMUNITIES) == FALSE) {
+        if ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) && movePower) {
+            if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_FILTER) == TRUE
+                    || PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_SOLID_ROCK) == TRUE) {
+                damage = BattleSystem_Divide(damage * 3, 4);
+            }
+
+            if (attackerItemEffect == HOLD_EFFECT_POWER_UP_SE) {
+                damage = damage * (100 + attackerItemPower) / 100;
+            }
+			
+			if ((defenderItemEffect == HOLD_EFFECT_WEAK_RAISE_SPA_ATK)
+			&& (DEFENDING_MON.curHP)
+			&& (movePower)
+			&& (battleCtx->battleMons[defender].wpolicyFlag == FALSE))
+			{
+				battleCtx->battleMons[defender].wpolicyFlag = TRUE;
+			}
+        }
+
+        if ((*moveStatusMask & MOVE_STATUS_NOT_VERY_EFFECTIVE) && movePower) {
+            if (Battler_Ability(battleCtx, attacker) == ABILITY_TINTED_LENS) {
+                damage *= 2;
+            }
+        }
+    } else {
+        *moveStatusMask &= ~MOVE_STATUS_SUPER_EFFECTIVE;
+        *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
+    }
+
+    
+    if (moveType == TYPE_WATER)
+	{
+        if ((PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_WATER_ABSORB) == TRUE)
+            || (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_DRY_SKIN) == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
+        }
+
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_STORM_DRAIN == TRUE)) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
+        }
+    }
+    if (moveType == TYPE_ELECTRIC)
+	{
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_VOLT_ABSORB) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
+        }
+         
+        if ((PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_LIGHTNING_ROD) == TRUE)
+            || PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_MOTOR_DRIVE) == TRUE) {
+
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY;
+        }
+    }
+    if (moveType == TYPE_FIRE)
+	{
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_FLASH_FIRE) == TRUE)
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY;
+        }
+
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_DRY_SKIN) == TRUE) 
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_WEAKNESS_ABILITY;
+        }
+
+        if ((PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_HEATPROOF) == TRUE)
+            || (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_THICK_FAT) == TRUE)) 
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+        }
+    }
+    if (moveType == TYPE_ICE) 
+    {
+        if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_THICK_FAT) == TRUE)
+        {
+            *moveStatusMask |= MOVE_STATUS_TYPE_RESIST_ABILITY;
+        }
+    }
+    if (moveType == TYPE_NORMAL)
+    {
+        if (MON_HAS_TYPE(defender, TYPE_GHOST))
+        {
+            if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_SCRAPPY) == TRUE)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+            }
+
+            if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY;
+            }
+
+            if (attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM;
+            }
+        }
+    }
+    if (moveType == TYPE_FIGHTING)
+    {
+        if (MON_HAS_TYPE(defender, TYPE_GHOST))
+        {
+            if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_SCRAPPY) == TRUE)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+            }
+
+            if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY;
+            }
+        }
+    }
+    if (moveType == TYPE_POISON)
+    {
+        if (MON_HAS_TYPE(defender, TYPE_STEEL))
+        {
+            if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_CORROSION) == TRUE)
+            {
+                *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
+            }
+        }
+    }
+
+    return damage;
+}
+
 void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inType, int attackerAbility, int defenderAbility, int defenderItemEffect, int defenderType1, int defenderType2, u32 *moveStatusMask)
 {
     int chartEntry;

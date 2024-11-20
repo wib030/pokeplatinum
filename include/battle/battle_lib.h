@@ -465,6 +465,22 @@ int Battler_SlotForMove(BattleMon *mon, u16 move);
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask);
 
 /**
+ * @brief Same as above but for a party Pokemon.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param move 
+ * @param inType            If this is non-zero, then it will be regarded as the move's type
+ * @param attacker 
+ * @param defender 
+ * @param damage            Pre-calculated starting damage value
+ * @param partySlot         Party slot index of the attacker's party Pokemon to use in calculation.
+ * @param[out] moveStatusMask   
+ * @return Damage value after applying the type-chart and related multipliers
+ */
+int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partySlot, u32 *moveStatusMask);
+
+/**
  * @brief Calculate the effectiveness mask of the given move.
  * 
  * @param battleCtx
