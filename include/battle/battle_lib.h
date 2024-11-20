@@ -1615,13 +1615,23 @@ int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect);
 int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot);
 
 /**
+* @brief Determine whether the battler is a physical attacker or not.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The currently-in battler slot number.
+* @return   The TRUE / FALSE result of examining the Pokemon's move list and stats.
+*/
+BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+
+/**
 * @brief Determine whether the party Pokemon in the given slot is a physical attacker or not.
 *
 * @param battleSys
 * @param battleCtx
 * @param battler    The currently-in battler slot number.
 * @param partySlot  The party slot number of the party Pokemon to use in calculation.
-* @return   The TRUE / FALSE result of examining the Pokemon's move list and EVs.
+* @return   The TRUE / FALSE result of examining the Pokemon's move list and stats.
 */
 BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot);
 
