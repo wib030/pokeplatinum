@@ -333,4 +333,5 @@ subscript_files = files(
 	'subscript_atk_up_focus_energy.s',
 	'subscript_hit_x_times_spikes.s',
 	'subscript_unown_energy.s',
+	'subscript_blow_away_item.s',
 )

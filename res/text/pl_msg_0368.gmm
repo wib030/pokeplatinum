@@ -5096,15 +5096,15 @@
 	</row>
 	<row id="pl_msg_00000368_01270" index="1270">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\n{STRVAR_1 1, 1, 0}!</language>
+		<language name="English">The Sticky Barb latched onto\n{STRVAR_1 1, 0, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01271" index="1271">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\nthe wild {STRVAR_1 1, 1, 0}!</language>
+		<language name="English">The Sticky Barb latched onto\nthe wild {STRVAR_1 1, 0, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01272" index="1272">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\nthe foe’s {STRVAR_1 1, 1, 0}!</language>
+		<language name="English">The Sticky Barb latched onto\nthe foe’s {STRVAR_1 1, 0, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01273" index="1273">
 		<attribute name="window_context_name">used</attribute>
@@ -5120,15 +5120,15 @@
 	</row>
 	<row id="pl_msg_00000368_01276" index="1276">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} was freed of the Sticky Barb!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} was freed of the {STRVAR_1 6, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01277" index="1277">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} was freed of the Sticky Barb!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was freed of the\n{STRVAR_1 6, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01278" index="1278">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} was freed of the Sticky Barb!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was freed of the\n{STRVAR_1 6, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_01279" index="1279">
 		<attribute name="window_context_name">used</attribute>
@@ -5264,15 +5264,15 @@
 	</row>
 	<row id="pl_msg_00000368_01312" index="1312">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} was shaken down!</language>
 	</row>
 	<row id="pl_msg_00000368_01313" index="1313">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was shaken down!</language>
 	</row>
 	<row id="pl_msg_00000368_01314" index="1314">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was shaken down!</language>
 	</row>
 	<row id="pl_msg_00000368_01315" index="1315">
 		<attribute name="window_context_name">used</attribute>

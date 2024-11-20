@@ -6402,6 +6402,14 @@ static BOOL BtlCmd_RapidSpin(BattleSystem *battleSys, BattleContext *battleCtx)
 
         return FALSE;
     }
+	
+	if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_CHIP) {
+        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_CHIP;
+        battleCtx->msgItemTemp = ITEM_STICKY_BARB;
+        BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_blow_away_item);
+
+        return FALSE;
+    }
 
     if (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LEECH_SEED) {
         ATTACKING_MON.moveEffectsMask &= ~MOVE_EFFECT_LEECH_SEED;
