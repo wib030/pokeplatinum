@@ -11917,13 +11917,6 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
     return type;
 }
 
-/**
- * @brief Map the given battle effect to an appropriate side condition.
- * 
- * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding side condition
- * @return The corresponding side condition 
- */
 int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
 {
     u32 sideCondition;
@@ -11982,13 +11975,6 @@ int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
     return sideCondition;
 }
 
-/**
- * @brief Map the given battle effect to an appropriate field condition.
- * 
- * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding field condition
- * @return The corresponding field condition 
- */
 int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect)
 {
     u32 fieldCondition;
@@ -12039,13 +12025,6 @@ int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect)
     return fieldCondition;
 }
 
-/**
- * @brief Map the given battle effect to an appropriate move effect.
- * 
- * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding move effect
- * @return The corresponding move effect
- */
 int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
 {
     int moveEffect;
@@ -12128,14 +12107,6 @@ int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
     return moveEffect;
 }
 
-
-/**
- * @brief Map the given battle effect to an appropriate volatile status.
- * 
- * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding volatile status
- * @return The corresponding volatile status
- */
 int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
 {
     int volatileStatus;
@@ -12200,19 +12171,16 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
         case BATTLE_EFFECT_TORMENT:
             volatileStatus = VOLATILE_CONDITION_TORMENT;
             break;
+
+        // Curse
+        case BATTLE_EFFECT_CURSE:
+            voaltileStatus = VOLATILE_CONDITION_CURSE;
+            break;
     }
 
     return volatileStatus;
 }
 
-
-/**
- * @brief Map the given battle effect to an appropriate status condition.
- * 
- * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding status condition
- * @return The corresponding status condition
- */
 int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect)
 {
     int statusCondition;
@@ -12274,13 +12242,6 @@ int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect)
     return statusCondition;
 }
 
-/**
- * @brief Map the given battle effect to an appropriate stat drop.
- * 
- * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding stat drop
- * @return The corresponding battle stat flag of the dropped stat
- */
 int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
 {
     int battleStatFlag;
