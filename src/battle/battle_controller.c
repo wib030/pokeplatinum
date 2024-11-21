@@ -3259,7 +3259,6 @@ static void BattleController_BeforeMove(BattleSystem *battleSys, BattleContext *
 	
 	case BEFORE_MOVE_STATE_COLOR_CHANGE:
         if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE)
-		&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
         && (battleCtx->moveCur != MOVE_STRUGGLE)
 		&& ((battleCtx->battleMons[battleCtx->defender].type1 != MOVE_DATA(battleCtx->moveCur).type)
 		|| (battleCtx->battleMons[battleCtx->defender].type2 != MOVE_DATA(battleCtx->moveCur).type)))
