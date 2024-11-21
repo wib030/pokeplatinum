@@ -1558,6 +1558,15 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
 int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect);
 
 /**
+ * @brief Map the given battle effect to an appropriate field condition.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding field condition
+ * @return The corresponding field condition 
+ */
+int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect);
+
+/**
  * @brief Map the given battle effect to an appropriate move effect.
  * 
  * @param battleCtx 
