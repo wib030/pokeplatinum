@@ -1594,13 +1594,13 @@ int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect);
 int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect);
 
 /**
- * @brief Map the given battle effect to an appropriate field condition.
+ * @brief Map the given battle effect to an appropriate stat boost.
  * 
  * @param battleCtx 
- * @param effect    Battle effect which should be mapped to a corresponding field condition
- * @return The corresponding field condition 
+ * @param effect    Battle effect which should be mapped to a corresponding stat boost
+ * @return The corresponding battle stat flag of the boosted stat
  */
-int MapBattleEffectToFieldCondition(BattleContext *battleCtx, int effect);
+int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect);
 
 /**
 * @brief Calculate the entry hazards damage for a party Pokemon in the given slot

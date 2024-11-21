@@ -12360,6 +12360,110 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
 }
 
 
+/**
+ * @brief Map the given battle effect to an appropriate stat boost.
+ * 
+ * @param battleCtx 
+ * @param effect    Battle effect which should be mapped to a corresponding stat boost
+ * @return The corresponding battle stat flag of the boosted stat
+ */
+int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect)
+{
+    int battleStatFlag;
+
+    switch (effect) {
+
+        default:
+            battleStatFlag = BATTLE_STAT_FLAG_NONE;
+            break;
+        
+        // Attack
+        case BATTLE_EFFECT_ATK_UP:
+        case BATTLE_EFFECT_ATK_UP_2:
+        case BATTLE_EFFECT_RAISE_ATK_WHEN_HIT:
+        case BATTLE_EFFECT_RAISE_ATTACK_HIT:
+        case BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP:
+            battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
+            break;
+
+        // Defense
+        case BATTLE_EFFECT_DEF_UP:
+        case BATTLE_EFFECT_DEF_UP_2:
+        case BATTLE_EFFECT_RAISE_DEF_HIT:
+        case BATTLE_EFFECT_CHARGE_TURN_DEF_UP:
+        case BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER:
+
+            battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
+            break;
+
+        // Special Attack
+        case BATTLE_EFFECT_SP_ATK_UP:
+        case BATTLE_EFFECT_SP_ATK_UP_2:
+        case BATTLE_EFFECT_SP_ATK_DOWN_2:
+        case BATTLE_EFFECT_RAISE_SP_ATK_HIT:
+            battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
+            break;
+
+        // Special Defense
+        case BATTLE_EFFECT_SP_DEF_UP:
+        case BATTLE_EFFECT_SP_DEF_UP_2:
+        case BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER:
+            battleStatFlag = BATTLE_STAT_FLAG_SP_DEFENSE;
+            break;
+
+        // Speed
+        case BATTLE_EFFECT_SPEED_UP:
+        case BATTLE_EFFECT_SPEED_UP_2:
+        case BATTLE_EFFECT_SPEED_DOWN_2:
+        case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+            battleStatFlag = BATTLE_STAT_FLAG_SPEED;
+            break;
+
+        // Accuracy
+        case BATTLE_EFFECT_ACC_UP:
+        case BATTLE_EFFECT_ACC_UP_2:
+            battleStatFlag = BATTLE_STAT_FLAG_ACCURACY;
+            break;
+
+        // Evasion
+        case BATTLE_EFFECT_EVA_UP:
+        case BATTLE_EFFECT_EVA_UP_2:
+        case BATTLE_EFFECT_EVA_UP_2_MINIMIZE:
+            battleStatFlag = BATTLE_STAT_FLAG_EVASION;
+            break;
+
+        // Attack and Defense
+        case BATTLE_EFFECT_ATK_DEF_UP:
+            battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_DEF;
+            break;
+
+        // Attack and Speed
+        case BATTLE_EFFECT_ATK_SPD_UP:
+            battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_SPE;
+            break;
+
+        // Defense and Special Defense
+        case BATTLE_EFFECT_STOCKPILE:
+        case BATTLE_EFFECT_DEF_SPD_UP:
+            battleStatFlag = BATTLE_STAT_FLAG_DEF_AND_SPDEF;
+            break;
+
+        // Special Attack and Special Defense
+        case BATTLE_EFFECT_SP_ATK_SP_DEF_UP:
+            battleStatFlag = BATTLE_STAT_FLAG_SPATK_AND_SPDEF;
+            break;
+
+        // Omniboost
+        case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+        case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+            battleStatFlag = BATTLE_STAT_FLAG_OMNIBOOST;
+            break;
+    }
+
+    return battleStatFlag;
+}
+
+
 static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
 {
     BOOL result;
