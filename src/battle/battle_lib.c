@@ -1333,7 +1333,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
-        battler1Speed = battler1Speed * 15 / 10;
+        battler1Speed *= 2;
     } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
         battler1Speed /= 2;
     }
@@ -1399,7 +1399,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY)) {
-        battler2Speed = battler2Speed * 15 / 10;
+        battler2Speed *= 2;
     } else if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
         battler2Speed /= 4;
     }
@@ -11033,13 +11033,14 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     break;
             }
 
-            if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS) {
-                if (monAbility == ABILITY_QUICK_FEET) {
-                    monSpeedStat = monSpeedStat * 3 / 2;
-                }
-                else {
-                    monSpeedStat /= 2;
-                }
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat *= 2;
+            }
+            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
+			{
+                monSpeedStat /= 2;
             }
 
             hazardsBonus = 0;
@@ -11636,13 +11637,14 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     break;
             }
 
-            if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS) {
-                if (monAbility == ABILITY_QUICK_FEET) {
-                    monSpeedStat = monSpeedStat * 3 / 2;
-                }
-                else {
-                    monSpeedStat /= 2;
-                }
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat *= 2;
+            }
+            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
+			{
+                monSpeedStat /= 2;
             }
 
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
