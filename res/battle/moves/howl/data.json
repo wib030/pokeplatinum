@@ -9,7 +9,7 @@
         "type": "BATTLE_EFFECT_ATK_UP",
         "chance": 0
     },
-    "range": "RANGE_USER",
+    "range": "RANGE_USER_SIDE",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_CAN_SNATCH"
