@@ -6540,6 +6540,7 @@ static BOOL BtlCmd_CopyStatStages(BattleSystem *battleSys, BattleContext *battle
     }
 
     ATTACKING_MON.statusVolatile |= (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_FOCUS_ENERGY);
+    ATTACKING_MON.meditateCritBoostFlag |= DEFENDING_MON.meditateCritBoostFlag;
 
     return FALSE;
 }
