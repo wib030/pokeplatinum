@@ -2751,7 +2751,7 @@ static BOOL BasicTypeMulApplies_PartyMon(BattleSystem *battleSys, BattleContext 
         result = FALSE;
     }
 	
-	if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_CORROSION)
+	if ((Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_CORROSION)
 	&& MOVE_DATA(move).type == TYPE_POISON
 	&& sTypeMatchupMultipliers[chartEntry][1] == TYPE_STEEL
     && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE)
@@ -3100,7 +3100,7 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
         *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
     }
 	else if ((powderMove == TRUE)
-	&& (Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL) == TYPE_GRASS || Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL) == TYPE_GRASS)
+	&& ((Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL) == TYPE_GRASS || Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL) == TYPE_GRASS)
     || (defenderItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)))
 	{
 		*moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
@@ -10984,8 +10984,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
     defenderAbility = Battler_Ability(battleCtx, defender);
     defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
-    defenderMaxHP = Battlemon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
-    defenderCurHP = Battlemon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+    defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
+    defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
 
     for (i = 0; i < partySize; i++) {
         mon = BattleSystem_PartyPokemon(battleSys, battler, i);
@@ -11035,7 +11035,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
             if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS) {
                 if (monAbility == ABILITY_QUICK_FEET) {
-                    monSpeedStat *= 2;
+                    monSpeedStat = monSpeedStat * 3 / 2;
                 }
                 else {
                     monSpeedStat /= 2;
@@ -11074,8 +11074,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 battleSys,
                                 battleCtx,
                                 move,
-                                sideConditions,
-                                fieldConditions,
+                                battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                                battleCtx->fieldConditionsMask,
                                 0,
                                 moveType,
                                 battler,
@@ -11638,7 +11638,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
             if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS) {
                 if (monAbility == ABILITY_QUICK_FEET) {
-                    monSpeedStat *= 2;
+                    monSpeedStat = monSpeedStat * 3 / 2;
                 }
                 else {
                     monSpeedStat /= 2;
@@ -12553,7 +12553,7 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
     result = FALSE;
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-        move = Battlemon_Get(battler, BATTLEMON_MOVE_1 + i, NULL);
+        move = BattleMon_Get(battleCtx, battler, BATTLEMON_MOVE_1 + i, NULL);
 
         if (move == MOVE_NONE) {
             break;
@@ -12588,7 +12588,7 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
                 case BATTLE_EFFECT_RAISE_DEF_HIT:
                 case BATTLE_EFFECT_SPIKES_MULTI_HIT:
                 case BATTLE_EFFECT_INFATUATE_HIT:
-                    if (Battlemon_Get(battler, BATTLEMON_ATTACK, NULL) >= (Battlemon_Get(battler, BATTLEMON_SP_ATTACK, NULL) * 2 / 3))
+                    if (BattleMon_Get(battleCtx, battler, BATTLEMON_ATTACK, NULL) >= (BattleMon_Get(battleCtx, battler, BATTLEMON_SP_ATTACK, NULL) * 2 / 3))
                     {
                         result = TRUE;
                     }
