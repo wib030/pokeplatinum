@@ -1655,4 +1655,15 @@ BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *b
 */
 BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int statusCondition);
 
+/**
+* @brief Determine whether the AI should paralyze the defender based on stats and moves.
+*
+* @param battleSys
+* @param battleCtx
+* @param defender           The defending BattleMon id.
+* @param attackerSpeedStat  The speed stat of the attacking Pokemon.
+* @Return   The TRUE / FALSE result of whether the AI should use a paralysis move.
+*/
+BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

@@ -12905,3 +12905,64 @@ BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCt
 
     return result;
 }
+
+BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat)
+{
+    u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
+    u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
+    u32 defenderMaxHP;
+    int moveEffect, moveStat;
+    int i;
+    BOOL hasSpeedBoost;
+    BOOL result;
+
+    result = FALSE;
+
+    hasSpeedBoost = FALSE;
+
+    defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
+    defenderDefStat = BattleMon_Get(battleCtx, defender, BATTLEMON_DEFENSE, NULL);
+    defenderSpDefStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SP_DEFENSE, NULL);
+    defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
+    defenderLevel = BattleMon_Get(battleCtx, defender, BATTLEMON_LEVEL, NULL);
+    defenderAbility = BattleMon_Get(battleCtx, defender, BATTLEMON_ABILITY, NULL);
+    defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+    defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[defender].moves[i];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+        
+        moveEffect = MOVE_DATA(move).effect;
+        moveStat = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+
+        if ((moveStat & BATTLE_STAT_FLAG_SPEED)
+            && moveEffect != BATTLE_EFFECT_RAISE_ALL_STATS_HIT) {
+
+                hasSpeedBoost = TRUE;
+                break;
+        }
+    }
+
+    if (hasSpeedBoost) {
+        if (2 * defenderSpeedStat > attackerSpeedStat) {
+            result = TRUE;
+        }
+    }
+    else {
+        if (defenderMaxHP - defenderLevel + defenderDefStat + defenderSpDefStat > 3 * defenderSpeedStat)
+        {
+            if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_PARALYSIS) == FALSE)
+                && defenderType1 != TYPE_ELECTRIC
+                && defenderType2 != TYPE_ELECTRIC)
+            {
+                result = TRUE;
+            }
+        }
+    }
+
+    return result;
+}
