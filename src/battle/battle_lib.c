@@ -11177,7 +11177,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             }
 
                             if (moveVolatileStatus & VOLATILE_CONDITION_MOVE_LOCKED) {
-                                if (battleCtx->battleMons[defender].encoredMove != MOVE_NONE) {
+                                if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE) {
                                     moveScore = 25;
                                 }
                             }
@@ -11217,7 +11217,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                             if (moveMoveEffect & MOVE_EFFECT_PERISH_SONG) {
                                 if (defenderAbility != ABILITY_SOUNDPROOF
-                                    && battleCtx->battleMons[defender].MoveEffectsData.perishSongTurns > 0) {
+                                    && battleCtx->battleMons[defender].moveEffectsData.perishSongTurns > 0) {
                                     
                                     moveScore = 15;
                                 }
@@ -12284,7 +12284,7 @@ int MapBattleEffectToVolatileStatus(BattleContext *battleCtx, int effect)
 
         // Curse
         case BATTLE_EFFECT_CURSE:
-            voaltileStatus = VOLATILE_CONDITION_CURSE;
+            volatileStatus = VOLATILE_CONDITION_CURSE;
             break;
     }
 
