@@ -6682,6 +6682,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     int species;
     int form;
     int level;
+    int i;
     Pokemon *mon;
 
     BattleScript_Iter(battleCtx, 1);
@@ -6693,7 +6694,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
         battleCtx->multiHitAccuracyCheck = SYSCTL_MULTI_HIT_MOVE;
         battleCtx->beatUpCounter = 0;
 
-        while (TRUE) {
+        for (i = 0; i < MAX_PARTY_SIZE; i++) {
             // Find the next mon to deal Beat Up damage
             mon = BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->beatUpCounter);
             if (BeatUpEligibleMon(battleCtx, mon)) {
@@ -6741,7 +6742,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
 
     // Check if there are more eligible mons in the back to attack
     if (battleCtx->beatUpCounter < partyCount) {
-        while (TRUE) {
+        for (i = 0; i < MAX_PARTY_SIZE; i++) {
             mon = BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->beatUpCounter);
             if (BeatUpEligibleMon(battleCtx, mon)) {
                 break;
