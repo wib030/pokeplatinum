@@ -1785,6 +1785,8 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
     case SIDE_COND_CHECK_STATE_FUTURE_SIGHT:
 
         int effectivenessMultiplier;
+        int side = Battler_Side(battleSys, battleCtx->defender);
+        u16 storedAttackingStat, moveClass;
         u8 moveType;
 
         while (battleCtx->sideConditionCheckTemp < maxBattlers) {
@@ -1810,10 +1812,37 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                 battleCtx->msgMoveTemp = battleCtx->fieldConditions.futureSightMove[battler];
 
                 moveType = MOVE_DATA(battleCtx->fieldConditions.futureSightMove[battler]).type;
+                moveClass = MOVE_DATA(battleCtx->fieldConditions.futureSightMove[battler]).class;
 
                 effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
 
+                if (moveClass == CLASS_PHYSICAL) {
+                    storedAttackingStat = battleCtx->battleMons[battler].attack;
+                    battleCtx->battleMons[battler].attack = battleCtx->fieldConditions.futureSightAttackingStat[battler];
+                }
+                else {
+                    storedAttackingStat = battleCtx->battleMons[battler].spAttack;
+                    battleCtx->battleMons[battler].spAttack = battleCtx->fieldConditions.futureSightAttackingStat[battler];
+                }
+
+                battleCtx->fieldConditions.futureSightDamage[battler] = BattleSystem_CalcMoveDamage(battleSys,
+                                                                        battleCtx,
+                                                                        battleCtx->fieldConditions.futureSightMove[battler],
+                                                                        battleCtx->sideConditionsMask[side],
+                                                                        battleCtx->fieldConditionsMask,
+                                                                        0, moveType,
+                                                                        battler,
+                                                                        battler,
+                                                                        1) * -1;
+
                 battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler] * effectivenessMultiplier / 40;
+
+                if (moveClass == CLASS_PHYSICAL) {
+                    battleCtx->battleMons[battler].attack = storedAttackingStat;
+                }
+                else {
+                    battleCtx->battleMons[battler].spAttack = storedAttackingStat;
+                }
 
                 PrepareSubroutineSequence(battleCtx, subscript_future_sight_damage);
                 return;
