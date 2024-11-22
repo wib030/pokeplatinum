@@ -6574,7 +6574,7 @@ static BOOL BtlCmd_TryFutureSight(BattleSystem *battleSys, BattleContext *battle
                 battleCtx->moveCur,
                 battleCtx->sideConditionsMask[side],
                 battleCtx->fieldConditionsMask,
-                0, battleCtx->moveType,
+                0, TYPE_PSYCHIC,
                 battleCtx->attacker,
                 battleCtx->defender,
                 1) * -1;
