@@ -1816,6 +1816,17 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 
                 effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
 
+                if (effectivenessMultiplier > 40) {
+                    battleCtx->moveStatusFlags |= MOVE_STATUS_SUPER_EFFECTIVE;
+                }
+                if (effectivenessMultiplier > 0
+                    && effectivenessMultiplier < 40) {
+                    battleCtx->moveStatusFlags |= MOVE_STATUS_NOT_VERY_EFFECTIVE;
+                }
+                if (effectivenessMultiplier == 0) {
+                    battleCtx->moveStatusFlags |= MOVE_STATUS_INEFFECTIVE;
+                }
+
                 if (moveClass == CLASS_PHYSICAL) {
                     storedAttackingStat = battleCtx->battleMons[battler].attack;
                     battleCtx->battleMons[battler].attack = battleCtx->fieldConditions.futureSightAttackingStat[battler];
