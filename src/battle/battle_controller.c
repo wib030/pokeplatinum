@@ -1783,6 +1783,10 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
     int battler;
     switch (battleCtx->sideConditionCheckState) {
     case SIDE_COND_CHECK_STATE_FUTURE_SIGHT:
+
+        int effectivenessMultiplier;
+        u8 moveType;
+
         while (battleCtx->sideConditionCheckTemp < maxBattlers) {
             battler = battleCtx->monSpeedOrder[battleCtx->sideConditionCheckTemp];
             if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
@@ -1804,7 +1808,13 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                 battleCtx->msgBattlerTemp = battler;
                 battleCtx->msgAttacker = battleCtx->fieldConditions.futureSightAttacker[battler];
                 battleCtx->msgMoveTemp = battleCtx->fieldConditions.futureSightMove[battler];
-                battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler];
+
+                moveType = MOVE_DATA(battleCtx->fieldConditions.futureSightMove[battler]).type;
+
+               effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
+
+                battleCtx->fieldConditions.futureSightDamage[battler]
+                battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler] * effectivenessMultiplier / 40;
 
                 PrepareSubroutineSequence(battleCtx, subscript_future_sight_damage);
                 return;
