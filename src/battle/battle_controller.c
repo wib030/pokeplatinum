@@ -1836,6 +1836,12 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                                                                         1) * -1;
 
                 battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler] * effectivenessMultiplier / 40;
+                if (battleCtx->fieldConditions.futureSightHelpingHandFlag[battler] == TRUE) {
+                    battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * 3 / 2;
+                }
+                if (battleCtx->fieldConditions.futureSightSTABFlag[battler] == TRUE) {
+                    battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * 3 / 2;
+                }
 
                 if (moveClass == CLASS_PHYSICAL) {
                     battleCtx->battleMons[battler].attack = storedAttackingStat;

@@ -6588,7 +6588,11 @@ static BOOL BtlCmd_TryFutureSight(BattleSystem *battleSys, BattleContext *battle
         battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
 
         if (ATTACKER_TURN_FLAGS.helpingHand) {
-            battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] = battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] * 15 / 10;
+            battleCtx->fieldConditions.futureSightHelpingHandFlag[battleCtx->defender] = TRUE;
+        }
+        if (battleCtx->battleMons[battleCtx->attacker].type1 == MOVE_DATA(battleCtx->moveCur).type
+        || battleCtx->battleMons[battleCtx->attacker].type2 == MOVE_DATA(battleCtx->moveCur).type) {
+            battleCtx->fieldConditions.futureSightSTABFlag[battleCtx->defender] = TRUE;
         }
     } else {
         BattleScript_Iter(battleCtx, jumpOnFail);
