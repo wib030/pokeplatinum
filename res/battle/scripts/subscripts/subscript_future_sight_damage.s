@@ -3,10 +3,10 @@
     .data
 
 _000:
-    CompareVarToValue OPCODE_EQU, BTLVAR_HP_CALC_TEMP, 0, _116
     PrintBufferedMessage 
     Wait 
     WaitButtonABTime 30
+    CompareVarToValue OPCODE_EQU, BTLVAR_HP_CALC_TEMP, 0, _117
     CheckMoveHit BTLSCR_MSG_ATTACKER, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP, _117
     UpdateVar OPCODE_SET, BTLVAR_MOVE_EFFECT_CHANCE, 1
     PlayMoveAnimationOnMons BTLSCR_MSG_TEMP, BTLSCR_MSG_ATTACKER, BTLSCR_MSG_TEMP
