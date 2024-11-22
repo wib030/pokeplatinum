@@ -5214,6 +5214,9 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
     case ABILITY_EFFECT_SPORE:
         if (ATTACKING_MON.curHP
                 && ATTACKING_MON.status == MON_CONDITION_NONE
+				&& (battleCtx->battleMons[battleCtx->attacker].type1 != TYPE_GRASS)
+				&& (battleCtx->battleMons[battleCtx->attacker].type2 != TYPE_GRASS)
+				&& (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
                 && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
                 && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
