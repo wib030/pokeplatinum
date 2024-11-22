@@ -22,6 +22,7 @@ typedef struct FieldConditions {
     u8 wishTurns[MAX_BATTLERS];
     u16 futureSightMove[MAX_BATTLERS];
     int futureSightAttacker[MAX_BATTLERS];
+    u16 futureSightAttackingStat[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
 } FieldConditions;

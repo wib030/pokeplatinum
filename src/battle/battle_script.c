@@ -6566,6 +6566,13 @@ static BOOL BtlCmd_TryFutureSight(BattleSystem *battleSys, BattleContext *battle
         battleCtx->fieldConditions.futureSightTurns[battleCtx->defender] = 3;
         battleCtx->fieldConditions.futureSightMove[battleCtx->defender] = battleCtx->moveCur;
         battleCtx->fieldConditions.futureSightAttacker[battleCtx->defender] = battleCtx->attacker;
+
+        if (MOVE_DATA(battleCtx->moveCur).class == CLASS_PHYSICAL) {
+            battleCtx->fieldConditions.futureSightAttackingStat[battleCtx->defender] = battleCtx->battleMons[battleCtx->attacker].attack;
+        }
+        else {
+            battleCtx->fieldConditions.futureSightAttackingStat[battleCtx->defender] = battleCtx->battleMons[battleCtx->attacker].spAttack;
+        }
         
         // Calculate the damage at the time of Future Sight setup.
         // Do not check for type effectiveness nor crits.
