@@ -1811,9 +1811,8 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 
                 moveType = MOVE_DATA(battleCtx->fieldConditions.futureSightMove[battler]).type;
 
-               effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
+                effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
 
-                battleCtx->fieldConditions.futureSightDamage[battler]
                 battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler] * effectivenessMultiplier / 40;
 
                 PrepareSubroutineSequence(battleCtx, subscript_future_sight_damage);
