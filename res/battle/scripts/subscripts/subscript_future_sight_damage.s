@@ -3,6 +3,7 @@
     .data
 
 _000:
+    CompareVarToValue OPCODE_EQU, BTLVAR_HP_CALC_TEMP, 0, _116
     PrintBufferedMessage 
     Wait 
     WaitButtonABTime 30
