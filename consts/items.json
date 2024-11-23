@@ -160,7 +160,8 @@
 				"HOLD_EFFECT_SWITCH_ATTACKER_HIT",
 				"HOLD_EFFECT_EVIOLITE",
 				"HOLD_EFFECT_LOADED_DICE",
-				"HOLD_EFFECT_PUNCH_CRITRATE_UP"
+				"HOLD_EFFECT_PUNCH_CRITRATE_UP",
+				"HOLD_EFFECT_THREE_FOUR_FIVE_DICE"
             ]
         },
         "@Item": {
@@ -624,7 +625,7 @@
                 "ITEM_MEMBER_CARD",
                 "ITEM_AZURE_FLUTE",
                 "ITEM_LOADED_DICE",
-                "ITEM_CONTEST_PASS",
+                "ITEM_SAFETY_GOGGLES",
                 "ITEM_ASSAULT_VEST",
                 "ITEM_PARCEL",
                 "ITEM_COUPON_1",
