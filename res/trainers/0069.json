@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SANDSHREW",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_UPGRADE",
             "moves": [
                 "MOVE_FRUSTRATION",

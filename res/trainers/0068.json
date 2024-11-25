@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MANTINE",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_BULLET_SEED",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_CACTURNE",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_PIN_MISSILE",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_WATER_GUN",

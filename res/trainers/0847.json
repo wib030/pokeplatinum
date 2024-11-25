@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WORMADAM",
             "form": 1,
-            "level": 34,
+            "level": 36,
             "item": "ITEM_BERRY_JUICE",
             "moves": [
                 "MOVE_SPIDER_WEB",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_ARIADOS",
             "form": 0,
-            "level": 34,
+            "level": 36,
             "item": "ITEM_BERRY_JUICE",
             "moves": [
                 "MOVE_SPIDER_WEB",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_MOTHIM",
             "form": 0,
-            "level": 34,
+            "level": 36,
             "item": "ITEM_BERRY_JUICE",
             "moves": [
                 "MOVE_SILVER_WIND",

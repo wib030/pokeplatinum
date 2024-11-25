@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ARCEUS",
             "form": 0,
-            "level": 20,
+            "level": 24,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_COSMIC_POWER",

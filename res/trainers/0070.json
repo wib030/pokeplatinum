@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_FORRETRESS",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_RAPID_SPIN",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_CLOYSTER",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_RAPID_SPIN",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_STARMIE",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_RAPID_SPIN",
@@ -57,7 +57,7 @@
         {
             "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 36,
+            "level": 37,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_RAPID_SPIN",
