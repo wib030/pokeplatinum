@@ -6383,6 +6383,7 @@ Expert_GastroAcid_AbilityChecklist:
     TableEntry ABILITY_FLARE_BOOST
     TableEntry ABILITY_SHARPNESS
     TableEntry ABILITY_STRANGLE_WEED
+	TableEntry ABILITY_STEADFAST
     TableEntry TABLE_END
 
 Expert_GastroAcid_End:
@@ -7322,6 +7323,7 @@ StealthRock_AbilityPunish_RapidSpin:
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
     TableEntry ABILITY_FRESH_MILK
+	TableEntry ABILITY_STEADFAST
     TableEntry TABLE_END
 
 Expert_StealthRock_CheckDefog:
@@ -7476,6 +7478,7 @@ Spikes_AbilityPunish_RapidSpin:
     TableEntry ABILITY_POISON_POINT
     TableEntry ABILITY_FLAME_BODY
     TableEntry ABILITY_FRESH_MILK
+	TableEntry ABILITY_STEADFAST
     TableEntry TABLE_END
 
 Expert_Spikes_CheckDefog:

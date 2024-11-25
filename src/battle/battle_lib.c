@@ -5382,6 +5382,20 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				result = TRUE;
 			}
 			break;
+			
+	case ABILITY_STEADFAST:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& ((CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)))
+			{
+				*subscript = subscript_steadfast_activate;
+				battleCtx->sideEffectMon = battleCtx->defender;
+				result = TRUE;
+			}
+			break;
     }
 	
 	switch (Battler_Ability(battleCtx, battleCtx->attacker))
