@@ -21,7 +21,8 @@
                 "MOVE_SHADOW_SNEAK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         },
         {
             "species": "SPECIES_PRIMEAPE",

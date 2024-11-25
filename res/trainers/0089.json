@@ -21,7 +21,8 @@
 				"MOVE_FOCUS_BLAST"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         },
         {
             "species": "SPECIES_VIGOROTH",

@@ -49,7 +49,8 @@
                 "MOVE_ENCORE"
             ],
             "power": 120,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         }
     ]
 }
