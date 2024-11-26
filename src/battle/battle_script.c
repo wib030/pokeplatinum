@@ -3078,6 +3078,7 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
     int hitChance = BattleSystem_RandNext(battleSys) % 10;
     int hits = BattleScript_Read(battleCtx);
     int flags = BattleScript_Read(battleCtx);
+	int attackerSide = Battler_Side(battleSys, battleCtx->attacker);
 
     if (battleCtx->multiHitNumHits == 0) {
         if (hits == 0) {
@@ -3115,6 +3116,12 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
 				{
 					hits = 5;
 				}
+			}
+			
+			if ((battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+			&& (hits < 3))
+			{
+				hits = 3;
 			}
         }
         battleCtx->multiHitCounter = hits;

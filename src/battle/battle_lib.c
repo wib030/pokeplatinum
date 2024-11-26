@@ -1631,6 +1631,7 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 {
     BOOL result = FALSE;
     u16 effectChance;
+	int attackerSide = Battler_Side(battleSys, battleCtx->attacker);
 
     if (battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_ON_HIT) {
         SetupSideEffect(battleCtx, effect, SIDE_EFFECT_TYPE_INDIRECT);
@@ -1660,17 +1661,28 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
             result = TRUE;
         }
     } else if (battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_PROBABILISTIC) {
-        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE) {
-			if (CURRENT_MOVE_DATA.effectChance >= 50)
+		effectChance = CURRENT_MOVE_DATA.effectChance;
+		
+		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+		{
+			effectChance = effectChance * 3 / 2;
+			
+			if (effectChance > 100)
+			{
+				effectChance = 100;
+			}
+		}
+		
+        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE)
+		{
+			if (effectChance >= 50)
 			{
 				effectChance = 100;
 			}
 			else
 			{
-				effectChance = CURRENT_MOVE_DATA.effectChance * 2;
+				effectChance *= 2;
 			}
-        } else {
-            effectChance = CURRENT_MOVE_DATA.effectChance;
         }
 
         GF_ASSERT(effectChance != 0);
@@ -1686,17 +1698,28 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 
         result = TRUE;
     } else if (battleCtx->sideEffectIndirectFlags) {
-        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE) {
-            if (CURRENT_MOVE_DATA.effectChance >= 50)
+        effectChance = CURRENT_MOVE_DATA.effectChance;
+		
+		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+		{
+			effectChance = effectChance * 3 / 2;
+			
+			if (effectChance > 100)
+			{
+				effectChance = 100;
+			}
+		}
+		
+        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE)
+		{
+			if (effectChance >= 50)
 			{
 				effectChance = 100;
 			}
 			else
 			{
-				effectChance = CURRENT_MOVE_DATA.effectChance * 2;
+				effectChance *= 2;
 			}
-        } else {
-            effectChance = CURRENT_MOVE_DATA.effectChance;
         }
 
         GF_ASSERT(effectChance != 0);
