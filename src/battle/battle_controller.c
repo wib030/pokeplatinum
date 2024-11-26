@@ -3536,14 +3536,16 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
             }
 
-            if (itemEffect == HOLD_EFFECT_ENDURE && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
+            if ((itemEffect == HOLD_EFFECT_ENDURE && DEFENDING_MON.curHP == DEFENDING_MON.maxHP)
+		    && (battleCtx->damage >= DEFENDING_MON.maxHP))
+			{
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
             }
 			
 			if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY)
 			&& (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MOLD_BREAKER)
-			&& (battleCtx->battleMons[battleCtx->defender].curHP == battleCtx->battleMons[battleCtx->defender].maxHP)
-			&& (battleCtx->damage >= battleCtx->battleMons[battleCtx->defender].maxHP))
+			&& (DEFENDING_MON.curHP == DEFENDING_MON.maxHP)
+			&& (battleCtx->damage >= DEFENDING_MON.maxHP))
 			{
 				DEFENDER_TURN_FLAGS.enduring_ability = TRUE;
 			}
