@@ -91,10 +91,10 @@
         "level_up": {
             "1": [
                 "MOVE_AQUA_JET",
-                "MOVE_WATER_SPORT",
-                "MOVE_SCRATCH",
+                "MOVE_FUTURE_SIGHT",
+                "MOVE_CROSS_CHOP",
                 "MOVE_ME_FIRST",
-                "MOVE_WATER_GUN"
+                "MOVE_YAWN"
             ],
             "5": "MOVE_TAIL_WHIP",
             "7": "MOVE_WATER_GUN",
