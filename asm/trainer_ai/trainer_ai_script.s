@@ -4859,6 +4859,7 @@ FakeOut_AbilityPunish:
     TableEntry ABILITY_FRESH_MILK
     TableEntry ABILITY_INNER_FOCUS
     TableEntry ABILITY_STEADFAST
+	TableEntry TABLE_END
 
 Expert_FakeOut_End:
     PopOrEnd 
