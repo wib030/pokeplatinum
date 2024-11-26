@@ -3341,12 +3341,12 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
             if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT
                     || battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
-				battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+				battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag = FALSE;
                 BattleScript_Iter(battleCtx, jumpBlocked);
             } else {
                 SetupNicknameStatMsg(battleCtx, 142, statOffset); // "{0}'s {1} won't go higher!"
                 BattleScript_Iter(battleCtx, jumpNoChange);
-				battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+				battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag = FALSE;
             }
         } else {
             if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
@@ -3423,14 +3423,14 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
                 if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT
                         || battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
-					battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+					battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag = FALSE;
                     BattleScript_Iter(battleCtx, jumpBlocked);
 
                     return FALSE;
                 } else {
                     SetupNicknameStatMsg(battleCtx, 145, statOffset); // "{0}'s {1} won't go lower!"
                     BattleScript_Iter(battleCtx, jumpNoChange);
-					battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+					battleCtx->battleMons[battleCtx->sideEffectMon].defiantFlag = FALSE;
 
                     return FALSE;
                 }

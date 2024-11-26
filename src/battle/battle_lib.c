@@ -2925,9 +2925,9 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 			if ((defenderItemEffect == HOLD_EFFECT_WEAK_RAISE_SPA_ATK)
 			&& (DEFENDING_MON.curHP)
 			&& (movePower)
-			&& (battleCtx->battleMons[defender].wpolicyFlag == FALSE))
+			&& (DEFENDING_MON.wpolicyFlag == FALSE))
 			{
-				battleCtx->battleMons[defender].wpolicyFlag = TRUE;
+				DEFENDING_MON.wpolicyFlag = TRUE;
 			}
         }
 
@@ -3189,9 +3189,9 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
 			if ((defenderItemEffect == HOLD_EFFECT_WEAK_RAISE_SPA_ATK)
 			&& (DEFENDING_MON.curHP)
 			&& (movePower)
-			&& (battleCtx->battleMons[defender].wpolicyFlag == FALSE))
+			&& (DEFENDING_MON.wpolicyFlag == FALSE))
 			{
-				battleCtx->battleMons[defender].wpolicyFlag = TRUE;
+				DEFENDING_MON.wpolicyFlag = TRUE;
 			}
         }
 
@@ -5307,10 +5307,10 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			if (DEFENDING_MON.curHP
 				&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 				&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-				&& battleCtx->battleMons[battleCtx->defender].defiantFlag == TRUE) {
+				&& DEFENDING_MON.defiantFlag == TRUE) {
 			*subscript = subscript_defiant_activate;
 			result = TRUE;
-			battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+			DEFENDING_MON.defiantFlag = FALSE;
 		}
 		break;
 		
@@ -5318,10 +5318,10 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			if (DEFENDING_MON.curHP
 				&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 				&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-				&& battleCtx->battleMons[battleCtx->defender].defiantFlag == TRUE) {
+				&& DEFENDING_MON.defiantFlag == TRUE) {
 			*subscript = subscript_comp_activate;
 			result = TRUE;
-			battleCtx->battleMons[battleCtx->defender].defiantFlag = FALSE;
+			DEFENDING_MON.defiantFlag = FALSE;
 		}
 		break;
 
@@ -5444,7 +5444,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			
 		case ABILITY_RIVALRY:
 			if (ATTACKING_MON.curHP
-			&& (battleCtx->battleMons[battleCtx->attacker].rivalryFlag == TRUE)
+			&& (ATTACKING_MON.rivalryFlag == TRUE)
             && (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) == FALSE
             && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
@@ -6573,13 +6573,13 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& (battleCtx->battleMons[battleCtx->defender].wpolicyFlag == TRUE))
+			&& (DEFENDING_MON.wpolicyFlag == TRUE))
 			{
 				*subscript = subscript_weakness_policy_activate;
 				battleCtx->msgBattlerTemp = battleCtx->defender;
 				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
 				result = TRUE;
-				battleCtx->battleMons[battleCtx->defender].wpolicyFlag = FALSE;
+				DEFENDING_MON.wpolicyFlag = FALSE;
 			}
 			break;
 			
@@ -6601,7 +6601,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
 			if (DEFENDING_MON.curHP
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
+			&& (ATTACKING_MON.sheerForceFlag == FALSE)
 			&& (BattleSystem_AnyReplacementMons(battleSys, battleCtx, battleCtx->attacker) == TRUE)
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
@@ -10284,7 +10284,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
             && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
             && battleCtx->attacker != battleCtx->defender
             && ATTACKING_MON.curHP < ATTACKING_MON.maxHP
-			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
+			&& (ATTACKING_MON.sheerForceFlag == FALSE)
             && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt * -1, attackerItemPower);
         battleCtx->msgBattlerTemp = battleCtx->attacker;
@@ -10296,7 +10296,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
             && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
             && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
             && CURRENT_MOVE_DATA.class != CLASS_STATUS
-			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
+			&& (ATTACKING_MON.sheerForceFlag == FALSE)
             && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 10);
         battleCtx->msgBattlerTemp = battleCtx->attacker;
@@ -10329,13 +10329,13 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
-			&& (battleCtx->battleMons[battleCtx->defender].wpolicyFlag == TRUE))
+			&& (DEFENDING_MON.wpolicyFlag == TRUE))
 			{
 				*subscript = subscript_weakness_policy_activate;
 				battleCtx->msgBattlerTemp = battleCtx->defender;
 				battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
 				result = TRUE;
-				battleCtx->battleMons[battleCtx->defender].wpolicyFlag = FALSE;
+				DEFENDING_MON.wpolicyFlag = FALSE;
 			}
 			
 	if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POPPED_IF_HIT
@@ -10354,7 +10354,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 			&& (DEFENDING_MON.curHP)
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& !((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE) && (battleCtx->battleMons[battleCtx->defender].sheerForceFlag == TRUE))
+			&& (ATTACKING_MON.sheerForceFlag == FALSE)
 			&& (BattleSystem_AnyReplacementMons(battleSys, battleCtx, battleCtx->attacker) == TRUE)
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
 			{
