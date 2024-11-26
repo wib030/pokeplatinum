@@ -9074,10 +9074,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     break;
 
                 case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
-                    for (i = 0; i < NUM_BOOSTABLE_STATS; i++) {
+                    for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
 
-                        if (BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_STAGE + i, NULL) > 6) {
-                            cumStatBoosts += BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_STAGE + i, NULL) - 6;
+                        if (battleCtx->battleMons[attacker].statBoosts[i] > 6) {
+                            cumStatBoosts += battleCtx->battleMons[attacker].statBoosts[i] - 6;
                         }
                     }
 
@@ -11027,6 +11027,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
     defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
 
+    if (defenderCurHP <= 0) {
+        defenderCurHP = 1;
+    }
+    if (defenderMaxHP <= 0) {
+        defenderMaxHP = 1;
+    }
+
     for (i = 0; i < partySize; i++) {
         mon = BattleSystem_PartyPokemon(battleSys, battler, i);
         monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
@@ -11087,10 +11094,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             sackBonus = 0;
             monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
             monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
-            if (monCurHP == 0) {
+            if (monCurHP <= 0) {
                 monCurHP = 1;
             }
-            if (monMaxHP == 0) {
+            if (monMaxHP <= 0) {
                 monMaxHP = 1;
             }
             hpPercent = (monCurHP * 100) / monMaxHP;
@@ -11642,10 +11649,10 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
             sackBonus = 0;
             monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
             monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
-            if (monCurHP == 0) {
+            if (monCurHP <= 0) {
                 monCurHP = 1;
             }
-            if (monMaxHP == 0) {
+            if (monMaxHP <= 0) {
                 monMaxHP = 1;
             }
             hpPercent = (monCurHP * 100) / monMaxHP;

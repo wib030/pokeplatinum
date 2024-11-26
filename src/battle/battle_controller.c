@@ -1799,7 +1799,8 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
             battleCtx->sideConditionCheckTemp++;
             if (battleCtx->fieldConditions.futureSightTurns[battler]
                     && --battleCtx->fieldConditions.futureSightTurns[battler] == FALSE
-                    && battleCtx->battleMons[battler].curHP) {
+                    && battleCtx->battleMons[battler].curHP)
+            {
                 battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
 
                 battleCtx->msgBuffer.id = 475;
@@ -1820,7 +1821,7 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                     battleCtx->moveStatusFlags |= MOVE_STATUS_SUPER_EFFECTIVE;
                 }
                 if (effectivenessMultiplier > 0
-                    && effectivenessMultiplier < 40) {
+                        && effectivenessMultiplier < 40) {
                     battleCtx->moveStatusFlags |= MOVE_STATUS_NOT_VERY_EFFECTIVE;
                 }
                 if (effectivenessMultiplier == 0) {
@@ -1852,9 +1853,12 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                 }
 				
                 if (battleCtx->fieldConditions.futureSightSTABFlag[battler] == TRUE) {
-                    battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * 3 / 2;
-                } else if (battleCtx->fieldConditions.futureSightADAPTABILITYFlag[battler] == TRUE) {
-                    battleCtx->hpCalcTemp *= 2;
+                    if (battleCtx->fieldConditions.futureSightADAPTABILITYFlag[battler] == TRUE) {
+                        battleCtx->hpCalcTemp *= 2;
+                    }
+                    else {
+                        battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * 3 / 2;
+                    }
                 }
 
                 if (moveClass == CLASS_PHYSICAL) {

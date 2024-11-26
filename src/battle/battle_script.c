@@ -6615,13 +6615,24 @@ static BOOL BtlCmd_TryFutureSight(BattleSystem *battleSys, BattleContext *battle
         if (ATTACKER_TURN_FLAGS.helpingHand) {
             battleCtx->fieldConditions.futureSightHelpingHandFlag[battleCtx->defender] = TRUE;
         }
+        else {
+            battleCtx->fieldConditions.futureSightHelpingHandFlag[battleCtx->defender] = FALSE;
+        }
+
         if (battleCtx->battleMons[battleCtx->attacker].type1 == MOVE_DATA(battleCtx->moveCur).type
         || battleCtx->battleMons[battleCtx->attacker].type2 == MOVE_DATA(battleCtx->moveCur).type) {
+
+            battleCtx->fieldConditions.futureSightSTABFlag[battleCtx->defender] = TRUE;
+
 			if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ADAPTABILITY) {
-				battleCtx->fieldConditions.futureSightADAPTABILITYFlag[battleCtx->defender] = TRUE;
+				battleCtx->fieldConditions.futureSightAdaptabilityFlag[battleCtx->defender] = TRUE;
 			} else {
-				battleCtx->fieldConditions.futureSightSTABFlag[battleCtx->defender] = TRUE;
+				battleCtx->fieldConditions.futureSightAdaptabilityFlag[battleCtx->defender] = FALSE;
 			}
+        }
+        else {
+            battleCtx->fieldConditions.futureSightSTABFlag[battleCtx->defender] = FALSE;
+            battleCtx->fieldConditions.futureSightAdaptabilityFlag[battleCtx->defender] = FALSE;
         }
     } else {
         BattleScript_Iter(battleCtx, jumpOnFail);
