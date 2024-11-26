@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_DRAPION",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_POISON_FANG",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_BRAVE_BIRD",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_GABITE",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_YACHE_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -68,7 +68,7 @@
 		{
             "species": "SPECIES_PURUGLY",
             "form": 0,
-            "level": 45,
+            "level": 47,
             "item": "ITEM_CLEANSE_TAG",
             "moves": [
                 "MOVE_LAST_RESORT",

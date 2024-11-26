@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MAGCARGO",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_LAVA_PLUME",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_MUK",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_GUNK_SHOT",
@@ -40,8 +40,8 @@
         {
             "species": "SPECIES_SWALOT",
             "form": 0,
-            "level": 44,
-            "item": "ITEM_SHUCA_BERRY",
+            "level": 45,
+            "item": "ITEM_AIR_BALLOON",
             "moves": [
                 "MOVE_ENCORE",
                 "MOVE_SLUDGE_BOMB",

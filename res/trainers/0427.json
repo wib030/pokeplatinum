@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_FLAREON",
             "form": 0,
-            "level": 43,
+            "level": 45,
             "item": "ITEM_ZOOM_LENS",
             "moves": [
                 "MOVE_HELPING_HAND",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 43,
+            "level": 45,
             "item": "ITEM_POKE_DOLL",
             "moves": [
                 "MOVE_FRUSTRATION",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_GALLADE",
             "form": 0,
-            "level": 43,
+            "level": 45,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_GRUDGE",

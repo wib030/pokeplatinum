@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PUPITAR",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WISH",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_MAGMAR",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_LAVA_PLUME",

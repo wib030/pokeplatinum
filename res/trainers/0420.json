@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ALTARIA",
             "form": 0,
-            "level": 43,
+            "level": 45,
             "item": "ITEM_DESTINY_KNOT",
             "moves": [
                 "MOVE_ATTRACT",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_GARDEVOIR",
             "form": 0,
-            "level": 43,
+            "level": 45,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_SKILL_SWAP",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 43,
+            "level": 45,
             "item": "ITEM_LUCKY_EGG",
             "moves": [
                 "MOVE_ICY_WIND",

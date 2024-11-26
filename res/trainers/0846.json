@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MAGMORTAR",
             "form": 0,
-            "level": 42,
+            "level": 43,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SCREECH",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SCREECH",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_STEELIX",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SCREECH",

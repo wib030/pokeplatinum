@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MAGNETON",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_ZAP_CANNON",
@@ -27,11 +27,11 @@
         {
             "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_FIRE_BLAST",
-                "MOVE_EARTHQUAKE",
+                "MOVE_EARTH_POWER",
                 "MOVE_STONE_EDGE",
                 "MOVE_MORNING_SUN"
             ],
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_MAWILE",
             "form": 0,
-            "level": 40,
+            "level": 43,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_SWORDS_DANCE",

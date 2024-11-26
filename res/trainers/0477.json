@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_INFERNAPE",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_PIDGEOT",
             "form": 0,
-            "level": 39,
+            "level": 41,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_U_TURN",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 39,
+            "level": 41,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_DISCHARGE",
@@ -54,7 +54,7 @@
         {
             "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 39,
+            "level": 41,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SHADOW_SNEAK",
@@ -68,7 +68,7 @@
 		{
             "species": "SPECIES_VAPOREON",
             "form": 0,
-            "level": 39,
+            "level": 41,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_U_TURN",
@@ -82,7 +82,7 @@
 		{
             "species": "SPECIES_VIBRAVA",
             "form": 0,
-            "level": 39,
+            "level": 41,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_U_TURN",
