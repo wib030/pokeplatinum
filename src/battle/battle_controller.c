@@ -1845,7 +1845,7 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                 }
 				
                 if (battleCtx->fieldConditions.futureSightSTABFlag[battler] == TRUE) {
-                    if (battleCtx->fieldConditions.futureSightADAPTABILITYFlag[battler] == TRUE) {
+                    if (battleCtx->fieldConditions.futureSightAdaptabilityFlag[battler] == TRUE) {
                         battleCtx->hpCalcTemp *= 2;
                     }
                     else {
