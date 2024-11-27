@@ -1795,9 +1795,6 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
         
         for (i = battleCtx->sideConditionCheckTemp; i < maxBattlers; i++) {
             battler = battleCtx->monSpeedOrder[battleCtx->sideConditionCheckTemp];
-            if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
-                continue;
-            }
 
             if (battleCtx->fieldConditions.futureSightTurns[battler]
                     && --battleCtx->fieldConditions.futureSightTurns[battler] == 0
