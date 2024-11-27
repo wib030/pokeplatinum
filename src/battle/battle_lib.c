@@ -5431,6 +5431,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
 			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
 			&& BattleSystem_RandNext(battleSys) % 10 < 3)
 			{
 				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
