@@ -3710,61 +3710,64 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
 
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
 
-    // Here we want to just learn every instance of a given pivot move
-    // on the opponent's team if they use that pivot move because the 
-    // active mon data is switched before the AI gets to run this code
-    // again.
-    if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH
-        || MOVE_DATA(move).effect == BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE) {
-        partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
+    if (move != MOVE_STRUGGLE
+    && move != MOVE_NONE) {
+        // Here we want to just learn every instance of a given pivot move
+        // on the opponent's team if they use that pivot move because the 
+        // active mon data is switched before the AI gets to run this code
+        // again.
+        if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH
+            || MOVE_DATA(move).effect == BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE) {
+            partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
 
-        for (i = 0; i < partyMax; i++) {
-            mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+            for (i = 0; i < partyMax; i++) {
+                mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
 
-            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 
-                if(move == Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL)) {
+                    if(move == Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL)) {
 
-                    if(AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] != move) {
+                        if(AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] != move) {
 
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
-                        break;
+                            AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                            break;
+                        }
                     }
                 }
             }
         }
-    }
-    else {
+        else {
 
-        partySlot = battleCtx->selectedPartySlot[AI_CONTEXT.defender];
+            partySlot = battleCtx->selectedPartySlot[AI_CONTEXT.defender];
 
-        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
-            if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == move) {
+                if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == move) {
 
-                if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == move) {
+                    if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == move) {
 
-                    break;
+                        break;
+                    }
+                    else {
+
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                        break;
+                    }
                 }
-                else {
+
+                if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == MOVE_NONE) {
+
+                    if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
+
+                        AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                        break;
+                    }
 
                     AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
-                    break;
-                }
-            }
-
-            if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == MOVE_NONE) {
-
-                if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
-
                     AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
-                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
                     break;
                 }
-
-                AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
-                AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
-                break;
             }
         }
     }

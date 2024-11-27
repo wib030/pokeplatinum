@@ -91,6 +91,10 @@
 #include "battle/ov16_02268520.h"
 #include "overlay021/ov21_021E8D48.h"
 
+#include "data/terrain/to_type.h"
+#include "data/terrain/to_move.h"
+#include "data/terrain/to_secondary_effect.h"
+
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
 
 typedef struct BattleMessageParams {
@@ -8538,8 +8542,6 @@ static BOOL BtlCmd_GetItemEffectParam(BattleSystem *battleSys, BattleContext *ba
     return FALSE;
 }
 
-#include "data/terrain/to_type.h"
-
 /**
  * @brief Try to change the battler's type to one according to the battle
  * terrain.
@@ -8579,8 +8581,6 @@ static BOOL BtlCmd_TryCamouflage(BattleSystem *battleSys, BattleContext *battleC
     return 0;
 }
 
-#include "data/terrain/to_move.h"
-
 /**
  * @brief Get the move which corresponding to this battle's terrain.
  * 
@@ -8605,8 +8605,6 @@ static BOOL BtlCmd_GetTerrainMove(BattleSystem *battleSys, BattleContext *battle
 
     return FALSE;
 }
-
-#include "data/terrain/to_secondary_effect.h"
 
 /**
  * @brief Get the secondary effect corresponding to this battle's terrain.
