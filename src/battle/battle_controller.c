@@ -1801,7 +1801,7 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 
             battleCtx->sideConditionCheckTemp++;
             if (battleCtx->fieldConditions.futureSightTurns[battler]
-                    && --battleCtx->fieldConditions.futureSightTurns[battler] == FALSE
+                    && --battleCtx->fieldConditions.futureSightTurns[battler] == 0
                     && battleCtx->battleMons[battler].curHP)
             {
                 battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
