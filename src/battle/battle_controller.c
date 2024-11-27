@@ -1788,7 +1788,7 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
     case SIDE_COND_CHECK_STATE_FUTURE_SIGHT:
 
         int effectivenessMultiplier;
-        int side = Battler_Side(battleSys, battleCtx->defender);
+        int side;
         u16 storedAttackingStat, moveClass;
         u8 moveType;
 
@@ -1804,6 +1804,7 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                     && --battleCtx->fieldConditions.futureSightTurns[battler] == 0
                     && battleCtx->battleMons[battler].curHP)
             {
+                side = Battler_Side(battleSys, battler);
                 battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
 
                 battleCtx->msgBuffer.id = 475;
