@@ -135,7 +135,11 @@
     "evolutions": [
         [
             "EVO_LEVEL_UP",
-            30,
+            40,
+            "SPECIES_RAMPARDOS"
+        ],
+        [
+            "EVO_MOSSY_STONE",
             "SPECIES_RAMPARDOS"
         ]
     ],
