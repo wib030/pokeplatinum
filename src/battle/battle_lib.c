@@ -8158,7 +8158,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 moveType = inType & 0x3F;
             }
 
-            if (moveType == TYPE_NORMAL) {
+            if (moveType == TYPE_NORMAL
+            && move != MOVE_STRUGGLE) {
                 movePower = movePower * 6 / 5;
             }
             break;
@@ -9176,7 +9177,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 moveType = inType & 0x3F;
             }
 
-            if (moveType == TYPE_NORMAL) {
+            if (moveType == TYPE_NORMAL
+            && move != MOVE_STRUGGLE) {
                 movePower = movePower * 6 / 5;
             }
             break;

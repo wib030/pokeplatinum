@@ -45,6 +45,9 @@
 #include "battle/battle_lib.h"
 #include "battle/battle_display.h"
 #include "battle/battle_io.h"
+#include "data/terrain/to_move.h"
+#include "data/battle/weight_to_power.h"
+
 
 enum {
     STATE_PROCESSING = 0,
@@ -2697,7 +2700,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
                 ATTACKING_MON.statusVolatile -= (1 << VOLATILE_CONDITION_CONFUSION_SHIFT);
 
                 if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION) {
-                    if (BattleSystem_RandNext(battleSys) % 2 != 0) {
+                    if (BattleSystem_RandNext(battleSys) % 3 != 0) {
                         LOAD_SUBSEQ(subscript_confused);
                         battleCtx->commandNext = battleCtx->command;
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
