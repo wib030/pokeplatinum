@@ -1917,6 +1917,7 @@ Expert_Explosion:
     IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 9, Expert_Explosion_CheckUserHighHP
     IfRandomLessThan 128, Expert_Explosion_CheckUserHighHP
     AddToMoveScore -1
+    GoTo Expert_Explosion_CheckUserHighHP
 
 Expert_Explosion_CheckUserHighHP:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 80, Expert_Explosion_CheckUserMediumHP
@@ -1928,16 +1929,19 @@ Expert_Explosion_CheckUserMediumHP:
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Explosion_TryScoreMinus1
     IfRandomLessThan 128, Expert_Explosion_CheckUserLowHP
     AddToMoveScore 1
+    GoTo Expert_Explosion_CheckUserLowHP
 
 Expert_Explosion_CheckUserLowHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Explosion_End
-    IfRandomLessThan 50, Expert_Explosion_End
     AddToMoveScore 1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Explosion_TryScoreMinus1
+    IfRandomLessThan 25, Expert_Explosion_End
+    AddToMoveScore 2
     GoTo Expert_Explosion_End
 
 Expert_Explosion_TryScoreMinus1:
-    IfRandomLessThan 50, Expert_Explosion_End
+    IfRandomLessThan 64, Expert_Explosion_End
     AddToMoveScore -1
+    GoTo Expert_Explosion_End
 
 Expert_Explosion_End:
     PopOrEnd 
