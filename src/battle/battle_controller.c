@@ -1789,18 +1789,22 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 
         int effectivenessMultiplier;
         int side;
-        int i;
         u16 storedAttackingStat, moveClass;
         u8 moveType;
-        
-        for (i = battleCtx->sideConditionCheckTemp; i < maxBattlers; i++) {
-            battler = battleCtx->monSpeedOrder[battleCtx->sideConditionCheckTemp];
 
+        while (battleCtx->sideConditionCheckTemp < maxBattlers) {
+            battler = battleCtx->monSpeedOrder[battleCtx->sideConditionCheckTemp];
+            if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
+                battleCtx->sideConditionCheckTemp++;
+                continue;
+            }
+
+            battleCtx->sideConditionCheckTemp++;
             if (battleCtx->fieldConditions.futureSightTurns[battler]
                     && --battleCtx->fieldConditions.futureSightTurns[battler] == 0
                     && battleCtx->battleMons[battler].curHP)
             {
-                side = Battler_Side(battleSys, battler);
+				side = Battler_Side(battleSys, battler);
                 battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
 
                 battleCtx->msgBuffer.id = 475;
@@ -3026,6 +3030,11 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
 
     if (Battler_Ability(battleCtx, attacker) == ABILITY_HUSTLE && moveClass == CLASS_PHYSICAL) {
         hitRate = hitRate * 80 / 100;
+    }
+	
+	if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_TANGLED_FEET) == TRUE
+            && (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_CONFUSION)) {
+        hitRate = hitRate * 50 / 100;
     }
 
     int itemEffect = Battler_HeldItemEffect(battleCtx, defender);
