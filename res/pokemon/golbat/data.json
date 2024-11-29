@@ -116,6 +116,14 @@
             "EVO_LEVEL_UP",
             38,
             "SPECIES_CROBAT"
+        ],
+		[
+            "EVO_HAPPINESS_DAY",
+            "SPECIES_CROBAT"
+        ],
+		[
+            "EVO_HAPPINESS_NIGHT",
+            "SPECIES_CROBAT"
         ]
     ],
     "footprint": {

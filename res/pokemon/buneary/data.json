@@ -117,6 +117,14 @@
             "EVO_LEVEL_UP",
 			24,
             "SPECIES_LOPUNNY"
+        ],
+		[
+            "EVO_HAPPINESS_DAY",
+            "SPECIES_LOPUNNY"
+        ],
+		[
+            "EVO_HAPPINESS_NIGHT",
+            "SPECIES_LOPUNNY"
         ]
     ],
     "footprint": {

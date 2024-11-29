@@ -122,7 +122,7 @@
     "evolutions": [
         [
             "EVO_USE_ITEM",
-            "ITEM_MOON_STONE",
+            "ITEM_DUSK_STONE",
             "SPECIES_DELCATTY"
         ]
     ],
