@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WIGGLYTUFF",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_METRONOME",
             "moves": [
                 "MOVE_SING",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_DUBIOUS_DISC",
             "moves": [
                 "MOVE_SING",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_CLEFABLE",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_METRONOME",
             "moves": [
                 "MOVE_SING",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_MAROWAK",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_METRONOME",
             "moves": [
                 "MOVE_SING",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_KANGASKHAN",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_STICK",
             "moves": [
                 "MOVE_SING",

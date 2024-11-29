@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_HIPPOWDON",
             "form": 0,
-            "level": 45,
+            "level": 47,
             "item": "ITEM_SOFT_SAND",
             "moves": [
                 "MOVE_SAND_ATTACK",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_LUDICOLO",
             "form": 0,
-            "level": 45,
+            "level": 47,
             "item": "ITEM_DAMP_ROCK",
             "moves": [
                 "MOVE_RAIN_DANCE",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 45,
+            "level": 47,
             "item": "ITEM_LUCKY_PUNCH",
             "moves": [
                 "MOVE_BULLET_PUNCH",

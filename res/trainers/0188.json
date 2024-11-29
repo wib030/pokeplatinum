@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_SHADOW_BALL",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_GALLADE",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_PSYCHO_CUT",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_OUTRAGE",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_AERODACTYL",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_WING_ATTACK",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_PINSIR",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_FURY_CUTTER"

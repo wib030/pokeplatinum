@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SNEASEL",
             "form": 0,
-            "level": 47,
+            "level": 49,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_BEAT_UP"
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_BEAT_UP"
@@ -36,7 +36,7 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_BEAT_UP"
@@ -48,7 +48,7 @@
 		{
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_BEAT_UP"
@@ -60,7 +60,7 @@
 		{
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_KINGS_ROCK",
             "moves": [
                 "MOVE_BEAT_UP"
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_BEAT_UP"

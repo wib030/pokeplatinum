@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ARCANINE",
             "form": 0,
-            "level": 44,
+            "level": 51,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_EXTREME_SPEED",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 44,
+            "level": 51,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_BLAST_BURN",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_TYPHLOSION",
             "form": 0,
-            "level": 44,
+            "level": 51,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_LAVA_PLUME",

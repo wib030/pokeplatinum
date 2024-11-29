@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SHIFTRY",
             "form": 0,
-            "level": 47,
+            "level": 50,
             "item": "ITEM_MEADOW_PLATE",
             "moves": [
                 "MOVE_FLING",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_CRAWDAUNT",
             "form": 0,
-            "level": 47,
+            "level": 50,
             "item": "ITEM_SPLASH_PLATE",
             "moves": [
                 "MOVE_FLING",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 47,
+            "level": 50,
             "item": "ITEM_FLAME_PLATE",
             "moves": [
                 "MOVE_FLING",

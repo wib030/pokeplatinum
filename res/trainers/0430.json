@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_COBA_BERRY",
             "moves": [
                 "MOVE_BULLET_SEED",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_OCTAZOOKA",

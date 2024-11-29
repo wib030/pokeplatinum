@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_ENCORE",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_MR_MIME",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_WISE_GLASSES",
             "moves": [
                 "MOVE_MIND_READER",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_HONCHKROW",
             "form": 0,
-            "level": 44,
+            "level": 47,
             "item": "ITEM_POWER_HERB",
             "moves": [
                 "MOVE_SUCKER_PUNCH",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_CHOPLE_BERRY",
             "moves": [
                 "MOVE_ROOST",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_ROOST",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_AIR_MAIL",
             "moves": [
                 "MOVE_ROOST",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_ABOMASNOW",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_OCCA_BERRY",
             "moves": [
                 "MOVE_OUTRAGE",

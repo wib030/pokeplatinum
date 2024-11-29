@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 57,
+            "level": 60,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 57,
+            "level": 60,
             "item": "ITEM_HABAN_BERRY",
             "moves": [
                 "MOVE_DRAGON_PULSE",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 57,
+            "level": 60,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_OCTAZOOKA",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 57,
+            "level": 60,
             "item": "ITEM_LUM_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -68,7 +68,7 @@
 		{
             "species": "SPECIES_ALTARIA",
             "form": 0,
-            "level": 57,
+            "level": 60,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WILL_O_WISP",
@@ -82,7 +82,7 @@
 		{
             "species": "SPECIES_SALAMENCE",
             "form": 0,
-            "level": 58,
+            "level": 61,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_DRAGON_DANCE",

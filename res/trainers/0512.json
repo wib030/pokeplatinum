@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_CHOPLE_BERRY",
             "moves": [
                 "MOVE_DIZZY_PUNCH",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_CHOPLE_BERRY",
             "moves": [
                 "MOVE_DIZZY_PUNCH",

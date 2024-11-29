@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MEOWTH",
             "form": 0,
-            "level": 45,
+            "level": 48,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_FURY_SWIPES",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 45,
+            "level": 48,
             "item": "ITEM_REAPER_CLOTH",
             "moves": [
                 "MOVE_ATTRACT",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_LOPUNNY",
             "form": 0,
-            "level": 45,
+            "level": 48,
             "item": "ITEM_REAPER_CLOTH",
             "moves": [
                 "MOVE_ATTRACT",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_GARDEVOIR",
             "form": 0,
-            "level": 45,
+            "level": 48,
             "item": "ITEM_REAPER_CLOTH",
             "moves": [
                 "MOVE_ATTRACT",

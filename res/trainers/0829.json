@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PORYGON",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_EVERSTONE",
             "moves": [
                 "MOVE_SPIKES",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_PORYGON2",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_EVERSTONE",
             "moves": [
                 "MOVE_RECOVER",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_PORYGON_Z",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_EVERSTONE",
             "moves": [
                 "MOVE_TRI_ATTACK",

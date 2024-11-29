@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PIDGEOT",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_RAZOR_WIND",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_HABAN_BERRY",
             "moves": [
                 "MOVE_OUTRAGE",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_INFERNAPE",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_WHITE_HERB",
             "moves": [
                 "MOVE_FLARE_BLITZ",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 2,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_HYDRO_PUMP",

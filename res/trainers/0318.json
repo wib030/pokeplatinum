@@ -77,14 +77,14 @@
 			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
-            "species": "SPECIES_DRIFLOON",
+            "species": "SPECIES_DELCATTY",
             "form": 0,
             "level": 25,
-            "item": "ITEM_SALAC_BERRY",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_CALM_MIND",
-				"MOVE_SUBSTITUTE",
-				"MOVE_OMINOUS_WIND",
+                "MOVE_GUILLOTINE",
+				"MOVE_COSMIC_POWER",
+				"MOVE_SKILL_SWAP",
 				"MOVE_BATON_PASS"
             ],
             "power": 120,

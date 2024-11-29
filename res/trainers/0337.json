@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_FOLLOW_ME",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_MEGANIUM",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_LIGHT_SCREEN",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_RAMPARDOS",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_ROCK_SLIDE",

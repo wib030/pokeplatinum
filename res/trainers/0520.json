@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_LEDIAN",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_LIGHT_SCREEN",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_FURRET",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_STARF_BERRY",
             "moves": [
                 "MOVE_SUBSTITUTE",
@@ -43,7 +43,7 @@
 		{
             "species": "SPECIES_STARAPTOR",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_CLOSE_COMBAT",
@@ -58,7 +58,7 @@
 		{
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_LUM_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -74,7 +74,7 @@
 		{
             "species": "SPECIES_STARMIE",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_HYDRO_PUMP",
@@ -89,7 +89,7 @@
 		{
             "species": "SPECIES_MAGNEZONE",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_ZAP_CANNON",

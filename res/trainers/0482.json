@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_BULK_UP",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_BULK_UP",
@@ -44,7 +44,7 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_SILK_SCARF",
             "moves": [
                 "MOVE_BULK_UP",

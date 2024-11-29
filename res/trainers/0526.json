@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 51,
+            "level": 53,
             "item": "ITEM_TOXIC_ORB",
             "moves": [
                 "MOVE_PROTECT",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 51,
+            "level": 53,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SKILL_SWAP",
@@ -43,7 +43,7 @@
         {
             "species": "SPECIES_AZUMARILL",
             "form": 0,
-            "level": 51,
+            "level": 53,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_BELLY_DRUM",
@@ -58,7 +58,7 @@
 		{
             "species": "SPECIES_HERACROSS",
             "form": 0,
-            "level": 51,
+            "level": 53,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_MEGAHORN",
@@ -73,7 +73,7 @@
 		{
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 51,
+            "level": 53,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_THUNDERBOLT",
@@ -88,7 +88,7 @@
 		{
             "species": "SPECIES_MAWILE",
             "form": 0,
-            "level": 51,
+            "level": 53,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_IRON_HEAD",

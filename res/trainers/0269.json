@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 47,
+            "level": 48,
             "item": "ITEM_ICICLE_PLATE",
             "moves": [
                 "MOVE_DETECT",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_DELIBIRD",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_PRESENT",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_JYNX",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_WISE_GLASSES",
             "moves": [
                 "MOVE_TORMENT",

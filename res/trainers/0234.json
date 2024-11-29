@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GIRAFARIG",
             "form": 0,
-            "level": 55,
+            "level": 58,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_COSMIC_POWER",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 55,
+            "level": 58,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_IMPRISON",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_CHIMECHO",
             "form": 0,
-            "level": 55,
+            "level": 58,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_FUTURE_SIGHT",

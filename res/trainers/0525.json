@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_MAGMA_STORM",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_BULLET_SEED",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_ASSAULT_VEST",
             "moves": [
                 "MOVE_OCTAZOOKA",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_WATER_SPOUT"
@@ -84,7 +84,7 @@
 		{
             "species": "SPECIES_VICTREEBEL",
             "form": 0,
-            "level": 50,
+            "level": 53,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_SLUDGE_BOMB",

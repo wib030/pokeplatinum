@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PIKACHU",
             "form": 0,
-            "level": 53,
+            "level": 56,
             "item": "ITEM_LIGHT_BALL",
             "moves": [
                 "MOVE_FAKE_OUT",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 53,
+            "level": 56,
             "item": "ITEM_MICLE_BERRY",
             "moves": [
                 "MOVE_DYNAMIC_PUNCH",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_ROTOM",
             "form": 0,
-            "level": 53,
+            "level": 56,
             "item": "ITEM_ZAP_PLATE",
             "moves": [
                 "MOVE_WILL_O_WISP",
@@ -54,7 +54,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 53,
+            "level": 56,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_MAGNET_RISE",

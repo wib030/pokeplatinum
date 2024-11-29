@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_VENUSAUR",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_GIGA_DRAIN",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_POLIWRATH",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_AQUA_JET",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_SEAKING",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HORN_DRILL",

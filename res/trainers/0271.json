@@ -14,7 +14,7 @@
         {
             "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_CLOYSTER",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_SHELL_BELL",
             "moves": [
                 "MOVE_SPIKE_CANNON",

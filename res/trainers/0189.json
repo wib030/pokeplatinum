@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_QWILFISH",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_WAILORD",
             "form": 0,
-            "level": 54,
+            "level": 57,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AMNESIA",

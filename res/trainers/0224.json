@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ABSOL",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_ME_FIRST"
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_SCYTHER",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_ADAMANT_ORB",
             "moves": [
                 "MOVE_WING_ATTACK",
@@ -39,7 +39,7 @@
         {
             "species": "SPECIES_ROTOM",
             "form": 1,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_STEEL_MAIL",
             "moves": [
                 "MOVE_OVERHEAT",

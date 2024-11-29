@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SWORDS_DANCE",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_LUCARIO",
             "form": 0,
-            "level": 56,
+            "level": 59,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SWORDS_DANCE",

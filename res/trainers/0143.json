@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PILOSWINE",
             "form": 0,
-            "level": 45,
+            "level": 47,
             "item": "ITEM_UPGRADE",
             "moves": [
                 "MOVE_ICE_BALL",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_SLUGMA",
             "form": 0,
-            "level": 45,
+            "level": 47,
             "item": "ITEM_UPGRADE",
             "moves": [
                 "MOVE_LAVA_PLUME",

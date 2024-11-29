@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MASQUERAIN",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_U_TURN"
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_STARAPTOR",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_U_TURN"
@@ -36,7 +36,7 @@
         {
             "species": "SPECIES_STARAPTOR",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_U_TURN"
@@ -48,7 +48,7 @@
 		{
             "species": "SPECIES_CHIMECHO",
             "form": 0,
-            "level": 52,
+            "level": 55,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_CURSE",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_CHOPLE_BERRY",
             "moves": [
                 "MOVE_MEGAHORN",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_LAPRAS",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_THUNDERBOLT",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_EXPERT_BELT",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 3,
-            "level": 47,
+            "level": 51,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_BLIZZARD",

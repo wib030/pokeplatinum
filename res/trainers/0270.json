@@ -16,7 +16,7 @@
         {
             "species": "SPECIES_DEWGONG",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_RECOVER",
@@ -30,7 +30,7 @@
         {
             "species": "SPECIES_LAPRAS",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -44,7 +44,7 @@
         {
             "species": "SPECIES_WALREIN",
             "form": 0,
-            "level": 46,
+            "level": 48,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AQUA_RING",

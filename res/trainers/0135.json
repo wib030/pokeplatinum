@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_POWER_BAND",
             "moves": [
                 "MOVE_BEAT_UP",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_GLALIE",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_RED_SCARF",
             "moves": [
                 "MOVE_ROLLOUT",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_BUIZEL",
             "form": 0,
-            "level": 44,
+            "level": 46,
             "item": "ITEM_FIRE_STONE",
             "moves": [
                 "MOVE_ODOR_SLEUTH",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_TOXIC_ORB",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_ICE_BALL",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_KABUTOPS",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_AQUA_JET",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_SLOWBRO",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_FUTURE_SIGHT",

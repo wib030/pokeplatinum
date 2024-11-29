@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MUK",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_NUGGET",
             "moves": [
                 "MOVE_GUNK_SHOT",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_SWALOT",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_TOXIC",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_WEEZING",
             "form": 0,
-            "level": 49,
+            "level": 52,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_SLUDGE_BOMB",
