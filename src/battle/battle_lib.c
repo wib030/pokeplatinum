@@ -11358,8 +11358,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 else {
                     if (moveEffect == BATTLE_EFFECT_STATUS_BURN) {
 
-                        if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
-                            && defenderAbility != ABILITY_MOLD_BREAKER
+                        if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
+                            || defenderAbility == ABILITY_MOLD_BREAKER)
                             && monType1 != TYPE_FIRE
                             && monType2 != TYPE_FIRE) {
 
@@ -11526,16 +11526,18 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
                 if (move && (MOVE_DATA(move).power > 1)) {
-                    score = BattleSystem_CalcMoveDamage(battleSys,
-                        battleCtx,
-                        move,
-                        battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
-                        battleCtx->fieldConditionsMask,
-                        0,
-                        0,
-                        battler,
-                        defender,
-                        1);
+                    score = BattleSystem_CalcPartyMemberMoveDamage(
+                            battleSys,
+                            battleCtx,
+                            move,
+                            battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                            battleCtx->fieldConditionsMask,
+                            0,
+                            moveType,
+                            battler,
+                            defender,
+                            1,
+                            i);
 
                     moveStatusFlags = 0;
                     score = BattleSystem_ApplyTypeChart(battleSys,
@@ -11547,14 +11549,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         score,
                         &moveStatusFlags);
 
-                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE))
-                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
-                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
-                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)
-                        ) 
+                    if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                        && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
                     {
                         score = 0;
                     }
