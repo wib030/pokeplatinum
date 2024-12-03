@@ -5906,7 +5906,9 @@ static BOOL BtlCmd_TrySpikes(BattleSystem *battleSys, BattleContext *battleCtx)
     int defendingSide = Battler_Side(battleSys, battleCtx->attacker) ^ 1;
 
     if (battleCtx->sideConditions[defendingSide].spikesLayers == 3) {
-        battleCtx->selfTurnFlags[battleCtx->attacker].skipPressureCheck = TRUE;
+        if (MOVE_DATA(battleCtx->moveCur).class == CLASS_STATUS) {
+            battleCtx->selfTurnFlags[battleCtx->attacker].skipPressureCheck = TRUE;
+        }
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
         battleCtx->sideConditionsMask[defendingSide] |= SIDE_CONDITION_SPIKES;
@@ -8159,7 +8161,9 @@ static BOOL BtlCmd_TryToxicSpikes(BattleSystem * battleSys, BattleContext * batt
     int defending = Battler_Side(battleSys, battleCtx->attacker) ^ 1;
 
     if (battleCtx->sideConditions[defending].toxicSpikesLayers == 2) {
-        ATTACKER_SELF_TURN_FLAGS.skipPressureCheck = TRUE;
+        if (MOVE_DATA(battleCtx->moveCur).class == CLASS_STATUS) {
+            ATTACKER_SELF_TURN_FLAGS.skipPressureCheck = TRUE;
+        }
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
         battleCtx->sideConditionsMask[defending] |= SIDE_CONDITION_TOXIC_SPIKES;
