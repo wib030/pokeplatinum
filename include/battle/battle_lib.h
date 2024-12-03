@@ -474,11 +474,12 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
  * @param attacker 
  * @param defender 
  * @param damage            Pre-calculated starting damage value
- * @param partySlot         Party slot index of the attacker's party Pokemon to use in calculation.
+ * @param partyIndicator    The battler ID of the Pokemon whose party will be referenced.
+ * @param partySlot         Party slot index of the indicated battler's party Pokemon to use in calculation.
  * @param[out] moveStatusMask   
  * @return Damage value after applying the type-chart and related multipliers
  */
-int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partySlot, u32 *moveStatusMask);
+int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partyIndicator, int partySlot, u32 *moveStatusMask);
 
 /**
  * @brief Calculate the effectiveness mask of the given move.
@@ -1314,6 +1315,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
  * @param defender 
  * @param criticalMul       Critical multiplier; must always be >= 1, 1 == no crit,
  *                          2+ signifies a crit
+ * @param partyIndicator    The id of the battlemon whose party will be referenced.
  * @param partySlot         The slot number of the party member to use in the calculation.
  * @return The computed base damage for the move
  */
@@ -1328,6 +1330,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     u8 attacker,
     u8 defender,
     u8 criticalMul,
+    u8 partyIndicator,
     int partySlot);
 
 

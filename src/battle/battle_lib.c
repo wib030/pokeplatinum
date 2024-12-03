@@ -3042,7 +3042,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     return damage;
 }
 
-int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partySlot, u32 *moveStatusMask)
+int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partyIndicator, int partySlot, u32 *moveStatusMask)
 {
     int chartEntry;
     int totalMul;
@@ -3056,7 +3056,7 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
     u8 monAbility;
     u16 monItem;
 
-    mon = BattleSystem_PartyPokemon(battleSys, attacker, partySlot);
+    mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
     monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
     monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
 	
@@ -7921,6 +7921,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     u8 attacker,
     u8 defender,
     u8 criticalMul,
+    u8 partyIndicator,
     int partySlot)
 {
     // vars have to all be declared C89-style to match
@@ -7954,7 +7955,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     int naturePowerMove;
     int rnd;
     
-    mon = BattleSystem_PartyPokemon(battleSys, attacker, partySlot);
+    mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
@@ -8085,6 +8086,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             attacker,
                             defender,
                             criticalMul,
+                            partyIndicator,
                             partySlot);
 
                     return damage;
