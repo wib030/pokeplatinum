@@ -12365,7 +12365,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_SLEEP) == FALSE)
                                     || monAbility == ABILITY_MOLD_BREAKER) {
 
-                                    // Yawn is handled by sleep status, so we just give it +2 here
+                                        // Yawn is handled by sleep status, so we just give it +2 here
                                         moveScore += 2;
                                     }
                                 }
