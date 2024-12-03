@@ -10988,7 +10988,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     int i, j;
     u8 defender, defenderType1, defenderType2, defenderAbility;
     u8 monType1, monType2, monAbility, monItemEffect;
-    u8 battlerType1, battlerType2, battlerAbility, side;
+    u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
     u16 monSpecies, monSpeedStat, monItem, defenderItem;
     u16 move;
     int moveType, movePower, moveEffect;
@@ -11022,6 +11022,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     picked = 6;
     maxScore = 100;
     side = Battler_Side(battleSys, battler);
+    oppSide = Battler_Side(battleSys, defender);
 
     // Use the AI's list of known moves
 
@@ -11128,13 +11129,14 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 battleSys,
                                 battleCtx,
                                 move,
-                                battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                                battleCtx->sideConditionsMask[oppSide],
                                 battleCtx->fieldConditionsMask,
                                 0,
                                 moveType,
                                 battler,
                                 defender,
                                 1,
+                                battler,
                                 i);
 
                     moveScore = PartyMon_ApplyTypeChart(battleSys,
@@ -11144,6 +11146,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 battler,
                                 defender,
                                 moveScore,
+                                battler,
                                 i,
                                 &moveStatusFlags);
 
@@ -11151,6 +11154,18 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
                             moveScore = 0;
+                    }
+
+                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
+                        if (monAbility != ABILITY_MOLD_BREAKER) {
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                moveScore /= 2;
+                            }
+
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                moveScore = moveScore * 3 / 2;
+                            }
+                        }
                     }
 
                     moveScore = moveScore * 100 / defenderMaxHP;
@@ -11163,6 +11178,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 battler,
                                 defender,
                                 0,
+                                battler,
                                 i,
                                 &moveStatusFlags);
                     moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
@@ -11275,6 +11291,26 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 }
                             }
                         }
+
+                        if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
+                            if ((defenderAbility == ABILITY_DEFIANT
+                                || defenderAbility == ABILITY_COMPETITIVE)
+                                && monAbility != ABILITY_UNAWARE) {
+                                    moveScore = 0;
+                            }
+                            else {
+                                if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_HAZARDS_ANY) {
+                                    moveScore = 10 * battleCtx->sideConditions[oppSide].spikesLayers;
+                                    moveScore += (15 * battleCtx->sideConditions[oppSide].toxicSpikesLayers);
+                                    if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_STEALTH_ROCK) {
+                                        moveScore += 15;
+                                    }
+                                }
+                                else {
+                                    moveScore = 2;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -11314,31 +11350,47 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                 if (movePower > 1) {
 
-                    moveScore = BattleSystem_CalcMoveDamage(battleSys,
+                    moveScore = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
                                 battleCtx,
                                 move,
-                                battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                                battleCtx->sideConditionsMask[oppSide],
                                 battleCtx->fieldConditionsMask,
                                 0,
                                 moveType,
                                 defender,
                                 battler,
-                                1);
+                                1,
+                                battler,
+                                i);
 
                     moveStatusFlags = 0;
-                    moveScore = BattleSystem_ApplyTypeChart(battleSys,
-                            battleCtx,
-                            move,
-                            moveType,
-                            defender,
-                            battler,
-                            moveScore,
-                            &moveStatusFlags);
+                    moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                defender,
+                                battler,
+                                moveScore,
+                                battler,
+                                i,
+                                &moveStatusFlags);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
                             moveScore = 0;
+                    }
+
+                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
+                        if (defenderAbility != ABILITY_MOLD_BREAKER) {
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                moveScore /= 2;
+                            }
+
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                moveScore = moveScore * 3 / 2;
+                            }
+                        }
                     }
 
                     // Move score is % of mon's hp damage they'll take
@@ -11358,15 +11410,135 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     }
                 }
                 else {
-                    if (moveEffect == BATTLE_EFFECT_STATUS_BURN) {
+                    moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                defender,
+                                battler,
+                                0,
+                                battler,
+                                i,
+                                &moveStatusFlags);
+                    moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
+                    moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+                    moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
 
-                        if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
-                            || defenderAbility == ABILITY_MOLD_BREAKER)
-                            && monType1 != TYPE_FIRE
-                            && monType2 != TYPE_FIRE) {
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
+                        || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                        if (moveStatus != MON_CONDITION_NONE) {
+                            if (moveStatus & MON_CONDITION_BURN) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_FIRE
+                                && monType2 != TYPE_FIRE)
+                                if (Battle_PartyMonIsPhysicalAttacker(battleSys, battleCtx, battler, i)) {
+                                    moveScore = 100;
+                                }
+                            }
 
-                            if (Battle_PartyMonIsPhysicalAttacker(battleSys, battleCtx, battler, i)) {
-                                moveScore = 200;
+                            if (moveStatus & MON_CONDITION_PARALYSIS) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_PARALYSIS) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_ELECTRIC
+                                && monType2 != TYPE_ELECTRIC) {
+
+                                    if (AI_PartyMonShouldParalyzeCheck(battleSys, battleCtx, battler, i, defenderSpeedStat)) {
+                                        moveScore = 50;
+                                    }
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_SLEEP) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                    moveScore = 50;
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_ANY_POISON) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                    moveScore = 25;
+                                }
+                            }
+                        }
+
+                        if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
+                            if (moveVolatileStatus & VOLATILE_CONDITION_CONFUSION) {
+                                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender)) {
+                                    moveScore = 20;
+                                }
+                                else {
+                                    moveScore = 10;
+                                }
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_ATTRACT) {
+                                if (BattleMon_Get(battleCtx, defender, BATTLEMON_GENDER, NULL) != Pokemon_GetValue(mon, MON_DATA_GENDER, NULL)
+                                    && Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) != GENDER_NONE) {
+                                        moveScore = 25;
+                                }
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_MOVE_LOCKED) {
+                                moveScore = 25;
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_TORMENT) {
+                                moveScore = 10;
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_CURSE) {
+                                if (defenderType1 == TYPE_GHOST || defenderType2 == TYPE_GHOST) {
+                                    moveScore = 49;
+                                }
+                            }
+                        }
+
+                        if (moveMoveEffect != MOVE_EFFECT_NONE) {
+                            if (moveMoveEffect & MOVE_EFFECT_YAWN) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                // Yawn is handled by sleep status, so we just give it +2 here
+                                    moveScore += 2;
+                                }
+                            }
+
+                            if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
+                                if (monType1 != TYPE_GRASS && monType2 != TYPE_GRASS) {
+                                    moveScore = 12;
+                                }
+                            }
+
+                            if (moveMoveEffect & MOVE_EFFECT_PERISH_SONG) {
+                                if (monAbility != ABILITY_SOUNDPROOF) {
+                                    
+                                    moveScore = 15;
+                                }
+                            }
+                        }
+
+                        if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
+                            if ((monAbility == ABILITY_DEFIANT
+                                || monAbility == ABILITY_COMPETITIVE)
+                                && defenderAbility != ABILITY_UNAWARE) {
+                                    moveScore = 0;
+                            }
+                            else {
+                                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+                                    moveScore = 10 * battleCtx->sideConditions[side].spikesLayers;
+                                    moveScore += (8 * battleCtx->sideConditions[side].toxicSpikesLayers);
+                                    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK) {
+                                        moveScore += 12;
+                                    }
+                                }
+                                else {
+                                    moveScore = 7;
+                                }
                             }
                         }
                     }
@@ -11539,17 +11711,20 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             battler,
                             defender,
                             1,
+                            battler,
                             i);
 
                     moveStatusFlags = 0;
-                    score = BattleSystem_ApplyTypeChart(battleSys,
-                        battleCtx,
-                        move,
-                        moveType,
-                        battler,
-                        defender,
-                        score,
-                        &moveStatusFlags);
+                    score = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                battler,
+                                defender,
+                                score,
+                                battler,
+                                i,
+                                &moveStatusFlags);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
@@ -11587,20 +11762,22 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     int i, j;
     u8 defender, defenderType1, defenderType2, defenderAbility;
     u8 monType1, monType2, monAbility, monItemEffect;
-    u8 battlerType1, battlerType2, battlerAbility, side;
-    u16 monSpecies, monSpeedStat, monItem, defenderItem;
+    u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
+    u16 monSpecies, monSpeedStat, monItem, defenderItem, defenderSpeedStat;
     u16 move;
-    int moveType, movePower, moveEffect;
+    int moveType, movePower, moveEffect, moveStatFlag;
     u8 battlersDisregarded;
     u16 attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2;
     u8 picked = 6;
     u8 slot1, slot2;
     u32 moveStatusFlags;
     int partySize;
-    int score, maxScore, minScore, moveScore, hpPercent, monCurHP, monMaxHP;
+    int score, maxScore, minScore, moveScore, attackScore;
+    int hpPercent, monCurHP, monMaxHP;
     int hazardsBonus, sackBonus, speedMultiplier;
     Pokemon *mon;
     BattleContext *battleCtx;
+    BOOL keepPicked;
 
     battleCtx = BattleSystem_Context(battleSys);
 	
@@ -11618,6 +11795,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     picked = 6;
     minScore = 200;
     side = Battler_Side(battleSys, battler);
+    oppSide = Battler_Side(battleSys, defender);
 
     // Use the AI's list of known moves
 
@@ -11625,6 +11803,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
     defenderAbility = Battler_Ability(battleCtx, defender);
     defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
+    defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
 
     for (i = 0; i < partySize; i++) {
         mon = BattleSystem_PartyPokemon(battleSys, battler, i);
@@ -11680,31 +11859,47 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                 if (movePower > 0) {
 
-                    moveScore = BattleSystem_CalcMoveDamage(battleSys,
+                    moveScore = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
                             battleCtx,
                             move,
-                            battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                            battleCtx->sideConditionsMask[oppSide],
                             battleCtx->fieldConditionsMask,
                             0,
                             moveType,
                             defender,
                             battler,
-                            1);
+                            1,
+                            battler,
+                            i);
                         
                     moveStatusFlags = 0;
-                    moveScore = BattleSystem_ApplyTypeChart(battleSys,
-                            battleCtx,
-                            move,
-                            moveType,
-                            defender,
-                            battler,
-                            moveScore,
-                            &moveStatusFlags);
+                    moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                defender,
+                                battler,
+                                moveScore,
+                                battler,
+                                i,
+                                &moveStatusFlags);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
                             moveScore = 0;
+                    }
+
+                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
+                        if (defenderAbility != ABILITY_MOLD_BREAKER) {
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                moveScore /= 2;
+                            }
+
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                moveScore = moveScore * 3 / 2;
+                            }
+                        }
                     }
 
                     // Move score is % of mon's hp damage they'll take
@@ -11731,15 +11926,135 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     }
                 }
                 else {
-                    if (moveEffect == BATTLE_EFFECT_STATUS_BURN) {
+                    moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                defender,
+                                battler,
+                                0,
+                                battler,
+                                i,
+                                &moveStatusFlags);
+                    moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
+                    moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+                    moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
 
-                        if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
-                            && defenderAbility != ABILITY_MOLD_BREAKER
-                            && monType1 != TYPE_FIRE
-                            && monType2 != TYPE_FIRE) {
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
+                        || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                        if (moveStatus != MON_CONDITION_NONE) {
+                            if (moveStatus & MON_CONDITION_BURN) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_FIRE
+                                && monType2 != TYPE_FIRE)
+                                if (Battle_PartyMonIsPhysicalAttacker(battleSys, battleCtx, battler, i)) {
+                                    moveScore = 100;
+                                }
+                            }
 
-                            if (Battle_PartyMonIsPhysicalAttacker(battleSys, battleCtx, battler, i)) {
-                                moveScore = 200;
+                            if (moveStatus & MON_CONDITION_PARALYSIS) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_PARALYSIS) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_ELECTRIC
+                                && monType2 != TYPE_ELECTRIC) {
+
+                                    if (AI_PartyMonShouldParalyzeCheck(battleSys, battleCtx, battler, i, defenderSpeedStat)) {
+                                        moveScore = 50;
+                                    }
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_SLEEP) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                    moveScore = 50;
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_ANY_POISON) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                    moveScore = 25;
+                                }
+                            }
+                        }
+
+                        if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
+                            if (moveVolatileStatus & VOLATILE_CONDITION_CONFUSION) {
+                                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender)) {
+                                    moveScore = 20;
+                                }
+                                else {
+                                    moveScore = 10;
+                                }
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_ATTRACT) {
+                                if (BattleMon_Get(battleCtx, defender, BATTLEMON_GENDER, NULL) != Pokemon_GetValue(mon, MON_DATA_GENDER, NULL)
+                                    && Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) != GENDER_NONE) {
+                                        moveScore = 25;
+                                }
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_MOVE_LOCKED) {
+                                moveScore = 25;
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_TORMENT) {
+                                moveScore = 10;
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_CURSE) {
+                                if (defenderType1 == TYPE_GHOST || defenderType2 == TYPE_GHOST) {
+                                    moveScore = 49;
+                                }
+                            }
+                        }
+
+                        if (moveMoveEffect != MOVE_EFFECT_NONE) {
+                            if (moveMoveEffect & MOVE_EFFECT_YAWN) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                // Yawn is handled by sleep status, so we just give it +2 here
+                                    moveScore += 2;
+                                }
+                            }
+
+                            if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
+                                if (monType1 != TYPE_GRASS && monType2 != TYPE_GRASS) {
+                                    moveScore = 12;
+                                }
+                            }
+
+                            if (moveMoveEffect & MOVE_EFFECT_PERISH_SONG) {
+                                if (monAbility != ABILITY_SOUNDPROOF) {
+                                    
+                                    moveScore = 15;
+                                }
+                            }
+                        }
+
+                        if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
+                            if ((monAbility == ABILITY_DEFIANT
+                                || monAbility == ABILITY_COMPETITIVE)
+                                && defenderAbility != ABILITY_UNAWARE) {
+                                    moveScore = 0;
+                            }
+                            else {
+                                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+                                    moveScore = 10 * battleCtx->sideConditions[side].spikesLayers;
+                                    moveScore += (8 * battleCtx->sideConditions[side].toxicSpikesLayers);
+                                    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK) {
+                                        moveScore += 12;
+                                    }
+                                }
+                                else {
+                                    moveScore = 7;
+                                }
                             }
                         }
                     }
@@ -11885,6 +12200,263 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                 battlersDisregarded |= FlagIndex(i);
             }
+
+            if (picked == i) {
+                keepPicked = FALSE;
+                attackScore = 0;
+                moveStatFlag = BATTLE_STAT_FLAG_NONE;
+                for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                    move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+                    if (move == MOVE_NONE) {
+                        break;
+                    }
+
+                    moveScore = 0;
+                    movePower = MOVE_DATA(move).power;
+                    moveType = CalcMoveType(battleSys, battleCtx, monItem, move);
+                    moveEffect = MOVE_DATA(move).effect;
+                    moveStatusFlags = 0;
+
+                    if (movePower > 0) {
+                        moveScore = BattleSystem_CalcPartyMemberMoveDamage(
+                                    battleSys,
+                                    battleCtx,
+                                    move,
+                                    battleCtx->sideConditionsMask[oppSide],
+                                    battleCtx->fieldConditionsMask,
+                                    0,
+                                    moveType,
+                                    battler,
+                                    defender,
+                                    1,
+                                    battler,
+                                    i);
+
+                        moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                    battleCtx,
+                                    move,
+                                    moveType,
+                                    battler,
+                                    defender,
+                                    moveScore,
+                                    battler,
+                                    i,
+                                    &moveStatusFlags);
+
+                        if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                            && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                                moveScore = 0;
+                        }
+
+                        if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
+                            if (monAbility != ABILITY_MOLD_BREAKER) {
+                                if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                    moveScore /= 2;
+                                }
+
+                                if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                    moveScore = moveScore * 3 / 2;
+                                }
+                            }
+                        }
+
+                        moveScore = moveScore * 100 / defenderMaxHP;
+                    }
+                    else {
+                        moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                    battleCtx,
+                                    move,
+                                    moveType,
+                                    battler,
+                                    defender,
+                                    0,
+                                    battler,
+                                    i,
+                                    &moveStatusFlags);
+                        moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
+                        moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+                        moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
+                        moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+
+                        if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
+                            || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                            if (moveStatus != MON_CONDITION_NONE) {
+                                if (moveStatus & MON_CONDITION_BURN) {
+                                    if (((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_BURN) == FALSE)
+                                    || monAbility == ABILITY_MOLD_BREAKER)
+                                    && defenderType1 != TYPE_FIRE
+                                    && defenderType2 != TYPE_FIRE)
+                                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender)) {
+                                        moveScore = 100;
+                                    }
+                                }
+
+                                if (moveStatus & MON_CONDITION_PARALYSIS) {
+                                    if (((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_PARALYSIS) == FALSE)
+                                    || monAbility == ABILITY_MOLD_BREAKER)
+                                    && defenderType1 != TYPE_ELECTRIC
+                                    && defenderType2 != TYPE_ELECTRIC) {
+
+                                        if (AI_ShouldParalyzeCheck(battleSys, battleCtx, defender, monSpeedStat)) {
+                                            moveScore = 50;
+                                        }
+                                    }
+                                }
+
+                                if (moveStatus & MON_CONDITION_SLEEP) {
+                                    if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_SLEEP) == FALSE)
+                                    || monAbility == ABILITY_MOLD_BREAKER) {
+
+                                        moveScore = 50;
+                                    }
+                                }
+
+                                if (moveStatus & MON_CONDITION_ANY_POISON) {
+                                    if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                    || monAbility == ABILITY_MOLD_BREAKER) {
+
+                                        moveScore = 25;
+                                    }
+                                }
+                            }
+
+                            if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
+                                if (moveVolatileStatus & VOLATILE_CONDITION_CONFUSION) {
+                                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender)) {
+                                        moveScore = 20;
+                                    }
+                                    else {
+                                        moveScore = 10;
+                                    }
+                                }
+
+                                if (moveVolatileStatus & VOLATILE_CONDITION_ATTRACT) {
+                                    if (BattleMon_Get(battleCtx, defender, BATTLEMON_GENDER, NULL) != Pokemon_GetValue(mon, MON_DATA_GENDER, NULL)
+                                        && Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) != GENDER_NONE) {
+                                            moveScore = 25;
+                                    }
+                                }
+
+                                if (moveVolatileStatus & VOLATILE_CONDITION_MOVE_LOCKED) {
+                                    if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE) {
+                                        moveScore = 25;
+                                    }
+                                }
+
+                                if (moveVolatileStatus & VOLATILE_CONDITION_TORMENT) {
+                                    if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_TORMENT) == FALSE) {
+                                        moveScore = 10;
+                                    }
+                                }
+
+                                if (moveVolatileStatus & VOLATILE_CONDITION_CURSE) {
+                                    if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_CURSE) == FALSE) {
+                                        if (monType1 == TYPE_GHOST || monType2 == TYPE_GHOST) {
+                                            moveScore = 49;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (moveMoveEffect != MOVE_EFFECT_NONE) {
+                                if (moveMoveEffect & MOVE_EFFECT_YAWN) {
+                                    if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_SLEEP) == FALSE)
+                                    || monAbility == ABILITY_MOLD_BREAKER) {
+
+                                    // Yawn is handled by sleep status, so we just give it +2 here
+                                        moveScore += 2;
+                                    }
+                                }
+
+                                if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
+                                    if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED) == FALSE) {
+                                        if (defenderType1 != TYPE_GRASS && defenderType2 != TYPE_GRASS) {
+                                            moveScore = 12;
+                                        }
+                                    }
+                                }
+
+                                if (moveMoveEffect & MOVE_EFFECT_PERISH_SONG) {
+                                    if (defenderAbility != ABILITY_SOUNDPROOF
+                                        && battleCtx->battleMons[defender].moveEffectsData.perishSongTurns > 0) {
+                                    
+                                        moveScore = 15;
+                                    }
+                                }
+                            }
+
+                            if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
+                                if ((defenderAbility == ABILITY_DEFIANT
+                                    || defenderAbility == ABILITY_COMPETITIVE)
+                                    && monAbility != ABILITY_UNAWARE) {
+                                        moveScore = 0;
+                                }
+                                else {
+                                    if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_HAZARDS_ANY) {
+                                        moveScore = 10 * battleCtx->sideConditions[oppSide].spikesLayers;
+                                        moveScore += (15 * battleCtx->sideConditions[oppSide].toxicSpikesLayers);
+                                        if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_STEALTH_ROCK) {
+                                            moveScore += 15;
+                                        }
+                                    }
+                                    else {
+                                        moveScore = 2;
+                                    }
+                                }
+                            }
+
+                            if (moveStatFlag != BATTLE_STAT_FLAG_NONE) {
+                                if (defenderAbility != ABILITY_UNAWARE) {
+                                    if (moveStatFlag & (BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK)) {
+                                        moveScore = 40;
+                                    }
+                                    else {
+                                        if (moveStatFlag & (BATTLE_STAT_FLAG_DEFENSE | BATTLE_STAT_FLAG_SP_DEFENSE | BATTLE_STAT_FLAG_EVASION)) {
+                                            moveScore = 25;
+                                        }
+                                    }
+
+                                    if (moveStatFlag & BATTLE_STAT_FLAG_SPEED) {
+                                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) == FALSE) {
+                                            moveScore += 9;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (moveScore >= 50) {
+
+                        moveScore += 25;
+                    }
+                    if (moveScore >= 125) {
+
+                        moveScore += 25;
+                    }
+                    if (moveScore > 200) {
+                        moveScore = 200;
+                    }
+
+                    if (moveScore >= 40) {
+                        keepPicked = TRUE;
+                        break;
+                    }
+
+                    attackScore += moveScore;
+                }
+
+                if (attackScore / 4 >= 25) {
+                    keepPicked = TRUE;
+                }
+
+                if (keepPicked == FALSE) {
+                    picked = 6;
+                    battlersDisregarded |= FlagIndex(i);
+                }
+            }
         }
     }
 
@@ -11916,36 +12488,44 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
                 if (move && (MOVE_DATA(move).power > 1)) {
-                    score = BattleSystem_CalcMoveDamage(battleSys,
-                        battleCtx,
-                        move,
-                        battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
-                        battleCtx->fieldConditionsMask,
-                        0,
-                        0,
-                        battler,
-                        defender,
-                        1);
+                    score = BattleSystem_CalcPartyMemberMoveDamage(
+                                    battleSys,
+                                    battleCtx,
+                                    move,
+                                    battleCtx->sideConditionsMask[oppSide],
+                                    battleCtx->fieldConditionsMask,
+                                    0,
+                                    moveType,
+                                    battler,
+                                    defender,
+                                    1,
+                                    battler,
+                                    i);
 
                     moveStatusFlags = 0;
-                    score = BattleSystem_ApplyTypeChart(battleSys,
-                        battleCtx,
-                        move,
-                        moveType,
-                        battler,
-                        defender,
-                        score,
-                        &moveStatusFlags);
+                    score = PartyMon_ApplyTypeChart(battleSys,
+                                    battleCtx,
+                                    move,
+                                    moveType,
+                                    battler,
+                                    defender,
+                                    score,
+                                    battler,
+                                    i,
+                                    &moveStatusFlags);
 
-                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY) == FALSE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY) == FALSE)
-                         && ((moveStatusFlags & MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ITEM) == FALSE))
-                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY)
-                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY)
-                        || (moveStatusFlags & MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)
-                        ) {
+                    if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) 
+                    {
                         score = 0;
+                    }
+
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                        score /= 2;
+                    }
+
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                        score = score * 3 / 2;
                     }
                 }
 
@@ -12574,8 +13154,12 @@ int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect)
 
         // Omniboost
         case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
-        case BATTLE_EFFECT_RANDOM_STAT_UP_2:
             battleStatFlag = BATTLE_STAT_FLAG_OMNIBOOST;
+            break;
+
+        // Acupressure
+        case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+            battleStatFlag = (BATTLE_STAT_FLAG_OMNIBOOST | BATTLE_STAT_FLAG_EVASION | BATTLE_STAT_FLAG_ACCURACY);
             break;
     }
 
@@ -13030,7 +13614,7 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
     u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
     u32 defenderMaxHP;
-    int moveEffect, moveStat;
+    int moveEffect, moveStatFlag;
     int i;
     BOOL hasSpeedBoost;
     BOOL result;
@@ -13056,9 +13640,74 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
         }
         
         moveEffect = MOVE_DATA(move).effect;
-        moveStat = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+        moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
 
-        if ((moveStat & BATTLE_STAT_FLAG_SPEED)
+        if ((moveStatFlag & BATTLE_STAT_FLAG_SPEED)
+            && moveEffect != BATTLE_EFFECT_RAISE_ALL_STATS_HIT) {
+
+                hasSpeedBoost = TRUE;
+                break;
+        }
+    }
+
+    if (hasSpeedBoost) {
+        if (2 * defenderSpeedStat > attackerSpeedStat) {
+            result = TRUE;
+        }
+    }
+    else {
+        if (defenderMaxHP - defenderLevel + defenderDefStat + defenderSpDefStat > 3 * defenderSpeedStat)
+        {
+            if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_PARALYSIS) == FALSE)
+                && defenderType1 != TYPE_ELECTRIC
+                && defenderType2 != TYPE_ELECTRIC)
+            {
+                result = TRUE;
+            }
+        }
+    }
+
+    return result;
+}
+
+
+BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat)
+{
+    u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
+    u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
+    u32 defenderMaxHP;
+    int moveEffect, moveStatFlag;
+    int i;
+    BOOL hasSpeedBoost;
+    BOOL result;
+    Pokemon *mon;
+
+    result = FALSE;
+
+    hasSpeedBoost = FALSE;
+
+    mon = BattleSystem_PartyPokemon(battleSys, defender, partySlot);
+
+    defenderSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+    defenderDefStat = Pokemon_GetValue(mon, MON_DATA_DEF, NULL);
+    defenderSpDefStat = Pokemon_GetValue(mon, MON_DATA_SP_DEF, NULL);
+    defenderMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+    defenderLevel = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+    defenderAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    defenderType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+    defenderType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+        
+        moveEffect = MOVE_DATA(move).effect;
+        moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+
+        if ((moveStatFlag & BATTLE_STAT_FLAG_SPEED)
             && moveEffect != BATTLE_EFFECT_RAISE_ALL_STATS_HIT) {
 
                 hasSpeedBoost = TRUE;
