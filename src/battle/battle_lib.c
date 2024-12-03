@@ -11000,7 +11000,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     int partySize;
     int score, maxScore, moveScore, defendScore, attackScore;
     int hpPercent, monCurHP, monMaxHP;
-    int defenderCurHP, defenderMaxHP;
+    int defenderCurHP, defenderMaxHP, defenderSpeedStat;
     int moveMoveEffect, moveVolatileStatus, moveStatus;
     int hazardsBonus, sackBonus, speedMultiplier;
     Pokemon *mon;
@@ -11032,6 +11032,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
     defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
     defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+	defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
 
     if (defenderCurHP <= 0) {
         defenderCurHP = 1;
@@ -11763,7 +11764,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     u8 defender, defenderType1, defenderType2, defenderAbility;
     u8 monType1, monType2, monAbility, monItemEffect;
     u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
-    u16 monSpecies, monSpeedStat, monItem, defenderItem, defenderSpeedStat;
+    u16 monSpecies, monSpeedStat, monItem, defenderItem;
     u16 move;
     int moveType, movePower, moveEffect, moveStatFlag;
     u8 battlersDisregarded;
@@ -11775,6 +11776,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     int score, maxScore, minScore, moveScore, attackScore;
     int hpPercent, monCurHP, monMaxHP;
     int hazardsBonus, sackBonus, speedMultiplier;
+	int moveMoveEffect, moveVolatileStatus, moveStatus;
+	int defenderCurHP, defenderMaxHP, defenderSpeedStat;
     Pokemon *mon;
     BattleContext *battleCtx;
     BOOL keepPicked;
@@ -11803,7 +11806,16 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
     defenderAbility = Battler_Ability(battleCtx, defender);
     defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
-    defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
+	defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
+    defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+	defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
+
+    if (defenderCurHP <= 0) {
+        defenderCurHP = 1;
+    }
+    if (defenderMaxHP <= 0) {
+        defenderMaxHP = 1;
+    }
 
     for (i = 0; i < partySize; i++) {
         mon = BattleSystem_PartyPokemon(battleSys, battler, i);
