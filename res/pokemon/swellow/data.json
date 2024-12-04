@@ -2,7 +2,7 @@
     "name": "Swellow",
     "base_stats": {
         "hp": 60,
-        "attack": 105,
+        "attack": 95,
         "defense": 60,
         "speed": 129,
         "special_attack": 90,
