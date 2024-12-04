@@ -337,5 +337,8 @@
 #define subscript_forecast_ignores 328
 #define subscript_atk_up_focus_energy 329
 #define subscript_hit_x_times_spikes 330
+#define subscript_unown_energy 331
+#define subscript_blow_away_item 332
+#define subscript_steadfast_activate 333
 
 #endif // NARC_SUB_SEQ_NAIX_

@@ -312,5 +312,7 @@
 #define pl_msg_00000610_00151 151
 // Changes to a random\nAbility on switch-in.
 #define pl_msg_00000610_00152 152
+// Warps type matchups.
+#define pl_msg_00000610_00153 153
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0612_H

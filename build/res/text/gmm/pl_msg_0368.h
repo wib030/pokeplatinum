@@ -2546,11 +2546,11 @@
 #define pl_msg_00000368_01268 1268
 // {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
 #define pl_msg_00000368_01269 1269
-// {STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\n{STRVAR_1 1, 1, 0}!
+// The Sticky Barb latched onto\n{STRVAR_1 1, 0, 0}!
 #define pl_msg_00000368_01270 1270
-// {STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\nthe wild {STRVAR_1 1, 1, 0}!
+// The Sticky Barb latched onto\nthe wild {STRVAR_1 1, 0, 0}!
 #define pl_msg_00000368_01271 1271
-// {STRVAR_1 1, 0, 0}’s Sticky Barb latched onto\nthe foe’s {STRVAR_1 1, 1, 0}!
+// The Sticky Barb latched onto\nthe foe’s {STRVAR_1 1, 0, 0}!
 #define pl_msg_00000368_01272 1272
 // {STRVAR_1 1, 0, 0} was hurt by the\nSticky Barb!
 #define pl_msg_00000368_01273 1273
@@ -2558,11 +2558,11 @@
 #define pl_msg_00000368_01274 1274
 // The foe’s {STRVAR_1 1, 0, 0} was hurt by\nthe Sticky Barb!
 #define pl_msg_00000368_01275 1275
-// {STRVAR_1 1, 0, 0} was freed of the Sticky Barb!
+// {STRVAR_1 1, 0, 0} was freed of the {STRVAR_1 6, 1, 0}!
 #define pl_msg_00000368_01276 1276
-// {STRVAR_1 1, 0, 0} was freed of the Sticky Barb!
+// The wild {STRVAR_1 1, 0, 0} was freed of the\n{STRVAR_1 6, 1, 0}!
 #define pl_msg_00000368_01277 1277
-// {STRVAR_1 1, 0, 0} was freed of the Sticky Barb!
+// The foe’s {STRVAR_1 1, 0, 0} was freed of the\n{STRVAR_1 6, 1, 0}!
 #define pl_msg_00000368_01278 1278
 // {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nactivated!
 #define pl_msg_00000368_01279 1279
@@ -2630,11 +2630,11 @@
 #define pl_msg_00000368_01310 1310
 // {STRVAR_1 1, 0, 0} was shaken down\nby the foe’s {STRVAR_1 1, 1, 0}!
 #define pl_msg_00000368_01311 1311
-// {STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!
+// {STRVAR_1 1, 0, 0} was shaken down!
 #define pl_msg_00000368_01312 1312
-// The wild {STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!
+// The wild {STRVAR_1 1, 0, 0} was shaken down!
 #define pl_msg_00000368_01313 1313
-// The foe’s {STRVAR_1 1, 0, 0} was shaken down\nby {STRVAR_1 1, 1, 0}!
+// The foe’s {STRVAR_1 1, 0, 0} was shaken down!
 #define pl_msg_00000368_01314 1314
 // Todays forecast is Sunny!
 #define pl_msg_00000368_01315 1315
@@ -2650,5 +2650,17 @@
 #define pl_msg_00000368_01320 1320
 // The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} was\nblocked by Forecast!
 #define pl_msg_00000368_01321 1321
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} reduced\nthe incoming damage!
+#define pl_msg_00000368_01322 1322
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nreduced the incoming damage!
+#define pl_msg_00000368_01323 1323
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nreduced the incoming damage!
+#define pl_msg_00000368_01324 1324
+// {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} increased\nthe incoming damage!
+#define pl_msg_00000368_01325 1325
+// The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nincreased the incoming damage!
+#define pl_msg_00000368_01326 1326
+// The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nincreased the incoming damage!
+#define pl_msg_00000368_01327 1327
 
 #endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0368_H
