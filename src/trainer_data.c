@@ -214,7 +214,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             rnd = (rnd << 8) + genderMod;
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 
-            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
+            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, 0, OTID_NOT_SHINY, 0);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
             Party_AddPokemon(battleParams->parties[battler], mon);
@@ -239,7 +239,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             rnd = (rnd << 8) + genderMod;
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 
-            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
+            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, 0, OTID_NOT_SHINY, 0);
 
             for (j = 0; j < 4; j++) {
                 Pokemon_SetMoveSlot(mon, trmon[i].moves[j], j);
@@ -269,7 +269,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             rnd = (rnd << 8) + genderMod;
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 
-            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
+            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, 0, OTID_NOT_SHINY, 0);
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
@@ -296,7 +296,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 			
 			//TRUE is whether or not to enable nature, rnd value decides the nature
-            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
+            Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, trmon[i].nature, OTID_NOT_SHINY, 0);
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
 			
 			u32 ability1 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_1);
