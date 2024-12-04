@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_AMBIPOM",
             "form": 0,
-            "level": 61,
+            "level": 63,
             "item": "ITEM_SCOPE_LENS",
             "moves": [
                 "MOVE_BEAT_UP",
@@ -25,7 +25,7 @@
         {
             "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 61,
+            "level": 63,
             "item": "ITEM_TOXIC_ORB",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -39,7 +39,7 @@
         {
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 61,
+            "level": 63,
             "item": "ITEM_SHUCA_BERRY",
             "moves": [
                 "MOVE_AGILITY",
@@ -53,7 +53,7 @@
         {
             "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 61,
+            "level": 63,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_OCTAZOOKA",
@@ -67,7 +67,7 @@
         {
             "species": "SPECIES_TANGROWTH",
             "form": 0,
-            "level": 61,
+            "level": 63,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_LEECH_SEED",
@@ -82,7 +82,7 @@
 		{
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 62,
+            "level": 63,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_CLOSE_COMBAT",

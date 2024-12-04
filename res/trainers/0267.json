@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_AERODACTYL",
             "form": 0,
-            "level": 62,
+            "level": 64,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TAUNT",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_MAGNEZONE",
             "form": 0,
-            "level": 62,
+            "level": 64,
             "item": "ITEM_AIR_BALLOON",
             "moves": [
                 "MOVE_THUNDERBOLT",
@@ -43,7 +43,7 @@
         {
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 62,
+            "level": 64,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_U_TURN",
@@ -58,7 +58,7 @@
         {
             "species": "SPECIES_LATIOS",
             "form": 0,
-            "level": 62,
+            "level": 64,
             "item": "ITEM_SOUL_DEW",
             "moves": [
                 "MOVE_DRAGON_PULSE",
@@ -73,7 +73,7 @@
         {
             "species": "SPECIES_SALAMENCE",
             "form": 0,
-            "level": 62,
+            "level": 64,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -88,7 +88,7 @@
         {
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 64,
+            "level": 66,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_DRAGON_CLAW",
