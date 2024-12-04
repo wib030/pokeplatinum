@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TYRANITAR",
             "form": 0,
-            "level": 69,
+            "level": 73,
             "item": "ITEM_SMOOTH_ROCK",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_HEATRAN",
             "form": 0,
-            "level": 69,
+            "level": 73,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_FIRE_BLAST",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 69,
+            "level": 73,
             "item": "ITEM_TOXIC_ORB",
             "moves": [
                 "MOVE_ROOST",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_REGIROCK",
             "form": 0,
-            "level": 69,
+            "level": 73,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_CURSE",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_DIALGA",
             "form": 0,
-            "level": 69,
+            "level": 73,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_OVERHEAT",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_ARCEUS",
             "form": 0,
-            "level": 71,
+            "level": 75,
             "item": "ITEM_STONE_PLATE",
             "moves": [
                 "MOVE_CALM_MIND",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_PSYCHIC",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_BULK_UP",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_BEEDRILL",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_U_TURN",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 4,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_DISCHARGE",

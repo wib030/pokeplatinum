@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_ELECTIRIZER",
             "moves": [
                 "MOVE_THIEF",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_METAL_POWDER",
             "moves": [
                 "MOVE_TRANSFORM"
@@ -39,7 +39,7 @@
 		{
             "species": "SPECIES_ELEKID",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_MAGNET",
             "moves": [
                 "MOVE_CHARGE_BEAM",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_WISE_GLASSES",
             "moves": [
                 "MOVE_CONFUSION",
@@ -69,7 +69,7 @@
 		{
             "species": "SPECIES_BLISSEY",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_BLUE_SCARF",
             "moves": [
                 "MOVE_GROWL",
@@ -84,7 +84,7 @@
 		{
             "species": "SPECIES_MANECTRIC",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_BLUE_SCARF",
             "moves": [
                 "MOVE_ROAR",

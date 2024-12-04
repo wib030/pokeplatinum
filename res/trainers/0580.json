@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DRAPION",
             "form": 0,
-            "level": 68,
+            "level": 71,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE"
@@ -24,7 +24,7 @@
 		{
             "species": "SPECIES_SHUCKLE",
             "form": 0,
-            "level": 68,
+            "level": 71,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ACUPRESSURE"
@@ -36,7 +36,7 @@
 		{
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 68,
+            "level": 71,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE"
@@ -48,7 +48,7 @@
 		{
             "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 68,
+            "level": 71,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ACUPRESSURE"
@@ -60,7 +60,7 @@
 		{
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 68,
+            "level": 71,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE"
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_DRAPION",
             "form": 0,
-            "level": 68,
+            "level": 71,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE"

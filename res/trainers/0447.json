@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PINSIR",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_SEVIPER",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_POISON_JAB",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LUM_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",

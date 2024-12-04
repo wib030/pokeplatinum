@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DRIFBLIM",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_DESTINY_BOND"
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_FROSLASS",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_DESTINY_BOND"
@@ -36,7 +36,7 @@
 		{
             "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_DESTINY_BOND"

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_SHUCA_BERRY",
             "moves": [
                 "MOVE_AGILITY",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_COLBUR_BERRY",
             "moves": [
                 "MOVE_AGILITY",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_METEOR_MASH",

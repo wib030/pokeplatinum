@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ARIADOS",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_SPIDER_WEB",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_NIDOQUEEN",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_RECOVER",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_ARBOK",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_SWALOT",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_AMNESIA",

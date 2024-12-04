@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TAUROS",
             "form": 0,
-            "level": 63,
+            "level": 68,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_EXTREME_SPEED",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 63,
+            "level": 68,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_THUNDERBOLT",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_MAGNEZONE",
             "form": 0,
-            "level": 63,
+            "level": 68,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_ZAP_CANNON",

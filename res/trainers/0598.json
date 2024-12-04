@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_KINGLER",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_CRABHAMMER",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_CRAWDAUNT",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_AQUA_JET",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_CLOYSTER",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_WACAN_BERRY",
             "moves": [
                 "MOVE_ICICLE_SPEAR",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_BLASTOISE",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_OMASTAR",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_RINDO_BERRY",
             "moves": [
                 "MOVE_POWER_GEM",

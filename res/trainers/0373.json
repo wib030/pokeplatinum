@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_RHYDON",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_ROCK_SLIDE",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_SEAKING",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_MEGAHORN",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_NIDOQUEEN",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_RECOVER",

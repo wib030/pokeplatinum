@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_THUNDER",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_ABSOL",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_KNOCK_OFF",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_SCEPTILE",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_SWORDS_DANCE",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_FAKE_OUT",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_THUNDER_PUNCH",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_LIGHT_SCREEN",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_RAIKOU",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_CALM_MIND",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_ZAPDOS",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ZAP_CANNON",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_ARCEUS",
             "form": 0,
-            "level": 67,
+            "level": 73,
             "item": "ITEM_ZAP_PLATE",
             "moves": [
                 "MOVE_CALM_MIND",

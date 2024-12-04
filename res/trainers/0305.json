@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DUGTRIO",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_MEMENTO"
@@ -23,7 +23,7 @@
 		{
             "species": "SPECIES_TRAPINCH",
             "form": 0,
-            "level": 67,
+            "level": 70,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -36,7 +36,7 @@
 		{
             "species": "SPECIES_TRAPINCH",
             "form": 0,
-            "level": 67,
+            "level": 70,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -49,7 +49,7 @@
 		{
             "species": "SPECIES_TRAPINCH",
             "form": 0,
-            "level": 67,
+            "level": 70,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EARTHQUAKE",

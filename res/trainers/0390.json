@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_CLAYDOL",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_TRICK_ROOM",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SOLAR_BEAM",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_TRICK_ROOM",

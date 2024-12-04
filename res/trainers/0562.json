@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SCEPTILE",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SWORDS_DANCE",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_DRAGON_PULSE",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_THUNDERBOLT",

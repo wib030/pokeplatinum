@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WRAP",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_WRAP",

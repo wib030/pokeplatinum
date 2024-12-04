@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_LEAFEON",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_JABOCA_BERRY",
             "moves": [
                 "MOVE_WORRY_SEED",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_ALAKAZAM",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_METAL_COAT",
             "moves": [
                 "MOVE_ENCORE",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_SHARPEDO",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_MIMIC"

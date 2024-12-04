@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_FARFETCHD",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_STICK",
             "moves": [
                 "MOVE_SLASH",
@@ -25,7 +25,7 @@
         {
             "species": "SPECIES_SKUNTANK",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_RAZOR_CLAW",
             "moves": [
                 "MOVE_SLASH",
@@ -38,7 +38,7 @@
         {
             "species": "SPECIES_ABSOL",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_RAZOR_CLAW",
             "moves": [
                 "MOVE_SLASH",
@@ -51,7 +51,7 @@
 		{
             "species": "SPECIES_SHEDINJA",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_RAZOR_CLAW",
             "moves": [
                 "MOVE_SLASH",

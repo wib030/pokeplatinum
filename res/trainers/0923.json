@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TORTERRA",
             "form": 0,
-            "level": 63,
+            "level": 67,
             "item": "ITEM_YACHE_BERRY",
             "moves": [
                 "MOVE_ROCK_SLIDE",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_PIDGEOT",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_RAZOR_WIND",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_REFLECT",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_BANETTE",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_SHADOW_SNEAK"
@@ -65,7 +65,7 @@
 		{
             "species": "SPECIES_FLAREON",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_WHITE_HERB",
             "moves": [
                 "MOVE_FLARE_BLITZ",
@@ -79,7 +79,7 @@
 		{
             "species": "SPECIES_FLYGON",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_DRAGON_DANCE",

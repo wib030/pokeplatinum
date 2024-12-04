@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_POWER_BELT",
             "moves": [
                 "MOVE_SCREECH",
@@ -39,7 +39,7 @@
         {
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_BURN_HEAL",
             "moves": [
                 "MOVE_TAKE_DOWN",
@@ -66,7 +66,7 @@
         {
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_DAMP_MULCH",
             "moves": [
                 "MOVE_WRING_OUT",
@@ -93,7 +93,7 @@
 		{
             "species": "SPECIES_MOTHIM",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_BUBBLE_MAIL",
             "moves": [
                 "MOVE_BUG_BITE",
@@ -120,7 +120,7 @@
 		{
             "species": "SPECIES_BEEDRILL",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_TIMER_BALL",
             "moves": [
                 "MOVE_SPIDER_WEB",
@@ -147,7 +147,7 @@
 		{
             "species": "SPECIES_URSARING",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_DRACO_PLATE",
             "moves": [
                 "MOVE_THRASH",

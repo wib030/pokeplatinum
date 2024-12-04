@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_DAMP_ROCK",
             "moves": [
                 "MOVE_TAILWIND",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_SWAMPERT",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -41,7 +41,7 @@
 		{
             "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
@@ -56,7 +56,7 @@
 		{
             "species": "SPECIES_GYARADOS",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_WACAN_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -71,7 +71,7 @@
 		{
             "species": "SPECIES_RELICANTH",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_AQUA_TAIL",
@@ -84,7 +84,7 @@
 		{
             "species": "SPECIES_MANAPHY",
             "form": 0,
-            "level": 68,
+            "level": 73,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_TAIL_GLOW",

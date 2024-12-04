@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 65,
+            "level": 71,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_TYPHLOSION",
             "form": 0,
-            "level": 65,
+            "level": 71,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_ERUPTION"
@@ -39,7 +39,7 @@
         {
             "species": "SPECIES_ELECTRODE",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EXPLOSION"

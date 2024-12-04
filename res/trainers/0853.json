@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ARTICUNO",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_CHARTI_BERRY",
             "moves": [
                 "MOVE_BLIZZARD",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_MAMOSWINE",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_ABOMASNOW",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_OCCA_BERRY",
             "moves": [
                 "MOVE_ICE_SHARD",
@@ -57,7 +57,7 @@
         {
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -71,7 +71,7 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_KNOCK_OFF",
@@ -86,7 +86,7 @@
 		{
             "species": "SPECIES_REGICE",
             "form": 0,
-            "level": 67,
+            "level": 73,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_DEFENSE_CURL",

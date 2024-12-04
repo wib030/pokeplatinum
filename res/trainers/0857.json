@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MEGANIUM",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_REFLECT",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_CHERRIM",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SYNTHESIS",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_SCEPTILE",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_WHITE_HERB",
             "moves": [
                 "MOVE_DRACO_METEOR",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_SHIFTRY",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_KNOCK_OFF",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_ROSERADE",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_MEGA_DRAIN",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_SHAYMIN",
             "form": 1,
-            "level": 67,
+            "level": 73,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_SEED_FLARE",

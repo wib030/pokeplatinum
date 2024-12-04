@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MAMOSWINE",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_MILK_DRINK",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WISH",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_PARASECT",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SPORE",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_SHUCA_BERRY",
             "moves": [
                 "MOVE_THUNDER_WAVE",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_KABUTO",
             "form": 0,
-            "level": 61,
+            "level": 66,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_RAPID_SPIN",

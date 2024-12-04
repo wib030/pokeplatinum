@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_FOCUS_BLAST",
@@ -28,7 +28,7 @@
 		{
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_CLOSE_COMBAT",
@@ -43,7 +43,7 @@
 		{
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SUBSTITUTE",

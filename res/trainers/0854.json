@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_INFERNAPE",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_OVERHEAT",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_HARIYAMA",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_BELLY_DRUM",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AURA_SPHERE",
@@ -57,7 +57,7 @@
         {
             "species": "SPECIES_HERACROSS",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_MEGAHORN",
@@ -72,7 +72,7 @@
         {
             "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 66,
+            "level": 72,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_THUNDER_PUNCH",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_ARCEUS",
             "form": 0,
-            "level": 68,
+            "level": 73,
             "item": "ITEM_FIST_PLATE",
             "moves": [
                 "MOVE_JUDGMENT",

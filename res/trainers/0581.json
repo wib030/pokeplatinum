@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TYRANITAR",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_CHOPLE_BERRY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_METAGROSS",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_AGILITY",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_LUCARIO",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_AURA_SPHERE",

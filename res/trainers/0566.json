@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SLAKING",
             "form": 0,
-            "level": 63,
+            "level": 68,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_GIGA_IMPACT",
@@ -25,7 +25,7 @@
         {
             "species": "SPECIES_HARIYAMA",
             "form": 0,
-            "level": 63,
+            "level": 68,
             "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_KNOCK_OFF",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_SWALOT",
             "form": 0,
-            "level": 63,
+            "level": 68,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_STOCKPILE",

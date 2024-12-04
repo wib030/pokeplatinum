@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_REGIROCK",
             "form": 0,
-            "level": 63,
+            "level": 70,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EXPLOSION"
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_REGICE",
             "form": 0,
-            "level": 63,
+            "level": 70,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_EXPLOSION"
@@ -36,7 +36,7 @@
 		{
             "species": "SPECIES_REGISTEEL",
             "form": 0,
-            "level": 63,
+            "level": 70,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EXPLOSION"

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_EEVEE",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_PROTECT",
@@ -25,7 +25,7 @@
         {
             "species": "SPECIES_CARNIVINE",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_POWER_WHIP",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_FLAREON",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_FLARE_BLITZ",
@@ -55,7 +55,7 @@
 		{
             "species": "SPECIES_VAPOREON",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WISH",
@@ -70,7 +70,7 @@
 		{
             "species": "SPECIES_ESPEON",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_PSYCHIC",
@@ -85,7 +85,7 @@
 		{
             "species": "SPECIES_UMBREON",
             "form": 0,
-            "level": 62,
+            "level": 67,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_MOONLIGHT",

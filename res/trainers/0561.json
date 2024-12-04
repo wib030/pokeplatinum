@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_IRON_DEFENSE",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SCARY_FACE",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_SHELGON",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_DRAGON_DANCE",

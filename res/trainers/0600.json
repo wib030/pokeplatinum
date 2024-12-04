@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_URSARING",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_SCARY_FACE",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_OCTILLERY",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_ENDURE",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_STARMIE",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_PROTECT",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 3,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WILL_O_WISP",

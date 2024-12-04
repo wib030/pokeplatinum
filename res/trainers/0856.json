@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WORMADAM",
             "form": 2,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_OVERHEAT",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SWORDS_DANCE",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_LUCARIO",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_NASTY_PLOT",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_REGISTEEL",
             "form": 0,
-            "level": 65,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SEISMIC_TOSS",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_JIRACHI",
             "form": 0,
-            "level": 67,
+            "level": 73,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_BODY_SLAM",

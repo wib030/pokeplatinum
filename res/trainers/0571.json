@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_YACHE_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 65,
+            "level": 70,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_SALAMENCE",
             "form": 0,
-            "level": 66,
+            "level": 71,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_DRAGON_DANCE",

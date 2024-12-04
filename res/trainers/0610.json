@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_SHUCKLE",
             "form": 0,
-            "level": 60,
+            "level": 70,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ACUPRESSURE",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_STANTLER",
             "form": 0,
-            "level": 60,
+            "level": 70,
             "item": "ITEM_STICKY_BARB",
             "moves": [
                 "MOVE_TRICK_ROOM",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_TYRANITAR",
             "form": 0,
-            "level": 60,
+            "level": 70,
             "item": "ITEM_STICKY_BARB",
             "moves": [
                 "MOVE_ROAR",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_BLISSEY",
             "form": 0,
-            "level": 60,
+            "level": 70,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_FLING",
@@ -70,7 +70,7 @@
 		{
             "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 60,
+            "level": 70,
             "item": "ITEM_PERSIM_BERRY",
             "moves": [
                 "MOVE_TEETER_DANCE",
@@ -85,7 +85,7 @@
 		{
             "species": "SPECIES_SHAYMIN",
             "form": 1,
-            "level": 60,
+            "level": 70,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_SEED_FLARE",

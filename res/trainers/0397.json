@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DRAGONITE",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_YACHE_BERRY",
             "moves": [
                 "MOVE_OUTRAGE",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_AERODACTYL",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_ROCK_SLIDE",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_SCIZOR",
             "form": 0,
-            "level": 60,
+            "level": 65,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_BULLET_PUNCH",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_DRAPION",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_ACUPRESSURE",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_DODRIO",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_HI_JUMP_KICK",
@@ -54,7 +54,7 @@
 		{
             "species": "SPECIES_GARCHOMP",
             "form": 0,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_OUTRAGE",
@@ -68,7 +68,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 1,
-            "level": 66,
+            "level": 70,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_OVERHEAT",
@@ -82,7 +82,7 @@
 		{
             "species": "SPECIES_ZAPDOS",
             "form": 0,
-            "level": 67,
+            "level": 70,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ZAP_CANNON",

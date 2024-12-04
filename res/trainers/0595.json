@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TAUROS",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_ENDEAVOR",
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_ATTRACT",
@@ -38,7 +38,7 @@
 		{
             "species": "SPECIES_NIDOQUEEN",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_LUCKY_EGG",
             "moves": [
                 "MOVE_ATTRACT",
@@ -52,7 +52,7 @@
 		{
             "species": "SPECIES_NIDOKING",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_ATTRACT",
@@ -66,7 +66,7 @@
 		{
             "species": "SPECIES_GALLADE",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_MEMENTO"
@@ -77,7 +77,7 @@
 		{
             "species": "SPECIES_GARDEVOIR",
             "form": 0,
-            "level": 64,
+            "level": 69,
             "item": "ITEM_WIDE_LENS",
             "moves": [
                 "MOVE_ATTRACT",

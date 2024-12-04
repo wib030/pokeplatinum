@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_RAICHU",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_FAKE_OUT",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_LANTURN",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_WHITE_HERB",
             "moves": [
                 "MOVE_DRACO_METEOR",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_LUXRAY",
             "form": 0,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_FLAME_ORB",
             "moves": [
                 "MOVE_VOLT_TACKLE",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_ROTOM",
             "form": 1,
-            "level": 62,
+            "level": 66,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_OVERHEAT",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_ELECTIVIRE",
             "form": 0,
-            "level": 63,
+            "level": 67,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_ROCK_SLIDE",

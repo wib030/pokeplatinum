@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_CORSOLA",
             "form": 0,
-            "level": 68,
+            "level": 72,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_MOTHIM",
             "form": 0,
-            "level": 68,
+            "level": 72,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_AGILITY",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_VILEPLUME",
             "form": 0,
-            "level": 68,
+            "level": 72,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_PETAL_DANCE",
@@ -55,7 +55,7 @@
 		{
             "species": "SPECIES_WIGGLYTUFF",
             "form": 0,
-            "level": 68,
+            "level": 72,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -69,7 +69,7 @@
 		{
             "species": "SPECIES_LATIAS",
             "form": 0,
-            "level": 68,
+            "level": 72,
             "item": "ITEM_SOUL_DEW",
             "moves": [
                 "MOVE_AURA_SPHERE",
@@ -83,7 +83,7 @@
 		{
             "species": "SPECIES_MESPRIT",
             "form": 0,
-            "level": 70,
+            "level": 73,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SWORDS_DANCE",

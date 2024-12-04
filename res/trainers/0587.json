@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_INFERNAPE",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_BRAVE_BIRD",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_MONFERNO",
             "form": 0,
-            "level": 64,
+            "level": 68,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_MACH_PUNCH",
