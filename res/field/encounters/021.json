@@ -15,7 +15,7 @@
         },
         {
             "level": 13,
-            "species": "SPECIES_IGGLYBUFF"
+            "species": "SPECIES_SPOINK"
         },
         {
             "level": 16,
@@ -55,11 +55,11 @@
         "SPECIES_GEODUDE"
     ],
     "morning": [
-        "SPECIES_IGGLYBUFF",
+        "SPECIES_SPOINK",
         "SPECIES_CLEFFA"
     ],
     "night": [
-        "SPECIES_IGGLYBUFF",
+        "SPECIES_SPOINK",
         "SPECIES_CLEFFA"
     ],
     "radar": [

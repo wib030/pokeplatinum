@@ -11,7 +11,7 @@
         },
         {
             "level": 33,
-            "species": "SPECIES_JIGGLYPUFF"
+            "species": "SPECIES_GRUMPIG"
         },
         {
             "level": 32,
@@ -55,11 +55,11 @@
         "SPECIES_GRAVELER"
     ],
     "morning": [
-        "SPECIES_JIGGLYPUFF",
+        "SPECIES_GRUMPIG",
         "SPECIES_CLEFAIRY"
     ],
     "night": [
-        "SPECIES_JIGGLYPUFF",
+        "SPECIES_GRUMPIG",
         "SPECIES_CLEFAIRY"
     ],
     "radar": [

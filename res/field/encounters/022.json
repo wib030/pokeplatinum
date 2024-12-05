@@ -55,12 +55,12 @@
         "SPECIES_GRAVELER"
     ],
     "morning": [
-        "SPECIES_JIGGLYPUFF",
-        "SPECIES_CLEFAIRY"
+        "SPECIES_LUNATONE",
+        "SPECIES_SOLROCK"
     ],
     "night": [
-        "SPECIES_JIGGLYPUFF",
-        "SPECIES_CLEFAIRY"
+        "SPECIES_LUNATONE",
+        "SPECIES_SOLROCK"
     ],
     "radar": [
         "SPECIES_MACHOKE",
