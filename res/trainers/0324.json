@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TREECKO",
             "form": 0,
-            "level": 17,
+            "level": 19,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_BULLET_SEED",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_BELLSPROUT",
             "form": 0,
-            "level": 17,
+            "level": 19,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SEED_BOMB",

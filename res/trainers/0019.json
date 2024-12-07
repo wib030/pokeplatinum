@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 14,
+            "level": 16,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_PAY_DAY"

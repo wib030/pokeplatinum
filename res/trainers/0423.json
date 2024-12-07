@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MIME_JR",
             "form": 0,
-            "level": 20,
+            "level": 22,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_TRICK_ROOM",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_WEEDLE",
             "form": 0,
-            "level": 20,
+            "level": 22,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_POISON_STING",
@@ -39,7 +39,7 @@
         {
             "species": "SPECIES_DIGLETT",
             "form": 0,
-            "level": 20,
+            "level": 22,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SCREECH",
