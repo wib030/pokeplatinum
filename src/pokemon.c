@@ -2605,8 +2605,17 @@ void BuildArchivedPokemonSprite(ArchivedSprite *sprite, u16 species, u8 gender, 
         
     case SPECIES_CASTFORM:
 		sprite->archive = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-		sprite->character = 64 + (face * 2) + form;
-		sprite->palette = 158 + (shiny * 4) + form;
+		
+		if (form < 4)
+		{
+			sprite->character = 64 + (face * 2) + form;
+			sprite->palette = 158 + (shiny * 4) + form;
+		}
+		else
+		{
+			sprite->character = 64 + (face * 2) + 3;
+			sprite->palette = 174 + shiny;
+		}
 		break;
 
     case SPECIES_DEOXYS:
@@ -2700,7 +2709,7 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         }
         break;
     case SPECIES_CASTFORM:
-        if (monForm > 3) {
+        if (monForm > 4) {
             monForm = 0;
         }
         break;
@@ -2956,7 +2965,14 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
 
     case SPECIES_CASTFORM:
         narcIndex = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT_O;
-        memberIndex = 64 + face * 2 + form;
+		if (form < 4)
+		{
+			memberIndex = 64 + face * 2 + form;
+		}
+		else
+		{
+			memberIndex = 64 + face * 2 + 3;
+		}
         break;
 
     case SPECIES_DEOXYS:

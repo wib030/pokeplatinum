@@ -4356,9 +4356,6 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battler, battlero;
     int maxBattlers;
 	int imposter1Pos, imposter2Pos;
-	int colorChange1Pos, colorChange2Pos;
-	int colorChangeTarget = NULL;
-	int targetType1, targetType2;
 	int abilityMax = ABILITY_UNOWN_ENERGY;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
@@ -4495,7 +4492,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES:
 			int baseCastform = 0;
-			int castformChecking;
+			int castformChecking, side;
 			
 			for (int j = 0; j < BattleSystem_MaxBattlers(battleSys); j++)
 			{
@@ -4507,6 +4504,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 				&& battleCtx->battleMons[castformChecking].formNum == 0)
 				{
 					baseCastform = 1;
+					side = Battler_Side(battleSys, castformChecking);
 				}
 			}
 				
@@ -4527,8 +4525,19 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						}
 						else
 						{
-							subscript = subscript_forecast_ignores;
-							result = SWITCH_IN_CHECK_RESULT_BREAK;
+							if (side != Battler_Side(battleSys, battler))
+							{
+								subscript = subscript_forecast_ignores;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+							else
+							{
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) == FALSE)
+								{
+									subscript = subscript_drizzle;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							}
 						}
                         break;
 
@@ -4543,8 +4552,19 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						}
 						else
 						{
-							subscript = subscript_forecast_ignores;
-							result = SWITCH_IN_CHECK_RESULT_BREAK;
+							if (side != Battler_Side(battleSys, battler))
+							{
+								subscript = subscript_forecast_ignores;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+							else
+							{
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) == FALSE)
+								{
+									subscript = subscript_sand_stream;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							}
 						}
                         break;
 
@@ -4559,8 +4579,19 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						}
 						else
 						{
-							subscript = subscript_forecast_ignores;
-							result = SWITCH_IN_CHECK_RESULT_BREAK;
+							if (side != Battler_Side(battleSys, battler))
+							{
+								subscript = subscript_forecast_ignores;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+							else
+							{
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE)
+								{
+									subscript = subscript_drought;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							}
 						}
                         break;
 
@@ -4575,8 +4606,19 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						}
 						else
 						{
-							subscript = subscript_forecast_ignores;
-							result = SWITCH_IN_CHECK_RESULT_BREAK;
+							if (side != Battler_Side(battleSys, battler))
+							{
+								subscript = subscript_forecast_ignores;
+								result = SWITCH_IN_CHECK_RESULT_BREAK;
+							}
+							else
+							{
+								if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) == FALSE)
+								{
+									subscript = subscript_snow_warning;
+									result = SWITCH_IN_CHECK_RESULT_BREAK;
+								}
+							}
 						}
                         break;
 						
@@ -7624,7 +7666,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                         && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_ROCK) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ROCK;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ROCK;
-                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 3;
+                    battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = 4;
 					battleCtx->msgTemp = TYPE_ROCK;
                     *subscript = subscript_form_change;
                     result = TRUE;
