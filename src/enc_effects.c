@@ -288,9 +288,6 @@ static u32 EncEffects_WildPokemonEffect (Party *wildParty, int mapHeaderID)
     u32 wildSpecies = Pokemon_GetValue(wildPokemon, MON_DATA_SPECIES, NULL);
 
     switch (wildSpecies) {
-        case SPECIES_SHAYMIN:
-            result = ENCEFF_SHAYMIN;
-            break;
         case SPECIES_CRESSELIA:
             result = ENCEFF_CRESSELIA;
             break;
@@ -308,6 +305,22 @@ static u32 EncEffects_WildPokemonEffect (Party *wildParty, int mapHeaderID)
         case SPECIES_HEATRAN:
         case SPECIES_DARKRAI:
         case SPECIES_ROTOM:
+		case SPECIES_SHAYMIN:
+		case SPECIES_MANAPHY:
+		case SPECIES_CELEBI:
+		case SPECIES_MEW:
+		case SPECIES_MEWTWO:
+		case SPECIES_RAIKOU:
+		case SPECIES_ENTEI:
+		case SPECIES_SUICUNE:
+		case SPECIES_LUGIA:
+		case SPECIES_HO_OH:
+		case SPECIES_LATIAS:
+		case SPECIES_LATIOS:
+		case SPECIES_DEOXYS:
+		case SPECIES_GROUDON:
+		case SPECIES_KYOGRE:
+		case SPECIES_RAYQUAZA:
             result = ENCEFF_MINOR_LEGENDARIES;
             break;
         case SPECIES_MESPRIT:
