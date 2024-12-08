@@ -8679,14 +8679,41 @@ static BOOL BtlCmd_TryPluck(BattleSystem *battleSys, BattleContext *battleCtx)
     BattleScript_Iter(battleCtx, 1);
     int jumpStickyHold = BattleScript_Read(battleCtx);
     int jumpNoEffect = BattleScript_Read(battleCtx);
-
-    if (DEFENDING_MON.heldItem
-            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE) {
-        BattleScript_Iter(battleCtx, jumpStickyHold);
-    } else if ((DEFENDING_MON.heldItem && DEFENDING_MON.moveEffectsData.custapBerry)
-            || BattleSystem_PluckBerry(battleSys, battleCtx, battleCtx->defender) != TRUE) {
-        BattleScript_Iter(battleCtx, jumpNoEffect);
-    }
+	
+	if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_FREE_SAMPLE)
+	{
+		if ((ATTACKING_MON.heldItem && ATTACKING_MON.moveEffectsData.custapBerry)
+		|| BattleSystem_PluckBerry(battleSys, battleCtx, battleCtx->attacker) != TRUE)
+		{
+			BattleScript_Iter(battleCtx, jumpNoEffect);
+		}
+	}
+	else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_FREE_SAMPLE)
+	{
+		if (DEFENDING_MON.heldItem
+		&& Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE)
+		{
+			BattleScript_Iter(battleCtx, jumpStickyHold);
+		}
+		else if ((DEFENDING_MON.heldItem && DEFENDING_MON.moveEffectsData.custapBerry)
+		|| BattleSystem_PluckBerry(battleSys, battleCtx, battleCtx->defender) != TRUE)
+		{
+			BattleScript_Iter(battleCtx, jumpNoEffect);
+		}
+	}
+	else
+	{
+		if (DEFENDING_MON.heldItem
+		&& Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE)
+		{
+			BattleScript_Iter(battleCtx, jumpStickyHold);
+		}
+		else if ((DEFENDING_MON.heldItem && DEFENDING_MON.moveEffectsData.custapBerry)
+		|| BattleSystem_PluckBerry(battleSys, battleCtx, battleCtx->defender) != TRUE)
+		{
+			BattleScript_Iter(battleCtx, jumpNoEffect);
+		}
+	}
 
     return FALSE;
 }
