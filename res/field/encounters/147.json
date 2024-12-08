@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 16,
+            "level": 20,
             "species": "SPECIES_PONYTA"
         },
         {
-            "level": 16,
+            "level": 20,
             "species": "SPECIES_GLIGAR"
         },
         {
-            "level": 18,
+            "level": 22,
             "species": "SPECIES_DUNSPARCE"
         },
         {
-            "level": 17,
+            "level": 21,
             "species": "SPECIES_KRICKETUNE"
         },
         {
-            "level": 16,
+            "level": 20,
             "species": "SPECIES_GLIGAR"
         },
         {
-            "level": 17,
+            "level": 21,
             "species": "SPECIES_DIGLETT"
         },
         {
-            "level": 18,
+            "level": 22,
             "species": "SPECIES_SNUBBULL"
         },
         {
-            "level": 18,
+            "level": 22,
             "species": "SPECIES_TEDDIURSA"
         },
         {
-            "level": 19,
+            "level": 23,
             "species": "SPECIES_SNUBBULL"
         },
         {
-            "level": 18,
+            "level": 22,
             "species": "SPECIES_TEDDIURSA"
         },
         {
-            "level": 19,
+            "level": 23,
             "species": "SPECIES_MACHOP"
         },
         {
-            "level": 18,
+            "level": 22,
             "species": "SPECIES_GEODUDE"
         }
     ],
