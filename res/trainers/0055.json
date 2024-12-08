@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SOLROCK",
             "form": 0,
-            "level": 24,
+            "level": 26,
             "item": "ITEM_CHARCOAL",
             "moves": [
                 "MOVE_FIRE_SPIN",
@@ -21,12 +21,13 @@
 				"MOVE_HIDDEN_POWER"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         },
         {
             "species": "SPECIES_CASTFORM",
             "form": 0,
-            "level": 24,
+            "level": 26,
             "item": "ITEM_SMOOTH_ROCK",
             "moves": [
                 "MOVE_WEATHER_BALL",

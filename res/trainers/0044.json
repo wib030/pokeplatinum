@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_KOFFING",
             "form": 0,
-            "level": 22,
+            "level": 24,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SMOKE_SCREEN",
@@ -20,14 +20,14 @@
 				"MOVE_POISON_GAS",
 				"MOVE_SCREECH"
             ],
-            "power": 0,
+            "power": 40,
             "ball_seal": 1,
 			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_STUNKY",
             "form": 0,
-            "level": 22,
+            "level": 24,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SMOKE_SCREEN",
@@ -35,7 +35,7 @@
 				"MOVE_HAZE",
 				"MOVE_SMOG"
             ],
-            "power": 0,
+            "power": 40,
             "ball_seal": 0,
 			"ball_type": "ITEM_DUSK_BALL"
         }

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SLAKOTH",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SLACK_OFF",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_MUNCHLAX",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_ORAN_BERRY",
             "moves": [
                 "MOVE_REST",
@@ -40,7 +40,7 @@
 		{
             "species": "SPECIES_SLOWPOKE",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_YAWN",

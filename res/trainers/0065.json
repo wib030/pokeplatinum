@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WHISMUR",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_ICY_WIND",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_NUMEL",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_MAGNITUDE",

@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_SHUPPET",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_SHADOW_SNEAK",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_FLAAFFY",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_COUNTER",
@@ -54,7 +54,7 @@
         {
             "species": "SPECIES_PIDGEOTTO",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
                 "MOVE_U_TURN",
@@ -68,7 +68,7 @@
 		{
             "species": "SPECIES_EEVEE",
             "form": 0,
-            "level": 23,
+            "level": 26,
             "item": "ITEM_SILK_SCARF",
             "moves": [
                 "MOVE_WISH",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SLUGMA",
             "form": 0,
-            "level": 24,
+            "level": 26,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_WILL_O_WISP",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_SHELLOS",
             "form": 0,
-            "level": 24,
+            "level": 26,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_AMNESIA",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_DITTO",
             "form": 0,
-            "level": 24,
+            "level": 26,
             "item": "ITEM_QUICK_POWDER",
             "moves": [
                 "MOVE_TRANSFORM"

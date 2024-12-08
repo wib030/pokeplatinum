@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 22,
+            "level": 24,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_AGILITY",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_YANMA",
             "form": 0,
-            "level": 22,
+            "level": 24,
             "item": "ITEM_LUM_BERRY",
             "moves": [
                 "MOVE_HIDDEN_POWER",

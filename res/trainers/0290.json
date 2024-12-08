@@ -10,7 +10,7 @@
         {
             "species": "SPECIES_KRICKETUNE",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_STARF_BERRY",
             "moves": [
                 "MOVE_NATURAL_GIFT",
@@ -24,7 +24,7 @@
         {
             "species": "SPECIES_BIBAREL",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_CUSTAP_BERRY",
             "moves": [
                 "MOVE_FLING",
