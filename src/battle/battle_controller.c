@@ -2952,8 +2952,7 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
         return 0;
     }
 	
-	u8 moveType = Move_CalcVariableType(battleSys, battleCtx, attacker, move);
-    if (moveType == TYPE_NORMAL) { moveType = CalcMoveType(battleCtx, attacker, move); }
+	u8 moveType = CalcMoveType(battleCtx, attacker, move);
     u8 moveClass = MOVE_DATA(move).class;
     s8 accStages = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ACCURACY] - 6;
     s8 evaStages = 6 - battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_EVASION];
