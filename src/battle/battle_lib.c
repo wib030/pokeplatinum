@@ -10933,6 +10933,62 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
             break;
         }
         break;
+		
+	case MOVE_FLING:
+        switch (Battler_HeldItemEffect(battleCtx, item)) {
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+            type = TYPE_FIGHTING;
+            break;
+        case HOLD_EFFECT_ARCEUS_FLYING:
+            type = TYPE_FLYING;
+            break;
+        case HOLD_EFFECT_ARCEUS_POISON:
+            type = TYPE_POISON;
+            break;
+        case HOLD_EFFECT_ARCEUS_GROUND:
+            type = TYPE_GROUND;
+            break;
+        case HOLD_EFFECT_ARCEUS_ROCK:
+            type = TYPE_ROCK;
+            break;
+        case HOLD_EFFECT_ARCEUS_BUG:
+            type = TYPE_BUG;
+            break;
+        case HOLD_EFFECT_ARCEUS_GHOST:
+            type = TYPE_GHOST;
+            break;
+        case HOLD_EFFECT_ARCEUS_STEEL:
+            type = TYPE_STEEL;
+            break;
+        case HOLD_EFFECT_ARCEUS_FIRE:
+            type = TYPE_FIRE;
+            break;
+        case HOLD_EFFECT_ARCEUS_WATER:
+            type = TYPE_WATER;
+            break;
+        case HOLD_EFFECT_ARCEUS_GRASS:
+            type = TYPE_GRASS;
+            break;
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+            type = TYPE_ELECTRIC;
+            break;
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+            type = TYPE_PSYCHIC;
+            break;
+        case HOLD_EFFECT_ARCEUS_ICE:
+            type = TYPE_ICE;
+            break;
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+            type = TYPE_DRAGON;
+            break;
+        case HOLD_EFFECT_ARCEUS_DARK:
+            type = TYPE_DARK;
+            break;
+        default:
+            type = TYPE_NORMAL;
+            break;
+        }
+        break;
 
     case MOVE_HIDDEN_POWER:
         type = ((battleCtx->battleMons[item].hpIV & 1) >> 0)
@@ -12610,6 +12666,62 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
         break;
 
     case MOVE_JUDGMENT:
+        switch (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT)) {
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+            type = TYPE_FIGHTING;
+            break;
+        case HOLD_EFFECT_ARCEUS_FLYING:
+            type = TYPE_FLYING;
+            break;
+        case HOLD_EFFECT_ARCEUS_POISON:
+            type = TYPE_POISON;
+            break;
+        case HOLD_EFFECT_ARCEUS_GROUND:
+            type = TYPE_GROUND;
+            break;
+        case HOLD_EFFECT_ARCEUS_ROCK:
+            type = TYPE_ROCK;
+            break;
+        case HOLD_EFFECT_ARCEUS_BUG:
+            type = TYPE_BUG;
+            break;
+        case HOLD_EFFECT_ARCEUS_GHOST:
+            type = TYPE_GHOST;
+            break;
+        case HOLD_EFFECT_ARCEUS_STEEL:
+            type = TYPE_STEEL;
+            break;
+        case HOLD_EFFECT_ARCEUS_FIRE:
+            type = TYPE_FIRE;
+            break;
+        case HOLD_EFFECT_ARCEUS_WATER:
+            type = TYPE_WATER;
+            break;
+        case HOLD_EFFECT_ARCEUS_GRASS:
+            type = TYPE_GRASS;
+            break;
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+            type = TYPE_ELECTRIC;
+            break;
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+            type = TYPE_PSYCHIC;
+            break;
+        case HOLD_EFFECT_ARCEUS_ICE:
+            type = TYPE_ICE;
+            break;
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+            type = TYPE_DRAGON;
+            break;
+        case HOLD_EFFECT_ARCEUS_DARK:
+            type = TYPE_DARK;
+            break;
+        default:
+            type = TYPE_NORMAL;
+            break;
+        }
+        break;
+		
+	case MOVE_FLING:
         switch (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
             type = TYPE_FIGHTING;

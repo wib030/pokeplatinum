@@ -2951,8 +2951,9 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_CATCH_TUTORIAL) {
         return 0;
     }
-
-    u8 moveType = CalcMoveType(battleCtx, attacker, move);
+	
+	u8 moveType = Move_CalcVariableType(battleSys, battleCtx, attacker, move);
+    if (moveType == TYPE_NORMAL) { moveType = CalcMoveType(battleCtx, attacker, move); }
     u8 moveClass = MOVE_DATA(move).class;
     s8 accStages = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ACCURACY] - 6;
     s8 evaStages = 6 - battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_EVASION];
@@ -3329,19 +3330,7 @@ static void BattleController_BeforeMove(BattleSystem *battleSys, BattleContext *
 		&& ((battleCtx->battleMons[battleCtx->defender].type1 != MOVE_DATA(battleCtx->moveCur).type)
 		|| (battleCtx->battleMons[battleCtx->defender].type2 != MOVE_DATA(battleCtx->moveCur).type)))
 		{
-			u8 moveType;
-			if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE)
-			{
-				moveType = TYPE_NORMAL;
-			}
-			else if (battleCtx->moveType)
-			{
-				moveType = battleCtx->moveType;
-			}
-			else
-			{
-				moveType = CURRENT_MOVE_DATA.type;
-			}
+			u8 moveType = CalcMoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur);
 			
 			battleCtx->battleMons[battleCtx->defender].type1 = moveType;
 			battleCtx->battleMons[battleCtx->defender].type2 = moveType;
