@@ -152,4 +152,5 @@ static const int sSideEffectSubscripts[] = {
 	[MOVE_SUBSCRIPT_PTR_GROWTH]                           = subscript_growth,
 	[MOVE_SUBSCRIPT_INFATUATE_HIT]                        = subscript_infatuate_hit,
 	[MOVE_SUBSCRIPT_ATK_UP_FOCUS_ENERGY]                  = subscript_atk_up_focus_energy,
+	[MOVE_SUBSCRIPT_PTR_FLING_BEFORE]                     = subscript_fling_before,
 };

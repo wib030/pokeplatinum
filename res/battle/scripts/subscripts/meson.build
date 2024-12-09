@@ -335,4 +335,10 @@ subscript_files = files(
 	'subscript_unown_energy.s',
 	'subscript_blow_away_item.s',
 	'subscript_steadfast_activate.s',
+	'subscript_fling_before.s',
+	'subscript_held_item_user_raise_atk.s',
+	'subscript_held_item_user_raise_def.s',
+	'subscript_held_item_user_raise_spe.s',
+	'subscript_held_item_user_raise_spa.s',
+	'subscript_held_item_user_raise_spd.s',
 )

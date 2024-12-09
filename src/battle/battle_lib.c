@@ -4356,7 +4356,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battler, battlero;
     int maxBattlers;
 	int imposter1Pos, imposter2Pos;
-	int abilityMax = ABILITY_UNOWN_ENERGY;
+	int abilityMax = ABILITY_ROCK_SOLID;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
@@ -4467,7 +4467,6 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						&& (abilityChosen != ABILITY_KLUTZ)
 						&& (abilityChosen != ABILITY_STALL)
 						&& (abilityChosen != ABILITY_SHELL_ARMOR)
-						&& (abilityChosen != ABILITY_TANGLED_FEET)
 						&& (abilityChosen != ABILITY_SOLID_ROCK)
 						&& (abilityChosen != ABILITY_FORECAST))
 						{
@@ -7276,6 +7275,40 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 	case FLING_EFFECT_INFLICT_INGRAIN:
 			battleCtx->flingScript = subscript_ingrain_fling;
 		break;
+		
+	case FLING_EFFECT_USER_ATK_UP:
+        if (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
+            battleCtx->flingScript = subscript_held_item_user_raise_atk;
+        }
+        break;
+
+    case FLING_EFFECT_USER_DEF_UP:
+        if (ATTACKING_MON.statBoosts[BATTLE_STAT_DEFENSE] < 12) {
+            battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
+            battleCtx->flingScript = subscript_held_item_user_raise_def;
+        }
+        break;
+
+    case FLING_EFFECT_USER_SPEED_UP:
+        if (ATTACKING_MON.statBoosts[BATTLE_STAT_SPEED] < 12) {
+            battleCtx->msgTemp = BATTLE_STAT_SPEED;
+            battleCtx->flingScript = subscript_held_item_user_raise_spe;
+        }
+        break;
+
+    case FLING_EFFECT_USER_SPATK_UP:
+        if (ATTACKING_MON.statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
+            battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
+            battleCtx->flingScript = subscript_held_item_user_raise_spa;
+        }
+        break;
+
+    case FLING_EFFECT_USER_SPDEF_UP:
+        if (ATTACKING_MON.statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
+            battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
+            battleCtx->flingScript = subscript_held_item_user_raise_spd;
+        }
+        break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
