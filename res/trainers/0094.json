@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 30,
+            "level": 33,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_DRAGON_RAGE",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 30,
+            "level": 33,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_WATERFALL",

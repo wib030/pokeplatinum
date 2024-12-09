@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MR_MIME",
             "form": 0,
-            "level": 26,
+            "level": 28,
             "item": "ITEM_LUCKY_PUNCH",
             "moves": [
                 "MOVE_DOUBLE_SLAP",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_PSYDUCK",
             "form": 0,
-            "level": 26,
+            "level": 28,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_DOUBLE_TEAM",

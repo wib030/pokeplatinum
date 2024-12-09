@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_CORSOLA",
             "form": 0,
-            "level": 30,
+            "level": 34,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_REFLECT",
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_MR_MIME",
             "form": 0,
-            "level": 30,
+            "level": 34,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_LIGHT_SCREEN",

@@ -14,7 +14,7 @@
         {
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_MILK_DRINK",
@@ -28,7 +28,7 @@
 		{
             "species": "SPECIES_CLEFABLE",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_MINIMIZE",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_NIDOQUEEN",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_CHARM",
@@ -56,7 +56,7 @@
 		{
             "species": "SPECIES_GLACEON",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_TAIL_WHIP",
@@ -70,7 +70,7 @@
 		{
             "species": "SPECIES_GRUMPIG",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_ODOR_SLEUTH",
@@ -84,7 +84,7 @@
 		{
             "species": "SPECIES_MAGMAR",
             "form": 0,
-            "level": 26,
+            "level": 27,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_FLING",

@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_UNOWN",
             "form": 19,
-            "level": 30,
+            "level": 33,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_HIDDEN_POWER",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_MISMAGIUS",
             "form": 0,
-            "level": 30,
+            "level": 33,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_MAGIC_COAT",

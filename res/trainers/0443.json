@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_BELLOSSOM",
             "form": 0,
-            "level": 30,
+            "level": 34,
             "item": "ITEM_HEART_MAIL",
             "moves": [
                 "MOVE_FLASH",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_NUZLEAF",
             "form": 0,
-            "level": 30,
+            "level": 34,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_HARDEN",

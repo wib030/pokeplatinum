@@ -14,7 +14,7 @@
         {
             "species": "SPECIES_HAUNTER",
             "form": 0,
-            "level": 30,
+            "level": 31,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_EXPLOSION"
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_ICY_WIND",

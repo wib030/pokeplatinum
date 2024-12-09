@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_ROTOM",
             "form": 2,
-            "level": 32,
+            "level": 34,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
                 "MOVE_CHARGE_BEAM",

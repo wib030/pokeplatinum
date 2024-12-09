@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_PROTECTOR",
             "moves": [
                 "MOVE_FAKE_TEARS",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_GROVYLE",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_CHARCOAL",
             "moves": [
                 "MOVE_DOUBLE_TEAM",

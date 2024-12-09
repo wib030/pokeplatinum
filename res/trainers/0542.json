@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_FURRET",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_FOLLOW_ME",

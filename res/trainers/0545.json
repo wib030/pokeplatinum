@@ -14,7 +14,7 @@
         {
             "species": "SPECIES_PHIONE",
             "form": 0,
-            "level": 30,
+            "level": 31,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_SELFDESTRUCT"
@@ -26,7 +26,7 @@
 		{
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_WIDE_LENS",
             "moves": [
                 "MOVE_DARK_VOID",

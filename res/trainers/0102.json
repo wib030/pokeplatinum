@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_HIPPOPOTAS",
             "form": 0,
-            "level": 30,
+            "level": 33,
             "item": "ITEM_SOFT_SAND",
             "moves": [
                 "MOVE_SAND_TOMB",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_TRAPINCH",
             "form": 0,
-            "level": 30,
+            "level": 33,
             "item": "ITEM_SOFT_SAND",
             "moves": [
                 "MOVE_DIG",

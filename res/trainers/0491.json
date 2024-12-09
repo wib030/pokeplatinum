@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_WORMADAM",
             "form": 2,
-            "level": 29,
+            "level": 30,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_WIGGLYTUFF",
             "form": 0,
-            "level": 29,
+            "level": 30,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_LICK",
@@ -40,7 +40,7 @@
         {
             "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 29,
+            "level": 30,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_DIZZY_PUNCH",

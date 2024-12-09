@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 32,
+            "level": 34,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_ATTRACT",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 32,
+            "level": 34,
             "item": "ITEM_POWER_HERB",
             "moves": [
                 "MOVE_BOUNCE",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_LUVDISC",
             "form": 0,
-            "level": 32,
+            "level": 34,
             "item": "ITEM_MYSTIC_WATER",
             "moves": [
                 "MOVE_SURF",

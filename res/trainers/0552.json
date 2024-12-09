@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_ARCANINE",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_WILL_O_WISP",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_MAGMORTAR",
             "form": 0,
-            "level": 28,
+            "level": 31,
             "item": "ITEM_ZOOM_LENS",
             "moves": [
                 "MOVE_FOLLOW_ME",

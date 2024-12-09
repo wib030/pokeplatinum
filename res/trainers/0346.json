@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 30,
+            "level": 32,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SKILL_SWAP",
@@ -24,7 +24,7 @@
 		{
             "species": "SPECIES_PERSIAN",
             "form": 0,
-            "level": 30,
+            "level": 32,
             "item": "ITEM_EXPERT_BELT",
             "moves": [
                 "MOVE_SLASH",
@@ -38,7 +38,7 @@
 		{
             "species": "SPECIES_ESPEON",
             "form": 0,
-            "level": 30,
+            "level": 32,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_PSYBEAM",

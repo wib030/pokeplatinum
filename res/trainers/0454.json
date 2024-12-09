@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 30,
+            "level": 34,
             "item": "ITEM_POWER_BAND",
             "moves": [
                 "MOVE_BULK_UP",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 30,
+            "level": 34,
             "item": "ITEM_SACRED_ASH",
             "moves": [
                 "MOVE_LEER",

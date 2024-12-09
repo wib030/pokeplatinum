@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_HYPNO",
             "form": 0,
-            "level": 29,
+            "level": 30,
             "item": "ITEM_ESCAPE_ROPE",
             "moves": [
                 "MOVE_HYPNOSIS",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_BAYLEEF",
             "form": 0,
-            "level": 29,
+            "level": 30,
             "item": "ITEM_MOOMOO_MILK",
             "moves": [
                 "MOVE_SWEET_SCENT",
