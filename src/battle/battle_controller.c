@@ -3026,6 +3026,10 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
         if (battleCtx->fieldConditionsMask & FIELD_CONDITION_DEEP_FOG) {
             hitRate = hitRate * 6 / 10;
         }
+		
+		if (WEATHER_IS_SAND && moveType == TYPE_ROCK) {
+            hitRate = hitRate * 11 / 10;
+        }
     }
 
     if (Battler_Ability(battleCtx, attacker) == ABILITY_HUSTLE && moveClass == CLASS_PHYSICAL) {
@@ -3545,7 +3549,7 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
             }
 			
-			if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY)
+			if (((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY) || (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_ROCK_SOLID))
 			&& (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MOLD_BREAKER)
 			&& (DEFENDING_MON.curHP == DEFENDING_MON.maxHP)
 			&& (battleCtx->damage >= DEFENDING_MON.maxHP))
@@ -3560,7 +3564,7 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
             }
         }
 		
-		if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY)
+		if (((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY) || (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_ROCK_SOLID))
 		&& (battleCtx->battleMons[battleCtx->defender].curHP < battleCtx->battleMons[battleCtx->defender].maxHP))
 		{
 			DEFENDER_TURN_FLAGS.enduring_ability = FALSE;

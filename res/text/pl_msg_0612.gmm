@@ -617,4 +617,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Warps type matchups.</language>
 	</row>
+	<row id="pl_msg_00000610_00154" index="154">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">No recoil damage,\nendures at full HP.</language>
+	</row>
 </body>

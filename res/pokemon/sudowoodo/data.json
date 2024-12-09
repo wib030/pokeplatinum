@@ -35,8 +35,8 @@
         "EGG_GROUP_MINERAL"
     ],
     "abilities": [
-        "ABILITY_STURDY",
-        "ABILITY_ROCK_HEAD"
+        "ABILITY_ROCK_SOLID",
+        "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

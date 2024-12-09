@@ -583,6 +583,7 @@ Basic_CheckOHKOWouldFail:
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckOHKOWouldFail_Levels
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_STURDY, ScoreMinus10
+	IfLoadedEqualTo ABILITY_ROCK_SOLID, ScoreMinus10
 
 Basic_CheckOHKOWouldFail_Levels:
     IfLevel CHECK_LOWER_THAN_TARGET, ScoreMinus10
@@ -6389,6 +6390,7 @@ Expert_GastroAcid_AbilityChecklist:
     TableEntry ABILITY_SHARPNESS
     TableEntry ABILITY_STRANGLE_WEED
 	TableEntry ABILITY_STEADFAST
+	TableEntry ABILITY_ROCK_SOLID
     TableEntry TABLE_END
 
 Expert_GastroAcid_End:
@@ -7713,6 +7715,7 @@ Expert_RecoilMove:
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_RecoilMove_End
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_ROCK_HEAD, Expert_RecoilMove_ScorePlus1
+	IfLoadedEqualTo ABILITY_ROCK_SOLID, Expert_RecoilMove_ScorePlus1
 	IfLoadedEqualTo ABILITY_HOTHEADED, Expert_RecoilMove_ScorePlus1
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_RecoilMove_ScorePlus1
     GoTo Expert_RecoilMove_End

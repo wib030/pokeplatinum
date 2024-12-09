@@ -617,4 +617,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">UNOWN ENERGY</language>
 	</row>
+	<row id="pl_msg_00000610_00154" index="154">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">ROCK SOLID</language>
+	</row>
 </body>

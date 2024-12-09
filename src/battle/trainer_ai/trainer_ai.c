@@ -215,6 +215,7 @@ static const u8 sRemovableAbilities[] = {
     ABILITY_SHARPNESS,
     ABILITY_STRANGLE_WEED,
     ABILITY_PEST,
+	ABILITY_ROCK_SOLID,
     0xFFFF
 };
 

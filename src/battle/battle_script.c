@@ -4840,7 +4840,8 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
     BattleScript_Iter(battleCtx, 1);
     battleCtx->battleStatusMask |= SYSCTL_NONSTANDARD_ACC_CHECK;
 
-    if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE) {
+    if ((Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE)
+	|| (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_ROCK_SOLID) == TRUE)) {
         battleCtx->moveStatusFlags |= MOVE_STATUS_STURDY;
     } else {
         if ((DEFENDING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON) == FALSE
