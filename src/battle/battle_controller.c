@@ -3004,6 +3004,10 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
 
     hitRate *= HitRateByStage[sumStages].numerator;
     hitRate /= HitRateByStage[sumStages].denominator;
+	
+	if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && MON_HAS_TYPE(attacker, moveType)) {
+       hitRate = hitRate * 11 / 10;
+    }
 
     if (Battler_Ability(battleCtx, attacker) == ABILITY_COMPOUND_EYES) {
         hitRate = hitRate * 13 / 10;
