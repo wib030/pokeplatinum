@@ -3,12 +3,12 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0161_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0161_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0161_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0161_H
 
 // I wanted to go to Celestic Town, but\nthere were some Pokémon in the way.\rWho knows why they’re there, but\nthey’re not budging.
 #define pl_msg_00000161_00000 0
 // There was a group of Pokémon blocking\nthe way up to Celestic Town.\rI think they’re gone now.
 #define pl_msg_00000161_00001 1
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0161_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0161_H

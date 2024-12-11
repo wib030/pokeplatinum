@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0706_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0706_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0706_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0706_H
 
 #define pl_msg_00000706_00000 0
 // For some time after its birth, it\ngrows by gaining nourishment from\nthe seed on its back.
@@ -994,4 +994,4 @@
 // It is said to have emerged from an\negg in a place where there was\nnothing, then shaped the world.
 #define pl_msg_00000706_00493 493
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0706_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0706_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0695_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0695_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0695_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0695_H
 
 // Unable to connect to Nintendo\nWi-Fi Connection.\n\nFor help, check the software\nInstruction Booklet or visit\nsupport.nintendo.com.\nError code: {STRVAR_1 54, 0, 0}
 #define pl_msg_00000695_00000 0
@@ -73,4 +73,4 @@
 // There was a communication error\nin the Wi-Fi Plaza.\nError code: {STRVAR_1 54, 0, 0}
 #define pl_msg_00000695_00032 32
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0695_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0695_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0056_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0056_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0056_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0056_H
 
 // Ah!\nThat’s Oreburgh’s Gym Badge!\rI see, I see!\nYou’ve defeated my son.\rBut that’s no surprise.\nHe still has much to learn.\rIn place of my son Roark, I, Byron,\nwill take your challenge!\r
 #define pl_msg_00000056_00000 0
@@ -29,4 +29,4 @@
 // Canalave City Pokémon Gym\nLeader: Byron\rCertified Trainers:\n{STRVAR_1 3, 0, 0}\f{STRVAR_1 3, 1, 0}
 #define pl_msg_00000056_00009 9
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0056_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0056_H

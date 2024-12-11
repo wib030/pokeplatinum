@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0480_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0480_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0480_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0480_H
 
 // Where departed Pokémon sleep...\nThis is the Lost Tower.
 #define pl_msg_00000480_00000 0
@@ -49,4 +49,4 @@
 // Trainer Tips\rYou may register one of the Key\nItems in your Bag for instant use.\rSimply press the Y Button to use the\nregistered item instantly.
 #define pl_msg_00000480_00020 20
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0480_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0480_H

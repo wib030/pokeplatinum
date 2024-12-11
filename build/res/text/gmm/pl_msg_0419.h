@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0419_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0419_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0419_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0419_H
 
 // It was all in spite of the exploration\nteam’s best efforts.\rThe rare, oddly colored Pokémon\neluded detection.\rThe rumored red GYARADOS failed to\nappear to the dispirited team...\rThat concludes our special report,\n“Search for the Red GYARADOS!”\rBrought to you by Jubilife TV on\nNationw
 // ide Net!\rSee you next week, same time, same\nchannel!
@@ -98,4 +98,4 @@
 //  for falling for\nthat fraud, weren’t you?
 #define pl_msg_00000419_00028 28
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0419_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0419_H

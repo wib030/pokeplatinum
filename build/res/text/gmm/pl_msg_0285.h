@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0285_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0285_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0285_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0285_H
 
 // Cyrus: ...So, you’ve come.\nYou heard my speech, I take it.\rSnicker...\nA big lie, of course.\rIt’s true insofar as my intention is to\ncreate a new world.\rBut that world isn’t for the likes of\nTeam Galactic.\rI seek an entirely new world solely for\nmyself.\rIf not, it could never be the c
 // omplete\nand perfect world.\rYou’ve seen my minions of Team Galactic.\rYou yourself must know that they are\nuniformly useless and incomplete.\r
@@ -43,4 +43,4 @@
 //  be summoned and shackled\fto do as we command...\rThe PC entry ends there...\r
 #define pl_msg_00000285_00013 13
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0285_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0285_H

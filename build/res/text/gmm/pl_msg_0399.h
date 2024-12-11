@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0399_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0399_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0399_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0399_H
 
 // {STRVAR_1 3, 0, 0}: All right!\nWe’re at the lake!\rGet ready, because we’re capturing\nthat legendary Pokémon.\rTrust me on this one. It’s here.\nIt even says so on the sign!\r
 #define pl_msg_00000399_00000 0
@@ -15,4 +15,4 @@
 // Lake Verity Ahead\rAccording to legend, this lake is home\nto the Pokémon said to be “The Being of\fEmotion.”\rIt is because of this Pokémon that\npeople can experience sorrow and joy.
 #define pl_msg_00000399_00003 3
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0399_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0399_H

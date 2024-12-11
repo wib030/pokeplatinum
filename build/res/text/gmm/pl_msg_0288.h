@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0288_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0288_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0288_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0288_H
 
 // You... You came all the way here\njust to save some Pokémon?\r...Though it’s nothing new, I can’t\nsay I understand our boss...\rWhy would he let a kid like you\ncome and go freely...?\rWe, Team Galactic, take all that we\nneed, and eliminate what we do not.\rBut anyway. You’ve taken the trou
 // ble\nto come. Let me welcome you!\rConsider it payback for your insulting\nme at the lake.\r
@@ -47,4 +47,4 @@
 // It’s Team Galactic’s sinister machine.\nAZELF had been sealed inside it.
 #define pl_msg_00000288_00018 18
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0288_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0288_H

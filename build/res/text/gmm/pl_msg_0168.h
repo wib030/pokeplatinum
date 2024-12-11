@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0168_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0168_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0168_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0168_H
 
 // Julia: Oh, hello.\nYou’re quite the nifty Trainer.\rMy husband is a Sailor, and he’s off\nworking somewhere far away.\rI long for the day he comes back\nto me.\rAll that waiting gets to be very\nboring every day, though...\rI know! How about you visit me and\ntell me stories every so often?
 #define pl_msg_00000168_00000 0
@@ -52,4 +52,4 @@
 // You love {STRVAR_1 28, 0, 0}?\n...\rUfufu... That says something about\nyou. It puts a smile on my face!\r
 #define pl_msg_00000168_00021 21
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0168_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0168_H

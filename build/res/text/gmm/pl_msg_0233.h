@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0233_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0233_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0233_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0233_H
 
 // There’s no way of getting to the\npeak of Mt. Coronet from this side!\rUh-oh... Was I supposed to go up from\nthe Oreburgh City side?\rMaybe I wasn’t supposed to climb from\nthe Eterna City side?\rOh, didn’t I need hidden moves like\nSurf, too?
 #define pl_msg_00000233_00000 0
@@ -13,4 +13,4 @@
 // Grunt 2: Hah? The Pokémon they gave me\ncan’t use Defog, either.\rI think we’re stuck.\nLet’s wait till the others get here.\r
 #define pl_msg_00000233_00002 2
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0233_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0233_H

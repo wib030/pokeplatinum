@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0140_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0140_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0140_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0140_H
 
 // Everyone calls me the Pokémon\nMove Maniac. I prefer Move Tutor.\rI know every move that Pokémon learn\nwhile they’re leveling up, and I can\fteach Pokémon those moves.\rI can teach a move to a Pokémon\nof yours if you’d like.\rI’ll do it if you’ll trade me\na Heart Scale.\r
 #define pl_msg_00000140_00000 0
@@ -43,4 +43,4 @@
 // I often go to Solaceon Town for my big\nbrother.\rThe newspaper there gives me Heart\nScales for running errands.
 #define pl_msg_00000140_00017 17
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0140_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0140_H

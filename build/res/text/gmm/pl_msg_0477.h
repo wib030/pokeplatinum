@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0477_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0477_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0477_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0477_H
 
 // Dawn: Hi, {STRVAR_1 3, 0, 0}!\nHow’s your Pokédex coming along?\rMe? I’m somewhere between fantastic\nand, uh, hopeless...\rBut this isn’t about me!\nI’ve got something nice for you.\r{STRVAR_1 3, 0, 0}, choose which hand\nyou want.
 #define pl_msg_00000477_00000 0
@@ -35,4 +35,4 @@
 // Trainer Tips\rPokémon may become immobilized if\nthey are asleep or paralyzed.\rIf it happens to your Pokémon,\nit could be disastrous.\rIf your opponent’s Pokémon can’t\nmove, it’s a big opportunity!
 #define pl_msg_00000477_00013 13
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0477_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0477_H

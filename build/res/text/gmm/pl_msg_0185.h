@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0185_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0185_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0185_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0185_H
 
 // Hello!\nWelcome to the Pokémon League!\rI’m Aaron of the Elite Four.\nIt’s good to meet you.\rOh, I should explain, I’m a huge fan\nof bug Pokémon.\rBug Pokémon are nasty-mean, and yet\nthey’re beautiful, too...\rWould you like to know why I take\non challengers here?\rIt’s because I wa
 // nt to become\nperfect, just like my bug Pokémon!\rOK! Let me take you on!\r
@@ -15,4 +15,4 @@
 // Go on, go to the next room.\rI’m going to become a top-level\nTrainer who can’t be outclassed with\fmy beautiful and tough bug Pokémon!
 #define pl_msg_00000185_00002 2
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0185_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0185_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0405_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0405_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0405_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0405_H
 
 // {STRVAR_1 3, 0, 0}: Hey, {STRVAR_1 3, 1, 0}!\nWhat, you finally come along now?\fSlooow! Way too slow!\rListen, {STRVAR_1 3, 1, 0}.\nSee how the rocks are all lumpy here?\rYou can’t climb those rocks until you\nget the Snowpoint Gym Badge.\rAnyway, I’m off.\nTeam Galactic! I’m coming for you!\
 // r
@@ -20,4 +20,4 @@
 // Lake Acuity ahead
 #define pl_msg_00000405_00005 5
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0405_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0405_H

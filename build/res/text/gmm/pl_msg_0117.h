@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0117_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0117_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0117_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0117_H
 
 // Hello, hello!\nHow, I say, do you do?\rI am the Pokémon Fan Club Chairman!\nIndeed, yes I am!\rWhen you wish to treat your Pokémon\nto a treat, what, I say, do you do?\rIf I may say so, and I will, I feed\nPoffins to my Pokémon!\rAnd why, I say, would I do that?\rBecause the giving of Poffins is\
 // na way of expressing your love!\rFor example! If I were to give a\nSweet Poffin, the Pokémon eating it\fwould become more cute!\rFor example! A Spicy Poffin will add\nto the coolness of a Pokémon!\rIn such ways I say that Poffins have\nnothing but goodness for Pokémon!\rTherefore!\rI declare this
@@ -37,4 +37,4 @@
 // CLEFAIRY: Pip piiih!
 #define pl_msg_00000117_00013 13
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0117_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0117_H

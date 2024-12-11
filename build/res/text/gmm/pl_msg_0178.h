@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0178_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0178_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0178_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0178_H
 
 // You want to challenge Candice?\rSure thing!\nI was waiting for someone tough!\rBut I should tell you, I’m tough\nbecause I know how to focus.\rPokémon, fashion, romance...\nIt’s all about focus!\rI’ll show you just what I mean.\nGet ready to lose!\r
 #define pl_msg_00000178_00000 0
@@ -28,4 +28,4 @@
 // Snowpoint City Pokémon Gym\nLeader: Candice\rCertified Trainers:\n{STRVAR_1 3, 0, 0}\f{STRVAR_1 3, 1, 0}
 #define pl_msg_00000178_00009 9
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0178_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0178_H

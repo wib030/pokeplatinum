@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0264_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0264_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0264_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0264_H
 
 // Charon: ...Cyrus disappeared.\nMars and Jupiter quit.\rSaturn said he would look after what\nremains of Team Galactic.\rBut he won’t join me.\nSo foolish of him!\rSo very foolish of the rest of them!\nThrowing away Team Galactic!\rAfter all the effort we took as a team\nto make it grow...\rThat po
 // wer could have made us rich\nbeyond imagination.\rBut, enough of that.\nThe Magma Stone will be mine.\r
@@ -49,4 +49,4 @@
 //                                                                                                                                
 #define pl_msg_00000264_00019 19
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0264_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0264_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0192_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0192_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0192_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0192_H
 
 // {STRVAR_1 3, 0, 0}: Oh, hey, {STRVAR_1 3, 1, 0}!\nWhat took you so long?\fI’m fining you $100 million!\rActually, never mind the fine.\nCome with me, will ya?\r
 #define pl_msg_00000192_00000 0
@@ -115,4 +115,4 @@
 // {STRVAR_1 3, 0, 0}: ...!\nIt’s OK, though.\r{STRVAR_1 3, 1, 0}, the tougher you get,\nthe tougher we can get, too.\rThere’s no end to Pokémon.\nThat’s what I’m saying, {STRVAR_1 3, 1, 0}.
 #define pl_msg_00000192_00051 51
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0192_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0192_H

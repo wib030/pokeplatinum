@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0497_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0497_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0497_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0497_H
 
 // Dr. Footstep: Pokémon are quite easy\nfor me to read.\rI need only to see their footprints,\nand their innermost thoughts are\frevealed to me!\rOh?\nYou are skeptical of my claim?\rThen, let your {STRVAR_1 0, 0, 0} walk\nin front of me, right here.\rFrom its footprints, I will determine\nhow it fee
 // ls about you.\r
@@ -110,4 +110,4 @@
 // Sssshhnnn...\n...\f...Ssshhhnnn...\f...\fSsshhhnnn...\f...\r
 #define pl_msg_00000497_00050 50
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0497_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0497_H

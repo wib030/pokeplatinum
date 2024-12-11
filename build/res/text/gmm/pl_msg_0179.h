@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0179_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0179_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0179_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0179_H
 
 // Maylene: Brrr...\rOh, hi, {STRVAR_1 3, 0, 0}!\nAre you taking the Gym challenge now?\rI’m hoping to see Candice soon, but I’m\nstaying put until I warm up again first.\rOh, you should know that Candice is\na user of Ice-type Pokémon.\rI really admire Candice.\nShe’s so studious.\rShe wanted t
 // o practice against me to\nlearn about the Fighting type.\rIt’s because the Ice type matches up\nbadly against the Fighting type.\n
@@ -26,4 +26,4 @@
 // My dream is to be the top Idol!\rTo win everyone’s heart, I’ll sing my\nheart out in snowy Snowpoint!\r...To a crowd of none.\n...This is Grace. Thanks for listening...
 #define pl_msg_00000179_00008 8
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0179_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0179_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0229_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0229_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0229_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0229_H
 
 // Mr. Fuego: Well, hello!\nIt’s not often I get a visitor here.\rI tried to make the ironworks run\nbetter with the moving floor tiles.\rBut no one was happy about it! They\nsaid the moving floor made them dizzy!\rBut you don’t want to listen to me\nwhine. Here’s a souvenir!\r
 #define pl_msg_00000229_00000 0
@@ -25,4 +25,4 @@
 // Mr. Fuego: My ironworks would be\nnothing if there were no iron.\rThat’s why I’m always thankful for\nnature supplying me with iron.
 #define pl_msg_00000229_00008 8
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0229_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0229_H

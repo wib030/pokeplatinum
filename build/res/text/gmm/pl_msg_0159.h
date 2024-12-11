@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0159_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0159_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0159_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0159_H
 
 // You’re a Trainer, aren’t you?\rYou see, there’s this Pokémon I’d like\nsomeone to look after.\rIt’s a Pokémon called PORYGON.\nI found it near Team Galactic’s building.\rI’m no Trainer, so can you take it off\nmy hands?
 #define pl_msg_00000159_00000 0
@@ -25,4 +25,4 @@
 // Those thorny things on the building...\nThe way it moves meaninglessly...\rI don’t understand their idea of \n“awesomely fashionable” at all.\rStill, Team Galactic does seem to have\na huge supply of energy.
 #define pl_msg_00000159_00008 8
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0159_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0159_H

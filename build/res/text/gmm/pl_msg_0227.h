@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0227_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0227_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0227_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0227_H
 
 // Hello, my name’s Cheryl.\nAnd you are...?\rOK, so your name is {STRVAR_1 3, 0, 0}.\nI’m sincerely glad to meet you.\r{STRVAR_1 3, 0, 0}, may I ask a big favor\nof you?\rI want to get through this forest,\nbut I’m afraid of doing it alone.\rI’ve heard that there is a sinister\ngroup of people
 //  called Team Galactic\fabout.\rI think there’d be safety in numbers.\nPlease, may I go through with you?\r
@@ -40,4 +40,4 @@
 // Trainer Tips!\rIn forests and caves, there are many\nitems on the ground that cannot be\fseen in the murky darkness.\rTake the time to search carefully!
 #define pl_msg_00000227_00015 15
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0227_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0227_H

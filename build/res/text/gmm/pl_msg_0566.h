@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0566_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0566_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0566_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0566_H
 
 // Ah, so that Rowan fellow is back?\nHe’s quite the remarkable man.\rHe’s been studying Pokémon since way,\nway back.\rMy son and grandchild help Rowan\nwith his studies now.
 #define pl_msg_00000566_00000 0
@@ -21,4 +21,4 @@
 // Let me see...\nWhat did that news say now...?\r{STRVAR_1 4, 1, 0}! They said there’s\na whole bunch of {STRVAR_1 0, 2, 0} there!\r{STRVAR_1 3, 0, 0}, you have to hurry!\rI want you to do better than my\nbrother Lucas!
 #define pl_msg_00000566_00006 6
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0566_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0566_H

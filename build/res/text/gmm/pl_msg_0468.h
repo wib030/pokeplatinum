@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0468_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0468_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0468_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0468_H
 
 // {STRVAR_1 3, 0, 0}: Hey! {STRVAR_1 3, 1, 0}!\nTell me you got a little tougher!\rMe? Do you even need to ask?\nOf course I got tougher!\rCome on!\nI’ll demonstrate it to you!\r
 #define pl_msg_00000468_00000 0
@@ -21,4 +21,4 @@
 // Trainer Tips!\rPokémon moves use energy called\nPower Points, or PP for short.\rIf the PP of moves runs low, head for\nany Pokémon Center.
 #define pl_msg_00000468_00006 6
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0468_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0468_H

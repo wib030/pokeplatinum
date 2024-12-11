@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0030_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0030_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0030_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0030_H
 
 // Why don’t you try dressing up your\nPokémon now?\rWe have a Fitting Room on\nthe second floor.\rDress up your Pokémon nicely with\nAccessories!
 #define pl_msg_00000030_00000 0
@@ -51,4 +51,4 @@
 // The TV station interviews all sorts of\nTrainers for its shows.\rAfter all, people want to know about\ngood Trainers and what they say.\rPersonally, I’d like to learn more about\nGym Leaders.\rI’d also like to hear about the tough\nElite Four of the Pokémon League.
 #define pl_msg_00000030_00021 21
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0030_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0030_H

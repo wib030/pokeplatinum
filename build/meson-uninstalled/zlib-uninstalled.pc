@@ -1,7 +1,7 @@
-prefix=/c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum/build
+prefix=/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/build
 includedir=${prefix}/include
 libdir=${prefix}/lib
-srcdir=/c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum
+srcdir=/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum
 
 Name: zlib
 Description: zlib compression library

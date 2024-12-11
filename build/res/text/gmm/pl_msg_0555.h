@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0555_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0555_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0555_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0555_H
 
 // {STRVAR_1 3, 1, 0}’s mom: Oh, hi,\n{STRVAR_1 3, 0, 0}.\rAre you looking for {STRVAR_1 3, 1, 0}?\rHe was gone for a second, but then\nhe came running right back home.\rHe just can’t sit still, that boy.\nI wonder who he takes after?
 #define pl_msg_00000555_00000 0
@@ -19,4 +19,4 @@
 // {STRVAR_1 3, 1, 0}’s mom: My {STRVAR_1 3, 1, 0}\ntook off like a rocket as usual.\rHe was shouting something about\nbecoming the greatest Trainer ever...\rHe just can’t sit still, that boy.\nI wonder who he takes after?
 #define pl_msg_00000555_00005 5
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0555_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0555_H

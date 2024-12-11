@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0578_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0578_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0578_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0578_H
 
 // Are you a fan of the Day-Care\nCouple like me?\rI got hold of something quite useful.\rIt’s the latest Pokétch app from\nthe Pokétch Company.\rWhat’s more, they developed it in\ncollaboration with the Day Care.\rSince you’re a fellow fan of the Day\nCare, I’m compelled to share this!\r
 #define pl_msg_00000578_00000 0
@@ -13,4 +13,4 @@
 // As you travel, your Pokémon grows\nwith you...\rBe always bonded in friendship.\nPokémon Day Care
 #define pl_msg_00000578_00002 2
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0578_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0578_H

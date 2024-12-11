@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0593_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0593_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0593_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0593_H
 
 // Oh? So, you are?!\nYou’re Buck’s friend, yes!\rI’ve heard about you from both Buck\nand Wake.\rWell, my young friend, you’re always\nwelcome here from now on!\rThis is a private club for only Sinnoh’s\nGym Leaders, or those vouched for by\fthose selfsame Gym Leaders.\rIt’s a place where 
 // the best seek to\nbetter themselves.\rWelcome to the Battleground!
@@ -298,4 +298,4 @@
 // Buck: Fweh! Too much!\rI guess I’ll better my team on\nStark Mountain!
 #define pl_msg_00000593_00143 143
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0593_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0593_H

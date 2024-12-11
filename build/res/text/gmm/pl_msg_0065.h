@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0065_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0065_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0065_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0065_H
 
 // {STRVAR_1 3, 0, 0}: Hunh?\rOh, it’s you, {STRVAR_1 3, 1, 0}!\nYou finally got here?\fYou’re slow like always.\rBut anyway, the Gym Leader’s tough!\nLike, seriously serious!\rIf the Gym Leader’s this tough,\nI wonder how he compares to my dad...\rHuh?\nI just drifted there.\rAnyway, the Gym L
 // eader’s gone off\nto the coal mine.\rIf you want to take on the Gym Leader,\nyou’d better go off to the mine!
@@ -70,4 +70,4 @@
 // Oreburgh Mine\nBeware of Busy Pokémon!
 #define pl_msg_00000065_00030 30
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0065_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0065_H

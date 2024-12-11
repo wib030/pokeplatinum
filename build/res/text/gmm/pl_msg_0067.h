@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0067_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0067_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0067_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0067_H
 
 // Welcome!\nThis is the Oreburgh Pokémon Gym!\rI’m Roark, the Gym Leader!\rI’m but one Trainer who decided to\nwalk proudly with Rock-type Pokémon!\rAs the Gym Leader, I need to see\nyour potential as a Trainer.\rAnd, I’ll need to see the toughness\nof the Pokémon that battle with you!\r
 #define pl_msg_00000067_00000 0
@@ -29,4 +29,4 @@
 // Oreburgh City Pokémon Gym\nLeader: Roark\rCertified Trainers:\n{STRVAR_1 3, 0, 0}\f{STRVAR_1 3, 1, 0}
 #define pl_msg_00000067_00009 9
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0067_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0067_H

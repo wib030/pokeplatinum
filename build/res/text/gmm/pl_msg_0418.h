@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0418_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0418_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0418_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0418_H
 
 // Reporter: Hello! The time for\nDiscovering Groups is upon us.\rToday, we dropped in to check up on\nthe Trainer {STRVAR_1 3, 0, 0}.\rThe Trainer is a member of the group\n{STRVAR_1 5, 1, 0}.\rOh, that must be {STRVAR_1 3, 0, 0} over\nthere.\rThe Trainer is obviously enjoying\nbeing a member of the g
 // roup.\rIt’s like the Trainer has found\na second home!\rIf I had to describe this group, in my\nuninformed, subjective view,\fit would be the {STRVAR_1 15, 2, 0} type?\rPlease look forward to the next\nshow!
@@ -162,4 +162,4 @@
 //                                                                                                                                                                                                                                                                         
 #define pl_msg_00000418_00055 55
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0418_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0418_H

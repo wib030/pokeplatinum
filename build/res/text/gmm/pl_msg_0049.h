@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0049_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0049_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0049_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0049_H
 
 // {STRVAR_1 3, 1, 0}: Hey, {STRVAR_1 3, 0, 0}!\nDid you come to study, too?\rI went ahead and memorized everything\nthat was up on the blackboard.\rAfter all, it’s the Trainer’s job to\navoid having their precious Pokémon\fhurt in battle, right?\rSo, {STRVAR_1 3, 0, 0}, what brings you?\nHuh?\fYo
 // u’ve got something for me?\r
@@ -65,4 +65,4 @@
 // llengers\fin Pokémon Gyms.
 #define pl_msg_00000049_00027 27
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0049_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0049_H

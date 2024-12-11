@@ -3,12 +3,12 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0297_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0297_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0297_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0297_H
 
 // {STRVAR_1 3, 0, 0}: What are you doing?\nYou’re not supposed to be here.\rThere’s nothing here anyway.\rIf anything were to happen, it’s in\nmy good hands.\rI’ve got my trusty Pokémon with me,\nfor one.\rAnd more than anything, I’m tough,\nand you know it!
 #define pl_msg_00000297_00000 0
 // {STRVAR_1 3, 0, 0}: What’d I say?\nI told you I’ll be OK by myself.\rIf you haven’t gone yet, go\nchallenge the Sunyshore Gym.\rI have a feeling things are going\nto keep getting tougher.\rIt could be rough if you don’t\ncollect up some Gym Badges.
 #define pl_msg_00000297_00001 1
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0297_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0297_H

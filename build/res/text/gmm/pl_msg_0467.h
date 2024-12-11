@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0467_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0467_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0467_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0467_H
 
 // Dawn: {STRVAR_1 3, 1, 0}?!\rDid you tell your family that you’re\nhelping the professor?\r...You didn’t, did you?\rI know that you’re really eager to\nsee all kinds of Pokémon.\rBut you shouldn’t make your mom\nworry that you’ve disappeared.\r
 #define pl_msg_00000467_00000 0
@@ -49,4 +49,4 @@
 // Now, here’s the strange part.\rIf you see another patch of rustling\ngrass far away, it means the same kind\fof Pokémon is hiding there.\rSo, if your aim is to keep seeing the\nsame kind of Pokémon, you should\fconsider using Repels.\r
 #define pl_msg_00000467_00019 19
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0467_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0467_H

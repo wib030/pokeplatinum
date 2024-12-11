@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0273_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0273_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0273_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0273_H
 
 // Everyone calls me the Ruin Maniac.\nI don’t care what they call me.\rI’ll just keep on chipping away at\nthe rock wall little by little.\rDo you know why? I’m a Ruin Maniac\nwho is fascinated by the UNOWN.\rI know it’s a little sudden, but\nhow about you and me have a race?\rYou go and catch
 //  the UNOWN,\nand I’ll keep digging away.\rWe’ll have a race to see who can\nget done faster.
@@ -13,4 +13,4 @@
 // re UNOWN.\rIt’s going to be messy.\nYou’d better go outside.
 #define pl_msg_00000273_00001 1
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0273_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0273_H

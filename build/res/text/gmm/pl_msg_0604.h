@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0604_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0604_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0604_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0604_H
 
 // All I need to be happy is my TV.\nThat’s all I need.\rI learn so much just sitting here.\nI absorb knowledge!\rI learned about the Pokétch app\nMarking Map, for instance.\rThey say the Marking Map can track\nPokémon that travel around.\r...I’ve never met any traveling\nPokémon, but I’ve hea
 // rd about them.
@@ -18,4 +18,4 @@
 // You’ve seen every Pokémon in Sinnoh!\nThat is so cool!\rI’m going to travel with Pokémon when\nI get bigger!
 #define pl_msg_00000604_00004 4
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0604_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0604_H

@@ -340,5 +340,11 @@
 #define subscript_unown_energy 331
 #define subscript_blow_away_item 332
 #define subscript_steadfast_activate 333
+#define subscript_fling_before 334
+#define subscript_held_item_user_raise_atk 335
+#define subscript_held_item_user_raise_def 336
+#define subscript_held_item_user_raise_spe 337
+#define subscript_held_item_user_raise_spa 338
+#define subscript_held_item_user_raise_spd 339
 
 #endif // NARC_SUB_SEQ_NAIX_

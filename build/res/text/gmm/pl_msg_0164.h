@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0164_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0164_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0164_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0164_H
 
 // Hey, there!\nHow’s it going, Champ-to-be?\rLet me check out your Trainer Case.\nLet’s see how many Badges you have.\rOne, two, three...\nWhoa! Wow! You’ve already got seven!\rThat means if you can beat this Gym\nLeader, you’re on your way to the\fPokémon League next.\rThat also means this i
 // s the last time\nI get to give you advice.\rThis is it, kiddo!\nListen carefully...one last time!\rThe Gym Leader here is a master of\nElectric-type Pokémon!\rThat’s all I have to say.\nThe rest is up to you!
@@ -18,4 +18,4 @@
 // Sunyshore City Pokémon Gym\rLeader: Volkner\nCertified Trainers:\f{STRVAR_1 3, 0, 0}\f{STRVAR_1 3, 1, 0}
 #define pl_msg_00000164_00004 4
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0164_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0164_H

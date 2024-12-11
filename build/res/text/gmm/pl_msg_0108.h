@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0108_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0108_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0108_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0108_H
 
 // Hey, there!\nHow’s it going, Champ-to-be?\rThis Gym is some kind of wicked!\nWhat’s wicked about it?\rI’ll tell you!\nFirst, it’s pitch-black!\rOh, no worries, though!\nI have a flashlight right here for you.\rAlso, there are the usual Gym Trainers.\nThey have flashlights, too.\rIf you cast 
 // a light on one, or they\ncatch you in the light, the battle’s on!\rOK, now this is really important!\nIt’s about the tiles on the floor.\rFirst, find the one {COLOR 2}blue{COLOR 0} tile in the\nroom, and memorize the mark on it.\rNext, head for the {COLOR 1}red{COLOR 0} door with the\nsame mark 
@@ -26,4 +26,4 @@
 // Hearthome City Pokémon Gym\nLeader: Fantina\rCertified Trainers:\n{STRVAR_1 3, 0, 0}\f{STRVAR_1 3, 1, 0}
 #define pl_msg_00000108_00006 6
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0108_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0108_H

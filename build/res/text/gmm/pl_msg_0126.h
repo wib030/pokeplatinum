@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0126_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0126_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0126_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0126_H
 
 // Hiya!\nOh, you’re a Trainer!\rThat means you’re using Pokémon Boxes!\nI love meeting end users!\rOh, what’s up?\nWhy that astonished look?\rOh, right, sorry!\nThere I go running my mouth again!\rMy name’s Bebe!\rYou know the PC Pokémon Boxes?\nI’m the system administrator!\rI know this i
 // s out of the blue, but do\nyou want a Pokémon named EEVEE?
@@ -26,4 +26,4 @@
 // Bebe: Oh? Now that’s a National Pokédex\nI’m seeing. Good for you!\rYou’ll be using my Pokémon Boxes a\nwhole lot more if you’ve got that.\rWell, I always thought a good Trainer\nought to juggle Boxes smartly, though.\fI shouldn’t be the one to say so.
 #define pl_msg_00000126_00008 8
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0126_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0126_H

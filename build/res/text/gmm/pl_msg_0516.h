@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0516_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0516_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0516_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0516_H
 
 // ...I saw it!\nToday’s number is {STRVAR_1 51, 0, 0}!\rShow me a Pokémon that’s Lv. {STRVAR_1 51, 0, 0}.\nIf you can, I’ll reward you.
 #define pl_msg_00000516_00000 0
@@ -20,4 +20,4 @@
 // Win Items from Me!\rBlack Belt: Powers up Fighting-type\nmoves.\rExpert Belt: Powers up moves if they\nare super effective.\rFocus Sash: The bearer avoids\na one-hit KO if its HP is full.
 #define pl_msg_00000516_00005 5
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0516_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0516_H

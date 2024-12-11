@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0165_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0165_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0165_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0165_H
 
 // ...All right, challenger.\rIt’s not often, but some Trainers\nmanage to come and challenge me.\rBut they’ve all been boring battles.\nI didn’t break a sweat beating them.\r...Sigh...\nI’m Volkner, the Gym Leader.\rThey say I’m the top Gym Leader in\nSinnoh, but...\rAnyway, I guess we’d b
 // etter get this\ndone.\rI hope you’re the Trainer who’ll make\nme remember how fun it is to battle!\r
@@ -21,4 +21,4 @@
 // Your next step is the Pokémon\nLeague challenge.\rIt’s time for you to cross the sea\nand win your way through the\fgauntlet that is Victory Road.\rDemonstrate to the Pokémon League\nyour mastery of your team.\rAgainst you, even the Elite Four will\nbe pushed to fend off your challenge!
 #define pl_msg_00000165_00005 5
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0165_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0165_H

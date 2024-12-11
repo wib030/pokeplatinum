@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0486_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0486_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0486_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0486_H
 
 // Hohoho...\nThey call me Grandma Wilma.\rI came out here by myself from\na town of Dragon Tamers.\rI can teach the strongest of all\nDragon-type moves to the tough\fPokémon of Sinnoh.\rWould you like me to teach that\nmove to one of your Pokémon?
 #define pl_msg_00000486_00000 0
@@ -41,4 +41,4 @@
 // Draco Meteor’s destructive power\nis awe inspiring.\rHowever, using it will also lower\nthe Pokémon’s Special Attack.
 #define pl_msg_00000486_00016 16
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0486_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0486_H

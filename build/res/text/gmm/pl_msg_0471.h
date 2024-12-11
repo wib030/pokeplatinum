@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0471_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0471_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0471_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0471_H
 
 // Help, help, Trainer!\nPlease, I want to see my papa.\rMy papa and I lived at the Valley\nWindworks.\rBut then a whole bunch of people\ndressed like spacemen came...\rThey kicked me out, and they’re making\nmy papa do something.\rPlease, Trainer!\nI miss my papa!
 #define pl_msg_00000471_00000 0
@@ -27,4 +27,4 @@
 // Trainer Tips!\rThe items placed in your Bag are\nautomatically sorted to the\fappropriate pockets.\rIt’s very convenient!\nIt’s a Trainer’s best friend!
 #define pl_msg_00000471_00009 9
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0471_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0471_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0014_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0014_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0014_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0014_H
 
 // A Recruitment Message arrived\nfrom a Pokémon Ranger.\n\nYou may receive a {COLOR 1}MANAPHY Egg{COLOR 0}\nfrom the Pokémon Ranger!\n\nOn the next screen, select\n{COLOR 1}LINK WITH POKéMON RANGER{COLOR 0}.\nPress the A Button to advance.
 #define pl_msg_00000014_00000 0
@@ -19,4 +19,4 @@
 // \n{COLOR 1}WARNING!\n{COLOR 0}There is already another saved game\nfile. If you start an adventure now,\nyou will not be able to save it.\nPress Up + SELECT + B Button on\nthe title screen if you want to erase\nthe current saved game file.\n\nA Button: Begin adventure\nB Button: Return to the menu
 #define pl_msg_00000014_00005 5
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0014_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0014_H

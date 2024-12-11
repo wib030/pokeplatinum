@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0109_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0109_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0109_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0109_H
 
 // {SIZE 200}Ohohoho!!{SIZE 100}\rFinally, you have arrived!\rSince I came to this country, always\nI try to learn new things.\rThey hold Contests in this city?\nI say to myself, enfin, I will excel.\rThat is why I dress this way.\nC’est une performance!\rAlso, I study Pokémon very much.\nI have com
 // e to be Gym Leader.\rAnd, uh, so it shall be that you\nchallenge me.\rBut I shall win.\nThat is what a Gym Leader does, non?\r
@@ -26,4 +26,4 @@
 //                
 #define pl_msg_00000109_00008 8
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0109_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0109_H

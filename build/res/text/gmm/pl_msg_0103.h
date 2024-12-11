@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0103_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0103_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0103_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0103_H
 
 // Oak: Ah, it’s you! Good to see you!\nHow is your Pokédex coming along?\rCapturing every kind of Pokémon is\nno easy feat, I’ll grant you that.\rBut I’m sure you can accomplish it!\r
 #define pl_msg_00000103_00000 0
@@ -20,4 +20,4 @@
 // Oak: Ah, it’s you!\nHow goes it?\rWhat’s that? You’ve caught ARTICUNO,\nZAPDOS, and MOLTRES?!\rNow that is incredible!\rWell, then, allow me to examine your\nPokédex.\r
 #define pl_msg_00000103_00005 5
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0103_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0103_H

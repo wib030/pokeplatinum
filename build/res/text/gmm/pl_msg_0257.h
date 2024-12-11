@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0257_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0257_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0257_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0257_H
 
 // That sparkling new Pokétch!\nYour awkwardness as a traveler!\rHmm... You’re still a pretty new\nTrainer, aren’t you?\rBut it’s all good! You’re a new fellow\nfriend of Pokémon!\rSo, let me make a gift of this Hidden\nMachine to you!\r
 #define pl_msg_00000257_00000 0
@@ -14,4 +14,4 @@
 // Oh! Good golly!\nThat’s Oreburgh City’s Gym Badge!\rAll right! Now you can use the hidden\nmove Rock Smash on small boulders!
 #define pl_msg_00000257_00002 2
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0257_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0257_H

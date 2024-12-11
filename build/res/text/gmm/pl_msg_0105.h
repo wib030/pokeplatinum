@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0105_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0105_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0105_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0105_H
 
 // I am! I am the first to have gone\nunderground and dug some tunnels.\rYou can call me the Underground Man.\nEveryone else does.\rI’ll make a gift of this to you.\nYou hold up your end of the deal\fand put it to good use!\r
 #define pl_msg_00000105_00000 0
@@ -116,4 +116,4 @@
 // Treasure: These are rare items that\nappear while digging underground.\rThey can be taken out of the\nUnderground if placed in your Bag\fwhile in the tunnels.\rDig around all over and find\nTreasure!\r
 #define pl_msg_00000105_00047 47
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0105_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0105_H

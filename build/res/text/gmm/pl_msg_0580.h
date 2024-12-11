@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0580_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0580_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0580_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0580_H
 
 // Oh?\nWelcome!\rYou saw the notice outside about\nus hiring, right?\rIs that a Pokédex there?\nThen you must know Professor Rowan!\rYou’re just the Pokémon-searching\nexpert we’ve been looking for!\r
 #define pl_msg_00000580_00000 0
@@ -45,4 +45,4 @@
 // The Pokémon of the mothering sea\naren’t like the others.\rIf you are brave enough to face such\nintimidating Pokémon, the Dive Ball is\fperfect for you.\rFor Pokémon you meet in the sea, and\nfor Pokémon caught fishing...\rThe Dive Ball is the Poké Ball you can\ncount on!
 #define pl_msg_00000580_00017 17
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0580_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0580_H

@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0492_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0492_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0492_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0492_H
 
 // Backlot: Hello, hello!\nWelcome to my opulent mansion!\rThere’s a lot for me to be proud of\ninside, and outside, of this home...\rBut what makes me the most proud is\nmy trophy garden in the back!\rWhy bother traveling afar when\nPokémon are attracted by my garden?\rThey come to me in hopes of s
 // eeing\nthe garden!\rYou’re welcome to join them and\nmarvel at my garden!
@@ -57,4 +57,4 @@
 // {STRVAR_1 3, 0, 0} put the book back.
 #define pl_msg_00000492_00022 22
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0492_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0492_H

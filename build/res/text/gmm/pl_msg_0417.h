@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0417_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0417_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0417_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0417_H
 
 // Serge: It’s time for Rack ’Em Up\nRecords!\rToday, we’ll look at an amazing\nrecord set by a Battle Tower master!\rTanya: A Battle Tower master?\rSerge: You heard right, Tanya!\nI’m talking about {STRVAR_1 3, 0, 0}’s\f{STRVAR_1 0, 1, 0}-led team.\rThey set a new Single Battle record\nof {S
 // TRVAR_1 53, 2, 0} straight wins at the tower!\rTanya: They must really enjoy\nclimbing to high places.\rSerge: No, no, you’ve got that all\nwrong!\rThey accomplished a super feat!\nSee you again, folks!
@@ -40,4 +40,4 @@
 // anya: Other people’s Pokémon must\nseem stronger to that Trainer.\rSerge: No, no, that’s not right!\nThat’s not how to look at it.\rThis is something special!\nSee you again, folks!
 #define pl_msg_00000417_00010 10
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0417_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0417_H

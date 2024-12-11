@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0189_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0189_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0189_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0189_H
 
 // Cynthia: Have you been keeping well?\rThank you for Mt. Coronet.\nAnd for the Distortion World.\fI’m truly grateful.\rTogether, you and your Pokémon\novercame all the challenges you\ffaced, however difficult.\rIt means that you’ve triumphed\nover any personal weaknesses, too.\rThe power you lea
 // rned...\nI can feel it emanating from you.\rBut that’s enough talk.\nLet’s get on with why you’re here.\rAs the Pokémon League Champion,\nI accept your challenge!\r
@@ -18,4 +18,4 @@
 // et’s get on with why you’re here.\rI, Cynthia, accept your challenge as\nthe Pokémon League Champion!\rThere won’t be any letup from me!\r
 #define pl_msg_00000189_00003 3
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0189_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0189_H

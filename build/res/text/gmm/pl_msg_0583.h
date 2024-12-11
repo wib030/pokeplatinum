@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0583_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0583_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0583_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0583_H
 
 // There’s an odd spaceman\nin front of the ruins.\rThere isn’t anything there, but that\nonly seemed to make him get angry.\rHe’s saying he will blow the town\nup with a bomb...\rThe nerve of it all...\rIf only I were younger, I’d punish\nthat spaceman with my Pokémon...
 #define pl_msg_00000583_00000 0
@@ -44,4 +44,4 @@
 // A giant etching of a Pokémon-like\ncreature covers the wall...\rThere is some fading text etched\nin as well...\rSpace is ever-expanding dimensions...\nOur spirits, too, are as space...
 #define pl_msg_00000583_00017 17
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0583_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0583_H

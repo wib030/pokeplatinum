@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0086_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0086_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0086_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0086_H
 
 // The more Gym Badges you have, the\nbetter they treat you at Poké Marts.\rYou get to buy a better selection of\nmerchandise, you see.\rBut I don’t have a single Gym Badge.\nIt’s because Gardenia’s too much!\rArgh! I don’t want to see another\ngrass Pokémon ever again!\rIf only I had Flying-
 // type Pokémon...\nThen my losing streak would end!
@@ -12,4 +12,4 @@
 // An Escape Rope is indispensable!\rI wish I’d had one when I got into a \ntough spot in the Eterna Forest.\rI would’ve been able to warp to the\nentrance instantly!
 #define pl_msg_00000086_00001 1
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0086_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0086_H

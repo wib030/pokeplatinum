@@ -1,35 +1,180 @@
-Log of Meson test suite run on 2024-05-31T23:06:47.601730
+Log of Meson test suite run on 2024-12-11T13:10:18.504479
 
-Inherited environment: ProgramFiles(x86)='C:\Program Files (x86)' !::='::\' CommonProgramFiles(x86)='C:\Program Files (x86)\Common Files' SHELL=/usr/bin/bash NUMBER_OF_PROCESSORS=6 PROCESSOR_LEVEL=23 TERM_PROGRAM_VERSION=3.7.1 PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig USERDOMAIN_ROAMINGPROFILE=DESKTOP-VK5OFGB HOSTNAME=DESKTOP-VK5OFGB DEVKITPRO=/opt/devkitpro PROGRAMFILES='C:\Program Files' MSYSTEM=MSYS ChocolateyInstall='C:\ProgramData\chocolatey' PATHEXT='.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW' ORIGINAL_TEMP=/c/Users/User/AppData/Local/Temp OS=Windows_NT HOMEDRIVE=C: MSYSTEM_CARCH=x86_64 USERDOMAIN=DESKTOP-VK5OFGB PWD=/c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum USERPROFILE='C:\Users\User' MANPATH=/usr/local/man:/usr/share/man:/usr/man:/share/man PRINTER='Microsoft Print to PDF' TZ=Australia/Hobart MINGW_PACKAGE_PREFIX=mingw-w64-x86_64- ALLUSERSPROFILE='C:\ProgramData' ORIGINAL_PATH=/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/ CommonProgramW6432='C:\Program Files\Common Files' HOME=/home/User USERNAME=User OneDrive='C:\Users\User\OneDrive' COMSPEC='C:\Windows\system32\cmd.exe' APPDATA='C:\Users\User\AppData\Roaming' SYSTEMROOT='C:\Windows' LOCALAPPDATA='C:\Users\User\AppData\Local' NINJA_STATUS='[%p %f/%t] ' DEVKITARM=/opt/devkitpro/devkitARM COMPUTERNAME=DESKTOP-VK5OFGB INFOPATH=/usr/local/info:/usr/share/info:/usr/info:/share/info TERM=xterm LOGONSERVER='\\DESKTOP-VK5OFGB' USER=User PSModulePath='C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules' TEMP=/tmp MSYSTEM_CHOST=x86_64-pc-msys SHLVL=2 ORIGINAL_TMP=/c/Users/User/AppData/Local/Temp PROCESSOR_REVISION=7100 DriverData='C:\Windows\System32\Drivers\DriverData' VBOX_HWVIRTEX_IGNORE_SVM_IN_USE=1 COMMONPROGRAMFILES='C:\Program Files\Common Files' DEVKITPPC=/opt/devkitpro/devkitPPC LM_LICENSE_FILE='C:\Users\User\Documents\.ROMs\..Decompilation\pokeplatinum\tools\cw\license.dat' LC_CTYPE=en_US.UTF-8 QT_SCALE_FACTOR_ROUNDING_POLICY=RoundPreferFloor PROCESSOR_IDENTIFIER='AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD' SESSIONNAME=Console HOMEPATH='\Users\User' MSYSCON=mintty.exe TMP=/tmp CONFIG_SITE=/etc/config.site PATH=/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/mingw64/bin ProgramW6432='C:\Program Files' MSYSTEM_PREFIX=/usr OculusBase='C:\Program Files\Oculus\' WINDIR='C:\Windows' PROCESSOR_ARCHITECTURE=AMD64 PUBLIC='C:\Users\Public' SYSTEMDRIVE=C: OLDPWD=/home/User TERM_PROGRAM=mintty ProgramData='C:\ProgramData' ChocolateyLastPathUpdate=133566056415730905 _=/usr/bin/meson 
+Inherited environment: ProgramFiles(x86)='C:\Program Files (x86)' !::='::\' CommonProgramFiles(x86)='C:\Program Files (x86)\Common Files' SHELL=/usr/bin/bash NUMBER_OF_PROCESSORS=6 FPS_BROWSER_USER_PROFILE_STRING=Default PROCESSOR_LEVEL=23 TERM_PROGRAM_VERSION=3.7.1 PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig USERDOMAIN_ROAMINGPROFILE=DESKTOP-4ONS9C4 HOSTNAME=DESKTOP-4ONS9C4 PROGRAMFILES='C:\Program Files' MSYSTEM=MSYS PATHEXT='.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC' ORIGINAL_TEMP=/c/Users/lbear/AppData/Local/Temp OS=Windows_NT HOMEDRIVE=C: MSYSTEM_CARCH=x86_64 USERDOMAIN=DESKTOP-4ONS9C4 PWD=/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum USERPROFILE='C:\Users\lbear' MANPATH=/usr/local/man:/usr/share/man:/usr/man:/share/man PRINTER='Microsoft Print to PDF' TZ=Australia/Hobart MINGW_PACKAGE_PREFIX=mingw-w64-x86_64- ALLUSERSPROFILE='C:\ProgramData' ORIGINAL_PATH=/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/ CommonProgramW6432='C:\Program Files\Common Files' HOME=/home/lbear USERNAME=lbear OneDrive='C:\Users\lbear\OneDrive' COMSPEC='C:\Windows\system32\cmd.exe' APPDATA='C:\Users\lbear\AppData\Roaming' SYSTEMROOT='C:\Windows' LOCALAPPDATA='C:\Users\lbear\AppData\Local' NINJA_STATUS='[%p %f/%t] ' COMPUTERNAME=DESKTOP-4ONS9C4 INFOPATH=/usr/local/info:/usr/share/info:/usr/info:/share/info TERM=xterm LOGONSERVER='\\DESKTOP-4ONS9C4' USER=lbear PSModulePath='C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules' TEMP=/tmp MSYSTEM_CHOST=x86_64-pc-msys SHLVL=2 ORIGINAL_TMP=/c/Users/lbear/AppData/Local/Temp PROCESSOR_REVISION=7100 DriverData='C:\Windows\System32\Drivers\DriverData' COMMONPROGRAMFILES='C:\Program Files\Common Files' LM_LICENSE_FILE='C:\Users\lbear\Documents\.ROMs\..Decompilation\pokeplatinum\tools\cw\license.dat' LC_CTYPE=en_US.UTF-8 PROCESSOR_IDENTIFIER='AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD' SESSIONNAME=Console HOMEPATH='\Users\lbear' MSYSCON=mintty.exe TMP=/tmp CONFIG_SITE=/etc/config.site PATH=/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/mingw64/bin ProgramW6432='C:\Program Files' MSYSTEM_PREFIX=/usr WINDIR='C:\Windows' FPS_BROWSER_APP_PROFILE_STRING='Internet Explorer' PROCESSOR_ARCHITECTURE=AMD64 PUBLIC='C:\Users\Public' SYSTEMDRIVE=C: OLDPWD=/home/lbear TERM_PROGRAM=mintty ProgramData='C:\ProgramData' _=/usr/bin/meson 
 
 ==================================== 1/3 =====================================
 test:         SBIN Checksums
-start time:   13:06:47
-duration:     0.11s
-result:       exit status 0
-command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=4 /usr/bin/sha1sum -c --quiet /c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum/build/../platinum.us/sbins.sha1
+start time:   02:10:18
+duration:     0.29s
+result:       exit status 1
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=246 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/sha1sum -c --quiet /c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/build/../platinum.us/sbins.sha1
+----------------------------------- stdout -----------------------------------
+main.sbin: FAILED
+overlay1.sbin: FAILED
+overlay4.sbin: FAILED
+overlay5.sbin: FAILED
+overlay6.sbin: FAILED
+overlay7.sbin: FAILED
+overlay8.sbin: FAILED
+overlay9.sbin: FAILED
+overlay10.sbin: FAILED
+overlay11.sbin: FAILED
+overlay12.sbin: FAILED
+overlay13.sbin: FAILED
+trainer_ai.sbin: FAILED
+battle.sbin: FAILED
+overlay17.sbin: FAILED
+overlay18.sbin: FAILED
+overlay19.sbin: FAILED
+overlay20.sbin: FAILED
+overlay21.sbin: FAILED
+overlay22.sbin: FAILED
+overlay23.sbin: FAILED
+overlay24.sbin: FAILED
+overlay25.sbin: FAILED
+overlay26.sbin: FAILED
+overlay27.sbin: FAILED
+overlay28.sbin: FAILED
+overlay29.sbin: FAILED
+overlay30.sbin: FAILED
+overlay31.sbin: FAILED
+overlay32.sbin: FAILED
+overlay33.sbin: FAILED
+overlay34.sbin: FAILED
+overlay35.sbin: FAILED
+overlay36.sbin: FAILED
+overlay37.sbin: FAILED
+overlay38.sbin: FAILED
+overlay39.sbin: FAILED
+overlay40.sbin: FAILED
+overlay41.sbin: FAILED
+overlay42.sbin: FAILED
+overlay43.sbin: FAILED
+overlay44.sbin: FAILED
+overlay45.sbin: FAILED
+overlay46.sbin: FAILED
+overlay47.sbin: FAILED
+overlay48.sbin: FAILED
+overlay49.sbin: FAILED
+overlay50.sbin: FAILED
+overlay51.sbin: FAILED
+overlay52.sbin: FAILED
+overlay53.sbin: FAILED
+overlay54.sbin: FAILED
+overlay55.sbin: FAILED
+overlay56.sbin: FAILED
+overlay57.sbin: FAILED
+overlay58.sbin: FAILED
+overlay59.sbin: FAILED
+overlay60.sbin: FAILED
+overlay61.sbin: FAILED
+overlay62.sbin: FAILED
+overlay63.sbin: FAILED
+overlay64.sbin: FAILED
+overlay65.sbin: FAILED
+overlay66.sbin: FAILED
+overlay67.sbin: FAILED
+overlay68.sbin: FAILED
+overlay69.sbin: FAILED
+overlay70.sbin: FAILED
+overlay71.sbin: FAILED
+overlay72.sbin: FAILED
+overlay73.sbin: FAILED
+overlay74.sbin: FAILED
+overlay75.sbin: FAILED
+overlay76.sbin: FAILED
+overlay77.sbin: FAILED
+choose_starter.sbin: FAILED
+overlay79.sbin: FAILED
+overlay80.sbin: FAILED
+overlay81.sbin: FAILED
+overlay82.sbin: FAILED
+overlay83.sbin: FAILED
+overlay84.sbin: FAILED
+overlay85.sbin: FAILED
+overlay86.sbin: FAILED
+overlay87.sbin: FAILED
+overlay88.sbin: FAILED
+overlay90.sbin: FAILED
+overlay91.sbin: FAILED
+overlay92.sbin: FAILED
+overlay93.sbin: FAILED
+overlay94.sbin: FAILED
+overlay95.sbin: FAILED
+overlay96.sbin: FAILED
+overlay97.sbin: FAILED
+overlay98.sbin: FAILED
+overlay99.sbin: FAILED
+overlay100.sbin: FAILED
+overlay101.sbin: FAILED
+overlay102.sbin: FAILED
+overlay104.sbin: FAILED
+overlay105.sbin: FAILED
+overlay106.sbin: FAILED
+overlay107.sbin: FAILED
+overlay108.sbin: FAILED
+overlay109.sbin: FAILED
+overlay110.sbin: FAILED
+overlay111.sbin: FAILED
+overlay112.sbin: FAILED
+overlay113.sbin: FAILED
+overlay114.sbin: FAILED
+overlay115.sbin: FAILED
+overlay116.sbin: FAILED
+overlay117.sbin: FAILED
+overlay118.sbin: FAILED
+overlay119.sbin: FAILED
+overlay120.sbin: FAILED
+overlay121.sbin: FAILED
+----------------------------------- stderr -----------------------------------
+/usr/bin/sha1sum: WARNING: 117 computed checksums did NOT match
 ==============================================================================
 
 ==================================== 2/3 =====================================
 test:         Filesystem Checksums
-start time:   13:06:47
-duration:     0.26s
-result:       exit status 0
-command:      MALLOC_PERTURB_=10 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/sha1sum -c --quiet /c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum/build/../platinum.us/filesys.sha1
+start time:   02:10:18
+duration:     0.24s
+result:       exit status 1
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=114 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/sha1sum -c --quiet /c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/build/../platinum.us/filesys.sha1
+----------------------------------- stdout -----------------------------------
+res/text/pl_msg.narc: FAILED
+res/pokemon/pl_personal.narc: FAILED
+res/pokemon/evo.narc: FAILED
+res/pokemon/wotbl.narc: FAILED
+res/trainers/trdata.narc: FAILED
+res/trainers/trpoke.narc: FAILED
+res/battle/scripts/be_seq.narc: FAILED
+res/battle/scripts/sub_seq.narc: FAILED
+res/battle/moves/pl_waza_tbl.narc: FAILED
+res/prebuilt/itemtool/itemdata/item_icon.narc: FAILED
+res/items/pl_item_data.narc: FAILED
+res/field/encounters/pl_enc_data.narc: FAILED
+----------------------------------- stderr -----------------------------------
+/usr/bin/sha1sum: WARNING: 12 computed checksums did NOT match
 ==============================================================================
 
 ==================================== 3/3 =====================================
 test:         ROM Checksum
-start time:   13:06:47
-duration:     0.26s
-result:       exit status 0
-command:      MALLOC_PERTURB_=49 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/sha1sum -c --quiet /c/Users/User/Documents/.ROMs/..Decompilation/pokeplatinum/build/../platinum.us/rom.sha1
+start time:   02:10:18
+duration:     0.25s
+result:       exit status 1
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=36 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/sha1sum -c --quiet /c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/build/../platinum.us/rom.sha1
+----------------------------------- stdout -----------------------------------
+pokeplatinum.us.nds: FAILED
+----------------------------------- stderr -----------------------------------
+/usr/bin/sha1sum: WARNING: 1 computed checksum did NOT match
 ==============================================================================
 
 
-Ok:                 3   
+Summary of Failures:
+
+1/3 SBIN Checksums       FAIL            0.29s   exit status 1
+2/3 Filesystem Checksums FAIL            0.24s   exit status 1
+3/3 ROM Checksum         FAIL            0.25s   exit status 1
+
+Ok:                 0   
 Expected Fail:      0   
-Fail:               0   
+Fail:               3   
 Unexpected Pass:    0   
 Skipped:            0   
 Timeout:            0   

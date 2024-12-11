@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0416_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0416_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0416_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0416_H
 
 // DJ: Gotta catch ’em all!\nIt’s the Catch That Pokémon Show!\rSo, let me tell you about this show’s\nfeatured Pokémon-catching Trainer.\rThe Trainer that caught our eye with\na dandy of a catch is none other\fthan the inestimable {STRVAR_1 3, 0, 0}!\rAnd what, you may ask yourself, did\n{STRV
 // AR_1 3, 0, 0} catch?\rWhy, none other than a mighty fine\n{STRVAR_1 0, 1, 0}!\rNice one, {STRVAR_1 3, 0, 0}!\nThat’s one slick takedown!\rThe Pokémon was nabbed with an\nexpertly thrown {STRVAR_1 8, 2, 0}.\rAnd out of {STRVAR_1 52, 3, 0} thrown, it was\nthe very last one!\rLame joking aside, we�
@@ -142,4 +142,4 @@
 // from the\nResort Area.
 #define pl_msg_00000416_00039 39
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0416_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0416_H

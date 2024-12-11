@@ -3,8 +3,8 @@
  *               DO NOT MODIFY                     *
  ***************************************************/
 
-#ifndef MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0188_H
-#define MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0188_H
+#ifndef MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0188_H
+#define MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0188_H
 
 // Ah, you timed your arrival well.\rI’ve just finished reading a book,\nyou see.\rAllow me to introduce myself.\rI am Lucian.\nI am a user of the Psychic type.\rI must say, you’ve already proven\nyourself to be outstanding by coming\fthis far.\rThey say I am the toughest of the\nElite Four.\rI’m
 //  afraid I will have to go all out\nagainst you to live up to that\freputation.\r
@@ -14,4 +14,4 @@
 // I’ll be reading books until the next\nchallenger arrives.\rThat will calm my nerves, so that\nI may deal with all situations without\fpanicking.
 #define pl_msg_00000188_00002 2
 
-#endif //MSGENC__C_USERS_USER_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0188_H
+#endif //MSGENC__C_USERS_LBEAR_DOCUMENTS__ROMS___DECOMPILATION_POKEPLATINUM_BUILD_RES_TEXT_GMM_PL_MSG_0188_H
