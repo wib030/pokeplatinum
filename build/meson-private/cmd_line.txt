@@ -1,7 +1,0 @@
-[options]
-wrap_mode = nopromote
-
-[properties]
-cross_file = ['/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/meson/cross.ini', '/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/build/root.ini']
-native_file = ['/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/meson/native.ini', '/c/Users/lbear/Documents/.ROMs/..Decompilation/pokeplatinum/build/root.ini']
-
