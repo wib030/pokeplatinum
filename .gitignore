@@ -12,8 +12,8 @@
 /subprojects/SDATTool/
 /subprojects/knarc/
 
-# Built rom
-/build/pokeplatinum.us.nds
+# Meson files
+/build/
 
 # CLion folders
 .idea/
