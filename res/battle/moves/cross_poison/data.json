@@ -7,7 +7,7 @@
     "pp": 20,
     "effect": {
         "type": "BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT",
-        "chance": 10
+        "chance": 30
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
