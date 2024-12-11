@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PELIPPER",
             "form": 0,
-            "level": 35,
+            "level": 36,
             "item": "ITEM_DAMP_ROCK",
             "moves": [
                 "MOVE_ROOST",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_GASTRODON",
             "form": 1,
-            "level": 35,
+            "level": 36,
             "item": "ITEM_RINDO_BERRY",
             "moves": [
                 "MOVE_EARTH_POWER",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_KINGDRA",
             "form": 0,
-            "level": 35,
+            "level": 36,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_OCTAZOOKA",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_KINGLER",
             "form": 0,
-            "level": 35,
+            "level": 36,
             "item": "ITEM_STARF_BERRY",
             "moves": [
                 "MOVE_AQUA_JET",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_SLOWKING",
             "form": 0,
-            "level": 35,
+            "level": 36,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
                 "MOVE_FUTURE_SIGHT",
