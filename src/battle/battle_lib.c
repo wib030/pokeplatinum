@@ -8404,7 +8404,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             break;
 
         case ABILITY_TIDAL_FORCE:
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
+            if (fieldConditions & FIELD_CONDITION_GRAVITY) {
                 movePower = movePower * 13 / 10;
             }
             break;
@@ -9428,7 +9428,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             break;
 
         case ABILITY_TIDAL_FORCE:
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
+            if (fieldConditions & FIELD_CONDITION_GRAVITY) {
                 movePower = movePower * 13 / 10;
             }
             break;
