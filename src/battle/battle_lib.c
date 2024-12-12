@@ -8030,6 +8030,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     int terrain;
     int naturePowerMove;
     int rnd;
+	u32 effectiveness;
     
     mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
 
@@ -8120,7 +8121,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
                         partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
 
-                        if ((Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
+                        if (Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
                         && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
@@ -8201,14 +8202,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                                     break;
 
                                 case ABILITY_GUTS:
-                                    if (Pokemon_GetValue(partyMon MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                                    if (Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
                                         damage = damage * 3 / 2;
                                     }
                                     break;
 
                                 case ABILITY_RIVALRY:
                                     if (defenderParams.gender != GENDER_NONE
-                                    && Pokemon_GetValue(partyMon MON_DATA_GENDER, NULL) == defenderParams.gender) {
+                                    && Pokemon_GetValue(partyMon, MON_DATA_GENDER, NULL) == defenderParams.gender) {
                                         damage = damage * 3 / 2;
                                     }
                                     break;
@@ -8242,18 +8243,18 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                                 case HOLD_EFFECT_STRENGTHEN_DARK:
                                 case HOLD_EFFECT_ARCEUS_DARK:
                                     if (partyMonInType == TYPE_DARK) {
-                                        damage = damage * (100 + itemPower) / 100;
+                                        damage = damage * (100 + partyMonItemPower) / 100;
                                     }
                                     break;
 
                                 case HOLD_EFFECT_STRENGTHEN_NORMAL:
                                     if (partyMonInType == TYPE_NORMAL) {
-                                        damage = damage * (100 + itemPower) / 100;
+                                        damage = damage * (100 + partyMonItemPower) / 100;
                                     }
                                     break;
 
                                 case HOLD_EFFECT_POWER_UP_PHYS:
-                                    damage = damage * (100 + itemPower) / 100;
+                                    damage = damage * (100 + partyMonItemPower) / 100;
                                     break;
                             }
 
@@ -9240,6 +9241,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     int terrain;
     int naturePowerMove;
     int rnd;
+	u32 effectiveness;
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
@@ -9324,7 +9326,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
                         partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
 
-                        if ((Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
+                        if (Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
                         && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
@@ -9405,14 +9407,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                                     break;
 
                                 case ABILITY_GUTS:
-                                    if (Pokemon_GetValue(partyMon MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                                    if (Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
                                         damage = damage * 3 / 2;
                                     }
                                     break;
 
                                 case ABILITY_RIVALRY:
                                     if (defenderParams.gender != GENDER_NONE
-                                    && Pokemon_GetValue(partyMon MON_DATA_GENDER, NULL) == defenderParams.gender) {
+                                    && Pokemon_GetValue(partyMon, MON_DATA_GENDER, NULL) == defenderParams.gender) {
                                         damage = damage * 3 / 2;
                                     }
                                     break;
@@ -9446,18 +9448,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                                 case HOLD_EFFECT_STRENGTHEN_DARK:
                                 case HOLD_EFFECT_ARCEUS_DARK:
                                     if (partyMonInType == TYPE_DARK) {
-                                        damage = damage * (100 + itemPower) / 100;
+                                        damage = damage * (100 + partyMonItemPower) / 100;
                                     }
                                     break;
 
                                 case HOLD_EFFECT_STRENGTHEN_NORMAL:
                                     if (partyMonInType == TYPE_NORMAL) {
-                                        damage = damage * (100 + itemPower) / 100;
+                                        damage = damage * (100 + partyMonItemPower) / 100;
                                     }
                                     break;
 
                                 case HOLD_EFFECT_POWER_UP_PHYS:
-                                    damage = damage * (100 + itemPower) / 100;
+                                    damage = damage * (100 + partyMonItemPower) / 100;
                                     break;
                             }
 
@@ -10581,7 +10583,7 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
             + (attackerAbility == ABILITY_SUPER_LUCK)
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
 			+ (4 * (punchingMove == 1))
-            + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
+            + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD)));
 
     if (effectiveCritStage > 4) {
         effectiveCritStage = 4;
