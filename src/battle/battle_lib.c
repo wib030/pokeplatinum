@@ -7933,7 +7933,8 @@ static const u16 sPunchingMoves[] = {
     MOVE_DRAIN_PUNCH,
     MOVE_BULLET_PUNCH,
 	MOVE_GUILLOTINE,
-    MOVE_SKY_UPPERCUT
+    MOVE_SKY_UPPERCUT,
+    MOVE_BEAT_UP
 };
 
 static const u16 sBitingMoves[] = {
@@ -8090,6 +8091,195 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             || effect == BATTLE_EFFECT_AVERAGE_HP) {
             switch (effect) {
                 default:
+                    break;
+
+                case BATTLE_EFFECT_BEAT_UP:
+                    Pokemon *partyMon;
+                    int partyMonSpecies;
+                    int partyMonForm;
+                    int partyMonLevel;
+                    int side;
+                    u8 partyMonAbility;
+                    u8 partyMonType1;
+                    u8 partyMonType2;
+                    u8 partyMonInType;
+                    u8 partyMonItemEffect;
+                    u8 partyMonItemPower;
+                    u16 partyMonItem;
+                    s32 cumDamage = 0;
+
+                    for (i = 0; i < MAX_PARTY_SIZE; i++) {
+                        partyMon = BattleSystem_PartyPokemon(battleSys, attacker, i);
+                        partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
+                        partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                        partyMonLevel = Pokemon_GetValue(partyMon, MON_DATA_LEVEL, NULL);
+                        partyMonAbility = Pokemon_GetValue(partyMon, MON_DATA_ABILITY, NULL);
+                        partyMonType1 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_1, NULL);
+                        partyMonType2 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_2, NULL);
+                        partyMonItem = Pokemon_GetValue(partyMon, MON_DATA_HELD_ITEM, NULL);
+                        partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
+                        partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+
+                        if ((Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
+                        && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                        && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                        && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
+                            damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
+                            damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
+
+                            switch (partyMonAbility) {
+                                default:
+                                    break;
+
+                                case ABILITY_HUGE_POWER:
+                                case ABILITY_PURE_POWER:
+                                    damage *= 2;
+                                    break;
+
+                                case ABILITY_PLUS:
+                                    if (attackerParams.ability == ABILITY_MINUS) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_FORECAST:
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                                        damage /= 2;
+                                        break;
+                                    }
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                        damage = damage * 3 / 2;
+                                        break;
+                                    }
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+                                        damage = damage * 3 / 2;
+                                        break;
+                                    }
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+                                        damage = damage * 3 / 2;
+                                        break;
+                                    }
+                                    break;
+
+                                case ABILITY_SOLAR_POWER:
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_HUSTLE:
+                                    damage = damage * 3 / 2;
+                                    break;
+                            }
+
+                            // Held item effects that directly affect attack stat
+                            switch (partyMonItemEffect) {
+                                default:
+                                    break;
+
+                                case HOLD_EFFECT_PIKA_SPATK_UP:
+                                    if (partyMonSpecies == SPECIES_PIKACHU) {
+                                        damage *= 2;
+                                    }
+                                    break;
+
+                                case HOLD_EFFECT_CUBONE_ATK_UP:
+                                    if (partyMonSpecies == SPECIES_CUBONE
+                                        || partyMonSpecies == SPECIES_MAROWAK) {
+
+                                        damage *= 2;
+                                    }
+                                    break;
+                            }
+
+                            // End of use of direct attack stat usage here
+                            damage += 2;
+
+                            // All other abilities
+                            switch (partyMonAbility) {
+                                default:
+                                    break;
+
+                                case ABILITY_GUTS:
+                                    if (Pokemon_GetValue(partyMon MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_RIVALRY:
+                                    if (defenderParams.gender != GENDER_NONE
+                                    && Pokemon_GetValue(partyMon MON_DATA_GENDER, NULL) == defenderParams.gender) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_IRON_FIST:
+                                    damage = damage * 13 / 10;
+                                    break;
+
+                                case ABILITY_TECHNICIAN:
+                                    damage = damage * 3 / 2;
+                                    break;
+
+                                case ABILITY_NORMALIZE:
+                                    partyMonInType = TYPE_NORMAL;
+                                    break;
+                            }
+	
+                            // All other held item effects
+                            switch (partyMonItemEffect) {
+                                default:
+                                    break;
+
+                                case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+                                    damage = damage * 6 / 5;
+                                    break;
+
+                                case HOLD_EFFECT_CHOICE_ATK:
+                                    damage = damage * 3 / 2;
+                                    break;
+
+                                case HOLD_EFFECT_STRENGTHEN_DARK:
+                                case HOLD_EFFECT_ARCEUS_DARK:
+                                    if (partyMonInType == TYPE_DARK) {
+                                        damage = damage * (100 + itemPower) / 100;
+                                    }
+                                    break;
+
+                                case HOLD_EFFECT_STRENGTHEN_NORMAL:
+                                    if (partyMonInType == TYPE_NORMAL) {
+                                        damage = damage * (100 + itemPower) / 100;
+                                    }
+                                    break;
+
+                                case HOLD_EFFECT_POWER_UP_PHYS:
+                                    damage = damage * (100 + itemPower) / 100;
+                                    break;
+                            }
+
+                            damage = PartyMon_ApplyTypeChart(battleSys,
+                                                battleCtx,
+                                                move,
+                                                partyMonInType,
+                                                attacker,
+                                                defender,
+                                                damage,
+                                                attacker,
+                                                i,
+                                                &effectiveness);
+
+                            if ((effectiveness & MOVE_STATUS_IMMUNE)
+                                && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+                            {
+                                    damage = 0;
+                            }
+                        }
+
+                        cumDamage += damage;
+                    }
+
+                    damage = cumDamage;
+                    return damage;
                     break;
 
                 case BATTLE_EFFECT_40_DAMAGE_FLAT:
@@ -9106,6 +9296,196 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             switch (effect) {
                 default:
                     break;
+
+                case BATTLE_EFFECT_BEAT_UP:
+                    Pokemon *partyMon;
+                    int partyMonSpecies;
+                    int partyMonForm;
+                    int partyMonLevel;
+                    int side;
+                    u8 partyMonAbility;
+                    u8 partyMonType1;
+                    u8 partyMonType2;
+                    u8 partyMonInType;
+                    u8 partyMonItemEffect;
+                    u8 partyMonItemPower;
+                    u16 partyMonItem;
+                    s32 cumDamage = 0;
+
+                    for (i = 0; i < MAX_PARTY_SIZE; i++) {
+                        partyMon = BattleSystem_PartyPokemon(battleSys, attacker, i);
+                        partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
+                        partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                        partyMonLevel = Pokemon_GetValue(partyMon, MON_DATA_LEVEL, NULL);
+                        partyMonAbility = Pokemon_GetValue(partyMon, MON_DATA_ABILITY, NULL);
+                        partyMonType1 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_1, NULL);
+                        partyMonType2 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_2, NULL);
+                        partyMonItem = Pokemon_GetValue(partyMon, MON_DATA_HELD_ITEM, NULL);
+                        partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
+                        partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+
+                        if ((Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
+                        && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                        && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                        && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
+                            damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
+                            damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
+
+                            switch (partyMonAbility) {
+                                default:
+                                    break;
+
+                                case ABILITY_HUGE_POWER:
+                                case ABILITY_PURE_POWER:
+                                    damage *= 2;
+                                    break;
+
+                                case ABILITY_PLUS:
+                                    if (attackerParams.ability == ABILITY_MINUS) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_FORECAST:
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                                        damage /= 2;
+                                        break;
+                                    }
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                        damage = damage * 3 / 2;
+                                        break;
+                                    }
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+                                        damage = damage * 3 / 2;
+                                        break;
+                                    }
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+                                        damage = damage * 3 / 2;
+                                        break;
+                                    }
+                                    break;
+
+                                case ABILITY_SOLAR_POWER:
+                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_HUSTLE:
+                                    damage = damage * 3 / 2;
+                                    break;
+                            }
+
+                            // Held item effects that directly affect attack stat
+                            switch (partyMonItemEffect) {
+                                default:
+                                    break;
+
+                                case HOLD_EFFECT_PIKA_SPATK_UP:
+                                    if (partyMonSpecies == SPECIES_PIKACHU) {
+                                        damage *= 2;
+                                    }
+                                    break;
+
+                                case HOLD_EFFECT_CUBONE_ATK_UP:
+                                    if (partyMonSpecies == SPECIES_CUBONE
+                                        || partyMonSpecies == SPECIES_MAROWAK) {
+
+                                        damage *= 2;
+                                    }
+                                    break;
+                            }
+
+                            // End of use of direct attack stat usage here
+                            damage += 2;
+
+                            // All other abilities
+                            switch (partyMonAbility) {
+                                default:
+                                    break;
+
+                                case ABILITY_GUTS:
+                                    if (Pokemon_GetValue(partyMon MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_RIVALRY:
+                                    if (defenderParams.gender != GENDER_NONE
+                                    && Pokemon_GetValue(partyMon MON_DATA_GENDER, NULL) == defenderParams.gender) {
+                                        damage = damage * 3 / 2;
+                                    }
+                                    break;
+
+                                case ABILITY_IRON_FIST:
+                                    damage = damage * 13 / 10;
+                                    break;
+
+                                case ABILITY_TECHNICIAN:
+                                    damage = damage * 3 / 2;
+                                    break;
+
+                                case ABILITY_NORMALIZE:
+                                    partyMonInType = TYPE_NORMAL;
+                                    break;
+                            }
+	
+                            // All other held item effects
+                            switch (partyMonItemEffect) {
+                                default:
+                                    break;
+
+                                case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+                                    damage = damage * 6 / 5;
+                                    break;
+
+                                case HOLD_EFFECT_CHOICE_ATK:
+                                    damage = damage * 3 / 2;
+                                    break;
+
+                                case HOLD_EFFECT_STRENGTHEN_DARK:
+                                case HOLD_EFFECT_ARCEUS_DARK:
+                                    if (partyMonInType == TYPE_DARK) {
+                                        damage = damage * (100 + itemPower) / 100;
+                                    }
+                                    break;
+
+                                case HOLD_EFFECT_STRENGTHEN_NORMAL:
+                                    if (partyMonInType == TYPE_NORMAL) {
+                                        damage = damage * (100 + itemPower) / 100;
+                                    }
+                                    break;
+
+                                case HOLD_EFFECT_POWER_UP_PHYS:
+                                    damage = damage * (100 + itemPower) / 100;
+                                    break;
+                            }
+
+                            damage = PartyMon_ApplyTypeChart(battleSys,
+                                                battleCtx,
+                                                move,
+                                                partyMonInType,
+                                                attacker,
+                                                defender,
+                                                damage,
+                                                attacker,
+                                                i,
+                                                &effectiveness);
+
+                            if ((effectiveness & MOVE_STATUS_IMMUNE)
+                                && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+                            {
+                                    damage = 0;
+                            }
+                        }
+
+                        cumDamage += damage;
+                    }
+
+                    damage = cumDamage;
+                    return damage;
+                    break;
+
 
                 case BATTLE_EFFECT_40_DAMAGE_FLAT:
                     damage = 40;

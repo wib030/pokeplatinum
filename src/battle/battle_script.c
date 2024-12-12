@@ -6709,7 +6709,7 @@ static inline BOOL BeatUpEligibleMon(BattleContext *battleCtx, Pokemon *mon)
             || (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
-                && Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_NONE);
+                && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE));
 }
 
 /**
@@ -6725,12 +6725,24 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     int species;
     int form;
     int level;
+    int side;
+    u8 ability;
+    u8 type1;
+    u8 type2;
+    u8 inType;
+    u8 itemEffect;
+    u8 itemPower;
+    u16 item;
+    u32 effectiveness;
     int i;
     Pokemon *mon;
 
     BattleScript_Iter(battleCtx, 1);
 
     partyCount = BattleSystem_PartyCount(battleSys, battleCtx->attacker);
+    side = Battler_Side(battleSys, battleCtx->attacker);
+    effectiveness = 0;
+    inType = TYPE_DARK;
 
     if (battleCtx->multiHitNumHits == 0) {
         battleCtx->multiHitNumHits = 2; // not actually used, just set to make multi-hit stuff work
@@ -6752,14 +6764,182 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
     form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
     level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+    ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+    type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+    item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+    itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
+    itemPower = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT_PARAM);
 
     battleCtx->damage = PokemonPersonalData_GetFormValue(species, form, MON_DATA_PERSONAL_BASE_ATK);
     battleCtx->damage *= CURRENT_MOVE_DATA.power;
     battleCtx->damage *= ((level * 2 / 5) + 2);
     battleCtx->damage /= PokemonPersonalData_GetFormValue(DEFENDING_MON.species, DEFENDING_MON.formNum, MON_DATA_PERSONAL_BASE_DEF);
     battleCtx->damage /= 50;
+
+    // Critical is calculated with the PartyMon script
+    battleCtx->criticalMul = BattleSystem_PartyMonCalcCriticalMulti(battleSys,
+                             battleCtx,
+                             battleCtx->attacker,
+                             battleCtx->defender,
+                             battleCtx->attacker,
+                             battleCtx->beatUpCounter,
+                             0,
+                             battleCtx->sideConditionsMask[side]);
+    
+    // Abilities that affect the attack stat directly
+    switch (ability) {
+        default:
+            break;
+
+        case ABILITY_HUGE_POWER:
+        case ABILITY_PURE_POWER:
+            battleCtx->damage *= 2;
+            break;
+
+        case ABILITY_PLUS:
+            if (battleCtx->battleMons[battleCtx->attacker].ability == ABILITY_MINUS) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+            }
+            break;
+
+        case ABILITY_FORECAST:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                battleCtx->damage /= 2;
+                break;
+            }
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+                break;
+            }
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+                break;
+            }
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+                break;
+            }
+            break;
+
+        case ABILITY_SOLAR_POWER:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+            }
+            break;
+
+        case ABILITY_HUSTLE:
+            battleCtx->damage = battleCtx->damage * 3 / 2;
+            break;
+    }
+
+    // Held item effects that directly affect attack stat
+    switch (itemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_PIKA_SPATK_UP:
+            if (species == SPECIES_PIKACHU) {
+                battleCtx->damage *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_CUBONE_ATK_UP:
+            if (species == SPECIES_CUBONE
+                || species == SPECIES_MAROWAK) {
+
+                battleCtx->damage *= 2;
+            }
+            break;
+    }
+
+    // End of use of direct attack stat usage here
     battleCtx->damage += 2;
+
+    // All other abilities
+    switch (ability) {
+        default:
+            break;
+
+        case ABILITY_GUTS:
+            if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+            }
+            break;
+
+        case ABILITY_RIVALRY:
+            if (battleCtx->battleMons[battleCtx->defender].gender != GENDER_NONE
+            && Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) == battleCtx->battleMons[battleCtx->defender].gender) {
+                battleCtx->damage = battleCtx->damage * 3 / 2;
+            }
+            break;
+
+        case ABILITY_IRON_FIST:
+            battleCtx->damage = battleCtx->damage * 13 / 10;
+            break;
+
+        case ABILITY_SNIPER:
+            if (battleCtx->criticalMul == 2) {
+                battleCtx->criticalMul = 3;
+            }
+
+        case ABILITY_TECHNICIAN:
+            battleCtx->damage = battleCtx->damage * 3 / 2;
+            break;
+
+        case ABILITY_NORMALIZE:
+            inType = TYPE_NORMAL;
+            break;
+    }
 	
+    // All other held item effects
+    switch (itemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+            battleCtx->damage = battleCtx->damage * 6 / 5;
+            break;
+
+        case HOLD_EFFECT_CHOICE_ATK:
+            battleCtx->damage = battleCtx->damage * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_DARK:
+        case HOLD_EFFECT_ARCEUS_DARK:
+            if (inType == TYPE_DARK) {
+                battleCtx->damage = battleCtx->damage * (100 + itemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_STRENGTHEN_NORMAL:
+            if (inType == TYPE_NORMAL) {
+                battleCtx->damage = battleCtx->damage * (100 + itemPower) / 100;
+            }
+            break;
+
+        case HOLD_EFFECT_POWER_UP_PHYS:
+            battleCtx->damage = battleCtx->damage * (100 + itemPower) / 100;
+            break;
+    }
+
+    battleCtx->damage = PartyMon_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        battleCtx->moveCur,
+                        inType,
+                        battleCtx->attacker,
+                        battleCtx->defender,
+                        battleCtx->damage,
+                        battleCtx->attacker,
+                        battleCtx->beatUpCounter,
+                        &effectiveness);
+
+    if ((effectiveness & MOVE_STATUS_IMMUNE)
+        && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+    {
+            battleCtx->damage = 0;
+    }
+
 	if (battleCtx->criticalMul == 2)
 	{
 		battleCtx->damage = battleCtx->damage * 4 / 3;
@@ -6770,7 +6950,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
 	}
 
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
-        battleCtx->damage = battleCtx->damage * 15 / 10;
+        battleCtx->damage = battleCtx->damage * 3 / 2;
     }
 
     battleCtx->damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->damage);
