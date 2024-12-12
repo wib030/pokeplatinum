@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_TOGETIC",
             "form": 0,
-            "level": 20,
+            "level": 24,
             "item": "ITEM_NONE",
             "moves": [
 				"MOVE_FOLLOW_ME",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_RIOLU",
             "form": 0,
-            "level": 20,
+            "level": 24,
             "item": "ITEM_NONE",
             "moves": [
 				"MOVE_FOLLOW_ME",

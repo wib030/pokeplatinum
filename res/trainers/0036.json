@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TENTACOOL",
             "form": 0,
-            "level": 18,
+            "level": 20,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_POISON_STING",
@@ -20,37 +20,7 @@
 				"MOVE_HAZE",
 				"MOVE_ACUPRESSURE"
             ],
-            "power": 0,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
-        },
-        {
-            "species": "SPECIES_TENTACOOL",
-            "form": 0,
-            "level": 19,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_POISON_STING",
-				"MOVE_RAPID_SPIN",
-				"MOVE_KNOCK_OFF",
-				"MOVE_WHIRLPOOL"
-            ],
-            "power": 0,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
-        },
-        {
-            "species": "SPECIES_TENTACOOL",
-            "form": 0,
-            "level": 20,
-            "item": "ITEM_NONE",
-            "moves": [
-                "MOVE_POISON_STING",
-				"MOVE_RETURN",
-				"MOVE_FRUSTRATION",
-				"MOVE_ATTRACT"
-            ],
-            "power": 0,
+            "power": 50,
             "ball_seal": 0,
 			"ball_type": "ITEM_DUSK_BALL"
         },
@@ -61,11 +31,41 @@
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_POISON_STING",
+				"MOVE_RAPID_SPIN",
+				"MOVE_KNOCK_OFF",
+				"MOVE_WHIRLPOOL"
+            ],
+            "power": 60,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
+        },
+        {
+            "species": "SPECIES_TENTACOOL",
+            "form": 0,
+            "level": 22,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_STING",
+				"MOVE_RETURN",
+				"MOVE_FRUSTRATION",
+				"MOVE_ATTRACT"
+            ],
+            "power": 70,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
+        },
+        {
+            "species": "SPECIES_TENTACOOL",
+            "form": 0,
+            "level": 23,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_STING",
 				"MOVE_TOXIC_SPIKES",
 				"MOVE_REST",
 				"MOVE_SNORE"
             ],
-            "power": 0,
+            "power": 80,
             "ball_seal": 0,
 			"ball_type": "ITEM_DUSK_BALL"
         }

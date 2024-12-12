@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_NOSEPASS",
             "form": 0,
-            "level": 22,
+            "level": 24,
             "item": "ITEM_SMOOTH_ROCK",
             "moves": [
                 "MOVE_SANDSTORM",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_DUSTOX",
             "form": 0,
-            "level": 22,
+            "level": 24,
             "item": "ITEM_SILVERPOWDER",
             "moves": [
                 "MOVE_CONFUSION",
