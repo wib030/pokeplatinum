@@ -17,7 +17,7 @@
         {
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_MILK_DRINK",
@@ -31,7 +31,7 @@
 		{
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_MILK_DRINK",
@@ -45,7 +45,7 @@
 		{
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_MILK_DRINK",
@@ -59,7 +59,7 @@
 		{
             "species": "SPECIES_MILTANK",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_MILK_DRINK",

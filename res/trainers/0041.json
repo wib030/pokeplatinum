@@ -12,14 +12,14 @@
         {
             "species": "SPECIES_DONPHAN",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_BLOCK",
 				"MOVE_ROAR",
 				"MOVE_FURY_ATTACK"
             ],
-            "power": 0,
+            "power": 80,
             "ball_seal": 0,
 			"ball_type": "ITEM_DUSK_BALL"
         }

@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_HOPPIP",
             "form": 0,
-            "level": 22,
+            "level": 23,
             "item": "ITEM_HEAT_ROCK",
             "moves": [
 				"MOVE_SUNNY_DAY",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_HOUNDOUR",
             "form": 0,
-            "level": 22,
+            "level": 23,
             "item": "ITEM_CHARCOAL",
             "moves": [
 				"MOVE_FIRE_SPIN",

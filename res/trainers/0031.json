@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_UNOWN",
             "form": 14,
-            "level": 22,
+            "level": 23,
             "item": "ITEM_LEFTOVERS",
             "moves": [
 				"MOVE_HIDDEN_POWER",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_UNOWN",
             "form": 10,
-            "level": 22,
+            "level": 23,
             "item": "ITEM_CHOICE_SPECS",
             "moves": [
 				"MOVE_HIDDEN_POWER"

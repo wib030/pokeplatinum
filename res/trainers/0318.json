@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_FROSLASS",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SPIKES",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_ROTOM",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_SHELL_BELL",
             "moves": [
                 "MOVE_ZAP_CANNON",
@@ -49,7 +49,7 @@
         {
             "species": "SPECIES_SABLEYE",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_GANLON_BERRY",
             "moves": [
                 "MOVE_NIGHT_SHADE",
@@ -64,7 +64,7 @@
 		{
             "species": "SPECIES_SHEDINJA",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SWORDS_DANCE",
@@ -79,7 +79,7 @@
 		{
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 25,
+            "level": 26,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_GUILLOTINE",

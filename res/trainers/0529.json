@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_TAMATO_BERRY",
             "moves": [
                 "MOVE_ROLE_PLAY",

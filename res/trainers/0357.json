@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SHUPPET",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_MIMIC",
@@ -26,7 +26,7 @@
         {
             "species": "SPECIES_DUSKULL",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_NANAB_BERRY",
             "moves": [
                 "MOVE_CALM_MIND",
