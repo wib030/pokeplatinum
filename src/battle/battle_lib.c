@@ -10118,8 +10118,11 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     int criticalMul = 1;
     int attackerAbility;
 	int punchingMove = 0;
-	
-	if (itemEffect == HOLD_EFFECT_PUNCH_CRITRATE_UP)
+
+    item = Battler_HeldItem(battleCtx, attacker);
+    itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
+
+    if (itemEffect == HOLD_EFFECT_PUNCH_CRITRATE_UP)
 	{
 		for (int i = 0; i < NELEMS(sPunchingMoves); i++)
 		{
@@ -10130,8 +10133,6 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
 		}
 	}
 
-    item = Battler_HeldItem(battleCtx, attacker);
-    itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
     attackerSpecies = battleCtx->battleMons[attacker].species;
     attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
     defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
@@ -10141,6 +10142,63 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
             + criticalStage
             + (attackerAbility == ABILITY_SUPER_LUCK)
             + (battleCtx->battleMons[attacker].meditateCritBoostFlag != FALSE)
+            + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
+			+ (4 * (punchingMove == 1))
+            + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
+
+    if (effectiveCritStage > 4) {
+        effectiveCritStage = 4;
+    }
+
+    if ((BattleSystem_RandNext(battleSys) % sCriticalStageModuli[effectiveCritStage][0]) % sCriticalStageModuli[effectiveCritStage][1] == 0
+            && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == FALSE
+            && (sideConditions & SIDE_CONDITION_LUCKY_CHANT) == FALSE
+            && (defenderMoveEffects & MOVE_EFFECT_NO_CRITICAL) == FALSE) {
+        criticalMul = 2;
+    }
+
+    if (criticalMul == 2 && Battler_Ability(battleCtx, attacker) == ABILITY_SNIPER) {
+        criticalMul = 3;
+    }
+
+    return criticalMul;
+}
+
+int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int partyIndicator, int partySlot, int criticalStage, u32 sideConditions)
+{
+    // have to declare vars C89-style to match
+    u16 effectiveCritStage;
+    u16 item;
+    int itemEffect;
+    u16 attackerSpecies;
+    u32 defenderMoveEffects;
+    int criticalMul = 1;
+    int attackerAbility;
+	int punchingMove = 0;
+    Pokemon *mon;
+
+    mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
+
+    item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+    itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
+
+    if (itemEffect == HOLD_EFFECT_PUNCH_CRITRATE_UP)
+	{
+		for (int i = 0; i < NELEMS(sPunchingMoves); i++)
+		{
+			if (sPunchingMoves[i] == battleCtx->moveCur)
+			{
+				punchingMove = 1;
+			}
+		}
+	}
+
+    attackerSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+    defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
+    attackerAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    effectiveCritStage = ((itemEffect == HOLD_EFFECT_CRITRATE_UP)
+            + criticalStage
+            + (attackerAbility == ABILITY_SUPER_LUCK)
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
 			+ (4 * (punchingMove == 1))
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));

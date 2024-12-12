@@ -1367,6 +1367,25 @@ int BattleSystem_CalcDamageVariance(BattleSystem *battleSys, BattleContext *batt
 int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int criticalStage, u32 sideConditions);
 
 /**
+ * @brief Calculate the critical multiplier to be applied to a party Pokemon's move's damage.
+ * 
+ * This also performs all of the calculations for if a critical hit should/can
+ * occur.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param attacker 
+ * @param defender 
+ * @param partyIndicator    The battleMon whose party should be referenced
+ * @param partySlot         The partySlot of the party Pokemon to use in claculation
+ * @param criticalStage     The existing critical hit stage for the attacker
+ * @param sideConditions    State of the side conditions mask at the time of calculation
+ * @return 1 if no critical occurs, 2 if a critical occurs, 3 if a critical
+ * occurs and the attacker also has the ability Sniper 
+ */
+int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int partyIndicator, int partySlot, int criticalStage, u32 sideConditions);
+
+/**
  * @brief Check if a move can be copied by Mimic.
  * 
  * @param move 
