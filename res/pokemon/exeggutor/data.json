@@ -100,6 +100,7 @@
 			"21": "MOVE_POISON_POWDER",
 			"23": "MOVE_SLEEP_POWDER",
             "27": "MOVE_EGG_BOMB",
+			"29": "MOVE_PSYBEAM",
 			"33": "MOVE_WORRY_SEED",
             "37": [ 
 				"MOVE_WOOD_HAMMER",

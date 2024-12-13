@@ -95,6 +95,7 @@
             "19": "MOVE_STUN_SPORE",
             "21": "MOVE_POISON_POWDER",
             "23": "MOVE_SLEEP_POWDER",
+			"28": "MOVE_PSYBEAM",
             "33": "MOVE_WORRY_SEED",
 			"35": "MOVE_MEAN_LOOK",
             "37": "MOVE_NATURAL_GIFT",
