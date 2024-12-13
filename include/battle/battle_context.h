@@ -22,7 +22,8 @@ typedef struct FieldConditions {
     u8 wishTurns[MAX_BATTLERS];
     u16 futureSightMove[MAX_BATTLERS];
     int futureSightAttacker[MAX_BATTLERS];
-    u16 futureSightAttackingStat[MAX_BATTLERS];
+    s8 futureSightAttackingStatStage[MAX_BATTLERS];
+    u8 futureSightSelectedPartySlot[MAX_BATTLERS];
     BOOL futureSightHelpingHandFlag[MAX_BATTLERS];
     BOOL futureSightSTABFlag[MAX_BATTLERS];
 	BOOL futureSightAdaptabilityFlag[MAX_BATTLERS];

@@ -8410,6 +8410,15 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     }
                     return movePower;
                     break;
+
+                case BATTLE_EFFECT_HIT_IN_3_TURNS:
+                    if (moveClass == CLASS_PHYSICAL) {
+                        attackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
+                    }
+                    if (moveClass == CLASS_SPECIAL) {
+                        spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
+                    }
+                    break;
             }
         }
     }

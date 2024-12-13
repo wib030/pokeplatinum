@@ -6598,26 +6598,14 @@ static BOOL BtlCmd_TryFutureSight(BattleSystem *battleSys, BattleContext *battle
         battleCtx->fieldConditions.futureSightTurns[battleCtx->defender] = 3;
         battleCtx->fieldConditions.futureSightMove[battleCtx->defender] = battleCtx->moveCur;
         battleCtx->fieldConditions.futureSightAttacker[battleCtx->defender] = battleCtx->attacker;
+        battleCtx->fieldConditions.futureSightSelectedPartySlot[battleCtx->defender] = battleCtx->selectedPartySlot[battleCtx->attacker];
 
         if (MOVE_DATA(battleCtx->moveCur).class == CLASS_PHYSICAL) {
-            battleCtx->fieldConditions.futureSightAttackingStat[battleCtx->defender] = battleCtx->battleMons[battleCtx->attacker].attack;
+            battleCtx->fieldConditions.futureSightAttackingStatStage[battleCtx->defender] = battleCtx->battleMons[battleCtx->attacker].statBoosts[BATTLE_STAT_ATTACK] - 6;
         }
         else {
-            battleCtx->fieldConditions.futureSightAttackingStat[battleCtx->defender] = battleCtx->battleMons[battleCtx->attacker].spAttack;
+            battleCtx->fieldConditions.futureSightAttackingStatStage[battleCtx->defender] = battleCtx->battleMons[battleCtx->attacker].statBoosts[BATTLE_STAT_SP_ATTACK] - 6;
         }
-        
-        // Calculate the damage at the time of Future Sight setup.
-        // Do not check for type effectiveness nor crits.
-        int damage = BattleSystem_CalcMoveDamage(battleSys,
-                battleCtx,
-                battleCtx->moveCur,
-                battleCtx->sideConditionsMask[side],
-                battleCtx->fieldConditionsMask,
-                0, 0,
-                battleCtx->attacker,
-                battleCtx->defender,
-                1) * -1;
-        battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
 
         if (ATTACKER_TURN_FLAGS.helpingHand) {
             battleCtx->fieldConditions.futureSightHelpingHandFlag[battleCtx->defender] = TRUE;

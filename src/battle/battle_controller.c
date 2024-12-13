@@ -1788,9 +1788,9 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
     case SIDE_COND_CHECK_STATE_FUTURE_SIGHT:
 
         int effectivenessMultiplier;
-        int side;
-        u16 storedAttackingStat, moveClass;
-        u8 moveType;
+        int side, futureSightAttacker;
+        u16 moveClass;
+        u8 moveType, futureSightSelectedPartySlot;
 
         while (battleCtx->sideConditionCheckTemp < maxBattlers) {
             battler = battleCtx->monSpeedOrder[battleCtx->sideConditionCheckTemp];
@@ -1805,6 +1805,9 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                     && battleCtx->battleMons[battler].curHP)
             {
 				side = Battler_Side(battleSys, battler);
+                futureSightSelectedPartySlot = battleCtx->fieldConditions.futureSightSelectedPartySlot[battler];
+                futureSightAttacker = battleCtx->fieldConditions.futureSightAttacker[battler];
+
                 battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
 
                 battleCtx->msgBuffer.id = 475;
@@ -1821,24 +1824,38 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 
                 effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
 
-                if (moveClass == CLASS_PHYSICAL) {
-                    storedAttackingStat = battleCtx->battleMons[battler].attack;
-                    battleCtx->battleMons[battler].attack = battleCtx->fieldConditions.futureSightAttackingStat[battler];
+                // If future sight user is still out
+                if (futureSightSelectedPartySlot == battleCtx->selectedPartySlot[futureSightAttacker]) {
+
+                    battleCtx->fieldConditions.futureSightDamage[battler] = BattleSystem_CalcMoveDamage(
+                                                                            battleSys,
+                                                                            battleCtx,
+                                                                            battleCtx->fieldConditions.futureSightMove[battler],
+                                                                            battleCtx->sideConditionsMask[side],
+                                                                            battleCtx->fieldConditionsMask,
+                                                                            0, moveType,
+                                                                            futureSightAttacker,
+                                                                            battler,
+                                                                            1) * -1;
                 }
+                // Future sight user is not still out on enemy side
                 else {
-                    storedAttackingStat = battleCtx->battleMons[battler].spAttack;
-                    battleCtx->battleMons[battler].spAttack = battleCtx->fieldConditions.futureSightAttackingStat[battler];
+                    battleCtx->fieldConditions.futureSightDamage[battler] = BattleSystem_CalcPartyMemberMoveDamage(
+                                                                            battleSys,
+                                                                            battleCtx,
+                                                                            battleCtx->fieldConditions.futureSightMove[battler],
+                                                                            battleCtx->sideConditionsMask[side],
+                                                                            battleCtx->fieldConditionsMask,
+                                                                            0,
+                                                                            moveType,
+                                                                            futureSightAttacker,
+                                                                            battler,
+                                                                            1,
+                                                                            futureSightAttacker,
+                                                                            futureSightSelectedPartySlot) * -1;
                 }
 
-                battleCtx->fieldConditions.futureSightDamage[battler] = BattleSystem_CalcMoveDamage(battleSys,
-                                                                        battleCtx,
-                                                                        battleCtx->fieldConditions.futureSightMove[battler],
-                                                                        battleCtx->sideConditionsMask[side],
-                                                                        battleCtx->fieldConditionsMask,
-                                                                        0, moveType,
-                                                                        battler,
-                                                                        battler,
-                                                                        1) * -1;
+                battleCtx->fieldConditions.futureSightDamage[battler] = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->fieldConditions.futureSightDamage[battler]);
 
                 battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler] * effectivenessMultiplier / 40;
                 if (battleCtx->fieldConditions.futureSightHelpingHandFlag[battler] == TRUE) {
@@ -1852,13 +1869,6 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                     else {
                         battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * 3 / 2;
                     }
-                }
-
-                if (moveClass == CLASS_PHYSICAL) {
-                    battleCtx->battleMons[battler].attack = storedAttackingStat;
-                }
-                else {
-                    battleCtx->battleMons[battler].spAttack = storedAttackingStat;
                 }
 
                 PrepareSubroutineSequence(battleCtx, subscript_future_sight_damage);
