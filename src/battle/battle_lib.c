@@ -9164,15 +9164,19 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         }
     }
 
-    if ((battleType & BATTLE_TYPE_DOUBLES)
-            && MOVE_DATA(move).range == RANGE_ADJACENT_OPPONENTS
-            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
-        damage = damage * 3 / 4;
-    }
-    if ((battleType & BATTLE_TYPE_DOUBLES)
-            && MOVE_DATA(move).range == RANGE_ALL_ADJACENT
-            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, FALSE, defender) >= 2) {
-        damage = damage * 3 / 4;
+    if (battleType & BATTLE_TYPE_DOUBLES) {
+
+        if (MOVE_DATA(move).range == RANGE_ADJACENT_OPPONENTS
+            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) >= 2)
+        {
+            damage = damage * 3 / 4;
+        }
+
+        if (MOVE_DATA(move).range == RANGE_ALL_ADJACENT
+            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, FALSE, defender) >= 2)
+        {
+            damage = damage * 3/4;
+        }
     }
 
     if (NO_CLOUD_NINE) {
@@ -10391,15 +10395,19 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
-    if ((battleType & BATTLE_TYPE_DOUBLES)
-            && MOVE_DATA(move).range == RANGE_ADJACENT_OPPONENTS
-            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
-        damage = damage * 3 / 4;
-    }
-    if ((battleType & BATTLE_TYPE_DOUBLES)
-            && MOVE_DATA(move).range == RANGE_ALL_ADJACENT
-            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, FALSE, defender) >= 2) {
-        damage = damage * 3 / 4;
+    if (battleType & BATTLE_TYPE_DOUBLES) {
+
+        if (MOVE_DATA(move).range == RANGE_ADJACENT_OPPONENTS
+            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) >= 2)
+        {
+            damage = damage * 3 / 4;
+        }
+
+        if (MOVE_DATA(move).range == RANGE_ALL_ADJACENT
+            && BattleSystem_CountAliveBattlers(battleSys, battleCtx, FALSE, defender) >= 2)
+        {
+            damage = damage * 3 / 4;
+        }
     }
 
     if (NO_CLOUD_NINE) {
