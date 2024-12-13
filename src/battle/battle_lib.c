@@ -8257,23 +8257,18 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                                     damage = damage * (100 + partyMonItemPower) / 100;
                                     break;
                             }
+							
+							if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && (partyMonType1 == inType || partyMonType2 == inType)) {
+								if (partyMonAbility == ABILITY_ADAPTABILITY) {
+									damage *= 2;
+								} else {
+									damage = damage * 3 / 2;
+								}
+							}
 
-                            damage = PartyMon_ApplyTypeChart(battleSys,
-                                                battleCtx,
-                                                move,
-                                                partyMonInType,
-                                                attacker,
-                                                defender,
-                                                damage,
-                                                attacker,
-                                                i,
-                                                &effectiveness);
-
-                            if ((effectiveness & MOVE_STATUS_IMMUNE)
-                                && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
-                            {
-                                    damage = 0;
-                            }
+                            effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2);
+	
+							damage = damage * effectiveness / 40;
                         }
 
                         cumDamage += damage;

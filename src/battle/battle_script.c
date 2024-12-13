@@ -6922,23 +6922,18 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->damage = battleCtx->damage * (100 + itemPower) / 100;
             break;
     }
-
-    battleCtx->damage = PartyMon_ApplyTypeChart(battleSys,
-                        battleCtx,
-                        battleCtx->moveCur,
-                        inType,
-                        battleCtx->attacker,
-                        battleCtx->defender,
-                        battleCtx->damage,
-                        battleCtx->attacker,
-                        battleCtx->beatUpCounter,
-                        &effectiveness);
-
-    if ((effectiveness & MOVE_STATUS_IMMUNE)
-        && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
-    {
-            battleCtx->damage = 0;
+	
+	if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && (type1 == inType || type2 == inType)) {
+        if (ability == ABILITY_ADAPTABILITY) {
+            battleCtx->damage *= 2;
+        } else {
+            battleCtx->damage = battleCtx->damage * 3 / 2;
+        }
     }
+						
+	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2);
+	
+	battleCtx->damage = battleCtx->damage * effectiveness / 40;
 
 	if (battleCtx->criticalMul == 2)
 	{
