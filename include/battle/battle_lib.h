@@ -1700,4 +1700,12 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
 */
 BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat);
 
+/**
+* @brief Determine whether the AI should perform a switch.
+*
+* @param battler
+* @Return   The TRUE / FALSE result of whether the AI should switch.
+*/
+BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

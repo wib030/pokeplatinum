@@ -14401,3 +14401,466 @@ BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *batt
 
     return result;
 }
+
+BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
+{
+    // Must keep C89-style declaration to match
+    int i, j;
+    u8 defender, defenderType1, defenderType2, defenderAbility;
+    u8 monType1, monType2, monAbility, monItemEffect;
+    u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
+    u16 monSpecies, monSpeedStat, monItem, defenderItem;
+    u16 move;
+    int moveType, movePower, moveEffect, moveStatFlag;
+    u8 battlersDisregarded;
+    u8 slot1, slot2;
+    u32 moveStatusFlags;
+    int partySize;
+    int score, maxScore, moveScore;
+    int hpPercent, monCurHP, monMaxHP;
+    int hazardsBonus, sackBonus, speedMultiplier;
+	int moveMoveEffect, moveVolatileStatus, moveStatus;
+	int defenderCurHP, defenderMaxHP, defenderSpeedStat;
+    Pokemon *mon;
+    BattleContext *battleCtx;
+    BOOL shouldSwitch;
+
+    battleCtx = BattleSystem_Context(battleSys);
+
+    shouldSwitch = TRUE;
+	
+    slot1 = battler;
+    if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
+            || (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_2vs2)) {
+        slot2 = slot1;
+    } else {
+        slot2 = BattleSystem_Partner(battleSys, battler);
+    }
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    partySize = BattleSystem_PartyCount(battleSys, battler);
+    battlersDisregarded = 0;
+    side = Battler_Side(battleSys, battler);
+    oppSide = Battler_Side(battleSys, defender);
+
+    // Use the AI's list of known moves
+
+    defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+    defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+    defenderAbility = Battler_Ability(battleCtx, defender);
+    defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
+	defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
+    defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+	defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
+
+    if (defenderCurHP <= 0) {
+        defenderCurHP = 1;
+    }
+    if (defenderMaxHP <= 0) {
+        defenderMaxHP = 1;
+    }
+
+    for (i = 0; i < partySize; i++) {
+        mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+        monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+        monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+        monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+        monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+        if (monSpecies != SPECIES_NONE
+            && monSpecies != SPECIES_EGG
+            && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+            && (battlersDisregarded & FlagIndex(i)) == FALSE
+            && battleCtx->selectedPartySlot[slot1] != i
+            && battleCtx->selectedPartySlot[slot2] != i
+            && i != battleCtx->aiSwitchedPartySlot[slot1]
+            && i != battleCtx->aiSwitchedPartySlot[slot2]
+            && i != battleCtx->selectedPartySlot[battler]) {
+
+            monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+            monItemEffect = BattleSystem_GetItemData(battleCtx, monItem, ITEM_PARAM_HOLD_EFFECT);
+
+            hazardsBonus = 0;
+            sackBonus = 0;
+            monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+            monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+            if (monCurHP <= 0) {
+                monCurHP = 1;
+            }
+            if (monMaxHP <= 0) {
+                monMaxHP = 1;
+            }
+            hpPercent = (monCurHP * 100) / monMaxHP;
+            score = 0;
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+                if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE) {
+
+                    move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
+                }
+                else {
+                    move = battleCtx->aiContext.battlerMoves[defender][j];
+                }
+
+                if (move == MOVE_NONE) {
+                    break;
+                }
+
+                moveScore = 0;
+                movePower = MOVE_DATA(move).power;
+                moveType = CalcMoveType(battleSys, battleCtx, defenderItem, move);
+                moveEffect = MOVE_DATA(move).effect;
+
+                if (movePower > 0) {
+
+                    moveScore = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                            battleCtx,
+                            move,
+                            battleCtx->sideConditionsMask[oppSide],
+                            battleCtx->fieldConditionsMask,
+                            0,
+                            moveType,
+                            defender,
+                            battler,
+                            1,
+                            battler,
+                            i);
+                        
+                    moveStatusFlags = 0;
+                    moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                defender,
+                                battler,
+                                moveScore,
+                                battler,
+                                i,
+                                &moveStatusFlags);
+
+                    if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                        && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                            moveScore = 0;
+                    }
+
+                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
+                        if (defenderAbility != ABILITY_MOLD_BREAKER) {
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                moveScore /= 2;
+                            }
+
+                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                moveScore = moveScore * 3 / 2;
+                            }
+                        }
+                    }
+
+                    // Move score is % of mon's hp damage they'll take
+                    moveScore = moveScore * 100 / monMaxHP;
+
+                    // Penalize choices that would lose more than half health from
+                    // switching in.
+                    if (moveScore > (Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL) / 2)) {
+
+                        moveScore += 100;
+                    }
+
+                    // Penalize choices that would result in a KO, except for Sacks
+                    if (moveScore > (monCurHP - Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i))) {
+                        if (hpPercent < 50) {
+                            sackBonus = (monMaxHP - monCurHP) * 100 / monMaxHP;
+                            if (moveScore < sackBonus) {
+                                moveScore = 0;
+                            }
+                            else {
+                                moveScore -= sackBonus;
+                            }
+                        }
+                    }
+                }
+                else {
+                    moveScore = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                defender,
+                                battler,
+                                0,
+                                battler,
+                                i,
+                                &moveStatusFlags);
+                    moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
+                    moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+                    moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
+
+                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
+                        || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                        if (moveStatus != MON_CONDITION_NONE) {
+                            if (moveStatus & MON_CONDITION_BURN) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_FIRE
+                                && monType2 != TYPE_FIRE)
+                                if (Battle_PartyMonIsPhysicalAttacker(battleSys, battleCtx, battler, i)) {
+                                    moveScore = 100;
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_PARALYSIS) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_PARALYSIS) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_ELECTRIC
+                                && monType2 != TYPE_ELECTRIC) {
+
+                                    if (AI_PartyMonShouldParalyzeCheck(battleSys, battleCtx, battler, i, defenderSpeedStat)) {
+                                        moveScore = 50;
+                                    }
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_SLEEP) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                    moveScore = 50;
+                                }
+                            }
+
+                            if (moveStatus & MON_CONDITION_ANY_POISON) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                    moveScore = 25;
+                                }
+                            }
+                        }
+
+                        if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
+                            if (moveVolatileStatus & VOLATILE_CONDITION_CONFUSION) {
+                                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender)) {
+                                    moveScore = 20;
+                                }
+                                else {
+                                    moveScore = 10;
+                                }
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_ATTRACT) {
+                                if (BattleMon_Get(battleCtx, defender, BATTLEMON_GENDER, NULL) != Pokemon_GetValue(mon, MON_DATA_GENDER, NULL)
+                                    && Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) != GENDER_NONE) {
+                                        moveScore = 25;
+                                }
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_MOVE_LOCKED) {
+                                moveScore = 25;
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_TORMENT) {
+                                moveScore = 10;
+                            }
+
+                            if (moveVolatileStatus & VOLATILE_CONDITION_CURSE) {
+                                if (defenderType1 == TYPE_GHOST || defenderType2 == TYPE_GHOST) {
+                                    moveScore = 49;
+                                }
+                            }
+                        }
+
+                        if (moveMoveEffect != MOVE_EFFECT_NONE) {
+                            if (moveMoveEffect & MOVE_EFFECT_YAWN) {
+                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+
+                                // Yawn is handled by sleep status, so we just give it +2 here
+                                    moveScore += 2;
+                                }
+                            }
+
+                            if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
+                                if (monType1 != TYPE_GRASS && monType2 != TYPE_GRASS) {
+                                    moveScore = 12;
+                                }
+                            }
+
+                            if (moveMoveEffect & MOVE_EFFECT_PERISH_SONG) {
+                                if (monAbility != ABILITY_SOUNDPROOF) {
+                                    
+                                    moveScore = 15;
+                                }
+                            }
+                        }
+
+                        if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
+                            if ((monAbility == ABILITY_DEFIANT
+                                || monAbility == ABILITY_COMPETITIVE)
+                                && defenderAbility != ABILITY_UNAWARE) {
+                                    moveScore = 0;
+                            }
+                            else {
+                                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+                                    moveScore = 10 * battleCtx->sideConditions[side].spikesLayers;
+                                    moveScore += (8 * battleCtx->sideConditions[side].toxicSpikesLayers);
+                                    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK) {
+                                        moveScore += 12;
+                                    }
+                                }
+                                else {
+                                    moveScore = 7;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                score += moveScore;
+
+                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+                    if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_DEFOG
+                        || Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_RAPID_SPIN) {
+
+                        hazardsBonus = (monMaxHP / 8) + 2;
+
+                        if (score < hazardsBonus) {
+                            score = 0;
+                        }
+                        else {
+                            score -= hazardsBonus;
+                        }
+                    }
+                }
+
+                if (moveScore > 50
+                && hpPercent >= 25) {
+                    battlersDisregarded |= FlagIndex(i);
+                }
+                    
+                if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
+                    && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
+                    break;
+                }
+            }
+
+            monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+            switch (monItemEffect) {
+                default:
+                    break;
+
+                case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+                case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+                case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+                case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+                case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+                case HOLD_EFFECT_LVLUP_HP_EV_UP:
+                case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+                case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+                    monSpeedStat /= 2;
+                    break;
+
+                case HOLD_EFFECT_DITTO_SPEED_UP:
+                    if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
+                        monSpeedStat *= 2;
+                    }
+                    break;
+
+                case HOLD_EFFECT_CHOICE_SPEED:
+                    monSpeedStat = monSpeedStat * 3 / 2;
+                    break;
+            }
+
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat *= 2;
+            }
+            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
+			{
+                monSpeedStat /= 2;
+            }
+
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+
+                // 0.8x if faster
+                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
+
+                    speedMultiplier = 8;
+                }
+                // 1.0x if tie
+                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
+
+                    speedMultiplier = 10;
+                }
+                // 1.2x if slower
+                else {
+
+                    speedMultiplier = 12;
+                }
+            }
+            // Trick Room is not up in this case.
+            else {
+                // 1.2x if faster
+                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
+
+                    speedMultiplier = 12;
+                }
+                // 1.0x if same speed
+                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
+
+                    speedMultiplier = 10;
+                }
+                // 0.8x if slower
+                else {
+                    
+                    speedMultiplier = 8;
+                }
+            }
+
+            if (speedMultiplier != 10) {
+
+                score = score * speedMultiplier / 10;
+            }
+
+            if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+
+                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TOXIC_SPIKES) {
+                    if (monType1 == TYPE_POISON
+                    || monType2 == TYPE_POISON) {
+                        if (score < hazardsBonus) {
+                            score = 0;
+                        }
+                        else {
+                            score -= hazardsBonus;
+                        }
+                    }
+
+                    if (monType1 == TYPE_STEEL
+                    || monType2 == TYPE_STEEL) {
+                        if (score < (hazardsBonus / 2)) {
+                            score = 0;
+                        }
+                        else {
+                            score -= (hazardsBonus / 2);
+                        }
+                    }
+                }
+
+                if (monAbility != ABILITY_MAGIC_GUARD) {
+                    score += Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i) * 200 / monMaxHP;
+                }
+            }
+
+            if (score > 300) {
+
+                battlersDisregarded |= FlagIndex(i);
+            }
+
+            if ((battlersDisregarded & FlagIndex(i)) == FALSE) {
+                shouldSwitch = TRUE;
+            }
+        }
+    }
+
+    return shouldSwitch;
+}
