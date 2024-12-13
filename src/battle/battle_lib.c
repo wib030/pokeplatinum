@@ -8324,7 +8324,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     break;
 
                 case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
-                    movePower = 60;
+                    for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
+
+                        if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
+                            cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
+                        }
+                    }
+
+                    movePower = 60 + 20 * cumStatBoosts;
                     break;
 
                 case BATTLE_EFFECT_NATURE_POWER:
@@ -9532,8 +9539,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
                     for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
 
-                        if (battleCtx->battleMons[attacker].statBoosts[i] > 6) {
-                            cumStatBoosts += battleCtx->battleMons[attacker].statBoosts[i] - 6;
+                        if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
+                            cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
                         }
                     }
 
