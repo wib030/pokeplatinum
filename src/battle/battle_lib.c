@@ -1665,7 +1665,7 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 		
 		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
 		{
-			effectChance = effectChance * 3 / 2;
+			effectChance += 10;
 			
 			if (effectChance > 100)
 			{
@@ -1702,7 +1702,7 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 		
 		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
 		{
-			effectChance = effectChance * 3 / 2;
+			effectChance += 10;
 			
 			if (effectChance > 100)
 			{

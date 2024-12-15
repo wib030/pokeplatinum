@@ -102,6 +102,7 @@
             "6": "MOVE_IMPRISON",
             "16": "MOVE_PROTECT",
             "21": "MOVE_SWIFT",
+			"26": "MOVE_LUCKY_CHANT",
             "31": "MOVE_RAPID_SPIN",
             "36": "MOVE_FUTURE_SIGHT",
 			"40": "MOVE_MIND_READER",

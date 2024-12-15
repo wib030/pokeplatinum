@@ -85,6 +85,7 @@
 			"22": "MOVE_EXTRASENSORY",
             "24": "MOVE_GUILLOTINE",
             "26": "MOVE_FLAIL",
+			"29": "MOVE_LUCKY_CHANT",
             "31": "MOVE_SWEET_KISS",
             "34": "MOVE_TAKE_DOWN",
             "40": "MOVE_AQUA_RING",
