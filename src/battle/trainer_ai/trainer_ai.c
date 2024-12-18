@@ -6338,11 +6338,38 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
 static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
-        return TRUE;
+    BOOL result;
+    int defender;
+    u8 ability;
+    u8 heldItemEffect;
+
+    result = FALSE;
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    ability = battleCtx->battleMons[battler].ability;
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+
+    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN)
+        && (battleCtx->battleMons[battler].status & MON_CONDITION_ANY) == FALSE) {
+
+        // Don't switch if we can just kill or we're resistant to sleep
+        if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, battler, defender) == FALSE
+        && Battle_AbilityDetersStatus(battleSys, battleCtx, ability, MON_CONDITION_SLEEP) == FALSE) {
+            
+            if (heldItemEffect == HOLD_EFFECT_SLP_RESTORE
+            || heldItemEffect == HOLD_EFFECT_STATUS_RESTORE
+            || heldItemEffect == HOLD_EFFECT_PSN_USER
+            || heldItemEffect == HOLD_EFFECT_BRN_USER) {
+
+                result = FALSE;
+            }
+            else {
+                result = TRUE;
+            }
+        }
     }
 
-    return FALSE;
+    return result;
 }
 
 /**

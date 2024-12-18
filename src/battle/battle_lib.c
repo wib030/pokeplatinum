@@ -12497,7 +12497,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
                         || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
-                        if (moveStatus != MON_CONDITION_NONE) {
+                        if (moveStatus != MON_CONDITION_NONE
+                            && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) == FALSE) {
                             if (moveStatus & MON_CONDITION_BURN) {
                                 if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
                                 || defenderAbility == ABILITY_MOLD_BREAKER)
@@ -12677,28 +12678,28 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
 
-                // 0.8x if faster
+                // 1.2x if faster
                 if (battleCtx->battleMons[defender].speed > monSpeedStat) {
 
-                    speedMultiplier = 8;
+                    speedMultiplier = 12;
                 }
                 // 1.0x if tie
                 else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
 
                     speedMultiplier = 10;
                 }
-                // 1.2x if slower
+                // 0.8x if slower
                 else {
 
-                    speedMultiplier = 12;
+                    speedMultiplier = 8;
                 }
             }
             // Trick Room is not up in this case.
             else {
-                // 1.2x if faster
+                // 0.8x if faster
                 if (battleCtx->battleMons[defender].speed > monSpeedStat) {
 
-                    speedMultiplier = 12;
+                    speedMultiplier = 8;
                 }
                 // 1.0x if same speed
                 else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
@@ -12708,7 +12709,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 // 0.8x if slower
                 else {
                     
-                    speedMultiplier = 8;
+                    speedMultiplier = 12;
                 }
             }
 
@@ -12743,6 +12744,22 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                 if (monAbility != ABILITY_MAGIC_GUARD) {
                     score += Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i) * 200 / monMaxHP;
+                }
+            }
+
+            // Status immunity item score boost for yawn switch
+            if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+                if (monItemEffect == HOLD_EFFECT_SLP_RESTORE
+                    || monItemEffect == HOLD_EFFECT_STATUS_RESTORE
+                    || monItemEffect == HOLD_EFFECT_PSN_USER
+                    || monItemEffect == HOLD_EFFECT_BRN_USER) {
+                    
+                    if (score < 150) {
+                        score = 0;
+                    }
+                    else {
+                        score -= 150;
+                    }
                 }
             }
 
@@ -12799,6 +12816,13 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     i,
                                     &moveStatusFlags);
 
+                        // Boost to pivoting when doing a yawn switch
+                        if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+                            if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+                                moveScore += 150;
+                            }
+                        }
+
                         if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                             && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
@@ -12837,7 +12861,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                         if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
                             || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
-                            if (moveStatus != MON_CONDITION_NONE) {
+                            if (moveStatus != MON_CONDITION_NONE
+                                && (battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
                                 if (moveStatus & MON_CONDITION_BURN) {
                                     if (((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_BURN) == FALSE)
                                     || monAbility == ABILITY_MOLD_BREAKER)
@@ -12939,6 +12964,21 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     
                                         moveScore = 15;
                                     }
+                                }
+                            }
+
+                            // Boost to statusing, pivoting, and phazing when yawn switching
+                            if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+                                if (moveEffect != BATTLE_EFFECT_INFATUATE) {
+                                    moveScore *= 3;
+                                }
+
+                                if (moveEffect == BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE) {
+                                    moveScore += 100;
+                                }
+
+                                if (moveEffect == BATTLE_EFFECT_FORCE_SWITCH) {
+                                    moveScore += 50;
                                 }
                             }
 
@@ -14381,6 +14421,75 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             hpPercent = (monCurHP * 100) / monMaxHP;
             score = 0;
 
+            monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+            switch (monItemEffect) {
+                default:
+                    break;
+
+                case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+                case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+                case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+                case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+                case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+                case HOLD_EFFECT_LVLUP_HP_EV_UP:
+                case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+                case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+                    monSpeedStat /= 2;
+                    break;
+
+                case HOLD_EFFECT_DITTO_SPEED_UP:
+                    if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
+                        monSpeedStat *= 2;
+                    }
+                    break;
+
+                case HOLD_EFFECT_CHOICE_SPEED:
+                    monSpeedStat = monSpeedStat * 3 / 2;
+                    break;
+            }
+
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat *= 2;
+            }
+            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
+			{
+                monSpeedStat /= 2;
+            }
+
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+
+                // speed bonuses are inverted for defensive score
+                if (defenderSpeedStat > monSpeedStat) {
+
+                    speedMultiplier = 8;
+                }
+                else if (defenderSpeedStat == monSpeedStat) {
+
+                    speedMultiplier = 10;
+                }
+                else {
+
+                    speedMultiplier = 12;
+                }
+            }
+            // Trick Room is not up in this case.
+            else {
+                if (defenderSpeedStat > monSpeedStat) {
+
+                    speedMultiplier = 12;
+                }
+                else if (defenderSpeedStat == monSpeedStat) {
+
+                    speedMultiplier = 10;
+                }
+                else {
+                    
+                    speedMultiplier = 8;
+                }
+            }
+
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE) {
@@ -14512,7 +14621,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                                 if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_SLEEP) == FALSE)
                                 || defenderAbility == ABILITY_MOLD_BREAKER) {
 
-                                    moveScore = 50;
+                                    moveScore = 47;
                                 }
                             }
 
@@ -14609,7 +14718,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_DEFOG
                         || Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_RAPID_SPIN) {
 
-                        hazardsBonus = (monMaxHP / 8) + 2;
+                        hazardsBonus = (hpPercent / 4) + 2;
 
                         if (score < hazardsBonus) {
                             score = 0;
@@ -14628,80 +14737,6 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
                     && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
                     break;
-                }
-            }
-
-            monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
-            switch (monItemEffect) {
-                default:
-                    break;
-
-                case HOLD_EFFECT_LVLUP_ATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_DEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
-                case HOLD_EFFECT_LVLUP_HP_EV_UP:
-                case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
-                case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
-                    monSpeedStat /= 2;
-                    break;
-
-                case HOLD_EFFECT_DITTO_SPEED_UP:
-                    if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
-                        monSpeedStat *= 2;
-                    }
-                    break;
-
-                case HOLD_EFFECT_CHOICE_SPEED:
-                    monSpeedStat = monSpeedStat * 3 / 2;
-                    break;
-            }
-
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat *= 2;
-            }
-            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			{
-                monSpeedStat /= 2;
-            }
-
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
-
-                // 0.8x if faster
-                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
-
-                    speedMultiplier = 8;
-                }
-                // 1.0x if tie
-                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
-
-                    speedMultiplier = 10;
-                }
-                // 1.2x if slower
-                else {
-
-                    speedMultiplier = 12;
-                }
-            }
-            // Trick Room is not up in this case.
-            else {
-                // 1.2x if faster
-                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
-
-                    speedMultiplier = 12;
-                }
-                // 1.0x if same speed
-                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
-
-                    speedMultiplier = 10;
-                }
-                // 0.8x if slower
-                else {
-                    
-                    speedMultiplier = 8;
                 }
             }
 
