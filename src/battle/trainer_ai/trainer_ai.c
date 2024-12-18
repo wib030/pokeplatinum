@@ -7616,12 +7616,12 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (BattleAI_ValidateSwitch(battleSys, battler)) {
+        if (BattleAI_ValidateSwitch(battleSys, battler) == FALSE) {
             return FALSE;
         }
 
         // Anything below this function is not run for Joke fights
-        if (AI_CONTEXT.thinkingMask & AI_FLAG_JOKE) {
+        if (battleSys->trainers[battler].aiMask & AI_FLAG_JOKE) {
             return FALSE;
         }
 
