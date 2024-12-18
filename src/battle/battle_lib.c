@@ -11731,7 +11731,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
                         || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
-                        if (moveStatus != MON_CONDITION_NONE) {
+                        if (moveStatus != MON_CONDITION_NONE
+                            && (battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
                             if (moveStatus & MON_CONDITION_BURN) {
                                 if (((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_BURN) == FALSE)
                                 || monAbility == ABILITY_MOLD_BREAKER)
@@ -11970,7 +11971,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
                         || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
-                        if (moveStatus != MON_CONDITION_NONE) {
+                        if (moveStatus != MON_CONDITION_NONE
+                            && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) == FALSE) {
                             if (moveStatus & MON_CONDITION_BURN) {
                                 if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
                                 || defenderAbility == ABILITY_MOLD_BREAKER)
@@ -14355,7 +14357,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
     battleCtx = BattleSystem_Context(battleSys);
 
-    shouldSwitch = TRUE;
+    shouldSwitch = FALSE;
 	
     slot1 = battler;
     if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
@@ -14594,7 +14596,8 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
                         || (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY)) {
-                        if (moveStatus != MON_CONDITION_NONE) {
+                        if (moveStatus != MON_CONDITION_NONE
+                            && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) == FALSE) {
                             if (moveStatus & MON_CONDITION_BURN) {
                                 if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_BURN) == FALSE)
                                 || defenderAbility == ABILITY_MOLD_BREAKER)
