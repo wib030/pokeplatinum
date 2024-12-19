@@ -697,6 +697,8 @@ Basic_CheckCannotDisable:
 Basic_CheckCannotEncore:
     ; If the target is already Encored, score -8.
     IfBattlerUnderEffect AI_BATTLER_DEFENDER, CHECK_ENCORE, ScoreMinus8
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    IfLoadedEqualTo MOVE_NONE, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckAttackerAsleep:
