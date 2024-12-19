@@ -37,11 +37,21 @@ _064:
 
 _077:
     CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_MAGIC_GUARD, _090
+	UpdateVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, 3
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // It sucked up the liquid ooze!
     PrintMessage pl_msg_00000368_00720, TAG_NONE
     Wait 
     WaitButtonABTime 30
+	Call BATTLE_SUBSCRIPT_HEAL_BLOCK_START_LEECH
 
 _090:
-    End 
+    End
+	
+_092:
+	// It sucked up the liquid ooze!
+    PrintMessage pl_msg_00000368_00720, TAG_NONE
+    Wait 
+    WaitButtonABTime 30
+	Call BATTLE_SUBSCRIPT_HEAL_BLOCK_START_LEECH
+	End

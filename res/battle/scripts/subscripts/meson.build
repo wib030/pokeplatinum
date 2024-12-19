@@ -341,4 +341,5 @@ subscript_files = files(
 	'subscript_held_item_user_raise_spe.s',
 	'subscript_held_item_user_raise_spa.s',
 	'subscript_held_item_user_raise_spd.s',
+	'subscript_heal_block_start_leech.s',
 )
