@@ -637,21 +637,26 @@ Basic_CheckAlreadyUnderReflect:
 
 Basic_CheckCannotParalyze:
     ; If the target cannot be paralyzed for any reason, score -10.
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCannotParalyze_ImmuneToStatus
     IfMoveEqualTo MOVE_THUNDER_WAVE, Basic_CheckCannotParalyze_ThunderWave
     IfMoveEqualTo MOVE_STUN_SPORE, Basic_CheckCannotParalyze_PowderMove
     GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
 Basic_CheckCannotParalyze_ThunderWave:
+    LoadBattlerAbility AI_BATTLER_ATTACKER    
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCannotParalyze_ImmuneToStatus
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MOTOR_DRIVE, ScoreMinus10
     IfLoadedEqualTo ABILITY_VOLT_ABSORB, ScoreMinus10
 	IfLoadedEqualTo ABILITY_LIGHTNING_ROD, ScoreMinus10
+    GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
 Basic_CheckCannotParalyze_PowderMove:
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
