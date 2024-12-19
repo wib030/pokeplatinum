@@ -5259,6 +5259,10 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                             // Move is either basic effectiveness or super effective at this point
                             else {
+                                if (effect == BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES) {
+                                    return FALSE;
+                                }
+
                                 // Check that no immunity abilities or items will activate
                                 if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) == FALSE)
                                 {
