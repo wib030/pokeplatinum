@@ -4216,7 +4216,6 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == TRUE) {
         for (int i = 0; i < NELEMS(sSoundMoves); i++) {
             if (sSoundMoves[i] == battleCtx->moveCur) {
-                battleCtx->moveStatusFlags |= MOVE_STATUS_INEFFECTIVE;
                 subscript = subscript_blocked_by_soundproof;
                 break;
             }
@@ -14357,6 +14356,330 @@ BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *batt
                 && defenderType1 != TYPE_ELECTRIC
                 && defenderType2 != TYPE_ELECTRIC)
             {
+                result = TRUE;
+            }
+        }
+    }
+
+    return result;
+}
+
+BOOL AI_ShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
+{
+    u8 speedCompare;
+    u16 move;
+    int moveEffect;
+    int i, numStatusMoves;
+    BOOL result;
+
+    // Early exit if enemy mon is already taunted
+    if (battleCtx->battleMons[defender].MoveEffectsData.tauntedTurns > 0) {
+        result = TRUE;
+        return result;
+    }
+
+    // Early exit for Magic Bounce
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MAGIC_BOUNCE)) {
+        result = FALSE;
+        return result;
+    }
+
+    result = FALSE;
+    numStatusMoves = 0;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[defender].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (MOVE_DATA(move).class == CLASS_STATUS) {
+
+            if (MapBattleEffectToSelfStatBoost(battleCtx, moveEffect) != BATTLE_STAT_FLAG_NONE) {
+                result = TRUE;
+                break;
+            }
+
+            if(MapBattleEffectToStatusCondition(battleCtx, moveEffect) != MON_CONDITION_NONE) {
+                result = TRUE;
+                break;
+            }
+
+            switch (moveEffect) {
+                default:
+                    numStatusMoves++;
+                    break;
+
+                case BATTLE_EFFECT_STEALTH_ROCK:
+                case BATTLE_EFFECT_SET_SPIKES:
+                case BATTLE_EFFECT_TOXIC_SPIKES:
+                case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
+                    result = TRUE;
+                    numStatusMoves++;
+                    break;
+
+                case BATTLE_EFFECT_RESTORE_HALF_HP:
+                case BATTLE_EFFECT_REST:
+                case BATTLE_EFFECT_AVERAGE_HP:
+                case BATTLE_EFFECT_CURE_PARTY_STATUS:
+                case BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN:
+                case BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE:
+                case BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON:
+                case BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON:
+                case BATTLE_EFFECT_HEAL_IN_3_TURNS:
+                case BATTLE_EFFECT_SWALLOW:
+                    result = TRUE;
+                    numStatusMoves++;
+                    break;
+
+                // Volatile statuses
+                case BATTLE_EFFECT_CONFUSE_ALL:
+                case BATTLE_EFFECT_STATUS_CONFUSE:
+                case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+                case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
+                case BATTLE_EFFECT_ENCORE:
+                case BATTLE_EFFECT_TORMENT:
+                case BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE:
+                case BATTLE_EFFECT_DISABLE:
+                case BATTLE_EFFECT_MAKE_GLOBAL_TARGET:
+                case BATTLE_EFFECT_INFATUATE:
+                case BATTLE_EFFECT_SET_SUBSTITUTE:
+                    result = TRUE;
+                    numStatusMoves++;
+                    break;
+
+                case BATTLE_EFFECT_TAUNT:
+                    speedCompare = BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, defender, TRUE);
+                    if (speedCompare == COMPARE_SPEED_FASTER || speedCompare == COMPARE_SPEED_TIE) {
+                        result = TRUE;
+                    }
+                    numStatusMoves++;
+                    break;
+
+                // Moves we don't need to taunt for
+                case BATTLE_EFFECT_DO_NOTHING:
+                case BATTLE_EFFECT_COPY_MOVE:
+                case BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE:
+                case BATTLE_EFFECT_CALL_RANDOM_MOVE:
+                case BATTLE_EFFECT_LEARN_MOVE_PERMANENT:
+                    break;
+
+                // Moves we will not usually taunt for
+                case BATTLE_EFFECT_CONVERSION:
+                case BATTLE_EFFECT_CONVERSION2:
+                case BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT:
+                case BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE:
+                case BATTLE_EFFECT_CHANGE_TYPE_WITH_WEATHER:
+                case BATTLE_EFFECT_HALVE_FIRE_DAMAGE:
+                case BATTLE_EFFECT_USE_LAST_USED_MOVE:
+                    if (BattleSystem_RandNext(battleSys) % 8 == 0) {
+                        numStatusMoves++;
+                    }
+                    break;
+
+                case BATTLE_EFFECT_PROTECT:
+                    // Normally, we wait til after the target has clicked protect to taunt
+                    if(battleCtx->battleMons[defender].moveEffectsData.protectSuccessTurns > 0
+                    || battleCtx->totalTurns - battleCtx->battleMons[defender].moveEffectsData.fakeOutTurnNumber > 1) {
+                        numStatusMoves++;
+                    }
+                    else {
+                        // 10% chance to taunt turn 1 or 2 out
+                        if (BattleSystem_RandNext(battleSys) % 10 == 0) {
+                            numStatusMoves++;
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+
+    if (numStatusMoves > 1) {
+        result = TRUE;
+    }
+    else {
+        if (numStatusMoves == 1) {
+            if (BattleSystem_RandNext(battleSys) % 8 == 0) {
+                result = TRUE;
+            }
+        }
+    }
+
+    return result;
+}
+
+BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int partySlot, int partyIndicator)
+{
+    u8 monItemEffect;
+    u16 move, monSpeedStat;
+    int moveEffect;
+    int i, numStatusMoves;
+    Pokemon *mon;
+    BOOL result;
+
+    // Early exit if enemy mon is already taunted
+    if (battleCtx->battleMons[defender].MoveEffectsData.tauntedTurns > 0) {
+        result = TRUE;
+        return result;
+    }
+
+    mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
+
+    // Early exit for Magic Bounce
+    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_MAGIC_BOUNCE)) {
+        result = FALSE;
+        return result;
+    }
+
+    result = FALSE;
+    numStatusMoves = 0;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[defender].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (MOVE_DATA(move).class == CLASS_STATUS) {
+
+            if (MapBattleEffectToSelfStatBoost(battleCtx, moveEffect) != BATTLE_STAT_FLAG_NONE) {
+                result = TRUE;
+                break;
+            }
+
+            if(MapBattleEffectToStatusCondition(battleCtx, moveEffect) != MON_CONDITION_NONE) {
+                result = TRUE;
+                break;
+            }
+
+            switch (moveEffect) {
+                default:
+                    numStatusMoves++;
+                    break;
+
+                case BATTLE_EFFECT_STEALTH_ROCK:
+                case BATTLE_EFFECT_SET_SPIKES:
+                case BATTLE_EFFECT_TOXIC_SPIKES:
+                case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
+                    result = TRUE;
+                    numStatusMoves++;
+                    break;
+
+                case BATTLE_EFFECT_RESTORE_HALF_HP:
+                case BATTLE_EFFECT_REST:
+                case BATTLE_EFFECT_AVERAGE_HP:
+                case BATTLE_EFFECT_CURE_PARTY_STATUS:
+                case BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN:
+                case BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE:
+                case BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON:
+                case BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON:
+                case BATTLE_EFFECT_HEAL_IN_3_TURNS:
+                case BATTLE_EFFECT_SWALLOW:
+                    result = TRUE;
+                    numStatusMoves++;
+                    break;
+
+                // Volatile statuses
+                case BATTLE_EFFECT_CONFUSE_ALL:
+                case BATTLE_EFFECT_STATUS_CONFUSE:
+                case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+                case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
+                case BATTLE_EFFECT_ENCORE:
+                case BATTLE_EFFECT_TORMENT:
+                case BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE:
+                case BATTLE_EFFECT_DISABLE:
+                case BATTLE_EFFECT_MAKE_GLOBAL_TARGET:
+                case BATTLE_EFFECT_INFATUATE:
+                case BATTLE_EFFECT_SET_SUBSTITUTE:
+                    result = TRUE;
+                    numStatusMoves++;
+                    break;
+
+                case BATTLE_EFFECT_TAUNT:
+                    monItemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
+                    monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+                    switch (monItemEffect) {
+                        default:
+                            break;
+
+                        case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+                        case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+                        case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+                        case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+                        case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+                        case HOLD_EFFECT_LVLUP_HP_EV_UP:
+                        case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+                        case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+                            monSpeedStat /= 2;
+                            break;
+
+                        case HOLD_EFFECT_DITTO_SPEED_UP:
+                            if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
+                                monSpeedStat *= 2;
+                            }
+                            break;
+
+                        case HOLD_EFFECT_CHOICE_SPEED:
+                            monSpeedStat = monSpeedStat * 3 / 2;
+                            break;
+                    }
+
+                    if (monSpeedStat >= battleCtx->battleMons[defender].speed) {
+                        result = TRUE;
+                    }
+                    numStatusMoves++;
+                    break;
+
+                // Moves we don't need to taunt for
+                case BATTLE_EFFECT_DO_NOTHING:
+                case BATTLE_EFFECT_COPY_MOVE:
+                case BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE:
+                case BATTLE_EFFECT_CALL_RANDOM_MOVE:
+                case BATTLE_EFFECT_LEARN_MOVE_PERMANENT:
+                    break;
+
+                // Moves we will not usually taunt for
+                case BATTLE_EFFECT_CONVERSION:
+                case BATTLE_EFFECT_CONVERSION2:
+                case BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT:
+                case BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE:
+                case BATTLE_EFFECT_CHANGE_TYPE_WITH_WEATHER:
+                case BATTLE_EFFECT_HALVE_FIRE_DAMAGE:
+                case BATTLE_EFFECT_USE_LAST_USED_MOVE:
+                    if (BattleSystem_RandNext(battleSys) % 8 == 0) {
+                        numStatusMoves++;
+                    }
+                    break;
+
+                case BATTLE_EFFECT_PROTECT:
+                    // Normally, we wait til after the target has clicked protect to taunt
+                    if(battleCtx->battleMons[defender].moveEffectsData.protectSuccessTurns > 0
+                    || battleCtx->totalTurns - battleCtx->battleMons[defender].moveEffectsData.fakeOutTurnNumber > 1) {
+                        numStatusMoves++;
+                    }
+                    else {
+                        // 10% chance to taunt turn 1 or 2 out
+                        if (BattleSystem_RandNext(battleSys) % 10 == 0) {
+                            numStatusMoves++;
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+
+    if (numStatusMoves > 1) {
+        result = TRUE;
+    }
+    else {
+        if (numStatusMoves == 1) {
+            if (BattleSystem_RandNext(battleSys) % 8 == 0) {
                 result = TRUE;
             }
         }

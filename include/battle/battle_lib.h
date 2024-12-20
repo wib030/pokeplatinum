@@ -1701,6 +1701,30 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
 BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat);
 
 /**
+* @brief Determine whether the AI should taunt the defender based on stats and moves.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker           The attacking BattleMon id.
+* @param defender           The defending BattleMon id.
+* @Return   The TRUE / FALSE result of whether the AI should use taunt.
+*/
+BOOL AI_ShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+
+/**
+* @brief Determine whether the AI should paralyze the defender's PartyMon based on stats and moves.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker           The attacking BattleMon id.
+* @param defender           The defending BattleMon id.
+* @param partySlot          The party slot of the Pokemon to consider.
+* @param partyIndicator     The BattleMon id of the BattleMon whose party will be considered.
+* @Return   The TRUE / FALSE result of whether the AI should use a taunt move.
+*/
+BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int partySlot, int partyIndicator);
+
+/**
 * @brief Determine whether the AI should perform a switch.
 *
 * @param battler
