@@ -4160,7 +4160,10 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE
             && moveType == TYPE_ELECTRIC
-            && attacker != defender) {
+            && attacker != defender
+            && CURRENT_MOVE_DATA.range != RANGE_USER_SIDE
+            && CURRENT_MOVE_DATA.range != RANGE_OPPONENT_SIDE
+            && CURRENT_MOVE_DATA.range != RANGE_FIELD) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 4);
         subscript = subscript_ability_restores_hp;
     }
@@ -4168,7 +4171,10 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WATER_ABSORB) == TRUE
             && moveType == TYPE_WATER
             && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE // do not proc on first turn of Dive
-            && CURRENT_MOVE_DATA.power) {
+            && attacker != defender
+            && CURRENT_MOVE_DATA.range != RANGE_USER_SIDE
+            && CURRENT_MOVE_DATA.range != RANGE_OPPONENT_SIDE
+            && CURRENT_MOVE_DATA.range != RANGE_FIELD) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 4);
         subscript = subscript_ability_restores_hp;
     }
@@ -4177,13 +4183,16 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
             && moveType == TYPE_FIRE
             && (battleCtx->battleMons[defender].status & MON_CONDITION_FREEZE) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-            && (CURRENT_MOVE_DATA.power || battleCtx->moveCur == MOVE_WILL_O_WISP)) {
+            && CURRENT_MOVE_DATA.range != RANGE_USER_SIDE
+            && CURRENT_MOVE_DATA.range != RANGE_OPPONENT_SIDE
+            && CURRENT_MOVE_DATA.range != RANGE_FIELD) {
         subscript = subscript_absorb_and_boost_fire_type_moves;
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == TRUE) {
         for (int i = 0; i < NELEMS(sSoundMoves); i++) {
             if (sSoundMoves[i] == battleCtx->moveCur) {
+                battleCtx->moveStatusFlags |= MOVE_STATUS_INEFFECTIVE;
                 subscript = subscript_blocked_by_soundproof;
                 break;
             }
