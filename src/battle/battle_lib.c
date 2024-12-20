@@ -2814,7 +2814,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 	
 	for (int i = 0; i < NELEMS(sPowderMoves); i++)
 	{
-		if (sPowderMoves[i] == battleCtx->moveCur)
+		if (sPowderMoves[i] == move)
 		{
 			powderMove = TRUE;
 			break;
@@ -3037,6 +3037,18 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
                 *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
             }
         }
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == TRUE) {
+
+        for (int i = 0; i < NELEMS(sSoundMoves); i++)
+	    {
+		    if (sSoundMoves[i] == move)
+		    {
+			    *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+			    break;
+		    }
+	    }
     }
 
     return damage;
@@ -3301,6 +3313,18 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
                 *moveStatusMask |= MOVE_STATUS_TYPE_IGNORE_IMMUNITY_ABILITY;
             }
         }
+    }
+
+    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_SOUNDPROOF) == TRUE) {
+
+        for (int i = 0; i < NELEMS(sSoundMoves); i++)
+	    {
+		    if (sSoundMoves[i] == move)
+		    {
+			    *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+			    break;
+		    }
+	    }
     }
 
     return damage;
