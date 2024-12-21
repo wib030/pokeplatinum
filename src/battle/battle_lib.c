@@ -2785,6 +2785,22 @@ static BOOL BasicTypeMulApplies_PartyMon(BattleSystem *battleSys, BattleContext 
     return result;
 }
 
+static u16 sSoundMoves[] = {
+    MOVE_GROWL,
+    MOVE_ROAR,
+    MOVE_SING,
+    MOVE_SUPERSONIC,
+    MOVE_SCREECH,
+    MOVE_SNORE,
+    MOVE_UPROAR,
+    MOVE_METAL_SOUND,
+    MOVE_GRASS_WHISTLE,
+    MOVE_HYPER_VOICE,
+    MOVE_BUG_BUZZ,
+    MOVE_CHATTER,
+    MOVE_PERISH_SONG,
+};
+
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
 {
     int chartEntry;
@@ -4145,22 +4161,6 @@ int Battler_CountMoves(BattleSystem *battleSys, BattleContext *battleCtx, int ba
 
     return i;
 }
-
-static u16 sSoundMoves[] = {
-    MOVE_GROWL,
-    MOVE_ROAR,
-    MOVE_SING,
-    MOVE_SUPERSONIC,
-    MOVE_SCREECH,
-    MOVE_SNORE,
-    MOVE_UPROAR,
-    MOVE_METAL_SOUND,
-    MOVE_GRASS_WHISTLE,
-    MOVE_HYPER_VOICE,
-    MOVE_BUG_BUZZ,
-    MOVE_CHATTER,
-    MOVE_PERISH_SONG,
-};
 
 static u16 sPowderMoves[] = {
     MOVE_POISON_POWDER,
@@ -14373,7 +14373,7 @@ BOOL AI_ShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int 
     BOOL result;
 
     // Early exit if enemy mon is already taunted
-    if (battleCtx->battleMons[defender].MoveEffectsData.tauntedTurns > 0) {
+    if (battleCtx->battleMons[defender].moveEffectsData.tauntedTurns > 0) {
         result = TRUE;
         return result;
     }
@@ -14521,7 +14521,7 @@ BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleC
     BOOL result;
 
     // Early exit if enemy mon is already taunted
-    if (battleCtx->battleMons[defender].MoveEffectsData.tauntedTurns > 0) {
+    if (battleCtx->battleMons[defender].moveEffectsData.tauntedTurns > 0) {
         result = TRUE;
         return result;
     }
