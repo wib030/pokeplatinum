@@ -111,9 +111,11 @@
             "29": "MOVE_FEINT",
             "33": "MOVE_PUNISHMENT",
             "36": "MOVE_CLOSE_COMBAT",
+			"38": "MOVE_BLAZE_KICK",
             "45": "MOVE_FIRE_SPIN",
             "53": "MOVE_CALM_MIND",
-            "54": "MOVE_FLARE_BLITZ"
+            "54": "MOVE_FLARE_BLITZ",
+			"56": "MOVE_OVERHEAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
