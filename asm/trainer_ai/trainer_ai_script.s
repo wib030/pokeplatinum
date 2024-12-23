@@ -292,6 +292,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Basic_CheckStealthRock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Basic_CheckLunarDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_Wish
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Basic_Taunt
     PopOrEnd 
 
 Basic_CheckCannotSleep:
@@ -1613,6 +1614,27 @@ Basic_Wish:
 Basic_Wish_End:
     PopOrEnd
 
+Basic_Taunt:
+    IfTargetIsNotTaunted AI_BATTLER_DEFENDER, Basic_Taunt_CheckAbility
+    GoTo ScoreMinus10
+
+Basic_Taunt_CheckAbility:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_Taunt_CheckFirstTurn
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
+    GoTo Basic_Taunt_CheckFirstTurn
+
+Basic_Taunt_CheckFirstTurn:
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, ScorePlus3
+    IfRandomLessThan 128, Basic_Taunt_End
+    AddToMoveScore 1
+    GoTo Basic_Taunt_End
+
+Basic_Taunt_End:
+    PopOrEnd
+
 ScoreMinus1:
     AddToMoveScore -1
     PopOrEnd 
@@ -1862,6 +1884,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_SP_ATK_HIT, Expert_ChargeBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Expert_WeightMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Expert_Wish
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -7942,6 +7965,34 @@ Expert_Wish_TryScorePlus1:
 Expert_Wish_End:
     PopOrEnd
     
+Expert_Taunt:
+    IfTargetIsNotTaunted AI_BATTLER_DEFENDER, Expert_Taunt_CheckAbility
+    GoTo ScoreMinus10
+
+Expert_Taunt_CheckAbility:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Taunt_CheckFirstTurn
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
+    GoTo Expert_Taunt_CheckFirstTurn
+
+Expert_Taunt_CheckFirstTurn:
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_Taunt_TryScorePlus1
+    GoTo Expert_Taunt_ValidateTaunt
+
+Expert_TryScorePlus1:
+    IfRandomLessThan 32, Expert_Taunt_ValidateTaunt
+    AddToMoveScore 1
+    GoTo Expert_Taunt_ValidateTaunt
+
+Expert_Taunt_ValidateTaunt:
+    IfShouldTaunt AI_BATTLER_DEFENDER, ScorePlus3
+    AddToMoveScore -4
+    GoTo Expert_Taunt_End
+
+Expert_Taunt_End:
+    PopOrEnd
 
 EvalAttack_Main:
     ; Never target the partner.

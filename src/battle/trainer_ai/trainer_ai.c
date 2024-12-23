@@ -412,6 +412,7 @@ static void AICmd_IfToxicSpikesClearerAliveInParty(BattleSystem *battleSys, Batt
 static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext  *battleCtx);
 static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -569,7 +570,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfToxicSpikesClearerAliveInParty,
     AICmd_LoadWeight,
     AICmd_IfWishActive,
-	AICmd_IfPartyMemberHasBattleEffect
+	AICmd_IfPartyMemberHasBattleEffect,
+    AICmd_IfShouldTaunt
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3658,6 +3660,19 @@ static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleCo
                 }
             }
             break;
+    }
+}
+
+static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (AI_ShouldTauntCheck(battleSys, battleCtx, AI_CONTEXT.attacker, battler)) {
+        AIScript_Iter(battleCtx, jump);
     }
 }
 
