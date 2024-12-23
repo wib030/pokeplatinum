@@ -1615,7 +1615,7 @@ Basic_Wish_End:
     PopOrEnd
 
 Basic_Taunt:
-    IfTargetIsNotTaunted AI_BATTLER_DEFENDER, Basic_Taunt_CheckAbility
+    IfTargetIsNotTaunted Basic_Taunt_CheckAbility
     GoTo ScoreMinus10
 
 Basic_Taunt_CheckAbility:
@@ -7966,7 +7966,7 @@ Expert_Wish_End:
     PopOrEnd
     
 Expert_Taunt:
-    IfTargetIsNotTaunted AI_BATTLER_DEFENDER, Expert_Taunt_CheckAbility
+    IfTargetIsNotTaunted Expert_Taunt_CheckAbility
     GoTo ScoreMinus10
 
 Expert_Taunt_CheckAbility:
@@ -7981,7 +7981,7 @@ Expert_Taunt_CheckFirstTurn:
     IfLoadedEqualTo TRUE, Expert_Taunt_TryScorePlus1
     GoTo Expert_Taunt_ValidateTaunt
 
-Expert_TryScorePlus1:
+Expert_Taunt_TryScorePlus1:
     IfRandomLessThan 32, Expert_Taunt_ValidateTaunt
     AddToMoveScore 1
     GoTo Expert_Taunt_ValidateTaunt
