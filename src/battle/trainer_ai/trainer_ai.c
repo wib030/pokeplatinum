@@ -413,6 +413,7 @@ static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext  *battleCtx)
 static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -571,7 +572,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadWeight,
     AICmd_IfWishActive,
 	AICmd_IfPartyMemberHasBattleEffect,
-    AICmd_IfShouldTaunt
+    AICmd_IfShouldTaunt,
+    AICmd_LoadMoveAccuracy
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3675,6 +3677,79 @@ static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCt
         AIScript_Iter(battleCtx, jump);
     }
 }
+
+static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    u8 moveType;
+
+    AIScript_Iter(battleCtx, 1);
+    AI_CONTEXT.calcTemp = MOVE_DATA(AI_CONTEXT.move).accuracy;
+
+    moveType = MOVE_DATA(AI_CONTEXT.move).type;
+
+    // Moves with no acc check
+    if (AI_CONTEXT.calcTemp == 0) {
+        AI_CONTEXT.calcTemp = 100;
+    }
+
+    if (NO_CLOUD_NINE) {
+        if ((WEATHER_IS_SUN && MOVE_DATA(AI_CONTEXT.move).effect == BATTLE_EFFECT_THUNDER)
+            || (WEATHER_IS_SUN && MOVE_DATA(AI_CONTEXT.move).effect == BATTLE_EFFECT_HURRICANE))
+        {
+            AI_CONTEXT.calcTemp = 50;
+        }
+
+        if ((WEATHER_IS_RAIN && MOVE_DATA(AI_CONTEXT.move).effect == BATTLE_EFFECT_THUNDER)
+            || (WEATHER_IS_RAIN && MOVE_DATA(AI_CONTEXT.move).effect == BATTLE_EFFECT_HURRICANE))
+        {
+            AI_CONTEXT.calcTemp = 100;
+        }
+
+        if (WEATHER_IS_SAND && moveType == TYPE_ROCK) {
+            AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 11 / 10;
+        }
+    }
+
+    if (MON_HAS_TYPE(AI_CONTEXT.attacker, moveType)) {
+        AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 11 / 10;
+    }
+
+    if (Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_ACCURACY_UP) {
+        AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 11 / 10;
+    }
+
+    if (Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_ACCURACY_UP_SLOWER) {
+        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, TRUE) == COMPARE_SPEED_SLOWER) {
+            AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 6 / 5;
+        }
+    }
+
+    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_COMPOUND_EYES) {
+        AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 13 / 10;
+    }
+
+    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_NO_GUARD) {
+        AI_CONTEXT.calcTemp = 100;
+    }
+
+    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, AI_CONTEXT.attacker, ABILITY_ILLUMINATE))
+	{
+		AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 6 / 5;
+	}
+
+    if (battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.micleBerry) {
+        AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 6 / 5;
+    }
+
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
+        AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 5 / 3;
+    }
+
+    if (AI_CONTEXT.calcTemp > 100) {
+        AI_CONTEXT.calcTemp = 100;
+    }
+}
+
 
 /**
  * @brief Push an address for the AI script onto the cursor stack.

@@ -8031,6 +8031,10 @@ EvalAttack_CheckForKill:
     ; Do not evaluate kills with Explosion or Self-Destruct for this routine.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, EvalAttack_Terminate
 
+    ; Inaccurate moves will receive 2 points less score
+    LoadMoveAccuracy
+    IfLoadedNotEqualTo 100, EvalAttack_ScorePlus2_Inaccurate
+
     ; Randomly increase the score of a move that kills.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, EvalAttack_TryScorePlus4
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING, EvalAttack_TryScorePlus4
@@ -8051,6 +8055,11 @@ EvalAttack_ScorePlus2:
 
 EvalAttack_ScorePlus4:
     AddToMoveScore 4
+    GoTo EvalAttack_Terminate
+
+EvalAttack_ScorePlus2_Inaccurate:
+    AddToMoveScore 2
+    GoTo EvalAttack_Terminate
 
 EvalAttack_Terminate:
     PopOrEnd 
