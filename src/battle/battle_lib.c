@@ -1332,7 +1332,9 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed *= 2;
     }
 
-    if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
+    if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY_NOT_PARA)) {
+		battler1Speed = battler1Speed * 15 / 10;
+    } else if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS)) {
         battler1Speed *= 2;
     } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
         battler1Speed /= 2;
@@ -1398,10 +1400,12 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler2Speed *= 2;
     }
 
-    if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY)) {
+	if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY_NOT_PARA)) {
+		battler2Speed = battler2Speed * 15 / 10;
+    } else if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS)) {
         battler2Speed *= 2;
     } else if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
-        battler2Speed /= 4;
+        battler2Speed /= 2;
     }
 
     if (battler2Ability == ABILITY_SLOW_START
@@ -11575,7 +11579,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     break;
             }
 
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY_NOT_PARA)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat = monSpeedStat * 3 / 2;
+            }
+			else if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
 			&& (monAbility == ABILITY_QUICK_FEET))
 			{
                monSpeedStat *= 2;
@@ -12613,7 +12622,12 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     break;
             }
 
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY_NOT_PARA)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat = monSpeedStat * 3 / 2;
+            }
+			else if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
 			&& (monAbility == ABILITY_QUICK_FEET))
 			{
                monSpeedStat *= 2;
@@ -14719,7 +14733,12 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     break;
             }
 
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY)
+            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY_NOT_PARA)
+			&& (monAbility == ABILITY_QUICK_FEET))
+			{
+               monSpeedStat = monSpeedStat * 3 / 2;
+            }
+			else if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
 			&& (monAbility == ABILITY_QUICK_FEET))
 			{
                monSpeedStat *= 2;
