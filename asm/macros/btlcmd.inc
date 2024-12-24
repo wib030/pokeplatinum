@@ -1233,5 +1233,10 @@
     .macro End
     .long 222
     .endm
+	
+	.macro TriggerAttackerAbilityOnHit jump_no_effect
+    .long 223
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

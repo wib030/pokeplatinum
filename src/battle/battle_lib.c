@@ -5493,93 +5493,6 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			}
 			break;
     }
-	
-	switch (Battler_Ability(battleCtx, battleCtx->attacker))
-	{
-		case ABILITY_POISON_TOUCH:
-			if (DEFENDING_MON.curHP
-			&& DEFENDING_MON.status == MON_CONDITION_NONE
-			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
-			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
-            && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
-			&& BattleSystem_RandNext(battleSys) % 10 < 3)
-			{
-				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
-				battleCtx->sideEffectMon = battleCtx->defender;
-				battleCtx->msgBattlerTemp = battleCtx->attacker;
-
-				*subscript = subscript_poison;
-				result = TRUE;
-			}
-			break;
-			
-		case ABILITY_RIVALRY:
-			if (ATTACKING_MON.curHP
-			&& (ATTACKING_MON.rivalryFlag == TRUE)
-            && (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) == FALSE
-            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-            && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
-            && DEFENDING_MON.curHP
-            && BattleSystem_RandNext(battleSys) % 10 < 3)
-			{
-				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
-				battleCtx->sideEffectMon = battleCtx->attacker;
-				battleCtx->msgBattlerTemp = battleCtx->defender;
-				
-				*subscript = subscript_infatuate_rivalry;
-				result = TRUE;
-			}
-			break;
-			
-		case ABILITY_FREE_SAMPLE:
-			if (DEFENDING_MON.curHP
-			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
-			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
-			&& BattleSystem_RandNext(battleSys) % 10 < 3)
-			{
-				*subscript = subscript_pluck_ability;
-				result = TRUE;
-			}
-			break;
-			
-		case ABILITY_SHAKEDOWN:
-			if (DEFENDING_MON.curHP
-			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-			&& (battleCtx->battleMons[battleCtx->defender].moveEffectsData.embargoTurns == 0)
-			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
-			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
-			{
-				*subscript = subscript_embargo_start_ability;
-				result = TRUE;
-			}
-			break;
-			
-		case ABILITY_STRANGLE_WEED:
-			if (DEFENDING_MON.curHP
-			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
-			&& (MOVE_DATA(battleCtx->moveCur).type == TYPE_GRASS)
-			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
-			{
-				battleCtx->sideEffectMon = battleCtx->defender;
-				battleCtx->msgMoveTemp = MOVE_WRAP;
-				*subscript = subscript_bind_start_ability;
-				result = TRUE;
-			}
-			break;
-	}
 
     return result;
 }
@@ -15145,4 +15058,107 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
     }
 
     return shouldSwitch;
+}
+
+BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
+{
+    BOOL result = FALSE;
+
+    // These two sentinels must be separate to match
+    if (battleCtx->defender == BATTLER_NONE) {
+        return result;
+    }
+
+    if (Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == TRUE) {
+        return result;
+    }
+
+	switch (Battler_Ability(battleCtx, battleCtx->attacker))
+	{
+		case ABILITY_POISON_TOUCH:
+			if (DEFENDING_MON.curHP
+			&& DEFENDING_MON.status == MON_CONDITION_NONE
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)
+			&& BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+				battleCtx->sideEffectMon = battleCtx->defender;
+				battleCtx->msgBattlerTemp = battleCtx->attacker;
+
+				*subscript = subscript_poison;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_RIVALRY:
+			if (ATTACKING_MON.curHP
+			&& (ATTACKING_MON.rivalryFlag == TRUE)
+            && (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) == FALSE
+            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+            && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+            && DEFENDING_MON.curHP
+            && BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+				battleCtx->sideEffectMon = battleCtx->attacker;
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+				
+				*subscript = subscript_infatuate_rivalry;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_FREE_SAMPLE:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& BattleSystem_RandNext(battleSys) % 10 < 3)
+			{
+				*subscript = subscript_pluck_ability;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_SHAKEDOWN:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (battleCtx->battleMons[battleCtx->defender].moveEffectsData.embargoTurns == 0)
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				*subscript = subscript_embargo_start_ability;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_STRANGLE_WEED:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& (MOVE_DATA(battleCtx->moveCur).type == TYPE_GRASS)
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			{
+				battleCtx->sideEffectMon = battleCtx->defender;
+				battleCtx->msgMoveTemp = MOVE_WRAP;
+				*subscript = subscript_bind_start_ability;
+				result = TRUE;
+			}
+			break;
+	}
+
+    return result;
 }

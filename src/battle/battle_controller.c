@@ -3651,6 +3651,7 @@ enum {
     ONE_HIT_FORM_CHANGE,
     ONE_HIT_RAGE,
     ONE_HIT_TRIGGER_ABILITY,
+	ONE_HIT_TRIGGER_ATTACKER_ABILITY,
     ONE_HIT_EXTRA_FLINCH,
 
     MULTI_HIT_CRITICAL = 0,
@@ -3658,6 +3659,7 @@ enum {
     MULTI_HIT_FORM_CHANGE,
     MULTI_HIT_RAGE,
     MULTI_HIT_TRIGGER_ABILITY,
+	MULTI_HIT_TRIGGER_ATTACKER_ABILITY,
     MULTI_HIT_STATUS,
     MULTI_HIT_EXTRA_FLINCH,
 };
@@ -3719,6 +3721,18 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
                 
                 return;
             }
+			
+		case ONE_HIT_TRIGGER_ATTACKER_ABILITY:
+            int abilitySeqNew;
+
+            battleCtx->afterMoveMessageState++;
+            if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &abilitySeqNew) == TRUE) {
+                LOAD_SUBSEQ(abilitySeqNew);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                
+                return;
+            }
 
         case ONE_HIT_EXTRA_FLINCH:
             battleCtx->afterMoveMessageState++;
@@ -3774,6 +3788,18 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
             battleCtx->afterMoveMessageState++;
             if (BattleSystem_TriggerAbilityOnHit(battleSys, battleCtx, &abilitySeq) == TRUE) {
                 LOAD_SUBSEQ(abilitySeq);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                
+                return;
+            }
+			
+		case MULTI_HIT_TRIGGER_ATTACKER_ABILITY:
+            int abilitySeqNew;
+
+            battleCtx->afterMoveMessageState++;
+            if (BattleSystem_TriggerAbilityOnHit(battleSys, battleCtx, &abilitySeqNew) == TRUE) {
+                LOAD_SUBSEQ(abilitySeqNew);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
                 

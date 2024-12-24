@@ -1732,4 +1732,21 @@ BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleC
 */
 BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler);
 
+BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
+
+/**
+ * @brief Triggers an attackers ability which prevents an illegal status
+ * condition on the given battler, e.g. a paralyzed Pokemon with Limber.
+ * 
+ * This also contains the check responsible for setting the canUnburden flag.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler 
+ * @param skipLoad  If TRUE, the routine will skip loading the subscript
+ *                  responsible for curing an illegal status condition.
+ * @return TRUE if a subscript for an ability effect was loaded, FALSE
+ * otherwise.
+ */
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
