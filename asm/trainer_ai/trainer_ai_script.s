@@ -228,7 +228,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, Basic_CheckFutureSight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Basic_CheckSpikes
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Basic_CheckStickyWeb
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Basic_CheckMaxStockpile
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Basic_CheckCanSpitUpOrSwallow
@@ -1587,6 +1587,15 @@ Basic_CheckStealthRock:
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
     PopOrEnd 
+	
+Basic_CheckStickyWeb:
+    ; If the target''s side of the field is already under the effect of Sticky Web, score -10.
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STICKY_WEB, ScoreMinus10
+
+    ; If the target is on their last Pokemon, score -10.
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+    PopOrEnd
 
 Basic_CheckLunarDance:
     ; Start at -20
@@ -7030,10 +7039,6 @@ Expert_MagnetRise_ScorePlus1:
 
 Expert_MagnetRise_End:
     PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
 
 Expert_Defog:
 	; If the defender has Defiant or Competitive, score -10
@@ -7072,9 +7077,11 @@ Expert_Defog:
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_HazardsScoreSpikesTryMinus2
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_HazardsScoreStealthRockTryMinus2
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_HazardsScoreToxicSpikesTryMinus2
+	IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_HazardsScoreStickyWebTryMinus2
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_HazardsScorePlus2
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_HazardsScorePlus2
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_HazardsScorePlus2
+	IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_HazardsScorePlus2
     GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
     
 
@@ -7086,6 +7093,9 @@ Expert_Defog_HazardsScoreStealthRockTryMinus2:
 
 Expert_Defog_HazardsScoreToxicSpikesTryMinus2:
     IfMoveEffectNotKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_TOXIC_SPIKES, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
+	
+Expert_Defog_HazardsScoreStickyWebTryMinus2:
+    IfMoveEffectNotKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SET_STICKY_WEB, Expert_Defog_CheckEnemyTeamAliveAndTryMinus2
 
 Expert_Defog_CheckEnemyTeamAliveAndTryMinus2:
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
@@ -7195,7 +7205,6 @@ Expert_Blizzard_TryScoreMinus3:
     AddToMoveScore -3
 
 Expert_Blizzard_End:
-    PopOrEnd 
     PopOrEnd 
 
 Expert_Captivate:
@@ -7370,7 +7379,7 @@ Expert_StealthRock_CheckDefog:
 
 StealthRock_AbilityPunish_Defog:
     TableEntry ABILITY_DEFIANT
-    TableEntry ABILITY_STALL
+    TableEntry ABILITY_COMPETITIVE
     TableEntry TABLE_END
 
 Expert_StealthRock_TryScorePlus1:
@@ -7388,9 +7397,7 @@ Expert_StealthRock_TryScoreMinus1:
     AddToMoveScore -1
     GoTo Expert_StealthRock_End
 
-Expert_StealthRock_End:
-    PopOrEnd 
-    PopOrEnd 
+Expert_StealthRock_End: 
     PopOrEnd
 
 Expert_Spikes:
@@ -7528,7 +7535,6 @@ Spikes_AbilityPunish_Defog:
     TableEntry ABILITY_DEFIANT
     TableEntry TABLE_END
 
-
 Expert_Spikes_CheckToEncourage:
     LoadTurnCount
     IfLoadedLessThan 3, Expert_Spikes_SpikesScore
@@ -7559,9 +7565,7 @@ Expert_Spikes_TryScoreMinus1:
     AddToMoveScore -1
     GoTo Expert_Spikes_End
     
-Expert_Spikes_End:
-    PopOrEnd 
-    PopOrEnd 
+Expert_Spikes_End: 
     PopOrEnd
 
 Expert_ToxicSpikes:
@@ -7731,9 +7735,168 @@ Expert_ToxicSpikes_TryScoreMinus1:
     GoTo Expert_ToxicSpikes_End
     
 Expert_ToxicSpikes_End:
-    PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
+    PopOrEnd
+	
+Expert_StickyWeb:
+    ; Don''t use if defender is on their last mon.
+    ;
+    ; Check if defender knows Rapid Spin, Defog, or Taunt.
+    ;
+    ; If Rapid Spin, check if attacker has a move that punishes on contact.
+    ; If attacker does have move that punishes on contact, try to click rocks into a spinner.
+    ;
+    ; Similar for Defog, but with Defiant / Competitive
+    ;
+    ; If defender knows Taunt, try rocks 25% of the time, otherwise score -1.
+    ;
+    ; Try rocks has 50% chance to default to +1 score if Stealth Rocks is not already up.
+    ;
+    ; 90% chance to add +4 score during the first 3 turns of a battle.
+    ;
+    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ;
+    ; If the attacker has just switched in, 33% chance of additional score +1.
+
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STICKY_WEB, ScoreMinus10
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_StickyWeb_CheckRapidSpin
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_StickyWeb_CheckDefog
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_StickyWeb_TryScoreMinus1
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, Expert_StickyWeb_CheckToEncourage
+    IfRandomLessThan 64, Expert_StickyWeb_CheckToEncourage
+    AddToMoveScore -1
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckToEncourage:
+    LoadTurnCount
+    IfLoadedLessThan 3, Expert_StickyWeb_TryScorePlus4
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StickyWeb_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StickyWeb_TryScorePlus1
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_StickyWeb_TryScorePlus1
+    IfRandomLessThan 128, Expert_StickyWeb_End
+    AddToMoveScore 1
+    GoTo Expert_StickyWeb_End
+
+Expert_StickyWeb_CheckRapidSpin:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, Expert_StickyWeb_CheckItem
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, Expert_StickyWeb_CheckItem
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_ABILITY_SUPPRESSED, ScoreMinus3
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable StickyWeb_AbilityPunish_RapidSpin, Expert_StickyWeb_CheckAbilityImmunity
+    IfRandomLessThan 25, Expert_StickyWeb_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_StealthRock_End
+
+Expert_StickyWeb_CheckItem:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NORMAL_HIT_GHOST, ScoreMinus3
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckAbilityImmunity:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus3
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH, ScoreMinus3
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_POINT, Expert_StickyWeb_CheckPoisonPoint
+    IfLoadedEqualTo ABILITY_FLAME_BODY, Expert_StickyWeb_CheckFlameBody
+    IfLoadedEqualTo ABILITY_STATIC, Expert_StickyWeb_CheckStatic
+    IfLoadedEqualTo ABILITY_FRESH_MILK, Expert_StickyWeb_CheckFreshMilk
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckPoisonPoint:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_STEEL, ScoreMinus3
+    IfLoadedEqualTo TYPE_POISON, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckFlameBody:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_FIRE, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckStatic:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus3
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus3
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus3
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FACADE, ScoreMinus3
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckFreshMilk:
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus3
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus3
+    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus3
+    LoadGender AI_BATTLER_ATTACKER
+    IfLoadedEqualTo GENDER_MALE, Expert_StickyWeb_CheckFreshMilk_BothMale
+    IfLoadedEqualTo GENDER_FEMALE, Expert_StickyWeb_CheckFreshMilk_BothFemale
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckFreshMilk_BothMale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_MALE, ScoreMinus3
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+Expert_StickyWeb_CheckFreshMilk_BothFemale:
+    LoadGender AI_BATTLER_DEFENDER
+    IfLoadedEqualTo GENDER_FEMALE, ScoreMinus3
+    GoTo Expert_StickyWeb_CheckToEncourage
+
+StickyWeb_AbilityPunish_RapidSpin:
+    TableEntry ABILITY_EFFECT_SPORE
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_STATIC
+    TableEntry ABILITY_POISON_POINT
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_FRESH_MILK
+	TableEntry ABILITY_STEADFAST
+    TableEntry TABLE_END
+
+Expert_StickyWeb_CheckDefog:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable StickyWeb_AbilityPunish_Defog, Expert_StickyWeb_CheckToEncourage
+    AddToMoveScore -8
+    GoTo Expert_StickyWeb_End
+
+StickyWeb_AbilityPunish_Defog:
+    TableEntry ABILITY_DEFIANT
+    TableEntry ABILITY_COMPETITIVE
+    TableEntry TABLE_END
+
+Expert_StickyWeb_TryScorePlus1:
+    IfRandomLessThan 85, Expert_StickyWeb_End
+    AddToMoveScore 1
+    GoTo Expert_StickyWeb_End
+
+Expert_StickyWeb_TryScorePlus4:
+    IfRandomLessThan 25, Expert_StickyWeb_End
+    AddToMoveScore 4
+    GoTo Expert_StickyWeb_End
+
+Expert_StickyWeb_TryScoreMinus1:
+    IfRandomLessThan 64, Expert_StickyWeb_CheckToEncourage
+    AddToMoveScore -1
+    GoTo Expert_StickyWeb_End
+
+Expert_StickyWeb_End: 
+    PopOrEnd
 
 Expert_RecoilMove:
     ; If the opponent resists or is immune to the move, ignore all further score modifiers.
