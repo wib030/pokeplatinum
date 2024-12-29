@@ -104,7 +104,8 @@
             "41": "MOVE_ATTRACT",
             "44": "MOVE_PSYCHIC",
             "47": "MOVE_LEAF_STORM",
-			"50": "MOVE_BUG_BUZZ"
+			"50": "MOVE_BUG_BUZZ",
+			"52": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_SNORE",

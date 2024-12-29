@@ -95,6 +95,7 @@
             "34": "MOVE_EXPLOSION",
             "39": "MOVE_IRON_DEFENSE",
             "42": "MOVE_GYRO_BALL",
+			"40": "MOVE_MUD_SPORT",
             "45": "MOVE_DOUBLE_EDGE"
         },
         "tutor": [

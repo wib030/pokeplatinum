@@ -100,7 +100,8 @@
 			"32": "MOVE_LEECH_LIFE",
             "39": "MOVE_GIGA_DRAIN",
             "42": "MOVE_AROMATHERAPY",
-            "50": "MOVE_X_SCISSOR"
+            "50": "MOVE_X_SCISSOR",
+			"54": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_FURY_CUTTER",

@@ -48,7 +48,8 @@
         "level_up": {
             "1": "MOVE_HARDEN",
 			"3": "MOVE_FRENZY_PLANT",
-            "7": "MOVE_HARDEN"
+            "7": "MOVE_HARDEN",
+			"35": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_IRON_DEFENSE"

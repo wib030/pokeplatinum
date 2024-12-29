@@ -94,7 +94,8 @@
 			"31": "MOVE_POWER_TRICK",
 			"38": "MOVE_ROCK_SLIDE",
             "40": "MOVE_BUG_BITE",
-			"49": "MOVE_STONE_EDGE"
+			"49": "MOVE_STONE_EDGE",
+			"53": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -89,7 +89,8 @@
             "36": "MOVE_PIN_MISSILE",
             "40": "MOVE_PSYCHIC",
 			"42": "MOVE_MIND_READER",
-            "43": "MOVE_POISON_JAB"
+            "43": "MOVE_POISON_JAB",
+			"45": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_SIGNAL_BEAM",

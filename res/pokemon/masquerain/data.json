@@ -106,6 +106,7 @@
 			"42": "MOVE_BUG_BUZZ",
 			"46": "MOVE_WEATHER_BALL",
 			"52": "MOVE_HYDRO_PUMP",
+			"54": "MOVE_MUD_SPORT",
 			"56": "MOVE_RAZOR_WIND"
         },
         "tutor": [

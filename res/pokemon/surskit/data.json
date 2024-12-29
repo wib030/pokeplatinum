@@ -85,7 +85,8 @@
                 "MOVE_HAZE"
             ],
 			"30": "MOVE_AQUA_JET",
-            "35": "MOVE_BATON_PASS"
+            "35": "MOVE_BATON_PASS",
+			"40": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

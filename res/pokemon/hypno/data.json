@@ -95,7 +95,8 @@
                 "MOVE_SWITCHEROO",
                 "MOVE_POUND",
                 "MOVE_HYPNOSIS",
-                "MOVE_TELEPORT"
+                "MOVE_TELEPORT",
+				"MOVE_ODOR_SLEUTH"
             ],
             "5": "MOVE_DISABLE",
             "9": "MOVE_CONFUSION",
@@ -105,7 +106,6 @@
             "25": "MOVE_PSYBEAM",
             "33": "MOVE_PSYCH_UP",
 			"36": "MOVE_MEAN_LOOK",
-            "38": "MOVE_HEADBUTT",
 			"40": "MOVE_ZEN_HEADBUTT",
 			"42": "MOVE_KINESIS",
             "45": "MOVE_SWAGGER",

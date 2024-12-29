@@ -51,7 +51,8 @@
 				"MOVE_FRENZY_PLANT",
                 "MOVE_BIDE"
             ],
-            "16": "MOVE_BUG_BITE"
+            "16": "MOVE_BUG_BITE",
+			"40": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

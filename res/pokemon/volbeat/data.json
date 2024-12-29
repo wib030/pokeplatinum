@@ -105,7 +105,8 @@
 			"39": "MOVE_SPIDER_WEB",
             "41": "MOVE_BUG_BUZZ",
 			"43": "MOVE_TRICK",
-            "45": "MOVE_DISCHARGE"
+            "45": "MOVE_DISCHARGE",
+			"54": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
