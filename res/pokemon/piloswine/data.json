@@ -87,11 +87,9 @@
                 "MOVE_ANCIENT_POWER",
                 "MOVE_PECK",
                 "MOVE_ODOR_SLEUTH",
-                "MOVE_MUD_SPORT",
 				"MOVE_FURY_ATTACK",
                 "MOVE_POWDER_SNOW"
             ],
-            "5": "MOVE_MUD_SPORT",
             "8": "MOVE_POWDER_SNOW",
             "11": "MOVE_MUD_SLAP",
             "14": "MOVE_ENDURE",

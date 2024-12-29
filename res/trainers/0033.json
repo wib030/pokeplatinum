@@ -28,8 +28,7 @@
             "moves": [
 				"MOVE_DRAIN_PUNCH",
 				"MOVE_RAIN_DANCE",
-				"MOVE_BELLY_DRUM",
-				"MOVE_MUD_SPORT"
+				"MOVE_BELLY_DRUM"
             ],
             "power": 50,
             "ball_seal": 0

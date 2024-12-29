@@ -89,10 +89,8 @@
         "level_up": {
             "1": [
                 "MOVE_WATER_GUN",
-                "MOVE_TAIL_WHIP",
-                "MOVE_MUD_SPORT"
+                "MOVE_TAIL_WHIP"
             ],
-            "5": "MOVE_MUD_SPORT",
             "9": "MOVE_MUD_SHOT",
             "15": "MOVE_BODY_SLAM",
             "19": "MOVE_MUD_BOMB",

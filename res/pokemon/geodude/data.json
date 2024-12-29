@@ -84,8 +84,7 @@
         "level_up": {
             "1": [
                 "MOVE_TACKLE",
-                "MOVE_DEFENSE_CURL",
-				"MOVE_MUD_SPORT"
+                "MOVE_DEFENSE_CURL"
             ],
 			"4": "MOVE_ROCK_THROW",
 			"6": "MOVE_ROCK_POLISH",

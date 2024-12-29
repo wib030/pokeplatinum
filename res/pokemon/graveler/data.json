@@ -85,7 +85,6 @@
             "1": [
                 "MOVE_TACKLE",
                 "MOVE_DEFENSE_CURL",
-				"MOVE_MUD_SPORT",
 				"MOVE_ROCK_POLISH"
             ],
 			"10": "MOVE_ROLLOUT",

@@ -74,7 +74,6 @@
 				"MOVE_MUD_SLAP",
 				"MOVE_BUBBLE"
 			],
-            "2": "MOVE_MUD_SPORT",
             "4": "MOVE_HARDEN",
             "7": "MOVE_WATER_PULSE",
             "11": "MOVE_MUD_BOMB",

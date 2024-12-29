@@ -32,7 +32,6 @@
             "moves": [
                 "MOVE_BOUNCE",
                 "MOVE_DIVE",
-                "MOVE_MUD_SPORT",
                 "MOVE_ICY_WIND"
             ],
             "power": 200,

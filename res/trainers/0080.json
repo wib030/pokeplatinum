@@ -29,7 +29,6 @@
             "item": "ITEM_GROWTH_MULCH",
             "moves": [
                 "MOVE_MUD_SLAP",
-				"MOVE_MUD_SPORT",
 				"MOVE_MUD_BOMB"
             ],
             "power": 200,

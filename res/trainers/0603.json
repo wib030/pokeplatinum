@@ -60,7 +60,6 @@
             "level": 67,
             "item": "ITEM_IRON_BALL",
             "moves": [
-                "MOVE_MUD_SPORT",
                 "MOVE_SUNNY_DAY",
                 "MOVE_ROCK_TOMB",
                 "MOVE_FIRE_PUNCH"
