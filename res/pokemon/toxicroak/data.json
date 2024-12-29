@@ -104,6 +104,7 @@
             "10": "MOVE_TAUNT",
             "15": "MOVE_PURSUIT",
             "17": "MOVE_FAINT_ATTACK",
+			"20": "MOVE_WATER_SPORT",
             "22": "MOVE_REVENGE",
             "24": "MOVE_SWAGGER",
 			"26": "MOVE_FLATTER",

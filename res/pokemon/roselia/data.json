@@ -79,6 +79,7 @@
         "level_up": {
             "1": "MOVE_ABSORB",
             "4": "MOVE_GROWTH",
+			"6": "MOVE_ACID",
             "7": "MOVE_POISON_STING",
             "10": "MOVE_STUN_SPORE",
             "13": "MOVE_MEGA_DRAIN",

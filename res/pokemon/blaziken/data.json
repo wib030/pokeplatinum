@@ -100,6 +100,7 @@
 			"5": "MOVE_EMBER",
 			"10": "MOVE_SAND_ATTACK",
 			"14": "MOVE_PECK",
+			"22": "MOVE_WATER_SPORT",
 			"25": "MOVE_QUICK_ATTACK",
             "31": "MOVE_BULK_UP",
             "36": "MOVE_BLAZE_KICK",

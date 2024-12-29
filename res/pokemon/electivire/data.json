@@ -95,11 +95,11 @@
                 "MOVE_FIRE_PUNCH",
                 "MOVE_QUICK_ATTACK",
 				"MOVE_LOW_KICK",
-				"MOVE_ZAP_CANNON"
+				"MOVE_ZAP_CANNON",
+				"MOVE_WATER_SPORT"
             ],
             "5": "MOVE_THUNDER_SHOCK",
 			"7": "MOVE_KARATE_CHOP",
-            "12": "MOVE_SWIFT",
             "15": "MOVE_SHOCK_WAVE",
 			"19": "MOVE_THUNDER_WAVE",
             "26": "MOVE_LIGHT_SCREEN",

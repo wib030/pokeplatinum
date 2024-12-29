@@ -1,15 +1,15 @@
 {
-    "name": "Water Sport",
-    "class": "CLASS_STATUS",
-    "type": "TYPE_WATER",
-    "power": 0,
-    "accuracy": 0,
-    "pp": 15,
+    "name": "Low Sweep",
+    "class": "CLASS_PHYSICAL",
+    "type": "TYPE_FIGHTING",
+    "power": 65,
+    "accuracy": 100,
+    "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_HALVE_FIRE_DAMAGE",
-        "chance": 0
+        "type": "BATTLE_EFFECT_LOWER_SPEED_HIT",
+        "chance": 100
     },
-    "range": "RANGE_FIELD",
+    "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [],
     "contest": {

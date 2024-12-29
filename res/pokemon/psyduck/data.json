@@ -85,7 +85,6 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_WATER_SPORT",
                 "MOVE_SCRATCH",
 				"MOVE_WATER_GUN"
             ],

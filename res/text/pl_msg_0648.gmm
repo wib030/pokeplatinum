@@ -1203,7 +1203,7 @@
 	</row>
 	<row id="pl_msg_00000648_00300" index="300">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">MUD SPORT</language>
+		<language name="English">STICKY WEB</language>
 	</row>
 	<row id="pl_msg_00000648_00301" index="301">
 		<attribute name="window_context_name">used</attribute>
@@ -1387,7 +1387,7 @@
 	</row>
 	<row id="pl_msg_00000648_00346" index="346">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">WATER SPORT</language>
+		<language name="English">LOW SWEEP</language>
 	</row>
 	<row id="pl_msg_00000648_00347" index="347">
 		<attribute name="window_context_name">used</attribute>

@@ -81,7 +81,8 @@
         "level_up": {
             "1": [
                 "MOVE_REVENGE",
-                "MOVE_COMET_PUNCH"
+                "MOVE_COMET_PUNCH",
+				"MOVE_WATER_SPORT"
             ],
             "6": "MOVE_AGILITY",
             "11": "MOVE_PURSUIT",

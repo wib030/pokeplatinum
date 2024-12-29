@@ -91,6 +91,7 @@
             "16": "MOVE_WHIRLWIND",
             "19": "MOVE_KNOCK_OFF",
 			"22": "MOVE_VITAL_THROW",
+			"24": "MOVE_WATER_SPORT",
             "25": "MOVE_BELLY_DRUM",
 			"28": "MOVE_SMELLING_SALT",
             "31": "MOVE_SEISMIC_TOSS",

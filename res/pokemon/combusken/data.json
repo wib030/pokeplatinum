@@ -94,6 +94,7 @@
 			"14": "MOVE_PECK",
             "16": "MOVE_DOUBLE_KICK",
 			"20": "MOVE_FLAME_WHEEL",
+			"22": "MOVE_WATER_SPORT",
 			"25": "MOVE_QUICK_ATTACK",
             "31": "MOVE_BULK_UP",
 			"36": "MOVE_FOCUS_ENERGY",

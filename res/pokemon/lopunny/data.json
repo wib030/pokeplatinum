@@ -98,6 +98,7 @@
 			"16": "MOVE_DOUBLE_KICK",
 			"21": "MOVE_CHARM",
 			"24": "MOVE_GUILLOTINE",
+			"26": "MOVE_WATER_SPORT",
             "28": "MOVE_JUMP_KICK",
             "32": "MOVE_HEADBUTT",
             "34": "MOVE_AGILITY",

@@ -3603,15 +3603,15 @@
 	</row>
 	<row id="pl_msg_00000000_00900" index="900">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMud Sport!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSticky Web!</language>
 	</row>
 	<row id="pl_msg_00000000_00901" index="901">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMud Sport!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSticky Web!</language>
 	</row>
 	<row id="pl_msg_00000000_00902" index="902">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMud Sport!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSticky Web!</language>
 	</row>
 	<row id="pl_msg_00000000_00903" index="903">
 		<attribute name="window_context_name">used</attribute>
@@ -4155,15 +4155,15 @@
 	</row>
 	<row id="pl_msg_00000000_01038" index="1038">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nWater Sport!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nLow Sweep!</language>
 	</row>
 	<row id="pl_msg_00000000_01039" index="1039">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nWater Sport!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLow Sweep!</language>
 	</row>
 	<row id="pl_msg_00000000_01040" index="1040">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nWater Sport!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLow Sweep!</language>
 	</row>
 	<row id="pl_msg_00000000_01041" index="1041">
 		<attribute name="window_context_name">used</attribute>

@@ -82,7 +82,6 @@
 			],
             "4": "MOVE_GROWTH",
 			"6": "MOVE_ACID",
-            "7": "MOVE_WATER_SPORT",
             "10": "MOVE_STUN_SPORE",
             "13": "MOVE_MEGA_DRAIN",
             "16": "MOVE_WORRY_SEED"

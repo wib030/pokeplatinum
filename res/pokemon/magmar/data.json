@@ -84,7 +84,8 @@
             "1": [
                 "MOVE_SMOG",
                 "MOVE_LEER",
-                "MOVE_EMBER"
+                "MOVE_EMBER",
+				"MOVE_WATER_SPORT"
             ],
             "5": "MOVE_EMBER",
             "8": "MOVE_SMOKE_SCREEN",

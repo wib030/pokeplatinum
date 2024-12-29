@@ -86,7 +86,6 @@
             "1": [
                 "MOVE_GROWL",
                 "MOVE_WATER_GUN",
-                "MOVE_WATER_SPORT",
 				"MOVE_TAILWIND"
             ],
             "5": "MOVE_SUPERSONIC",

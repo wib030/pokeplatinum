@@ -79,10 +79,7 @@
             "HM07"
         ],
         "level_up": {
-            "1": [
-                "MOVE_SONIC_BOOM",
-                "MOVE_WATER_SPORT"
-            ],
+            "1": "MOVE_SONIC_BOOM",
 			"4": "MOVE_GROWL",
             "6": "MOVE_WATER_GUN",
 			"11": "MOVE_QUICK_ATTACK",

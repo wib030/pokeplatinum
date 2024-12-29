@@ -85,10 +85,7 @@
                 "MOVE_MUD_SLAP",
 				"MOVE_THRASH"
             ],
-            "6": [
-                "MOVE_MUD_SPORT",
-                "MOVE_WATER_SPORT"
-            ],
+            "6": "MOVE_MUD_SPORT",
             "9": "MOVE_WATER_GUN",
             "13": "MOVE_MUD_BOMB",
             "15": "MOVE_AMNESIA",

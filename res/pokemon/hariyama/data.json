@@ -86,7 +86,6 @@
         "level_up": {
             "1": [
                 "MOVE_BRINE",
-                "MOVE_TACKLE",
                 "MOVE_FOCUS_ENERGY",
                 "MOVE_SAND_ATTACK",
 				"MOVE_LOW_KICK",
@@ -99,6 +98,7 @@
             "16": "MOVE_WHIRLWIND",
             "19": "MOVE_KNOCK_OFF",
 			"22": "MOVE_VITAL_THROW",
+			"24": "MOVE_WATER_SPORT",
             "27": "MOVE_BELLY_DRUM",
 			"30": "MOVE_SMELLING_SALT",
             "34": "MOVE_SEISMIC_TOSS",

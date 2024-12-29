@@ -87,7 +87,8 @@
                 "MOVE_QUICK_ATTACK",
                 "MOVE_LEER",
 				"MOVE_ZAP_CANNON",
-                "MOVE_THUNDER_SHOCK"
+                "MOVE_THUNDER_SHOCK",
+				"MOVE_WATER_SPORT"
             ],
             "5": "MOVE_THUNDER_SHOCK",
             "8": "MOVE_LOW_KICK",
