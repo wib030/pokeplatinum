@@ -6,7 +6,7 @@
         "defense": 75,
         "speed": 65,
         "special_attack": 75,
-        "special_defense": 75
+        "special_defense": 55
     },
     "types": [
         "TYPE_NORMAL",
