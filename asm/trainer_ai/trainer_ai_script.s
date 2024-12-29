@@ -228,7 +228,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, Basic_CheckFutureSight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Basic_CheckSpikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Basic_CheckMaxStockpile
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Basic_CheckCanSpitUpOrSwallow
@@ -1792,7 +1792,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_ChargeTurnNoInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_UnusedSolarbeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLY, Expert_ChargeTurnWithInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Expert_Recovery
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Expert_Spikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Expert_SpitUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_Recovery
@@ -6244,7 +6244,6 @@ Expert_HealBlock:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_HealBlock_TryScorePlus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_UNUSED_157, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REST, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SWALLOW, Expert_HealBlock_TryScorePlus1

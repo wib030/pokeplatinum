@@ -13260,6 +13260,10 @@ int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
         case (BATTLE_EFFECT_PREVENT_CRITS):
             sideCondition = SIDE_CONDITION_LUCKY_CHANT;
             break;
+			
+		case (BATTLE_EFFECT_SET_STICKY_WEB):
+            sideCondition = SIDE_CONDITION_STICKY_WEB;
+            break;
 
         default:
             sideCondition = SIDE_CONDITION_NONE;

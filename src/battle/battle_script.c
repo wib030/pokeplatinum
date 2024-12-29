@@ -327,6 +327,7 @@ static BOOL BtlCmd_LoadArchivedMonData(BattleSystem *battleSys, BattleContext *b
 static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -587,7 +588,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_LoadArchivedMonData,
     BtlCmd_RefreshMonData,
     BtlCmd_End,
-	BtlCmd_TriggerAttackerAbilityOnHit
+	BtlCmd_TriggerAttackerAbilityOnHit,
+	BtlCmd_CheckStickyWeb
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -6480,6 +6482,14 @@ static BOOL BtlCmd_RapidSpin(BattleSystem *battleSys, BattleContext *battleCtx)
 
         return FALSE;
     }
+	
+	if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STICKY_WEB) {
+        battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_STICKY_WEB;
+        battleCtx->msgMoveTemp = MOVE_MUD_SPORT;
+        BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_blow_away_hazards);
+
+        return FALSE;
+    }
 
     BattleScript_Iter(battleCtx, 1);
 
@@ -10256,6 +10266,42 @@ static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCo
     int jumpNoEffect = BattleScript_Read(battleCtx);
 
     if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &battleCtx->scriptTemp) == FALSE) {
+        BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check for Sticky Web on a battler's side of the field.
+ * 
+ * Inputs:
+ * 1. The battler for whom Sticky Web should be checked.
+ * 2. The distance to jump if there is no effect to apply.
+ * 
+ * Side effects:
+ * - nothing!!!
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpNoEffect = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int side = Battler_Side(battleSys, battler);
+
+    if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STICKY_WEB)
+    && battleCtx->battleMons[battler].curHP)
+	{
+		return FALSE;
+    }
+	else
+	{
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
 

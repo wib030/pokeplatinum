@@ -5326,4 +5326,24 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nincreased the incoming damage!</language>
 	</row>
+	<row id="pl_msg_00000368_01328" index="1328">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A sticky web was laid out beneath\nyour teams feet!</language>
+	</row>
+	<row id="pl_msg_00000368_01329" index="1329">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A sticky web was laid out beneath\nthe foe’s teams feet!</language>
+	</row>
+	<row id="pl_msg_00000368_01330" index="1330">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was caught in a sticky web!</language>
+	</row>
+	<row id="pl_msg_00000368_01331" index="1331">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was caught in a\nsticky web!</language>
+	</row>
+	<row id="pl_msg_00000368_01332" index="1332">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was caught in a\nsticky web!</language>
+	</row>
 </body>

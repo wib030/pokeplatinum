@@ -1238,5 +1238,11 @@
     .long 223
     .long (\jump_no_effect-.) / 4 - 1
     .endm
+	
+	.macro CheckStickyWeb battler, jump_no_effect
+    .long 224
+    .long \battler
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC
