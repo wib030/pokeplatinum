@@ -9,7 +9,7 @@
         "type": "BATTLE_EFFECT_CONFUSE_HIT",
         "chance": 10
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_ADJACENT_OPPONENTS",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_CAN_PROTECT",
