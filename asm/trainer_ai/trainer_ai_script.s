@@ -6107,6 +6107,8 @@ Expert_Fling:
     ; If the attacker''s item would grant Fling > 60 base power, 75% chance of score +1.
     ;
     ; Otherwise, 50% chance of score -1.
+	LoadHeldItem AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Fling_InstantFling, Expert_Fling_ScorePlus12_End
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Fling_CheckAttackerItem
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Fling_CheckAttackerItem
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Fling_CheckAttackerItem
