@@ -11906,7 +11906,7 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
 
         case ITEM_QUICK_BALL:
             if (battleCtx->totalTurns < 1) {
-                ballMod = 40;
+                ballMod = 50;
             }
             break;
         }
