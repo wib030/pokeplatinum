@@ -36,7 +36,7 @@
 #define VOLATILE_CONDITION_UPROAR_0     (1 << 4)
 #define VOLATILE_CONDITION_UPROAR_1     (1 << 5)
 #define VOLATILE_CONDITION_UPROAR_2     (1 << 6)
-#define VOLATILE_CONDITION_CHIP     	(1 << 7) // unused flag: 1 << 7
+#define VOLATILE_CONDITION_CHIP     	(1 << 7)
 #define VOLATILE_CONDITION_BIDE_0       (1 << 8)
 #define VOLATILE_CONDITION_BIDE_1       (1 << 9)
 #define VOLATILE_CONDITION_THRASH_0     (1 << 10)

@@ -29,6 +29,7 @@ typedef struct FieldConditions {
 	BOOL futureSightAdaptabilityFlag[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
+	u32 gravityTurns;
 } FieldConditions;
 
 typedef struct SideConditions {
@@ -48,6 +49,7 @@ typedef struct SideConditions {
     u32 spikesLayers : 2;
     u32 toxicSpikesLayers : 2;
     u32 padding04_04 : 28;
+	u32 tailwindTurns;
 } SideConditions;
 
 typedef struct TurnFlags {

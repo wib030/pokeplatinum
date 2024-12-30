@@ -1059,9 +1059,9 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
                 side = battleCtx->fieldConditionCheckTemp;
 
                 if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) {
-                    battleCtx->sideConditionsMask[side] -= SIDE_CONDITION_TAILWIND_SHIFT;
 
-                    if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) == FALSE) {
+                    if (--battleCtx->sideConditions[side].tailwindTurns == 0) {
+						battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_TAILWIND;
                         PrepareSubroutineSequence(battleCtx, subscript_tailwind_end);
                         battleCtx->msgBattlerTemp = BattleSystem_SideToBattler(battleSys, battleCtx, side);
                         state = STATE_BREAK_OUT;
@@ -1244,9 +1244,8 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
 
         case FIELD_COND_CHECK_STATE_GRAVITY:
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
-                battleCtx->fieldConditionsMask -= (1 << FIELD_CONDITION_GRAVITY_SHIFT);
 
-                if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == 0) {
+                if (--battleCtx->fieldConditions.gravityTurns == 0) {
                     PrepareSubroutineSequence(battleCtx, subscript_gravity_end);
                     state = STATE_BREAK_OUT;
                 }

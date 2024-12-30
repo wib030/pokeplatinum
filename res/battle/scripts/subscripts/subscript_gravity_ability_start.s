@@ -3,7 +3,7 @@
     .data
 
 _000:
-	CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_GRAVITY, _095
+	TryGravity 4, _095
 	// {0}’s {1} activated!
     PrintMessage pl_msg_00000368_01279, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     Wait 

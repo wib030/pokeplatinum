@@ -1244,5 +1244,18 @@
     .long \battler
     .long (\jump_no_effect-.) / 4 - 1
     .endm
+	
+	.macro TryTailwind battler, turns, jump_no_effect
+    .long 225
+    .long \battler
+	.long \turns
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
+	
+	.macro TryGravity turns, jump_no_effect
+    .long 226
+	.long \turns
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

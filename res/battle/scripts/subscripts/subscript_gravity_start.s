@@ -3,6 +3,7 @@
     .data
 
 _000:
+	TryGravity 5, _095
     // Gravity intensified!
     PrintMessage pl_msg_00000368_00997, TAG_NONE
     Wait 
@@ -41,4 +42,8 @@ _078:
 _085:
     UpdateVar OPCODE_ADD, BTLVAR_BATTLER_SPEED_TEMP, 1
     GoToIfValidMon BTLVAR_BATTLER_SPEED_TEMP, _013
-    End 
+    End
+	
+_095:
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
+    End

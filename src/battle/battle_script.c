@@ -328,6 +328,8 @@ static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryTailwind(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -589,7 +591,9 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_RefreshMonData,
     BtlCmd_End,
 	BtlCmd_TriggerAttackerAbilityOnHit,
-	BtlCmd_CheckStickyWeb
+	BtlCmd_CheckStickyWeb,
+	BtlCmd_TryTailwind,
+	BtlCmd_TryGravity
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -10303,6 +10307,74 @@ static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battle
 	else
 	{
         BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check for Tailwind on a battler's side of the field, and set it if it is not set.
+ * 
+ * Inputs:
+ * 1. The battler for whom Tailwind should be checked.
+ * 2. The distance to jump if there is no effect to apply.
+ * 
+ * Side effects:
+ * - Sets tailwindTurns.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryTailwind(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+	int turnCount = BattleScript_Read(battleCtx);
+    int jumpNoEffect = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int side = Battler_Side(battleSys, battler);
+
+    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND)
+	{
+		BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
+	else
+	{
+        battleCtx->sideConditions[side].tailwindTurns = turnCount;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check for Gravity on the field, and set it if it is not set.
+ * 
+ * Inputs:
+ * 1. The battler for whom Gravity should be checked.
+ * 2. The distance to jump if there is no effect to apply.
+ * 
+ * Side effects:
+ * - Sets gravityTurns.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int turnCount = BattleScript_Read(battleCtx);
+    int jumpNoEffect = BattleScript_Read(battleCtx);
+
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+	{
+		BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
+	else
+	{
+        battleCtx->fieldConditions.gravityTurns = turnCount;
     }
 
     return FALSE;
