@@ -105,7 +105,8 @@
 			"45": "MOVE_SPIDER_WEB",
             "47": "MOVE_SUPERPOWER",
             "52": "MOVE_CLOSE_COMBAT",
-			"54": "MOVE_OUTRAGE"
+			"54": "MOVE_OUTRAGE",
+			"56": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_FURY_CUTTER",
