@@ -1690,11 +1690,12 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
     u32 moveStatusFlags;
     int battler1Action, battler2Action;
     int battler1MoveSlot, battler2MoveSlot;
+	int battler1MoveType, battler2MoveType;
     int battler1Ability, battler2Ability;
     int battler1SpeedStage, battler2SpeedStage;
 	int battler1FlingEffect, battler2FlingEffect;
     int i;
-    int battler1MoveScore;
+    int battler1MoveScore, battler2MoveScore;
     Pokemon *mon;
 
     mon = Party_GetPokemonBySlotIndex(partyIndicator, partySlot);
@@ -2001,7 +2002,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
             break;
     }
 
-    if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_PARALYSIS)
+    if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_PARALYSIS)
         && battler2Ability != ABILITY_QUICK_FEET) {
     
         battler2Speed /= 2;
@@ -2040,7 +2041,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
         }
 
         if (MOVE_DATA(battler1Move).priority > 0) {
-            if (MOVE_DATA(battler1Move).damage > 0) {
+            if (MOVE_DATA(battler1Move).power > 0) {
                 moveStatusFlags = 0;
 
                 battler1MoveScore = BattleSystem_CalcPartyMemberMoveDamage(
@@ -2082,8 +2083,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
                     battler1MoveScore = battler1MoveScore * 3 / 2;
                 }
 
-                if (battler1MoveScore > BattleMon_Get(battleCtx, battler1, BATTLEMON_CUR_HP, NULL); * 2 / 5) {
-                    if (battlerMaxPriority < MOVE_DATA(battler1Move).priority) {
+                if (battler1MoveScore > BattleMon_Get(battleCtx, battler1, BATTLEMON_CUR_HP, NULL) * 2 / 5) {
+                    if (battler1MaxPriority < MOVE_DATA(battler1Move).priority) {
                         battler1MaxPriority = MOVE_DATA(battler1Move).priority;
                     }
                 }
@@ -2113,7 +2114,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
         }
 
         if (MOVE_DATA(battler2Move).priority > 0) {
-            if (MOVE_DATA(battler2Move).damage > 0) {
+            if (MOVE_DATA(battler2Move).power > 0) {
                 moveStatusFlags = 0;
 
                 battler2MoveScore = BattleSystem_CalcPartyMemberMoveDamage(
@@ -2156,7 +2157,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
                 }
 
                 if (battler2MoveScore > Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) * 2 / 5) {
-                    if (battlerMaxPriority < MOVE_DATA(battler2Move).priority) {
+                    if (battler2MaxPriority < MOVE_DATA(battler2Move).priority) {
                         battler2MaxPriority = MOVE_DATA(battler2Move).priority;
                     }
                 }
@@ -4782,14 +4783,6 @@ int Battler_CountMoves(BattleSystem *battleSys, BattleContext *battleCtx, int ba
 
     return i;
 }
-
-static u16 sPowderMoves[] = {
-    MOVE_POISON_POWDER,
-    MOVE_SLEEP_POWDER,
-    MOVE_STUN_SPORE,
-    MOVE_SPORE,
-    MOVE_COTTON_SPORE,
-};
 
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
