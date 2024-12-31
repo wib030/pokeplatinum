@@ -196,6 +196,24 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val);
 u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler1, int battler2, BOOL ignoreQuickClaw);
 
 /**
+ * @brief Compare the speed of a battler against a Party Pokemon and determine
+ * which will move first.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler1
+ * @param battler2 
+ * @param partyIndicator    The ID of the BattleMon whose party should be referenced (should be battler2).
+ * @param partySlot         The ID of the party slot of the mon to be considered.
+ * @param ignoreQuickClaw   If set to TRUE, the Quick Claw and Custap Berry
+ *                          flags will NOT be set after determining if they
+ *                          should activate.
+ * @return A value representing the speed-ordering of the two battlers,
+ * relative to the first of the two. See enum CompareSpeedResult.
+ */
+u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler1, int battler2, int partyIndicator, int partySlot, BOOL ignoreQuickClaw);
+
+/**
  * @brief Clear the flag denoting that a battler (or its partner) are due to
  * gain experience.
  * 

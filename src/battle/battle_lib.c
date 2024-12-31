@@ -1273,182 +1273,288 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     battler1Speed = battleCtx->battleMons[battler1].speed * sStatStageBoosts[battler1SpeedStage].numerator / sStatStageBoosts[battler1SpeedStage].denominator;
     battler2Speed = battleCtx->battleMons[battler2].speed * sStatStageBoosts[battler2SpeedStage].numerator / sStatStageBoosts[battler2SpeedStage].denominator;
 
-    if (NO_CLOUD_NINE) {
-        if ((battler1Ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
-				|| (battler1Ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
-				|| (battler1Ability == ABILITY_CHLOROPLAST && WEATHER_IS_SUN)
-                || (battler1Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
-            battler1Speed *= 2;
+    if (ANY_WEATHER) {
+        // Rain
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_SWIFT_SWIM:
+                    battler1Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 3 / 4;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_SWIFT_SWIM:
+                    battler2Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 3 / 4;
+                    break;
+            }
         }
 
-        if ((battler2Ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
-				|| (battler2Ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
-				|| (battler2Ability == ABILITY_CHLOROPLAST && WEATHER_IS_SUN)
-                || (battler2Ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)) {
-            battler2Speed *= 2;
+        // Hail
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_SLUSH_RUSH:
+                    battler1Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 3 / 4;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_SLUSH_RUSH:
+                    battler2Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 3 / 4;
+                    break;
+            }
         }
-		
-		//Special Castform section
-		
-		//Forecast in rain, hail or sand
-		if ((battler1Ability == ABILITY_FORECAST && WEATHER_IS_RAIN)
-		|| (battler1Ability == ABILITY_FORECAST && WEATHER_IS_HAIL)
-		|| (battler1Ability == ABILITY_FORECAST && WEATHER_IS_SAND))
-		{
-			battler1Speed = battler1Speed * 3 / 4;
-		}
-		if ((battler2Ability == ABILITY_FORECAST && WEATHER_IS_RAIN)
-		|| (battler2Ability == ABILITY_FORECAST && WEATHER_IS_HAIL)
-		|| (battler2Ability == ABILITY_FORECAST && WEATHER_IS_SAND))
-		{
-			battler2Speed = battler2Speed * 3 / 4;
-		}
-		
-		//Forecast in sun
-		if (battler1Ability == ABILITY_FORECAST && WEATHER_IS_SUN)
-		{
-			battler1Speed = battler1Speed * 11 / 10;
-		}
-		if (battler2Ability == ABILITY_FORECAST && WEATHER_IS_SUN)
-		{
-			battler2Speed = battler2Speed * 11 / 10;
-		}
+
+        // Sun
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_CHLOROPLAST:
+                case ABILITY_CHLOROPHYLL:
+                    battler1Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 11 / 10;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_CHLOROPLAST:
+                case ABILITY_CHLOROPHYLL:
+                    battler2Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 11 / 10;
+                    break;
+            }
+        }
+
+        // Sand
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 3 / 4;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 3 / 4;
+                    break;
+            }
+        }
     }
+    switch (battler1ItemEffect) {
+        default:
+            break;
 
-    for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
-        // The speed-halving effect of these items are not ignored by any negation effect
-        if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler1].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
+        case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+        case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        case HOLD_EFFECT_LVLUP_HP_EV_UP:
+        case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
             battler1Speed /= 2;
             break;
-        }
+
+        case HOLD_EFFECT_CHOICE_SPEED:
+            battler1Speed = battler1Speed * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_DITTO_SPEED_UP:
+            if (battleCtx->battleMons[battler1].species == SPECIES_DITTO) {
+                battler1Speed *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_SOMETIMES_PRIORITY:
+            if (battleCtx->speedRand[battler1] % (100 / battler1ItemParam) == 0) {
+                battler1QuickClaw = 1;
+
+                if (ignoreQuickClaw == FALSE) {
+                    battleCtx->battleMons[battler1].moveEffectsData.quickClaw = 1;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_PINCH_PRIORITY:
+            if (battler1Ability == ABILITY_GLUTTONY) {
+                battler1ItemParam /= 2;
+            }
+
+            if (battleCtx->battleMons[battler1].curHP <= (battleCtx->battleMons[battler1].maxHP / battler1ItemParam)) {
+                battler1QuickClaw = 1;
+
+                if (ignoreQuickClaw == FALSE) {
+                    battleCtx->battleMons[battler1].moveEffectsData.custapBerry = 1;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_PRIORITY_DOWN:
+            battler1LaggingTail = 1;
+            break;
     }
 
-    if (battler1ItemEffect == HOLD_EFFECT_CHOICE_SPEED) {
-        battler1Speed = battler1Speed * 15 / 10;
+    switch (battler1Ability) {
+        default:
+            break;
+
+        case ABILITY_QUICK_FEET:
+            if (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY) {
+                if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
+                    battler1Speed *= 2;
+                }
+                else {
+                    battler1Speed = battler1Speed * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_SLOW_START:
+            if (battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.slowStartTurnNumber < 5) {
+                battler1Speed /= 2;
+            }
+            break;
+
+        case ABILITY_UNBURDEN:
+            if (battleCtx->battleMons[battler1].moveEffectsData.canUnburden
+                && battleCtx->battleMons[battler1].heldItem == ITEM_NONE) {
+                battler1Speed *= 2;
+            }
+            break;
     }
 
-    if (battler1ItemEffect == HOLD_EFFECT_DITTO_SPEED_UP
-            && battleCtx->battleMons[battler1].species == SPECIES_DITTO) {
-        battler1Speed *= 2;
-    }
-
-    if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY_NOT_PARA)) {
-		battler1Speed = battler1Speed * 15 / 10;
-    } else if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS)) {
-        battler1Speed *= 2;
-    } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
+    if ((battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS)
+        && battler1Ability != ABILITY_QUICK_FEET) {
+    
         battler1Speed /= 2;
-    }
-
-    if (battler1Ability == ABILITY_SLOW_START
-            && battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.slowStartTurnNumber < 5) {
-        battler1Speed /= 2;
-    }
-
-    if (battler1Ability == ABILITY_UNBURDEN
-            && battleCtx->battleMons[battler1].moveEffectsData.canUnburden
-            && battleCtx->battleMons[battler1].heldItem == ITEM_NONE) {
-        battler1Speed *= 2;
     }
 
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND) {
         battler1Speed *= 2;
     }
 
-    if (battler1ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
-        if (battleCtx->speedRand[battler1] % (100 / battler1ItemParam) == 0) {
-            battler1QuickClaw = 1;
+    
+    switch (battler2ItemEffect) {
+        default:
+            break;
 
-            if (ignoreQuickClaw == FALSE) {
-                battleCtx->battleMons[battler1].moveEffectsData.quickClaw = 1;
-            }
-        }
-    }
-
-    if (battler1ItemEffect == HOLD_EFFECT_PINCH_PRIORITY) {
-        if (Battler_Ability(battleCtx, battler1) == ABILITY_GLUTTONY) {
-            battler1ItemParam /= 2;
-        }
-
-        if (battleCtx->battleMons[battler1].curHP <= (battleCtx->battleMons[battler1].maxHP / battler1ItemParam)) {
-            battler1QuickClaw = 1;
-
-            if (ignoreQuickClaw == FALSE) {
-                battleCtx->battleMons[battler1].moveEffectsData.custapBerry = 1;
-            }
-        }
-    }
-
-    if (battler1ItemEffect == HOLD_EFFECT_PRIORITY_DOWN) {
-        battler1LaggingTail = 1;
-    }
-
-    for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
-        // The speed-halving effect of these items are not ignored by any negation effect
-        if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler2].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
+        case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+        case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        case HOLD_EFFECT_LVLUP_HP_EV_UP:
+        case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
             battler2Speed /= 2;
             break;
-        }
-    }
 
-    if (battler2ItemEffect == HOLD_EFFECT_CHOICE_SPEED) {
-        battler2Speed = battler2Speed * 15 / 10;
-    }
+        case HOLD_EFFECT_CHOICE_SPEED:
+            battler2Speed = battler2Speed * 3 / 2;
+            break;
 
-    if (battler2ItemEffect == HOLD_EFFECT_DITTO_SPEED_UP
-            && battleCtx->battleMons[battler2].species == SPECIES_DITTO) {
-        battler2Speed *= 2;
-    }
-
-	if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY_NOT_PARA)) {
-		battler2Speed = battler2Speed * 15 / 10;
-    } else if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS)) {
-        battler2Speed *= 2;
-    } else if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
-        battler2Speed /= 2;
-    }
-
-    if (battler2Ability == ABILITY_SLOW_START
-            && battleCtx->totalTurns - battleCtx->battleMons[battler2].moveEffectsData.slowStartTurnNumber < 5) {
-        battler2Speed /= 2;
-    }
-
-    if (battler2Ability == ABILITY_UNBURDEN
-            && battleCtx->battleMons[battler2].moveEffectsData.canUnburden
-            && battleCtx->battleMons[battler2].heldItem == ITEM_NONE) {
-        battler2Speed *= 2;
-    }
-
-    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_TAILWIND) {
-        battler2Speed *= 2;
-    }
-
-    if (battler2ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
-        if (battleCtx->speedRand[battler2] % (100 / battler2ItemParam) == 0) {
-            battler2QuickClaw = 1;
-
-            if (ignoreQuickClaw == FALSE) {
-                battleCtx->battleMons[battler2].moveEffectsData.quickClaw = 1;
+        case HOLD_EFFECT_DITTO_SPEED_UP:
+            if (battleCtx->battleMons[battler2].species == SPECIES_DITTO) {
+                battler2Speed *= 2;
             }
-        }
-    }
+            break;
 
-    if (battler2ItemEffect == HOLD_EFFECT_PINCH_PRIORITY) {
-        if (Battler_Ability(battleCtx, battler2) == ABILITY_GLUTTONY) {
-            battler2ItemParam /= 2;
-        }
+        case HOLD_EFFECT_SOMETIMES_PRIORITY:
+            if (battleCtx->speedRand[battler2] % (100 / battler2ItemParam) == 0) {
+                battler2QuickClaw = 1;
 
-        if (battleCtx->battleMons[battler2].curHP <= (battleCtx->battleMons[battler2].maxHP / battler2ItemParam)) {
-            battler2QuickClaw = 1;
-
-            if (ignoreQuickClaw == FALSE) {
-                battleCtx->battleMons[battler2].moveEffectsData.custapBerry = 1;
+                if (ignoreQuickClaw == FALSE) {
+                    battleCtx->battleMons[battler2].moveEffectsData.quickClaw = 1;
+                }
             }
-        }
+            break;
+
+        case HOLD_EFFECT_PINCH_PRIORITY:
+            if (battler2Ability == ABILITY_GLUTTONY) {
+                battler2ItemParam /= 2;
+            }
+
+            if (battleCtx->battleMons[battler2].curHP <= (battleCtx->battleMons[battler2].maxHP / battler2ItemParam)) {
+                battler2QuickClaw = 1;
+
+                if (ignoreQuickClaw == FALSE) {
+                    battleCtx->battleMons[battler2].moveEffectsData.custapBerry = 1;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_PRIORITY_DOWN:
+            battler2LaggingTail = 1;
+            break;
     }
 
-    if (battler2ItemEffect == HOLD_EFFECT_PRIORITY_DOWN) {
-        battler2LaggingTail = 1;
+    switch (battler2Ability) {
+        default:
+            break;
+
+        case ABILITY_QUICK_FEET:
+            if (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY) {
+                if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
+                    battler2Speed *= 2;
+                }
+                else {
+                    battler2Speed = battler2Speed * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_SLOW_START:
+            if (battleCtx->totalTurns - battleCtx->battleMons[battler2].moveEffectsData.slowStartTurnNumber < 5) {
+                battler2Speed /= 2;
+            }
+            break;
+
+        case ABILITY_UNBURDEN:
+            if (battleCtx->battleMons[battler2].moveEffectsData.canUnburden
+                && battleCtx->battleMons[battler2].heldItem == ITEM_NONE) {
+                battler2Speed *= 2;
+            }
+            break;
     }
 	
 	battler1Action = battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND];
@@ -1565,6 +1671,525 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         result = COMPARE_SPEED_SLOWER;
     }
 
+    return result;
+}
+
+
+u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler1, int battler2, int partyIndicator, int partySlot, BOOL ignoreQuickClaw)
+{
+    u8 result = COMPARE_SPEED_FASTER;
+    u32 battler1Speed, battler2Speed;
+    u16 battler1Move = 0, battler2Move = 0;
+    u8 battler1ItemEffect, battler1ItemParam;
+    u8 battler2ItemEffect, battler2ItemParam;
+    s8 battler1Priority = 0, battler2Priority = 0;
+    s8 battler1MaxPriority = 0, battler2MaxPriority = 0;
+    u8 battler1QuickClaw = 0, battler2QuickClaw = 0;
+    u8 battler1LaggingTail = 0, battler2LaggingTail = 0;
+    u16 battler1Item, battler2Item;
+    u32 moveStatusFlags;
+    int battler1Action, battler2Action;
+    int battler1MoveSlot, battler2MoveSlot;
+    int battler1Ability, battler2Ability;
+    int battler1SpeedStage, battler2SpeedStage;
+	int battler1FlingEffect, battler2FlingEffect;
+    int i;
+    int battler1MoveScore;
+    Pokemon *mon;
+
+    mon = Party_GetPokemonBySlotIndex(partyIndicator, partySlot);
+
+    // If either battler is dead, short-circuit to preferring the other
+    if (battleCtx->battleMons[battler1].curHP == 0 && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0) {
+        return 1;
+    }
+
+    if (battleCtx->battleMons[battler1].curHP && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) == 0) {
+        return 0;
+    }
+
+    battler1Ability = Battler_Ability(battleCtx, battler1);
+    battler2Ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    battler1Item = BattleMon_Get(battleCtx, battler1, BATTLEMON_HELD_ITEM, NULL);
+    battler1ItemEffect = Battler_HeldItemEffect(battleCtx, battler1);
+    battler1ItemParam = Battler_HeldItemPower(battleCtx, battler1, ITEM_POWER_CHECK_ALL);
+    battler2Item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+    battler2ItemEffect = BattleSystem_GetItemData(battleCtx, battler2Item, ITEM_PARAM_HOLD_EFFECT);
+    battler2ItemParam = BattleSystem_GetItemData(battleCtx, battler2Item, ITEM_PARAM_HOLD_EFFECT_PARAM);
+	battler1FlingEffect = Battler_ItemFlingEffect(battleCtx, battler1);
+	battler2FlingEffect = BattleSystem_GetItemData(battleCtx, battler2Item, ITEM_PARAM_FLING_EFFECT);
+
+    battler1SpeedStage = battleCtx->battleMons[battler1].statBoosts[BATTLE_STAT_SPEED];
+    battler2SpeedStage = 6;
+
+    // Factor in Sticky Web
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_STICKY_WEB) {
+        if (battler2Ability != ABILITY_LEVITATE
+        && battler2Ability != ABILITY_CLEAR_BODY
+        && battler2Ability != ABILITY_WHITE_SMOKE
+        && Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL) != TYPE_FLYING
+        && Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL) != TYPE_FLYING) {
+            if (battler2Ability == ABILITY_SIMPLE) {
+                battler2SpeedStage -= 2;
+            }
+            else {
+                battler2SpeedStage -= 1;
+            }
+        }
+    }
+
+    battler1SpeedStage = CompareSpeed_ApplySimple(battleCtx, battler1, battler1SpeedStage);
+
+    battler1Speed = battleCtx->battleMons[battler1].speed * sStatStageBoosts[battler1SpeedStage].numerator / sStatStageBoosts[battler1SpeedStage].denominator;
+    battler2Speed = battleCtx->battleMons[battler2].speed * sStatStageBoosts[battler2SpeedStage].numerator / sStatStageBoosts[battler2SpeedStage].denominator;
+
+    if (ANY_WEATHER) {
+        // Rain
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_SWIFT_SWIM:
+                    battler1Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 3 / 4;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_SWIFT_SWIM:
+                    battler2Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 3 / 4;
+                    break;
+            }
+        }
+
+        // Hail
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_SLUSH_RUSH:
+                    battler1Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 3 / 4;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_SLUSH_RUSH:
+                    battler2Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 3 / 4;
+                    break;
+            }
+        }
+
+        // Sun
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_CHLOROPLAST:
+                case ABILITY_CHLOROPHYLL:
+                    battler1Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 11 / 10;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_CHLOROPLAST:
+                case ABILITY_CHLOROPHYLL:
+                    battler2Speed *= 2;
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 11 / 10;
+                    break;
+            }
+        }
+
+        // Sand
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+            switch (battler1Ability) {
+                default:
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler1Speed = battler1Speed * 3 / 4;
+                    break;
+            }
+            switch (battler2Ability) {
+                default:
+                    break;
+
+                case ABILITY_FORECAST:
+                    battler2Speed = battler2Speed * 3 / 4;
+                    break;
+            }
+        }
+    }
+
+    switch (battler1ItemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+        case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        case HOLD_EFFECT_LVLUP_HP_EV_UP:
+        case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+            battler1Speed /= 2;
+            break;
+
+        case HOLD_EFFECT_CHOICE_SPEED:
+            battler1Speed = battler1Speed * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_DITTO_SPEED_UP:
+            if (battleCtx->battleMons[battler1].species == SPECIES_DITTO) {
+                battler1Speed *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_SOMETIMES_PRIORITY:
+            if (battleCtx->speedRand[battler1] % (100 / battler1ItemParam) == 0) {
+                battler1QuickClaw = 1;
+
+                if (ignoreQuickClaw == FALSE) {
+                    battleCtx->battleMons[battler1].moveEffectsData.quickClaw = 1;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_PINCH_PRIORITY:
+            if (battler1Ability == ABILITY_GLUTTONY) {
+                battler1ItemParam /= 2;
+            }
+
+            if (battleCtx->battleMons[battler1].curHP <= (battleCtx->battleMons[battler1].maxHP / battler1ItemParam)) {
+                battler1QuickClaw = 1;
+
+                if (ignoreQuickClaw == FALSE) {
+                    battleCtx->battleMons[battler1].moveEffectsData.custapBerry = 1;
+                }
+            }
+            break;
+
+        case HOLD_EFFECT_PRIORITY_DOWN:
+            battler1LaggingTail = 1;
+            break;
+    }
+
+    switch (battler1Ability) {
+        default:
+            break;
+
+        case ABILITY_QUICK_FEET:
+            if (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY) {
+                if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
+                    battler1Speed *= 2;
+                }
+                else {
+                    battler1Speed = battler1Speed * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_SLOW_START:
+            if (battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.slowStartTurnNumber < 5) {
+                battler1Speed /= 2;
+            }
+            break;
+
+        case ABILITY_UNBURDEN:
+            if (battleCtx->battleMons[battler1].moveEffectsData.canUnburden
+                && battleCtx->battleMons[battler1].heldItem == ITEM_NONE) {
+                battler1Speed *= 2;
+            }
+            break;
+    }
+
+    if ((battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS)
+        && battler1Ability != ABILITY_QUICK_FEET) {
+    
+        battler1Speed /= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND) {
+        battler1Speed *= 2;
+    }
+
+    
+    switch (battler2ItemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+        case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        case HOLD_EFFECT_LVLUP_HP_EV_UP:
+        case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+        case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+            battler2Speed /= 2;
+            break;
+
+        case HOLD_EFFECT_CHOICE_SPEED:
+            battler2Speed = battler2Speed * 3 / 2;
+            break;
+
+        case HOLD_EFFECT_DITTO_SPEED_UP:
+            if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
+                battler2Speed *= 2;
+            }
+            break;
+
+        case HOLD_EFFECT_SOMETIMES_PRIORITY:
+            if (battleCtx->speedRand[partyIndicator] % (100 / battler2ItemParam) == 0) {
+                battler2QuickClaw = 1;
+            }
+            break;
+
+        case HOLD_EFFECT_PRIORITY_DOWN:
+            battler2LaggingTail = 1;
+            break;
+    }
+
+    switch (battler2Ability) {
+        default:
+            break;
+
+        case ABILITY_QUICK_FEET:
+            if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_PARALYSIS) {
+                    battler2Speed *= 2;
+                }
+                else {
+                    battler2Speed = battler2Speed * 3 / 2;
+                }
+            }
+            break;
+
+        case ABILITY_SLOW_START:
+            battler2Speed /= 2;
+            break;
+    }
+
+    if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_PARALYSIS)
+        && battler2Ability != ABILITY_QUICK_FEET) {
+    
+        battler2Speed /= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_TAILWIND) {
+        battler2Speed *= 2;
+    }
+
+    
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + i, NULL);
+        battler1MoveType = CalcMoveType(battleSys, battleCtx, battler1Item, battler1Move);
+
+        switch (battler1Move) {
+            default:
+                break;
+
+            case MOVE_FLING:
+                if (battler1FlingEffect == FLING_EFFECT_TRICK_ROOM) {
+                    MOVE_DATA(battler1Move).priority = -7;
+                }
+                break;
+
+            case MOVE_MAGNET_RISE:
+                if (battler1Ability == ABILITY_MAGNET_PULL) {
+                    MOVE_DATA(battler1Move).priority += 1;
+                }
+                break;
+
+            case MOVE_FAKE_OUT:
+                if (battleCtx->totalTurns > battleCtx->battleMons[battler1].moveEffectsData.fakeOutTurnNumber) {
+                    MOVE_DATA(battler1Move).priority = 0;
+                }
+                break;
+        }
+
+        if (MOVE_DATA(battler1Move).priority > 0) {
+            if (MOVE_DATA(battler1Move).damage > 0) {
+                moveStatusFlags = 0;
+
+                battler1MoveScore = BattleSystem_CalcPartyMemberMoveDamage(
+                                    battleSys,
+                                    battleCtx,
+                                    battler1Move,
+                                    battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)],
+                                    battleCtx->fieldConditionsMask,
+                                    0,
+                                    battler1MoveType,
+                                    battler1,
+                                    battler2,
+                                    1,
+                                    partyIndicator,
+                                    partySlot);
+
+                battler1MoveScore = PartyMon_ApplyTypeChart(battleSys,
+                                    battleCtx,
+                                    battler1Move,
+                                    battler1MoveType,
+                                    battler1,
+                                    battler2,
+                                    battler1MoveScore,
+                                    partyIndicator,
+                                    partySlot,
+                                    &moveStatusFlags);
+
+                if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                    && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                    battler1MoveScore = 0;
+                }
+
+                if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                    battler1MoveScore /= 2;
+                }
+
+                if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                    battler1MoveScore = battler1MoveScore * 3 / 2;
+                }
+
+                if (battler1MoveScore > BattleMon_Get(battleCtx, battler1, BATTLEMON_CUR_HP, NULL); * 2 / 5) {
+                    if (battlerMaxPriority < MOVE_DATA(battler1Move).priority) {
+                        battler1MaxPriority = MOVE_DATA(battler1Move).priority;
+                    }
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        battler2Move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+        battler2MoveType = CalcMoveType(battleSys, battleCtx, battler2Item, battler2Move);
+
+        switch (battler2Move) {
+            default:
+                break;
+
+            case MOVE_FLING:
+                if (battler2FlingEffect == FLING_EFFECT_TRICK_ROOM) {
+                    MOVE_DATA(battler2Move).priority = -7;
+                }
+                break;
+
+            case MOVE_MAGNET_RISE:
+                if (battler2Ability == ABILITY_MAGNET_PULL) {
+                    MOVE_DATA(battler2Move).priority += 1;
+                }
+                break;
+        }
+
+        if (MOVE_DATA(battler2Move).priority > 0) {
+            if (MOVE_DATA(battler2Move).damage > 0) {
+                moveStatusFlags = 0;
+
+                battler2MoveScore = BattleSystem_CalcPartyMemberMoveDamage(
+                                    battleSys,
+                                    battleCtx,
+                                    battler2Move,
+                                    battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)],
+                                    battleCtx->fieldConditionsMask,
+                                    0,
+                                    battler2MoveType,
+                                    battler2,
+                                    battler1,
+                                    1,
+                                    partyIndicator,
+                                    partySlot);
+
+                battler2MoveScore = PartyMon_ApplyTypeChart(battleSys,
+                                    battleCtx,
+                                    battler2Move,
+                                    battler2MoveType,
+                                    battler2,
+                                    battler1,
+                                    battler2MoveScore,
+                                    partyIndicator,
+                                    partySlot,
+                                    &moveStatusFlags);
+
+                if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                    && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                    battler2MoveScore = 0;
+                }
+
+                if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                    battler2MoveScore /= 2;
+                }
+
+                if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                    battler2MoveScore = battler2MoveScore * 3 / 2;
+                }
+
+                if (battler2MoveScore > Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) * 2 / 5) {
+                    if (battlerMaxPriority < MOVE_DATA(battler2Move).priority) {
+                        battler2MaxPriority = MOVE_DATA(battler2Move).priority;
+                    }
+                }
+            }
+        }
+    }
+
+    if (battler1MaxPriority == battler2MaxPriority) {
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+            if (battler1Speed > battler2Speed) {
+                result = COMPARE_SPEED_SLOWER;
+            }
+        }
+        else {
+            if (battler1Speed < battler2Speed) {
+                result = COMPARE_SPEED_SLOWER;
+            }
+        }
+
+        if (battler1Speed == battler2Speed) {
+            result = COMPARE_SPEED_TIE;
+        }
+
+        if (battler1LaggingTail && battler2LaggingTail == FALSE) {
+            result = COMPARE_SPEED_SLOWER;
+        }
+    }
+
+    if (battler1MaxPriority < battler2MaxPriority) {
+        result = COMPARE_SPEED_SLOWER;
+    }
+
+    // Default value is COMPARE_SPEED_FASTER
     return result;
 }
 
@@ -2805,6 +3430,14 @@ static u16 sSoundMoves[] = {
     MOVE_PERISH_SONG,
 };
 
+static u16 sPowderMoves[] = {
+		MOVE_POISON_POWDER,
+		MOVE_SLEEP_POWDER,
+		MOVE_STUN_SPORE,
+		MOVE_SPORE,
+		MOVE_COTTON_SPORE,
+};
+
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
 {
     int chartEntry;
@@ -2815,14 +3448,6 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     u8 defenderItemEffect;
     u8 attackerItemPower;
     u8 defenderItemPower;
-	
-	static u16 sPowderMoves[] = {
-		MOVE_POISON_POWDER,
-		MOVE_SLEEP_POWDER,
-		MOVE_STUN_SPORE,
-		MOVE_SPORE,
-		MOVE_COTTON_SPORE,
-	};
 	
 	int powderMove = FALSE;
 
@@ -3091,14 +3716,6 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
     mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
     monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
     monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
-	
-	static u16 sPowderMoves[] = {
-		MOVE_POISON_POWDER,
-		MOVE_SLEEP_POWDER,
-		MOVE_STUN_SPORE,
-		MOVE_SPORE,
-		MOVE_COTTON_SPORE,
-	};
 	
 	int powderMove = FALSE;
 
@@ -11654,16 +12271,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             moveScore = 0;
                     }
 
-                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
-                        if (monAbility != ABILITY_MOLD_BREAKER) {
-                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
-                                moveScore /= 2;
-                            }
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                        moveScore /= 2;
+                    }
 
-                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                                moveScore = moveScore * 3 / 2;
-                            }
-                        }
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                        moveScore = moveScore * 3 / 2;
                     }
 
                     moveScore = moveScore * 100 / defenderMaxHP;
@@ -11810,6 +12423,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 }
                             }
                         }
+
+                        if (moveEffect == BATTLE_EFFECT_PASS_STATS_AND_STATUS) {
+                            if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
+                                moveScore = 150;
+                            }
+                        }
                     }
                 }
 
@@ -11821,8 +12440,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                     moveScore += 25;
                 }
-                if (moveScore > 200) {
-                    moveScore = 200;
+                if (moveScore > 250) {
+                    moveScore = 250;
                 }
 
                 attackScore += moveScore;
@@ -11880,16 +12499,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             moveScore = 0;
                     }
 
-                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
-                        if (defenderAbility != ABILITY_MOLD_BREAKER) {
-                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
-                                moveScore /= 2;
-                            }
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                        moveScore /= 2;
+                    }
 
-                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                                moveScore = moveScore * 3 / 2;
-                            }
-                        }
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                        moveScore = moveScore * 3 / 2;
                     }
 
                     // Move score is % of mon's hp damage they'll take
@@ -12054,9 +12669,9 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                     moveScore += 25;
                 }
-                // Cap move score to 200
-                if (moveScore > 200) {
-                    moveScore = 200;
+                // Cap move score to 250
+                if (moveScore > 250) {
+                    moveScore = 250;
                 }
 
                 defendScore += moveScore;
@@ -12082,42 +12697,15 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 }
             }
 
-            
-
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
-
-                // 0.8x if faster
-                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
-
-                    speedMultiplier = 8;
-                }
-                // 1.0x if tie
-                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
-
-                    speedMultiplier = 10;
-                }
-                // 1.2x if slower
-                else {
-
-                    speedMultiplier = 12;
-                }
+            if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
+                speedMultiplier = 7;
             }
-            // Trick Room is not up in this case.
             else {
-                // 1.2x if faster
-                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
-
-                    speedMultiplier = 12;
-                }
-                // 1.0x if same speed
-                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
-
+                if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_TIE) {
                     speedMultiplier = 10;
                 }
-                // 0.8x if slower
                 else {
-                    
-                    speedMultiplier = 8;
+                    speedMultiplier = 13;
                 }
             }
 
@@ -12401,16 +12989,12 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                             moveScore = 0;
                     }
 
-                    if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
-                        if (defenderAbility != ABILITY_MOLD_BREAKER) {
-                            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
-                                moveScore /= 2;
-                            }
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                        moveScore /= 2;
+                    }
 
-                            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                                moveScore = moveScore * 3 / 2;
-                            }
-                        }
+                    if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                        moveScore = moveScore * 3 / 2;
                     }
 
                     // Move score is % of mon's hp damage they'll take
@@ -12596,80 +13180,15 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
-            switch (monItemEffect) {
-                default:
-                    break;
 
-                case HOLD_EFFECT_LVLUP_ATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_DEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
-                case HOLD_EFFECT_LVLUP_HP_EV_UP:
-                case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
-                case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
-                    monSpeedStat /= 2;
-                    break;
-
-                case HOLD_EFFECT_DITTO_SPEED_UP:
-                    if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
-                        monSpeedStat *= 2;
-                    }
-                    break;
-
-                case HOLD_EFFECT_CHOICE_SPEED:
-                    monSpeedStat = monSpeedStat * 3 / 2;
-                    break;
+            if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
+                speedMultiplier = 8;
             }
-
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY_NOT_PARA)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat = monSpeedStat * 3 / 2;
-            }
-			else if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat *= 2;
-            }
-            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			{
-                monSpeedStat /= 2;
-            }
-
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
-
-                // 1.2x if faster
-                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
-
-                    speedMultiplier = 12;
-                }
-                // 1.0x if tie
-                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
-
-                    speedMultiplier = 10;
-                }
-                // 0.8x if slower
-                else {
-
-                    speedMultiplier = 8;
-                }
-            }
-            // Trick Room is not up in this case.
             else {
-                // 0.8x if faster
-                if (battleCtx->battleMons[defender].speed > monSpeedStat) {
-
-                    speedMultiplier = 8;
-                }
-                // 1.0x if same speed
-                else if (battleCtx->battleMons[defender].speed == monSpeedStat) {
-
+                if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_TIE) {
                     speedMultiplier = 10;
                 }
-                // 0.8x if slower
                 else {
-                    
                     speedMultiplier = 12;
                 }
             }
@@ -12790,16 +13309,12 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                 moveScore = 0;
                         }
 
-                        if (moveStatusFlags & (MOVE_STATUS_TYPE_RESIST_ABILITY | MOVE_STATUS_TYPE_WEAKNESS_ABILITY)) {
-                            if (monAbility != ABILITY_MOLD_BREAKER) {
-                                if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
-                                    moveScore /= 2;
-                                }
+                        if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                            moveScore /= 2;
+                        }
 
-                                if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                                    moveScore = moveScore * 3 / 2;
-                                }
-                            }
+                        if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                            moveScore = moveScore * 3 / 2;
                         }
 
                         moveScore = moveScore * 100 / defenderMaxHP;
@@ -12992,8 +13507,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                         moveScore += 25;
                     }
-                    if (moveScore > 200) {
-                        moveScore = 200;
+                    if (moveScore > 250) {
+                        moveScore = 250;
                     }
 
                     if (moveScore >= 40) {
