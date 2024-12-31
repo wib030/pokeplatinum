@@ -4511,7 +4511,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 					} while (randomAbilityActivated == FALSE);
 					
 					battleCtx->battleMons[battler].randomAbilityAnnounced = TRUE;
-					battleCtx->sideEffectMon = battler;
+                    battleCtx->msgBattlerTemp = battler;
 					battleCtx->calcTemp = abilityChosen;
 					subscript = subscript_random_ability;
 					result = SWITCH_IN_CHECK_RESULT_BREAK;
