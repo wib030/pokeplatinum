@@ -11862,14 +11862,15 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
         switch (battleCtx->msgItemTemp) {
         case ITEM_NET_BALL:
             if (type1 == TYPE_WATER || type2 == TYPE_WATER
-                    || type1 == TYPE_BUG || type2 == TYPE_BUG) {
-                ballMod = 30;
+                    || type1 == TYPE_BUG || type2 == TYPE_BUG
+					|| type1 == TYPE_FLYING || type2 == TYPE_FLYING) {
+                ballMod = 35;
             }
             break;
 
         case ITEM_DIVE_BALL:
             if (BattleSystem_Terrain(battleSys) == TERRAIN_WATER) {
-                ballMod = 35;
+                ballMod = 40;
             }
             break;
 
@@ -11885,7 +11886,7 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
 
         case ITEM_REPEAT_BALL:
             if (BattleSystem_CaughtSpecies(battleSys, battleCtx->battleMons[battleCtx->defender].species) == TRUE) {
-                ballMod = 30;
+                ballMod = 35;
             }
             break;
 
@@ -11909,6 +11910,12 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
                 ballMod = 50;
             }
             break;
+			
+		case ITEM_PREMIER_BALL:
+			if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MILTANK) {
+				ballMod = 40;
+			}
+			break;
         }
     } else {
         ballMod = sBasicBallMod[battleCtx->msgItemTemp - ITEM_ULTRA_BALL];
