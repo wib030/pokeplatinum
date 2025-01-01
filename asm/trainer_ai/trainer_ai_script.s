@@ -7262,8 +7262,10 @@ Expert_StealthRock:
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedEqualTo 0, ScoreMinus10
+    IfLoadedLessThan 2, ScoreMinus10
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, ScoreMinus10
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_StealthRock_CheckRapidSpin
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_StealthRock_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_StealthRock_TryScoreMinus1
@@ -7427,7 +7429,9 @@ Expert_Spikes:
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES
     IfLoadedEqualTo 3, ScoreMinus10
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedEqualTo 0, ScoreMinus10
+    IfLoadedLessThan 2, ScoreMinus10
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_Spikes_CheckRapidSpin
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_Spikes_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_Spikes_TryScoreMinus1
@@ -7592,7 +7596,9 @@ Expert_ToxicSpikes:
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedEqualTo 0, ScoreMinus10
+    IfLoadedLessThan 2, ScoreMinus10
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
     IfLoadedEqualTo 2, ScoreMinus10
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_ToxicSpikes_CheckRapidSpin
