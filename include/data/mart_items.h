@@ -16,6 +16,7 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 	{ ITEM_MAX_POTION, 0x5 },
 	{ ITEM_FULL_RESTORE, 0x6 },
 	{ ITEM_REVIVE, 0x3 },
+	{ ITEM_MAX_REVIVE, 0x5 },
 	{ ITEM_ANTIDOTE, 0x1 },
 	{ ITEM_PARLYZ_HEAL, 0x1 },
 	{ ITEM_AWAKENING, 0x1 },
@@ -43,8 +44,7 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 	{ ITEM_LANSAT_BERRY, 0x3 },
 	{ ITEM_STARF_BERRY, 0x5 },
 	{ ITEM_JABOCA_BERRY, 0x4 },
-	{ ITEM_ROWAP_BERRY, 0x4 },
-	{ ITEM_CHILAN_BERRY, 0x5 }
+	{ ITEM_ROWAP_BERRY, 0x4 }
 };
 
 const u16 JubilifeMartSpecialties[] = {
