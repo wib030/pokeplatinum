@@ -1698,7 +1698,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
     int battler1MoveScore, battler2MoveScore;
     Pokemon *mon;
 
-    mon = Party_GetPokemonBySlotIndex(partyIndicator, partySlot);
+    mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
 
     // If either battler is dead, short-circuit to preferring the other
     if (battleCtx->battleMons[battler1].curHP == 0 && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0) {
