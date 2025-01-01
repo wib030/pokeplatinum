@@ -5296,9 +5296,9 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                             if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
-                                // Each non-immune move gives 2/3 chance not to switch
+                                // Each non-immune move gives 90% chance not to switch
                                 // when attacker is heavily boosted
-                                if ((BattleSystem_RandNext(battleSys) % 3) < 2) {
+                                if ((BattleSystem_RandNext(battleSys) % 10) < 9) {
                                     return FALSE;
                                 }
                             }
@@ -5314,9 +5314,9 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
-                                    // Each non-immune move gives 3/4 chance not to switch
+                                    // Each non-immune move gives 95% chance not to switch
                                     // when attacker is heavily boosted
-                                    if ((BattleSystem_RandNext(battleSys) % 4) < 3) {
+                                    if ((BattleSystem_RandNext(battleSys) % 20) < 19) {
                                         return FALSE;
                                     }
                                 }
