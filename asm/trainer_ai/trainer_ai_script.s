@@ -7768,6 +7768,8 @@ Expert_StickyWeb:
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STICKY_WEB, ScoreMinus10
+	LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_RAPID_SPIN, Expert_StickyWeb_CheckRapidSpin
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, Expert_StickyWeb_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TAUNT, Expert_StickyWeb_TryScoreMinus1
