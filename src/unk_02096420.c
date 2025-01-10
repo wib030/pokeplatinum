@@ -654,24 +654,24 @@ static s32 CalculateEVUpdate (s32 param0, s32 param1, s32 param2)
         return -1;
     }
 
-    if ((param0 >= 100) && (param2 > 0)) {
+    if ((param0 >= EV_ITEM_MAX) && (param2 > 0)) {
         return -1;
     }
 
-    if (((param0 + param1) >= 510) && (param2 > 0)) {
+    if (((param0 + param1) >= EV_TOTAL_MAX) && (param2 > 0)) {
         return -1;
     }
 
     param0 += param2;
 
-    if (param0 > 100) {
-        param0 = 100;
+    if (param0 > EV_ITEM_MAX) {
+        param0 = EV_ITEM_MAX;
     } else if (param0 < 0) {
         param0 = 0;
     }
 
-    if ((param0 + param1) > 510) {
-        param0 = 510 - param1;
+    if ((param0 + param1) > EV_TOTAL_MAX) {
+        param0 = EV_TOTAL_MAX - param1;
     }
 
     return param0;
