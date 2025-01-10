@@ -11,6 +11,9 @@
 #include "item.h"
 #include "unk_02096420.h"
 
+#define EV_ITEM_MAX     ( 100 )     // EV cap for doping items
+#define EV_TOTAL_MAX    ( 510 )     // Maximum EV's on a Pokemon across all stats
+
 static u8 CheckMovePPAvailability(Pokemon * param0, u32 param1);
 static u8 UpdatePokemonMovePP(Pokemon * param0, u32 param1, u32 param2);
 static u8 IncreaseMovePPUps(Pokemon * param0, u32 param1, u32 param2);
@@ -132,7 +135,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
             v1[6] = Item_Get(v0, 48);
 
             if (v1[6] > 0) {
-                if ((v1[0] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
+                if ((v1[0] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX)) {
                     Heap_FreeToHeap(v0);
                     return 1;
                 }
@@ -154,7 +157,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
         v1[6] = Item_Get(v0, 49);
 
         if (v1[6] > 0) {
-            if ((v1[1] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
+            if ((v1[1] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX)) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -175,7 +178,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
         v1[6] = Item_Get(v0, 50);
 
         if (v1[6] > 0) {
-            if ((v1[2] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
+            if ((v1[2] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX)) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -196,7 +199,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
         v1[6] = Item_Get(v0, 51);
 
         if (v1[6] > 0) {
-            if ((v1[3] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
+            if ((v1[3] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX)) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -217,7 +220,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
         v1[6] = Item_Get(v0, 52);
 
         if (v1[6] > 0) {
-            if ((v1[4] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
+            if ((v1[4] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX)) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -238,7 +241,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
         v1[6] = Item_Get(v0, 53);
 
         if (v1[6] > 0) {
-            if ((v1[5] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
+            if ((v1[5] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX)) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
