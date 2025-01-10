@@ -11,7 +11,7 @@
 #include "item.h"
 #include "unk_02096420.h"
 
-#define EV_ITEM_MAX     ( 100 )     // EV cap for doping items
+#define EV_ITEM_MAX     ( 252 )     // EV cap for doping items
 #define EV_TOTAL_MAX    ( 510 )     // Maximum EV's on a Pokemon across all stats
 
 static u8 CheckMovePPAvailability(Pokemon * param0, u32 param1);
