@@ -14743,6 +14743,119 @@ BOOL Battle_AbilityDetersVolatileStatus(BattleSystem *battleSys, BattleContext *
     return result;
 }
 
+BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int moveEffect)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    switch (moveEffect) {
+        default:
+            break;
+
+        case MOVE_EFFECT_LEECH_SEED:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_GUARD:
+                case ABILITY_LIQUID_OOZE:
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_PERISH_SONG:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_SOUNDPROOF:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_ABILITY_SUPPRESSED:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_HEAL_BLOCK:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_EMBARGO:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_MAGNET_RISE:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_ROCHE_RADIUS:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_YAWN_0:
+        case MOVE_EFFECT_YAWN_1:
+        case MOVE_EFFECT_YAWN:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_INSOMNIA:
+                case ABILITY_VITAL_SPIRIT:
+                case ABILITY_EARLY_BIRD:
+                case ABILITY_SHED_SKIN:
+                case ABILITY_MARVEL_SCALE:
+                case ABILITY_GUTS:
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+
+                case ABILITY_HYDRATION:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                        result = TRUE;
+                    }
+                    break;
+
+                case ABILITY_LEAF_GUARD:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                        result = TRUE;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    return result;
+}
+
 BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat)
 {
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
