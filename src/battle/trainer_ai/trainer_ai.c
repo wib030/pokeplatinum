@@ -440,6 +440,7 @@ static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, i
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_ShouldSwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
@@ -6430,6 +6431,15 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     return FALSE;
 }
 
+
+/**
+ * @brief Check if an AI's battler should switch out due to Yawn status.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The AI's battler.
+ * @return TRUE if the AI's battler should switch out.
+ */
 static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     BOOL result;
@@ -6443,23 +6453,76 @@ static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCt
     ability = battleCtx->battleMons[battler].ability;
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
 
+    if (Battle_AbilityDetersStatus(battleSys, battleCtx, ability, MON_CONDITION_SLEEP)
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_MOLD_BREAKER) == 0)
+    {
+        // Early exit if we don't mind being being put to sleep due to ability
+        return FALSE;
+    }
+
+    if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, battler, defender))
+    {
+        // Early exit if we can just kill
+        return FALSE;
+    }
+
     if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN)
-        && (battleCtx->battleMons[battler].status & MON_CONDITION_ANY) == FALSE) {
+        && (battleCtx->battleMons[battler].status & MON_CONDITION_ANY) == FALSE)
+    {
+        if (heldItemEffect == HOLD_EFFECT_SLP_RESTORE
+        || heldItemEffect == HOLD_EFFECT_STATUS_RESTORE
+        || heldItemEffect == HOLD_EFFECT_PSN_USER
+        || heldItemEffect == HOLD_EFFECT_BRN_USER)
+        {
+            result = FALSE;
+        }
+        else {
+            result = TRUE;
+        }
+    }
 
-        // Don't switch if we can just kill or we're resistant to sleep
-        if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, battler, defender) == FALSE
-        && Battle_AbilityDetersStatus(battleSys, battleCtx, ability, MON_CONDITION_SLEEP) == FALSE) {
-            
-            if (heldItemEffect == HOLD_EFFECT_SLP_RESTORE
-            || heldItemEffect == HOLD_EFFECT_STATUS_RESTORE
-            || heldItemEffect == HOLD_EFFECT_PSN_USER
-            || heldItemEffect == HOLD_EFFECT_BRN_USER) {
+    return result;
+}
 
-                result = FALSE;
-            }
-            else {
-                result = TRUE;
-            }
+/**
+ * @brief Check if an AI's battler should switch out due to Toxic status.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The AI's battler.
+ * @return TRUE if the AI's battler should switch out.
+ */
+static BOOL AI_ShouldSwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    BOOL result;
+    int defender;
+    u8 ability;
+    u8 heldItemEffect;
+
+    result = FALSE;
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    ability = battleCtx->battleMons[battler].ability;
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+
+    if (Battle_AbilityDetersStatus(battleSys, battleCtx, ability, MON_CONDITION_ANY_POISON)
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_MOLD_BREAKER) == 0)
+    {
+        // Early exit if we don't mind being poisoned due to ability
+        return FALSE;
+    }
+
+    if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, battler, defender))
+    {
+        // Early exit if we can just kill
+        return FALSE;
+    }
+
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_TOXIC)
+    {
+        if (battleCtx->battleMons[battler].status & (MON_CONDITION_TOXIC_COUNTER_2 | MON_CONDITION_TOXIC_COUNTER_3))
+        {
+            result = TRUE;
         }
     }
 
@@ -7699,7 +7762,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_WONDER_GUARD) > 0) {
+        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_WONDER_GUARD) > 0) {
 
             if (AI_CannotDamageWonderGuard(battleSys, battleCtx, battler)) {
                 return TRUE;
@@ -7707,6 +7770,10 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         }
 
         if (AI_ShouldSwitchYawn(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (AI_ShouldSwitchToxic(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
