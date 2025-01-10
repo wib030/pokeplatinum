@@ -4,6 +4,9 @@
 #include "pokemon.h"
 #include "struct_decls/struct_party_decl.h"
 
+#include "savedata.h"
+#include "trainer_info.h"
+
 #include "heap.h"
 #include "pokemon.h"
 #include "move_table.h"
@@ -26,6 +29,51 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
 {
     ItemData * v0;
     s32 v1[8];
+	int capLevel = 100;
+	
+/*/
+	SaveData * saveData;
+    TrainerInfo * trInfo = SaveData_GetTrainerInfo(saveData);
+	u8 badges = TrainerInfo_BadgeCount(trInfo);
+	
+	switch (badges) {
+		default:
+			capLevel = 100;
+			break;
+
+		case 0:
+			capLevel = 14;
+			break;
+
+		case 1:
+			capLevel = 23;
+			break;
+
+		case 2:
+			capLevel = 27;
+			break;
+
+		case 3:
+			capLevel = 32;
+			break;
+
+		case 4:
+			capLevel = 37;
+			break;
+
+		case 5:
+			capLevel = 46;
+			break;
+
+		case 6:
+			capLevel = 52;
+			break;
+
+		case 7:
+			capLevel = 59;
+			break;
+	}
+/*/
 
     v0 = Item_Load(param1, 0, param3);
 
@@ -86,7 +134,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
     }
 
     if (Item_Get(v0, 25) != 0) {
-        if (Pokemon_GetValue(param0, MON_DATA_LEVEL, NULL) < 100) {
+        if (Pokemon_GetValue(param0, MON_DATA_LEVEL, NULL) < capLevel) {
             Heap_FreeToHeap(v0);
             return 1;
         }
