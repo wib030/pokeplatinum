@@ -14677,6 +14677,72 @@ BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCt
     return result;
 }
 
+BOOL Battle_AbilityDetersVolatileStatus(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int volatileStatus)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    switch (volatileStatus) {
+        default:
+            break;
+
+        case VOLATILE_CONDITION_CONFUSION_0:
+        case VOLATILE_CONDITION_CONFUSION_1:
+        case VOLATILE_CONDITION_CONFUSION_2:
+        case VOLATILE_CONDITION_CONFUSION:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_OWN_TEMPO:
+                case ABILITY_TANGLED_FEET:
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case VOLATILE_CONDITION_FLINCH:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_INNER_FOCUS:
+                case ABILITY_STEADFAST:
+                case ABILITY_SHIELD_DUST:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case VOLATILE_CONDITION_CHIP:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_GUARD:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case VOLATILE_CONDITION_CURSE:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                case ABILITY_MAGIC_GUARD:
+                    result = TRUE;
+                    break;
+            }
+            break;
+    }
+
+    return result;
+}
+
 BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat)
 {
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
