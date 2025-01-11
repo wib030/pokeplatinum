@@ -14677,6 +14677,185 @@ BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCt
     return result;
 }
 
+BOOL Battle_AbilityDetersVolatileStatus(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int volatileStatus)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    switch (volatileStatus) {
+        default:
+            break;
+
+        case VOLATILE_CONDITION_CONFUSION_0:
+        case VOLATILE_CONDITION_CONFUSION_1:
+        case VOLATILE_CONDITION_CONFUSION_2:
+        case VOLATILE_CONDITION_CONFUSION:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_OWN_TEMPO:
+                case ABILITY_TANGLED_FEET:
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case VOLATILE_CONDITION_FLINCH:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_INNER_FOCUS:
+                case ABILITY_STEADFAST:
+                case ABILITY_SHIELD_DUST:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case VOLATILE_CONDITION_CHIP:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_GUARD:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case VOLATILE_CONDITION_CURSE:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                case ABILITY_MAGIC_GUARD:
+                    result = TRUE;
+                    break;
+            }
+            break;
+    }
+
+    return result;
+}
+
+BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int moveEffect)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    switch (moveEffect) {
+        default:
+            break;
+
+        case MOVE_EFFECT_LEECH_SEED:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_GUARD:
+                case ABILITY_LIQUID_OOZE:
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_PERISH_SONG:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_SOUNDPROOF:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_ABILITY_SUPPRESSED:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_HEAL_BLOCK:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_EMBARGO:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_MAGNET_RISE:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_ROCHE_RADIUS:
+                    result = TRUE;
+                    break;
+            }
+            break;
+
+        case MOVE_EFFECT_YAWN_0:
+        case MOVE_EFFECT_YAWN_1:
+        case MOVE_EFFECT_YAWN:
+            switch (ability) {
+                default:
+                    break;
+
+                case ABILITY_INSOMNIA:
+                case ABILITY_VITAL_SPIRIT:
+                case ABILITY_EARLY_BIRD:
+                case ABILITY_SHED_SKIN:
+                case ABILITY_MARVEL_SCALE:
+                case ABILITY_GUTS:
+                case ABILITY_MAGIC_BOUNCE:
+                    result = TRUE;
+                    break;
+
+                case ABILITY_HYDRATION:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                        result = TRUE;
+                    }
+                    break;
+
+                case ABILITY_LEAF_GUARD:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                        result = TRUE;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    return result;
+}
+
 BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat)
 {
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
@@ -15141,7 +15320,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
     u8 slot1, slot2;
     u32 moveStatusFlags;
     int partySize;
-    int score, maxScore, moveScore;
+    int score, maxScore, moveScore, activeScore;
     int hpPercent, monCurHP, monMaxHP;
     int hazardsBonus, sackBonus, speedMultiplier;
 	int moveMoveEffect, moveVolatileStatus, moveStatus;
@@ -15152,6 +15331,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
     battleCtx = BattleSystem_Context(battleSys);
 
+    activeScore = 0;
     shouldSwitch = FALSE;
 	
     slot1 = battler;
@@ -15199,8 +15379,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             && battleCtx->selectedPartySlot[slot1] != i
             && battleCtx->selectedPartySlot[slot2] != i
             && i != battleCtx->aiSwitchedPartySlot[slot1]
-            && i != battleCtx->aiSwitchedPartySlot[slot2]
-            && i != battleCtx->selectedPartySlot[battler]) {
+            && i != battleCtx->aiSwitchedPartySlot[slot2]) {
 
             monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
             monItemEffect = BattleSystem_GetItemData(battleCtx, monItem, ITEM_PARAM_HOLD_EFFECT);
@@ -15517,24 +15696,27 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
                 score += moveScore;
 
-                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
-                    if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_DEFOG
-                        || Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_RAPID_SPIN) {
+                if (i != battleCtx->selectedPartySlot[battler])
+                {
+                    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+                        if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_DEFOG
+                            || Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL) == MOVE_RAPID_SPIN) {
 
-                        hazardsBonus = (hpPercent / 4) + 2;
+                            hazardsBonus = (hpPercent / 4) + 2;
 
-                        if (score < hazardsBonus) {
-                            score = 0;
-                        }
-                        else {
-                            score -= hazardsBonus;
+                            if (score < hazardsBonus) {
+                                score = 0;
+                            }
+                            else {
+                                score -= hazardsBonus;
+                            }
                         }
                     }
-                }
 
-                if (moveScore > 50
-                && hpPercent >= 25) {
-                    battlersDisregarded |= FlagIndex(i);
+                    if (moveScore > 50
+                    && hpPercent >= 25) {
+                        battlersDisregarded |= FlagIndex(i);
+                    }
                 }
                     
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
@@ -15548,36 +15730,46 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                 score = score * speedMultiplier / 10;
             }
 
-            if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
+            if (i != battleCtx->selectedPartySlot[battler])
+            {
+                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_HAZARDS_ANY) {
 
-                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TOXIC_SPIKES) {
-                    if (monType1 == TYPE_POISON
-                    || monType2 == TYPE_POISON) {
-                        if (score < hazardsBonus) {
-                            score = 0;
+                    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TOXIC_SPIKES) {
+                        hazardsBonus = (hpPercent / 4) + 2;
+
+                        if (monType1 == TYPE_POISON
+                        || monType2 == TYPE_POISON) {
+                            if (score < hazardsBonus) {
+                                score = 0;
+                            }
+                            else {
+                                score -= hazardsBonus;
+                            }
                         }
-                        else {
-                            score -= hazardsBonus;
+
+                        if (monType1 == TYPE_STEEL
+                        || monType2 == TYPE_STEEL) {
+                            if (score < (hazardsBonus / 2)) {
+                                score = 0;
+                            }
+                            else {
+                                score -= (hazardsBonus / 2);
+                            }
                         }
                     }
 
-                    if (monType1 == TYPE_STEEL
-                    || monType2 == TYPE_STEEL) {
-                        if (score < (hazardsBonus / 2)) {
-                            score = 0;
-                        }
-                        else {
-                            score -= (hazardsBonus / 2);
-                        }
+                    if (monAbility != ABILITY_MAGIC_GUARD) {
+                        score += Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i) * 200 / monMaxHP;
                     }
-                }
-
-                if (monAbility != ABILITY_MAGIC_GUARD) {
-                    score += Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i) * 200 / monMaxHP;
                 }
             }
 
-            if (score > 300) {
+            if (i == battleCtx->selectedPartySlot[battler])
+            {
+                activeScore = score;
+            }
+
+            if (activeScore <= score) {
 
                 battlersDisregarded |= FlagIndex(i);
             }

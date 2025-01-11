@@ -1696,6 +1696,28 @@ BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *b
 BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int statusCondition);
 
 /**
+* @brief Determine whether the given ability deters the given volatile status.
+*
+* @param battleSys
+* @param battleCtx
+* @param ability            The ability of the mon being affected by the volatile status.
+* @param volatileStatus     The bitmask of the volatile status condition.
+* @Return   The TRUE / FALSE result of whether the ability deters the given volatile status.
+*/
+BOOL Battle_AbilityDetersVolatileStatus(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int volatileStatus);
+
+/**
+* @brief Determine whether the given ability deters the given move effect.
+*
+* @param battleSys
+* @param battleCtx
+* @param ability            The ability of the mon being affected by the move effect.
+* @param moveEffect         The bitmask of the move effect.
+* @Return   The TRUE / FALSE result of whether the ability deters the given move effect.
+*/
+BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int moveEffect);
+
+/**
 * @brief Determine whether the AI should paralyze the defender based on stats and moves.
 *
 * @param battleSys
