@@ -1,10 +1,9 @@
 {
-    "name": "Allen",
+    "name": "Allen_2015",
     "class": "TRAINER_CLASS_ACE_TRAINER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
-        "AI_FLAG_EXPERT",
 		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
