@@ -6521,7 +6521,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_ATTACK;
-                subscript = subscript_held_item_raise_stat;
+                subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6534,7 +6534,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
-                subscript = subscript_held_item_raise_stat;
+                subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6547,7 +6547,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_SPEED;
-                subscript = subscript_held_item_raise_stat;
+                subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6560,7 +6560,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
-                subscript = subscript_held_item_raise_stat;
+                subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6573,7 +6573,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
-                subscript = subscript_held_item_raise_stat;
+                subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6944,7 +6944,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_ATTACK;
-                *subscript = subscript_held_item_raise_stat;
+                *subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6957,7 +6957,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_DEFENSE] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
-                *subscript = subscript_held_item_raise_stat;
+                *subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6970,7 +6970,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_SPEED;
-                *subscript = subscript_held_item_raise_stat;
+                *subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6983,7 +6983,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
-                *subscript = subscript_held_item_raise_stat;
+                *subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
@@ -6996,7 +6996,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
             if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / itemPower
                     && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
                 battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
-                *subscript = subscript_held_item_raise_stat;
+                *subscript = subscript_held_item_sharply_raise_stat;
                 result = TRUE;
             }
             break;
