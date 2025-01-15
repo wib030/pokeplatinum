@@ -12163,46 +12163,6 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
             monItemEffect = BattleSystem_GetItemData(battleCtx, monItem, ITEM_PARAM_HOLD_EFFECT);
             monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
-            switch (monItemEffect) {
-                default:
-                    break;
-
-                case HOLD_EFFECT_LVLUP_ATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_DEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
-                case HOLD_EFFECT_LVLUP_HP_EV_UP:
-                case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
-                case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
-                    monSpeedStat /= 2;
-                    break;
-
-                case HOLD_EFFECT_DITTO_SPEED_UP:
-                    if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
-                        monSpeedStat *= 2;
-                    }
-                    break;
-
-                case HOLD_EFFECT_CHOICE_SPEED:
-                    monSpeedStat = monSpeedStat * 3 / 2;
-                    break;
-            }
-
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY_NOT_PARA)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat = monSpeedStat * 3 / 2;
-            }
-			else if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat *= 2;
-            }
-            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			{
-                monSpeedStat /= 2;
-            }
 
             hazardsBonus = 0;
             sackBonus = 0;
@@ -12324,10 +12284,20 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             }
 
                             if (moveStatus & MON_CONDITION_ANY_POISON) {
-                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_ANY_POISON) == FALSE)
-                                || monAbility == ABILITY_MOLD_BREAKER) {
-
-                                    moveScore = 25;
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                || monAbility == ABILITY_MOLD_BREAKER)
+                                && defenderType1 != TYPE_POISON
+                                && defenderType2 != TYPE_POISON
+                                ) {
+                                    if ((defenderType1 == TYPE_STEEL
+                                        || defenderType2 == TYPE_STEEL)
+                                        && monAbility == ABILITY_CORROSION)
+                                    {
+                                        moveScore = 50;
+                                    }
+                                    else {
+                                        moveScore = 25;
+                                    }
                                 }
                             }
                         }
@@ -12383,7 +12353,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
                                 if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED) == FALSE) {
                                     if (defenderType1 != TYPE_GRASS && defenderType2 != TYPE_GRASS) {
-                                        moveScore = 12;
+                                        moveScore = 25;
                                     }
                                 }
                             }
@@ -12566,10 +12536,20 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             }
 
                             if (moveStatus & MON_CONDITION_ANY_POISON) {
-                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
-                                || defenderAbility == ABILITY_MOLD_BREAKER) {
-
-                                    moveScore = 25;
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_POISON
+                                && monType2 != TYPE_POISON
+                                ) {
+                                    if ((monType1 == TYPE_STEEL
+                                        || monType2 == TYPE_STEEL)
+                                        && defenderAbility == ABILITY_CORROSION)
+                                    {
+                                        moveScore = 50;
+                                    }
+                                    else {
+                                        moveScore = 25;
+                                    }
                                 }
                             }
                         }
@@ -12618,7 +12598,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                             if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
                                 if (monType1 != TYPE_GRASS && monType2 != TYPE_GRASS) {
-                                    moveScore = 12;
+                                    moveScore = 25;
                                 }
                             }
 
@@ -13067,11 +13047,16 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                 || defenderAbility == ABILITY_MOLD_BREAKER)
                                 && monType1 != TYPE_POISON
                                 && monType2 != TYPE_POISON
-                                && monType1 != TYPE_STEEL
-                                && monType2 != TYPE_STEEL
                                 ) {
-
-                                    moveScore = 25;
+                                    if ((monType1 == TYPE_STEEL
+                                        || monType2 == TYPE_STEEL)
+                                        && defenderAbility == ABILITY_CORROSION)
+                                    {
+                                        moveScore = 50;
+                                    }
+                                    else {
+                                        moveScore = 25;
+                                    }
                                 }
                             }
                         }
@@ -13120,7 +13105,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                             if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
                                 if (monType1 != TYPE_GRASS && monType2 != TYPE_GRASS) {
-                                    moveScore = 12;
+                                    moveScore = 25;
                                 }
                             }
 
@@ -13427,7 +13412,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                 if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
                                     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED) == FALSE) {
                                         if (defenderType1 != TYPE_GRASS && defenderType2 != TYPE_GRASS) {
-                                            moveScore = 12;
+                                            moveScore = 25;
                                         }
                                     }
                                 }
@@ -15665,7 +15650,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
                             if (moveMoveEffect & MOVE_EFFECT_LEECH_SEED) {
                                 if (monType1 != TYPE_GRASS && monType2 != TYPE_GRASS) {
-                                    moveScore = 12;
+                                    moveScore = 25;
                                 }
                             }
 
