@@ -13063,8 +13063,13 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                             }
 
                             if (moveStatus & MON_CONDITION_ANY_POISON) {
-                                if ((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
-                                || defenderAbility == ABILITY_MOLD_BREAKER) {
+                                if (((Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, MON_CONDITION_ANY_POISON) == FALSE)
+                                || defenderAbility == ABILITY_MOLD_BREAKER)
+                                && monType1 != TYPE_POISON
+                                && monType2 != TYPE_POISON
+                                && monType1 != TYPE_STEEL
+                                && monType2 != TYPE_STEEL
+                                ) {
 
                                     moveScore = 25;
                                 }
