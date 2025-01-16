@@ -4328,7 +4328,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 		
 	case MOVE_FLING:
         if (embargoTurns == 0) {
-            power = 0;
+            power = Battler_ItemFlingPower(battleCtx, attacker);
 
             switch (BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_HOLD_EFFECT)) {
             case HOLD_EFFECT_ARCEUS_FIGHTING:
@@ -4420,7 +4420,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             | ((ivs[STAT_SPECIAL_DEFENSE] & 1) << 5);
 
         // power = power * 40 / 63 + 30;
-        damage = MOVE_DATA(move).power;
+        power = 0;
         type = (type * 15 / 63) + 1;
 
         if (type >= TYPE_MYSTERY) {
@@ -4448,7 +4448,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_PSYWAVE:
-        damage = battleCtx->battleMons[attacker].level * (BattleSystem_RandNext(battleSys) % 11 + 5) / 10;
+        power = battleCtx->battleMons[attacker].level * (BattleSystem_RandNext(battleSys) % 11 + 5) / 10;
         break;
 
     case MOVE_RETURN:
