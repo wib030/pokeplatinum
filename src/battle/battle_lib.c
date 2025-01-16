@@ -60,7 +60,7 @@ static void BattleAI_ClearKnownAbility(BattleContext *battleCtx, u8 battler);
 static void BattleAI_ClearKnownItem(BattleContext *battleCtx, u8 battler);
 static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, int defender1, int defender2);
 static BOOL MoveCannotTriggerAnticipation(BattleContext *battleCtx, int move);
-static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int item, int move);
+static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move);
 
 static const Fraction sStatStageBoosts[];
 
@@ -2015,7 +2015,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
     
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + i, NULL);
-        battler1MoveType = CalcMoveType(battleSys, battleCtx, battler1Item, battler1Move);
+        battler1MoveType = CalcMoveType(battleSys, battleCtx, battler1, battler1Item, battler1Move);
 
         switch (battler1Move) {
             default:
@@ -2094,7 +2094,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         battler2Move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
-        battler2MoveType = CalcMoveType(battleSys, battleCtx, battler2Item, battler2Move);
+        battler2MoveType = CalcMoveType(battleSys, battleCtx, battler2, battler2Item, battler2Move);
 
         switch (battler2Move) {
             default:
@@ -2510,6 +2510,9 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
 void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move)
 {
     int battler, moveType; // must declare these first to match
+    u16 attackerItem;
+
+    attackerItem = Battler_HeldItem(battleCtx, attacker);
 
     if (battleCtx->defender == BATTLER_NONE
             || Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE
@@ -2522,7 +2525,7 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
         return;
     }
 
-    moveType = CalcMoveType(battleSys, battleCtx, attacker, move);
+    moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerItem, move);
     if (moveType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;
     }
@@ -11924,12 +11927,13 @@ static BOOL MoveCannotTriggerAnticipation(BattleContext *battleCtx, int move)
  * 
  * @param battleSys 
  * @param battleCtx 
+ * @param battler   The battler to use for the calculation.
  * @param item      The attacker's held item. Affects the typing of Natural Gift
  *                  and Judgment.
  * @param move      The move being used.
  * @return The variable-type of the given move.
  */
-static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int item, int move)
+static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move)
 {
     int type;
 
@@ -11995,12 +11999,12 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
         break;
 
     case MOVE_HIDDEN_POWER:
-        type = ((battleCtx->battleMons[item].hpIV & 1) >> 0)
-                | ((battleCtx->battleMons[item].attackIV & 1) << 1)
-                | ((battleCtx->battleMons[item].defenseIV & 1) << 2)
-                | ((battleCtx->battleMons[item].speedIV & 1) << 3)
-                | ((battleCtx->battleMons[item].spAttackIV & 1) << 4)
-                | ((battleCtx->battleMons[item].spDefenseIV & 1) << 5);
+        type = ((battleCtx->battleMons[battler].hpIV & 1) >> 0)
+                | ((battleCtx->battleMons[battler].attackIV & 1) << 1)
+                | ((battleCtx->battleMons[battler].defenseIV & 1) << 2)
+                | ((battleCtx->battleMons[battler].speedIV & 1) << 3)
+                | ((battleCtx->battleMons[battler].spAttackIV & 1) << 4)
+                | ((battleCtx->battleMons[battler].spDefenseIV & 1) << 5);
         type = (type * 15 / 63) + 1;
 
         if (type >= TYPE_MYSTERY) {
@@ -12188,7 +12192,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                 moveScore = 0;
                 movePower = MOVE_DATA(move).power;
-                moveType = CalcMoveType(battleSys, battleCtx, monItem, move);
+                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
                 moveEffect = MOVE_DATA(move).effect;
                 moveStatusFlags = 0;
 
@@ -12426,7 +12430,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                 moveScore = 0;
                 movePower = MOVE_DATA(move).power;
-                moveType = CalcMoveType(battleSys, battleCtx, defenderItem, move);
+                moveType = CalcMoveType(battleSys, battleCtx, defender, defenderItem, move);
                 moveEffect = MOVE_DATA(move).effect;
 
                 if (movePower > 1) {
@@ -12926,7 +12930,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                 moveScore = 0;
                 movePower = MOVE_DATA(move).power;
-                moveType = CalcMoveType(battleSys, battleCtx, defenderItem, move);
+                moveType = CalcMoveType(battleSys, battleCtx, defender, defenderItem, move);
                 moveEffect = MOVE_DATA(move).effect;
 
                 if (movePower > 0) {
@@ -13249,7 +13253,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                     moveScore = 0;
                     movePower = MOVE_DATA(move).power;
-                    moveType = CalcMoveType(battleSys, battleCtx, monItem, move);
+                    moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
                     moveEffect = MOVE_DATA(move).effect;
                     moveStatusFlags = 0;
 
@@ -14248,7 +14252,7 @@ static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleCo
             break;
         }
 
-        moveType = CalcMoveType(battleSys, battleCtx, item, move);
+        moveType = CalcMoveType(battleSys, battleCtx, attacker, item, move);
         movePower = MOVE_DATA(move).power;
 
         if (movePower > 0) {
@@ -15477,7 +15481,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
                 moveScore = 0;
                 movePower = MOVE_DATA(move).power;
-                moveType = CalcMoveType(battleSys, battleCtx, defenderItem, move);
+                moveType = CalcMoveType(battleSys, battleCtx, defender, defenderItem, move);
                 moveEffect = MOVE_DATA(move).effect;
 
                 if (movePower > 0) {
