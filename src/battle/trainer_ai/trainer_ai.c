@@ -4730,7 +4730,7 @@ static s32 TrainerAI_CalcEndOfTurnTick(BattleSystem *battleSys, BattleContext *b
                 {
                     if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
                     {
-                        tick = battleCtx->battleMons[defender].curHp;
+                        tick = battleCtx->battleMons[defender].curHP;
                     }
                     else
                     {
@@ -6950,10 +6950,8 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
         return FALSE;
     }
 
-    for (i = 0; i )
-
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-        move = battleCtx->battleMons[battler].moves[i]
+        move = battleCtx->battleMons[battler].moves[i];
         moveEffect = MOVE_DATA(move).effect;
         moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
         moveClass = MOVE_DATA(move).class;
