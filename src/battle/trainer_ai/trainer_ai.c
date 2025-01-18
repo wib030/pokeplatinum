@@ -5036,36 +5036,6 @@ static s32 TrainerAI_CalcEndOfTurnTick(BattleSystem *battleSys, BattleContext *b
         }
     }
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
-    {
-        if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_HEAL_BLOCK)
-        {
-            tick = 0;
-        }
-        else
-        {
-            tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
-        }
-
-        totalTick += tick;
-        tick = 0;
-    }
-
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_AQUA_RING)
-    {
-        if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_HEAL_BLOCK)
-        {
-            tick = 0;
-        }
-        else
-        {
-            tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
-        }
-
-        totalTick += tick;
-        tick = 0;
-    }
-
     return totalTick;
 }
 
