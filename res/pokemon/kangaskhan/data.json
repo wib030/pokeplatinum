@@ -111,7 +111,6 @@
 			"21": "MOVE_FOCUS_ENERGY",
             "23": "MOVE_STOMP",
             "25": "MOVE_HEADBUTT",
-			"27": "MOVE_MEGA_PUNCH",
 			"29": [
 				"MOVE_DIZZY_PUNCH",
 				"MOVE_GUILLOTINE"

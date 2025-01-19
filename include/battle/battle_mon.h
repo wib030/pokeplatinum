@@ -35,6 +35,7 @@ typedef struct MoveEffectsData {
     u32 quickClaw : 1;
     u32 meFirst : 1;
     u32 padding0004_1F : 1;
+	u32 healInversionTurns : 3;
 
     int rechargeTurnNumber;
     int fakeOutTurnNumber;

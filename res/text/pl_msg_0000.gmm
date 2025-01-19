@@ -63,15 +63,15 @@
 	</row>
 	<row id="pl_msg_00000000_00015" index="15">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMega Punch!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nMind Virus!</language>
 	</row>
 	<row id="pl_msg_00000000_00016" index="16">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMega Punch!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMind Virus!</language>
 	</row>
 	<row id="pl_msg_00000000_00017" index="17">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMega Punch!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMind Virus!</language>
 	</row>
 	<row id="pl_msg_00000000_00018" index="18">
 		<attribute name="window_context_name">used</attribute>

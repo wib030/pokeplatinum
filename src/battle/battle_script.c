@@ -6120,10 +6120,14 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
             }
 			
 			if (battleCtx->battleMons[battler].curHP
-            && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+            && ((battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP) || (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0))
             && Battler_Ability(battleCtx, battler) == ABILITY_PHOTOSYNTHESIS)
 			{
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+				if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)
+				{
+					battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * -1;
+				}
             }
         }
 
@@ -6131,8 +6135,13 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
                 && battleCtx->battleMons[battler].curHP
                 && (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_NO_WEATHER_DAMAGE) == FALSE) {
             if (Battler_Ability(battleCtx, battler) == ABILITY_ICE_BODY) {
-                if (battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP) {
+                if ((battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP)
+				|| (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)) {
                     battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+					if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)
+					{
+						battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * -1;
+					}
                 }
             } else if (type1 != TYPE_ICE
                     && type2 != TYPE_ICE
@@ -6144,15 +6153,23 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
 
         if (WEATHER_IS_RAIN) {
             if (battleCtx->battleMons[battler].curHP
-                    && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+                    && ((battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP) || (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0))
                     && Battler_Ability(battleCtx, battler) == ABILITY_RAIN_DISH) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+				if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)
+				{
+					battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * -1;
+				}
             }
 
             if (battleCtx->battleMons[battler].curHP
-                    && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+                    && ((battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP) || (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0))
                     && Battler_Ability(battleCtx, battler) == ABILITY_DRY_SKIN) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+				if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)
+				{
+					battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * -1;
+				}
             }
 
             if (battleCtx->battleMons[battler].curHP
@@ -6331,7 +6348,11 @@ static BOOL BtlCmd_Present(BattleSystem *battleSys, BattleContext *battleCtx)
     } else if (rnd < (255 * 80 / 100)) {
         battleCtx->movePower = 120;
     } else {
-        battleCtx->hpCalcTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, 4);
+		battleCtx->hpCalcTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, 4);
+		if (battleCtx->battleMons[battleCtx->defender].moveEffectsData.healInversionTurns > 0)
+		{
+			battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * -1;
+		}
         BattleScript_Iter(battleCtx, jumpIfHeal);
     }
 
@@ -6522,6 +6543,11 @@ static BOOL BtlCmd_WeatherHPRecovery(BattleSystem *battleSys, BattleContext *bat
     } else {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, 4);
     }
+	
+	if (battleCtx->battleMons[battleCtx->attacker].moveEffectsData.healInversionTurns > 0)
+	{
+		battleCtx->hpCalcTemp = battleCtx->hpCalcTemp * -1;
+	}
 
     return FALSE;
 }

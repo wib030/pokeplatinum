@@ -5346,4 +5346,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was caught in a\nsticky web!</language>
 	</row>
+	<row id="pl_msg_00000368_01333" index="1333">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s healing\nwas inverted!</language>
+	</row>
+	<row id="pl_msg_00000368_01334" index="1334">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s healing\nwas inverted!</language>
+	</row>
+	<row id="pl_msg_00000368_01335" index="1335">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s healing\nwas inverted!</language>
+	</row>
 </body>

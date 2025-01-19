@@ -596,6 +596,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 		
 	case BATTLEMON_UNOWN_ENERGY_WEAK_FLAG:
         return battleMon->unownEnergyWeakFlag;
+		
+	case BATTLEMON_HEAL_INVERSION_TURNS:
+        return battleMon->moveEffectsData.healInversionTurns;
 
     default:
         GF_ASSERT(FALSE);
@@ -963,6 +966,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 	case BATTLEMON_UNOWN_ENERGY_WEAK_FLAG:
         mon->unownEnergyWeakFlag = *(u8 *)buf;
 		break;
+		
+	case BATTLEMON_HEAL_INVERSION_TURNS:
+        mon->moveEffectsData.healInversionTurns = *(u8 *)buf;
+        break;
 
     default:
         GF_ASSERT(FALSE);
@@ -1195,6 +1202,10 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 	case BATTLEMON_UNOWN_ENERGY_WEAK_FLAG:
         mon->unownEnergyWeakFlag += val;
 		break;
+		
+	case BATTLEMON_HEAL_INVERSION_TURNS:
+        mon->moveEffectsData.healInversionTurns += val;
+        break;
 
     default:
         GF_ASSERT(FALSE);
@@ -2893,6 +2904,7 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
         battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns = moveEffects.magnetRiseTurns;
         battleCtx->battleMons[battler].moveEffectsData.embargoTurns = moveEffects.embargoTurns;
         battleCtx->battleMons[battler].moveEffectsData.healBlockTurns = moveEffects.healBlockTurns;
+		battleCtx->battleMons[battler].moveEffectsData.healInversionTurns = moveEffects.healInversionTurns;
     }
 
     battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber = battleCtx->totalTurns + 1;
@@ -6675,7 +6687,8 @@ BOOL BattleSystem_TriggerLeftovers(BattleSystem *battleSys, BattleContext *battl
     if (battleCtx->battleMons[battler].curHP) {
         switch (itemEffect) {
         case HOLD_EFFECT_HP_RESTORE_GRADUAL:
-            if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP)) {
+            if ((battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP))
+			|| (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
                 subscript = subscript_restore_a_little_hp;
                 result = TRUE;
@@ -6684,7 +6697,8 @@ BOOL BattleSystem_TriggerLeftovers(BattleSystem *battleSys, BattleContext *battl
 
         case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
             if (MON_HAS_TYPE(battler, TYPE_POISON)) {
-                if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP)) {
+                if ((battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP))
+				|| (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns > 0)) {
                     battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
                     subscript = subscript_restore_a_little_hp;
                     result = TRUE;
@@ -8488,7 +8502,6 @@ static const u16 sPunchingMoves[] = {
     MOVE_DIZZY_PUNCH,
     MOVE_DYNAMIC_PUNCH,
     MOVE_HAMMER_ARM,
-    MOVE_MEGA_PUNCH,
     MOVE_COMET_PUNCH,
     MOVE_METEOR_MASH,
     MOVE_SHADOW_PUNCH,
@@ -11393,7 +11406,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
             && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
             && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
             && battleCtx->attacker != battleCtx->defender
-            && ATTACKING_MON.curHP < ATTACKING_MON.maxHP
+            && ((ATTACKING_MON.curHP < ATTACKING_MON.maxHP) || (ATTACKING_MON.moveEffectsData.healInversionTurns > 0))
 			&& (ATTACKING_MON.sheerForceFlag == FALSE)
             && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt * -1, attackerItemPower);

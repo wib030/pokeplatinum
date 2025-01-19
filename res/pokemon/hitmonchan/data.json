@@ -99,7 +99,6 @@
             ],
 			"33": "MOVE_GUILLOTINE",
             "36": "MOVE_SKY_UPPERCUT",
-            "41": "MOVE_MEGA_PUNCH",
             "46": "MOVE_DETECT",
             "51": "MOVE_COUNTER",
             "56": "MOVE_CLOSE_COMBAT"

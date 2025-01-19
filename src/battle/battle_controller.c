@@ -1296,6 +1296,7 @@ enum {
     MON_COND_CHECK_STATE_TAUNT,
     MON_COND_CHECK_STATE_MAGNET_RISE,
     MON_COND_CHECK_STATE_HEAL_BLOCK,
+	MON_COND_CHECK_STATE_HEAL_INVERSION,
     MON_COND_CHECK_STATE_EMBARGO,
     MON_COND_CHECK_STATE_YAWN,
     MON_COND_CHECK_STATE_ITEM_CONDITION,
@@ -1691,6 +1692,18 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
                 battleCtx->msgBattlerTemp = battler;
                 
                 PrepareSubroutineSequence(battleCtx, subscript_heal_block_end);
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+			
+		case MON_COND_CHECK_STATE_HEAL_INVERSION:
+            if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns
+                    && --battleCtx->battleMons[battler].moveEffectsData.healInversionTurns == 0) {
+                battleCtx->msgBattlerTemp = battler;
+                
+                PrepareSubroutineSequence(battleCtx, subscript_heal_inversion_end);
                 state = STATE_BREAK_OUT;
             }
 
@@ -5005,7 +5018,7 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
                     && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
                     && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
                     && battleCtx->attacker != battleCtx->defender
-                    && ATTACKING_MON.curHP < ATTACKING_MON.maxHP
+                    && ((ATTACKING_MON.curHP < ATTACKING_MON.maxHP) || (ATTACKING_MON.moveEffectsData.healInversionTurns > 0))
 					&& (ATTACKING_MON.sheerForceFlag == FALSE)
                     && ATTACKING_MON.curHP) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt * -1, itemPower);

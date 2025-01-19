@@ -18,7 +18,7 @@
             "moves": [
                 "MOVE_DYNAMIC_PUNCH",
 				"MOVE_SUPERSONIC",
-				"MOVE_MEGA_PUNCH",
+				"MOVE_FOCUS_PUNCH",
 				"MOVE_STRING_SHOT"
             ],
             "power": 200,

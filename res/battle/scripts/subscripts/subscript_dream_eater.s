@@ -16,6 +16,7 @@ _000:
 _037:
     UpdateVarFromVar OPCODE_SET, BTLVAR_MSG_BATTLER_TEMP, BTLVAR_ATTACKER
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
+	CompareMonDataToValue OPCODE_NEQ, BTLSCR_ATTACKER, BATTLEMON_HEAL_INVERSION_TURNS, 0, _047
     UpdateVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, -1
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // {0}’s dream was eaten!
@@ -23,6 +24,14 @@ _037:
     Wait 
     WaitButtonABTime 30
     End 
+	
+_047:
+    Call BATTLE_SUBSCRIPT_UPDATE_HP
+    // {0}’s dream was eaten!
+    PrintMessage pl_msg_00000368_00139, TAG_NICKNAME, BTLSCR_DEFENDER
+    Wait 
+    WaitButtonABTime 30
+    End
 
 _059:
     UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_HEAL_BLOCK
