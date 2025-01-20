@@ -1283,6 +1283,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
     battler1Speed = battleCtx->battleMons[battler1].speed * sStatStageBoosts[battler1SpeedStage].numerator / sStatStageBoosts[battler1SpeedStage].denominator;
     battler2Speed = battleCtx->battleMons[battler2].speed * sStatStageBoosts[battler2SpeedStage].numerator / sStatStageBoosts[battler2SpeedStage].denominator;
+	
+	battler1Action = battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND];
+    battler2Action = battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND];
+    battler1MoveSlot = battleCtx->moveSlot[battler1];
+    battler2MoveSlot = battleCtx->moveSlot[battler2];
+	battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + battler1MoveSlot, NULL);
+	battler2Move = BattleMon_Get(battleCtx, battler2, BATTLEMON_MOVE_1 + battler2MoveSlot, NULL);
 
     if (ANY_WEATHER) {
         // Rain
@@ -1472,6 +1479,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                 battler1Speed *= 2;
             }
             break;
+			
+		case ABILITY_COWARD:
+            if (MOVE_DATA(battler1Move).power == 0)
+			{
+                battler1Speed *= 2;
+            }
+            break;
     }
 
     if ((battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS)
@@ -1566,14 +1580,15 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                 battler2Speed *= 2;
             }
             break;
+			
+		case ABILITY_COWARD:
+            if (MOVE_DATA(battler2Move).power == 0)
+			{
+                battler2Speed *= 2;
+            }
+            break;
     }
 	
-	battler1Action = battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND];
-    battler2Action = battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND];
-    battler1MoveSlot = battleCtx->moveSlot[battler1];
-    battler2MoveSlot = battleCtx->moveSlot[battler2];
-	battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + battler1MoveSlot, NULL);
-	battler2Move = BattleMon_Get(battleCtx, battler2, BATTLEMON_MOVE_1 + battler2MoveSlot, NULL);
 	battler1Priority = MOVE_DATA(battler1Move).priority;
     battler2Priority = MOVE_DATA(battler2Move).priority;
 	

@@ -621,4 +621,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Rock Solid</language>
 	</row>
+	<row id="pl_msg_00000610_00155" index="155">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Coward</language>
+	</row>
 </body>

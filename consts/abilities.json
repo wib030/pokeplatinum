@@ -157,7 +157,8 @@
 				"ABILITY_PEST",
 				"ABILITY_GENETIC_FREAK",
 				"ABILITY_UNOWN_ENERGY",
-				"ABILITY_ROCK_SOLID"
+				"ABILITY_ROCK_SOLID",
+				"ABILITY_COWARD"
             ]
         }
     }
