@@ -7,7 +7,7 @@ _000:
     PlayBattleAnimation BTLSCR_MSG_TEMP, BATTLE_ANIMATION_DAMAGE_CURSE
     Wait 
     UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_TEMP, BATTLEMON_MAX_HP, BTLVAR_HP_CALC_TEMP
-    DivideVarByValue BTLVAR_HP_CALC_TEMP, 4
+    DivideVarByValue BTLVAR_HP_CALC_TEMP, 2
     UpdateVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, -1
     // {0} is afflicted by the curse!
     PrintMessage pl_msg_00000368_00424, TAG_NICKNAME, BTLSCR_MSG_TEMP
