@@ -4,7 +4,7 @@
     "type": "TYPE_NORMAL",
     "power": 0,
     "accuracy": 0,
-    "pp": 40,
+    "pp": 20,
     "effect": {
         "type": "BATTLE_EFFECT_PASS_STATS_AND_STATUS",
         "chance": 0
