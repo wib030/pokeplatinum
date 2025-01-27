@@ -430,11 +430,8 @@ static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler);
 static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, BOOL varyDamage);
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
-<<<<<<< HEAD
-=======
 static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
->>>>>>> EndOfTurnTick
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
@@ -4690,8 +4687,6 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
     return result;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * @brief End-of-turn healing tick routine visible to the AI.
  * 
@@ -5175,7 +5170,6 @@ static s32 TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
     return totalTick;
 }
 
->>>>>>> EndOfTurnTick
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i;
@@ -7020,9 +7014,6 @@ static BOOL AI_ShouldSwitchToxic(BattleSystem *battleSys, BattleContext *battleC
     return result;
 }
 
-<<<<<<< HEAD
-=======
-
 /**
  * @brief Check if an AI's battler should switch out due to Leech Seed move effect.
  * 
@@ -7153,7 +7144,6 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
     return TRUE;
 }
 
->>>>>>> EndOfTurnTick
 /**
  * @brief Check if an AI's battler has a super-effective move against either of the
  * opponent's Pokemon.
