@@ -439,6 +439,10 @@ static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *
 static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int defender);
 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static int AI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
+static BOOL AI_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int moveSlot, int opMask);
+static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int defender);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -5313,6 +5317,109 @@ static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *
     return result;
 }
 
+/* @brief Check if any moves are invalid for use by the battler.
+ * 
+ * This routine is copied from BattleSystem_CheckInvalidMoves in battle_lib
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler       The AI's battler.
+ * @param invalidMoves  The bitmask of invalid moves.
+ * @param opMask        The bitmask of the operation to check.
+ * @return  The bitmask of the current move slot to determine validity.
+ */
+static int AI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask)
+{
+    int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[battler].moves[i] == MOVE_NONE
+                && (opMask & CHECK_INVALID_NO_MOVE)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (battleCtx->battleMons[battler].ppCur[i] == 0
+                && (opMask & CHECK_INVALID_NO_PP)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (battleCtx->battleMons[battler].moves[i] == battleCtx->battleMons[battler].moveEffectsData.disabledMove
+                && (opMask & CHECK_INVALID_DISABLED)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (battleCtx->battleMons[battler].moves[i] == battleCtx->movePrevByBattler[battler]
+                && (opMask & CHECK_INVALID_TORMENTED)
+                && (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TORMENT)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (battleCtx->battleMons[battler].moveEffectsData.tauntedTurns
+                && (opMask & CHECK_INVALID_TAUNTED)
+                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0) {
+            invalidMoves |= FlagIndex(i);
+        }
+		
+		if (itemEffect == HOLD_EFFECT_RAISE_SPD_NO_STATUS
+		&& (opMask & CHECK_INVALID_ASS_VEST)
+        && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (Move_Imprisoned(battleSys, battleCtx, battler, battleCtx->battleMons[battler].moves[i])
+                && (opMask & CHECK_INVALID_IMPRISONED)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (Move_FailsInHighGravity(battleSys, battleCtx, battler, battleCtx->battleMons[battler].moves[i])
+                && (opMask & CHECK_INVALID_GRAVITY)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (Move_HealBlocked(battleSys, battleCtx, battler, battleCtx->battleMons[battler].moves[i])
+                && (opMask & CHECK_INVALID_HEAL_BLOCK)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if (battleCtx->battleMons[battler].moveEffectsData.encoredMove
+           && battleCtx->battleMons[battler].moveEffectsData.encoredMove != battleCtx->battleMons[battler].moves[i]
+           && (opMask & CHECK_INVALID_ENCORE)) {
+            invalidMoves |= FlagIndex(i);
+        }
+
+        if ((itemEffect == HOLD_EFFECT_CHOICE_ATK || itemEffect == HOLD_EFFECT_CHOICE_SPEED || itemEffect == HOLD_EFFECT_CHOICE_SPATK)
+                && (opMask & CHECK_INVALID_CHOICE_ITEM)) {
+            if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove
+                    && battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove != battleCtx->battleMons[battler].moves[i]) {
+                invalidMoves |= FlagIndex(i);
+            }
+        }
+    }
+
+    return invalidMoves;
+}
+
+/* @brief Check if a move can be used by an active battler.
+ * 
+ * This routine is copied from BattleSystem_CanUseMove in battle_lib
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler       The AI's battler.
+ * @param opMask        The bitmask of the operation to check.
+ * @return  TRUE / FALSE if the current move in current slot can be used.
+ */
+static BOOL AI_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int moveSlot, int opMask)
+{
+    BOOL result = TRUE;
+
+    if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
+        result = FALSE;
+    }
+
+    return result;
+}
+
 static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
 {
     BOOL result;
@@ -5334,36 +5441,39 @@ static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContex
             break;
         }
 
-        moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
-        movePower = MOVE_DATA(move).power;
+        if (AI_CanUseMove(battleSys, battleCtx, battler, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
 
-        if (movePower > 0) {
-            moveDamage = BattleSystem_CalcMoveDamage(battleSys,
-            battleCtx,
-            move,
-            battleCtx->sideConditionsMask[side],
-            battleCtx->fieldConditionsMask,
-            movePower,
-            moveType,
-            attacker,
-            defender,
-            1);
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
+            movePower = MOVE_DATA(move).power;
 
-            moveDamage = BattleSystem_ApplyTypeChart(battleSys,
-            battleCtx,
-            move,
-            moveType,
-            attacker,
-            defender,
-            moveDamage,
-            &effectiveness);
+            if (movePower > 0) {
+                moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                move,
+                battleCtx->sideConditionsMask[side],
+                battleCtx->fieldConditionsMask,
+                movePower,
+                moveType,
+                attacker,
+                defender,
+                1);
 
-            if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
-                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
-                if ((moveDamage > battleCtx->battleMons[defender].curHP)
-                    || (moveDamage > (battleCtx->battleMons[defender].maxHP / 2))) {
-                    result = TRUE;
-                    break;
+                moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                battleCtx,
+                move,
+                moveType,
+                attacker,
+                defender,
+                moveDamage,
+                &effectiveness);
+
+                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
+                    if ((moveDamage > battleCtx->battleMons[defender].curHP)
+                        || (moveDamage > (battleCtx->battleMons[defender].maxHP / 2))) {
+                        result = TRUE;
+                        break;
+                    }
                 }
             }
         }
