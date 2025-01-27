@@ -430,6 +430,11 @@ static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler);
 static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, BOOL varyDamage);
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
+<<<<<<< HEAD
+=======
+static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+>>>>>>> EndOfTurnTick
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
@@ -4685,6 +4690,492 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
     return result;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * @brief End-of-turn healing tick routine visible to the AI.
+ * 
+ * @param battleSys 
+ * @param battleCtx
+ * @param battler      The battler's ID.
+ * @return Calculated healing tick value.
+ */
+static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int defender1, defender2, defender;
+    int i;
+    u8 heldItemEffect, ability;
+    int tick, totalTick;
+
+    totalTick = 0;
+    tick = 0;
+
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    ability = Battler_Ability(battleCtx, battler);
+
+    // Early exit if under effects of Heal Block
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_HEAL_BLOCK)
+    {
+       return totalTick;
+    }
+
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+        defender1 = BATTLER_ENEMY_SLOT_1;
+        defender2 = BATTLER_ENEMY_SLOT_2;
+    } else {
+        defender1 = BATTLER_ENEMY_SLOT_1;
+        defender2 = defender1;
+    }
+
+    for (i = 0; i < 2; i++)
+    {
+        if (i = 0)
+        {
+            defender = defender1;
+        }
+        else
+        {
+            if (defender2 == defender1) {
+                break;
+            }
+            defender = defender2;
+        }
+
+        if (battleCtx->battleMons[defender].curHP > 0)
+        {
+            if (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+            {
+                if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                {
+                    if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
+                    {
+                        tick = battleCtx->battleMons[defender].curHP;
+                    }
+                    else
+                    {
+                        tick = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8);
+                    }
+                }
+                if (battleCtx->battleMons[defender].ability == ABILITY_LIQUID_OOZE)
+                {
+                    tick = 0;
+                }
+
+                if (heldItemEffect == HOLD_EFFECT_LEECH_BOOST)
+                {
+                    tick = tick * 13 / 10;
+                }
+
+                totalTick += tick;
+                tick = 0;
+            }
+        }
+    }
+
+    switch (heldItemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
+            if (battleCtx->battleMons[battler].type1 != TYPE_POISON
+            && battleCtx->battleMons[battler].type2 != TYPE_POISON)
+            {
+                break;
+            }
+            // Otherwise, we are poison, so use leftovers procedure below
+
+        case HOLD_EFFECT_HP_RESTORE_GRADUAL:
+            tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+
+            // Max HP less than 16
+            if (tick < 1) {
+                tick = 1;
+            }
+
+            totalTick += tick;
+            tick = 0;
+            break;
+    }
+
+    if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM)
+        && NO_CLOUD_NINE)
+    {
+        switch (ability) {
+            default:
+                break;
+
+            case ABILITY_DRY_SKIN:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+                }
+
+                totalTick += tick;
+                tick = 0;
+                break;
+
+            case ABILITY_RAIN_DISH:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+                }
+
+                totalTick += tick;
+                tick = 0;
+                break;
+
+            case ABILITY_ICE_BODY:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+                }
+
+                totalTick += tick;
+                tick = 0;
+                break;
+
+            case ABILITY_PHOTOSYNTHESIS:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+                }
+                
+                totalTick += tick;
+                tick = 0;
+                break;
+        }
+    }
+
+
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY_POISON)
+    {
+        if (ability == ABILITY_POISON_HEAL)
+        {
+            tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+            if (tick < 1) {
+                tick = 1;
+            }
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    return totalTick;
+}
+
+
+/**
+ * @brief End-of-turn damage tick routine visible to the AI.
+ * 
+ * @param battleSys 
+ * @param battleCtx
+ * @param battler      The battler's ID.
+ * @return Calculated damage tick value.
+ */
+static s32 TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int defender1, defender2, defender;
+    int i;
+    u8 heldItemEffect, ability;
+    s32 tick, totalTick;
+
+    totalTick = 0;
+    tick = 0;
+
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    ability = Battler_Ability(battleCtx, battler);
+
+    // Early exit if battler has Magic Guard ability
+    if (ability == ABILITY_MAGIC_GUARD)
+    {
+       return totalTick;
+    }
+
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+        defender1 = BATTLER_ENEMY_SLOT_1;
+        defender2 = BATTLER_ENEMY_SLOT_2;
+    } else {
+        defender1 = BATTLER_ENEMY_SLOT_1;
+        defender2 = defender1;
+    }
+
+    for (i = 0; i < 2; i++)
+    {
+        if (i = 0)
+        {
+            defender = defender1;
+        }
+        else
+        {
+            if (defender2 == defender1) {
+                break;
+            }
+            defender = defender2;
+        }
+
+        if (battleCtx->battleMons[defender].curHP > 0)
+        {
+            if (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+            {
+                if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                {
+                    if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
+                    {
+                        tick = battleCtx->battleMons[defender].curHP;
+                    }
+                    else
+                    {
+                        tick = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8);
+                    }
+                }
+                if (battleCtx->battleMons[defender].ability == ABILITY_LIQUID_OOZE)
+                {
+                    if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
+                    {
+                        tick = battleCtx->battleMons[defender].curHP;
+                    }
+                    else
+                    {
+                        tick = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8);
+                        if (tick < 1) {
+                            tick = 1;
+                        }
+                    }
+                }
+
+                if (heldItemEffect == HOLD_EFFECT_LEECH_BOOST)
+                {
+                    tick = tick * 13 / 10;
+                }
+
+                totalTick += tick;
+                tick = 0;
+            }
+        }
+    }
+
+    switch (heldItemEffect) {
+        default:
+            break;
+
+        case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
+            if (battleCtx->battleMons[battler].type1 != TYPE_POISON
+            && battleCtx->battleMons[battler].type2 != TYPE_POISON)
+            {
+                tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                if (tick < 1) {
+                    tick = 1;
+                }
+
+                totalTick += tick;
+                tick = 0;
+            }
+            break;
+
+        case HOLD_EFFECT_DMG_USER_CONTACT_XFR:
+            if (ability != ABILITY_MAGIC_GUARD)
+            {
+                tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+                if (tick < 1) {
+                    tick = 1;
+                }
+
+                totalTick += tick;
+                tick = 0;
+            }
+            break;
+    }
+
+    if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM)
+        && NO_CLOUD_NINE)
+    {
+        switch (ability) {
+            default:
+                break;
+
+            case ABILITY_DRY_SKIN:
+            case ABILITY_SOLAR_POWER:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+
+                    totalTick += tick;
+                    tick = 0;
+                }
+                break;
+        }
+
+        if (heldItemEffect != HOLD_EFFECT_NO_WEATHER_CHIP_POWDER) {
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM)
+            {
+                if (battleCtx->battleMons[battler].type1 != TYPE_ROCK
+                && battleCtx->battleMons[battler].type1 != TYPE_GROUND
+                && battleCtx->battleMons[battler].type1 != TYPE_STEEL
+                && battleCtx->battleMons[battler].type2 != TYPE_ROCK
+                && battleCtx->battleMons[battler].type2 != TYPE_GROUND
+                && battleCtx->battleMons[battler].type2 != TYPE_STEEL)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+                    
+                    totalTick += tick;
+                    tick = 0;
+                }
+            }
+
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING
+                && ability != ABILITY_ICE_BODY)
+            {
+                if (battleCtx->battleMons[battler].type1 != TYPE_ICE
+                && battleCtx->battleMons[battler].type2 != TYPE_ICE)
+                {
+                    tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                    if (tick < 1) {
+                        tick = 1;
+                    }
+
+                    totalTick += tick;
+                    tick = 0;
+                }
+            }
+        }
+    }
+
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CHIP)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_BIND)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CURSE)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 4);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_NIGHTMARE)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 4);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_BURN)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        if (ability == ABILITY_HEATPROOF)
+        {
+            tick /= 2;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
+    && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS) > 0)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+        if (tick < 1) {
+            tick = 1;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY_POISON)
+    {
+        if ((battleCtx->battleMons[battler].status & MON_CONDITION_POISON)
+        && ability != ABILITY_POISON_HEAL)
+        {
+            tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
+            if (tick < 1) {
+                tick = 1;
+            }
+        }
+
+        if ((battleCtx->battleMons[battler].status & MON_CONDITION_TOXIC)
+        && ability != ABILITY_POISON_HEAL)
+        {
+            tick = ((battleCtx->battleMons[battler].status & MON_CONDITION_TOXIC_COUNTER) >> 8);
+            tick *= BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+            if (tick < 1) {
+                tick = 1;
+            }
+        }
+
+        if (ability == ABILITY_POISON_HEAL)
+        {
+            tick = 0;
+        }
+
+        totalTick += tick;
+        tick = 0;
+    }
+
+    return totalTick;
+}
+
+>>>>>>> EndOfTurnTick
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i;
@@ -6529,6 +7020,140 @@ static BOOL AI_ShouldSwitchToxic(BattleSystem *battleSys, BattleContext *battleC
     return result;
 }
 
+<<<<<<< HEAD
+=======
+
+/**
+ * @brief Check if an AI's battler should switch out due to Leech Seed move effect.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The AI's battler.
+ * @return TRUE if the AI's battler should switch out.
+ */
+static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int defender;
+    int moveDamage, damageThreshold;
+    u8 ability, heldItemEffect;
+    u8 side;
+    u16 move, moveEffect, moveType, moveClass;
+    u32 effectiveness;
+    int i, endOfTurnHealingTick, endOfTurnDamageTick, endOfTurnTick, protectMultiplier;
+    BOOL hasProtect;
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    ability = battleCtx->battleMons[battler].ability;
+    heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    side = Battler_Side(battleSys, defender);
+
+    hasProtect = FALSE;
+
+    if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, ability, MOVE_EFFECT_LEECH_SEED)
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_MOLD_BREAKER) == 0)
+    {
+        // Early exit if we don't mind being leech seeded due to ability
+        return FALSE;
+    }
+
+    if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, battler, defender))
+    {
+        // Early exit if we can just kill
+        return FALSE;
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[defender].moves[i];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (moveEffect == BATTLE_EFFECT_PROTECT) {
+            hasProtect = TRUE;
+        }
+    }
+
+    if (hasProtect) {
+        protectMultiplier = 2;
+    }
+    else {
+        protectMultiplier = 1;
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[battler].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+        moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+        moveClass = MOVE_DATA(move).class;
+        effectiveness = 0;
+
+        if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING
+            || moveEffect == BATTLE_EFFECT_PREVENT_HEALING)
+        {
+            return FALSE;
+        }
+
+        if (moveClass != CLASS_STATUS) {
+            moveDamage = MOVE_DATA(move).power;
+
+            moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                move,
+                battleCtx->sideConditionsMask[side],
+                battleCtx->fieldConditionsMask,
+                moveDamage,
+                moveType,
+                battler,
+                defender,
+                1);
+
+            moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                battleCtx,
+                move,
+                moveType,
+                battler,
+                defender,
+                moveDamage,
+                &effectiveness);
+
+            if ((effectiveness & MOVE_STATUS_IMMUNE)
+            && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+            {
+                moveDamage = 0;
+            }
+
+            if (effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                moveDamage /= 2;
+            }
+
+            if (effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                moveDamage = moveDamage * 3 / 2;
+            }
+
+            endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender);
+            endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, defender);
+            
+            if (endOfTurnHealingTick <= endOfTurnDamageTick) {
+                endOfTurnTick = 0;
+            }
+            else {
+                endOfTurnTick = endOfTurnHealingTick - endOfTurnDamageTick;
+            }
+
+            if (moveDamage > endOfTurnTick * protectMultiplier)
+            {
+                return FALSE;
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+>>>>>>> EndOfTurnTick
 /**
  * @brief Check if an AI's battler has a super-effective move against either of the
  * opponent's Pokemon.
