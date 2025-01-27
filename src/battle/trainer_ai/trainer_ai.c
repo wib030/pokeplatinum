@@ -7191,7 +7191,7 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
         moveClass = MOVE_DATA(move).class;
         effectiveness = 0;
 
-        if (AI_CanUseMove(battleSys, battleCtx, battler, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+        if (AI_CanUseMove(battleSys, battleCtx, battler, i, CHECK_INVALID_ALL_BUT_TORMENT)) {
 
             if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING
                 || moveEffect == BATTLE_EFFECT_PREVENT_HEALING)
