@@ -4884,12 +4884,12 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
  * @param battler      The battler's ID.
  * @return Calculated damage tick value.
  */
-static s32 TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int defender1, defender2, defender;
     int i;
     u8 heldItemEffect, ability;
-    s32 tick, totalTick;
+    int tick, totalTick;
 
     totalTick = 0;
     tick = 0;
