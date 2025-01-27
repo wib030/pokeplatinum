@@ -5413,7 +5413,7 @@ static BOOL AI_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, int
 {
     BOOL result = TRUE;
 
-    if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
+    if (AI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
         result = FALSE;
     }
 
