@@ -5435,13 +5435,13 @@ static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContex
 
     for (k = 0; k < LEARNED_MOVES_MAX; k++) {
         effectiveness = 0;
-        move = battleCtx->battleMons[defender].moves[k];
+        move = battleCtx->battleMons[attacker].moves[k];
 
         if (move == MOVE_NONE) {
             break;
         }
 
-        if (AI_CanUseMove(battleSys, battleCtx, battler, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+        if (AI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
 
             moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
             movePower = MOVE_DATA(move).power;
