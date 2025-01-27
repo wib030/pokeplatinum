@@ -137,6 +137,7 @@ enum BattlerBootState {
 #define CHECK_INVALID_CHOICE_ITEM   (1 << 9)
 #define CHECK_INVALID_ASS_VEST      (1 << 10)
 #define CHECK_INVALID_ALL           ~0
+#define CHECK_INVALID_ALL_BUT_TORMENT (CHECK_INVALID_ALL & ~CHECK_INVALID_TORMENTED)
 
 #define STRUGGLING_MOVE_1           (1 << 0)
 #define STRUGGLING_MOVE_2           (1 << 1)
