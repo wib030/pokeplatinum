@@ -7191,62 +7191,65 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
         moveClass = MOVE_DATA(move).class;
         effectiveness = 0;
 
-        if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING
-            || moveEffect == BATTLE_EFFECT_PREVENT_HEALING)
-        {
-            return FALSE;
-        }
+        if (AI_CanUseMove(battleSys, battleCtx, battler, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
 
-        if (moveClass != CLASS_STATUS) {
-            moveDamage = MOVE_DATA(move).power;
-
-            moveDamage = BattleSystem_CalcMoveDamage(battleSys,
-                battleCtx,
-                move,
-                battleCtx->sideConditionsMask[side],
-                battleCtx->fieldConditionsMask,
-                moveDamage,
-                moveType,
-                battler,
-                defender,
-                1);
-
-            moveDamage = BattleSystem_ApplyTypeChart(battleSys,
-                battleCtx,
-                move,
-                moveType,
-                battler,
-                defender,
-                moveDamage,
-                &effectiveness);
-
-            if ((effectiveness & MOVE_STATUS_IMMUNE)
-            && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
-            {
-                moveDamage = 0;
-            }
-
-            if (effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) {
-                moveDamage /= 2;
-            }
-
-            if (effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                moveDamage = moveDamage * 3 / 2;
-            }
-
-            endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender);
-            endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, defender);
-            
-            if (endOfTurnHealingTick <= endOfTurnDamageTick) {
-                endOfTurnTick = 0;
-            }
-            else {
-                endOfTurnTick = endOfTurnHealingTick - endOfTurnDamageTick;
-            }
-
-            if (moveDamage > endOfTurnTick * protectMultiplier)
+            if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING
+                || moveEffect == BATTLE_EFFECT_PREVENT_HEALING)
             {
                 return FALSE;
+            }
+
+            if (moveClass != CLASS_STATUS) {
+                moveDamage = MOVE_DATA(move).power;
+
+                moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                    battleCtx,
+                    move,
+                    battleCtx->sideConditionsMask[side],
+                    battleCtx->fieldConditionsMask,
+                    moveDamage,
+                    moveType,
+                    battler,
+                    defender,
+                    1);
+
+                moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    moveType,
+                    battler,
+                    defender,
+                    moveDamage,
+                    &effectiveness);
+
+                if ((effectiveness & MOVE_STATUS_IMMUNE)
+                && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+                {
+                    moveDamage = 0;
+                }
+
+                if (effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                    moveDamage /= 2;
+                }
+
+                if (effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                    moveDamage = moveDamage * 3 / 2;
+                }
+
+                endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender);
+                endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, defender);
+            
+                if (endOfTurnHealingTick <= endOfTurnDamageTick) {
+                    endOfTurnTick = 0;
+                }
+                else {
+                    endOfTurnTick = endOfTurnHealingTick - endOfTurnDamageTick;
+                }
+
+                if (moveDamage > endOfTurnTick * protectMultiplier)
+                {
+                    return FALSE;
+                }
             }
         }
     }
