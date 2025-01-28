@@ -415,6 +415,7 @@ static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleCo
 static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -581,8 +582,9 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfWishActive,
 	AICmd_IfPartyMemberHasBattleEffect,
     AICmd_IfShouldTaunt,
-    AICmd_LoadMoveAccuracy
-    AICmd_IfSameAbilities
+    AICmd_LoadMoveAccuracy,
+    AICmd_IfSameAbilities,
+    AICmd_IfHasBaseAbility
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3771,6 +3773,26 @@ static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battle
 
     if (battleCtx->battleMons[battler1].ability ==  battleCtx->battleMons[battler2].ability) {
         AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    u8 battlerAbility = Battler_Ability(battleCtx, battler);
+    u8 ability1 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_1);
+    u8 ability2 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_2);
+
+    if (battlerAbility != ABILITY_NONE) {
+        if (battlerAbility == ability1 || battlerAbility == ability2) {
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 

@@ -704,6 +704,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro AICmd_IfHasBaseAbility battler, jump
+    .long 122
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
