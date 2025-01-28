@@ -5329,7 +5329,7 @@ Expert_SkillSwap_DefenderBaseAbilityScoreBoost:
 
 Expert_SkillSwap_CheckAttackerHasBaseAbility:
     IfHasBaseAbility AI_BATTLER_ATTACKER, Expert_SkillSwap_AttackerBaseAbilityScoreBoost
-    IfRandomLessThan 128
+    IfRandomLessThan 128, Expert_SkillSwap_CheckAttackerAbility
     AddToMoveScore -1
     GoTo Expert_SkillSwap_CheckAttackerAbility
 
@@ -5361,12 +5361,6 @@ Expert_SkillSwap_AttackerAbilityBigScoreBoost:
 Expert_SkillSwap_CheckMinorScoreCancel:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedNotInTable Expert_SkillSwap_DesirableAbilities, Expert_SkillSwap_CheckDefenderAbility
-    IfRandomLessThan 243, ScoreMinus20
-    GoTo Expert_SkillSwap_End
-    
-Expert_SkillSwap_CheckMinorScoreCancel:
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedNotInTable Expert_SkillSwap_AlwaysTakeAbilities, Expert_SkillSwap_CheckDefenderAbility
     IfRandomLessThan 243, ScoreMinus20
     GoTo Expert_SkillSwap_End
 
@@ -5428,7 +5422,7 @@ Expert_SkillSwap_UndesirableAbilities:
 
 Expert_SkillSwap_AlwaysRemoveAbilities:
     TableEntry ABILITY_DAMP
-    TableEntry ABILITY OBLIVIOUS
+    TableEntry ABILITY_OBLIVIOUS
     TableEntry ABILITY_OWN_TEMPO
     TableEntry ABILITY_INNER_FOCUS
     TableEntry ABILITY_MAGMA_ARMOR
