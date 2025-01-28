@@ -1822,7 +1822,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HELD_ITEM, Expert_KnockOff
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Expert_Endeavor
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP, Expert_WaterSpout
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_ChangeUserAbility
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_SkillSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Expert_Imprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_Refresh
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Snatch
@@ -5268,7 +5268,6 @@ Expert_ChangeUserAbility_End:
 
 Expert_ChangeUserAbility_DesirableAbilities:
     TableEntry ABILITY_SPEED_BOOST
-    TableEntry ABILITY_BATTLE_ARMOR
     TableEntry ABILITY_SAND_VEIL
     TableEntry ABILITY_STATIC
     TableEntry ABILITY_FLASH_FIRE
@@ -5277,7 +5276,6 @@ Expert_ChangeUserAbility_DesirableAbilities:
     TableEntry ABILITY_SWIFT_SWIM
     TableEntry ABILITY_HUGE_POWER
     TableEntry ABILITY_RAIN_DISH
-    TableEntry ABILITY_CUTE_CHARM
     TableEntry ABILITY_SHED_SKIN
     TableEntry ABILITY_MARVEL_SCALE
     TableEntry ABILITY_PURE_POWER
@@ -5286,12 +5284,350 @@ Expert_ChangeUserAbility_DesirableAbilities:
     TableEntry ABILITY_ADAPTABILITY
     TableEntry ABILITY_MAGIC_GUARD
     TableEntry ABILITY_MOLD_BREAKER
-    TableEntry ABILITY_SUPER_LUCK
     TableEntry ABILITY_UNAWARE
     TableEntry ABILITY_TINTED_LENS
     TableEntry ABILITY_FILTER
     TableEntry ABILITY_RELENTLESS
     TableEntry ABILITY_RECKLESS
+    TableEntry TABLE_END
+
+Expert_SkillSwap:
+    ; Don''t cast if we have same ability as defender.
+    ; Don''t cast twice in a row.
+    ; Try to cast into Encore users only if we are faster
+    ;
+    ; Plus 1 or 2 points for undesirable abilities on attacker
+    ; Plus 4 or 5 points for abilities we always want to get rid of on attacker
+    ; Plus 10 points if attacker has Truant, Slow Start, or Normalize
+    ;
+    ; Plus 1 or 2 points for desirable abilities on defender
+    ; Plus 4 or 5 points for abilities we always want to take away from defender
+    ; 95% chance to cancel above bonus if attacker''s ability is in the same tier as defender
+    ;
+    ; Highly discourage swapping with a defender that has a bad or negative ability
+    IfSameAbilities AI_BATTLER_ATTACKER, AI_BATTLER_DEFENDER, ScoreMinus20
+    LoadBattlerPreviousMove AI_BATTLER_ATTACKER
+    IfLoadedEqualTo MOVE_SKILL_SWAP, ScoreMinus20
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, Expert_SkillSwap_CheckSpeed
+    GoTo Expert_SkillSwap_CheckDefenderHasBaseAbility
+
+Expert_SkillSwap_CheckSpeed:
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SkillSwap_CheckDefenderHasBaseAbility
+    IfRandomLessThan 192, Expert_SkillSwap_CheckDefenderHasBaseAbility
+    GoTo ScoreMinus12
+
+Expert_SkillSwap_CheckDefenderHasBaseAbility:
+    IfHasBaseAbility AI_BATTLER_DEFENDER, Expert_SkillSwap_DefenderBaseAbilityScoreBoost
+    AddToMoveScore -1
+    IfRandomLessThan 230, Expert_SkillSwap_CheckAttackerHasBaseAbility
+    AddToMoveScore -1
+    GoTo Expert_SkillSwap_CheckAttackerHasBaseAbility
+
+Expert_SkillSwap_DefenderBaseAbilityScoreBoost:
+    AddToMoveScore 1
+    GoTo Expert_SkillSwap_CheckAttackerHasBaseAbility
+
+Expert_SkillSwap_CheckAttackerHasBaseAbility:
+    IfHasBaseAbility AI_BATTLER_ATTACKER, Expert_SkillSwap_AttackerBaseAbilityScoreBoost
+    IfRandomLessThan 128
+    AddToMoveScore -1
+    GoTo Expert_SkillSwap_CheckAttackerAbility
+
+Expert_SkillSwap_AttackerBaseAbilityScoreBoost:
+    AddToMoveScore 2
+    GoTo Expert_SkillSwap_CheckAttackerAbility
+
+Expert_SkillSwap_CheckAttackerAbility:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_SkillSwap_ForbiddenDefenderAbilities, ScorePlus10
+    IfLoadedInTable Expert_SkillSwap_AlwaysGiveAbilities, Expert_SkillSwap_AttackerAbilityBigScoreBoost
+    IfLoadedInTable Expert_SkillSwap_UndesirableAbilities, Expert_SkillSwap_AttackerAbilityScoreBoost
+    IfLoadedInTable Expert_SkillSwap_AlwaysTakeAbilities, Expert_SkillSwap_CheckMajorScoreCancel
+    IfLoadedInTable Expert_SkillSwap_DesirableAbilities, Expert_SkillSwap_CheckMinorScoreCancel
+    GoTo Expert_SkillSwap_CheckDefenderAbility
+
+Expert_SkillSwap_AttackerAbilityScoreBoost:
+    AddToMoveScore 1
+    IfRandomLessThan 230, Expert_SkillSwap_CheckDefenderAbility
+    AddToMoveScore 1
+    GoTo Expert_SkillSwap_CheckDefenderAbility
+
+Expert_SkillSwap_AttackerAbilityBigScoreBoost:
+    AddToMoveScore 4
+    IfRandomLessThan 230, Expert_SkillSwap_CheckDefenderAbility
+    AddToMoveScore 1
+    GoTo Expert_SkillSwap_CheckDefenderAbility
+
+Expert_SkillSwap_CheckMinorScoreCancel:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedNotInTable Expert_SkillSwap_DesirableAbilities, Expert_SkillSwap_CheckDefenderAbility
+    IfRandomLessThan 243, ScoreMinus20
+    GoTo Expert_SkillSwap_End
+    
+Expert_SkillSwap_CheckMinorScoreCancel:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedNotInTable Expert_SkillSwap_AlwaysTakeAbilities, Expert_SkillSwap_CheckDefenderAbility
+    IfRandomLessThan 243, ScoreMinus20
+    GoTo Expert_SkillSwap_End
+
+Expert_SkillSwap_CheckDefenderAbility:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable Expert_SkillSwap_ForbiddenDefenderAbilities, ScoreMinus30
+    IfLoadedInTable Expert_SkillSwap_AlwaysGiveAbilities, ScoreMinus20
+    IfLoadedInTable Expert_SkillSwap_UndesirableAbilities, ScoreMinus10
+    IfLoadedInTable Expert_SkillSwap_AlwaysTakeAbilities, Expert_SkillSwap_DefenderAbilityBigScoreBoost
+    IfLoadedInTable Expert_SkillSwap_DesirableAbilities, Expert_SkillSwap_DefenderAbilityScoreBoost
+    GoTo Expert_SkillSwap_End
+
+Expert_SkillSwap_DefenderAbilityScoreBoost:
+    AddToMoveScore 1
+    IfRandomLessThan 230, Expert_SkillSwap_End
+    AddToMoveScore 1
+    GoTo Expert_SkillSwap_End
+
+Expert_SkillSwap_DefenderAbilityBigScoreBoost:
+    AddToMoveScore 4
+    IfRandomLessThan 230, Expert_SkillSwap_End
+    AddToMoveScore 1
+    GoTo Expert_SkillSwap_End
+    
+Expert_SkillSwap_End:
+    PopOrEnd
+
+Expert_SkillSwap_UndesirableAbilities:
+    TableEntry ABILITY_BATTLE_ARMOR
+    TableEntry ABILITY_DAMP
+    TableEntry ABILITY_OBLIVIOUS
+    TableEntry ABILITY_OWN_TEMPO
+    TableEntry ABILITY_INNER_FOCUS
+    TableEntry ABILITY_MAGMA_ARMOR
+    TableEntry ABILITY_WATER_VEIL
+    TableEntry ABILITY_RUN_AWAY
+    TableEntry ABILITY_KEEN_EYE
+    TableEntry ABILITY_PICKUP
+    TableEntry ABILITY_TRUANT
+    TableEntry ABILITY_CUTE_CHARM
+    TableEntry ABILITY_STICKY_HOLD
+    TableEntry ABILITY_OVERGROW
+    TableEntry ABILITY_BLAZE
+    TableEntry ABILITY_TORRENT
+    TableEntry ABILITY_SWARM
+    TableEntry ABILITY_SHELL_ARMOR
+    TableEntry ABILITY_TANGLED_FEET
+    TableEntry ABILITY_NORMALIZE
+    TableEntry ABILITY_SNIPER
+    TableEntry ABILITY_STALL
+    TableEntry ABILITY_KLUTZ
+    TableEntry ABILITY_ANTICIPATION
+    TableEntry ABILITY_FOREWARN
+    TableEntry ABILITY_SLOW_START
+    TableEntry ABILITY_HONEY_GATHER
+    TableEntry ABILITY_FRISK
+    TableEntry ABILITY_IMPOSTER
+    TableEntry TABLE_END
+
+Expert_SkillSwap_AlwaysRemoveAbilities:
+    TableEntry ABILITY_DAMP
+    TableEntry ABILITY OBLIVIOUS
+    TableEntry ABILITY_OWN_TEMPO
+    TableEntry ABILITY_INNER_FOCUS
+    TableEntry ABILITY_MAGMA_ARMOR
+    TableEntry ABILITY_RUN_AWAY
+    TableEntry ABILITY_KEEN_EYE
+    TableEntry ABILITY_PICKUP
+    TableEntry ABILITY_TRUANT
+    TableEntry ABILITY_STICKY_HOLD
+    TableEntry ABILITY_STALL
+    TableEntry ABILITY_KLUTZ
+    TableEntry ABILITY_ANTICIPATION
+    TableEntry ABILITY_FOREWARN
+    TableEntry ABILITY_SLOW_START
+    TableEntry ABILITY_HONEY_GATHER
+    TableEntry ABILITY_FRISK
+    TableEntry TABLE_END
+    
+Expert_SkillSwap_DesirableAbilities:
+    TableEntry ABILITY_SPEED_BOOST
+    TableEntry ABILITY_STURDY
+    TableEntry ABILITY_LIMBER
+    TableEntry ABILITY_STATIC
+    TableEntry ABILITY_VOLT_ABSORB
+    TableEntry ABILITY_WATER_ABSORB
+    TableEntry ABILITY_COMPOUND_EYES
+    TableEntry ABILITY_COLOR_CHANGE
+    TableEntry ABILITY_IMMUNITY
+    TableEntry ABILITY_FLASH_FIRE
+    TableEntry ABILITY_SHIELD_DUST
+    TableEntry ABILITY_INTIMIDATE
+    TableEntry ABILITY_SHADOW_TAG
+    TableEntry ABILITY_ROUGH_SKIN
+    TableEntry ABILITY_WONDER_GUARD
+    TableEntry ABILITY_LEVITATE
+    TableEntry ABILITY_EFFECT_SPORE
+    TableEntry ABILITY_SYNCHRONIZE
+    TableEntry ABILITY_CLEAR_BODY
+    TableEntry ABILITY_NATURAL_CURE
+    TableEntry ABILITY_LIGHTNING_ROD
+    TableEntry ABILITY_SERENE_GRACE
+    TableEntry ABILITY_SWIFT_SWIM
+    TableEntry ABILITY_CHLOROPHYLL
+    TableEntry ABILITY_ILLUMINATE
+    TableEntry ABILITY_HUGE_POWER
+    TableEntry ABILITY_POISON_POINT
+    TableEntry ABILITY_MAGNET_PULL
+    TableEntry ABILITY_SOUNDPROOF
+    TableEntry ABILITY_RAIN_DISH
+    TableEntry ABILITY_PRESSURE
+    TableEntry ABILITY_THICK_FAT
+    TableEntry ABILITY_EARLY_BIRD
+    TableEntry ABILITY_FLAME_BODY
+    TableEntry ABILITY_HUSTLE
+    TableEntry ABILITY_SHED_SKIN
+    TableEntry ABILITY_GUTS
+    TableEntry ABILITY_MARVEL_SCALE
+    TableEntry ABILITY_LIQUID_OOZE
+    TableEntry ABILITY_ROCK_HEAD
+    TableEntry ABILITY_ARENA_TRAP
+    TableEntry ABILITY_PURE_POWER
+    TableEntry ABILITY_MOTOR_DRIVE
+    TableEntry ABILITY_RIVALRY
+    TableEntry ABILITY_STEADFAST
+    TableEntry ABILITY_ANGER_POINT
+    TableEntry ABILITY_UNBURDEN
+    TableEntry ABILITY_HEATPROOF
+    TableEntry ABILITY_SIMPLE
+    TableEntry ABILITY_DRY_SKIN
+    TableEntry ABILITY_DOWNLOAD
+    TableEntry ABILITY_IRON_FIST
+    TableEntry ABILITY_POISON_HEAL
+    TableEntry ABILITY_ADAPTABILITY
+    TableEntry ABILITY_SKILL_LINK
+    TableEntry ABILITY_HYDRATION
+    TableEntry ABILITY_SOLAR_POWER
+    TableEntry ABILITY_QUICK_FEET
+    TableEntry ABILITY_MAGIC_GUARD
+    TableEntry ABILITY_TECHNICIAN
+    TableEntry ABILITY_AFTERMATH
+    TableEntry ABILITY_UNAWARE
+    TableEntry ABILITY_TINTED_LENS
+    TableEntry ABILITY_FILTER
+    TableEntry ABILITY_SCRAPPY
+    TableEntry ABILITY_STORM_DRAIN
+    TableEntry ABILITY_ICE_BODY
+    TableEntry ABILITY_SOLID_ROCK
+    TableEntry ABILITY_RECKLESS
+    TableEntry ABILITY_BAD_DREAMS
+    TableEntry ABILITY_SLUSH_RUSH
+    TableEntry ABILITY_MULTISCALE
+    TableEntry ABILITY_POISON_TOUCH
+    TableEntry ABILITY_DEFIANT
+    TableEntry ABILITY_COMPETITIVE
+    TableEntry ABILITY_FRESH_MILK
+    TableEntry ABILITY_HEADACHE
+    TableEntry ABILITY_RELENTLESS
+    TableEntry ABILITY_SHEER_FORCE
+    TableEntry ABILITY_CORROSION
+    TableEntry ABILITY_STRONG_JAW
+    TableEntry ABILITY_SAND_FORCE
+    TableEntry ABILITY_MAGIC_BOUNCE
+    TableEntry ABILITY_HOTHEADED
+    TableEntry ABILITY_MEGA_LAUNCHER
+    TableEntry ABILITY_TIDAL_FORCE
+    TableEntry ABILITY_FREE_SAMPLE
+    TableEntry ABILITY_FLARE_BOOST
+    TableEntry ABILITY_CHLOROPLAST
+    TableEntry ABILITY_COTTON_DOWN
+    TableEntry ABILITY_PHOTOSYNTHESIS
+    TableEntry ABILITY_SHARPNESS
+    TableEntry ABILITY_STRANGLE_WEED
+    TableEntry ABILITY_PEST
+    TableEntry ABILITY_UNOWN_ENERGY
+    TableEntry ABILITY_ROCK_SOLID
+    TableEntry ABILITY_COWARD
+    TableEntry TABLE_END
+
+Expert_SkillSwap_AlwaysTakeAbilities:
+	TableEntry ABILITY_SPEED_BOOST
+	TableEntry ABILITY_LIMBER
+	TableEntry ABILITY_VOLT_ABSORB
+	TableEntry ABILITY_WATER_ABSORB
+	TableEntry ABILITY_COMPOUND_EYES
+	TableEntry ABILITY_COLOR_CHANGE
+	TableEntry ABILITY_IMMUNITY
+	TableEntry ABILITY_FLASH_FIRE
+	TableEntry ABILITY_SHADOW_TAG
+	TableEntry ABILITY_ROUGH_SKIN
+	TableEntry ABILITY_WONDER_GUARD
+	TableEntry ABILITY_LEVITATE
+	TableEntry ABILITY_LIGHTNING_ROD
+	TableEntry ABILITY_SERENE_GRACE
+	TableEntry ABILITY_SWIFT_SWIM
+	TableEntry ABILITY_CHLOROPHYLL
+	TableEntry ABILITY_ILLUMINATE
+	TableEntry ABILITY_HUGE_POWER
+	TableEntry ABILITY_MAGNET_PULL
+	TableEntry ABILITY_RAIN_DISH
+	TableEntry ABILITY_PRESSURE
+	TableEntry ABILITY_THICK_FAT
+	TableEntry ABILITY_FLAME_BODY
+	TableEntry ABILITY_HUSTLE
+	TableEntry ABILITY_GUTS
+	TableEntry ABILITY_MARVEL_SCALE
+	TableEntry ABILITY_ROCK_HEAD
+	TableEntry ABILITY_ARENA_TRAP
+	TableEntry ABILITY_PURE_POWER
+	TableEntry ABILITY_MOTOR_DRIVE
+	TableEntry ABILITY_STEADFAST
+	TableEntry ABILITY_ANGER_POINT
+	TableEntry ABILITY_UNBURDEN
+	TableEntry ABILITY_HEATPROOF
+	TableEntry ABILITY_SIMPLE
+	TableEntry ABILITY_DRY_SKIN
+	TableEntry ABILITY_IRON_FIST
+	TableEntry ABILITY_POISON_HEAL
+	TableEntry ABILITY_ADAPTABILITY
+	TableEntry ABILITY_SKILL_LINK
+	TableEntry ABILITY_HYDRATION
+	TableEntry ABILITY_SOLAR_POWER
+	TableEntry ABILITY_QUICK_FEET
+	TableEntry ABILITY_MAGIC_GUARD
+	TableEntry ABILITY_TECHNICIAN
+	TableEntry ABILITY_AFTERMATH
+	TableEntry ABILITY_UNAWARE
+	TableEntry ABILITY_TINTED_LENS
+	TableEntry ABILITY_FILTER
+	TableEntry ABILITY_STORM_DRAIN
+	TableEntry ABILITY_ICE_BODY
+	TableEntry ABILITY_SOLID_ROCK
+	TableEntry ABILITY_SLUSH_RUSH
+	TableEntry ABILITY_MULTISCALE
+	TableEntry ABILITY_POISON_TOUCH
+	TableEntry ABILITY_DEFIANT
+	TableEntry ABILITY_COMPETITIVE
+	TableEntry ABILITY_HEADACHE
+	TableEntry ABILITY_RELENTLESS
+	TableEntry ABILITY_SHEER_FORCE
+	TableEntry ABILITY_CORROSION
+	TableEntry ABILITY_STRONG_JAW
+	TableEntry ABILITY_SAND_FORCE
+	TableEntry ABILITY_MAGIC_BOUNCE
+	TableEntry ABILITY_HOTHEADED
+	TableEntry ABILITY_MEGA_LAUNCHER
+	TableEntry ABILITY_TIDAL_FORCE
+	TableEntry ABILITY_FLARE_BOOST
+	TableEntry ABILITY_CHLOROPLAST
+	TableEntry ABILITY_PHOTOSYNTHESIS
+	TableEntry ABILITY_SHARPNESS
+	TableEntry ABILITY_STRANGLE_WEED
+	TableEntry ABILITY_PEST
+	TableEntry ABILITY_UNOWN_ENERGY
+	TableEntry ABILITY_ROCK_SOLID
+	TableEntry TABLE_END
+    
+Expert_SkillSwap_ForbiddenDefenderAbilities:
+    TableEntry ABILITY_SLOW_START
+    TableEntry ABILITY_TRUANT
+    TableEntry ABILITY_NORMALIZE
     TableEntry TABLE_END
 
 Expert_Ingrain:
