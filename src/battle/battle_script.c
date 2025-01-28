@@ -2364,7 +2364,10 @@ static BOOL BtlCmd_GoToSubscript(BattleSystem *battleSys, BattleContext *battleC
  */
 static BOOL BtlCmd_GoToEffectScript(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+    u16 moveEffect;
     BattleScript_Iter(battleCtx, 1);
+
+    moveEffect = CURRENT_MOVE_DATA.effect;
 	
 	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SHEER_FORCE)
 	{
@@ -2406,29 +2409,29 @@ static BOOL BtlCmd_GoToEffectScript(BattleSystem *battleSys, BattleContext *batt
 			case BATTLE_EFFECT_INFATUATE_HIT:
 			case BATTLE_EFFECT_DISABLE_HIT:
 			case BATTLE_EFFECT_HURRICANE:
-				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIT;
+				moveEffect = BATTLE_EFFECT_HIT;
 				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
 				break;
 			
 			case BATTLE_EFFECT_RECOIL_BURN_HIT:
 			case BATTLE_EFFECT_RECOIL_PARALYZE_HIT:
-				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_RECOIL_THIRD;
+				moveEffect = BATTLE_EFFECT_RECOIL_THIRD;
 				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
 				break;
 			
 			case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
-				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT;
+				moveEffect = BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT;
 				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
 				break;
 			
 			case BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT:
 			case BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT:
-				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIGH_CRITICAL;
+				moveEffect = BATTLE_EFFECT_HIGH_CRITICAL;
 				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
 				break;
 				
 			case BATTLE_EFFECT_POISON_MULTI_HIT:
-				CURRENT_MOVE_DATA.effect = BATTLE_EFFECT_HIT_TWICE;
+				moveEffect = BATTLE_EFFECT_HIT_TWICE;
 				battleCtx->battleMons[battleCtx->attacker].sheerForceFlag = TRUE;
 				break;
 				
@@ -2438,7 +2441,7 @@ static BOOL BtlCmd_GoToEffectScript(BattleSystem *battleSys, BattleContext *batt
 		}
 	}
 
-    BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__BE_SEQ, CURRENT_MOVE_DATA.effect);
+        BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__BE_SEQ, moveEffect);
 
     return FALSE;
 }
