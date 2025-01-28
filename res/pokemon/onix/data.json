@@ -119,6 +119,16 @@
             "EVO_LEVEL_UP",
             28,
             "SPECIES_STEELIX"
+        ],
+		[
+            "EVO_USE_ITEM_DAY",
+            "ITEM_METAL_COAT",
+            "SPECIES_STEELIX"
+        ],
+		[
+            "EVO_USE_ITEM_NIGHT",
+            "ITEM_METAL_COAT",
+            "SPECIES_STEELIX"
         ]
     ],
     "footprint": {
