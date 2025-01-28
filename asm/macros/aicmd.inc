@@ -697,14 +697,14 @@
     .long 120
     .endm
 
-    .macro AICmd_IfSameAbilities battler1, battler2, jump
+    .macro IfSameAbilities battler1, battler2, jump
     .long 121
     .long \battler1
     .long \battler2
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro AICmd_IfHasBaseAbility battler, jump
+    .macro IfHasBaseAbility battler, jump
     .long 122
     .long \battler
     .long (\jump-.) / 4 - 1
