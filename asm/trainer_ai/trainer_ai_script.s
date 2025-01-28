@@ -5363,6 +5363,12 @@ Expert_SkillSwap_CheckMinorScoreCancel:
     IfLoadedNotInTable Expert_SkillSwap_DesirableAbilities, Expert_SkillSwap_CheckDefenderAbility
     IfRandomLessThan 243, ScoreMinus20
     GoTo Expert_SkillSwap_End
+    
+Expert_SkillSwap_CheckMajorScoreCancel:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedNotInTable Expert_SkillSwap_AlwaysTakeAbilities, Expert_SkillSwap_CheckDefenderAbility
+    IfRandomLessThan 243, ScoreMinus20
+    GoTo Expert_SkillSwap_End
 
 Expert_SkillSwap_CheckDefenderAbility:
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -5420,7 +5426,7 @@ Expert_SkillSwap_UndesirableAbilities:
     TableEntry ABILITY_IMPOSTER
     TableEntry TABLE_END
 
-Expert_SkillSwap_AlwaysRemoveAbilities:
+Expert_SkillSwap_AlwaysGiveAbilities:
     TableEntry ABILITY_DAMP
     TableEntry ABILITY_OBLIVIOUS
     TableEntry ABILITY_OWN_TEMPO
