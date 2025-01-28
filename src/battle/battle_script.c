@@ -2441,7 +2441,7 @@ static BOOL BtlCmd_GoToEffectScript(BattleSystem *battleSys, BattleContext *batt
 		}
 	}
 
-        BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__BE_SEQ, moveEffect);
+    BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__BE_SEQ, moveEffect);
 
     return FALSE;
 }
