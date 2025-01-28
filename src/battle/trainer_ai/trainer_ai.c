@@ -414,6 +414,7 @@ static void AICmd_IfWishActive(BattleSystem *battleSys, BattleContext *battleCtx
 static void AICmd_IfPartyMemberHasBattleEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -581,6 +582,7 @@ static const AICommandFunc sAICommandTable[] = {
 	AICmd_IfPartyMemberHasBattleEffect,
     AICmd_IfShouldTaunt,
     AICmd_LoadMoveAccuracy
+    AICmd_IfSameAbilities
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3754,6 +3756,21 @@ static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battl
 
     if (AI_CONTEXT.calcTemp > 100) {
         AI_CONTEXT.calcTemp = 100;
+    }
+}
+
+static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler1 = AIScript_Read(battleCtx);
+    int inBattler2 = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler1 = AIScript_Battler(battleCtx, inBattler1);
+    u8 battler2 = AIScript_Battler(battleCtx, inBattler2);
+
+    if (battleCtx->battleMons[battler1].ability ==  battleCtx->battleMons[battler2].ability) {
+        AIScript_Iter(battleCtx, jump);
     }
 }
 
