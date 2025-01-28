@@ -1299,7 +1299,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                     break;
 
                 case ABILITY_SWIFT_SWIM:
-                    battler1Speed *= 2;
+                    battler1Speed = battler1Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1311,7 +1311,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                     break;
 
                 case ABILITY_SWIFT_SWIM:
-                    battler2Speed *= 2;
+                    battler2Speed = battler2Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1327,7 +1327,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                     break;
 
                 case ABILITY_SLUSH_RUSH:
-                    battler1Speed *= 2;
+                    battler1Speed = battler1Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1339,7 +1339,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                     break;
 
                 case ABILITY_SLUSH_RUSH:
-                    battler2Speed *= 2;
+                    battler2Speed = battler2Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1356,7 +1356,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
                 case ABILITY_CHLOROPLAST:
                 case ABILITY_CHLOROPHYLL:
-                    battler1Speed *= 2;
+                    battler1Speed = battler1Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1369,7 +1369,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
                 case ABILITY_CHLOROPLAST:
                 case ABILITY_CHLOROPHYLL:
-                    battler2Speed *= 2;
+                    battler2Speed = battler2Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1778,7 +1778,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
                     break;
 
                 case ABILITY_SWIFT_SWIM:
-                    battler1Speed *= 2;
+                    battler1Speed = battler1Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1790,7 +1790,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
                     break;
 
                 case ABILITY_SWIFT_SWIM:
-                    battler2Speed *= 2;
+                    battler2Speed = battler2Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1806,7 +1806,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
                     break;
 
                 case ABILITY_SLUSH_RUSH:
-                    battler1Speed *= 2;
+                    battler1Speed = battler1Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1818,7 +1818,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
                     break;
 
                 case ABILITY_SLUSH_RUSH:
-                    battler2Speed *= 2;
+                    battler2Speed = battler2Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1835,7 +1835,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
 
                 case ABILITY_CHLOROPLAST:
                 case ABILITY_CHLOROPHYLL:
-                    battler1Speed *= 2;
+                    battler1Speed = battler1Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
@@ -1848,7 +1848,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
 
                 case ABILITY_CHLOROPLAST:
                 case ABILITY_CHLOROPHYLL:
-                    battler2Speed *= 2;
+                    battler2Speed = battler2Speed * 5 / 3;
                     break;
 
                 case ABILITY_FORECAST:
