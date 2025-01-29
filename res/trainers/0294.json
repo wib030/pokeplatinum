@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_PIKACHU",
             "form": 0,
-            "level": 27,
+            "level": 26,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_FAKE_OUT",
@@ -21,13 +21,13 @@
 				"MOVE_THUNDER_PUNCH",
 				"MOVE_PROTECT"
             ],
-            "power": 80,
+            "power": 50,
             "ball_seal": 0
         },
         {
             "species": "SPECIES_MAGBY",
             "form": 0,
-            "level": 27,
+            "level": 26,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_BELLY_DRUM",
@@ -35,13 +35,13 @@
 				"MOVE_MACH_PUNCH",
 				"MOVE_FAINT_ATTACK"
             ],
-            "power": 80,
+            "power": 50,
             "ball_seal": 0
         },
 		{
             "species": "SPECIES_CHIMECHO",
             "form": 0,
-            "level": 26,
+            "level": 25,
             "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_REFLECT",
@@ -49,7 +49,7 @@
 				"MOVE_ICY_WIND",
 				"MOVE_THUNDER_WAVE"
             ],
-            "power": 80,
+            "power": 40,
             "ball_seal": 0
         },
 		{
@@ -63,7 +63,7 @@
 				"MOVE_OMINOUS_WIND",
 				"MOVE_HIDDEN_POWER"
             ],
-            "power": 80,
+            "power": 40,
             "ball_seal": 0
         }
     ]
