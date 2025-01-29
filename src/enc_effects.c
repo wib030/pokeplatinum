@@ -321,6 +321,7 @@ static u32 EncEffects_WildPokemonEffect (Party *wildParty, int mapHeaderID)
 		case SPECIES_GROUDON:
 		case SPECIES_KYOGRE:
 		case SPECIES_RAYQUAZA:
+		case SPECIES_SPIRITOMB:
             result = ENCEFF_MINOR_LEGENDARIES;
             break;
         case SPECIES_MESPRIT:
