@@ -12119,7 +12119,7 @@ static BOOL BattleAI_AllMovesKnown(BattleContext *battleCtx, int battler)
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
     // Must keep C89-style declaration to match
-    int i, j;
+    int i, j, k;
     u8 defender, defenderType1, defenderType2, defenderAbility;
     u8 monType1, monType2, monAbility, monItemEffect;
     u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
@@ -12137,6 +12137,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     int defenderCurHP, defenderMaxHP, defenderSpeedStat;
     int moveMoveEffect, moveVolatileStatus, moveStatus;
     int hazardsBonus, sackBonus, speedMultiplier;
+    int statDiff, statCumDiff, statMaxDiff, statStage, boostedMonStat;
     Pokemon *mon;
     BattleContext *battleCtx;
 
@@ -12155,6 +12156,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     battlersDisregarded = 0;
     picked = 6;
     maxScore = 100;
+    statMaxDiff = 0;
     side = Battler_Side(battleSys, battler);
     oppSide = Battler_Side(battleSys, defender);
 
@@ -12210,6 +12212,43 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             score = 0;
             defendScore = 0;
             attackScore = 0;
+
+            if (battleCtx->battleStatusMask & SYSCTL_BATON_PASS) {
+                statDiff = 0;
+                statCumDiff = 0;
+
+                int statParams[STAT_MAX] = {
+                    MON_DATA_MAX_HP,
+                    MON_DATA_ATK,
+                    MON_DATA_DEF,
+                    MON_DATA_SP_ATK,
+                    MON_DATA_SP_DEF,
+                    MON_DATA_SPEED
+                };
+                for (k = 0; k < STAT_MAX; k++) {
+                    statStage = BattleMon_Get(battleCtx, battler, BATTLEMON_HP_STAGE + k, NULL) - 6;
+                    boostedMonStat = Pokemon_GetValue(mon, statParams[k], NULL) * (sStatStageBoosts[statStage].numerator / sStatStageBoosts[statStage].denominator);
+
+                    if (statParams[STAT_MAX] = MON_DATA_SPEED) {
+                        if (boostedMonStat > battleCtx->battleMons[defender].speed * 3 / 2)
+                        {
+                            // Currently, just give a boost for speed, since it's unpredictable
+                            attackScore += 50;
+                        }
+                    }
+                    else {
+                        if (battleCtx->battleMons[battler].statBoosts[k] > 6)
+                        {
+                            statDiff = boostedMonStat - Pokemon_GetValue(mon, statParams[k], NULL);
+                            statCumDiff += statDiff;
+                        }
+                    }
+                }
+
+                if (statCumDiff > statMaxDiff) {
+                    statMaxDiff = statCumDiff;
+                }
+            }
 
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
@@ -12750,6 +12789,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             }
             else {
                 score = 0;
+            }
+
+            if (battleCtx->battleStatusMask & SYSCTL_BATON_PASS) {
+                // 300 point bonus to mon that benefits most from baton pass
+                if(statMaxDiff == statCumDiff) {
+                    score += 200;
+                }
             }
 
             if (maxScore < score) {
