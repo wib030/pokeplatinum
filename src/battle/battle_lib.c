@@ -7570,7 +7570,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     case PLUCK_EFFECT_ATK_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
             battleCtx->msgTemp = BATTLE_STAT_ATTACK;
-            nextSeq = subscript_held_item_raise_stat;
+            nextSeq = subscript_held_item_sharply_raise_stat;
         }
 
         result = TRUE;
@@ -7579,7 +7579,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     case PLUCK_EFFECT_DEF_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_DEFENSE] < 12) {
             battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
-            nextSeq = subscript_held_item_raise_stat;
+            nextSeq = subscript_held_item_sharply_raise_stat;
         }
 
         result = TRUE;
@@ -7588,7 +7588,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     case PLUCK_EFFECT_SPEED_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_SPEED] < 12) {
             battleCtx->msgTemp = BATTLE_STAT_SPEED;
-            nextSeq = subscript_held_item_raise_stat;
+            nextSeq = subscript_held_item_sharply_raise_stat;
         }
 
         result = TRUE;
@@ -7597,7 +7597,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     case PLUCK_EFFECT_SPATK_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
             battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
-            nextSeq = subscript_held_item_raise_stat;
+            nextSeq = subscript_held_item_sharply_raise_stat;
         }
 
         result = TRUE;
@@ -7606,7 +7606,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     case PLUCK_EFFECT_SPDEF_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
             battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
-            nextSeq = subscript_held_item_raise_stat;
+            nextSeq = subscript_held_item_sharply_raise_stat;
         }
 
         result = TRUE;
