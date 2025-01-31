@@ -7289,14 +7289,14 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
 
                 if (moveDamage > endOfTurnTick * protectMultiplier)
                 {
-                    battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
-                    return TRUE;
+                    return FALSE;
                 }
             }
         }
     }
 
-    return FALSE;
+    battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+    return TRUE;
 }
 
 /**
