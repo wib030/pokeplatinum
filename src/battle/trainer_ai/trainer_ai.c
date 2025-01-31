@@ -7111,6 +7111,7 @@ static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCt
             result = FALSE;
         }
         else {
+            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
             result = TRUE;
         }
     }
@@ -7156,6 +7157,7 @@ static BOOL AI_ShouldSwitchToxic(BattleSystem *battleSys, BattleContext *battleC
     {
         if (battleCtx->battleMons[battler].status & (MON_CONDITION_TOXIC_COUNTER_2 | MON_CONDITION_TOXIC_COUNTER_3))
         {
+            battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
             result = TRUE;
         }
     }
@@ -7287,13 +7289,14 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
 
                 if (moveDamage > endOfTurnTick * protectMultiplier)
                 {
-                    return FALSE;
+                    battleCtx->aiSwitchedPartySlot[battler] = BattleAI_HotSwitchIn(battleSys, battler);
+                    return TRUE;
                 }
             }
         }
     }
 
-    return TRUE;
+    return FALSE;
 }
 
 /**
