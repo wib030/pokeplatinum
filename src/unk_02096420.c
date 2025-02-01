@@ -445,7 +445,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
     v1[4] = Pokemon_GetValue(param0, MON_DATA_SPATK_EV, NULL);
     v1[5] = Pokemon_GetValue(param0, MON_DATA_SPDEF_EV, NULL);
 
-    if (Pokemon_GetValue(param0, MON_DATA_SPECIES, NULL) != 292) {
+    if (Pokemon_GetValue(param0, MON_DATA_SPECIES, NULL) != 292
+        && Pokemon_GetValue(param0, MON_DATA_SPECIES, NULL) != 489) {
         if (Item_Get(v0, 39) != 0) {
             v1[7] = Item_Get(v0, 48);
             v1[6] = CalculateEVUpdate(v1[0], (v1[1] + v1[2] + v1[3] + v1[4] + v1[5]), v1[7]);
