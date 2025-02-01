@@ -323,6 +323,7 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
     s32 v1[8];
     u8 v2;
     u8 v3;
+	u8 tempIV;
 
     v0 = Item_Load(param1, 0, param4);
 
@@ -460,7 +461,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 
             if (v1[6] == -1) {
                 if (Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) < 31) {
-                    Pokemon_SetValue(param0, MON_DATA_HP_IV, NULL) = Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) + 1;
+					tempIV = Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) + 1;
+                    Pokemon_SetValue(param0, MON_DATA_HP_IV, &tempIV); 
                     Pokemon_CalcLevelAndStats(param0);
                     v2 = 1;
                 }
@@ -485,7 +487,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 
         if (v1[6] == -1) {
             if (Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) < 31) {
-                Pokemon_SetValue(param0, MON_DATA_ATK_IV, NULL) = Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) + 1;
+                tempIV = Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) + 1;
+                Pokemon_SetValue(param0, MON_DATA_ATK_IV, &tempIV);
                 Pokemon_CalcLevelAndStats(param0);
                 v2 = 1;
             }
@@ -509,7 +512,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 
         if (v1[6] == -1) {
             if (Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) < 31) {
-                Pokemon_SetValue(param0, MON_DATA_DEF_IV, NULL) = Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) + 1;
+                tempIV = Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) + 1;
+                Pokemon_SetValue(param0, MON_DATA_DEF_IV, &tempIV);
                 Pokemon_CalcLevelAndStats(param0);
                 v2 = 1;
             }
@@ -533,7 +537,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 
         if (v1[6] == -1) {
             if (Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) < 31) {
-                Pokemon_SetValue(param0, MON_DATA_SPEED_IV, NULL) = Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) + 1;
+                tempIV = Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) + 1;
+                Pokemon_SetValue(param0, MON_DATA_SPEED_IV, &tempIV);
                 Pokemon_CalcLevelAndStats(param0);
                 v2 = 1;
             }
@@ -557,7 +562,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 
         if (v1[6] == -1) {
             if (Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) < 31) {
-                Pokemon_SetValue(param0, MON_DATA_SPATK_IV, NULL) = Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) + 1;
+                tempIV = Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) + 1;
+                Pokemon_SetValue(param0, MON_DATA_SPATK_IV, &tempIV);
                 Pokemon_CalcLevelAndStats(param0);
                 v2 = 1;
             }
@@ -581,7 +587,8 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 
         if (v1[6] == -1) {
             if (Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) < 31) {
-                Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, NULL) = Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) + 1;
+                tempIV = Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) + 1;
+                Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, &tempIV);
                 Pokemon_CalcLevelAndStats(param0);
                 v2 = 1;
             }
