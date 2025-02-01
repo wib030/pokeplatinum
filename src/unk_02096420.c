@@ -251,7 +251,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
 
         if (v1[6] > 0) {
             if (((v1[3] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX))
-            && Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) < 31)) {
+            && Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) < 31) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -273,7 +273,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
 
         if (v1[6] > 0) {
             if (((v1[4] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX))
-            && Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) < 31)) {
+            && Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) < 31) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -295,7 +295,7 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
 
         if (v1[6] > 0) {
             if (((v1[5] < EV_ITEM_MAX) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < EV_TOTAL_MAX))
-            && Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) < 31)) {
+            && Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) < 31) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
