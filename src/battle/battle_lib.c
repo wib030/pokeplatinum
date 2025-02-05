@@ -8621,6 +8621,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     int naturePowerMove;
     int rnd;
 	u32 effectiveness;
+    int multiHitChance;
+    int multiHitHits;
     
     mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
 
@@ -9008,6 +9010,49 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     if (moveClass == CLASS_SPECIAL) {
                         spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
                     }
+                    break;
+
+                case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+                case BATTLE_EFFECT_MULTI_HIT:
+                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+                    multiHitHits = 2;
+
+                    if (multiHitChance < 7) { // 70% chance for 2 or 3 hits
+                    multiHitHits += multiHitChance & 1; // 2 or 3 hits
+                    }
+                    else { // 30% chance for 4 or 5 hits
+                        multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
+                    }
+
+                    if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE) {
+                        multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+                    }
+                    if (attackerParams.ability == ABILITY_SKILL_LINK) {
+                        multiHitHits = 5;
+                    }
+                    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT) {
+                        if (multiHitHits < 3) {
+                            multiHitHits = 3;
+                        }
+                    }
+
+                    movePower *= multiHitHits;
+                    break;
+
+                case BATTLE_EFFECT_HIT_THREE_TIMES:
+                    rnd = BattleSystem_RandNext(battleSys) % 10;
+                    if (rnd != 0) {
+                        movePower += movePower * 2;
+                    }
+
+                    rnd = BattleSystem_RandNext(battleSys) % 10;
+                    if (rnd != 0) {
+                        movePower += movePower * 3;
+                    }
+                    break;
+                    
+                case BATTLE_EFFECT_HIT_TWICE:
+                    movePower *= 2;
                     break;
             }
         }
@@ -12742,14 +12787,14 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
-                speedMultiplier = 7;
+                speedMultiplier = 9;
             }
             else {
                 if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_TIE) {
-                    speedMultiplier = 10;
+                    speedMultiplier = 15;
                 }
                 else {
-                    speedMultiplier = 13;
+                    speedMultiplier = 20;
                 }
             }
 
@@ -12792,7 +12837,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             if (battleCtx->battleStatusMask & SYSCTL_BATON_PASS) {
-                // 300 point bonus to mon that benefits most from baton pass
+                // 200 point bonus to mon that benefits most from baton pass
                 if(statMaxDiff == statCumDiff) {
                     score += 200;
                 }
