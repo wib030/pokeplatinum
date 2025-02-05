@@ -6070,7 +6070,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     }
 
                     if (MOVE_DATA(move).class == CLASS_STATUS
-                        && battleCtx->battleMons[battler].moveEffectsData.tauntedTurns == 0) {
+                        && battleCtx->battleMons[battler].moveEffectsData.tauntedTurns == 0
+                        && (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, battler, defender) == FALSE)) {
                         Party *party;
                         moveEffect = MapBattleEffectToMoveEffect(battleCtx, effect);
                         moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, effect);
