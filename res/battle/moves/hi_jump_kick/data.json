@@ -3,7 +3,7 @@
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_FIGHTING",
     "power": 130,
-    "accuracy": 90,
+    "accuracy": 85,
     "pp": 10,
     "effect": {
         "type": "BATTLE_EFFECT_CRASH_ON_MISS",
