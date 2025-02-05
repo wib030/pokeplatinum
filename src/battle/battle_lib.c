@@ -15825,6 +15825,10 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             if (i == battleCtx->selectedPartySlot[battler])
             {
                 activeScore = score;
+
+                if (activeScore <= 0) {
+                    activeScore = 1;
+                }
             }
 
             if (activeScore >= score) {
