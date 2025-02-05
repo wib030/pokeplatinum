@@ -15590,6 +15590,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
             activeScore = activeScore * speedMultiplier / 10;
         }
+	}
 
 
     for (i = 0; i < partySize; i++) {
@@ -16051,10 +16052,11 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
     int i;
     int score, moveScore;
     int defenderCurHP, defenderMaxHP;
-    int moveMoveEffect, moveVolatileStatus, moveStatus, moveStatFlag;
+    int moveMoveEffect, moveVolatileStatus, moveStatus, moveStatFlag, moveEffect;
     u8 moveType;
     u8 monType1, monType2, monAbility;
     u8 defenderItemEffect, defenderItemPower, defenderType1, defenderType2, defenderAbility;
+	u8 side, oppSide;
     u16 move, monSpeedStat;
     u32 moveStatusFlags;
 
@@ -16077,12 +16079,16 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
     monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
     monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+	
+	side = Battler_Side(battleSys, battler);
+    oppSide = Battler_Side(battleSys, defender);
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
 
         if (MOVE_DATA(move).class == CLASS_STATUS) {
             moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+			moveEffect = MOVE_DATA(move).effect;
 
             moveScore = PartyMon_ApplyTypeChart(battleSys,
                         battleCtx,
