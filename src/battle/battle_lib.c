@@ -12794,7 +12794,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     speedMultiplier = 15;
                 }
                 else {
-                    speedMultiplier = 20;
+                    speedMultiplier = 18;
                 }
             }
 
@@ -15485,6 +15485,12 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
         monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
         monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
+        if (i == 0
+        && activeScore == 0
+        && battleCtx->selectedPartySlot[battler] == 0) {
+            i = battleCtx->selectedPartySlot[battler];
+        }
+
         if (monSpecies != SPECIES_NONE
             && monSpecies != SPECIES_EGG
             && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
@@ -15511,77 +15517,18 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             score = 0;
 
             monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
-            switch (monItemEffect) {
-                default:
-                    break;
+            // speed bonuses are inverted for defensive score
+            if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
 
-                case HOLD_EFFECT_LVLUP_ATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_DEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
-                case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
-                case HOLD_EFFECT_LVLUP_HP_EV_UP:
-                case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
-                case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
-                    monSpeedStat /= 2;
-                    break;
-
-                case HOLD_EFFECT_DITTO_SPEED_UP:
-                    if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) == SPECIES_DITTO) {
-                        monSpeedStat *= 2;
-                    }
-                    break;
-
-                case HOLD_EFFECT_CHOICE_SPEED:
-                    monSpeedStat = monSpeedStat * 3 / 2;
-                    break;
+                speedMultiplier = 9;
             }
+            else if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_TIE) {
 
-            if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_ANY_NOT_PARA)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat = monSpeedStat * 3 / 2;
+                speedMultiplier = 10;
             }
-			else if ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			&& (monAbility == ABILITY_QUICK_FEET))
-			{
-               monSpeedStat *= 2;
-            }
-            else if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) == MON_CONDITION_PARALYSIS)
-			{
-                monSpeedStat /= 2;
-            }
-
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
-
-                // speed bonuses are inverted for defensive score
-                if (defenderSpeedStat > monSpeedStat) {
-
-                    speedMultiplier = 8;
-                }
-                else if (defenderSpeedStat == monSpeedStat) {
-
-                    speedMultiplier = 10;
-                }
-                else {
-
-                    speedMultiplier = 12;
-                }
-            }
-            // Trick Room is not up in this case.
             else {
-                if (defenderSpeedStat > monSpeedStat) {
 
-                    speedMultiplier = 12;
-                }
-                else if (defenderSpeedStat == monSpeedStat) {
-
-                    speedMultiplier = 10;
-                }
-                else {
-                    
-                    speedMultiplier = 8;
-                }
+                speedMultiplier = 18;
             }
 
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
@@ -15882,7 +15829,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                 activeScore = score;
             }
 
-            if (activeScore <= score) {
+            if (activeScore >= score) {
 
                 battlersDisregarded |= FlagIndex(i);
             }
@@ -15890,6 +15837,11 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             if ((battlersDisregarded & FlagIndex(i)) == FALSE) {
                 shouldSwitch = TRUE;
             }
+        }
+
+        if (i == battleCtx->selectedPartySlot[battler]
+            && (battlersDisregarded & FlagIndex(i))) {
+            i = 0;
         }
     }
 
