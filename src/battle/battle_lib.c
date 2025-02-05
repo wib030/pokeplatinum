@@ -15495,8 +15495,9 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             && monSpecies != SPECIES_EGG
             && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
             && (battlersDisregarded & FlagIndex(i)) == FALSE
-            && battleCtx->selectedPartySlot[slot2] != i
-            && i != battleCtx->aiSwitchedPartySlot[slot2]) {
+            && ((battleCtx->selectedPartySlot[slot2] != i
+            && i != battleCtx->aiSwitchedPartySlot[slot2])
+            || slot1 == slot2)) {
 
             monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
             monItemEffect = BattleSystem_GetItemData(battleCtx, monItem, ITEM_PARAM_HOLD_EFFECT);
