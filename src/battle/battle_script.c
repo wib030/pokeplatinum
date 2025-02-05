@@ -3117,20 +3117,7 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
 			
 			if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
 			{
-				int hitChance345 = BattleSystem_RandNext(battleSys) % 3;
-				
-				if (hitChance345 == 0)
-				{
-					hits = 3;
-				}
-				else if (hitChance345 == 1)
-				{
-					hits = 4;
-				}
-				else
-				{
-					hits = 5;
-				}
+                hits = (BattleSystem_RandNext(battleSys) % 3) + 3;
 			}
 			
 			if ((battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
