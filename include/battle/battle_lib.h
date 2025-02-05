@@ -1775,6 +1775,19 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler);
 BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
 
 /**
+* @brief Calculate offensive score for status moves for a given party mon.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler            The attacking BattleMon id.
+* @param defender           The defending BattleMon id.
+* @param partyIndicator     The BattleMon id of the mon whose party will be considered.
+* @param partySlot          The party slot of the Pokemon to consider.
+* @Return   The cumulative attacking score for all status moves for the mon.
+*/
+int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int defender, int partyIndicator, int partySlot);
+
+/**
  * @brief Triggers an attackers ability which prevents an illegal status
  * condition on the given battler, e.g. a paralyzed Pokemon with Limber.
  * 
