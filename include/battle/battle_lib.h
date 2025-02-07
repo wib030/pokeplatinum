@@ -1772,8 +1772,6 @@ BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleC
 */
 BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler);
 
-BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
-
 /**
 * @brief Calculate offensive score for status moves for a given party mon.
 *
@@ -1786,6 +1784,19 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
 * @Return   The cumulative attacking score for all status moves for the mon.
 */
 int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int defender, int partyIndicator, int partySlot);
+
+/**
+* @brief Calculate defensive score for status moves for a given party mon.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler            The attacking BattleMon id.
+* @param defender           The defending BattleMon id.
+* @param partyIndicator     The BattleMon id of the mon whose party will be considered.
+* @param partySlot          The party slot of the Pokemon to consider.
+* @Return   The cumulative defending score for all status moves for the mon.
+*/
+int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int battler, int partyIndicator, int partySlot)
 
 /**
  * @brief Triggers an attackers ability which prevents an illegal status
@@ -1801,5 +1812,17 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
  * @return TRUE if a subscript for an ability effect was loaded, FALSE
  * otherwise.
  */
+ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
+
+ /**
+ * @brief Determines whether a BattleMon has a priority move or not.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The ID of the BattleMon whose move list will be checked.
+ *
+ * @return TRUE if the battler has a priority move. Otherwise, FALSE.
+ */
+ BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
