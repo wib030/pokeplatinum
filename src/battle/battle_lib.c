@@ -16145,10 +16145,10 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                         if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_ENEMY_DEFOG) {
                             moveScore += 5;
                             if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_REFLECT) {
-                                moveScore += 10
+                                moveScore += 10;
                             }
                             if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_LIGHT_SCREEN) {
-                                moveScore += 10
+                                moveScore += 10;
                             }
                         }
                     }
@@ -16180,7 +16180,7 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                                                             partySlot,
                                                             &moveStatusFlags);
 
-                                    if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                                    if ((((moveStatusFlags & MOVE_STATUS_IMMUNE)
                                         && (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
                                         || (moveStatusFlags & MOVE_STATUS_RESISTED)) {
 
@@ -16292,7 +16292,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
     int moveMoveEffect, moveVolatileStatus, moveStatus, moveStatFlag, moveEffect;
     u8 moveType;
     u8 monType1, monType2, monAbility;
-    u8 defenderItemEffect, defenderItemPower, defenderType1, defenderType2, defenderAbility;
+    u8 defenderItemEffect, defenderItemPower, defenderType1, defenderType2, defenderAbility, defenderSpeedStat;
 	u8 side, oppSide;
     u8 compareSpeedDefenderVsMon;
     u16 move, monSpeedStat, defenderItem;
@@ -16312,6 +16312,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 
 	defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
     defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+	defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
 
     monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
@@ -16537,10 +16538,10 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                     if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_ENEMY_DEFOG) {
                         moveScore += 5;
                         if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_REFLECT) {
-                            moveScore += 10
+                            moveScore += 10;
                         }
                         if (battleCtx->sideConditionsMask[oppSide] & SIDE_CONDITION_LIGHT_SCREEN) {
-                            moveScore += 10
+                            moveScore += 10;
                         }
                     }
                 }
@@ -16572,7 +16573,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                                                         partySlot,
                                                         &moveStatusFlags);
 
-                                if (((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                                if ((((moveStatusFlags & MOVE_STATUS_IMMUNE)
                                     && (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
                                     || (moveStatusFlags & MOVE_STATUS_RESISTED)) {
 

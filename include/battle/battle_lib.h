@@ -1796,7 +1796,7 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
 * @param partySlot          The party slot of the Pokemon to consider.
 * @Return   The cumulative defending score for all status moves for the mon.
 */
-int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int battler, int partyIndicator, int partySlot)
+int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int battler, int partyIndicator, int partySlot);
 
 /**
  * @brief Triggers an attackers ability which prevents an illegal status
