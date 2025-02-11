@@ -2263,10 +2263,15 @@ static int ov5_021E6684 (UnkStruct_02026310 * param0)
         } else {
             v2 = 1;
         }
+        for (v0 = 0; v0 < 2; v0++) {
+            if (BoxPokemon_GetValue(v4[v0], MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
+                v2 = v0;
+            }
+        }
     }
-
-    if (BoxPokemon_GetValue(v4[v2], MON_DATA_HELD_ITEM, NULL) == 229) {
-        if (LCRNG_Next() >= (0xffff / 2)) {
+    // ITEM_EVERSTONE == 229
+    if (BoxPokemon_GetValue(v4[v2], MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
+        if (LCRNG_Next() <= (0xffff / 20)) {
             return -1;
         }
     } else {
