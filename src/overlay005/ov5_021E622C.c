@@ -2840,7 +2840,7 @@ static const u16 Unk_ov5_021F9F54[] = {
 	928,	// DP Anime Debut (and Red and Blue Release)
     1009,   // Yellow Release
     1031,   // Halloween
-	1121,	// Ruby Sapphire Release
+	1121,	// Ruby Sapphire Release (and Gold and Silver Relase)
 	1214,	// Crystal Release
     1224,   // Christmas Eve
     1225,   // Christmas
