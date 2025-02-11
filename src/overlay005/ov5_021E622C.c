@@ -2823,18 +2823,27 @@ static u8 ov5_021E70FC (UnkStruct_02026310 * param0)
 }
 
 static const u16 Unk_ov5_021F9F54[] = {
-    0x70,
-    0xD6,
-    0x12F,
-    0x191,
-    0x1F5,
-    0x263,
-    0x2C3,
-    0x335,
-    0x38B,
-    0x3A0,
-    0x461,
-    0x4BE
+    106,    // Three Kings' Day
+	112,	// Junichi Masuda's Birthday
+	214,	// Valentine's Day
+    227,    // Green Release
+	303,	// Hinamatsuri
+	401,	// School Entrance Exam Day
+    414,    // Lyss Birthday
+    430,    // Maisy's Birthday
+	501,	// May Day
+	611,	// Pokemon Daisuki Club?
+	707,	// Qixi  (Tanabata)
+    807,    // Ellie's birthday
+	813,	// 2009 World Championship
+	907,	// American Anime Debut
+	928,	// DP Anime Debut (and Red and Blue Release)
+    1009,   // Yellow Release
+    1031,   // Halloween
+	1121,	// Ruby Sapphire Release
+	1214,	// Crystal Release
+    1224,   // Christmas Eve
+    1225,   // Christmas
 };
 
 static int ov5_021E7110 (FieldSystem * fieldSystem)
@@ -2848,7 +2857,7 @@ static int ov5_021E7110 (FieldSystem * fieldSystem)
 
     for (v1 = 0; v1 < NELEMS(Unk_ov5_021F9F54); v1++) {
         if (Unk_ov5_021F9F54[v1] == v0) {
-            return 230;
+            return 127;
         }
     }
 
