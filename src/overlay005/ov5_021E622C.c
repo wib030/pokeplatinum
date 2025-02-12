@@ -2767,6 +2767,10 @@ static u8 ov5_021E6FF0 (BoxPokemon ** param0)
         v3[v5] = Pokemon_GetGenderOf(v1[v5], v4);
         v0[v5][0] = PokemonPersonalData_GetSpeciesValue(v1[v5], 22);
         v0[v5][1] = PokemonPersonalData_GetSpeciesValue(v1[v5], 23);
+
+        if (BoxPokemon_GetValue(param0[v5], MON_DATA_HELD_ITEM, NULL) == 217) {
+            return 0;
+        }
     }
 
     if ((v0[0][0] == 15) || (v0[1][0] == 15)) {
