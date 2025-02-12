@@ -2852,16 +2852,16 @@ static int ov5_021E7110 (FieldSystem * fieldSystem)
     int v1;
 
     if (sub_02055C40(fieldSystem)) {
-        return 255;
+        return 64;
     }
 
     for (v1 = 0; v1 < NELEMS(Unk_ov5_021F9F54); v1++) {
         if (Unk_ov5_021F9F54[v1] == v0) {
-            return 127;
+            return 32;
         }
     }
 
-    return 255;
+    return 64;
 }
 
 BOOL ov5_021E7154 (UnkStruct_02026310 * param0, Party * param1, FieldSystem * fieldSystem)
