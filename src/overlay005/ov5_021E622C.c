@@ -2823,15 +2823,18 @@ static u8 ov5_021E70FC (UnkStruct_02026310 * param0)
 }
 
 static const u16 Unk_ov5_021F9F54[] = {
+	101,    // New Years's Day
     106,    // Three Kings' Day
 	112,	// Junichi Masuda's Birthday
 	214,	// Valentine's Day
     227,    // Green Release
 	303,	// Hinamatsuri
 	401,	// School Entrance Exam Day
+	405,    // Easter 2026
     414,    // Lyss Birthday
     430,    // Maisy's Birthday
 	501,	// May Day
+	509,    // Goku & Piccolo Day
 	611,	// Pokemon Daisuki Club?
 	707,	// Qixi  (Tanabata)
     807,    // Ellie's birthday
@@ -2844,6 +2847,7 @@ static const u16 Unk_ov5_021F9F54[] = {
 	1214,	// Crystal Release
     1224,   // Christmas Eve
     1225,   // Christmas
+	1231,   // New Year's Eve
 };
 
 static int ov5_021E7110 (FieldSystem * fieldSystem)
