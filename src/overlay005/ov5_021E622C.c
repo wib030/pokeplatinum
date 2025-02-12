@@ -2266,9 +2266,12 @@ static int ov5_021E6684 (UnkStruct_02026310 * param0)
 		
 		if (mateLevel[0] == mateLevel[1])
 		{
-			if (LCRNG_Next() >= (0xffff / 2)) {
-            v2 = 0;
-			} else {
+			if (LCRNG_Next() >= (0xffff / 2))
+			{
+				v2 = 0;
+			}
+			else
+			{
 				v2 = 1;
 			}
 		}
@@ -2640,9 +2643,12 @@ static u16 ov5_021E6C20 (UnkStruct_02026310 * param0, u8 param1[])
 		
 		if (mateLevel[0] == mateLevel[1])
 		{
-			if (LCRNG_Next() >= (0xffff / 2)) {
-            v4 = BoxPokemon_GetValue(v6[0], MON_DATA_SPECIES, NULL);
-			} else {
+			if (LCRNG_Next() >= (0xffff / 2))
+			{
+				v4 = BoxPokemon_GetValue(v6[0], MON_DATA_SPECIES, NULL);
+			}
+			else
+			{
 				v4 = BoxPokemon_GetValue(v6[1], MON_DATA_SPECIES, NULL);
 			}
 		}
@@ -2838,9 +2844,9 @@ static u8 ov5_021E6FF0 (BoxPokemon ** param0)
         }
     }
 
-//    if (v3[0] == v3[1]) {
-//        return 0;
-//    }
+    if (v3[0] == v3[1]) {
+        return 20;
+    }
 
     if ((v3[0] == 2) || (v3[1] == 2)) {
         return 0;
