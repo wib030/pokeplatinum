@@ -2239,7 +2239,7 @@ static void ov5_021E6668 (UnkStruct_02026310 * param0, BoxPokemon * param1[])
 static int ov5_021E6684 (UnkStruct_02026310 * param0)
 {
     int v0;
-    int v1[2], v2 = -1, v3;
+    int v1[2], v2 = -1, v3, mateLevel[2];
     BoxPokemon * v4[2];
 
     ov5_021E6668(param0, v4);
@@ -2248,6 +2248,30 @@ static int ov5_021E6684 (UnkStruct_02026310 * param0)
         if (BoxPokemon_GetGender(v4[v0]) == 1) {
             v2 = v0;
         }
+    }
+	
+	if (BoxPokemon_GetGender(v4[0]) == BoxPokemon_GetGender(v4[1]))
+	{
+        mateLevel[0] = BoxPokemon_GetLevel(v4[0]);
+		mateLevel[1] = BoxPokemon_GetLevel(v4[1]);
+		
+		if (mateLevel[0] < mateLevel[1])
+		{
+			v2 = 0;
+		}
+		else
+		{
+			v2 = 1;
+		}
+		
+		if (mateLevel[0] == mateLevel[1])
+		{
+			if (LCRNG_Next() >= (0xffff / 2)) {
+            v2 = 0;
+			} else {
+				v2 = 1;
+			}
+		}
     }
 
     for (v3 = 0, v0 = 0; v0 < 2; v0++) {
@@ -2555,6 +2579,7 @@ static u16 ov5_021E6C20 (UnkStruct_02026310 * param0, u8 param1[])
 {
     u16 v0[2], v1, v2, v3, v4, v5;
     BoxPokemon * v6[2];
+	int mateLevel[2];
 
     ov5_021E6668(param0, v6);
 
@@ -2597,6 +2622,30 @@ static u16 ov5_021E6C20 (UnkStruct_02026310 * param0, u8 param1[])
         v5 = param1[1];
         param1[1] = param1[0];
         param1[0] = v5;
+    }
+
+	if (BoxPokemon_GetGender(v6[0]) == BoxPokemon_GetGender(v6[1]))
+	{
+        mateLevel[0] = BoxPokemon_GetLevel(v6[0]);
+		mateLevel[1] = BoxPokemon_GetLevel(v6[1]);
+		
+		if (mateLevel[0] < mateLevel[1])
+		{
+			v4 = BoxPokemon_GetValue(v6[0], MON_DATA_SPECIES, NULL);
+		}
+		else
+		{
+			v4 = BoxPokemon_GetValue(v6[1], MON_DATA_SPECIES, NULL);
+		}
+		
+		if (mateLevel[0] == mateLevel[1])
+		{
+			if (LCRNG_Next() >= (0xffff / 2)) {
+            v4 = BoxPokemon_GetValue(v6[0], MON_DATA_SPECIES, NULL);
+			} else {
+				v4 = BoxPokemon_GetValue(v6[1], MON_DATA_SPECIES, NULL);
+			}
+		}
     }
 
     return v4;
@@ -2789,9 +2838,9 @@ static u8 ov5_021E6FF0 (BoxPokemon ** param0)
         }
     }
 
-    if (v3[0] == v3[1]) {
-        return 0;
-    }
+//    if (v3[0] == v3[1]) {
+//        return 0;
+//    }
 
     if ((v3[0] == 2) || (v3[1] == 2)) {
         return 0;
