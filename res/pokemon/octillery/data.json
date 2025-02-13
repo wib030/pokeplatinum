@@ -35,8 +35,8 @@
         "EGG_GROUP_WATER_2"
     ],
     "abilities": [
-        "ABILITY_SUCTION_CUPS",
-        "ABILITY_SNIPER"
+        "ABILITY_SNIPER",
+        "ABILITY_SUCTION_CUPS"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
