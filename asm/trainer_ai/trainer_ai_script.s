@@ -418,8 +418,10 @@ Basic_CheckHighStatStage_SpDefense_NoSimple:
 Basic_CheckHighStatStage_Accuracy:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckHighStatStage_Accuracy_NoSimple
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 8, ScoreMinus10
     PopOrEnd 
@@ -431,8 +433,10 @@ Basic_CheckHighStatStage_Accuracy_NoSimple:
 Basic_CheckHighStatStage_Evasion:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckHighStatStage_Evasion_NoSimple
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 8, ScoreMinus10
     PopOrEnd 
@@ -478,17 +482,21 @@ Basic_CheckLowStatStage_Accuracy:
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 0, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_KEEN_EYE, ScoreMinus10
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     GoTo Basic_CheckClearBodyEffect
 
 Basic_CheckLowStatStage_Evasion:
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 0, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
 
 Basic_CheckClearBodyEffect:
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -712,8 +720,10 @@ Basic_CheckLockOn:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LOCK_ON, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckMeanLook:
@@ -6767,6 +6777,7 @@ Expert_GastroAcid_AbilityChecklist:
     TableEntry ABILITY_STRANGLE_WEED
 	TableEntry ABILITY_STEADFAST
 	TableEntry ABILITY_ROCK_SOLID
+	TableEntry ABILITY_SUCTION_CUPS
     TableEntry TABLE_END
 
 Expert_GastroAcid_End:
@@ -9657,6 +9668,7 @@ TagStrategy_PartnerSkillSwap_GiveAccuracyIncrease:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_COMPOUND_EYES, TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove
     IfLoadedEqualTo ABILITY_NO_GUARD, TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove
+	IfLoadedEqualTo ABILITY_SUCTION_CUPS, TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove:

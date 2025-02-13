@@ -216,6 +216,7 @@ static const u8 sRemovableAbilities[] = {
     ABILITY_STRANGLE_WEED,
     ABILITY_PEST,
 	ABILITY_ROCK_SOLID,
+	ABILITY_SUCTION_CUPS,
     0xFFFF
 };
 
@@ -3739,7 +3740,8 @@ static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battl
         AI_CONTEXT.calcTemp = AI_CONTEXT.calcTemp * 13 / 10;
     }
 
-    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_NO_GUARD) {
+    if ((Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_NO_GUARD)
+	|| (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_SUCTION_CUPS)) {
         AI_CONTEXT.calcTemp = 100;
     }
 

@@ -4844,8 +4844,8 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
         battleCtx->moveStatusFlags |= MOVE_STATUS_STURDY;
     } else {
         if ((DEFENDING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON) == FALSE
-                && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NO_GUARD
-                && Battler_Ability(battleCtx, battleCtx->defender) != ABILITY_NO_GUARD) {
+                && ((Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NO_GUARD) || (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SUCTION_CUPS))
+                && ((Battler_Ability(battleCtx, battleCtx->defender) != ABILITY_NO_GUARD) || (Battler_Ability(battleCtx, battleCtx->defender) != ABILITY_SUCTION_CUPS))) {
             // Use the usual OHKO accuracy check: scale upwards with the difference between the attacker and
             // defender's levels.
             hit = CURRENT_MOVE_DATA.accuracy + (ATTACKING_MON.level - DEFENDING_MON.level);
@@ -4858,8 +4858,8 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
         } else {
             if (((DEFENDING_MON.moveEffectsData.lockOnTarget == battleCtx->attacker
                             && (DEFENDING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON))
-                        || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NO_GUARD
-                        || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_NO_GUARD)
+                        || ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NO_GUARD) || (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SUCTION_CUPS))
+                        || ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_NO_GUARD) || (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_SUCTION_CUPS)))
                     && ATTACKING_MON.level >= DEFENDING_MON.level) {
                 // Bypass the accuracy check: always hit.
                 hit = TRUE;
