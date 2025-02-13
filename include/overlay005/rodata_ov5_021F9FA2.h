@@ -1,8 +1,8 @@
 #ifndef POKEPLATINUM_RODATA_OV5_021F9FA2_H
 #define POKEPLATINUM_RODATA_OV5_021F9FA2_H
 
-const u16 Unk_ov5_021F9FA2[] = {
-    (1) + 20000,
+const u16 EggMove_Table[] = {
+    (SPECIES_BULBASAUR) + 20000, // Bulbasaur line
     113,
     130,
     219,
@@ -15,7 +15,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     267,
     133,
     437,
-    (4) + 20000,
+    (SPECIES_CHARMANDER) + 20000, // Charmander line
     187,
     246,
     157,
@@ -28,7 +28,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     407,
     232,
     394,
-    (7) + 20000,
+    (SPECIES_SQUIRTLE) + 20000, // Squirtle line
     243,
     114,
     54,
@@ -41,7 +41,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     392,
     453,
-    (16) + 20000,
+    (SPECIES_PIDGEY) + 20000, // Pidgey line
     228,
     185,
     193,
@@ -50,7 +50,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     403,
     413,
     253,
-    (19) + 20000,
+    (SPECIES_RATTATA) + 20000, // Rattata line
     103,
     172,
     154,
@@ -61,7 +61,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     207,
     387,
     382,
-    (21) + 20000,
+    (SPECIES_SPEAROW) + 20000, // Spearow line
     185,
     206,
     184,
@@ -71,7 +71,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     143,
     18,
     253,
-    (23) + 20000,
+    (SPECIES_EKANS) + 20000, // Ekans line
     228,
     21,
     180,
@@ -80,7 +80,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     184,
     342,
     50,
-    (27) + 20000,
+    (SPECIES_SANDSHREW) + 20000, // Sandshrew line
     175,
     219,
     68,
@@ -90,7 +90,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     14,
     306,
     400,
-    (29) + 20000,
+    (SPECIES_NIDORAN_F) + 20000, // Nidoran-female line
     48,
     50,
     36,
@@ -99,7 +99,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     68,
     251,
     228,
-    (32) + 20000,
+    (SPECIES_NIDORAN_M) + 20000, // Nidoran-male line
     68,
     50,
     48,
@@ -108,7 +108,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     93,
     251,
     389,
-    (37) + 20000,
+    (SPECIES_VULPIX) + 20000, // Vulpix line
     185,
     95,
     175,
@@ -120,7 +120,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     394,
     326,
     412,
-    (41) + 20000,
+    (SPECIES_ZUBAT) + 20000, // Zubat line
     98,
     228,
     185,
@@ -131,7 +131,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     95,
     428,
     413,
-    (43) + 20000,
+    (SPECIES_ODDISH) + 20000, // Oddish line
     14,
     75,
     175,
@@ -139,7 +139,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     204,
     275,
     321,
-    (46) + 20000,
+    (SPECIES_PARAS) + 20000, // Paras line
     206,
     103,
     68,
@@ -151,7 +151,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     232,
     450,
     440,
-    (48) + 20000,
+    (SPECIES_VENONAT) + 20000, // Venonat line
     226,
     103,
     202,
@@ -160,7 +160,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     234,
     390,
     450,
-    (50) + 20000,
+    (SPECIES_DIGLETT) + 20000, // Diglett line
     185,
     103,
     246,
@@ -170,7 +170,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     157,
     426,
     310,
-    (52) + 20000,
+    (SPECIES_MEOWTH) + 20000, // Meowth line
     180,
     204,
     95,
@@ -181,7 +181,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     175,
     387,
     386,
-    (54) + 20000,
+    (SPECIES_PSYDUCK) + 20000, // Psyduck line
     95,
     60,
     193,
@@ -193,7 +193,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     109,
     281,
     426,
-    (56) + 20000,
+    (SPECIES_MANKEY) + 20000, // Mankey line
     157,
     193,
     96,
@@ -203,7 +203,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     279,
     265,
     370,
-    (58) + 20000,
+    (SPECIES_GROWLITHE) + 20000, // Growlithe line
     34,
     219,
     242,
@@ -213,7 +213,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     257,
     38,
     394,
-    (60) + 20000,
+    (SPECIES_POLIWAG) + 20000, // Poliwag line
     54,
     150,
     61,
@@ -224,7 +224,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     341,
     287,
     283,
-    (63) + 20000,
+    (SPECIES_ABRA) + 20000, // Abra line
     227,
     112,
     282,
@@ -233,7 +233,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     8,
     379,
     385,
-    (66) + 20000,
+    (SPECIES_MACHOP) + 20000, // Machop line
     113,
     96,
     27,
@@ -246,7 +246,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     9,
     8,
     418,
-    (69) + 20000,
+    (SPECIES_BELLSPROUT) + 20000, // Bellsprout line
     14,
     227,
     115,
@@ -256,7 +256,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     345,
     388,
     321,
-    (72) + 20000,
+    (SPECIES_TENTACOOL) + 20000, // Tentacool line
     62,
     243,
     229,
@@ -265,13 +265,13 @@ const u16 Unk_ov5_021F9FA2[] = {
     109,
     282,
     367,
-    (74) + 20000,
+    (SPECIES_GEODUDE) + 20000, // Geodude line
     5,
     157,
     335,
     359,
     175,
-    (77) + 20000,
+    (SPECIES_PONYTA) + 20000, // Ponyta line
     172,
     37,
     24,
@@ -279,7 +279,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     204,
     38,
     32,
-    (79) + 20000,
+    (SPECIES_SLOWPOKE) + 20000, // Slowpoke line
     219,
     187,
     248,
@@ -290,7 +290,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     382,
     335,
     428,
-    (83) + 20000,
+    (SPECIES_FARFETCHD) + 20000, // Farfetch'd
     211,
     193,
     119,
@@ -302,7 +302,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     343,
     189,
     400,
-    (84) + 20000,
+    (SPECIES_DODUO) + 20000, // Doduo line
     98,
     48,
     114,
@@ -311,7 +311,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     283,
     119,
     413,
-    (86) + 20000,
+    (SPECIES_SEEL) + 20000, // Seel line
     122,
     195,
     50,
@@ -321,7 +321,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     333,
     324,
-    (88) + 20000,
+    (SPECIES_GRIMER) + 20000, // Grimer line
     114,
     212,
     122,
@@ -333,7 +333,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     254,
     256,
     255,
-    (90) + 20000,
+    (SPECIES_SHELLDER) + 20000, // Shellder line
     61,
     36,
     112,
@@ -341,7 +341,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     103,
     333,
     341,
-    (92) + 20000,
+    (SPECIES_GASTLY) + 20000, // Gastly line
     149,
     195,
     114,
@@ -352,7 +352,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     7,
     8,
     9,
-    (95) + 20000,
+    (SPECIES_ONIX) + 20000, // Onix line
     157,
     175,
     153,
@@ -360,7 +360,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     111,
     205,
     350,
-    (96) + 20000,
+    (SPECIES_DROWZEE) + 20000, // Drowzee line
     112,
     274,
     272,
@@ -370,7 +370,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     417,
     260,
     427,
-    (98) + 20000,
+    (SPECIES_KRABBY) + 20000, // Krabby line
     91,
     114,
     133,
@@ -380,7 +380,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     14,
     321,
     246,
-    (102) + 20000,
+    (SPECIES_EXEGGCUTE) + 20000, // Exeggcute line
     235,
     236,
     115,
@@ -391,7 +391,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     267,
     381,
     437,
-    (104) + 20000,
+    (SPECIES_CUBONE) + 20000, // Cubone line
     157,
     246,
     187,
@@ -401,7 +401,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     14,
     24,
     442,
-    (108) + 20000,
+    (SPECIES_LICKITUNG) + 20000, // Lickitung line
     187,
     222,
     34,
@@ -412,7 +412,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     164,
     133,
     359,
-    (109) + 20000,
+    (SPECIES_KOFFING) + 20000, // Koffing line
     103,
     149,
     60,
@@ -422,8 +422,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     288,
     180,
     174,
-    (111) + 20000,
-    242,
+    (SPECIES_RHYHORN) + 20000, // Rhyhorn line
     179,
     157,
     68,
@@ -435,7 +434,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     423,
     424,
     422,
-    (113) + 20000,
+    (SPECIES_CHANSEY) + 20000, // Chansey line
     217,
     118,
     215,
@@ -444,7 +443,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     68,
     270,
     356,
-    (114) + 20000,
+    (SPECIES_TANGELA) + 20000, // Tangela line
     175,
     93,
     72,
@@ -454,7 +453,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     267,
     283,
     437,
-    (115) + 20000,
+    (SPECIES_KANGASKHAN) + 20000, // Kangaskhan
     23,
     193,
     116,
@@ -466,7 +465,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     38,
     283,
     359,
-    (116) + 20000,
+    (SPECIES_HORSEA) + 20000, // Horsea line
     175,
     62,
     190,
@@ -475,7 +474,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     82,
     225,
     324,
-    (118) + 20000,
+    (SPECIES_GOLDEEN) + 20000, // Goldeen line
     60,
     114,
     56,
@@ -483,7 +482,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     300,
     189,
     401,
-    (122) + 20000,
+    (SPECIES_MR_MIME) + 20000, // Mr. Mime
     248,
     95,
     102,
@@ -493,7 +492,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     109,
     358,
     298,
-    (123) + 20000,
+    (SPECIES_SCYTHER) + 20000, // Scyther line
     68,
     219,
     226,
@@ -504,7 +503,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     318,
     405,
     400,
-    (127) + 20000,
+    (SPECIES_PINSIR) + 20000, // Pinsir
     31,
     175,
     206,
@@ -512,7 +511,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     98,
     370,
     364,
-    (131) + 20000,
+    (SPECIES_LAPRAS) + 20000, // Lapras
     193,
     164,
     321,
@@ -524,7 +523,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     246,
     250,
     90,
-    (133) + 20000,
+    (SPECIES_EEVEE) + 20000, // Eevee line
     204,
     175,
     203,
@@ -534,7 +533,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     281,
     313,
     343,
-    (138) + 20000,
+    (SPECIES_OMANYTE) + 20000, // Omanyte line
     61,
     62,
     21,
@@ -545,7 +544,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     282,
     378,
     390,
-    (140) + 20000,
+    (SPECIES_KABUTO) + 20000, // Kabuto line
     61,
     62,
     229,
@@ -556,7 +555,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     341,
     196,
     103,
-    (142) + 20000,
+    (SPECIES_AERODACTYL) + 20000, // Aerodactyl
     18,
     228,
     193,
@@ -564,7 +563,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     225,
     174,
     372,
-    (143) + 20000,
+    (SPECIES_SNORLAX) + 20000, // Snorlax
     122,
     204,
     38,
@@ -573,7 +572,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     164,
     18,
     228,
-    (147) + 20000,
+    (SPECIES_DRATINI) + 20000, // Dratini line
     113,
     54,
     114,
@@ -581,7 +580,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     225,
     349,
     407,
-    (152) + 20000,
+    (SPECIES_CHIKORITA) + 20000, // Chikorita line
     22,
     73,
     68,
@@ -593,7 +592,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     437,
     312,
     378,
-    (155) + 20000,
+    (SPECIES_CYNDAQUIL) + 20000, // Cyndaquil line
     154,
     98,
     179,
@@ -605,7 +604,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     38,
     24,
     394,
-    (158) + 20000,
+    (SPECIES_TOTODILE) + 20000, // Totodile line
     242,
     37,
     56,
@@ -617,7 +616,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     8,
     232,
     349,
-    (161) + 20000,
+    (SPECIES_SENTRET) + 20000, // Sentret line
     38,
     228,
     163,
@@ -629,7 +628,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     387,
     204,
     343,
-    (163) + 20000,
+    (SPECIES_HOOTHOOT) + 20000, // Hoothoot line
     119,
     48,
     185,
@@ -639,7 +638,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     297,
     97,
     101,
-    (165) + 20000,
+    (SPECIES_LEDYBA) + 20000, // Ledyba line
     60,
     117,
     318,
@@ -648,7 +647,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     227,
     282,
     450,
-    (167) + 20000,
+    (SPECIES_SPINARAK) + 20000, // Spinarak line
     60,
     50,
     49,
@@ -657,7 +656,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     324,
     390,
     398,
-    (170) + 20000,
+    (SPECIES_CHINCHOU) + 20000, // Chinchou line
     175,
     103,
     133,
@@ -665,7 +664,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     250,
     97,
     54,
-    (172) + 20000,
+    (SPECIES_PICHU) + 20000, // Pichu line
     179,
     117,
     217,
@@ -676,7 +675,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     9,
     321,
-    (173) + 20000,
+    (SPECIES_CLEFFA) + 20000, // Cleffa line
     217,
     118,
     133,
@@ -687,7 +686,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     164,
     313,
     343,
-    (174) + 20000,
+    (SPECIES_IGGLYBUFF) + 20000, // Igglybuff line
     195,
     217,
     185,
@@ -696,7 +695,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     387,
     343,
     356,
-    (175) + 20000,
+    (SPECIES_TOGEPI) + 20000, // Togepi line
     217,
     119,
     64,
@@ -707,7 +706,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     417,
     375,
     381,
-    (177) + 20000,
+    (SPECIES_NATU) + 20000, // Natu line
     114,
     65,
     98,
@@ -718,7 +717,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     287,
     428,
     389,
-    (179) + 20000,
+    (SPECIES_MAREEP) + 20000, // Mareep line
     36,
     34,
     219,
@@ -728,7 +727,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     268,
     260,
     28,
-    (183) + 20000,
+    (SPECIES_MARILL) + 20000, // Marill line
     113,
     217,
     133,
@@ -740,14 +739,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     453,
     276,
     287,
-    (185) + 20000,
+    (SPECIES_SUDOWOODO) + 20000, // Sudowoodo
     120,
     29,
     106,
     111,
     205,
     328,
-    (187) + 20000,
+    (SPECIES_HOPPIP) + 20000, // Hoppip line
     93,
     227,
     38,
@@ -757,7 +756,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     244,
     312,
     388,
-    (190) + 20000,
+    (SPECIES_AIPOM) + 20000, // Aipom line
     68,
     103,
     228,
@@ -769,7 +768,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     343,
     340,
-    (191) + 20000,
+    (SPECIES_SUNKERN) + 20000, // Sunkern line
     320,
     227,
     73,
@@ -778,7 +777,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     270,
     275,
     230,
-    (193) + 20000,
+    (SPECIES_YANMA) + 20000, // Yanma line
     18,
     179,
     141,
@@ -787,7 +786,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     364,
     185,
     228,
-    (194) + 20000,
+    (SPECIES_WOOPER) + 20000, // Wooper line
     34,
     246,
     219,
@@ -799,7 +798,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     68,
     227,
     24,
-    (198) + 20000,
+    (SPECIES_MURKROW) + 20000, // Murkrow line
     18,
     65,
     119,
@@ -811,7 +810,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     375,
     103,
     185,
-    (200) + 20000,
+    (SPECIES_MISDREAVUS) + 20000, // Misdreavus line
     103,
     194,
     244,
@@ -822,7 +821,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     174,
     180,
     466,
-    (203) + 20000,
+    (SPECIES_GIRAFARIG) + 20000, // Girafarig
     36,
     133,
     193,
@@ -833,7 +832,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     277,
     24,
     243,
-    (204) + 20000,
+    (SPECIES_PINECO) + 20000, // Pineco line
     115,
     42,
     175,
@@ -843,7 +842,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     279,
     38,
     390,
-    (206) + 20000,
+    (SPECIES_DUNSPARCE) + 20000, // Dunsparce
     117,
     246,
     157,
@@ -854,7 +853,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     376,
     277,
     173,
-    (207) + 20000,
+    (SPECIES_GLIGAR) + 20000, // Gligar line
     232,
     17,
     13,
@@ -866,7 +865,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     364,
     400,
     440,
-    (209) + 20000,
+    (SPECIES_SNUBBULL) + 20000, // Snubbull line
     118,
     185,
     115,
@@ -879,7 +878,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     423,
     424,
     422,
-    (211) + 20000,
+    (SPECIES_QWILFISH) + 20000, // Qwilfish line
     175,
     114,
     61,
@@ -887,14 +886,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     310,
     324,
     398,
-    (213) + 20000,
+    (SPECIES_SHUCKLE) + 20000, // Shuckle
     230,
     282,
     270,
     367,
     328,
     189,
-    (214) + 20000,
+    (SPECIES_HERACROSS) + 20000, // Heracross
     106,
     117,
     175,
@@ -902,7 +901,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     279,
     228,
     38,
-    (215) + 20000,
+    (SPECIES_SNEASEL) + 20000, // Sneasel line
     68,
     180,
     193,
@@ -915,7 +914,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     228,
     420,
     8,
-    (216) + 20000,
+    (SPECIES_TEDDIURSA) + 20000, // Teddiursa line
     242,
     36,
     69,
@@ -928,7 +927,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     38,
     370,
     400,
-    (218) + 20000,
+    (SPECIES_SLUGMA) + 20000, // Slugma line
     151,
     257,
     174,
@@ -937,7 +936,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     254,
     255,
     256,
-    (220) + 20000,
+    (SPECIES_SWINUB) + 20000, // Swinub line
     36,
     44,
     34,
@@ -948,7 +947,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     38,
     90,
     174,
-    (222) + 20000,
+    (SPECIES_CORSOLA) + 20000, // Corsola
     157,
     103,
     54,
@@ -959,7 +958,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     333,
     267,
     392,
-    (223) + 20000,
+    (SPECIES_REMORAID) + 20000, // Remoraid line
     62,
     190,
     48,
@@ -969,7 +968,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     350,
     173,
     175,
-    (225) + 20000,
+    (SPECIES_DELIBIRD) + 20000, // Delibird
     62,
     98,
     248,
@@ -978,7 +977,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     301,
     420,
     8,
-    (226) + 20000,
+    (SPECIES_MANTINE) + 20000, // Mantine
     239,
     56,
     114,
@@ -988,7 +987,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     243,
     346,
     150,
-    (227) + 20000,
+    (SPECIES_SKARMORY) + 20000, // Skarmory
     65,
     228,
     18,
@@ -996,7 +995,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     174,
     413,
     372,
-    (228) + 20000,
+    (SPECIES_HOUNDOUR) + 20000, // Houndour line
     83,
     99,
     228,
@@ -1009,7 +1008,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     422,
     417,
     386,
-    (231) + 20000,
+    (SPECIES_PHANPY) + 20000, // Phanpy line
     116,
     34,
     246,
@@ -1018,7 +1017,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     90,
     283,
     420,
-    (234) + 20000,
+    (SPECIES_STANTLER) + 20000, // Stantler
     180,
     50,
     44,
@@ -1028,7 +1027,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     37,
     24,
     428,
-    (236) + 20000,
+    (SPECIES_TYROGUE) + 20000, // Tyrogue line
     229,
     136,
     183,
@@ -1037,14 +1036,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     68,
     410,
     418,
-    (238) + 20000,
+    (SPECIES_SMOOCHUM) + 20000, // Smoochum line
     96,
     244,
     252,
     273,
     8,
     357,
-    (239) + 20000,
+    (SPECIES_ELEKID) + 20000, // Elekid line
     2,
     112,
     27,
@@ -1053,7 +1052,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     7,
     8,
     223,
-    (240) + 20000,
+    (SPECIES_MAGBY) + 20000, // Magby line
     2,
     5,
     112,
@@ -1063,7 +1062,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     183,
     223,
     394,
-    (241) + 20000,
+    (SPECIES_MILTANK) + 20000, // Miltank line
     217,
     179,
     69,
@@ -1076,7 +1075,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     359,
     38,
     386,
-    (246) + 20000,
+    (SPECIES_LARVITAR) + 20000, // Larvitar line
     228,
     23,
     200,
@@ -1087,7 +1086,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     334,
     372,
     442,
-    (252) + 20000,
+    (SPECIES_TREECKO) + 20000, // Treecko line
     242,
     300,
     283,
@@ -1100,7 +1099,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     235,
     345,
     437,
-    (255) + 20000,
+    (SPECIES_TORCHIC) + 20000, // Torchic line
     68,
     179,
     203,
@@ -1113,7 +1112,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     400,
     387,
     364,
-    (258) + 20000,
+    (SPECIES_MUDKIP) + 20000, // Mudkip line
     287,
     253,
     174,
@@ -1126,7 +1125,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     44,
     38,
     426,
-    (261) + 20000,
+    (SPECIES_POOCHYENA) + 20000, // Poochyena line
     310,
     305,
     343,
@@ -1137,7 +1136,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     424,
     422,
     382,
-    (263) + 20000,
+    (SPECIES_ZIGZAGOON) + 20000, // Zigzagoon line
     204,
     228,
     164,
@@ -1145,7 +1144,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     271,
     270,
     189,
-    (270) + 20000,
+    (SPECIES_LOTAD) + 20000, // Lotad line
     235,
     75,
     230,
@@ -1153,7 +1152,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     175,
     55,
     321,
-    (273) + 20000,
+    (SPECIES_SEEDOT) + 20000, // Seedot line
     73,
     133,
     98,
@@ -1162,7 +1161,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     206,
     388,
     417,
-    (276) + 20000,
+    (SPECIES_TAILLOW) + 20000, // Taillow line
     228,
     48,
     287,
@@ -1171,7 +1170,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     143,
     18,
     413,
-    (278) + 20000,
+    (SPECIES_WINGULL) + 20000, // Wingull line
     54,
     239,
     97,
@@ -1179,7 +1178,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     346,
     392,
     282,
-    (280) + 20000,
+    (SPECIES_RALTS) + 20000, // Ralts line
     50,
     261,
     212,
@@ -1188,7 +1187,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     288,
     425,
     109,
-    (283) + 20000,
+    (SPECIES_SURSKIT) + 20000, // Surskit line
     193,
     341,
     60,
@@ -1196,7 +1195,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     170,
     324,
     450,
-    (285) + 20000,
+    (SPECIES_SHROOMISH) + 20000, //Shroomish line
     313,
     207,
     204,
@@ -1205,7 +1204,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     388,
     358,
     402,
-    (287) + 20000,
+    (SPECIES_SLAKOTH) + 20000, // Slakoth line
     228,
     163,
     34,
@@ -1215,7 +1214,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     214,
     359,
     400,
-    (290) + 20000,
+    (SPECIES_NINCADA) + 20000, // Nincada line
     203,
     185,
     16,
@@ -1223,7 +1222,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     405,
     400,
     450,
-    (293) + 20000,
+    (SPECIES_WHISMUR) + 20000, // Whismur line
     36,
     173,
     207,
@@ -1231,7 +1230,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     265,
     108,
     283,
-    (296) + 20000,
+    (SPECIES_MAKUHITA) + 20000, // Makuhita line
     185,
     197,
     193,
@@ -1242,20 +1241,20 @@ const u16 Unk_ov5_021F9FA2[] = {
     68,
     358,
     418,
-    (298) + 20000,
+    (SPECIES_AZURILL) + 20000, //Azurill
     227,
     47,
     287,
     21,
     321,
     313,
-    (299) + 20000,
+    (SPECIES_NOSEPASS) + 20000, // Nosepass line
     222,
     205,
     153,
     38,
     335,
-    (300) + 20000,
+    (SPECIES_SKITTY) + 20000, // Skitty line
     270,
     244,
     253,
@@ -1268,13 +1267,13 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     428,
     389,
-    (302) + 20000,
+    (SPECIES_SABLEYE) + 20000, // Sableye
     244,
     105,
     236,
     417,
     260,
-    (303) + 20000,
+    (SPECIES_MAWILE) + 20000, // Mawile
     14,
     206,
     305,
@@ -1286,7 +1285,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     424,
     422,
     386,
-    (304) + 20000,
+    (SPECIES_ARON) + 20000, // Aron line
     283,
     34,
     23,
@@ -1295,7 +1294,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     103,
     442,
     407,
-    (307) + 20000,
+    (SPECIES_MEDITITE) + 20000, // Meditite line
     7,
     9,
     8,
@@ -1307,7 +1306,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     385,
     427,
     418,
-    (309) + 20000,
+    (SPECIES_ELECTRIKE) + 20000, // Electrike line
     242,
     29,
     253,
@@ -1317,29 +1316,29 @@ const u16 Unk_ov5_021F9FA2[] = {
     423,
     424,
     422,
-    (311) + 20000,
+    (SPECIES_PLUSLE) + 20000, // Plusle
     164,
     273,
     47,
     186,
-    (312) + 20000,
+    (SPECIES_MINUN) + 20000, // Minun
     164,
     273,
     47,
     186,
-    (313) + 20000,
+    (SPECIES_VOLBEAT) + 20000, // Volbeat
     226,
     318,
     271,
     227,
     405,
-    (314) + 20000,
+    (SPECIES_ILLUMISE) + 20000, // Illumise
     226,
     318,
     74,
     227,
     405,
-    (315) + 20000,
+    (SPECIES_ROSELIA) + 20000, // Roselia line
     191,
     235,
     42,
@@ -1348,19 +1347,19 @@ const u16 Unk_ov5_021F9FA2[] = {
     75,
     170,
     437,
-    (316) + 20000,
+    (SPECIES_GULPIN) + 20000, // Gulpin line
     138,
     151,
     123,
     220,
     174,
     194,
-    (318) + 20000,
+    (SPECIES_CARVANHA) + 20000, // Carvanha line
     56,
     38,
     37,
     246,
-    (320) + 20000,
+    (SPECIES_WAILMER) + 20000, // Wailmer line
     38,
     37,
     207,
@@ -1371,7 +1370,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     321,
     111,
     34,
-    (322) + 20000,
+    (SPECIES_NUMEL) + 20000, // Numel line
     336,
     184,
     34,
@@ -1382,14 +1381,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     246,
     426,
     257,
-    (324) + 20000,
+    (SPECIES_TORKOAL) + 20000, // Torkoal
     284,
     203,
     214,
     281,
     89,
     90,
-    (325) + 20000,
+    (SPECIES_SPOINK) + 20000, // Spoink line
     248,
     326,
     164,
@@ -1397,7 +1396,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     428,
     133,
     243,
-    (327) + 20000,
+    (SPECIES_SPINDA) + 20000, // Spinda
     227,
     157,
     274,
@@ -1409,13 +1408,13 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     272,
     427,
-    (328) + 20000,
+    (SPECIES_TRAPINCH) + 20000, // Trapinch line
     116,
     98,
     16,
     175,
     210,
-    (331) + 20000,
+    (SPECIES_CACNEA) + 20000, // Cacnea line
     320,
     51,
     298,
@@ -1425,14 +1424,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     265,
     345,
     402,
-    (333) + 20000,
+    (SPECIES_SWABLU) + 20000, // Swablu line
     97,
     114,
     228,
     99,
     297,
     407,
-    (335) + 20000,
+    (SPECIES_ZANGOOSE) + 20000, // Zangoose
     175,
     24,
     13,
@@ -1443,7 +1442,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     400,
     232,
     458,
-    (336) + 20000,
+    (SPECIES_SEVIPER) + 20000, // Seviper
     254,
     256,
     255,
@@ -1451,14 +1450,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     184,
     372,
     400,
-    (339) + 20000,
+    (SPECIES_BARBOACH) + 20000, // Barboach line
     37,
     250,
     209,
     56,
     175,
     36,
-    (341) + 20000,
+    (SPECIES_CORPHISH) + 20000, // Corphish line
     300,
     283,
     34,
@@ -1466,14 +1465,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     282,
     276,
     232,
-    (345) + 20000,
+    (SPECIES_LILEEP) + 20000, // Lileep line
     112,
     105,
     243,
     157,
     378,
     321,
-    (347) + 20000,
+    (SPECIES_ANORITH) + 20000, // Anorith line
     229,
     282,
     14,
@@ -1481,7 +1480,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     103,
     28,
     440,
-    (349) + 20000,
+    (SPECIES_FEEBAS) + 20000, // Feebas line
     243,
     225,
     300,
@@ -1491,21 +1490,21 @@ const u16 Unk_ov5_021F9FA2[] = {
     54,
     114,
     321,
-    (351) + 20000,
+    (SPECIES_CASTFORM) + 20000, // Castform
     248,
     244,
     381,
     50,
     133,
     466,
-    (352) + 20000,
+    (SPECIES_KECLEON) + 20000, // Kecleon
     50,
     277,
     271,
     252,
     417,
     146,
-    (353) + 20000,
+    (SPECIES_SHUPPET) + 20000, // Shuppet line
     50,
     194,
     193,
@@ -1515,7 +1514,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     425,
     371,
     109,
-    (355) + 20000,
+    (SPECIES_DUSKULL) + 20000, // Duskull line
     286,
     194,
     220,
@@ -1523,7 +1522,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     262,
     185,
     466,
-    (357) + 20000,
+    (SPECIES_TROPIUS) + 20000, // Tropius
     29,
     21,
     13,
@@ -1533,14 +1532,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     235,
     174,
     348,
-    (358) + 20000,
+    (SPECIES_CHIMECHO) + 20000, //Chimecho
     50,
     174,
     95,
     138,
     273,
     248,
-    (359) + 20000,
+    (SPECIES_ABSOL) + 20000, // Absol
     226,
     185,
     38,
@@ -1553,13 +1552,13 @@ const u16 Unk_ov5_021F9FA2[] = {
     389,
     372,
     382,
-    (361) + 20000,
+    (SPECIES_SNORUNT) + 20000, // Snorunt line
     335,
     191,
     205,
     50,
     117,
-    (363) + 20000,
+    (SPECIES_SPHEAL) + 20000, // Spheal line
     346,
     254,
     256,
@@ -1569,7 +1568,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     174,
     90,
     324,
-    (366) + 20000,
+    (SPECIES_CLAMPERL) + 20000, // Clamperl line
     287,
     300,
     34,
@@ -1577,7 +1576,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     112,
     109,
     392,
-    (369) + 20000,
+    (SPECIES_RELICANTH) + 20000, // Relicanth
     222,
     130,
     346,
@@ -1587,14 +1586,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     401,
     173,
     189,
-    (370) + 20000,
+    (SPECIES_LUVDISC) + 20000, // Luvdisc
     150,
     48,
     346,
     300,
     445,
     392,
-    (371) + 20000,
+    (SPECIES_BAGON) + 20000, // Bagon line
     56,
     37,
     82,
@@ -1603,7 +1602,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     424,
     421,
     407,
-    (387) + 20000,
+    (SPECIES_TURTWIG) + 20000, // Turtwig line
     388,
     74,
     321,
@@ -1614,7 +1613,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     37,
     133,
     276,
-    (390) + 20000,
+    (SPECIES_CHIMCHAR) + 20000, // Chimchar line
     7,
     9,
     24,
@@ -1625,7 +1624,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     252,
     299,
     68,
-    (393) + 20000,
+    (SPECIES_PIPLUP) + 20000, // Piplup line
     458,
     48,
     281,
@@ -1636,7 +1635,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     97,
     392,
     56,
-    (396) + 20000,
+    (SPECIES_STARLY) + 20000, // Starly line
     297,
     31,
     228,
@@ -1644,7 +1643,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     28,
     193,
     38,
-    (399) + 20000,
+    (SPECIES_BIDOOF) + 20000, // Bidoof line
     98,
     346,
     38,
@@ -1653,14 +1652,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     205,
     316,
     401,
-    (403) + 20000,
+    (SPECIES_SHINX) + 20000, // Shinx line
     423,
     424,
     422,
     98,
     336,
     36,
-    (406) + 20000,
+    (SPECIES_BUDEW) + 20000, // Budew
     191,
     235,
     42,
@@ -1670,7 +1669,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     170,
     437,
     326,
-    (408) + 20000,
+    (SPECIES_CRANIDOS) + 20000, // Cranidos line
     242,
     37,
     38,
@@ -1679,7 +1678,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     23,
     18,
     359,
-    (410) + 20000,
+    (SPECIES_SHIELDON) + 20000, // Shieldon line
     29,
     184,
     116,
@@ -1689,7 +1688,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     103,
     174,
     90,
-    (417) + 20000,
+    (SPECIES_PACHIRISU) + 20000, // Pachirisu line
     343,
     44,
     313,
@@ -1697,7 +1696,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     205,
     260,
     175,
-    (418) + 20000,
+    (SPECIES_BUIZEL) + 20000, // Buizel line
     189,
     29,
     154,
@@ -1706,14 +1705,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     3,
     210,
     226,
-    (420) + 20000,
+    (SPECIES_CHERUBI) + 20000, // Cherubi line
     75,
     230,
     321,
     267,
     320,
     312,
-    (422) + 20000,
+    (SPECIES_SHELLOS) + 20000, // Shellos line
     68,
     243,
     254,
@@ -1724,14 +1723,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     174,
     133,
     90,
-    (425) + 20000,
+    (SPECIES_DRIFLOON) + 20000, // Drifloon line
     262,
     34,
     194,
     50,
     114,
     95,
-    (427) + 20000,
+    (SPECIES_BUNEARY) + 20000, // Buneary line
     313,
     252,
     227,
@@ -1744,14 +1743,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     9,
     8,
     7,
-    (431) + 20000,
+    (SPECIES_GLAMEOW) + 20000, // Glameow line
     44,
     39,
     98,
     28,
     313,
     372,
-    (433) + 20000,
+    (SPECIES_CHINGLING) + 20000, // Chingling
     50,
     174,
     95,
@@ -1759,7 +1758,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     273,
     248,
     105,
-    (434) + 20000,
+    (SPECIES_STUNKY) + 20000, // Stunky line
     228,
     43,
     123,
@@ -1768,14 +1767,14 @@ const u16 Unk_ov5_021F9FA2[] = {
     184,
     310,
     386,
-    (438) + 20000,
+    (SPECIES_BONSLY) + 20000, // Bonsly
     120,
     29,
     106,
     111,
     205,
     328,
-    (439) + 20000,
+    (SPECIES_MIME_JR) + 20000, // Mime Jr.
     248,
     95,
     102,
@@ -1787,7 +1786,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     298,
     361,
     204,
-    (440) + 20000,
+    (SPECIES_HAPPINY) + 20000, // Happiny
     217,
     118,
     215,
@@ -1797,20 +1796,20 @@ const u16 Unk_ov5_021F9FA2[] = {
     270,
     356,
     387,
-    (441) + 20000,
+    (SPECIES_CHATOT) + 20000, // Chatot
     227,
     101,
     97,
     417,
     48,
-    (442) + 20000,
+    (SPECIES_SPIRITOMB) + 20000, // Spiritomb
     194,
     220,
     108,
     286,
     288,
     425,
-    (443) + 20000,
+    (SPECIES_GIBLE) + 20000, // Gible line
     225,
     200,
     239,
@@ -1821,7 +1820,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     328,
     34,
     442,
-    (446) + 20000,
+    (SPECIES_MUNCHLAX) + 20000, // Munchlax
     122,
     204,
     38,
@@ -1830,7 +1829,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     18,
     228,
     428,
-    (447) + 20000,
+    (SPECIES_RIOLU) + 20000, // Riolu line
     238,
     197,
     44,
@@ -1844,7 +1843,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     334,
     299,
     418,
-    (449) + 20000,
+    (SPECIES_HIPPOPOTAS) + 20000, // Hippopotas line
     254,
     256,
     255,
@@ -1852,7 +1851,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     303,
     34,
     328,
-    (451) + 20000,
+    (SPECIES_SKORUPI) + 20000, // Skorupi line
     185,
     103,
     28,
@@ -1862,7 +1861,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     97,
     228,
     400,
-    (453) + 20000,
+    (SPECIES_CROAGUNK) + 20000, // Croagunk line
     382,
     364,
     223,
@@ -1874,7 +1873,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     265,
     238,
     418,
-    (455) + 20000,
+    (SPECIES_CARNIVINE) + 20000, // Carnivine line
     79,
     78,
     75,
@@ -1883,7 +1882,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     345,
     73,
     388,
-    (456) + 20000,
+    (SPECIES_FINNEON) + 20000, // Finneon line
     186,
     204,
     175,
@@ -1892,7 +1891,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     60,
     321,
     97,
-    (458) + 20000,
+    (SPECIES_MANTYKE) + 20000, // Mantyke
     239,
     56,
     114,
@@ -1903,7 +1902,7 @@ const u16 Unk_ov5_021F9FA2[] = {
     346,
     150,
     324,
-    (459) + 20000,
+    (SPECIES_SNOVER) + 20000, // Snover line
     73,
     345,
     402,
