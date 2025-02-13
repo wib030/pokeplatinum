@@ -1528,7 +1528,7 @@ static u8 ov6_0224226C (const BOOL param0, const u8 param1, const UnkStruct_ov6_
     if (param2->unk_0D == 0) {
         if (param0) {
             if ((param2->unk_0E == 60) || (param2->unk_0E == 21)) {
-                (void)(v0 * 2);
+                v0 *= 2; //Fix Sticky Hold and Suction Cups not applying outside battle
             }
         } else {
             if ((param2->unk_0E == 71) || (param2->unk_0E == 99) || (param2->unk_0E == 35)) {

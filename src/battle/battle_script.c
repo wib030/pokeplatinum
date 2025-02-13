@@ -1635,7 +1635,8 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
 		battleCtx->damage /= 2;
 	}
 	
-	if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_UNOWN_ENERGY)
+	if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_UNOWN_ENERGY)
+	&& (battleCtx->moveCur != MOVE_STRUGGLE))
 	{
 		if (moveType == TYPE_NORMAL)
 		{
