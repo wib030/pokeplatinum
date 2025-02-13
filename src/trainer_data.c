@@ -291,7 +291,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             for (j = 0; j < battleParams->trainerData[battler].class; j++) {
                 rnd = LCRNG_Next();
             }
-
+			
             rnd = (rnd << 8) + genderMod;
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 			
