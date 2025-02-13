@@ -56,13 +56,14 @@
             "level": 63,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
-                "MOVE_OCTAZOOKA",
-				"MOVE_ICE_BEAM",
+                "MOVE_HYDRO_PUMP",
+				"MOVE_BLIZZARD",
 				"MOVE_FIRE_BLAST",
 				"MOVE_THUNDER_WAVE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         },
         {
             "species": "SPECIES_TANGROWTH",

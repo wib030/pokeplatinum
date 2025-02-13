@@ -103,7 +103,8 @@
             "40": "MOVE_ICE_BEAM",
 			"46": "MOVE_BULLET_SEED",
 			"52": "MOVE_SHEER_COLD",
-            "58": "MOVE_HYPER_BEAM"
+            "58": "MOVE_HYDRO_PUMP",
+			"60": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_DIVE",
