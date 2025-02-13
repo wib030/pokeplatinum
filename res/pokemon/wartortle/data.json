@@ -35,8 +35,8 @@
         "EGG_GROUP_WATER_1"
     ],
     "abilities": [
-        "ABILITY_SHAKEDOWN",
-        "ABILITY_NONE"
+        "ABILITY_TORRENT",
+        "ABILITY_SHAKEDOWN"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
