@@ -4044,6 +4044,7 @@ static BOOL BtlCmd_ResetAllStatChanges(BattleSystem *battleSys, BattleContext *b
         }
 
         battleCtx->battleMons[i].statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
+        battleCtx->battleMons[i].meditateCritBoostFlag = FALSE;
     }
 
     return FALSE;
