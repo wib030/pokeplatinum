@@ -10419,6 +10419,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     u8 inheritedIVs[STAT_MAX];
     // u16 monSpecies;
     u32 currentBox, inBox;
+	u32 isEgg, personality, eggLevel, eggSpecies;
     BOOL isOpenEggSlot;
 
     Party * party;
@@ -10454,9 +10455,10 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         Pokemon *mon = Pokemon_New(HEAP_ID_BATTLE);
 
         Pokemon_Copy(BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->selectedPartySlot[battleCtx->attacker]), mon);
-
-        Pokemon_SetValue(mon, MON_DATA_IS_EGG, 1);
-
+		
+		isEgg = 1;
+        Pokemon_SetValue(mon, MON_DATA_IS_EGG, &isEgg);
+		
         // Everstone nature calculation
         if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE
             || Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
@@ -10464,19 +10466,23 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE
             && Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
                 if (BattleSystem_RandNext(battleSys) & 1) {
-                    Pokemon_SetValue(mon, MON_DATA_PERSONALITY, Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL));
+					personality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
+                    Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
                 }
             }
             else {
                 if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
-                    Pokemon_SetValue(mon, MON_DATA_PERSONALITY, Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL));
+					personality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
+                    Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
                 }
             }
         }
         else {
-            Pokemon_SetValue(mon, MON_DATA_PERSONALITY, NULL) = Pokemon_GetNatureOf(BattleSystem_RandNext(battleSys));
+			personality = Pokemon_GetNatureOf(BattleSystem_RandNext(battleSys));
+            Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
         }
-
+		
+		/*
         for (i = 0; i < STAT_MAX; i++) {
             inheritedIVs[i] = 32;
         }
@@ -10509,10 +10515,12 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 inheritedIVs[i] = BattleSystem_RandNext(battleSys) % 32;
             }
 
-            Pokemon_SetValue(mon, MON_DATA_HP_IV + i, inheritedIVs[i]);
+            Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &inheritedIVs[i]);
         }
-
-        Pokemon_SetValue(mon, MON_DATA_LEVEL, 1);
+		*/
+		
+		eggLevel = 1;
+        Pokemon_SetValue(mon, MON_DATA_LEVEL, &eggLevel);
     }
 
     
@@ -10529,9 +10537,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         }
         else {
             if (currentBox < 18) {
-                // PCBoxes *box;
-
-                // box = 
                 sub_020798A0(battleSys->pcBoxes, currentBox, Pokemon_GetBoxPokemon(mon));
             }
         }
