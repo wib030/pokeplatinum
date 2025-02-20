@@ -19,15 +19,15 @@ typedef struct UnkStruct_02026224_t {
 } UnkStruct_02026224;
 
 typedef struct UnkStruct_02026218_t {
-    BoxPokemon unk_00;
-    UnkStruct_02026224 unk_08;
-    u32 unk_68;
+    BoxPokemon unk_00; // box pokemon
+    UnkStruct_02026224 unk_08; // mail
+    u32 unk_68; // step count
 } UnkStruct_02026218;
 
 typedef struct UnkStruct_02026310_t {
-    UnkStruct_02026218 unk_00[2];
-    u32 unk_D8;
-    u8 unk_DC;
+    UnkStruct_02026218 unk_00[2]; // daycare pokemon (above struct)
+    u32 unk_D8; // egg (0 = not available, non-zero = available, random number of seeds)
+    u8 unk_DC; // egg count (egg hatching count)
 } UnkStruct_02026310;
 
 int Daycare_SaveSize (void)
