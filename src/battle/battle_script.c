@@ -95,6 +95,8 @@
 #include "data/terrain/to_move.h"
 #include "data/terrain/to_secondary_effect.h"
 
+#include "constants/battle/trainer_ai.h"
+
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
 
 typedef struct BattleMessageParams {
@@ -330,6 +332,7 @@ static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCo
 static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryTailwind(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -593,7 +596,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_TriggerAttackerAbilityOnHit,
 	BtlCmd_CheckStickyWeb,
 	BtlCmd_TryTailwind,
-	BtlCmd_TryGravity
+	BtlCmd_TryGravity,
+    BtlCmd_PregnancyPunch
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7098,10 +7102,10 @@ static BOOL BtlCmd_TrySwapItems(BattleSystem *battleSys, BattleContext *battleCt
     int attacking = Battler_Side(battleSys, battleCtx->attacker);
     int defending = Battler_Side(battleSys, battleCtx->defender);
 
-    //if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE)
-	//{
-        //BattleScript_Iter(battleCtx, jumpOnFail);
-    //} 
+    //  if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE)
+	//  {
+    //      BattleScript_Iter(battleCtx, jumpOnFail);
+    //  } 
 	
 	if ((battleCtx->sideConditions[attacking].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker]))
     || (battleCtx->sideConditions[defending].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->defender])))
@@ -10400,6 +10404,153 @@ static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @brief Execute Pregnancy Punch, including the generation of the
+ *        offspring egg.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE
+ */
+static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int i;
+    int statsFromMom, statsFromDad, statRand;
+    u8 eggPartySlot;
+    u8 inheritedIVs[STAT_MAX];
+    // u16 monSpecies;
+    u32 currentBox, inBox;
+    BOOL isOpenEggSlot;
+
+    Party * party;
+    Pokemon *mon;
+    Pokemon *defendingMon;
+    Pokemon *attackingMon;
+
+    isOpenEggSlot = FALSE;
+    eggPartySlot = 6;
+
+    BattleScript_Iter(battleCtx, 1);
+
+    defendingMon = BattleSystem_PartyPokemon(battleSys, battleCtx->defender, battleCtx->selectedPartySlot[battleCtx->defender]);
+    attackingMon = BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->selectedPartySlot[battleCtx->attacker]);
+
+    if (battleSys->trainers[battleCtx->defender].aiMask & AI_FLAG_BASIC) {
+        if (BattleSystem_PartyCount(battleSys, battleCtx->defender) != MAX_PARTY_SIZE) {
+            eggPartySlot = BattleSystem_PartyCount(battleSys, battleCtx->defender);
+        }
+        else {
+            currentBox = 18;
+        }
+    }
+    else {
+        if (BattleSystem_PartyCount(battleSys, battleCtx->defender) != MAX_PARTY_SIZE || PCBoxes_FirstEmptyBox(battleSys->pcBoxes) != 18) {
+            eggPartySlot = BattleSystem_PartyCount(battleSys, battleCtx->defender);
+            currentBox = PCBoxes_FirstEmptyBox(battleSys->pcBoxes);
+        }
+    }
+
+    // Make our pokemon
+    if (eggPartySlot < MAX_PARTY_SIZE || currentBox < 18) {
+        Pokemon *mon = Pokemon_New(HEAP_ID_BATTLE);
+
+        Pokemon_Copy(BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->selectedPartySlot[battleCtx->attacker]), mon);
+
+        Pokemon_SetValue(mon, MON_DATA_IS_EGG, 1);
+
+        // Everstone nature calculation
+        if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE
+            || Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
+
+            if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE
+            && Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
+                if (BattleSystem_RandNext(battleSys) & 1) {
+                    Pokemon_SetValue(mon, MON_DATA_PERSONALITY, Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL));
+                }
+            }
+            else {
+                if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
+                    Pokemon_SetValue(mon, MON_DATA_PERSONALITY, Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL));
+                }
+            }
+        }
+        else {
+            Pokemon_SetValue(mon, MON_DATA_PERSONALITY, NULL) = Pokemon_GetNatureOf(BattleSystem_RandNext(battleSys));
+        }
+
+        for (i = 0; i < STAT_MAX; i++) {
+            inheritedIVs[i] = 32;
+        }
+
+        statsFromMom = 0;
+        statsFromDad = 0;
+
+        for (i = 0; i < 3; i++) {
+            statRand = BattleSystem_RandNext(battleSys) % (STAT_MAX - i);
+            
+            if ((BattleSystem_RandNext(battleSys) & 1)
+            && statsFromMom < 2) {
+                inheritedIVs[BattleSystem_RandNext(battleSys) % (STAT_MAX - i)] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i + statRand, NULL);
+                statsFromMom++;
+            }
+            else {
+                if (statsFromDad < 2) {
+                    inheritedIVs[BattleSystem_RandNext(battleSys) % (STAT_MAX - i)] = Pokemon_GetValue(attackingMon, MON_DATA_HP_IV + i + statRand, NULL);
+                    statsFromDad++;
+                }
+                else {
+                    inheritedIVs[BattleSystem_RandNext(battleSys) % (STAT_MAX - i)] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i + statRand, NULL);
+                    statsFromMom++;
+                }
+            }
+        }
+
+        for (i = 0; i < STAT_MAX; i++) {
+            if (inheritedIVs[i] == 32) {
+                inheritedIVs[i] = BattleSystem_RandNext(battleSys) % 32;
+            }
+
+            Pokemon_SetValue(mon, MON_DATA_HP_IV + i, inheritedIVs[i]);
+        }
+
+        Pokemon_SetValue(mon, MON_DATA_LEVEL, 1);
+    }
+
+    
+
+    if (eggPartySlot < MAX_PARTY_SIZE) {
+        // We have an open party slot
+
+        party = BattleSystem_Party(battleSys, battleCtx->defender);
+        Party_AddPokemon(party, mon);
+    }
+    else {
+        if (battleSys->trainers[battleCtx->defender].aiMask & AI_FLAG_BASIC) {
+            // do nothing if we are AI
+        }
+        else {
+            if (currentBox < 18) {
+                // PCBoxes *box;
+
+                // box = 
+                sub_020798A0(battleSys->pcBoxes, currentBox, Pokemon_GetBoxPokemon(mon));
+            }
+        }
+    }
+
+    // BattleSystem_PartyPokemon(battleSys, v1, v2->battleCtx->selectedPartySlot[v1]);
+
+    /*
+    // Calculate shininess
+    u32 monOTID = Pokemon_GetValue(defen, MON_DATA_OT_ID, NULL);
+    u32 monPersonality = Pokemon_GetValue(boxMon, MON_DATA_PERSONALITY, NULL);
+
+    return Pokemon_IsPersonalityShiny(monOTID, monPersonality);
+    */
+
+    return FALSE;
+}
+
+/**
  * @brief Read a 4-byte chunk from the loaded script and increment the cursor.
  * 
  * @param battleCtx 
@@ -11678,6 +11829,7 @@ static void BattleScript_CatchMonTask (SysTask * param0, void * param1)
                         int v28;
                         int v29;
 
+                        // Get box
                         v24 = ov16_0223E228(v2->battleSys);
                         v25 = sub_0207999C(v24);
                         v26 = PCBoxes_FirstEmptyBox(v24);
