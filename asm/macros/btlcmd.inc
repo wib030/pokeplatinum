@@ -1257,5 +1257,9 @@
 	.long \turns
     .long (\jump_no_effect-.) / 4 - 1
     .endm
+	
+	.macro PregnancyPunch
+    .long 227
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

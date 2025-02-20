@@ -2297,9 +2297,7 @@ static int ov5_021E6684 (UnkStruct_02026310 * param0)
     }
     // 229 == ITEM_EVERSTONE
     if (BoxPokemon_GetValue(v4[v2], MON_DATA_HELD_ITEM, NULL) == 229) {
-        if (LCRNG_Next() <= (0xffff / 20)) {
-            return -1;
-        }
+        //Don't return -1
     } else {
         return -1;
     }
