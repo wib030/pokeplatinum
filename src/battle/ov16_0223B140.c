@@ -530,7 +530,7 @@ static void ov16_0223B790 (OverlayManager * param0)
     BattleParams * v1 = OverlayManager_Args(param0);
     ArchivedSprite v2;
     int v3;
-    RTCDate v4;
+    RTCDate v4; // RTC time values that are used in commented out get date function
     RTCTime v5;
 
     MI_CpuFill16((void *)sub_020241F0(), 0x0, sub_020241F8());
