@@ -10415,22 +10415,27 @@ static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx)
  */
 static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int i;
-    int statRand, monOTIDSource;
+    int i, maxIVsInherited;
+    int statRand, IVRandSeed, statRandReroll, monOTIDSource;
     int battlerPregnant;
 	int monLevel;
     // int monMetDateTime;
     u8 monMetYear, monMetMonth, monMetDay;
-    u8 eggPartySlot, inheritedIVsTemp, tempEV;
+    u8 eggPartySlot, monIVsTemp, tempEV;
     u8 monGender, attackerGender, defenderGender;
-    u8 inheritedIVs[STAT_MAX];
+    u8 inheritedIVs[STAT_MAX], lockedDefenderIVs[STAT_MAX], lockedAttackerIVs[STAT_MAX], monIVs[STAT_MAX];
 	u8 eggCycles;
     u16 monSpecies, attackerSpecies, defenderSpecies;
     u16 monEggSpecies, attackerEggSpecies, defenderEggSpecies;
+    u16 attackerHeldItem, defenderHeldItem;
+    u16 monMoves[LEARNED_MOVES_MAX];
+    u16 moveTemp;
     u32 monTrainerID;
     u32 currentBox, inBox;
-	u32 isEgg, personality, hasNickname;
+	u32 isEgg, hasNickname;
+    u32 monPersonality, attackerPersonality, defenderPersonality, pregnantPersonality, personalityRand;
     BOOL isOpenEggSlot;
+    BOOL flagVoltTackle;
 
     RTCDate date;
     RTCTime time;
@@ -10439,12 +10444,14 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     Pokemon *mon;
     Pokemon *defendingMon;
     Pokemon *attackingMon;
+    Pokemon *pregnantMon;
     TrainerInfo *trInfo;
     BoxPokemon *boxMon;
 
     Strbuf* eggName;
 
     isOpenEggSlot = FALSE;
+    flagVoltTackle = FALSE;
     eggPartySlot = 6;
 
     BattleScript_Iter(battleCtx, 1);
@@ -10483,9 +10490,10 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         attackerEggSpecies = Pokemon_GetValue(attackingMon, MON_DATA_SPECIES_EGG, NULL);
         defenderEggSpecies = Pokemon_GetValue(defendingMon, MON_DATA_SPECIES_EGG, NULL);
 
+        monSpecies = SPECIES_NONE;
         monEggSpecies = SPECIES_NONE;
 
-        switch (defenderEggSpecies) {
+        switch (defenderSpecies) {
             default:
                 break;
 
@@ -10516,7 +10524,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             case SPECIES_MESPRIT:
             case SPECIES_MILTANK:
             case SPECIES_MISMAGIUS:
-            case SPECIES_NIDOQUEEN:
             case SPECIES_NIDORINA:
             case SPECIES_OCTILLERY:
             case SPECIES_ODDISH:
@@ -10535,17 +10542,36 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             case SPECIES_VULPIX:
             case SPECIES_WORMADAM:
                 if (defenderGender == GENDER_FEMALE || defenderGender == GENDER_NONE) {
+                    monSpecies = defenderEggSpecies;
                     monEggSpecies = defenderEggSpecies;
                 }
                 break;
 
             case SPECIES_MEW:
+                monSpecies = SPECIES_MEWTWO;
                 monEggSpecies = SPECIES_MEWTWO;
+                break;
+
+            case SPECIES_NIDOQUEEN:
+                if (defenderGender == GENDER_FEMALE || defenderGender == GENDER_NONE) {
+                    monSpecies = SPECIES_NIDORAN_F;
+                    monEggSpecies = SPECIES_NIDORAN_F;
+                }
+                else {
+                    if ((BattleSystem_RandNext(battleSys) % 8) < 7) {
+                        monSpecies = SPECIES_NIDORAN_M;
+                        monEggSpecies = SPECIES_NIDORAN_F;
+                    }
+                    else {
+                        monSpecies = SPECIES_NIDORAN_F;
+                        monEggSpecies = SPECIES_NIDORAN_M;
+                    }
+                }
                 break;
                 
         }
 
-        switch (attackerEggSpecies) {
+        switch (attackerSpecies) {
             default:
                 break;
 
@@ -10560,7 +10586,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             case SPECIES_MACHAMP:
             case SPECIES_MEWTWO:
             case SPECIES_MUK:
-            case SPECIES_NIDOKING:
             case SPECIES_RIOLU:
             case SPECIES_SLAKING:
             case SPECIES_STEELIX:
@@ -10570,54 +10595,69 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             case SPECIES_WIGGLYTUFF:
             case SPECIES_ZANGOOSE:
                 if (attackerGender == GENDER_MALE || attackerGender == GENDER_NONE) {
+                    monSpecies = attackerEggSpecies;
                     monEggSpecies = attackerEggSpecies;
                 }
+                break;
+
+            case SPECIES_NIDOKING:
+                monSpecies = SPECIES_NIDORAN_M;
+                monEggSpecies = MONSNO_NIDORAN_M;
                 break;
         }
 
         // Phione's sperm and eggs die in transit
         if (attackerSpecies == SPECIES_PHIONE || defenderSpecies == SPECIES_PHIONE) {
+            monSpecies = SPECIES_GASTLY;
             monEggSpecies = SPECIES_GASTLY;
         }
 
         // Machamp is the god of sex
         if (attackerSpecies == SPECIES_MACHAMP || defenderSpecies == SPECIES_MACHAMP) {
+            monSpecies = SPECIES_MACHAMP;
             monEggSpecies = SPECIES_MACHAMP;
         }
 
         trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
         battlerPregnant = battleCtx->defender;
+        pregnantMon = defendingMon;
 
         // male attacking anything
         if (attackerGender == GENDER_MALE) {
             if (monEggSpecies == SPECIES_NONE) {
+                monSpecies = attackerEggSpecies;
                 monEggSpecies = attackerEggSpecies;
             }
             trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
             monTrainerID = TrainerInfo_ID(trInfo);
             battlerPregnant = battleCtx->defender;
+            pregnantMon = defendingMon;
         }
         else {
             // non-male attacking male
             if (defenderGender == GENDER_MALE) {
                 if (monEggSpecies == SPECIES_NONE) {
+                    monSpecies = defenderEggSpecies;
                     monEggSpecies = defenderEggSpecies;
                 }
                 trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->attacker);
                 monTrainerID = TrainerInfo_ID(trInfo);
                 battlerPregnant = battleCtx->attacker;
+                pregnantMon = attackingMon;
             }
             else {
                 // neuter attacking female
                 if (attackerGender != defenderGender
                 && attackerGender == GENDER_NONE) {
                     if (monEggSpecies == SPECIES_NONE) {
+                        monSpecies = attackerEggSpecies;
                         monEggSpecies = attackerEggSpecies;
                     }
                 }
                 // neuter attacking neuter or female attacking neuter or female attacking female
                 else {
                     if (monEggSpecies == SPECIES_NONE) {
+                        monSpecies = defenderEggSpecies;
                         monEggSpecies = defenderEggSpecies;
                     } 
                 }
@@ -10625,44 +10665,266 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
                 monTrainerID = TrainerInfo_ID(trInfo);
                 battlerPregnant = battleCtx->defender;
+                pregnantMon = defendingMon;
             }
         }
-        
-        // Pokemon_Copy(BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->selectedPartySlot[battleCtx->attacker]), mon);
 		
-        // Everstone nature calculation
-        if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE
-            || Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
+        defenderHeldItem = Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL);
+        attackerHeldItem = Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL);
 
-            if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE
-            && Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
-                if (BattleSystem_RandNext(battleSys) & 1) {
-					personality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
+        attackerPersonality = Pokemon_GetValue(attackingMon, MON_DATA_PERSONALITY, NULL);
+        defenderPersonality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
+        pregnantPersonality = Pokemon_GetValue(pregnantMon, MON_DATA_PERSONALITY, NULL);
+
+        // initialize some things before Mon generation
+
+        for (i = 0; i < STAT_MAX; i++) {
+            // Set invalid IV for later checking
+            inheritedIVs[i] = 32;
+            lockedDefenderIVs[i] = 0;
+            lockedAttackerIVs[i] = 0;
+        }
+
+        personalityRand = BattleSystem_RandNext(battleSys);
+		monPersonality = Pokemon_GetNatureOf(personalityRand);
+        maxIVsInherited = 3;
+
+        switch (defenderHeldItem) {
+            default:
+                break;
+
+            case ITEM_EVERSTONE:
+                monPersonality = defenderPersonality;
+                break;
+
+            case ITEM_POWER_WEIGHT:
+                lockedDefenderIVs[STAT_HP] = 1;
+                break;
+
+            case ITEM_POWER_BRACER:
+                lockedDefenderIVs[STAT_ATTACK] = 1;
+                break;
+
+            case ITEM_POWER_BELT:
+                lockedDefenderIVs[STAT_DEFENSE] = 1;
+                break;
+
+            case ITEM_POWER_ANKLET:
+                lockedDefenderIVs[STAT_SPEED] = 1;
+                break;
+
+            case ITEM_POWER_LENS:
+                lockedDefenderIVs[STAT_SPECIAL_ATTACK] = 1;
+                break;
+
+            case ITEM_POWER_BAND:
+                lockedDefenderIVs[STAT_SPECIAL_DEFENSE] = 1;
+                break;
+
+            case ITEM_DESTINY_KNOT:
+                maxIVsInherited = STAT_MAX - 1;
+                break;
+
+            case ITEM_SEA_INCENSE:
+                if (monSpecies == SPECIES_MARILL) {
+                    monSpecies = SPECIES_AZUMARILL;
+                }
+                break;
+
+            case ITEM_LAX_INCENSE:
+                if (monSpecies == SPECIES_WOBBUFFET) {
+                    monSpecies = SPECIES_WYNAUT;
+                }
+                break;
+
+            case ITEM_ROSE_INCENSE:
+                if (monSpecies == SPECIES_ROSELIA) {
+                    monSpecies = SPECIES_BUDEW;
+                }
+                break;
+
+            case ITEM_PURE_INCENSE:
+                if (monSpecies == SPECIES_CHIMECHO) {
+                    monSpecies = SPECIES_CHINGLING;
+                }
+                break;
+
+            case ITEM_ROCK_INCENSE:
+                if (monSpecies == SPECIES_SUDOWOODO) {
+                    monSpecies = SPECIES_BONSLY;
+                }
+                break;
+
+            case ITEM_ODD_INCENSE:
+                if (monSpecies == SPECIES_MR_MIME) {
+                    monSpecies = SPECIES_MIME_JR;
+                }
+                break;
+
+            case ITEM_LUCK_INCENSE:
+                if (monSpecies == SPECIES_CHANSEY) {
+                    monSpecies = SPECIES_HAPPINY;
+                }
+                break;
+
+            case ITEM_FULL_INCENSE:
+                if (monSpecies == SPECIES_SNORLAX) {
+                    monSpecies = SPECIES_MUNCHLAX;
+                }
+                break;
+
+            case ITEM_WAVE_INCENSE:
+                if (monSpecies == SPECIES_MANTINE) {
+                    monSpecies = SPECIES_MANTYKE;
+                }
+                break;
+
+            case ITEM_LIGHT_BALL:
+                if (monSpecies == SPECIES_PICHU) {
+                    flagVoltTackle = TRUE;
+                }
+                break;
+        }
+
+        switch (attackerHeldItem) {
+            default:
+                break;
+
+            case ITEM_EVERSTONE:
+                if (defenderHeldItem == ITEM_EVERSTONE) {
+                    if (BattleSystem_RandNext(battleSys) & 1) {
+                        monPersonality = attackerPersonality;
+                    }
+                    // no need for ELSE as the monPersonality will have already
+                    // been set to defenderPersonality by this point
                 }
                 else {
-                    personality = Pokemon_GetValue(attackingMon, MON_DATA_PERSONALITY, NULL);
+                    monPersonality = attackerPersonality;
                 }
-                // Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
+                break;
+
+            case ITEM_POWER_WEIGHT:
+                lockedAttackerIVs[STAT_HP] = 1;
+                break;
+
+            case ITEM_POWER_BRACER:
+                lockedAttackerIVs[STAT_ATTACK] = 1;
+                break;
+
+            case ITEM_POWER_BELT:
+                lockedAttackerIVs[STAT_DEFENSE] = 1;
+                break;
+
+            case ITEM_POWER_ANKLET:
+                lockedAttackerIVs[STAT_SPEED] = 1;
+                break;
+
+            case ITEM_POWER_LENS:
+                lockedAttackerIVs[STAT_SPECIAL_ATTACK] = 1;
+                break;
+
+            case ITEM_POWER_BAND:
+                lockedAttackerIVs[STAT_SPECIAL_DEFENSE] = 1;
+                break;
+
+            case ITEM_DESTINY_KNOT:
+                maxIVsInherited = STAT_MAX - 1;
+                break;
+
+            case ITEM_SEA_INCENSE:
+                if (monSpecies == SPECIES_MARILL) {
+                    monSpecies = SPECIES_AZUMARILL;
+                }
+                break;
+
+            case ITEM_LAX_INCENSE:
+                if (monSpecies == SPECIES_WOBBUFFET) {
+                    monSpecies = SPECIES_WYNAUT;
+                }
+                break;
+
+            case ITEM_ROSE_INCENSE:
+                if (monSpecies == SPECIES_ROSELIA) {
+                    monSpecies = SPECIES_BUDEW;
+                }
+                break;
+
+            case ITEM_PURE_INCENSE:
+                if (monSpecies == SPECIES_CHIMECHO) {
+                    monSpecies = SPECIES_CHINGLING;
+                }
+                break;
+
+            case ITEM_ROCK_INCENSE:
+                if (monSpecies == SPECIES_SUDOWOODO) {
+                    monSpecies = SPECIES_BONSLY;
+                }
+                break;
+
+            case ITEM_ODD_INCENSE:
+                if (monSpecies == SPECIES_MR_MIME) {
+                    monSpecies = SPECIES_MIME_JR;
+                }
+                break;
+
+            case ITEM_LUCK_INCENSE:
+                if (monSpecies == SPECIES_CHANSEY) {
+                    monSpecies = SPECIES_HAPPINY;
+                }
+                break;
+
+            case ITEM_FULL_INCENSE:
+                if (monSpecies == SPECIES_SNORLAX) {
+                    monSpecies = SPECIES_MUNCHLAX;
+                }
+                break;
+
+            case ITEM_WAVE_INCENSE:
+                if (monSpecies == SPECIES_MANTINE) {
+                    monSpecies = SPECIES_MANTYKE;
+                }
+                break;
+
+            case ITEM_LIGHT_BALL:
+                if (monSpecies == SPECIES_PICHU) {
+                    flagVoltTackle = TRUE;
+                }
+                break;
+        }
+
+        // generate random seed that has same nature as parent in case of Everstone
+        if (attackerHeldItem == ITEM_EVERSTONE || defenderHeldItem == ITEM_EVERSTONE) {
+            for (i = 0; i < 2400; i++) {
+                personalityRand = BattleSystem_RandNext(battleSys);
+                if (personalityRand != 0) {
+                    if (monPersonality == Pokemon_GetNatureOf(personalityRand)) {
+                        monPersonality = Pokemon_GetNatureOf(personalityRand);
+                    }
+                }
+            }
+        }
+		
+        // IV random seeds greater than 31 yield random stat generation
+        for (i = 0; i < 1000; i++) {
+            IVRandSeed = BattleSystem_RandNext(battleSys);
+            if (IVRandSeed > 31) {
+                break;
+            }
+        }
+
+        if (monSpecies == SPECIES_VOLBEAT || monSpecies == ILLUMISE) {
+            if (BattleSystem_RandNext(battleSys) & 1) {
+                monSpecies = SPECIES_VOLBEAT;
             }
             else {
-                if (Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL) == ITEM_EVERSTONE) {
-					personality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
-                    // Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
-                }
-                else {
-                    personality = Pokemon_GetValue(attackingMon, MON_DATA_PERSONALITY, NULL);
-                }
+                monSpecies = SPECIES_ILLUMISE;
             }
         }
-        else {
-			personality = Pokemon_GetNatureOf(BattleSystem_RandNext(battleSys));
-            // Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
-        }
-		
 
+        if (monSpecies == )
 
         // Pokemon_InitWith(Pokemon *mon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
-        Pokemon_InitWith(mon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
+        Pokemon_InitWith(mon, monSpecies, monLevel, IVRandSeed, TRUE, personalityRand, OTID_SET, monTrainerID);
 
         // sub_02073E18(BoxPokemon *boxMon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
         // sub_02073E18(boxMon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
@@ -10673,25 +10935,42 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         BoxPokemon_SetValue(boxMon, MON_DATA_IS_EGG, &isEgg);
 		
 		// Set the species and egg species
-        monSpecies = monEggSpecies;
         Pokemon_SetValue(mon, MON_DATA_SPECIES, &monSpecies);
         BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES, &monSpecies);
 		
         Pokemon_SetValue(mon, MON_DATA_SPECIES_EGG, &monEggSpecies);
         BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES_EGG, &monEggSpecies);
-		
+
         for (i = 0; i < STAT_MAX; i++) {
-            // Set invalid IV for later checking
-            inheritedIVs[i] = 32;
             // blank Effort Values
             tempEV = 0;
             Pokemon_SetValue(mon, MON_DATA_HP_EV + i, &tempEV);
             BoxPokemon_SetValue(boxMon, MON_DATA_HP_EV + i, &tempEV);
         }
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < maxIVsInherited; i++) {
             statRand = BattleSystem_RandNext(battleSys) % (STAT_MAX - i);
-            
+            statRandReroll = BattleSystem_RandNext(battleSys) % (STAT_MAX - i - 1);
+
+            if (i < STAT_DEFENSE) {
+                // boost the odds of inheriting HP and Attack to be closer to 47%
+                // this should give all stats the same odds of being inherited
+                if (i == STAT_HP && statRand != STAT_HP) {
+                    if (statRandReroll == 0) {
+                        statRand = STAT_HP;
+                    }
+                }
+
+                if (i == STAT_ATTACK && statRand != STAT_ATTACK) {
+                    if (statRandReroll == 0) {
+                        statRand = STAT_ATTACK;
+                    }
+                    if (statRandReroll == 1) {
+                        statRand = STAT_HP;
+                    }
+                }
+            }
+
             if (BattleSystem_RandNext(battleSys) & 1) {
                 inheritedIVs[statRand] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i + statRand, NULL);
             }
@@ -10700,14 +10979,43 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             }
         }
 
+        // manual random IV generation if we didn't get a good seed
+        if (IVRandSeed < 32) {
+            for (i = 0; i < STAT_MAX; i++) {
+                monIVs[i] = BattleSystem_RandNext(battleSys) % 32;
+
+                monIVsTemp = monIVs[i];
+                Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &monIVsTemp);
+                BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &monIVsTemp);
+            }
+        }
+
+        // inherit IVs
         for (i = 0; i < STAT_MAX; i++) {
-            if (inheritedIVs[i] == 32) {
-                inheritedIVs[i] = BattleSystem_RandNext(battleSys) % 32;
+            if (inheritedIVs[i] < 32) {
+                monIVs[i] = inheritedIVs[i];
             }
 
-            inheritedIVsTemp = inheritedIVs[i];
-            Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &inheritedIVsTemp);
-            BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &inheritedIVsTemp);
+            monIVsTemp = monIVs[i];
+            Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &monIVsTemp);
+            BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &monIVsTemp);
+        }
+
+        if (flagVoltTackle) {
+            moveTemp = MOVE_VOLT_TACKLE;
+
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL) == MOVE_NONE) {
+                    Pokemon_SetValue(mon, MON_DATA_MOVE1 + i, &moveTemp);
+                    BoxPokemon_SetValue(boxMon, MON_DATA_MOVE1 + i, &moveTemp);
+                    break;
+                }
+            }
+
+            if (i == LEARNED_MOVES_MAX) {
+                Pokemon_SetValue(mon, MON_DATA_MOVE1, &moveTemp);
+                BoxPokemon_SetValue(boxMon, MON_DATA_MOVE1, &moveTemp);
+            }
         }
 		
 		// Reset any nickname
