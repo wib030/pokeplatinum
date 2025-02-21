@@ -10579,7 +10579,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 monEggSpecies = attackerEggSpecies;
             }
             trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
-            monTrainerID = trInfo.id;
+            monTrainerID = TrainerInfo_ID(trInfo);
         }
         else {
             // non-male attacking male
@@ -10588,7 +10588,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                     monEggSpecies = defenderEggSpecies;
                 }
                 trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->attacker);
-                monTrainerID = trInfo.id;
+                monTrainerID = TrainerInfo_ID(trInfo);
             }
             else {
                 // neuter attacking female
@@ -10606,7 +10606,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 }
 
                 trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
-                monTrainerID = trInfo.id;
+                monTrainerID = TrainerInfo_ID(trInfo);
             }
         }
         
