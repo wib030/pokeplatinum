@@ -240,14 +240,14 @@ void Pokemon_InitWith(Pokemon *mon, int monSpecies, int monLevel, int monIVs, BO
 {
     Pokemon_Init(mon);
 
-    sub_02073E18(&mon->box, monSpecies, monLevel, monIVs, useMonPersonalityParam, monPersonality, monOTIDSource, monOTID);
+    sub_02073E18(&mon->box, monSpecies, monLevel, monIVs, useMonPersonalityParam, monPersonality, monOTIDSource, monOTID); // Pokemon Box Data ? function right under this one
     Pokemon_EncryptData(&mon->party, sizeof(PartyPokemon), 0);
     Pokemon_EncryptData(&mon->party, sizeof(PartyPokemon), mon->box.personality);
     Pokemon_SetValue(mon, MON_DATA_LEVEL, &monLevel);
 
     UnkStruct_0202818C *v1 = sub_0202818C(0);
 
-    Pokemon_SetValue(mon, MON_DATA_170, v1);
+    Pokemon_SetValue(mon, MON_DATA_170, v1); // mail data
     Heap_FreeToHeap(v1);
 
     u32 zero = 0;
@@ -256,7 +256,7 @@ void Pokemon_InitWith(Pokemon *mon, int monSpecies, int monLevel, int monIVs, BO
     UnkStruct_0202CA28 v2;
     MI_CpuClearFast(&v2, sizeof(UnkStruct_0202CA28));
 
-    Pokemon_SetValue(mon, MON_DATA_171, &v2);
+    Pokemon_SetValue(mon, MON_DATA_171, &v2); // custom ball data (not used?)
     Pokemon_CalcLevelAndStats(mon);
 }
 
