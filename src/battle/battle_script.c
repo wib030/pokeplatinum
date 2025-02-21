@@ -10429,6 +10429,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     Pokemon *mon;
     Pokemon *defendingMon;
     Pokemon *attackingMon;
+    TrainerInfo *trInfo;
 
     isOpenEggSlot = FALSE;
     eggPartySlot = 6;
@@ -10570,12 +10571,15 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             monEggSpecies = SPECIES_MACHAMP;
         }
 
+        trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
+
         // male attacking anything
         if (attackerGender == GENDER_MALE) {
             if (monEggSpecies == SPECIES_NONE) {
                 monEggSpecies = attackerEggSpecies;
             }
-            monTrainerID = battleSys->trainerInfo[battleCtx->defender].id;
+            trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
+            monTrainerID = trInfo.id;
         }
         else {
             // non-male attacking male
@@ -10583,7 +10587,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 if (monEggSpecies == SPECIES_NONE) {
                     monEggSpecies = defenderEggSpecies;
                 }
-                monTrainerID = battleSys->trainerInfo[battleCtx->attacker].id;
+                trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->attacker);
+                monTrainerID = trInfo.id;
             }
             else {
                 // neuter attacking female
@@ -10592,15 +10597,16 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                     if (monEggSpecies == SPECIES_NONE) {
                         monEggSpecies = attackerEggSpecies;
                     }
-                    monTrainerID = battleSys->trainerInfo[battleCtx->defender].id;
                 }
                 // neuter attacking neuter or female attacking neuter or female attacking female
                 else {
                     if (monEggSpecies == SPECIES_NONE) {
                         monEggSpecies = defenderEggSpecies;
-                    }
-                    monTrainerID = battleSys->trainerInfo[battleCtx->defender].id;
+                    } 
                 }
+
+                trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
+                monTrainerID = trInfo.id;
             }
         }
         
@@ -10616,7 +10622,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 					personality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
                 }
                 else {
-                    personality = Pokemon_GetValue(attackingingMon, MON_DATA_PERSONALITY, NULL);
+                    personality = Pokemon_GetValue(attackingMon, MON_DATA_PERSONALITY, NULL);
                 }
                 // Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &personality);
             }
