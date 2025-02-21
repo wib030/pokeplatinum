@@ -10430,6 +10430,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     Pokemon *defendingMon;
     Pokemon *attackingMon;
     TrainerInfo *trInfo;
+    BoxPokemon *boxMon;
 
     isOpenEggSlot = FALSE;
     eggPartySlot = 6;
@@ -10457,6 +10458,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     // Make our pokemon
     if (eggPartySlot < MAX_PARTY_SIZE || currentBox < 18) {
         mon = Pokemon_New(HEAP_ID_BATTLE);
+        boxMon = Pokemon_GetBoxPokemon(mon);
 
         monLevel = 1;
 
@@ -10646,11 +10648,17 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         // Pokemon_InitWith(Pokemon *mon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
         Pokemon_InitWith(mon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
 
+        // sub_02073E18(BoxPokemon *boxMon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
+        sub_02073E18(boxMon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
+
         isEgg = 1;
         Pokemon_SetValue(mon, MON_DATA_IS_EGG, &isEgg);
+        BoxPokemon_SetValue(boxMon, MON_DATA_IS_EGG, &isEgg);
         monSpecies = SPECIES_EGG;
         Pokemon_SetValue(mon, MON_DATA_SPECIES, &monSpecies);
+        BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES, &monSpecies);
         Pokemon_SetValue(mon, MON_DATA_SPECIES_EGG, &monEggSpecies);
+        BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES_EGG, &monEggSpecies);
 		
         for (i = 0; i < STAT_MAX; i++) {
             // Set invalid IV for later checking
@@ -10658,6 +10666,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             // blank Effort Values
             tempEV = 0;
             Pokemon_SetValue(mon, MON_DATA_HP_EV + i, &tempEV);
+            BoxPokemon_SetValue(boxMon, MON_DATA_HP_EV + i, &tempEV);
         }
 
         for (i = 0; i < 3; i++) {
@@ -10678,13 +10687,15 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
             inheritedIVsTemp = inheritedIVs[i];
             Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &inheritedIVsTemp);
+            BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &inheritedIVsTemp);
         }
-		
-		
+
 		// eggLevel = 1;
         // Pokemon_SetValue(mon, MON_DATA_LEVEL, &eggLevel);
-        // hasNickname = 0;
-        // Pokemon_SetValue(mon, MON_DATA_HAS_NICKNAME, &hasNickname);
+
+        hasNickname = 0;
+        Pokemon_SetValue(mon, MON_DATA_HAS_NICKNAME, &hasNickname);
+        BoxPokemon_SetValue(boxMon, MON_DATA_HAS_NICKNAME, &hasNickname);
 
         Heap_FreeToHeap(mon);
     }
