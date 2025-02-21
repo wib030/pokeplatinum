@@ -10432,6 +10432,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     TrainerInfo *trInfo;
     BoxPokemon *boxMon;
 
+    Strbuf* eggName;
+
     isOpenEggSlot = FALSE;
     eggPartySlot = 6;
 
@@ -10696,6 +10698,12 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         hasNickname = 0;
         Pokemon_SetValue(mon, MON_DATA_HAS_NICKNAME, &hasNickname);
         BoxPokemon_SetValue(boxMon, MON_DATA_HAS_NICKNAME, &hasNickname);
+
+        eggName = MessageUtil_SpeciesName(SPECIES_EGG, HEAP_ID_BATTLE);
+        Pokemon_SetValue(mon, MON_DATA_NICKNAME, eggName);
+        BoxPokemon_SetValue(boxMon, MON_DATA_NICKNAME, eggName);
+
+        Strbuf_Free(eggName);
 
         Heap_FreeToHeap(mon);
     }
