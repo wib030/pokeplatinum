@@ -2101,8 +2101,8 @@ static int ov5_021E6444 (Party * param0, UnkStruct_02026218 * param1, StringTemp
     Pokemon * v0 = Pokemon_New(4);
     BoxPokemon * v1 = sub_02026220(param1);
     UnkStruct_02026224 * v2 = sub_02026224(param1);
-    u32 v3;
-    u16 v4;
+    u32 v3; // exp
+    u16 v4; // species number
 
     StringTemplate_SetNickname(param2, 0, v1);
     v4 = BoxPokemon_GetValue(v1, MON_DATA_SPECIES, NULL);
