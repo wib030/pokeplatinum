@@ -10669,7 +10669,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         isEgg = 1;
         Pokemon_SetValue(mon, MON_DATA_IS_EGG, &isEgg);
         BoxPokemon_SetValue(boxMon, MON_DATA_IS_EGG, &isEgg);
-        monSpecies = SPECIES_EGG;
+        monSpecies = monEggSpecies;
         Pokemon_SetValue(mon, MON_DATA_SPECIES, &monSpecies);
         BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES, &monSpecies);
         Pokemon_SetValue(mon, MON_DATA_SPECIES_EGG, &monEggSpecies);
