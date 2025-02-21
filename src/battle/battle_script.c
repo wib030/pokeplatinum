@@ -10418,6 +10418,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     int i;
     int statRand, monOTIDSource;
     int battlerPregnant;
+	int trainerGender;
     // int monMetDateTime;
     u8 monMetYear, monMetMonth, monMetDay;
     u8 eggPartySlot, inheritedIVsTemp, tempEV;
@@ -10431,8 +10432,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 	u32 isEgg, personality, monLevel, hasNickname;
     BOOL isOpenEggSlot;
 
-    RTCDate *date;
-    RTCTime *time;
+    RTCDate date;
+    RTCTime time;
 
     Party *party;
     Pokemon *mon;
@@ -10720,18 +10721,19 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
         // monMetDateTime = date->year + date->month * 100 + date->day * 10000;
 
-        monMetYear = &date->year;
-        monMetMonth = &date->month;
-        monMetDay = &date->day;
+        monMetYear = date.year;
+        monMetMonth = date.month;
+        monMetDay = date.day;
 
-        Pokemon_SetValue(mon, MON_DATA_MET_YEAR, &monMetYear);
-        Pokemon_SetValue(mon, MON_DATA_MET_MONTH, &monMetMonth);
-        Pokemon_SetValue(mon, MON_DATA_MET_DAY, &monMetDay);
+        Pokemon_SetValue(mon, MON_DATA_HATCH_YEAR, &monMetYear);
+        Pokemon_SetValue(mon, MON_DATA_HATCH_MONTH, &monMetMonth);
+        Pokemon_SetValue(mon, MON_DATA_HATCH_DAY, &monMetDay);
 
-        BoxPokemon_SetValue(boxMon, MON_DATA_MET_YEAR, &monMetYear);
-        BoxPokemon_SetValue(boxMon, MON_DATA_MET_MONTH, &monMetMonth);
-        BoxPokemon_SetValue(boxMon, MON_DATA_MET_DAY, &monMetDay);
+        BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_YEAR, &monMetYear);
+        BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_MONTH, &monMetMonth);
+        BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_DAY, &monMetDay);
 		
+		// Set egg cycles
 		eggCycles = PokemonPersonalData_GetSpeciesValue(monEggSpecies, 19);
 		
 		Pokemon_SetValue(mon, 9, &eggCycles);
