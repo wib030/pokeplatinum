@@ -1,22 +1,24 @@
 {
-    "name": "Sharpen",
-    "class": "CLASS_STATUS",
-    "type": "TYPE_NORMAL",
-    "power": 0,
-    "accuracy": 0,
-    "pp": 30,
+    "name": "Pregnancy Punch",
+    "class": "CLASS_PHYSICAL",
+    "type": "TYPE_FIGHTING",
+    "power": 100,
+    "accuracy": 100,
+    "pp": 5,
     "effect": {
-        "type": "BATTLE_EFFECT_ATK_UP",
-        "chance": 0
+        "type": "BATTLE_EFFECT_PREGNANCY_PUNCH",
+        "chance": 100
     },
-    "range": "RANGE_USER",
+    "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_CAN_SNATCH",
-        "MOVE_FLAG_HIDES_HP_GAUGES"
+        "MOVE_FLAG_MAKES_CONTACT",
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_SHADOWS"
     ],
     "contest": {
-        "effect": 11,
-        "type": "CONTEST_TYPE_BEAUTY"
+        "effect": 18,
+        "type": "CONTEST_TYPE_COOL"
     }
 }

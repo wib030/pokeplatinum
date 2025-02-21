@@ -86,8 +86,7 @@
             "1": [
                 "MOVE_CONVERSION_2",
                 "MOVE_TACKLE",
-                "MOVE_CONVERSION",
-                "MOVE_SHARPEN"
+                "MOVE_CONVERSION"
             ],
             "7": "MOVE_PSYBEAM",
 			"10": "MOVE_TELEPORT",
