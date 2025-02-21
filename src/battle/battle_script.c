@@ -10424,7 +10424,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     u8 eggPartySlot, monIVsTemp, tempEV;
     u8 monGender, attackerGender, defenderGender;
     u8 inheritedIVs[STAT_MAX], lockedDefenderIVs[STAT_MAX], lockedAttackerIVs[STAT_MAX], monIVs[STAT_MAX];
-	u8 eggCycles;
+	u8 eggCycles, monPokeBall;
     u16 monSpecies, attackerSpecies, defenderSpecies;
     u16 monEggSpecies, attackerEggSpecies, defenderEggSpecies;
     u16 attackerHeldItem, defenderHeldItem;
@@ -10436,6 +10436,9 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     u32 monPersonality, attackerPersonality, defenderPersonality, pregnantPersonality, personalityRand;
     BOOL isOpenEggSlot;
     BOOL flagVoltTackle;
+
+    // StringTemplate * strTemp;
+    int monHatchLocation, monHatchTerrain;
 
     RTCDate date;
     RTCTime time;
@@ -10614,8 +10617,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
         // Machamp is the god of sex
         if (attackerSpecies == SPECIES_MACHAMP || defenderSpecies == SPECIES_MACHAMP) {
-            monSpecies = SPECIES_MACHAMP;
-            monEggSpecies = SPECIES_MACHAMP;
+            monSpecies = SPECIES_MACHOP;
+            monEggSpecies = SPECIES_MACHOP;
         }
 
         trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
@@ -10628,10 +10631,10 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 monSpecies = attackerEggSpecies;
                 monEggSpecies = attackerEggSpecies;
             }
-            trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
-            monTrainerID = TrainerInfo_ID(trInfo);
             battlerPregnant = battleCtx->defender;
             pregnantMon = defendingMon;
+            trInfo = BattleSystem_TrainerInfo(battleSys, battlerPregnant);
+            monTrainerID = TrainerInfo_ID(trInfo);
         }
         else {
             // non-male attacking male
@@ -10640,10 +10643,10 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                     monSpecies = defenderEggSpecies;
                     monEggSpecies = defenderEggSpecies;
                 }
-                trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->attacker);
-                monTrainerID = TrainerInfo_ID(trInfo);
                 battlerPregnant = battleCtx->attacker;
                 pregnantMon = attackingMon;
+                trInfo = BattleSystem_TrainerInfo(battleSys, battlerPregnant);
+                monTrainerID = TrainerInfo_ID(trInfo);
             }
             else {
                 // neuter attacking female
@@ -10662,10 +10665,10 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                     } 
                 }
 
-                trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
-                monTrainerID = TrainerInfo_ID(trInfo);
                 battlerPregnant = battleCtx->defender;
                 pregnantMon = defendingMon;
+                trInfo = BattleSystem_TrainerInfo(battleSys, pregnantMon);
+                monTrainerID = TrainerInfo_ID(trInfo);
             }
         }
 		
@@ -11042,6 +11045,19 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_YEAR, &monMetYear);
         BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_MONTH, &monMetMonth);
         BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_DAY, &monMetDay);
+
+        // Set egg met location
+        monHatchLocation = BattleSystem_MapHeader(battleSys);
+        monHatchTerrain = BattleSystem_Terrain(battleSys);
+
+        // Pokemon_SetValue(mon, MON_DATA_HATCH_LOCATION, &monHatchLocation);
+        // BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_LOCATION, &monHatchLocation);
+
+        Pokemon_SetCatchData(mon, trInfo, ITEM_POKE_BALL, monHatchLocation, monHatchTerrain, HEAP_ID_BATTLE);
+
+        monPokeBall = Pokemon_GetValue(pregnantMon, MON_DATA_POKEBALL, NULL);
+        Pokemon_SetValue(mon, MON_DATA_POKEBALL, &monPokeBall);
+        BoxPokemon_SetValue(boxMon, MON_DATA_POKEBALL, &monPokeBall);
 		
 		// Set egg cycles
 		eggCycles = PokemonPersonalData_GetSpeciesValue(monEggSpecies, MON_DATA_PERSONAL_HATCH_CYCLE);
