@@ -10418,7 +10418,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     int i;
     int statRand, monOTIDSource;
     int battlerPregnant;
-	int trainerGender;
+	int monLevel;
     // int monMetDateTime;
     u8 monMetYear, monMetMonth, monMetDay;
     u8 eggPartySlot, inheritedIVsTemp, tempEV;
@@ -10429,7 +10429,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     u16 monEggSpecies, attackerEggSpecies, defenderEggSpecies;
     u32 monTrainerID;
     u32 currentBox, inBox;
-	u32 isEgg, personality, monLevel, hasNickname;
+	u32 isEgg, personality, hasNickname;
     BOOL isOpenEggSlot;
 
     RTCDate date;
@@ -10666,13 +10666,17 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
         // sub_02073E18(BoxPokemon *boxMon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
         // sub_02073E18(boxMon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
-
+		
+		// Set the pokemon to be an egg
         isEgg = 1;
         Pokemon_SetValue(mon, MON_DATA_IS_EGG, &isEgg);
         BoxPokemon_SetValue(boxMon, MON_DATA_IS_EGG, &isEgg);
+		
+		// Set the species and egg species
         monSpecies = monEggSpecies;
         Pokemon_SetValue(mon, MON_DATA_SPECIES, &monSpecies);
         BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES, &monSpecies);
+		
         Pokemon_SetValue(mon, MON_DATA_SPECIES_EGG, &monEggSpecies);
         BoxPokemon_SetValue(boxMon, MON_DATA_SPECIES_EGG, &monEggSpecies);
 		
@@ -10705,21 +10709,19 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &inheritedIVsTemp);
             BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &inheritedIVsTemp);
         }
-
-		// eggLevel = 1;
-        // Pokemon_SetValue(mon, MON_DATA_LEVEL, &eggLevel);
-
+		
+		// Reset any nickname
         hasNickname = 0;
         Pokemon_SetValue(mon, MON_DATA_HAS_NICKNAME, &hasNickname);
         BoxPokemon_SetValue(boxMon, MON_DATA_HAS_NICKNAME, &hasNickname);
-
+		
+		// Set egg name
         eggName = MessageUtil_SpeciesName(SPECIES_EGG, HEAP_ID_BATTLE);
         Pokemon_SetValue(mon, MON_DATA_NICKNAME_STRBUF, eggName);
         BoxPokemon_SetValue(boxMon, MON_DATA_NICKNAME_STRBUF, eggName);
-
+		
+		// Set egg met year, month and day
         GetCurrentDateTime(&date, &time);
-
-        // monMetDateTime = date->year + date->month * 100 + date->day * 10000;
 
         monMetYear = date.year;
         monMetMonth = date.month;
