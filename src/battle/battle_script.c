@@ -10649,7 +10649,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         Pokemon_InitWith(mon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
 
         // sub_02073E18(BoxPokemon *boxMon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
-        sub_02073E18(boxMon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
+        // sub_02073E18(boxMon, monEggSpecies, monLevel, 0, TRUE, personality, OTID_SET, monTrainerID);
 
         isEgg = 1;
         Pokemon_SetValue(mon, MON_DATA_IS_EGG, &isEgg);
