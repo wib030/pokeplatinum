@@ -10423,6 +10423,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     u8 eggPartySlot, inheritedIVsTemp, tempEV;
     u8 monGender, attackerGender, defenderGender;
     u8 inheritedIVs[STAT_MAX];
+	u8 eggCycles;
     u16 monSpecies, attackerSpecies, defenderSpecies;
     u16 monEggSpecies, attackerEggSpecies, defenderEggSpecies;
     u32 monTrainerID;
@@ -10730,6 +10731,11 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         BoxPokemon_SetValue(boxMon, MON_DATA_MET_YEAR, &monMetYear);
         BoxPokemon_SetValue(boxMon, MON_DATA_MET_MONTH, &monMetMonth);
         BoxPokemon_SetValue(boxMon, MON_DATA_MET_DAY, &monMetDay);
+		
+		eggCycles = PokemonPersonalData_GetSpeciesValue(monEggSpecies, 19);
+		
+		Pokemon_SetValue(mon, 9, &eggCycles);
+		BoxPokemon_SetValue(boxMon, 9, &eggCycles);
 
         Strbuf_Free(eggName);
 
