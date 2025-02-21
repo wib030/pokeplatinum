@@ -10714,8 +10714,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         BoxPokemon_SetValue(boxMon, MON_DATA_HAS_NICKNAME, &hasNickname);
 
         eggName = MessageUtil_SpeciesName(SPECIES_EGG, HEAP_ID_BATTLE);
-        Pokemon_SetValue(mon, MON_DATA_NICKNAME, eggName);
-        BoxPokemon_SetValue(boxMon, MON_DATA_NICKNAME, eggName);
+        Pokemon_SetValue(mon, MON_DATA_NICKNAME_STRBUF, eggName);
+        BoxPokemon_SetValue(boxMon, MON_DATA_NICKNAME_STRBUF, eggName);
 
         GetCurrentDateTime(&date, &time);
 
@@ -10734,10 +10734,10 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         BoxPokemon_SetValue(boxMon, MON_DATA_HATCH_DAY, &monMetDay);
 		
 		// Set egg cycles
-		eggCycles = PokemonPersonalData_GetSpeciesValue(monEggSpecies, 19);
+		eggCycles = PokemonPersonalData_GetSpeciesValue(monEggSpecies, MON_DATA_PERSONAL_HATCH_CYCLE);
 		
-		Pokemon_SetValue(mon, 9, &eggCycles);
-		BoxPokemon_SetValue(boxMon, 9, &eggCycles);
+		Pokemon_SetValue(mon, MON_DATA_FRIENDSHIP, &eggCycles);
+		BoxPokemon_SetValue(boxMon, MON_DATA_FRIENDSHIP, &eggCycles);
 
         Strbuf_Free(eggName);
 
