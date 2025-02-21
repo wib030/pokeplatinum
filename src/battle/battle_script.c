@@ -10457,7 +10457,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
     // Make our pokemon
     if (eggPartySlot < MAX_PARTY_SIZE || currentBox < 18) {
-        mon = Pokemon_New(HEAP_ID_BATTLE);
+        mon = Pokemon_New(4);
         boxMon = Pokemon_GetBoxPokemon(mon);
 
         monLevel = 1;
