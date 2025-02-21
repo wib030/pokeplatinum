@@ -10715,13 +10715,13 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         Pokemon_SetValue(mon, MON_DATA_NICKNAME, eggName);
         BoxPokemon_SetValue(boxMon, MON_DATA_NICKNAME, eggName);
 
-        GetCurrentDateTime(date, time);
+        GetCurrentDateTime(&date, &time);
 
         // monMetDateTime = date->year + date->month * 100 + date->day * 10000;
 
-        monMetYear = &date->year;
-        monMetMonth = &date->month;
-        monMetDay = &date->day;
+        monMetYear = date->year;
+        monMetMonth = date->month;
+        monMetDay = date->day;
 
         Pokemon_SetValue(mon, MON_DATA_MET_YEAR, &monMetYear);
         Pokemon_SetValue(mon, MON_DATA_MET_MONTH, &monMetMonth);
