@@ -10418,7 +10418,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     int i;
     int statRand, monOTIDSource;
     int battlerPregnant;
-    int monMetDateTime;
+    // int monMetDateTime;
     u8 monMetYear, monMetMonth, monMetDay;
     u8 eggPartySlot, inheritedIVsTemp, tempEV;
     u8 monGender, attackerGender, defenderGender;
@@ -10430,8 +10430,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 	u32 isEgg, personality, monLevel, hasNickname;
     BOOL isOpenEggSlot;
 
-    RTCDate date;
-    RTCTime time;
+    RTCDate *date;
+    RTCTime *time;
 
     Party *party;
     Pokemon *mon;
@@ -10717,7 +10717,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
         GetCurrentDateTime(&date, &time);
 
-        monMetDateTime = date->year + date->month * 100 + date->day * 10000;
+        // monMetDateTime = date->year + date->month * 100 + date->day * 10000;
 
         monMetYear = date->year;
         monMetMonth = date->month;
