@@ -4402,6 +4402,7 @@ BOOL Pokemon_IsEligibleForAction(Pokemon *mon)
     return sub_02005844(monSpecies, monForm);
 }
 
+// PokeParaGetInfoSet(POKEMON_PARAM *pp,MYSTATUS *status,int ball,int place,int ground_id,int heapID)
 void Pokemon_SetCatchData(Pokemon *mon, TrainerInfo *param1, int monPokeball, int param3, int param4, int param5)
 {
     InitializeBoxPokemonAfterCapture(&mon->box, param1, monPokeball, param3, param4, param5);
