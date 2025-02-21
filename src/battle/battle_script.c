@@ -97,6 +97,8 @@
 
 #include "constants/battle/trainer_ai.h"
 
+#include "communication_system.h"
+
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
 
 typedef struct BattleMessageParams {
@@ -10415,6 +10417,9 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 {
     int i;
     int statRand, monOTIDSource;
+    int battlerPregnant;
+    int monMetDateTime;
+    u8 monMetYear, monMetMonth, monMetDay;
     u8 eggPartySlot, inheritedIVsTemp, tempEV;
     u8 monGender, attackerGender, defenderGender;
     u8 inheritedIVs[STAT_MAX];
@@ -10424,6 +10429,9 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     u32 currentBox, inBox;
 	u32 isEgg, personality, monLevel, hasNickname;
     BOOL isOpenEggSlot;
+
+    RTCDate date;
+    RTCTime time;
 
     Party *party;
     Pokemon *mon;
@@ -10576,6 +10584,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         }
 
         trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
+        battlerPregnant = battleCtx->defender;
 
         // male attacking anything
         if (attackerGender == GENDER_MALE) {
@@ -10584,6 +10593,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             }
             trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
             monTrainerID = TrainerInfo_ID(trInfo);
+            battlerPregnant = battleCtx->defender;
         }
         else {
             // non-male attacking male
@@ -10593,6 +10603,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 }
                 trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->attacker);
                 monTrainerID = TrainerInfo_ID(trInfo);
+                battlerPregnant = battleCtx->attacker;
             }
             else {
                 // neuter attacking female
@@ -10611,6 +10622,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
                 trInfo = BattleSystem_TrainerInfo(battleSys, battleCtx->defender);
                 monTrainerID = TrainerInfo_ID(trInfo);
+                battlerPregnant = battleCtx->defender;
             }
         }
         
@@ -10703,6 +10715,22 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         Pokemon_SetValue(mon, MON_DATA_NICKNAME, eggName);
         BoxPokemon_SetValue(boxMon, MON_DATA_NICKNAME, eggName);
 
+        GetCurrentDateTime(&date, &time);
+
+        monMetDateTime = date->year + date->month * 100 + date->day * 10000;
+
+        monMetYear = date->year;
+        monMetMonth = date->month;
+        monMetDay = date->day;
+
+        Pokemon_SetValue(mon, MON_DATA_MET_YEAR, &monMetYear);
+        Pokemon_SetValue(mon, MON_DATA_MET_MONTH, &monMetMonth);
+        Pokemon_SetValue(mon, MON_DATA_MET_DAY, &monMetDay);
+
+        BoxPokemon_SetValue(boxMon, MON_DATA_MET_YEAR, &monMetYear);
+        BoxPokemon_SetValue(boxMon, MON_DATA_MET_MONTH, &monMetMonth);
+        BoxPokemon_SetValue(boxMon, MON_DATA_MET_DAY, &monMetDay);
+
         Strbuf_Free(eggName);
 
         Heap_FreeToHeap(mon);
@@ -10713,11 +10741,11 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     if (eggPartySlot < MAX_PARTY_SIZE) {
         // We have an open party slot
 
-        party = BattleSystem_Party(battleSys, battleCtx->defender);
+        party = BattleSystem_Party(battleSys, battlerPregnant);
         Party_AddPokemon(party, mon);
     }
     else {
-        if (battleSys->trainers[battleCtx->defender].aiMask & AI_FLAG_BASIC) {
+        if (battleSys->trainers[battlerPregnant].aiMask & AI_FLAG_BASIC) {
             // do nothing if we are AI
         }
         else {
