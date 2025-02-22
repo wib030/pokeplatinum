@@ -90,6 +90,7 @@
             "22": "MOVE_MEGA_DRAIN",
 			"25": "MOVE_SILVER_WIND",
 			"27": "MOVE_ATTRACT",
+			"28": "MOVE_AIR_SLASH",
             "30": "MOVE_WHIRLWIND",
 			"32": "MOVE_GIGA_DRAIN",
 			"35": "MOVE_BUG_BUZZ",
