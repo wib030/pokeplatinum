@@ -10668,7 +10668,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
                 battlerPregnant = battleCtx->defender;
                 pregnantMon = defendingMon;
-                trInfo = BattleSystem_TrainerInfo(battleSys, pregnantMon);
+                trInfo = BattleSystem_TrainerInfo(battleSys, battlerPregnant);
                 monTrainerID = TrainerInfo_ID(trInfo);
             }
         }
