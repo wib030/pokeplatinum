@@ -4587,6 +4587,19 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
         msgOut->params[1] = ABILITY_MAGNET_PULL;
         return TRUE;
     }
+	
+	if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_THIRSTY))
+            && MON_HAS_TYPE(battler, TYPE_WATER)) {
+        if (msgOut == NULL) {
+            return TRUE;
+        }
+
+        msgOut->tags = TAG_NICKNAME_ABILITY;
+        msgOut->id = 39; // "{0} prevents escape with {1}!"
+        msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
+        msgOut->params[1] = ABILITY_THIRSTY;
+        return TRUE;
+    }
 
     if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TRAPPED)
             || (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)) {
@@ -7336,7 +7349,8 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
     }
 
     if ((Battler_Ability(battleCtx, battler) != ABILITY_SHADOW_TAG && CountAbilityTheirSide(battleSys, battleCtx, battler, ABILITY_SHADOW_TAG))
-            || (MON_HAS_TYPE(battler, TYPE_STEEL) && CountAbilityTheirSide(battleSys, battleCtx, battler, ABILITY_MAGNET_PULL))) {
+            || (MON_HAS_TYPE(battler, TYPE_STEEL) && CountAbilityTheirSide(battleSys, battleCtx, battler, ABILITY_MAGNET_PULL))
+			|| (MON_HAS_TYPE(battler, TYPE_WATER) && CountAbilityTheirSide(battleSys, battleCtx, battler, ABILITY_THIRSTY))) {
         result = TRUE;
     }
 

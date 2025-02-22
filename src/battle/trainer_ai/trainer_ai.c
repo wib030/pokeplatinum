@@ -217,6 +217,7 @@ static const u8 sRemovableAbilities[] = {
     ABILITY_PEST,
 	ABILITY_ROCK_SOLID,
 	ABILITY_SUCTION_CUPS,
+	ABILITY_THIRSTY,
     0xFFFF
 };
 
@@ -1597,6 +1598,7 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
             // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
             if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
                     || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
+					|| battleCtx->battleMons[battler].ability == ABILITY_THIRSTY
                     || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP) {
                 AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].ability;
             } else {
@@ -1642,6 +1644,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
             // If the opponent has an ability that announces, we should already know about it (because it self-announces)
             if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
                 || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
+				|| battleCtx->battleMons[battler].ability == ABILITY_THIRSTY
                 || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP
                 || battleCtx->battleMons[battler].ability == ABILITY_INTIMIDATE
                 || battleCtx->battleMons[battler].ability == ABILITY_TRACE
@@ -8499,7 +8502,9 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
                 && battleCtx->battleMons[battler].ability != ABILITY_LEVITATE
                 && Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_MAGNET_PULL)
-                && MON_HAS_TYPE(battler, TYPE_STEEL)))
+                && MON_HAS_TYPE(battler, TYPE_STEEL))
+			|| (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_THIRSTY)
+                && MON_HAS_TYPE(battler, TYPE_WATER)))
             && battleCtx->battleMons[battler].heldItem != ITEM_SHED_SHELL) {
             //&& battleCtx->battleMons[battler].ability != ABILITY_NEUTRALIZING_GAS) {
         return FALSE;

@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_CHLOROPHYLL",
-        "ABILITY_LEAF_GUARD"
+        "ABILITY_THIRSTY"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

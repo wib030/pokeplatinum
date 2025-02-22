@@ -5554,6 +5554,7 @@ Expert_SkillSwap_DesirableAbilities:
     TableEntry ABILITY_UNOWN_ENERGY
     TableEntry ABILITY_ROCK_SOLID
     TableEntry ABILITY_COWARD
+	TableEntry ABILITY_THIRSTY
     TableEntry TABLE_END
 
 Expert_SkillSwap_AlwaysTakeAbilities:
@@ -5632,6 +5633,7 @@ Expert_SkillSwap_AlwaysTakeAbilities:
 	TableEntry ABILITY_PEST
 	TableEntry ABILITY_UNOWN_ENERGY
 	TableEntry ABILITY_ROCK_SOLID
+	TableEntry ABILITY_THIRSTY
 	TableEntry TABLE_END
     
 Expert_SkillSwap_ForbiddenDefenderAbilities:
@@ -6778,6 +6780,7 @@ Expert_GastroAcid_AbilityChecklist:
 	TableEntry ABILITY_STEADFAST
 	TableEntry ABILITY_ROCK_SOLID
 	TableEntry ABILITY_SUCTION_CUPS
+	TableEntry ABILITY_THIRSTY
     TableEntry TABLE_END
 
 Expert_GastroAcid_End:

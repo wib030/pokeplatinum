@@ -35,7 +35,7 @@
         "EGG_GROUP_GRASS"
     ],
     "abilities": [
-        "ABILITY_CHLOROPHYLL",
+        "ABILITY_THIRSTY",
         "ABILITY_SOLAR_POWER"
     ],
     "great_marsh_flee_rate": 0,
