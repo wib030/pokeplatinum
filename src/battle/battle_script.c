@@ -10673,7 +10673,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         }
 		
         defenderHeldItem = Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL);
-        attackerHeldItem = Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL);
+        attackerHeldItem = Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL);
 
         attackerPersonality = Pokemon_GetValue(attackingMon, MON_DATA_PERSONALITY, NULL);
         defenderPersonality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
@@ -10923,8 +10923,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 monSpecies = SPECIES_ILLUMISE;
             }
         }
-
-        //if (monSpecies == )
 
         // Pokemon_InitWith(Pokemon *mon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
         Pokemon_InitWith(mon, monSpecies, monLevel, IVRandSeed, TRUE, personalityRand, OTID_SET, monTrainerID);
