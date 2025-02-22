@@ -87,9 +87,9 @@
         "level_up": {
             "1": [
                 "MOVE_LOW_KICK",
-                "MOVE_LEER",
+                "MOVE_COUNTER",
 				"MOVE_KARATE_CHOP",
-                "MOVE_FOCUS_ENERGY"
+                "MOVE_MEDITATE"
             ],
             "3": "MOVE_FOCUS_ENERGY",
             "9": "MOVE_FORESIGHT",
@@ -104,7 +104,8 @@
 			"36": "MOVE_BULK_UP",
             "40": "MOVE_CROSS_CHOP",
             "44": "MOVE_SCARY_FACE",
-            "51": "MOVE_DYNAMIC_PUNCH"
+            "54": "MOVE_DYNAMIC_PUNCH",
+			"56": "MOVE_CLOSE_COMBAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
