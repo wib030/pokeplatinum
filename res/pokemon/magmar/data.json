@@ -121,7 +121,12 @@
             "EVO_USE_ITEM_NIGHT",
             "ITEM_MAGMARIZER",
             "SPECIES_MAGMORTAR"
-        ]
+        ],
+		[
+			"EVO_LEVEL_UP",
+            38,
+			"SPECIES_MAGMORTAR"
+		]
     ],
     "footprint": {
         "has_footprint": true,

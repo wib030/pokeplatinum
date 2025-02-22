@@ -124,7 +124,12 @@
             "EVO_USE_ITEM_NIGHT",
             "ITEM_ELECTIRIZER",
             "SPECIES_ELECTIVIRE"
-        ]
+        ],
+		[
+			"EVO_LEVEL_UP",
+            38,
+			"SPECIES_ELECTIVIRE"
+		]
     ],
     "footprint": {
         "has_footprint": true,

@@ -114,7 +114,12 @@
             "EVO_USE_ITEM_NIGHT",
             "ITEM_DRAGON_SCALE",
             "SPECIES_KINGDRA"
-        ]
+        ],
+		[
+			"EVO_LEVEL_UP",
+            36,
+			"SPECIES_KINGDRA"
+		]
     ],
     "footprint": {
         "has_footprint": false,

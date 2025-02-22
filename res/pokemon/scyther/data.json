@@ -119,7 +119,12 @@
             "EVO_USE_ITEM_NIGHT",
             "ITEM_METAL_COAT",
             "SPECIES_SCIZOR"
-        ]
+        ],
+		[
+			"EVO_LEVEL_UP",
+            38,
+			"SPECIES_SCIZOR"
+		]
     ],
     "footprint": {
         "has_footprint": true,
