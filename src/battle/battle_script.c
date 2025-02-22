@@ -10605,7 +10605,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
             case SPECIES_NIDOKING:
                 monSpecies = SPECIES_NIDORAN_M;
-                monEggSpecies = MONSNO_NIDORAN_M;
+                monEggSpecies = SPECIES_NIDORAN_M;
                 break;
         }
 
@@ -10915,7 +10915,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             }
         }
 
-        if (monSpecies == SPECIES_VOLBEAT || monSpecies == ILLUMISE) {
+        if (monSpecies == SPECIES_VOLBEAT || monSpecies == SPECIES_ILLUMISE) {
             if (BattleSystem_RandNext(battleSys) & 1) {
                 monSpecies = SPECIES_VOLBEAT;
             }
@@ -10924,7 +10924,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             }
         }
 
-        if (monSpecies == )
+        //if (monSpecies == )
 
         // Pokemon_InitWith(Pokemon *mon, int monSpecies, int monLevel, int monIVs, BOOL useMonPersonalityParam, u32 monPersonality, int monOTIDSource, u32 monOTID)
         Pokemon_InitWith(mon, monSpecies, monLevel, IVRandSeed, TRUE, personalityRand, OTID_SET, monTrainerID);
