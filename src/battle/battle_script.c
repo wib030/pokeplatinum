@@ -10419,6 +10419,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     int statRand, IVRandSeed, statRandReroll, monOTIDSource;
     int battlerPregnant;
 	int monLevel;
+	int moveMaxPP;
     // int monMetDateTime;
     u8 monMetYear, monMetMonth, monMetDay;
     u8 eggPartySlot, monIVsTemp, tempEV;
@@ -11062,6 +11063,15 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 		
 		Pokemon_SetValue(mon, MON_DATA_FRIENDSHIP, &eggCycles);
 		BoxPokemon_SetValue(boxMon, MON_DATA_FRIENDSHIP, &eggCycles);
+		
+		// Restore Pokemon PP
+		for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+			if (Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL) != MOVE_NONE) {
+				moveMaxPP = Pokemon_GetValue(mon, MON_DATA_MOVE1_MAX_PP + i, NULL);
+				Pokemon_SetValue(mon, MON_DATA_MOVE1_CUR_PP + i, &moveMaxPP);
+				BoxPokemon_SetValue(boxMon, MON_DATA_MOVE1_CUR_PP + i, &moveMaxPP);
+			}
+		}
 
         Strbuf_Free(eggName);
 
