@@ -505,4 +505,152 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Rock Peak Ruins</language>
 	</row>
+	<row id="pl_msg_00000433_00126" index="126">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Lonely House</language>
+	</row>
+	<row id="pl_msg_00000433_00127" index="127">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L1</language>
+	</row>
+	<row id="pl_msg_00000433_00128" index="128">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L2</language>
+	</row>
+	<row id="pl_msg_00000433_00129" index="129">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L3</language>
+	</row>
+	<row id="pl_msg_00000433_00130" index="130">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L4</language>
+	</row>
+	<row id="pl_msg_00000433_00131" index="131">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L5</language>
+	</row>
+	<row id="pl_msg_00000433_00132" index="132">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L6</language>
+	</row>
+	<row id="pl_msg_00000433_00133" index="133">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L7</language>
+	</row>
+	<row id="pl_msg_00000433_00134" index="134">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L8</language>
+	</row>
+	<row id="pl_msg_00000433_00135" index="135">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L9</language>
+	</row>
+	<row id="pl_msg_00000433_00136" index="136">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L10</language>
+	</row>
+	<row id="pl_msg_00000433_00137" index="137">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L11</language>
+	</row>
+	<row id="pl_msg_00000433_00138" index="138">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L12</language>
+	</row>
+	<row id="pl_msg_00000433_00139" index="139">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L13</language>
+	</row>
+	<row id="pl_msg_00000433_00140" index="140">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet L14</language>
+	</row>
+	<row id="pl_msg_00000433_00141" index="141">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Great Marsh A1</language>
+	</row>
+	<row id="pl_msg_00000433_00142" index="142">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Great Marsh A2</language>
+	</row>
+	<row id="pl_msg_00000433_00143" index="143">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Great Marsh A3</language>
+	</row>
+	<row id="pl_msg_00000433_00144" index="144">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Great Marsh A4</language>
+	</row>
+	<row id="pl_msg_00000433_00145" index="145">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Great Marsh A5</language>
+	</row>
+	<row id="pl_msg_00000433_00146" index="146">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Great Marsh A6</language>
+	</row>
+	<row id="pl_msg_00000433_00147" index="147">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road L1</language>
+	</row>
+	<row id="pl_msg_00000433_00148" index="148">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road L2</language>
+	</row>
+	<row id="pl_msg_00000433_00149" index="149">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road L3</language>
+	</row>
+	<row id="pl_msg_00000433_00150" index="150">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road L4</language>
+	</row>
+	<row id="pl_msg_00000433_00151" index="151">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road L5</language>
+	</row>
+	<row id="pl_msg_00000433_00152" index="152">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road L6</language>
+	</row>
+	<row id="pl_msg_00000433_00153" index="153">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Abandoned House</language>
+	</row>
+	<row id="pl_msg_00000433_00154" index="154">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Lost Tower</language>
+	</row>
+	<row id="pl_msg_00000433_00155" index="155">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Rowan Mart</language>
+	</row>
+	<row id="pl_msg_00000433_00156" index="156">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Coronet Summit</language>
+	</row>
+	<row id="pl_msg_00000433_00157" index="157">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Coronet Passage</language>
+	</row>
+	<row id="pl_msg_00000433_00158" index="158">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mt. Coronet B1</language>
+	</row>
+	<row id="pl_msg_00000433_00159" index="159">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road B1</language>
+	</row>
+	<row id="pl_msg_00000433_00160" index="160">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Victory Road B2</language>
+	</row>
+	<row id="pl_msg_00000433_00161" index="161">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Iron Island B1</language>
+	</row>
+	<row id="pl_msg_00000433_00162" index="162">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Iron Island B2</language>
+	</row>
 </body>
