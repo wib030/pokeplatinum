@@ -293,6 +293,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Basic_CheckLunarDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_Wish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Basic_Taunt
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HOWL, Basic_CheckHighStatStage_Attack
     PopOrEnd 
 
 Basic_CheckCannotSleep:
@@ -1904,6 +1905,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Expert_WeightMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Expert_Wish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HOWL, Expert_StatusAttackUp
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BULLDOZE, Expert_SpeedDownOnHit
 
     ; All other moves have no additional logic.
     PopOrEnd 
