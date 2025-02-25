@@ -155,4 +155,5 @@ static const int sSideEffectSubscripts[] = {
 	[MOVE_SUBSCRIPT_PTR_FLING_BEFORE]                     = subscript_fling_before,
 	[MOVE_SUBSCRIPT_PTR_HEAL_INVERSION_START]             = subscript_heal_inversion_start,
 	[MOVE_SUBSCRIPT_PTR_PREGNANCY_PUNCH]                  = subscript_pregnancy_punch,
+	[MOVE_SUBSCRIPT_PTR_HOWL]                  			  = subscript_howl,
 };

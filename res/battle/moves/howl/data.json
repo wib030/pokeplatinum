@@ -6,10 +6,10 @@
     "accuracy": 0,
     "pp": 40,
     "effect": {
-        "type": "BATTLE_EFFECT_ATK_UP",
+        "type": "BATTLE_EFFECT_HOWL",
         "chance": 0
     },
-    "range": "RANGE_USER_SIDE",
+    "range": "RANGE_ALLY",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_CAN_SNATCH"

@@ -345,4 +345,5 @@ subscript_files = files(
 	'subscript_heal_inversion_start.s',
 	'subscript_heal_inversion_end.s',
 	'subscript_pregnancy_punch.s',
+	'subscript_howl.s',
 )
