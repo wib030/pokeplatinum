@@ -10,7 +10,7 @@
         "chance": 0
     },
     "range": "RANGE_USER",
-    "priority": 3,
+    "priority": 4,
     "flags": [],
     "contest": {
         "effect": 16,

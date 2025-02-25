@@ -12,7 +12,6 @@
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MAGIC_COAT",
         "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],
