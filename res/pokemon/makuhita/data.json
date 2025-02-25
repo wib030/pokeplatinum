@@ -116,7 +116,7 @@
     "evolutions": [
         [
             "EVO_LEVEL_UP",
-            24,
+            30,
             "SPECIES_HARIYAMA"
         ]
     ],
