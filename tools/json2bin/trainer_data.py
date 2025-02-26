@@ -77,7 +77,6 @@ def parse_party_mon(mon: dict, has_moves: bool, has_items: bool) -> bytes:
     binary_mon.extend(j2b.parse_int(mon.get('evSPDEF', 253), 2))
     binary_mon.extend(j2b.parse_int(mon.get('friendship', 70), 2))
     binary_mon.extend(j2b.parse_int(mon.get('nature', 0), 2))
-    binary_mon.extend(j2b.parse_int(mon.get('levelScaling', 0), 2))
     return binary_mon
 
 

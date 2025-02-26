@@ -23,8 +23,6 @@
 #include "unk_0201D15C.h"
 #include "savedata_misc.h"
 
-#include "trainer_info.h"
-
 static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int heapID);
 
 void TrainerData_Encounter(BattleParams *battleParams, const SaveData *save, int heapID)
@@ -185,9 +183,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
     u32 genderMod, rnd, oldSeed;
     u8 ivs;
     Pokemon *mon;
-	SaveData * saveData;
-	TrainerInfo *trInfo = SaveData_GetTrainerInfo(saveData);
-
+	
     oldSeed = LCRNG_GetSeed();
 
     // alloc enough space to support the maximum possible data size
@@ -300,50 +296,6 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 			
 			int monLevel = trmon[i].level;
-			
-			// Level scaling code
-			if (trmon[i].levelScaling == 1)
-			{
-				int badges = TrainerInfo_BadgeCount(trInfo);
-
-				switch (badges) {
-					case 0:
-						monLevel = 12;
-						break;
-
-					case 1:
-						monLevel = 21;
-						break;
-
-					case 2:
-						monLevel = 25;
-						break;
-
-					case 3:
-						monLevel = 32;
-						break;
-
-					case 4:
-						monLevel = 35;
-						break;
-
-					case 5:
-						monLevel = 44;
-						break;
-
-					case 6:
-						monLevel = 50;
-						break;
-
-					case 7:
-						monLevel = 57;
-						break;
-
-					case 8:
-						monLevel = 64;
-						break;
-				}
-			}
 			
 			//TRUE is whether or not to enable nature, rnd value decides the nature
             Pokemon_InitWith(mon, species, monLevel, ivs, TRUE, trmon[i].nature, OTID_NOT_SHINY, 0);

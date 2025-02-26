@@ -32,8 +32,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 3,
-			"levelScaling": 1
+			"nature": 3
         },
 		{
             "species": "SPECIES_CLOYSTER",
@@ -56,8 +55,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 13,
-			"levelScaling": 1
+			"nature": 13
         },
 		{
             "species": "SPECIES_HYPNO",
@@ -86,8 +84,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 7,
-			"levelScaling": 1
+			"nature": 7
         },
 		{
             "species": "SPECIES_SMEARGLE",
@@ -116,8 +113,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 13,
-			"levelScaling": 1
+			"nature": 13
         },
 		{
             "species": "SPECIES_BRELOOM",
@@ -140,8 +136,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 3,
-			"levelScaling": 1
+			"nature": 3
         },
 		{
             "species": "SPECIES_MAWILE",
@@ -170,8 +165,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 3,
-			"levelScaling": 1
+			"nature": 3
         }
     ]
 }

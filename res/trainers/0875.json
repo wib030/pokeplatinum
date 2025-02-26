@@ -37,8 +37,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 4,
 			"ability": 0,
-			"nature": 5,
-			"levelScaling": 1
+			"nature": 5
         },
 		{
             "species": "SPECIES_MACHAMP",
@@ -67,8 +66,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 1,
-			"nature": 2,
-			"levelScaling": 1
+			"nature": 2
         },
 		{
             "species": "SPECIES_DELIBIRD",
@@ -97,8 +95,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"ability": 1,
-			"nature": 3,
-			"levelScaling": 1
+			"nature": 3
         },
 		{
             "species": "SPECIES_STEELIX",
@@ -121,8 +118,7 @@
 			"evSPATK": 0,
 			"evSPDEF": 128,
 			"ability": 0,
-			"nature": 3,
-			"levelScaling": 1
+			"nature": 3
         },
 		{
             "species": "SPECIES_GENGAR",
@@ -151,8 +147,7 @@
 			"evSPATK": 128,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 10,
-			"levelScaling": 1
+			"nature": 10
         },
 		{
             "species": "SPECIES_AMPHAROS",
@@ -181,8 +176,7 @@
 			"evSPATK": 128,
 			"evSPDEF": 0,
 			"ability": 0,
-			"nature": 15,
-			"levelScaling": 1
+			"nature": 15
         }
     ]
 }
