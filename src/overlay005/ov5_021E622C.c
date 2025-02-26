@@ -1274,6 +1274,7 @@ const u16 EggMove_Table[] = {
     MOVE_COUNTER,
     MOVE_WAKE_UP_SLAP,
     MOVE_BULLET_PUNCH,
+	MOVE_BELLY_DRUM,
     (SPECIES_AZURILL) + 20000, //Azurill
     MOVE_ENCORE,
     MOVE_SING,
