@@ -2,7 +2,7 @@
     "name": "Delibird",
     "base_stats": {
         "hp": 45,
-        "attack": 55,
+        "attack": 85,
         "defense": 45,
         "speed": 105,
         "special_attack": 105,
@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_SLUSH_RUSH",
-        "ABILITY_NONE"
+        "ABILITY_HUSTLE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -80,16 +80,25 @@
         ],
         "level_up": {
             "1": "MOVE_PRESENT",
-			"5": "MOVE_PECK",
+			"3": "MOVE_PECK",
 			"10": "MOVE_ICE_SHARD",
+			"13": "MOVE_PLUCK",
 			"15": "MOVE_AURORA_BEAM",
-			"20": "MOVE_RAPID_SPIN",
-			"25": "MOVE_SPIKES",
-			"30": "MOVE_FAKE_OUT",
-			"35": "MOVE_HEADBUTT",
-			"40": "MOVE_SKY_ATTACK",
-			"45": "MOVE_SEISMIC_TOSS",
-			"50": "MOVE_MIND_READER"
+			"19": "MOVE_RAPID_SPIN",
+			"22": "MOVE_SPIKES",
+			"25": [ 
+				"MOVE_FAKE_OUT",
+				"MOVE_WING_ATTACK"
+			],
+			"28": "MOVE_HEADBUTT",
+			"30": "MOVE_DRILL_PECK",
+			"32": "MOVE_SEISMIC_TOSS",
+			"35": "MOVE_MIND_READER",
+			"38": "MOVE_SKY_ATTACK",
+			"40": "MOVE_FUTURE_SIGHT",
+			"42": "MOVE_ICE_BALL",
+			"45": "MOVE_DESTINY_BOND",
+			"52": "MOVE_BRAVE_BIRD"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
