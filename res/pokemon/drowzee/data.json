@@ -35,7 +35,7 @@
         "EGG_GROUP_HUMAN_LIKE"
     ],
     "abilities": [
-        "ABILITY_INSOMNIA",
+        "ABILITY_BAD_DREAMS",
         "ABILITY_FOREWARN"
     ],
     "great_marsh_flee_rate": 0,
@@ -89,25 +89,27 @@
         "level_up": {
             "1": [
                 "MOVE_POUND",
+				"MOVE_LICK",
 				"MOVE_TELEPORT",
                 "MOVE_HYPNOSIS"
             ],
             "5": "MOVE_DISABLE",
             "9": "MOVE_CONFUSION",
-            "13": "MOVE_HEADBUTT",
-            "18": "MOVE_POISON_GAS",
+            "13": "MOVE_GUILLOTINE",
             "21": "MOVE_MEDITATE",
             "24": "MOVE_PSYBEAM",
-            "29": "MOVE_PSYCH_UP",
-            "32": "MOVE_HEADBUTT",
-			"34": "MOVE_MEAN_LOOK",
-            "36": "MOVE_SWAGGER",
-			"38": "MOVE_ZEN_HEADBUTT",
-            "40": "MOVE_PSYCHIC",
+			"26": "MOVE_WAKE_UP_SLAP",
+			"32": "MOVE_MEAN_LOOK",
+			"36": "MOVE_ZEN_HEADBUTT",
+			"40": "MOVE_FUTURE_SIGHT",
 			"41": "MOVE_KINESIS",
-            "43": "MOVE_NASTY_PLOT",
-			"45": "MOVE_MIND_READER",
-            "48": "MOVE_FUTURE_SIGHT"
+			"43": [ 
+				"MOVE_MIRACLE_EYE",
+				"MOVE_NASTY_PLOT"
+			],
+            "45": "MOVE_PSYCHIC",
+			"48": "MOVE_EGG_BOMB"
+            
         },
         "tutor": [
             "MOVE_THUNDER_PUNCH",

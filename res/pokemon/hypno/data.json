@@ -1,11 +1,11 @@
 {
     "name": "Hypno",
     "base_stats": {
-        "hp": 85,
-        "attack": 73,
-        "defense": 70,
-        "speed": 67,
-        "special_attack": 73,
+        "hp": 95,
+        "attack": 98,
+        "defense": 90,
+        "speed": 69,
+        "special_attack": 88,
         "special_defense": 115
     },
     "types": [
@@ -35,7 +35,7 @@
         "EGG_GROUP_HUMAN_LIKE"
     ],
     "abilities": [
-        "ABILITY_INSOMNIA",
+        "ABILITY_BAD_DREAMS",
         "ABILITY_FOREWARN"
     ],
     "great_marsh_flee_rate": 0,
@@ -92,27 +92,29 @@
         "level_up": {
             "1": [
                 "MOVE_NIGHTMARE",
-                "MOVE_SWITCHEROO",
+                "MOVE_BEAT_UP",
                 "MOVE_POUND",
+				"MOVE_LICK",
                 "MOVE_HYPNOSIS",
                 "MOVE_TELEPORT",
 				"MOVE_ODOR_SLEUTH"
             ],
             "5": "MOVE_DISABLE",
             "9": "MOVE_CONFUSION",
-            "13": "MOVE_HEADBUTT",
-            "18": "MOVE_POISON_GAS",
+            "13": "MOVE_GUILLOTINE",
             "21": "MOVE_MEDITATE",
             "25": "MOVE_PSYBEAM",
-            "33": "MOVE_PSYCH_UP",
+            "28": "MOVE_WAKE_UP_SLAP",
 			"36": "MOVE_MEAN_LOOK",
-			"40": "MOVE_ZEN_HEADBUTT",
+			"38": "MOVE_ZEN_HEADBUTT",
+			"40": "MOVE_FUTURE_SIGHT",
 			"42": "MOVE_KINESIS",
-            "45": "MOVE_SWAGGER",
-			"47": "MOVE_MIND_READER",
-            "50": "MOVE_PSYCHIC",
-            "53": "MOVE_NASTY_PLOT",
-            "55": "MOVE_FUTURE_SIGHT"
+			"45": [ 
+				"MOVE_MIRACLE_EYE",
+				"MOVE_NASTY_PLOT"
+			],
+            "48": "MOVE_PSYCHIC",
+			"52": "MOVE_EGG_BOMB"
         },
         "tutor": [
             "MOVE_THUNDER_PUNCH",
