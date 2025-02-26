@@ -86,6 +86,7 @@
             ],
 			"13": "MOVE_ICICLE_SPEAR",
 			"15": "MOVE_ICE_SHARD",
+			"20": "MOVE_RAPID_SPIN",
 			"25": "MOVE_CLAMP",
             "28": "MOVE_SPIKES",
 			"30": "MOVE_TELEPORT",
