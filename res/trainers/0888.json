@@ -1,38 +1,40 @@
 {
-    "name": "Lee",
-    "class": "TRAINER_CLASS_CLOWN",
+    "name": "Kaiji",
+    "class": "TRAINER_CLASS_PI",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_RISKY",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MR_MIME",
+            "species": "SPECIES_HITMONCHAN",
             "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
+            "level": 57,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_DYNAMIC_PUNCH"
+            ],
             "power": 0,
-            "ball_seal": 3
-        },
-        {
-            "species": "SPECIES_KADABRA",
-            "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 3
-        },
-        {
-            "species": "SPECIES_AMBIPOM",
-            "form": 0,
-            "level": 44,
-            "item": null,
-            "moves": null,
-            "power": 0,
-            "ball_seal": 3
+            "ball_seal": 0,
+			"ball_type": "ITEM_POKE_BALL",
+			"ivHP": 15,
+			"ivATK": 15,
+			"ivDEF": 15,
+			"ivSPEED": 15,
+			"ivSPATK": 15,
+			"ivSPDEF": 15,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"ability": 0,
+			"nature": 0
         }
     ]
 }
