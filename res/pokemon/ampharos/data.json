@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_STATIC",
-        "ABILITY_NONE"
+        "ABILITY_MOLD_BREAKER",
+        "ABILITY_STATIC"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
