@@ -497,12 +497,13 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
 static u8 ov5_021E68D8 (Pokemon * param0, u16 * param1)
 {
     u16 v0, v1, v2, v3;
+	int eggMovesSize = sizeof(EggMove_Table);
 
     v2 = 0;
     v1 = 0;
     v0 = Pokemon_GetValue(param0, MON_DATA_SPECIES, NULL);
 
-    for (v3 = 0; v3 < 1909; v3++) {
+    for (v3 = 0; v3 < eggMovesSize; v3++) {
         if (EggMove_Table[v3] == (20000 + v0)) {
             v1 = v3 + 1;
             break;
