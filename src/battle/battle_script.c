@@ -13264,7 +13264,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             if (attackerWeight > pregnantWeight) {
                 weightDifference = attackerWeight - pregnantWeight;
 
-                for (; sWeightToPower[i][0] != 0xFFFF; i++) {
+                for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
                     if (sWeightToPower[i][0] >= weightDifference) {
                         break;
                     }
