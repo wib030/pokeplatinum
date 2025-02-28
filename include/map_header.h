@@ -22,7 +22,6 @@ typedef struct {
     u16 isRunningAllowed : 1;
     u16 isEscapeRopeAllowed : 1;
     u16 isFlyAllowed : 1;
-	u16 isRowanPadAllowed : 1;
 } MapHeader;
 
 u32 MapHeader_IDBoundsCheck(u32 param0);
@@ -60,6 +59,5 @@ BOOL MapHeader_IsAmitySquare(const u32 param0);
 BOOL MapHeader_IsAzureFluteAllowed(const u32 param0);
 BOOL MapHeader_IsPokemonCenter2F(const u32 param0);
 u32 MapHeader_GetMapEvolutionMethod(u32 param0);
-BOOL MapHeader_IsRowanPadAllowed(u32 param0);
 
 #endif // POKEPLATINUM_UNK_0203A024_H

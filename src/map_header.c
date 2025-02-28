@@ -305,9 +305,3 @@ u32 MapHeader_GetMapEvolutionMethod (u32 headerID)
 
     return 0;
 }
-
-BOOL MapHeader_IsRowanPadAllowed(u32 headerID)
-{
-    headerID = MapHeader_IDBoundsCheck(headerID);
-    return sMapHeaders[headerID].isRowanPadAllowed;
-}
