@@ -104,6 +104,7 @@
             "10": "MOVE_SWEET_KISS",
             "15": "MOVE_YAWN",
             "19": "MOVE_ENCORE",
+			"20": "MOVE_VACUUM_WAVE",
             "24": "MOVE_FOLLOW_ME",
 			"26": "MOVE_GUILLOTINE",
             "28": "MOVE_WISH",
