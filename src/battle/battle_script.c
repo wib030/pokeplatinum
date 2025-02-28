@@ -13277,6 +13277,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 }
             }
 
+            /*
             HeightWeightData *heightWeightData = Pokedex_HeightWeightData(HEAP_ID_BATTLE);
             Pokedex_HeightWeightData_Load(heightWeightData, 0, HEAP_ID_BATTLE);
 
@@ -13298,6 +13299,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                     battleCtx->movePower += heightDifference;
                 }
             }
+            */
         }
     }
 
