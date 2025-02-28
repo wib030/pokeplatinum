@@ -31,8 +31,8 @@
     "base_friendship": 100,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
     "egg_groups": [
-        "EGG_GROUP_UNDISCOVERED",
-        "EGG_GROUP_UNDISCOVERED"
+        "EGG_GROUP_DITTO",
+        "EGG_GROUP_DITTO"
     ],
     "abilities": [
         "ABILITY_SYNCHRONIZE",

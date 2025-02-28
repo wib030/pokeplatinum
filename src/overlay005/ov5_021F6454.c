@@ -704,6 +704,7 @@ BOOL ScrCmd_2FF (ScriptContext * param0)
         case 14:
         case 129:
         case 132:
+		case 151:
         case 202:
         case 235:
         case 265:

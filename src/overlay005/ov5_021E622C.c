@@ -367,7 +367,7 @@ static int ov5_021E6684 (UnkStruct_02026310 * param0)
     }
 
     for (v3 = 0, v0 = 0; v0 < 2; v0++) {
-        if ((v1[v0] = BoxPokemon_GetValue(v4[v0], MON_DATA_SPECIES, NULL)) == 132) {
+        if (((v1[v0] = BoxPokemon_GetValue(v4[v0], MON_DATA_SPECIES, NULL)) == 132) || ((v1[v0] = BoxPokemon_GetValue(v4[v0], MON_DATA_SPECIES, NULL)) == 151)) {
             v3++;
             v2 = v0;
         }
@@ -677,7 +677,7 @@ static u16 ov5_021E6C20 (UnkStruct_02026310 * param0, u8 param1[])
     v2 = 0;
 
     for (v1 = 0; v1 < 2; v1++) {
-        if ((v0[v1] = BoxPokemon_GetValue(v6[v1], MON_DATA_SPECIES, NULL)) == 132) {
+        if (((v0[v1] = BoxPokemon_GetValue(v6[v1], MON_DATA_SPECIES, NULL)) == 132) || ((v0[v1] = BoxPokemon_GetValue(v6[v1], MON_DATA_SPECIES, NULL)) == 151)) {
             param1[0] = v1 ^ 1;
             param1[1] = v1;
         } else if (BoxPokemon_GetGender(v6[v1]) == 1) {
@@ -709,7 +709,7 @@ static u16 ov5_021E6C20 (UnkStruct_02026310 * param0, u8 param1[])
         v4 = 489;
     }
 
-    if ((v0[param1[1]] == 132) && (BoxPokemon_GetGender(v6[param1[0]]) != 1)) {
+    if (((v0[param1[1]] == 132)  || (v0[param1[1]] == 151)) && (BoxPokemon_GetGender(v6[param1[0]]) != 1)) {
         v5 = param1[1];
         param1[1] = param1[0];
         param1[0] = v5;
@@ -915,15 +915,21 @@ static u8 ov5_021E6FF0 (BoxPokemon ** param0)
             return 0;
         }
     }
+	
+	if ((v0[0][0] == 13) && (v0[1][0] == 13)) {
+        return 0;
+    }
+	
+	// Everyone loves Mew (except Ditto and other Mews)
+	if ((v1[0] == 151) || (v1[1] == 151))
+	{
+		return 70;
+	}
 
     if ((v0[0][0] == 15) || (v0[1][0] == 15)) {
         return 0;
     }
-
-    if ((v0[0][0] == 13) && (v0[1][0] == 13)) {
-        return 0;
-    }
-
+	
     if ((v0[0][0] == 13) || (v0[1][0] == 13)) {
         if (v2[0] == v2[1]) {
             return 20;
