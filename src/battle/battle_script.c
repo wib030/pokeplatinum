@@ -99,6 +99,9 @@
 
 #include "communication_system.h"
 
+#include "struct_decls/struct_02098700_decl.h"
+#include "unk_02098700.h"
+
 const u16 EggMove_Table_Script[] = {
     (SPECIES_BULBASAUR) + 20000, // Bulbasaur line
     MOVE_LIGHT_SCREEN,
