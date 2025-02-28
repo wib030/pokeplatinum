@@ -5,6 +5,7 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
+		"AI_FLAG_OMNISCIENT",
 		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
@@ -20,8 +21,23 @@
                 "MOVE_BLAST_BURN",
                 "MOVE_AEROBLAST"
             ],
-            "power": 255,
-            "ball_seal": 5
+            "power": 0,
+            "ball_seal": 5,
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4,
+			"isShiny": 1,
+			"nature": 15
         },
         {
             "species": "SPECIES_CHARIZARD",
@@ -34,8 +50,23 @@
                 "MOVE_MAGMA_STORM",
                 "MOVE_AURA_SPHERE"
             ],
-            "power": 255,
-            "ball_seal": 13
+            "power": 0,
+            "ball_seal": 13,
+			"ball_type": "ITEM_LUXURY_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4,
+			"isShiny": 1,
+			"nature": 15
         }
     ]
 }
