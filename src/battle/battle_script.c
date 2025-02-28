@@ -12465,14 +12465,17 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     int i, j, p, loops, maxIVsInherited;
     int statRand, IVRandSeed, statRandReroll, monOTIDSource;
     int battlerPregnant;
+    int pregnantWeight, attackerWeight, weightDifference;
+    int pregnantHeight, attackerHeight, heightDifference;
 	int monLevel;
 	int moveMaxPP;
 	int maxLoops;
 	int eggMovesSize = sizeof(EggMove_Table_Script);
     // int monMetDateTime;
+    u8 attackingEggGroup1, attackingEggGroup2, pregnantEggGroup1, pregnantEggGroup2;
     u8 monMetYear, monMetMonth, monMetDay;
     u8 eggPartySlot, monIVsTemp, tempEV;
-    u8 monGender, attackerGender, defenderGender;
+    u8 pregnantGender, attackerGender, defenderGender;
     u8 inheritedIVs[STAT_MAX], lockedDefenderIVs[STAT_MAX], lockedAttackerIVs[STAT_MAX], monIVs[STAT_MAX];
 	u8 eggCycles, monPokeBall;
     u16 monSpecies, attackerSpecies, defenderSpecies;
@@ -13223,9 +13226,72 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         Strbuf_Free(eggName);
 
         Heap_FreeToHeap(mon);
-    }
 
-    
+        pregnantEggGroup1 = Pokemon_GetValue(pregnantMon, MON_DATA_PERSONAL_EGG_GROUP_1, NULL);
+        pregnantEggGroup2 = Pokemon_GetValue(pregnantMon, MON_DATA_PERSONAL_EGG_GROUP_2, NULL);
+        attackingEggGroup1 = Pokemon_GetValue(attackingMon, MON_DATA_PERSONAL_EGG_GROUP_1, NULL);
+        attackingEggGroup2 = Pokemon_GetValue(attackingMon, MON_DATA_PERSONAL_EGG_GROUP_2, NULL);
+
+        if (battlerPregnant != battleCtx->attacker) {
+            // 13 - Metamon Egg Group
+            // 15 - Legendary / No Egg Group
+            if (pregnantEggGroup1 != attackingEggGroup1
+            && pregnantEggGroup2 != attackingEggGroup2
+            && pregnantEggGroup1 != attackingEggGroup2
+            && pregnantEggGroup2 != attackingEggGroup1
+            && pregnantEggGroup1 != 13
+            && pregnantEggGroup2 != 13
+            && attackingEggGroup1 != 13
+            && attackingEggGroup2 != 13) {
+                battleCtx->movePower += 20;
+            }
+
+            // Men Suffer
+            pregnantGender = Pokemon_GetValue(pregnantMon, MON_DATA_GENDER, NULL);
+            if (pregnantGender == GENDER_MALE) {
+                battleCtx->movePower += 20;
+            }
+
+            pregnantWeight = battleCtx->battleMons[battlerPregnant].weight;
+            attackerWeight = battleCtx->battleMons[battleCtx->attacker].weight;
+
+
+            if (attackerWeight > pregnantWeight) {
+                weightDifference = attackerWeight - pregnantWeight;
+
+                for (; sWeightToPower[i][0] != 0xFFFF; i++) {
+                    if (sWeightToPower[i][0] >= weightDifference) {
+                        break;
+                    }
+                }
+
+                if (sWeightToPower[i][0] != 0xFFFF) {
+                    battleCtx->movePower += sWeightToPower[i][1] / 4;
+                } else {
+                    battleCtx->movePower += 150 / 4;
+                }
+            }
+
+            HeightWeightData *heightWeightData = Pokedex_HeightWeightData(HEAP_ID_BATTLE);
+            Pokedex_HeightWeightData_Load(heightWeightData, 0, HEAP_ID_BATTLE);
+
+            pregnantHeight = sub_02098808(heightWeightData, battleCtx->battleMons[battlerPregnant].species);
+            attackerHeight = sub_02098808(heightWeightData, battleCtx->battleMons[battleCtx->attacker].species);
+
+            if (attackerHeight > pregnantHeight
+                && pregnantHeight > 0) {
+                heightDifference = (attackerHeight - pregnantHeight)/pregnantHeight;
+
+                if (heightDifference > 50) {
+                    heightDifference = 50;
+                }
+
+                if (heightDifference > 0) {
+                    battleCtx->movePower += heightDifference;
+                }
+            }
+        }
+    }
 
     if (eggPartySlot < MAX_PARTY_SIZE) {
         // We have an open party slot
