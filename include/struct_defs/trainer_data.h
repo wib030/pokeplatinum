@@ -96,6 +96,7 @@ typedef struct TrainerMonWithMovesAndItem {
 	u16 friendship;
 	u16 nature;
 	u16 isShiny;
+	u16 gender;
 } TrainerMonWithMovesAndItem;
 
 #endif // POKEPLATINUM_STRUCT_TRAINER_DATA_H
