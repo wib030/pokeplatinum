@@ -280,6 +280,10 @@ static void sub_02073E18(BoxPokemon *boxMon, int monSpecies, int monLevel, int m
     } else if (monOTIDSource != 1) {
         monOTID = 0;
     }
+	
+    if (monOTIDSource == 3) {
+        monOTID = monPersonality;
+	}
 
     BoxPokemon_SetValue(boxMon, MON_DATA_OT_ID, &monOTID);
     BoxPokemon_SetValue(boxMon, MON_DATA_LANGUAGE, &Unk_020E4C44);

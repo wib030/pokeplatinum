@@ -296,9 +296,15 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 			
 			int monLevel = trmon[i].level;
+			int otIdSource = OTID_NOT_SHINY;
+			
+			if (trmon[i].isShiny == 1)
+			{
+				otIdSource = OTID_ALWAYS_SHINY;
+			}
 			
 			//TRUE is whether or not to enable nature, rnd value decides the nature
-            Pokemon_InitWith(mon, species, monLevel, ivs, TRUE, trmon[i].nature, OTID_NOT_SHINY, 0);
+            Pokemon_InitWith(mon, species, monLevel, ivs, TRUE, trmon[i].nature, otIdSource, 0);
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
 			
 			u32 ability1 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_1);
