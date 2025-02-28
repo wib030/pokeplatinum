@@ -13277,12 +13277,14 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 }
             }
 
-            /*
             HeightWeightData *heightWeightData = Pokedex_HeightWeightData(HEAP_ID_BATTLE);
             Pokedex_HeightWeightData_Load(heightWeightData, 0, HEAP_ID_BATTLE);
 
             pregnantHeight = sub_02098808(heightWeightData, battleCtx->battleMons[battlerPregnant].species);
             attackerHeight = sub_02098808(heightWeightData, battleCtx->battleMons[battleCtx->attacker].species);
+
+            Pokedex_HeightWeightData_Release(heightWeightData);
+            Pokedex_HeightWeightData_Free(heightWeightData);
 
             if (attackerHeight > pregnantHeight
                 && pregnantHeight > 0) {
@@ -13296,7 +13298,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                     battleCtx->movePower += heightDifference;
                 }
             }
-            */
         }
     }
 
