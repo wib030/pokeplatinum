@@ -13235,6 +13235,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         attackingEggGroup1 = Pokemon_GetValue(attackingMon, MON_DATA_PERSONAL_EGG_GROUP_1, NULL);
         attackingEggGroup2 = Pokemon_GetValue(attackingMon, MON_DATA_PERSONAL_EGG_GROUP_2, NULL);
 
+        battleCtx->movePower = CURRENT_MOVE_DATA.power;
+
         if (battlerPregnant != battleCtx->attacker) {
             // 13 - Metamon Egg Group
             // 15 - Legendary / No Egg Group
