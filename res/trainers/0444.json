@@ -1,5 +1,5 @@
 {
-    "name": "Zoroark",
+    "name": "Pregnor",
     "class": "TRAINER_CLASS_BLACK_BELT",
     "items": [],
     "ai_flags": [
@@ -12,41 +12,25 @@
         {
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 59,
-            "item": "ITEM_WIDE_LENS",
+            "level": 61,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_DYNAMIC_PUNCH",
-                "MOVE_FIRE_BLAST",
-                "MOVE_STONE_EDGE",
-                "MOVE_MEGA_KICK"
-            ],
-            "power": 200,
-            "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
-        },
-		{
-            "species": "SPECIES_DITTO",
-            "form": 0,
-            "level": 59,
-            "item": "ITEM_LEFTOVERS",
-            "moves": [
-                "MOVE_TRANSFORM"
+                "MOVE_SHARPEN",
+                "MOVE_SCARY_FACE",
+				"MOVE_LEER"
             ],
             "power": 255,
-            "ball_seal": 0,
+            "ball_seal": 7,
 			"ball_type": "ITEM_ULTRA_BALL",
-			"ivHP": 31,
-			"ivATK": 0,
-			"ivDEF": 0,
-			"ivSPEED": 0,
-			"ivSPATK": 0,
-			"ivSPDEF": 0,
 			"evHP": 252,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 252,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 4,
+			"isShiny": 1,
+			"gender": 0,
+			"ability": 1
         }
     ]
 }
