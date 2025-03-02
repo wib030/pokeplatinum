@@ -32,7 +32,11 @@
 			"evDEF": 0,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"friendship": 70,
+			"nature": 0,
+			"isShiny": 0,
+			"gender": 2
         }
     ]
 }
