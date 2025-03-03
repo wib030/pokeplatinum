@@ -1,6 +1,9 @@
 #include <nitro.h>
 #include <string.h>
 
+#include "constants/items.h"
+#include "constants/species.h"
+
 #include "strbuf.h"
 #include "trainer_info.h"
 #include "struct_decls/struct_02026218_decl.h"
@@ -447,50 +450,185 @@ static void ov5_021E6778 (u8 * param0, u8 param1)
 
 static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
 {
-    u8 v0[3], v1, v2[6], v3[3], v4;
+    int maxInheritedIVs = 3;
+    int statRand, statRandReroll;
+    u8 inheritedIVs[5], i, IVs[6], IVFlags[5], daycareTemp;
+    u16 parent1HeldItem, parent2HeldItem;
 
-    for (v1 = 0; v1 < 6; v1++) {
-        v2[v1] = v1;
+    BoxPokemon * parent1 = ov5_021E622C(param1, 0);
+    BoxPokemon * parent2 = ov5_021E622C(param1, 1);
+
+    parent1HeldItem = BoxPokemon_GetValue(parent1, MON_DATA_HELD_ITEM, NULL);
+    parent1HeldItem = BoxPokemon_GetValue(parent2, MON_DATA_HELD_ITEM, NULL);
+
+    // ITEM_DESTINY_KNOT == 280
+    if (parent1HeldItem == ITEM_DESTINY_KNOT || parent2HeldItem == ITEM_DESTINY_KNOT) {
+        maxInheritedIVs = 5;
     }
 
-    for (v1 = 0; v1 < 3; v1++) {
-        v0[v1] = v2[LCRNG_Next() % (6 - v1)];
-        ov5_021E6778(v2, v1);
+    for (i = 0; i < 6; i++) {
+        IVs[i] = i;
     }
 
-    for (v1 = 0; v1 < 3; v1++) {
-        v3[v1] = LCRNG_Next() % 2;
+    for (i = 0; i < maxInheritedIVs; i++) {
+        statRand = LCRNG_Next() % (6 - i);
+
+        // Give Attack and HP more rolls to balance RNG odds
+        if (i < 2) {
+            statRandReroll = LCRNG_Next() % (6 - i - 1);
+
+            if (statRand != i) {
+                if (statRandReroll <= i) {
+                    statRand = statRandReroll;
+                }
+            }
+        }
+
+        inheritedIVs[i] = IVs[statRand];
+        ov5_021E6778(IVs, i);
     }
 
-    for (v1 = 0; v1 < 3; v1++) {
-        BoxPokemon * v5 = ov5_021E622C(param1, v3[v1]);
+    for (i = 0; i < maxInheritedIVs; i++) {
+        IVFlags[i] = LCRNG_Next() % 2;
+    }
 
-        switch (v0[v1]) {
+    for (i = 0; i < maxInheritedIVs; i++) {
+        BoxPokemon * currentParent = ov5_021E622C(param1, IVFlags[i]);
+
+        if (BoxPokemon_GetValue(currentParent, MON_DATA_HELD_ITEM, NULL) )
+
+        switch (inheritedIVs[i]) {
         case 0:
-            v4 = BoxPokemon_GetValue(v5, MON_DATA_HP_IV, NULL);
-            Pokemon_SetValue(param0, 70, (u8 *)&v4);
+            daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_HP_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_HP_IV, (u8 *)&daycareTemp);
             break;
         case 1:
-            v4 = BoxPokemon_GetValue(v5, MON_DATA_ATK_IV, NULL);
-            Pokemon_SetValue(param0, 71, (u8 *)&v4);
+            daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_ATK_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_ATK_IV, (u8 *)&daycareTemp);
             break;
         case 2:
-            v4 = BoxPokemon_GetValue(v5, MON_DATA_DEF_IV, NULL);
-            Pokemon_SetValue(param0, 72, (u8 *)&v4);
+            daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_DEF_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_DEF_IV, (u8 *)&daycareTemp);
             break;
         case 3:
-            v4 = BoxPokemon_GetValue(v5, MON_DATA_SPEED_IV, NULL);
-            Pokemon_SetValue(param0, 73, (u8 *)&v4);
+            daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_SPEED_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPEED_IV, (u8 *)&daycareTemp);
             break;
         case 4:
-            v4 = BoxPokemon_GetValue(v5, MON_DATA_SPATK_IV, NULL);
-            Pokemon_SetValue(param0, 74, (u8 *)&v4);
+            daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_SPATK_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPATK_IV, (u8 *)&daycareTemp);
             break;
         case 5:
-            v4 = BoxPokemon_GetValue(v5, MON_DATA_SPDEF_IV, NULL);
-            Pokemon_SetValue(param0, 75, (u8 *)&v4);
+            daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_SPDEF_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, (u8 *)&daycareTemp);
             break;
         }
+    }
+
+    // ITEM_POWER_WEIGHT == 294
+    // ITEM_POWER_ANKLET == 293
+    // ITEM_POWER_BAND == 292
+    // ITEM_POWER_LENS == 291
+    // ITEM_POWER_BELT == 290
+    // ITEM_POWER_BRACER == 289
+    switch (parent1HeldItem) {
+        default:
+            break;
+
+        case ITEM_POWER_WEIGHT:
+            daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_HP_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_HP_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_BRACER:
+            daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_ATK_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_ATK_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_BELT:
+            daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_DEF_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_DEF_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_ANKLET:
+            daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_SPEED_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPEED_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_LENS:
+            daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_SPATK_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPATK_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_BAND:
+            daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_SPDEF_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, (u8 *)&daycareTemp);
+            break;
+    }
+
+    switch (parent2HeldItem) {
+        default:
+            break;
+
+        case ITEM_POWER_WEIGHT:
+            if (parent2HeldItem == parent1HeldItem) {
+                if (LCRNG_Next() % 2) {
+                    break;
+                }
+            }
+            daycareTemp = BoxPokemon_GetValue(parent2, MON_DATA_HP_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_HP_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_BRACER:
+            if (parent2HeldItem == parent1HeldItem) {
+                    if (LCRNG_Next() % 2) {
+                        break;
+                    }
+            }
+            daycareTemp = BoxPokemon_GetValue(parent2, MON_DATA_ATK_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_ATK_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_BELT:
+            if (parent2HeldItem == parent1HeldItem) {
+                if (LCRNG_Next() % 2) {
+                    break;
+                }
+            }
+            daycareTemp = BoxPokemon_GetValue(parent2, MON_DATA_DEF_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_DEF_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_ANKLET:
+            if (parent2HeldItem == parent1HeldItem) {
+                if (LCRNG_Next() % 2) {
+                    break;
+                }
+            }
+            daycareTemp = BoxPokemon_GetValue(parent2, MON_DATA_SPEED_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPEED_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_LENS:
+            if (parent2HeldItem == parent1HeldItem) {
+                if (LCRNG_Next() % 2) {
+                    break;
+                }
+            }
+            daycareTemp = BoxPokemon_GetValue(parent2, MON_DATA_SPATK_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPATK_IV, (u8 *)&daycareTemp);
+            break;
+
+        case ITEM_POWER_BAND:
+            if (parent2HeldItem == parent1HeldItem) {
+                if (LCRNG_Next() % 2) {
+                    break;
+                }
+            }
+            daycareTemp = BoxPokemon_GetValue(parent2, MON_DATA_SPDEF_IV, NULL);
+            Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, (u8 *)&daycareTemp);
+            break;
     }
 }
 
