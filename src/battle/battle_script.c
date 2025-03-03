@@ -13004,15 +13004,39 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             tempEV = 0;
             Pokemon_SetValue(mon, MON_DATA_HP_EV + i, &tempEV);
             BoxPokemon_SetValue(boxMon, MON_DATA_HP_EV + i, &tempEV);
+
+            if (lockedAttackerIVs[i] == 1 && lockedDefenderIVs[i] == 1) {
+                if (BattleSystem_RandNext(battleSys) & 1) {
+                    inheritedIVs[i] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i, NULL);
+                }
+                else {
+                    inheritedIVs[i] = Pokemon_GetValue(attackingMon, MON_DATA_HP_IV + i, NULL);
+                }
+            }
+            else {
+                if (lockedAttackerIVs[i] == 1) {
+                    inheritedIVs[i] = Pokemon_GetValue(attackingMon, MON_DATA_HP_IV + i, NULL);
+                }
+
+                if (lockedDefenderIVs[i] == 1) {
+                    inheritedIVs[i] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i, NULL);
+                }
+            }
         }
 
         for (i = 0; i < maxIVsInherited; i++) {
             statRand = BattleSystem_RandNext(battleSys) % (STAT_MAX - i);
-            statRandReroll = BattleSystem_RandNext(battleSys) % (STAT_MAX - i - 1);
 
             if (i < STAT_DEFENSE) {
+                statRandReroll = BattleSystem_RandNext(battleSys) % (STAT_MAX - i - 1);
                 // boost the odds of inheriting HP and Attack to be closer to 47%
                 // this should give all stats the same odds of being inherited
+                if (statRand != i) {
+                    if (statRandReroll <= i) {
+                        statRand = statRandReroll;
+                    }
+                }
+                /*
                 if (i == STAT_HP && statRand != STAT_HP) {
                     if (statRandReroll == 0) {
                         statRand = STAT_HP;
@@ -13027,13 +13051,16 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                         statRand = STAT_HP;
                     }
                 }
+                */
             }
 
-            if (BattleSystem_RandNext(battleSys) & 1) {
-                inheritedIVs[statRand] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i + statRand, NULL);
-            }
-            else {
-                inheritedIVs[statRand] = Pokemon_GetValue(attackingMon, MON_DATA_HP_IV + i + statRand, NULL);
+            if (inheritedIVs[statRand] == 32) {
+                if (BattleSystem_RandNext(battleSys) & 1) {
+                    inheritedIVs[statRand] = Pokemon_GetValue(defendingMon, MON_DATA_HP_IV + i + statRand, NULL);
+                }
+                else {
+                    inheritedIVs[statRand] = Pokemon_GetValue(attackingMon, MON_DATA_HP_IV + i + statRand, NULL);
+                }
             }
         }
 
@@ -13050,9 +13077,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
         // inherit IVs
         for (i = 0; i < STAT_MAX; i++) {
-            if (inheritedIVs[i] < 32) {
-                monIVs[i] = inheritedIVs[i];
-            }
+            monIVs[i] = inheritedIVs[i];
 
             monIVsTemp = monIVs[i];
             Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &monIVsTemp);
