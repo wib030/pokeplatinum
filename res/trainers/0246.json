@@ -20,9 +20,22 @@
 				"MOVE_ROCK_TOMB",
 				"MOVE_PAIN_SPLIT"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 11,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 20,
+			"ivATK": 17,
+			"ivDEF": 16,
+			"ivSPEED": 17,
+			"ivSPATK": 15,
+			"ivSPDEF": 17,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_ARON",
@@ -35,9 +48,22 @@
 				"MOVE_METAL_CLAW",
 				"MOVE_ENDURE"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 17,
+			"ivATK": 14,
+			"ivDEF": 15,
+			"ivSPEED": 20,
+			"ivSPATK": 14,
+			"ivSPDEF": 17,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_ONIX",
@@ -50,9 +76,22 @@
 				"MOVE_TORMENT",
 				"MOVE_PROTECT"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 20,
+			"ivATK": 17,
+			"ivDEF": 17,
+			"ivSPEED": 17,
+			"ivSPATK": 14,
+			"ivSPDEF": 15,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_LILEEP",
@@ -65,9 +104,22 @@
 				"MOVE_PAIN_SPLIT",
 				"MOVE_GASTRO_ACID"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 20,
+			"ivATK": 15,
+			"ivDEF": 16,
+			"ivSPEED": 16,
+			"ivSPATK": 17,
+			"ivSPDEF": 16,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_OMANYTE",
@@ -80,9 +132,22 @@
 				"MOVE_ROCK_POLISH",
 				"MOVE_MUD_SHOT"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 16,
+			"ivATK": 17,
+			"ivDEF": 14,
+			"ivSPEED": 15,
+			"ivSPATK": 20,
+			"ivSPDEF": 17,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_ANORITH",
@@ -95,9 +160,22 @@
 				"MOVE_CURSE",
 				"MOVE_FURY_CUTTER"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 11,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 14,
+			"ivATK": 20,
+			"ivDEF": 14,
+			"ivSPEED": 14,
+			"ivSPATK": 15,
+			"ivSPDEF": 16,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }

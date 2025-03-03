@@ -21,9 +21,22 @@
 				"MOVE_GRASS_KNOT",
 				"MOVE_U_TURN"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 1,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 23,
+			"ivATK": 21,
+			"ivDEF": 19,
+			"ivSPEED": 22,
+			"ivSPATK": 21,
+			"ivSPDEF": 19,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_TANGELA",
@@ -36,24 +49,50 @@
 				"MOVE_CONFUSION",
 				"MOVE_GROWTH"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 16,
+			"ivATK": 17,
+			"ivDEF": 18,
+			"ivSPEED": 16,
+			"ivSPATK": 16,
+			"ivSPDEF": 19,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_BELLSPROUT",
             "form": 0,
             "level": 20,
-            "item": "ITEM_MUSCLE_BAND",
+            "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_BULLET_SEED",
-				"MOVE_KNOCK_OFF",
-				"MOVE_SWORDS_DANCE",
-				"MOVE_SUNNY_DAY"
+				"MOVE_ACID",
+				"MOVE_THIEF",
+				"MOVE_GROWTH"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 16,
+			"ivATK": 20,
+			"ivDEF": 18,
+			"ivSPEED": 20,
+			"ivSPATK": 17,
+			"ivSPDEF": 16,
+			"evHP": 0,
+			"evATK": 24,
+			"evDEF": 0,
+			"evSPEED": 24,
+			"evSPATK": 24,
+			"evSPDEF": 0,
+			"nature": 14
         },
 		{
             "species": "SPECIES_LOMBRE",
@@ -66,9 +105,22 @@
 				"MOVE_ICY_WIND",
 				"MOVE_MEGA_DRAIN"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 18,
+			"ivATK": 16,
+			"ivDEF": 16,
+			"ivSPEED": 18,
+			"ivSPATK": 16,
+			"ivSPDEF": 19,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_CHERRIM",
@@ -81,9 +133,22 @@
 				"MOVE_GRASS_KNOT",
 				"MOVE_AROMATHERAPY"
             ],
-            "power": 100,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 19,
+			"ivATK": 19,
+			"ivDEF": 17,
+			"ivSPEED": 18,
+			"ivSPATK": 19,
+			"ivSPDEF": 18,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_ROSERADE",
@@ -96,9 +161,22 @@
 				"MOVE_MUD_SLAP",
 				"MOVE_HIDDEN_POWER"
             ],
-            "power": 120,
+            "power": 0,
             "ball_seal": 1,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 17,
+			"ivATK": 16,
+			"ivDEF": 17,
+			"ivSPEED": 18,
+			"ivSPATK": 18,
+			"ivSPDEF": 18,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }
