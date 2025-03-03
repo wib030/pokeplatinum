@@ -156,6 +156,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     Pokedex_HeightWeightData_Load(heightWeightData, 0, HEAP_ID_BATTLE);
 
     battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, battleCtx->battleMons[battler].species);
+    battleCtx->battleMons[battler].height = sub_02098808(heightWeightData, battleCtx->battleMons[battler].species);
 
     Pokedex_HeightWeightData_Release(heightWeightData);
     Pokedex_HeightWeightData_Free(heightWeightData);

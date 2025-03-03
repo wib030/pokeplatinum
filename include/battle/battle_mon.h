@@ -76,6 +76,7 @@ typedef struct BattleMon {
     s8 statBoosts[NUM_BOOSTABLE_STATS];
 
     int weight;
+    int height;
 
     u8 type1;
     u8 type2;
