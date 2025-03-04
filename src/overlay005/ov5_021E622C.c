@@ -892,7 +892,7 @@ void ov5_021E6CF0 (Pokemon * param0, u16 param1, u8 param2, TrainerInfo * param3
     u8 v4 = PokemonPersonalData_GetSpeciesValue(param1, 19);
     Strbuf* v5;
 
-    if (LCRNG_Next() % PRETERM_ODDS == 0) {
+    if ((LCRNG_Next() % PRETERM_ODDS) == 0) {
         birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
     }
     else {
@@ -959,7 +959,7 @@ void ov5_021E6DE8 (Pokemon * param0, u16 param1, UnkStruct_02026310 * param2, u3
         }
     }
 
-    if (LCRNG_Next() % PRETERM_ODDS == 0) {
+    if ((LCRNG_Next() % PRETERM_ODDS) == 0) {
         birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
     }
     else {
@@ -1397,7 +1397,7 @@ static void ov5_021E742C (Pokemon * param0, int param1)
         }
     }
 
-    if (LCRNG_Next() % PRETERM_ODDS == 0) {
+    if ((LCRNG_Next() % PRETERM_ODDS) == 0) {
         birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
     }
     else {
