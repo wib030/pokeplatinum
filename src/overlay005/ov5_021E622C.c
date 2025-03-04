@@ -535,32 +535,32 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
         default:
             break;
 
-        case ITEM_POWER_WEIGHT:
+        case 294:
             daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_HP_IV, NULL);
             Pokemon_SetValue(param0, MON_DATA_HP_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_BRACER:
+        case 289:
             daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_ATK_IV, NULL);
             Pokemon_SetValue(param0, MON_DATA_ATK_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_BELT:
+        case 290:
             daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_DEF_IV, NULL);
             Pokemon_SetValue(param0, MON_DATA_DEF_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_ANKLET:
+        case 293:
             daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_SPEED_IV, NULL);
             Pokemon_SetValue(param0, MON_DATA_SPEED_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_LENS:
+        case 291:
             daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_SPATK_IV, NULL);
             Pokemon_SetValue(param0, MON_DATA_SPATK_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_BAND:
+        case 292:
             daycareTemp = BoxPokemon_GetValue(parent1, MON_DATA_SPDEF_IV, NULL);
             Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, (u8 *)&daycareTemp);
             break;
@@ -570,7 +570,7 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
         default:
             break;
 
-        case ITEM_POWER_WEIGHT:
+        case 294:
             if (parent2HeldItem == parent1HeldItem) {
                 if (LCRNG_Next() % 2) {
                     break;
@@ -580,7 +580,7 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
             Pokemon_SetValue(param0, MON_DATA_HP_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_BRACER:
+        case 289:
             if (parent2HeldItem == parent1HeldItem) {
                     if (LCRNG_Next() % 2) {
                         break;
@@ -590,7 +590,7 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
             Pokemon_SetValue(param0, MON_DATA_ATK_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_BELT:
+        case 290:
             if (parent2HeldItem == parent1HeldItem) {
                 if (LCRNG_Next() % 2) {
                     break;
@@ -600,7 +600,7 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
             Pokemon_SetValue(param0, MON_DATA_DEF_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_ANKLET:
+        case 293:
             if (parent2HeldItem == parent1HeldItem) {
                 if (LCRNG_Next() % 2) {
                     break;
@@ -610,7 +610,7 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
             Pokemon_SetValue(param0, MON_DATA_SPEED_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_LENS:
+        case 291:
             if (parent2HeldItem == parent1HeldItem) {
                 if (LCRNG_Next() % 2) {
                     break;
@@ -620,7 +620,7 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
             Pokemon_SetValue(param0, MON_DATA_SPATK_IV, (u8 *)&daycareTemp);
             break;
 
-        case ITEM_POWER_BAND:
+        case 292:
             if (parent2HeldItem == parent1HeldItem) {
                 if (LCRNG_Next() % 2) {
                     break;
