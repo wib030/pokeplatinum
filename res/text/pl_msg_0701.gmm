@@ -1978,4 +1978,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">La mythologie le décrit comme\nle Pokémon qui a façonné\nl’univers avec ses 1 000 bras.</language>
 	</row>
+	<row id="pl_msg_00000701_00494" index="494">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A ferocious, cave-dwelling monster\nthat is said to be related to\nJIGGLYPUFF.</language>
+	</row>
 </body>

@@ -1980,9 +1980,13 @@
 	</row>
 	<row id="pl_msg_00000413_00494" index="494">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">an {COLOR 255}Egg{COLOR 0}</language>
+		<language name="English">a {COLOR 255}SCREAMTAIL{COLOR 0}</language>
 	</row>
 	<row id="pl_msg_00000413_00495" index="495">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">an {COLOR 255}Egg{COLOR 0}</language>
+	</row>
+	<row id="pl_msg_00000413_00496" index="496">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">a {COLOR 255}Bad Egg{COLOR 0}</language>
 	</row>

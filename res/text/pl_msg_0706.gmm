@@ -1978,4 +1978,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">It is said to have emerged from an\negg in a place where there was\nnothing, then shaped the world.</language>
 	</row>
+	<row id="pl_msg_00000706_00494" index="494">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A ferocious, cave-dwelling monster\nthat is said to be related to\nJIGGLYPUFF.</language>
+	</row>
 </body>

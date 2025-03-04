@@ -1979,9 +1979,13 @@
 	</row>
 	<row id="pl_msg_00000412_00494" index="494">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Egg</language>
+		<language name="English">SCREAMTAIL</language>
 	</row>
 	<row id="pl_msg_00000412_00495" index="495">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Egg</language>
+	</row>
+	<row id="pl_msg_00000412_00496" index="496">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Bad Egg</language>
 	</row>
