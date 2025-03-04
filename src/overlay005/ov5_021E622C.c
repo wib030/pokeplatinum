@@ -39,7 +39,8 @@
 
 #include "overlay005/rodata_ov5_021F9FA2.h"
 
-#define	BIRTH_LEVEL			(6)
+#define	BIRTH_LEVEL			(5)
+#define PRETERM_ODDS        (10)
 
 typedef struct {
     int unk_00[4];
@@ -891,7 +892,12 @@ void ov5_021E6CF0 (Pokemon * param0, u16 param1, u8 param2, TrainerInfo * param3
     u8 v4 = PokemonPersonalData_GetSpeciesValue(param1, 19);
     Strbuf* v5;
 
-    birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
+    if (LCRNG_Next() % PRETERM_ODDS == 0) {
+        birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
+    }
+    else {
+        birthLevel = BIRTH_LEVEL;
+    }
     Pokemon_InitWith(param0, param1, birthLevel, 32, 0, 0, 0, 0);
 
     v0 = 0;
@@ -953,7 +959,12 @@ void ov5_021E6DE8 (Pokemon * param0, u16 param1, UnkStruct_02026310 * param2, u3
         }
     }
 
-    birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
+    if (LCRNG_Next() % PRETERM_ODDS == 0) {
+        birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
+    }
+    else {
+        birthLevel = BIRTH_LEVEL;
+    }
     Pokemon_InitWith(param0, param1, birthLevel, 32, 1, v2, 0, 0);
 
     v0 = 0;
@@ -1386,7 +1397,12 @@ static void ov5_021E742C (Pokemon * param0, int param1)
         }
     }
 
-    birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
+    if (LCRNG_Next() % PRETERM_ODDS == 0) {
+        birthLevel = 1 + (LCRNG_Next() % BIRTH_LEVEL);
+    }
+    else {
+        birthLevel = BIRTH_LEVEL;
+    }
     Pokemon_InitWith(v16, v0, birthLevel, 32, 1, v3, 0, 0);
 
     for (v7 = 0; v7 < 4; v7++) {
