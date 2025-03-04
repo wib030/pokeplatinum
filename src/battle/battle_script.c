@@ -12547,8 +12547,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         attackerSpecies = Pokemon_GetValue(attackingMon, MON_DATA_SPECIES, NULL);
         defenderSpecies = Pokemon_GetValue(defendingMon, MON_DATA_SPECIES, NULL);
 
-        attackerEggSpecies = Pokemon_GetValue(attackingMon, MON_DATA_SPECIES_EGG, NULL);
-        defenderEggSpecies = Pokemon_GetValue(defendingMon, MON_DATA_SPECIES_EGG, NULL);
+        attackerEggSpecies = sub_02076F84(attackerSpecies);
+        defenderEggSpecies = sub_02076F84(defenderSpecies);
 
         monSpecies = SPECIES_NONE;
         monEggSpecies = SPECIES_NONE;
