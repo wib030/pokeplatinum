@@ -8,6 +8,8 @@
 #include "unk_020131EC.h"
 #include "heap.h"
 
+#include "constants/species.h"
+
 static void sub_020131EC(const u8 * param0, u8 * param1, int * param2, int * param3, int param4, int param5);
 
 static void sub_020131EC (const u8 * param0, u8 * param1, int * param2, int * param3, int param4, int param5)
@@ -75,13 +77,13 @@ static BOOL sub_020132F8 (int param0)
     int v0;
     int v1;
     const int v2[] = {
-        327, 495,
+        SPECIES_SPINDA, MAX_SPECIES,
     };
 
-    for (v0 = 0; v0 < 495; v0++) {
+    for (v0 = 0; v0 < MAX_SPECIES; v0++) {
         v1 = v2[v0];
 
-        if (v1 == 495) {
+        if (v1 == MAX_SPECIES) {
             break;
         }
 

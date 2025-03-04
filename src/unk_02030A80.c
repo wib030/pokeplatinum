@@ -27,6 +27,8 @@
 #include "pokemon.h"
 #include "unk_020996D0.h"
 
+#include "constants/species.h"
+
 UnkStruct_02030A80 * sub_02030A80 (int param0)
 {
     UnkStruct_02030A80 * v0;
@@ -98,7 +100,7 @@ u32 sub_02030BAC (const UnkStruct_02030A80 * param0)
 
 int sub_02030BBC (const UnkStruct_02030A80 * param0)
 {
-    if (param0->unk_1C >= 495) {
+    if (param0->unk_1C >= MAX_SPECIES) {
         return 0;
     }
 
@@ -107,7 +109,7 @@ int sub_02030BBC (const UnkStruct_02030A80 * param0)
 
 int sub_02030BCC (const UnkStruct_02030A80 * param0)
 {
-    if (param0->unk_1C >= 495) {
+    if (param0->unk_1C >= MAX_SPECIES) {
         return 0;
     }
 

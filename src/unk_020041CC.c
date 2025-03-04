@@ -12,6 +12,8 @@
 #include "heap.h"
 #include "communication_system.h"
 
+#include "constants/species.h"
+
 void sub_020041E8(u16 param0);
 u16 sub_020041FC(void);
 void sub_02004208(u16 param0);
@@ -1308,7 +1310,7 @@ const SNDWaveData * sub_020050F8 (int param0)
     v0 = param0;
 
     if (v0 != 441) {
-        if ((param0 > 495) || (param0 == 0)) {
+        if ((param0 > MAX_SPECIES) || (param0 == 0)) {
             v0 = 1;
         }
     }
@@ -1328,7 +1330,7 @@ static const SNDWaveData * sub_02005130 (int param0)
     v0 = param0;
 
     if (v0 != 441) {
-        if ((param0 > 495) || (param0 == 0)) {
+        if ((param0 > MAX_SPECIES) || (param0 == 0)) {
             v0 = 1;
         }
     }
