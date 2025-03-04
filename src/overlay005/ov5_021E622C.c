@@ -495,8 +495,6 @@ static void ov5_021E67B0 (Pokemon * param0, UnkStruct_02026310 * param1)
     for (i = 0; i < maxInheritedIVs; i++) {
         BoxPokemon * currentParent = ov5_021E622C(param1, IVFlags[i]);
 
-        if (BoxPokemon_GetValue(currentParent, MON_DATA_HELD_ITEM, NULL) )
-
         switch (inheritedIVs[i]) {
         case 0:
             daycareTemp = BoxPokemon_GetValue(currentParent, MON_DATA_HP_IV, NULL);
