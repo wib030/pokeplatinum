@@ -33,7 +33,7 @@ output_dir = pathlib.Path(args.output_dir)
 
 private_dir.mkdir(parents=True, exist_ok=True)
 
-NUM_POKEMON = 494
+NUM_POKEMON = 495
 
 pokedex = [0 for i in range(NUM_POKEMON)]
 
