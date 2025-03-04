@@ -7,10 +7,12 @@
 #define JOHTO_DEX_COUNT         (SPECIES_CELEBI - SPECIES_MEW)
 #define HOENN_DEX_COUNT         (SPECIES_DEOXYS - SPECIES_CELEBI)
 #define SINNOH_DEX_COUNT        (SPECIES_ARCEUS - SPECIES_DEOXYS)
+#define NEW_DEX_COUNT        	(SPECIES_SCREAM_TAIL - SPECIES_ARCEUS)
 #define NATIONAL_DEX_COUNT      (KANTO_DEX_COUNT \
                                 + JOHTO_DEX_COUNT \
                                 + HOENN_DEX_COUNT \
-                                + SINNOH_DEX_COUNT)
+                                + SINNOH_DEX_COUNT \
+								+ NEW_DEX_COUNT)
 
 #define MAX_SPECIES             SPECIES_BAD_EGG
 

@@ -549,6 +549,7 @@ const u8 sPokemonIconPaletteIndex[] = {
     [SPECIES_DARKRAI]   	= 0,
     [SPECIES_SHAYMIN]   	= 1,
     [SPECIES_ARCEUS]    	= 0,
+	[SPECIES_SCREAM_TAIL]   = 0,
     [ICON_EGG]                = 1,
     [ICON_MANAPHY_EGG]        = 2,
     [ICON_DEOXYS_ATTACK]      = 0,

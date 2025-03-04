@@ -526,6 +526,7 @@ pokemon_subdirs = [
     'darkrai',
     'shaymin',
     'arceus',
+	'scream_tail',
     'egg',
     'bad_egg'
 ]
