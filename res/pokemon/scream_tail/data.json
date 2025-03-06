@@ -1,12 +1,12 @@
 {
-    "name": "Scream Tail",
+    "name": "ScreamTail",
     "base_stats": {
         "hp": 115,
-        "attack": 65,
-        "defense": 99,
-        "speed": 65,
-        "special_attack": 115,
-        "special_defense": 111
+        "attack": 115,
+        "defense": 65,
+        "speed": 111,
+        "special_attack": 99,
+        "special_defense": 65
     },
     "types": [
         "TYPE_NORMAL",
@@ -35,8 +35,8 @@
         "EGG_GROUP_FAIRY"
     ],
     "abilities": [
-        "ABILITY_COWARD",
-        "ABILITY_PEST"
+        "ABILITY_ROCK_STAR",
+        "ABILITY_RIVALRY"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

@@ -1261,5 +1261,10 @@
 	.macro PregnancyPunch
     .long 227
     .endm
+	
+	.macro CheckSoundMove jump_no_effect
+    .long 228
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

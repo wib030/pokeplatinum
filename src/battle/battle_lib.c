@@ -3462,6 +3462,7 @@ static u16 sSoundMoves[] = {
     MOVE_BUG_BUZZ,
     MOVE_CHATTER,
     MOVE_PERISH_SONG,
+	MOVE_MIND_READER, // Psychic Scream
 };
 
 static u16 sPowderMoves[] = {
@@ -3504,12 +3505,34 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     attackerItemPower = Battler_HeldItemPower(battleCtx, attacker, ITEM_POWER_CHECK_ALL);
     defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
     defenderItemPower = Battler_HeldItemPower(battleCtx, defender, ITEM_POWER_CHECK_ALL);
-
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+	
+	int soundMove = FALSE;
+	if (Battler_Ability(battleCtx, attacker) == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+	
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE)
+	{
         moveType = TYPE_NORMAL;
-    } else if (inType) {
+    }
+	else if ((Battler_Ability(battleCtx, attacker) == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		moveType = TYPE_ROCK;
+    }
+	else if (inType)
+	{
         moveType = inType;
-    } else {
+    }
+	else
+	{
         moveType = MOVE_DATA(move).type;
     }
 
@@ -3773,11 +3796,33 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
     defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
     defenderItemPower = Battler_HeldItemPower(battleCtx, defender, ITEM_POWER_CHECK_ALL);
 
-    if (monAbility == ABILITY_NORMALIZE) {
+    int soundMove = FALSE;
+	if (monAbility == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+	
+    if (monAbility == ABILITY_NORMALIZE)
+	{
         moveType = TYPE_NORMAL;
-    } else if (inType) {
+    }
+	else if ((monAbility == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		moveType = TYPE_ROCK;
+    }
+	else if (inType)
+	{
         moveType = inType;
-    } else {
+    }
+	else
+	{
         moveType = MOVE_DATA(move).type;
     }
 
@@ -4002,11 +4047,33 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         return;
     }
 
-    if (attackerAbility == ABILITY_NORMALIZE) {
+    int soundMove = FALSE;
+	if (attackerAbility == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+	
+    if (attackerAbility == ABILITY_NORMALIZE)
+	{
         moveType = TYPE_NORMAL;
-    } else if (inType) {
+    }
+	else if ((attackerAbility == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		moveType = TYPE_ROCK;
+    }
+	else if (inType)
+	{
         moveType = inType;
-    } else {
+    }
+	else
+	{
         moveType = MOVE_DATA(move).type;
     }
 	
@@ -4826,11 +4893,29 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 {
     int subscript = NULL, moveType;
 
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+    int soundMove = FALSE;
+	if (Battler_Ability(battleCtx, attacker) == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == battleCtx->moveCur)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+	
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE)
+	{
         moveType = TYPE_NORMAL;
-    } else if (battleCtx->moveType) {
-        moveType = battleCtx->moveType;
-    } else {
+    }
+	else if ((Battler_Ability(battleCtx, attacker) == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		moveType = TYPE_ROCK;
+    }
+	else
+	{
         moveType = CURRENT_MOVE_DATA.type;
     }
 
@@ -8682,6 +8767,18 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     effect = MOVE_DATA(move).effect;
     moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
+	
+	int soundMove = FALSE;
+	if (attackerParams.ability == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
 
     if (inPower != 0){
         movePower = inPower;
@@ -8826,6 +8923,13 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
                                 case ABILITY_NORMALIZE:
                                     partyMonInType = TYPE_NORMAL;
+                                    break;
+									
+								case ABILITY_ROCK_STAR:
+									if (soundMove == TRUE)
+									{
+										partyMonInType = TYPE_ROCK;
+									}
                                     break;
                             }
 	
@@ -9088,6 +9192,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 movePower = movePower * 6 / 5;
             }
             break;
+			
+		case ABILITY_ROCK_STAR:
+			if (soundMove == TRUE)
+			{
+				moveType = TYPE_ROCK;
+				movePower = movePower * 3 / 2;
+			}
+			break;
 
         case ABILITY_TECHNICIAN:
             if (move != MOVE_STRUGGLE
@@ -9945,6 +10057,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     effect = MOVE_DATA(move).effect;
     moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
+	
+	int soundMove = FALSE;
+	if (attackerParams.ability == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
 
     if (inPower != 0){
         movePower = inPower;
@@ -10089,6 +10213,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
                                 case ABILITY_NORMALIZE:
                                     partyMonInType = TYPE_NORMAL;
+                                    break;
+									
+								case ABILITY_ROCK_STAR:
+									if (soundMove == TRUE)
+									{
+										partyMonInType = TYPE_ROCK;
+									}
                                     break;
                             }
 	
@@ -10311,6 +10442,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 movePower = movePower * 6 / 5;
             }
             break;
+			
+		case ABILITY_ROCK_STAR:
+			if (soundMove == TRUE)
+			{
+				moveType = TYPE_ROCK;
+				movePower = movePower * 3 / 2;
+			}
+			break;
 
         case ABILITY_TECHNICIAN:
             if (move != MOVE_STRUGGLE

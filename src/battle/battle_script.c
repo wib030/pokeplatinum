@@ -2149,6 +2149,23 @@ const u16 EggMove_Table_Script[] = {
     0xffff,
 };
 
+static u16 sSoundMoves[] = {
+    MOVE_GROWL,
+    MOVE_ROAR,
+    MOVE_SING,
+    MOVE_SUPERSONIC,
+    MOVE_SCREECH,
+    MOVE_SNORE,
+    MOVE_UPROAR,
+    MOVE_METAL_SOUND,
+    MOVE_GRASS_WHISTLE,
+    MOVE_HYPER_VOICE,
+    MOVE_BUG_BUZZ,
+    MOVE_CHATTER,
+    MOVE_PERISH_SONG,
+	MOVE_MIND_READER, // Psychic Scream
+};
+
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
 
 typedef struct BattleMessageParams {
@@ -2385,6 +2402,7 @@ static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_TryTailwind(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2649,7 +2667,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_CheckStickyWeb,
 	BtlCmd_TryTailwind,
 	BtlCmd_TryGravity,
-    BtlCmd_PregnancyPunch
+    BtlCmd_PregnancyPunch,
+	BtlCmd_CheckSoundMove
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -3629,11 +3648,29 @@ static BOOL BtlCmd_Wait(BattleSystem *battleSys, BattleContext *battleCtx)
 static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int moveType;
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+    int soundMove = FALSE;
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == battleCtx->moveCur)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+	
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE)
+	{
         moveType = TYPE_NORMAL;
-    } else if (battleCtx->moveType) {
-        moveType = battleCtx->moveType;
-    } else {
+    }
+	else if ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		moveType = TYPE_ROCK;
+    }
+	else
+	{
         moveType = CURRENT_MOVE_DATA.type;
     }
 
@@ -13346,6 +13383,42 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
     return Pokemon_IsPersonalityShiny(monOTID, monPersonality);
     */
+
+    return FALSE;
+}
+
+/**
+ * @brief Check if the currently used move is a sound move.
+ * 
+ * Inputs:
+ * 1. The distance to jump if there is no effect to apply.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpNoEffect = BattleScript_Read(battleCtx);
+	
+	int soundMove = FALSE;
+	for (int i = 0; i < NELEMS(sSoundMoves); i++)
+	{
+		if (sSoundMoves[i] == battleCtx->moveCur)
+		{
+			soundMove = TRUE;
+		}
+	}
+	
+    if (soundMove)
+	{
+		return FALSE;
+    }
+	else
+	{
+        BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
 
     return FALSE;
 }

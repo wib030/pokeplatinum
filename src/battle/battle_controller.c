@@ -131,6 +131,23 @@ static void BattleSystem_RecordCommand(BattleSystem *battleSys, BattleContext *b
 
 extern u32 gTrainerAITable[];
 
+static u16 sSoundMoves[] = {
+    MOVE_GROWL,
+    MOVE_ROAR,
+    MOVE_SING,
+    MOVE_SUPERSONIC,
+    MOVE_SCREECH,
+    MOVE_SNORE,
+    MOVE_UPROAR,
+    MOVE_METAL_SOUND,
+    MOVE_GRASS_WHISTLE,
+    MOVE_HYPER_VOICE,
+    MOVE_BUG_BUZZ,
+    MOVE_CHATTER,
+    MOVE_PERISH_SONG,
+	MOVE_MIND_READER, // Psychic Scream
+};
+
 static const BattleControlFunc sBattleControlCommands[] = {
     BattleController_InitBattleMons,
     BattleController_StartEncounter,
@@ -2947,9 +2964,29 @@ static BOOL BattleController_LoadQuickClawCheck(BattleSystem *battleSys, BattleC
 
 static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
 {
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+	int soundMove = FALSE;
+	if (Battler_Ability(battleCtx, attacker) == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+		
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE)
+	{
         return TYPE_NORMAL;
-    } else if (battleCtx->moveType) {
+	}
+	else if ((Battler_Ability(battleCtx, attacker) == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		return TYPE_ROCK;
+    }
+	else if (battleCtx->moveType)
+	{
         return battleCtx->moveType;
     }
 
@@ -3847,9 +3884,29 @@ static void BattleController_LeftoverState29(BattleSystem *battleSys, BattleCont
 
 static inline int CalcCurrentMoveType(BattleContext *battleCtx)
 {
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+    int soundMove = FALSE;
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == battleCtx->moveCur)
+			{
+				soundMove = TRUE;
+			}
+		}
+	}
+		
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE)
+	{
         return TYPE_NORMAL;
-    } else if (battleCtx->moveType) {
+	}
+	else if ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		return TYPE_ROCK;
+    }
+	else if (battleCtx->moveType)
+	{
         return battleCtx->moveType;
     }
 
