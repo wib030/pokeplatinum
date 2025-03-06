@@ -10,7 +10,7 @@
     },
     "types": [
         "TYPE_NORMAL",
-        "TYPE_NORMAL"
+        "TYPE_GROUND"
     ],
     "catch_rate": 200,
     "base_exp_reward": 76,
