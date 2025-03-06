@@ -93,6 +93,7 @@
             "11": "MOVE_LEECH_SEED",
             "17": "MOVE_BULLET_SEED",
             "19": "MOVE_STUN_SPORE",
+			"20": "MOVE_MEGA_DRAIN",
             "21": "MOVE_POISON_POWDER",
             "23": "MOVE_SLEEP_POWDER",
 			"28": "MOVE_PSYBEAM",

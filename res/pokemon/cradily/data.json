@@ -92,9 +92,10 @@
             "9": "MOVE_INGRAIN",
             "13": "MOVE_CONFUSE_RAY",
 			"17": "MOVE_ANCIENT_POWER",
+			"20": "MOVE_MEGA_DRAIN",
 			"21": "MOVE_BRINE",
-			"26": "MOVE_GIGA_DRAIN",
             "29": "MOVE_AMNESIA",
+			"30": "MOVE_GIGA_DRAIN",
 			"31": "MOVE_GASTRO_ACID",
 			"33": [
                 "MOVE_STOCKPILE",
