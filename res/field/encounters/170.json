@@ -7,11 +7,11 @@
         },
         {
             "level": 50,
-            "species": "SPECIES_ELECTRIKE"
+            "species": "SPECIES_MANECTRIC"
         },
         {
             "level": 51,
-            "species": "SPECIES_TAUROS"
+            "species": "SPECIES_PELIPPER"
         },
         {
             "level": 48,
@@ -27,15 +27,15 @@
         },
         {
             "level": 48,
-            "species": "SPECIES_LUXIO"
+            "species": "SPECIES_FARFETCHD"
         },
         {
             "level": 50,
-            "species": "SPECIES_LUXIO"
+            "species": "SPECIES_FARFETCHD"
         },
         {
             "level": 50,
-            "species": "SPECIES_PELIPPER"
+            "species": "SPECIES_TAUROS"
         },
         {
             "level": 51,
@@ -43,7 +43,7 @@
         },
         {
             "level": 50,
-            "species": "SPECIES_PELIPPER"
+            "species": "SPECIES_TAUROS"
         },
         {
             "level": 51,
