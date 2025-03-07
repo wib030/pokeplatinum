@@ -3522,6 +3522,11 @@ u16 sub_02076F84(const u16 monSpecies)
     FS_SeekFile(&file, monSpecies * 2, FS_SEEK_SET);
     FS_ReadFile(&file, &result, 2);
     FS_CloseFile(&file);
+	
+	if (monSpecies == SPECIES_JIGGLYPUFF || monSpecies == SPECIES_WIGGLYTUFF)
+	{
+		result = SPECIES_JIGGLYPUFF;
+	}
 
     return result;
 }

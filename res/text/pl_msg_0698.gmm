@@ -700,7 +700,7 @@
 	</row>
 	<row id="pl_msg_00000698_00174" index="174">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">It has a soft and bouncy body.\nOnce it starts bouncing, it\nbecomes impossible to stop.</language>
+		<language name="English">A ferocious, cave-dwelling monster\nthat is said to be related to\nWIBBLYPUFF.</language>
 	</row>
 	<row id="pl_msg_00000698_00175" index="175">
 		<attribute name="window_context_name">used</attribute>
