@@ -40,14 +40,14 @@ u16 * sub_020997D8 (Pokemon * param0, u32 param1)
         v2[v7] = (u16)Pokemon_GetValue(param0, MON_DATA_MOVE1 + v7, NULL);
     }
 
-    v0 = Heap_AllocFromHeap(param1, (44 / 2) * 2);
-    v1 = Heap_AllocFromHeap(param1, (44 / 2) * 2);
+    v0 = Heap_AllocFromHeap(param1, (sizeof(SpeciesLearnset) / 2) * 2);
+    v1 = Heap_AllocFromHeap(param1, (sizeof(SpeciesLearnset) / 2) * 2);
 
     Pokemon_LoadLevelUpMovesOf(v3, v5, v0);
 
     v8 = 0;
 
-    for (v7 = 0; v7 < (44 / 2); v7++) {
+    for (v7 = 0; v7 < (sizeof(SpeciesLearnset) / 2); v7++) {
         if (v0[v7] == 0xffff) {
             v1[v8] = 0xffff;
             break;

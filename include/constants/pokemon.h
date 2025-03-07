@@ -25,7 +25,7 @@ enum {
 #define MAX_EVS_ALL_STATS   510
 
 #define LEARNSET_NO_MOVE_TO_LEARN   0
-#define MAX_LEARNSET_ENTRIES        20
+#define MAX_LEARNSET_ENTRIES        40
 #define LEARNSET_MOVE_ALREADY_KNOWN 0xFFFE
 #define LEARNSET_ALL_SLOTS_FILLED   0xFFFF
 #define ALIGN_4 __attribute__((aligned(4)))
