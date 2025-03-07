@@ -87,7 +87,11 @@
                 "MOVE_FIRE_PUNCH",
                 "MOVE_COUNTER",
                 "MOVE_SEISMIC_TOSS",
-                "MOVE_DRAGON_PULSE"
+                "MOVE_DRAGON_PULSE",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_TACKLE",
+				"MOVE_GROWL",
+				"MOVE_THUNDER_SHOCK"
             ],
             "5": "MOVE_GROWL",
             "10": "MOVE_THUNDER_SHOCK",

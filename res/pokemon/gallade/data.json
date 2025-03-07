@@ -109,7 +109,11 @@
             "1": [
                 "MOVE_LEAF_BLADE",
                 "MOVE_NIGHT_SLASH",
-				"MOVE_SLASH"
+				"MOVE_SLASH",
+				"MOVE_LEER",
+				"MOVE_CONFUSION",
+				"MOVE_TELEPORT",
+				"MOVE_DOUBLE_TEAM"
             ],
             "4": "MOVE_CONFUSION",
             "6": "MOVE_DOUBLE_TEAM",

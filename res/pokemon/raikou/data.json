@@ -86,7 +86,8 @@
         "level_up": {
             "1": [
                 "MOVE_ZAP_CANNON",
-                "MOVE_EXTREME_SPEED"
+                "MOVE_EXTREME_SPEED",
+				"MOVE_BITE"
             ],
             "8": "MOVE_THUNDER_SHOCK",
             "15": "MOVE_ROAR",

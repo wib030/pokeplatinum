@@ -79,7 +79,10 @@
                 "MOVE_POISON_JAB",
                 "MOVE_MEGAHORN",
 				"MOVE_HORN_DRILL",
-                "MOVE_QUICK_ATTACK"
+                "MOVE_QUICK_ATTACK",
+				"MOVE_TAIL_WHIP",
+				"MOVE_GROWL",
+				"MOVE_EMBER"
             ],
             "6": "MOVE_TAIL_WHIP",
             "10": "MOVE_EMBER",

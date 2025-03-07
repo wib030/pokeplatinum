@@ -83,7 +83,8 @@
             "HM05"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_CONFUSION",
 				"MOVE_GUST",
 				"MOVE_FRENZY_PLANT"
 			],
@@ -102,6 +103,7 @@
 			"32": "MOVE_WING_ATTACK",
 			"33": "MOVE_SPIDER_WEB",
             "34": "MOVE_SAFEGUARD",
+			"36": "MOVE_CAPTIVATE",
 			"37": "MOVE_FISSURE",
             "40": "MOVE_BUG_BUZZ",
 			"42": "MOVE_RAZOR_WIND"

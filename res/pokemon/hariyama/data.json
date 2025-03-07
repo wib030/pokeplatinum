@@ -89,7 +89,8 @@
                 "MOVE_FOCUS_ENERGY",
                 "MOVE_SAND_ATTACK",
 				"MOVE_LOW_KICK",
-                "MOVE_ARM_THRUST"
+                "MOVE_ARM_THRUST",
+				"MOVE_TACKLE"
             ],
             "4": "MOVE_SAND_ATTACK",
             "7": "MOVE_ARM_THRUST",

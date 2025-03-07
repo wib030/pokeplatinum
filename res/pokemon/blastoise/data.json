@@ -94,7 +94,11 @@
             "1": [ 
 				"MOVE_FLASH_CANNON",
 				"MOVE_DRAGON_PULSE",
-				"MOVE_DARK_PULSE"
+				"MOVE_DARK_PULSE",
+				"MOVE_TACKLE",
+				"MOVE_TAIL_WHIP",
+				"MOVE_WITHDRAW",
+				"MOVE_BUBBLE"
 			],
             "4": "MOVE_TAIL_WHIP",
             "7": "MOVE_BUBBLE",

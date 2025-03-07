@@ -88,7 +88,8 @@
                 "MOVE_DOUBLE_HIT",
                 "MOVE_SMOG",
 				"MOVE_TOXIC_SPIKES",
-                "MOVE_SMOKE_SCREEN"
+                "MOVE_SMOKE_SCREEN",
+				"MOVE_TACKLE"
             ],
             "4": "MOVE_SMOG",
             "7": "MOVE_SMOKE_SCREEN",

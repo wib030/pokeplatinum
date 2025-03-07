@@ -100,6 +100,9 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SCRATCH",
+				"MOVE_LEER",
+				"MOVE_QUICK_ATTACK",
                 "MOVE_EMBARGO",
                 "MOVE_REVENGE",
                 "MOVE_ASSURANCE",
@@ -107,7 +110,10 @@
             ],
 			"5": "MOVE_POWDER_SNOW",
             "8": "MOVE_QUICK_ATTACK",
-			"10": "MOVE_FAINT_ATTACK",
+			"10": [ 
+				"MOVE_FAINT_ATTACK",
+				"MOVE_SCREECH"
+			],
 			"14": "MOVE_ICY_WIND",
 			"16": "MOVE_FURY_SWIPES",
             "20": "MOVE_NASTY_PLOT",
@@ -117,7 +123,10 @@
 			"30": "MOVE_ICE_SHARD",
 			"32": "MOVE_WATER_SPORT",
 			"35": "MOVE_NIGHT_SLASH",
-			"38": "MOVE_ICE_BALL",
+			"38": [ 
+				"MOVE_ICE_BALL",
+				"MOVE_FLING"
+			],
 			"40": "MOVE_KNOCK_OFF",
 			"44": "MOVE_PUNISHMENT",
 			"46": "MOVE_SHEER_COLD",

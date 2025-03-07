@@ -84,7 +84,10 @@
                 "MOVE_THUNDER_FANG",
                 "MOVE_YAWN",
 				"MOVE_BODY_SLAM",
-				"MOVE_REVENGE"
+				"MOVE_REVENGE",
+				"MOVE_TACKLE",
+				"MOVE_SAND_ATTACK",
+				"MOVE_BITE"
             ],
 			"3": "MOVE_SAND_TOMB",
             "7": "MOVE_BITE",

@@ -83,7 +83,10 @@
         "level_up": {
             "1": [ 
 				"MOVE_POUND",
-				"MOVE_BODY_SLAM"
+				"MOVE_BODY_SLAM",
+				"MOVE_YAWN",
+				"MOVE_POISON_GAS",
+				"MOVE_SLUDGE"
 			],
             "5": "MOVE_YAWN",
             "8": "MOVE_POISON_GAS",

@@ -99,7 +99,9 @@
                 "MOVE_BITE",
                 "MOVE_POISON_TAIL",
 				"MOVE_IRON_TAIL",
-				"MOVE_FRENZY_PLANT"
+				"MOVE_FRENZY_PLANT",
+				"MOVE_KNOCK_OFF",
+				"MOVE_LEER"
             ],
             "5": "MOVE_KNOCK_OFF",
             "9": "MOVE_PIN_MISSILE",

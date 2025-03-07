@@ -85,7 +85,10 @@
                 "MOVE_ICE_FANG",
                 "MOVE_THUNDER_FANG",
                 "MOVE_FIRE_FANG",
-                "MOVE_WRAP"
+                "MOVE_WRAP",
+				"MOVE_BITE",
+				"MOVE_LEER",
+				"MOVE_POISON_STING"
             ],
             "4": "MOVE_POISON_STING",
             "9": "MOVE_BITE",

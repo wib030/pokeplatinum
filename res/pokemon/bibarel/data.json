@@ -97,7 +97,10 @@
                 "MOVE_GROWL",
 				"MOVE_AQUA_JET"
             ],
-            "5": "MOVE_DEFENSE_CURL",
+            "5": [ 
+				"MOVE_DEFENSE_CURL",
+				"MOVE_GROWL"
+			],
             "9": "MOVE_ROLLOUT",
 			"13": "MOVE_HEADBUTT",
             "15": "MOVE_WATER_GUN",

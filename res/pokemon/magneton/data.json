@@ -87,7 +87,10 @@
                 "MOVE_SUPERSONIC"
             ],
             "6": "MOVE_THUNDER_SHOCK",
-			"11": "MOVE_THUNDER_WAVE",
+			"11": [ 
+				"MOVE_THUNDER_WAVE",
+				"MOVE_SUPERSONIC"
+			],
 			"13": "MOVE_LIGHT_SCREEN",
             "17": "MOVE_SONIC_BOOM",
             "19": "MOVE_SPARK",

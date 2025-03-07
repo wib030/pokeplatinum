@@ -109,7 +109,8 @@
                 "MOVE_TACKLE",
 				"MOVE_HARDEN",
                 "MOVE_HEADBUTT",
-				"MOVE_FRENZY_PLANT"
+				"MOVE_FRENZY_PLANT",
+				"MOVE_MUD_SLAP"
             ],
             "4": "MOVE_MUD_SLAP",
 			"7": "MOVE_HEADBUTT",

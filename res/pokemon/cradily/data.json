@@ -86,7 +86,8 @@
             "1": [
                 "MOVE_ASTONISH",
                 "MOVE_LEECH_SEED",
-                "MOVE_ACID"
+                "MOVE_ACID",
+				"MOVE_INGRAIN"
             ],
             "5": "MOVE_ACID",
             "9": "MOVE_INGRAIN",

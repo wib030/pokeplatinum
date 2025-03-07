@@ -95,7 +95,10 @@
                 "MOVE_HEALING_WISH",
                 "MOVE_IMPRISON",
 				"MOVE_MEMENTO",
-                "MOVE_DESTINY_BOND"
+                "MOVE_DESTINY_BOND",
+				"MOVE_CONFUSION",
+				"MOVE_DOUBLE_TEAM",
+				"MOVE_TELEPORT"
             ],
             "4": "MOVE_LUCKY_CHANT",
             "6": "MOVE_DOUBLE_TEAM",

@@ -87,7 +87,10 @@
                 "MOVE_TOXIC_SPIKES",
 				"MOVE_MIRROR_SHOT",
 				"MOVE_MAGNET_RISE",
-                "MOVE_PROTECT"
+                "MOVE_PROTECT",
+				"MOVE_SELFDESTRUCT",
+				"MOVE_BUG_BITE",
+				"MOVE_TACKLE"
             ],
             "6": "MOVE_SELFDESTRUCT",
             "9": "MOVE_BUG_BITE",

@@ -88,7 +88,10 @@
 				"MOVE_ZAP_CANNON",
                 "MOVE_CHARGE_BEAM"
             ],
-            "4": "MOVE_LEER",
+            "4": [ 
+				"MOVE_LEER",
+				"MOVE_THUNDER_WAVE"
+			],
             "7": "MOVE_HOWL",
             "10": "MOVE_QUICK_ATTACK",
             "13": "MOVE_SPARK",

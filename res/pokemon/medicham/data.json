@@ -94,7 +94,8 @@
                 "MOVE_THUNDER_PUNCH",
                 "MOVE_ICE_PUNCH",
 				"MOVE_CONFUSION",
-				"MOVE_ZEN_HEADBUTT"
+				"MOVE_ZEN_HEADBUTT",
+				"MOVE_BIDE"
             ],
             "4": "MOVE_MEDITATE",
             "9": "MOVE_DETECT",

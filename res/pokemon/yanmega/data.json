@@ -83,7 +83,10 @@
             "1": [
                 "MOVE_NIGHT_SLASH",
                 "MOVE_BUG_BITE",
-                "MOVE_HYPNOSIS"
+                "MOVE_HYPNOSIS",
+				"MOVE_DOUBLE_TEAM",
+				"MOVE_FORESIGHT",
+				"MOVE_TACKLE"
             ],
             "6": "MOVE_QUICK_ATTACK",
             "11": "MOVE_DOUBLE_TEAM",

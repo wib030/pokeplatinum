@@ -109,7 +109,9 @@
                 "MOVE_ICE_FANG",
                 "MOVE_FIRE_FANG",
                 "MOVE_BITE",
-                "MOVE_LEER"
+                "MOVE_LEER",
+				"MOVE_SANDSTORM",
+				"MOVE_SCREECH"
             ],
             "3": "MOVE_FRENZY_PLANT",
             "5": "MOVE_SANDSTORM",

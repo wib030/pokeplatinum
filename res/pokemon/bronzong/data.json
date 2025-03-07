@@ -110,7 +110,10 @@
             "25": "MOVE_SAFEGUARD",
 			"29": "MOVE_FUTURE_SIGHT",
 			"31": "MOVE_EXTRASENSORY",
-			"33": "MOVE_METAL_SOUND",
+			"33": [ 
+				"MOVE_METAL_SOUND",
+				"MOVE_BLOCK"
+			],
 			"35": "MOVE_MEAN_LOOK",
             "36": "MOVE_GYRO_BALL",
 			"41": "MOVE_MIND_READER",

@@ -92,7 +92,9 @@
         "level_up": {
             "1": [
                 "MOVE_PROTECT",
-                "MOVE_BLOCK"
+                "MOVE_BLOCK",
+				"MOVE_TAUNT",
+				"MOVE_TACKLE"
             ],
             "6": "MOVE_TAUNT",
             "10": "MOVE_METAL_SOUND",

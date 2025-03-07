@@ -87,7 +87,9 @@
             "1": [
                 "MOVE_GROWL",
                 "MOVE_TACKLE",
-				"MOVE_ROCK_SLIDE"
+				"MOVE_ROCK_SLIDE",
+				"MOVE_EMBER",
+				"MOVE_MAGNITUDE"
             ],
             "4": "MOVE_EMBER",
 			"8": "MOVE_FOCUS_ENERGY",

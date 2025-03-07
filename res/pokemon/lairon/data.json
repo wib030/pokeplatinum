@@ -89,7 +89,10 @@
                 "MOVE_HEADBUTT",
 				"MOVE_FRENZY_PLANT"
             ],
-            "4": "MOVE_MUD_SLAP",
+            "4": [ 
+				"MOVE_MUD_SLAP",
+				"MOVE_HARDEN"
+			],
 			"7": "MOVE_HEADBUTT",
 			"10": [ 
 				"MOVE_METAL_BURST",

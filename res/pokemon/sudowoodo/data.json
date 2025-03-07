@@ -86,7 +86,9 @@
             "1": [
                 "MOVE_WOOD_HAMMER",
                 "MOVE_COPYCAT",
-                "MOVE_ROCK_THROW"
+                "MOVE_ROCK_THROW",
+				"MOVE_FLAIL",
+				"MOVE_LOW_KICK"
             ],
             "6": "MOVE_FLAIL",
             "9": "MOVE_LOW_KICK",

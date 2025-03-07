@@ -103,6 +103,7 @@
                 "MOVE_LICK",
 				"MOVE_ACID"
             ],
+			"5": "MOVE_SPITE",
             "12": "MOVE_CURSE",
             "15": "MOVE_NIGHT_SHADE",
             "19": "MOVE_CONFUSE_RAY",

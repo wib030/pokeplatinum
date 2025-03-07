@@ -86,7 +86,9 @@
 				"MOVE_THIEF",
 				"MOVE_FIRE_FANG",
 				"MOVE_ICE_FANG",
-				"MOVE_THUNDER_FANG"
+				"MOVE_THUNDER_FANG",
+				"MOVE_HOWL",
+				"MOVE_BITE"
             ],
             "4": "MOVE_HOWL",
             "7": "MOVE_SAND_ATTACK",

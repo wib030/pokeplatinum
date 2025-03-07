@@ -108,6 +108,7 @@
             ],
             "6": "MOVE_GROWL",
 			"10": "MOVE_TELEPORT",
+			"11": "MOVE_WATER_GUN",
             "15": "MOVE_CONFUSION",
             "20": "MOVE_DISABLE",
             "23": "MOVE_HEADBUTT",

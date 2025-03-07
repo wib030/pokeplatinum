@@ -98,7 +98,9 @@
             "1": [ 
 				"MOVE_WING_ATTACK",
 				"MOVE_AGILITY",
-				"MOVE_YAWN"
+				"MOVE_YAWN",
+				"MOVE_TACKLE",
+				"MOVE_BUBBLE"
 			],
             "4": "MOVE_GROWL",
             "8": "MOVE_BUBBLE",

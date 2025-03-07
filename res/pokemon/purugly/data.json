@@ -92,6 +92,7 @@
                 "MOVE_SCRATCH",
                 "MOVE_QUICK_ATTACK"
             ],
+			"5": "MOVE_SCRATCH",
             "7": "MOVE_GROWL",
             "11": "MOVE_HYPNOSIS",
 			"13": "MOVE_FURY_SWIPES",

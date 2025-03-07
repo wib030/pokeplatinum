@@ -105,7 +105,9 @@
                 "MOVE_POISON_JAB",
                 "MOVE_HORN_ATTACK",
 				"MOVE_HAMMER_ARM",
-                "MOVE_TAIL_WHIP"
+                "MOVE_TAIL_WHIP",
+				"MOVE_STOMP",
+				"MOVE_FURY_ATTACK"
             ],
 			"5": "MOVE_FURY_ATTACK",
 			"9": "MOVE_SCARY_FACE",

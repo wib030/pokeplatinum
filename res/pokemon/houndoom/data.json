@@ -89,7 +89,9 @@
                 "MOVE_THUNDER_FANG",
                 "MOVE_LEER",
 				"MOVE_NASTY_PLOT",
-                "MOVE_EMBER"
+                "MOVE_EMBER",
+				"MOVE_HOWL",
+				"MOVE_SMOG"
             ],
             "4": "MOVE_HOWL",
             "8": "MOVE_SMOG",

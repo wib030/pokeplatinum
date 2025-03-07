@@ -93,7 +93,9 @@
             "1": [
                 "MOVE_DESTINY_BOND",
 				"MOVE_HYPNOSIS",
-                "MOVE_MINIMIZE"
+                "MOVE_MINIMIZE",
+				"MOVE_ASTONISH",
+				"MOVE_GUST"
             ],
             "4": "MOVE_ASTONISH",
             "8": "MOVE_GUST",

@@ -84,7 +84,8 @@
                 "MOVE_SUPERSONIC",
 				"MOVE_STOCKPILE",
                 "MOVE_SWALLOW",
-                "MOVE_SPIT_UP"
+                "MOVE_SPIT_UP",
+				"MOVE_THUNDER_WAVE"
             ],
             "6": "MOVE_THUNDER_WAVE",
             "9": "MOVE_FLAIL",

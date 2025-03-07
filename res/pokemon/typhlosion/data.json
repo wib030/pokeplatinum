@@ -90,7 +90,9 @@
             "1": [
                 "MOVE_GYRO_BALL",
                 "MOVE_TACKLE",
-                "MOVE_LEER"
+                "MOVE_LEER",
+				"MOVE_SMOKE_SCREEN",
+				"MOVE_EMBER"
             ],
             "3": "MOVE_SMOKE_SCREEN",
             "5": "MOVE_EMBER",

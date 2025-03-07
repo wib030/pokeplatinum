@@ -86,7 +86,9 @@
         "level_up": {
             "1": [
                 "MOVE_OMINOUS_WIND",
-                "MOVE_BUBBLE"
+                "MOVE_BUBBLE",
+				"MOVE_SWEET_SCENT",
+				"MOVE_QUICK_ATTACK"
             ],
             "6": "MOVE_QUICK_ATTACK",
             "9": "MOVE_SWEET_SCENT",

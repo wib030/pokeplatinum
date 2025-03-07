@@ -86,7 +86,9 @@
                 "MOVE_BUG_BITE",
                 "MOVE_TOXIC_SPIKES",
                 "MOVE_SPIKES",
-				"MOVE_FURY_CUTTER"
+				"MOVE_FURY_CUTTER",
+				"MOVE_SCRATCH",
+				"MOVE_HARDEN"
             ],
 			"3": "MOVE_FRENZY_PLANT",
             "9": "MOVE_SAND_ATTACK",

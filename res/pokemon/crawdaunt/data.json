@@ -91,7 +91,9 @@
         "level_up": {
             "1": [
                 "MOVE_BUBBLE",
-                "MOVE_VICE_GRIP"
+                "MOVE_VICE_GRIP",
+				"MOVE_LEER",
+				"MOVE_HARDEN"
             ],
             "5": "MOVE_HARDEN",
             "7": "MOVE_VICE_GRIP",

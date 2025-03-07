@@ -88,7 +88,9 @@
             "1": [
                 "MOVE_FEINT",
                 "MOVE_LEER",
-                "MOVE_BITE"
+                "MOVE_BITE",
+				"MOVE_RAGE",
+				"MOVE_FOCUS_ENERGY"
             ],
             "4": "MOVE_RAGE",
             "8": "MOVE_FOCUS_ENERGY",

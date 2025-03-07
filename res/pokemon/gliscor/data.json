@@ -103,7 +103,8 @@
                 "MOVE_POISON_JAB",
                 "MOVE_WING_ATTACK",
 				"MOVE_QUICK_ATTACK",
-                "MOVE_KNOCK_OFF"
+                "MOVE_KNOCK_OFF",
+				"MOVE_SAND_ATTACK"
             ],
             "4": "MOVE_SAND_ATTACK",
             "7": "MOVE_HARDEN",

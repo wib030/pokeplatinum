@@ -91,7 +91,8 @@
                 "MOVE_HYPNOSIS",
                 "MOVE_LICK",
 				"MOVE_SHADOW_PUNCH",
-				"MOVE_ACID"
+				"MOVE_ACID",
+				"MOVE_SPITE"
             ],
             "5": "MOVE_SPITE",
             "12": "MOVE_CURSE",

@@ -97,6 +97,7 @@
 			"27": "MOVE_BODY_SLAM",
 			"30": "MOVE_LAVA_PLUME",
 			"34": "MOVE_FLAMETHROWER",
+			"36": "MOVE_PROTECT",
             "38": "MOVE_IRON_DEFENSE",
             "40": "MOVE_AMNESIA",
             "42": "MOVE_FLAIL",

@@ -96,7 +96,11 @@
             "1": [
                 "MOVE_DRAGON_CLAW",
                 "MOVE_SHADOW_CLAW",
-                "MOVE_AIR_SLASH"
+                "MOVE_AIR_SLASH",
+				"MOVE_SMOKE_SCREEN",
+				"MOVE_EMBER",
+				"MOVE_GROWL",
+				"MOVE_SCRATCH"
             ],
             "7": "MOVE_EMBER",
             "10": "MOVE_SMOKE_SCREEN",

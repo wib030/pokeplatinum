@@ -84,7 +84,9 @@
             "1": [
                 "MOVE_SKY_ATTACK",
                 "MOVE_FORESIGHT",
-                "MOVE_WING_ATTACK"
+                "MOVE_WING_ATTACK",
+				"MOVE_TACKLE",
+				"MOVE_GROWL"
             ],
             "4": "MOVE_HYPNOSIS",
             "7": "MOVE_PECK",

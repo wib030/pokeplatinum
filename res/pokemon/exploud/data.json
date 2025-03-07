@@ -96,7 +96,10 @@
                 "MOVE_THUNDER_FANG",
 				"MOVE_BITE",
 				"MOVE_CRUNCH",
-                "MOVE_HOWL"
+                "MOVE_HOWL",
+				"MOVE_POUND",
+				"MOVE_UPROAR",
+				"MOVE_ASTONISH"
             ],
             "4": "MOVE_UPROAR",
             "9": "MOVE_ASTONISH",

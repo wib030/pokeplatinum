@@ -77,7 +77,9 @@
             "1": [
                 "MOVE_BUG_BITE",
                 "MOVE_POISON_FANG",
-                "MOVE_FRENZY_PLANT"
+                "MOVE_FRENZY_PLANT",
+				"MOVE_SCARY_FACE",
+				"MOVE_CONSTRICT"
             ],
             "5": "MOVE_SCARY_FACE",
             "8": "MOVE_CONSTRICT",

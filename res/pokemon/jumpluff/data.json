@@ -78,7 +78,9 @@
         "level_up": {
             "1": [
                 "MOVE_SPLASH",
-                "MOVE_TACKLE"
+                "MOVE_TACKLE",
+				"MOVE_SYNTHESIS",
+				"MOVE_TAIL_WHIP"
             ],
             "4": "MOVE_SYNTHESIS",
             "7": "MOVE_TAIL_WHIP",

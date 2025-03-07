@@ -103,7 +103,9 @@
 				"MOVE_TOXIC_SPIKES",
 				"MOVE_NIGHTMARE",
 				"MOVE_ASTONISH",
-                "MOVE_DISABLE"
+                "MOVE_DISABLE",
+				"MOVE_LEER",
+				"MOVE_BIND"
             ],
             "6": "MOVE_DISABLE",
             "9": "MOVE_FORESIGHT",

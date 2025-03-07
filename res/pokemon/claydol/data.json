@@ -97,7 +97,8 @@
                 "MOVE_TELEPORT",
 				"MOVE_HARDEN",
 				"MOVE_MUD_SLAP",
-                "MOVE_CONFUSION"
+                "MOVE_CONFUSION",
+				"MOVE_RAPID_SPIN"
             ],
             "4": "MOVE_RAPID_SPIN",
 			"10": "MOVE_HEAL_BLOCK",

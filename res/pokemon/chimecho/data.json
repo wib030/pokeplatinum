@@ -90,6 +90,8 @@
 				"MOVE_WISH",
 				"MOVE_CONFUSION"
 			],
+			"6": "MOVE_GROWL",
+			"9": "MOVE_ASTONISH",
             "10": "MOVE_UPROAR",
 			"13": "MOVE_YAWN",
 			"16": "MOVE_PSYWAVE",

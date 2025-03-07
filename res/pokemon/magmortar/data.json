@@ -90,7 +90,9 @@
             "1": [
                 "MOVE_THUNDER_PUNCH",
                 "MOVE_SMOG",
-                "MOVE_LEER"
+                "MOVE_LEER",
+				"MOVE_EMBER",
+				"MOVE_SMOKE_SCREEN"
             ],
             "5": "MOVE_EMBER",
             "8": "MOVE_SMOKE_SCREEN",

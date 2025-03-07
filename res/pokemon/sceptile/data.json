@@ -97,7 +97,11 @@
         "level_up": {
             "1": [
                 "MOVE_NIGHT_SLASH",
-				"MOVE_FURY_CUTTER"
+				"MOVE_FURY_CUTTER",
+				"MOVE_ABSORB",
+				"MOVE_LEER",
+				"MOVE_POUND",
+				"MOVE_QUICK_ATTACK"
             ],
             "5": "MOVE_ABSORB",
             "9": "MOVE_QUICK_ATTACK",
