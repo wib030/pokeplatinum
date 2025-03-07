@@ -430,11 +430,6 @@ BOOL sub_02005844 (u16 param0, u8 param1)
             return 1;
         }
     }
-	
-	if (v0 == SPECIES_SCREAM_TAIL)
-	{
-		v0 = SPECIES_JIGGLYPUFF;
-	}
 
     if (*v2 == 0) {
         if (*v4 == 0) {

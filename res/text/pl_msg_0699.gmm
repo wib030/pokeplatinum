@@ -1978,8 +1978,4 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">It is told in mythology that this\nPokémon was born before the\nuniverse even existed.</language>
 	</row>
-	<row id="pl_msg_00000699_00494" index="494">
-		<attribute name="window_context_name">used</attribute>
-		<language name="English">A ferocious, cave-dwelling monster\nthat is said to be related to\nWIBBLYPUFF.</language>
-	</row>
 </body>

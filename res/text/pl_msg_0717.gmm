@@ -1977,8 +1977,4 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">４９３  アルセウス</language>
 	</row>
-	<row id="pl_msg_00000717_00494" index="494">
-		<attribute name="window_context_name">used</attribute>
-		<language name="English">４９４  SCREAMTAIL</language>
-	</row>
 </body>

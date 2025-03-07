@@ -1978,8 +1978,4 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">It is described in mythology as\nthe Pokémon that shaped the\nuniverse with its 1,000 arms.</language>
 	</row>
-	<row id="pl_msg_00000700_00494" index="494">
-		<attribute name="window_context_name">used</attribute>
-		<language name="English">A ferocious, cave-dwelling monster\nthat is said to be related to\nWIBBLYPUFF.</language>
-	</row>
 </body>

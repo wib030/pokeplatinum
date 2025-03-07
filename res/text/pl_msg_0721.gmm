@@ -1977,8 +1977,4 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Pokémon Primevo</language>
 	</row>
-	<row id="pl_msg_00000721_00494" index="494">
-		<attribute name="window_context_name">used</attribute>
-		<language name="English">Pokémon Cave</language>
-	</row>
 </body>
