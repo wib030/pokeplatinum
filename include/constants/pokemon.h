@@ -25,8 +25,21 @@ enum {
 #define MAX_EVS_ALL_STATS   510
 
 #define LEARNSET_NO_MOVE_TO_LEARN   0
+#define MAX_LEARNSET_ENTRIES        20
 #define LEARNSET_MOVE_ALREADY_KNOWN 0xFFFE
 #define LEARNSET_ALL_SLOTS_FILLED   0xFFFF
+#define ALIGN_4 __attribute__((aligned(4)))
+
+typedef struct SpeciesLearnsetEntry {
+    u16 move : 9;
+    u16 level : 7;
+} SpeciesLearnsetEntry;
+
+// This struct is not explicitly used; it is provided to document and enforce the size of
+// the learnset entries.
+typedef struct SpeciesLearnset {
+    ALIGN_4 SpeciesLearnsetEntry entries[MAX_LEARNSET_ENTRIES + 1];
+} SpeciesLearnset;
 
 /**
  * @brief Pokemon Data Parameters

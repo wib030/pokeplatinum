@@ -3549,7 +3549,7 @@ static void BoxPokemon_SetDefaultMoves(BoxPokemon *boxMon)
 {
     BOOL reencrypt;
     // TODO const value?
-    u16 *monLevelUpMoves = Heap_AllocFromHeap(0, 44);
+    u16 *monLevelUpMoves = Heap_AllocFromHeap(HEAP_ID_SYSTEM, sizeof(SpeciesLearnset));
 
     reencrypt = BoxPokemon_EnterDecryptionContext(boxMon);
     
@@ -3679,7 +3679,7 @@ u16 Pokemon_LevelUpMove(Pokemon *mon, int *index, u16 *moveID)
 {
     u16 result = 0x0;
     // TODO const value?
-    u16 *monLevelUpMoves = Heap_AllocFromHeap(0, 44);
+    u16 *monLevelUpMoves = Heap_AllocFromHeap(HEAP_ID_SYSTEM, sizeof(SpeciesLearnset));
 
     u16 monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
     int monForm = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
@@ -3883,7 +3883,7 @@ s8 Pokemon_GetFlavorAffinityOf(u32 monPersonality, int flavor)
 
 int Pokemon_LoadLevelUpMoveIdsOf(int monSpecies, int monForm, u16 *monLevelUpMoveIDs)
 {
-    u16 *monLevelUpMoves = Heap_AllocFromHeap(0, 44);
+    u16 *monLevelUpMoves = Heap_AllocFromHeap(HEAP_ID_SYSTEM, sizeof(SpeciesLearnset));
 
     Pokemon_LoadLevelUpMovesOf(monSpecies, monForm, monLevelUpMoves);
 
