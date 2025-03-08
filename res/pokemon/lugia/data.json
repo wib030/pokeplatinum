@@ -9,7 +9,7 @@
         "special_defense": 154
     },
     "types": [
-        "TYPE_PSYCHIC",
+        "TYPE_WATER",
         "TYPE_FLYING"
     ],
     "catch_rate": 45,
