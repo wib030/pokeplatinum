@@ -78,9 +78,9 @@
                 "MOVE_GROWL"
             ],
             "4": "MOVE_LEER",
-			"8": "MOVE_PURSUIT",
             "11": "MOVE_FURY_ATTACK",
 			"15": "MOVE_AERIAL_ACE",
+			"17": "MOVE_PURSUIT",
             "22": "MOVE_ASSURANCE",
 			"24": "MOVE_WING_ATTACK",
             "26": "MOVE_AGILITY",
