@@ -3514,6 +3514,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 			if (sSoundMoves[i] == move)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
@@ -3804,6 +3805,7 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
 			if (sSoundMoves[i] == move)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
@@ -4055,6 +4057,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 			if (sSoundMoves[i] == move)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
@@ -4901,6 +4904,7 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 			if (sSoundMoves[i] == battleCtx->moveCur)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
@@ -8776,6 +8780,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 			if (sSoundMoves[i] == move)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
@@ -10066,6 +10071,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 			if (sSoundMoves[i] == move)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}

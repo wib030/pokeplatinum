@@ -3666,6 +3666,7 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
 			if (sSoundMoves[i] == battleCtx->moveCur)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}

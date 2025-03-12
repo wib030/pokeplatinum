@@ -2972,6 +2972,7 @@ static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
 			if (sSoundMoves[i] == move)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
@@ -3892,6 +3893,7 @@ static inline int CalcCurrentMoveType(BattleContext *battleCtx)
 			if (sSoundMoves[i] == battleCtx->moveCur)
 			{
 				soundMove = TRUE;
+				break;
 			}
 		}
 	}
