@@ -271,6 +271,7 @@ static void sub_02073E18(BoxPokemon *boxMon, int monSpecies, int monLevel, int m
     }
 
     BoxPokemon_SetValue(boxMon, MON_DATA_PERSONALITY, &monPersonality);
+	BoxPokemon_SetValue(boxMon, MON_DATA_NATURE, &monPersonality);
 
     // TODO likely should be an enum
     if (monOTIDSource == 2) {
@@ -650,6 +651,10 @@ static u32 BoxPokemon_GetDataInternal (BoxPokemon *boxMon, enum PokemonDataParam
 
     case MON_DATA_PERSONALITY:
         result = boxMon->personality;
+        break;
+		
+	case MON_DATA_NATURE:
+        result = boxMon->nature;
         break;
 
     case MON_DATA_IS_PARTY_DECRYPTED:
@@ -1230,6 +1235,10 @@ static void BoxPokemon_SetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam
     switch (param) {
     case MON_DATA_PERSONALITY:
         boxMon->personality = *u32Value;
+        break;
+		
+	case MON_DATA_NATURE:
+        boxMon->nature = *u32Value;
         break;
 
     case MON_DATA_IS_PARTY_DECRYPTED:
@@ -2280,6 +2289,13 @@ u8 BoxPokemon_GetNature(BoxPokemon *boxMon)
 {
     BOOL reencrypt = BoxPokemon_EnterDecryptionContext(boxMon);
     u32 monPersonality = BoxPokemon_GetValue(boxMon, MON_DATA_PERSONALITY, NULL);
+	u32 monNature = BoxPokemon_GetValue(boxMon, MON_DATA_NATURE, NULL);
+	
+	if (monPersonality != monNature)
+	{
+		BoxPokemon_ExitDecryptionContext(boxMon, reencrypt);
+		return Pokemon_GetNatureOf(monNature);
+	}
 
     BoxPokemon_ExitDecryptionContext(boxMon, reencrypt);
 

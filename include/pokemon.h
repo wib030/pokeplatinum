@@ -185,6 +185,7 @@ typedef union {
  */
 typedef struct BoxPokemon {
     u32 personality; //!< The Pokemon's personality value (or PID).
+	u32 nature;
     u16 partyDecrypted : 1; //!< Whether the Pokemon's party data is currently decrypted.
     u16 boxDecrypted : 1; //!< Whether the Pokemon's boxed data is currently decrypted.
     u16 invalidData : 1; //!< Whether the Pokemon's data is invalid. If set to 1, this Pokemon will appear in-game as a Bad Egg.

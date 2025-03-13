@@ -106,10 +106,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
     }
 
     if (Item_Get(v0, 18) != 0) {
-        if ((v1[0] & 0x20) != 0) {
-            Heap_FreeToHeap(v0);
-            return 1;
-        }
+        Heap_FreeToHeap(v0);
+        return 1;
     }
 
     if (Item_Get(v0, 19) != 0) {
@@ -360,8 +358,9 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
     }
 
     if (Item_Get(v0, 18) != 0) {
-        v1[1] &= (0x20 ^ 0xffffffff);
-        v3 = 1;
+        u32 monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+		Pokemon_SetValue(param0, MON_DATA_NATURE, &monPersonality);
+		Pokemon_CalcLevelAndStats(param0);
     }
 
     if (Item_Get(v0, 19) != 0) {
