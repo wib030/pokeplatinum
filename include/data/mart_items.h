@@ -21,7 +21,6 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 	{ ITEM_PARLYZ_HEAL, 0x1 },
 	{ ITEM_AWAKENING, 0x1 },
 	{ ITEM_BURN_HEAL, 0x1 },
-	{ ITEM_ICE_HEAL, 0x1 },
 	{ ITEM_FULL_HEAL, 0x3 },
 	{ ITEM_ESCAPE_ROPE, 0x1 },
 	{ ITEM_REPEL, 0x1 },
@@ -33,7 +32,6 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 	{ ITEM_CHESTO_BERRY, 0x2 },
 	{ ITEM_PECHA_BERRY, 0x2 },
 	{ ITEM_RAWST_BERRY, 0x2 },
-	{ ITEM_ASPEAR_BERRY, 0x2 },
 	{ ITEM_LEPPA_BERRY, 0x4 },
 	{ ITEM_LUM_BERRY, 0x4 },
 	{ ITEM_LIECHI_BERRY, 0x3 },
@@ -136,7 +134,6 @@ const u16 VeilstoneDeptStoreStock_1F_RIGHT[] = {
 	ITEM_ANTIDOTE,
 	ITEM_PARLYZ_HEAL,
 	ITEM_BURN_HEAL,
-	ITEM_ICE_HEAL,
 	ITEM_AWAKENING,
 	ITEM_FULL_HEAL,
 	0xffff
