@@ -16286,7 +16286,7 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
     int i;
     int score, moveScore;
     int defenderCurHP, defenderMaxHP;
-    int moveMoveEffect, moveVolatileStatus, moveStatus, moveStatFlag, moveEffect, movePower;
+    int moveMoveEffect, moveVolatileStatus, moveStatus, moveSelfStatBoostStatFlag, moveEnemyStatDropStatFlag, moveEffect, movePower;
     u8 moveType;
     u8 monType1, monType2, monAbility;
     u8 defenderItemEffect, defenderItemPower, defenderType1, defenderType2, defenderAbility;
@@ -16357,7 +16357,21 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
             moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
             moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
             moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
-            moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+            moveSelfStatBoostStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+            moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleCtx, moveEffect);
+
+            if (moveSelfStatBoostStatFlag != BATTLE_STAT_FLAG_NONE) {
+                if (moveSelfStatBoostStatFlag & BATTLE_STAT_FLAG_SPEED) {
+                    if (compareSpeedDefenderVsMon == COMPARE_SPEED_FASTER) {
+                        moveScore += 5;
+                    }
+                }
+
+                if (moveSelfStatBoostStatFlag & (BATTLE_STAT_FLAG_ATK_AND_SPATK))
+                {
+                    moveScore += 5;
+                }
+            }
 
             if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
                 if (Battle_TargetAbilityDetersContactMove(battleSys, battleCtx, defender, battler, battler) == TRUE) {
@@ -16527,6 +16541,7 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
             {
                 result = TRUE;
             }
+
             break;
 
         case ABILITY_COTTON_DOWN:
