@@ -16522,8 +16522,21 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
             result = TRUE;
             break;
 
-        case ABILITY_COTTON_DOWN:
         case ABILITY_FREE_SAMPLE:
+            if (Item_IsBerry(battleCtx->battleMons[attacker].heldItem))
+            {
+                result = TRUE;
+            }
+            break;
+
+        case ABILITY_COTTON_DOWN:
+            if (battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_SPEED] <= 3) {
+                break;
+            }
+
+            result = TRUE;
+            break;
+
         case ABILITY_ROUGH_SKIN:
 
             result = TRUE;
