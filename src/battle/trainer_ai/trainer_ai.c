@@ -418,6 +418,7 @@ static void AICmd_IfShouldTaunt(BattleSystem *battleSys, BattleContext *battleCt
 static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -586,7 +587,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfShouldTaunt,
     AICmd_LoadMoveAccuracy,
     AICmd_IfSameAbilities,
-    AICmd_IfHasBaseAbility
+    AICmd_IfHasBaseAbility,
+	AICmd_IfDestinyBondFails
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3801,6 +3803,20 @@ static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battl
     }
 }
 
+static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns != 0)
+	{
+		AIScript_Iter(battleCtx, jump);
+	}
+}
 
 /**
  * @brief Push an address for the AI script onto the cursor stack.

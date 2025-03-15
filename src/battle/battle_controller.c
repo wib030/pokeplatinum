@@ -1971,6 +1971,17 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 
 static void BattleController_TurnEnd(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+	int battler;
+    int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+	
+	for (battler = 0; battler < maxBattlers; battler++)
+	{
+		if (battleCtx->movePrevByBattler[battler] != MOVE_DESTINY_BOND)
+		{
+			battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns = 0;
+		}
+	}
+	
     if (BattleController_AnyExpPayout(battleCtx, battleCtx->command, battleCtx->command) == TRUE
             || BattleController_CheckBattleOver(battleSys, battleCtx) == TRUE
             || BattleController_ReplaceFainted(battleSys, battleCtx) == TRUE) {

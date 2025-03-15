@@ -709,6 +709,12 @@
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
+	
+	.macro IfDestinyBondFails battler, jump
+    .long 123
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
 
     .equ TABLE_END, 0xFFFFFFFF
 

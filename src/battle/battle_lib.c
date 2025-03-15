@@ -600,6 +600,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 		
 	case BATTLEMON_HEAL_INVERSION_TURNS:
         return battleMon->moveEffectsData.healInversionTurns;
+		
+	case BATTLEMON_DESTINY_BOND_SUCCESS_TURNS:
+        return battleMon->moveEffectsData.destinyBondSuccessTurns;
 
     default:
         GF_ASSERT(FALSE);
@@ -971,6 +974,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 	case BATTLEMON_HEAL_INVERSION_TURNS:
         mon->moveEffectsData.healInversionTurns = *(u8 *)buf;
         break;
+		
+	case BATTLEMON_DESTINY_BOND_SUCCESS_TURNS:
+        mon->moveEffectsData.destinyBondSuccessTurns = *(u8 *)buf;
+        break;
 
     default:
         GF_ASSERT(FALSE);
@@ -1206,6 +1213,10 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 		
 	case BATTLEMON_HEAL_INVERSION_TURNS:
         mon->moveEffectsData.healInversionTurns += val;
+        break;
+		
+	case BATTLEMON_DESTINY_BOND_SUCCESS_TURNS:
+        mon->moveEffectsData.destinyBondSuccessTurns += val;
         break;
 
     default:

@@ -3700,6 +3700,7 @@ Expert_DestinyBond:
     ; If the attacker''s HP > 50%, terminate. Otherwise, 50% chance of additional score +1.
     ;
     ; If the attacker''s HP > 30%, terminate. Otherwise, 60.9% chance of additional score +2.
+	IfDestinyBondFails AI_BATTLER_ATTACKER, Expert_DestinyBond_Minus10
     AddToMoveScore -1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DestinyBond_End
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_DestinyBond_End
@@ -3716,8 +3717,12 @@ Expert_DestinyBond_CheckUserLowHP:
     IfRandomLessThan 100, Expert_DestinyBond_End
     AddToMoveScore 2
 
-Expert_DestinyBond_End:
+Expert_DestinyBond_Minus10:
+	AddToMoveScore -10
     PopOrEnd 
+	
+Expert_DestinyBond_End:
+    PopOrEnd
 
 Expert_Reversal:
     ; If the attacker is slower than its opponent:
