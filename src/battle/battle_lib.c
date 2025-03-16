@@ -8733,6 +8733,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 	u32 effectiveness;
     int multiHitChance;
     int multiHitHits;
+	
+	u16 fullAttackStat, fullSpAttackStat;
     
     mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
 
@@ -8782,18 +8784,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     effect = MOVE_DATA(move).effect;
     moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
-	
-	if (move == MOVE_JUDGMENT)
-	{
-		if (attackStat > spAttackStat)
-		{
-			moveClass = CLASS_PHYSICAL;
-		}
-		else
-		{
-			moveClass = CLASS_SPECIAL;
-		}
-	}
 	
 	int soundMove = FALSE;
 	if (attackerParams.ability == ABILITY_ROCK_STAR)
@@ -9852,6 +9842,20 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     //if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
     //    defenseStat = defenseStat / 2;
     //}
+	
+	if (move == MOVE_JUDGMENT)
+	{
+		fullAttackStat = attackStat * sStatStageBoosts[attackStage].numerator;
+        fullAttackStat /= sStatStageBoosts[attackStage].denominator;
+		
+		fullSpAttackStat = spAttackStat * sStatStageBoosts[spAttackStage].numerator;
+        fullSpAttackStat /= sStatStageBoosts[spAttackStage].denominator;
+		
+		if (fullAttackStat > fullSpAttackStat)
+		{
+			moveClass = CLASS_PHYSICAL;
+		}
+	}
 
     if (moveClass == CLASS_PHYSICAL) {
         if (criticalMul > 1) {
@@ -10042,6 +10046,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     int naturePowerMove;
     int rnd;
 	u32 effectiveness;
+	
+	u16 fullAttackStat, fullSpAttackStat;
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
@@ -10085,18 +10091,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     effect = MOVE_DATA(move).effect;
     moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
-	
-	if (move == MOVE_JUDGMENT)
-	{
-		if (attackStat > spAttackStat)
-		{
-			moveClass = CLASS_PHYSICAL;
-		}
-		else
-		{
-			moveClass = CLASS_SPECIAL;
-		}
-	}
 	
 	int soundMove = FALSE;
 	if (attackerParams.ability == ABILITY_ROCK_STAR)
@@ -11132,6 +11126,20 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     //if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
     //    defenseStat = defenseStat / 2;
     //}
+	
+	if (move == MOVE_JUDGMENT)
+	{
+		fullAttackStat = attackStat * sStatStageBoosts[attackStage].numerator;
+        fullAttackStat /= sStatStageBoosts[attackStage].denominator;
+		
+		fullSpAttackStat = spAttackStat * sStatStageBoosts[spAttackStage].numerator;
+        fullSpAttackStat /= sStatStageBoosts[spAttackStage].denominator;
+		
+		if (fullAttackStat > fullSpAttackStat)
+		{
+			moveClass = CLASS_PHYSICAL;
+		}
+	}
 
     if (moveClass == CLASS_PHYSICAL) {
         if (criticalMul > 1) {
