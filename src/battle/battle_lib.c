@@ -8783,6 +8783,18 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
 	
+	if (move == MOVE_JUDGMENT)
+	{
+		if (attackStat > spAttackStat)
+		{
+			moveClass = CLASS_PHYSICAL;
+		}
+		else
+		{
+			moveClass = CLASS_SPECIAL;
+		}
+	}
+	
 	int soundMove = FALSE;
 	if (attackerParams.ability == ABILITY_ROCK_STAR)
 	{
@@ -10073,6 +10085,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     effect = MOVE_DATA(move).effect;
     moveClass = MOVE_DATA(move).class;
     cumStatBoosts = 0;
+	
+	if (move == MOVE_JUDGMENT)
+	{
+		if (attackStat > spAttackStat)
+		{
+			moveClass = CLASS_PHYSICAL;
+		}
+		else
+		{
+			moveClass = CLASS_SPECIAL;
+		}
+	}
 	
 	int soundMove = FALSE;
 	if (attackerParams.ability == ABILITY_ROCK_STAR)
