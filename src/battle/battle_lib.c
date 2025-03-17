@@ -11681,7 +11681,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
             && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 10);
         battleCtx->msgBattlerTemp = battleCtx->attacker;
-        *subscript = subscript_lose_hp_from_item;
+        *subscript = subscript_lose_hp_from_item_with_message;
         result = TRUE;
     }
 
