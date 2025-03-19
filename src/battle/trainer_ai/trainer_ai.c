@@ -424,6 +424,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AIScript_PushCursor(BattleSystem *battleSys, BattleContext *battleCtx, int address);
@@ -691,6 +692,10 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     TrainerAI_RecordLastMove(battleSys, battleCtx);
+	
+	if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
+		TrainerAI_RecordRandomMove(battleSys, battleCtx);
+	}
 
     while (AI_CONTEXT.thinkingMask) {
         if (AI_CONTEXT.thinkingMask & AI_FLAG_BASIC) {
@@ -771,6 +776,10 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
         if ((battler & 1) != (AI_CONTEXT.attacker & 1)) {
             TrainerAI_RecordLastMove(battleSys, battleCtx);
         }
+		
+		if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
+			TrainerAI_RecordRandomMove(battleSys, battleCtx);
+		}
 
         AI_CONTEXT.thinkingBitShift = 0;
         AI_CONTEXT.moveSlot = 0;
@@ -3867,6 +3876,88 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
     Pokemon *mon;
 
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
+
+    if (move != MOVE_STRUGGLE
+    && move != MOVE_NONE) {
+        // Here we want to just learn every instance of a given pivot move
+        // on the opponent's team if they use that pivot move because the 
+        // active mon data is switched before the AI gets to run this code
+        // again.
+        if (MOVE_DATA(move).effect == BATTLE_EFFECT_HIT_BEFORE_SWITCH
+            || MOVE_DATA(move).effect == BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE) {
+            partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
+
+            for (i = 0; i < partyMax; i++) {
+                mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+
+                for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                
+                    if(move == Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL)) {
+
+                        if(AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] != move) {
+
+                            AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else {
+
+            partySlot = battleCtx->selectedPartySlot[AI_CONTEXT.defender];
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+
+                if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == move) {
+
+                    if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == move) {
+
+                        break;
+                    }
+                    else {
+
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                        break;
+                    }
+                }
+
+                if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == MOVE_NONE) {
+
+                    if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
+
+                        AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                        break;
+                    }
+
+                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+                    AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * @brief Record a random move known by an active battler, if it is not
+ * already known.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ */
+static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    u8 partySlot;
+    u16 move;
+    int i, j, partyMax, randMove;
+    Pokemon *mon;
+	
+	partySlot = battleCtx->selectedPartySlot[AI_CONTEXT.defender];
+	randMove = BattleSystem_RandNext(battleSys) % 4;
+	
+    move = AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][randMove];
 
     if (move != MOVE_STRUGGLE
     && move != MOVE_NONE) {
