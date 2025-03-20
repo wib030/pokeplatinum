@@ -11,7 +11,7 @@
         },
         {
             "level": 6,
-            "species": "SPECIES_CHERUBI"
+            "species": "SPECIES_WHISMUR"
         },
         {
             "level": 5,
@@ -55,11 +55,11 @@
         "SPECIES_CUBONE"
     ],
     "morning": [
-        "SPECIES_STARLY",
+        "SPECIES_WHISMUR",
         "SPECIES_KRICKETOT"
     ],
     "night": [
-        "SPECIES_STARLY",
+        "SPECIES_WHISMUR",
         "SPECIES_KRICKETOT"
     ],
     "radar": [

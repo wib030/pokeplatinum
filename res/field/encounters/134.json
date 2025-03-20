@@ -11,7 +11,7 @@
         },
         {
             "level": 5,
-            "species": "SPECIES_STARLY"
+            "species": "SPECIES_DROWZEE"
         },
         {
             "level": 5,
@@ -19,11 +19,11 @@
         },
         {
             "level": 5,
-            "species": "SPECIES_ODDISH"
+            "species": "SPECIES_BULBASAUR"
         },
         {
             "level": 5,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_WOOPER"
         },
         {
             "level": 5,
@@ -55,12 +55,12 @@
         "SPECIES_BIDOOF"
     ],
     "morning": [
-        "SPECIES_STARLY",
-        "SPECIES_BIDOOF"
+        "SPECIES_DROWZEE",
+        "SPECIES_PIDGEY"
     ],
     "night": [
-        "SPECIES_BIDOOF",
-        "SPECIES_BIDOOF"
+        "SPECIES_DROWZEE",
+        "SPECIES_SPEAROW"
     ],
     "radar": [
         "SPECIES_WOBBUFFET",

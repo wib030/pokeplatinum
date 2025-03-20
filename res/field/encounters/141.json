@@ -19,7 +19,7 @@
         },
         {
             "level": 6,
-            "species": "SPECIES_WHISMUR"
+            "species": "SPECIES_TYROGUE"
         },
         {
             "level": 5,
@@ -59,7 +59,7 @@
         "SPECIES_KRICKETOT"
     ],
     "night": [
-        "SPECIES_STARLY",
+        "SPECIES_HOOTHOOT",
         "SPECIES_KRICKETOT"
     ],
     "radar": [

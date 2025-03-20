@@ -15,11 +15,11 @@
         },
         {
             "level": 6,
-            "species": "SPECIES_CUBONE"
+            "species": "SPECIES_MAGNEMITE"
         },
         {
             "level": 4,
-            "species": "SPECIES_MACHOP"
+            "species": "SPECIES_ONIX"
         },
         {
             "level": 7,
@@ -27,19 +27,19 @@
         },
         {
             "level": 6,
-            "species": "SPECIES_ONIX"
+            "species": "SPECIES_CUBONE"
         },
         {
             "level": 8,
-            "species": "SPECIES_ONIX"
+            "species": "SPECIES_TYROGUE"
         },
         {
             "level": 8,
-            "species": "SPECIES_GEODUDE"
+            "species": "SPECIES_CUBONE"
         },
         {
             "level": 7,
-            "species": "SPECIES_ZUBAT"
+            "species": "SPECIES_TYROGUE"
         },
         {
             "level": 8,
@@ -56,11 +56,11 @@
     ],
     "morning": [
         "SPECIES_DIGLETT",
-        "SPECIES_CUBONE"
+        "SPECIES_MAGNEMITE"
     ],
     "night": [
         "SPECIES_DIGLETT",
-        "SPECIES_CUBONE"
+        "SPECIES_MAGNEMITE"
     ],
     "radar": [
         "SPECIES_GEODUDE",

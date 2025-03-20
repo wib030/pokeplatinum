@@ -11,35 +11,35 @@
         },
         {
             "level": 9,
-            "species": "SPECIES_WURMPLE"
-        },
-        {
-            "level": 8,
-            "species": "SPECIES_KRICKETOT"
-        },
-        {
-            "level": 9,
-            "species": "SPECIES_BUDEW"
-        },
-        {
-            "level": 9,
-            "species": "SPECIES_RATTATA"
-        },
-        {
-            "level": 10,
             "species": "SPECIES_AIPOM"
         },
         {
-            "level": 10,
-            "species": "SPECIES_SHINX"
+            "level": 8,
+            "species": "SPECIES_CHERUBI"
+        },
+        {
+            "level": 9,
+            "species": "SPECIES_BONSLY"
+        },
+        {
+            "level": 9,
+            "species": "SPECIES_SHROOMISH"
         },
         {
             "level": 10,
-            "species": "SPECIES_RALTS"
+            "species": "SPECIES_POOCHYENA"
         },
         {
             "level": 10,
-            "species": "SPECIES_RALTS"
+            "species": "SPECIES_NATU"
+        },
+        {
+            "level": 10,
+            "species": "SPECIES_POOCHYENA"
+        },
+        {
+            "level": 10,
+            "species": "SPECIES_NATU"
         },
         {
             "level": 11,
@@ -47,7 +47,7 @@
         },
         {
             "level": 11,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_STARLY"
         }
     ],
     "swarms": [
@@ -55,18 +55,18 @@
         "SPECIES_BIDOOF"
     ],
     "morning": [
-        "SPECIES_WURMPLE",
-        "SPECIES_KRICKETOT"
+        "SPECIES_AIPOM",
+        "SPECIES_CHERUBI"
     ],
     "night": [
-        "SPECIES_WURMPLE",
-        "SPECIES_KRICKETOT"
+        "SPECIES_AIPOM",
+        "SPECIES_CHERUBI"
     ],
     "radar": [
-        "SPECIES_RALTS",
-        "SPECIES_RALTS",
-        "SPECIES_RALTS",
-        "SPECIES_RALTS"
+        "SPECIES_NATU",
+        "SPECIES_NATU",
+        "SPECIES_NATU",
+        "SPECIES_NATU"
     ],
     "rate_form0": 0,
     "rate_form1": 0,

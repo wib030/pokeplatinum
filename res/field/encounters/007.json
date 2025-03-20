@@ -35,19 +35,19 @@
         },
         {
             "level": 11,
-            "species": "SPECIES_KRABBY"
+            "species": "SPECIES_DRIFLOON"
         },
         {
             "level": 12,
-            "species": "SPECIES_KRABBY"
+            "species": "SPECIES_DRIFLOON"
         },
         {
             "level": 11,
-            "species": "SPECIES_PACHIRISU"
+            "species": "SPECIES_MAGNEMITE"
         },
         {
             "level": 12,
-            "species": "SPECIES_PACHIRISU"
+            "species": "SPECIES_MAGNEMITE"
         }
     ],
     "swarms": [

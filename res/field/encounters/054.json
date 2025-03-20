@@ -15,7 +15,7 @@
         },
         {
             "level": 6,
-            "species": "SPECIES_DIGLETT"
+            "species": "SPECIES_BALTOY"
         },
         {
             "level": 5,
@@ -23,11 +23,11 @@
         },
         {
             "level": 5,
-            "species": "SPECIES_ZUBAT"
+            "species": "SPECIES_MANKEY"
         },
         {
             "level": 7,
-            "species": "SPECIES_PSYDUCK"
+            "species": "SPECIES_PARAS"
         },
         {
             "level": 7,
@@ -56,11 +56,11 @@
     ],
     "morning": [
         "SPECIES_MACHOP",
-        "SPECIES_DIGLETT"
+        "SPECIES_BALTOY"
     ],
     "night": [
         "SPECIES_MACHOP",
-        "SPECIES_DIGLETT"
+        "SPECIES_BALTOY"
     ],
     "radar": [
         "SPECIES_GEODUDE",

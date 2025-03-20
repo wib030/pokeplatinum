@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_MAGIC_BOUNCE",
-        "ABILITY_NONE"
+        "ABILITY_SYNCHRONIZE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
