@@ -38,7 +38,6 @@ const u16 EggMove_Table[] = {
     MOVE_FORESIGHT,
     MOVE_FLAIL,
     MOVE_REFRESH,
-    MOVE_MUD_SPORT,
     MOVE_YAWN,
     MOVE_MUDDY_WATER,
     MOVE_FAKE_OUT,
@@ -78,7 +77,6 @@ const u16 EggMove_Table[] = {
 	MOVE_FEATHER_DANCE,
     (SPECIES_EKANS) + 20000, // Ekans line
     MOVE_PURSUIT,
-    MOVE_SLAM,
     MOVE_SPITE,
     MOVE_BEAT_UP,
     MOVE_POISON_FANG,
@@ -244,9 +242,8 @@ const u16 EggMove_Table[] = {
     MOVE_SPLASH,
     MOVE_BUBBLE_BEAM,
     MOVE_HAZE,
-    MOVE_MIND_READER,
-    MOVE_WATER_SPORT,
-    MOVE_ICE_BALL,
+    MOVE_WATER_SPORT, // Low Sweep
+    MOVE_ICE_BALL, // Icicle Crash
     MOVE_MUD_SHOT,
     MOVE_REFRESH,
     MOVE_ENDEAVOR,
@@ -297,7 +294,6 @@ const u16 EggMove_Table[] = {
     MOVE_ACUPRESSURE,
 	MOVE_MUDDY_WATER,
     (SPECIES_GEODUDE) + 20000, // Geodude line
-    MOVE_MEGA_PUNCH,
     MOVE_ROCK_SLIDE,
     MOVE_BLOCK,
     MOVE_HAMMER_ARM,
@@ -310,14 +306,13 @@ const u16 EggMove_Table[] = {
     MOVE_HYPNOSIS,
     MOVE_CHARM,
     MOVE_DOUBLE_EDGE,
-    MOVE_HORN_DRILL,
+    MOVE_HORN_DRILL, // Drill Run
 	MOVE_MORNING_SUN,
     (SPECIES_SLOWPOKE) + 20000, // Slowpoke line
     MOVE_SAFEGUARD,
     MOVE_BELLY_DRUM,
     MOVE_FUTURE_SIGHT,
     MOVE_STOMP,
-    MOVE_MUD_SPORT,
     MOVE_SLEEP_TALK,
     MOVE_SNORE,
     MOVE_ME_FIRST,
@@ -349,8 +344,7 @@ const u16 EggMove_Table[] = {
     MOVE_LICK,
     MOVE_PERISH_SONG,
     MOVE_DISABLE,
-    MOVE_HORN_DRILL,
-    MOVE_SLAM,
+    MOVE_HORN_DRILL, // Drill Run
     MOVE_ENCORE,
     MOVE_FAKE_OUT,
     MOVE_ICICLE_SPEAR,
@@ -360,7 +354,7 @@ const u16 EggMove_Table[] = {
 	MOVE_SPIT_UP,
     (SPECIES_GRIMER) + 20000, // Grimer line
     MOVE_HAZE,
-    MOVE_MEAN_LOOK,
+    MOVE_MEAN_LOOK, // Peek-A-Boo
     MOVE_LICK,
     MOVE_IMPRISON,
     MOVE_CURSE,
@@ -416,7 +410,6 @@ const u16 EggMove_Table[] = {
     MOVE_HAZE,
     MOVE_AMNESIA,
     MOVE_FLAIL,
-    MOVE_SLAM,
     MOVE_KNOCK_OFF,
     MOVE_SWORDS_DANCE,
     MOVE_TICKLE,
@@ -528,9 +521,8 @@ const u16 EggMove_Table[] = {
     MOVE_HAZE,
     MOVE_HYDRO_PUMP,
     MOVE_SLEEP_TALK,
-    MOVE_MUD_SPORT,
     MOVE_MUD_SLAP,
-    MOVE_AQUA_TAIL,
+    MOVE_AQUA_TAIL, // Wave Crash
 	MOVE_BODY_SLAM,
     (SPECIES_MR_MIME) + 20000, // Mr. Mime
     MOVE_FUTURE_SIGHT,
@@ -547,7 +539,6 @@ const u16 EggMove_Table[] = {
     MOVE_COUNTER,
     MOVE_SAFEGUARD,
     MOVE_BATON_PASS,
-    MOVE_RAZOR_WIND,
     MOVE_REVERSAL,
     MOVE_LIGHT_SCREEN,
     MOVE_ENDURE,
@@ -570,10 +561,9 @@ const u16 EggMove_Table[] = {
     MOVE_DRAGON_DANCE,
     MOVE_CURSE,
     MOVE_SLEEP_TALK,
-    MOVE_HORN_DRILL,
+    MOVE_HORN_DRILL, // Drill Run
     MOVE_ANCIENT_POWER,
     MOVE_WHIRLPOOL,
-    MOVE_FISSURE,
     (SPECIES_EEVEE) + 20000, // Eevee line
     MOVE_CHARM,
     MOVE_FLAIL,
@@ -588,7 +578,6 @@ const u16 EggMove_Table[] = {
     (SPECIES_OMANYTE) + 20000, // Omanyte line
     MOVE_BUBBLE_BEAM,
     MOVE_AURORA_BEAM,
-    MOVE_SLAM,
     MOVE_SUPERSONIC,
     MOVE_HAZE,
     MOVE_ROCK_SLIDE,
@@ -621,7 +610,6 @@ const u16 EggMove_Table[] = {
     MOVE_CHARM,
     MOVE_DOUBLE_EDGE,
     MOVE_CURSE,
-    MOVE_FISSURE,
     MOVE_SUBSTITUTE,
     MOVE_WHIRLWIND,
     MOVE_PURSUIT,
@@ -667,8 +655,6 @@ const u16 EggMove_Table[] = {
     MOVE_HYDRO_PUMP,
     MOVE_ANCIENT_POWER,
     MOVE_ROCK_SLIDE,
-    MOVE_MUD_SPORT,
-    MOVE_WATER_SPORT,
     MOVE_DRAGON_CLAW,
     MOVE_ICE_PUNCH,
     MOVE_METAL_CLAW,
@@ -690,7 +676,7 @@ const u16 EggMove_Table[] = {
     MOVE_MIRROR_MOVE,
     MOVE_SUPERSONIC,
     MOVE_FAINT_ATTACK,
-    MOVE_WING_ATTACK,
+    MOVE_WING_ATTACK, // Dual Wingbeat
     MOVE_WHIRLWIND,
     MOVE_SKY_ATTACK,
     MOVE_FEATHER_DANCE,
@@ -825,7 +811,6 @@ const u16 EggMove_Table[] = {
     MOVE_PURSUIT,
     MOVE_AGILITY,
     MOVE_SPITE,
-    MOVE_SLAM,
     MOVE_DOUBLE_SLAP,
     MOVE_BEAT_UP,
     MOVE_FAKE_OUT,
@@ -854,7 +839,6 @@ const u16 EggMove_Table[] = {
     MOVE_ANCIENT_POWER,
     MOVE_SAFEGUARD,
     MOVE_CURSE,
-    MOVE_MUD_SPORT,
     MOVE_STOCKPILE,
     MOVE_SWALLOW,
     MOVE_SPIT_UP,
@@ -866,7 +850,7 @@ const u16 EggMove_Table[] = {
     MOVE_WHIRLWIND,
     MOVE_DRILL_PECK,
     MOVE_MIRROR_MOVE,
-    MOVE_WING_ATTACK,
+    MOVE_WING_ATTACK, // Dual Wingbeat
     MOVE_SKY_ATTACK,
     MOVE_CONFUSE_RAY,
     MOVE_FEATHER_DANCE,
@@ -923,8 +907,7 @@ const u16 EggMove_Table[] = {
 	MOVE_AGILITY,
     (SPECIES_GLIGAR) + 20000, // Gligar line
     MOVE_METAL_CLAW,
-    MOVE_WING_ATTACK,
-    MOVE_RAZOR_WIND,
+    MOVE_WING_ATTACK, // Dual Wingbeat
     MOVE_COUNTER,
     MOVE_SAND_TOMB,
     MOVE_AGILITY,
@@ -1017,7 +1000,7 @@ const u16 EggMove_Table[] = {
     MOVE_MUD_SHOT,
     MOVE_ICICLE_SPEAR,
     MOVE_DOUBLE_EDGE,
-    MOVE_FISSURE,
+    MOVE_FISSURE, // Peat Slide
     MOVE_CURSE,
     (SPECIES_CORSOLA) + 20000, // Corsola
     MOVE_ROCK_SLIDE,
@@ -1048,7 +1031,7 @@ const u16 EggMove_Table[] = {
     MOVE_FUTURE_SIGHT,
     MOVE_SPLASH,
     MOVE_RAPID_SPIN,
-    MOVE_ICE_BALL,
+    MOVE_ICE_BALL, // Icicle Crash
     MOVE_ICE_SHARD,
     MOVE_ICE_PUNCH,
 	MOVE_FAKE_OUT,
@@ -1056,11 +1039,8 @@ const u16 EggMove_Table[] = {
     MOVE_TWISTER,
     MOVE_HYDRO_PUMP,
     MOVE_HAZE,
-    MOVE_SLAM,
-    MOVE_MUD_SPORT,
     MOVE_ROCK_SLIDE,
     MOVE_MIRROR_COAT,
-    MOVE_WATER_SPORT,
     MOVE_SPLASH,
     (SPECIES_SKARMORY) + 20000, // Skarmory
     MOVE_DRILL_PECK,
@@ -1091,7 +1071,7 @@ const u16 EggMove_Table[] = {
     MOVE_ANCIENT_POWER,
     MOVE_SNORE,
     MOVE_COUNTER,
-    MOVE_FISSURE,
+    MOVE_FISSURE, // Peat Slide
     MOVE_ENDEAVOR,
     MOVE_ICE_SHARD,
 	MOVE_HEAD_SMASH,
@@ -1110,7 +1090,6 @@ const u16 EggMove_Table[] = {
     MOVE_RAPID_SPIN,
     MOVE_HI_JUMP_KICK,
     MOVE_MACH_PUNCH,
-    MOVE_MIND_READER,
     MOVE_HELPING_HAND,
     MOVE_COUNTER,
     MOVE_VACUUM_WAVE,
@@ -1135,7 +1114,6 @@ const u16 EggMove_Table[] = {
 	MOVE_FEINT,
     (SPECIES_MAGBY) + 20000, // Magby line
     MOVE_KARATE_CHOP,
-    MOVE_MEGA_PUNCH,
     MOVE_BARRIER,
     MOVE_SCREECH,
     MOVE_CROSS_CHOP,
@@ -1170,7 +1148,6 @@ const u16 EggMove_Table[] = {
     MOVE_IRON_HEAD,
     (SPECIES_TREECKO) + 20000, // Treecko line
     MOVE_CRUNCH,
-    MOVE_MUD_SPORT,
     MOVE_CAMOUFLAGE,
     MOVE_LEECH_SEED,
     MOVE_DRAGON_BREATH,
@@ -1200,7 +1177,6 @@ const u16 EggMove_Table[] = {
     MOVE_UPROAR,
     MOVE_CURSE,
     MOVE_STOMP,
-    MOVE_ICE_BALL,
     MOVE_MIRROR_COAT,
     MOVE_COUNTER,
     MOVE_ANCIENT_POWER,
@@ -1242,7 +1218,7 @@ const u16 EggMove_Table[] = {
     MOVE_LEECH_SEED,
     MOVE_AMNESIA,
     MOVE_QUICK_ATTACK,
-    MOVE_RAZOR_WIND,
+    MOVE_RAZOR_WIND, // Hurricane
     MOVE_TAKE_DOWN,
     MOVE_FALSE_SWIPE,
     MOVE_WORRY_SEED,
@@ -1262,13 +1238,12 @@ const u16 EggMove_Table[] = {
     MOVE_TWISTER,
     MOVE_AGILITY,
     MOVE_GUST,
-    MOVE_WATER_SPORT,
     MOVE_AQUA_RING,
     MOVE_KNOCK_OFF,
     (SPECIES_RALTS) + 20000, // Ralts line
     MOVE_DISABLE,
     MOVE_WILL_O_WISP,
-    MOVE_MEAN_LOOK,
+    MOVE_MEAN_LOOK, // Peek-A-Boo
     MOVE_MEMENTO,
     MOVE_DESTINY_BOND,
     MOVE_GRUDGE,
@@ -1280,7 +1255,6 @@ const u16 EggMove_Table[] = {
     MOVE_MUD_SHOT,
     MOVE_PSYBEAM,
     MOVE_HYDRO_PUMP,
-    MOVE_MIND_READER,
     MOVE_SIGNAL_BEAM,
     MOVE_BUG_BITE,
     (SPECIES_SHROOMISH) + 20000, //Shroomish line
@@ -1336,7 +1310,7 @@ const u16 EggMove_Table[] = {
     MOVE_ENCORE,
     MOVE_SING,
     MOVE_REFRESH,
-    MOVE_SLAM,
+    MOVE_SLAM, // Psyshield Bash
     MOVE_TICKLE,
     MOVE_FAKE_TEARS,
 	MOVE_BODY_SLAM,
@@ -1445,7 +1419,6 @@ const u16 EggMove_Table[] = {
     MOVE_COTTON_SPORE,
     MOVE_SLEEP_POWDER,
     MOVE_RAZOR_LEAF,
-    MOVE_MIND_READER,
     MOVE_LEAF_STORM,
     (SPECIES_GULPIN) + 20000, // Gulpin line
     MOVE_DREAM_EATER,
@@ -1466,7 +1439,6 @@ const u16 EggMove_Table[] = {
     MOVE_SNORE,
     MOVE_SLEEP_TALK,
     MOVE_CURSE,
-    MOVE_FISSURE,
     MOVE_TICKLE,
     MOVE_DEFENSE_CURL,
     MOVE_BODY_SLAM,
@@ -1491,7 +1463,6 @@ const u16 EggMove_Table[] = {
     MOVE_SLEEP_TALK,
     MOVE_YAWN,
     MOVE_EARTHQUAKE,
-    MOVE_FISSURE,
 	MOVE_SKULL_BASH,
     (SPECIES_SPOINK) + 20000, // Spoink line
     MOVE_FUTURE_SIGHT,
@@ -1542,7 +1513,6 @@ const u16 EggMove_Table[] = {
     (SPECIES_ZANGOOSE) + 20000, // Zangoose
     MOVE_FLAIL,
     MOVE_DOUBLE_KICK,
-    MOVE_RAZOR_WIND,
     MOVE_COUNTER,
     MOVE_ROAR,
     MOVE_CURSE,
@@ -1569,7 +1539,6 @@ const u16 EggMove_Table[] = {
     MOVE_TAKE_DOWN,
 	MOVE_DRAGON_DANCE,
     (SPECIES_CORPHISH) + 20000, // Corphish line
-    MOVE_MUD_SPORT,
     MOVE_ENDEAVOR,
     MOVE_BODY_SLAM,
     MOVE_ANCIENT_POWER,
@@ -1597,7 +1566,6 @@ const u16 EggMove_Table[] = {
     (SPECIES_FEEBAS) + 20000, // Feebas line
     MOVE_MIRROR_COAT,
     MOVE_DRAGON_BREATH,
-    MOVE_MUD_SPORT,
     MOVE_HYPNOSIS,
     MOVE_LIGHT_SCREEN,
     MOVE_CONFUSE_RAY,
@@ -1639,8 +1607,7 @@ const u16 EggMove_Table[] = {
     MOVE_OMINOUS_WIND,
     (SPECIES_TROPIUS) + 20000, // Tropius
     MOVE_HEADBUTT,
-    MOVE_SLAM,
-    MOVE_RAZOR_WIND,
+    MOVE_RAZOR_WIND, // Hurricane
     MOVE_LEECH_SEED,
     MOVE_NATURE_POWER,
     MOVE_LEAF_STORM,
@@ -1662,7 +1629,7 @@ const u16 EggMove_Table[] = {
     MOVE_MAGIC_COAT,
     MOVE_CURSE,
     MOVE_SUBSTITUTE,
-    MOVE_MEAN_LOOK,
+    MOVE_MEAN_LOOK, // Peek-A-Boo
     MOVE_ZEN_HEADBUTT,
     MOVE_PUNISHMENT,
     MOVE_SUCKER_PUNCH,
@@ -1677,19 +1644,16 @@ const u16 EggMove_Table[] = {
     MOVE_BIDE,
 	MOVE_WEATHER_BALL,
     (SPECIES_SPHEAL) + 20000, // Spheal line
-    MOVE_WATER_SPORT,
     MOVE_STOCKPILE,
     MOVE_SWALLOW,
     MOVE_SPIT_UP,
     MOVE_YAWN,
     MOVE_ROCK_SLIDE,
     MOVE_CURSE,
-    MOVE_FISSURE,
     MOVE_SIGNAL_BEAM,
 	MOVE_AQUA_RING,
     (SPECIES_CLAMPERL) + 20000, // Clamperl line
     MOVE_REFRESH,
-    MOVE_MUD_SPORT,
     MOVE_BODY_SLAM,
     MOVE_SUPERSONIC,
     MOVE_BARRIER,
@@ -1699,19 +1663,16 @@ const u16 EggMove_Table[] = {
     (SPECIES_RELICANTH) + 20000, // Relicanth
     MOVE_MAGNITUDE,
     MOVE_SKULL_BASH,
-    MOVE_WATER_SPORT,
     MOVE_AMNESIA,
     MOVE_SLEEP_TALK,
     MOVE_ROCK_SLIDE,
-    MOVE_AQUA_TAIL,
+    MOVE_AQUA_TAIL, // Wave Crash
     MOVE_SNORE,
     MOVE_MUD_SLAP,
 	MOVE_MUDDY_WATER,
     (SPECIES_LUVDISC) + 20000, // Luvdisc
     MOVE_SPLASH,
     MOVE_SUPERSONIC,
-    MOVE_WATER_SPORT,
-    MOVE_MUD_SPORT,
     MOVE_CAPTIVATE,
     MOVE_AQUA_RING,
 	MOVE_AQUA_JET,
@@ -1754,7 +1715,6 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_HIT,
     MOVE_SUPERSONIC,
     MOVE_YAWN,
-    MOVE_MUD_SPORT,
     MOVE_MUD_SLAP,
     MOVE_SNORE,
     MOVE_FLAIL,
@@ -1772,13 +1732,12 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_EDGE,
     (SPECIES_BIDOOF) + 20000, // Bidoof line
     MOVE_QUICK_ATTACK,
-    MOVE_WATER_SPORT,
     MOVE_DOUBLE_EDGE,
     MOVE_FURY_SWIPES,
     MOVE_DEFENSE_CURL,
     MOVE_ROLLOUT,
     MOVE_ODOR_SLEUTH,
-    MOVE_AQUA_TAIL,
+    MOVE_AQUA_TAIL, // Wave Crash
     (SPECIES_SHINX) + 20000, // Shinx line
     MOVE_ICE_FANG,
     MOVE_FIRE_FANG,
@@ -1794,7 +1753,6 @@ const u16 EggMove_Table[] = {
     MOVE_COTTON_SPORE,
     MOVE_SLEEP_POWDER,
     MOVE_RAZOR_LEAF,
-    MOVE_MIND_READER,
     MOVE_LEAF_STORM,
     MOVE_EXTRASENSORY,
     (SPECIES_CRANIDOS) + 20000, // Cranidos line
@@ -1802,7 +1760,7 @@ const u16 EggMove_Table[] = {
     MOVE_THRASH,
     MOVE_DOUBLE_EDGE,
     MOVE_LEER,
-    MOVE_SLAM,
+    MOVE_SLAM, // Psyshield Bash
     MOVE_STOMP,
     MOVE_WHIRLWIND,
     MOVE_HAMMER_ARM,
@@ -1816,7 +1774,7 @@ const u16 EggMove_Table[] = {
     MOVE_BODY_SLAM,
     MOVE_SCREECH,
     MOVE_CURSE,
-    MOVE_FISSURE,
+    MOVE_FISSURE, // Peat Slide
 	MOVE_COUNTER,
     (SPECIES_PACHIRISU) + 20000, // Pachirisu line
     MOVE_COVET,
@@ -1853,7 +1811,7 @@ const u16 EggMove_Table[] = {
     MOVE_MEMENTO,
     MOVE_CURSE,
     MOVE_AMNESIA,
-    MOVE_FISSURE,
+    MOVE_FISSURE, // Peat Slide
 	MOVE_TRUMP_CARD,
 	MOVE_SLUDGE,
     (SPECIES_DRIFLOON) + 20000, // Drifloon line
@@ -1974,7 +1932,6 @@ const u16 EggMove_Table[] = {
     MOVE_CROSS_CHOP,
     MOVE_DETECT,
     MOVE_BITE,
-    MOVE_MIND_READER,
     MOVE_SKY_UPPERCUT,
     MOVE_HI_JUMP_KICK,
     MOVE_AGILITY,
@@ -2021,7 +1978,6 @@ const u16 EggMove_Table[] = {
     MOVE_SLEEP_POWDER,
     MOVE_STUN_SPORE,
     MOVE_RAZOR_LEAF,
-    MOVE_SLAM,
     MOVE_SYNTHESIS,
     MOVE_MAGICAL_LEAF,
     MOVE_LEECH_SEED,
@@ -2030,7 +1986,6 @@ const u16 EggMove_Table[] = {
     MOVE_SWEET_KISS,
     MOVE_CHARM,
     MOVE_FLAIL,
-    MOVE_AQUA_TAIL,
     MOVE_SPLASH,
     MOVE_PSYBEAM,
     MOVE_TICKLE,
@@ -2039,11 +1994,8 @@ const u16 EggMove_Table[] = {
     MOVE_TWISTER,
     MOVE_HYDRO_PUMP,
     MOVE_HAZE,
-    MOVE_SLAM,
-    MOVE_MUD_SPORT,
     MOVE_ROCK_SLIDE,
     MOVE_MIRROR_COAT,
-    MOVE_WATER_SPORT,
     MOVE_SPLASH,
     MOVE_SIGNAL_BEAM,
     (SPECIES_SNOVER) + 20000, // Snover line
