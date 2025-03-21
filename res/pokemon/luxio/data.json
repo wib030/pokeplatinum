@@ -81,6 +81,7 @@
 				"MOVE_THUNDER_SHOCK",
 				"MOVE_CHARGE"
 			],
+			"7": "MOVE_FURY_ATTACK",
 			"13": "MOVE_SPARK",
 			"15": "MOVE_THUNDER_FANG",
 			"18": "MOVE_BITE",

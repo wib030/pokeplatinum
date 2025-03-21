@@ -80,6 +80,7 @@
 				"MOVE_LEER"
 			],
 			"5": "MOVE_THUNDER_SHOCK",
+			"7": "MOVE_FURY_ATTACK",
             "9": "MOVE_CHARGE",
 			"11": "MOVE_HOWL",
             "13": "MOVE_SPARK",
