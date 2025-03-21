@@ -90,12 +90,12 @@
             "1": [
                 "MOVE_POUND",
 				"MOVE_LICK",
-				"MOVE_TELEPORT",
                 "MOVE_HYPNOSIS"
             ],
             "5": "MOVE_DISABLE",
             "9": "MOVE_CONFUSION",
             "13": "MOVE_GUILLOTINE",
+			"15": "MOVE_TELEPORT",
             "21": "MOVE_MEDITATE",
             "24": "MOVE_PSYBEAM",
 			"26": "MOVE_WAKE_UP_SLAP",

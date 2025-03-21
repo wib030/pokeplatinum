@@ -78,8 +78,7 @@
             "1": [
                 "MOVE_TACKLE",
                 "MOVE_GROWL",
-                "MOVE_LEECH_SEED",
-				"MOVE_POISON_STING"
+                "MOVE_LEECH_SEED"
             ],
 			"3": "MOVE_ACID",
             "9": "MOVE_VINE_WHIP",

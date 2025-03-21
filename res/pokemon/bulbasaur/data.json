@@ -77,12 +77,11 @@
         "level_up": {
             "1": [ 
 				"MOVE_TACKLE",
-				"MOVE_POISON_STING"
+				"MOVE_GROWL"
 			],
-            "3": "MOVE_GROWL",
-			"5": "MOVE_VINE_WHIP",
+			"3": "MOVE_VINE_WHIP",
+			"5": "MOVE_ACID",
             "7": "MOVE_LEECH_SEED",
-			"9": "MOVE_ACID",
             "13": [
                 "MOVE_POISON_POWDER",
                 "MOVE_SLEEP_POWDER"
