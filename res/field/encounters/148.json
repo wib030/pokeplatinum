@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 7,
+            "level": 11,
             "species": "SPECIES_MACHOP"
         },
         {
-            "level": 5,
+            "level": 9,
             "species": "SPECIES_SANDSHREW"
         },
         {
-            "level": 6,
+            "level": 10,
             "species": "SPECIES_PONYTA"
         },
         {
-            "level": 5,
+            "level": 9,
             "species": "SPECIES_PINECO"
         },
         {
-            "level": 5,
-            "species": "SPECIES_GLIGAR"
+            "level": 9,
+            "species": "SPECIES_BELLSPROUT"
         },
         {
-            "level": 6,
+            "level": 10,
             "species": "SPECIES_MACHOP"
         },
         {
-            "level": 8,
+            "level": 11,
             "species": "SPECIES_NUMEL"
         },
         {
-            "level": 6,
+            "level": 10,
             "species": "SPECIES_SANDSHREW"
         },
         {
-            "level": 7,
+            "level": 9,
             "species": "SPECIES_NOSEPASS"
         },
         {
-            "level": 7,
+            "level": 9,
             "species": "SPECIES_NOSEPASS"
         },
         {
-            "level": 7,
+            "level": 9,
             "species": "SPECIES_GEODUDE"
         },
         {
-            "level": 7,
+            "level": 9,
             "species": "SPECIES_GEODUDE"
         }
     ],
