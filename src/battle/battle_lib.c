@@ -119,6 +119,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].unownEnergyStrongFlag = FALSE;
 	battleCtx->battleMons[battler].unownEnergyWeakFlag = FALSE;
 	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
+	battleCtx->battleMons[battler].paraProtectionFlag = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -603,6 +604,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 		
 	case BATTLEMON_DESTINY_BOND_SUCCESS_TURNS:
         return battleMon->moveEffectsData.destinyBondSuccessTurns;
+		
+	case BATTLEMON_PARA_PROTECTION_FLAG:
+        return battleMon->paraProtectionFlag;
 
     default:
         GF_ASSERT(FALSE);
@@ -978,6 +982,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 	case BATTLEMON_DESTINY_BOND_SUCCESS_TURNS:
         mon->moveEffectsData.destinyBondSuccessTurns = *(u8 *)buf;
         break;
+		
+	case BATTLEMON_PARA_PROTECTION_FLAG:
+        mon->paraProtectionFlag = *(u8 *)buf;
+		break;
 
     default:
         GF_ASSERT(FALSE);
@@ -1218,6 +1226,10 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 	case BATTLEMON_DESTINY_BOND_SUCCESS_TURNS:
         mon->moveEffectsData.destinyBondSuccessTurns += val;
         break;
+		
+	case BATTLEMON_PARA_PROTECTION_FLAG:
+        mon->paraProtectionFlag += val;
+		break;
 
     default:
         GF_ASSERT(FALSE);
