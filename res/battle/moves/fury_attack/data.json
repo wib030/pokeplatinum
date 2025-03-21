@@ -1,22 +1,22 @@
 {
-    "name": "Fury Attack",
+    "name": "Tantrum",
     "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
-    "power": 20,
-    "accuracy": 90,
-    "pp": 20,
+    "type": "TYPE_DARK",
+    "power": 45,
+    "accuracy": 100,
+    "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_MULTI_HIT",
+        "type": "BATTLE_EFFECT_CONTINUE_AND_CONFUSE_SELF",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_RANDOM_OPPONENT",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE",
         "MOVE_FLAG_TRIGGERS_KINGS_ROCK",
-        "MOVE_FLAG_HIDES_HP_GAUGES"
+        "MOVE_FLAG_HIDES_SHADOWS"
     ],
     "contest": {
         "effect": 7,

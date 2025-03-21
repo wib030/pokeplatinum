@@ -127,7 +127,7 @@
 	</row>
 	<row id="pl_msg_00000646_00031" index="31">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is jabbed\nrepeatedly with a\nhorn or beak two to\nfive times in a row.\n</language>
+		<language name="English">The user throws\na tantrum for two\nto three turns.\nHowever, it then\nbecomes confused.</language>
 	</row>
 	<row id="pl_msg_00000646_00032" index="32">
 		<attribute name="window_context_name">used</attribute>

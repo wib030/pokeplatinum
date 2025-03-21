@@ -375,15 +375,15 @@
 	</row>
 	<row id="pl_msg_00000000_00093" index="93">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nFury Attack!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nTantrum!</language>
 	</row>
 	<row id="pl_msg_00000000_00094" index="94">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFury Attack!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nTantrum!</language>
 	</row>
 	<row id="pl_msg_00000000_00095" index="95">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFury Attack!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nTantrum!</language>
 	</row>
 	<row id="pl_msg_00000000_00096" index="96">
 		<attribute name="window_context_name">used</attribute>
