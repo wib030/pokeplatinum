@@ -89,6 +89,7 @@
                 "MOVE_FOCUS_ENERGY"
             ],
             "3": "MOVE_POISON_GAS",
+			"5": "MOVE_FURY_ATTACK",
             "7": "MOVE_SCREECH",
 			"9": "MOVE_FURY_SWIPES",
 			"11": "MOVE_BITE",

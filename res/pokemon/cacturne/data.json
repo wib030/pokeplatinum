@@ -91,7 +91,8 @@
 				"MOVE_DESTINY_BOND",
                 "MOVE_NASTY_PLOT"
             ],
-            "4": "MOVE_ABSORB",
+            "3": "MOVE_ABSORB",
+			"5": "MOVE_FURY_ATTACK",
             "7": "MOVE_GROWTH",
             "10": "MOVE_LEECH_SEED",
             "13": "MOVE_SAND_ATTACK",

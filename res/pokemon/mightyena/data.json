@@ -90,9 +90,10 @@
 				"MOVE_HOWL",
 				"MOVE_BITE"
             ],
-            "4": "MOVE_HOWL",
+            "3": "MOVE_HOWL",
+			"5": "MOVE_FURY_ATTACK",
             "7": "MOVE_SAND_ATTACK",
-            "10": "MOVE_BITE",
+            "11": "MOVE_BITE",
             "13": "MOVE_ODOR_SLEUTH",
             "16": "MOVE_ROAR",
             "20": "MOVE_SWAGGER",

@@ -78,9 +78,10 @@
         ],
         "level_up": {
             "1": "MOVE_TACKLE",
-			"3": "MOVE_BITE",
-            "4": "MOVE_HOWL",
+            "3": "MOVE_HOWL",
+			"5": "MOVE_FURY_ATTACK",
             "7": "MOVE_SAND_ATTACK",
+			"11": "MOVE_BITE",
             "13": "MOVE_ODOR_SLEUTH",
             "15": "MOVE_ROAR",
             "18": "MOVE_SWAGGER",

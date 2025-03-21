@@ -124,7 +124,6 @@
             "item": "ITEM_TIMER_BALL",
             "moves": [
                 "MOVE_SPIDER_WEB",
-                "MOVE_FURY_ATTACK",
                 "MOVE_AGILITY",
                 "MOVE_FOCUS_ENERGY"
             ],

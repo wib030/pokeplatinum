@@ -94,6 +94,7 @@
 				"MOVE_SMOG"
             ],
             "4": "MOVE_HOWL",
+			"6": "MOVE_FURY_ATTACK",
             "8": "MOVE_SMOG",
             "13": "MOVE_ROAR",
             "16": "MOVE_BITE",

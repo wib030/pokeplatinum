@@ -17,7 +17,7 @@
             "moves": [
                 "MOVE_BLOCK",
 				"MOVE_ROAR",
-				"MOVE_FURY_ATTACK"
+				"MOVE_FLAIL"
             ],
             "power": 80,
             "ball_seal": 0,

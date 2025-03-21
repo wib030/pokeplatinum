@@ -3,10 +3,10 @@
     "base_stats": {
         "hp": 66,
         "attack": 41,
-        "defense": 77,
+        "defense": 67,
         "speed": 23,
         "special_attack": 61,
-        "special_defense": 87
+        "special_defense": 77
     },
     "types": [
         "TYPE_ROCK",

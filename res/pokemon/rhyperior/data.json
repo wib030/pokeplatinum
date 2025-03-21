@@ -106,10 +106,8 @@
                 "MOVE_HORN_ATTACK",
 				"MOVE_HAMMER_ARM",
                 "MOVE_TAIL_WHIP",
-				"MOVE_STOMP",
-				"MOVE_FURY_ATTACK"
+				"MOVE_STOMP"
             ],
-			"5": "MOVE_FURY_ATTACK",
 			"9": "MOVE_SCARY_FACE",
             "13": "MOVE_STOMP",
 			"21": "MOVE_MAGNITUDE",

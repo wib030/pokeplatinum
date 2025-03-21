@@ -1,11 +1,11 @@
 {
     "name": "Drowzee",
     "base_stats": {
-        "hp": 60,
-        "attack": 48,
-        "defense": 45,
-        "speed": 42,
-        "special_attack": 43,
+        "hp": 65,
+        "attack": 58,
+        "defense": 65,
+        "speed": 43,
+        "special_attack": 53,
         "special_defense": 90
     },
     "types": [

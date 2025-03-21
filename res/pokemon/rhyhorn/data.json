@@ -94,7 +94,6 @@
                 "MOVE_HORN_ATTACK",
                 "MOVE_TAIL_WHIP"
             ],
-			"5": "MOVE_FURY_ATTACK",
 			"9": "MOVE_SCARY_FACE",
             "13": "MOVE_STOMP",
 			"21": "MOVE_MAGNITUDE",

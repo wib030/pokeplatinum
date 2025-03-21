@@ -93,6 +93,7 @@
                 "MOVE_HAZE",
                 "MOVE_WING_ATTACK"
             ],
+			"5": "MOVE_FURY_ATTACK",
 			"21": "MOVE_NIGHT_SHADE",
             "25": [ 
 				"MOVE_SWAGGER",

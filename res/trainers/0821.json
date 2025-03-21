@@ -13,7 +13,6 @@
             "level": 23,
             "item": null,
             "moves": [
-                "MOVE_FURY_ATTACK",
                 "MOVE_SING",
                 "MOVE_GROWL",
                 "MOVE_PECK"

@@ -86,7 +86,8 @@
 				"MOVE_HELPING_HAND",
                 "MOVE_WISH",
 				"MOVE_COVET",
-				"MOVE_COPYCAT"
+				"MOVE_COPYCAT",
+				"MOVE_FURY_ATTACK"
             ],
             "5": "MOVE_SAND_ATTACK",
 			"10": "MOVE_QUICK_ATTACK",

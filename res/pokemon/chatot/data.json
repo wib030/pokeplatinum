@@ -79,7 +79,6 @@
             "5": "MOVE_GROWL",
             "9": "MOVE_MIRROR_MOVE",
             "13": "MOVE_SING",
-            "17": "MOVE_FURY_ATTACK",
             "21": "MOVE_CHATTER",
             "25": "MOVE_TAUNT",
             "27": "MOVE_MIMIC",

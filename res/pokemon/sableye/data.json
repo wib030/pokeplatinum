@@ -95,7 +95,8 @@
                 "MOVE_LEER",
 				"MOVE_ASTONISH",
                 "MOVE_SCRATCH",
-				"MOVE_IMPRISON"
+				"MOVE_IMPRISON",
+				"MOVE_FURY_ATTACK"
             ],
             "4": "MOVE_FORESIGHT",
             "6": "MOVE_NIGHT_SHADE",

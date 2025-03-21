@@ -85,7 +85,6 @@
         ],
         "level_up": {
             "1": "MOVE_FRENZY_PLANT",
-            "10": "MOVE_FURY_ATTACK",
             "13": "MOVE_FOCUS_ENERGY",
             "16": "MOVE_TWINEEDLE",
             "19": "MOVE_RAGE",

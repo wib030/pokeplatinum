@@ -77,7 +77,8 @@
             "TM89",
             "TM90",
             "HM02",
-            "HM05"
+            "HM05",
+			"HM06"
         ],
         "level_up": {
              "1": [
@@ -85,10 +86,11 @@
 				"MOVE_LEER",
                 "MOVE_PECK",
                 "MOVE_GROWL",
-				"MOVE_PLUCK"
+				"MOVE_PLUCK",
+				"MOVE_QUICK_ATTACK",
+				"MOVE_FURY_ATTACK"
             ],
 			"8": "MOVE_PURSUIT",
-            "11": "MOVE_FURY_ATTACK",
 			"15": "MOVE_AERIAL_ACE",
             "23": "MOVE_ASSURANCE",
 			"26": "MOVE_WING_ATTACK",

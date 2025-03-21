@@ -99,7 +99,6 @@
 			"16": "MOVE_DOUBLE_HIT",
 			"19": "MOVE_COUNTER",
 			"22": "MOVE_FURY_CUTTER",
-			"25": "MOVE_FURY_ATTACK",
             "28": "MOVE_BRICK_BREAK",
 			"31": "MOVE_PIN_MISSILE",
             "34": "MOVE_TAKE_DOWN",

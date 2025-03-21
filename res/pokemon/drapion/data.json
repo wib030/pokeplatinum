@@ -104,11 +104,12 @@
 				"MOVE_LEER",
 				"MOVE_MEDITATE"
             ],
-            "5": "MOVE_KNOCK_OFF",
+			"5": "MOVE_FURY_ATTACK",
             "9": "MOVE_PIN_MISSILE",
             "13": "MOVE_ACUPRESSURE",
 			"16": "MOVE_PURSUIT",
 			"20": "MOVE_BUG_BITE",
+			"21": "MOVE_KNOCK_OFF",
 			"23": "MOVE_POISON_FANG",
             "27": "MOVE_TOXIC_SPIKES",
 			"30": "MOVE_SCREECH",

@@ -84,6 +84,7 @@
 			],
             "3": "MOVE_TAIL_WHIP",
 			"5": "MOVE_WATER_GUN",
+			"7": "MOVE_FURY_ATTACK",
             "15": "MOVE_ROLLOUT",
 			"16": "MOVE_BITE",
             "18": "MOVE_BUBBLE_BEAM",

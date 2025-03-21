@@ -83,6 +83,7 @@
 				"MOVE_HARDEN",
 				"MOVE_FRENZY_PLANT"
 			],
+			"5": "MOVE_FURY_ATTACK",
             "7": "MOVE_GROWTH",
             "13": "MOVE_NATURE_POWER",
             "21": "MOVE_SYNTHESIS",

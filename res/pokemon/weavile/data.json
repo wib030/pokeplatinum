@@ -106,7 +106,8 @@
                 "MOVE_EMBARGO",
                 "MOVE_REVENGE",
                 "MOVE_ASSURANCE",
-                "MOVE_TAUNT"
+                "MOVE_TAUNT",
+				"MOVE_FURY_ATTACK"
             ],
 			"5": "MOVE_POWDER_SNOW",
             "8": "MOVE_QUICK_ATTACK",

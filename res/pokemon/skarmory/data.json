@@ -93,7 +93,6 @@
             "6": "MOVE_SAND_ATTACK",
             "9": "MOVE_METAL_CLAW",
 			"12": "MOVE_AIR_CUTTER",
-            "17": "MOVE_FURY_ATTACK",
             "20": "MOVE_FEINT",
 			"25": "MOVE_AGILITY",
             "28": "MOVE_SPIKES",
