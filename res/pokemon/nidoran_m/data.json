@@ -2,10 +2,10 @@
     "name": "Nidoran♂",
     "base_stats": {
         "hp": 46,
-        "attack": 57,
+        "attack": 77,
         "defense": 40,
         "speed": 50,
-        "special_attack": 40,
+        "special_attack": 55,
         "special_defense": 40
     },
     "types": [
@@ -87,6 +87,7 @@
             ],
             "7": "MOVE_FOCUS_ENERGY",
             "9": "MOVE_DOUBLE_KICK",
+			"11": "MOVE_MUD_SHOT",
             "21": "MOVE_HORN_ATTACK",
             "25": "MOVE_HELPING_HAND",
             "31": "MOVE_TOXIC_SPIKES",

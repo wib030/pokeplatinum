@@ -2,10 +2,10 @@
     "name": "Nidorina",
     "base_stats": {
         "hp": 70,
-        "attack": 62,
+        "attack": 72,
         "defense": 67,
         "speed": 56,
-        "special_attack": 55,
+        "special_attack": 80,
         "special_defense": 55
     },
     "types": [
@@ -87,6 +87,7 @@
             ],
             "7": "MOVE_TAIL_WHIP",
             "9": "MOVE_DOUBLE_KICK",
+			"11": "MOVE_MUD_SHOT",
             "13": "MOVE_POISON_STING",
             "20": "MOVE_FURY_SWIPES",
             "23": "MOVE_BITE",

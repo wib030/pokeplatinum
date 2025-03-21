@@ -109,6 +109,7 @@
 				"MOVE_HORN_DRILL",
                 "MOVE_POISON_STING"
             ],
+			"11": "MOVE_MUD_SHOT",
             "23": [ 
 				"MOVE_THRASH",
 				"MOVE_HORN_ATTACK"

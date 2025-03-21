@@ -2,10 +2,10 @@
     "name": "Nidorino",
     "base_stats": {
         "hp": 61,
-        "attack": 72,
+        "attack": 92,
         "defense": 57,
         "speed": 65,
-        "special_attack": 55,
+        "special_attack": 70,
         "special_defense": 55
     },
     "types": [
@@ -86,6 +86,7 @@
             ],
             "7": "MOVE_FOCUS_ENERGY",
             "9": "MOVE_DOUBLE_KICK",
+			"11": "MOVE_MUD_SHOT",
             "13": "MOVE_POISON_STING",
             "23": "MOVE_HORN_ATTACK",
             "28": "MOVE_HELPING_HAND",

@@ -109,6 +109,7 @@
                 "MOVE_DOUBLE_KICK",
                 "MOVE_POISON_STING"
             ],
+			"11": "MOVE_MUD_SHOT",
 			"20": "MOVE_FURY_SWIPES",
             "23": [
 				"MOVE_BODY_SLAM",
