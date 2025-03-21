@@ -2,7 +2,7 @@
     "name": "Feint",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_NORMAL",
-    "power": 50,
+    "power": 60,
     "accuracy": 100,
     "pp": 10,
     "effect": {
