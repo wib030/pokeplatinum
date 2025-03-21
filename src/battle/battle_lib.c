@@ -3474,6 +3474,7 @@ static u16 sSoundMoves[] = {
     MOVE_CHATTER,
     MOVE_PERISH_SONG,
 	MOVE_MIND_READER, // Psychic Scream
+	MOVE_HOWL,
 };
 
 static u16 sPowderMoves[] = {

@@ -647,7 +647,7 @@ const u16 EggMove_Table_Script[] = {
     MOVE_BUG_BUZZ,
     MOVE_NIGHT_SLASH,
     (SPECIES_PINSIR) + 20000, // Pinsir
-    MOVE_FURY_ATTACK,
+    MOVE_FURY_ATTACK, // Tantrum
     MOVE_FLAIL,
     MOVE_FALSE_SWIPE,
     MOVE_FAINT_ATTACK,
@@ -1825,7 +1825,6 @@ const u16 EggMove_Table_Script[] = {
 	MOVE_FEATHER_DANCE,
     (SPECIES_STARLY) + 20000, // Starly line
     MOVE_FEATHER_DANCE,
-    MOVE_FURY_ATTACK,
     MOVE_PURSUIT,
     MOVE_ASTONISH,
     MOVE_SAND_ATTACK,
@@ -2126,6 +2125,7 @@ static u16 sSoundMoves[] = {
     MOVE_CHATTER,
     MOVE_PERISH_SONG,
 	MOVE_MIND_READER, // Psychic Scream
+	MOVE_HOWL,
 };
 
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
