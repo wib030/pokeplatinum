@@ -100,16 +100,21 @@
                 "MOVE_DRAGON_BREATH",
                 "MOVE_SCARY_FACE"
             ],
-            "10": "MOVE_OMINOUS_WIND",
-            "20": "MOVE_ANCIENT_POWER",
-            "30": "MOVE_DRAGON_CLAW",
-			"35": "MOVE_WING_ATTACK",
-            "40": "MOVE_SHADOW_FORCE",
-			"42": "MOVE_SLASH",
-			"48": "MOVE_SHADOW_CLAW",
-            "50": "MOVE_HEAL_BLOCK",
-            "52": "MOVE_EARTH_POWER",
-            "55": "MOVE_AURA_SPHERE"
+            "6": "MOVE_OMINOUS_WIND",
+            "10": "MOVE_ANCIENT_POWER",
+			"15": "MOVE_SLASH",
+			"19": "MOVE_SHADOW_SNEAK",
+			"24": "MOVE_DESTINY_BOND",
+            "28": "MOVE_DRAGON_CLAW",
+			"33": "MOVE_EARTH_POWER",
+			"35": [ 
+				"MOVE_WING_ATTACK",
+				"MOVE_HEAL_BLOCK"
+			],
+			"37": "MOVE_AURA_SPHERE",
+			"42": "MOVE_SHADOW_CLAW",
+            "46": "MOVE_SHADOW_FORCE",
+			"50": "MOVE_SHADOW_BALL"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

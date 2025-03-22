@@ -89,20 +89,24 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_MAGNITUDE",
+				"MOVE_CHARGE_BEAM",
                 "MOVE_EXPLOSION",
+				"MOVE_ICY_WIND",
                 "MOVE_STOMP"
             ],
-            "9": "MOVE_ICY_WIND",
-            "17": "MOVE_CURSE",
-            "25": "MOVE_SUPERPOWER",
-            "33": "MOVE_ANCIENT_POWER",
-			"35": "MOVE_CHARGE_BEAM",
-			"40": "MOVE_LOCK_ON",
-            "41": "MOVE_AMNESIA",
-			"51": "MOVE_SHEER_COLD",
+            "7": "MOVE_ICY_WIND",
+			"13": "MOVE_CHARGE_BEAM",
+			"19": "MOVE_MAGNITUDE",
+            "25": "MOVE_CURSE",
+            "31": "MOVE_ANCIENT_POWER",
+			"37": "MOVE_AMNESIA",
+			"43": "MOVE_ICE_BEAM",
+			"45": "MOVE_SHEER_COLD",
 			"49": "MOVE_HAMMER_ARM",
-            "52": "MOVE_ICE_BEAM",
-            "58": "MOVE_HYPER_BEAM"
+			"55": "MOVE_LOCK_ON",
+			"61": "MOVE_SUPERPOWER",
+			"67": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

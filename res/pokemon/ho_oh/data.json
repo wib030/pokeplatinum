@@ -96,21 +96,26 @@
             "HM06"
         ],
         "level_up": {
-            "1": "MOVE_WHIRLWIND",
-            "9": "MOVE_SAFEGUARD",
-            "15": "MOVE_GUST",
-            "23": "MOVE_RECOVER",
-            "29": "MOVE_FIRE_BLAST",
-			"33": "MOVE_PUNISHMENT",
-            "37": "MOVE_SUNNY_DAY",
-			"40": "MOVE_EXTRASENSORY",
-            "43": "MOVE_SWIFT",
-            "51": "MOVE_NATURAL_GIFT",
-			"55": "MOVE_FUTURE_SIGHT",
-            "57": "MOVE_ANCIENT_POWER",
-			"59": "MOVE_CALM_MIND",
-			"60": "MOVE_SACRED_FIRE",
-            "65": "MOVE_SKY_ATTACK"
+            "1": [
+				"MOVE_WEATHER_BALL",
+				"MOVE_WHIRLWIND",
+				"MOVE_SAFEGUARD",
+				"MOVE_NATURAL_GIFT"
+			],
+            "9": "MOVE_GUST",
+			"15": "MOVE_BRAVE_BIRD",
+			"23": "MOVE_EXTRASENSORY",
+			"25": "MOVE_ANCIENT_POWER",
+			"29": "MOVE_SUNNY_DAY",
+			"33": "MOVE_FIRE_BLAST",
+            "35": "MOVE_RECOVER",
+			"39": "MOVE_PUNISHMENT",
+			"43": "MOVE_SACRED_FIRE",
+			"45": "MOVE_FUTURE_SIGHT",
+			"49": "MOVE_KINESIS",
+			"53": "MOVE_CALM_MIND",
+			"55": "MOVE_MIND_READER",
+            "59": "MOVE_SKY_ATTACK"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

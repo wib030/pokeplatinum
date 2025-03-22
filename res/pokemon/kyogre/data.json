@@ -86,16 +86,25 @@
             "HM07"
         ],
         "level_up": {
-            "1": "MOVE_WATER_PULSE",
+            "1": [
+				"MOVE_AVALANCHE",
+				"MOVE_DIVE",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_WATER_PULSE"
+			],
             "5": "MOVE_SCARY_FACE",
-            "15": "MOVE_ANCIENT_POWER",
+			"10": "MOVE_WHIRLPOOL",
+			"15": "MOVE_AQUA_TAIL",
             "20": "MOVE_BODY_SLAM",
-            "30": "MOVE_CALM_MIND",
+			"25": "MOVE_AQUA_RING",
+			"30": "MOVE_MUDDY_WATER",
             "35": "MOVE_ICE_BEAM",
+			"40": "MOVE_REST",
             "45": "MOVE_HYDRO_PUMP",
-            "50": "MOVE_REST",
-            "65": "MOVE_DOUBLE_EDGE",
-            "68": "MOVE_WATER_SPOUT"
+			"50": "MOVE_CALM_MIND",
+            "55": "MOVE_DOUBLE_EDGE",
+			"60": "MOVE_SHEER_COLD",
+            "65": "MOVE_WATER_SPOUT"
         },
         "tutor": [
             "MOVE_DIVE",

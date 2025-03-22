@@ -45,6 +45,7 @@
     },
     "learnset": {
         "tms": [
+			"TM01",
             "TM02",
             "TM05",
             "TM06",
@@ -97,18 +98,25 @@
             "HM08"
         ],
         "level_up": {
-            "1": "MOVE_MUD_SHOT",
+            "1": [
+				"MOVE_SEISMIC_TOSS",
+				"MOVE_DIG",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_MUD_SHOT"
+			],
             "5": "MOVE_SCARY_FACE",
-            "15": "MOVE_ANCIENT_POWER",
-            "20": "MOVE_SLASH",
+			"10": "MOVE_SLASH",
+			"15": "MOVE_EARTH_POWER",
+			"20": "MOVE_LAVA_PLUME",
 			"25": "MOVE_BLAST_BURN",
-            "30": "MOVE_BULK_UP",
-            "35": "MOVE_EARTHQUAKE",
-            "45": "MOVE_FIRE_BLAST",
-            "50": "MOVE_REST",
-			"55": "MOVE_ERUPTION",
-            "60": "MOVE_SOLAR_BEAM",
-            "65": "MOVE_EARTH_POWER"
+			"30": "MOVE_EARTHQUAKE",
+			"35": "MOVE_SOLAR_BEAM",
+			"40": "MOVE_REST",
+			"45": "MOVE_HAMMER_ARM",
+            "50": "MOVE_BULK_UP",
+			"55": "MOVE_STONE_EDGE",
+            "60": "MOVE_FIRE_BLAST",
+			"65": "MOVE_ERUPTION"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

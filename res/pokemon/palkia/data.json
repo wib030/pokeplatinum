@@ -103,17 +103,18 @@
                 "MOVE_DRAGON_BREATH",
                 "MOVE_SCARY_FACE"
             ],
-            "10": "MOVE_WATER_PULSE",
-            "20": "MOVE_ANCIENT_POWER",
-            "30": "MOVE_DRAGON_CLAW",
-			"35": [ 
-				"MOVE_WING_ATTACK",
-				"MOVE_SLASH"
-			],
-            "40": "MOVE_SPACIAL_REND",
-            "50": "MOVE_HEAL_BLOCK",
-			"55": "MOVE_AURA_SPHERE",
-            "60": "MOVE_EARTH_POWER"
+            "6": "MOVE_WATER_PULSE",
+            "10": "MOVE_ANCIENT_POWER",
+			"15": "MOVE_SLASH",
+			"19": "MOVE_POWER_GEM",
+			"24": "MOVE_HEAL_BLOCK",
+            "28": "MOVE_DRAGON_CLAW",
+			"33": "MOVE_EARTH_POWER",
+			"35": "MOVE_WING_ATTACK",
+			"37": "MOVE_AURA_SPHERE",
+			"42": "MOVE_AQUA_TAIL",
+            "46": "MOVE_SPACIAL_REND",
+			"50": "MOVE_HYDRO_PUMP"
         },
         "tutor": [
             "MOVE_DIVE",

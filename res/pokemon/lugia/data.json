@@ -101,23 +101,26 @@
             "HM07"
         ],
         "level_up": {
-            "1": "MOVE_WHIRLWIND",
-            "9": "MOVE_SAFEGUARD",
-            "15": "MOVE_GUST",
-            "23": "MOVE_RECOVER",
-            "29": "MOVE_HYDRO_PUMP",
-			"33": "MOVE_PUNISHMENT",
-            "37": "MOVE_RAIN_DANCE",
-			"40": "MOVE_EXTRASENSORY",
-            "43": "MOVE_SWIFT",
-			"45": "MOVE_KINESIS",
-            "51": "MOVE_NATURAL_GIFT",
-			"55": "MOVE_FUTURE_SIGHT",
-            "57": "MOVE_ANCIENT_POWER",
-			"59": "MOVE_CALM_MIND",
-			"60": "MOVE_AEROBLAST",
-			"62": "MOVE_MIND_READER",
-            "65": "MOVE_SKY_ATTACK"
+            "1": [
+				"MOVE_WEATHER_BALL",
+				"MOVE_WHIRLWIND",
+				"MOVE_SAFEGUARD",
+				"MOVE_NATURAL_GIFT"
+			],
+            "9": "MOVE_GUST",
+			"15": "MOVE_DRAGON_RUSH",
+			"23": "MOVE_EXTRASENSORY",
+			"25": "MOVE_ANCIENT_POWER",
+			"29": "MOVE_RAIN_DANCE",
+            "33": "MOVE_HYDRO_PUMP",
+			"35": "MOVE_RECOVER",
+			"39": "MOVE_PUNISHMENT",
+			"43": "MOVE_AEROBLAST",
+			"45": "MOVE_FUTURE_SIGHT",
+			"49": "MOVE_KINESIS",
+			"53": "MOVE_CALM_MIND",
+			"55": "MOVE_MIND_READER",
+            "59": "MOVE_SKY_ATTACK"
         },
         "tutor": [
             "MOVE_DIVE",

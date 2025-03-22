@@ -85,14 +85,17 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_CONFUSE_RAY",
+				"MOVE_CRUSH_GRIP",
+				"MOVE_DIZZY_PUNCH",
                 "MOVE_FIRE_PUNCH",
                 "MOVE_ICE_PUNCH",
                 "MOVE_THUNDER_PUNCH",
-                "MOVE_DIZZY_PUNCH",
                 "MOVE_KNOCK_OFF",
-                "MOVE_CONFUSE_RAY",
+				"MOVE_IRON_HEAD",
                 "MOVE_FORESIGHT"
             ],
+			"15": "MOVE_PAYBACK",
             "25": "MOVE_REVENGE",
             "35": "MOVE_ZEN_HEADBUTT",
             "45": "MOVE_CRUSH_GRIP",

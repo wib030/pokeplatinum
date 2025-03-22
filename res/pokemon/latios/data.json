@@ -100,28 +100,30 @@
             "HM07"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_HEAL_BLOCK",
+				"MOVE_HELPING_HAND",
+				"MOVE_MEMENTO",
 				"MOVE_PSYWAVE",
+				"MOVE_SAFEGUARD",
 				"MOVE_TRANSFORM"
 			],
-            "5": "MOVE_HEAL_BLOCK",
-            "10": "MOVE_HELPING_HAND",
-            "15": "MOVE_SAFEGUARD",
+            "4": "MOVE_PROTECT",
+			"7": "MOVE_DRAGON_DANCE",
+            "10": "MOVE_CONFUSION",
+			"13": "MOVE_REFRESH",
             "20": "MOVE_DRAGON_BREATH",
-            "25": "MOVE_PROTECT",
-            "30": "MOVE_REFRESH",
-            "35": "MOVE_LUSTER_PURGE",
-			"38": "MOVE_KINESIS",
-            "40": "MOVE_ZEN_HEADBUTT",
-			"42": "MOVE_MIND_READER",
-            "45": "MOVE_RECOVER",
-			"48": "MOVE_WING_ATTACK",
-            "50": "MOVE_PSYCHO_SHIFT",
-			"52": "MOVE_PSYCHIC",
-            "55": "MOVE_DRAGON_DANCE",
-			"58": "MOVE_AURA_SPHERE",
-            "61": "MOVE_MEMENTO",
-            "62": "MOVE_DRAGON_PULSE"
+            "24": "MOVE_LUSTER_PURGE",
+			"28": "MOVE_PSYCHO_SHIFT",
+			"32": "MOVE_RECOVER",
+			"36": "MOVE_KINESIS",
+			"38": "MOVE_MIND_READER",
+            "41": "MOVE_ZEN_HEADBUTT",
+			"46": "MOVE_WING_ATTACK",
+			"51": "MOVE_PSYCHIC",
+			"54": "MOVE_AURA_SPHERE",
+			"56": "MOVE_DRAGON_PULSE",
+            "61": "MOVE_MEMENTO"
         },
         "tutor": [
             "MOVE_DIVE",

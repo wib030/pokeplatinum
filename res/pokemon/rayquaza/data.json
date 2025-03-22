@@ -101,18 +101,25 @@
             "HM07"
         ],
         "level_up": {
-            "1": "MOVE_TWISTER",
+            "1": [
+				"MOVE_WHIRLPOOL",
+				"MOVE_DIVE",
+				"MOVE_ANCIENT_POWER",
+				"MOVE_TWISTER"
+			],
             "5": "MOVE_SCARY_FACE",
-            "15": "MOVE_ANCIENT_POWER",
-            "20": "MOVE_DRAGON_CLAW",
-            "30": "MOVE_DRAGON_DANCE",
-            "35": "MOVE_CRUNCH",
-            "45": "MOVE_FLY",
-            "50": "MOVE_REST",
-			"58": "MOVE_DRAGON_PULSE",
-            "60": "MOVE_EXTREME_SPEED",
-            "65": "MOVE_HYPER_BEAM",
-            "66": "MOVE_OUTRAGE"
+			"10": "MOVE_DRAGON_DANCE",
+			"15": "MOVE_ANCIENT_POWER",
+			"20": "MOVE_CRUNCH",
+            "25": "MOVE_DRAGON_CLAW",
+			"30": "MOVE_AIR_SLASH",
+            "35": "MOVE_FLY",
+            "40": "MOVE_REST",
+			"45": "MOVE_EXTREME_SPEED",
+			"50": "MOVE_DRAGON_PULSE",
+			"55": "MOVE_HYPER_VOICE",
+			"60": "MOVE_OUTRAGE",
+            "65": "MOVE_HYPER_BEAM"
         },
         "tutor": [
             "MOVE_DIVE",
