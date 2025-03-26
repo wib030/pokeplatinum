@@ -2128,6 +2128,11 @@ static u16 sSoundMoves[] = {
 	MOVE_HOWL,
 };
 
+static u16 sMetronomeEncouragedMoves[] = {
+	MOVE_SHARPEN, // Pregnancy Punch
+	MOVE_ATTRACT,
+};
+
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
 
 typedef struct BattleMessageParams {
@@ -7098,7 +7103,28 @@ static BOOL BtlCmd_Metronome(BattleSystem *battleSys, BattleContext *battleCtx)
 
     while (TRUE) {
         int i;
+		BOOL encouragedMove;
         u16 move = (BattleSystem_RandNext(battleSys) % NUM_MOVES) + 1;
+		
+		// Check if the move is on the list of encouraged moves
+		for (i = 0; i < NELEMS(sMetronomeEncouragedMoves); i++)
+		{
+			if (sMetronomeEncouragedMoves[i] == move)
+			{
+				encouragedMove = TRUE;
+				break;
+			}
+			else
+			{
+				encouragedMove = FALSE;
+			}
+		}
+		
+		// Reroll the move if it is not an encouraged move
+		if (encouragedMove == FALSE)
+		{
+			move = (BattleSystem_RandNext(battleSys) % NUM_MOVES) + 1;
+		}
 
         // Do not try to invoke a move that we already know.
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
