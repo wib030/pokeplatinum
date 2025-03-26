@@ -11374,6 +11374,9 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     int criticalMul = 1;
     int attackerAbility;
 	int punchingMove = 0;
+	int attackerSide, defenderSide;
+	BOOL attackerLuckyChant = FALSE;
+	BOOL defenderLuckyChant = FALSE;
 
     item = Battler_HeldItem(battleCtx, attacker);
     itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
@@ -11393,11 +11396,26 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
     defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
     attackerAbility = battleCtx->battleMons[attacker].ability;
+	
+	attackerSide = Battler_Side(battleSys, attacker);
+	defenderSide = Battler_Side(battleSys, defender);
+	
+	if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+	{
+		attackerLuckyChant = TRUE;
+	}
+	
+	if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_LUCKY_CHANT)
+	{
+		defenderLuckyChant = TRUE;
+	}
+	
     effectiveCritStage = (((attackerVolStatus & VOLATILE_CONDITION_FOCUS_ENERGY) != FALSE) * 2)
             + (itemEffect == HOLD_EFFECT_CRITRATE_UP)
             + criticalStage
             + (attackerAbility == ABILITY_SUPER_LUCK)
             + (battleCtx->battleMons[attacker].meditateCritBoostFlag != FALSE)
+			+ attackerLuckyChant
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
 			+ (4 * (punchingMove == 1))
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
@@ -11408,7 +11426,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
 
     if ((BattleSystem_RandNext(battleSys) % sCriticalStageModuli[effectiveCritStage][0]) % sCriticalStageModuli[effectiveCritStage][1] == 0
             && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == FALSE
-            && (sideConditions & SIDE_CONDITION_LUCKY_CHANT) == FALSE
+            && (defenderLuckyChant) == FALSE
             && (defenderMoveEffects & MOVE_EFFECT_NO_CRITICAL) == FALSE) {
         criticalMul = 2;
     }
@@ -11431,6 +11449,10 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
     int criticalMul = 1;
     int attackerAbility;
 	int punchingMove = 0;
+	int attackerSide, defenderSide;
+	BOOL attackerLuckyChant = FALSE;
+	BOOL defenderLuckyChant = FALSE;
+	
     Pokemon *mon;
 
     mon = BattleSystem_PartyPokemon(battleSys, partyIndicator, partySlot);
@@ -11452,9 +11474,24 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
     attackerSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
     defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
     attackerAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+	
+	attackerSide = Battler_Side(battleSys, attacker);
+	defenderSide = Battler_Side(battleSys, defender);
+	
+	if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+	{
+		attackerLuckyChant = TRUE;
+	}
+	
+	if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_LUCKY_CHANT)
+	{
+		defenderLuckyChant = TRUE;
+	}
+	
     effectiveCritStage = ((itemEffect == HOLD_EFFECT_CRITRATE_UP)
             + criticalStage
             + (attackerAbility == ABILITY_SUPER_LUCK)
+			+ attackerLuckyChant
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
 			+ (4 * (punchingMove == 1))
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD)));
@@ -11465,7 +11502,7 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
 
     if ((BattleSystem_RandNext(battleSys) % sCriticalStageModuli[effectiveCritStage][0]) % sCriticalStageModuli[effectiveCritStage][1] == 0
             && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == FALSE
-            && (sideConditions & SIDE_CONDITION_LUCKY_CHANT) == FALSE
+            && (defenderLuckyChant) == FALSE
             && (defenderMoveEffects & MOVE_EFFECT_NO_CRITICAL) == FALSE) {
         criticalMul = 2;
     }
