@@ -9051,6 +9051,27 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
         battleCtx->damage = battleCtx->damage * 3 / 2;
     }
+	
+	if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_MULTISCALE)
+	&& (battleCtx->battleMons[battleCtx->defender].curHP == battleCtx->battleMons[battleCtx->defender].maxHP))
+	{
+		battleCtx->damage /= 2;
+	}
+	
+	if ((Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_UNOWN_ENERGY)
+	&& (battleCtx->moveCur != MOVE_STRUGGLE))
+	{
+		if (inType == TYPE_NORMAL)
+		{
+			battleCtx->damage *= 2;
+			battleCtx->battleMons[battleCtx->defender].unownEnergyStrongFlag = TRUE;
+		}
+		else
+		{
+			battleCtx->damage /= 2;
+			battleCtx->battleMons[battleCtx->defender].unownEnergyWeakFlag = TRUE;
+		}
+	}
 
     battleCtx->damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->damage);
     battleCtx->damage *= -1;
