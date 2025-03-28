@@ -1291,12 +1291,8 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
 enum {
     MON_COND_CHECK_START = 0,
 
-    MON_COND_CHECK_STATE_INGRAIN = MON_COND_CHECK_START,
-    MON_COND_CHECK_STATE_AQUA_RING,
-    MON_COND_CHECK_STATE_ABILITY,
+    MON_COND_CHECK_STATE_ABILITY = MON_COND_CHECK_START,
     MON_COND_CHECK_STATE_USE_ITEM,
-    MON_COND_CHECK_STATE_LEFTOVERS,
-    MON_COND_CHECK_STATE_LEECH_SEED,
     MON_COND_CHECK_STATE_POISON,
     MON_COND_CHECK_STATE_TOXIC,
     MON_COND_CHECK_STATE_BURN,
@@ -1305,6 +1301,10 @@ enum {
 	MON_COND_CHECK_STATE_CHIP,
     MON_COND_CHECK_STATE_BIND,
     MON_COND_CHECK_STATE_BAD_DREAMS,
+	MON_COND_CHECK_STATE_LEFTOVERS,
+	MON_COND_CHECK_STATE_LEECH_SEED,
+	MON_COND_CHECK_STATE_INGRAIN,
+	MON_COND_CHECK_STATE_AQUA_RING,
     MON_COND_CHECK_STATE_UPROAR,
     MON_COND_CHECK_STATE_THRASH,
     MON_COND_CHECK_STATE_DISABLE,
@@ -1345,49 +1345,6 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
         }
 
         switch (battleCtx->monConditionCheckState) {
-        case MON_COND_CHECK_STATE_INGRAIN:
-            if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
-                    && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
-                    && battleCtx->battleMons[battler].curHP) {
-                if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns) {
-                    battleCtx->msgBattlerTemp = battler;
-                    LOAD_SUBSEQ(subscript_cannot_heal);
-                } else {
-                    battleCtx->msgBattlerTemp = battler;
-                    LOAD_SUBSEQ(subscript_ingrain_heal);
-                }
-
-                battleCtx->commandNext = battleCtx->command;
-                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-
-                state = STATE_BREAK_OUT;
-            }
-
-            battleCtx->monConditionCheckState++;
-            break;
-
-        case MON_COND_CHECK_STATE_AQUA_RING:
-            if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_AQUA_RING)
-                    && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
-                    && battleCtx->battleMons[battler].curHP) {
-                if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns) {
-                    battleCtx->msgBattlerTemp = battler;
-                    LOAD_SUBSEQ(subscript_cannot_heal);
-                } else {
-                    battleCtx->msgBattlerTemp = battler;
-                    battleCtx->msgMoveTemp = MOVE_AQUA_RING;
-                    battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
-                    LOAD_SUBSEQ(subscript_aqua_ring_heal);
-                }
-
-                battleCtx->commandNext = battleCtx->command;
-                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-
-                state = STATE_BREAK_OUT;
-            }
-
-            battleCtx->monConditionCheckState++;
-            break;
         case MON_COND_CHECK_STATE_ABILITY:
             if (BattleSystem_TriggerTurnEndAbility(battleSys, battleCtx, battler) == TRUE) {
                 state = STATE_BREAK_OUT;
@@ -1398,29 +1355,6 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
 
         case MON_COND_CHECK_STATE_USE_ITEM:
             if (BattleSystem_TriggerHeldItem(battleSys, battleCtx, battler) == TRUE) {
-                state = STATE_BREAK_OUT;
-            }
-
-            battleCtx->monConditionCheckState++;
-            break;
-
-        case MON_COND_CHECK_STATE_LEFTOVERS:
-            if (BattleSystem_TriggerLeftovers(battleSys, battleCtx, battler) == TRUE) {
-                state = STATE_BREAK_OUT;
-            }
-
-            battleCtx->monConditionCheckState++;
-            break;
-
-        case MON_COND_CHECK_STATE_LEECH_SEED:
-            if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
-                    && battleCtx->battleMons[battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED_RECIPIENT].curHP
-                    && Battler_Ability(battleCtx, battler) != ABILITY_MAGIC_GUARD
-                    && battleCtx->battleMons[battler].curHP) {
-                battleCtx->msgAttacker = battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED_RECIPIENT;
-                battleCtx->msgDefender = battler;
-
-                PrepareSubroutineSequence(battleCtx, subscript_leech_seed_effect);
                 state = STATE_BREAK_OUT;
             }
 
@@ -1541,6 +1475,73 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
                 LOAD_SUBSEQ(subscript_bad_dreams);
                 battleCtx->battleStatusMask |= SYSCTL_SKIP_SPRITE_BLINK;
                 battleCtx->msgBattlerTemp = battler;
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+			
+		case MON_COND_CHECK_STATE_LEFTOVERS:
+            if (BattleSystem_TriggerLeftovers(battleSys, battleCtx, battler) == TRUE) {
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+			
+		case MON_COND_CHECK_STATE_LEECH_SEED:
+            if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+                    && battleCtx->battleMons[battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED_RECIPIENT].curHP
+                    && Battler_Ability(battleCtx, battler) != ABILITY_MAGIC_GUARD
+                    && battleCtx->battleMons[battler].curHP) {
+                battleCtx->msgAttacker = battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LEECH_SEED_RECIPIENT;
+                battleCtx->msgDefender = battler;
+
+                PrepareSubroutineSequence(battleCtx, subscript_leech_seed_effect);
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+			
+		case MON_COND_CHECK_STATE_INGRAIN:
+            if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
+                    && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
+                    && battleCtx->battleMons[battler].curHP) {
+                if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns) {
+                    battleCtx->msgBattlerTemp = battler;
+                    LOAD_SUBSEQ(subscript_cannot_heal);
+                } else {
+                    battleCtx->msgBattlerTemp = battler;
+                    LOAD_SUBSEQ(subscript_ingrain_heal);
+                }
+
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+
+        case MON_COND_CHECK_STATE_AQUA_RING:
+            if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_AQUA_RING)
+                    && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
+                    && battleCtx->battleMons[battler].curHP) {
+                if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns) {
+                    battleCtx->msgBattlerTemp = battler;
+                    LOAD_SUBSEQ(subscript_cannot_heal);
+                } else {
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgMoveTemp = MOVE_AQUA_RING;
+                    battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+                    LOAD_SUBSEQ(subscript_aqua_ring_heal);
+                }
+
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
