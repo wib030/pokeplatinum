@@ -2818,22 +2818,35 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
                 battleCtx->msgBattlerTemp = LowestBit(
                     (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) >> VOLATILE_CONDITION_ATTRACT_SHIFT
                 );
-
-                if (BattleSystem_RandNext(battleSys) % 3 != 0) {
+				
+				u16 move;
+				if (ATTACKING_MON.moveEffectsData.encoredMove
+						&& ATTACKING_MON.moveEffectsData.encoredMove == ATTACKING_MON.moves[ATTACKING_MON.moveEffectsData.encoredMoveSlot]) {
+					move = ATTACKING_MON.moveEffectsData.encoredMove;
+				} else {
+					move = Battler_SelectedMove(battleCtx, battleCtx->attacker);
+				}
+				
+				if (ATTACKER_ACTION[BATTLE_ACTION_PICK_COMMAND] != BATTLE_CONTROL_MOVE_END
+				&& ATTACKER_TURN_FLAGS.struggling == FALSE
+				&& MOVE_DATA(move).power)
+				{
+					if (BattleSystem_RandNext(battleSys) % 2 == 0) {
                     LOAD_SUBSEQ(subscript_infatuated);
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
                     result = CHECK_STATUS_GO_TO_SCRIPT;
-                } else {
-                    battleCtx->moveFailFlags[battleCtx->attacker].infatuated = TRUE;
+					} else {
+						battleCtx->moveFailFlags[battleCtx->attacker].infatuated = TRUE;
 
-                    LOAD_SUBSEQ(subscript_immobilized_by_love);
-                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-                    battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
+						LOAD_SUBSEQ(subscript_immobilized_by_love);
+						battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+						battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
 
-                    result = CHECK_STATUS_DISRUPT_MOVE;
-                }
+						result = CHECK_STATUS_DISRUPT_MOVE;
+					}
+				}
             }
 
             battleCtx->statusCheckState++;
