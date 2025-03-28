@@ -105,6 +105,7 @@
             "23": "MOVE_CONFUSE_RAY",
             "27": "MOVE_CALM_MIND",
             "33": "MOVE_ROLE_PLAY",
+			"35": "MOVE_SLAM",
 			"36": [
 				"MOVE_ICE_BALL",
 				"MOVE_ROOST"
