@@ -86,7 +86,8 @@
         "level_up": {
             "1": [
                 "MOVE_TACKLE",
-                "MOVE_SAND_ATTACK"
+                "MOVE_SAND_ATTACK",
+				"MOVE_PSYWAVE"
             ],
             "3": "MOVE_SAND_ATTACK",
 			"7": "MOVE_SAND_TOMB",

@@ -85,6 +85,7 @@
                 "MOVE_WITHDRAW"
             ],
             "5": "MOVE_WITHDRAW",
+			"7": "MOVE_PSYWAVE",
             "9": "MOVE_ABSORB",
             "13": "MOVE_RAZOR_LEAF",
             "17": "MOVE_CURSE",

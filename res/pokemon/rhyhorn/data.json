@@ -92,7 +92,8 @@
         "level_up": {
             "1": [
                 "MOVE_HORN_ATTACK",
-                "MOVE_TAIL_WHIP"
+                "MOVE_TAIL_WHIP",
+				"MOVE_PSYWAVE"
             ],
 			"9": "MOVE_SCARY_FACE",
             "13": "MOVE_STOMP",

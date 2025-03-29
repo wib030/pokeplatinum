@@ -374,7 +374,6 @@ const u16 EggMove_Table[] = {
     MOVE_MUD_SHOT,
 	MOVE_ROCK_BLAST,
     (SPECIES_GASTLY) + 20000, // Gastly line
-    MOVE_PSYWAVE,
     MOVE_PERISH_SONG,
     MOVE_HAZE,
     MOVE_ASTONISH,
@@ -452,7 +451,6 @@ const u16 EggMove_Table[] = {
 	MOVE_MUDDY_WATER,
     (SPECIES_KOFFING) + 20000, // Koffing line
     MOVE_SCREECH,
-    MOVE_PSYWAVE,
     MOVE_PSYBEAM,
     MOVE_DESTINY_BOND,
     MOVE_PAIN_SPLIT,

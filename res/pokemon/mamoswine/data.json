@@ -89,7 +89,8 @@
                 "MOVE_ODOR_SLEUTH",
                 "MOVE_AMNESIA",
 				"MOVE_DOUBLE_HIT",
-                "MOVE_POWDER_SNOW"
+                "MOVE_POWDER_SNOW",
+				"MOVE_PSYWAVE"
             ],
             "8": "MOVE_POWDER_SNOW",
             "11": "MOVE_MUD_SLAP",

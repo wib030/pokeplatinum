@@ -78,12 +78,13 @@
 				"MOVE_BITE",
 				"MOVE_FAINT_ATTACK",
 				"MOVE_FRENZY_PLANT",
-				"MOVE_SAND_ATTACK"
+				"MOVE_SAND_ATTACK",
+				"MOVE_PSYWAVE"
 			],
             "5": "MOVE_MUD_SLAP",
-			"8": "MOVE_MAGNITUDE",
             "12": "MOVE_SAND_TOMB",
 			"15": "MOVE_ROCK_SLIDE",
+			"17": "MOVE_MAGNITUDE",
 			"19": "MOVE_DIG",
 			"22": "MOVE_CRUNCH",
 			"26": "MOVE_EARTH_POWER",

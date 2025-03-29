@@ -85,7 +85,8 @@
             "1": [
                 "MOVE_TACKLE",
                 "MOVE_DEFENSE_CURL",
-				"MOVE_ROCK_POLISH"
+				"MOVE_ROCK_POLISH",
+				"MOVE_PSYWAVE"
             ],
 			"10": "MOVE_ROLLOUT",
 			"12": "MOVE_MAGNITUDE",

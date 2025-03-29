@@ -87,7 +87,8 @@
 				"MOVE_REVENGE",
 				"MOVE_TACKLE",
 				"MOVE_SAND_ATTACK",
-				"MOVE_BITE"
+				"MOVE_BITE",
+				"MOVE_PSYWAVE"
             ],
 			"3": "MOVE_SAND_TOMB",
             "7": "MOVE_BITE",

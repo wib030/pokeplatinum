@@ -93,7 +93,8 @@
                 "MOVE_GROWL",
                 "MOVE_TAIL_WHIP",
                 "MOVE_BONE_CLUB",
-                "MOVE_HEADBUTT"
+                "MOVE_HEADBUTT",
+				"MOVE_PSYWAVE"
             ],
             "3": "MOVE_TAIL_WHIP",
             "7": "MOVE_BONE_CLUB",

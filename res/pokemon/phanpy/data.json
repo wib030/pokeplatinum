@@ -77,12 +77,13 @@
                 "MOVE_ODOR_SLEUTH",
                 "MOVE_TACKLE",
                 "MOVE_GROWL",
-                "MOVE_DEFENSE_CURL"
+                "MOVE_DEFENSE_CURL",
+				"MOVE_PSYWAVE"
             ],
             "6": "MOVE_FLAIL",
 			"10": "MOVE_ROLLOUT",
-			"12": "MOVE_MAGNITUDE",
 			"15": "MOVE_NATURAL_GIFT",
+			"17": "MOVE_MAGNITUDE",
 			"19": "MOVE_ENDURE",
             "24": "MOVE_BODY_SLAM",
 			"28": "MOVE_TAKE_DOWN",

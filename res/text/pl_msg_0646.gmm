@@ -599,7 +599,7 @@
 	</row>
 	<row id="pl_msg_00000646_00149" index="149">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is attacked\nwith an odd, hot\nenergy wave.\nThe attack varies in\nintensity.</language>
+		<language name="English">The dirt around the\nfoe is plowed wildy\nwith a vigorous\ntrampling.\n</language>
 	</row>
 	<row id="pl_msg_00000646_00150" index="150">
 		<attribute name="window_context_name">used</attribute>

@@ -86,7 +86,8 @@
                 "MOVE_GROWL",
                 "MOVE_DEFENSE_CURL",
                 "MOVE_FLAIL",
-				"MOVE_MAGNITUDE"
+				"MOVE_MAGNITUDE",
+				"MOVE_PSYWAVE"
             ],
             "6": "MOVE_RAPID_SPIN",
             "10": "MOVE_ROLLOUT",

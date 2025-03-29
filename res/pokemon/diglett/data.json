@@ -79,7 +79,8 @@
             "1": [
                 "MOVE_SCRATCH",
 				"MOVE_FRENZY_PLANT",
-                "MOVE_SAND_ATTACK"
+                "MOVE_SAND_ATTACK",
+				"MOVE_PSYWAVE"
             ],
             "4": "MOVE_GROWL",
             "7": "MOVE_ASTONISH",

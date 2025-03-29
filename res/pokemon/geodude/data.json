@@ -84,12 +84,13 @@
         "level_up": {
             "1": [
                 "MOVE_TACKLE",
-                "MOVE_DEFENSE_CURL"
+                "MOVE_DEFENSE_CURL",
+				"MOVE_PSYWAVE"
             ],
 			"4": "MOVE_ROCK_THROW",
 			"6": "MOVE_ROCK_POLISH",
 			"10": "MOVE_ROLLOUT",
-			"12": "MOVE_MAGNITUDE",
+			"16": "MOVE_MAGNITUDE",
             "18": "MOVE_ROCK_TOMB",
             "24": "MOVE_SELFDESTRUCT",
             "28": "MOVE_STEALTH_ROCK",

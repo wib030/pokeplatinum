@@ -1791,15 +1791,15 @@
 	</row>
 	<row id="pl_msg_00000000_00447" index="447">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nPsywave!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPlow!</language>
 	</row>
 	<row id="pl_msg_00000000_00448" index="448">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPsywave!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPlow!</language>
 	</row>
 	<row id="pl_msg_00000000_00449" index="449">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPsywave!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPlow!</language>
 	</row>
 	<row id="pl_msg_00000000_00450" index="450">
 		<attribute name="window_context_name">used</attribute>

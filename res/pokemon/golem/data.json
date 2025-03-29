@@ -90,7 +90,8 @@
                 "MOVE_TACKLE",
                 "MOVE_DEFENSE_CURL",
 				"MOVE_IRON_HEAD",
-				"MOVE_ROCK_POLISH"
+				"MOVE_ROCK_POLISH",
+				"MOVE_PSYWAVE"
             ],
 			"16": "MOVE_ROCK_THROW",
             "18": "MOVE_ROCK_TOMB",

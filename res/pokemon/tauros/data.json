@@ -87,7 +87,10 @@
             "HM08"
         ],
         "level_up": {
-            "1": "MOVE_TACKLE",
+            "1": [ 
+				"MOVE_TACKLE",
+				"MOVE_PSYWAVE"
+			],
             "3": "MOVE_TAIL_WHIP",
             "5": "MOVE_RAGE",
             "8": "MOVE_HORN_ATTACK",

@@ -4604,10 +4604,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         damage = battleCtx->battleMons[attacker].level;
         break;
 
-    case MOVE_PSYWAVE:
-        power = battleCtx->battleMons[attacker].level * (BattleSystem_RandNext(battleSys) % 11 + 5) / 10;
-        break;
-
     case MOVE_RETURN:
         power = battleCtx->battleMons[attacker].friendship * 10 / 25;
         type = TYPE_NORMAL;

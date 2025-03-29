@@ -87,7 +87,8 @@
 				"MOVE_FRENZY_PLANT",
                 "MOVE_REVERSAL",
 				"MOVE_SCRATCH",
-				"MOVE_GROWL"
+				"MOVE_GROWL",
+				"MOVE_PSYWAVE"
             ],
             "4": "MOVE_GROWL",
             "7": "MOVE_ASTONISH",

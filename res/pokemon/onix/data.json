@@ -88,11 +88,12 @@
             "1": [
                 "MOVE_TACKLE",
                 "MOVE_HARDEN",
-                "MOVE_BIND"
+                "MOVE_BIND",
+				"MOVE_PSYWAVE"
             ],
 			"5": "MOVE_ROCK_THROW",
             "7": "MOVE_SCREECH",
-            "12": "MOVE_MAGNITUDE",
+            "15": "MOVE_MAGNITUDE",
             "17": "MOVE_ROCK_TOMB",
             "22": "MOVE_SANDSTORM",
             "25": "MOVE_BODY_SLAM",

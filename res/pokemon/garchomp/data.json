@@ -96,7 +96,8 @@
                 "MOVE_FIRE_FANG",
                 "MOVE_THRASH",
                 "MOVE_IRON_HEAD",
-                "MOVE_SANDSTORM"
+                "MOVE_SANDSTORM",
+				"MOVE_PSYWAVE"
             ],
             "3": "MOVE_SAND_ATTACK",
 			"7": "MOVE_SAND_TOMB",

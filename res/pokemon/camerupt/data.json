@@ -89,11 +89,12 @@
                 "MOVE_TACKLE",
 				"MOVE_ROCK_SLIDE",
 				"MOVE_EMBER",
-				"MOVE_MAGNITUDE"
+				"MOVE_MAGNITUDE",
+				"MOVE_PSYWAVE"
             ],
             "4": "MOVE_EMBER",
 			"8": "MOVE_FOCUS_ENERGY",
-            "12": "MOVE_MAGNITUDE",
+            "17": "MOVE_MAGNITUDE",
 			"19": "MOVE_AMNESIA",
 			"22": "MOVE_LAVA_PLUME",
 			"23": "MOVE_BLAST_BURN",

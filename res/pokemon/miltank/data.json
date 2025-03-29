@@ -94,7 +94,8 @@
             "1": [ 
 				"MOVE_TACKLE",
 				"MOVE_SEISMIC_TOSS",
-				"MOVE_PRESENT"
+				"MOVE_PRESENT",
+				"MOVE_PSYWAVE"
 			],
             "3": "MOVE_GROWL",
             "5": "MOVE_DEFENSE_CURL",

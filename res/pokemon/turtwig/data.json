@@ -86,6 +86,7 @@
 				"MOVE_WITHDRAW"
 			],
 			"3": "MOVE_FRENZY_PLANT",
+			"7": "MOVE_PSYWAVE",
             "9": "MOVE_RAZOR_LEAF",
             "18": "MOVE_CURSE",
             "21": "MOVE_BULLET_SEED",
