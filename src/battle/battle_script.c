@@ -475,7 +475,6 @@ const u16 EggMove_Table_Script[] = {
     MOVE_MUD_SHOT,
 	MOVE_ROCK_BLAST,
     (SPECIES_GASTLY) + 20000, // Gastly line
-    MOVE_PSYWAVE,
     MOVE_PERISH_SONG,
     MOVE_HAZE,
     MOVE_ASTONISH,
@@ -553,7 +552,6 @@ const u16 EggMove_Table_Script[] = {
 	MOVE_MUDDY_WATER,
     (SPECIES_KOFFING) + 20000, // Koffing line
     MOVE_SCREECH,
-    MOVE_PSYWAVE,
     MOVE_PSYBEAM,
     MOVE_DESTINY_BOND,
     MOVE_PAIN_SPLIT,
@@ -10127,8 +10125,15 @@ static BOOL BtlCmd_CalcTrumpCardPower(BattleSystem *battleSys, BattleContext *ba
 static BOOL BtlCmd_CalcWringOutPower(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
-
-    battleCtx->movePower = 1 + (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+	
+	if (battleCtx->moveCur == MOVE_CRUSH_GRIP)
+	{
+		battleCtx->movePower = 1 + (160 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+	}
+	else
+	{
+		battleCtx->movePower = 1 + (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+	}
 
     return FALSE;
 }
