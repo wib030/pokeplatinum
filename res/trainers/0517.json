@@ -13,7 +13,7 @@
             "species": "SPECIES_STANTLER",
             "form": 0,
             "level": 52,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_ICY_ROCK",
             "moves": [
                 "MOVE_BLIZZARD",
                 "MOVE_MIND_READER",
@@ -49,7 +49,8 @@
                 "MOVE_BLIZZARD"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         },
 		{
             "species": "SPECIES_NIDOKING",
