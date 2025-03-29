@@ -96,11 +96,9 @@
         "level_up": {
             "1": [
                 "MOVE_SPLASH",
-                "MOVE_PSYWAVE",
 				"MOVE_ODOR_SLEUTH",
 				"MOVE_PSYBEAM"
             ],
-            "3": "MOVE_PSYWAVE",
             "10": "MOVE_ODOR_SLEUTH",
             "14": "MOVE_PSYBEAM",
             "15": "MOVE_PSYCH_UP",
