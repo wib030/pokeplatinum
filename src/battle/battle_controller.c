@@ -3731,6 +3731,8 @@ enum {
     ONE_HIT_TRIGGER_SECONDARY,
     ONE_HIT_FORM_CHANGE,
     ONE_HIT_RAGE,
+	ONE_HIT_TRIGGER_SNOWED_IN,
+	ONE_HIT_TRIGGER_SNOWED_IN_DEFENDER,
     ONE_HIT_TRIGGER_ABILITY,
 	ONE_HIT_TRIGGER_ATTACKER_ABILITY,
     ONE_HIT_EXTRA_FLINCH,
@@ -3739,6 +3741,8 @@ enum {
     MULTI_HIT_TRIGGER_SECONDARY,
     MULTI_HIT_FORM_CHANGE,
     MULTI_HIT_RAGE,
+	MULTI_HIT_TRIGGER_SNOWED_IN,
+	MULTI_HIT_TRIGGER_SNOWED_IN_DEFENDER,
     MULTI_HIT_TRIGGER_ABILITY,
 	MULTI_HIT_TRIGGER_ATTACKER_ABILITY,
     MULTI_HIT_STATUS,
@@ -3747,6 +3751,13 @@ enum {
 
 static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+	u16 move = battleCtx->moveCur;
+	u8 moveClass, moveType;
+	int snowedInSub;
+	
+	moveClass = MOVE_DATA(move).class;
+	moveType = CalcCurrentMoveType(battleCtx);
+	
     switch (battleCtx->afterMoveMessageType) {
     case AFTER_MOVE_MESSAGE_ONE_HIT:
         switch (battleCtx->afterMoveMessageState) {
@@ -3788,6 +3799,36 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
         case ONE_HIT_RAGE:
             battleCtx->afterMoveMessageState++;
             if (BattleController_RageBuilding(battleSys, battleCtx) == TRUE) {
+                return;
+            }
+			
+		case ONE_HIT_TRIGGER_SNOWED_IN:
+			snowedInSub = subscript_snowed_in_end;
+			
+            battleCtx->afterMoveMessageState++;
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->attacker)] & SIDE_CONDITION_SNOWED_IN
+			&& (moveClass == CLASS_PHYSICAL || moveType == TYPE_FIRE))
+			{
+				battleCtx->msgBattlerTemp = battleCtx->attacker;
+                LOAD_SUBSEQ(snowedInSub);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                
+                return;
+            }
+			
+		case ONE_HIT_TRIGGER_SNOWED_IN_DEFENDER:
+			snowedInSub = subscript_snowed_in_defender_end;
+			
+            battleCtx->afterMoveMessageState++;
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)] & SIDE_CONDITION_SNOWED_IN
+			&& (moveType == TYPE_FIRE))
+			{
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+                LOAD_SUBSEQ(snowedInSub);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                
                 return;
             }
 
@@ -3860,6 +3901,36 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
         case MULTI_HIT_RAGE:
             battleCtx->afterMoveMessageState++;
             if (BattleController_RageBuilding(battleSys, battleCtx) == TRUE) {
+                return;
+            }
+			
+		case MULTI_HIT_TRIGGER_SNOWED_IN:
+			snowedInSub = subscript_snowed_in_end;
+			
+            battleCtx->afterMoveMessageState++;
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->attacker)] & SIDE_CONDITION_SNOWED_IN
+			&& (moveClass == CLASS_PHYSICAL || moveType == TYPE_FIRE))
+			{
+				battleCtx->msgBattlerTemp = battleCtx->attacker;
+                LOAD_SUBSEQ(snowedInSub);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                
+                return;
+            }
+			
+		case MULTI_HIT_TRIGGER_SNOWED_IN_DEFENDER:
+			snowedInSub = subscript_snowed_in_defender_end;
+			
+            battleCtx->afterMoveMessageState++;
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)] & SIDE_CONDITION_SNOWED_IN
+			&& (moveType == TYPE_FIRE))
+			{
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+                LOAD_SUBSEQ(snowedInSub);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                
                 return;
             }
 

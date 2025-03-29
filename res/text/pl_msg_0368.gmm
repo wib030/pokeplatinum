@@ -5358,4 +5358,20 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s healing\nwas inverted!</language>
 	</row>
+	<row id="pl_msg_00000368_01336" index="1336">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Snow piled up around\nyour team’s feet!</language>
+	</row>
+	<row id="pl_msg_00000368_01337" index="1337">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Snow piled up around\nthe foe’s team!</language>
+	</row>
+	<row id="pl_msg_00000368_01338" index="1338">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The snow around your\nteam was cleared!</language>
+	</row>
+	<row id="pl_msg_00000368_01339" index="1339">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The snow around the\nfoe’s team was cleared!</language>
+	</row>
 </body>

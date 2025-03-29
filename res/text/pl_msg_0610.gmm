@@ -633,4 +633,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Rock Star</language>
 	</row>
+	<row id="pl_msg_00000610_00158" index="158">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Snowed In</language>
+	</row>
 </body>

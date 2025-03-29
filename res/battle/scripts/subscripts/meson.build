@@ -345,4 +345,7 @@ subscript_files = files(
 	'subscript_heal_inversion_start.s',
 	'subscript_heal_inversion_end.s',
 	'subscript_howl.s',
+	'subscript_snowed_in_start.s',
+	'subscript_snowed_in_end.s',
+	'subscript_snowed_in_defender_end.s',
 )

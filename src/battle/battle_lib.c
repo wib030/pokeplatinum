@@ -1521,7 +1521,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND) {
         battler1Speed *= 2;
     }
-
+	
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_SNOWED_IN
+	&& (battleCtx->battleMons[battler1].type1 != TYPE_ICE)
+	&& (battleCtx->battleMons[battler1].type2 != TYPE_ICE))
+	{
+        battler1Speed /= 2;
+    }
     
     switch (battler2ItemEffect) {
         default:
@@ -1611,6 +1617,23 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                 battler2Speed *= 2;
             }
             break;
+    }
+	
+	if ((battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS)
+        && battler2Ability != ABILITY_QUICK_FEET) {
+    
+        battler2Speed /= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_TAILWIND) {
+        battler2Speed *= 2;
+    }
+	
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_SNOWED_IN
+	&& (battleCtx->battleMons[battler2].type1 != TYPE_ICE)
+	&& (battleCtx->battleMons[battler2].type2 != TYPE_ICE))
+	{
+        battler2Speed /= 2;
     }
 	
 	battler1Priority = MOVE_DATA(battler1Move).priority;
@@ -1994,6 +2017,13 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND) {
         battler1Speed *= 2;
     }
+	
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_SNOWED_IN
+	&& (battleCtx->battleMons[battler1].type1 != TYPE_ICE)
+	&& (battleCtx->battleMons[battler1].type2 != TYPE_ICE))
+	{
+        battler1Speed /= 2;
+    }
 
     
     switch (battler2ItemEffect) {
@@ -2060,6 +2090,13 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
 
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_TAILWIND) {
         battler2Speed *= 2;
+    }
+	
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_SNOWED_IN
+	&& (battleCtx->battleMons[partyIndicator].type1 != TYPE_ICE)
+	&& (battleCtx->battleMons[partyIndicator].type2 != TYPE_ICE))
+	{
+        battler2Speed /= 2;
     }
 
     
@@ -3490,11 +3527,19 @@ static u16 sSoundMoves[] = {
 };
 
 static u16 sPowderMoves[] = {
-		MOVE_POISON_POWDER,
-		MOVE_SLEEP_POWDER,
-		MOVE_STUN_SPORE,
-		MOVE_SPORE,
-		MOVE_COTTON_SPORE,
+	MOVE_POISON_POWDER,
+	MOVE_SLEEP_POWDER,
+	MOVE_STUN_SPORE,
+	MOVE_SPORE,
+	MOVE_COTTON_SPORE,
+};
+
+static u16 sSnowedInMoves[] = {
+    MOVE_AVALANCHE,
+	MOVE_BLIZZARD,
+	MOVE_POWDER_SNOW,
+	MOVE_SHEER_COLD, // Hail Cannon
+	MOVE_ICY_WIND,
 };
 
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
@@ -15497,6 +15542,20 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
 {
     BOOL result = FALSE;
+	u16 move = battleCtx->moveCur;
+	int snowedInMove = FALSE;
+	
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SNOWED_IN)
+	{
+		for (int i = 0; i < NELEMS(sSnowedInMoves); i++)
+		{
+			if (sSnowedInMoves[i] == move)
+			{
+				snowedInMove = TRUE;
+				break;
+			}
+		}
+	}
 
     // These two sentinels must be separate to match
     if (battleCtx->defender == BATTLER_NONE) {
@@ -15589,6 +15648,21 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
 				battleCtx->sideEffectMon = battleCtx->defender;
 				battleCtx->msgMoveTemp = MOVE_WRAP;
 				*subscript = subscript_bind_start_ability;
+				result = TRUE;
+			}
+			break;
+			
+		case ABILITY_SNOWED_IN:
+			if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& snowedInMove
+			&& BattleSystem_RandNext(battleSys) % 10 < 10)
+			{
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+
+				*subscript = subscript_snowed_in_start;
 				result = TRUE;
 			}
 			break;

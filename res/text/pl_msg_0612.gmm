@@ -633,4 +633,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Sound moves become Rock\ntype and gain 1.5x power.</language>
 	</row>
+	<row id="pl_msg_00000612_00158" index="158">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Certain Ice-type moves\ncause foe’s Speed to lower.</language>
+	</row>
 </body>
