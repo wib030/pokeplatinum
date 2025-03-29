@@ -71,7 +71,7 @@
             "level": 12,
             "item": "ITEM_FLAME_ORB",
             "moves": [
-                "MOVE_MAGNITUDE",
+                "MOVE_PSYWAVE",
 				"MOVE_ROCK_TOMB",
 				"MOVE_TORMENT",
 				"MOVE_PROTECT"
