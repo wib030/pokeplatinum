@@ -15658,7 +15658,7 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
 			&& snowedInMove
-			&& BattleSystem_RandNext(battleSys) % 10 < 10)
+			&& ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE))
 			{
 				battleCtx->msgBattlerTemp = battleCtx->defender;
 
