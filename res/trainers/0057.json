@@ -19,7 +19,8 @@
                 "MOVE_METRONOME"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 0
         },
         {
             "species": "SPECIES_JIGGLYPUFF",
@@ -30,18 +31,8 @@
                 "MOVE_METRONOME"
             ],
             "power": 100,
-            "ball_seal": 0
-        },
-		{
-            "species": "SPECIES_SNUBBULL",
-            "form": 0,
-            "level": 30,
-            "item": "ITEM_SITRUS_BERRY",
-            "moves": [
-                "MOVE_METRONOME"
-            ],
-            "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 0
         },
 		{
             "species": "SPECIES_MAKUHITA",
@@ -52,7 +43,8 @@
                 "MOVE_METRONOME"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 0
         },
 		{
             "species": "SPECIES_DROWZEE",
@@ -63,7 +55,8 @@
                 "MOVE_METRONOME"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 0
         },
 		{
             "species": "SPECIES_HAPPINY",
@@ -74,7 +67,32 @@
                 "MOVE_METRONOME"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 0
+        },
+		{
+            "species": "SPECIES_SMEARGLE",
+            "form": 0,
+            "level": 31,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_METRONOME"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 15,
+			"ivDEF": 31,
+			"ivSPEED": 15,
+			"ivSPATK": 15,
+			"ivSPDEF": 31,
+			"evHP": 4,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252,
+			"gender": 0
         }
     ]
 }
