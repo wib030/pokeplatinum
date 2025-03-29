@@ -11249,6 +11249,11 @@ static BOOL BtlCmd_CheckStealthRock(BattleSystem *battleSys, BattleContext *batt
 			battleCtx->hpCalcTemp /= 4;
 		}
 		
+		if (battleCtx->hpCalcTemp >= 0)
+		{
+			battleCtx->hpCalcTemp = -1;
+		}
+		
     } else {
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
