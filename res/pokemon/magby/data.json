@@ -103,7 +103,7 @@
     "evolutions": [
         [
             "EVO_LEVEL_UP",
-            30,
+            25,
             "SPECIES_MAGMAR"
         ]
     ],
