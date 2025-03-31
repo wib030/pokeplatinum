@@ -1522,7 +1522,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed *= 2;
     }
 	
-	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_SNOWED_IN
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_DEEP_SNOW
 	&& (battleCtx->battleMons[battler1].type1 != TYPE_ICE)
 	&& (battleCtx->battleMons[battler1].type2 != TYPE_ICE))
 	{
@@ -1629,7 +1629,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler2Speed *= 2;
     }
 	
-	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_SNOWED_IN
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_DEEP_SNOW
 	&& (battleCtx->battleMons[battler2].type1 != TYPE_ICE)
 	&& (battleCtx->battleMons[battler2].type2 != TYPE_ICE))
 	{
@@ -2018,7 +2018,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
         battler1Speed *= 2;
     }
 	
-	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_SNOWED_IN
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_DEEP_SNOW
 	&& (battleCtx->battleMons[battler1].type1 != TYPE_ICE)
 	&& (battleCtx->battleMons[battler1].type2 != TYPE_ICE))
 	{
@@ -2092,7 +2092,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem *battleSys, BattleContext *bat
         battler2Speed *= 2;
     }
 	
-	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_SNOWED_IN
+	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_DEEP_SNOW
 	&& (battleCtx->battleMons[partyIndicator].type1 != TYPE_ICE)
 	&& (battleCtx->battleMons[partyIndicator].type2 != TYPE_ICE))
 	{

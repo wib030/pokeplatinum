@@ -3806,7 +3806,7 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
 			snowedInSub = subscript_snowed_in_end;
 			
             battleCtx->afterMoveMessageState++;
-            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->attacker)] & SIDE_CONDITION_SNOWED_IN
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->attacker)] & SIDE_CONDITION_DEEP_SNOW
 			&& (moveClass == CLASS_PHYSICAL || moveType == TYPE_FIRE))
 			{
 				battleCtx->msgBattlerTemp = battleCtx->attacker;
@@ -3821,7 +3821,7 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
 			snowedInSub = subscript_snowed_in_defender_end;
 			
             battleCtx->afterMoveMessageState++;
-            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)] & SIDE_CONDITION_SNOWED_IN
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)] & SIDE_CONDITION_DEEP_SNOW
 			&& (moveType == TYPE_FIRE))
 			{
 				battleCtx->msgBattlerTemp = battleCtx->defender;
@@ -3908,7 +3908,7 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
 			snowedInSub = subscript_snowed_in_end;
 			
             battleCtx->afterMoveMessageState++;
-            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->attacker)] & SIDE_CONDITION_SNOWED_IN
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->attacker)] & SIDE_CONDITION_DEEP_SNOW
 			&& (moveClass == CLASS_PHYSICAL || moveType == TYPE_FIRE))
 			{
 				battleCtx->msgBattlerTemp = battleCtx->attacker;
@@ -3923,7 +3923,7 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
 			snowedInSub = subscript_snowed_in_defender_end;
 			
             battleCtx->afterMoveMessageState++;
-            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)] & SIDE_CONDITION_SNOWED_IN
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)] & SIDE_CONDITION_DEEP_SNOW
 			&& (moveType == TYPE_FIRE))
 			{
 				battleCtx->msgBattlerTemp = battleCtx->defender;
