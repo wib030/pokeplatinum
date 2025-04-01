@@ -92,6 +92,7 @@
             "12": "MOVE_FAINT_ATTACK",
             "15": "MOVE_FIRE_SPIN",
             "22": "MOVE_CONFUSE_RAY",
+			"25": "MOVE_FLAME_WHEEL",
             "29": "MOVE_FIRE_PUNCH",
 			"33": "MOVE_KNOCK_OFF",
             "36": "MOVE_LAVA_PLUME",
