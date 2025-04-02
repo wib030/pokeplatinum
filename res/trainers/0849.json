@@ -5,37 +5,93 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_QWILFISH",
+            "species": "SPECIES_MANECTRIC",
             "form": 0,
             "level": 30,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_RED_CARD",
             "moves": [
-                "MOVE_U_TURN",
-                "MOVE_TOXIC_SPIKES",
-                "MOVE_TAUNT",
-                "MOVE_BRINE"
+				"MOVE_HOWL",
+				"MOVE_LIGHT_SCREEN",
+				"MOVE_ROAR",
+				"MOVE_TOXIC"
             ],
-            "power": 100,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 16,
+			"ivATK": 23,
+			"ivDEF": 22,
+			"ivSPEED": 11,
+			"ivSPATK": 30,
+			"ivSPDEF": 17,
+			"evHP": 43,
+			"evATK": 0,
+			"evDEF": 81,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 25,
+			"nature": 23
         },
-        {
-            "species": "SPECIES_SWELLOW",
+		{
+            "species": "SPECIES_CORSOLA",
             "form": 0,
             "level": 30,
-            "item": "ITEM_FLAME_ORB",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_FACADE",
-                "MOVE_PROTECT",
-                "MOVE_FOCUS_ENERGY",
-                "MOVE_ROOST"
+				"MOVE_SPIKE_CANNON",
+				"MOVE_SUBSTITUTE",
+				"MOVE_INGRAIN",
+				"MOVE_AQUA_RING"
             ],
-            "power": 100,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 13,
+			"ivATK": 14,
+			"ivDEF": 25,
+			"ivSPEED": 29,
+			"ivSPATK": 16,
+			"ivSPDEF": 19,
+			"evHP": 69,
+			"evATK": 0,
+			"evDEF": 69,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 69,
+			"nature": 22,
+			"shiny": 1
+        },
+		{
+            "species": "SPECIES_MAWILE",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_AIR_BALLOON",
+            "moves": [
+				"MOVE_IRON_DEFENSE",
+				"MOVE_SUBSTITUTE",
+				"MOVE_ICY_WIND",
+				"MOVE_BATON_PASS"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 22,
+			"ivATK": 24,
+			"ivDEF": 20,
+			"ivSPEED": 1,
+			"ivSPATK": 9,
+			"ivSPDEF": 16,
+			"evHP": 77,
+			"evATK": 0,
+			"evDEF": 77,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 77,
+			"nature": 8,
+			"ability": 1
         }
     ]
 }

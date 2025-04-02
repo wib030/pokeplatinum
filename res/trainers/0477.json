@@ -16,7 +16,7 @@
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_STEALTH_ROCK",
-                "MOVE_CLOSE_COMBAT",
+                "MOVE_BRICK_BREAK",
                 "MOVE_OVERHEAT",
                 "MOVE_U_TURN"
             ],

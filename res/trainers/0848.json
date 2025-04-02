@@ -10,32 +10,87 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_HONCHKROW",
+            "species": "SPECIES_KECLEON",
             "form": 0,
             "level": 30,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_SWAGGER",
-                "MOVE_TORMENT",
-                "MOVE_THUNDER_WAVE",
-                "MOVE_FLY"
+				"MOVE_BIND",
+				"MOVE_FLING",
+				"MOVE_RECYCLE",
+				"MOVE_STEALTH_ROCK"
             ],
-            "power": 100,
-            "ball_seal": 0
+            "power": 80,
+            "ball_seal": 0,
+			"ivHP": 10,
+			"ivATK": 8,
+			"ivDEF": 22,
+			"ivSPEED": 26,
+			"ivSPATK": 27,
+			"ivSPDEF": 14,
+			"evHP": 56,
+			"evATK": 0,
+			"evDEF": 48,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 24,
+			"nature": 5
         },
-        {
-            "species": "SPECIES_NOCTOWL",
+		{
+            "species": "SPECIES_FARFETCHD",
             "form": 0,
             "level": 30,
-            "item": "ITEM_WIDE_LENS",
+            "item": "ITEM_STICK",
             "moves": [
-                "MOVE_CONFUSION",
-                "MOVE_ROOST",
-                "MOVE_HYPNOSIS",
-                "MOVE_FEATHER_DANCE"
+				"MOVE_MIRROR_MOVE",
+				"MOVE_QUICK_ATTACK",
+				"MOVE_FACADE",
+				"MOVE_FLY"
             ],
-            "power": 100,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 4,
+			"ivATK": 31,
+			"ivDEF": 11,
+			"ivSPEED": 0,
+			"ivSPATK": 16,
+			"ivSPDEF": 26,
+			"evHP": 24,
+			"evATK": 242,
+			"evDEF": 12,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 2,
+			"status": 16
+        },
+		{
+            "species": "SPECIES_GRANBULL",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+				"MOVE_HEAL_BELL",
+				"MOVE_REFLECT",
+				"MOVE_SUPER_FANG",
+				"MOVE_TOXIC"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 2,
+			"ivATK": 17,
+			"ivDEF": 30,
+			"ivSPEED": 23,
+			"ivSPATK": 5,
+			"ivSPDEF": 15,
+			"evHP": 60,
+			"evATK": 0,
+			"evDEF": 40,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 36,
+			"nature": 7,
+			"ability": 1
         }
     ]
 }

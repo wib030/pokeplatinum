@@ -10,46 +10,68 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_CLEFABLE",
-            "form": 0,
-            "level": 30,
-            "item": "ITEM_LIGHT_CLAY",
-            "moves": [
-                "MOVE_METRONOME",
-                "MOVE_LIGHT_SCREEN",
-                "MOVE_REFLECT",
-                "MOVE_SING"
-            ],
-            "power": 100,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_TROPIUS",
-            "form": 0,
-            "level": 30,
-            "item": "ITEM_SITRUS_BERRY",
-            "moves": [
-                "MOVE_WHIRLWIND",
-                "MOVE_WING_ATTACK",
-                "MOVE_DOUBLE_TEAM",
-                "MOVE_PROTECT"
-            ],
-            "power": 100,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_MONFERNO",
             "form": 0,
             "level": 30,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_FOCUS_PUNCH",
+                "MOVE_STEALTH_ROCK",
                 "MOVE_FAKE_OUT",
-                "MOVE_BULK_UP",
-                "MOVE_TORMENT"
+                "MOVE_U_TURN",
+                "MOVE_BRICK_BREAK"
             ],
-            "power": 100,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 100,
+			"evDEF": 0,
+			"evSPEED": 100,
+			"evSPATK": 4,
+			"evSPDEF": 0,
+			"nature": 14,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_UNOWN",
+            "form": 17,
+            "level": 30,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_MIRACLE_EYE",
+                "MOVE_COSMIC_POWER",
+                "MOVE_METRONOME",
+                "MOVE_ANCIENT_POWER"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 100,
+			"evATK": 0,
+			"evDEF": 100,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 5
+        },
+		{
+            "species": "SPECIES_TAUROS",
+            "form": 0,
+            "level": 30,
+            "item": "ITEM_MOOMOO_MILK",
+            "moves": [
+                "MOVE_TAKE_DOWN",
+                "MOVE_SCARY_FACE",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_PAYBACK"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 100,
+			"evDEF": 0,
+			"evSPEED": 100,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 13
         }
     ]
 }

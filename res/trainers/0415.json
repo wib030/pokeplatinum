@@ -1,20 +1,40 @@
 {
-    "name": "Grunt",
+    "name": "Wibston",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+		"AI_FLAG_EXPERT",
+		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_ELECTRIKE",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
+            "level": 12,
+            "item": "ITEM_STICK",
+            "moves": [
+				"MOVE_THUNDER_WAVE",
+				"MOVE_HOWL",
+				"MOVE_ROAR",
+				"MOVE_SWAGGER"
+            ],
             "power": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 16,
+			"ivATK": 23,
+			"ivDEF": 22,
+			"ivSPEED": 11,
+			"ivSPATK": 30,
+			"ivSPDEF": 17,
+			"evHP": 14,
+			"evATK": 0,
+			"evDEF": 33,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 21,
+			"nature": 23
         }
     ]
 }
