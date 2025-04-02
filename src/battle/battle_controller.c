@@ -3240,6 +3240,13 @@ static int BattleController_CheckMoveHitOverrides(BattleSystem *battleSys, Battl
         battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
 		return 0;
     }
+	
+	// Make sure Howl and Magnet Rise always hit, so that the user can still get a stat boost if their ally is Semi-Invulnerable
+	if (battleCtx->moveCur == MOVE_HOWL || battleCtx->moveCur == MOVE_MAGNET_RISE)
+	{
+		battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
+		return 0;
+	}
 
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_BYPASSED_ACCURACY) == FALSE
             && CURRENT_MOVE_DATA.range != RANGE_OPPONENT_SIDE
