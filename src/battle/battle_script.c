@@ -2134,6 +2134,22 @@ static u16 sMetronomeEncouragedMoves[] = {
 	MOVE_ATTRACT,
 };
 
+static const Fraction sStatStageBoosts[] = {
+    { 10, 40 }, // -6
+    { 10, 35 }, // -5
+    { 10, 30 }, // -4
+    { 10, 25 }, // -3
+    { 10, 20 }, // -2
+    { 10, 15 }, // -1
+    { 10, 10 }, // neutral
+    { 15, 10 }, // +1
+    { 20, 10 }, // +2
+    { 25, 10 }, // +3
+    { 30, 10 }, // +4
+    { 35, 10 }, // +5
+    { 40, 10 }, // +6
+};
+
 typedef BOOL (*BtlCmd)(BattleSystem*, BattleContext*);
 
 typedef struct BattleMessageParams {
@@ -8840,6 +8856,8 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     u16 item;
     u32 effectiveness;
     int i;
+	u32 attackerAttackStat, defenderDefenseStat;
+	int attackerAttackStage, defenderDefenseStage;
     Pokemon *mon;
 
     BattleScript_Iter(battleCtx, 1);
@@ -8875,11 +8893,17 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
     itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
     itemPower = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT_PARAM);
+	
+	attackerAttackStage = battleCtx->battleMons[battleCtx->attacker].statBoosts[BATTLE_STAT_ATTACK];
+	defenderDefenseStage = battleCtx->battleMons[battleCtx->defender].statBoosts[BATTLE_STAT_DEFENSE];
+	
+	attackerAttackStat = PokemonPersonalData_GetFormValue(species, form, MON_DATA_PERSONAL_BASE_ATK) * sStatStageBoosts[attackerAttackStage].numerator / sStatStageBoosts[attackerAttackStage].denominator;
+	defenderDefenseStat = PokemonPersonalData_GetFormValue(DEFENDING_MON.species, DEFENDING_MON.formNum, MON_DATA_PERSONAL_BASE_DEF) * sStatStageBoosts[defenderDefenseStage].numerator / sStatStageBoosts[defenderDefenseStage].denominator;
 
-    battleCtx->damage = PokemonPersonalData_GetFormValue(species, form, MON_DATA_PERSONAL_BASE_ATK);
+    battleCtx->damage = attackerAttackStat;
     battleCtx->damage *= CURRENT_MOVE_DATA.power;
     battleCtx->damage *= ((level * 2 / 5) + 2);
-    battleCtx->damage /= PokemonPersonalData_GetFormValue(DEFENDING_MON.species, DEFENDING_MON.formNum, MON_DATA_PERSONAL_BASE_DEF);
+    battleCtx->damage /= defenderDefenseStat;
     battleCtx->damage /= 50;
 
     // Critical is calculated with the PartyMon script
