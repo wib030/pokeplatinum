@@ -474,6 +474,7 @@ const u16 EggMove_Table_Script[] = {
     MOVE_ICICLE_SPEAR,
     MOVE_MUD_SHOT,
 	MOVE_ROCK_BLAST,
+	MOVE_SPIKE_CANNON,
     (SPECIES_GASTLY) + 20000, // Gastly line
     MOVE_PERISH_SONG,
     MOVE_HAZE,
@@ -1038,6 +1039,7 @@ const u16 EggMove_Table_Script[] = {
     MOVE_SIGNAL_BEAM,
     MOVE_POISON_JAB,
 	MOVE_AQUA_JET,
+	MOVE_SPIKE_CANNON,
     (SPECIES_SHUCKLE) + 20000, // Shuckle
     MOVE_SWEET_SCENT,
     MOVE_KNOCK_OFF,
@@ -1113,6 +1115,7 @@ const u16 EggMove_Table_Script[] = {
     MOVE_NATURE_POWER,
     MOVE_AQUA_RING,
 	MOVE_CURSE,
+	MOVE_SPIKE_CANNON,
     (SPECIES_REMORAID) + 20000, // Remoraid line
     MOVE_AURORA_BEAM,
     MOVE_OCTAZOOKA,
