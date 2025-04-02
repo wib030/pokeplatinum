@@ -54,7 +54,8 @@
 			"15": "MOVE_MIRACLE_EYE",
 			"20": "MOVE_COSMIC_POWER",
 			"23": "MOVE_ANCIENT_POWER",
-			"25": "MOVE_METRONOME"
+			"25": "MOVE_METRONOME",
+			"42": "MOVE_JUDGMENT"
         },
         "tutor": []
     },

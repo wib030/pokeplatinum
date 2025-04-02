@@ -102,8 +102,8 @@
             "19": "MOVE_FLAME_WHEEL",
             "26": "MOVE_FEINT",
             "29": "MOVE_TORMENT",
-            "36": "MOVE_CLOSE_COMBAT",
             "39": "MOVE_FIRE_SPIN",
+			"41": "MOVE_CLOSE_COMBAT",
             "46": "MOVE_SLACK_OFF",
             "49": "MOVE_FLARE_BLITZ"
         },

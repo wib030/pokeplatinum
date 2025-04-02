@@ -89,6 +89,7 @@
                 "MOVE_FORESIGHT",
                 "MOVE_ENDURE"
             ],
+			"3": "MOVE_HOWL",
             "6": "MOVE_COUNTER",
 			"11": "MOVE_FEINT",
             "15": "MOVE_FORCE_PALM",
