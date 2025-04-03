@@ -90,7 +90,7 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
                 "MOVE_VICE_GRIP",
 				"MOVE_LEER",
 				"MOVE_HARDEN"

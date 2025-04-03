@@ -86,7 +86,7 @@
         "level_up": {
             "1": [
                 "MOVE_TAIL_GLOW",
-                "MOVE_BUBBLE"
+                "MOVE_WATER_GUN"
             ],
             "9": "MOVE_CHARM",
             "16": "MOVE_SUPERSONIC",

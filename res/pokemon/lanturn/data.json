@@ -80,7 +80,7 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
                 "MOVE_SUPERSONIC",
 				"MOVE_STOCKPILE",
                 "MOVE_SWALLOW",

@@ -58,7 +58,7 @@
                 "MOVE_SURF",
                 "MOVE_WATERFALL",
                 "MOVE_DIVE",
-                "MOVE_BUBBLE"
+                "MOVE_WATER_GUN"
             ],
             "power": 0,
             "ball_seal": 0

@@ -80,7 +80,7 @@
         "level_up": {
             "1": [ 
 				"MOVE_POISON_STING",
-				"MOVE_BUBBLE"
+				"MOVE_WATER_GUN"
 			],
             "4": "MOVE_SUPERSONIC",
             "7": "MOVE_CONSTRICT",

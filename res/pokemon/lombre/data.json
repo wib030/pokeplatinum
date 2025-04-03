@@ -87,7 +87,7 @@
             "1": [ 
 				"MOVE_ASTONISH",
 				"MOVE_ABSORB",
-				"MOVE_BUBBLE"
+				"MOVE_WATER_GUN"
 			],
             "3": "MOVE_GROWL",
 			"12": "MOVE_FURY_SWIPES",

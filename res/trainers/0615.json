@@ -17,7 +17,7 @@
             "level": 13,
             "item": null,
             "moves": [
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
                 "MOVE_POUND"
             ],
             "power": 30,

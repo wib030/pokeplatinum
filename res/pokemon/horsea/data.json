@@ -73,7 +73,7 @@
             "HM07"
         ],
         "level_up": {
-            "1": "MOVE_BUBBLE",
+            "1": "MOVE_WATER_GUN",
             "5": "MOVE_SMOKE_SCREEN",
             "9": "MOVE_LEER",
             "13": "MOVE_WATER_GUN",

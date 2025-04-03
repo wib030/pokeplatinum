@@ -72,7 +72,7 @@
         "level_up": {
             "1": [ 
 				"MOVE_MUD_SLAP",
-				"MOVE_BUBBLE"
+				"MOVE_WATER_GUN"
 			],
             "4": "MOVE_HARDEN",
             "7": "MOVE_WATER_PULSE",

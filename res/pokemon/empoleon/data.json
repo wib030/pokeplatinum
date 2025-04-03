@@ -100,10 +100,10 @@
 				"MOVE_AGILITY",
 				"MOVE_YAWN",
 				"MOVE_TACKLE",
-				"MOVE_BUBBLE"
+				"MOVE_WATER_GUN"
 			],
             "4": "MOVE_GROWL",
-            "8": "MOVE_BUBBLE",
+            "8": "MOVE_WATER_GUN",
             "11": "MOVE_SWORDS_DANCE",
             "15": "MOVE_PECK",
             "16": "MOVE_METAL_CLAW",

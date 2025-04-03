@@ -83,7 +83,7 @@
 				"MOVE_ABSORB"
 			],
             "3": "MOVE_GROWL",
-			"6": "MOVE_BUBBLE",
+			"6": "MOVE_WATER_GUN",
 			"12": "MOVE_NATURAL_GIFT",
 			"15": "MOVE_MIST",
 			"18": "MOVE_MEGA_DRAIN",

@@ -86,7 +86,7 @@
         "level_up": {
             "1": [
                 "MOVE_OMINOUS_WIND",
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
 				"MOVE_SWEET_SCENT",
 				"MOVE_QUICK_ATTACK"
             ],

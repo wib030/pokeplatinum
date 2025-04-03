@@ -85,7 +85,7 @@
                 "MOVE_BULLET_SEED",
                 "MOVE_SIGNAL_BEAM",
                 "MOVE_TACKLE",
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
 				"MOVE_SUPERSONIC",
 				"MOVE_BUBBLE_BEAM"
             ],

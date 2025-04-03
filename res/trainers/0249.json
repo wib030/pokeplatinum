@@ -30,7 +30,7 @@
             "moves": [
                 "MOVE_POUND",
 				"MOVE_GROWL",
-				"MOVE_BUBBLE"
+				"MOVE_WATER_GUN"
             ],
             "power": 30,
             "ball_seal": 6,

@@ -77,7 +77,7 @@
         "level_up": {
             "1": [
                 "MOVE_YAWN",
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
                 "MOVE_SMOKE_SCREEN",
                 "MOVE_LEER",
                 "MOVE_WATER_GUN"

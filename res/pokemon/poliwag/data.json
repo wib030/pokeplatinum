@@ -75,9 +75,9 @@
         "level_up": {
             "1": "MOVE_WATER_GUN",
             "8": "MOVE_HYPNOSIS",
-            "11": "MOVE_BUBBLE",
             "15": "MOVE_DOUBLE_SLAP",
             "18": "MOVE_RAIN_DANCE",
+			"19": "MOVE_BUBBLE",
             "21": "MOVE_BODY_SLAM",
             "25": "MOVE_BUBBLE_BEAM",
             "28": "MOVE_MUD_SHOT",

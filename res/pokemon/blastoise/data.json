@@ -98,12 +98,11 @@
 				"MOVE_TACKLE",
 				"MOVE_TAIL_WHIP",
 				"MOVE_WITHDRAW",
-				"MOVE_BUBBLE"
+				"MOVE_WATER_GUN"
 			],
             "4": "MOVE_TAIL_WHIP",
-            "7": "MOVE_BUBBLE",
+            "7": "MOVE_WATER_GUN",
             "10": "MOVE_WITHDRAW",
-            "13": "MOVE_WATER_GUN",
             "16": "MOVE_BITE",
             "20": "MOVE_RAPID_SPIN",
             "24": "MOVE_PROTECT",

@@ -82,9 +82,8 @@
         "level_up": {
             "1": "MOVE_TACKLE",
             "4": "MOVE_TAIL_WHIP",
-            "5": "MOVE_BUBBLE",
+            "5": "MOVE_WATER_GUN",
             "10": "MOVE_WITHDRAW",
-            "13": "MOVE_WATER_GUN",
             "16": "MOVE_BITE",
             "19": "MOVE_RAPID_SPIN",
             "22": "MOVE_PROTECT",
