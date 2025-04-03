@@ -85,7 +85,6 @@
         "level_up": {
             "1": [
                 "MOVE_POISON_GAS",
-                "MOVE_DOUBLE_HIT",
                 "MOVE_SMOG",
 				"MOVE_TOXIC_SPIKES",
                 "MOVE_SMOKE_SCREEN",

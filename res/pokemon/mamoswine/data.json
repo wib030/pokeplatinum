@@ -88,7 +88,6 @@
                 "MOVE_PECK",
                 "MOVE_ODOR_SLEUTH",
                 "MOVE_AMNESIA",
-				"MOVE_DOUBLE_HIT",
                 "MOVE_POWDER_SNOW",
 				"MOVE_PSYWAVE"
             ],

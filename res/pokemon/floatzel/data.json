@@ -99,7 +99,7 @@
             "15": "MOVE_SWIFT",
 			"19": "MOVE_BUBBLE",
             "21": "MOVE_AQUA_JET",
-			"27": "MOVE_DOUBLE_HIT",
+			"27": "MOVE_DIVE",
 			"33": "MOVE_WHIRLPOOL",
             "37": "MOVE_AGILITY",
             "50": "MOVE_AQUA_TAIL"

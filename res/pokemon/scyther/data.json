@@ -97,7 +97,6 @@
             "41": "MOVE_X_SCISSOR",
 			"43": "MOVE_SWORDS_DANCE",
             "45": "MOVE_NIGHT_SLASH",
-            "49": "MOVE_DOUBLE_HIT",
             "50": "MOVE_AIR_SLASH",
 			"54": "MOVE_CLOSE_COMBAT"
         },

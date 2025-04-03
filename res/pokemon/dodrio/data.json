@@ -86,7 +86,7 @@
 			"5": "MOVE_QUICK_ATTACK",
 			"10": "MOVE_RAGE",
             "15": "MOVE_PURSUIT",
-			"22": "MOVE_DOUBLE_HIT",
+			"22": "MOVE_HEADBUTT",
 			"26": "MOVE_AGILITY",
             "29": "MOVE_UPROAR",
 			"30": "MOVE_WING_ATTACK",

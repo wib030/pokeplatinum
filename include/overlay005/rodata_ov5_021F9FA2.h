@@ -966,7 +966,6 @@ const u16 EggMove_Table[] = {
     MOVE_BITE,
     MOVE_CRUSH_CLAW,
     MOVE_FAKE_OUT,
-    MOVE_DOUBLE_HIT,
     MOVE_PUNISHMENT,
     MOVE_PURSUIT,
     MOVE_ICE_SHARD,
@@ -1527,7 +1526,6 @@ const u16 EggMove_Table[] = {
     MOVE_FURY_SWIPES,
     MOVE_NIGHT_SLASH,
     MOVE_METAL_CLAW,
-    MOVE_DOUBLE_HIT,
 	MOVE_DISABLE,
     (SPECIES_SEVIPER) + 20000, // Seviper
     MOVE_STOCKPILE,
@@ -1720,7 +1718,6 @@ const u16 EggMove_Table[] = {
     MOVE_COUNTER,
 	MOVE_ASSIST,
     (SPECIES_PIPLUP) + 20000, // Piplup line
-    MOVE_DOUBLE_HIT,
     MOVE_SUPERSONIC,
     MOVE_YAWN,
     MOVE_MUD_SLAP,
@@ -1835,7 +1832,6 @@ const u16 EggMove_Table[] = {
     MOVE_FAKE_OUT,
     MOVE_ENCORE,
     MOVE_SWEET_KISS,
-    MOVE_DOUBLE_HIT,
     MOVE_ATTRACT,
     MOVE_LOW_KICK,
     MOVE_SKY_UPPERCUT,

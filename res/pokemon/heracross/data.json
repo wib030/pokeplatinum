@@ -96,7 +96,6 @@
             ],
 			"7": "MOVE_FEINT",
             "10": "MOVE_AERIAL_ACE",
-			"16": "MOVE_DOUBLE_HIT",
 			"19": "MOVE_COUNTER",
 			"22": "MOVE_FURY_CUTTER",
             "28": "MOVE_BRICK_BREAK",
