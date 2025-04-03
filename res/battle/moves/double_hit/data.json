@@ -1,12 +1,12 @@
 {
-    "name": "Double Hit",
+    "name": "Chum Rush",
     "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
-    "power": 35,
-    "accuracy": 90,
-    "pp": 10,
+    "type": "TYPE_WATER",
+    "power": 80,
+    "accuracy": 85,
+    "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_HIT_TWICE",
+        "type": "BATTLE_EFFECT_WHIRLPOOL",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
@@ -15,10 +15,11 @@
         "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE",
-        "MOVE_FLAG_TRIGGERS_KINGS_ROCK"
+        "MOVE_FLAG_TRIGGERS_KINGS_ROCK",
+        "MOVE_FLAG_HIDES_SHADOWS"
     ],
     "contest": {
-        "effect": 7,
-        "type": "CONTEST_TYPE_SMART"
+        "effect": 5,
+        "type": "CONTEST_TYPE_TOUGH"
     }
 }

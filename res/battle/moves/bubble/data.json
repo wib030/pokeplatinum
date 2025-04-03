@@ -3,7 +3,7 @@
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_WATER",
     "power": 50,
-    "accuracy": 100,
+    "accuracy": 95,
     "pp": 25,
     "effect": {
         "type": "BATTLE_EFFECT_HIT",

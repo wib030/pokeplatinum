@@ -1835,7 +1835,7 @@
 	</row>
 	<row id="pl_msg_00000646_00458" index="458">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user slams the\nfoe with a tail, etc.\nThe target is hit\ntwice in a row.\n</language>
+		<language name="English">The user viciously\nswarms the foe, which\ntraps them for two to\nfive turns.</language>
 	</row>
 	<row id="pl_msg_00000646_00459" index="459">
 		<attribute name="window_context_name">used</attribute>

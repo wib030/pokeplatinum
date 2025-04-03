@@ -8690,7 +8690,8 @@ static const u16 sBitingMoves[] = {
 	MOVE_ICE_FANG,
 	MOVE_POISON_FANG,
 	MOVE_THUNDER_FANG,
-	MOVE_BUBBLE // Snap
+	MOVE_BUBBLE, // Snap
+	MOVE_DOUBLE_HIT // Chum Rush
 };
 
 static const u16 sSlicingMoves[] = {

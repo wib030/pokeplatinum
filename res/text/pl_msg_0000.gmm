@@ -5499,15 +5499,15 @@
 	</row>
 	<row id="pl_msg_00000000_01374" index="1374">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nDouble Hit!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nChum Rush!</language>
 	</row>
 	<row id="pl_msg_00000000_01375" index="1375">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDouble Hit!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nChum Rush!</language>
 	</row>
 	<row id="pl_msg_00000000_01376" index="1376">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDouble Hit!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nChum Rush!</language>
 	</row>
 	<row id="pl_msg_00000000_01377" index="1377">
 		<attribute name="window_context_name">used</attribute>
