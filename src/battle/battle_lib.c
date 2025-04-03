@@ -116,6 +116,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].rivalryFlag = FALSE;
 	battleCtx->battleMons[battler].colorChangeFlag = FALSE;
     battleCtx->battleMons[battler].meditateCritBoostFlag = FALSE;
+	battleCtx->battleMons[battler].steadfastFlag = FALSE;
 	battleCtx->battleMons[battler].unownEnergyStrongFlag = FALSE;
 	battleCtx->battleMons[battler].unownEnergyWeakFlag = FALSE;
 	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
@@ -607,6 +608,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 		
 	case BATTLEMON_PARA_PROTECTION_FLAG:
         return battleMon->paraProtectionFlag;
+		
+	case BATTLEMON_STEADFAST_FLAG:
+        return battleMon->steadfastFlag;
 
     default:
         GF_ASSERT(FALSE);
@@ -986,6 +990,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 	case BATTLEMON_PARA_PROTECTION_FLAG:
         mon->paraProtectionFlag = *(u8 *)buf;
 		break;
+		
+	case BATTLEMON_STEADFAST_FLAG:
+        mon->steadfastFlag = *(u8 *)buf;
+		break;
 
     default:
         GF_ASSERT(FALSE);
@@ -1229,6 +1237,10 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 		
 	case BATTLEMON_PARA_PROTECTION_FLAG:
         mon->paraProtectionFlag += val;
+		break;
+		
+	case BATTLEMON_STEADFAST_FLAG:
+        mon->steadfastFlag += val;
 		break;
 
     default:
@@ -6076,31 +6088,6 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         }
         break;
 
-//    case ABILITY_COLOR_CHANGE:
-//        u8 moveType;
-//
-//        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
-//            moveType = TYPE_NORMAL;
-//        } else if (battleCtx->moveType) {
-//            moveType = battleCtx->moveType;
-//        } else {
-//            moveType = CURRENT_MOVE_DATA.type;
-//        }
-//
-//        if (DEFENDING_MON.curHP
-//                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-//                && battleCtx->moveCur != MOVE_STRUGGLE
-//                && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
-//                && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-//                && CURRENT_MOVE_DATA.power
-//                && BattleMon_Get(battleCtx, battleCtx->defender, 27, NULL) != moveType
-//                && BattleMon_Get(battleCtx, battleCtx->defender, 28, NULL) != moveType) {
-//            *subscript = subscript_color_change;
-//            battleCtx->msgTemp = moveType;
-//            result = TRUE;
-//        }
-//        break;
-
     case ABILITY_ROUGH_SKIN:
         if (ATTACKING_MON.curHP
                 && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
@@ -6295,10 +6282,10 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& DEFENDING_MON.steadfastFlag == FALSE
 			&& ((CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)))
 			{
 				*subscript = subscript_steadfast_activate;
-				battleCtx->sideEffectMon = battleCtx->defender;
 				result = TRUE;
 			}
 			break;
