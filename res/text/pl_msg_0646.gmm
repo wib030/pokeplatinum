@@ -583,7 +583,7 @@
 	</row>
 	<row id="pl_msg_00000646_00145" index="145">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A spray of countless\nbubbles is jetted at\nthe foe.\nIt may also lower the\ntarget’s Speed stat.</language>
+		<language name="English">The user snaps down\non the target with a\njaw or a beak,\netc.\n</language>
 	</row>
 	<row id="pl_msg_00000646_00146" index="146">
 		<attribute name="window_context_name">used</attribute>

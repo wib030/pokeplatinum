@@ -1743,15 +1743,15 @@
 	</row>
 	<row id="pl_msg_00000000_00435" index="435">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBubble!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSnap!</language>
 	</row>
 	<row id="pl_msg_00000000_00436" index="436">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBubble!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSnap!</language>
 	</row>
 	<row id="pl_msg_00000000_00437" index="437">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBubble!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSnap!</language>
 	</row>
 	<row id="pl_msg_00000000_00438" index="438">
 		<attribute name="window_context_name">used</attribute>

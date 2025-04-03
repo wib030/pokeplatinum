@@ -1,22 +1,23 @@
 {
-    "name": "Bubble",
-    "class": "CLASS_SPECIAL",
+    "name": "Snap",
+    "class": "CLASS_PHYSICAL",
     "type": "TYPE_WATER",
-    "power": 40,
+    "power": 50,
     "accuracy": 100,
-    "pp": 30,
+    "pp": 25,
     "effect": {
-        "type": "BATTLE_EFFECT_LOWER_SPEED_HIT",
-        "chance": 10
+        "type": "BATTLE_EFFECT_HIT",
+        "chance": 0
     },
-    "range": "RANGE_ADJACENT_OPPONENTS",
+    "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
+        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],
     "contest": {
-        "effect": 2,
-        "type": "CONTEST_TYPE_BEAUTY"
+        "effect": 5,
+        "type": "CONTEST_TYPE_TOUGH"
     }
 }
