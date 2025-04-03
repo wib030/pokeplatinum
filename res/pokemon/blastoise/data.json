@@ -105,6 +105,7 @@
             "10": "MOVE_WITHDRAW",
             "16": "MOVE_BITE",
             "20": "MOVE_RAPID_SPIN",
+			"22": "MOVE_BUBBLE",
             "24": "MOVE_PROTECT",
             "28": "MOVE_WATER_PULSE",
             "39": "MOVE_SKULL_BASH",

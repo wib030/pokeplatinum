@@ -87,6 +87,7 @@
             "9": "MOVE_ENCORE",
 			"17": "MOVE_BRINE",
             "21": "MOVE_AURORA_BEAM",
+			"23": "MOVE_BUBBLE",
 			"26": "MOVE_BODY_SLAM",
 			"31": [
                 "MOVE_REST",

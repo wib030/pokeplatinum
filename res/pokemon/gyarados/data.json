@@ -94,7 +94,10 @@
 				"MOVE_THRASH",
 				"MOVE_BITE"
 			],
-            "20": "MOVE_BITE",
+            "20": [ 
+				"MOVE_BITE",
+				"MOVE_BUBBLE"
+			],
             "21": "MOVE_LEER",
             "24": "MOVE_TWISTER",
             "27": "MOVE_ICE_FANG",

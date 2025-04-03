@@ -102,6 +102,7 @@
             "5": "MOVE_RAGE",
             "10": "MOVE_BITE",
             "15": "MOVE_SCARY_FACE",
+			"18": "MOVE_BUBBLE",
             "21": "MOVE_ICE_FANG",
             "24": "MOVE_FLAIL",
             "30": "MOVE_AGILITY",

@@ -89,6 +89,7 @@
             "5": "MOVE_RAGE",
             "10": "MOVE_BITE",
             "15": "MOVE_SCARY_FACE",
+			"18": "MOVE_BUBBLE",
             "20": "MOVE_ICE_FANG",
             "22": "MOVE_FLAIL",
             "27": "MOVE_CRUNCH",

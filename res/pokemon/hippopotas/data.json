@@ -84,6 +84,7 @@
             "7": "MOVE_BITE",
             "13": "MOVE_YAWN",
             "19": "MOVE_TAKE_DOWN",
+			"23": "MOVE_BUBBLE",
             "25": "MOVE_CURSE",
 			"28": [
                 "MOVE_STOCKPILE",

@@ -84,6 +84,7 @@
             "6": "MOVE_WATER_GUN",
 			"11": "MOVE_QUICK_ATTACK",
             "18": "MOVE_PURSUIT",
+			"19": "MOVE_BUBBLE",
             "21": "MOVE_SWIFT",
             "24": "MOVE_AQUA_JET",
 			"27": "MOVE_DOUBLE_HIT",

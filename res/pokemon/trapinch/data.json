@@ -87,6 +87,7 @@
 			"17": "MOVE_MAGNITUDE",
 			"19": "MOVE_DIG",
 			"22": "MOVE_CRUNCH",
+			"24": "MOVE_BUBBLE",
 			"26": "MOVE_EARTH_POWER",
 			"29": "MOVE_FEINT",
 			"33": "MOVE_EARTHQUAKE",

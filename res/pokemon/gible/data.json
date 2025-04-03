@@ -91,6 +91,7 @@
 			"7": "MOVE_SAND_TOMB",
             "13": "MOVE_SANDSTORM",
             "15": "MOVE_TAKE_DOWN",
+			"23": "MOVE_BUBBLE",
             "25": "MOVE_SLASH",
             "27": "MOVE_DRAGON_CLAW",
             "31": "MOVE_DIG",

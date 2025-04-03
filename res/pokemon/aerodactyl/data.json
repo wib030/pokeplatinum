@@ -102,6 +102,7 @@
             ],
             "9": "MOVE_ROAR",
             "17": "MOVE_AGILITY",
+			"21": "MOVE_BUBBLE",
             "25": "MOVE_ANCIENT_POWER",
             "33": "MOVE_CRUNCH",
             "41": "MOVE_TAKE_DOWN",

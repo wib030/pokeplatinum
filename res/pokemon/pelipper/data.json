@@ -93,6 +93,7 @@
             "12": "MOVE_MIST",
             "15": "MOVE_WATER_PULSE",
             "19": "MOVE_PURSUIT",
+			"21": "MOVE_BUBBLE",
 			"22": "MOVE_BRINE",
             "25": "MOVE_AIR_CUTTER",
 			"28": [

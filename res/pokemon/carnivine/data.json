@@ -89,6 +89,7 @@
             "7": "MOVE_BITE",
 			"12": "MOVE_LEECH_SEED",
             "17": "MOVE_SWEET_SCENT",
+			"19": "MOVE_BUBBLE",
             "21": "MOVE_INGRAIN",
             "27": "MOVE_FAINT_ATTACK",
 			"29": "MOVE_GIGA_DRAIN",

@@ -64,6 +64,7 @@ const u16 EggMove_Table[] = {
     MOVE_SWAGGER,
     MOVE_LAST_RESORT,
     MOVE_ME_FIRST,
+	MOVE_BUBBLE, // Snap
     (SPECIES_SPEAROW) + 20000, // Spearow line
     MOVE_FAINT_ATTACK,
     MOVE_FALSE_SWIPE,
@@ -75,6 +76,7 @@ const u16 EggMove_Table[] = {
     MOVE_WHIRLWIND,
     MOVE_UPROAR,
 	MOVE_FEATHER_DANCE,
+	MOVE_BUBBLE, // Snap
     (SPECIES_EKANS) + 20000, // Ekans line
     MOVE_PURSUIT,
     MOVE_SPITE,
@@ -248,6 +250,7 @@ const u16 EggMove_Table[] = {
     MOVE_REFRESH,
     MOVE_ENDEAVOR,
 	MOVE_ENCORE,
+	MOVE_BUBBLE, // Snap
     (SPECIES_ABRA) + 20000, // Abra line
     MOVE_ENCORE,
     MOVE_BARRIER,
@@ -340,6 +343,7 @@ const u16 EggMove_Table[] = {
     MOVE_ENDEAVOR,
     MOVE_MIRROR_MOVE,
     MOVE_BRAVE_BIRD,
+	MOVE_BUBBLE, // Snap
     (SPECIES_SEEL) + 20000, // Seel line
     MOVE_LICK,
     MOVE_PERISH_SONG,
@@ -1036,6 +1040,7 @@ const u16 EggMove_Table[] = {
     MOVE_ICE_SHARD,
     MOVE_ICE_PUNCH,
 	MOVE_FAKE_OUT,
+	MOVE_BUBBLE, // Snap
     (SPECIES_MANTINE) + 20000, // Mantine
     MOVE_TWISTER,
     MOVE_HYDRO_PUMP,
@@ -1294,6 +1299,7 @@ const u16 EggMove_Table[] = {
     MOVE_SMOKE_SCREEN,
     MOVE_ENDEAVOR,
 	MOVE_HAMMER_ARM,
+	MOVE_BUBBLE, // Snap
     (SPECIES_MAKUHITA) + 20000, // Makuhita line
     MOVE_FAINT_ATTACK,
     MOVE_DETECT,
@@ -1356,6 +1362,7 @@ const u16 EggMove_Table[] = {
     MOVE_THUNDER_FANG,
     MOVE_PUNISHMENT,
 	MOVE_GUARD_SWAP,
+	MOVE_BUBBLE, // Snap
     (SPECIES_ARON) + 20000, // Aron line
     MOVE_ENDEAVOR,
     MOVE_BODY_SLAM,
@@ -1738,6 +1745,7 @@ const u16 EggMove_Table[] = {
     MOVE_ROLLOUT,
     MOVE_ODOR_SLEUTH,
     MOVE_AQUA_TAIL, // Wave Crash
+	MOVE_BUBBLE, // Snap
     (SPECIES_SHINX) + 20000, // Shinx line
     MOVE_ICE_FANG,
     MOVE_FIRE_FANG,

@@ -93,6 +93,7 @@
 			"13": "MOVE_FURY_SWIPES",
             "16": "MOVE_WATER_PULSE",
 			"19": "MOVE_DISABLE",
+			"21": "MOVE_BUBBLE",
             "22": "MOVE_SCREECH",
 			"25": "MOVE_ZEN_HEADBUTT",
             "34": "MOVE_PSYCH_UP",

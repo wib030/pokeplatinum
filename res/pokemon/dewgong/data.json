@@ -90,6 +90,7 @@
             "11": "MOVE_ICY_WIND",
             "13": "MOVE_ENCORE",
             "17": "MOVE_ICE_SHARD",
+			"19": "MOVE_BUBBLE",
             "21": "MOVE_WISH",
             "23": "MOVE_AQUA_RING",
 			"25": "MOVE_HAZE",

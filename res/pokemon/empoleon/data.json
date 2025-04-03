@@ -108,6 +108,7 @@
             "15": "MOVE_PECK",
             "16": "MOVE_METAL_CLAW",
             "19": "MOVE_BUBBLE_BEAM",
+			"21": "MOVE_BUBBLE",
             "24": "MOVE_SWAGGER",
             "33": "MOVE_BRINE",
             "36": "MOVE_AQUA_JET",

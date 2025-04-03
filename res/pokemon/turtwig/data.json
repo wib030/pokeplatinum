@@ -90,6 +90,7 @@
             "9": "MOVE_RAZOR_LEAF",
             "18": "MOVE_CURSE",
             "21": "MOVE_BULLET_SEED",
+			"23": "MOVE_BUBBLE",
             "25": "MOVE_MEGA_DRAIN",
             "29": "MOVE_LEECH_SEED",
             "33": "MOVE_SYNTHESIS",

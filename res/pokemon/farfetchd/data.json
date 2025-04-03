@@ -89,6 +89,7 @@
             "13": "MOVE_KNOCK_OFF",
             "19": "MOVE_SLASH",
             "21": "MOVE_AIR_CUTTER",
+			"23": "MOVE_BUBBLE",
             "25": "MOVE_SWORDS_DANCE",
 			"29": "MOVE_WING_ATTACK",
 			"30": "MOVE_QUICK_ATTACK",
