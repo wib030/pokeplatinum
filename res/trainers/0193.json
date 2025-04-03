@@ -17,7 +17,7 @@
             "moves": [
                 "MOVE_AQUA_JET",
 				"MOVE_CRUNCH",
-				"MOVE_WATERFALL",
+				"MOVE_DOUBLE_HIT",
 				"MOVE_EARTHQUAKE"
             ],
             "power": 180,

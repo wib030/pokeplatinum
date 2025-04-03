@@ -15,7 +15,7 @@
             "level": 67,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_CRABHAMMER",
+                "MOVE_DOUBLE_HIT",
                 "MOVE_KNOCK_OFF",
                 "MOVE_SUPERPOWER",
                 "MOVE_AGILITY"
@@ -32,7 +32,7 @@
             "moves": [
                 "MOVE_AQUA_JET",
                 "MOVE_CRUNCH",
-                "MOVE_WATERFALL",
+                "MOVE_DOUBLE_HIT",
                 "MOVE_DRAGON_DANCE"
             ],
             "power": 200,

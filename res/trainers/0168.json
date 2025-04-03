@@ -47,7 +47,7 @@
             "moves": [
                 "MOVE_RECOVER",
 				"MOVE_AGILITY",
-				"MOVE_WATERFALL",
+				"MOVE_DOUBLE_HIT",
 				"MOVE_TOXIC"
             ],
             "power": 200,
