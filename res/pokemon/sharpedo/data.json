@@ -106,6 +106,7 @@
 			"34": "MOVE_POISON_FANG",
             "40": "MOVE_TAUNT",
 			"42": "MOVE_RECOVER",
+			"43": "MOVE_DOUBLE_HIT",
             "45": "MOVE_AGILITY",
             "48": "MOVE_SKULL_BASH",
 			"50": "MOVE_NIGHT_SLASH",
