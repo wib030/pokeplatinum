@@ -587,6 +587,8 @@ const u16 EggMove_Table_Script[] = {
     MOVE_HELPING_HAND,
     MOVE_GRAVITY,
 	MOVE_MUD_BOMB,
+	MOVE_WISH,
+	MOVE_SEISMIC_TOSS,
     (SPECIES_TANGELA) + 20000, // Tangela line
     MOVE_FLAIL,
     MOVE_CONFUSION,
@@ -1998,6 +2000,8 @@ const u16 EggMove_Table_Script[] = {
     MOVE_GRAVITY,
     MOVE_LAST_RESORT,
 	MOVE_MUD_BOMB,
+	MOVE_WISH,
+	MOVE_SEISMIC_TOSS,
     (SPECIES_CHATOT) + 20000, // Chatot
     MOVE_ENCORE,
     MOVE_NIGHT_SHADE,
