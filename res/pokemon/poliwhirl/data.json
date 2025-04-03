@@ -80,12 +80,10 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_BUBBLE",
+                "MOVE_WATER_GUN",
                 "MOVE_HYPNOSIS"
             ],
-            "5": "MOVE_WATER_GUN",
             "8": "MOVE_HYPNOSIS",
-            "11": "MOVE_BUBBLE",
             "15": "MOVE_DOUBLE_SLAP",
             "18": "MOVE_RAIN_DANCE",
             "21": "MOVE_BODY_SLAM",
