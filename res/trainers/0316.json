@@ -10,77 +10,144 @@
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_GASTRODON",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_EARTH_POWER",
+				"MOVE_ICY_WIND",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_YAWN"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 30,
+			"ivATK": 11,
+			"ivDEF": 31,
+			"ivSPEED": 14,
+			"ivSPATK": 29,
+			"ivSPDEF": 30,
+			"evHP": 128,
+			"evATK": 0,
+			"evDEF": 112,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 44,
+			"nature": 5
+        },
+        {
             "species": "SPECIES_PELIPPER",
             "form": 0,
             "level": 36,
             "item": "ITEM_DAMP_ROCK",
             "moves": [
-                "MOVE_ROOST",
-				"MOVE_BRINE",
+                "MOVE_KNOCK_OFF",
 				"MOVE_U_TURN",
-				"MOVE_KNOCK_OFF"
+				"MOVE_ROOST",
+				"MOVE_DEFOG"
             ],
             "power": 0,
             "ball_seal": 0,
 			"ball_type": "ITEM_DIVE_BALL",
-			"ivHP": 0,
-			"ivATK": 0,
-			"ivDEF": 0,
-			"ivSPEED": 0,
-			"ivSPATK": 0,
-			"ivSPDEF": 0,
-			"evHP": 0,
+			"ivHP": 31,
+			"ivATK": 24,
+			"ivDEF": 31,
+			"ivSPEED": 28,
+			"ivSPATK": 16,
+			"ivSPDEF": 30,
+			"evHP": 200,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 36,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 40,
+			"nature": 8
         },
         {
-            "species": "SPECIES_GASTRODON",
-            "form": 1,
+            "species": "SPECIES_SHARPEDO",
+            "form": 0,
             "level": 36,
-            "item": "ITEM_RINDO_BERRY",
+            "item": "ITEM_LOADED_DICE",
             "moves": [
-                "MOVE_EARTH_POWER",
-				"MOVE_ICY_WIND",
-				"MOVE_PAIN_SPLIT",
-				"MOVE_MEMENTO"
+                "MOVE_DOUBLE_HIT",
+				"MOVE_AQUA_JET",
+				"MOVE_CRUNCH",
+				"MOVE_FOCUS_BLAST"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 29,
+			"ivATK": 31,
+			"ivDEF": 25,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 29,
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 4,
+			"evSPDEF": 0,
+			"nature": 14
         },
-        {
+		{
+            "species": "SPECIES_RELICANTH",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_WEAKNESS_POLICY",
+            "moves": [
+                "MOVE_MAGNITUDE",
+				"MOVE_AQUA_TAIL",
+				"MOVE_STONE_EDGE",
+				"MOVE_ROCK_POLISH"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 30,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 6,
+			"ivSPDEF": 27,
+			"evHP": 0,
+			"evATK": 64,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
+        },
+		{
             "species": "SPECIES_KINGDRA",
             "form": 0,
             "level": 36,
-            "item": "ITEM_PETAYA_BERRY",
+            "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_OCTAZOOKA",
-				"MOVE_DRAGON_BREATH",
 				"MOVE_ICE_BEAM",
-				"MOVE_SUBSTITUTE"
+				"MOVE_DRAGON_PULSE",
+				"MOVE_AGILITY"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
-        },
-		{
-            "species": "SPECIES_KINGLER",
-            "form": 0,
-            "level": 36,
-            "item": "ITEM_STARF_BERRY",
-            "moves": [
-                "MOVE_AQUA_JET",
-				"MOVE_HAMMER_ARM",
-				"MOVE_DIVE",
-				"MOVE_KNOCK_OFF"
-            ],
-            "power": 200,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 7,
+			"ivATK": 0,
+			"ivDEF": 28,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 27,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 164,
+			"evSPATK": 100,
+			"evSPDEF": 0,
+			"nature": 10
         },
 		{
             "species": "SPECIES_SLOWKING",
@@ -88,29 +155,27 @@
             "level": 36,
             "item": "ITEM_CHESTO_BERRY",
             "moves": [
-                "MOVE_FUTURE_SIGHT",
-				"MOVE_WHIRLPOOL",
-				"MOVE_RECYCLE",
-				"MOVE_REST"
+                "MOVE_WHIRLPOOL",
+				"MOVE_FUTURE_SIGHT",
+				"MOVE_REST",
+				"MOVE_RECYCLE"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
-        },
-		{
-            "species": "SPECIES_RELICANTH",
-            "form": 0,
-            "level": 36,
-            "item": "ITEM_LIECHI_BERRY",
-            "moves": [
-                "MOVE_STONE_EDGE",
-				"MOVE_AQUA_TAIL",
-				"MOVE_MAGNITUDE",
-				"MOVE_ROCK_POLISH"
-            ],
-            "power": 255,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 30,
+			"ivATK": 7,
+			"ivDEF": 30,
+			"ivSPEED": 29,
+			"ivSPATK": 29,
+			"ivSPDEF": 31,
+			"evHP": 196,
+			"evATK": 0,
+			"evDEF": 36,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 60,
+			"nature": 20
         }
     ]
 }
