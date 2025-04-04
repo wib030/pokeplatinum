@@ -110,7 +110,8 @@
             "40": "MOVE_DIG",
             "48": "MOVE_CRUNCH",
             "53": "MOVE_DRAGON_RUSH",
-			"56": "MOVE_OUTRAGE"
+			"56": "MOVE_OUTRAGE",
+			"60": "MOVE_DOUBLE_HIT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

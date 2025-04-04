@@ -99,7 +99,7 @@
 			"25": "MOVE_AQUA_RING",
 			"30": "MOVE_MUDDY_WATER",
             "35": "MOVE_ICE_BEAM",
-			"40": "MOVE_REST",
+			"40": "MOVE_DOUBLE_HIT",
             "45": "MOVE_HYDRO_PUMP",
 			"50": "MOVE_CALM_MIND",
             "55": "MOVE_DOUBLE_EDGE",

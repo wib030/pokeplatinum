@@ -97,8 +97,8 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
+            "level_max": 40,
+            "level_min": 35,
             "species": "SPECIES_CARVANHA"
         },
         {

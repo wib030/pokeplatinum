@@ -108,8 +108,8 @@
             "36": "MOVE_TAUNT",
 			"40": "MOVE_SWORDS_DANCE",
 			"43": "MOVE_CRUNCH",
-			"45": "MOVE_DOUBLE_HIT",
-            "48": "MOVE_CRABHAMMER",
+            "45": "MOVE_CRABHAMMER",
+			"48": "MOVE_DOUBLE_HIT",
 			"55": "MOVE_SHEER_COLD"
         },
         "tutor": [

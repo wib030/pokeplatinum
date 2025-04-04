@@ -35,8 +35,8 @@
         "EGG_GROUP_WATER_3"
     ],
     "abilities": [
-        "ABILITY_ADAPTABILITY",
-        "ABILITY_NONE"
+        "ABILITY_SHEER_FORCE",
+        "ABILITY_BATTLE_ARMOR"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

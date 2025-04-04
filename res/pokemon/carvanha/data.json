@@ -92,9 +92,9 @@
 			"29": "MOVE_SCARY_FACE",
 			"32": "MOVE_CRUNCH",
 			"34": "MOVE_POISON_FANG",
+			"35": "MOVE_DOUBLE_HIT",
             "36": "MOVE_AGILITY",
-            "39": "MOVE_TAKE_DOWN",
-			"41": "MOVE_DOUBLE_HIT"
+            "39": "MOVE_TAKE_DOWN"
         },
         "tutor": [
             "MOVE_DIVE",

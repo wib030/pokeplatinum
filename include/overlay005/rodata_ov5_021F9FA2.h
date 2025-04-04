@@ -251,6 +251,7 @@ const u16 EggMove_Table[] = {
     MOVE_ENDEAVOR,
 	MOVE_ENCORE,
 	MOVE_BUBBLE, // Snap
+	MOVE_DOUBLE_HIT, // Chum Rush
     (SPECIES_ABRA) + 20000, // Abra line
     MOVE_ENCORE,
     MOVE_BARRIER,

@@ -103,9 +103,10 @@
             ],
 			"35": "MOVE_ICE_BALL",
 			"38": "MOVE_HAIL",
-			"40": "MOVE_RECOVER",
+			"40": "MOVE_SLACK_OFF",
 			"42": "MOVE_SUPER_FANG",
             "44": "MOVE_BLIZZARD",
+			"46": "MOVE_DOUBLE_HIT",
             "48": "MOVE_SHEER_COLD"
         },
         "tutor": [
