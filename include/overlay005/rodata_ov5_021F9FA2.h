@@ -17,6 +17,7 @@ const u16 EggMove_Table[] = {
     MOVE_LEAF_STORM,
 	MOVE_POWER_WHIP,
 	MOVE_SLUDGE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CHARMANDER) + 20000, // Charmander line
     MOVE_BELLY_DRUM,
     MOVE_ANCIENT_POWER,
@@ -44,6 +45,8 @@ const u16 EggMove_Table[] = {
     MOVE_AQUA_RING,
     MOVE_AQUA_JET,
 	MOVE_WATER_SPOUT,
+	(SPECIES_CATERPIE) + 20000, // Caterpie line
+    MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PIDGEY) + 20000, // Pidgey line
     MOVE_PURSUIT,
     MOVE_FAINT_ATTACK,
@@ -86,6 +89,7 @@ const u16 EggMove_Table[] = {
     MOVE_POISON_TAIL,
     MOVE_DISABLE,
 	MOVE_SWITCHEROO,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SANDSHREW) + 20000, // Sandshrew line
     MOVE_FLAIL,
     MOVE_SAFEGUARD,
@@ -97,6 +101,7 @@ const u16 EggMove_Table[] = {
     MOVE_CRUSH_CLAW,
     MOVE_NIGHT_SLASH,
 	MOVE_MUD_SHOT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_NIDORAN_F) + 20000, // Nidoran-female line
     MOVE_SUPERSONIC,
     MOVE_DISABLE,
@@ -107,6 +112,7 @@ const u16 EggMove_Table[] = {
     MOVE_BEAT_UP,
     MOVE_PURSUIT,
 	MOVE_SKULL_BASH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_NIDORAN_M) + 20000, // Nidoran-male line
     MOVE_COUNTER,
     MOVE_DISABLE,
@@ -117,6 +123,7 @@ const u16 EggMove_Table[] = {
     MOVE_BEAT_UP,
     MOVE_SUCKER_PUNCH,
 	MOVE_HEAD_SMASH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_VULPIX) + 20000, // Vulpix line
     MOVE_FAINT_ATTACK,
     MOVE_HYPNOSIS,
@@ -130,6 +137,7 @@ const u16 EggMove_Table[] = {
     MOVE_EXTRASENSORY,
     MOVE_ENERGY_BALL,
 	MOVE_POWER_SWAP,
+	MOVE_SHARPEN, // Pregnancy Punch
 	(SPECIES_JIGGLYPUFF) + 20000, // Jigglybuff line
     MOVE_PERISH_SONG,
     MOVE_PRESENT,
@@ -139,6 +147,7 @@ const u16 EggMove_Table[] = {
     MOVE_LAST_RESORT,
     MOVE_COVET,
     MOVE_GRAVITY,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ZUBAT) + 20000, // Zubat line
     MOVE_QUICK_ATTACK,
     MOVE_PURSUIT,
@@ -150,6 +159,7 @@ const u16 EggMove_Table[] = {
     MOVE_HYPNOSIS,
     MOVE_ZEN_HEADBUTT,
     MOVE_BRAVE_BIRD,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ODDISH) + 20000, // Oddish line
     MOVE_SWORDS_DANCE,
     MOVE_RAZOR_LEAF,
@@ -159,6 +169,7 @@ const u16 EggMove_Table[] = {
     MOVE_INGRAIN,
     MOVE_TICKLE,
 	MOVE_TEETER_DANCE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PARAS) + 20000, // Paras line
     MOVE_FALSE_SWIPE,
     MOVE_SCREECH,
@@ -217,6 +228,7 @@ const u16 EggMove_Table[] = {
     MOVE_YAWN,
     MOVE_MUD_BOMB,
 	MOVE_ENCORE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MANKEY) + 20000, // Mankey line
     MOVE_ROCK_SLIDE,
     MOVE_FORESIGHT,
@@ -228,6 +240,7 @@ const u16 EggMove_Table[] = {
     MOVE_SMELLING_SALT,
     MOVE_CLOSE_COMBAT,
 	MOVE_ENCORE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_GROWLITHE) + 20000, // Growlithe line
     MOVE_BODY_SLAM,
     MOVE_SAFEGUARD,
@@ -261,6 +274,7 @@ const u16 EggMove_Table[] = {
     MOVE_ICE_PUNCH,
     MOVE_POWER_TRICK,
     MOVE_GUARD_SWAP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MACHOP) + 20000, // Machop line
     MOVE_LIGHT_SCREEN,
     MOVE_MEDITATE,
@@ -312,6 +326,7 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_EDGE,
     MOVE_HORN_DRILL, // Drill Run
 	MOVE_MORNING_SUN,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SLOWPOKE) + 20000, // Slowpoke line
     MOVE_SAFEGUARD,
     MOVE_BELLY_DRUM,
@@ -335,6 +350,7 @@ const u16 EggMove_Table[] = {
     MOVE_MUD_SLAP,
     MOVE_NIGHT_SLASH,
 	MOVE_LEAF_BLADE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_DODUO) + 20000, // Doduo line
     MOVE_QUICK_ATTACK,
     MOVE_SUPERSONIC,
@@ -357,6 +373,7 @@ const u16 EggMove_Table[] = {
 	MOVE_STOCKPILE,
 	MOVE_SWALLOW,
 	MOVE_SPIT_UP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_GRIMER) + 20000, // Grimer line
     MOVE_HAZE,
     MOVE_MEAN_LOOK, // Peek-A-Boo
@@ -369,6 +386,7 @@ const u16 EggMove_Table[] = {
     MOVE_STOCKPILE,
     MOVE_SWALLOW,
     MOVE_SPIT_UP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SHELLDER) + 20000, // Shellder line
     MOVE_BUBBLE_BEAM,
     MOVE_TAKE_DOWN,
@@ -390,6 +408,7 @@ const u16 EggMove_Table[] = {
     MOVE_ICE_PUNCH,
     MOVE_THUNDER_PUNCH,
 	MOVE_DISABLE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ONIX) + 20000, // Onix line
     MOVE_ROCK_SLIDE,
     MOVE_FLAIL,
@@ -398,6 +417,7 @@ const u16 EggMove_Table[] = {
     MOVE_DEFENSE_CURL,
     MOVE_ROLLOUT,
     MOVE_ROCK_BLAST,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_DROWZEE) + 20000, // Drowzee line
     MOVE_BARRIER,
     MOVE_ASSIST,
@@ -420,6 +440,8 @@ const u16 EggMove_Table[] = {
     MOVE_TICKLE,
     MOVE_ANCIENT_POWER,
 	MOVE_AGILITY,
+	(SPECIES_VOLTORB) + 20000, // Voltorb line
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_EXEGGCUTE) + 20000, // Exeggcute line
     MOVE_SYNTHESIS,
     MOVE_MOONLIGHT,
@@ -432,6 +454,7 @@ const u16 EggMove_Table[] = {
     MOVE_LUCKY_CHANT,
     MOVE_LEAF_STORM,
 	MOVE_POWER_SWAP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CUBONE) + 20000, // Cubone line
     MOVE_ROCK_SLIDE,
     MOVE_ANCIENT_POWER,
@@ -455,6 +478,7 @@ const u16 EggMove_Table[] = {
     MOVE_AMNESIA,
     MOVE_HAMMER_ARM,
 	MOVE_MUDDY_WATER,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_KOFFING) + 20000, // Koffing line
     MOVE_SCREECH,
     MOVE_PSYBEAM,
@@ -489,6 +513,7 @@ const u16 EggMove_Table[] = {
 	MOVE_MUD_BOMB,
 	MOVE_WISH,
 	MOVE_SEISMIC_TOSS,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TANGELA) + 20000, // Tangela line
     MOVE_FLAIL,
     MOVE_CONFUSION,
@@ -512,6 +537,7 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_EDGE,
     MOVE_ENDEAVOR,
     MOVE_HAMMER_ARM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_HORSEA) + 20000, // Horsea line
     MOVE_FLAIL,
     MOVE_AURORA_BEAM,
@@ -541,6 +567,7 @@ const u16 EggMove_Table[] = {
     MOVE_WAKE_UP_SLAP,
     MOVE_TEETER_DANCE,
 	MOVE_NASTY_PLOT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SCYTHER) + 20000, // Scyther line
     MOVE_COUNTER,
     MOVE_SAFEGUARD,
@@ -551,6 +578,7 @@ const u16 EggMove_Table[] = {
     MOVE_SILVER_WIND,
     MOVE_BUG_BUZZ,
     MOVE_NIGHT_SLASH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PINSIR) + 20000, // Pinsir
     MOVE_FURY_ATTACK, // Tantrum
     MOVE_FLAIL,
@@ -559,6 +587,8 @@ const u16 EggMove_Table[] = {
     MOVE_QUICK_ATTACK,
     MOVE_CLOSE_COMBAT,
     MOVE_FEINT,
+	(SPECIES_TAUROS) + 20000, // Tauros
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_LAPRAS) + 20000, // Lapras
     MOVE_FORESIGHT,
     MOVE_SUBSTITUTE,
@@ -570,6 +600,7 @@ const u16 EggMove_Table[] = {
     MOVE_HORN_DRILL, // Drill Run
     MOVE_ANCIENT_POWER,
     MOVE_WHIRLPOOL,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_EEVEE) + 20000, // Eevee line
     MOVE_CHARM,
     MOVE_FLAIL,
@@ -581,6 +612,7 @@ const u16 EggMove_Table[] = {
     MOVE_FAKE_TEARS,
     MOVE_COVET,
 	MOVE_DETECT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_OMANYTE) + 20000, // Omanyte line
     MOVE_BUBBLE_BEAM,
     MOVE_AURORA_BEAM,
@@ -620,6 +652,7 @@ const u16 EggMove_Table[] = {
     MOVE_WHIRLWIND,
     MOVE_PURSUIT,
 	MOVE_COUNTER,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_DRATINI) + 20000, // Dratini line
     MOVE_LIGHT_SCREEN,
     MOVE_MIST,
@@ -629,6 +662,11 @@ const u16 EggMove_Table[] = {
     MOVE_DRAGON_DANCE,
     MOVE_DRAGON_RUSH,
 	MOVE_EXTREME_SPEED,
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_MEWTWO) + 20000, // Mewtwo
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_MEW) + 20000, // Mew
+    MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CHIKORITA) + 20000, // Chikorita line
     MOVE_VINE_WHIP,
     MOVE_LEECH_SEED,
@@ -642,6 +680,7 @@ const u16 EggMove_Table[] = {
     MOVE_AROMATHERAPY,
     MOVE_WRING_OUT,
 	MOVE_BODY_SLAM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CYNDAQUIL) + 20000, // Cyndaquil line
     MOVE_FURY_SWIPES,
     MOVE_QUICK_ATTACK,
@@ -655,6 +694,7 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_KICK,
     MOVE_FLARE_BLITZ,
 	MOVE_EXTRASENSORY,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TOTODILE) + 20000, // Totodile line
     MOVE_CRUNCH,
     MOVE_THRASH,
@@ -678,6 +718,7 @@ const u16 EggMove_Table[] = {
     MOVE_LAST_RESORT,
     MOVE_CHARM,
     MOVE_COVET,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_HOOTHOOT) + 20000, // Hoothoot line
     MOVE_MIRROR_MOVE,
     MOVE_SUPERSONIC,
@@ -697,6 +738,7 @@ const u16 EggMove_Table[] = {
     MOVE_ENCORE,
     MOVE_KNOCK_OFF,
     MOVE_BUG_BITE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SPINARAK) + 20000, // Spinarak line
     MOVE_PSYBEAM,
     MOVE_DISABLE,
@@ -714,6 +756,7 @@ const u16 EggMove_Table[] = {
     MOVE_WHIRLPOOL,
     MOVE_AGILITY,
     MOVE_MIST,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PICHU) + 20000, // Pichu line
     MOVE_REVERSAL,
     MOVE_BIDE,
@@ -726,6 +769,7 @@ const u16 EggMove_Table[] = {
     MOVE_THUNDER_PUNCH,
     MOVE_TICKLE,
 	MOVE_FLAIL,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CLEFFA) + 20000, // Cleffa line
     MOVE_PRESENT,
     MOVE_METRONOME,
@@ -738,7 +782,8 @@ const u16 EggMove_Table[] = {
     MOVE_FAKE_TEARS,
     MOVE_COVET,
 	MOVE_AROMATHERAPY,
-    (SPECIES_IGGLYBUFF) + 20000, // Igglybuff
+	MOVE_SHARPEN, // Pregnancy Punch
+    (SPECIES_IGGLYBUFF) + 20000, // Scream Tail
     MOVE_PERISH_SONG,
     MOVE_PRESENT,
     MOVE_FAINT_ATTACK,
@@ -748,6 +793,7 @@ const u16 EggMove_Table[] = {
     MOVE_COVET,
     MOVE_GRAVITY,
 	MOVE_BATON_PASS,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TOGEPI) + 20000, // Togepi line
     MOVE_PRESENT,
     MOVE_MIRROR_MOVE,
@@ -760,6 +806,7 @@ const u16 EggMove_Table[] = {
     MOVE_PSYCHO_SHIFT,
     MOVE_LUCKY_CHANT,
 	MOVE_EXTRASENSORY,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_NATU) + 20000, // Natu line
     MOVE_HAZE,
     MOVE_DRILL_PECK,
@@ -781,6 +828,7 @@ const u16 EggMove_Table[] = {
     MOVE_CHARGE,
     MOVE_FLATTER,
     MOVE_SAND_ATTACK,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MARILL) + 20000, // Marill line
     MOVE_LIGHT_SCREEN,
     MOVE_PRESENT,
@@ -794,6 +842,7 @@ const u16 EggMove_Table[] = {
     MOVE_SUPERPOWER,
     MOVE_REFRESH,
 	MOVE_BODY_SLAM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SUDOWOODO) + 20000, // Sudowoodo
     MOVE_SELFDESTRUCT,
     MOVE_HEADBUTT,
@@ -811,6 +860,7 @@ const u16 EggMove_Table[] = {
     MOVE_PSYCH_UP,
     MOVE_AROMATHERAPY,
     MOVE_WORRY_SEED,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_AIPOM) + 20000, // Aipom line
     MOVE_COUNTER,
     MOVE_SCREECH,
@@ -831,6 +881,7 @@ const u16 EggMove_Table[] = {
     MOVE_HELPING_HAND,
     MOVE_INGRAIN,
     MOVE_SWEET_SCENT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_YANMA) + 20000, // Yanma line
     MOVE_WHIRLWIND,
     MOVE_REVERSAL,
@@ -877,6 +928,9 @@ const u16 EggMove_Table[] = {
     MOVE_SPITE,
     MOVE_OMINOUS_WIND,
 	MOVE_NASTY_PLOT,
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_UNOWN) + 20000, // Unown
+    MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_GIRAFARIG) + 20000, // Girafarig
     MOVE_TAKE_DOWN,
     MOVE_AMNESIA,
@@ -888,6 +942,7 @@ const u16 EggMove_Table[] = {
     MOVE_MAGIC_COAT,
     MOVE_DOUBLE_KICK,
     MOVE_MIRROR_COAT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PINECO) + 20000, // Pineco line
     MOVE_REFLECT,
     MOVE_PIN_MISSILE,
@@ -923,6 +978,7 @@ const u16 EggMove_Table[] = {
     MOVE_NIGHT_SLASH,
     MOVE_CROSS_POISON,
 	MOVE_POWER_TRICK,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SNUBBULL) + 20000, // Snubbull line
     MOVE_METRONOME,
     MOVE_FAINT_ATTACK,
@@ -953,6 +1009,7 @@ const u16 EggMove_Table[] = {
     MOVE_ACUPRESSURE,
     MOVE_SAND_TOMB,
     MOVE_MUD_SLAP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_HERACROSS) + 20000, // Heracross
     MOVE_HARDEN,
     MOVE_BIDE,
@@ -961,6 +1018,7 @@ const u16 EggMove_Table[] = {
     MOVE_REVENGE,
     MOVE_PURSUIT,
     MOVE_DOUBLE_EDGE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SNEASEL) + 20000, // Sneasel line
     MOVE_COUNTER,
     MOVE_SPITE,
@@ -974,6 +1032,7 @@ const u16 EggMove_Table[] = {
     MOVE_ICE_SHARD,
     MOVE_ICE_PUNCH,
 	MOVE_ASSIST,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TEDDIURSA) + 20000, // Teddiursa line
     MOVE_CRUNCH,
     MOVE_TAKE_DOWN,
@@ -988,6 +1047,7 @@ const u16 EggMove_Table[] = {
     MOVE_CLOSE_COMBAT,
     MOVE_NIGHT_SLASH,
 	MOVE_BELLY_DRUM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SLUGMA) + 20000, // Slugma line
     MOVE_ACID_ARMOR,
     MOVE_HEAT_WAVE,
@@ -1021,6 +1081,7 @@ const u16 EggMove_Table[] = {
     MOVE_AQUA_RING,
 	MOVE_CURSE,
 	MOVE_SPIKE_CANNON,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_REMORAID) + 20000, // Remoraid line
     MOVE_AURORA_BEAM,
     MOVE_OCTAZOOKA,
@@ -1032,6 +1093,7 @@ const u16 EggMove_Table[] = {
     MOVE_SNORE,
     MOVE_FLAIL,
 	MOVE_WATER_SPOUT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_DELIBIRD) + 20000, // Delibird
     MOVE_AURORA_BEAM,
     MOVE_QUICK_ATTACK,
@@ -1059,6 +1121,7 @@ const u16 EggMove_Table[] = {
     MOVE_BRAVE_BIRD,
     MOVE_ASSURANCE,
 	MOVE_GUARD_SWAP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_HOUNDOUR) + 20000, // Houndour line
     MOVE_FIRE_SPIN,
     MOVE_RAGE,
@@ -1073,6 +1136,7 @@ const u16 EggMove_Table[] = {
     MOVE_NASTY_PLOT,
     MOVE_PUNISHMENT,
 	MOVE_FEINT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PHANPY) + 20000, // Phanpy line
     MOVE_FOCUS_ENERGY,
     MOVE_BODY_SLAM,
@@ -1102,6 +1166,7 @@ const u16 EggMove_Table[] = {
     MOVE_COUNTER,
     MOVE_VACUUM_WAVE,
     MOVE_BULLET_PUNCH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SMOOCHUM) + 20000, // Smoochum line
     MOVE_MEDITATE,
     MOVE_PSYCH_UP,
@@ -1120,6 +1185,7 @@ const u16 EggMove_Table[] = {
     MOVE_ICE_PUNCH,
     MOVE_DYNAMIC_PUNCH,
 	MOVE_FEINT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MAGBY) + 20000, // Magby line
     MOVE_KARATE_CHOP,
     MOVE_BARRIER,
@@ -1130,6 +1196,7 @@ const u16 EggMove_Table[] = {
     MOVE_DYNAMIC_PUNCH,
     MOVE_FLARE_BLITZ,
 	MOVE_BELLY_DRUM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MILTANK) + 20000, // Miltank line
     MOVE_PRESENT,
     MOVE_REVERSAL,
@@ -1143,6 +1210,9 @@ const u16 EggMove_Table[] = {
     MOVE_HAMMER_ARM,
     MOVE_DOUBLE_EDGE,
     MOVE_PUNISHMENT,
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_SUICUNE) + 20000, // Suicune
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_LARVITAR) + 20000, // Larvitar line
     MOVE_PURSUIT,
     MOVE_STOMP,
@@ -1154,6 +1224,13 @@ const u16 EggMove_Table[] = {
     MOVE_IRON_DEFENSE,
     MOVE_ASSURANCE,
     MOVE_IRON_HEAD,
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_LUGIA) + 20000, // Lugia
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_HO_OH) + 20000, // Ho-Oh
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_CELEBI) + 20000, //Celebi
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TREECKO) + 20000, // Treecko line
     MOVE_CRUNCH,
     MOVE_CAMOUFLAGE,
@@ -1166,6 +1243,7 @@ const u16 EggMove_Table[] = {
     MOVE_SYNTHESIS,
     MOVE_MAGICAL_LEAF,
     MOVE_LEAF_STORM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TORCHIC) + 20000, // Torchic line
     MOVE_COUNTER,
     MOVE_REVERSAL,
@@ -1194,6 +1272,7 @@ const u16 EggMove_Table[] = {
     MOVE_MUD_BOMB,
 	MOVE_YAWN,
 	MOVE_SLUDGE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_POOCHYENA) + 20000, // Poochyena line
     MOVE_ASTONISH,
     MOVE_POISON_FANG,
@@ -1232,6 +1311,7 @@ const u16 EggMove_Table[] = {
     MOVE_WORRY_SEED,
     MOVE_NASTY_PLOT,
 	MOVE_POWER_SWAP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TAILLOW) + 20000, // Taillow line
     MOVE_PURSUIT,
     MOVE_SUPERSONIC,
@@ -1258,6 +1338,7 @@ const u16 EggMove_Table[] = {
     MOVE_SHADOW_SNEAK,
     MOVE_CONFUSE_RAY,
 	MOVE_ENCORE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SURSKIT) + 20000, // Surskit line
     MOVE_FORESIGHT,
     MOVE_MUD_SHOT,
@@ -1274,6 +1355,7 @@ const u16 EggMove_Table[] = {
     MOVE_WORRY_SEED,
     MOVE_WAKE_UP_SLAP,
     MOVE_SEED_BOMB,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SLAKOTH) + 20000, // Slakoth line
     MOVE_PURSUIT,
     MOVE_SLASH,
@@ -1284,6 +1366,7 @@ const u16 EggMove_Table[] = {
     MOVE_SLEEP_TALK,
     MOVE_HAMMER_ARM,
     MOVE_NIGHT_SLASH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_NINCADA) + 20000, // Nincada line
     MOVE_ENDURE,
     MOVE_FAINT_ATTACK,
@@ -1315,6 +1398,7 @@ const u16 EggMove_Table[] = {
     MOVE_BULLET_PUNCH,
 	MOVE_BELLY_DRUM,
 	MOVE_FEINT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_AZURILL) + 20000, //Azurill
     MOVE_ENCORE,
     MOVE_SING,
@@ -1323,6 +1407,7 @@ const u16 EggMove_Table[] = {
     MOVE_TICKLE,
     MOVE_FAKE_TEARS,
 	MOVE_BODY_SLAM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_NOSEPASS) + 20000, // Nosepass line
     MOVE_MAGNITUDE,
     MOVE_ROLLOUT,
@@ -1344,6 +1429,7 @@ const u16 EggMove_Table[] = {
     MOVE_ZEN_HEADBUTT,
     MOVE_SUCKER_PUNCH,
 	MOVE_MUD_BOMB,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SABLEYE) + 20000, // Sableye
     MOVE_PSYCH_UP,
     MOVE_RECOVER,
@@ -1365,6 +1451,7 @@ const u16 EggMove_Table[] = {
     MOVE_PUNISHMENT,
 	MOVE_GUARD_SWAP,
 	MOVE_BUBBLE, // Snap
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ARON) + 20000, // Aron line
     MOVE_ENDEAVOR,
     MOVE_BODY_SLAM,
@@ -1387,6 +1474,7 @@ const u16 EggMove_Table[] = {
     MOVE_GUARD_SWAP,
     MOVE_PSYCHO_CUT,
     MOVE_BULLET_PUNCH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ELECTRIKE) + 20000, // Electrike line
     MOVE_CRUNCH,
     MOVE_HEADBUTT,
@@ -1404,24 +1492,28 @@ const u16 EggMove_Table[] = {
     MOVE_SING,
     MOVE_SWEET_KISS,
 	MOVE_DISCHARGE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MINUN) + 20000, // Minun
     MOVE_SUBSTITUTE,
     MOVE_WISH,
     MOVE_SING,
     MOVE_SWEET_KISS,
 	MOVE_DISCHARGE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_VOLBEAT) + 20000, // Volbeat
     MOVE_BATON_PASS,
     MOVE_SILVER_WIND,
     MOVE_TRICK,
     MOVE_ENCORE,
     MOVE_BUG_BUZZ,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ILLUMISE) + 20000, // Illumise
     MOVE_BATON_PASS,
     MOVE_SILVER_WIND,
     MOVE_GROWTH,
     MOVE_ENCORE,
     MOVE_BUG_BUZZ,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ROSELIA) + 20000, // Roselia line
     MOVE_SPIKES,
     MOVE_SYNTHESIS,
@@ -1430,6 +1522,7 @@ const u16 EggMove_Table[] = {
     MOVE_SLEEP_POWDER,
     MOVE_RAZOR_LEAF,
     MOVE_LEAF_STORM,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_GULPIN) + 20000, // Gulpin line
     MOVE_DREAM_EATER,
     MOVE_ACID_ARMOR,
@@ -1437,6 +1530,7 @@ const u16 EggMove_Table[] = {
     MOVE_PAIN_SPLIT,
     MOVE_CURSE,
     MOVE_DESTINY_BOND,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CARVANHA) + 20000, // Carvanha line
     MOVE_HYDRO_PUMP,
     MOVE_DOUBLE_EDGE,
@@ -1467,6 +1561,7 @@ const u16 EggMove_Table[] = {
 	MOVE_STOCKPILE,
 	MOVE_SWALLOW,
 	MOVE_SPIT_UP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TORKOAL) + 20000, // Torkoal
     MOVE_ERUPTION,
     MOVE_ENDURE,
@@ -1482,6 +1577,7 @@ const u16 EggMove_Table[] = {
     MOVE_ZEN_HEADBUTT,
     MOVE_AMNESIA,
     MOVE_MIRROR_COAT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SPINDA) + 20000, // Spinda
     MOVE_ENCORE,
     MOVE_ROCK_SLIDE,
@@ -1494,6 +1590,7 @@ const u16 EggMove_Table[] = {
     MOVE_FAKE_OUT,
     MOVE_ROLE_PLAY,
     MOVE_PSYCHO_CUT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TRAPINCH) + 20000, // Trapinch line
     MOVE_FOCUS_ENERGY,
     MOVE_QUICK_ATTACK,
@@ -1501,6 +1598,7 @@ const u16 EggMove_Table[] = {
     MOVE_FLAIL,
     MOVE_FURY_CUTTER,
 	MOVE_MUD_SHOT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CACNEA) + 20000, // Cacnea line
     MOVE_GRASS_WHISTLE,
     MOVE_ACID,
@@ -1530,6 +1628,7 @@ const u16 EggMove_Table[] = {
     MOVE_NIGHT_SLASH,
     MOVE_METAL_CLAW,
 	MOVE_DISABLE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SEVIPER) + 20000, // Seviper
     MOVE_STOCKPILE,
     MOVE_SWALLOW,
@@ -1539,6 +1638,7 @@ const u16 EggMove_Table[] = {
     MOVE_ASSURANCE,
     MOVE_NIGHT_SLASH,
 	MOVE_SWITCHEROO,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_BARBOACH) + 20000, // Barboach line
     MOVE_THRASH,
     MOVE_WHIRLPOOL,
@@ -1588,6 +1688,7 @@ const u16 EggMove_Table[] = {
     MOVE_DISABLE,
     MOVE_AMNESIA,
     MOVE_OMINOUS_WIND,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_KECLEON) + 20000, // Kecleon
     MOVE_DISABLE,
     MOVE_MAGIC_COAT,
@@ -1606,6 +1707,7 @@ const u16 EggMove_Table[] = {
     MOVE_SHADOW_SNEAK,
     MOVE_PAYBACK,
     MOVE_CONFUSE_RAY,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_DUSKULL) + 20000, // Duskull line
     MOVE_IMPRISON,
     MOVE_DESTINY_BOND,
@@ -1614,6 +1716,7 @@ const u16 EggMove_Table[] = {
     MOVE_MEMENTO,
     MOVE_FAINT_ATTACK,
     MOVE_OMINOUS_WIND,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TROPIUS) + 20000, // Tropius
     MOVE_HEADBUTT,
     MOVE_RAZOR_WIND, // Hurricane
@@ -1631,6 +1734,7 @@ const u16 EggMove_Table[] = {
     MOVE_DREAM_EATER,
     MOVE_WISH,
     MOVE_FUTURE_SIGHT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_ABSOL) + 20000, // Absol
     MOVE_BATON_PASS,
     MOVE_FAINT_ATTACK,
@@ -1685,6 +1789,7 @@ const u16 EggMove_Table[] = {
     MOVE_CAPTIVATE,
     MOVE_AQUA_RING,
 	MOVE_AQUA_JET,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_BAGON) + 20000, // Bagon line
     MOVE_HYDRO_PUMP,
     MOVE_THRASH,
@@ -1694,6 +1799,16 @@ const u16 EggMove_Table[] = {
     MOVE_FIRE_FANG,
     MOVE_SHADOW_CLAW,
     MOVE_DRAGON_RUSH,
+	(SPECIES_LATIAS) + 20000, // Latias
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_LATIOS) + 20000, // Latios
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_GROUDON) + 20000, // Groudon
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_JIRACHI) + 20000, // Jirachi
+	MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_DEOXYS) + 20000, // Deoxys
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_TURTWIG) + 20000, // Turtwig line
     MOVE_WORRY_SEED,
     MOVE_GROWTH,
@@ -1708,6 +1823,7 @@ const u16 EggMove_Table[] = {
 	MOVE_STOCKPILE,
 	MOVE_SWALLOW,
 	MOVE_SPIT_UP,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CHIMCHAR) + 20000, // Chimchar line
     MOVE_FIRE_PUNCH,
     MOVE_THUNDER_PUNCH,
@@ -1730,6 +1846,7 @@ const u16 EggMove_Table[] = {
     MOVE_AQUA_RING,
     MOVE_HYDRO_PUMP,
 	MOVE_FEATHER_DANCE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_STARLY) + 20000, // Starly line
     MOVE_FEATHER_DANCE,
     MOVE_PURSUIT,
@@ -1754,6 +1871,7 @@ const u16 EggMove_Table[] = {
     MOVE_HOWL,
     MOVE_TAKE_DOWN,
 	MOVE_NIGHT_SLASH,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_BUDEW) + 20000, // Budew
     MOVE_SPIKES,
     MOVE_SYNTHESIS,
@@ -1763,6 +1881,7 @@ const u16 EggMove_Table[] = {
     MOVE_RAZOR_LEAF,
     MOVE_LEAF_STORM,
     MOVE_EXTRASENSORY,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CRANIDOS) + 20000, // Cranidos line
     MOVE_CRUNCH,
     MOVE_THRASH,
@@ -1784,6 +1903,8 @@ const u16 EggMove_Table[] = {
     MOVE_CURSE,
     MOVE_FISSURE, // Peat Slide
 	MOVE_COUNTER,
+	(SPECIES_MOTHIM) + 20000, // Mothim
+    MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_PACHIRISU) + 20000, // Pachirisu line
     MOVE_COVET,
     MOVE_BITE,
@@ -1792,6 +1913,7 @@ const u16 EggMove_Table[] = {
     MOVE_ROLLOUT,
     MOVE_FLATTER,
     MOVE_FLAIL,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_BUIZEL) + 20000, // Buizel line
     MOVE_MUD_SLAP,
     MOVE_HEADBUTT,
@@ -1801,6 +1923,7 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_SLAP,
     MOVE_FURY_CUTTER,
     MOVE_BATON_PASS,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CHERUBI) + 20000, // Cherubi line
     MOVE_RAZOR_LEAF,
     MOVE_SWEET_SCENT,
@@ -1809,6 +1932,7 @@ const u16 EggMove_Table[] = {
     MOVE_GRASS_WHISTLE,
     MOVE_AROMATHERAPY,
 	MOVE_WEATHER_BALL,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SHELLOS) + 20000, // Shellos line
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
@@ -1843,6 +1967,7 @@ const u16 EggMove_Table[] = {
     MOVE_ICE_PUNCH,
     MOVE_FIRE_PUNCH,
 	MOVE_FLAIL,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_GLAMEOW) + 20000, // Glameow line
     MOVE_BITE,
     MOVE_TAIL_WHIP,
@@ -1851,6 +1976,7 @@ const u16 EggMove_Table[] = {
     MOVE_FAKE_TEARS,
     MOVE_ASSURANCE,
 	MOVE_FLAIL,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CHINGLING) + 20000, // Chingling
     MOVE_DISABLE,
     MOVE_CURSE,
@@ -1859,6 +1985,7 @@ const u16 EggMove_Table[] = {
     MOVE_WISH,
     MOVE_FUTURE_SIGHT,
     MOVE_RECOVER,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_STUNKY) + 20000, // Stunky line
     MOVE_PURSUIT,
     MOVE_LEER,
@@ -1869,6 +1996,7 @@ const u16 EggMove_Table[] = {
     MOVE_ASTONISH,
     MOVE_PUNISHMENT,
 	MOVE_HAZE,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_BONSLY) + 20000, // Bonsly
     MOVE_SELFDESTRUCT,
     MOVE_HEADBUTT,
@@ -1889,6 +2017,7 @@ const u16 EggMove_Table[] = {
     MOVE_HEALING_WISH,
     MOVE_CHARM,
 	MOVE_NASTY_PLOT,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_HAPPINY) + 20000, // Happiny
     MOVE_PRESENT,
     MOVE_METRONOME,
@@ -1902,12 +2031,14 @@ const u16 EggMove_Table[] = {
 	MOVE_MUD_BOMB,
 	MOVE_WISH,
 	MOVE_SEISMIC_TOSS,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CHATOT) + 20000, // Chatot
     MOVE_ENCORE,
     MOVE_NIGHT_SHADE,
     MOVE_AGILITY,
     MOVE_NASTY_PLOT,
     MOVE_SUPERSONIC,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_SPIRITOMB) + 20000, // Spiritomb
     MOVE_DESTINY_BOND,
     MOVE_PAIN_SPLIT,
@@ -1937,6 +2068,7 @@ const u16 EggMove_Table[] = {
     MOVE_PURSUIT,
     MOVE_ZEN_HEADBUTT,
 	MOVE_COUNTER,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_RIOLU) + 20000, // Riolu line
     MOVE_CROSS_CHOP,
     MOVE_DETECT,
@@ -1951,6 +2083,7 @@ const u16 EggMove_Table[] = {
     MOVE_BLAZE_KICK,
     MOVE_BULLET_PUNCH,
 	MOVE_FOLLOW_ME,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_HIPPOPOTAS) + 20000, // Hippopotas line
     MOVE_STOCKPILE,
     MOVE_SWALLOW,
@@ -1983,6 +2116,7 @@ const u16 EggMove_Table[] = {
     MOVE_CROSS_CHOP,
     MOVE_BULLET_PUNCH,
 	MOVE_COUNTER,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_CARNIVINE) + 20000, // Carnivine line
     MOVE_SLEEP_POWDER,
     MOVE_STUN_SPORE,
@@ -1999,6 +2133,7 @@ const u16 EggMove_Table[] = {
     MOVE_PSYBEAM,
     MOVE_TICKLE,
     MOVE_AGILITY,
+	MOVE_SHARPEN, // Pregnancy Punch
     (SPECIES_MANTYKE) + 20000, // Mantyke
     MOVE_TWISTER,
     MOVE_HYDRO_PUMP,
@@ -2016,6 +2151,20 @@ const u16 EggMove_Table[] = {
     MOVE_MIST,
     MOVE_STOMP,
 	MOVE_SKULL_BASH,
+	(SPECIES_ROTOM) + 20000, // Rotom
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_UXIE) + 20000, // Uxie
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_MESPRIT) + 20000, // Mesprit
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_AZELF) + 20000, // Azelf
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_DIALGA) + 20000, // Dialga
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_REGIGIGAS) + 20000, // Regigigas
+    MOVE_SHARPEN, // Pregnancy Punch
+	(SPECIES_SHAYMIN) + 20000, // Shaymin
+    MOVE_SHARPEN, // Pregnancy Punch
     0xffff,
 };
 

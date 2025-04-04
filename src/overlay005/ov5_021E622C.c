@@ -637,6 +637,7 @@ static u8 ov5_021E68D8 (Pokemon * param0, u16 * param1)
 {
     u16 v0, v1, v2, v3;
 	int eggMovesSize = sizeof(EggMove_Table);
+	int eggMoveMax = 32;
 
     v2 = 0;
     v1 = 0;
@@ -649,7 +650,7 @@ static u8 ov5_021E68D8 (Pokemon * param0, u16 * param1)
         }
     }
 
-    for (v3 = 0; v3 < 16; v3++) {
+    for (v3 = 0; v3 < eggMoveMax; v3++) {
         if (EggMove_Table[v1 + v3] > 20000) {
             break;
         } else {
