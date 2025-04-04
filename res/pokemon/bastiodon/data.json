@@ -107,7 +107,7 @@
             "36": "MOVE_ENDURE",
 			"38": "MOVE_SLAM",
             "43": "MOVE_IRON_HEAD",
-			"45": "MOVE_RECOVER",
+			"45": "MOVE_SLACK_OFF",
 			"53": "MOVE_SHEER_COLD",
             "55": "MOVE_ROCK_WRECKER"
         },

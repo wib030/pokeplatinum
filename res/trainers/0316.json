@@ -20,9 +20,22 @@
 				"MOVE_U_TURN",
 				"MOVE_KNOCK_OFF"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_GASTRODON",
@@ -93,7 +106,7 @@
                 "MOVE_STONE_EDGE",
 				"MOVE_AQUA_TAIL",
 				"MOVE_MAGNITUDE",
-				"MOVE_SUBSTITUTE"
+				"MOVE_ROCK_POLISH"
             ],
             "power": 255,
             "ball_seal": 0,

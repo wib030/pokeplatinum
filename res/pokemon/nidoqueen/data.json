@@ -119,7 +119,7 @@
 			"30": "MOVE_GUILLOTINE",
 			"35": "MOVE_TOXIC_SPIKES",
 			"38": "MOVE_FLATTER",
-			"40": "MOVE_RECOVER",
+			"40": "MOVE_SLACK_OFF",
             "43": [ 
 				"MOVE_EARTH_POWER",
 				"MOVE_CRUNCH"

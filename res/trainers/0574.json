@@ -30,7 +30,7 @@
             "level": 68,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_RECOVER",
+                "MOVE_SLACK_OFF",
                 "MOVE_EARTHQUAKE",
                 "MOVE_SUPER_FANG",
                 "MOVE_ROAR"

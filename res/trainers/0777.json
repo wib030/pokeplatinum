@@ -29,7 +29,7 @@
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_TOXIC",
-                "MOVE_RECOVER",
+                "MOVE_SLACK_OFF",
                 "MOVE_STOCKPILE",
                 "MOVE_ICY_WIND"
             ],

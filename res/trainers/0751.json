@@ -18,7 +18,7 @@
                 "MOVE_STEALTH_ROCK",
                 "MOVE_AVALANCHE",
                 "MOVE_PSYCHO_SHIFT",
-                "MOVE_RECOVER"
+                "MOVE_SLACK_OFF"
             ],
             "power": 255,
             "ball_seal": 0

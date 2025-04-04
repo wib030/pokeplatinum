@@ -19,7 +19,7 @@
             "level": 48,
             "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_RECOVER",
+                "MOVE_SLACK_OFF",
 				"MOVE_AQUA_RING",
 				"MOVE_DIVE",
 				"MOVE_STOCKPILE"
@@ -48,7 +48,7 @@
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AQUA_RING",
-				"MOVE_RECOVER",
+				"MOVE_SLACK_OFF",
 				"MOVE_STOCKPILE",
 				"MOVE_DIVE"
             ],

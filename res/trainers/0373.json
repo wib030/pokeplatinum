@@ -43,7 +43,7 @@
             "level": 65,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_RECOVER",
+                "MOVE_SLACK_OFF",
 				"MOVE_EARTH_POWER",
 				"MOVE_FLAMETHROWER",
 				"MOVE_POISON_FANG"

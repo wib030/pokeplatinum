@@ -1,12 +1,12 @@
 {
     "name": "Dewgong",
     "base_stats": {
-        "hp": 90,
-        "attack": 70,
-        "defense": 80,
-        "speed": 70,
-        "special_attack": 70,
-        "special_defense": 95
+        "hp": 100,
+        "attack": 90,
+        "defense": 90,
+        "speed": 79,
+        "special_attack": 100,
+        "special_defense": 115
     },
     "types": [
         "TYPE_WATER",
@@ -100,9 +100,10 @@
 			"33": "MOVE_HYPER_VOICE",
             "38": "MOVE_PSYBEAM",
             "41": "MOVE_SWEET_KISS",
-            "43": "MOVE_RECOVER",
+            "43": "MOVE_SLACK_OFF",
 			"44": "MOVE_MIRROR_COAT",
-            "47": "MOVE_ICE_BEAM",
+            "45": "MOVE_ICE_BEAM",
+			"47": "MOVE_DOUBLE_HIT",
 			"49": "MOVE_MIND_READER",
             "51": "MOVE_MIST"
         },

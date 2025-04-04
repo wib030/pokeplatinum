@@ -32,7 +32,7 @@
             "moves": [
                 "MOVE_ICY_WIND",
 				"MOVE_STOCKPILE",
-				"MOVE_RECOVER",
+				"MOVE_SLACK_OFF",
 				"MOVE_ENCORE"
             ],
             "power": 200,

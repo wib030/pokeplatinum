@@ -46,7 +46,7 @@
                 "MOVE_TOXIC_SPIKES",
 				"MOVE_SUPER_FANG",
 				"MOVE_ROAR",
-				"MOVE_RECOVER"
+				"MOVE_SLACK_OFF"
             ],
             "power": 255,
             "ball_seal": 15

@@ -89,7 +89,7 @@
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_STOCKPILE",
-				"MOVE_RECOVER",
+				"MOVE_SLACK_OFF",
 				"MOVE_SUPER_FANG",
 				"MOVE_WHIRLPOOL"
             ],
