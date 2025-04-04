@@ -2395,6 +2395,7 @@ static BOOL BtlCmd_TryTailwind(BattleSystem *battleSys, BattleContext *battleCtx
 static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2660,7 +2661,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_TryTailwind,
 	BtlCmd_TryGravity,
     BtlCmd_PregnancyPunch,
-	BtlCmd_CheckSoundMove
+	BtlCmd_CheckSoundMove,
+	BtlCmd_CalcChumRushPower
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -5180,37 +5182,75 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
     int hitChance = BattleSystem_RandNext(battleSys) % 10;
     int hits = BattleScript_Read(battleCtx);
     int flags = BattleScript_Read(battleCtx);
+	int maxHits = BattleScript_Read(battleCtx);
 	int attackerSide = Battler_Side(battleSys, battleCtx->attacker);
 
     if (battleCtx->multiHitNumHits == 0) {
         if (hits == 0) {
-            if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
-                hits = 5;
-            } 
-            else {
-                hits = 2;
-                if (hitChance < 7) { // 70% chance for 2 or 3 hits
-                    hits += hitChance & 1; // 2 or 3 hits
-                }
-                else { // 30% chance for 4 or 5 hits
-                    hits += (hitChance & 1) + 2; // 4 or 5 hits
-                }
-            }
-			
-			if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_LOADED_DICE)
+			if (maxHits == 10)
 			{
-                hits = (hitChance & 1) + 4;
+				if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
+					hits = maxHits;
+				}
+				else {
+					if (hitChance < 3) {
+					  hits += 2 + BattleSystem_RandNext(battleSys) % 2;
+					}
+					else if (hitChance >= 3 && hitChance <= 6) {
+					  hits += 4 + (BattleSystem_RandNext(battleSys) % 4);
+					}
+					else {
+					  hits += 8 + (BattleSystem_RandNext(battleSys) % 3);
+					}
+				}
+			}
+			else
+			{
+				if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
+					hits = maxHits;
+				}
+				else {
+					hits = 2;
+					if (hitChance < 7) { // 70% chance for 2 or 3 hits
+						hits += hitChance & 1; // 2 or 3 hits
+					}
+					else { // 30% chance for 4 or 5 hits
+						hits += (hitChance & 1) + 2; // 4 or 5 hits
+					}
+				}
 			}
 			
-			if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+			if ((Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_LOADED_DICE)
+			&& (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SKILL_LINK))
 			{
-                hits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+				hits = (hitChance & 1) + 4;
 			}
 			
-			if ((battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
-			&& (hits < 3))
+			if ((Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+			&& (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SKILL_LINK))
 			{
-				hits = 3;
+				hits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+				
+				if (maxHits == 10)
+				{
+					hits += (BattleSystem_RandNext(battleSys) % 3) + 3;
+				}
+			}
+			
+			if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+			{
+				if (maxHits == 10)
+				{
+					if (hits < 6)
+					{
+						hits = 6;
+					}
+				}
+				
+				if (hits < 3)
+				{
+					hits = 3;
+				}
 			}
         }
         battleCtx->multiHitCounter = hits;
@@ -12558,6 +12598,8 @@ static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx)
  */
 static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+	BattleScript_Iter(battleCtx, 1);
+	
     int i, j, p, loops, maxIVsInherited;
     int statRand, IVRandSeed, statRandReroll, monOTIDSource;
     int battlerPregnant;
@@ -12606,8 +12648,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     isOpenEggSlot = FALSE;
     flagVoltTackle = FALSE;
     eggPartySlot = 6;
-
-    BattleScript_Iter(battleCtx, 1);
 
     defendingMon = BattleSystem_PartyPokemon(battleSys, battleCtx->defender, battleCtx->selectedPartySlot[battleCtx->defender]);
     attackingMon = BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->selectedPartySlot[battleCtx->attacker]);
@@ -13475,6 +13515,41 @@ static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battle
 	{
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
+
+    return FALSE;
+}
+
+/**
+ * @brief Calculate the power for Chum Rush according to the defenders's
+ * max and current HP.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int HPMult;
+	
+	if ((DEFENDING_MON.curHP <= (DEFENDING_MON.maxHP / 8))
+	|| DEFENDING_MON.curHP <= 0)
+	{
+		HPMult = 800; // Multiplier cap
+	}
+	else
+	{
+	  HPMult = 100 * DEFENDING_MON.maxHP / DEFENDING_MON.curHP;
+
+	  if (HPMult <= 0)
+	  {
+		HPMult = 100;
+	  }
+	}
+	
+	battleCtx->movePower = CURRENT_MOVE_DATA.power;
+	battleCtx->movePower = battleCtx->movePower * 2 / 3;
+	battleCtx->movePower = battleCtx->movePower * HPMult / 100;
 
     return FALSE;
 }

@@ -330,10 +330,11 @@
     .long 48
     .endm
 
-    .macro SetMultiHit hits, flags
+    .macro SetMultiHit hits, flags, maxHits
     .long 49
     .long \hits
     .long \flags
+	.long \maxHits
     .endm
 
     .macro UpdateVar op, var, val
@@ -1265,6 +1266,10 @@
 	.macro CheckSoundMove jump_no_effect
     .long 228
     .long (\jump_no_effect-.) / 4 - 1
+    .endm
+	
+	.macro CalcChumRushPower
+    .long 229
     .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

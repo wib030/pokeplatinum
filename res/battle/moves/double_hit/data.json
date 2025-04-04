@@ -2,11 +2,11 @@
     "name": "Chum Rush",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_WATER",
-    "power": 80,
+    "power": 10,
     "accuracy": 85,
     "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_WHIRLPOOL",
+        "type": "BATTLE_EFFECT_MULTI_HIT_TEN",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",

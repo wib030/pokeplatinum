@@ -8780,6 +8780,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 	u32 effectiveness;
     int multiHitChance;
     int multiHitHits;
+	int multiHitMaxHits;
 	
 	u16 fullAttackStat, fullSpAttackStat;
     
