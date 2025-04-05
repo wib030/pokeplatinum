@@ -870,7 +870,6 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
 				battleCtx->battleMons[battler].rivalryFlag = FALSE;
 				battleCtx->battleMons[battler].unownEnergyStrongFlag = FALSE;
 				battleCtx->battleMons[battler].unownEnergyWeakFlag = FALSE;
-				battleCtx->battleMons[battler].steadfastFlag = FALSE;
             }
 
             battleCtx->turnStartCheckState++;
