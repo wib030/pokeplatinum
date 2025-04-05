@@ -297,11 +297,16 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 			
 			int monLevel = trmon[i].level;
 			int otIdSource = OTID_NOT_SHINY;
-			int monPersonality = trmon[i].nature;
+			int monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
 			
 			if (trmon[i].isShiny == 1)
 			{
 				otIdSource = OTID_ALWAYS_SHINY;
+			}
+			
+			if (trmon[i].nature < 25)
+			{
+				monPersonality = trmon[i].nature;
 			}
 			
 			if (trmon[i].gender < 2)
