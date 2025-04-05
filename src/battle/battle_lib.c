@@ -6076,31 +6076,6 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         }
         break;
 
-//    case ABILITY_COLOR_CHANGE:
-//        u8 moveType;
-//
-//        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
-//            moveType = TYPE_NORMAL;
-//        } else if (battleCtx->moveType) {
-//            moveType = battleCtx->moveType;
-//        } else {
-//            moveType = CURRENT_MOVE_DATA.type;
-//        }
-//
-//        if (DEFENDING_MON.curHP
-//                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-//                && battleCtx->moveCur != MOVE_STRUGGLE
-//                && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
-//                && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-//                && CURRENT_MOVE_DATA.power
-//                && BattleMon_Get(battleCtx, battleCtx->defender, 27, NULL) != moveType
-//                && BattleMon_Get(battleCtx, battleCtx->defender, 28, NULL) != moveType) {
-//            *subscript = subscript_color_change;
-//            battleCtx->msgTemp = moveType;
-//            result = TRUE;
-//        }
-//        break;
-
     case ABILITY_ROUGH_SKIN:
         if (ATTACKING_MON.curHP
                 && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD

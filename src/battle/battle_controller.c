@@ -3957,7 +3957,7 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
             int abilitySeqNew;
 
             battleCtx->afterMoveMessageState++;
-            if (BattleSystem_TriggerAbilityOnHit(battleSys, battleCtx, &abilitySeqNew) == TRUE) {
+            if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &abilitySeqNew) == TRUE) {
                 LOAD_SUBSEQ(abilitySeqNew);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
