@@ -92,12 +92,12 @@
 			"21": "MOVE_FEINT",
 			"23": "MOVE_DOUBLE_TEAM",
 			"26": "MOVE_SPARK",
+			"28": "MOVE_ZAP_CANNON",
             "30": "MOVE_AGILITY",
 			"34": "MOVE_DISCHARGE",
-			"36": "MOVE_ZAP_CANNON",
 			"42": "MOVE_THUNDERBOLT",
+			"46": "MOVE_VOLT_TACKLE",
             "48": "MOVE_THUNDER",
-			"51": "MOVE_VOLT_TACKLE",
 			"53": "MOVE_LIGHT_SCREEN"
         },
         "tutor": [
