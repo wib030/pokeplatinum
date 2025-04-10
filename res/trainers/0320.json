@@ -18,8 +18,8 @@
             "moves": [
                 "MOVE_THUNDER",
 				"MOVE_RAZOR_WIND",
-				"MOVE_U_TURN",
-				"MOVE_WEATHER_BALL"
+				"MOVE_ROOST",
+				"MOVE_U_TURN"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -30,20 +30,20 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 0,
-			"evATK": 4,
-			"evDEF": 0,
-			"evSPEED": 252,
-			"evSPATK": 252,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 4,
 			"evSPDEF": 0,
-			"nature": 11,
+			"nature": 5,
 			"ability": 1
         },
         {
             "species": "SPECIES_LANTURN",
             "form": 0,
             "level": 57,
-            "item": "ITEM_AIR_BALLOON",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
 				"MOVE_THUNDER",
@@ -70,11 +70,11 @@
         },
 		{
             "species": "SPECIES_ROTOM",
-            "form": 2,
+            "form": 5,
             "level": 57,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
-                "MOVE_HYDRO_PUMP",
+                "MOVE_LEAF_STORM",
 				"MOVE_THUNDER",
 				"MOVE_NASTY_PLOT",
 				"MOVE_SHADOW_BALL"
@@ -88,13 +88,13 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 128,
+			"evHP": 0,
 			"evATK": 0,
 			"evDEF": 0,
-			"evSPEED": 128,
+			"evSPEED": 252,
 			"evSPATK": 252,
-			"evSPDEF": 0,
-			"nature": 15
+			"evSPDEF": 4,
+			"nature": 10
         },
         {
             "species": "SPECIES_AMPHAROS",
