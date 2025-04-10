@@ -6610,7 +6610,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             break;
 
         case HOLD_EFFECT_HP_RESTORE_SPICY:
-            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 2) {
+            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 4) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SPICY;
 
@@ -6625,7 +6625,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             break;
 
         case HOLD_EFFECT_HP_RESTORE_DRY:
-            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 2) {
+            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 4) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_DRY;
 
@@ -6640,7 +6640,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             break;
 
         case HOLD_EFFECT_HP_RESTORE_SWEET:
-            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 2) {
+            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 4) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SWEET;
 
@@ -6655,7 +6655,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             break;
 
         case HOLD_EFFECT_HP_RESTORE_BITTER:
-            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 2) {
+            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 4) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_BITTER;
 
@@ -6670,7 +6670,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
             break;
 
         case HOLD_EFFECT_HP_RESTORE_SOUR:
-            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 2) {
+            if (battleCtx->battleMons[battler].curHP <= battleCtx->battleMons[battler].maxHP / 4) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SOUR;
 
