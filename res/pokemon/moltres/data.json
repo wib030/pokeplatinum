@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_FLAME_BODY",
-        "ABILITY_NONE"
+        "ABILITY_DROUGHT"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
