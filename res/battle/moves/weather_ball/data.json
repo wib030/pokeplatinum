@@ -1,7 +1,7 @@
 {
     "name": "Weather Ball",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_FLYING",
     "power": 60,
     "accuracy": 100,
     "pp": 10,

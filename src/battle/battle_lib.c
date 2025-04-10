@@ -9424,8 +9424,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
         case ABILITY_FORECAST:
             // Castform offensive boosts
-		    // Rainy form
             if (NO_CLOUD_NINE) {
+				// Rainy form
 		        if (fieldConditions & FIELD_CONDITION_RAINING)
 		        {
 			        attackStat = attackStat / 2;
@@ -9444,7 +9444,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 			        spAttackStat = spAttackStat * 5 / 3;
 		        }
 		        // Sandy form
-		        if ((fieldConditions & FIELD_CONDITION_SANDSTORM) && attackerParams.ability == ABILITY_FORECAST)
+		        if (fieldConditions & FIELD_CONDITION_SANDSTORM)
 		        {
 			        attackStat = attackStat * 3 / 2;
 			        spAttackStat = spAttackStat * 4 / 3;
