@@ -4315,7 +4315,7 @@ BOOL Pokemon_SetRotomForm(Pokemon *mon, int monForm, int moveSlot)
         MOVE_OVERHEAT,
         MOVE_HYDRO_PUMP,
         MOVE_BLIZZARD,
-        MOVE_AIR_SLASH,
+        MOVE_RAZOR_WIND,
         MOVE_LEAF_STORM
     };
 

@@ -84,7 +84,6 @@
                 "MOVE_ASTONISH",
                 "MOVE_THUNDER_WAVE",
                 "MOVE_THUNDER_SHOCK",
-				"MOVE_RAZOR_WIND",
                 "MOVE_CONFUSE_RAY"
             ],
             "8": "MOVE_UPROAR",
