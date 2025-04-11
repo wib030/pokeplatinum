@@ -304,11 +304,6 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 				otIdSource = OTID_ALWAYS_SHINY;
 			}
 			
-			if (trmon[i].nature < 25)
-			{
-				monPersonality = trmon[i].nature;
-			}
-			
 			if (trmon[i].gender < 2)
 			{
 				PokemonPersonalData *monPersonalData = PokemonPersonalData_FromMonSpecies(species, 0);
@@ -323,6 +318,11 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 			//TRUE is whether or not to enable nature, rnd value decides the nature
             Pokemon_InitWith(mon, species, monLevel, ivs, TRUE, monPersonality, otIdSource, 0);
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
+			
+			if (trmon[i].nature < 25)
+			{
+				Pokemon_SetValue(mon, MON_DATA_NATURE, &trmon[i].nature);
+			}
 			
 			u32 ability1 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_1);
 			u32 ability2 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_2);
