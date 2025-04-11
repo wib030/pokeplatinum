@@ -1271,5 +1271,10 @@
 	.macro CalcChumRushPower
     .long 229
     .endm
+	
+	.macro RollNextStatBoost battler
+    .long 230
+	.long \battler
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

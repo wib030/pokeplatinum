@@ -2546,6 +2546,7 @@ static BOOL BtlCmd_TryGravity(BattleSystem *battleSys, BattleContext *battleCtx)
 static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2812,7 +2813,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_TryGravity,
     BtlCmd_PregnancyPunch,
 	BtlCmd_CheckSoundMove,
-	BtlCmd_CalcChumRushPower
+	BtlCmd_CalcChumRushPower,
+	BtlCmd_RollNextStatBoost
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13704,6 +13706,30 @@ static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *bat
     return FALSE;
 }
 
+static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+	BattleScript_Iter(battleCtx, 1);
+	int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+	int i;
+	
+	for (i = 0; i < 5; i++) {
+		if (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK + i] < 12) {
+			break;
+		}
+	}
+
+	if (i != 5) {
+		do {
+			i = BattleSystem_RandNext(battleSys) % 5;
+		} while (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK + i] == 12);
+
+		battleCtx->msgTemp = BATTLE_STAT_ATTACK + i;
+	}
+	
+	return FALSE;
+}
+
 /**
  * @brief Read a 4-byte chunk from the loaded script and increment the cursor.
  * 
@@ -15238,6 +15264,18 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
 			
 		case ITEM_PREMIER_BALL:
 			if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MILTANK) {
+				ballMod = 40;
+			}
+			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_TAUROS) {
+				ballMod = 40;
+			}
+			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MACHOP) {
+				ballMod = 40;
+			}
+			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MACHOKE) {
+				ballMod = 40;
+			}
+			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MACHAMP) {
 				ballMod = 40;
 			}
 			break;

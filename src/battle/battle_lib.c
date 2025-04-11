@@ -6780,7 +6780,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                     } while (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK + i] == 12);
 
                     battleCtx->msgTemp = BATTLE_STAT_ATTACK + i;
-                    subscript = subscript_held_item_sharply_raise_stat;
+                    subscript = subscript_starf_berry;
                     result = TRUE;
                 }
             }
@@ -7205,7 +7205,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                     } while (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK + i] == 12);
 
                     battleCtx->msgTemp = BATTLE_STAT_ATTACK + i;
-                    *subscript = subscript_held_item_sharply_raise_stat;
+                    *subscript = subscript_starf_berry;
                     result = TRUE;
                 }
             }
