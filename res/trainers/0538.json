@@ -20,7 +20,7 @@
                 "MOVE_CHARGE_BEAM",
                 "MOVE_PSYCH_UP"
             ],
-            "power": 120,
+            "power": 100,
             "ball_seal": 0
         },
         {
@@ -34,7 +34,7 @@
                 "MOVE_SCREECH",
                 "MOVE_DIG"
             ],
-            "power": 120,
+            "power": 100,
             "ball_seal": 0
         }
     ]

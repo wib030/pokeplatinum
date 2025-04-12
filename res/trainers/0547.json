@@ -21,7 +21,7 @@
                 "MOVE_PROTECT",
                 "MOVE_UPROAR"
             ],
-            "power": 200,
+            "power": 100,
             "ball_seal": 0
         },
 		{
@@ -35,7 +35,7 @@
                 "MOVE_GRASS_WHISTLE",
                 "MOVE_DOUBLE_EDGE"
             ],
-            "power": 200,
+            "power": 100,
             "ball_seal": 0
         }
     ]
