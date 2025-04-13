@@ -20,8 +20,21 @@
 				"MOVE_LEECH_SEED",
 				"MOVE_MEMENTO"
             ],
-            "power": 255,
-            "ball_seal": 11
+            "power": 0,
+            "ball_seal": 11,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 10
         },
         {
             "species": "SPECIES_AZUMARILL",
@@ -34,8 +47,21 @@
 				"MOVE_KNOCK_OFF",
 				"MOVE_ICE_PUNCH"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 13
         },
         {
             "species": "SPECIES_WIGGLYTUFF",
@@ -48,8 +74,21 @@
 				"MOVE_SOFTBOILED",
 				"MOVE_SUPER_FANG"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 5
         },
         {
             "species": "SPECIES_GLACEON",
@@ -62,8 +101,21 @@
 				"MOVE_MUD_SHOT",
 				"MOVE_SHADOW_BALL"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4,
+			"nature": 10
         },
         {
             "species": "SPECIES_NIDOKING",
@@ -76,8 +128,21 @@
 				"MOVE_POISON_JAB",
 				"MOVE_THUNDER"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4,
+			"nature": 14
         },
 		{
             "species": "SPECIES_LOPUNNY",
@@ -90,8 +155,21 @@
 				"MOVE_ICE_PUNCH",
 				"MOVE_LAST_RESORT"
             ],
-            "power": 255,
-            "ball_seal": 11
+            "power": 0,
+            "ball_seal": 11,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 13
         }
     ]
 }
