@@ -61,6 +61,7 @@ static void BattleAI_ClearKnownItem(BattleContext *battleCtx, u8 battler);
 static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, int defender1, int defender2);
 static BOOL MoveCannotTriggerAnticipation(BattleContext *battleCtx, int move);
 static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move);
+static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, int HPTracker);
 
 static const Fraction sStatStageBoosts[];
 
@@ -8773,6 +8774,9 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     int multiHitChance;
     int multiHitHits;
 	int multiHitMaxHits;
+	int HPTracker;
+	int tempPower;
+	int HPMult;
 	
 	u16 fullAttackStat, fullSpAttackStat;
     
@@ -9210,6 +9214,68 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
                     movePower *= multiHitHits;
                     break;
+					
+				case BATTLE_EFFECT_MULTI_HIT_TEN:
+					multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+					multiHitHits = 0;
+				
+					if (attackerParams.ability == ABILITY_SKILL_LINK) {
+						multiHitHits = 10;
+					}
+					else {
+						if (multiHitChance < 3) {
+						  multiHitHits += 2 + BattleSystem_RandNext(battleSys) % 2;
+						}
+						else if (multiHitChance >= 3 && multiHitChance <= 6) {
+						  multiHitHits += 4 + (BattleSystem_RandNext(battleSys) % 4);
+						}
+						else {
+						  multiHitHits += 8 + (BattleSystem_RandNext(battleSys) % 3);
+						}
+					}
+					
+					if ((attackerParams.heldItemEffect == HOLD_EFFECT_LOADED_DICE)
+					&& (attackerParams.ability != ABILITY_SKILL_LINK))
+					{
+						multiHitHits = (multiHitChance & 1) + 4;
+					}
+					
+					if ((attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+					&& (attackerParams.ability != ABILITY_SKILL_LINK))
+					{
+						multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+						multiHitHits += (BattleSystem_RandNext(battleSys) % 3) + 3;
+					}
+					
+					HPTracker = defenderParams.curHP;
+					
+					for (i = 0; i < multiHitHits; i++)
+					{
+						tempPower = 0;
+						
+						if ((HPTracker <= (defenderParams.maxHP / 8))
+						|| HPTracker <= 0)
+						{
+							HPMult = 800; // Multiplier cap
+						}
+						else
+						{
+						  HPMult = 100 * defenderParams.maxHP / HPTracker;
+
+						  if (HPMult <= 0)
+						  {
+							HPMult = 100;
+						  }
+						}
+						
+						tempPower = 10;
+						tempPower = tempPower * 2 / 3;
+						tempPower = tempPower * HPMult / 100;
+						
+						movePower += tempPower;
+						HPTracker = CalcChumRushPower(battleSys, battleCtx, mon, defender, HPTracker);
+					}
+					break;
 
                 case BATTLE_EFFECT_HIT_THREE_TIMES:
                     rnd = BattleSystem_RandNext(battleSys) % 10;
@@ -10086,6 +10152,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     int naturePowerMove;
     int rnd;
 	u32 effectiveness;
+    int multiHitChance;
+    int multiHitHits;
+	int multiHitMaxHits;
+	int HPTracker;
+	int tempPower;
+	int HPMult;
 	
 	u16 fullAttackStat, fullSpAttackStat;
 
@@ -10492,6 +10564,111 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     if (moveClass == CLASS_SPECIAL) {
                         spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
                     }
+                    break;
+					
+				case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+                case BATTLE_EFFECT_MULTI_HIT:
+                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+                    multiHitHits = 2;
+
+                    if (multiHitChance < 7) { // 70% chance for 2 or 3 hits
+                    multiHitHits += multiHitChance & 1; // 2 or 3 hits
+                    }
+                    else { // 30% chance for 4 or 5 hits
+                        multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
+                    }
+
+                    if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE) {
+                        multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+                    }
+                    if (attackerParams.ability == ABILITY_SKILL_LINK) {
+                        multiHitHits = 5;
+                    }
+                    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT) {
+                        if (multiHitHits < 3) {
+                            multiHitHits = 3;
+                        }
+                    }
+
+                    movePower *= multiHitHits;
+                    break;
+					
+				case BATTLE_EFFECT_MULTI_HIT_TEN:
+					multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+                    multiHitHits = 0;
+				
+					if (attackerParams.ability == ABILITY_SKILL_LINK) {
+						multiHitHits = 10;
+					}
+					else {
+						if (multiHitChance < 3) {
+						  multiHitHits += 2 + BattleSystem_RandNext(battleSys) % 2;
+						}
+						else if (multiHitChance >= 3 && multiHitChance <= 6) {
+						  multiHitHits += 4 + (BattleSystem_RandNext(battleSys) % 4);
+						}
+						else {
+						  multiHitHits += 8 + (BattleSystem_RandNext(battleSys) % 3);
+						}
+					}
+					
+					if ((attackerParams.heldItemEffect == HOLD_EFFECT_LOADED_DICE)
+					&& (attackerParams.ability != ABILITY_SKILL_LINK))
+					{
+						multiHitHits = (multiHitChance & 1) + 4;
+					}
+					
+					if ((attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+					&& (attackerParams.ability != ABILITY_SKILL_LINK))
+					{
+						multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+						multiHitHits += (BattleSystem_RandNext(battleSys) % 3) + 3;
+					}
+					
+					HPTracker = defenderParams.curHP;
+					
+					for (i = 0; i < multiHitHits; i++)
+					{
+						tempPower = 0;
+						
+						if ((HPTracker <= (defenderParams.maxHP / 8))
+						|| HPTracker <= 0)
+						{
+							HPMult = 800; // Multiplier cap
+						}
+						else
+						{
+						  HPMult = 100 * defenderParams.maxHP / HPTracker;
+
+						  if (HPMult <= 0)
+						  {
+							HPMult = 100;
+						  }
+						}
+						
+						tempPower = 10;
+						tempPower = tempPower * 2 / 3;
+						tempPower = tempPower * HPMult / 100;
+						
+						movePower += tempPower;
+						HPTracker = CalcChumRushPower(battleSys, battleCtx, partyMon, defender, HPTracker);
+					}
+					break;
+
+                case BATTLE_EFFECT_HIT_THREE_TIMES:
+                    rnd = BattleSystem_RandNext(battleSys) % 10;
+                    if (rnd != 0) {
+                        movePower += movePower * 2;
+                    }
+
+                    rnd = BattleSystem_RandNext(battleSys) % 10;
+                    if (rnd != 0) {
+                        movePower += movePower * 3;
+                    }
+                    break;
+                    
+                case BATTLE_EFFECT_HIT_TWICE:
+                    movePower *= 2;
                     break;
             }
         }
@@ -12387,6 +12564,230 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int b
     }
 
     return type;
+}
+
+static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, int HPTracker)
+{
+	int maxHP, hitChance, movePower, HPMult;
+	int species;
+    int form;
+    int level;
+	int damage;
+    u8 ability;
+    u8 type1;
+    u8 type2;
+    u8 inType;
+    u8 itemEffect;
+    u8 itemPower;
+    u16 item;
+    u32 effectiveness;
+	u32 attackerAttackStat, defenderDefenseStat;
+	
+	hitChance = BattleSystem_RandNext(battleSys) % 10;
+	maxHP = battleCtx->battleMons[defender].maxHP;
+	
+	ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+	species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+	form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
+	level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+	type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+	type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+	item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+	itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
+	itemPower = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT_PARAM);
+	
+    effectiveness = 0;
+    inType = TYPE_WATER;
+	
+	attackerAttackStat = PokemonPersonalData_GetFormValue(species, form, MON_DATA_PERSONAL_BASE_ATK);
+	defenderDefenseStat = battleCtx->battleMons[defender].defense;
+	
+	if ((HPTracker <= (maxHP / 8))
+	|| HPTracker <= 0)
+	{
+		HPMult = 800; // Multiplier cap
+	}
+	else
+	{
+	  HPMult = 100 * maxHP / HPTracker;
+
+	  if (HPMult <= 0)
+	  {
+		HPMult = 100;
+	  }
+	}
+	
+	movePower = 10;
+	movePower = movePower * 2 / 3;
+	movePower = movePower * HPMult / 100;
+	
+	damage = attackerAttackStat;
+	damage *= movePower;
+	damage *= ((level * 2 / 5) + 2);
+	damage /= defenderDefenseStat;
+	damage /= 50;
+	
+	// Abilities that affect the attack stat directly
+	switch (ability) {
+		default:
+			break;
+
+		case ABILITY_HUGE_POWER:
+		case ABILITY_PURE_POWER:
+			damage *= 2;
+			break;
+
+		case ABILITY_FORECAST:
+			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+				damage /= 2;
+				break;
+			}
+			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+				damage = damage * 3 / 2;
+				break;
+			}
+			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+				damage = damage * 3 / 2;
+				break;
+			}
+			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+				damage = damage * 3 / 2;
+				break;
+			}
+			break;
+
+		case ABILITY_SOLAR_POWER:
+			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+				damage = damage * 3 / 2;
+			}
+			break;
+
+		case ABILITY_HUSTLE:
+			damage = damage * 3 / 2;
+			break;
+	}
+
+	// Held item effects that directly affect attack stat
+	switch (itemEffect) {
+		default:
+			break;
+
+		case HOLD_EFFECT_PIKA_SPATK_UP:
+			if (species == SPECIES_PIKACHU) {
+				damage *= 2;
+			}
+			break;
+
+		case HOLD_EFFECT_CUBONE_ATK_UP:
+			if (species == SPECIES_CUBONE
+				|| species == SPECIES_MAROWAK) {
+
+				damage *= 2;
+			}
+			break;
+	}
+
+	// End of use of direct attack stat usage here
+	damage += 2;
+
+	// All other abilities
+	switch (ability) {
+		default:
+			break;
+
+		case ABILITY_GUTS:
+			if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+				damage = damage * 3 / 2;
+			}
+			break;
+
+		case ABILITY_RIVALRY:
+			if (battleCtx->battleMons[defender].gender != GENDER_NONE
+			&& Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) == battleCtx->battleMons[defender].gender) {
+				damage = damage * 3 / 2;
+			}
+			break;
+
+		case ABILITY_IRON_FIST:
+			damage = damage * 13 / 10;
+			break;
+
+		case ABILITY_TECHNICIAN:
+			damage = damage * 3 / 2;
+			break;
+
+		case ABILITY_NORMALIZE:
+			inType = TYPE_NORMAL;
+			break;
+	}
+	
+	// All other held item effects
+	switch (itemEffect) {
+		default:
+			break;
+
+		case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+			damage = damage * 6 / 5;
+			break;
+
+		case HOLD_EFFECT_CHOICE_ATK:
+			damage = damage * 3 / 2;
+			break;
+
+		case HOLD_EFFECT_STRENGTHEN_DARK:
+		case HOLD_EFFECT_ARCEUS_DARK:
+			if (inType == TYPE_DARK) {
+				damage = damage * (100 + itemPower) / 100;
+			}
+			break;
+
+		case HOLD_EFFECT_STRENGTHEN_NORMAL:
+			if (inType == TYPE_NORMAL) {
+				damage = damage * (100 + itemPower) / 100;
+			}
+			break;
+
+		case HOLD_EFFECT_POWER_UP_PHYS:
+			damage = damage * (100 + itemPower) / 100;
+			break;
+	}
+	
+	if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && (type1 == inType || type2 == inType)) {
+		if (ability == ABILITY_ADAPTABILITY) {
+			damage *= 2;
+		} else {
+			damage = damage * 3 / 2;
+		}
+	}
+						
+	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2);
+	
+	damage = damage * effectiveness / 40;
+	
+	if ((Battler_Ability(battleCtx, defender) == ABILITY_MULTISCALE)
+	&& (battleCtx->battleMons[defender].curHP == battleCtx->battleMons[defender].maxHP))
+	{
+		damage /= 2;
+	}
+	
+	if (Battler_Ability(battleCtx, defender) == ABILITY_UNOWN_ENERGY)
+	{
+		if (inType == TYPE_NORMAL)
+		{
+			damage *= 2;
+		}
+		else
+		{
+			damage /= 2;
+		}
+	}
+
+	damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
+	damage *= -1;
+	
+	HPTracker -= damage;
+	
+	return HPTracker;
 }
 
 /**
