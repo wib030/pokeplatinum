@@ -8042,6 +8042,10 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
             battleCtx->flingScript = subscript_held_item_user_raise_spd;
         }
         break;
+		
+	case FLING_EFFECT_PIVOT:
+		battleCtx->flingScript = subscript_attack_switch_no_anim;
+		break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);

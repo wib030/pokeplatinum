@@ -109,6 +109,7 @@ enum {
 #define FLING_EFFECT_USER_SPEED_UP      50
 #define FLING_EFFECT_USER_SPATK_UP      51
 #define FLING_EFFECT_USER_SPDEF_UP      52
+#define FLING_EFFECT_PIVOT              53
 
 #define PLUCK_EFFECT_NONE                0
 #define PLUCK_EFFECT_PRZ_RESTORE         1
