@@ -89,11 +89,17 @@
                 "MOVE_STUN_SPORE",
                 "MOVE_POISON_POWDER"
             ],
+			"10": "MOVE_GROWTH",
+			"12": "MOVE_LEECH_SEED",
+			"15": "MOVE_MEGA_DRAIN",
             "17": "MOVE_SPORE",
+			"20": "MOVE_FURY_CUTTER",
             "22": "MOVE_SLASH",
-            "27": "MOVE_GROWTH",
+			"23": "MOVE_BUG_BITE",
+			"24": "MOVE_BULLET_SEED",
 			"30": "MOVE_LEECH_LIFE",
             "33": "MOVE_GIGA_DRAIN",
+			"35": "MOVE_SEED_BOMB",
             "38": "MOVE_AROMATHERAPY",
             "43": "MOVE_X_SCISSOR"
         },

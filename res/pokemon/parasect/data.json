@@ -83,10 +83,11 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_CROSS_POISON",
+				"MOVE_CROSS_POISON",
+                "MOVE_NIGHT_SLASH",
+				"MOVE_METAL_CLAW",
+				"MOVE_AGILITY",
                 "MOVE_SCRATCH",
-                "MOVE_STUN_SPORE",
-                "MOVE_POISON_POWDER",
                 "MOVE_ABSORB"
             ],
 			"3": "MOVE_FRENZY_PLANT",
@@ -94,14 +95,21 @@
                 "MOVE_STUN_SPORE",
                 "MOVE_POISON_POWDER"
             ],
+			"10": "MOVE_GROWTH",
+			"12": "MOVE_LEECH_SEED",
+			"17": "MOVE_MEGA_DRAIN",
+			"20": "MOVE_FURY_CUTTER",
             "22": "MOVE_SPORE",
+			"24": "MOVE_BUG_BITE",
+			"26": "MOVE_BULLET_SEED",
 			"29": "MOVE_SLASH",
-            "30": "MOVE_GROWTH",
 			"32": "MOVE_LEECH_LIFE",
-            "39": "MOVE_GIGA_DRAIN",
+            "35": "MOVE_GIGA_DRAIN",
+			"38": "MOVE_SEED_BOMB",
             "42": "MOVE_AROMATHERAPY",
-            "50": "MOVE_X_SCISSOR",
-			"54": "MOVE_MUD_SPORT"
+            "45": "MOVE_X_SCISSOR",
+			"54": "MOVE_MUD_SPORT",
+			"58": "MOVE_WOOD_HAMMER"
         },
         "tutor": [
             "MOVE_FURY_CUTTER",
