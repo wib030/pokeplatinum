@@ -13744,14 +13744,6 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
 	int oneTurnChance = 25; //25% chance
 	int twoTurnChance = 50; // 25% chance
 	
-	// If the opposing side has a Pokemon with Bad Dreams, lower the chance of a 1 and 2 turn sleep by 15%.
-	// (Also raises the chance of a 3-turn sleep by 15%)
-	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS))
-	{
-		oneTurnChance -= 15;
-		twoTurnChance -= 15;
-	}
-	
 	// Decrease the sleep turn amount if these conditions are met
 	if (sleepRoll <= twoTurnChance)
 	{
@@ -13761,6 +13753,20 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
 	if (sleepRoll <= oneTurnChance)
 	{
 		sleepTurns--;
+	}
+	
+	// If the opposing side has a Pokemon with Bad Dreams, and the sleep counter is 1, set it to 2 or 3
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS)
+	&& sleepTurns == 1)
+	{
+		if (sleepRoll < 50)
+		{
+			sleepTurns = 2;
+		}
+		else
+		{
+			sleepTurns = 3;
+		}
 	}
 
     battleCtx->calcTemp = sleepTurns;
