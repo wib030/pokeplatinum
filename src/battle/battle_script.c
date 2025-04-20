@@ -2547,6 +2547,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2814,7 +2815,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_PregnancyPunch,
 	BtlCmd_CheckSoundMove,
 	BtlCmd_CalcChumRushPower,
-	BtlCmd_RollNextStatBoost
+	BtlCmd_RollNextStatBoost,
+	BtlCmd_RollSleepTurns
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13728,6 +13730,42 @@ static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *bat
 	}
 	
 	return FALSE;
+}
+
+static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+	
+	int sleepRoll = BattleSystem_RandNext(battleSys) % 100;
+	int sleepTurns = 3;
+	
+	int oneTurnChance = 25; //25% chance
+	int twoTurnChance = 50; // 25% chance
+	
+	// If the opposing side has a Pokemon with Bad Dreams, lower the chance of a 1 and 2 turn sleep by 15%.
+	// (Also raises the chance of a 3-turn sleep by 15%)
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS))
+	{
+		oneTurnChance -= 15;
+		twoTurnChance -= 15;
+	}
+	
+	// Decrease the sleep turn amount if these conditions are met
+	if (sleepRoll <= twoTurnChance)
+	{
+		sleepTurns--;
+	}
+	
+	if (sleepRoll <= oneTurnChance)
+	{
+		sleepTurns--;
+	}
+
+    battleCtx->calcTemp = sleepTurns;
+
+    return FALSE;
 }
 
 /**

@@ -1276,5 +1276,10 @@
     .long 230
 	.long \battler
     .endm
+	
+	.macro RollSleepTurns battler
+    .long 231
+	.long \battler
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC
