@@ -3,7 +3,7 @@
     "land_encounters": [
         {
             "level": 18,
-            "species": "SPECIES_BUDEW"
+            "species": "SPECIES_BURMY"
         },
         {
             "level": 18,
@@ -27,7 +27,7 @@
         },
         {
             "level": 18,
-            "species": "SPECIES_RALTS"
+            "species": "SPECIES_GULPIN"
         },
         {
             "level": 19,

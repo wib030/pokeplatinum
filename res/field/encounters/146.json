@@ -19,19 +19,19 @@
         },
         {
             "level": 14,
-            "species": "SPECIES_SILCOON"
+            "species": "SPECIES_TORCHIC"
         },
         {
             "level": 14,
-            "species": "SPECIES_CASCOON"
+            "species": "SPECIES_SEEDOT"
         },
         {
             "level": 13,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_STARLY"
         },
         {
             "level": 14,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_STARLY"
         },
         {
             "level": 13,
@@ -127,12 +127,12 @@
         {
             "level_max": 6,
             "level_min": 4,
-            "species": "SPECIES_MAGIKARP"
+            "species": "SPECIES_LOTAD"
         },
         {
             "level_max": 7,
             "level_min": 3,
-            "species": "SPECIES_MAGIKARP"
+            "species": "SPECIES_LOTAD"
         },
         {
             "level_max": 10,

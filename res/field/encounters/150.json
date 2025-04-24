@@ -56,11 +56,11 @@
     ],
     "morning": [
         "SPECIES_NATU",
-        "SPECIES_CLEFAIRY"
+        "SPECIES_TORCHIC"
     ],
     "night": [
         "SPECIES_NATU",
-        "SPECIES_HOOTHOOT"
+        "SPECIES_TORCHIC"
     ],
     "radar": [
         "SPECIES_KIRLIA",

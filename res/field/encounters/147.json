@@ -15,7 +15,7 @@
         },
         {
             "level": 21,
-            "species": "SPECIES_KRICKETUNE"
+            "species": "SPECIES_SNUBBULL"
         },
         {
             "level": 20,
@@ -23,7 +23,7 @@
         },
         {
             "level": 21,
-            "species": "SPECIES_DIGLETT"
+            "species": "SPECIES_TEDDIURSA"
         },
         {
             "level": 22,
@@ -47,7 +47,7 @@
         },
         {
             "level": 22,
-            "species": "SPECIES_GEODUDE"
+            "species": "SPECIES_GLIGAR"
         }
     ],
     "swarms": [
@@ -55,11 +55,11 @@
         "SPECIES_LARVITAR"
     ],
     "morning": [
-        "SPECIES_GLIGAR",
+        "SPECIES_DUNSPARCE",
         "SPECIES_KRICKETUNE"
     ],
     "night": [
-        "SPECIES_GLIGAR",
+        "SPECIES_DUNSPARCE",
         "SPECIES_KRICKETUNE"
     ],
     "radar": [
