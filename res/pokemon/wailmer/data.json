@@ -88,11 +88,16 @@
             "19": "MOVE_WATER_PULSE",
             "22": "MOVE_MIST",
 			"25": "MOVE_BRINE",
-            "29": "MOVE_REST",
+            "29": [ 
+				"MOVE_REST",
+				"MOVE_SLEEP_TALK",
+				"MOVE_SNORE"
+			],
+			"31": "MOVE_BOUNCE",
             "33": "MOVE_WATER_SPOUT",
+			"35": "MOVE_BODY_SLAM",
             "37": "MOVE_AMNESIA",
             "41": "MOVE_DIVE",
-            "45": "MOVE_BOUNCE",
             "47": "MOVE_HYDRO_PUMP"
         },
         "tutor": [

@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_UNAWARE",
-        "ABILITY_OBLIVIOUS"
+        "ABILITY_PRESSURE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -80,10 +80,13 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_ZEN_HEADBUTT",
                 "MOVE_THRASH",
+				"MOVE_AQUA_RING",
+				"MOVE_BLOCK",
+				"MOVE_SPLASH",
 				"MOVE_WATER_GUN",
                 "MOVE_ROLLOUT",
-				"MOVE_ZEN_HEADBUTT",
 				"MOVE_GROWL"
             ],
             "4": "MOVE_GROWL",
@@ -94,14 +97,19 @@
             "19": "MOVE_WATER_PULSE",
             "22": "MOVE_MIST",
 			"25": "MOVE_BRINE",
-            "29": "MOVE_REST",
+            "29": [ 
+				"MOVE_REST",
+				"MOVE_SLEEP_TALK",
+				"MOVE_SNORE"
+			],
+			"31": "MOVE_BOUNCE",
             "33": "MOVE_WATER_SPOUT",
+			"35": "MOVE_BODY_SLAM",
             "37": "MOVE_AMNESIA",
-			"38": "MOVE_CURSE",
-            "44": "MOVE_BOUNCE",
-            "48": "MOVE_HYDRO_PUMP",
-            "50": "MOVE_AQUA_TAIL",
-			"54": "MOVE_SHEER_COLD"
+			"39": "MOVE_CURSE",
+            "45": "MOVE_HYDRO_PUMP",
+            "49": "MOVE_AQUA_TAIL",
+			"53": "MOVE_SHEER_COLD"
         },
         "tutor": [
             "MOVE_DIVE",
