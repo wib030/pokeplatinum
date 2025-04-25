@@ -22,7 +22,8 @@
             ],
             "power": 50,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ability": 1
         },
         {
             "species": "SPECIES_TENTACOOL",
@@ -37,7 +38,8 @@
             ],
             "power": 60,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ability": 1
         },
         {
             "species": "SPECIES_TENTACOOL",
@@ -52,7 +54,8 @@
             ],
             "power": 70,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ability": 1
         },
         {
             "species": "SPECIES_TENTACOOL",
@@ -67,7 +70,8 @@
             ],
             "power": 80,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ability": 1
         }
     ]
 }
