@@ -6278,6 +6278,20 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 				result = TRUE;
 			}
 			break;
+			
+	case ABILITY_RATTLED:
+			if (DEFENDING_MON.curHP
+			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (CURRENT_MOVE_DATA.type == TYPE_BUG || CURRENT_MOVE_DATA.type == TYPE_DARK || CURRENT_MOVE_DATA.type == TYPE_GHOST))
+			{
+				*subscript = subscript_steadfast_activate;
+				battleCtx->sideEffectMon = battleCtx->defender;
+				result = TRUE;
+			}
+			break;
     }
 
     return result;

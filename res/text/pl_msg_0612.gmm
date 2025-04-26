@@ -637,4 +637,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Certain Ice-type moves\ncause foe’s Speed to lower.</language>
 	</row>
+	<row id="pl_msg_00000612_00159" index="159">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Being hit by Bug, Dark\nor Ghost moves raise Speed.</language>
+	</row>
 </body>
