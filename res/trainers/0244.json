@@ -21,7 +21,8 @@
 				"MOVE_BITE"
             ],
             "power": 10,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         }
     ]
 }
