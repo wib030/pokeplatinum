@@ -358,8 +358,17 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
     }
 
     if (Item_Get(v0, 18) != 0) {
-        u32 monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
-		Pokemon_SetValue(param0, MON_DATA_NATURE, &monPersonality);
+		u32 newNature;
+		u32 currentNature = Pokemon_GetValue(param0, MON_DATA_NATURE, NULL);
+		
+		newNature = currentNature + 1;
+		
+		if (newNature > 24)
+		{
+			newNature = 0;
+		}
+		
+		Pokemon_SetValue(param0, MON_DATA_NATURE, &newNature);
 		Pokemon_CalcLevelAndStats(param0);
     }
 
