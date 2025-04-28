@@ -105,6 +105,7 @@
 			"38": "MOVE_EMBARGO",
 			"40": "MOVE_MORNING_SUN",
 			"42": "MOVE_PUNISHMENT",
+			"45": "MOVE_DARK_PULSE",
             "48": "MOVE_FLAMETHROWER",
 			"50": "MOVE_NASTY_PLOT",
 			"54": "MOVE_CRUNCH"

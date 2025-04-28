@@ -97,6 +97,7 @@
             "32": "MOVE_FAINT_ATTACK",
             "37": "MOVE_EMBARGO",
 			"40": "MOVE_PUNISHMENT",
+			"42": "MOVE_DARK_PULSE",
             "44": "MOVE_FLAMETHROWER",
             "49": "MOVE_CRUNCH",
             "52": "MOVE_NASTY_PLOT"
