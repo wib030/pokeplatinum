@@ -79,10 +79,10 @@
                 "MOVE_POISON_FANG",
                 "MOVE_FRENZY_PLANT",
 				"MOVE_SCARY_FACE",
-				"MOVE_CONSTRICT"
+				"MOVE_WRAP"
             ],
             "5": "MOVE_SCARY_FACE",
-            "8": "MOVE_CONSTRICT",
+            "8": "MOVE_WRAP",
             "15": "MOVE_NIGHT_SHADE",
             "19": "MOVE_SHADOW_SNEAK",
 			"22": "MOVE_CROSS_POISON",

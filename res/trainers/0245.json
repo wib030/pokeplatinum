@@ -30,7 +30,7 @@
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_STRING_SHOT",
-				"MOVE_CONSTRICT",
+				"MOVE_WRAP",
 				"MOVE_FLASH",
 				"MOVE_TICKLE"
             ],

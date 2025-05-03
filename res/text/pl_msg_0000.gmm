@@ -1587,15 +1587,15 @@
 	</row>
 	<row id="pl_msg_00000000_00396" index="396">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nConstrict!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nFreeze-Dry!</language>
 	</row>
 	<row id="pl_msg_00000000_00397" index="397">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nConstrict!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFreeze-Dry!</language>
 	</row>
 	<row id="pl_msg_00000000_00398" index="398">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nConstrict!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFreeze-Dry!</language>
 	</row>
 	<row id="pl_msg_00000000_00399" index="399">
 		<attribute name="window_context_name">used</attribute>

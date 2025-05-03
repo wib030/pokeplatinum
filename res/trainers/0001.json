@@ -8,12 +8,15 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_PRINPLUP",
+            "species": "SPECIES_HOPPIP",
             "form": 0,
             "level": 5,
-            "item": "ITEM_NONE",
+            "item": "ITEM_HEAT_ROCK",
             "moves": [
-				"MOVE_ICE_BEAM"
+				"MOVE_GRASS_KNOT",
+				"MOVE_CONFUSION",
+				"MOVE_ENCORE",
+				"MOVE_SUNNY_DAY"
             ],
             "power": 0,
             "ball_seal": 0,

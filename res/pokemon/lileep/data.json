@@ -80,7 +80,7 @@
             "1": [
                 "MOVE_ASTONISH",
 				"MOVE_ABSORB",
-                "MOVE_CONSTRICT"
+                "MOVE_WRAP"
             ],
             "5": "MOVE_ACID",
             "9": "MOVE_INGRAIN",

@@ -84,7 +84,7 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_CONSTRICT",
+                "MOVE_WRAP",
                 "MOVE_WITHDRAW",
                 "MOVE_BITE"
             ],

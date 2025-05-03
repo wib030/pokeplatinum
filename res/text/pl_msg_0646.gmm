@@ -531,7 +531,7 @@
 	</row>
 	<row id="pl_msg_00000646_00132" index="132">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is attacked\nwith long, creeping\ntentacles or vines.\nIt may also lower the\ntarget’s Speed.</language>
+		<language name="English">This move is super-\neffective on Water\ntypes.\nIt may also freeze\nthe target solid.</language>
 	</row>
 	<row id="pl_msg_00000646_00133" index="133">
 		<attribute name="window_context_name">used</attribute>

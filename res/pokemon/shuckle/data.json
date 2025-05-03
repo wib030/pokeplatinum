@@ -80,7 +80,7 @@
         "level_up": {
             "1": [
                 "MOVE_WITHDRAW",
-                "MOVE_CONSTRICT",
+                "MOVE_WRAP",
 				"MOVE_ROLLOUT",
                 "MOVE_BIDE"
             ],

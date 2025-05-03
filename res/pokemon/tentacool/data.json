@@ -83,7 +83,7 @@
 				"MOVE_WATER_GUN"
 			],
             "4": "MOVE_SUPERSONIC",
-            "7": "MOVE_CONSTRICT",
+            "7": "MOVE_WRAP",
             "10": "MOVE_ACID",
             "13": "MOVE_TOXIC_SPIKES",
 			"16": "MOVE_WATER_PULSE",

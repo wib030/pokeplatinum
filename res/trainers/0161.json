@@ -16,7 +16,7 @@
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE",
-				"MOVE_CONSTRICT",
+				"MOVE_WRAP",
 				"MOVE_RAPID_SPIN",
 				"MOVE_ATTRACT"
             ],
@@ -31,7 +31,7 @@
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE",
-				"MOVE_CONSTRICT",
+				"MOVE_WRAP",
 				"MOVE_RAPID_SPIN",
 				"MOVE_ATTRACT"
             ],
@@ -46,7 +46,7 @@
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE",
-				"MOVE_CONSTRICT",
+				"MOVE_WRAP",
 				"MOVE_RAPID_SPIN",
 				"MOVE_ATTRACT"
             ],

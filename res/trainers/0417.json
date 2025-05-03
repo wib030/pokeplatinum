@@ -18,7 +18,7 @@
                 "MOVE_SPIDER_WEB",
                 "MOVE_LEECH_LIFE",
                 "MOVE_SCARY_FACE",
-                "MOVE_CONSTRICT"
+                "MOVE_WRAP"
             ],
             "power": 140,
             "ball_seal": 0
