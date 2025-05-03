@@ -99,6 +99,7 @@
 			"32": "MOVE_PROTECT",
 			"33": "MOVE_MIRACLE_EYE",
             "35": "MOVE_U_TURN",
+			"36": "MOVE_CONSTRICT",
 			"37": "MOVE_MIND_READER",
             "41": "MOVE_CRUNCH",
             "47": "MOVE_HAIL",

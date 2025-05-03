@@ -99,6 +99,7 @@
             "22": "MOVE_RAIN_DANCE",
             "27": "MOVE_PERISH_SONG",
             "32": "MOVE_ICE_BEAM",
+			"35": "MOVE_CONSTRICT",
             "37": "MOVE_BRINE",
 			"39": "MOVE_RECOVER",
             "43": "MOVE_SAFEGUARD",

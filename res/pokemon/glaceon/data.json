@@ -92,7 +92,7 @@
             "20": "MOVE_ICY_WIND",
             "25": "MOVE_MUD_SHOT",
             "30": "MOVE_AURORA_BEAM",
-            "35": "MOVE_HAIL",
+            "35": "MOVE_CONSTRICT",
 			"40": "MOVE_ICE_BEAM",
             "45": "MOVE_MIRROR_COAT",
             "50": "MOVE_BLIZZARD",

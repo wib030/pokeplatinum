@@ -92,6 +92,7 @@
             "22": "MOVE_MIND_READER",
             "29": "MOVE_ANCIENT_POWER",
             "36": "MOVE_AGILITY",
+			"38": "MOVE_CONSTRICT",
 			"40": "MOVE_TAILWIND",
             "43": "MOVE_ICE_BEAM",
             "50": "MOVE_REFLECT",
