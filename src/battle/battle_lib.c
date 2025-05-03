@@ -3404,6 +3404,124 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { 0xFF, 0xFF, TYPE_MULTI_IMMUNE },
 };
 
+static const u8 sFreezeDryTypeChart[][3] = {
+    { TYPE_NORMAL,   TYPE_ROCK,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_NORMAL,   TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIRE,     TYPE_FIRE,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIRE,     TYPE_WATER,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIRE,     TYPE_GRASS,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIRE,     TYPE_ICE,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIRE,     TYPE_BUG,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIRE,     TYPE_ROCK,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIRE,     TYPE_DRAGON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIRE,     TYPE_STEEL,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_WATER,    TYPE_FIRE,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_WATER,    TYPE_WATER,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_WATER,    TYPE_GRASS,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_WATER,    TYPE_GROUND,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_WATER,    TYPE_ROCK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_WATER,    TYPE_DRAGON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ELECTRIC, TYPE_WATER,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ELECTRIC, TYPE_ELECTRIC,  TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ELECTRIC, TYPE_GRASS,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ELECTRIC, TYPE_GROUND,    TYPE_MULTI_IMMUNE       },
+    { TYPE_ELECTRIC, TYPE_FLYING,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ELECTRIC, TYPE_DRAGON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_FIRE,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_WATER,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GRASS,    TYPE_GRASS,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_POISON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_GROUND,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GRASS,    TYPE_FLYING,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_BUG,       TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_ROCK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GRASS,    TYPE_DRAGON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GRASS,    TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ICE,      TYPE_WATER,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ICE,      TYPE_GRASS,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ICE,      TYPE_ICE,       TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ICE,      TYPE_GROUND,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ICE,      TYPE_FLYING,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ICE,      TYPE_DRAGON,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ICE,      TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ICE,      TYPE_FIRE,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIGHTING, TYPE_NORMAL,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIGHTING, TYPE_ICE,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIGHTING, TYPE_POISON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIGHTING, TYPE_FLYING,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIGHTING, TYPE_PSYCHIC,   TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIGHTING, TYPE_BUG,       TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FIGHTING, TYPE_ROCK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIGHTING, TYPE_DARK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FIGHTING, TYPE_STEEL,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_POISON,   TYPE_GRASS,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_POISON,   TYPE_POISON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_POISON,   TYPE_GROUND,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_POISON,   TYPE_ROCK,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_POISON,   TYPE_GHOST,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_POISON,   TYPE_STEEL,     TYPE_MULTI_IMMUNE       },
+    { TYPE_GROUND,   TYPE_FIRE,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GROUND,   TYPE_ELECTRIC,  TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GROUND,   TYPE_GRASS,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GROUND,   TYPE_POISON,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GROUND,   TYPE_FLYING,    TYPE_MULTI_IMMUNE       },
+    { TYPE_GROUND,   TYPE_BUG,       TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GROUND,   TYPE_ROCK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GROUND,   TYPE_STEEL,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FLYING,   TYPE_ELECTRIC,  TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FLYING,   TYPE_GRASS,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FLYING,   TYPE_FIGHTING,  TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FLYING,   TYPE_BUG,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_FLYING,   TYPE_ROCK,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FLYING,   TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_PSYCHIC,  TYPE_FIGHTING,  TYPE_MULTI_SUPER_EFF    },
+    { TYPE_PSYCHIC,  TYPE_POISON,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_PSYCHIC,  TYPE_PSYCHIC,   TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_PSYCHIC,  TYPE_DARK,      TYPE_MULTI_IMMUNE       },
+    { TYPE_PSYCHIC,  TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG,      TYPE_FIRE,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG,      TYPE_GRASS,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_BUG,      TYPE_FIGHTING,  TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG,      TYPE_POISON,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG,      TYPE_FLYING,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG,      TYPE_PSYCHIC,   TYPE_MULTI_SUPER_EFF    },
+    { TYPE_BUG,      TYPE_GHOST,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG,      TYPE_DARK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_BUG,      TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ROCK,     TYPE_FIRE,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ROCK,     TYPE_ICE,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ROCK,     TYPE_FIGHTING,  TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ROCK,     TYPE_GROUND,    TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_ROCK,     TYPE_FLYING,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ROCK,     TYPE_BUG,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_ROCK,     TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GHOST,    TYPE_NORMAL,    TYPE_MULTI_IMMUNE       },
+    { TYPE_GHOST,    TYPE_PSYCHIC,   TYPE_MULTI_SUPER_EFF    },
+    { TYPE_GHOST,    TYPE_DARK,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_GHOST,    TYPE_GHOST,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_DRAGON,   TYPE_DRAGON,    TYPE_MULTI_SUPER_EFF    },
+    { TYPE_DRAGON,   TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_DARK,     TYPE_FIGHTING,  TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_DARK,     TYPE_PSYCHIC,   TYPE_MULTI_SUPER_EFF    },
+    { TYPE_DARK,     TYPE_GHOST,     TYPE_MULTI_SUPER_EFF    },
+    { TYPE_DARK,     TYPE_DARK,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_STEEL,    TYPE_FIRE,      TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_STEEL,    TYPE_WATER,     TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_STEEL,    TYPE_ELECTRIC,  TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_STEEL,    TYPE_ICE,       TYPE_MULTI_SUPER_EFF    },
+    { TYPE_STEEL,    TYPE_ROCK,      TYPE_MULTI_SUPER_EFF    },
+    { TYPE_STEEL,    TYPE_STEEL,     TYPE_MULTI_NOT_VERY_EFF },
+
+    { 0xFE, 0xFE, TYPE_MULTI_IMMUNE },
+
+    // These values are separated from the remainder of the table to support
+    // the Foresight effect, which removes these immunities from consideration.
+    { TYPE_NORMAL,   TYPE_GHOST,    TYPE_MULTI_IMMUNE        },
+    { TYPE_FIGHTING, TYPE_GHOST,    TYPE_MULTI_IMMUNE        },
+
+    { 0xFF, 0xFF, TYPE_MULTI_IMMUNE },
+};
+
 /**
  * @brief Check if the basic type multiplier applies.
  * 
@@ -3553,14 +3671,21 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     u8 defenderItemEffect;
     u8 attackerItemPower;
     u8 defenderItemPower;
-	
 	int powderMove = FALSE;
-
     totalMul = 1;
 
     if (move == MOVE_STRUGGLE) {
         return damage;
     }
+	
+	int freezeDryUsed = 0;
+	
+	if (move == MOVE_CONSTRICT
+	&& (BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) == TYPE_WATER
+	|| BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL) == TYPE_WATER))
+	{
+		freezeDryUsed = 1;
+	}
 	
 	for (int i = 0; i < NELEMS(sPowderMoves); i++)
 	{
@@ -3638,43 +3763,85 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 	}
     else {
         chartEntry = 0;
+		
+		if (freezeDryUsed == 1)
+		{
+			while (sFreezeDryTypeChart[chartEntry][0] != 0xFF) {
+				if (sFreezeDryTypeChart[chartEntry][0] == 0xFE) {
+					// The Ghost-type immunities are listed separately and ignored as a batch
+					if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+							|| Battler_Ability(battleCtx, attacker) == ABILITY_SCRAPPY
+							|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
+						break;
+					} else {
+						chartEntry++;
+						continue;
+					}
+				}
 
-        while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
-            if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                // The Ghost-type immunities are listed separately and ignored as a batch
-                if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
-                        || Battler_Ability(battleCtx, attacker) == ABILITY_SCRAPPY
-						|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
-                    break;
-                } else {
-                    chartEntry++;
-                    continue;
-                }
-            }
+				if (sFreezeDryTypeChart[chartEntry][0] == moveType) {
+					if (sFreezeDryTypeChart[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sFreezeDryTypeChart[chartEntry][2], damage, movePower, moveStatusMask);
 
-            if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
-                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
-                        && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
-                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+						if (sFreezeDryTypeChart[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
 
-                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-                        totalMul *= 2;
-                    }
-                }
+					if (sFreezeDryTypeChart[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sFreezeDryTypeChart[chartEntry][2], damage, movePower, moveStatusMask);
 
-                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-                        && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-                        && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
-                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+						if (sFreezeDryTypeChart[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
+				}
 
-                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-                        totalMul *= 2;
-                    }
-                }
-            }
+				chartEntry++;
+			}
+		}
+		else
+		{
+			while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
+				if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
+					// The Ghost-type immunities are listed separately and ignored as a batch
+					if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+							|| Battler_Ability(battleCtx, attacker) == ABILITY_SCRAPPY
+							|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
+						break;
+					} else {
+						chartEntry++;
+						continue;
+					}
+				}
 
-            chartEntry++;
-        }
+				if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
+					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
+
+					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
+				}
+
+				chartEntry++;
+			}
+		}
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WONDER_GUARD) == TRUE
@@ -3853,6 +4020,15 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
         return damage;
     }
 	
+	int freezeDryUsed = 0;
+	
+	if (move == MOVE_CONSTRICT
+	&& (BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) == TYPE_WATER
+	|| BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL) == TYPE_WATER))
+	{
+		freezeDryUsed = 1;
+	}
+	
 	for (int i = 0; i < NELEMS(sPowderMoves); i++)
 	{
 		if (move == sPowderMoves[i])
@@ -3930,43 +4106,85 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
 	}
     else {
         chartEntry = 0;
+		
+		if (freezeDryUsed == 1)
+		{
+			while (sFreezeDryTypeChart[chartEntry][0] != 0xFF) {
+				if (sFreezeDryTypeChart[chartEntry][0] == 0xFE) {
+					// The Ghost-type immunities are listed separately and ignored as a batch
+					if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+							|| monAbility == ABILITY_SCRAPPY
+							|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
+						break;
+					} else {
+						chartEntry++;
+						continue;
+					}
+				}
 
-        while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
-            if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                // The Ghost-type immunities are listed separately and ignored as a batch
-                if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
-                        || monAbility == ABILITY_SCRAPPY
-						|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
-                    break;
-                } else {
-                    chartEntry++;
-                    continue;
-                }
-            }
+				if (sFreezeDryTypeChart[chartEntry][0] == moveType) {
+					if (sFreezeDryTypeChart[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+							&& BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sFreezeDryTypeChart[chartEntry][2], damage, movePower, moveStatusMask);
 
-            if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
-                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
-                        && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
-                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+						if (sFreezeDryTypeChart[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
 
-                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-                        totalMul *= 2;
-                    }
-                }
+					if (sFreezeDryTypeChart[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sFreezeDryTypeChart[chartEntry][2], damage, movePower, moveStatusMask);
 
-                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-                        && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-                        && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
-                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+						if (sFreezeDryTypeChart[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
+				}
 
-                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-                        totalMul *= 2;
-                    }
-                }
-            }
+				chartEntry++;
+			}
+		}
+		else
+		{
+			while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
+				if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
+					// The Ghost-type immunities are listed separately and ignored as a batch
+					if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+							|| monAbility == ABILITY_SCRAPPY
+							|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
+						break;
+					} else {
+						chartEntry++;
+						continue;
+					}
+				}
 
-            chartEntry++;
-        }
+				if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
+					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+							&& BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
+
+					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+							&& BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+							totalMul *= 2;
+						}
+					}
+				}
+
+				chartEntry++;
+			}
+		}
     }
 
     if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_WONDER_GUARD) == TRUE
@@ -4118,6 +4336,15 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
     if (move == MOVE_STRUGGLE) {
         return;
     }
+	
+	int freezeDryUsed = 0;
+	
+	if (move == MOVE_CONSTRICT
+	&& (defenderType1 == TYPE_WATER
+	|| defenderType2 == TYPE_WATER))
+	{
+		freezeDryUsed = 1;
+	}
 
     int soundMove = FALSE;
 	if (attackerAbility == ABILITY_ROCK_STAR)
@@ -4164,32 +4391,63 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
     } else {
         chartEntry = 0;
+		
+		if (freezeDryUsed == 1)
+		{
+			while (sFreezeDryTypeChart[chartEntry][0] != 0xFF) {
+				if (sFreezeDryTypeChart[chartEntry][0] == 0xFE) {
+					if (attackerAbility == ABILITY_SCRAPPY) {
+						break;
+					} else {
+						chartEntry++;
+						continue;
+					}
+				}
 
-        while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
-            if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                if (attackerAbility == ABILITY_SCRAPPY) {
-                    break;
-                } else {
-                    chartEntry++;
-                    continue;
-                }
-            }
+				if (sFreezeDryTypeChart[chartEntry][0] == moveType) {
+					if (sFreezeDryTypeChart[chartEntry][1] == defenderType1
+							&& NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
+						UpateMoveStatusForTypeMul(sFreezeDryTypeChart[chartEntry][2], moveStatusMask);
+					}
 
-            if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
-                if (sTypeMatchupMultipliers[chartEntry][1] == defenderType1
-                        && NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
-                    UpateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
-                }
+					if (sFreezeDryTypeChart[chartEntry][1] == defenderType2
+							&& defenderType1 != defenderType2
+							&& NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
+						UpateMoveStatusForTypeMul(sFreezeDryTypeChart[chartEntry][2], moveStatusMask);
+					}
+				}
 
-                if (sTypeMatchupMultipliers[chartEntry][1] == defenderType2
-                        && defenderType1 != defenderType2
-                        && NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
-                    UpateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
-                }
-            }
+				chartEntry++;
+			}
+		}
+		else
+		{
+			while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
+				if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
+					if (attackerAbility == ABILITY_SCRAPPY) {
+						break;
+					} else {
+						chartEntry++;
+						continue;
+					}
+				}
 
-            chartEntry++;
-        }
+				if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
+					if (sTypeMatchupMultipliers[chartEntry][1] == defenderType1
+							&& NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
+						UpateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
+					}
+
+					if (sTypeMatchupMultipliers[chartEntry][1] == defenderType2
+							&& defenderType1 != defenderType2
+							&& NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
+						UpateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
+					}
+				}
+
+				chartEntry++;
+			}
+		}
     }
 
     if (attackerAbility != ABILITY_MOLD_BREAKER
@@ -4455,38 +4713,67 @@ BOOL Move_IsMultiTurn(BattleContext *battleCtx, int move)
 BOOL BattleSystem_TypeMatchup(BattleSystem *battleSys, int idx, u8 *moveType, u8 *vsType, u8 *multi)
 {
     BOOL result = TRUE;
-    if (idx >= NELEMS(sTypeMatchupMultipliers)) {
-        idx = BattleSystem_RandNext(battleSys) % NELEMS(sTypeMatchupMultipliers);
-        result = FALSE;
-    }
+	
+	if (idx >= NELEMS(sTypeMatchupMultipliers)) {
+		idx = BattleSystem_RandNext(battleSys) % NELEMS(sTypeMatchupMultipliers);
+		result = FALSE;
+	}
 
-    *moveType = sTypeMatchupMultipliers[idx][0];
-    *vsType = sTypeMatchupMultipliers[idx][1];
-    *multi = sTypeMatchupMultipliers[idx][2];
+	*moveType = sTypeMatchupMultipliers[idx][0];
+	*vsType = sTypeMatchupMultipliers[idx][1];
+	*multi = sTypeMatchupMultipliers[idx][2];
 
     return result;
 }
 
-int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2)
+int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2, u8 move)
 {
     int i = 0;
     int mul = 40;
+	int freezeDryUsed = 0;
+	
+	if (move == MOVE_CONSTRICT
+	&& (defendingType1 == TYPE_WATER
+	|| defendingType2 == TYPE_WATER))
+	{
+		freezeDryUsed = 1;
+	}
+	
+	if (freezeDryUsed == 1)
+	{
+		while (sFreezeDryTypeChart[i][0] != 0xFF) {
+			if (sFreezeDryTypeChart[i][0] == attackingType) {
+				if (sFreezeDryTypeChart[i][1] == defendingType1) {
+					mul = mul * sFreezeDryTypeChart[i][2] / 10;
+				}
 
-    while (sTypeMatchupMultipliers[i][0] != 0xFF) {
-        if (sTypeMatchupMultipliers[i][0] == attackingType) {
-            if (sTypeMatchupMultipliers[i][1] == defendingType1) {
-                mul = mul * sTypeMatchupMultipliers[i][2] / 10;
-            }
+				if (sFreezeDryTypeChart[i][1] == defendingType2
+						&& defendingType1 != defendingType2) {
+					mul = mul * sFreezeDryTypeChart[i][2] / 10;
+				}
+			}
 
-            if (sTypeMatchupMultipliers[i][1] == defendingType2
-                    && defendingType1 != defendingType2) {
-                mul = mul * sTypeMatchupMultipliers[i][2] / 10;
-            }
-        }
+			i++;
+		}
+	}
+	else
+	{
+		while (sTypeMatchupMultipliers[i][0] != 0xFF) {
+			if (sTypeMatchupMultipliers[i][0] == attackingType) {
+				if (sTypeMatchupMultipliers[i][1] == defendingType1) {
+					mul = mul * sTypeMatchupMultipliers[i][2] / 10;
+				}
 
-        i++;
-    }
+				if (sTypeMatchupMultipliers[i][1] == defendingType2
+						&& defendingType1 != defendingType2) {
+					mul = mul * sTypeMatchupMultipliers[i][2] / 10;
+				}
+			}
 
+			i++;
+		}
+	}
+	
     return mul;
 }
 
@@ -9048,7 +9335,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 								}
 							}
 
-                            effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2);
+                            effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2, move);
 	
 							damage = damage * effectiveness / 40;
                         }
@@ -12774,7 +13061,7 @@ static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, 
 		}
 	}
 						
-	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2);
+	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2, MOVE_DOUBLE_HIT);
 	
 	damage = damage * effectiveness / 40;
 	
@@ -14555,7 +14842,7 @@ int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, 
 
     if (stealthRocks == TRUE) {
 
-        rocksMultiplier = BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, monType1, monType2);
+        rocksMultiplier = BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, monType1, monType2, MOVE_STEALTH_ROCK);
 
         damage += ((Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL) / 8) * rocksMultiplier / 40) * 3 / 4;
         

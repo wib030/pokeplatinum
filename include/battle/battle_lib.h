@@ -613,7 +613,7 @@ BOOL BattleSystem_TypeMatchup(BattleSystem *battleSys, int idx, u8 *moveType, u8
  * @return The total multiplier of the attacking type against a defender with
  * the pair of types. 
  */
-int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2);
+int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2, u8 move);
 
 /**
  * @brief Determines if a move is an invoker-class move.

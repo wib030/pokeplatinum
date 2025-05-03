@@ -9262,7 +9262,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
         }
     }
 						
-	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2);
+	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2, MOVE_BEAT_UP);
 	
 	battleCtx->damage = battleCtx->damage * effectiveness / 40;
 
@@ -11436,7 +11436,7 @@ static BOOL BtlCmd_CheckStealthRock(BattleSystem *battleSys, BattleContext *batt
 
     if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK)
             && battleCtx->battleMons[battler].curHP) {
-        switch (BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, type1, type2)) {
+        switch (BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, type1, type2, MOVE_STEALTH_ROCK)) {
         case TYPE_MULTI_QUADRUPLE_DAMAGE:
             battleCtx->hpCalcTemp = 2;
             break;

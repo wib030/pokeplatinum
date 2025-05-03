@@ -6487,7 +6487,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         // Copycat
                                     case BATTLE_EFFECT_USE_LAST_USED_MOVE:
                                         // if copycat move would be neutral or better
-                                        if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2) >= 40) {
+                                        if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2, move) >= 40) {
                                             return FALSE;
                                         }
                                         break;
@@ -6817,7 +6817,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                     // Mimic
                                     case BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE:
-                                        if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2) >= 40) {
+                                        if (BattleSystem_TypeMatchupMultiplier(MOVE_DATA(battleCtx->moveHit[battler]).type, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2, move) >= 40) {
                                             return FALSE;
                                         }
                                         break;

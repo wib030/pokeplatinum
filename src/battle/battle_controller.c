@@ -1853,7 +1853,7 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                 moveType = MOVE_DATA(battleCtx->fieldConditions.futureSightMove[battler]).type;
                 moveClass = MOVE_DATA(battleCtx->fieldConditions.futureSightMove[battler]).class;
 
-                effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2);
+                effectivenessMultiplier = BattleSystem_TypeMatchupMultiplier(moveType, battleCtx->battleMons[battler].type1, battleCtx->battleMons[battler].type2, battleCtx->moveCur);
 
                 // If future sight user is still out
                 if (futureSightSelectedPartySlot == battleCtx->selectedPartySlot[futureSightAttacker]) {
