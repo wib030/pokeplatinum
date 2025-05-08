@@ -3588,8 +3588,15 @@ static void AICmd_LoadWeight(BattleSystem *battleSys, BattleContext *battleCtx)
 
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
+	
+	int monWeight = battleCtx->battleMons[battler].weight;
+	
+	if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+	{
+		monWeight *= 2;
+	}
 
-    AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].weight;
+    AI_CONTEXT.calcTemp = monWeight;
 }
 
 
@@ -4646,9 +4653,16 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     case MOVE_LOW_KICK:
     case MOVE_GRASS_KNOT: {
         int i;
+		
+		int monWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
+		
+		if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+		{
+			monWeight *= 2;
+		}
 
         for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
-            if (sWeightToPower[i][0] >= battleCtx->battleMons[AI_CONTEXT.defender].weight) {
+            if (sWeightToPower[i][0] >= monWeight) {
                 break;
             }
         }

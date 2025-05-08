@@ -9458,8 +9458,15 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     break;
 
                 case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
+					int monWeight = battleCtx->battleMons[defender].weight;
+					
+					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+					{
+						monWeight *= 2;
+					}
+					
                     for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
-                        if (sWeightToPower[i][0] >= battleCtx->battleMons[defender].weight) {
+                        if (sWeightToPower[i][0] >= monWeight) {
                             break;
                         }
                     }
@@ -9789,7 +9796,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
         case ABILITY_TIDAL_FORCE:
             if (fieldConditions & FIELD_CONDITION_GRAVITY) {
-                movePower = movePower * 13 / 10;
+                movePower = movePower * 4 / 3;
             }
             break;
 
@@ -10836,8 +10843,15 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     break;
 
                 case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
+					int monWeight = battleCtx->battleMons[defender].weight;
+					
+					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+					{
+						monWeight *= 2;
+					}
+				
                     for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
-                        if (sWeightToPower[i][0] >= battleCtx->battleMons[defender].weight) {
+                        if (sWeightToPower[i][0] >= monWeight) {
                             break;
                         }
                     }
@@ -11172,7 +11186,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         case ABILITY_TIDAL_FORCE:
             if (fieldConditions & FIELD_CONDITION_GRAVITY) {
-                movePower = movePower * 13 / 10;
+                movePower = movePower * 4 / 3;
             }
             break;
 

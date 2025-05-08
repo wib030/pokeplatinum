@@ -9904,6 +9904,11 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
 
     int i = 0;
     int monWeight = DEFENDING_MON.weight;
+	
+	if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+	{
+		monWeight *= 2;
+	}
 
     for (; sWeightToPower[i][0] != 0xFFFF; i++) {
         if (sWeightToPower[i][0] >= monWeight) {
@@ -13571,7 +13576,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
             pregnantWeight = battleCtx->battleMons[battlerPregnant].weight;
             attackerWeight = battleCtx->battleMons[battleCtx->attacker].weight;
-
 
             if (attackerWeight > pregnantWeight) {
                 weightDifference = attackerWeight - pregnantWeight;
