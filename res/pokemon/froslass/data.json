@@ -106,6 +106,7 @@
 			"23": "MOVE_AURORA_BEAM",
 			"28": "MOVE_WILL_O_WISP",
             "32": "MOVE_CONFUSE_RAY",
+			"35": "MOVE_CONSTRICT",
 			"37": "MOVE_MEAN_LOOK",
 			"39": "MOVE_HAIL",
 			"41": "MOVE_MIND_READER",

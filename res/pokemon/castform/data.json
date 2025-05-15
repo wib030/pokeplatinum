@@ -114,6 +114,7 @@
 				"MOVE_LAVA_PLUME"
             ],
 			"40": "MOVE_HEAT_WAVE",
+			"44": "MOVE_CONSTRICT",
 			"54": [
                 "MOVE_RAZOR_WIND",
                 "MOVE_FLARE_BLITZ",

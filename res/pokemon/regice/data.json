@@ -103,6 +103,7 @@
 			"37": "MOVE_AMNESIA",
 			"43": "MOVE_ICE_BEAM",
 			"45": "MOVE_SHEER_COLD",
+			"47": "MOVE_CONSTRICT",
 			"49": "MOVE_HAMMER_ARM",
 			"55": "MOVE_LOCK_ON",
 			"61": "MOVE_SUPERPOWER",
