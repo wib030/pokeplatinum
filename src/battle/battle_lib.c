@@ -9063,6 +9063,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     u16 itemTmp;
     u32 battleType;
     u32 moveStatusFlags;
+    u32 attackerSideConditions;
     DamageCalcParams attackerParams;
     DamageCalcParams defenderParams;
     Pokemon *mon;
@@ -9097,6 +9098,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     spAttackStage = 0;
     spDefenseStage = BattleMon_Get(battleCtx, defender, BATTLEMON_SP_DEFENSE_STAGE, NULL) - 6;
     attackerLevel = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+
+    attackerSideConditions = battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)];
 
     attackerParams.species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
     defenderParams.species = BattleMon_Get(battleCtx, defender, BATTLEMON_SPECIES, NULL);
@@ -9161,7 +9164,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     int partyMonSpecies;
                     int partyMonForm;
                     int partyMonLevel;
-                    int side;
                     u8 partyMonAbility;
                     u8 partyMonType1;
                     u8 partyMonType2;
@@ -9514,7 +9516,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     if (attackerParams.ability == ABILITY_SKILL_LINK) {
                         multiHitHits = 5;
                     }
-                    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT) {
+                    if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT) {
                         if (multiHitHits < 3) {
                             multiHitHits = 3;
                         }
@@ -9524,45 +9526,59 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     break;
 					
 				case BATTLE_EFFECT_MULTI_HIT_TEN:
-					multiHitChance = BattleSystem_RandNext(battleSys) % 10;
-					multiHitHits = 0;
-				
-					if (attackerParams.ability == ABILITY_SKILL_LINK) {
-						multiHitHits = 10;
-					}
-					else {
-						if (multiHitChance < 3) {
-						  multiHitHits += 2 + BattleSystem_RandNext(battleSys) % 2;
-						}
-						else if (multiHitChance >= 3 && multiHitChance <= 6) {
-						  multiHitHits += 4 + (BattleSystem_RandNext(battleSys) % 4);
-						}
-						else {
-						  multiHitHits += 8 + (BattleSystem_RandNext(battleSys) % 3);
-						}
-					}
-					
-					if ((attackerParams.heldItemEffect == HOLD_EFFECT_LOADED_DICE)
-					&& (attackerParams.ability != ABILITY_SKILL_LINK))
-					{
-						multiHitHits = (multiHitChance & 1) + 4;
-					}
-					
-					if ((attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
-					&& (attackerParams.ability != ABILITY_SKILL_LINK))
-					{
-						multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
-						multiHitHits += (BattleSystem_RandNext(battleSys) % 3) + 3;
-					}
+                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+                    multiHitHits = 2;
+
+                    if (attackerParams.ability == ABILITY_SKILL_LINK)
+                    {
+                        multiHitHits = 10;
+                    }
+                    else
+                    {
+                        if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                        {
+                            multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                        }
+                        else
+                        {
+                            // restructured this to use less flops (using else for the middle case has less comparisons)
+                            if (multiHitChance < 3)
+                            {
+                                multiHitHits += BattleSystem_RandNext(battleSys) % 2;
+                            }
+                            else
+                            {
+                                if (multiHitChance > 6)
+                                {
+                                    multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
+                                }
+                                else
+                                {
+                                    multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
+                                }
+                            }
+                        }
+
+                        if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT)
+                        {
+                            if (multiHitHits < 3)
+                            {
+                                multiHitHits = 3;
+                            }
+                        }
+                    }
 					
 					HPTracker = defenderParams.curHP;
+                    tempPower = MOVE_DATA(move).power;
 					
 					for (i = 0; i < multiHitHits; i++)
 					{
-						tempPower = 0;
-						
-						if ((HPTracker <= (defenderParams.maxHP / 8))
-						|| HPTracker <= 0)
+                        if (HPTracker <= 0)
+                        {
+                            break;
+                        }
+
+						if (HPTracker <= (defenderParams.maxHP / 8))
 						{
 							HPMult = 800; // Multiplier cap
 						}
@@ -9570,19 +9586,32 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 						{
 						  HPMult = 100 * defenderParams.maxHP / HPTracker;
 
-						  if (HPMult <= 0)
-						  {
-							HPMult = 100;
-						  }
+						    if (HPMult <= 0)
+						    {
+							    HPMult = 100;
+						    }
 						}
-						
-						tempPower = 10;
-						tempPower = tempPower * 2 / 3;
-						tempPower = tempPower * HPMult / 100;
-						
-						movePower += tempPower;
-						HPTracker = CalcChumRushPower(battleSys, battleCtx, mon, defender, HPTracker);
+
+                        tempPower = tempPower * 2 / 3;
+                        tempPower = tempPower * HPMult / 100;
+
+                        HPTracker -= BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                            battleCtx,
+                            move,
+                            sideConditions,
+                            fieldConditions,
+                            tempPower,
+                            inType,
+                            attacker,
+                            defender,
+                            criticalMul,
+                            partyIndicator,
+                            partySlot);
 					}
+
+                    damage = defenderParams.curHP - HPTracker;
+                    return damage;
+
 					break;
 
                 case BATTLE_EFFECT_HIT_THREE_TIMES:
@@ -10453,6 +10482,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     u16 itemTmp;
     u32 battleType;
     u32 moveStatusFlags;
+    u32 attackerSideConditions;
     DamageCalcParams attackerParams;
     DamageCalcParams defenderParams;
     u16 cumStatBoosts;
@@ -10497,6 +10527,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     defenderParams.type1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
     attackerParams.type2 = BattleMon_Get(battleCtx, attacker, BATTLEMON_TYPE_2, NULL);
     defenderParams.type2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+
+    attackerSideConditions = battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)];
 
     itemTmp = Battler_HeldItem(battleCtx, attacker);
     attackerParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT);
@@ -10908,67 +10940,91 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     movePower *= multiHitHits;
                     break;
 					
-				case BATTLE_EFFECT_MULTI_HIT_TEN:
-					multiHitChance = BattleSystem_RandNext(battleSys) % 10;
-                    multiHitHits = 0;
-				
-					if (attackerParams.ability == ABILITY_SKILL_LINK) {
-						multiHitHits = 10;
-					}
-					else {
-						if (multiHitChance < 3) {
-						  multiHitHits += 2 + BattleSystem_RandNext(battleSys) % 2;
-						}
-						else if (multiHitChance >= 3 && multiHitChance <= 6) {
-						  multiHitHits += 4 + (BattleSystem_RandNext(battleSys) % 4);
-						}
-						else {
-						  multiHitHits += 8 + (BattleSystem_RandNext(battleSys) % 3);
-						}
-					}
-					
-					if ((attackerParams.heldItemEffect == HOLD_EFFECT_LOADED_DICE)
-					&& (attackerParams.ability != ABILITY_SKILL_LINK))
-					{
-						multiHitHits = (multiHitChance & 1) + 4;
-					}
-					
-					if ((attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
-					&& (attackerParams.ability != ABILITY_SKILL_LINK))
-					{
-						multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
-						multiHitHits += (BattleSystem_RandNext(battleSys) % 3) + 3;
-					}
-					
-					HPTracker = defenderParams.curHP;
-					
-					for (i = 0; i < multiHitHits; i++)
-					{
-						tempPower = 0;
-						
-						if ((HPTracker <= (defenderParams.maxHP / 8))
-						|| HPTracker <= 0)
-						{
-							HPMult = 800; // Multiplier cap
-						}
-						else
-						{
-						  HPMult = 100 * defenderParams.maxHP / HPTracker;
+                case BATTLE_EFFECT_MULTI_HIT_TEN:
+                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+                    multiHitHits = 2;
 
-						  if (HPMult <= 0)
-						  {
-							HPMult = 100;
-						  }
-						}
-						
-						tempPower = 10;
-						tempPower = tempPower * 2 / 3;
-						tempPower = tempPower * HPMult / 100;
-						
-						movePower += tempPower;
-						HPTracker = CalcChumRushPower(battleSys, battleCtx, partyMon, defender, HPTracker);
-					}
-					break;
+                    if (attackerParams.ability == ABILITY_SKILL_LINK)
+                    {
+                        multiHitHits = 10;
+                    }
+                    else
+                    {
+                        if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                        {
+                            multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                        }
+                        else
+                        {
+                            // restructured this to use less flops (using else for the middle case has less comparisons)
+                            if (multiHitChance < 3)
+                            {
+                                multiHitHits += BattleSystem_RandNext(battleSys) % 2;
+                            }
+                            else
+                            {
+                                if (multiHitChance > 6)
+                                {
+                                    multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
+                                }
+                                else
+                                {
+                                    multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
+                                }
+                            }
+                        }
+
+                        if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT)
+                        {
+                            if (multiHitHits < 3)
+                            {
+                                multiHitHits = 3;
+                            }
+                        }
+                    }
+
+                    HPTracker = defenderParams.curHP;
+                    tempPower = MOVE_DATA(move).power;
+
+                    for (i = 0; i < multiHitHits; i++)
+                    {
+                        if (HPTracker <= 0)
+                        {
+                            break;
+                        }
+
+                        if (HPTracker <= (defenderParams.maxHP / 8))
+                        {
+                            HPMult = 800; // Multiplier cap
+                        }
+                        else
+                        {
+                            HPMult = 100 * defenderParams.maxHP / HPTracker;
+
+                            if (HPMult <= 0)
+                            {
+                                HPMult = 100;
+                            }
+                        }
+
+                        tempPower = tempPower * 2 / 3;
+                        tempPower = tempPower * HPMult / 100;
+
+                        HPTracker -= BattleSystem_CalcMoveDamage(battleSys,
+                            battleCtx,
+                            move,
+                            sideConditions,
+                            fieldConditions,
+                            tempPower,
+                            inType,
+                            attacker,
+                            defender,
+                            criticalMul);
+                    }
+
+                    damage = defenderParams.curHP - HPTracker;
+                    return damage;
+                    break;
 
                 case BATTLE_EFFECT_HIT_THREE_TIMES:
                     rnd = BattleSystem_RandNext(battleSys) % 10;
@@ -12881,6 +12937,7 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int b
     return type;
 }
 
+/*
 static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, int HPTracker)
 {
 	int maxHP, hitChance, movePower, HPMult;
@@ -13104,6 +13161,7 @@ static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, 
 	
 	return HPTracker;
 }
+*/
 
 /**
  * @brief Check if the AI knows all of an opponent's moves.
@@ -15349,7 +15407,7 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
 {
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
     u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
-    u32 defenderMaxHP;
+    int defenderMaxHP;
     int moveEffect, moveStatFlag;
     int i;
     BOOL hasSpeedBoost;
@@ -15411,7 +15469,7 @@ BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *batt
 {
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
     u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
-    u32 defenderMaxHP;
+    int defenderMaxHP;
     int moveEffect, moveStatFlag;
     int i;
     BOOL hasSpeedBoost;
