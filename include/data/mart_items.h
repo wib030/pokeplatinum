@@ -111,6 +111,7 @@ const u16 SolaceonMartSpecialties[] = {
 };
 
 const u16 PastoriaMartSpecialties[] = {
+	ITEM_FRESH_WATER,
 	ITEM_DEEPSEASCALE,
 	ITEM_DEEPSEATOOTH,
 	ITEM_DRAGON_SCALE,
