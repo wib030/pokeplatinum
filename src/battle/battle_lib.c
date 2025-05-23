@@ -15008,6 +15008,7 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
 
                 // Conditionally utility moves
                 case BATTLE_EFFECT_SWITCH_HIT:
+				case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
                 case BATTLE_EFFECT_REMOVE_HELD_ITEM:
                 case BATTLE_EFFECT_RAISE_DEF_HIT:
                 case BATTLE_EFFECT_SPIKES_MULTI_HIT:
@@ -15069,6 +15070,7 @@ BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *b
 
                 // Conditionally utility moves
                 case BATTLE_EFFECT_SWITCH_HIT:
+				case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
                 case BATTLE_EFFECT_REMOVE_HELD_ITEM:
                 case BATTLE_EFFECT_RAISE_DEF_HIT:
                 case BATTLE_EFFECT_SPIKES_MULTI_HIT:

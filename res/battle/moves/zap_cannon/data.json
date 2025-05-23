@@ -6,7 +6,7 @@
     "accuracy": 100,
     "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_SWITCH_HIT",
+        "type": "BATTLE_EFFECT_SWITCH_HIT_NO_ANIM",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",

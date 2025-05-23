@@ -1862,6 +1862,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_STAT_UP_2, Expert_Acupressure
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT_NO_ANIM, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_CloseCombat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_IF_MOVING_SECOND, Expert_Payback
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_IF_TARGET_HIT, Expert_Assurance
