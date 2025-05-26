@@ -9635,13 +9635,13 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 			break;
 
         case BATTLE_EFFECT_HIT_THREE_TIMES:
-            rnd = BattleSystem_RandNext(battleSys) % 10;
-            if (rnd != 0) {
+            rnd = BattleSystem_RandNext(battleSys) % 100;
+            if (rnd < MOVE_DATA(move).accuracy) {
                 movePower += movePower * 2;
             }
 
-            rnd = BattleSystem_RandNext(battleSys) % 10;
-            if (rnd != 0) {
+            rnd = BattleSystem_RandNext(battleSys) % 100;
+            if (rnd < MOVE_DATA(move).accuracy) {
                 movePower += movePower * 3;
             }
             break;
@@ -11076,13 +11076,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             break;
 
         case BATTLE_EFFECT_HIT_THREE_TIMES:
-            rnd = BattleSystem_RandNext(battleSys) % 10;
-            if (rnd != 0) {
+            rnd = BattleSystem_RandNext(battleSys) % 100;
+            if (rnd < MOVE_DATA(move).accuracy) {
                 movePower += movePower * 2;
             }
 
-            rnd = BattleSystem_RandNext(battleSys) % 10;
-            if (rnd != 0) {
+            rnd = BattleSystem_RandNext(battleSys) % 100;
+            if (rnd < MOVE_DATA(move).accuracy) {
                 movePower += movePower * 3;
             }
             break;
