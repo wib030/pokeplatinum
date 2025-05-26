@@ -9079,6 +9079,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 	int HPTracker;
 	int tempPower;
 	int HPMult;
+    int currentHit;
 	
 	u16 fullAttackStat, fullSpAttackStat;
     
@@ -9569,33 +9570,38 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     }
 					
 					HPTracker = defenderParams.curHP;
-                    tempPower = MOVE_DATA(move).power;
+                    currentHit = 0;
+                    movePower = 0;
 					
-					for (i = 0; i < multiHitHits; i++)
+					for (i = 1; i < multiHitHits; i++)
 					{
+                        tempPower = MOVE_DATA(move).power;
+
                         if (HPTracker <= 0)
                         {
-                            break;
+                            HPMult = 800;
                         }
+                        else
+                        {
+                            if (HPTracker <= (defenderParams.maxHP / 8))
+                            {
+                                HPMult = 800; // Multiplier cap
+                            }
+                            else
+                            {
+                                HPMult = 100 * defenderParams.maxHP / HPTracker;
 
-						if (HPTracker <= (defenderParams.maxHP / 8))
-						{
-							HPMult = 800; // Multiplier cap
-						}
-						else
-						{
-						  HPMult = 100 * defenderParams.maxHP / HPTracker;
-
-						    if (HPMult <= 0)
-						    {
-							    HPMult = 100;
-						    }
-						}
+                                if (HPMult <= 0)
+                                {
+                                    HPMult = 100;
+                                }
+                            }
+                        }
 
                         tempPower = tempPower * 2 / 3;
                         tempPower = tempPower * HPMult / 100;
 
-                        HPTracker -= BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        currentHit = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
                             battleCtx,
                             move,
                             sideConditions,
@@ -9607,11 +9613,18 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             criticalMul,
                             partyIndicator,
                             partySlot);
+
+                        if (HPTracker <= currentHit)
+                        {
+                            HPTracker = 0;
+                        }
+                        else
+                        {
+                            HPTracker -= currentHit;
+                        }
+                        
+                        movePower += currentHit;
 					}
-
-                    damage = defenderParams.curHP - HPTracker;
-                    return damage;
-
 					break;
 
                 case BATTLE_EFFECT_HIT_THREE_TIMES:
@@ -10496,6 +10509,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 	int HPTracker;
 	int tempPower;
 	int HPMult;
+    int currentHit;
 	
 	u16 fullAttackStat, fullSpAttackStat;
 
@@ -10984,33 +10998,38 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     }
 
                     HPTracker = defenderParams.curHP;
-                    tempPower = MOVE_DATA(move).power;
+                    currentHit = 0;
+                    movePower = 0;
 
-                    for (i = 0; i < multiHitHits; i++)
+                    for (i = 1; i < multiHitHits; i++)
                     {
+                        tempPower = MOVE_DATA(move).power;
+
                         if (HPTracker <= 0)
                         {
-                            break;
-                        }
-
-                        if (HPTracker <= (defenderParams.maxHP / 8))
-                        {
-                            HPMult = 800; // Multiplier cap
+                            HPMult = 800;
                         }
                         else
                         {
-                            HPMult = 100 * defenderParams.maxHP / HPTracker;
-
-                            if (HPMult <= 0)
+                            if (HPTracker <= (defenderParams.maxHP / 8))
                             {
-                                HPMult = 100;
+                                HPMult = 800; // Multiplier cap
+                            }
+                            else
+                            {
+                                HPMult = 100 * defenderParams.maxHP / HPTracker;
+
+                                if (HPMult <= 0)
+                                {
+                                    HPMult = 100;
+                                }
                             }
                         }
 
                         tempPower = tempPower * 2 / 3;
                         tempPower = tempPower * HPMult / 100;
 
-                        HPTracker -= BattleSystem_CalcMoveDamage(battleSys,
+                        currentHit = BattleSystem_CalcMoveDamage(battleSys,
                             battleCtx,
                             move,
                             sideConditions,
@@ -11020,10 +11039,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             attacker,
                             defender,
                             criticalMul);
-                    }
 
-                    damage = defenderParams.curHP - HPTracker;
-                    return damage;
+                        if (HPTracker <= currentHit)
+                        {
+                            HPTracker = 0;
+                        }
+                        else
+                        {
+                            HPTracker -= currentHit;
+                        }
+
+                        movePower += currentHit;
+                    }
                     break;
 
                 case BATTLE_EFFECT_HIT_THREE_TIMES:
