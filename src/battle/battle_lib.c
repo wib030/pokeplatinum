@@ -9135,17 +9135,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     cumStatBoosts = 0;
 	
 	int soundMove = FALSE;
-	if (attackerParams.ability == ABILITY_ROCK_STAR)
-	{
-		for (int i = 0; i < NELEMS(sSoundMoves); i++)
-		{
-			if (sSoundMoves[i] == move)
-			{
-				soundMove = TRUE;
-				break;
-			}
-		}
-	}
 
     if (inPower != 0){
         movePower = inPower;
@@ -9292,6 +9281,15 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             break;
 
                         case ABILITY_ROCK_STAR:
+                            for (int i = 0; i < NELEMS(sSoundMoves); i++)
+                            {
+                                if (sSoundMoves[i] == move)
+                                {
+                                    soundMove = TRUE;
+                                    break;
+                                }
+                            }
+
                             if (soundMove == TRUE)
                             {
                                 partyMonInType = TYPE_ROCK;
@@ -9674,14 +9672,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 movePower = movePower * 6 / 5;
             }
             break;
-			
-		case ABILITY_ROCK_STAR:
-			if (soundMove == TRUE)
-			{
-				moveType = TYPE_ROCK;
-				movePower = movePower * 3 / 2;
-			}
-			break;
 
         case ABILITY_TECHNICIAN:
             if (move != MOVE_STRUGGLE
@@ -9895,6 +9885,23 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     attackStat = attackStat * 13 / 10;
 			        spAttackStat = spAttackStat * 13 / 10;
                 }
+            }
+            break;
+
+        case ABILITY_ROCK_STAR:
+            for (int i = 0; i < NELEMS(sSoundMoves); i++)
+            {
+                if (sSoundMoves[i] == move)
+                {
+                    soundMove = TRUE;
+                    break;
+                }
+            }
+
+            if (soundMove == TRUE)
+            {
+                moveType = TYPE_ROCK;
+                movePower = movePower * 3 / 2;
             }
             break;
     }
@@ -10567,17 +10574,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     cumStatBoosts = 0;
 	
 	int soundMove = FALSE;
-	if (attackerParams.ability == ABILITY_ROCK_STAR)
-	{
-		for (int i = 0; i < NELEMS(sSoundMoves); i++)
-		{
-			if (sSoundMoves[i] == move)
-			{
-				soundMove = TRUE;
-				break;
-			}
-		}
-	}
 
     if (inPower != 0){
         movePower = inPower;
@@ -10725,6 +10721,15 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             break;
 
                         case ABILITY_ROCK_STAR:
+                            for (int i = 0; i < NELEMS(sSoundMoves); i++)
+                            {
+                                if (sSoundMoves[i] == move)
+                                {
+                                    soundMove = TRUE;
+                                    break;
+                                }
+                            }
+
                             if (soundMove == TRUE)
                             {
                                 partyMonInType = TYPE_ROCK;
@@ -11108,14 +11113,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 movePower = movePower * 6 / 5;
             }
             break;
-			
-		case ABILITY_ROCK_STAR:
-			if (soundMove == TRUE)
-			{
-				moveType = TYPE_ROCK;
-				movePower = movePower * 3 / 2;
-			}
-			break;
 
         case ABILITY_TECHNICIAN:
             if (move != MOVE_STRUGGLE
@@ -11340,6 +11337,23 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         // Flash fire will no longer apply when you don't have flash fire ability
         case ABILITY_FLASH_FIRE:
             if (BattleMon_Get(battleCtx, attacker, BATTLEMON_FLASH_FIRE, NULL) && moveType == TYPE_FIRE) {
+                movePower = movePower * 3 / 2;
+            }
+            break;
+
+        case ABILITY_ROCK_STAR:
+            for (int i = 0; i < NELEMS(sSoundMoves); i++)
+            {
+                if (sSoundMoves[i] == move)
+                {
+                    soundMove = TRUE;
+                    break;
+                }
+            }
+
+            if (soundMove == TRUE)
+            {
+                moveType = TYPE_ROCK;
                 movePower = movePower * 3 / 2;
             }
             break;
