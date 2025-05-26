@@ -9157,492 +9157,500 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             || effect == BATTLE_EFFECT_NATURE_POWER
             || effect == BATTLE_EFFECT_AVERAGE_HP) {
             switch (effect) {
-                default:
-                    break;
+            default:
+                break;
 
-                case BATTLE_EFFECT_BEAT_UP:
-                    Pokemon *partyMon;
-                    int partyMonSpecies;
-                    int partyMonForm;
-                    int partyMonLevel;
-                    u8 partyMonAbility;
-                    u8 partyMonType1;
-                    u8 partyMonType2;
-                    u8 partyMonInType;
-                    u8 partyMonItemEffect;
-                    u8 partyMonItemPower;
-                    u16 partyMonItem;
-                    s32 cumDamage = 0;
+            case BATTLE_EFFECT_BEAT_UP:
+                Pokemon* partyMon;
+                int partyMonSpecies;
+                int partyMonForm;
+                int partyMonLevel;
+                u8 partyMonAbility;
+                u8 partyMonType1;
+                u8 partyMonType2;
+                u8 partyMonInType = TYPE_DARK;
+                u8 partyMonItemEffect;
+                u8 partyMonItemPower;
+                u16 partyMonItem;
+                s32 cumDamage = 0;
 
-                    for (i = 0; i < MAX_PARTY_SIZE; i++) {
-                        partyMon = BattleSystem_PartyPokemon(battleSys, attacker, i);
-                        partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
-                        partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
-                        partyMonLevel = Pokemon_GetValue(partyMon, MON_DATA_LEVEL, NULL);
-                        partyMonAbility = Pokemon_GetValue(partyMon, MON_DATA_ABILITY, NULL);
-                        partyMonType1 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_1, NULL);
-                        partyMonType2 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_2, NULL);
-                        partyMonItem = Pokemon_GetValue(partyMon, MON_DATA_HELD_ITEM, NULL);
-                        partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
-                        partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+                for (i = 0; i < MAX_PARTY_SIZE; i++) {
+                    partyMon = BattleSystem_PartyPokemon(battleSys, attacker, i);
+                    partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
+                    partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                    partyMonLevel = Pokemon_GetValue(partyMon, MON_DATA_LEVEL, NULL);
+                    partyMonAbility = Pokemon_GetValue(partyMon, MON_DATA_ABILITY, NULL);
+                    partyMonType1 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_1, NULL);
+                    partyMonType2 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_2, NULL);
+                    partyMonItem = Pokemon_GetValue(partyMon, MON_DATA_HELD_ITEM, NULL);
+                    partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
+                    partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
 
-                        if (Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
+                    if (Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
                         && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
-                            damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
-                            damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
+                        damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
+                        damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
 
-                            switch (partyMonAbility) {
-                                default:
-                                    break;
+                        switch (partyMonAbility) {
+                        default:
+                            break;
 
-                                case ABILITY_HUGE_POWER:
-                                case ABILITY_PURE_POWER:
-                                    damage *= 2;
-                                    break;
+                        case ABILITY_HUGE_POWER:
+                        case ABILITY_PURE_POWER:
+                            damage *= 2;
+                            break;
 
-                                case ABILITY_PLUS:
-                                    if (attackerParams.ability == ABILITY_MINUS) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_FORECAST:
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-                                        damage /= 2;
-                                        break;
-                                    }
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                                        damage = damage * 3 / 2;
-                                        break;
-                                    }
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
-                                        damage = damage * 3 / 2;
-                                        break;
-                                    }
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
-                                        damage = damage * 3 / 2;
-                                        break;
-                                    }
-                                    break;
-
-                                case ABILITY_SOLAR_POWER:
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_HUSTLE:
-                                    damage = damage * 3 / 2;
-                                    break;
+                        case ABILITY_PLUS:
+                            if (attackerParams.ability == ABILITY_MINUS) {
+                                damage = damage * 3 / 2;
                             }
+                            break;
 
-                            // Held item effects that directly affect attack stat
-                            switch (partyMonItemEffect) {
-                                default:
-                                    break;
-
-                                case HOLD_EFFECT_PIKA_SPATK_UP:
-                                    if (partyMonSpecies == SPECIES_PIKACHU) {
-                                        damage *= 2;
-                                    }
-                                    break;
-
-                                case HOLD_EFFECT_CUBONE_ATK_UP:
-                                    if (partyMonSpecies == SPECIES_CUBONE
-                                        || partyMonSpecies == SPECIES_MAROWAK) {
-
-                                        damage *= 2;
-                                    }
-                                    break;
+                        case ABILITY_FORECAST:
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                                damage /= 2;
+                                break;
                             }
-
-                            // End of use of direct attack stat usage here
-                            damage += 2;
-
-                            // All other abilities
-                            switch (partyMonAbility) {
-                                default:
-                                    break;
-
-                                case ABILITY_GUTS:
-                                    if (Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_RIVALRY:
-                                    if (defenderParams.gender != GENDER_NONE
-                                    && Pokemon_GetValue(partyMon, MON_DATA_GENDER, NULL) == defenderParams.gender) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_IRON_FIST:
-                                    damage = damage * 13 / 10;
-                                    break;
-
-                                case ABILITY_TECHNICIAN:
-                                    damage = damage * 3 / 2;
-                                    break;
-
-                                case ABILITY_NORMALIZE:
-                                    partyMonInType = TYPE_NORMAL;
-                                    break;
-									
-								case ABILITY_ROCK_STAR:
-									if (soundMove == TRUE)
-									{
-										partyMonInType = TYPE_ROCK;
-									}
-                                    break;
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                damage = damage * 3 / 2;
+                                break;
                             }
-	
-                            // All other held item effects
-                            switch (partyMonItemEffect) {
-                                default:
-                                    break;
-
-                                case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
-                                    damage = damage * 6 / 5;
-                                    break;
-
-                                case HOLD_EFFECT_CHOICE_ATK:
-                                    damage = damage * 3 / 2;
-                                    break;
-
-                                case HOLD_EFFECT_STRENGTHEN_DARK:
-                                case HOLD_EFFECT_ARCEUS_DARK:
-                                    if (partyMonInType == TYPE_DARK) {
-                                        damage = damage * (100 + partyMonItemPower) / 100;
-                                    }
-                                    break;
-
-                                case HOLD_EFFECT_STRENGTHEN_NORMAL:
-                                    if (partyMonInType == TYPE_NORMAL) {
-                                        damage = damage * (100 + partyMonItemPower) / 100;
-                                    }
-                                    break;
-
-                                case HOLD_EFFECT_POWER_UP_PHYS:
-                                    damage = damage * (100 + partyMonItemPower) / 100;
-                                    break;
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+                                damage = damage * 3 / 2;
+                                break;
                             }
-							
-							if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && (partyMonType1 == inType || partyMonType2 == inType)) {
-								if (partyMonAbility == ABILITY_ADAPTABILITY) {
-									damage *= 2;
-								} else {
-									damage = damage * 3 / 2;
-								}
-							}
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+                                damage = damage * 3 / 2;
+                                break;
+                            }
+                            break;
 
-                            effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2, move);
-	
-							damage = damage * effectiveness / 40;
-                        }
+                        case ABILITY_SOLAR_POWER:
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                damage = damage * 3 / 2;
+                            }
+                            break;
 
-                        cumDamage += damage;
-                    }
-
-                    damage = cumDamage;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_40_DAMAGE_FLAT:
-                    damage = 40;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_10_DAMAGE_FLAT:
-                    damage = 10;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
-                    damage = attackerLevel;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_HALVE_HP:
-                    damage = defenderParams.curHP / 2;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
-                    if (defenderParams.curHP > attackerParams.curHP) {
-                        damage = defenderParams.curHP - attackerParams.curHP;
-                    }
-                    else {
-                        damage = 0;
-                    }
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED:
-                    movePower = 1 + 25 * defenderSpeedStat / speedStat;
-                    if (battleCtx->movePower > 150) {
-                        battleCtx->movePower = 150;
-                    }
-                    break;
-
-                case BATTLE_EFFECT_FLING:
-                    movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_FLING_POWER);
-                    break;
-
-                case BATTLE_EFFECT_NATURAL_GIFT:
-                    movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_NATURAL_GIFT_POWER);
-                    break;
-
-                case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
-                    for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
-
-                        if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
-                            cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
-                        }
-                    }
-
-                    movePower = 60 + 20 * cumStatBoosts;
-                    break;
-
-                case BATTLE_EFFECT_NATURE_POWER:
-                    terrain = BattleSystem_Terrain(battleSys);
-
-                    if (terrain > TERRAIN_SPECIAL) {
-                        terrain = TERRAIN_SPECIAL;
-                    }
-
-                    naturePowerMove = sTerrainMove[terrain];
-
-                    damage = BattleSystem_CalcPartyMemberMoveDamage(
-                            battleSys,
-                            battleCtx,
-                            naturePowerMove,
-                            sideConditions,
-                            fieldConditions,
-                            inPower,
-                            inType,
-                            attacker,
-                            defender,
-                            criticalMul,
-                            partyIndicator,
-                            partySlot);
-
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL:
-                    rnd = BattleSystem_RandNext(battleSys) % 256;
-                    // 80 percentile
-                    if (rnd >= 204) {
-                        movePower = 0;
-                        break;
-                    }
-                    // 70 percentile
-                    if (rnd >= 178) {
-                        movePower = 120;
-                        break;
-                    }
-                    // 40 percentile
-                    if (rnd >= 102) {
-                        movePower = 80;
-                        break;
-                    }
-                    movePower = 40;
-                    break;
-                
-                case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
-                    movePower = Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL) * 2 / 5;
-                    break;
-
-                case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
-                    movePower = (255 - Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL)) * 2 / 5;
-                    break;
-
-                case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
-					int monWeight = battleCtx->battleMons[defender].weight;
-					
-					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
-					{
-						monWeight *= 2;
-					}
-					
-                    for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
-                        if (sWeightToPower[i][0] >= monWeight) {
+                        case ABILITY_HUSTLE:
+                            damage = damage * 3 / 2;
                             break;
                         }
+
+                        // Held item effects that directly affect attack stat
+                        switch (partyMonItemEffect) {
+                        default:
+                            break;
+
+                        case HOLD_EFFECT_PIKA_SPATK_UP:
+                            if (partyMonSpecies == SPECIES_PIKACHU) {
+                                damage *= 2;
+                            }
+                            break;
+
+                        case HOLD_EFFECT_CUBONE_ATK_UP:
+                            if (partyMonSpecies == SPECIES_CUBONE
+                                || partyMonSpecies == SPECIES_MAROWAK) {
+
+                                damage *= 2;
+                            }
+                            break;
+                        }
+
+                        // End of use of direct attack stat usage here
+                        damage += 2;
+
+                        // All other abilities
+                        switch (partyMonAbility) {
+                        default:
+                            break;
+
+                        case ABILITY_GUTS:
+                            if (Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                                damage = damage * 3 / 2;
+                            }
+                            break;
+
+                        case ABILITY_RIVALRY:
+                            if (defenderParams.gender != GENDER_NONE
+                                && Pokemon_GetValue(partyMon, MON_DATA_GENDER, NULL) == defenderParams.gender) {
+                                damage = damage * 3 / 2;
+                            }
+                            break;
+
+                        case ABILITY_IRON_FIST:
+                            damage = damage * 13 / 10;
+                            break;
+
+                        case ABILITY_TECHNICIAN:
+                            damage = damage * 3 / 2;
+                            break;
+
+                        case ABILITY_NORMALIZE:
+                            partyMonInType = TYPE_NORMAL;
+                            break;
+
+                        case ABILITY_ROCK_STAR:
+                            if (soundMove == TRUE)
+                            {
+                                partyMonInType = TYPE_ROCK;
+                            }
+                            break;
+                        }
+
+                        // All other held item effects
+                        switch (partyMonItemEffect) {
+                        default:
+                            break;
+
+                        case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+                            damage = damage * 6 / 5;
+                            break;
+
+                        case HOLD_EFFECT_CHOICE_ATK:
+                            damage = damage * 3 / 2;
+                            break;
+
+                        case HOLD_EFFECT_STRENGTHEN_DARK:
+                        case HOLD_EFFECT_ARCEUS_DARK:
+                            if (partyMonInType == TYPE_DARK) {
+                                damage = damage * (100 + partyMonItemPower) / 100;
+                            }
+                            break;
+
+                        case HOLD_EFFECT_STRENGTHEN_NORMAL:
+                            if (partyMonInType == TYPE_NORMAL) {
+                                damage = damage * (100 + partyMonItemPower) / 100;
+                            }
+                            break;
+
+                        case HOLD_EFFECT_POWER_UP_PHYS:
+                            damage = damage * (100 + partyMonItemPower) / 100;
+                            break;
+                        }
+
+                        if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && (partyMonType1 == inType || partyMonType2 == inType)) {
+                            if (partyMonAbility == ABILITY_ADAPTABILITY) {
+                                damage *= 2;
+                            }
+                            else {
+                                damage = damage * 3 / 2;
+                            }
+                        }
+
+                        effectiveness = BattleSystem_TypeMatchupMultiplier(inType, DEFENDING_MON.type1, DEFENDING_MON.type2, move);
+
+                        damage = damage * effectiveness / 40;
                     }
-                    if (sWeightToPower[i][0] != 0xFFFF) {
-                        movePower = sWeightToPower[i][1];
-                    } else {
-                        movePower = 150;
+
+                    cumDamage += damage;
+                }
+
+                damage = cumDamage;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_40_DAMAGE_FLAT:
+                damage = 40;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_10_DAMAGE_FLAT:
+                damage = 10;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+                damage = attackerLevel;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_HALVE_HP:
+                damage = defenderParams.curHP / 2;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+                if (defenderParams.curHP > attackerParams.curHP) {
+                    damage = defenderParams.curHP - attackerParams.curHP;
+                }
+                else {
+                    damage = 0;
+                }
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED:
+                movePower = 1 + 25 * defenderSpeedStat / speedStat;
+                if (battleCtx->movePower > 150) {
+                    battleCtx->movePower = 150;
+                }
+                break;
+
+            case BATTLE_EFFECT_FLING:
+                movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_FLING_POWER);
+                break;
+
+            case BATTLE_EFFECT_NATURAL_GIFT:
+                movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_NATURAL_GIFT_POWER);
+                break;
+
+            case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
+                for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
+
+                    if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
+                        cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
                     }
+                }
+
+                movePower = 60 + 20 * cumStatBoosts;
+                break;
+
+            case BATTLE_EFFECT_NATURE_POWER:
+                terrain = BattleSystem_Terrain(battleSys);
+
+                if (terrain > TERRAIN_SPECIAL) {
+                    terrain = TERRAIN_SPECIAL;
+                }
+
+                naturePowerMove = sTerrainMove[terrain];
+
+                damage = BattleSystem_CalcPartyMemberMoveDamage(
+                    battleSys,
+                    battleCtx,
+                    naturePowerMove,
+                    sideConditions,
+                    fieldConditions,
+                    inPower,
+                    inType,
+                    attacker,
+                    defender,
+                    criticalMul,
+                    partyIndicator,
+                    partySlot);
+
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL:
+                rnd = BattleSystem_RandNext(battleSys) % 256;
+                // 80 percentile
+                if (rnd >= 204) {
+                    movePower = 0;
                     break;
+                }
+                // 70 percentile
+                if (rnd >= 178) {
+                    movePower = 120;
+                    break;
+                }
+                // 40 percentile
+                if (rnd >= 102) {
+                    movePower = 80;
+                    break;
+                }
+                movePower = 40;
+                break;
+
+            case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
+                movePower = Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL) * 2 / 5;
+                break;
+
+            case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
+                movePower = (255 - Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL)) * 2 / 5;
+                break;
+
+            case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
+                int monWeight = battleCtx->battleMons[defender].weight;
+
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+                {
+                    monWeight *= 2;
+                }
+
+                for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
+                    if (sWeightToPower[i][0] >= monWeight) {
+                        break;
+                    }
+                }
+                if (sWeightToPower[i][0] != 0xFFFF) {
+                    movePower = sWeightToPower[i][1];
+                }
+                else {
+                    movePower = 150;
+                }
+                break;
 
                 case BATTLE_EFFECT_AVERAGE_HP:
-                    if(defenderParams.curHP > attackerParams.curHP) {
-                        movePower = (defenderParams.curHP - attackerParams.curHP) / 2;
-                    }
-                    else {
-                        movePower = 0;
-                    }
-                    return movePower;
-                    break;
+                if (defenderParams.curHP > attackerParams.curHP) {
+                    movePower = (defenderParams.curHP - attackerParams.curHP) / 2;
+                }
+                else {
+                    movePower = 0;
+                }
+                return movePower;
+                break;
+            }
+        }
 
-                case BATTLE_EFFECT_HIT_IN_3_TURNS:
-                    if (moveClass == CLASS_PHYSICAL) {
-                        attackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
-                    }
-                    if (moveClass == CLASS_SPECIAL) {
-                        spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
-                    }
-                    break;
+        switch (effect) // multi-hit and other weird moves here
+        {
+        default:
+            break;
 
-                case BATTLE_EFFECT_SPIKES_MULTI_HIT:
-                case BATTLE_EFFECT_MULTI_HIT:
-                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
-                    multiHitHits = 2;
+        case BATTLE_EFFECT_HIT_IN_3_TURNS:
+            if (moveClass == CLASS_PHYSICAL) {
+                attackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
+            }
+            if (moveClass == CLASS_SPECIAL) {
+                spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
+            }
+            break;
 
-                    if (multiHitChance < 7) { // 70% chance for 2 or 3 hits
-                    multiHitHits += multiHitChance & 1; // 2 or 3 hits
-                    }
-                    else { // 30% chance for 4 or 5 hits
-                        multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
-                    }
+        case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+        case BATTLE_EFFECT_MULTI_HIT:
+            multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+            multiHitHits = 2;
 
-                    if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE) {
-                        multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
-                    }
-                    if (attackerParams.ability == ABILITY_SKILL_LINK) {
-                        multiHitHits = 5;
-                    }
-                    if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT) {
-                        if (multiHitHits < 3) {
-                            multiHitHits = 3;
-                        }
-                    }
+            if (multiHitChance < 7) { // 70% chance for 2 or 3 hits
+            multiHitHits += multiHitChance & 1; // 2 or 3 hits
+            }
+            else { // 30% chance for 4 or 5 hits
+                multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
+            }
 
-                    movePower *= multiHitHits;
-                    break;
+            if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE) {
+                multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+            }
+            if (attackerParams.ability == ABILITY_SKILL_LINK) {
+                multiHitHits = 5;
+            }
+            if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT) {
+                if (multiHitHits < 3) {
+                    multiHitHits = 3;
+                }
+            }
+
+            movePower *= multiHitHits;
+            break;
 					
-				case BATTLE_EFFECT_MULTI_HIT_TEN:
-                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
-                    multiHitHits = 2;
+		case BATTLE_EFFECT_MULTI_HIT_TEN:
+            multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+            multiHitHits = 2;
 
-                    if (attackerParams.ability == ABILITY_SKILL_LINK)
+            if (attackerParams.ability == ABILITY_SKILL_LINK)
+            {
+                multiHitHits = 10;
+            }
+            else
+            {
+                if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                {
+                    multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                }
+                else
+                {
+                    // restructured this to use less flops (using else for the middle case has less comparisons)
+                    if (multiHitChance < 3)
                     {
-                        multiHitHits = 10;
+                        multiHitHits += BattleSystem_RandNext(battleSys) % 2;
                     }
                     else
                     {
-                        if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                        if (multiHitChance > 6)
                         {
-                            multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                            multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
                         }
                         else
                         {
-                            // restructured this to use less flops (using else for the middle case has less comparisons)
-                            if (multiHitChance < 3)
-                            {
-                                multiHitHits += BattleSystem_RandNext(battleSys) % 2;
-                            }
-                            else
-                            {
-                                if (multiHitChance > 6)
-                                {
-                                    multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
-                                }
-                                else
-                                {
-                                    multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
-                                }
-                            }
-                        }
-
-                        if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT)
-                        {
-                            if (multiHitHits < 3)
-                            {
-                                multiHitHits = 3;
-                            }
+                            multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
                         }
                     }
-					
-					HPTracker = defenderParams.curHP;
-                    currentHit = 0;
-                    movePower = 0;
-					
-					for (i = 1; i < multiHitHits; i++)
-					{
-                        tempPower = MOVE_DATA(move).power;
+                }
 
-                        if (HPTracker <= 0)
-                        {
-                            HPMult = 800;
-                        }
-                        else
-                        {
-                            if (HPTracker <= (defenderParams.maxHP / 8))
-                            {
-                                HPMult = 800; // Multiplier cap
-                            }
-                            else
-                            {
-                                HPMult = 100 * defenderParams.maxHP / HPTracker;
-
-                                if (HPMult <= 0)
-                                {
-                                    HPMult = 100;
-                                }
-                            }
-                        }
-
-                        tempPower = tempPower * 2 / 3;
-                        tempPower = tempPower * HPMult / 100;
-
-                        currentHit = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
-                            battleCtx,
-                            move,
-                            sideConditions,
-                            fieldConditions,
-                            tempPower,
-                            inType,
-                            attacker,
-                            defender,
-                            criticalMul,
-                            partyIndicator,
-                            partySlot);
-
-                        if (HPTracker <= currentHit)
-                        {
-                            HPTracker = 0;
-                        }
-                        else
-                        {
-                            HPTracker -= currentHit;
-                        }
-                        
-                        movePower += currentHit;
-					}
-					break;
-
-                case BATTLE_EFFECT_HIT_THREE_TIMES:
-                    rnd = BattleSystem_RandNext(battleSys) % 10;
-                    if (rnd != 0) {
-                        movePower += movePower * 2;
+                if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT)
+                {
+                    if (multiHitHits < 3)
+                    {
+                        multiHitHits = 3;
                     }
-
-                    rnd = BattleSystem_RandNext(battleSys) % 10;
-                    if (rnd != 0) {
-                        movePower += movePower * 3;
-                    }
-                    break;
-                    
-                case BATTLE_EFFECT_HIT_TWICE:
-                    movePower *= 2;
-                    break;
+                }
             }
+					
+			HPTracker = defenderParams.curHP;
+            currentHit = 0;
+            movePower = 0;
+					
+			for (i = 1; i < multiHitHits; i++)
+			{
+                tempPower = MOVE_DATA(move).power;
+
+                if (HPTracker <= 0)
+                {
+                    HPMult = 800;
+                }
+                else
+                {
+                    if (HPTracker <= (defenderParams.maxHP / 8))
+                    {
+                        HPMult = 800; // Multiplier cap
+                    }
+                    else
+                    {
+                        HPMult = 100 * defenderParams.maxHP / HPTracker;
+
+                        if (HPMult <= 0)
+                        {
+                            HPMult = 100;
+                        }
+                    }
+                }
+
+                tempPower = tempPower * 2 / 3;
+                tempPower = tempPower * HPMult / 100;
+
+                currentHit = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                    battleCtx,
+                    move,
+                    sideConditions,
+                    fieldConditions,
+                    tempPower,
+                    inType,
+                    attacker,
+                    defender,
+                    criticalMul,
+                    partyIndicator,
+                    partySlot);
+
+                if (HPTracker <= currentHit)
+                {
+                    HPTracker = 0;
+                }
+                else
+                {
+                    HPTracker -= currentHit;
+                }
+                        
+                movePower += currentHit;
+			}
+			break;
+
+        case BATTLE_EFFECT_HIT_THREE_TIMES:
+            rnd = BattleSystem_RandNext(battleSys) % 10;
+            if (rnd != 0) {
+                movePower += movePower * 2;
+            }
+
+            rnd = BattleSystem_RandNext(battleSys) % 10;
+            if (rnd != 0) {
+                movePower += movePower * 3;
+            }
+            break;
+                    
+        case BATTLE_EFFECT_HIT_TWICE:
+            movePower *= 2;
+            break;
         }
     }
 
@@ -10581,494 +10589,502 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             || effect == BATTLE_EFFECT_NATURE_POWER
             || effect == BATTLE_EFFECT_AVERAGE_HP) {
             switch (effect) {
-                default:
-                    break;
+            default:
+                break;
 
-                case BATTLE_EFFECT_BEAT_UP:
-                    Pokemon *partyMon;
-                    int partyMonSpecies;
-                    int partyMonForm;
-                    int partyMonLevel;
-                    int side;
-                    u8 partyMonAbility;
-                    u8 partyMonType1;
-                    u8 partyMonType2;
-                    u8 partyMonInType;
-                    u8 partyMonItemEffect;
-                    u8 partyMonItemPower;
-                    u16 partyMonItem;
-                    s32 cumDamage = 0;
+            case BATTLE_EFFECT_BEAT_UP:
+                Pokemon* partyMon;
+                int partyMonSpecies;
+                int partyMonForm;
+                int partyMonLevel;
+                int side;
+                u8 partyMonAbility;
+                u8 partyMonType1;
+                u8 partyMonType2;
+                u8 partyMonInType = TYPE_DARK;
+                u8 partyMonItemEffect;
+                u8 partyMonItemPower;
+                u16 partyMonItem;
+                s32 cumDamage = 0;
 
-                    for (i = 0; i < MAX_PARTY_SIZE; i++) {
-                        partyMon = BattleSystem_PartyPokemon(battleSys, attacker, i);
-                        partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
-                        partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
-                        partyMonLevel = Pokemon_GetValue(partyMon, MON_DATA_LEVEL, NULL);
-                        partyMonAbility = Pokemon_GetValue(partyMon, MON_DATA_ABILITY, NULL);
-                        partyMonType1 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_1, NULL);
-                        partyMonType2 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_2, NULL);
-                        partyMonItem = Pokemon_GetValue(partyMon, MON_DATA_HELD_ITEM, NULL);
-                        partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
-                        partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+                for (i = 0; i < MAX_PARTY_SIZE; i++) {
+                    partyMon = BattleSystem_PartyPokemon(battleSys, attacker, i);
+                    partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
+                    partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                    partyMonLevel = Pokemon_GetValue(partyMon, MON_DATA_LEVEL, NULL);
+                    partyMonAbility = Pokemon_GetValue(partyMon, MON_DATA_ABILITY, NULL);
+                    partyMonType1 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_1, NULL);
+                    partyMonType2 = Pokemon_GetValue(partyMon, MON_DATA_TYPE_2, NULL);
+                    partyMonItem = Pokemon_GetValue(partyMon, MON_DATA_HELD_ITEM, NULL);
+                    partyMonItemEffect = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT);
+                    partyMonItemPower = BattleSystem_GetItemData(battleCtx, partyMonItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
 
-                        if (Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
+                    if (Pokemon_GetValue(partyMon, MON_DATA_CURRENT_HP, NULL) != 0
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
                         && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
-                            damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
-                            damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
+                        damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
+                        damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
 
-                            switch (partyMonAbility) {
-                                default:
-                                    break;
+                        switch (partyMonAbility) {
+                        default:
+                            break;
 
-                                case ABILITY_HUGE_POWER:
-                                case ABILITY_PURE_POWER:
-                                    damage *= 2;
-                                    break;
+                        case ABILITY_HUGE_POWER:
+                        case ABILITY_PURE_POWER:
+                            damage *= 2;
+                            break;
 
-                                case ABILITY_PLUS:
-                                    if (attackerParams.ability == ABILITY_MINUS) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_FORECAST:
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-                                        damage /= 2;
-                                        break;
-                                    }
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                                        damage = damage * 3 / 2;
-                                        break;
-                                    }
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
-                                        damage = damage * 3 / 2;
-                                        break;
-                                    }
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
-                                        damage = damage * 3 / 2;
-                                        break;
-                                    }
-                                    break;
-
-                                case ABILITY_SOLAR_POWER:
-                                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_HUSTLE:
-                                    damage = damage * 3 / 2;
-                                    break;
+                        case ABILITY_PLUS:
+                            if (attackerParams.ability == ABILITY_MINUS) {
+                                damage = damage * 3 / 2;
                             }
+                            break;
 
-                            // Held item effects that directly affect attack stat
-                            switch (partyMonItemEffect) {
-                                default:
-                                    break;
-
-                                case HOLD_EFFECT_PIKA_SPATK_UP:
-                                    if (partyMonSpecies == SPECIES_PIKACHU) {
-                                        damage *= 2;
-                                    }
-                                    break;
-
-                                case HOLD_EFFECT_CUBONE_ATK_UP:
-                                    if (partyMonSpecies == SPECIES_CUBONE
-                                        || partyMonSpecies == SPECIES_MAROWAK) {
-
-                                        damage *= 2;
-                                    }
-                                    break;
+                        case ABILITY_FORECAST:
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                                damage /= 2;
+                                break;
                             }
-
-                            // End of use of direct attack stat usage here
-                            damage += 2;
-
-                            // All other abilities
-                            switch (partyMonAbility) {
-                                default:
-                                    break;
-
-                                case ABILITY_GUTS:
-                                    if (Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_RIVALRY:
-                                    if (defenderParams.gender != GENDER_NONE
-                                    && Pokemon_GetValue(partyMon, MON_DATA_GENDER, NULL) == defenderParams.gender) {
-                                        damage = damage * 3 / 2;
-                                    }
-                                    break;
-
-                                case ABILITY_IRON_FIST:
-                                    damage = damage * 13 / 10;
-                                    break;
-
-                                case ABILITY_TECHNICIAN:
-                                    damage = damage * 3 / 2;
-                                    break;
-
-                                case ABILITY_NORMALIZE:
-                                    partyMonInType = TYPE_NORMAL;
-                                    break;
-									
-								case ABILITY_ROCK_STAR:
-									if (soundMove == TRUE)
-									{
-										partyMonInType = TYPE_ROCK;
-									}
-                                    break;
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                damage = damage * 3 / 2;
+                                break;
                             }
-	
-                            // All other held item effects
-                            switch (partyMonItemEffect) {
-                                default:
-                                    break;
-
-                                case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
-                                    damage = damage * 6 / 5;
-                                    break;
-
-                                case HOLD_EFFECT_CHOICE_ATK:
-                                    damage = damage * 3 / 2;
-                                    break;
-
-                                case HOLD_EFFECT_STRENGTHEN_DARK:
-                                case HOLD_EFFECT_ARCEUS_DARK:
-                                    if (partyMonInType == TYPE_DARK) {
-                                        damage = damage * (100 + partyMonItemPower) / 100;
-                                    }
-                                    break;
-
-                                case HOLD_EFFECT_STRENGTHEN_NORMAL:
-                                    if (partyMonInType == TYPE_NORMAL) {
-                                        damage = damage * (100 + partyMonItemPower) / 100;
-                                    }
-                                    break;
-
-                                case HOLD_EFFECT_POWER_UP_PHYS:
-                                    damage = damage * (100 + partyMonItemPower) / 100;
-                                    break;
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+                                damage = damage * 3 / 2;
+                                break;
                             }
-
-                            damage = PartyMon_ApplyTypeChart(battleSys,
-                                                battleCtx,
-                                                move,
-                                                partyMonInType,
-                                                attacker,
-                                                defender,
-                                                damage,
-                                                attacker,
-                                                i,
-                                                &effectiveness);
-
-                            if ((effectiveness & MOVE_STATUS_IMMUNE)
-                                && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
-                            {
-                                    damage = 0;
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+                                damage = damage * 3 / 2;
+                                break;
                             }
-                        }
+                            break;
 
-                        cumDamage += damage;
-                    }
+                        case ABILITY_SOLAR_POWER:
+                            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                                damage = damage * 3 / 2;
+                            }
+                            break;
 
-                    damage = cumDamage;
-                    return damage;
-                    break;
-
-
-                case BATTLE_EFFECT_40_DAMAGE_FLAT:
-                    damage = 40;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_10_DAMAGE_FLAT:
-                    damage = 10;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
-                    damage = attackerLevel;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_HALVE_HP:
-                    damage = battleCtx->battleMons[defender].curHP / 2;
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
-                    if (defenderParams.curHP > attackerParams.curHP) {
-                        damage = defenderParams.curHP - attackerParams.curHP;
-                    }
-                    else {
-                        damage = 0;
-                    }
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED:
-                    movePower = 1 + 25 * battleCtx->monSpeedValues[battleCtx->defender] / battleCtx->monSpeedValues[battleCtx->attacker];
-                    if (battleCtx->movePower > 150) {
-                        battleCtx->movePower = 150;
-                    }
-                    break;
-
-                case BATTLE_EFFECT_FLING:
-                    movePower = Battler_ItemFlingPower(battleCtx, attacker);
-                    break;
-
-                case BATTLE_EFFECT_NATURAL_GIFT:
-                    movePower = Battler_NaturalGiftPower(battleCtx, attacker);
-                    break;
-
-                case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
-                    for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
-
-                        if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
-                            cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
-                        }
-                    }
-
-                    movePower = 60 + 20 * cumStatBoosts;
-                    break;
-
-                case BATTLE_EFFECT_NATURE_POWER:
-                    terrain = BattleSystem_Terrain(battleSys);
-
-                    if (terrain > TERRAIN_SPECIAL) {
-                        terrain = TERRAIN_SPECIAL;
-                    }
-
-                    naturePowerMove = sTerrainMove[terrain];
-
-                    damage = BattleSystem_CalcMoveDamage(battleSys,
-                            battleCtx,
-                            naturePowerMove,
-                            sideConditions,
-                            fieldConditions,
-                            inPower,
-                            inType,
-                            attacker,
-                            defender,
-                            criticalMul);
-
-                    return damage;
-                    break;
-
-                case BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL:
-                    rnd = BattleSystem_RandNext(battleSys) % 256;
-                    // 80 percentile
-                    if (rnd >= 204) {
-                        movePower = 0;
-                        break;
-                    }
-                    // 70 percentile
-                    if (rnd >= 178) {
-                        movePower = 120;
-                        break;
-                    }
-                    // 40 percentile
-                    if (rnd >= 102) {
-                        movePower = 80;
-                        break;
-                    }
-                    movePower = 40;
-                    break;
-                
-                case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
-                    movePower = battleCtx->battleMons[attacker].friendship * 2 / 5;
-                    break;
-
-                case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
-                    movePower = (255 - battleCtx->battleMons[attacker].friendship) * 2 / 5;
-                    break;
-
-                case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
-					int monWeight = battleCtx->battleMons[defender].weight;
-					
-					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
-					{
-						monWeight *= 2;
-					}
-				
-                    for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
-                        if (sWeightToPower[i][0] >= monWeight) {
+                        case ABILITY_HUSTLE:
+                            damage = damage * 3 / 2;
                             break;
                         }
-                    }
-                    if (sWeightToPower[i][0] != 0xFFFF) {
-                        movePower = sWeightToPower[i][1];
-                    } else {
-                        movePower = 150;
-                    }
-                    break;
 
-                case BATTLE_EFFECT_AVERAGE_HP:
-                    if(defenderParams.curHP > attackerParams.curHP) {
-                        movePower = (defenderParams.curHP - attackerParams.curHP) / 2;
-                    }
-                    else {
-                        movePower = 0;
-                    }
-                    return movePower;
-                    break;
+                        // Held item effects that directly affect attack stat
+                        switch (partyMonItemEffect) {
+                        default:
+                            break;
 
-                case BATTLE_EFFECT_HIT_IN_3_TURNS:
-                    if (moveClass == CLASS_PHYSICAL) {
-                        attackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
-                    }
-                    if (moveClass == CLASS_SPECIAL) {
-                        spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
-                    }
-                    break;
-					
-				case BATTLE_EFFECT_SPIKES_MULTI_HIT:
-                case BATTLE_EFFECT_MULTI_HIT:
-                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
-                    multiHitHits = 2;
+                        case HOLD_EFFECT_PIKA_SPATK_UP:
+                            if (partyMonSpecies == SPECIES_PIKACHU) {
+                                damage *= 2;
+                            }
+                            break;
 
-                    if (multiHitChance < 7) { // 70% chance for 2 or 3 hits
-                    multiHitHits += multiHitChance & 1; // 2 or 3 hits
-                    }
-                    else { // 30% chance for 4 or 5 hits
-                        multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
-                    }
+                        case HOLD_EFFECT_CUBONE_ATK_UP:
+                            if (partyMonSpecies == SPECIES_CUBONE
+                                || partyMonSpecies == SPECIES_MAROWAK) {
 
-                    if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE) {
-                        multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
-                    }
-                    if (attackerParams.ability == ABILITY_SKILL_LINK) {
-                        multiHitHits = 5;
-                    }
-                    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT) {
-                        if (multiHitHits < 3) {
-                            multiHitHits = 3;
+                                damage *= 2;
+                            }
+                            break;
+                        }
+
+                        // End of use of direct attack stat usage here
+                        damage += 2;
+
+                        // All other abilities
+                        switch (partyMonAbility) {
+                        default:
+                            break;
+
+                        case ABILITY_GUTS:
+                            if (Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
+                                damage = damage * 3 / 2;
+                            }
+                            break;
+
+                        case ABILITY_RIVALRY:
+                            if (defenderParams.gender != GENDER_NONE
+                                && Pokemon_GetValue(partyMon, MON_DATA_GENDER, NULL) == defenderParams.gender) {
+                                damage = damage * 3 / 2;
+                            }
+                            break;
+
+                        case ABILITY_IRON_FIST:
+                            damage = damage * 13 / 10;
+                            break;
+
+                        case ABILITY_TECHNICIAN:
+                            damage = damage * 3 / 2;
+                            break;
+
+                        case ABILITY_NORMALIZE:
+                            partyMonInType = TYPE_NORMAL;
+                            break;
+
+                        case ABILITY_ROCK_STAR:
+                            if (soundMove == TRUE)
+                            {
+                                partyMonInType = TYPE_ROCK;
+                            }
+                            break;
+                        }
+
+                        // All other held item effects
+                        switch (partyMonItemEffect) {
+                        default:
+                            break;
+
+                        case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
+                            damage = damage * 6 / 5;
+                            break;
+
+                        case HOLD_EFFECT_CHOICE_ATK:
+                            damage = damage * 3 / 2;
+                            break;
+
+                        case HOLD_EFFECT_STRENGTHEN_DARK:
+                        case HOLD_EFFECT_ARCEUS_DARK:
+                            if (partyMonInType == TYPE_DARK) {
+                                damage = damage * (100 + partyMonItemPower) / 100;
+                            }
+                            break;
+
+                        case HOLD_EFFECT_STRENGTHEN_NORMAL:
+                            if (partyMonInType == TYPE_NORMAL) {
+                                damage = damage * (100 + partyMonItemPower) / 100;
+                            }
+                            break;
+
+                        case HOLD_EFFECT_POWER_UP_PHYS:
+                            damage = damage * (100 + partyMonItemPower) / 100;
+                            break;
+                        }
+
+                        damage = PartyMon_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            partyMonInType,
+                            attacker,
+                            defender,
+                            damage,
+                            attacker,
+                            i,
+                            &effectiveness);
+
+                        if ((effectiveness & MOVE_STATUS_IMMUNE)
+                            && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+                        {
+                            damage = 0;
                         }
                     }
 
-                    movePower *= multiHitHits;
-                    break;
-					
-                case BATTLE_EFFECT_MULTI_HIT_TEN:
-                    multiHitChance = BattleSystem_RandNext(battleSys) % 10;
-                    multiHitHits = 2;
+                    cumDamage += damage;
+                }
 
-                    if (attackerParams.ability == ABILITY_SKILL_LINK)
+                damage = cumDamage;
+                return damage;
+                break;
+
+
+            case BATTLE_EFFECT_40_DAMAGE_FLAT:
+                damage = 40;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_10_DAMAGE_FLAT:
+                damage = 10;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+                damage = attackerLevel;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_HALVE_HP:
+                damage = battleCtx->battleMons[defender].curHP / 2;
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+                if (defenderParams.curHP > attackerParams.curHP) {
+                    damage = defenderParams.curHP - attackerParams.curHP;
+                }
+                else {
+                    damage = 0;
+                }
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED:
+                movePower = 1 + 25 * battleCtx->monSpeedValues[battleCtx->defender] / battleCtx->monSpeedValues[battleCtx->attacker];
+                if (battleCtx->movePower > 150) {
+                    battleCtx->movePower = 150;
+                }
+                break;
+
+            case BATTLE_EFFECT_FLING:
+                movePower = Battler_ItemFlingPower(battleCtx, attacker);
+                break;
+
+            case BATTLE_EFFECT_NATURAL_GIFT:
+                movePower = Battler_NaturalGiftPower(battleCtx, attacker);
+                break;
+
+            case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
+                for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
+
+                    if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
+                        cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
+                    }
+                }
+
+                movePower = 60 + 20 * cumStatBoosts;
+                break;
+
+            case BATTLE_EFFECT_NATURE_POWER:
+                terrain = BattleSystem_Terrain(battleSys);
+
+                if (terrain > TERRAIN_SPECIAL) {
+                    terrain = TERRAIN_SPECIAL;
+                }
+
+                naturePowerMove = sTerrainMove[terrain];
+
+                damage = BattleSystem_CalcMoveDamage(battleSys,
+                    battleCtx,
+                    naturePowerMove,
+                    sideConditions,
+                    fieldConditions,
+                    inPower,
+                    inType,
+                    attacker,
+                    defender,
+                    criticalMul);
+
+                return damage;
+                break;
+
+            case BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL:
+                rnd = BattleSystem_RandNext(battleSys) % 256;
+                // 80 percentile
+                if (rnd >= 204) {
+                    movePower = 0;
+                    break;
+                }
+                // 70 percentile
+                if (rnd >= 178) {
+                    movePower = 120;
+                    break;
+                }
+                // 40 percentile
+                if (rnd >= 102) {
+                    movePower = 80;
+                    break;
+                }
+                movePower = 40;
+                break;
+
+            case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
+                movePower = battleCtx->battleMons[attacker].friendship * 2 / 5;
+                break;
+
+            case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
+                movePower = (255 - battleCtx->battleMons[attacker].friendship) * 2 / 5;
+                break;
+
+            case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
+                int monWeight = battleCtx->battleMons[defender].weight;
+
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+                {
+                    monWeight *= 2;
+                }
+
+                for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
+                    if (sWeightToPower[i][0] >= monWeight) {
+                        break;
+                    }
+                }
+                if (sWeightToPower[i][0] != 0xFFFF) {
+                    movePower = sWeightToPower[i][1];
+                }
+                else {
+                    movePower = 150;
+                }
+                break;
+
+            case BATTLE_EFFECT_AVERAGE_HP:
+                if (defenderParams.curHP > attackerParams.curHP) {
+                    movePower = (defenderParams.curHP - attackerParams.curHP) / 2;
+                }
+                else {
+                    movePower = 0;
+                }
+                return movePower;
+                break;
+
+            }
+        }
+
+        switch (effect) // multi-hit and other weird moves here
+        {
+        default:
+            break;
+
+        case BATTLE_EFFECT_HIT_IN_3_TURNS:
+            if (moveClass == CLASS_PHYSICAL) {
+                attackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
+            }
+            if (moveClass == CLASS_SPECIAL) {
+                spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
+            }
+            break;
+					
+		case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+        case BATTLE_EFFECT_MULTI_HIT:
+            multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+            multiHitHits = 2;
+
+            if (multiHitChance < 7) { // 70% chance for 2 or 3 hits
+            multiHitHits += multiHitChance & 1; // 2 or 3 hits
+            }
+            else { // 30% chance for 4 or 5 hits
+                multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
+            }
+
+            if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE) {
+                multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+            }
+            if (attackerParams.ability == ABILITY_SKILL_LINK) {
+                multiHitHits = 5;
+            }
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT) {
+                if (multiHitHits < 3) {
+                    multiHitHits = 3;
+                }
+            }
+
+            movePower *= multiHitHits;
+            break;
+					
+        case BATTLE_EFFECT_MULTI_HIT_TEN:
+            multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+            multiHitHits = 2;
+
+            if (attackerParams.ability == ABILITY_SKILL_LINK)
+            {
+                multiHitHits = 10;
+            }
+            else
+            {
+                if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                {
+                    multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                }
+                else
+                {
+                    // restructured this to use less flops (using else for the middle case has less comparisons)
+                    if (multiHitChance < 3)
                     {
-                        multiHitHits = 10;
+                        multiHitHits += BattleSystem_RandNext(battleSys) % 2;
                     }
                     else
                     {
-                        if (attackerParams.heldItemEffect == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                        if (multiHitChance > 6)
                         {
-                            multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                            multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
                         }
                         else
                         {
-                            // restructured this to use less flops (using else for the middle case has less comparisons)
-                            if (multiHitChance < 3)
-                            {
-                                multiHitHits += BattleSystem_RandNext(battleSys) % 2;
-                            }
-                            else
-                            {
-                                if (multiHitChance > 6)
-                                {
-                                    multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
-                                }
-                                else
-                                {
-                                    multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
-                                }
-                            }
-                        }
-
-                        if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT)
-                        {
-                            if (multiHitHits < 3)
-                            {
-                                multiHitHits = 3;
-                            }
+                            multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
                         }
                     }
+                }
 
-                    HPTracker = defenderParams.curHP;
-                    currentHit = 0;
-                    movePower = 0;
-
-                    for (i = 1; i < multiHitHits; i++)
+                if (attackerSideConditions & SIDE_CONDITION_LUCKY_CHANT)
+                {
+                    if (multiHitHits < 3)
                     {
-                        tempPower = MOVE_DATA(move).power;
-
-                        if (HPTracker <= 0)
-                        {
-                            HPMult = 800;
-                        }
-                        else
-                        {
-                            if (HPTracker <= (defenderParams.maxHP / 8))
-                            {
-                                HPMult = 800; // Multiplier cap
-                            }
-                            else
-                            {
-                                HPMult = 100 * defenderParams.maxHP / HPTracker;
-
-                                if (HPMult <= 0)
-                                {
-                                    HPMult = 100;
-                                }
-                            }
-                        }
-
-                        tempPower = tempPower * 2 / 3;
-                        tempPower = tempPower * HPMult / 100;
-
-                        currentHit = BattleSystem_CalcMoveDamage(battleSys,
-                            battleCtx,
-                            move,
-                            sideConditions,
-                            fieldConditions,
-                            tempPower,
-                            inType,
-                            attacker,
-                            defender,
-                            criticalMul);
-
-                        if (HPTracker <= currentHit)
-                        {
-                            HPTracker = 0;
-                        }
-                        else
-                        {
-                            HPTracker -= currentHit;
-                        }
-
-                        movePower += currentHit;
+                        multiHitHits = 3;
                     }
-                    break;
-
-                case BATTLE_EFFECT_HIT_THREE_TIMES:
-                    rnd = BattleSystem_RandNext(battleSys) % 10;
-                    if (rnd != 0) {
-                        movePower += movePower * 2;
-                    }
-
-                    rnd = BattleSystem_RandNext(battleSys) % 10;
-                    if (rnd != 0) {
-                        movePower += movePower * 3;
-                    }
-                    break;
-                    
-                case BATTLE_EFFECT_HIT_TWICE:
-                    movePower *= 2;
-                    break;
+                }
             }
+
+            HPTracker = defenderParams.curHP;
+            currentHit = 0;
+            movePower = 0;
+
+            for (i = 1; i < multiHitHits; i++)
+            {
+                tempPower = MOVE_DATA(move).power;
+
+                if (HPTracker <= 0)
+                {
+                    HPMult = 800;
+                }
+                else
+                {
+                    if (HPTracker <= (defenderParams.maxHP / 8))
+                    {
+                        HPMult = 800; // Multiplier cap
+                    }
+                    else
+                    {
+                        HPMult = 100 * defenderParams.maxHP / HPTracker;
+
+                        if (HPMult <= 0)
+                        {
+                            HPMult = 100;
+                        }
+                    }
+                }
+
+                tempPower = tempPower * 2 / 3;
+                tempPower = tempPower * HPMult / 100;
+
+                currentHit = BattleSystem_CalcMoveDamage(battleSys,
+                    battleCtx,
+                    move,
+                    sideConditions,
+                    fieldConditions,
+                    tempPower,
+                    inType,
+                    attacker,
+                    defender,
+                    criticalMul);
+
+                if (HPTracker <= currentHit)
+                {
+                    HPTracker = 0;
+                }
+                else
+                {
+                    HPTracker -= currentHit;
+                }
+
+                movePower += currentHit;
+            }
+            break;
+
+        case BATTLE_EFFECT_HIT_THREE_TIMES:
+            rnd = BattleSystem_RandNext(battleSys) % 10;
+            if (rnd != 0) {
+                movePower += movePower * 2;
+            }
+
+            rnd = BattleSystem_RandNext(battleSys) % 10;
+            if (rnd != 0) {
+                movePower += movePower * 3;
+            }
+            break;
+                    
+        case BATTLE_EFFECT_HIT_TWICE:
+            movePower *= 2;
+            break;
         }
     }
 
