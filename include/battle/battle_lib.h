@@ -1825,4 +1825,13 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  */
  BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
+ /**
+* @brief Maps an SE berry effect to its type.
+*
+* @param itemEffect The item effect of the berry
+*
+* @return The type that the SE berry applies to.
+*/
+ u8 Battle_MapResistBerryEffectToType(u8 itemEffect);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

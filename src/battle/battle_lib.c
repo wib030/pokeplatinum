@@ -3764,7 +3764,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     else {
         chartEntry = 0;
 		
-		if (freezeDryUsed == 1)
+		if (freezeDryUsed)
 		{
 			while (sFreezeDryTypeChart[chartEntry][0] != 0xFF) {
 				if (sFreezeDryTypeChart[chartEntry][0] == 0xFE) {
@@ -4107,7 +4107,7 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
     else {
         chartEntry = 0;
 		
-		if (freezeDryUsed == 1)
+		if (freezeDryUsed)
 		{
 			while (sFreezeDryTypeChart[chartEntry][0] != 0xFF) {
 				if (sFreezeDryTypeChart[chartEntry][0] == 0xFE) {
@@ -9530,7 +9530,60 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 }
             }
 
-            movePower *= multiHitHits;
+            for (i = 1; i < multiHitHits; i++)
+            {
+                if (i == 1)
+                {
+                    movePower += BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        PartyMon_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            inType,
+                            attacker,
+                            defender,
+                            movePower,
+                            attacker,
+                            partySlot,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            movePower *= 2;
+                        }
+                    }
+
+                    movePower += BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
+            }
             break;
 					
 		case BATTLE_EFFECT_MULTI_HIT_TEN:
@@ -9608,18 +9661,57 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 tempPower = tempPower * 2 / 3;
                 tempPower = tempPower * HPMult / 100;
 
-                currentHit = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
-                    battleCtx,
-                    move,
-                    sideConditions,
-                    fieldConditions,
-                    tempPower,
-                    inType,
-                    attacker,
-                    defender,
-                    criticalMul,
-                    partyIndicator,
-                    partySlot);
+                if (i == 1)
+                {
+                    currentHit = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        tempPower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        PartyMon_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            inType,
+                            attacker,
+                            defender,
+                            tempPower,
+                            attacker,
+                            partySlot,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            tempPower *= 2;
+                        }
+                    }
+
+                    currentHit = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        tempPower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
 
                 if (HPTracker <= currentHit)
                 {
@@ -9635,19 +9727,131 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 			break;
 
         case BATTLE_EFFECT_HIT_THREE_TIMES:
-            rnd = BattleSystem_RandNext(battleSys) % 100;
-            if (rnd < MOVE_DATA(move).accuracy) {
-                movePower += movePower * 2;
+            multiHitHits = 3;
+
+            for (i = 1; i < multiHitHits; i++)
+            {
+                rnd = BattleSystem_RandNext(battleSys) % 100;
+                if (rnd < MOVE_DATA(move).accuracy) {
+                    movePower *= i;
+                }
+                else
+                {
+                    break;
+                }
+
+                if (i == 1)
+                {
+                    movePower += BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        PartyMon_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            inType,
+                            attacker,
+                            defender,
+                            movePower,
+                            attacker,
+                            partySlot,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            movePower *= 2;
+                        }
+                    }
+
+                    movePower += BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
             }
 
-            rnd = BattleSystem_RandNext(battleSys) % 100;
-            if (rnd < MOVE_DATA(move).accuracy) {
-                movePower += movePower * 3;
-            }
             break;
                     
         case BATTLE_EFFECT_HIT_TWICE:
-            movePower *= 2;
+            multiHitHits = 2;
+
+            for (i = 1; i < multiHitHits; i++)
+            {
+                if (i == 1)
+                {
+                    movePower += BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        PartyMon_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            inType,
+                            attacker,
+                            defender,
+                            movePower,
+                            attacker,
+                            partySlot,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            movePower *= 2;
+                        }
+                    }
+
+                    movePower += BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul,
+                        partyIndicator,
+                        partySlot);
+                }
+            }
             break;
         }
     }
@@ -10250,6 +10454,32 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             }
             break;
     }
+
+    /*
+    if (Item_IsBerry(Battler_HeldItem(battleCtx, defender)))
+    {
+        if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+        {
+            effectiveness = 0;
+
+            PartyMon_ApplyTypeChart(battleSys,
+                battleCtx,
+                move,
+                inType,
+                attacker,
+                defender,
+                movePower,
+                attacker,
+                partySlot,
+                &effectiveness);
+
+            if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+            {
+                movePower /= 2;
+            }
+        }
+    }
+    */
 
     GF_ASSERT(battleCtx->powerMul >= 10);
     movePower = movePower * battleCtx->powerMul / 10;
@@ -10973,7 +11203,54 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 }
             }
 
-            movePower *= multiHitHits;
+            for (i = 1; i < multiHitHits; i++)
+            {
+                if (i == 1)
+                {
+                    movePower += BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        BattleSystem_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            moveType,
+                            attacker,
+                            defender,
+                            movePower,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            movePower *= 2;
+                        }
+                    }
+
+                    movePower += BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
+            }
             break;
 					
         case BATTLE_EFFECT_MULTI_HIT_TEN:
@@ -11019,6 +11296,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 }
             }
 
+
+
             HPTracker = defenderParams.curHP;
             currentHit = 0;
             movePower = 0;
@@ -11051,16 +11330,51 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 tempPower = tempPower * 2 / 3;
                 tempPower = tempPower * HPMult / 100;
 
-                currentHit = BattleSystem_CalcMoveDamage(battleSys,
-                    battleCtx,
-                    move,
-                    sideConditions,
-                    fieldConditions,
-                    tempPower,
-                    inType,
-                    attacker,
-                    defender,
-                    criticalMul);
+                if (i == 1)
+                {
+                    currentHit = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        tempPower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        BattleSystem_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            moveType,
+                            attacker,
+                            defender,
+                            tempPower,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            tempPower *= 2;
+                        }
+                    }
+
+                    currentHit = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        tempPower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
 
                 if (HPTracker <= currentHit)
                 {
@@ -11076,19 +11390,118 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             break;
 
         case BATTLE_EFFECT_HIT_THREE_TIMES:
-            rnd = BattleSystem_RandNext(battleSys) % 100;
-            if (rnd < MOVE_DATA(move).accuracy) {
-                movePower += movePower * 2;
-            }
+            multiHitHits = 3;
 
-            rnd = BattleSystem_RandNext(battleSys) % 100;
-            if (rnd < MOVE_DATA(move).accuracy) {
-                movePower += movePower * 3;
+            for (i = 1; i < multiHitHits; i++)
+            {
+                rnd = BattleSystem_RandNext(battleSys) % 100;
+                if (rnd < MOVE_DATA(move).accuracy) {
+                    movePower *= i;
+                }
+                else
+                {
+                    break;
+                }
+
+                if (i == 1)
+                {
+                    movePower += BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        BattleSystem_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            moveType,
+                            attacker,
+                            defender,
+                            movePower,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            movePower *= 2;
+                        }
+                    }
+
+                    movePower += BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
             }
             break;
                     
         case BATTLE_EFFECT_HIT_TWICE:
-            movePower *= 2;
+            multiHitHits = 2;
+
+            for (i = 1; i < multiHitHits; i++)
+            {
+                if (i == 1)
+                {
+                    movePower += BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
+                else
+                {
+                    if (Battle_MapResistBerryEffectToType(defenderParams.heldItemEffect) == moveType)
+                    {
+                        effectiveness = 0;
+
+                        BattleSystem_ApplyTypeChart(battleSys,
+                            battleCtx,
+                            move,
+                            moveType,
+                            attacker,
+                            defender,
+                            movePower,
+                            &effectiveness);
+
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
+                        {
+                            movePower *= 2;
+                        }
+                    }
+
+                    movePower += BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        sideConditions,
+                        fieldConditions,
+                        movePower,
+                        inType,
+                        attacker,
+                        defender,
+                        criticalMul);
+                }
+            }
             break;
         }
     }
@@ -17538,6 +17951,89 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
 
             result = TRUE;
             break;
+    }
+
+    return result;
+}
+
+u8 Battle_MapResistBerryEffectToType(u8 itemEffect)
+{
+    u8 type;
+
+    type = TYPE_MYSTERY;
+
+    switch (itemEffect)
+    {
+    default:
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_FIRE:
+        result = TYPE_FIRE;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_WATER:
+        result = TYPE_WATER;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_ELECTRIC:
+        result = TYPE_ELECTRIC;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_GRASS:
+        result = TYPE_GRASS;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_ICE:
+        result = TYPE_ICE;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_FIGHT:
+        result = TYPE_FIGHTING;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_POISON:
+        result = TYPE_POISON;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_GROUND:
+        result = TYPE_GROUND;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_FLYING:
+        result = TYPE_FLYING;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_PSYCHIC:
+        result = TYPE_PSYCHIC;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_BUG:
+        result = TYPE_BUG;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_ROCK:
+        result = TYPE_ROCK;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_GHOST:
+        result = TYPE_GHOST;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_DRAGON:
+        result = TYPE_DRAGON;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_DARK:
+        result = TYPE_DARK;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_SE_STEEL:
+        result = TYPE_STEEL;
+        break;
+
+    case HOLD_EFFECT_WEAKEN_NORMAL:
+        result = TYPE_NORMAL;
+        break;
     }
 
     return result;
