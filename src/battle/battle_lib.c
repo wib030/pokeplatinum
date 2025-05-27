@@ -17958,9 +17958,9 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
 
 u8 Battle_MapResistBerryEffectToType(u8 itemEffect)
 {
-    u8 type;
+    u8 result;
 
-    type = TYPE_MYSTERY;
+    result = TYPE_MYSTERY;
 
     switch (itemEffect)
     {
