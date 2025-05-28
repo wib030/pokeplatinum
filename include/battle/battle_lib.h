@@ -1847,6 +1847,18 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
  /**
+* @brief Determines whether a PartyMon has a priority move or not.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler   The ID of the BattleMon whose party will be referenced.
+* @param partySlot  The index of the PartyMon.
+*
+* @return TRUE if the PartyMon has a priority move. Otherwise, FALSE.
+*/
+ BOOL BattleAI_PartyMonHasPriorityMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int partySlot);
+
+ /**
 * @brief Maps an SE berry effect to its type.
 *
 * @param itemEffect The item effect of the berry
@@ -1863,6 +1875,6 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  * @param battler   BattleMon to use in calculation.
  * @return The number of attacking moves the BattleMon has.
  */
- int AI_CountBattlerAttackingMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+ int AI_CountBattlerDamagingMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
