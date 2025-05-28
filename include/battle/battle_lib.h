@@ -1685,6 +1685,27 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
 BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot);
 
 /**
+* @brief Determine whether the battler is a special attacker or not.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The currently-in battler slot number.
+* @return   The TRUE / FALSE result of examining the Pokemon's move list and stats.
+*/
+BOOL Battle_BattleMonIsSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
+/**
+* @brief Determine whether the party Pokemon in the given slot is a special attacker or not.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The currently-in battler slot number.
+* @param partySlot  The party slot number of the party Pokemon to use in calculation.
+* @return   The TRUE / FALSE result of examining the Pokemon's move list and stats.
+*/
+BOOL Battle_PartyMonIsSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int partySlot);
+
+/**
 * @brief Determine whether the given ability deters the given status.
 *
 * @param battleSys
@@ -1833,5 +1854,15 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 * @return The type that the SE berry applies to.
 */
  u8 Battle_MapResistBerryEffectToType(u8 itemEffect);
+
+ /**
+ * @brief Count a BattleMons number of attacking moves
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler   BattleMon to use in calculation.
+ * @return The number of attacking moves the BattleMon has.
+ */
+ int AI_CountBattlerAttackingMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

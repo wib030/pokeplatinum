@@ -15439,9 +15439,12 @@ int Battle_CalcHazardsDamage(BattleSystem *battleSys, BattleContext *battleCtx, 
 BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int i, j;
-    u8 moveClass;
+    u8 moveClass, battlerAbility;
     u16 move;
+    u32 baseHP, baseAtk, baseDef, baseSpDef;
     int moveEffect;
+    int battlerSpecies, battlerForm;
+    PokemonPersonalData* personal;
     BOOL result;
 
     result = FALSE;
@@ -15465,6 +15468,7 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
                 // Always utility moves
                 case BATTLE_EFFECT_BIDE:
                 case BATTLE_EFFECT_COUNTER:
+                case BATTLE_EFFECT_10_DAMAGE_FLAT:
                 case BATTLE_EFFECT_40_DAMAGE_FLAT:
                 case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
                 case BATTLE_EFFECT_LEAVE_WITH_1_HP:
@@ -15483,9 +15487,50 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
                 case BATTLE_EFFECT_RAISE_DEF_HIT:
                 case BATTLE_EFFECT_SPIKES_MULTI_HIT:
                 case BATTLE_EFFECT_INFATUATE_HIT:
+                case BATTLE_EFFECT_BIND_HIT:
+                case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+                case BATTLE_EFFECT_LOWER_SPEED_HIT:
+                case BATTLE_EFFECT_BULLDOZE:
+                case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+                case BATTLE_EFFECT_WHIRLPOOL:
                     if (BattleMon_Get(battleCtx, battler, BATTLEMON_ATTACK, NULL) >= (BattleMon_Get(battleCtx, battler, BATTLEMON_SP_ATTACK, NULL) * 2 / 3))
                     {
-                        result = TRUE;
+                        battlerSpecies = battleCtx->battleMons[battler].species;
+                        battlerForm = battleCtx->battleMons[battler].formNum;
+                        personal = PokemonPersonalData_FromMonForm(battlerSpecies, battlerForm, HEAP_ID_BATTLE);
+
+                        baseHP = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_HP);
+                        baseAtk = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_ATK);
+
+                        battlerAbility = battleCtx->battleMons[battler].ability;
+
+                        if (battlerAbility == ABILITY_HUGE_POWER || battlerAbility == ABILITY_PURE_POWER)
+                        {
+                            baseAtk *= 2;
+                        }
+
+                        baseDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_DEF);
+                        baseSpDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_SP_DEF);
+
+                        if (baseAtk >= baseHP * 5 / 4
+                            && baseAtk >= baseDef * 5 / 4
+                            && baseAtk >= baseSpDef * 5 / 4)
+                        {
+                            result = TRUE;
+                        }
+                        else
+                        {
+                            Pokemon* mon;
+                            mon = BattleSystem_PartyPokemon(battleSys, battler, battleSys->selectedPartySlot[battler]);
+
+                            if (baseAtk >= baseHP
+                                && baseAtk >= baseDef
+                                && baseAtk >= baseSpDef
+                                && Pokemon_GetValue(mon, MON_DATA_ATK_EV, NULL) > 0)
+                            {
+                                result = TRUE;
+                            }
+                        }
                     }
                     break;
             }
@@ -15498,10 +15543,13 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
 BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot)
 {
     int i, j;
-    u8 moveClass;
+    u8 moveClass, monAbility;
     u16 move;
+    u32 baseHP, baseAtk, baseDef, baseSpDef;
     int moveEffect;
+    int partyMonSpecies, partyMonForm;
     Pokemon *mon;
+    PokemonPersonalData* personal;
     BOOL result;
 
     result = FALSE;
@@ -15527,6 +15575,7 @@ BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *b
                 // Always utility moves
                 case BATTLE_EFFECT_BIDE:
                 case BATTLE_EFFECT_COUNTER:
+                case BATTLE_EFFECT_10_DAMAGE_FLAT:
                 case BATTLE_EFFECT_40_DAMAGE_FLAT:
                 case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
                 case BATTLE_EFFECT_LEAVE_WITH_1_HP:
@@ -15538,17 +15587,253 @@ BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *b
                 case BATTLE_EFFECT_HALVE_HP:
                     break;
 
-                // Conditionally utility moves
+                    // Conditionally utility moves
                 case BATTLE_EFFECT_SWITCH_HIT:
-				case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+                case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
                 case BATTLE_EFFECT_REMOVE_HELD_ITEM:
                 case BATTLE_EFFECT_RAISE_DEF_HIT:
                 case BATTLE_EFFECT_SPIKES_MULTI_HIT:
                 case BATTLE_EFFECT_INFATUATE_HIT:
+                case BATTLE_EFFECT_BIND_HIT:
+                case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+                case BATTLE_EFFECT_LOWER_SPEED_HIT:
+                case BATTLE_EFFECT_BULLDOZE:
+                case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+                case BATTLE_EFFECT_WHIRLPOOL:
                     if (Pokemon_GetValue(mon, MON_DATA_ATK, NULL) >= (Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL) * 2 / 3)) {
-                        result = TRUE;
+
+                        partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
+                        partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                        // PokemonPersonalData_GetFormValue(battlerSpecies, battlerForm, MON_DATA_PERSONAL_BASE_ATK);
+                        personal = PokemonPersonalData_FromMonForm(partyMonSpecies, partyMonForm, HEAP_ID_BATTLE);
+
+                        baseHP = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_HP);
+                        baseAtk = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_ATK);
+
+                        monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+                        if (monAbility == ABILITY_HUGE_POWER || monAbility == ABILITY_PURE_POWER)
+                        {
+                            baseAtk *= 2;
+                        }
+
+                        baseDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_DEF);
+                        baseSpDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_SP_DEF);
+                        
+                        if (baseAtk >= baseHP * 5 / 4
+                            && baseAtk >= baseDef * 5 / 4
+                            && baseAtk >= baseSpDef * 5 / 4)
+                        {
+                            result = TRUE;
+                        }
+                        else
+                        {
+                            if (baseAtk >= baseHP
+                                && baseAtk >= baseDef
+                                && baseAtk >= baseSpDef
+                                && Pokemon_GetValue(mon, MON_DATA_ATK_EV, NULL) > 0)
+                            {
+                                result = TRUE;
+                            }
+                        }
+                        
                     }
                     break;
+            }
+        }
+    }
+
+    return result;
+}
+
+BOOL Battle_BattleMonIsSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    int i, j;
+    u8 moveClass;
+    u16 move;
+    u32 baseHP, baseDef, baseSpAtk, baseSpDef;
+    int moveEffect;
+    int battlerSpecies, battlerForm;
+    PokemonPersonalData* personal;
+    BOOL result;
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = BattleMon_Get(battleCtx, battler, BATTLEMON_MOVE_1 + i, NULL);
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveClass = MOVE_DATA(move).class;
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (moveClass == CLASS_PHYSICAL) {
+            switch (moveEffect) {
+            default:
+                result = TRUE;
+                break;
+
+                // Always utility moves
+            case BATTLE_EFFECT_BIDE:
+            case BATTLE_EFFECT_COUNTER:
+            case BATTLE_EFFECT_10_DAMAGE_FLAT:
+            case BATTLE_EFFECT_40_DAMAGE_FLAT:
+            case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+            case BATTLE_EFFECT_LEAVE_WITH_1_HP:
+            case BATTLE_EFFECT_REMOVE_PROTECT:
+            case BATTLE_EFFECT_METAL_BURST:
+            case BATTLE_EFFECT_MIRROR_COAT:
+            case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+            case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+            case BATTLE_EFFECT_HALVE_HP:
+                break;
+
+                // Conditionally utility moves
+            case BATTLE_EFFECT_SWITCH_HIT:
+            case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+            case BATTLE_EFFECT_REMOVE_HELD_ITEM:
+            case BATTLE_EFFECT_RAISE_DEF_HIT:
+            case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+            case BATTLE_EFFECT_INFATUATE_HIT:
+            case BATTLE_EFFECT_BIND_HIT:
+            case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+            case BATTLE_EFFECT_LOWER_SPEED_HIT:
+            case BATTLE_EFFECT_BULLDOZE:
+            case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+            case BATTLE_EFFECT_WHIRLPOOL:
+                if (BattleMon_Get(battleCtx, battler, BATTLEMON_ATTACK, NULL) >= (BattleMon_Get(battleCtx, battler, BATTLEMON_SP_ATTACK, NULL) * 2 / 3))
+                {
+                    battlerSpecies = battleCtx->battleMons[battler].species;
+                    battlerForm = battleCtx->battleMons[battler].formNum;
+                    personal = PokemonPersonalData_FromMonForm(battlerSpecies, battlerForm, HEAP_ID_BATTLE);
+
+                    baseHP = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_HP);
+
+                    baseDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_DEF);
+                    baseSpAtk = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_SP_ATK);
+                    baseSpDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_SP_DEF);
+
+                    if (baseSpAtk >= baseHP * 5 / 4
+                        && baseSpAtk >= baseDef * 5 / 4
+                        && baseSpAtk >= baseSpDef * 5 / 4)
+                    {
+                        result = TRUE;
+                    }
+                    else
+                    {
+                        Pokemon* mon;
+                        mon = BattleSystem_PartyPokemon(battleSys, battler, battleSys->selectedPartySlot[battler]);
+
+                        if (baseSpAtk >= baseHP
+                            && baseSpAtk >= baseDef
+                            && baseSpAtk >= baseSpDef
+                            && Pokemon_GetValue(mon, MON_DATA_SPATK_EV, NULL) > 0)
+                        {
+                            result = TRUE;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+BOOL Battle_PartyMonIsSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int partySlot)
+{
+    int i, j;
+    u8 moveClass;
+    u16 move;
+    u32 baseHP, baseSpAtk, baseDef, baseSpDef;
+    int moveEffect;
+    int partyMonSpecies, partyMonForm;
+    Pokemon* mon;
+    PokemonPersonalData* personal;
+    BOOL result;
+
+    result = FALSE;
+
+    mon = BattleSystem_PartyPokemon(battleSys, battler, partySlot);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveClass = MOVE_DATA(move).class;
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (moveClass == CLASS_PHYSICAL) {
+            switch (moveEffect) {
+            default:
+                result = TRUE;
+                break;
+
+                // Always utility moves
+            case BATTLE_EFFECT_BIDE:
+            case BATTLE_EFFECT_COUNTER:
+            case BATTLE_EFFECT_10_DAMAGE_FLAT:
+            case BATTLE_EFFECT_40_DAMAGE_FLAT:
+            case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+            case BATTLE_EFFECT_LEAVE_WITH_1_HP:
+            case BATTLE_EFFECT_REMOVE_PROTECT:
+            case BATTLE_EFFECT_METAL_BURST:
+            case BATTLE_EFFECT_MIRROR_COAT:
+            case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+            case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+            case BATTLE_EFFECT_HALVE_HP:
+                break;
+
+                // Conditionally utility moves
+            case BATTLE_EFFECT_SWITCH_HIT:
+            case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+            case BATTLE_EFFECT_REMOVE_HELD_ITEM:
+            case BATTLE_EFFECT_RAISE_DEF_HIT:
+            case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+            case BATTLE_EFFECT_INFATUATE_HIT:
+            case BATTLE_EFFECT_BIND_HIT:
+            case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+            case BATTLE_EFFECT_LOWER_SPEED_HIT:
+            case BATTLE_EFFECT_BULLDOZE:
+            case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+            case BATTLE_EFFECT_WHIRLPOOL:
+                if (Pokemon_GetValue(mon, MON_DATA_ATK, NULL) >= (Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL) * 2 / 3)) {
+
+                    partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
+                    partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                    // PokemonPersonalData_GetFormValue(battlerSpecies, battlerForm, MON_DATA_PERSONAL_BASE_ATK);
+                    personal = PokemonPersonalData_FromMonForm(partyMonSpecies, partyMonForm, HEAP_ID_BATTLE);
+
+                    baseHP = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_HP);
+                    baseDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_DEF);
+                    baseSpAtk = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_SP_ATK);
+                    baseSpDef = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_SP_DEF);
+
+                    if (baseSpAtk >= baseHP * 5 / 4
+                        && baseSpAtk >= baseDef * 5 / 4
+                        && baseSpAtk >= baseSpDef * 5 / 4)
+                    {
+                        result = TRUE;
+                    }
+                    else
+                    {
+                        if (baseSpAtk >= baseHP
+                            && baseSpAtk >= baseDef
+                            && baseSpAtk >= baseSpDef
+                            && Pokemon_GetValue(mon, MON_DATA_SPATK_EV, NULL) > 0)
+                        {
+                            result = TRUE;
+                        }
+                    }
+
+                }
+                break;
             }
         }
     }
@@ -16928,6 +17213,15 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
 	defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
     defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
 
+    if (defenderCurHP <= 0)
+    {
+        defenderCurHP = 1;
+    }
+    if (defenderMaxHP <= 0)
+    {
+        defenderMaxHP = 1;
+    }
+
     monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
@@ -16936,6 +17230,7 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
 	side = Battler_Side(battleSys, battler);
     oppSide = Battler_Side(battleSys, defender);
 
+    // COMPARE_SPEED_SLOWER is defender is slower than mon. Speed calcs are defender mon relative to attacker mon.
     compareSpeedDefenderVsMon = BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, partyIndicator, partySlot, TRUE);
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -17705,6 +18000,13 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
 	defenderMaxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
     defenderCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
 
+    if (defenderCurHP <= 0) {
+        defenderCurHP = 1;
+    }
+    if (defenderMaxHP <= 0) {
+        defenderMaxHP = 1;
+    }
+
     monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
@@ -17713,6 +18015,7 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
 	side = Battler_Side(battleSys, battler);
     oppSide = Battler_Side(battleSys, defender);
 
+    // COMPARE_SPEED_SLOWER is enemy is slower, COMPARE_SPEED_FASTER is enemy is faster. Speed is defender relative to mon.
     compareSpeedDefenderVsMon = BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, partyIndicator, partySlot, TRUE);
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -18037,4 +18340,67 @@ u8 Battle_MapResistBerryEffectToType(u8 itemEffect)
     }
 
     return result;
+}
+
+int AI_CountBattlerAttackingMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    u16 move;
+    int moveEffect;
+    int i, numAttackingMoves;
+
+    numAttackingMoves = 0;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[battler].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (MOVE_DATA(move).class != CLASS_STATUS) {
+            switch (moveEffect)
+            {
+            default:
+                numAttackingMoves++;
+                break;
+
+            case BATTLE_EFFECT_BIDE:
+            case BATTLE_EFFECT_COUNTER:
+            case BATTLE_EFFECT_10_DAMAGE_FLAT:
+            case BATTLE_EFFECT_40_DAMAGE_FLAT:
+            case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+            case BATTLE_EFFECT_LEAVE_WITH_1_HP:
+            case BATTLE_EFFECT_REMOVE_PROTECT:
+            case BATTLE_EFFECT_METAL_BURST:
+            case BATTLE_EFFECT_MIRROR_COAT:
+            case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
+            case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+            case BATTLE_EFFECT_HALVE_HP:
+                break;
+
+                // Conditionally utility moves
+            case BATTLE_EFFECT_SWITCH_HIT:
+            case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+            case BATTLE_EFFECT_REMOVE_HELD_ITEM:
+            case BATTLE_EFFECT_RAISE_DEF_HIT:
+            case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+            case BATTLE_EFFECT_INFATUATE_HIT:
+            case BATTLE_EFFECT_BIND_HIT:
+            case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+            case BATTLE_EFFECT_LOWER_SPEED_HIT:
+            case BATTLE_EFFECT_BULLDOZE:
+            case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+            case BATTLE_EFFECT_WHIRLPOOL:
+                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler)
+                    || Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                {
+                    numAttackingMoves++;
+                }
+                break;
+            }
+        }
+    }
+
+    return numAttackingMoves;
 }
