@@ -1281,5 +1281,11 @@
     .long 231
 	.long \battler
     .endm
+	
+	.macro CheckSleepClause battler, jump_no_effect
+    .long 232
+	.long \battler
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

@@ -2548,6 +2548,7 @@ static BOOL BtlCmd_CheckSoundMove(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2816,7 +2817,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_CheckSoundMove,
 	BtlCmd_CalcChumRushPower,
 	BtlCmd_RollNextStatBoost,
-	BtlCmd_RollSleepTurns
+	BtlCmd_RollSleepTurns,
+	BtlCmd_CheckSleepClause
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13774,6 +13776,43 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
 	}
 
     battleCtx->calcTemp = sleepTurns;
+
+    return FALSE;
+}
+
+/**
+ * @brief Check if sleep clause is active on the specified battler.
+ * 
+ * Inputs:
+ * 1. The battler who's party should be checked for valid sleeping Pokemon.
+ * 2. The distance to jump if there is no effect to apply.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+	BattleScript_Iter(battleCtx, 1);
+	int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int jumpNoEffect = BattleScript_Read(battleCtx);
+	
+	int i;
+	int sleepClauseActive = FALSE;
+	Pokemon * mon;
+	
+	for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, battler)); i++)
+	{
+		mon = BattleSystem_PartyPokemon(battleSys, battler, i);
+		
+		
+	}
+	
+    if (sleepClauseActive)
+	{
+		BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
 
     return FALSE;
 }
