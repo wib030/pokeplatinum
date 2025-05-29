@@ -15523,7 +15523,7 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
                         else
                         {
                             Pokemon* mon;
-                            mon = BattleSystem_PartyPokemon(battleSys, battler, battleSys->selectedPartySlot[battler]);
+                            mon = BattleSystem_PartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
 
                             if (baseAtk >= baseHP
                                 && baseAtk >= baseDef
@@ -15604,8 +15604,8 @@ BOOL Battle_PartyMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *b
                 case BATTLE_EFFECT_WHIRLPOOL:
                     if (Pokemon_GetValue(mon, MON_DATA_ATK, NULL) >= (Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL) * 2 / 3)) {
 
-                        partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
-                        partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                        partyMonSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+                        partyMonForm = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
                         // PokemonPersonalData_GetFormValue(battlerSpecies, battlerForm, MON_DATA_PERSONAL_BASE_ATK);
                         personal = PokemonPersonalData_FromMonForm(partyMonSpecies, partyMonForm, HEAP_ID_BATTLE);
 
@@ -15726,7 +15726,7 @@ BOOL Battle_BattleMonIsSpecialAttacker(BattleSystem* battleSys, BattleContext* b
                     else
                     {
                         Pokemon* mon;
-                        mon = BattleSystem_PartyPokemon(battleSys, battler, battleSys->selectedPartySlot[battler]);
+                        mon = BattleSystem_PartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
 
                         if (baseSpAtk >= baseHP
                             && baseSpAtk >= baseDef
@@ -15807,8 +15807,8 @@ BOOL Battle_PartyMonIsSpecialAttacker(BattleSystem* battleSys, BattleContext* ba
             case BATTLE_EFFECT_WHIRLPOOL:
                 if (Pokemon_GetValue(mon, MON_DATA_ATK, NULL) >= (Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL) * 2 / 3)) {
 
-                    partyMonSpecies = Pokemon_GetValue(partyMon, MON_DATA_SPECIES, NULL);
-                    partyMonForm = Pokemon_GetValue(partyMon, MON_DATA_FORM, NULL);
+                    partyMonSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+                    partyMonForm = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
                     // PokemonPersonalData_GetFormValue(battlerSpecies, battlerForm, MON_DATA_PERSONAL_BASE_ATK);
                     personal = PokemonPersonalData_FromMonForm(partyMonSpecies, partyMonForm, HEAP_ID_BATTLE);
 
@@ -16738,7 +16738,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     battleCtx,
                     move,
                     battleCtx->sideConditionsMask[oppSide],
-                    battleCtx->fieldConditions,
+                    battleCtx->fieldConditionsMask,
                     0,
                     moveType,
                     defender,
