@@ -17916,6 +17916,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                             moveScore += 50;
                         }
                         break;
+					}
                 }
 
                 // Status moves that get more score when we are faster
