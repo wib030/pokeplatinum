@@ -1868,7 +1868,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  u8 Battle_MapResistBerryEffectToType(u8 itemEffect);
 
  /**
- * @brief Count a BattleMons number of attacking moves
+ * @brief Count a BattleMon's number of attacking moves
  *
  * @param battleSys
  * @param battleCtx
@@ -1876,5 +1876,36 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  * @return The number of attacking moves the BattleMon has.
  */
  int AI_CountBattlerDamagingMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
+ /**
+ * @brief Count a PartyMon's number of attacking moves
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param partyIndicator   BattleMon whose party will be referenced.
+ * @param partySlot     Index of the PartyMon in the party.
+ * @return The number of attacking moves the PartyMon has.
+ */
+ int AI_CountPartyMonDamagingMoves(BattleSystem* battleSys, BattleContext* battleCtx, int partyIndicator, int partySlot);
+
+ /**
+ * @brief Check if a move is a healing move.
+ *
+ * @param battleCtx
+ * @param effect     The BattleEffect of a move.
+ * @return TRUE/FALSE whether the battle effect is a move that restores HP.
+ */
+ BOOL BattleEffect_IsHealingMove(BattleContext* battleCtx, int effect);
+
+ /**
+ * @brief Check if an ability deters a given stat drop.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param ability     The ability to check.
+ * @param battleStatFlag    The battle stat to check.
+ * @return TRUE/FALSE whether the ability prevents/deters the battle stat from being dropped.
+ */
+ BOOL Battle_AbilityDetersStatDrop(BattleSystem* battleSys, BattleContext* battleCtx, u8 ability, int battleStatFlag)
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
