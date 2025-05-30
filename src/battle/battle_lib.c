@@ -2384,16 +2384,6 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
     } else if (battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_PROBABILISTIC) {
 		effectChance = CURRENT_MOVE_DATA.effectChance;
 		
-		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
-		{
-			effectChance = effectChance + 10;
-			
-			if (effectChance > 100)
-			{
-				effectChance = 100;
-			}
-		}
-		
         if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE)
 		{
 			if (effectChance >= 50)
@@ -2405,6 +2395,16 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 				effectChance *= 2;
 			}
         }
+		
+		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+		{
+			effectChance = effectChance + 10;
+			
+			if (effectChance > 100)
+			{
+				effectChance = 100;
+			}
+		}
 
         GF_ASSERT(effectChance != 0);
 
@@ -2421,16 +2421,6 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
     } else if (battleCtx->sideEffectIndirectFlags) {
         effectChance = CURRENT_MOVE_DATA.effectChance;
 		
-		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
-		{
-			effectChance = effectChance + 10;
-			
-			if (effectChance > 100)
-			{
-				effectChance = 100;
-			}
-		}
-		
         if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE)
 		{
 			if (effectChance >= 50)
@@ -2442,6 +2432,16 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 				effectChance *= 2;
 			}
         }
+		
+		if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+		{
+			effectChance = effectChance + 10;
+			
+			if (effectChance > 100)
+			{
+				effectChance = 100;
+			}
+		}
 
         GF_ASSERT(effectChance != 0);
 
