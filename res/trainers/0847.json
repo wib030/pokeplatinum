@@ -1,5 +1,5 @@
 {
-    "name": "Bug",
+    "name": "Toot Boy",
     "class": "TRAINER_CLASS_GALACTIC_GRUNT_MALE",
     "items": [],
     "ai_flags": [
@@ -9,47 +9,142 @@
     ],
     "double_battle": false,
     "party": [
+		{
+            "species": "SPECIES_DUGTRIO",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+				"MOVE_BEAT_UP",
+				"MOVE_EARTHQUAKE",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_MEMENTO"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 24,
+			"ivDEF": 22,
+			"ivSPEED": 31,
+			"ivSPATK": 6,
+			"ivSPDEF": 18,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
+        },
+		{
+            "species": "SPECIES_FARFETCHD",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_STICK",
+            "moves": [
+				"MOVE_FACADE",
+				"MOVE_U_TURN",
+				"MOVE_KNOCK_OFF",
+				"MOVE_QUICK_ATTACK"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 11,
+			"ivSPEED": 31,
+			"ivSPATK": 16,
+			"ivSPDEF": 26,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3,
+			"status": 16
+        },
         {
-            "species": "SPECIES_WORMADAM",
-            "form": 1,
-            "level": 36,
-            "item": "ITEM_BERRY_JUICE",
-            "moves": [
-                "MOVE_SPIDER_WEB",
-                "MOVE_RAPID_SPIN",
-                "MOVE_TOXIC_SPIKES",
-                "MOVE_SPIKES"
-            ],
-            "power": 120,
-            "ball_seal": 0
-        },
-		{
-            "species": "SPECIES_ARIADOS",
+            "species": "SPECIES_KECLEON",
             "form": 0,
             "level": 36,
-            "item": "ITEM_BERRY_JUICE",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_SPIDER_WEB",
-                "MOVE_CROSS_POISON",
-                "MOVE_PURSUIT",
-                "MOVE_DIG"
+				"MOVE_TOXIC_SPIKES",
+				"MOVE_STEALTH_ROCK",
+				"MOVE_U_TURN",
+				"MOVE_RECOVER"
             ],
-            "power": 120,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 22,
+			"ivSPEED": 26,
+			"ivSPATK": 27,
+			"ivSPDEF": 14,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 204,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 8
         },
 		{
-            "species": "SPECIES_MOTHIM",
+            "species": "SPECIES_GRANBULL",
             "form": 0,
             "level": 36,
-            "item": "ITEM_BERRY_JUICE",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_SILVER_WIND",
-                "MOVE_PSYBEAM",
-                "MOVE_ROOST",
-                "MOVE_ENERGY_BALL"
+				"MOVE_SUBSTITUTE",
+				"MOVE_ROAR",
+				"MOVE_EARTHQUAKE",
+				"MOVE_LAST_RESORT"
             ],
-            "power": 120,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 30,
+			"ivSPEED": 23,
+			"ivSPATK": 5,
+			"ivSPDEF": 15,
+			"evHP": 252,
+			"evATK": 100,
+			"evDEF": 40,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 36,
+			"nature": 7,
+			"ability": 1
+        },
+		{
+            "species": "SPECIES_SUDOWOODO",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_RED_CARD",
+            "moves": [
+				"MOVE_WOOD_HAMMER",
+				"MOVE_ROCK_SLIDE",
+				"MOVE_EARTHQUAKE",
+				"MOVE_FLING"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 30,
+			"ivDEF": 11,
+			"ivSPEED": 13,
+			"ivSPATK": 4,
+			"ivSPDEF": 20,
+			"evHP": 252,
+			"evATK": 112,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 64,
+			"nature": 2
         }
     ]
 }

@@ -133,7 +133,7 @@
             "moves": [
                 "MOVE_VOLT_TACKLE",
 				"MOVE_CRUNCH",
-				"MOVE_SUCKER_PUNCH",
+				"MOVE_PROTECT",
 				"MOVE_ICE_FANG"
             ],
             "power": 0,
