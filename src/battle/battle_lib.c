@@ -18132,7 +18132,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                 }
             }
 
-            if (BattleEffect_IsHealingMove == TRUE)
+            if (BattleEffect_IsHealingMove(battleCtx, moveEffect) == TRUE)
             {
                 moveScore += 30;
             }
