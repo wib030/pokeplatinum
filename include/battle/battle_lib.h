@@ -1906,6 +1906,6 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  * @param battleStatFlag    The battle stat to check.
  * @return TRUE/FALSE whether the ability prevents/deters the battle stat from being dropped.
  */
- BOOL Battle_AbilityDetersStatDrop(BattleSystem* battleSys, BattleContext* battleCtx, u8 ability, int battleStatFlag)
+ BOOL Battle_AbilityDetersStatDrop(BattleSystem* battleSys, BattleContext* battleCtx, u8 ability, int battleStatFlag);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

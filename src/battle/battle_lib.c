@@ -14181,7 +14181,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 {
     // Must keep C89-style declaration to match
-    int i, j;
+    int i, j, k;
     u8 defender, defenderType1, defenderType2, defenderAbility;
     u8 monType1, monType2, monAbility, monItemEffect;
     u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
