@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 23,
+            "level": 31,
             "species": "SPECIES_MAREEP"
         },
         {
-            "level": 21,
+            "level": 29,
             "species": "SPECIES_MARILL"
         },
         {
-            "level": 23,
+            "level": 31,
             "species": "SPECIES_MUNCHLAX"
         },
         {
-            "level": 22,
+            "level": 30,
             "species": "SPECIES_KIRLIA"
         },
         {
-            "level": 22,
+            "level": 30,
             "species": "SPECIES_SPINDA"
         },
         {
-            "level": 21,
+            "level": 29,
             "species": "SPECIES_DODUO"
         },
         {
-            "level": 24,
+            "level": 32,
             "species": "SPECIES_FARFETCHD"
         },
         {
-            "level": 24,
+            "level": 32,
             "species": "SPECIES_DITTO"
         },
         {
-            "level": 24,
+            "level": 32,
             "species": "SPECIES_HERACROSS"
         },
         {
-            "level": 23,
+            "level": 31,
             "species": "SPECIES_HERACROSS"
         },
         {
-            "level": 24,
+            "level": 32,
             "species": "SPECIES_WURMPLE"
         },
         {
-            "level": 23,
+            "level": 31,
             "species": "SPECIES_WURMPLE"
         }
     ],
