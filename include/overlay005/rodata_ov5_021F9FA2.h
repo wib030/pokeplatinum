@@ -203,6 +203,7 @@ const u16 EggMove_Table[] = {
     MOVE_MUD_BOMB,
     MOVE_ASTONISH,
 	MOVE_REVERSAL,
+	MOVE_MEMENTO,
     (SPECIES_MEOWTH) + 20000, // Meowth line
     MOVE_SPITE,
     MOVE_CHARM,
