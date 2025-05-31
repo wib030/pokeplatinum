@@ -1,11 +1,11 @@
 {
     "name": "Sudowoodo",
     "base_stats": {
-        "hp": 70,
-        "attack": 100,
-        "defense": 115,
-        "speed": 30,
-        "special_attack": 30,
+        "hp": 75,
+        "attack": 120,
+        "defense": 125,
+        "speed": 25,
+        "special_attack": 50,
         "special_defense": 65
     },
     "types": [
