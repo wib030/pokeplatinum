@@ -22,7 +22,8 @@
 				"MOVE_BATON_PASS"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 0
         },
         {
             "species": "SPECIES_ESPEON",
@@ -36,7 +37,8 @@
 				"MOVE_HIDDEN_POWER"
             ],
             "power": 100,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"gender": 1
         }
     ]
 }
