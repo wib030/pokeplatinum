@@ -641,4 +641,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Rattled</language>
 	</row>
+	<row id="pl_msg_00000610_00160" index="160">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Ghostly</language>
+	</row>
 </body>

@@ -350,4 +350,5 @@ subscript_files = files(
 	'subscript_snowed_in_defender_end.s',
 	'subscript_starf_berry.s',
 	'subscript_attack_switch_no_anim.s',
+	'subscript_ability_changes_type.s',
 )

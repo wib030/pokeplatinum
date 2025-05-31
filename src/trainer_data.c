@@ -183,6 +183,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
     u32 genderMod, rnd, oldSeed;
     u8 ivs;
     Pokemon *mon;
+	u8 ghostlyId = 160;
 	
     oldSeed = LCRNG_GetSeed();
 
@@ -343,6 +344,11 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 				default:
 					Pokemon_SetValue(mon, MON_DATA_ABILITY, &ability1);
 				break;
+			}
+			
+			if (trmon[i].isGhostly == 1)
+			{
+				Pokemon_SetValue(mon, MON_DATA_ABILITY, &ghostlyId);
 			}
 			
             for (j = 0; j < 4; j++) {

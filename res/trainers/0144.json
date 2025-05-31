@@ -35,7 +35,8 @@
 				"MOVE_SHADOW_BALL"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"isGhostly": 1
         },
 		{
             "species": "SPECIES_LOPUNNY",
@@ -49,7 +50,8 @@
 				"MOVE_SWEET_KISS"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"isGhostly": 1
         },
 		{
             "species": "SPECIES_GARDEVOIR",
@@ -63,7 +65,8 @@
 				"MOVE_GRUDGE"
             ],
             "power": 180,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"isGhostly": 1
         }
     ]
 }

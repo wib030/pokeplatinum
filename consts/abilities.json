@@ -162,7 +162,8 @@
 				"ABILITY_THIRSTY",
 				"ABILITY_ROCK_STAR",
 				"ABILITY_SNOWED_IN",
-				"ABILITY_RATTLED"
+				"ABILITY_RATTLED",
+				"ABILITY_GHOSTLY"
             ]
         }
     }

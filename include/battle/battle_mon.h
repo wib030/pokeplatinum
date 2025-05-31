@@ -110,6 +110,7 @@ typedef struct BattleMon {
 	u32 unownEnergyStrongFlag : 1;
 	u32 unownEnergyWeakFlag : 1;
 	u32 paraProtectionFlag : 1;
+	u32 ghostlyAnnounced : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];

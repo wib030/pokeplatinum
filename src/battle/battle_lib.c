@@ -5454,6 +5454,7 @@ enum {
     SWITCH_IN_CHECK_STATE_FIELD_WEATHER = SWITCH_IN_CHECK_STATE_START,
     SWITCH_IN_CHECK_STATE_TRACE,
 	SWITCH_IN_CHECK_STATE_RANDOM_ABILITY,
+	SWITCH_IN_CHECK_STATE_GHOSTLY,
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
 	SWITCH_IN_CHECK_STATE_FORECAST,
     SWITCH_IN_CHECK_STATE_INTIMIDATE,
@@ -5489,7 +5490,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battler, battlero;
     int maxBattlers;
 	int imposter1Pos, imposter2Pos;
-	int abilityMax = ABILITY_THIRSTY;
+	int abilityMax = ABILITY_GHOSTLY;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
@@ -5618,6 +5619,31 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 			
 			if (i == maxBattlers)
 			{
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_GHOSTLY:
+            for (i = 0; i < maxBattlers; i++) {
+                battler = battleCtx->monSpeedOrder[i];
+
+                if (battleCtx->battleMons[battler].ghostlyAnnounced == FALSE
+                        && battleCtx->battleMons[battler].curHP
+                        && Battler_Ability(battleCtx, battler) == ABILITY_GHOSTLY) {
+                    battleCtx->battleMons[battler].ghostlyAnnounced = TRUE;
+                    battleCtx->msgBattlerTemp = battler;
+					battleCtx->msgTemp = TYPE_GHOST;
+					
+					battleCtx->battleMons[battler].type1 = TYPE_GHOST;
+					battleCtx->battleMons[battler].type2 = TYPE_GHOST;
+					
+                    subscript = subscript_ability_changes_type;
+                    result = TRUE;
+                    break;
+                }
+            }
+
+            if (i == maxBattlers) {
                 battleCtx->switchInCheckState++;
             }
             break;

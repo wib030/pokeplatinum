@@ -641,4 +641,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Being hit by Bug, Dark\nor Ghost moves raise Speed.</language>
 	</row>
+	<row id="pl_msg_00000612_00160" index="160">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Acquires Ghost-type\non switch-in.</language>
+	</row>
 </body>
