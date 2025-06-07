@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 21,
-            "species": "SPECIES_PIKACHU"
+            "level": 31,
+            "species": "SPECIES_PICHU"
         },
         {
-            "level": 22,
+            "level": 32,
             "species": "SPECIES_GROWLITHE"
         },
         {
-            "level": 22,
+            "level": 32,
             "species": "SPECIES_EEVEE"
         },
         {
-            "level": 23,
+            "level": 33,
             "species": "SPECIES_TOGEPI"
         },
         {
-            "level": 23,
-            "species": "SPECIES_MUNCHLAX"
+            "level": 33,
+            "species": "SPECIES_MIME_JR"
         },
         {
-            "level": 24,
+            "level": 34,
             "species": "SPECIES_HAPPINY"
         },
         {
-            "level": 22,
+            "level": 32,
             "species": "SPECIES_CLEFFA"
         },
         {
-            "level": 22,
+            "level": 32,
             "species": "SPECIES_JIGGLYPUFF"
         },
         {
-            "level": 24,
+            "level": 34,
             "species": "SPECIES_VULPIX"
         },
         {
-            "level": 22,
+            "level": 32,
             "species": "SPECIES_WEEDLE"
         },
         {
-            "level": 24,
+            "level": 34,
             "species": "SPECIES_WEEDLE"
         },
         {
-            "level": 22,
-            "species": "SPECIES_WEEDLE"
+            "level": 32,
+            "species": "SPECIES_MILTANK"
         }
     ],
     "swarms": [
@@ -63,9 +63,9 @@
         "SPECIES_TOGEPI"
     ],
     "radar": [
+        "SPECIES_SNEASEL",
         "SPECIES_EEVEE",
-        "SPECIES_EEVEE",
-        "SPECIES_EEVEE",
+        "SPECIES_SNEASEL",
         "SPECIES_EEVEE"
     ],
     "rate_form0": 100,

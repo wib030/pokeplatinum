@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
-            "level": 33,
+            "level": 35,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_GLISCOR",
             "form": 0,
-            "level": 33,
+            "level": 35,
             "item": "ITEM_TOXIC_ORB",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_WIGGLYTUFF",
             "form": 0,
-            "level": 33,
+            "level": 35,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_COSMIC_POWER",
@@ -57,7 +57,7 @@
 		{
             "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 33,
+            "level": 35,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SPIKES",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_ROSERADE",
             "form": 0,
-            "level": 33,
+            "level": 35,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_LEECH_SEED",
@@ -87,7 +87,7 @@
 		{
             "species": "SPECIES_BLISSEY",
             "form": 0,
-            "level": 35,
+            "level": 36,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_MINIMIZE",
