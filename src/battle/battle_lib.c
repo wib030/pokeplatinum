@@ -17318,6 +17318,19 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
 				result = TRUE;
 			}
 			break;
+			
+		case ABILITY_PICKUP:
+			if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+			&& ATTACKING_MON.heldItem == ITEM_NONE)
+			{
+				*subscript = subscript_steal_item_ability;
+				result = TRUE;
+			}
+			break;
 	}
 
     return result;

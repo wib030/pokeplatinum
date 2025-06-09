@@ -7908,10 +7908,10 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
     u32 battleType = BattleSystem_BattleType(battleSys);
     int attackingSide = Battler_Side(battleSys, battleCtx->attacker);
 
-    if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
+    //if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
         // AI trainers are unable to steal items outside of the Battle Frontier. PvP trainers can steal items.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
+    //    BattleScript_Iter(battleCtx, jumpOnFail);
+    if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
         // The attacker has an item which has been suppressed.
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_MULTITYPE) {

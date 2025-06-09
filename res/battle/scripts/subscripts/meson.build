@@ -351,4 +351,5 @@ subscript_files = files(
 	'subscript_starf_berry.s',
 	'subscript_attack_switch_no_anim.s',
 	'subscript_ability_changes_type.s',
+	'subscript_steal_item_ability.s',
 )
