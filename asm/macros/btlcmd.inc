@@ -1287,5 +1287,9 @@
 	.long \battler
     .long (\jump_no_effect-.) / 4 - 1
     .endm
+	
+	.macro CalcGrenadeDamage
+    .long 233
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

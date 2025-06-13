@@ -2550,6 +2550,7 @@ static BOOL BtlCmd_CalcChumRushPower(BattleSystem *battleSys, BattleContext *bat
 static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2819,7 +2820,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_CalcChumRushPower,
 	BtlCmd_RollNextStatBoost,
 	BtlCmd_RollSleepTurns,
-	BtlCmd_CheckSleepClause
+	BtlCmd_CheckSleepClause,
+	BtlCmd_CalcGrenadeDamage
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13815,6 +13817,24 @@ static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *batt
 	{
 		BattleScript_Iter(battleCtx, jumpNoEffect);
     }
+
+    return FALSE;
+}
+
+/**
+ * @brief Calculate the damage of safari thrown Grenade.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	
+	battleCtx->hpCalcTemp = battleCtx->battleMons[battleCtx->defender].maxHP;
+	battleCtx->hpCalcTemp *= -1;
+	battleCtx->hpCalcTemp /= 2;
 
     return FALSE;
 }
