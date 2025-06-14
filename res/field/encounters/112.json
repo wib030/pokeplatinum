@@ -1,5 +1,5 @@
 {
-    "land_rate": 10,
+    "land_rate": 3,
     "land_encounters": [
         {
             "level": 23,
@@ -35,19 +35,19 @@
         },
         {
             "level": 24,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_RHYHORN"
         },
         {
             "level": 24,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_RHYHORN"
         },
         {
             "level": 25,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_RHYHORN"
         },
         {
             "level": 25,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_RHYHORN"
         }
     ],
     "swarms": [
