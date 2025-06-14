@@ -2551,6 +2551,7 @@ static BOOL BtlCmd_RollNextStatBoost(BattleSystem *battleSys, BattleContext *bat
 static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TrySlurpUp(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2821,7 +2822,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_RollNextStatBoost,
 	BtlCmd_RollSleepTurns,
 	BtlCmd_CheckSleepClause,
-	BtlCmd_CalcGrenadeDamage
+	BtlCmd_CalcGrenadeDamage,
+	BtlCmd_TrySlurpUp
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13835,6 +13837,43 @@ static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *bat
 	battleCtx->hpCalcTemp = battleCtx->battleMons[battleCtx->defender].maxHP;
 	battleCtx->hpCalcTemp *= -1;
 	battleCtx->hpCalcTemp /= 2;
+
+    return FALSE;
+}
+
+/**
+ * @brief Try to slurp up the target's held item.
+ * 
+ * Inputs:
+ * 1. The distance to jump if the attacker does not have a held item.
+ * 
+ * Side effects:
+ * - CompareVarToValue the target has a held item, the mask
+ * of knocked off items for the attacking side will be updated to toggle the
+ * flag for the target.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_TrySlurpUp(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+    int attacking = Battler_Side(battleSys, battleCtx->attacker);
+
+    if (ATTACKING_MON.heldItem) {
+        battleCtx->msgBuffer.id = 1343; // "{0} slurped up {1}'s {2}!"
+        battleCtx->msgBuffer.tags = TAG_NICKNAME_NICKNAME_ITEM;
+        battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->defender);
+        battleCtx->msgBuffer.params[1] = BattleSystem_NicknameTag(battleCtx, battleCtx->attacker);
+        battleCtx->msgBuffer.params[2] = ATTACKING_MON.heldItem;
+
+        ATTACKING_MON.heldItem = ITEM_NONE;
+        battleCtx->sideConditions[attacking].knockedOffItemsMask |= FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker]);
+    } else {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    }
 
     return FALSE;
 }

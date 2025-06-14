@@ -645,4 +645,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Acquires Ghost-type\non switch-in.</language>
 	</row>
+	<row id="pl_msg_00000612_00161" index="161">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">30% chance to eat\nfoe’s item on contact.</language>
+	</row>
 </body>

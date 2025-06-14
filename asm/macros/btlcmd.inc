@@ -1291,5 +1291,10 @@
 	.macro CalcGrenadeDamage
     .long 233
     .endm
+	
+	.macro TrySlurpUp jump_if_fail
+    .long 234
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

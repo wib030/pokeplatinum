@@ -352,4 +352,5 @@ subscript_files = files(
 	'subscript_attack_switch_no_anim.s',
 	'subscript_ability_changes_type.s',
 	'subscript_steal_item_ability.s',
+	'subscript_slurp_up.s',
 )

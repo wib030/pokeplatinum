@@ -645,4 +645,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Ghostly</language>
 	</row>
+	<row id="pl_msg_00000610_00161" index="161">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Slurp Up</language>
+	</row>
 </body>

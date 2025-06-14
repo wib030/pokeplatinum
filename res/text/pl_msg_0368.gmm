@@ -5374,4 +5374,44 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The snow around the\nfoe’s team was cleared!</language>
 	</row>
+	<row id="pl_msg_00000368_01340" index="1340">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s poisoning faded away.</language>
+	</row>
+	<row id="pl_msg_00000368_01341" index="1341">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s poisoning faded\naway.</language>
+	</row>
+	<row id="pl_msg_00000368_01342" index="1342">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s poisoning faded\naway.</language>
+	</row>
+		<row id="pl_msg_00000368_01343" index="1343">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} slurped up\n{STRVAR_1 1, 1, 0}’s {STRVAR_1 8, 2, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01344" index="1344">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} slurped up the wild\n{STRVAR_1 1, 1, 0}’s {STRVAR_1 8, 2, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01345" index="1345">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} slurped up the foe’s\n{STRVAR_1 1, 1, 0}’s {STRVAR_1 8, 2, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01346" index="1346">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} slurped up\n{STRVAR_1 1, 1, 0}’s {STRVAR_1 8, 2, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01347" index="1347">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} slurped up the\nwild {STRVAR_1 1, 1, 0}’s {STRVAR_1 8, 2, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01348" index="1348">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} slurped up\n{STRVAR_1 1, 1, 0}’s {STRVAR_1 8, 2, 0}!</language>
+	</row>
+	<row id="pl_msg_00000368_01349" index="1349">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} slurped up\nthe foe’s {STRVAR_1 1, 1, 0}’s\f{STRVAR_1 8, 2, 0}!</language>
+	</row>
 </body>
