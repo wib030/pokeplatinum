@@ -155,7 +155,7 @@
             "level": 13,
             "item": "ITEM_WIDE_LENS",
             "moves": [
-                "MOVE_ROCK_BLAST",
+                "MOVE_ROCK_TOMB",
 				"MOVE_KNOCK_OFF",
 				"MOVE_CURSE",
 				"MOVE_FURY_CUTTER"
