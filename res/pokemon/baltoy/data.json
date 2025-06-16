@@ -94,7 +94,8 @@
 				"MOVE_MUD_SLAP"
 			],
             "4": "MOVE_RAPID_SPIN",
-			"10": "MOVE_HEAL_BLOCK",
+			"9": "MOVE_HEAL_BLOCK",
+			"11": "MOVE_MUD_SHOT",
             "13": "MOVE_ROCK_TOMB",
 			"16": "MOVE_PSYBEAM",
 			"19": "MOVE_ANCIENT_POWER",
@@ -102,6 +103,7 @@
 			"25": "MOVE_POWER_TRICK",
             "28": "MOVE_SELFDESTRUCT",
 			"31": "MOVE_EXTRASENSORY",
+			"32": "MOVE_FISSURE",
 			"33": "MOVE_KINESIS",
 			"37": "MOVE_EARTH_POWER",
             "40": "MOVE_SANDSTORM",

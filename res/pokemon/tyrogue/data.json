@@ -2,8 +2,8 @@
     "name": "Tyrogue",
     "base_stats": {
         "hp": 35,
-        "attack": 35,
-        "defense": 35,
+        "attack": 60,
+        "defense": 60,
         "speed": 35,
         "special_attack": 35,
         "special_defense": 35
