@@ -5490,7 +5490,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battler, battlero;
     int maxBattlers;
 	int imposter1Pos, imposter2Pos;
-	int abilityMax = ABILITY_GHOSTLY;
+	int abilityMax = ABILITY_SLURP_UP;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
