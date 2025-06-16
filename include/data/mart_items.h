@@ -64,12 +64,17 @@ const u16 JubilifeMartSpecialties[] = {
 const u16 OreburghMartSpecialties[] = {
 	ITEM_HEAL_BALL,
 	ITEM_REPEAT_BALL,
+	ITEM_MIRACLE_SEED,
+	ITEM_CHARCOAL,
+	ITEM_MYSTIC_WATER,
 	0xffff
 };
 
 const u16 FloaromaMartSpecialties[] = {
 	ITEM_HEAL_BALL,
 	ITEM_NET_BALL,
+	ITEM_SILVERPOWDER,
+	ITEM_HARD_STONE,
 	0xffff
 };
 
@@ -77,6 +82,8 @@ const u16 EternaMartSpecialties[] = {
 	ITEM_HEAL_BALL,
 	ITEM_NET_BALL,
 	ITEM_NEST_BALL,
+	ITEM_POISON_BARB,
+	ITEM_SOFT_SAND,
 	0xffff
 };
 
@@ -107,6 +114,10 @@ const u16 SolaceonMartSpecialties[] = {
 	ITEM_NEST_BALL,
 	ITEM_QUICK_BALL,
 	ITEM_DUSK_BALL,
+	ITEM_TWISTEDSPOON,
+	ITEM_SHARP_BEAK,
+	ITEM_SPELL_TAG,
+	ITEM_BLACKGLASSES,
 	0xffff
 };
 
@@ -231,6 +242,12 @@ const u16 CelesticMartSpecialties[] = {
 	ITEM_DUSK_BALL,
 	ITEM_QUICK_BALL,
 	ITEM_TIMER_BALL,
+	ITEM_BLACK_BELT,
+	ITEM_METAL_COAT,
+	ITEM_MAGNET,
+	ITEM_DRAGON_FANG,
+	ITEM_NEVERMELTICE,
+	ITEM_SILK_SCARF,
 	0xffff
 };
 
