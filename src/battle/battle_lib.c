@@ -13999,18 +13999,6 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     // Move score is % of mon's hp damage they'll take
                     moveScore = moveScore * 100 / monMaxHP;
 
-                    // Penalize choices that would result in a KO, except for Sacks
-                    if (moveScore > (monCurHP - Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i))) {
-                        if (hpPercent < 50) {
-                            sackBonus = (monMaxHP - monCurHP) * 100 / monMaxHP;
-                            if (moveScore < sackBonus) {
-                                moveScore = 0;
-                            }
-                            else {
-                                moveScore -= sackBonus;
-                            }
-                        }
-                    }
                 }
 
                 // Penalize choices that would lose more than half health from
@@ -14107,8 +14095,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 }
             }
 
-            if(400 + attackScore > defendScore) {
-                score = 400 + attackScore - defendScore;
+            if(800 + attackScore > defendScore) {
+                score = 800 + attackScore - defendScore;
             }
             else {
                 score = 0;
@@ -14424,7 +14412,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     // Penalize choices that would result in a KO, except for Sacks
                     if (moveScore > (monCurHP - Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i))) {
                         if (hpPercent < 50) {
-                            sackBonus = (monMaxHP - monCurHP) * 100 / monMaxHP;
+                            sackBonus = (monMaxHP - monCurHP) * 25 / monMaxHP;
                             if (moveScore < sackBonus) {
                                 moveScore = 0;
                             }
