@@ -13833,10 +13833,53 @@ static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *batt
 static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+
+    TrainerInfo* trInfo;
+    PokemonPersonalData* trainerMachop;
+    int badges, damage, safariTrainerLevel, grenadeMovePower, attackIV, attackEV;
+    int attackStat, defenderDefenseStat;
+    u32 baseAttack, trainerID;
+
+    trInfo = BattleSystem_TrainerInfo(battleSys, BATTLER_US);
+    badges = TrainerInfo_BadgeCount(trInfo);
+
+    safariTrainerLevel = 24 + badges;
+    grenadeMovePower = 10 + 30 * badges;
+
+    trainerMachop = PokemonPersonalData_FromMonForm(SPECIES_MACHOP, 0, HEAP_ID_BATTLE);
+    baseAttack = PokemonPersonalData_GetValue(trainerMachop, MON_DATA_PERSONAL_BASE_ATK);
+    trainerID = TrainerInfo_ID(trInfo);
+    attackIV = trainerID % 32;
+    
+    if (badges < 8)
+    {
+        attackEV = 252 / (8 - badges);
+    }
+    else
+    {
+        attackEV = 252;
+    }
+
+    attackStat = (2 * baseAttack + attackIV + attackEV / 4) * safariTrainerLevel / 100 + 5;
+
+    if ((trainerID % 25) < 4)
+    {
+        attackStat *= 11 / 10;
+    }
+
+    if ((trainerID % 25) > 21)
+    {
+        attackStat = 9 * attackStat / 10;
+    }
+
+    defenderDefenseStat = battleCtx->battleMons[battleCtx->defender].defense;
+
+    damage = (((2 * safariTrainerLevel / 5) + 2) * grenadeMovePower * (attackStat / defenderDefenseStat)) / 50;
+
+    damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
 	
-	battleCtx->hpCalcTemp = battleCtx->battleMons[battleCtx->defender].maxHP;
+	battleCtx->hpCalcTemp = damage;
 	battleCtx->hpCalcTemp *= -1;
-	battleCtx->hpCalcTemp /= 2;
 
     return FALSE;
 }
