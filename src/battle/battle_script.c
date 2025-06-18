@@ -13864,7 +13864,7 @@ static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *bat
 
     if ((trainerID % 25) < 4)
     {
-        attackStat *= 11 / 10;
+        attackStat = 11 * attackStat / 10;
     }
 
     if ((trainerID % 25) > 21)
@@ -13874,7 +13874,7 @@ static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *bat
 
     defenderDefenseStat = battleCtx->battleMons[battleCtx->defender].defense;
 
-    damage = (((2 * safariTrainerLevel / 5) + 2) * grenadeMovePower * (attackStat / defenderDefenseStat)) / 50;
+    damage = (((2 * safariTrainerLevel / 5) + 2) * grenadeMovePower * attackStat / defenderDefenseStat) / 50;
 
     damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
 	
