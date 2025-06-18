@@ -353,4 +353,7 @@ subscript_files = files(
 	'subscript_ability_changes_type.s',
 	'subscript_steal_item_ability.s',
 	'subscript_slurp_up.s',
+	'subscript_held_item_heal_taunt.s',
+	'subscript_held_item_heal_torment.s',
+	'subscript_held_item_heal_heal_block.s',
 )

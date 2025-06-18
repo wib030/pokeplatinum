@@ -7152,6 +7152,43 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 result = TRUE;
             }
             break;
+			
+		case HOLD_EFFECT_MENTAL_HERB:
+            if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_ATTRACT) {
+                battleCtx->msgTemp = MSGCOND_INFATUATION;
+                subscript = subscript_held_item_heal_infatuation;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.tauntedTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_TAUNT;
+                subscript = subscript_held_item_heal_taunt;
+				battleCtx->battleMons[battler].moveEffectsData.tauntedTurns = 0;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.encoredTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_ENCORE;
+                subscript = subscript_held_item_heal_taunt;
+				battleCtx->battleMons[battler].moveEffectsData.encoredTurns = 0;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TORMENT) {
+                battleCtx->msgMoveTemp = MOVE_TORMENT;
+                subscript = subscript_held_item_heal_torment;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_HEAL_BLOCK;
+                subscript = subscript_held_item_heal_heal_block;
+				battleCtx->battleMons[battler].moveEffectsData.healBlockTurns = 0;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.disabledTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_DISABLE;
+                subscript = subscript_held_item_heal_taunt;
+				battleCtx->battleMons[battler].moveEffectsData.disabledTurns = 0;
+                result = TRUE;
+            }
+            break;
 
         case HOLD_EFFECT_PINCH_ACC_UP:
             if (Battler_Ability(battleCtx, battler) == ABILITY_GLUTTONY) {
@@ -7364,6 +7401,43 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
             if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_ATTRACT) {
                 battleCtx->msgTemp = MSGCOND_INFATUATION;
                 *subscript = subscript_held_item_heal_infatuation;
+                result = TRUE;
+            }
+            break;
+			
+		case HOLD_EFFECT_MENTAL_HERB:
+            if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_ATTRACT) {
+                battleCtx->msgTemp = MSGCOND_INFATUATION;
+                *subscript = subscript_held_item_heal_infatuation;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.tauntedTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_TAUNT;
+                *subscript = subscript_held_item_heal_taunt;
+				battleCtx->battleMons[battler].moveEffectsData.tauntedTurns = 0;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.encoredTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_ENCORE;
+                *subscript = subscript_held_item_heal_taunt;
+				battleCtx->battleMons[battler].moveEffectsData.encoredTurns = 0;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TORMENT) {
+                battleCtx->msgMoveTemp = MOVE_TORMENT;
+                *subscript = subscript_held_item_heal_torment;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_HEAL_BLOCK;
+                *subscript = subscript_held_item_heal_heal_block;
+				battleCtx->battleMons[battler].moveEffectsData.healBlockTurns = 0;
+                result = TRUE;
+            }
+			else if (battleCtx->battleMons[battler].moveEffectsData.disabledTurns > 0) {
+                battleCtx->msgMoveTemp = MOVE_DISABLE;
+                *subscript = subscript_held_item_heal_taunt;
+				battleCtx->battleMons[battler].moveEffectsData.disabledTurns = 0;
                 result = TRUE;
             }
             break;

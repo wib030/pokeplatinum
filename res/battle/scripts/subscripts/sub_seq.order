@@ -350,3 +350,6 @@ subscript_attack_switch_no_anim
 subscript_ability_changes_type
 subscript_steal_item_ability
 subscript_slurp_up
+subscript_held_item_heal_taunt
+subscript_held_item_heal_torment
+subscript_held_item_heal_heal_block
