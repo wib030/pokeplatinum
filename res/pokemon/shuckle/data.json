@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_SHIELD_DUST",
-        "ABILITY_GLUTTONY"
+        "ABILITY_STURDY"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -92,10 +92,10 @@
 			"23": "MOVE_ROCK_THROW",
             "27": "MOVE_GASTRO_ACID",
 			"31": "MOVE_POWER_TRICK",
+			"35": "MOVE_MUD_SPORT",
 			"38": "MOVE_ROCK_SLIDE",
             "40": "MOVE_BUG_BITE",
-			"49": "MOVE_STONE_EDGE",
-			"53": "MOVE_MUD_SPORT"
+			"49": "MOVE_STONE_EDGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
