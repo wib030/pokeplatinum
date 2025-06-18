@@ -16969,19 +16969,6 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
                     moveScore += 50;
                 }
-
-                // Penalize choices that would result in a KO, except for Sacks
-                if (moveScore > monCurHP) {
-                    if (hpPercent < 50) {
-                        sackBonus = (monMaxHP - monCurHP) * 100 / monMaxHP;
-                        if (moveScore < sackBonus) {
-                            moveScore = 0;
-                        }
-                        else {
-                            moveScore -= sackBonus;
-                        }
-                    }
-                }
             }
 
             if (moveScore >= 200)
@@ -17143,7 +17130,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     // Penalize choices that would result in a KO, except for Sacks
                     if (moveScore > (monCurHP - Battle_CalcHazardsDamage(battleSys, battleCtx, battler, i))) {
                         if (hpPercent < 50) {
-                            sackBonus = (monMaxHP - monCurHP) * 100 / monMaxHP;
+                            sackBonus = (monMaxHP - monCurHP) * 25 / monMaxHP;
                             if (moveScore < sackBonus) {
                                 moveScore = 0;
                             }
