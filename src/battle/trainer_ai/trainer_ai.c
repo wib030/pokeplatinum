@@ -6620,7 +6620,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                     if (battleCtx->battleMons[defender].type1 != TYPE_FIRE
                                                         && battleCtx->battleMons[defender].type2 != TYPE_FIRE) {
 
-                                                        if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battleCtx->battleMons[defender]))
+                                                        if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender))
                                                         {
                                                             return FALSE;
                                                         }
