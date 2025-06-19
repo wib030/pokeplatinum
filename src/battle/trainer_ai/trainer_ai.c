@@ -8747,7 +8747,7 @@ int TrainerAI_PickCommand(BattleSystem *battleSys, int battler)
             // If this is a switch which should use the post-KO switch logic, then do so.
             // If there is no valid battler, pick the first one in party order.
             if (battleCtx->aiSwitchedPartySlot[battler] == 6) {
-                if ((i = BattleAI_PostKOSwitchIn(battleSys, battler)) == 6) {
+                if ((i = BattleAI_HotSwitchIn(battleSys, battler)) == 6) {
                     battler1 = battler;
                     if ((battleType & BATTLE_TYPE_TAG) || (battleType & BATTLE_TYPE_2vs2)) {
                         battler2 = battler1;
