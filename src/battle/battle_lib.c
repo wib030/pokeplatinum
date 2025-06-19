@@ -13981,7 +13981,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     }
 
                     if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                        moveScore = moveScore * 3 / 2;
+                        moveScore = moveScore * 5 / 4;
                     }
 
                     moveScore = moveScore * 100 / defenderMaxHP;
@@ -14067,7 +14067,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     }
 
                     if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                        moveScore = moveScore * 3 / 2;
+                        moveScore = moveScore * 5 / 4;
                     }
 
                     // Move score is % of mon's hp damage they'll take
@@ -14265,7 +14265,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     if (((moveStatusFlags & MOVE_STATUS_IMMUNE) == FALSE)
                         && (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY))
                     {
-                        score = score * 3 / 2;
+                        score = score * 5 / 4;
                     }
                 }
 
@@ -14470,7 +14470,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     }
 
                     if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                        moveScore = moveScore * 3 / 2;
+                        moveScore = moveScore * 5 / 4;
                     }
 
                     // Move score is % of mon's hp damage they'll take
@@ -14656,13 +14656,6 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     i,
                                     &moveStatusFlags);
 
-                        // Boost to pivoting when doing a yawn switch
-                        if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
-                            if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
-                                moveScore += 150;
-                            }
-                        }
-
                         if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                             && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
 
@@ -14674,10 +14667,17 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                         }
 
                         if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                            moveScore = moveScore * 3 / 2;
+                            moveScore = moveScore * 5 / 4;
                         }
 
                         moveScore = moveScore * 100 / defenderMaxHP;
+
+                        // Boost to pivoting when doing a yawn switch
+                        if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+                            if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+                                moveScore += 150;
+                            }
+                        }
                     }
 
                     if (moveScore >= 50) {
@@ -14779,7 +14779,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     }
 
                     if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                        score = score * 3 / 2;
+                        score = score * 5 / 4;
                     }
                 }
 
@@ -16969,7 +16969,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                         }
 
                         if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                            moveScore = moveScore * 3 / 2;
+                            moveScore = moveScore * 5 / 4;
                         }
                     }
                 }
@@ -17126,7 +17126,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                             }
 
                             if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
-                                moveScore = moveScore * 3 / 2;
+                                moveScore = moveScore * 5 / 4;
                             }
                         }
                     }
@@ -17208,6 +17208,10 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             score += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
             abilityDefendScore = BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
+
+            score += BattleAI_CalculateDamagingMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
+
+            score += BattleAI_CalculateStatusMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
 
             if (score > abilityDefendScore)
             {
@@ -18331,6 +18335,17 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         moveFieldEffect = MapBattleEffectToFieldCondition(battleCtx, moveEffect);
         moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleCtx, moveEffect);
 
+        if (monAbility == ABILITY_MAGIC_BOUNCE)
+        {
+            if (MOVE_DATA(move).class == CLASS_STATUS)
+            {
+                if (MOVE_DATA(move).range & (RANGE_SINGLE_TARGET | RANGE_RANDOM_OPPONENT | RANGE_ADJACENT_OPPONENTS | RANGE_OPPONENT_SIDE | RANGE_USER_OR_ALLY))
+                {
+                    moveScore += 20;
+                }
+            }
+        }
+
         if (moveStatusFlags & MOVE_STATUS_IMMUNE_ABILITY)
         {
             if (moveStatusFlags & MOVE_STATUS_LEVITATED)
@@ -18642,6 +18657,30 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
             moveSelfStatBoostStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
             moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleCtx, moveEffect);
 
+            if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
+                && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                moveScore = 0;
+            }
+
+            if (moveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                moveScore /= 2;
+            }
+
+            if (moveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                moveScore = moveScore * 5 / 4;
+            }
+
+            // Move score is % of mon's hp damage they'll take
+            moveScore = moveScore * 100 / defenderMaxHP;
+
+            // Boost to pivoting when doing a yawn switch
+            if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
+                if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+                    moveScore += 150;
+                }
+            }
+
             if (moveSelfStatBoostStatFlag != BATTLE_STAT_FLAG_NONE) {
                 if (moveSelfStatBoostStatFlag & BATTLE_STAT_FLAG_SPEED) {
                     if (compareSpeedDefenderVsMon == COMPARE_SPEED_FASTER) {
@@ -18737,7 +18776,10 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
                     }
                     else
                     {
-                        if (defenderItemEffect != HOLD_EFFECT_HP_RESTORE_GRADUAL)
+                        if (defenderItemEffect != HOLD_EFFECT_HP_RESTORE_GRADUAL
+                            && (defenderItemEffect != HOLD_EFFECT_HP_RESTORE_PSN_TYPE
+                                && (defenderType1 == TYPE_POISON
+                                    || defenderType2 == TYPE_POISON)))
                         {
                             moveScore *= 3 / 2;
                         }
@@ -18765,7 +18807,11 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
                 moveScore += 20;
             }
         }
+
+        score += moveScore;
     }
+
+    return score;
 }
 
 BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int attacker, int partySlot)
