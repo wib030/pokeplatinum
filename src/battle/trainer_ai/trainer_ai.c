@@ -5988,47 +5988,9 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                         if (moveStatus != MON_CONDITION_NONE) {
                             if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
-                                if (moveStatus & MON_CONDITION_ANY_POISON) {
-                                    if (battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL
-                                    && battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD
-                                    && battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE
-                                    && battleCtx->battleMons[defender].ability != ABILITY_IMMUNITY
-                                    && battleCtx->battleMons[defender].ability != ABILITY_GUTS
-                                    && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
-                                    && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE
-                                    ) {
-                                        return FALSE;
-                                    }
-                                }
-
-                                if (moveStatus & MON_CONDITION_BURN) {
-                                    if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD
-                                        && battleCtx->battleMons[defender].ability != ABILITY_GUTS
-                                        && battleCtx->battleMons[defender].ability != ABILITY_WATER_VEIL
-                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
-                                        && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE) {
-                                            return FALSE;
-                                    }
-                                }
-
-                                if (moveStatus & MON_CONDITION_PARALYSIS) {
-                                    if (battleCtx->battleMons[defender].ability != ABILITY_LIMBER
-                                        && battleCtx->battleMons[defender].ability != ABILITY_GUTS
-                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
-                                        && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE) {
-                                            return FALSE;
-                                    }
-                                }
-
-                                if (moveStatus & MON_CONDITION_SLEEP) {
-                                    if (battleCtx->battleMons[defender].ability != ABILITY_INSOMNIA
-                                        && battleCtx->battleMons[defender].ability != ABILITY_VITAL_SPIRIT
-                                        && battleCtx->battleMons[defender].ability != ABILITY_EARLY_BIRD
-                                        && battleCtx->battleMons[defender].ability != ABILITY_GUTS
-                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
-                                        && battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE) {
-                                            return FALSE;
-                                    }
+                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, battleCtx->battleMons[defender].ability, moveStatus))
+                                {
+                                    return FALSE;
                                 }
                             }
                         }
@@ -6634,61 +6596,33 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 if (moveStatus != MON_CONDITION_NONE) {
 
-                                    if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE)
-                                        && battleCtx->battleMons[defender].ability != ABILITY_SHED_SKIN
-                                        && battleCtx->battleMons[defender].ability != ABILITY_NATURAL_CURE
-                                        && battleCtx->battleMons[defender].ability != ABILITY_HYDRATION
-                                        && battleCtx->battleMons[defender].ability != ABILITY_LEAF_GUARD) {
+                                    if (Battle_AbilityDetersStatus(battleSys, battleCtx, battleCtx->battleMons[defender].ability, moveStatus)
+                                        && (Battler_IgnorableAbility(battleCtx, battler, defender, battleCtx->battleMons[defender].ability) == FALSE)) {
 
                                         if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
                                             // Only stay in to poison if it's relevant
                                             if (moveStatus & MON_CONDITION_ANY_POISON) {
-
-                                                if ((battleCtx->battleMons[defender].ability != ABILITY_POISON_HEAL)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_GUTS)
-                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_IMMUNITY) == FALSE)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE)) {
-
-                                                    if ((battleCtx->battleMons[defender].type1 != TYPE_POISON
-                                                        && battleCtx->battleMons[defender].type1 != TYPE_STEEL
-                                                        && battleCtx->battleMons[defender].type2 != TYPE_POISON
-                                                        && battleCtx->battleMons[defender].type2 != TYPE_STEEL)
-                                                        || battleCtx->battleMons[battler].ability == ABILITY_CORROSION) {
+                                                if ((battleCtx->battleMons[defender].type1 != TYPE_POISON
+                                                    && battleCtx->battleMons[defender].type1 != TYPE_STEEL
+                                                    && battleCtx->battleMons[defender].type2 != TYPE_POISON
+                                                    && battleCtx->battleMons[defender].type2 != TYPE_STEEL)
+                                                    || battleCtx->battleMons[battler].ability == ABILITY_CORROSION) {
                                                     
-                                                        return FALSE;
-                                                    }
+                                                    return FALSE;
                                                 }
                                             }
 
                                             // Only stay in to burn if it's relevant
                                             if (moveStatus & MON_CONDITION_BURN) {
+                                                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
 
-                                                if ((battleCtx->battleMons[defender].ability != ABILITY_GUTS)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_FLARE_BOOST)
-                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_WATER_VEIL) == FALSE)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_HEATPROOF)) {
+                                                    if (battleCtx->battleMons[defender].type1 != TYPE_FIRE
+                                                        && battleCtx->battleMons[defender].type2 != TYPE_FIRE) {
 
-                                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
-                                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
-
-                                                        if (battleCtx->battleMons[defender].type1 != TYPE_FIRE
-                                                            && battleCtx->battleMons[defender].type2 != TYPE_FIRE) {
-
-                                                            for (k = 0; k < LEARNED_MOVES_MAX; k++) {
-
-                                                                opponentMove = battleCtx->battleMons[defender].moves[k];
-
-                                                                if (MOVE_DATA(opponentMove).class == CLASS_PHYSICAL
-                                                                    && MOVE_DATA(opponentMove).power > 1) {
-
-                                                                    if (MOVE_DATA(opponentMove).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
-                                                                        return FALSE;
-                                                                    }
-                                                                }
-                                                            }
+                                                        if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battleCtx->battleMons[defender]))
+                                                        {
+                                                            return FALSE;
                                                         }
                                                     }
                                                 }
@@ -6696,38 +6630,24 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                             // Only stay in to paralyze if it's relevant
                                             if (moveStatus & MON_CONDITION_PARALYSIS) {
+                                                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
 
-                                                if ((battleCtx->battleMons[defender].ability != ABILITY_GUTS)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_QUICK_FEET)
-                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIMBER) == FALSE)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_MARVEL_SCALE)) {
+                                                    if (battleCtx->battleMons[defender].type1 != TYPE_ELECTRIC
+                                                        && battleCtx->battleMons[defender].type2 != TYPE_ELECTRIC) {
 
-                                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
-                                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
-
-                                                        if (battleCtx->battleMons[defender].type1 != TYPE_ELECTRIC
-                                                            && battleCtx->battleMons[defender].type2 != TYPE_ELECTRIC) {
-
-                                                            // Don't bother paralyzing stallmons
-                                                            if (battleCtx->battleMons[defender].speed > (battleCtx->battleMons[battler].speed * 3 / 4)) {
-                                                                return FALSE;
-                                                            }
+                                                        if (AI_ShouldParalyzeCheck(battleSys, battleCtx, defender, battleCtx->battleMons[battler].speed))
+                                                        {
+                                                            return FALSE;
                                                         }
                                                     }
                                                 }
                                             }
 
                                             if (moveStatus & MON_CONDITION_SLEEP) {
-
-                                                if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_INSOMNIA) == FALSE)
-                                                    && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_VITAL_SPIRIT) == FALSE)
-                                                    && (battleCtx->battleMons[defender].ability != ABILITY_EARLY_BIRD)) {
-
-                                                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
-                                                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
-                                                        return FALSE;
-                                                    }
+                                                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                                                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                                                    return FALSE;
                                                 }
                                             }
                                         }
