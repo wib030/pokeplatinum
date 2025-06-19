@@ -16348,7 +16348,7 @@ BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *batt
     return result;
 }
 
-BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat)
+BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, int defender, u16 attackerSpeedStat)
 {
     u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
     u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
@@ -16371,26 +16371,40 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
     defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
     defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
 
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-        move = battleCtx->battleMons[defender].moves[i];
-
-        if (move == MOVE_NONE) {
-            break;
+    if (battleCtx->battleMons[defender].ability == ABILITY_SPEED_BOOST)
+    {
+        hasSpeedBoost = TRUE;
+    }
+    else
+    {
+        if (battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_SPEED] > 6)
+        {
+            hasSpeedBoost = TRUE;
         }
-        
-        moveEffect = MOVE_DATA(move).effect;
-        moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+        else
+        {
+            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+                move = battleCtx->battleMons[defender].moves[i];
 
-        if ((moveStatFlag & BATTLE_STAT_FLAG_SPEED)
-            && moveEffect != BATTLE_EFFECT_RAISE_ALL_STATS_HIT) {
+                if (move == MOVE_NONE) {
+                    break;
+                }
 
-                hasSpeedBoost = TRUE;
-                break;
+                moveEffect = MOVE_DATA(move).effect;
+                moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+
+                if ((moveStatFlag & BATTLE_STAT_FLAG_SPEED)
+                    && moveEffect != BATTLE_EFFECT_RAISE_ALL_STATS_HIT) {
+
+                    hasSpeedBoost = TRUE;
+                    break;
+                }
+            }
         }
     }
 
     if (hasSpeedBoost) {
-        if (2 * defenderSpeedStat > attackerSpeedStat) {
+        if (3 * defenderSpeedStat / 2 > attackerSpeedStat) {
             result = TRUE;
         }
     }
