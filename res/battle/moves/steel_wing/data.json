@@ -3,11 +3,11 @@
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_STEEL",
     "power": 70,
-    "accuracy": 90,
+    "accuracy": 95,
     "pp": 25,
     "effect": {
         "type": "BATTLE_EFFECT_RAISE_DEF_HIT",
-        "chance": 10
+        "chance": 50
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
