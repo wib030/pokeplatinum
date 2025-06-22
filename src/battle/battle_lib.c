@@ -156,9 +156,21 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 
     HeightWeightData *heightWeightData = Pokedex_HeightWeightData(HEAP_ID_BATTLE);
     Pokedex_HeightWeightData_Load(heightWeightData, 0, HEAP_ID_BATTLE);
-
+	
     battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, battleCtx->battleMons[battler].species);
     battleCtx->battleMons[battler].height = sub_02098808(heightWeightData, battleCtx->battleMons[battler].species);
+	
+	// Not sure how to change the actual values, so for now this is the solution...
+	if (battleCtx->battleMons[battler].species == SPECIES_AZURILL)
+	{
+		battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_BLISSEY);
+		battleCtx->battleMons[battler].height = sub_02098808(heightWeightData, SPECIES_BLISSEY);
+	}
+	else if (battleCtx->battleMons[battler].species == SPECIES_IGGLYBUFF)
+	{
+		battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_GARDEVOIR);
+		battleCtx->battleMons[battler].height = sub_02098808(heightWeightData, SPECIES_GARDEVOIR);
+	}
 
     Pokedex_HeightWeightData_Release(heightWeightData);
     Pokedex_HeightWeightData_Free(heightWeightData);

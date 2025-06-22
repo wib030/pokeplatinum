@@ -1501,7 +1501,7 @@ const u16 EggMove_Table_Script[] = {
 	MOVE_BELLY_DRUM,
 	MOVE_FEINT,
 	MOVE_SHARPEN, // Pregnancy Punch
-    (SPECIES_AZURILL) + 20000, //Azurill
+    (SPECIES_AZURILL) + 20000, //Mega Marill
     MOVE_ENCORE,
     MOVE_SING,
     MOVE_REFRESH,
@@ -13085,12 +13085,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
                 maxIVsInherited = STAT_MAX - 1;
                 break;
 
-            case ITEM_SEA_INCENSE:
-                if (monSpecies == SPECIES_MARILL) {
-                    monSpecies = SPECIES_AZUMARILL;
-                }
-                break;
-
             case ITEM_LAX_INCENSE:
                 if (monSpecies == SPECIES_WOBBUFFET) {
                     monSpecies = SPECIES_WYNAUT;
@@ -13189,12 +13183,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
             case ITEM_DESTINY_KNOT:
                 maxIVsInherited = STAT_MAX - 1;
-                break;
-
-            case ITEM_SEA_INCENSE:
-                if (monSpecies == SPECIES_MARILL) {
-                    monSpecies = SPECIES_AZUMARILL;
-                }
                 break;
 
             case ITEM_LAX_INCENSE:

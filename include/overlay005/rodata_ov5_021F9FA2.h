@@ -1400,7 +1400,7 @@ const u16 EggMove_Table[] = {
 	MOVE_BELLY_DRUM,
 	MOVE_FEINT,
 	MOVE_SHARPEN, // Pregnancy Punch
-    (SPECIES_AZURILL) + 20000, //Azurill
+    (SPECIES_AZURILL) + 20000, //Mega Marill
     MOVE_ENCORE,
     MOVE_SING,
     MOVE_REFRESH,
