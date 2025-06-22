@@ -1404,7 +1404,6 @@ const u16 EggMove_Table[] = {
     MOVE_ENCORE,
     MOVE_SING,
     MOVE_REFRESH,
-    MOVE_SLAM, // Psyshield Bash
     MOVE_TICKLE,
     MOVE_FAKE_TEARS,
 	MOVE_BODY_SLAM,

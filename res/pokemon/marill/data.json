@@ -114,6 +114,11 @@
             "EVO_LEVEL_UP",
             24,
             "SPECIES_AZUMARILL"
+        ],
+		[
+            "EVO_USE_ITEM",
+            "ITEM_WATER_STONE",
+            "SPECIES_AZURILL"
         ]
     ],
     "footprint": {
