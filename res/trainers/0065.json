@@ -21,7 +21,8 @@
 				"MOVE_COUNTER"
             ],
             "power": 100,
-            "ball_seal": 20
+            "ball_seal": 20,
+			"gender": 1
         },
         {
             "species": "SPECIES_NUMEL",
@@ -35,7 +36,8 @@
 				"MOVE_PROTECT"
             ],
             "power": 100,
-            "ball_seal": 20
+            "ball_seal": 20,
+			"gender": 0
         }
     ]
 }

@@ -10,15 +10,13 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AZURILL",
+            "species": "SPECIES_TEDDIURSA",
             "form": 0,
             "level": 80,
             "item": "ITEM_STICKY_BARB",
             "moves": [
-                "MOVE_SPLASH",
                 "MOVE_TOXIC",
-                "MOVE_FAKE_TEARS",
-                "MOVE_UPROAR"
+                "MOVE_FAKE_TEARS"
             ],
             "power": 255,
             "ball_seal": 0,

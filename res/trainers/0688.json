@@ -18,7 +18,8 @@
                 "MOVE_ICY_WIND"
             ],
             "power": 255,
-            "ball_seal": 20
+            "ball_seal": 20,
+			"gender": 1
         },
         {
             "species": "SPECIES_CAMERUPT",
@@ -29,7 +30,8 @@
                 "MOVE_BLAST_BURN"
             ],
             "power": 255,
-            "ball_seal": 20
+            "ball_seal": 20,
+			"gender": 0
         }
     ]
 }

@@ -21,7 +21,8 @@
                 "MOVE_SHADOW_BALL"
             ],
             "power": 255,
-            "ball_seal": 20
+            "ball_seal": 20,
+			"gender": 1
         },
         {
             "species": "SPECIES_CAMERUPT",
@@ -35,7 +36,8 @@
                 "MOVE_ROCK_SLIDE"
             ],
             "power": 255,
-            "ball_seal": 20
+            "ball_seal": 20,
+			"gender": 0
         }
     ]
 }
