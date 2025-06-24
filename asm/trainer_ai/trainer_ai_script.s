@@ -158,6 +158,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESET_STAT_CHANGES, Basic_CheckStatStageImbalance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Basic_CheckCanForceSwitch
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH_HIT, Basic_CheckCanForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
@@ -1743,6 +1744,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESET_STAT_CHANGES, Expert_Haze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Expert_Bide
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Expert_Phaze
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH_HIT, Expert_Phaze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
@@ -3568,6 +3570,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_SP_ATK_UP
     TableEntry BATTLE_EFFECT_RESET_STAT_CHANGES
     TableEntry BATTLE_EFFECT_FORCE_SWITCH
+	TableEntry BATTLE_EFFECT_FORCE_SWITCH_HIT
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_STATUS_BADLY_POISON
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN

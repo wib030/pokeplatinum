@@ -4834,9 +4834,11 @@ BOOL BattleSystem_NotHoldingMail(BattleContext *battleCtx, int battler)
 
 BOOL BattleSystem_CanWhirlwind(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    BOOL result = FALSE;
-
-    if (ATTACKING_MON.level >= DEFENDING_MON.level) {
+    BOOL result = TRUE;
+	u32 battleType = BattleSystem_BattleType(battleSys);
+	
+    if (ATTACKING_MON.level >= DEFENDING_MON.level
+	|| (battleType & BATTLE_TYPE_TRAINER)) {
         result = TRUE;
     } else {
         int tmp = (((BattleSystem_RandNext(battleSys) & 0xFF) * (ATTACKING_MON.level + DEFENDING_MON.level)) >> 8) + 1;

@@ -356,4 +356,5 @@ subscript_files = files(
 	'subscript_held_item_heal_taunt.s',
 	'subscript_held_item_heal_torment.s',
 	'subscript_held_item_heal_heal_block.s',
+	'subscript_force_target_to_switch_or_flee_hit.s',
 )
