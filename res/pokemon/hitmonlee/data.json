@@ -106,8 +106,7 @@
             "MOVE_VACUUM_WAVE",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SUCKER_PUNCH"
         ]
     },
     "footprint": {

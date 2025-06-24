@@ -107,8 +107,7 @@
             "MOVE_AIR_CUTTER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TWISTER",
-            "MOVE_SWIFT"
+            "MOVE_TWISTER"
         ]
     },
     "footprint": {

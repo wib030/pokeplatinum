@@ -122,8 +122,7 @@
             "MOVE_TWISTER",
             "MOVE_TRICK",
             "MOVE_HEAT_WAVE",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SUCKER_PUNCH"
         ]
     },
     "footprint": {

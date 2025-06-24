@@ -86,10 +86,7 @@
             "HM06"
         ],
         "level_up": {
-			"1": [
-				"MOVE_SUPERSONIC",
-				"MOVE_SWIFT"
-			],
+			"1": "MOVE_SUPERSONIC",
             "12": [
                 "MOVE_LIGHT_SCREEN",
                 "MOVE_REFLECT",
@@ -117,7 +114,6 @@
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

@@ -114,8 +114,7 @@
             "MOVE_SNORE",
             "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
-            "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_LAST_RESORT"
         ]
     },
     "evolutions": [

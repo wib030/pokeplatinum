@@ -116,8 +116,7 @@
             "MOVE_OUTRAGE",
             "MOVE_EARTH_POWER",
             "MOVE_TWISTER",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "evolutions": [

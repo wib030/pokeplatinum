@@ -117,8 +117,7 @@
             "MOVE_AIR_CUTTER",
             "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_ZEN_HEADBUTT",
-            "MOVE_SWIFT"
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "footprint": {

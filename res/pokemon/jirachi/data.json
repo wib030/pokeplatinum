@@ -96,7 +96,6 @@
                 "MOVE_WISH",
                 "MOVE_CONFUSION"
             ],
-            "7": "MOVE_SWIFT",
             "21": "MOVE_HEADBUTT",
 			"28": "MOVE_ZEN_HEADBUTT",
 			"35": "MOVE_GRAVITY",
@@ -127,7 +126,6 @@
             "MOVE_IRON_DEFENSE",
             "MOVE_LAST_RESORT",
             "MOVE_TRICK",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

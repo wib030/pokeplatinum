@@ -105,6 +105,7 @@
             "7": "MOVE_EMBER",
             "10": "MOVE_SMOKE_SCREEN",
             "21": "MOVE_SCARY_FACE",
+			"26": "MOVE_SWIFT",
             "28": "MOVE_FIRE_FANG",
             "32": "MOVE_SLASH",
 			"34": "MOVE_DRAGON_RAGE",

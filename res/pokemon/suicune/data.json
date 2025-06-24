@@ -111,8 +111,7 @@
             "MOVE_IRON_HEAD",
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_SWIFT"
+            "MOVE_SIGNAL_BEAM"
         ]
     },
     "footprint": {

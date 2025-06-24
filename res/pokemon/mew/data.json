@@ -201,7 +201,7 @@
             "MOVE_HEAT_WAVE",
             "MOVE_KNOCK_OFF",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT",
+			"MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

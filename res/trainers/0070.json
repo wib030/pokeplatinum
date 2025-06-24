@@ -32,8 +32,7 @@
             "moves": [
                 "MOVE_RAPID_SPIN",
 				"MOVE_SPIKES",
-				"MOVE_TOXIC_SPIKES",
-				"MOVE_SWIFT"
+				"MOVE_TOXIC_SPIKES"
             ],
             "power": 200,
             "ball_seal": 0,
@@ -46,7 +45,6 @@
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_RAPID_SPIN",
-				"MOVE_SWIFT",
 				"MOVE_MINIMIZE",
 				"MOVE_CONFUSE_RAY"
             ],

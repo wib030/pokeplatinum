@@ -101,6 +101,7 @@
             "21": "MOVE_LEER",
             "24": "MOVE_TWISTER",
             "27": "MOVE_ICE_FANG",
+			"29": "MOVE_SWIFT",
 			"30": "MOVE_DIVE",
 			"33": "MOVE_SCARY_FACE",
 			"36": "MOVE_DRAGON_RAGE",

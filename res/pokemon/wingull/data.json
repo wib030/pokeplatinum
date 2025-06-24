@@ -106,7 +106,6 @@
             "MOVE_AIR_CUTTER",
             "MOVE_TWISTER",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

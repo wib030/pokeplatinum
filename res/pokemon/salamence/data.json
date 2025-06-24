@@ -93,7 +93,8 @@
                 "MOVE_WISH",
                 "MOVE_THRASH",
                 "MOVE_WING_ATTACK",
-                "MOVE_HEADBUTT"
+                "MOVE_HEADBUTT",
+				"MOVE_SWIFT"
             ],
 			"4": "MOVE_EMBER",
 			"7": "MOVE_LEER",

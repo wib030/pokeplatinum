@@ -83,7 +83,6 @@
 				"MOVE_ZAP_CANNON"
 			],
 			"3": "MOVE_HELPING_HAND",
-			"5": "MOVE_SWIFT",
             "7": "MOVE_SPARK",
             "10": "MOVE_ENCORE",
             "13": "MOVE_FAKE_TEARS",
@@ -108,7 +107,6 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_MAGNET_RISE",
             "MOVE_LAST_RESORT",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

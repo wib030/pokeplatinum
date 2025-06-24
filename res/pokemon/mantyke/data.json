@@ -96,8 +96,7 @@
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
             "MOVE_HELPING_HAND",
-            "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_BOUNCE"
         ]
     },
     "evolutions": [

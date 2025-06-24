@@ -104,8 +104,7 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_IRON_DEFENSE",
-            "MOVE_SWIFT"
+            "MOVE_IRON_DEFENSE"
         ]
     },
     "footprint": {

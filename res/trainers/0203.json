@@ -32,7 +32,7 @@
             "moves": [
                 "MOVE_LIGHT_SCREEN",
 				"MOVE_REFLECT",
-				"MOVE_SWIFT",
+				"MOVE_FRENZY_PLANT",
 				"MOVE_SUPERSONIC"
             ],
             "power": 10,

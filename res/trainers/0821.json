@@ -26,7 +26,6 @@
             "level": 24,
             "item": null,
             "moves": [
-                "MOVE_SWIFT",
                 "MOVE_ENDURE",
                 "MOVE_SPARK",
                 "MOVE_CHARM"

@@ -112,7 +112,6 @@
             "MOVE_VACUUM_WAVE",
             "MOVE_GUNK_SHOT",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

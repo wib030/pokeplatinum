@@ -89,7 +89,6 @@
             "7": "MOVE_RAPID_SPIN",
             "10": "MOVE_RECOVER",
 			"13": "MOVE_CONFUSION",
-			"16": "MOVE_SWIFT",
 			"18": "MOVE_BUBBLE_BEAM",
 			"20": "MOVE_TELEPORT",
             "22": "MOVE_CAMOUFLAGE",
@@ -109,8 +108,7 @@
             "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_TWISTER",
-            "MOVE_SWIFT"
+            "MOVE_TWISTER"
         ]
     },
     "evolutions": [

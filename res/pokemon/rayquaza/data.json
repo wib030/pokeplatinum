@@ -102,6 +102,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
 				"MOVE_WHIRLPOOL",
 				"MOVE_DIVE",
 				"MOVE_ANCIENT_POWER",

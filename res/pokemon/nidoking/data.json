@@ -103,10 +103,11 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_HORN_DRILL",
+				"MOVE_SWIFT",
                 "MOVE_PECK",
                 "MOVE_FOCUS_ENERGY",
                 "MOVE_DOUBLE_KICK",
-				"MOVE_HORN_DRILL",
                 "MOVE_POISON_STING"
             ],
 			"10": "MOVE_MUD_SHOT",

@@ -77,8 +77,7 @@
         "tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_SNORE",
-            "MOVE_SWIFT"
+            "MOVE_SNORE"
         ]
     },
     "evolutions": [

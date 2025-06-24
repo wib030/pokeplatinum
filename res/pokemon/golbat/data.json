@@ -94,7 +94,6 @@
             "13": "MOVE_PLUCK",
             "17": "MOVE_CONFUSE_RAY",
 			"19": "MOVE_AIR_CUTTER",
-			"24": "MOVE_SWIFT",
 			"27": "MOVE_POISON_FANG",
 			"32": "MOVE_LEECH_LIFE",
             "35": "MOVE_MEAN_LOOK",
@@ -109,7 +108,6 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_TWISTER",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

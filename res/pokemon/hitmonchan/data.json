@@ -110,8 +110,7 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
             "MOVE_HELPING_HAND",
-            "MOVE_VACUUM_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_VACUUM_WAVE"
         ]
     },
     "footprint": {

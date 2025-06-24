@@ -118,7 +118,6 @@
             "MOVE_TWISTER",
             "MOVE_SEED_BOMB",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

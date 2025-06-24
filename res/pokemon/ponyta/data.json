@@ -89,8 +89,7 @@
         "tutor": [
             "MOVE_SNORE",
             "MOVE_BOUNCE",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "evolutions": [

@@ -101,7 +101,6 @@
             ],
             "6": "MOVE_IMPRISON",
             "16": "MOVE_PROTECT",
-            "21": "MOVE_SWIFT",
 			"26": "MOVE_LUCKY_CHANT",
             "31": "MOVE_RAPID_SPIN",
             "36": "MOVE_FUTURE_SIGHT",
@@ -125,8 +124,7 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_TRICK",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

@@ -146,8 +146,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_VACUUM_WAVE",
             "MOVE_TRICK",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

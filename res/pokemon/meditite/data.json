@@ -118,8 +118,7 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_VACUUM_WAVE",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_TRICK"
         ]
     },
     "evolutions": [

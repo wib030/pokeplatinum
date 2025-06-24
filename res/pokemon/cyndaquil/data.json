@@ -80,7 +80,6 @@
             "10": "MOVE_QUICK_ATTACK",
             "16": "MOVE_FLAME_WHEEL",
             "19": "MOVE_DEFENSE_CURL",
-            "22": "MOVE_SWIFT",
 			"27": "MOVE_ROLLOUT",
             "31": "MOVE_LAVA_PLUME",
             "37": "MOVE_FLAMETHROWER",
@@ -91,8 +90,7 @@
             "MOVE_MUD_SLAP",
             "MOVE_ROLLOUT",
             "MOVE_SNORE",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "evolutions": [

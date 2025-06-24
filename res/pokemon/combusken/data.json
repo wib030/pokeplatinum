@@ -113,8 +113,7 @@
             "MOVE_VACUUM_WAVE",
             "MOVE_LAST_RESORT",
             "MOVE_BOUNCE",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "evolutions": [

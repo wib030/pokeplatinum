@@ -123,8 +123,7 @@
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

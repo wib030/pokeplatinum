@@ -96,7 +96,6 @@
             ],
             "7": "MOVE_SAND_ATTACK",
             "9": "MOVE_POISON_STING",
-			"13": "MOVE_SWIFT",
             "15": "MOVE_RAPID_SPIN",
 			"16": "MOVE_MAGNITUDE",
 			"17": "MOVE_FURY_CUTTER",

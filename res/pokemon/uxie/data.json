@@ -99,7 +99,6 @@
             ],
             "6": "MOVE_IMPRISON",
             "16": "MOVE_ENDURE",
-            "21": "MOVE_SWIFT",
             "31": "MOVE_YAWN",
             "36": "MOVE_FUTURE_SIGHT",
 			"40": "MOVE_MIND_READER",

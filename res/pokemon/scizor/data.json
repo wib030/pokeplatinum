@@ -113,8 +113,7 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_IRON_DEFENSE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

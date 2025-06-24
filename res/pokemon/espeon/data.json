@@ -94,7 +94,6 @@
             "5": "MOVE_SAND_ATTACK",
 			"10": "MOVE_QUICK_ATTACK",
             "15": "MOVE_CONFUSION",
-            "20": "MOVE_SWIFT",
             "25": "MOVE_PSYBEAM",
             "30": "MOVE_MORNING_SUN",
             "35": "MOVE_POWER_SWAP",
@@ -115,8 +114,7 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_TRICK"
         ]
     },
     "footprint": {

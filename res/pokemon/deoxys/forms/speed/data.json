@@ -116,7 +116,6 @@
             "33": "MOVE_PURSUIT",
             "41": "MOVE_PSYCHIC",
 			"45": "MOVE_ZEN_HEADBUTT",
-            "49": "MOVE_SWIFT",
 			"51": "MOVE_MIND_READER",
 			"55": "MOVE_AGILITY",
             "57": "MOVE_PSYCHO_SHIFT",
@@ -130,8 +129,7 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_TRICK",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     }
 }

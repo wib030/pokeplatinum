@@ -123,7 +123,6 @@
             "MOVE_VACUUM_WAVE",
             "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

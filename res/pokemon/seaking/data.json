@@ -103,8 +103,7 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_BOUNCE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

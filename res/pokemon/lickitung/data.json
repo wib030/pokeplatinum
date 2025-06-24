@@ -119,7 +119,8 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+			"MOVE_SWIFT"
         ]
     },
     "evolutions": [

@@ -95,6 +95,7 @@
 				"MOVE_FLASH_CANNON",
 				"MOVE_DRAGON_PULSE",
 				"MOVE_DARK_PULSE",
+				"MOVE_SWIFT",
 				"MOVE_TACKLE",
 				"MOVE_TAIL_WHIP",
 				"MOVE_WITHDRAW",
@@ -126,7 +127,8 @@
             "MOVE_OUTRAGE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_IRON_DEFENSE",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

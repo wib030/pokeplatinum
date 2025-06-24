@@ -102,7 +102,6 @@
             ],
             "6": "MOVE_IMPRISON",
             "16": "MOVE_DETECT",
-            "21": "MOVE_SWIFT",
             "31": "MOVE_UPROAR",
             "36": "MOVE_FUTURE_SIGHT",
 			"40": "MOVE_MIND_READER",
@@ -127,7 +126,6 @@
             "MOVE_LAST_RESORT",
             "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

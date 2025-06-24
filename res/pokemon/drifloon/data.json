@@ -117,8 +117,7 @@
             "MOVE_AIR_CUTTER",
             "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SUCKER_PUNCH"
         ]
     },
     "evolutions": [

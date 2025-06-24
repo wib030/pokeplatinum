@@ -104,8 +104,7 @@
             "MOVE_SNORE",
             "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_LAST_RESORT"
         ]
     },
     "footprint": {

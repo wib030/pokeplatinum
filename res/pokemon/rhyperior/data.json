@@ -113,6 +113,7 @@
             "13": "MOVE_STOMP",
 			"21": "MOVE_MAGNITUDE",
             "25": "MOVE_ROCK_BLAST",
+			"27": "MOVE_SWIFT",
             "28": "MOVE_TAKE_DOWN",
             "33": "MOVE_HORN_DRILL",
             "43": "MOVE_STONE_EDGE",
@@ -137,7 +138,8 @@
             "MOVE_OUTRAGE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_UPROAR"
+            "MOVE_UPROAR",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

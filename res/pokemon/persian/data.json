@@ -119,7 +119,6 @@
             "MOVE_SEED_BOMB",
             "MOVE_LAST_RESORT",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

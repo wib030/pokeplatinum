@@ -106,6 +106,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
                 "MOVE_TACKLE",
 				"MOVE_HARDEN",
                 "MOVE_HEADBUTT",
@@ -150,7 +151,8 @@
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
-            "MOVE_UPROAR"
+            "MOVE_UPROAR",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

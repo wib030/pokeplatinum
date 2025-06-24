@@ -97,6 +97,7 @@
             "17": "MOVE_ROCK_TOMB",
             "22": "MOVE_SANDSTORM",
             "25": "MOVE_BODY_SLAM",
+			"27": "MOVE_SWIFT",
 			"28": "MOVE_CURSE",
             "30": "MOVE_ROCK_POLISH",
             "33": "MOVE_DRAGON_BREATH",
@@ -112,7 +113,8 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_TWISTER"
+            "MOVE_TWISTER",
+			"MOVE_SWIFT"
         ]
     },
     "evolutions": [

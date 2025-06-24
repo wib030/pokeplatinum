@@ -86,7 +86,6 @@
                 "MOVE_WISH",
                 "MOVE_BITE",
 				"MOVE_SUNNY_DAY",
-                "MOVE_SWIFT",
 				"MOVE_CHARM",
 				"MOVE_HELPING_HAND",
 				"MOVE_COVET"
@@ -111,8 +110,7 @@
             "MOVE_SYNTHESIS",
             "MOVE_SEED_BOMB",
             "MOVE_LAST_RESORT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

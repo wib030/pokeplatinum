@@ -80,7 +80,8 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_SWIFT",
 				"MOVE_WRAP",
 				"MOVE_POISON_STING",
 				"MOVE_SWAGGER"
@@ -108,7 +109,7 @@
             "MOVE_SNORE",
             "MOVE_KNOCK_OFF",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

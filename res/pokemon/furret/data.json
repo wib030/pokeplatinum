@@ -124,7 +124,6 @@
             "MOVE_LAST_RESORT",
             "MOVE_KNOCK_OFF",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

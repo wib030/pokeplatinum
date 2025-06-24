@@ -109,8 +109,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_VACUUM_WAVE",
             "MOVE_IRON_DEFENSE",
-            "MOVE_MAGNET_RISE",
-            "MOVE_SWIFT"
+            "MOVE_MAGNET_RISE"
         ]
     },
     "evolutions": [

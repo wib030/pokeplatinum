@@ -120,7 +120,6 @@
                 "MOVE_DISABLE"
             ],
             "8": "MOVE_BARRIER",
-            "15": "MOVE_SWIFT",
             "22": "MOVE_FUTURE_SIGHT",
             "29": "MOVE_PSYCH_UP",
 			"30": "MOVE_SAFEGUARD",

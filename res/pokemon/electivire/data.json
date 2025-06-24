@@ -104,7 +104,6 @@
             "5": "MOVE_THUNDER_SHOCK",
 			"7": "MOVE_KARATE_CHOP",
 			"10": "MOVE_LOW_KICK",
-			"12": "MOVE_SWIFT",
             "15": "MOVE_SHOCK_WAVE",
 			"19": "MOVE_THUNDER_WAVE",
             "26": "MOVE_LIGHT_SCREEN",
@@ -126,8 +125,7 @@
             "MOVE_SNORE",
             "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_MAGNET_RISE",
-            "MOVE_SWIFT"
+            "MOVE_MAGNET_RISE"
         ]
     },
     "footprint": {

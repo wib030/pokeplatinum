@@ -104,8 +104,7 @@
             "MOVE_FURY_CUTTER",
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [

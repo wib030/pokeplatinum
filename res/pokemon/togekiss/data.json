@@ -128,8 +128,7 @@
             "MOVE_TWISTER",
             "MOVE_LAST_RESORT",
             "MOVE_TRICK",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "footprint": {

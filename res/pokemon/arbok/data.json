@@ -85,6 +85,7 @@
                 "MOVE_ICE_FANG",
                 "MOVE_THUNDER_FANG",
                 "MOVE_FIRE_FANG",
+				"MOVE_SWIFT",
                 "MOVE_WRAP",
 				"MOVE_BITE",
 				"MOVE_LEER",
@@ -114,7 +115,8 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_GUNK_SHOT",
-            "MOVE_SEED_BOMB"
+            "MOVE_SEED_BOMB",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

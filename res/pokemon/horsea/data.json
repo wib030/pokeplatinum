@@ -93,8 +93,7 @@
             "MOVE_OUTRAGE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_TWISTER",
-            "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_BOUNCE"
         ]
     },
     "evolutions": [

@@ -88,7 +88,6 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_SWIFT",
 				"MOVE_WATER_GUN",
 				"MOVE_RECOVER",
 				"MOVE_WISH",
@@ -117,8 +116,7 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_TWISTER",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_TRICK"
         ]
     },
     "footprint": {

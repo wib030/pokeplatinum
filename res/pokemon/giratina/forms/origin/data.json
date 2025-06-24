@@ -97,6 +97,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
                 "MOVE_DRAGON_BREATH",
                 "MOVE_SCARY_FACE"
             ],

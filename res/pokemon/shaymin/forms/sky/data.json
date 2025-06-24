@@ -97,8 +97,7 @@
             "MOVE_SYNTHESIS",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_SEED_BOMB",
-            "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_LAST_RESORT"
         ]
     }
 }

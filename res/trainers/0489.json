@@ -17,7 +17,6 @@
             "moves": [
                 "MOVE_ZAP_CANNON",
                 "MOVE_THUNDER_WAVE",
-                "MOVE_SWIFT",
                 "MOVE_HIDDEN_POWER"
             ],
             "power": 120,

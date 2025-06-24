@@ -95,8 +95,7 @@
             "MOVE_AIR_CUTTER",
             "MOVE_ENDEAVOR",
             "MOVE_TWISTER",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "evolutions": [

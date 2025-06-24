@@ -101,8 +101,7 @@
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
             "MOVE_TWISTER",
-            "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_BOUNCE"
         ]
     },
     "evolutions": [

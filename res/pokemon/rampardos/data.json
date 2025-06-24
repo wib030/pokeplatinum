@@ -104,6 +104,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
                 "MOVE_HEADBUTT",
                 "MOVE_LEER"
             ],
@@ -141,7 +142,8 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_EARTH_POWER",
-            "MOVE_UPROAR"
+            "MOVE_UPROAR",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

@@ -84,7 +84,6 @@
                 "MOVE_TAIL_WHIP",
                 "MOVE_BITE",
 				"MOVE_WISH",
-                "MOVE_SWIFT",
 				"MOVE_CHARM",
 				"MOVE_HELPING_HAND",
 				"MOVE_COVET"
@@ -107,8 +106,7 @@
             "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
             "MOVE_MAGNET_RISE",
-            "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_LAST_RESORT"
         ]
     },
     "footprint": {

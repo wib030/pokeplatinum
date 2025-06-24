@@ -58,8 +58,7 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
-            "MOVE_ENDEAVOR",
-            "MOVE_SWIFT"
+            "MOVE_ENDEAVOR"
         ]
     },
     "evolutions": [

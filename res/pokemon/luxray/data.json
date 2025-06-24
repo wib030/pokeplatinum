@@ -104,8 +104,7 @@
             "MOVE_SUPERPOWER",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_MAGNET_RISE",
-            "MOVE_SWIFT"
+            "MOVE_MAGNET_RISE"
         ]
     },
     "footprint": {

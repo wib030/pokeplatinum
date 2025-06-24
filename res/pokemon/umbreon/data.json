@@ -108,8 +108,7 @@
             "MOVE_SPITE",
             "MOVE_HELPING_HAND",
             "MOVE_LAST_RESORT",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SUCKER_PUNCH"
         ]
     },
     "footprint": {

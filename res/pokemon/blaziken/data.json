@@ -125,8 +125,7 @@
             "MOVE_LAST_RESORT",
             "MOVE_BOUNCE",
             "MOVE_HEAT_WAVE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

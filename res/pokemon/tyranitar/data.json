@@ -105,6 +105,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
                 "MOVE_THUNDER_FANG",
                 "MOVE_ICE_FANG",
                 "MOVE_FIRE_FANG",
@@ -145,7 +146,8 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
 			"MOVE_KNOCK_OFF",
-            "MOVE_UPROAR"
+            "MOVE_UPROAR",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

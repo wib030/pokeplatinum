@@ -129,8 +129,7 @@
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
             "MOVE_LAST_RESORT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "footprint": {

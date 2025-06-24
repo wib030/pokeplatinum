@@ -86,7 +86,6 @@
             "9": "MOVE_CHARM",
             "13": "MOVE_SPARK",
             "17": "MOVE_ENDURE",
-            "21": "MOVE_SWIFT",
             "25": "MOVE_SWEET_KISS",
             "29": "MOVE_DISCHARGE",
             "33": "MOVE_SUPER_FANG",
@@ -103,7 +102,6 @@
             "MOVE_SEED_BOMB",
             "MOVE_MAGNET_RISE",
             "MOVE_LAST_RESORT",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

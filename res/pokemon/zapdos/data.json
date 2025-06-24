@@ -110,8 +110,7 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_TWISTER",
-            "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_HEAT_WAVE"
         ]
     },
     "footprint": {

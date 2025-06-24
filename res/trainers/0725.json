@@ -29,7 +29,6 @@
             "level": 54,
             "item": "ITEM_STARF_BERRY",
             "moves": [
-                "MOVE_SWIFT",
                 "MOVE_WISH",
                 "MOVE_NATURAL_GIFT",
                 "MOVE_COSMIC_POWER"

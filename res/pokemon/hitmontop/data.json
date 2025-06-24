@@ -103,8 +103,7 @@
             "MOVE_ENDEAVOR",
             "MOVE_VACUUM_WAVE",
             "MOVE_TWISTER",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SUCKER_PUNCH"
         ]
     },
     "footprint": {

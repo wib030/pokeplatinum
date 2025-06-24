@@ -89,6 +89,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
                 "MOVE_LEER",
                 "MOVE_GUST",
 				"MOVE_GROWTH",
@@ -117,7 +118,8 @@
             "MOVE_AIR_CUTTER",
             "MOVE_OUTRAGE",
             "MOVE_SYNTHESIS",
-            "MOVE_TWISTER"
+            "MOVE_TWISTER",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

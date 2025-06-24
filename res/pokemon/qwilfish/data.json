@@ -115,8 +115,7 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_BOUNCE"
         ]
     },
     "footprint": {

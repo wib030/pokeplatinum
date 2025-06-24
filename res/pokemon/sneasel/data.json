@@ -127,8 +127,7 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [

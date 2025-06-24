@@ -93,6 +93,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SWIFT",
                 "MOVE_SCRATCH",
                 "MOVE_LEER",
 				"MOVE_RAGE",
@@ -129,7 +130,8 @@
             "MOVE_SPITE",
             "MOVE_OUTRAGE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_UPROAR"
+            "MOVE_UPROAR",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {

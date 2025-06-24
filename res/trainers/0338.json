@@ -32,8 +32,7 @@
             "moves": [
                 "MOVE_FLASH",
 				"MOVE_MAGIC_COAT",
-				"MOVE_SPARK",
-				"MOVE_SWIFT"
+				"MOVE_SPARK"
             ],
             "power": 100,
             "ball_seal": 0,
@@ -76,7 +75,6 @@
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_FLASH",
-				"MOVE_SWIFT",
 				"MOVE_UPROAR",
 				"MOVE_SPITE"
             ],

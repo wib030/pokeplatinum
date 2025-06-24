@@ -123,7 +123,6 @@
             "MOVE_LAST_RESORT",
             "MOVE_TRICK",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT",
             "MOVE_UPROAR"
         ]
     },

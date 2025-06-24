@@ -97,8 +97,7 @@
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_BOUNCE"
         ]
     },
     "footprint": {

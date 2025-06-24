@@ -123,8 +123,7 @@
             "MOVE_SUPERPOWER",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_LAST_RESORT"
         ]
     },
     "footprint": {
