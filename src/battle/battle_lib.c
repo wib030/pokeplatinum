@@ -17015,6 +17015,10 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             }
         }
 
+        activeScore += BattleAI_CalculateDamagingMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
+
+        activeScore += BattleAI_CalculateStatusMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
+
         activeScore += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
         abilityDefendScore = BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
