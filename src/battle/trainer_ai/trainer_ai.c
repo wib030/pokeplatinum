@@ -419,6 +419,7 @@ static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -589,7 +590,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadMoveAccuracy,
     AICmd_IfSameAbilities,
     AICmd_IfHasBaseAbility,
-	AICmd_IfDestinyBondFails
+	AICmd_IfDestinyBondFails,
+    AICmd_IfEnemyCanChunkOrKO
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3832,6 +3834,18 @@ static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *bat
 	{
 		AIScript_Iter(battleCtx, jump);
 	}
+}
+
+static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 /**

@@ -1731,6 +1731,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_UP, Expert_StatusSpeedUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP, Expert_StatusSpAttackUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP, Expert_StatusSpDefenseUp
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_StatusSpAttackUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_UP, Expert_StatusAccuracyUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Expert_StatusEvasionUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BYPASS_ACCURACY, Expert_BypassAccuracyMove
@@ -2207,20 +2208,68 @@ Expert_StatusSpAttackUp:
     ; If the attacker''s HP is < 40%, additional score -2.
     ;
     ; Otherwise, ~84.4% chance of additional score -2.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_SIMPLE, Expert_StatusSpAttackUp_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_StatusSpAttackUp_CheckMoves
+
+Expert_StatusSpAttackUp_CheckMoves:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESET_STAT_CHANGES, ScoreMinus20
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FORCE_SWITCH, Expert_StatusSpAttackUp_CheckSoundProof
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TAUNT, Expert_StatusSpAttackUp_TryScoreMinus10
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, Expert_StatusSpAttackUp_TryScoreMinus10
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_StatusSpAttackUp_TryScorePlus2
+    GoTo Expert_StatusSpAttackUp_CheckSpeed
+
+Expert_StatusSpAttackUp_TryScorePlus2:
+    IfRandomLessThan 32, Expert_StatusSpAttackUp_CheckSpeed
+    AddToMoveScore 2
+    GoTo Expert_StatusSpAttackUp_CheckSpeed
+
+Expert_StatusSpAttackUp_CheckSoundProof:
+    IfRandomLessThan 16, Expert_StatusSpAttackUp_CheckSpeed
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SOUNDPROOF, Expert_StatusSpAttackUp_CheckSpeed
+    IfRandomLessThan 80, Expert_StatusSpAttackUp_CheckSpeed
+    GoTo ScoreMinus12
+
+Expert_StatusSpAttackUp_TryScoreMinus10:
+    IfRandomLessThan 64, Expert_StatusSpAttackUp_CheckSpeed
+    GoTo ScoreMinus10
+
+Expert_StatusSpAttackUp_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_StatusSpAttackUp_Faster
+    IfRandomLessThan 50, Expert_StatusSpAttackUp_Slower
+    AddToMoveScore -2
+    GoTo Expert_StatusSpAttackUp_Slower
+
+Expert_StatusSpAttackUp_Faster:
+    IfRandomLessThan 50, Expert_StatusSpAttackUp_Slower
+    AddToMoveScore 2
+    GoTo Expert_StatusSpAttackUp_Slower
+
+Expert_StatusSpAttackUp_Slower:
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 9, Expert_StatusSpAttackUp_CheckUserAtMaxHP
     IfRandomLessThan 100, Expert_StatusSpAttackUp_CheckUserHPRange
     AddToMoveScore -1
     GoTo Expert_StatusSpAttackUp_CheckUserHPRange
 
 Expert_StatusSpAttackUp_CheckUserAtMaxHP:
-    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Expert_StatusSpAttackUp_CheckUserHPRange
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 88, Expert_StatusSpAttackUp_CheckUserHPRange
     IfRandomLessThan 128, Expert_StatusSpAttackUp_CheckUserHPRange
     AddToMoveScore 2
 
 Expert_StatusSpAttackUp_CheckUserHPRange:
+    IfEnemyCanChunkOrKO, Expert_StatusSpAttackUp_ScoreMinus10
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusSpAttackUp_End
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_StatusSpAttackUp_ScoreMinus2
     IfRandomLessThan 70, Expert_StatusSpAttackUp_End
+
+Expert_StatusSpAttackUp_ScoreMinus10:
+    AddToMoveScore -10
+    GoTo Expert_StatusSpAttackUp_End
 
 Expert_StatusSpAttackUp_ScoreMinus2:
     AddToMoveScore -2
