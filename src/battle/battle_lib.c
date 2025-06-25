@@ -16841,7 +16841,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
     u8 slot1, slot2;
     u32 moveStatusFlags;
     int partySize;
-    int score, maxScore, moveScore, activeScore, abilityDefendScore;
+    int score, maxScore, moveScore, activeScore, abilityDefendScore, tolerance;
     int hpPercent, monCurHP, monMaxHP;
     int hazardsBonus, sackBonus, speedMultiplier;
 	int moveMoveEffect, moveVolatileStatus, moveStatus;
@@ -16851,6 +16851,9 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
     BOOL shouldSwitch;
 
     battleCtx = BattleSystem_Context(battleSys);
+
+    // Set tolerance here... Tolerance is (100 + tolerance) / 100
+    tolerance = 50;
 
     activeScore = 0;
     shouldSwitch = FALSE;
@@ -17272,7 +17275,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                 }
             }
 
-            if (activeScore >= score * 5 / 4) {
+            if ((activeScore * (100 + tolerance)) / 100 >= score) {
 
                 battlersDisregarded |= FlagIndex(i);
             }
