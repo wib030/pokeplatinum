@@ -126,7 +126,8 @@
             "MOVE_LAST_RESORT",
             "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_UPROAR"
+            "MOVE_UPROAR",
+			"MOVE_SWIFT"
         ]
     },
     "footprint": {
