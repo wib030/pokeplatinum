@@ -716,7 +716,7 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro AICmd_IfEnemyCanChunkOrKO battler, jump
+    .macro IfEnemyCanChunkOrKO battler, jump
     .long 124
     .long (\jump-.) / 4 - 1
     .endm
