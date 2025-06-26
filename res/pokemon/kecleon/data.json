@@ -107,7 +107,7 @@
                 "MOVE_SCRATCH",
 				"MOVE_THIEF"
             ],
-            "4": "MOVE_BIND",
+            "4": "MOVE_WRAP",
             "7": "MOVE_SHADOW_SNEAK",
             "10": "MOVE_FEINT",
             "13": "MOVE_FURY_SWIPES",

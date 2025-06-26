@@ -15,7 +15,7 @@
             "level": 30,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-				"MOVE_BIND",
+				"MOVE_WRAP",
 				"MOVE_FLING",
 				"MOVE_RECYCLE",
 				"MOVE_STEALTH_ROCK"

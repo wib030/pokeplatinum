@@ -9589,6 +9589,13 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
                 movePower = (255 - Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL)) * 2 / 5;
                 break;
+				
+			case BATTLE_EFFECT_DOUBLE_POWER_STATUS:
+				if (defenderParams.statusMask & MON_CONDITION_ANY)
+				{
+					movePower *= 2;
+				}
+                break;
 
             case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
                 int monWeight = battleCtx->battleMons[defender].weight;
@@ -11261,7 +11268,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
                 movePower = (255 - battleCtx->battleMons[attacker].friendship) * 2 / 5;
                 break;
-
+			
+			case BATTLE_EFFECT_DOUBLE_POWER_STATUS:
+				if (defenderParams.statusMask & MON_CONDITION_ANY)
+				{
+					movePower *= 2;
+				}
+                break;
+				
             case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
                 int monWeight = battleCtx->battleMons[defender].weight;
 

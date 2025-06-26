@@ -104,8 +104,7 @@
 				"MOVE_NIGHTMARE",
 				"MOVE_ASTONISH",
                 "MOVE_DISABLE",
-				"MOVE_LEER",
-				"MOVE_BIND"
+				"MOVE_LEER"
             ],
             "6": "MOVE_DISABLE",
             "9": "MOVE_FORESIGHT",
