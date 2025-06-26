@@ -90,9 +90,10 @@
 			"27": "MOVE_SCARY_FACE",
 			"31": "MOVE_ZAP_CANNON",
 			"33": "MOVE_THUNDER_WAVE",
-			"38": "MOVE_CRUNCH",
+			"36": "MOVE_CRUNCH",
+			"38": "MOVE_BARRAGE",
             "48": "MOVE_DISCHARGE",
-			"53": "MOVE_VOLT_TACKLE"
+			"50": "MOVE_VOLT_TACKLE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

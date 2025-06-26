@@ -91,6 +91,7 @@
 			"27": "MOVE_SCARY_FACE",
             "29": "MOVE_THUNDER_WAVE",
             "33": "MOVE_CRUNCH",
+			"36": "MOVE_BARRAGE",
             "41": "MOVE_DISCHARGE",
 			"45": "MOVE_VOLT_TACKLE"
         },

@@ -93,6 +93,7 @@
             "33": "MOVE_AGILITY",
             "37": "MOVE_FIRE_BLAST",
             "43": "MOVE_BOUNCE",
+			"50": "MOVE_BARRAGE",
             "52": "MOVE_FLARE_BLITZ"
         },
         "tutor": [

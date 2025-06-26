@@ -102,6 +102,7 @@
 			"44": "MOVE_TAILWIND",
 			"46": "MOVE_HEAT_WAVE",
 			"48": "MOVE_FLARE_BLITZ",
+			"50": "MOVE_BARRAGE",
 			"52": "MOVE_CLOSE_COMBAT"
         },
         "tutor": [

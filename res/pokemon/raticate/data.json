@@ -105,7 +105,8 @@
             "39": "MOVE_DOUBLE_EDGE",
             "44": "MOVE_ENDEAVOR",
 			"46": "MOVE_EXTREME_SPEED",
-			"50": "MOVE_SHEER_COLD"
+			"50": "MOVE_SHEER_COLD",
+			"52": "MOVE_BARRAGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -114,6 +114,7 @@
             "47": "MOVE_THUNDERBOLT",
 			"48": "MOVE_BULK_UP",
 			"50": "MOVE_CLOSE_COMBAT",
+			"52": "MOVE_BARRAGE",
             "55": "MOVE_THUNDER",
             "62": "MOVE_GIGA_IMPACT"
         },

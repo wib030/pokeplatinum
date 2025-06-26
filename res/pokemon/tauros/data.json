@@ -103,6 +103,7 @@
 			"37": "MOVE_EXTREME_SPEED",
             "41": "MOVE_SWAGGER",
             "48": "MOVE_THRASH",
+			"50": "MOVE_BARRAGE",
 			"51": "MOVE_SHEER_COLD",
             "53": "MOVE_GIGA_IMPACT"
         },

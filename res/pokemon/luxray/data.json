@@ -93,8 +93,9 @@
 			"27": "MOVE_SCARY_FACE",
 			"33": "MOVE_ZAP_CANNON",
 			"35": "MOVE_THUNDER_WAVE",
-			"40": "MOVE_CRUNCH",
-			"43": "MOVE_SUCKER_PUNCH",
+			"38": "MOVE_CRUNCH",
+			"40": "MOVE_BARRAGE",
+			"42": "MOVE_SUCKER_PUNCH",
 			"46": "MOVE_DISCHARGE",
 			"52": "MOVE_VOLT_TACKLE"
         },

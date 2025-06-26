@@ -96,6 +96,7 @@
 			"33": "MOVE_CRUNCH",
             "36": "MOVE_REFLECT",
             "40": "MOVE_THUNDER_FANG",
+			"43": "MOVE_BARRAGE",
 			"45": "MOVE_EXTRASENSORY",
 			"49": "MOVE_DISCHARGE",
 			"51": "MOVE_RAIN_DANCE",
