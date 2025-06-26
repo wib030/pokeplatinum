@@ -751,9 +751,16 @@ u16 ov5_021D271C (FieldSystem * fieldSystem, u8 param1)
         if (ov5_021E0118(fieldSystem->playerAvatar, v2, param1)
 
             && TrainerInfo_HasBadge(v1, 3)) {
+			/*
             if (sub_020549A0(Party_GetFromSavedata(fieldSystem->saveData), 57) != 0xff) {
                 return 10004;
             }
+			*/
+			//This will check if the player has the Surf HM in their bag
+			if (sub_0207D688(sub_0207D990(fieldSystem->saveData), 422, 1, 11) == 1)
+			{
+				return 10004;
+			}
         }
     }
 
