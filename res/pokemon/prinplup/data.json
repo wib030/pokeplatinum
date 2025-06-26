@@ -93,12 +93,15 @@
             "15": "MOVE_PECK",
             "16": "MOVE_METAL_CLAW",
             "19": "MOVE_BUBBLE_BEAM",
+			"20": "MOVE_MIRROR_SHOT",
 			"21": "MOVE_BUBBLE",
+			"22": "MOVE_PLUCK",
             "24": "MOVE_BIDE",
+			"26": "MOVE_WHIRLPOOL",
             "33": "MOVE_BRINE",
-            "37": "MOVE_WHIRLPOOL",
+			"36": "MOVE_DRILL_PECK",
+			"38": "MOVE_FLASH_CANNON",
             "42": "MOVE_MIST",
-            "46": "MOVE_DRILL_PECK",
             "51": "MOVE_HYDRO_PUMP"
         },
         "tutor": [

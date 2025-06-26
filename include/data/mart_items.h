@@ -92,6 +92,9 @@ const u16 EternaHerbShopStock[] = {
 	ITEM_ENERGYPOWDER,
 	ITEM_ENERGY_ROOT,
 	ITEM_REVIVAL_HERB,
+	ITEM_WHITE_HERB,
+	ITEM_MENTAL_HERB,
+	ITEM_POWER_HERB,
 	0xffff
 };
 
@@ -239,15 +242,19 @@ const u16 VeilstoneDeptStoreStock_3F_DOWN[] = {
 };
 
 const u16 CelesticMartSpecialties[] = {
-	ITEM_DUSK_BALL,
-	ITEM_QUICK_BALL,
-	ITEM_TIMER_BALL,
+	ITEM_FLUFFY_TAIL,
+	ITEM_BLUE_FLUTE,
+	ITEM_YELLOW_FLUTE,
+	ITEM_RED_FLUTE,
+	ITEM_BLACK_FLUTE,
+	ITEM_WHITE_FLUTE,
 	ITEM_BLACK_BELT,
 	ITEM_METAL_COAT,
 	ITEM_MAGNET,
 	ITEM_DRAGON_FANG,
 	ITEM_NEVERMELTICE,
 	ITEM_SILK_SCARF,
+	ITEM_ENIGMA_BERRY,
 	0xffff
 };
 
@@ -305,6 +312,24 @@ const u16 VeilstoneDeptStoreStock_B1F_DOWN_LEFT[] = {
 	0xffff
 };
 
+const u16 CelesticMartSpecialties_Two[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_ULTRA_BALL,
+	ITEM_OLD_GATEAU,
+	ITEM_FRESH_WATER,
+	ITEM_LEMONADE,
+	ITEM_MOOMOO_MILK,
+	ITEM_HEAL_POWDER,
+	ITEM_ENERGYPOWDER,
+	ITEM_ENERGY_ROOT,
+	ITEM_REVIVAL_HERB,
+	ITEM_DUSK_BALL,
+	ITEM_QUICK_BALL,
+	ITEM_TIMER_BALL,
+	0xffff
+};
+
 const u16 *PokeMartSpecialties[] = {
 	JubilifeMartSpecialties,
 	OreburghMartSpecialties,
@@ -325,7 +350,8 @@ const u16 *PokeMartSpecialties[] = {
 	CanalaveMartSpecialties,
 	SunyshoreMartSpecialties,
 	PokemonLeagueMartSpecialties,
-	VeilstoneDeptStoreStock_B1F_DOWN_LEFT
+	VeilstoneDeptStoreStock_B1F_DOWN_LEFT,
+	CelesticMartSpecialties_Two
 };
 
 const u16 VeilstoneDeptStoreStock_4F_UP[] = {
