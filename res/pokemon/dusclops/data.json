@@ -112,6 +112,7 @@
             "17": "MOVE_SHADOW_SNEAK",
             "22": "MOVE_PURSUIT",
 			"25": "MOVE_WILL_O_WISP",
+			"28": "MOVE_BIND",
             "30": "MOVE_CURSE",
             "33": "MOVE_SHADOW_PUNCH",
 			"41": "MOVE_PAYBACK",

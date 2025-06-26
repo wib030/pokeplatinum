@@ -104,6 +104,7 @@
             "13": "MOVE_GRASS_WHISTLE",
             "17": "MOVE_SWAGGER",
             "21": "MOVE_MIST",
+			"24": "MOVE_BIND",
             "26": "MOVE_ICE_SHARD",
             "31": "MOVE_INGRAIN",
             "36": "MOVE_WOOD_HAMMER",

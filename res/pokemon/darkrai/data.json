@@ -110,6 +110,7 @@
             "11": "MOVE_QUICK_ATTACK",
             "20": "MOVE_HYPNOSIS",
             "29": "MOVE_FAINT_ATTACK",
+			"30": "MOVE_BIND",
 			"33": "MOVE_DOUBLE_TEAM",
             "38": "MOVE_NIGHTMARE",
 			"40": "MOVE_HAZE",

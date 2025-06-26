@@ -90,8 +90,11 @@
 			"10": "MOVE_QUICK_ATTACK",
             "15": "MOVE_ICE_SHARD",
             "20": "MOVE_ICY_WIND",
-            "25": "MOVE_MUD_SHOT",
-            "30": "MOVE_AURORA_BEAM",
+            "25": [ 
+				"MOVE_MUD_SHOT",
+				"MOVE_AURORA_BEAM"
+			],
+			"30": "MOVE_BIND",
             "35": "MOVE_CONSTRICT",
 			"40": "MOVE_ICE_BEAM",
             "45": "MOVE_MIRROR_COAT",

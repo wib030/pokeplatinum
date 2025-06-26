@@ -104,6 +104,7 @@
 				"MOVE_SING"
 			],
 			"23": "MOVE_AURORA_BEAM",
+			"26": "MOVE_BIND",
 			"28": "MOVE_WILL_O_WISP",
             "32": "MOVE_CONFUSE_RAY",
 			"35": "MOVE_CONSTRICT",

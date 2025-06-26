@@ -89,6 +89,7 @@
             "8": "MOVE_UPROAR",
             "15": "MOVE_DOUBLE_TEAM",
             "22": "MOVE_SHOCK_WAVE",
+			"26": "MOVE_BIND",
             "29": "MOVE_OMINOUS_WIND",
             "36": "MOVE_SUBSTITUTE",
             "43": "MOVE_CHARGE",

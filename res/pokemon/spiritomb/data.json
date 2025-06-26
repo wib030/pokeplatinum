@@ -97,6 +97,7 @@
             "19": "MOVE_DREAM_EATER",
             "25": "MOVE_OMINOUS_WIND",
 			"27": "MOVE_IMPRISON",
+			"29": "MOVE_BIND",
             "31": "MOVE_SUCKER_PUNCH",
 			"33": "MOVE_PAIN_SPLIT",
             "37": "MOVE_NASTY_PLOT",

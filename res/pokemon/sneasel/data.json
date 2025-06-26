@@ -109,6 +109,7 @@
             "16": "MOVE_FURY_SWIPES",
             "20": "MOVE_AGILITY",
 			"22": "MOVE_METAL_CLAW",
+			"24": "MOVE_BIND",
 			"25": "MOVE_GUILLOTINE",
 			"28": "MOVE_BEAT_UP",
 			"30": "MOVE_ICE_SHARD",

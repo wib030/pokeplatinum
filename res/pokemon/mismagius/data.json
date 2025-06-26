@@ -101,6 +101,7 @@
             "10": "MOVE_CONFUSE_RAY",
             "23": "MOVE_PSYBEAM",
 			"25": "MOVE_OMINOUS_WIND",
+			"26": "MOVE_BIND",
             "28": "MOVE_PAIN_SPLIT",
             "32": "MOVE_PAYBACK",
 			"35": "MOVE_MEAN_LOOK",

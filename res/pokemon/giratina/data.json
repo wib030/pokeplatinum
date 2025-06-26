@@ -107,6 +107,7 @@
 			"19": "MOVE_SHADOW_SNEAK",
 			"24": "MOVE_DESTINY_BOND",
             "28": "MOVE_DRAGON_CLAW",
+			"30": "MOVE_BIND",
 			"33": "MOVE_EARTH_POWER",
 			"35": [ 
 				"MOVE_WING_ATTACK",

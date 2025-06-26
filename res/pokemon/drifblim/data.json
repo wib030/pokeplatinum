@@ -108,6 +108,7 @@
                 "MOVE_SWALLOW",
                 "MOVE_SPIT_UP"
             ],
+			"29": "MOVE_BIND",
 			"32": "MOVE_AMNESIA",
 			"34": "MOVE_MEAN_LOOK",
 			"38": "MOVE_SHADOW_BALL",

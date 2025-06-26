@@ -90,6 +90,7 @@
             "8": "MOVE_MIST",
             "15": "MOVE_ICE_SHARD",
             "22": "MOVE_MIND_READER",
+			"26": "MOVE_BIND",
             "29": "MOVE_ANCIENT_POWER",
             "36": "MOVE_AGILITY",
 			"38": "MOVE_CONSTRICT",

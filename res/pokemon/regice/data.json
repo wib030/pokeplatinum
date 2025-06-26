@@ -99,6 +99,7 @@
 			"13": "MOVE_CHARGE_BEAM",
 			"19": "MOVE_MAGNITUDE",
             "25": "MOVE_CURSE",
+			"28": "MOVE_BIND",
             "31": "MOVE_ANCIENT_POWER",
 			"37": "MOVE_AMNESIA",
 			"43": "MOVE_ICE_BEAM",
