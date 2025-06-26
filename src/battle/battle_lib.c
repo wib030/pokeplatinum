@@ -10017,7 +10017,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
         case ABILITY_TECHNICIAN:
             if (move != MOVE_STRUGGLE
-                && MOVE_DATA(move).power <= 60) {
+                && movePower <= 60) {
                     movePower = movePower * 3 / 2;
                 }
             break;
@@ -11674,7 +11674,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         case ABILITY_TECHNICIAN:
             if (move != MOVE_STRUGGLE
-                && MOVE_DATA(move).power <= 60) {
+                && movePower <= 60) {
                     movePower = movePower * 3 / 2;
                 }
             break;
