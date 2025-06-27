@@ -14044,6 +14044,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                     move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
                 }
+                else if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE)
+                {
+                    move = battleCtx->battleMons[defender].moveEffectsData.encoredMove;
+                }
                 else {
                     move = battleCtx->aiContext.battlerMoves[defender][j];
                 }
@@ -14137,6 +14141,12 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
                     && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
+                    break;
+                }
+
+                if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE
+                    && move == battleCtx->battleMons[defender].moveEffectsData.encoredMove)
+                {
                     break;
                 }
             }
@@ -14447,6 +14457,10 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
                     move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
                 }
+                else if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE)
+                {
+                    move = battleCtx->battleMons[defender].moveEffectsData.encoredMove;
+                }
                 else {
                     move = battleCtx->aiContext.battlerMoves[defender][j];
                 }
@@ -14544,6 +14558,12 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
                     && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
+                    break;
+                }
+
+                if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE
+                    && move == battleCtx->battleMons[defender].moveEffectsData.encoredMove)
+                {
                     break;
                 }
             }
@@ -16956,6 +16976,10 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
                 move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
             }
+            else if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE)
+            {
+                move = battleCtx->battleMons[defender].moveEffectsData.encoredMove;
+            }
             else {
                 move = battleCtx->aiContext.battlerMoves[defender][j];
             }
@@ -17030,6 +17054,13 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     
             if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
                 && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
+                break;
+            }
+
+
+            if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE
+                && move == battleCtx->battleMons[defender].moveEffectsData.encoredMove)
+            {
                 break;
             }
         }
@@ -17112,6 +17143,10 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE) {
 
                     move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
+                }
+                else if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE)
+                {
+                    move = battleCtx->battleMons[defender].moveEffectsData.encoredMove;
                 }
                 else {
                     move = battleCtx->aiContext.battlerMoves[defender][j];
@@ -17241,6 +17276,12 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     
                 if (battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove != MOVE_NONE
                     && move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove) {
+                    break;
+                }
+
+                if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE
+                    && move == battleCtx->battleMons[defender].moveEffectsData.encoredMove)
+                {
                     break;
                 }
             }
@@ -17922,6 +17963,10 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 
             move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
         }
+        else if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE)
+        {
+            move = battleCtx->battleMons[defender].moveEffectsData.encoredMove;
+        }
         else {
             move = battleCtx->aiContext.battlerMoves[defender][i];
         }
@@ -18346,6 +18391,10 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
             move = battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove;
         }
+        else if (battleCtx->battleMons[defender].moveEffectsData.encoredMove != MOVE_NONE)
+        {
+            move = battleCtx->battleMons[defender].moveEffectsData.encoredMove;
+        }
         else {
             move = battleCtx->aiContext.battlerMoves[defender][i];
         }
@@ -18557,6 +18606,10 @@ BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *b
         if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove != MOVE_NONE) {
 
             move = battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove;
+        }
+        else if (battleCtx->battleMons[battler].moveEffectsData.encoredMove != MOVE_NONE)
+        {
+            move = battleCtx->battleMons[battler].moveEffectsData.encoredMove
         }
         else {
             move = battleCtx->aiContext.battlerMoves[battler][i];
