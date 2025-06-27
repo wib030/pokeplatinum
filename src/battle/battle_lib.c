@@ -15123,6 +15123,10 @@ int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
             moveEffect = MOVE_EFFECT_CAMOUFLAGE;
             break;
 
+        case BATTLE_EFFECT_HEAL_INVERSION:
+            moveEffect = MOVE_EFFECT_HEAL_INVERSION;
+            break;
+
         default:
             moveEffect = MOVE_EFFECT_NONE;
             break;
@@ -16308,6 +16312,7 @@ BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *batt
             }
             break;
 
+        case MOVE_EFFECT_HEAL_INVERSION:
         case MOVE_EFFECT_HEAL_BLOCK:
             switch (ability) {
                 default:
