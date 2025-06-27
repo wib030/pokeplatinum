@@ -129,7 +129,7 @@
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_GIGA_DRAIN",
-				"MOVE_ANCIENT_POWER",
+				"MOVE_TOXIC",
 				"MOVE_STOCKPILE",
 				"MOVE_RECOVER"
             ],
