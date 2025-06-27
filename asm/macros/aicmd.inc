@@ -716,14 +716,20 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfEnemyCanChunkOrKO battler, jump
+    .macro IfEnemyCanChunkOrKO jump
     .long 124
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro LoadBattlerCritStage battler
+    .macro LoadBattlerCritStage battler1
     .long 125
-    .long \battler
+    .long \battler1
+    .endm
+
+    .macro IfCanHazeOrPhaze battler1, jump
+    .long 126
+    .long \battler1
+    .long (\jump-.) / 4 - 1
     .endm
 
     .equ TABLE_END, 0xFFFFFFFF

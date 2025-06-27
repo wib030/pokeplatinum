@@ -421,6 +421,7 @@ static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -593,7 +594,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfHasBaseAbility,
 	AICmd_IfDestinyBondFails,
     AICmd_IfEnemyCanChunkOrKO,
-    AICmd_LoadBattlerCritStage
+    AICmd_LoadBattlerCritStage,
+    AICmd_IfCanHazeOrPhaze
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3855,52 +3857,52 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
     AIScript_Iter(battleCtx, 1);
 
     int inBattler = AIScript_Read(battleCtx);
-    u8 attacker = AIScript_Battler(battleCtx, inBattler);
-    u8 defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
-    u16 attackerSpecies;
+    u8 battler1 = AIScript_Battler(battleCtx, inBattler);
+    u8 battler2;
+    u16 battler1Species;
     u16 item;
-    u32 attackerVolStatus;
-    int attackerSide, defenderSide;
-    int attackerAbility, itemEffect;
+    u32 battler1VolStatus;
+    int battler1Side, battler2Side;
+    int battler1Ability, itemEffect;
     int critStage;
 
     critStage = battleCtx->criticalBoosts;
 
-    switch (attacker)
+    switch (battler1)
     {
         default:
-            defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
+            battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
             break;
 
         case AI_BATTLER_ATTACKER_PARTNER:
         case AI_BATTLER_ATTACKER:
-            defender = AI_CONTEXT.defender;
+            battler2 = AI_CONTEXT.battler2;
             break;
 
         case AI_BATTLER_DEFENDER_PARTNER:
         case AI_BATTLER_DEFENDER:
-            defender = AI_CONTEXT.attacker;
+            battler2 = AI_CONTEXT.battler1;
             break;
     }
 
-    attackerSide = Battler_Side(battleSys, attacker);
-    attackerSpecies = battleCtx->battleMons[attacker].species;
-    attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
-    attackerAbility = battleCtx->battleMons[attacker].ability;
+    battler1Side = Battler_Side(battleSys, battler1);
+    battler1Species = battleCtx->battleMons[battler1].species;
+    battler1VolStatus = battleCtx->battleMons[battler1].statusVolatile;
+    battler1Ability = battleCtx->battleMons[battler1].ability;
 
-    item = Battler_HeldItem(battleCtx, attacker);
+    item = Battler_HeldItem(battleCtx, battler1);
     itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
 
-    defenderSide = Battler_Side(battleSys, defender);
+    battler2Side = Battler_Side(battleSys, battler2);
 
-    if ((battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_LUCKY_CHANT)
-        || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR))
+    if ((battleCtx->sideConditionsMask[battler2Side] & SIDE_CONDITION_LUCKY_CHANT)
+        || Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_BATTLE_ARMOR))
     {
         critStage = 0;
     }
     else
     {
-        if (attackerVolStatus & VOLATILE_CONDITION_FOCUS_ENERGY)
+        if (battler1VolStatus & VOLATILE_CONDITION_FOCUS_ENERGY)
         {
             critStage++;
         }
@@ -3910,7 +3912,7 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
             critStage++;
         }
 
-        switch (attackerSpecies)
+        switch (battler1Species)
         {
         default:
             break;
@@ -3930,17 +3932,17 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
             break;
         }
 
-        if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+        if (battleCtx->sideConditionsMask[battler1Side] & SIDE_CONDITION_LUCKY_CHANT)
         {
             critStage++;
         }
 
-        if (battleCtx->battleMons[attacker].meditateCritBoostFlag)
+        if (battleCtx->battleMons[battler1].meditateCritBoostFlag)
         {
             critStage++;
         }
 
-        if (attackerAbility == ABILITY_SUPER_LUCK)
+        if (battler1Ability == ABILITY_SUPER_LUCK)
         {
             critStage++;
         }
@@ -3952,6 +3954,143 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
     }
 
     AI_CONTEXT.calcTemp = critStage;
+}
+
+static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int battler2;
+    int i, effect;
+    u16 move;
+    BOOL canHazeOrPhaze;
+
+    canHazeOrPhaze = FALSE;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.battler2;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.battler1;
+        break;
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        move = AI_CONTEXT.battlerMoves[battler1][i];
+
+        if (battleCtx->battleMons[battler1].moveEffectsData.encoredMove != MOVE_NONE)
+        {
+            move = battleCtx->battleMons[battler1].moveEffectsData.encoredMove;
+        }
+
+        if (battleCtx->battleMons[battler1].moveEffectsData.choiceLockedMove != MOVE_NONE)
+        {
+            move = battleCtx->battleMons[battler1].moveEffectsData.choiceLockedMove;
+        }
+
+        effect = MOVE_DATA(move).effect;
+
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler1, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+
+            if (MOVE_DATA(move).class == CLASS_STATUS)
+            {
+                if (battleCtx->battleMons[battler1].moveEffectsData.tauntedTurns == 0)
+                {
+                    switch (effect)
+                    {
+                    default:
+                        break;
+
+                    case BATTLE_EFFECT_FORCE_SWITCH:
+                        if (move == MOVE_ROAR
+                            && AI_CONTEXT.battlerAbilities[battler2] == ABILITY_SOUNDPROOF
+                            && Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_SOUNDPROOF)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if ((AI_CONTEXT.battlerAbilities[battler2] == ABILITY_SUCTION_CUPS
+                                && Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_SUCTION_CUPS)
+                                || battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_INGRAIN)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                canHazeOrPhaze = TRUE;
+                            }
+                        }
+                        break;
+
+                    case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+                    case BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES:
+                    case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                        canHazeOrPhaze = TRUE;
+                        break;
+
+                    case BATTLE_EFFECT_RESET_STAT_CHANGES:
+                        canHazeOrPhaze = TRUE;
+                        break;
+                    }
+                }
+
+                if (MOVE_DATA(move).range == RANGE_MAGIC_BOUNCE)
+                {
+                    if (AI_CONTEXT.battlerAbilities[battler2] == ABILITY_MAGIC_BOUNCE)
+                    {
+                        if (Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_MAGIC_BOUNCE))
+                        {
+                            canHazeOrPhaze = FALSE;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                switch (effect)
+                {
+                default:
+                    break;
+
+                case BATTLE_EFFECT_FORCE_SWITCH_HIT:
+                    if (battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_INGRAIN)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        canHazeOrPhaze = TRUE;
+                    }
+                }
+            }
+        }
+
+        if (battleCtx->battleMons[battler1].moveEffectsData.encoredMove != MOVE_NONE
+            || battleCtx->battleMons[battler1].moveEffectsData.choiceLockedMove != MOVE_NONE)
+        {
+            break;
+        }
+    }
+
+    if (canHazeOrPhaze)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 /**
