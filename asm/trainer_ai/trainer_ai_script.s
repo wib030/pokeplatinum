@@ -1911,6 +1911,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HOWL, Expert_StatusAttackUp
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BULLDOZE, Expert_SpeedDownOnHit
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Expert_Stockpile
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -8575,6 +8576,76 @@ Expert_Taunt_ValidateTaunt:
     GoTo Expert_Taunt_End
 
 Expert_Taunt_End:
+    PopOrEnd
+
+Expert_Stockpile:
+    ;   If Spit Up is known and effective, 80% chance for Score +1
+    ;   If Swallow is known and effective, 80% chance for Score +1, or +2 if less than 2 stockpiled
+    ;   Don''t use this move if they can phaze, taunt, encore, or psych up
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SPIT_UP, Expert_Stockpile_SpitUpKnown
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SWALLOW, Expert_Stockpile_SwallowKnown
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus12
+    LoadBattlerCritStage AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 0, ScoreMinus12
+    IfHPPercentLessThan 50, Expert_Stockpile_TryScoreMinus3
+    LoadStockpileCount AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 1, Expert_Stockpile_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_Stockpile_CheckMoves
+
+Expert_Stockpile_SpitUpKnown:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SCRAPPY, Expert_Stockpile_CheckMoves
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_NORMAL_HIT_GHOST, Expert_Stockpile_CheckMoves
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, ScoreMinus12
+    IfRandomLessThan 51, Expert_Stockpile_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_Stockpile_CheckMoves
+
+Expert_Stockpile_SwallowKnown:
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_HEAL_BLOCK, ScoreMinus12
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_HEAL_INVERSION, ScoreMinus20
+    IfHPPercentLessThan 40, Expert_Stockpile_TryScoreMinus3
+    IfHPPercentGreaterThan 88, Expert_Stockpile_TryScorePlus1
+    IfRandomLessThan 51, Expert_Stockpile_CheckMoves
+    AddToMoveScore 1
+    LoadStockpileCount AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 1, Expert_Stockpile_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_Stockpile_CheckMoves
+
+Expert_Stockpile_TryScoreMinus3:
+    IfRandomLessThan 13, Expert_Stockpile_CheckMoves
+    AddToMoveScore -3
+    GoTo Expert_Stockpile_CheckMoves
+
+Expert_Stockpile_TryScorePlus1:
+    IfRandomLessThan 26, Expert_Stockpile_CheckMoves
+    AddToMoveScore 1
+    GoTo Expert_Stockpile_CheckMoves
+
+Expert_Stockpile_CheckMoves:
+    IfCanHazeOrPhaze AI_BATTLER_DEFENDER, ScoreMinus5
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TAUNT, ScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, ScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_COPY_STAT_CHANGES, ScoreMinus2
+    IfRandomLessThan 205, Expert_Stockpile_CheckHP
+    AddToMoveScore 1
+    GoTo Expert_Stockpile_CheckHP
+
+Expert_Stockpile_CheckHP:
+    IfHPPercentGreaterThan 88, ScorePlus1
+    IfHPPercentLessThan 50, ScoreMinus2
+    GoTo Expert_Stockpile_End
+
+Expert_Stockpile_End:
+    LoadStockpileCount AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 3, ScoreMinus20
     PopOrEnd
 
 EvalAttack_Main:
