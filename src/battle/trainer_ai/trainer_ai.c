@@ -420,6 +420,7 @@ static void AICmd_IfSameAbilities(BattleSystem *battleSys, BattleContext *battle
 static void AICmd_IfHasBaseAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -591,7 +592,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfSameAbilities,
     AICmd_IfHasBaseAbility,
 	AICmd_IfDestinyBondFails,
-    AICmd_IfEnemyCanChunkOrKO
+    AICmd_IfEnemyCanChunkOrKO,
+    AICmd_LoadBattlerCritStage
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -3846,6 +3848,110 @@ static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* ba
     {
         AIScript_Iter(battleCtx, jump);
     }
+}
+
+static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    u8 attacker = AIScript_Battler(battleCtx, inBattler);
+    u8 defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
+    u16 attackerSpecies;
+    u16 item;
+    u32 attackerVolStatus;
+    int attackerSide, defenderSide;
+    int attackerAbility, itemEffect;
+    int critStage;
+
+    critStage = battleCtx->criticalBoosts;
+
+    switch (attacker)
+    {
+        default:
+            defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
+            break;
+
+        case AI_BATTLER_ATTACKER_PARTNER:
+        case AI_BATTLER_ATTACKER:
+            defender = AI_CONTEXT.defender;
+            break;
+
+        case AI_BATTLER_DEFENDER_PARTNER:
+        case AI_BATTLER_DEFENDER:
+            defender = AI_CONTEXT.attacker;
+            break;
+    }
+
+    attackerSide = Battler_Side(battleSys, attacker);
+    attackerSpecies = battleCtx->battleMons[attacker].species;
+    attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
+    attackerAbility = battleCtx->battleMons[attacker].ability;
+
+    item = Battler_HeldItem(battleCtx, attacker);
+    itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
+
+    defenderSide = Battler_Side(battleSys, defender);
+
+    if ((battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_LUCKY_CHANT)
+        || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR))
+    {
+        critStage = 0;
+    }
+    else
+    {
+        if (attackerVolStatus & VOLATILE_CONDITION_FOCUS_ENERGY)
+        {
+            critStage++;
+        }
+
+        if (itemEffect == HOLD_EFFECT_CRITRATE_UP)
+        {
+            critStage++;
+        }
+
+        switch (attackerSpecies)
+        {
+        default:
+            break;
+
+        case SPECIES_CHANSEY:
+            if (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP)
+            {
+                critStage += 2;
+            }
+            break;
+
+        case SPECIES_FARFETCHD:
+            if (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP)
+            {
+                critStage += 2;
+            }
+            break;
+        }
+
+        if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT)
+        {
+            critStage++;
+        }
+
+        if (battleCtx->battleMons[attacker].meditateCritBoostFlag)
+        {
+            critStage++;
+        }
+
+        if (attackerAbility == ABILITY_SUPER_LUCK)
+        {
+            critStage++;
+        }
+    }
+
+    if (critStage > 3)
+    {
+        critStage = 3;
+    }
+
+    AI_CONTEXT.calcTemp = critStage;
 }
 
 /**

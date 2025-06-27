@@ -721,6 +721,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro LoadBattlerCritStage battler
+    .long 125
+    .long \battler
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
