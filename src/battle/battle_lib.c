@@ -18379,7 +18379,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         {
             if (MOVE_DATA(move).class == CLASS_STATUS)
             {
-                if (MOVE_DATA(move).range & (RANGE_SINGLE_TARGET | RANGE_RANDOM_OPPONENT | RANGE_ADJACENT_OPPONENTS | RANGE_OPPONENT_SIDE | RANGE_USER_OR_ALLY))
+                if (MOVE_DATA(move).range & RANGE_MAGIC_BOUNCE)
                 {
                     moveScore += 20;
                 }
