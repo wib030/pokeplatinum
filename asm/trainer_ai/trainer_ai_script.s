@@ -8588,7 +8588,7 @@ Expert_Stockpile:
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus12
     LoadBattlerCritStage AI_BATTLER_DEFENDER
     IfLoadedGreaterThan 0, ScoreMinus12
-    IfHPPercentLessThan 50, Expert_Stockpile_TryScoreMinus3
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Stockpile_TryScoreMinus3
     LoadStockpileCount AI_BATTLER_ATTACKER
     IfLoadedGreaterThan 1, Expert_Stockpile_CheckMoves
     AddToMoveScore 1
@@ -8610,8 +8610,8 @@ Expert_Stockpile_SpitUpKnown:
 Expert_Stockpile_SwallowKnown:
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_HEAL_BLOCK, ScoreMinus12
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_HEAL_INVERSION, ScoreMinus20
-    IfHPPercentLessThan 40, Expert_Stockpile_TryScoreMinus3
-    IfHPPercentGreaterThan 88, Expert_Stockpile_TryScorePlus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Stockpile_TryScoreMinus3
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 88, Expert_Stockpile_TryScorePlus1
     IfRandomLessThan 51, Expert_Stockpile_CheckMoves
     AddToMoveScore 1
     LoadStockpileCount AI_BATTLER_ATTACKER
@@ -8639,8 +8639,8 @@ Expert_Stockpile_CheckMoves:
     GoTo Expert_Stockpile_CheckHP
 
 Expert_Stockpile_CheckHP:
-    IfHPPercentGreaterThan 88, ScorePlus1
-    IfHPPercentLessThan 50, ScoreMinus2
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 88, ScorePlus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, ScoreMinus2
     GoTo Expert_Stockpile_End
 
 Expert_Stockpile_End:

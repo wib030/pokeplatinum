@@ -4018,7 +4018,7 @@ static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battl
                     case BATTLE_EFFECT_FORCE_SWITCH:
                         if (move == MOVE_ROAR
                             && AI_CONTEXT.battlerAbilities[battler2] == ABILITY_SOUNDPROOF
-                            && Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_SOUNDPROOF)
+                            && Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_SOUNDPROOF))
                         {
                             break;
                         }
@@ -4026,7 +4026,7 @@ static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battl
                         {
                             if ((AI_CONTEXT.battlerAbilities[battler2] == ABILITY_SUCTION_CUPS
                                 && Battler_IgnorableAbility(battleCtx, battler1, battler2, ABILITY_SUCTION_CUPS)
-                                || battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_INGRAIN)
+                                || battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_INGRAIN))
                             {
                                 break;
                             }
