@@ -1091,7 +1091,7 @@ Basic_CheckGravityActive:
 
 Basic_CheckMiracleEye:
     ; If the target is already under the respective effect, score -10.
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MIRACLE_EYE, ScoreMinus10
+    ; IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MIRACLE_EYE, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckHealingWish:

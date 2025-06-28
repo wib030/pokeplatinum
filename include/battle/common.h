@@ -45,8 +45,7 @@
     1))
 
 #define MON_IS_UPROARING(mon)   (battleCtx->fieldConditionsMask & (FlagIndex(mon) << FIELD_CONDITION_UPROAR_SHIFT))
-#define MON_IS_IDENTIFIED(mon)  ((battleCtx->battleMons[mon].statusVolatile & VOLATILE_CONDITION_FORESIGHT) \
-                                || (battleCtx->battleMons[mon].moveEffectsMask & MOVE_EFFECT_MIRACLE_EYE))
+#define MON_IS_IDENTIFIED(mon)  (battleCtx->battleMons[mon].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
 
 #define MON_IS_LOCKED_ONTO(mon1, mon2)  ((battleCtx->battleMons[mon2].moveEffectsMask & MOVE_EFFECT_LOCK_ON) && battleCtx->battleMons[mon2].moveEffectsData.lockOnTarget == mon1)
 
