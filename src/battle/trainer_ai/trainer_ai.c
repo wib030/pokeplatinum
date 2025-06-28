@@ -3876,12 +3876,12 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
 
         case AI_BATTLER_ATTACKER_PARTNER:
         case AI_BATTLER_ATTACKER:
-            battler2 = AI_CONTEXT.battler2;
+            battler2 = AI_CONTEXT.defender;
             break;
 
         case AI_BATTLER_DEFENDER_PARTNER:
         case AI_BATTLER_DEFENDER:
-            battler2 = AI_CONTEXT.battler1;
+            battler2 = AI_CONTEXT.attacker;
             break;
     }
 
