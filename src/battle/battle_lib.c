@@ -3568,14 +3568,12 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
             && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
     }
-	
-	/*
+
     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MIRACLE_EYE)
             && sTypeMatchupMultipliers[chartEntry][1] == TYPE_DARK
             && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
     }
-	*/
 	
 	if ((Battler_Ability(battleCtx, attacker) == ABILITY_CORROSION)
 	&& MOVE_DATA(battleCtx->moveCur).type == TYPE_POISON
@@ -3626,14 +3624,12 @@ static BOOL BasicTypeMulApplies_PartyMon(BattleSystem *battleSys, BattleContext 
             && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
     }
-	
-	/*
+
     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MIRACLE_EYE)
             && sTypeMatchupMultipliers[chartEntry][1] == TYPE_DARK
             && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
     }
-	*/
 	
 	if ((Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_CORROSION)
 	&& MOVE_DATA(move).type == TYPE_POISON
