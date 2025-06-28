@@ -18609,7 +18609,7 @@ BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *b
         }
         else if (battleCtx->battleMons[battler].moveEffectsData.encoredMove != MOVE_NONE)
         {
-            move = battleCtx->battleMons[battler].moveEffectsData.encoredMove
+            move = battleCtx->battleMons[battler].moveEffectsData.encoredMove;
         }
         else {
             move = battleCtx->aiContext.battlerMoves[battler][i];

@@ -2263,7 +2263,7 @@ Expert_StatusSpAttackUp_CheckUserAtMaxHP:
     AddToMoveScore 2
 
 Expert_StatusSpAttackUp_CheckUserHPRange:
-    IfEnemyCanChunkOrKO, Expert_StatusSpAttackUp_ScoreMinus10
+    IfEnemyCanChunkOrKO Expert_StatusSpAttackUp_ScoreMinus10
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusSpAttackUp_End
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_StatusSpAttackUp_ScoreMinus2
     IfRandomLessThan 70, Expert_StatusSpAttackUp_End
