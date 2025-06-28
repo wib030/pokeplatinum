@@ -10682,7 +10682,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     //    defenseStat = defenseStat / 2;
     //}
 	
-	if (move == MOVE_JUDGMENT)
+	if (move == MOVE_JUDGMENT
+	|| move == MOVE_SPIT_UP)
 	{
 		fullAttackStat = attackStat * sStatStageBoosts[attackStage].numerator;
         fullAttackStat /= sStatStageBoosts[attackStage].denominator;
@@ -12330,7 +12331,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     //    defenseStat = defenseStat / 2;
     //}
 	
-	if (move == MOVE_JUDGMENT)
+	if (move == MOVE_JUDGMENT
+	|| move == MOVE_SPIT_UP)
 	{
 		fullAttackStat = attackStat * sStatStageBoosts[attackStage].numerator;
         fullAttackStat /= sStatStageBoosts[attackStage].denominator;
