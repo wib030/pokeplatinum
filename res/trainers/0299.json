@@ -30,7 +30,7 @@
             "level": 13,
             "item": "ITEM_NONE",
             "moves": [
-                "MOVE_COMET_PUNCH",
+                "MOVE_MACH_PUNCH",
 				"MOVE_PROTECT",
 				"MOVE_AERIAL_ACE",
 				"MOVE_ROLLOUT"

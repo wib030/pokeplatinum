@@ -100,7 +100,6 @@
         ],
         "level_up": {
             "1": [
-                "MOVE_COMET_PUNCH",
                 "MOVE_TAIL_WHIP",
 				"MOVE_POUND"
             ],

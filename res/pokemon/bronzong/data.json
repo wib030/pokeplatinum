@@ -107,6 +107,7 @@
             "19": "MOVE_IRON_DEFENSE",
 			"21": "MOVE_FAINT_ATTACK",
             "25": "MOVE_SAFEGUARD",
+			"27": "MOVE_COMET_PUNCH",
 			"29": "MOVE_FUTURE_SIGHT",
 			"31": "MOVE_EXTRASENSORY",
 			"33": [ 

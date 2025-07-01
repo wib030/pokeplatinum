@@ -94,7 +94,8 @@
                 "MOVE_DESTINY_BOND",
 				"MOVE_CRUNCH",
 				"MOVE_ICE_FANG",
-				"MOVE_OMINOUS_WIND"
+				"MOVE_OMINOUS_WIND",
+				"MOVE_COMET_PUNCH"
             ],
 			"5": "MOVE_DOUBLE_TEAM",
             "10": "MOVE_ICE_SHARD",
@@ -106,6 +107,7 @@
 			"23": "MOVE_AURORA_BEAM",
 			"26": "MOVE_BIND",
 			"28": "MOVE_WILL_O_WISP",
+			"30": "MOVE_COMET_PUNCH",
             "32": "MOVE_CONFUSE_RAY",
 			"35": "MOVE_CONSTRICT",
 			"37": "MOVE_MEAN_LOOK",

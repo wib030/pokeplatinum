@@ -101,7 +101,10 @@
 			"10": "MOVE_SPITE",
 			"13": "MOVE_SHADOW_SNEAK",
 			"19": "MOVE_FAINT_ATTACK",
-			"22": "MOVE_MEAN_LOOK",
+			"22": [ 
+				"MOVE_MEAN_LOOK",
+				"MOVE_COMET_PUNCH"
+			],
             "23": "MOVE_WILL_O_WISP",
 			"24": "MOVE_BIND",
 			"26": "MOVE_CURSE",

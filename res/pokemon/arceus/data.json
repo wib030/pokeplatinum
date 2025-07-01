@@ -135,6 +135,7 @@
             "10": "MOVE_GRAVITY",
             "20": "MOVE_EARTH_POWER",
 			"25": "MOVE_REFRESH",
+			"28": "MOVE_COMET_PUNCH",
             "30": "MOVE_HYPER_VOICE",
 			"38": "MOVE_RECOVER",
             "40": "MOVE_EXTREME_SPEED",

@@ -95,6 +95,7 @@
             "9": "MOVE_FORESIGHT",
             "14": "MOVE_CONFUSE_RAY",
             "17": "MOVE_SHADOW_SNEAK",
+			"20": "MOVE_COMET_PUNCH",
             "22": "MOVE_PURSUIT",
 			"25": "MOVE_WILL_O_WISP",
 			"28": "MOVE_BIND",

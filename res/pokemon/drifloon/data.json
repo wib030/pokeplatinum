@@ -98,6 +98,7 @@
 			"18": "MOVE_BATON_PASS",
 			"20": "MOVE_OMINOUS_WIND",
             "22": "MOVE_STOCKPILE",
+			"25": "MOVE_COMET_PUNCH",
             "27": [
                 "MOVE_SWALLOW",
                 "MOVE_SPIT_UP"

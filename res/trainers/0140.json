@@ -51,7 +51,7 @@
             "level": 47,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_COMET_PUNCH"
+                "MOVE_MACH_PUNCH"
             ],
             "power": 180,
             "ball_seal": 0,

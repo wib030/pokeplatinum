@@ -92,7 +92,7 @@
                 "MOVE_REFLECT",
                 "MOVE_SAFEGUARD"
             ],
-            "15": "MOVE_MACH_PUNCH",
+            "13": "MOVE_MACH_PUNCH",
             "19": "MOVE_ROOST",
             "22": "MOVE_SILVER_WIND",
             "26": "MOVE_BATON_PASS",

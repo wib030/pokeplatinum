@@ -95,6 +95,7 @@
             "7": "MOVE_FAINT_ATTACK",
             "13": "MOVE_HYPNOSIS",
             "19": "MOVE_DREAM_EATER",
+			"23": "MOVE_COMET_PUNCH",
             "25": "MOVE_OMINOUS_WIND",
 			"27": "MOVE_IMPRISON",
 			"29": "MOVE_BIND",

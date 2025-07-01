@@ -96,7 +96,10 @@
             "13": "MOVE_SHADOW_SNEAK",
             "16": "MOVE_WILL_O_WISP",
 			"19": "MOVE_FAINT_ATTACK",
-			"22": "MOVE_MEAN_LOOK",
+			"22": [ 
+				"MOVE_MEAN_LOOK",
+				"MOVE_COMET_PUNCH"
+			],
 			"24": "MOVE_BIND",
 			"26": "MOVE_CURSE",
             "30": "MOVE_SHADOW_BALL",
