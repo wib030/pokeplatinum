@@ -16893,7 +16893,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
     battleCtx = BattleSystem_Context(battleSys);
 
     // Set tolerance here... Tolerance is (100 + tolerance) / 100
-    tolerance = 50;
+    tolerance = 33;
 
     activeScore = 0;
     shouldSwitch = FALSE;
@@ -18588,6 +18588,16 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         if (move == battleCtx->battleMons[defender].moveEffectsData.choiceLockedMove)
         {
             break;
+        }
+    }
+
+    if (monAbility == ABILITY_UNAWARE)
+    {
+        for (i = 0; i < BATTLE_STAT_MAX; i++) {
+            if (battleCtx->battleMons[defender].statBoosts[i] > 6)
+            {
+                score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 5;
+            }
         }
     }
 
