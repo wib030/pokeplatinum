@@ -7699,7 +7699,7 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
     u8 aiSlot1, aiSlot2;
     u8 moveType;
     u8 ability;
-    u8 checkAbility[3];
+    u8 checkAbility[4];
     // u8 checkAbility, checkAbility2, checkAbility3;
     int start, end, checkAbilityCount;
     Pokemon *mon;
@@ -7727,7 +7727,8 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
         checkAbility[0] = ABILITY_WATER_ABSORB;
         checkAbility[1] = ABILITY_STORM_DRAIN;
         checkAbility[2] = ABILITY_DRY_SKIN;
-        checkAbilityCount = 3;
+        checkAbility[3] = ABILITY_THIRSTY;
+        checkAbilityCount = 4;
     } else if (moveType == TYPE_ELECTRIC) {
         checkAbility[0] = ABILITY_VOLT_ABSORB;
         checkAbility[1] = ABILITY_LIGHTNING_ROD;
