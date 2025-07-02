@@ -3834,24 +3834,38 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 				}
 
 				if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
-					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
-							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
-						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+                    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_COLOR_CHANGE))
+                    {
+                        if (sTypeMatchupMultipliers[chartEntry][1] == moveType
+                            && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+                            damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
-						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-							totalMul *= 2;
-						}
-					}
+                            if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                                totalMul *= 2;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+                            && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+                            damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
-					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
-						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+                            if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                                totalMul *= 2;
+                            }
+                        }
 
-						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-							totalMul *= 2;
-						}
-					}
+                        if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                            && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                            && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+                            damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+                            if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                                totalMul *= 2;
+                            }
+                        }
+                    }
 				}
 
 				chartEntry++;
@@ -4178,24 +4192,38 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
 				}
 
 				if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
-					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
-							&& BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
-						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+                    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_COLOR_CHANGE))
+                    {
+                        if (sTypeMatchupMultipliers[chartEntry][1] == moveType
+                            && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+                            damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
-						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-							totalMul *= 2;
-						}
-					}
+                            if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                                totalMul *= 2;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+                            && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+                            damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
-					if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-							&& BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
-						damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+                            if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                                totalMul *= 2;
+                            }
+                        }
 
-						if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
-							totalMul *= 2;
-						}
-					}
+                        if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                            && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                            && BasicTypeMulApplies_PartyMon(battleSys, battleCtx, attacker, defender, chartEntry, move, partyIndicator, partySlot) == TRUE) {
+                            damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+
+                            if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                                totalMul *= 2;
+                            }
+                        }
+                    }
 				}
 
 				chartEntry++;
