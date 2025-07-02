@@ -3900,7 +3900,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     if (moveType == TYPE_WATER)
 	{
         if ((Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WATER_ABSORB) == TRUE)
-            || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE)) {
+            || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE)
+            || (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THIRSTY) == TRUE)) {
 
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
         }
@@ -4234,7 +4235,8 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
     if (moveType == TYPE_WATER)
 	{
         if ((PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_WATER_ABSORB) == TRUE)
-            || (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_DRY_SKIN) == TRUE)) {
+            || (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_DRY_SKIN) == TRUE)
+            || (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_THIRSTY) == TRUE)) {
 
             *moveStatusMask |= MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY;
         }
