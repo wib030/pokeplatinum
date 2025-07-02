@@ -1859,6 +1859,20 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  BOOL BattleAI_PartyMonHasPriorityMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int partySlot);
 
  /**
+* @brief Determines whether a battlemon or partymon ability deters contact moves.
+*
+* @param battleSys
+* @param battleCtx
+* @param defender   The battler ID of the defending mon
+* @param attacker   The battler ID of the attacking mon
+* @param partyIndicator   The battler ID of the party to reference for a partyMon.
+* @param partySlot  The index of the PartyMon.
+*
+* @return TRUE if the ability deters contact moves.
+*/
+ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx, int defender, int attacker, int partyIndicator, int partySlot);
+
+ /**
 * @brief Maps an SE berry effect to its type.
 *
 * @param itemEffect The item effect of the berry
