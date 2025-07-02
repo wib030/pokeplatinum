@@ -18984,6 +18984,24 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         }
         break;
 
+    case ABILITY_THIRSTY:
+        if (defenderType1 == TYPE_WATER
+            || defenderType2 == TYPE_WATER)
+        {
+            if (defenderType1 != TYPE_GHOST
+                && defenderType2 != TYPE_GHOST
+                && defenderAbility != ABILITY_THIRSTY
+                && defenderItemEffect != HOLD_EFFECT_SWITCH)
+            {
+                if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE
+                    && BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
+                {
+                    score += 50;
+                }
+            }
+        }
+        break;
+
     case ABILITY_ANGER_POINT:
         if (BattleSystem_PartyMonCalcCriticalMulti(battleSys, battleCtx, defender, battler, partyIndicator, partySlot, 0, battleCtx->sideConditionsMask[side]) > 1)
         {
