@@ -1928,4 +1928,14 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
  BOOL BattleAI_BattleMonCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
+ /**
+* @brief Check if a battlemon can phaze.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The battlemon to check the moves of.
+* @return TRUE/FALSE whether the battlemon has a move that phazes.
+*/
+ BOOL BattleAI_BattleMonCanPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

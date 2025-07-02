@@ -19544,3 +19544,62 @@ BOOL BattleAI_BattleMonCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* ba
 
     return result;
 }
+
+BOOL BattleAI_BattleMonCanPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    BOOL result;
+    int i;
+    int moveEffect;
+    u16 move;
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove != MOVE_NONE) {
+
+            move = battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove;
+        }
+        else if (battleCtx->battleMons[battler].moveEffectsData.encoredMove != MOVE_NONE)
+        {
+            move = battleCtx->battleMons[battler].moveEffectsData.encoredMove;
+        }
+        else {
+            move = battleCtx->aiContext.battlerMoves[battler][i];
+        }
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveEffect = MOVE_DATA(move).effect;
+
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            switch (moveEffect)
+            {
+            default:
+                break;
+
+            case BATTLE_EFFECT_FORCE_SWITCH_HIT:
+                result = TRUE;
+                break;
+            }
+
+            case BATTLE_EFFECT_FORCE_SWITCH:
+                if (move == MOVE_ROAR)
+                {
+                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF) == 0)
+                    {
+                        result = TRUE;
+                    }
+                }
+                else
+                {
+                    result = TRUE;
+                }
+                break;
+        }
+    }
+
+    return result;
+}
