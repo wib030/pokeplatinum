@@ -1908,4 +1908,24 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  */
  BOOL Battle_AbilityDetersStatDrop(BattleSystem* battleSys, BattleContext* battleCtx, u8 ability, int battleStatFlag);
 
+ /**
+* @brief Check if a battlemon can pivot itself out.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The battlemon to check the moves of.
+* @return TRUE/FALSE whether the battlemon has a pivoting move.
+*/
+ BOOL BattleAI_BattleMonCanPivot(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
+ /**
+* @brief Check if a battlemon can haze or phaze.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The battlemon to check the moves of.
+* @return TRUE/FALSE whether the battlemon has a move that hazes or phazes.
+*/
+ BOOL BattleAI_BattleMonCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
