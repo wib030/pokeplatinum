@@ -4999,7 +4999,8 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
 
     if (itemEffect == HOLD_EFFECT_FLEE
             || (battleType & BATTLE_TYPE_NO_EXPERIENCE)
-            || Battler_Ability(battleCtx, battler) == ABILITY_RUN_AWAY) {
+            || Battler_Ability(battleCtx, battler) == ABILITY_RUN_AWAY
+			|| MON_HAS_TYPE(battler, TYPE_GHOST)) {
         return FALSE;
     }
 
@@ -7934,7 +7935,8 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
 {
     int result = FALSE;
 
-    if (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_SWITCH) {
+    if (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_SWITCH
+	|| MON_HAS_TYPE(battler, TYPE_GHOST)) {
         return FALSE;
     }
 
