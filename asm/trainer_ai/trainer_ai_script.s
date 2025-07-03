@@ -1912,6 +1912,7 @@ Expert_Main:
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HOWL, Expert_StatusAttackUp
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BULLDOZE, Expert_SpeedDownOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Expert_Stockpile
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TORMENT, Expert_Torment
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -8556,6 +8557,7 @@ Expert_Taunt:
 Expert_Taunt_CheckAbility:
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Taunt_CheckFirstTurn
+	IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Taunt_CheckFirstTurn
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     GoTo Expert_Taunt_CheckFirstTurn
@@ -8646,6 +8648,60 @@ Expert_Stockpile_CheckHP:
 Expert_Stockpile_End:
     LoadStockpileCount AI_BATTLER_ATTACKER
     IfLoadedEqualTo 3, ScoreMinus20
+    PopOrEnd
+	
+Expert_Torment:
+    IfNotVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_TORMENT, Expert_Torment_CheckAbility
+    GoTo Expert_Torment_ScoreMinus10_End
+
+Expert_Torment_CheckAbility:
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Torment_CheckFirstTurn
+	IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Torment_CheckFirstTurn
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Torment_ScoreMinus10_End
+    GoTo Expert_Torment_CheckFirstTurn
+
+Expert_Torment_CheckFirstTurn:
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_Torment_TryScorePlus1
+    GoTo Expert_Torment_ValidateTorment
+
+Expert_Torment_TryScorePlus1:
+    IfRandomLessThan 32, Expert_Torment_ValidateTorment
+    AddToMoveScore 1
+    GoTo Expert_Torment_ValidateTorment
+
+Expert_Torment_ValidateTorment:
+	IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_SUBSTITUTE, Expert_Torment_ScoreMinus10_End
+	IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_Torment_TryScorePlus3_End
+	IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, ScorePlus2
+	IfEnemyCanChunkOrKO Expert_Torment_ScoreMinus4_End
+	IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Expert_Torment_TryScorePlus2_End
+	IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Expert_Torment_TryScorePlus2_End
+	GoTo Expert_Torment_End
+	
+Expert_Torment_ScoreMinus4_End:
+    AddToMoveScore -4
+    GoTo Expert_Torment_End
+	
+Expert_Torment_ScoreMinus10_End:
+    AddToMoveScore -10
+    GoTo Expert_Torment_End
+	
+Expert_Torment_TryScorePlus3_End:
+	IfHPPercentLessThan AI_BATTLER_DEFENDER, 33, Expert_Torment_End
+	AddToMoveScore 1
+    IfRandomLessThan 85, Expert_Torment_End
+    AddToMoveScore 2
+    GoTo Expert_Torment_End
+	
+Expert_Torment_TryScorePlus2_End:
+    IfRandomLessThan 127, Expert_Torment_End
+    AddToMoveScore 2
+    GoTo Expert_Torment_End
+
+Expert_Torment_End:
     PopOrEnd
 
 EvalAttack_Main:
