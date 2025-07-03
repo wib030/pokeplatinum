@@ -18605,7 +18605,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             break;
 
         case ABILITY_SNOWED_IN:
-            if (compareSpeedDefenderVsMon == COMPARED_SPEED_FASTER)
+            if (compareSpeedDefenderVsMon == COMPARE_SPEED_FASTER)
             {
                 if (defenderAbility != ABILITY_LEVITATE && defenderType1 != TYPE_FLYING && defenderType2 != TYPE_FLYING)
                 {
@@ -18629,7 +18629,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
         if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
         {
-            if (Battle_TargetAbilityDetersContactMove(battleSys, battleCtx, battler, defender, partyIndicator, partySlot)
+            if (Battle_TargetAbilityDetersContactMove(battleSys, battleCtx, battler, defender, partyIndicator, partySlot))
             {
                 moveScore += 10;
             }
@@ -20074,34 +20074,35 @@ BOOL BattleAI_BattleMonCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* ba
         {
             switch (moveEffect)
             {
-            default:
-                break;
+				default:
+					break;
 
-            case BATTLE_EFFECT_FORCE_SWITCH_HIT:
-                result = TRUE;
-                break;
+				case BATTLE_EFFECT_FORCE_SWITCH_HIT:
+					result = TRUE;
+					break;
 
-            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
-            case BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES:
-            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
-            case BATTLE_EFFECT_RESET_STAT_CHANGES:
-                result = TRUE;
-                break;
-            }
+				case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+				case BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES:
+				case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+				case BATTLE_EFFECT_RESET_STAT_CHANGES:
+					result = TRUE;
+					break;
+				
 
-            case BATTLE_EFFECT_FORCE_SWITCH:
-                if (move == MOVE_ROAR)
-                {
-                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF) == 0)
-                    {
-                        result = TRUE;
-                    }
-                }
-                else
-                {
-                    result = TRUE;
-                }
-                break;
+				case BATTLE_EFFECT_FORCE_SWITCH:
+					if (move == MOVE_ROAR)
+					{
+						if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF) == 0)
+						{
+							result = TRUE;
+						}
+					}
+					else
+					{
+						result = TRUE;
+					}
+					break;
+			}
         }
     }
 
@@ -20140,27 +20141,28 @@ BOOL BattleAI_BattleMonCanPhaze(BattleSystem* battleSys, BattleContext* battleCt
         {
             switch (moveEffect)
             {
-            default:
-                break;
+				default:
+					break;
 
-            case BATTLE_EFFECT_FORCE_SWITCH_HIT:
-                result = TRUE;
-                break;
-            }
+				case BATTLE_EFFECT_FORCE_SWITCH_HIT:
+					result = TRUE;
+					break;
+				
 
-            case BATTLE_EFFECT_FORCE_SWITCH:
-                if (move == MOVE_ROAR)
-                {
-                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF) == 0)
-                    {
-                        result = TRUE;
-                    }
-                }
-                else
-                {
-                    result = TRUE;
-                }
-                break;
+				case BATTLE_EFFECT_FORCE_SWITCH:
+					if (move == MOVE_ROAR)
+					{
+						if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF) == 0)
+						{
+							result = TRUE;
+						}
+					}
+					else
+					{
+						result = TRUE;
+					}
+					break;
+			}
         }
     }
 
