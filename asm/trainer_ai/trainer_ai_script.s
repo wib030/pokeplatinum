@@ -8718,14 +8718,14 @@ Expert_Stockpile_End:
 	
 Expert_Torment:
     IfNotVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_TORMENT, Expert_Torment_CheckAbility
-    GoTo Expert_Torment_ScoreMinus10_End
+    GoTo ScoreMinus10
 
 Expert_Torment_CheckAbility:
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Torment_CheckFirstTurn
 	IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Torment_CheckFirstTurn
     LoadAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Torment_ScoreMinus10_End
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     GoTo Expert_Torment_CheckFirstTurn
 
 Expert_Torment_CheckFirstTurn:
