@@ -4500,7 +4500,7 @@ static void BattleController_EndFight(BattleSystem *battleSys, BattleContext *ba
 				ppMax = MoveTable_CalcMaxPP(move, ppUps);
 				ppAbsMax = MoveTable_CalcMaxPP(move, 3);
 				
-				if (ppCurr < ppMax / 2)
+				if (ppCurr < (3 * ppMax / 2))
 				{
 					ppNew = ppCurr;
 					maxRolls = ppAbsMax / 12;
@@ -4530,9 +4530,9 @@ static void BattleController_EndFight(BattleSystem *battleSys, BattleContext *ba
 					}
 					
 					// Cap it off to half max
-					if (ppNew > ppMax / 2)
+					if (ppNew > (3 * ppMax / 2))
 					{
-						ppNew = ppMax / 2;
+						ppNew = (3 * ppMax / 2);
 					}
 					
 					Pokemon_SetValue(mon, MON_DATA_MOVE1_CUR_PP + j, &ppNew);
