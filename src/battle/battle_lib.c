@@ -16262,6 +16262,7 @@ BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCt
             default:
                 break;
 
+            case ABILITY_MAGMA_ARMOR:
             case ABILITY_SYNCHRONIZE:
                 result = TRUE;
                 break;
