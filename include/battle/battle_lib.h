@@ -1954,12 +1954,37 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
  BOOL BattleAI_BattleMonCanPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
- /**
+/**
 * @brief Map a berry's effect to the status condition that it cures.
 *
 * @param itemEffect     The berry's item effect
 * @return The status condition flag that the berry cures.
 */
  u32 Battle_MapStatusBerryEffectToStatus(u8 itemEffect);
+
+/**
+* @brief Check if a Pokemon is immune to a status condition due to its typing.
+*        This does not factor for abilities.
+*
+* @param battleSys
+* @param battleCtx
+* @param type               The typing to check.
+* @param statusCondition    The status condition to check.
+* @return TRUE/FALSE whether the typing grants immunity to the status condition.
+*/
+ BOOL Battle_TypeIsImmuneToStatus(BattleSystem* battleSys, BattleContext* battleCtx, u8 type, u32 statusCondition);
+
+/**
+* @brief Check if an attacker's move can inflict an unwanted status against the defender
+*        under any circumstance.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker           BattleMon ID of the mon using the move.
+* @param defender           BattleMon ID of the mon being targeted by the move.
+* @param move               The move being used.
+* @return TRUE/FALSE whether the defender can be inflicted with an unwanted status.
+*/
+ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, BattleContext* battleCtx, u8 attacker, u8 defender, u16 move);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

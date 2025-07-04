@@ -20254,3 +20254,192 @@ u32 Battle_MapStatusBerryEffectToStatus(u8 itemEffect)
 
     return result;
 }
+
+BOOL Battle_TypeIsImmuneToStatus(BattleSystem* battleSys, BattleContext* battleCtx, u8 type, u32 statusCondition)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    if (statusCondition & MON_CONDITION_PARALYSIS)
+    {
+        if (type == TYPE_ELECTRIC)
+        {
+            result = TRUE;
+        }
+    }
+    
+    if (statusCondition & MON_CONDITION_BURN)
+    {
+        if (type == TYPE_FIRE)
+        {
+            result = TRUE;
+        }
+    }
+    
+    if (statusCondition & MON_CONDITION_ANY_POISON)
+    {
+        if (type == TYPE_POISON
+            || type == TYPE_STEEL)
+        {
+            result = TRUE;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_FREEZE)
+    {
+        if (type == TYPE_ICE
+            || type == TYPE_FIRE)
+        {
+            result = TRUE;
+        }
+    }
+
+    return result;
+}
+
+BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, BattleContext* battleCtx, u8 attacker, u8 defender, u16 move)
+{
+    u8 moveType;
+    u8 attackerAbility, attackerHeldItemEffect;
+    u8 defenderAbility, defenderHeldItemEffect, defenderType1, defenderType2, defenderSide;
+    u16 attackerHeldItem;
+    u16 defenderHeldItem;
+    u32 moveStatusCondition, effectiveness;
+    int moveEffect;
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    // Early exit for Safeguard
+    if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_SAFEGUARD)
+    {
+        return result;
+    }
+    // Early exit if defender is already statused
+    if (battleCtx->battleMons[defender].status & MON_CONDITION_ANY)
+    {
+        return result;
+    }
+
+    moveEffect = MOVE_DATA(move).effect;
+    moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerHeldItem, move);
+    moveStatusCondition = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+
+    if (moveEffect == BATTLE_EFFECT_TRANSFER_STATUS)
+    {
+        moveStatusCondition = battleCtx->battleMons[attacker].status;
+    }
+
+    // Early exit if the move does not inflict status
+    if (moveStatusCondition == MON_CONDITION_NONE)
+    {
+        return result;
+    }
+
+    attackerAbility = BattleMon_Get(battleCtx, attacker, BATTLEMON_ABILITY, NULL);
+    attackerHeldItem = BattleMon_Get(battleCtx, attacker, BATTLEMON_HELD_ITEM, NULL);
+    attackerHeldItemEffect = BattleSystem_GetItemData(battleCtx, attackerHeldItem, ITEM_PARAM_HOLD_EFFECT);
+
+    defenderAbility = BattleMon_Get(battleCtx, defender, BATTLEMON_ABILITY, NULL);
+    defenderHeldItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
+    defenderHeldItemEffect = BattleSystem_GetItemData(battleCtx, defenderHeldItem, ITEM_PARAM_HOLD_EFFECT);
+    defenderType1 = BattleMon_get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+    defenderType2 = BattleMon_get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+
+    if (defenderType1 == TYPE_GRASS
+        || defenderType2 == TYPE_GRASS
+        || defenderHeldItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
+    {
+        for (i = 0; i < NELEMS(sPowderMoves); i++)
+        {
+            if (sPowderMoves[i] == move)
+            {
+                return result;
+            }
+        }
+    }
+
+    if (Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, moveStatusCondition)
+        && attackerAbility != ABILITY_MOLD_BREAKER)
+    {
+        return result;
+    }
+
+    if (moveStatusCondition & MON_CONDITION_ANY_POISON)
+    {
+        if (attackerAbility == ABILITY_CORROSION)
+        {
+            if (defenderType1 == TYPE_STEEL
+                || defenderType2 == TYPE_STEEL)
+            {
+                result = TRUE;
+            }
+        }
+
+        if (Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType1, moveStatusCondition) == FALSE
+            && Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType2, moveStatusCondition) == FALSE)
+        {
+            result = TRUE;
+        }
+    }
+    else
+    {
+        if (Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType1, moveStatusCondition) == FALSE
+            && Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType2, moveStatusCondition) == FALSE)
+        {
+            if (MOVE_DATA(move).class == CLASS_STATUS)
+            {
+                // Thunder wave is an anomaly
+                if (moveEffect == BATTLE_EFFECT_STATUS_PARALYZE
+                    && moveType == TYPE_ELECTRIC
+                    && (MON_HAS_TYPE(defender, TYPE_GROUND)))
+                {
+                    result = FALSE;
+                }
+                else
+                {
+                    effectiveness = 0;
+
+                    BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        move,
+                        moveType,
+                        attacker,
+                        defender,
+                        0,
+                        &effectiveness);
+
+                    // Absorb abilities and soundproof still block status moves
+                    if ((effectiveness & (MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY | MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY | MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)) == FALSE
+                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+                    {
+                        result = TRUE;
+                    }
+                }
+            }
+            else
+            {
+                effectiveness = 0;
+
+                BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    moveType,
+                    attacker,
+                    defender,
+                    0,
+                    &effectiveness);
+
+                if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+                {
+                    result = TRUE;
+                }
+            }
+        }
+    }
+
+    return result;
+}
