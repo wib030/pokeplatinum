@@ -2213,6 +2213,7 @@ Expert_StatusSpAttackUp:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus20
     LoadBattlerAbility AI_BATTLER_ATTACKER
+	IfLoadedEqualTo ABILITY_AWARE, ScoreMinus20
     IfLoadedNotEqualTo ABILITY_SIMPLE, Expert_StatusSpAttackUp_CheckMoves
     AddToMoveScore 1
     GoTo Expert_StatusSpAttackUp_CheckMoves
@@ -4479,6 +4480,7 @@ Expert_BellyDrum:
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus10
     LoadHeldItem AI_BATTLER_ATTACKER
+	IfLoadedEqualTo ABILITY_AWARE, ScoreMinus10
     IfLoadedNotInTable Expert_BellyDrum_DesirableItems, Expert_BellyDrum_Item_TryScoreMinus1
     GoTo Expert_BellyDrum_StatusCheck
 
@@ -5517,6 +5519,7 @@ Expert_SkillSwap_AlwaysGiveAbilities:
     TableEntry ABILITY_SLOW_START
     TableEntry ABILITY_HONEY_GATHER
     TableEntry ABILITY_FRISK
+	TableEntry ABILITY_AWARE
     TableEntry TABLE_END
     
 Expert_SkillSwap_DesirableAbilities:
@@ -5703,6 +5706,7 @@ Expert_SkillSwap_ForbiddenDefenderAbilities:
     TableEntry ABILITY_SLOW_START
     TableEntry ABILITY_TRUANT
     TableEntry ABILITY_NORMALIZE
+	TableEntry ABILITY_AWARE
     TableEntry TABLE_END
 
 Expert_Ingrain:

@@ -164,7 +164,8 @@
 				"ABILITY_SNOWED_IN",
 				"ABILITY_RATTLED",
 				"ABILITY_GHOSTLY",
-				"ABILITY_SLURP_UP"
+				"ABILITY_SLURP_UP",
+				"ABILITY_AWARE"
             ]
         }
     }

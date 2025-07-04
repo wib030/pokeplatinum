@@ -5533,7 +5533,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battler, battlero;
     int maxBattlers;
 	int imposter1Pos, imposter2Pos;
-	int abilityMax = ABILITY_SLURP_UP;
+	int abilityMax = ABILITY_AWARE;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
@@ -10151,6 +10151,11 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             defenseStage = 0;
             spDefenseStage = 0;
             break;
+			
+		case ABILITY_AWARE:
+			attackStage = 0;
+			spAttackStage = 0;
+			break;
 
         case ABILITY_RIVALRY:
             if (attackerParams.gender == defenderParams.gender
@@ -11814,6 +11819,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             defenseStage = 0;
             spDefenseStage = 0;
             break;
+			
+		case ABILITY_AWARE:
+			attackStage = 0;
+			spAttackStage = 0;
+			break;
 
         case ABILITY_RIVALRY:
             if (attackerParams.gender == defenderParams.gender

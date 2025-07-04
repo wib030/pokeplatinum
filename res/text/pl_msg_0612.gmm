@@ -649,4 +649,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">30% chance to eat\nfoe’s item on contact.</language>
 	</row>
+	<row id="pl_msg_00000612_00162" index="162">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Ignores own stat\nchanges.</language>
+	</row>
 </body>

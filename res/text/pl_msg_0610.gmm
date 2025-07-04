@@ -649,4 +649,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Slurp Up</language>
 	</row>
+	<row id="pl_msg_00000610_00162" index="162">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Aware</language>
+	</row>
 </body>
