@@ -20218,3 +20218,38 @@ BOOL BattleAI_BattleMonCanPhaze(BattleSystem* battleSys, BattleContext* battleCt
 
     return result;
 }
+
+u32 Battle_MapStatusBerryEffectToStatus(u8 itemEffect)
+{
+    u32 result;
+
+    result = MON_CONDITION_NONE;
+
+    switch (itemEffect)
+    {
+    default:
+        break;
+
+    case HOLD_EFFECT_PRZ_RESTORE:
+        result = MON_CONDITION_PARALYSIS;
+        break;
+
+    case HOLD_EFFECT_SLP_RESTORE:
+        result = MON_CONDITION_SLEEP;
+        break;
+
+    case HOLD_EFFECT_PSN_RESTORE:
+        result = MON_CONDITION_ANY_POISON;
+        break;
+
+    case HOLD_EFFECT_BRN_RESTORE:
+        result = MON_CONDITION_BURN;
+        break;
+
+    case HOLD_EFFECT_STATUS_RESTORE:
+        result = MON_CONDITION_ANY;
+        break;
+    }
+
+    return result;
+}

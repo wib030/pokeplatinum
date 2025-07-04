@@ -1848,7 +1848,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  */
  BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
- /**
+/**
 * @brief Determines whether a PartyMon has a priority move or not.
 *
 * @param battleSys
@@ -1860,7 +1860,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
  BOOL BattleAI_PartyMonHasPriorityMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int partySlot);
 
- /**
+/**
 * @brief Determines whether a battlemon or partymon ability deters contact moves.
 *
 * @param battleSys
@@ -1874,7 +1874,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
  BOOL Battle_TargetAbilityDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx, int defender, int attacker, int partyIndicator, int partySlot);
 
- /**
+/**
 * @brief Maps an SE berry effect to its type.
 *
 * @param itemEffect The item effect of the berry
@@ -1924,7 +1924,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
  */
  BOOL Battle_AbilityDetersStatDrop(BattleSystem* battleSys, BattleContext* battleCtx, u8 ability, int battleStatFlag);
 
- /**
+/**
 * @brief Check if a battlemon can pivot itself out.
 *
 * @param battleSys
@@ -1944,7 +1944,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
  BOOL BattleAI_BattleMonCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
- /**
+/**
 * @brief Check if a battlemon can phaze.
 *
 * @param battleSys
@@ -1953,5 +1953,13 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 * @return TRUE/FALSE whether the battlemon has a move that phazes.
 */
  BOOL BattleAI_BattleMonCanPhaze(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
+ /**
+* @brief Map a berry's effect to the status condition that it cures.
+*
+* @param itemEffect     The berry's item effect
+* @return The status condition flag that the berry cures.
+*/
+ u32 Battle_MapStatusBerryEffectToStatus(u8 itemEffect);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
