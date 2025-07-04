@@ -20312,6 +20312,11 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
     {
         return result;
     }
+    // Early exit if defender is behind a substitute
+    if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
+    {
+        return result;
+    }
 
     moveEffect = MOVE_DATA(move).effect;
     moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerHeldItem, move);
