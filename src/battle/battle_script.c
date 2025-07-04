@@ -14147,7 +14147,7 @@ typedef struct PokemonStats {
 static void BattleScript_GetExpTask(SysTask *task, void *inData)
 {
     // must declare C89-style to match
-    int i;
+    int i, j;
     int slot;
     BattleScriptTaskData *data = inData;
     Pokemon *mon;
@@ -14158,6 +14158,9 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
     u32 battleType;
     int item;
     int itemEffect;
+	
+	u16 move;
+    u8 ppCurr, ppUps, ppNew, ppMax;
 
     msgLoader = BattleSystem_MessageLoader(data->battleSys);
     battleType = BattleSystem_BattleType(data->battleSys);
@@ -14329,6 +14332,33 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
                     expBattler,
                     data->battleCtx->selectedPartySlot[expBattler]);
             }
+			
+			for (j = 0; j < LEARNED_MOVES_MAX; j++)
+			{
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+				
+                if (move == MOVE_NONE)
+				{
+                    break;
+                }
+				
+				ppCurr = Pokemon_GetValue(mon, MON_DATA_MOVE1_CUR_PP + j, NULL);
+				ppUps = Pokemon_GetValue(mon, MON_DATA_MOVE1_PP_UPS + j, NULL);
+				ppMax = MoveTable_CalcMaxPP(move, ppUps);
+				
+				if (ppCurr < ppMax)
+				{
+					ppNew = ppCurr + 10;
+					
+					// Cap it off to pp max
+					if (ppNew > ppMax)
+					{
+						ppNew = ppMax;
+					}
+					
+					Pokemon_SetValue(mon, MON_DATA_MOVE1_CUR_PP + j, &ppNew);
+				}
+			}
 
             data->battleCtx->levelUpMons |= FlagIndex(slot);
             BattleIO_RefreshHPGauge(data->battleSys, data->battleCtx, expBattler);
