@@ -5578,6 +5578,15 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
     int stageChange;
     int result;
 	
+	int soundMove = FALSE;
+	for (int i = 0; i < NELEMS(sSoundMoves); i++)
+	{
+		if (sSoundMoves[i] == battleCtx->moveCur)
+		{
+			soundMove = TRUE;
+		}
+	}
+	
     BattleMon *mon = &battleCtx->battleMons[battleCtx->sideEffectMon];
 
     BattleScript_Iter(battleCtx, 1);
@@ -5702,7 +5711,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_SHIELD_DUST) == TRUE
                         && battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT) {
                     result = 1;
-                } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) {
+                } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE && soundMove == FALSE) {
                     result = 2;
                 }
             } else if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == 0) {
@@ -12334,10 +12343,19 @@ static BOOL BtlCmd_CheckSubstitute(BattleSystem *battleSys, BattleContext *battl
     BattleScript_Iter(battleCtx, 1);
     int inBattler = BattleScript_Read(battleCtx);
     int jumpSubActive = BattleScript_Read(battleCtx);
+	
+	int soundMove = FALSE;
+	for (int i = 0; i < NELEMS(sSoundMoves); i++)
+	{
+		if (sSoundMoves[i] == battleCtx->moveCur)
+		{
+			soundMove = TRUE;
+		}
+	}
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
-    if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
-            || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT)) {
+    if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) && soundMove == FALSE)
+    || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT)) {
         BattleScript_Iter(battleCtx, jumpSubActive);
     }
 

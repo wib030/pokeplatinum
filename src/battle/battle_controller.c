@@ -3592,6 +3592,15 @@ static void BattleController_UseMove(BattleSystem *battleSys, BattleContext *bat
 
 static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+	int soundMove = FALSE;
+	for (int i = 0; i < NELEMS(sSoundMoves); i++)
+	{
+		if (sSoundMoves[i] == battleCtx->moveCur)
+		{
+			soundMove = TRUE;
+		}
+	}
+	
     if (battleCtx->moveStatusFlags & MOVE_STATUS_ONE_HIT_KO) {
         battleCtx->damage = DEFENDING_MON.maxHP * -1;
     }
@@ -3608,7 +3617,7 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
 
         battleCtx->lastHitByBattler[battleCtx->defender] = battleCtx->attacker;
 
-        if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) && battleCtx->damage < 0) {
+        if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) && soundMove == FALSE && battleCtx->damage < 0) {
             if (DEFENDING_MON.moveEffectsData.substituteHP + battleCtx->damage <= 0) {
                 ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt += DEFENDING_MON.moveEffectsData.substituteHP * -1;
                 DEFENDING_MON.statusVolatile &= ~VOLATILE_CONDITION_SUBSTITUTE;
@@ -4461,11 +4470,76 @@ static void BattleController_ScreenWipe(BattleSystem *battleSys, BattleContext *
 static void BattleController_EndFight(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     u32 battleType = BattleSystem_BattleType(battleSys);
+	u16 move;
+    u8 ppCurr, ppUps, ppNew, ppMax;
+	int i, j, k;
+	int ppAbsMax;
+	int maxRolls;
+	int odds;
 
     if ((battleType & BATTLE_TYPE_LINK) == FALSE) {
         Party *playerParty = BattleSystem_Party(battleSys, BATTLER_US);
         Pokemon_ApplyPokerus(playerParty);
         Pokemon_ValidatePokerus(playerParty);
+		
+		for (i = 0; i < Party_GetCurrentCount(playerParty); i++)
+		{
+            Pokemon *mon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, i);
+			
+			for (j = 0; j < LEARNED_MOVES_MAX; j++)
+			{
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+				
+                if (move == MOVE_NONE)
+				{
+                    break;
+                }
+				
+				ppCurr = Pokemon_GetValue(mon, MON_DATA_MOVE1_CUR_PP + j, NULL);
+				ppUps = Pokemon_GetValue(mon, MON_DATA_MOVE1_PP_UPS + j, NULL);
+				ppMax = MoveTable_CalcMaxPP(move, ppUps);
+				ppAbsMax = MoveTable_CalcMaxPP(move, 3);
+				
+				if (ppCurr < ppMax / 2)
+				{
+					ppNew = ppCurr;
+					maxRolls = ppAbsMax / 12;
+					
+					if (maxRolls < 1)
+					{
+						maxRolls = 1;
+					}
+					
+					odds = ppCurr + 2;
+					
+					// Odds will be 1 / (n + 2) where n is remaining PP (down to 0).
+					// i.e. a move at 0 pp will have a 50% chance to get +1 PP each roll
+					// and a move with 3 pp will have a 20% chance to get +1 PP each roll
+					if (odds < 2)
+					{
+						odds = 2;
+					}
+					
+					// Roll multiple times based on max possible PP
+					for (k = 0; k < maxRolls; k++)
+					{
+						if ((BattleSystem_RandNext(battleSys) % odds) == 0)
+						{
+							ppNew++;
+						}
+					}
+					
+					// Cap it off to half max
+					if (ppNew > ppMax / 2)
+					{
+						ppNew = ppMax / 2;
+					}
+					
+					Pokemon_SetValue(mon, MON_DATA_MOVE1_CUR_PP + j, &ppNew);
+				}
+			}
+        }
+		
     }
 
     if (battleType & BATTLE_TYPE_LINK) {
