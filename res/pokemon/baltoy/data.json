@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_LEVITATE",
-        "ABILITY_NONE"
+        "ABILITY_AWARE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -101,6 +101,7 @@
 			"19": "MOVE_ANCIENT_POWER",
 			"22": "MOVE_COSMIC_POWER",
 			"25": "MOVE_POWER_TRICK",
+			"26": "MOVE_SKILL_SWAP",
             "28": "MOVE_SELFDESTRUCT",
 			"31": "MOVE_EXTRASENSORY",
 			"32": "MOVE_FISSURE",
