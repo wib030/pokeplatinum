@@ -6983,7 +6983,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                     if (battleCtx->battleMons[defender].type1 != TYPE_ELECTRIC
                                                         && battleCtx->battleMons[defender].type2 != TYPE_ELECTRIC) {
 
-                                                        if (AI_ShouldParalyzeCheck(battleSys, battleCtx, defender, battleCtx->battleMons[battler].speed), type)
+                                                        if (AI_ShouldParalyzeCheck(battleSys, battleCtx, defender, battleCtx->battleMons[battler].speed, type))
                                                         {
                                                             return FALSE;
                                                         }

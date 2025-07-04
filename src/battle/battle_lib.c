@@ -20348,8 +20348,8 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
     defenderAbility = BattleMon_Get(battleCtx, defender, BATTLEMON_ABILITY, NULL);
     defenderHeldItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
     defenderHeldItemEffect = BattleSystem_GetItemData(battleCtx, defenderHeldItem, ITEM_PARAM_HOLD_EFFECT);
-    defenderType1 = BattleMon_get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
-    defenderType2 = BattleMon_get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+    defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+    defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
 
     if (defenderType1 == TYPE_GRASS
         || defenderType2 == TYPE_GRASS
@@ -20440,8 +20440,6 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
                 result = TRUE;
             }
         }
-
-        if
     }
 
     return result;
