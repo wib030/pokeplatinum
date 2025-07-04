@@ -16123,151 +16123,141 @@ BOOL Battle_AbilityDetersStatus(BattleSystem *battleSys, BattleContext *battleCt
 
     result = FALSE;
 
-    switch (statusCondition) {
+    if (statusCondition & MON_CONDITION_ANY_POISON)
+    {
+        switch (ability) {
         default:
             break;
 
-        case MON_CONDITION_TOXIC_COUNTER_0:
-        case MON_CONDITION_TOXIC_COUNTER_1:
-        case MON_CONDITION_TOXIC_COUNTER_2:
-        case MON_CONDITION_TOXIC_COUNTER_3:
-        case MON_CONDITION_POISON:
-        case MON_CONDITION_TOXIC:
-        case MON_CONDITION_TOXIC_COUNTER:
-        case MON_CONDITION_ANY_POISON:
-            switch (ability) {
-                default:
-                    break;
-
-                case ABILITY_IMMUNITY:
-                case ABILITY_POISON_HEAL:
-                case ABILITY_MAGIC_GUARD:
-                case ABILITY_SHED_SKIN:
-                case ABILITY_MARVEL_SCALE:
-                case ABILITY_GUTS:
-                case ABILITY_MAGIC_BOUNCE:
-                case ABILITY_SYNCHRONIZE:
-                    result = TRUE;
-                    break;
-
-                case ABILITY_HYDRATION:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-                        result = TRUE;
-                    }
-                    break;
-
-                case ABILITY_LEAF_GUARD:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                        result = TRUE;
-                    }
-                    break;
-            }
+        case ABILITY_IMMUNITY:
+        case ABILITY_POISON_HEAL:
+        case ABILITY_MAGIC_GUARD:
+        case ABILITY_SHED_SKIN:
+        case ABILITY_MARVEL_SCALE:
+        case ABILITY_GUTS:
+        case ABILITY_MAGIC_BOUNCE:
+        case ABILITY_SYNCHRONIZE:
+            result = TRUE;
             break;
 
-        case MON_CONDITION_BURN:
-            switch (ability) {
-                default:
-                    break;
-
-                case ABILITY_WATER_VEIL:
-                case ABILITY_MAGIC_GUARD:
-                case ABILITY_SHED_SKIN:
-                case ABILITY_MARVEL_SCALE:
-                case ABILITY_GUTS:
-                case ABILITY_FLARE_BOOST:
-                case ABILITY_MAGIC_BOUNCE:
-                case ABILITY_SYNCHRONIZE:
-                    result = TRUE;
-                    break;
-
-                case ABILITY_HYDRATION:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-                        result = TRUE;
-                    }
-                    break;
-
-                case ABILITY_LEAF_GUARD:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                        result = TRUE;
-                    }
-                    break;
-            }
-            break;
-
-        case MON_CONDITION_PARALYSIS:
-            switch (ability) {
-                default:
-                    break;
-
-                case ABILITY_LIMBER:
-                case ABILITY_SHED_SKIN:
-                case ABILITY_MARVEL_SCALE:
-                case ABILITY_GUTS:
-                case ABILITY_QUICK_FEET:
-                case ABILITY_MAGIC_BOUNCE:
-                case ABILITY_WONDER_GUARD:
-                case ABILITY_SYNCHRONIZE:
-                    result = TRUE;
-                    break;
-
-                case ABILITY_HYDRATION:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-                        result = TRUE;
-                    }
-                    break;
-
-                case ABILITY_LEAF_GUARD:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                        result = TRUE;
-                    }
-                    break;
-            }
-            break;
-
-        case MON_CONDITION_SLEEP_0:
-        case MON_CONDITION_SLEEP_1:
-        case MON_CONDITION_SLEEP_2:
-        case MON_CONDITION_SLEEP:
-            switch (ability) {
-                default:
-                    break;
-
-                case ABILITY_INSOMNIA:
-                case ABILITY_VITAL_SPIRIT:
-                case ABILITY_EARLY_BIRD:
-                case ABILITY_SHED_SKIN:
-                case ABILITY_MARVEL_SCALE:
-                case ABILITY_GUTS:
-                case ABILITY_MAGIC_BOUNCE:
-                case ABILITY_SYNCHRONIZE:
-                    result = TRUE;
-                    break;
-
-                case ABILITY_HYDRATION:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-                        result = TRUE;
-                    }
-                    break;
-
-                case ABILITY_LEAF_GUARD:
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-                        result = TRUE;
-                    }
-                    break;
-            }
-            break;
-
-        case MON_CONDITION_FREEZE:
-            switch (ability) {
-            default:
-                break;
-
-            case ABILITY_MAGMA_ARMOR:
-            case ABILITY_SYNCHRONIZE:
+        case ABILITY_HYDRATION:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
                 result = TRUE;
-                break;
             }
             break;
+
+        case ABILITY_LEAF_GUARD:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                result = TRUE;
+            }
+            break;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_BURN)
+    {
+        switch (ability) {
+        default:
+            break;
+
+        case ABILITY_WATER_VEIL:
+        case ABILITY_MAGIC_GUARD:
+        case ABILITY_SHED_SKIN:
+        case ABILITY_MARVEL_SCALE:
+        case ABILITY_GUTS:
+        case ABILITY_FLARE_BOOST:
+        case ABILITY_MAGIC_BOUNCE:
+        case ABILITY_SYNCHRONIZE:
+            result = TRUE;
+            break;
+
+        case ABILITY_HYDRATION:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                result = TRUE;
+            }
+            break;
+
+        case ABILITY_LEAF_GUARD:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                result = TRUE;
+            }
+            break;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_PARALYSIS)
+    {
+        switch (ability) {
+        default:
+            break;
+
+        case ABILITY_LIMBER:
+        case ABILITY_SHED_SKIN:
+        case ABILITY_MARVEL_SCALE:
+        case ABILITY_GUTS:
+        case ABILITY_QUICK_FEET:
+        case ABILITY_MAGIC_BOUNCE:
+        case ABILITY_WONDER_GUARD:
+        case ABILITY_SYNCHRONIZE:
+            result = TRUE;
+            break;
+
+        case ABILITY_HYDRATION:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                result = TRUE;
+            }
+            break;
+
+        case ABILITY_LEAF_GUARD:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                result = TRUE;
+            }
+            break;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_SLEEP)
+    {
+        switch (ability) {
+        default:
+            break;
+
+        case ABILITY_INSOMNIA:
+        case ABILITY_VITAL_SPIRIT:
+        case ABILITY_EARLY_BIRD:
+        case ABILITY_SHED_SKIN:
+        case ABILITY_MARVEL_SCALE:
+        case ABILITY_GUTS:
+        case ABILITY_MAGIC_BOUNCE:
+        case ABILITY_SYNCHRONIZE:
+            result = TRUE;
+            break;
+
+        case ABILITY_HYDRATION:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                result = TRUE;
+            }
+            break;
+
+        case ABILITY_LEAF_GUARD:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                result = TRUE;
+            }
+            break;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_FREEZE)
+    {
+        switch (ability) {
+        default:
+            break;
+
+        case ABILITY_MAGMA_ARMOR:
+        case ABILITY_SYNCHRONIZE:
+            result = TRUE;
+            break;
+        }
     }
 
     return result;
@@ -20332,15 +20322,23 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
         moveStatusCondition = battleCtx->battleMons[attacker].status;
     }
 
-    // Early exit if the move does not inflict status
-    if (moveStatusCondition == MON_CONDITION_NONE)
-    {
-        return result;
-    }
-
     attackerAbility = BattleMon_Get(battleCtx, attacker, BATTLEMON_ABILITY, NULL);
     attackerHeldItem = BattleMon_Get(battleCtx, attacker, BATTLEMON_HELD_ITEM, NULL);
     attackerHeldItemEffect = BattleSystem_GetItemData(battleCtx, attackerHeldItem, ITEM_PARAM_HOLD_EFFECT);
+
+    // Early exit if the move does not inflict status
+    if (moveStatusCondition == MON_CONDITION_NONE)
+    {
+        if (attackerAbility == ABILITY_POISON_TOUCH
+            && (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT))
+        {
+            moveStatusCondition |= MON_CONDITION_POISON;
+        }
+        else
+        {
+            return result;
+        }
+    }
 
     defenderAbility = BattleMon_Get(battleCtx, defender, BATTLEMON_ABILITY, NULL);
     defenderHeldItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
@@ -20384,40 +20382,18 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
             result = TRUE;
         }
     }
-    else
+
+    if (Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType1, moveStatusCondition) == FALSE
+        && Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType2, moveStatusCondition) == FALSE)
     {
-        if (Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType1, moveStatusCondition) == FALSE
-            && Battle_TypeIsImmuneToStatus(battleSys, battleCtx, defenderType2, moveStatusCondition) == FALSE)
+        if (MOVE_DATA(move).class == CLASS_STATUS)
         {
-            if (MOVE_DATA(move).class == CLASS_STATUS)
+            // Thunder wave is an anomaly
+            if (moveEffect == BATTLE_EFFECT_STATUS_PARALYZE
+                && moveType == TYPE_ELECTRIC
+                && (MON_HAS_TYPE(defender, TYPE_GROUND)))
             {
-                // Thunder wave is an anomaly
-                if (moveEffect == BATTLE_EFFECT_STATUS_PARALYZE
-                    && moveType == TYPE_ELECTRIC
-                    && (MON_HAS_TYPE(defender, TYPE_GROUND)))
-                {
-                    result = FALSE;
-                }
-                else
-                {
-                    effectiveness = 0;
-
-                    BattleSystem_ApplyTypeChart(battleSys,
-                        battleCtx,
-                        move,
-                        moveType,
-                        attacker,
-                        defender,
-                        0,
-                        &effectiveness);
-
-                    // Absorb abilities and soundproof still block status moves
-                    if ((effectiveness & (MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY | MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY | MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)) == FALSE
-                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
-                    {
-                        result = TRUE;
-                    }
-                }
+                result = FALSE;
             }
             else
             {
@@ -20432,13 +20408,35 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
                     0,
                     &effectiveness);
 
-                if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                // Absorb abilities and soundproof still block status moves
+                if ((effectiveness & (MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY | MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY | MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)) == FALSE
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
                 {
                     result = TRUE;
                 }
             }
         }
+        else
+        {
+            effectiveness = 0;
+
+            BattleSystem_ApplyTypeChart(battleSys,
+                battleCtx,
+                move,
+                moveType,
+                attacker,
+                defender,
+                0,
+                &effectiveness);
+
+            if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+            {
+                result = TRUE;
+            }
+        }
+
+        if
     }
 
     return result;
