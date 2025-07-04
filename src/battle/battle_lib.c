@@ -16452,10 +16452,10 @@ BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *batt
     return result;
 }
 
-BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, int defender, u16 attackerSpeedStat)
+BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, int defender, u16 attackerSpeedStat, u8 moveType)
 {
-    u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
-    u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
+    u8 defenderLevel, defenderType1, defenderType2, defenderAbility, defenderItemEffect;
+    u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move, defenderItem;
     int defenderMaxHP;
     int moveEffect, moveStatFlag;
     int i;
@@ -16474,6 +16474,8 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, i
     defenderAbility = BattleMon_Get(battleCtx, defender, BATTLEMON_ABILITY, NULL);
     defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
     defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+    defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
+    defenderItemEffect = BattleSystem_GetItemData(battleCtx, defenderItem, ITEM_PARAM_HOLD_EFFECT);
 
     if (battleCtx->battleMons[defender].ability == ABILITY_SPEED_BOOST)
     {
@@ -16519,7 +16521,19 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, i
                 && defenderType1 != TYPE_ELECTRIC
                 && defenderType2 != TYPE_ELECTRIC)
             {
-                result = TRUE;
+                if (moveType == TYPE_GRASS)
+                {
+                    if (defenderType1 != TYPE_GRASS
+                        && defenderType2 != TYPE_GRASS
+                        && defenderItemEffect != HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
+                    {
+                        result = TRUE;
+                    }
+                }
+                else
+                {
+                    result = TRUE;
+                }
             }
         }
     }
@@ -16528,10 +16542,10 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, i
 }
 
 
-BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat)
+BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat, u8 moveType)
 {
-    u8 defenderLevel, defenderType1, defenderType2, defenderAbility;
-    u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move;
+    u8 defenderLevel, defenderType1, defenderType2, defenderAbility, defenderItemEffect;
+    u16 defenderSpeedStat, defenderDefStat, defenderSpDefStat, move, defenderItem;
     int defenderMaxHP;
     int moveEffect, moveStatFlag;
     int i;
@@ -16553,6 +16567,8 @@ BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *batt
     defenderAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
     defenderType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     defenderType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+    defenderItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+    defenderItemEffect = BattleSystem_GetItemData(battleCtx, defenderItem, ITEM_PARAM_HOLD_EFFECT);
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
@@ -16584,7 +16600,19 @@ BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *batt
                 && defenderType1 != TYPE_ELECTRIC
                 && defenderType2 != TYPE_ELECTRIC)
             {
-                result = TRUE;
+                if (moveType == TYPE_GRASS)
+                {
+                    if (defenderType1 != TYPE_GRASS
+                        && defenderType2 != TYPE_GRASS
+                        && defenderItemEffect != HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
+                    {
+                        result = TRUE;
+                    }
+                }
+                else
+                {
+                    result = TRUE;
+                }
             }
         }
     }
@@ -17646,7 +17674,7 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                         && defenderType1 != TYPE_ELECTRIC
                         && defenderType2 != TYPE_ELECTRIC) {
 
-                            if (AI_ShouldParalyzeCheck(battleSys, battleCtx, defender, monSpeedStat)) {
+                            if (AI_ShouldParalyzeCheck(battleSys, battleCtx, defender, monSpeedStat, moveType)) {
                                 moveScore = 50;
                             }
                         }
@@ -18070,7 +18098,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                         && monType1 != TYPE_ELECTRIC
                         && monType2 != TYPE_ELECTRIC) {
 
-                            if (AI_PartyMonShouldParalyzeCheck(battleSys, battleCtx, battler, i, defenderSpeedStat)) {
+                            if (AI_PartyMonShouldParalyzeCheck(battleSys, battleCtx, battler, i, defenderSpeedStat, moveType)) {
                                 moveScore = 50;
                             }
                         }

@@ -1745,9 +1745,10 @@ BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *batt
 * @param battleCtx
 * @param defender           The defending BattleMon id.
 * @param attackerSpeedStat  The speed stat of the attacking Pokemon.
+* @param moveType           The type of the paralysis move.
 * @Return   The TRUE / FALSE result of whether the AI should use a paralysis move.
 */
-BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat);
+BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, u16 attackerSpeedStat, u8 moveType);
 
 /**
 * @brief Determine whether the AI should paralyze the defender's PartyMon based on stats and moves.
@@ -1757,9 +1758,10 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, i
 * @param defender           The defending BattleMon id.
 * @param partySlot          The party slot id of the defender Pokemon's PartyMon to reference.
 * @param attackerSpeedStat  The speed stat of the attacking Pokemon.
+* @param moveType           The type of the paralysis move.
 * @Return   The TRUE / FALSE result of whether the AI should use a paralysis move.
 */
-BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat);
+BOOL AI_PartyMonShouldParalyzeCheck(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int partySlot, u16 attackerSpeedStat, u8 moveType);
 
 /**
 * @brief Determine whether the AI should taunt the defender based on stats and moves.
