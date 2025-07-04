@@ -732,6 +732,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfHasStatusThreat battler1, jump
+    .long 127
+    .long \battler1
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

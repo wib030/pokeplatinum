@@ -422,6 +422,7 @@ static void AICmd_IfDestinyBondFails(BattleSystem *battleSys, BattleContext *bat
 static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -595,7 +596,8 @@ static const AICommandFunc sAICommandTable[] = {
 	AICmd_IfDestinyBondFails,
     AICmd_IfEnemyCanChunkOrKO,
     AICmd_LoadBattlerCritStage,
-    AICmd_IfCanHazeOrPhaze
+    AICmd_IfCanHazeOrPhaze,
+    AICmd_IfHasStatusThreat
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4088,6 +4090,92 @@ static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battl
     }
 
     if (canHazeOrPhaze)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int battler2;
+    int i;
+    int moveEffect;
+    u8 battler1Ability;
+    u8 battler2Ability, battler2Type1, battler2Type2;
+    u16 move;
+    u32 moveStatusCondition;
+    BOOL hasStatusThreat;
+
+    hasStatusThreat = FALSE;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.defender;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.attacker;
+        break;
+    }
+
+    battler2Ability = BattleMon_Get(battleCtx, battler2, BATTLEMON_ABILITY, NULL);
+    battler2Type1 = BattleMon_Get(battleCtx, battler2, BATTLEMON_TYPE_1, NULL);
+    battler2Type2 = BattleMon_Get(battleCtx, battler2, BATTLEMON_TYPE_2, NULL);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler1, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            move = AI_CONTEXT.battlerMoves[battler1][i];
+            moveEffect = MOVE_DATA(move).effect;
+            moveStatusCondition = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+
+            // Special case for Psycho Shift
+            if (moveEffect == BATTLE_EFFECT_TRANSFER_STATUS)
+            {
+                moveStatusCondition = battleCtx->battleMons[battler1].status;
+
+                if (Battle_TypeIsImmuneToStatus(battleSys, battleCtx, battler2Type1, moveStatusCondition)
+                    || Battle_TypeIsImmuneToStatus(battleSys, battleCtx, battler2Type2, moveStatusCondition)
+                    || Battle_AbilityDetersStatus(battleSys, battleCtx, battler2Ability, moveStatusCondition))
+                {
+                    hasStatusThreat = TRUE;
+                    break;
+                }
+            }
+
+            if (BattleAI_BattleMonMoveInflictsUnwantedStatus(battleSys, battleCtx, battler1, battler2, move))
+            {
+                if (moveStatusCondition & MON_CONDITION_BURN)
+                {
+                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler2))
+                    {
+                        hasStatusThreat = TRUE;
+                        break;
+                    }
+                }
+                else
+                {
+                    hasStatusThreat = TRUE;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (hasStatusThreat)
     {
         AIScript_Iter(battleCtx, jump);
     }
