@@ -6040,19 +6040,13 @@ Expert_DragonDance:
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 9, Expert_DragonDance_TryScoreMinus2
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_DragonDance_TryScoreMinus2
     IfRandomLessThan 51, Expert_DragonDance_CheckSubstitute
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_PARALYZE, Expert_DragonDance_TryScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_BURN, Expert_DragonDance_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_DragonDance_TryScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_SLEEP, Expert_DragonDance_TryScoreMinus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_CONFUSE, Expert_DragonDance_TryScoreMinus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_CONFUSE_ALL, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_2, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_DragonDance_TryScoreMinus1
     AddToMoveScore 1
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_BIDE, ScorePlus3
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_COUNTER, Expert_DragonDance_TryScorePlus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_METAL_BURST, Expert_DragonDance_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_DragonDance_TryScoreMinus2
     GoTo Expert_DragonDance_CheckSubstitute
 
 Expert_DragonDance_UserSlower:
@@ -6061,15 +6055,14 @@ Expert_DragonDance_UserSlower:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TRICK_ROOM, Expert_DragonDance_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, Expert_DragonDance_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_DragonDance_TryScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_DragonDance_TryScoreMinus2
     IfCanHazeOrPhaze AI_BATTLER_DEFENDER, Expert_DragonDance_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SPEED_UP_2, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_2, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_DragonDance_TryScoreMinus1
     IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_DragonDance_CheckSubstitute
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_PARALYZE, Expert_DragonDance_TryScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_BURN, Expert_DragonDance_TryScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_SLEEP, Expert_DragonDance_TryScoreMinus1
+    IfHasStatusThreat AI_BATTLER_DEFENDER, Expert_DragonDance_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_CONFUSE, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_CONFUSE_ALL, Expert_DragonDance_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SPEED_DOWN_HIT, Expert_DragonDance_TryScoreMinus1
@@ -6083,6 +6076,10 @@ Expert_DragonDance_CheckSubstitute:
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_SKILL_LINK, Expert_DragonDance_TryScoreMinus2
     IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus3
+    IfHasStatusThreat AI_BATTLER_DEFENDER, Expert_DragonDance_TryScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_CONFUSE, Expert_DragonDance_TryScoreMinus1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_CONFUSE_ALL, Expert_DragonDance_TryScoreMinus1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_DragonDance_TryScoreMinus2
     GoTo Expert_DragonDance_End
 
 Expert_DragonDance_TryScoreMinus1:
