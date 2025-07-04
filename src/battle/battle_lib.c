@@ -10342,6 +10342,11 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 attackStage = 0;
                 spAttackStage = 0;
                 break;
+				
+			case ABILITY_AWARE:
+				defenseStage = 0;
+				spDefenseStage = 0;
+            break;
 
             case ABILITY_FLOWER_GIFT:
                 if (NO_CLOUD_NINE) {
@@ -12017,6 +12022,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 attackStage = 0;
                 spAttackStage = 0;
                 break;
+				
+			case ABILITY_AWARE:
+				defenseStage = 0;
+				spDefenseStage = 0;
+            break;
 
             case ABILITY_FLOWER_GIFT:
                 if (NO_CLOUD_NINE) {

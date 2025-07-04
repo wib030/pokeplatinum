@@ -3061,10 +3061,12 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SIMPLE) == TRUE) {
         evaStages *= 2;
     }
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE) {
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE
+	|| (Battler_Ability(battleCtx, attacker) == ABILITY_AWARE)) {
         accStages = 0;
     }
     if ((Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE)
+	|| (Battler_Ability(battleCtx, defender) == ABILITY_AWARE)
 	|| (battleCtx->moveCur == MOVE_FOCUS_PUNCH)) {
         evaStages = 0;
     }

@@ -8658,6 +8658,8 @@ Expert_Stockpile:
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SWALLOW, Expert_Stockpile_SwallowKnown
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus12
+	LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_AWARE, ScoreMinus12
     LoadBattlerCritStage AI_BATTLER_DEFENDER
     IfLoadedGreaterThan 0, ScoreMinus12
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Stockpile_TryScoreMinus3
