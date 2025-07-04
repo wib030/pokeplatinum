@@ -14348,7 +14348,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 				
 				if (ppCurr < ppMax)
 				{
-					ppNew = ppCurr + 10;
+					ppNew = ppCurr + 5;
 					
 					// Cap it off to pp max
 					if (ppNew > ppMax)
