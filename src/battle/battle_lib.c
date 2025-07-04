@@ -15195,7 +15195,7 @@ int MapBattleEffectToMoveEffect(BattleContext *battleCtx, int effect)
             break;
 
         case BATTLE_EFFECT_HEAL_INVERSION:
-            moveEffect = MOVE_EFFECT_HEAL_INVERSION;
+            moveEffect = MOVE_EFFECT_MIRACLE_EYE;
             break;
 
         default:
