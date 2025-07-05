@@ -5426,4 +5426,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s stockpiled\neffect dropped by two!</language>
 	</row>
+	<row id="pl_msg_00000368_01353" index="1353">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} can’t\nsleep due to sleep clause!</language>
+	</row>
+	<row id="pl_msg_00000368_01354" index="1354">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} can’t\nsleep due to sleep clause!</language>
+	</row>
+	<row id="pl_msg_00000368_01355" index="1355">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} can’t\nsleep due to sleep clause!</language>
+	</row>
 </body>

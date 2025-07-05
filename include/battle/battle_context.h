@@ -50,6 +50,7 @@ typedef struct SideConditions {
     u32 toxicSpikesLayers : 2;
     u32 padding04_04 : 28;
 	u32 tailwindTurns;
+	u32 sleepClauseMask : 6;
 } SideConditions;
 
 typedef struct TurnFlags {

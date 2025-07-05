@@ -2549,6 +2549,9 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcGrenadeDamage(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySlurpUp(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_UpdateSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckBattlerSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2820,7 +2823,10 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_RollSleepTurns,
 	BtlCmd_CheckSleepClause,
 	BtlCmd_CalcGrenadeDamage,
-	BtlCmd_TrySlurpUp
+	BtlCmd_TrySlurpUp,
+	BtlCmd_UpdateSleepClauseFlag,
+	BtlCmd_CheckBattlerSleepClause,
+	BtlCmd_ClearSleepClauseFlag
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7850,6 +7856,8 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
 {
     u32 battleType = BattleSystem_BattleType(battleSys);
     BattleScript_Iter(battleCtx, 1);
+	
+	int battlerSide = Battler_Side(battleSys, battleCtx->attacker);
 
     battleCtx->calcTemp = 0;
     if (battleCtx->moveCur == MOVE_HEAL_BELL) {
@@ -7858,6 +7866,7 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
         if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SOUNDPROOF) {
             ATTACKING_MON.status = MON_CONDITION_NONE;
             ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+			battleCtx->sideConditions[battlerSide].sleepClauseMask &= 0;
         } else {
             battleCtx->calcTemp |= (SOUNDPROOF_SLOT_1 | NO_PARTNER_SLOT_1);
         }
@@ -7880,6 +7889,7 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
     } else {
         ATTACKING_MON.status = MON_CONDITION_NONE;
         ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+		battleCtx->sideConditions[battlerSide].sleepClauseMask &= 0;
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
@@ -13754,7 +13764,7 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
 	
 	int sleepRoll = BattleSystem_RandNext(battleSys) % 100;
-	int sleepTurns = 3;
+	int sleepTurns = 4;
 	
 	int oneTurnChance = 25; //25% chance
 	int twoTurnChance = 50; // 25% chance
@@ -13770,18 +13780,11 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
 		sleepTurns--;
 	}
 	
-	// If the opposing side has a Pokemon with Bad Dreams, and the sleep counter is 1, set it to 2 or 3
+	// If the opposing side has a Pokemon with Bad Dreams, and the sleep counter is 1, set it to 4
 	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS)
 	&& sleepTurns == 1)
 	{
-		if (sleepRoll < 50)
-		{
-			sleepTurns = 2;
-		}
-		else
-		{
-			sleepTurns = 3;
-		}
+		sleepTurns = 4;
 	}
 
     battleCtx->calcTemp = sleepTurns;
@@ -13809,16 +13812,18 @@ static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *batt
 	
 	int i;
 	int sleepClauseActive = FALSE;
-	Pokemon * mon;
+	int battlerSide = Battler_Side(battleSys, battler);
 	
 	for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, battler)); i++)
 	{
-		mon = BattleSystem_PartyPokemon(battleSys, battler, i);
-		
-		
+		if (battleCtx->sideConditions[battlerSide].sleepClauseMask & FlagIndex(battleCtx->selectedPartySlot[i]))
+		{
+			sleepClauseActive = TRUE;
+			break;
+		}
 	}
 	
-    if (sleepClauseActive)
+    if (sleepClauseActive == TRUE)
 	{
 		BattleScript_Iter(battleCtx, jumpNoEffect);
     }
@@ -13921,6 +13926,68 @@ static BOOL BtlCmd_TrySlurpUp(BattleSystem *battleSys, BattleContext *battleCtx)
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
+    return FALSE;
+}
+
+/**
+ * @brief Update the side conditions mask for sleep clause.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_UpdateSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int battlerSide = Battler_Side(battleSys, battler);
+
+    battleCtx->sideConditions[battlerSide].sleepClauseMask |= FlagIndex(battleCtx->selectedPartySlot[battler]);
+
+    return FALSE;
+}
+
+/**
+ * @brief Check a battlers side conditions mask for sleep clause.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_CheckBattlerSleepClause(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int jumpEffect = BattleScript_Read(battleCtx);
+	
+	int battlerSide = Battler_Side(battleSys, battler);
+	
+	if (battleCtx->sideConditions[battlerSide].sleepClauseMask & FlagIndex(battleCtx->selectedPartySlot[battler]))
+	{
+		BattleScript_Iter(battleCtx, jumpEffect);
+	}
+
+    return FALSE;
+}
+
+/**
+ * @brief Clear the side conditions mask for sleep clause for the battlers side.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int battlerSide = Battler_Side(battleSys, battler);
+
+    // Flip any bit from 1 to 0 if the flag index is 1 at that bit
+	battleCtx->sideConditions[battlerSide].sleepClauseMask &= ~FlagIndex(battleCtx->selectedPartySlot[battler]);
     return FALSE;
 }
 

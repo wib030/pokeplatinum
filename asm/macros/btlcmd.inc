@@ -1296,5 +1296,21 @@
     .long 234
     .long (\jump_if_fail-.) / 4 - 1
     .endm
+	
+	.macro UpdateSleepClauseFlag battler
+    .long 235
+	.long \battler
+    .endm
+	
+	.macro CheckBattlerSleepClause battler, jump_no_effect
+    .long 236
+	.long \battler
+	.long (\jump_no_effect-.) / 4 - 1
+    .endm
+	
+	.macro ClearSleepClauseFlag battler
+    .long 237
+	.long \battler
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC
