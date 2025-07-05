@@ -17,7 +17,7 @@
             "moves": [
                 "MOVE_CRUNCH",
 				"MOVE_ICE_FANG",
-				"MOVE_BITE",
+				"MOVE_DOUBLE_HIT",
 				"MOVE_SUPER_FANG"
             ],
             "power": 160,
