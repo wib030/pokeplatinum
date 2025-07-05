@@ -313,7 +313,6 @@ const u16 VeilstoneDeptStoreStock_B1F_DOWN_LEFT[] = {
 };
 
 const u16 CelesticMartSpecialties_Two[] = {
-	ITEM_POKE_BALL,
 	ITEM_GREAT_BALL,
 	ITEM_ULTRA_BALL,
 	ITEM_OLD_GATEAU,
