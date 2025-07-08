@@ -5826,24 +5826,55 @@ Expert_Revenge_End:
 
 Expert_BrickBreak:
     ; If the opponent''s side of the field is under the effect of Reflect or Light Screen, score +1.
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScorePlus1
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_ScorePlus1
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_TryScorePlus2
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_TryScorePlus2
     GoTo Expert_BrickBreak_End
 
-Expert_BrickBreak_ScorePlus1:
+Expert_BrickBreak_TryScorePlus2:
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_BrickBreak_End
     AddToMoveScore 1
 
 Expert_BrickBreak_End:
     PopOrEnd 
 
 Expert_KnockOff:
-    ; If the opponent''s HP >= 30% and it is not the attacker''s first turn in battle, 29.7% chance of
-    ; score +1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_KnockOff_End
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedGreaterThan FALSE, Expert_KnockOff_End
-    IfRandomLessThan 180, Expert_KnockOff_End
+    ; Try not to Knock Off into Colbur Berry or Weakness Policy.
+    ;
+    ; Try not to knock off into Unburden or Rattled mons.
+    ;
+    ; If the enemy has an item, 75% chance for score +1.
+    ;
+    ; If the enemy has no item, 50% chance for score -1.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WEAKEN_SE_DARK, ScoreMinus1
+    IfLoadedEqualTo HOLD_EFFECT_WEAK_RAISE_SPA_ATK, Expert_KnockOff_CheckEffectiveness
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_RATTLED, ScoreMinus2
+    IfLoadedEqualTo ABILITY_UNBURDEN, ScoreMinus10
+    LoadHeldItem
+    IfLoadedNotEqualTo ITEM_NONE, Expert_KnockOff_TryScorePlus1
+    IfRandomLessThan 128, Expert_KnockOff_End
+    AddToMoveScore -1
+    GoTo Expert_KnockOff_End
+
+Expert_KnockOff_CheckEffectiveness:
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_KnockOff_End
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, ScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, ScoreMinus3
+    AddToMoveScore 3
+    GoTo Expert_KnockOff_End
+
+Expert_KnockOff_TryScorePlus2:
+    IfRandomLessThan 25, Expert_KnockOff_End
+    AddToMoveScore 2
+    GoTo Expert_KnockOff_End
+
+Expert_KnockOff_TryScorePlus1:
+    IfRandomLessThan 64, Expert_KnockOff_End
     AddToMoveScore 1
+    GoTo Expert_KnockOff_End
 
 Expert_KnockOff_End:
     PopOrEnd 
@@ -5880,15 +5911,19 @@ Expert_WaterSpout:
     ;
     ; If the attacker is slower than its opponent and the opponent''s HP <= 70%, score -1.
     ;
-    ; If the attacker is faster than its opponent and the opponent''s HP <= 50%, score -1.
+    ; If the attacker is faster than its opponent and the opponent''s HP < 53%, score -1.
+    ;
+    ; If our partner knows Follow Me, score +2.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_WaterSpout_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_WaterSpout_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_WaterSpout_ScoreMinus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 53, Expert_WaterSpout_ScoreMinus1
+    IfMoveEffectKnown AI_BATTLER_ATTACKER_PARTNER, BATTLE_EFFECT_MAKE_GLOBAL_TARGET, ScorePlus2
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_WaterSpout_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_WaterSpout_End
-    GoTo Expert_WaterSpout_ScoreMinus1
+    GoTo Expert_WaterSpout_End
 
 Expert_WaterSpout_SlowerCheckHP:
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_WaterSpout_End
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_WaterSpout_End
 
 Expert_WaterSpout_ScoreMinus1:
@@ -5909,7 +5944,15 @@ Expert_Imprison_End:
 
 Expert_Refresh:
     ; If the opponent''s HP < 50%, score -1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_Refresh_ScoreMinus1
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_FACADE_BOOST, Expert_Refresh_TryScorePlus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Refresh_ScoreMinus1
+    GoTo Expert_Refresh_End
+
+Expert_Refresh_TryScorePlus2:
+    IfRandomLessThan 12, Expert_Refresh_End
+    AddToMoveScore 1
+    IfRandomLessThan 12, Expert_Refresh_End
+    AddToMoveScore 1
     GoTo Expert_Refresh_End
 
 Expert_Refresh_ScoreMinus1:
