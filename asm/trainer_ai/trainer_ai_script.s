@@ -5986,23 +5986,46 @@ Expert_MudSport_End:
     PopOrEnd 
 
 Expert_Overheat:
-    ; If the opponent resists or is immune to the move, score -1.
+    ; If the defender has unaware, score +1.
     ;
-    ; If the attacker is faster than its opponent and the attacker''s HP is <= 60%, score -1.
+    ; If the attacker has a high hit stage, +1 or +2, depending on stage.
     ;
-    ; If the attacker is slower than its opponent and the attacker''s HP is <= 80%, score -1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Overheat_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Overheat_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Overheat_ScoreMinus1
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Overheat_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_Overheat_End
-    GoTo Expert_Overheat_ScoreMinus1
+    ; If the move is resisted or ineffective, score -3 to -10.
+    ;
+    ; If another move deals more damage, score -10.
+    ;
+    ; If the attacker is very low HP, score +2. Else, score +1.
+    LoadAbility AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo ABILITY_UNAWARE, Expert_Overheat_CheckCritStage
+    AddToMoveScore 1
+    GoTo Expert_Overheat_CheckCritStage
 
-Expert_Overheat_SlowerCheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 80, Expert_Overheat_End
+Expert_Overheat_CheckCritStage:
+    LoadBattlerCritStage AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 2, Expert_Overheat_TryScorePlus2
+    IfLoadedGreaterThan 0, Expert_Overheat_TryScorePlus1
+    GoTo Expert_Overheat_CheckEffectiveness
 
-Expert_Overheat_ScoreMinus1:
-    AddToMoveScore -1
+Expert_Overheat_TryScorePlus2:
+    IfRandomLessThan 12, Expert_Overheat_CheckEffectiveness
+    AddToMoveScore 2
+    GoTo Expert_Overheat_CheckEffectiveness
+
+Expert_Overheat_TryScorePlus1:
+    IfRandomLessThan 12, Expert_Overheat_CheckEffectiveness
+    AddToMoveScore 1
+    GoTo Expert_Overheat_CheckEffectiveness
+
+Expert_Overheat_CheckEffectiveness:
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, ScoreMinus5
+    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, ScoreMinus3
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus10
+    IfHPPercentLessThan 5, ScorePlus2
+    IfRandomLessThan 85, Expert_Overheat_End
+    AddToMoveScore 1
+    GoTo Expert_Overheat_End
 
 Expert_Overheat_End:
     PopOrEnd 
