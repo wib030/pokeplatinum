@@ -738,6 +738,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfBattlerDetersBoosting battler1, jump
+    .long 128
+    .long \battler1
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

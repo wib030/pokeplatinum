@@ -423,6 +423,7 @@ static void AICmd_IfEnemyCanChunkOrKO(BattleSystem* battleSys, BattleContext* ba
 static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -597,7 +598,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfEnemyCanChunkOrKO,
     AICmd_LoadBattlerCritStage,
     AICmd_IfCanHazeOrPhaze,
-    AICmd_IfHasStatusThreat
+    AICmd_IfHasStatusThreat,
+    AICmd_IfBattlerDetersBoosting
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -1088,7 +1090,10 @@ static void AICmd_IfStatus(BattleSystem *battleSys, BattleContext *battleCtx)
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].status & mask) {
-        AIScript_Iter(battleCtx, jump);
+        if (Battle_AbilityDetersStatus(battleSys, battleCtx, battleCtx->battleMons[battler].ability, mask) == FALSE)
+        {
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 
@@ -1116,7 +1121,10 @@ static void AICmd_IfVolatileStatus(BattleSystem *battleSys, BattleContext *battl
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].statusVolatile & mask) {
-        AIScript_Iter(battleCtx, jump);
+        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, battleCtx->battleMons[battler].ability, mask) == FALSE)
+        {
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 
@@ -1144,7 +1152,10 @@ static void AICmd_IfMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].moveEffectsMask & mask) {
-        AIScript_Iter(battleCtx, jump);
+        if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, battleCtx->battleMons[battler].ability, mask))
+        {
+            AIScript_Iter(battleCtx, jump);
+        }
     }
 }
 
@@ -4181,6 +4192,188 @@ static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* batt
     }
 }
 
+static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int battler2;
+    int i;
+    int moveEffect, enemyMoveEffect;
+    int moveBattleStatflag, moveBattleStatStages;
+    int enemyMoveBattleStatFlag, enemyMoveBattleStatStages;
+    u8 battler1Ability;
+    u8 battler2Ability;
+    u16 move, enemyMove;
+    u32 enemyMoveStatusCondition;
+    BOOL detersBoosting;
+
+    detersBoosting = FALSE;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.defender;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.attacker;
+        break;
+    }
+
+    battler1Ability = AI_CONTEXT.battlerAbilities[battler1];
+
+    // Early exit for Unaware
+    if (battler1Ability == ABILITY_UNAWARE)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+    else
+    {
+        battler2Ability = AI_CONTEXT.battlerAbilities[battler2];
+        move = AI_CONTEXT.move;
+        moveEffect = MOVE_DATA(move).effect;
+        moveBattleStatflag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+
+        if (moveBattleStatFlag != BATTLE_STAT_FLAG_NONE)
+        {
+            moveBattleStatStages = MapBattleEffectToStatBoostStages(battleCtx, moveEffect);
+            if (battler1Ability == ABILITY_SIMPLE)
+            {
+                moveBattleStatStages *= 2;
+            }
+
+            for (i = 0; i < LEARNED_MOVES_MAX; i++)
+            {
+                if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler1, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+                {
+                    enemyMove = AI_CONTEXT.battlerMoves[battler1][i];
+                    enemyMoveEffect = MOVE_DATA(enemyMove).effect;
+
+                    enemyMoveStatusCondition = MapBattleEffectToStatusCondition(battleCtx, enemyMoveEffect);
+
+                    enemyMoveBattleStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, enemyMoveEffect);
+
+                    if (enemyMoveBattleStatFlag != BATTLE_STAT_FLAG_NONE)
+                    {
+                        enemyMoveBattleStatStages = MapBattleEffectToStatBoostStages(battleCtx, enemyMoveEffect);
+
+                        if (battler2Ability == ABILITY_SIMPLE)
+                        {
+                            enemyMoveBattleStatStages *= 2;
+                        }
+
+
+                        if (enemyMoveBattleStatFlag & BattleAI_ParallelStatCheck(battleCtx, moveBattleStatflag))
+                        {
+                            if (enemyMoveBattleStatStages > moveBattleStatStages)
+                            {
+                                detersBoosting = TRUE;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (battler2Ability != ABILITY_DEFIANT
+                            && battler2Ability != ABILITY_COMPETITIVE
+                            && battler2Ability != ABILITY_MAGIC_BOUNCE
+                            && (battleCtx->battleMons[battler2].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) == FALSE)
+                        {
+                            enemyMoveBattleStatFlag = MapBattleEffectToStatDrop(battleSys, battleCtx, enemyMoveEffect);
+
+                            if (enemyMoveBattleStatFlag != BATTLE_STAT_FLAG_NONE)
+                            {
+                                enemyMoveBattleStatStages = MapBattleEffectToStatDropStages(battleSys, battleCtx, enemyMoveEffect);
+
+                                if (battler2Ability == ABILITY_SIMPLE)
+                                {
+                                    enemyMoveBattleStatStages *= 2;
+                                }
+
+                                if (enemyMoveBattleStatFlag & BattleAI_ParallelStatCheck(battleCtx, moveBattleStatflag))
+                                {
+                                    if (enemyMoveBattleStatStages > moveBattleStatStages)
+                                    {
+                                        detersBoosting = TRUE;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (enemyMoveStatusCondition != MON_CONDITION_FACADE_BOOST)
+                    {
+                        if (Battle_AbilityDetersStatus(battleSys, battleCtx, battler2Ability, enemyMoveStatusCondition) == FALSE)
+                        {
+                            if (enemyMoveStatusCondition & MON_CONDITION_PARALYSIS)
+                            {
+                                if (moveBattleStatFlag & BATTLE_STAT_FLAG_SPEED)
+                                {
+                                    detersBoosting = TRUE;
+                                    break;
+                                }
+                            }
+
+                            if (enemyMoveStatusCondition & MON_CONDITION_BURN)
+                            {
+                                if (moveBattleStatFlag & BATTLE_STAT_FLAG_ATTACK)
+                                {
+                                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler2))
+                                    {
+                                        detersBoosting = TRUE;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    switch (enemyMoveEffect)
+                    {
+                    default:
+                        break;
+
+                    case BATTLE_EFFECT_ENCORE:
+                        if (battler2Ability != ABILITY_MAGIC_BOUNCE)
+                        {
+                            detersBoosting = TRUE;
+                        }
+                        break;
+
+                    case BATTLE_EFFECT_TAUNT:
+                        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler1, battler2, TRUE) == COMPARE_SPEED_FASTER
+                            && battler2Ability != ABILITY_MAGIC_BOUNCE)
+                        {
+                            detersBoosting = TRUE;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (BattleAI_BattleMonCanHazeOrPhaze(battleSys, battleCtx, battler1))
+            {
+                detersBoosting = TRUE;
+            }
+        }
+    }
+
+    if (detersBoosting)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
 /**
  * @brief Push an address for the AI script onto the cursor stack.
  * 
@@ -6017,7 +6210,7 @@ static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, 
                 break;
 
             case ABILITY_HYPER_CUTTER:
-                if (MapBattleEffectToStatDrop(battleCtx, effect) & BATTLE_STAT_FLAG_ATTACK) {
+                if (MapBattleEffectToStatDrop(battleSys, battleCtx, effect) & BATTLE_STAT_FLAG_ATTACK) {
                     result = TRUE;
                 }
                 break;
