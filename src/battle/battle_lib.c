@@ -15451,6 +15451,8 @@ int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect)
         case BATTLE_EFFECT_RAISE_ATK_WHEN_HIT:
         case BATTLE_EFFECT_RAISE_ATTACK_HIT:
         case BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP:
+        case BATTLE_EFFECT_HOWL:
+        case BATTLE_EFFECT_MEDITATE:
             battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
             break;
 
@@ -15470,6 +15472,13 @@ int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect)
         case BATTLE_EFFECT_SP_ATK_DOWN_2:
         case BATTLE_EFFECT_RAISE_SP_ATK_HIT:
             battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
+            break;
+
+        case BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN:
+            if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE)
+            {
+                battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
+            }
             break;
 
         // Special Defense
@@ -15502,7 +15511,13 @@ int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect)
 
         // Attack and Defense
         case BATTLE_EFFECT_ATK_DEF_UP:
+        case BATTLE_EFFECT_CURSE:
             battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_DEF;
+            break;
+
+        // Attack and Special Attack
+        case BATTLE_EFFECT_GROWTH:
+            battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_SPATK;
             break;
 
         // Attack and Speed
