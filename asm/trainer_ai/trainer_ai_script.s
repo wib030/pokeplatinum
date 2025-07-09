@@ -1812,8 +1812,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Expert_PsychUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_MirrorCoat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurnNoInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_ChargeTurnNoInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_UnusedSolarbeam
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_SolarBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLY, Expert_ChargeTurnWithInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Expert_Spikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
@@ -4814,14 +4813,7 @@ Expert_ChargeTurnNoInvuln:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_ChargeTurnNoInvuln_CheckForSunnyWeather
     GoTo Expert_ChargeTurnNoInvuln_CheckForPowerHerb
-
-Expert_ChargeTurnNoInvuln_CheckForSunnyWeather:
-    LoadCurrentWeather 
-    IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_ChargeTurnNoInvuln_CheckForPowerHerb
-    AddToMoveScore 2
-    GoTo Expert_ChargeTurnNoInvuln_End
 
 Expert_ChargeTurnNoInvuln_CheckForPowerHerb:
     IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnNoInvuln_ScorePlus2
@@ -4843,22 +4835,74 @@ Expert_ChargeTurnNoInvuln_ScoreMinus2:
 Expert_ChargeTurnNoInvuln_End:
     PopOrEnd 
 
-Expert_UnusedSolarbeam:
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_UnusedSolarbeam_TryScoreMinus3
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_UnusedSolarbeam_TryScoreMinus3
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_UnusedSolarbeam_TryScoreMinus3
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_UnusedSolarbeam_TryScoreMinus3
-    IfLoadedNotEqualTo AI_WEATHER_RAINING, Expert_UnusedSolarbeam_End
+Expert_SolarBeam:
+    ; If move is resisted or immune, score -1 to -10.
+    ; 
+    ; 25% chance for score +1 if move is neutral or better.
+    ;
+    ; If using solar beam to boost is feasible, score +1.
+    ; Otherwise, score -3.
+    ;
+    ; If using solar beam as a coverage move for cheesing, score -3
+    ; if the move is not super effective.
+    ;
+    ; If solar beam goes without charging, 50% chance for score +1.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SolarBeam_ScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_SolarBeam_ScoreMinus2
+    IfRandomLessThan 192, Expert_SolarBeam_CheckBoost
     AddToMoveScore 1
-    GoTo Expert_UnusedSolarbeam_End
+    GoTo Expert_SolarBeam_CheckBoost
 
-Expert_UnusedSolarbeam_TryScoreMinus3:
-    IfRandomLessThan 50, Expert_UnusedSolarbeam_End
+Expert_SolarBeam_ScoreMinus3:
+    AddToMoveScore -1
+    IfRandomLessThan 12, Expert_SolarBeam_CheckBoost
+    AddToMoveScore -1
+    IfRandomLessThan 64, Expert_SolarBeam_CheckBoost
+    AddToMoveScore -1
+    GoTo Expert_SolarBeam_CheckBoost
+
+Expert_SolarBeam_ScoreMinus2:
+    AddToMoveScore -1
+    IfRandomLessThan 12, Expert_SolarBeam_CheckBoost
+    AddToMoveScore -1
+    GoTo Expert_SolarBeam_CheckBoost
+
+Expert_SolarBeam_CheckBoost:
+    LoadHeldItemEffect
+    IfLoadedEqualTo HOLD_EFFECT_CHARGE_SKIP, Expert_SolarBeam_YoloCoverMove
+    LoadCurrentWeather
+    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_SolarBeam_NoBoost
+    IfCanHazeOrPhaze AI_BATTLER_DEFENDER, Expert_SolarBeam_DeincentivizeBoost
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_SolarBeam_DeincentivizeBoost
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_UNAWARE, Expert_SolarBeam_DeincentivizeBoost
+    IfRandomLessThan 12, Expert_SolarBeam_End
+    AddToMoveScore 1
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SIMPLE, ScorePlus2
+    GoTo Expert_SolarBeam_End
+
+Expert_SolarBeam_YoloCoverMove:
+    IfMoveEffectivenessEquals TYPE_MULTI_BASE_DAMAGE, ScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_STAB_DAMAGE, ScoreMinus3
+    AddToMoveScore 1
+    GoTo Expert_SolarBeam_End
+
+Expert_SolarBeam_NoBoost:
+    IfRandomLessThan 128, Expert_SolarBeam_End
+    AddToMoveScore 1
+    GoTo Expert_SolarBeam_End
+
+Expert_SolarBeam_DeincentivizeBoost:
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus10
+    IfRandomLessThan 12, Expert_SolarBeam_End
     AddToMoveScore -3
+    GoTo Expert_SolarBeam_End
 
-Expert_UnusedSolarbeam_End:
-    PopOrEnd 
+Expert_SolarBeam_End:
+    PopOrEnd
 
 Expert_ChargeTurnWithInvuln:
     ; If the attacker is holding a Power Herb, score +2.
@@ -4896,9 +4940,9 @@ Expert_ChargeTurnWithInvuln_ScorePlus1AndEnd:
     GoTo Expert_ChargeTurnWithInvuln_End
 
 Expert_ChargeTurnWithInvuln_CheckConditions:
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_ChargeTurnWithInvuln_TryScorePlus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_ChargeTurnWithInvuln_TryScorePlus1
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_ChargeTurnWithInvuln_TryScorePlus1
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY_POISON, Expert_ChargeTurnWithInvuln_TryScoreMinus1
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_ChargeTurnWithInvuln_TryScoreMinus1
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_ChargeTurnWithInvuln_TryScoreMinus1
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_ChargeTurnWithInvuln_CheckSandImmuneType
     IfLoadedEqualTo AI_WEATHER_HAILING, Expert_ChargeTurnWithInvuln_CheckHailImmuneType
@@ -4912,6 +4956,9 @@ Expert_ChargeTurnWithInvuln_CheckSandImmuneType:
     GoTo Expert_ChargeTurnWithInvuln_CompareSpeed
 
 Expert_ChargeTurnWithInvuln_CheckHailImmuneType:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_ICE_BODY, Expert_ChargeTurnWithInvuln_CompareSpeed
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_ChargeTurnWithInvuln_CompareSpeed
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
     IfLoadedEqualTo TYPE_ICE, Expert_ChargeTurnWithInvuln_TryScorePlus1
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
@@ -4923,6 +4970,11 @@ Expert_ChargeTurnWithInvuln_CompareSpeed:
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
     LoadEffectOfLoadedMove 
     IfLoadedNotEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_ChargeTurnWithInvuln_TryScorePlus1
+    GoTo Expert_ChargeTurnWithInvuln_End
+
+Expert_ChargeTurnWithInvuln_TryScoreMinus1:
+    IfRandomLessThan 12, Expert_ChargeTurnWithInvuln_End
+    AddToMoveScore -1
     GoTo Expert_ChargeTurnWithInvuln_End
 
 Expert_ChargeTurnWithInvuln_TryScorePlus1:
@@ -4986,6 +5038,7 @@ Expert_FakeOut_End:
 Expert_SpitUp:
     ; If the attacker''s Stockpile count is 2 or higher, 68.75% chance of score +2.
     LoadStockpileCount AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, ScoreMinus10
     IfLoadedLessThan 2, Expert_SpitUp_End
     IfRandomLessThan 80, Expert_SpitUp_End
     AddToMoveScore 2
@@ -5000,13 +5053,13 @@ Expert_Hail:
     ;
     ; If the attacker has the ability Ice Body, additional score +2.
     LoadCurrentWeather 
-    IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_Hail_TryScorePlus10
+    IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_Hail_TryScorePlus5
     GoTo Expert_Hail_End
 
-Expert_Hail_TryScorePlus10:
-    AddToMoveScore 3
+Expert_Hail_TryScorePlus5:
+    AddToMoveScore 2
     IfRandomLessThan 64, Expert_Hail_CheckBlizzard
-    AddToMoveScore 7
+    AddToMoveScore 3
     GoTo Expert_Hail_CheckBlizzard
 
 Expert_Hail_CheckBlizzard:
@@ -5044,7 +5097,7 @@ Expert_FocusPunch:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_FocusPunch_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_FocusPunch_ScoreMinus1
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_FocusPunch_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus5
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus3
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_FocusPunch_ScorePlus2
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_FocusPunch_TryScorePlus1
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_FocusPunch_TryScorePlus1
