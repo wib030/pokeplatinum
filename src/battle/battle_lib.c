@@ -15550,6 +15550,85 @@ int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect)
     return battleStatFlag;
 }
 
+int MapBattleEffectToStatBoostStages(BattleContext* battleCtx, int effect)
+{
+    int numStages;
+
+    numStages = 0;
+
+    switch (effect)
+    {
+    default:
+        break;
+
+    case BATTLE_EFFECT_ATK_UP:
+    case BATTLE_EFFECT_RAISE_ATK_WHEN_HIT:
+    case BATTLE_EFFECT_RAISE_ATTACK_HIT:
+    case BATTLE_EFFECT_DEF_UP:
+    case BATTLE_EFFECT_RAISE_DEF_HIT:
+    case BATTLE_EFFECT_CHARGE_TURN_DEF_UP:
+    case BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER:
+    case BATTLE_EFFECT_SP_ATK_UP:
+    case BATTLE_EFFECT_RAISE_SP_ATK_HIT:
+    case BATTLE_EFFECT_SP_DEF_UP:    
+    case BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER:
+    case BATTLE_EFFECT_SPEED_UP:
+    case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+    case BATTLE_EFFECT_ACC_UP:
+    case BATTLE_EFFECT_EVA_UP:
+    case BATTLE_EFFECT_ATK_DEF_UP:
+    case BATTLE_EFFECT_ATK_SPD_UP:
+    case BATTLE_EFFECT_STOCKPILE:
+    case BATTLE_EFFECT_DEF_SPD_UP:
+    case BATTLE_EFFECT_SP_ATK_SP_DEF_UP:
+    case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+    case BATTLE_EFFECT_HOWL:
+    case BATTLE_EFFECT_MEDITATE:
+    case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
+    case BATTLE_EFFECT_CURSE:
+        numStages = 1;
+        break;
+
+    case BATTLE_EFFECT_ATK_UP_2:
+    case BATTLE_EFFECT_DEF_UP_2:
+    case BATTLE_EFFECT_SP_ATK_UP_2:
+    case BATTLE_EFFECT_SP_DEF_UP_2:
+    case BATTLE_EFFECT_SPEED_UP_2:
+    case BATTLE_EFFECT_ACC_UP_2:
+    case BATTLE_EFFECT_EVA_UP_2:
+    case BATTLE_EFFECT_EVA_UP_2_MINIMIZE:
+    case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+    case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+        numStages = 2;
+        break;
+
+    case BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP:
+        numStages = 6;
+        break;
+
+    case BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN:
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+        {
+            numStages = 1;
+        }
+        break;
+
+    case BATTLE_EFFECT_GROWTH:
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+        {
+            numStages = 2;
+        }
+        else
+        {
+            numStages = 1;
+        }
+        break;
+
+    }
+
+    return numStages;
+}
+
 
 static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
 {

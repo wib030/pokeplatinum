@@ -1652,6 +1652,16 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect);
 int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect);
 
 /**
+ * @brief   Map the given battle effect to the number of stat stages it boosts the
+ *          stat by.
+ *
+ * @param battleCtx
+ * @param effect    Battle effect which should be mapped to a number of stat stages.
+ * @return The number of stat stages that the boosting move will result in.
+ */
+int MapBattleEffectToStatBoostStages(BattleContext* battleCtx, int effect);
+
+/**
 * @brief Calculate the entry hazards damage for a party Pokemon in the given slot
 *
 * @param battleSys
