@@ -1636,11 +1636,12 @@ int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect);
 /**
  * @brief Map the given battle effect to an appropriate stat drop.
  * 
+ * @param battleSys
  * @param battleCtx 
  * @param effect    Battle effect which should be mapped to a corresponding stat drop
  * @return The corresponding battle stat flag of the dropped stat
  */
-int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect);
+int MapBattleEffectToStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, int effect);
 
 /**
  * @brief Map the given battle effect to an appropriate stat boost.
@@ -1660,6 +1661,26 @@ int MapBattleEffectToSelfStatBoost(BattleContext *battleCtx, int effect);
  * @return The number of stat stages that the boosting move will result in.
  */
 int MapBattleEffectToStatBoostStages(BattleContext* battleCtx, int effect);
+
+/**
+ * @brief   Map the given battle effect to the number of stat stages it drops the
+ *          stat by.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param effect    Battle effect which should be mapped to a number of stat stages.
+ * @return The number of stat stages that the dropping move will result in.
+ */
+int MapBattleEffectToStatDropStages(BattleSystem* battleSys, BattleContext* battleCtx, int effect);
+
+/**
+ * @brief   Map the given battle stat flag to other stats that compete with it.
+ *
+ * @param battleCtx
+ * @param battleStatFlag    The battleStatFlag to check.
+ * @return The flags of any stats that compete with the input stat flag.
+ */
+int BattleAI_ParallelStatCheck(BattleContext* battleCtx, int battleStatFlag);
 
 /**
 * @brief Calculate the entry hazards damage for a party Pokemon in the given slot

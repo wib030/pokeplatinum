@@ -46,6 +46,7 @@
 #include "battle/battle_display.h"
 #include "battle/battle_io.h"
 #include "data/terrain/to_move.h"
+#include "data/terrain/to_secondary_effect.h"
 #include "data/battle/weight_to_power.h"
 
 static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry);
@@ -15349,7 +15350,7 @@ int MapBattleEffectToStatusCondition(BattleContext *battleCtx, int effect)
     return statusCondition;
 }
 
-int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
+int MapBattleEffectToStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, int effect)
 {
     int battleStatFlag;
 
@@ -15383,7 +15384,6 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
 
         // Special Defense
         case BATTLE_EFFECT_LOWER_SP_DEF_2_HIT:
-        case BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER:
         case BATTLE_EFFECT_LOWER_SP_DEF_HIT:
         case BATTLE_EFFECT_SP_DEF_DOWN_2:
         case BATTLE_EFFECT_SP_DEF_DOWN:
@@ -15395,6 +15395,7 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
         case BATTLE_EFFECT_LOWER_SPEED_HIT:
         case BATTLE_EFFECT_SPEED_DOWN_2:
         case BATTLE_EFFECT_SPEED_DOWN:
+        case BATTLE_EFFECT_BULLDOZE:
             battleStatFlag = BATTLE_STAT_FLAG_SPEED;
             break;
 
@@ -15421,6 +15422,33 @@ int MapBattleEffectToStatDrop(BattleContext *battleCtx, int effect)
         // Attack and Defense
         case BATTLE_EFFECT_ATK_DEF_DOWN:
             battleStatFlag = BATTLE_STAT_FLAG_ATK_AND_DEF;
+            break;
+
+        case BATTLE_EFFECT_SECRET_POWER:
+            int terrain = BattleSystem_Terrain(battleSys);
+
+            switch (terrain)
+            {
+            default:
+                break;
+
+            case TERRAIN_PLAIN:
+            case TERRAIN_SAND:
+                battleStatFlag = BATTLE_STAT_FLAG_ACCURACY;
+                break;
+
+            case TERRAIN_WATER:
+                battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
+                break;
+
+            case TERRAIN_GREAT_MARSH:
+                battleStatFlag = BATTLE_STAT_FLAG_SPEED;
+                break;
+
+            case TERRAIN_BRIDGE:
+                battleStatFlag = BATTLE_STAT_FLAG_EVASION;
+                break;
+            }
             break;
     }
 
@@ -15627,6 +15655,118 @@ int MapBattleEffectToStatBoostStages(BattleContext* battleCtx, int effect)
     }
 
     return numStages;
+}
+
+int MapBattleEffectToStatDropStages(BattleSystem* battleSys, BattleContext* battleCtx, int effect)
+{
+    int numStages;
+
+    numStages = 0;
+
+    switch (effect)
+    {
+    default:
+        break;
+
+    case BATTLE_EFFECT_LOWER_ATTACK_HIT:
+    case BATTLE_EFFECT_ATK_DOWN:
+    case BATTLE_EFFECT_LOWER_DEFENSE_HIT:
+    case BATTLE_EFFECT_DEF_DOWN:
+    case BATTLE_EFFECT_LOWER_SP_ATK_HIT:
+    case BATTLE_EFFECT_SP_ATK_DOWN:
+    case BATTLE_EFFECT_LOWER_SP_DEF_HIT:
+    case BATTLE_EFFECT_SP_DEF_DOWN:
+    case BATTLE_EFFECT_SPEED_DOWN_HIT:
+    case BATTLE_EFFECT_LOWER_SPEED_HIT:
+    case BATTLE_EFFECT_SPEED_DOWN:
+    case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+    case BATTLE_EFFECT_ACC_DOWN:
+    case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
+    case BATTLE_EFFECT_LOWER_EVASION_HIT:
+    case BATTLE_EFFECT_EVA_DOWN:
+    case BATTLE_EFFECT_ATK_DEF_DOWN:
+    case BATTLE_EFFECT_BULLDOZE:
+        numStages = 1;
+        break;
+
+    case BATTLE_EFFECT_ATK_DOWN_2:
+    case BATTLE_EFFECT_DEF_DOWN_2:
+    case BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER:
+    case BATTLE_EFFECT_SP_ATK_DOWN_2:
+    case BATTLE_EFFECT_LOWER_SP_DEF_2_HIT:
+    case BATTLE_EFFECT_SP_DEF_DOWN_2:
+    case BATTLE_EFFECT_SPEED_DOWN_2:
+    case BATTLE_EFFECT_ACC_DOWN_2:
+    case BATTLE_EFFECT_EVA_DOWN_2:
+    case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
+        numStages = 2;
+        break;
+
+    case BATTLE_EFFECT_SECRET_POWER:
+        int terrain = BattleSystem_Terrain(battleSys);
+
+        switch (terrain)
+        {
+        default:
+            break;
+
+        case TERRAIN_PLAIN:
+        case TERRAIN_SAND:
+        case TERRAIN_WATER:
+        case TERRAIN_GREAT_MARSH:
+        case TERRAIN_BRIDGE:
+            numStages = 1;
+            break;
+        }
+        break;
+    }
+
+    return numStages;
+}
+
+int BattleAI_ParallelStatCheck(BattleContext* battleCtx, int battleStatFlag)
+{
+    int parallelStatFlag;
+
+    parallelStatFlag = BATTLE_STAT_FLAG_NONE;
+
+    // Early exit if nothing to check
+    if (battleStatFlag == BATTLE_STAT_FLAG_NONE)
+    {
+        return parallelStatFlag;
+    }
+
+    if (battleStatFlag & BATTLE_STAT_FLAG_ATTACK)
+    {
+        parallelStatFlag |= (BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK | BATTLE_STAT_FLAG_DEFENSE);
+    }
+
+    if (battleStatFlag & BATTLE_STAT_FLAG_DEFENSE)
+    {
+        parallelStatFlag |= (BATTLE_STAT_FLAG_DEFENSE | BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK);
+    }
+
+    if (battleStatFlag & BATTLE_STAT_FLAG_SPEED)
+    {
+        parallelStatFlag |= BATTLE_STAT_FLAG_SPEED;
+    }
+
+    if (battleStatFlag & BATTLE_STAT_FLAG_SP_ATTACK)
+    {
+        parallelStatFlag |= (BATTLE_STAT_FLAG_SP_ATTACK | BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_DEFENSE);
+    }
+
+    if (battleStatFlag & BATTLE_STAT_FLAG_SP_DEFENSE)
+    {
+        parallelStatFlag |= (BATTLE_STAT_FLAG_SP_DEFENSE | BATTLE_STAT_FLAG_SP_ATTACK | BATTLE_STAT_FLAG_ATTACK);
+    }
+
+    if (battleStatFlag & (BATTLE_STAT_FLAG_ACCURACY | BATTLE_STAT_FLAG_EVASION))
+    {
+        parallelStatFlag |= (BATTLE_STAT_FLAG_ACCURACY | BATTLE_STAT_FLAG_EVASION);
+    }
+
+    return parallelStatflag;
 }
 
 
@@ -18603,7 +18743,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
         moveStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
         moveFieldEffect = MapBattleEffectToFieldCondition(battleCtx, moveEffect);
-        moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleCtx, moveEffect);
+        moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect);
 
         switch (monAbility)
         {
@@ -19454,7 +19594,7 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
             moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
             moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
             moveSelfStatBoostStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
-            moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleCtx, moveEffect);
+            moveEnemyStatDropStatFlag = MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect);
 
             if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                 && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
