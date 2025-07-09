@@ -5853,7 +5853,7 @@ Expert_KnockOff:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_RATTLED, ScoreMinus2
     IfLoadedEqualTo ABILITY_UNBURDEN, ScoreMinus10
-    LoadHeldItem
+    LoadHeldItem AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo ITEM_NONE, Expert_KnockOff_TryScorePlus1
     IfRandomLessThan 128, Expert_KnockOff_End
     AddToMoveScore -1
@@ -6065,7 +6065,7 @@ Expert_Overheat_CheckEffectiveness:
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, ScoreMinus3
     FlagMoveDamageScore FALSE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus10
-    IfHPPercentLessThan 5, ScorePlus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 5, ScorePlus2
     IfRandomLessThan 85, Expert_Overheat_End
     AddToMoveScore 1
     GoTo Expert_Overheat_End
