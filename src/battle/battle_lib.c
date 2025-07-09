@@ -9625,6 +9625,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 					movePower *= 2;
 				}
                 break;
+				
+			case BATTLE_EFFECT_REMOVE_SCREENS:
+				if ((battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_REFLECT)
+				|| (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_LIGHT_SCREEN))
+				{
+					movePower = movePower * 3 / 2;
+				}
+                break;
 
             case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
                 int monWeight = battleCtx->battleMons[defender].weight;
