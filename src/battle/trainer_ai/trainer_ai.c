@@ -426,6 +426,7 @@ static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battl
 static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -602,7 +603,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfCanHazeOrPhaze,
     AICmd_IfHasStatusThreat,
     AICmd_IfBattlerDetersBoosting,
-    AICmd_LoadSleepTurns
+    AICmd_LoadSleepTurns,
+    AICmd_IfCurrentMoveRevealed
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4425,6 +4427,18 @@ static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleC
     AI_CONTEXT.calcTemp = sleepTurns;
 
 }
+
+static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (MOVE_DATA(AI_CONTEXT.move).pp > battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot])
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
 
 /**
  * @brief Push an address for the AI script onto the cursor stack.
