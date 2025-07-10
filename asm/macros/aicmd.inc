@@ -627,13 +627,13 @@
     .long \battler
     .endm
 
-    .macro IfBattlerHasPhysicalAttack battler, jump
+    .macro IfBattlerIsPhysicalAttacker battler, jump
     .long 109
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasSpecialAttack battler, jump
+    .macro IfBattlerIsSpecialAttacker battler, jump
     .long 110
     .long \battler
     .long (\jump-.) / 4 - 1

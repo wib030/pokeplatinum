@@ -405,8 +405,8 @@ static void AICmd_CheckIfHighestDamageWithPartner(BattleSystem *battleSys, Battl
 static void AICmd_IfBattlerFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerIsSpecialAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -581,8 +581,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerFainted,
     AICmd_IfBattlerNotFainted,
     AICmd_LoadAbility,
-    AICmd_IfBattlerHasPhysicalAttack,
-    AICmd_IfBattlerHasSpecialAttack,
+    AICmd_IfBattlerIsPhysicalAttacker,
+    AICmd_IfBattlerIsSpecialAttacker,
     AICmd_IfBattlerHasStatusAttack,
     AICmd_IfBattlerHasNoPhysicalAttack,
     AICmd_IfBattlerHasNoSpecialAttack,
@@ -2782,7 +2782,7 @@ static void AICmd_IfBattlerHasEqualStat(BattleSystem *battleSys, BattleContext *
 
 // Conditional jump in trainer_ai_script if battler has a physical move 
 
-static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx)
+static void AICmd_IfBattlerIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
 
@@ -2791,6 +2791,12 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
     u8 battler = AIScript_Battler(battleCtx, inBattler);
     int i;
 
+    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+
+    /*
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -2847,6 +2853,7 @@ static void AICmd_IfBattlerHasPhysicalAttack(BattleSystem *battleSys, BattleCont
         default:
             break;
     }
+    */
 }
 
 // Conditional jump in trainer_ai_script if battler has no physical moves
@@ -2920,7 +2927,7 @@ static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleCo
 
 // Conditional jump in trainer_ai_script if battler has a special move 
 
-static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx)
+static void AICmd_IfBattlerIsSpecialAttacker(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
 
@@ -2929,6 +2936,12 @@ static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleConte
     u8 battler = AIScript_Battler(battleCtx, inBattler);
     int i;
 
+    if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+
+    /*
     switch (inBattler) {
         case AI_BATTLER_ATTACKER:
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -2973,6 +2986,7 @@ static void AICmd_IfBattlerHasSpecialAttack(BattleSystem *battleSys, BattleConte
         default:
             break;
     }
+    */
 }
 
 // Conditional jump in trainer_ai_script if battler has no special moves
