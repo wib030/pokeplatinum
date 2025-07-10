@@ -13767,7 +13767,7 @@ static BOOL BtlCmd_RollSleepTurns(BattleSystem *battleSys, BattleContext *battle
 	int sleepTurns = 3;
 	
 	int oneTurnChance = 25; //25% chance
-	int twoTurnChance = 50; // 25% chance
+	int twoTurnChance = 75; // 25% chance
 
     // Decrease the sleep turn amount if these conditions are met
     if (sleepRoll < twoTurnChance)
