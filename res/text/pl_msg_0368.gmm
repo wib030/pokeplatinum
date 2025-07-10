@@ -5438,4 +5438,40 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} can’t\nsleep due to sleep clause!</language>
 	</row>
+	<row id="pl_msg_00000368_01356" index="1356">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s paralysis faded away.</language>
+	</row>
+	<row id="pl_msg_00000368_01357" index="1357">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s paralysis faded\naway.</language>
+	</row>
+	<row id="pl_msg_00000368_01358" index="1358">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s paralysis faded\naway.</language>
+	</row>
+	<row id="pl_msg_00000368_01359" index="1359">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s burn faded away.</language>
+	</row>
+	<row id="pl_msg_00000368_01360" index="1360">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s burn faded\naway.</language>
+	</row>
+	<row id="pl_msg_00000368_01361" index="1361">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s burn faded\naway.</language>
+	</row>
+	<row id="pl_msg_00000368_01362" index="1362">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s status faded away.</language>
+	</row>
+	<row id="pl_msg_00000368_01363" index="1363">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s status faded\naway.</language>
+	</row>
+	<row id="pl_msg_00000368_01364" index="1364">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s status faded\naway.</language>
+	</row>
 </body>
