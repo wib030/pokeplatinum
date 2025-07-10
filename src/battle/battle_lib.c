@@ -10160,11 +10160,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             defenseStage = 0;
             spDefenseStage = 0;
             break;
-			
-		case ABILITY_AWARE:
-			attackStage = 0;
-			spAttackStage = 0;
-			break;
 
         case ABILITY_RIVALRY:
             if (attackerParams.gender == defenderParams.gender
@@ -10351,11 +10346,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 attackStage = 0;
                 spAttackStage = 0;
                 break;
-				
-			case ABILITY_AWARE:
-				defenseStage = 0;
-				spDefenseStage = 0;
-            break;
 
             case ABILITY_FLOWER_GIFT:
                 if (NO_CLOUD_NINE) {
@@ -10700,6 +10690,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             attackStage = 0;
         }
     }
+	
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE))
+	{
+		attackStage = 0;
+        spAttackStage = 0;
+		defenseStage = 0;
+        spDefenseStage = 0;
+	}
 
     attackStage += 6;
     defenseStage += 6;
@@ -11833,11 +11831,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             defenseStage = 0;
             spDefenseStage = 0;
             break;
-			
-		case ABILITY_AWARE:
-			attackStage = 0;
-			spAttackStage = 0;
-			break;
 
         case ABILITY_RIVALRY:
             if (attackerParams.gender == defenderParams.gender
@@ -12031,11 +12024,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 attackStage = 0;
                 spAttackStage = 0;
                 break;
-				
-			case ABILITY_AWARE:
-				defenseStage = 0;
-				spDefenseStage = 0;
-            break;
 
             case ABILITY_FLOWER_GIFT:
                 if (NO_CLOUD_NINE) {
@@ -12359,6 +12347,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             attackStage = 0;
         }
     }
+	
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE))
+	{
+		attackStage = 0;
+        spAttackStage = 0;
+		defenseStage = 0;
+        spDefenseStage = 0;
+	}
 
     attackStage += 6;
     defenseStage += 6;
@@ -18046,7 +18042,8 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                 if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
                     if ((defenderAbility == ABILITY_DEFIANT
                         || defenderAbility == ABILITY_COMPETITIVE)
-                        && monAbility != ABILITY_UNAWARE) {
+                        && monAbility != ABILITY_UNAWARE
+						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
                             moveScore = 0;
                     }
                     else {
@@ -18182,7 +18179,8 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                 }
 
                 if (moveStatFlag != BATTLE_STAT_FLAG_NONE) {
-                    if (defenderAbility != ABILITY_UNAWARE) {
+                    if (defenderAbility != ABILITY_UNAWARE
+					&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
                         if (moveStatFlag & (BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK)) {
                             moveScore = 40;
                         }
@@ -18472,7 +18470,8 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                 if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN) {
                     if ((monAbility == ABILITY_DEFIANT
                         || monAbility == ABILITY_COMPETITIVE)
-                        && defenderAbility != ABILITY_UNAWARE) {
+                        && defenderAbility != ABILITY_UNAWARE
+						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
                             moveScore = 0;
                     }
                     else {
@@ -18630,7 +18629,8 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                 }
 
                 if (moveStatFlag != BATTLE_STAT_FLAG_NONE) {
-                    if (monAbility != ABILITY_UNAWARE) {
+                    if (monAbility != ABILITY_UNAWARE
+					&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
                         if (moveStatFlag & (BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK)) {
                             moveScore = 40;
                         }
@@ -18780,6 +18780,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             break;
 
         case ABILITY_UNAWARE:
+		case ABILITY_AWARE:
             if (moveStatFlag != BATTLE_STAT_FLAG_NONE)
             {
                 moveScore += 20;
@@ -19215,6 +19216,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         break;
 
     case ABILITY_UNAWARE:
+	case ABILITY_AWARE:
         for (i = 0; i < BATTLE_STAT_MAX; i++) {
             if (battleCtx->battleMons[defender].statBoosts[i] > 6)
             {
@@ -19406,7 +19408,8 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         break;
 
     case ABILITY_IMPOSTER:
-        if (defenderAbility != ABILITY_UNAWARE)
+        if (defenderAbility != ABILITY_UNAWARE
+		&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0)
         {
             for (i = 0; i < BATTLE_STAT_MAX; i++) {
                 if (battleCtx->battleMons[defender].statBoosts[i] > 6)

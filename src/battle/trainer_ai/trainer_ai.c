@@ -218,6 +218,7 @@ static const u8 sRemovableAbilities[] = {
 	ABILITY_ROCK_SOLID,
 	ABILITY_SUCTION_CUPS,
 	ABILITY_THIRSTY,
+	ABILITY_AWARE,
     0xFFFF
 };
 
@@ -4232,7 +4233,8 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
     battler1Ability = AI_CONTEXT.battlerAbilities[battler1];
 
     // Early exit for Unaware
-    if (battler1Ability == ABILITY_UNAWARE)
+    if (battler1Ability == ABILITY_UNAWARE
+	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE))
     {
         AIScript_Iter(battleCtx, jump);
     }
@@ -6551,7 +6553,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     // Generic boosts matter regardless of move power
                     if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler)) {
 
-                        if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE) {
+                        if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE
+						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
 
                             if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
@@ -6569,7 +6572,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         // Attacking stat boosts only matter if we are using a regular damaging move
                         if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
 
-                            if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE) {
+                            if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE
+							&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
 
                                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
