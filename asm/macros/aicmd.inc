@@ -639,7 +639,7 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasStatusAttack battler, jump
+    .macro IfBattlerHasStatusMove battler, jump
     .long 111
     .long \battler
     .long (\jump-.) / 4 - 1

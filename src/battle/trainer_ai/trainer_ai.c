@@ -407,7 +407,7 @@ static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *ba
 static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIsSpecialAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasStatusMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoPhysicalAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasNoStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -584,7 +584,7 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadAbility,
     AICmd_IfBattlerIsPhysicalAttacker,
     AICmd_IfBattlerIsSpecialAttacker,
-    AICmd_IfBattlerHasStatusAttack,
+    AICmd_IfBattlerHasStatusMove,
     AICmd_IfBattlerHasNoPhysicalAttack,
     AICmd_IfBattlerHasNoSpecialAttack,
     AICmd_IfBattlerHasNoStatusAttack,
@@ -3051,7 +3051,7 @@ static void AICmd_IfBattlerHasNoSpecialAttack(BattleSystem *battleSys, BattleCon
 
 // Conditional jump in trainer_ai_script if battler has a status move 
 
-static void AICmd_IfBattlerHasStatusAttack(BattleSystem *battleSys, BattleContext *battleCtx)
+static void AICmd_IfBattlerHasStatusMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
 
