@@ -744,6 +744,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro LoadSleepTurns battler
+    .long 129
+    .long \battler
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

@@ -425,6 +425,7 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
 static void AICmd_IfCanHazeOrPhaze(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -600,7 +601,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadBattlerCritStage,
     AICmd_IfCanHazeOrPhaze,
     AICmd_IfHasStatusThreat,
-    AICmd_IfBattlerDetersBoosting
+    AICmd_IfBattlerDetersBoosting,
+    AICmd_LoadSleepTurns
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4388,6 +4390,40 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
     {
         AIScript_Iter(battleCtx, jump);
     }
+}
+
+static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int inBattler = AIScript_Read(battleCtx);
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+    int sleepTurns;
+
+    sleepTurns = 0;
+
+    // 4
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP_2)
+    {
+        sleepTurns = 4;
+    }
+    else
+    {
+        // 2
+        if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP_1)
+        {
+            sleepTurns = 2;
+        }
+
+        // 1 or 3
+        if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP_0)
+        {
+            sleepTurns++;
+        }
+    }
+
+    AI_CONTEXT.calcTemp = sleepTurns;
+
 }
 
 /**
