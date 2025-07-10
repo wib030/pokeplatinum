@@ -1,10 +1,10 @@
 {
     "name": "Marowak",
     "base_stats": {
-        "hp": 60,
+        "hp": 70,
         "attack": 80,
-        "defense": 110,
-        "speed": 45,
+        "defense": 120,
+        "speed": 65,
         "special_attack": 50,
         "special_defense": 80
     },
@@ -35,8 +35,8 @@
         "EGG_GROUP_MONSTER"
     ],
     "abilities": [
-        "ABILITY_ROCK_HEAD",
-        "ABILITY_LIGHTNING_ROD"
+        "ABILITY_SKILL_LINK",
+        "ABILITY_GHOSTLY"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -74,6 +74,7 @@
             "TM54",
             "TM56",
             "TM58",
+			"TM65",
             "TM68",
             "TM71",
             "TM75",
@@ -90,6 +91,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SHADOW_CLAW",
                 "MOVE_GROWL",
                 "MOVE_TAIL_WHIP",
                 "MOVE_BONE_CLUB",
@@ -97,18 +99,25 @@
 				"MOVE_PSYWAVE"
             ],
             "3": "MOVE_TAIL_WHIP",
-            "7": "MOVE_BONE_CLUB",
+            "5": "MOVE_BONE_CLUB",
+			"7": "MOVE_RAGE",
             "11": "MOVE_HEADBUTT",
             "13": "MOVE_LEER",
+			"15": "MOVE_MAGNITUDE",
             "17": "MOVE_FOCUS_ENERGY",
+			"19": "MOVE_FALSE_SWIPE",
             "21": "MOVE_BONEMERANG",
-            "23": "MOVE_RAGE",
-            "27": "MOVE_FALSE_SWIPE",
+			"23": "MOVE_NIGHT_SHADE",
+			"25": "MOVE_FLING",
+			"28": "MOVE_BONE_RUSH",
+			"30": "MOVE_ENDEAVOR",
             "33": "MOVE_THRASH",
-            "37": "MOVE_FLING",
-            "43": "MOVE_BONE_RUSH",
-            "49": "MOVE_ENDEAVOR",
-            "53": "MOVE_DOUBLE_EDGE"
+			"35": "MOVE_CURSE",
+			"37": "MOVE_SWIFT",
+			"40": "MOVE_MEMENTO",
+            "43": "MOVE_DOUBLE_EDGE",
+			"45": "MOVE_PAIN_SPLIT",
+			"53": "MOVE_HEAD_SMASH"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
@@ -116,6 +125,7 @@
             "MOVE_ICY_WIND",
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
+			"MOVE_ICE_PUNCH",
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
             "MOVE_OUTRAGE",

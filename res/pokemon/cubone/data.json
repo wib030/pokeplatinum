@@ -87,21 +87,25 @@
         "level_up": {
             "1": [ 
 				"MOVE_GROWL",
-				"MOVE_PSYWAVE"
+				"MOVE_PSYWAVE",
+				"MOVE_FURY_ATTACK",
+				"MOVE_FAKE_TEARS"
 			],
             "3": "MOVE_TAIL_WHIP",
-            "7": "MOVE_BONE_CLUB",
+            "5": "MOVE_BONE_CLUB",
+			"7": "MOVE_RAGE",
+			"9": "MOVE_HOWL",
             "11": "MOVE_HEADBUTT",
             "13": "MOVE_LEER",
+			"15": "MOVE_MAGNITUDE",
             "17": "MOVE_FOCUS_ENERGY",
+			"19": "MOVE_FALSE_SWIPE",
             "21": "MOVE_BONEMERANG",
-            "23": "MOVE_RAGE",
-            "27": "MOVE_FALSE_SWIPE",
+			"25": "MOVE_FLING",
+			"27": "MOVE_ENDEAVOR",
+			"29": "MOVE_BONE_RUSH",
             "31": "MOVE_THRASH",
-            "33": "MOVE_FLING",
-            "37": "MOVE_BONE_RUSH",
-            "41": "MOVE_ENDEAVOR",
-            "43": "MOVE_DOUBLE_EDGE"
+            "37": "MOVE_DOUBLE_EDGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
