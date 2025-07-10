@@ -4869,7 +4869,7 @@ Expert_SolarBeam_ScoreMinus2:
     GoTo Expert_SolarBeam_CheckBoost
 
 Expert_SolarBeam_CheckBoost:
-    LoadHeldItemEffect
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo HOLD_EFFECT_CHARGE_SKIP, Expert_SolarBeam_YoloCoverMove
     LoadCurrentWeather
     IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_SolarBeam_NoBoost

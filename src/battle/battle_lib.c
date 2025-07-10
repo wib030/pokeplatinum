@@ -15766,7 +15766,7 @@ int BattleAI_ParallelStatCheck(BattleContext* battleCtx, int battleStatFlag)
         parallelStatFlag |= (BATTLE_STAT_FLAG_ACCURACY | BATTLE_STAT_FLAG_EVASION);
     }
 
-    return parallelStatflag;
+    return parallelStatFlag;
 }
 
 

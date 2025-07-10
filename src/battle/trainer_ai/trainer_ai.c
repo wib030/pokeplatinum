@@ -4202,7 +4202,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
     int battler2;
     int i;
     int moveEffect, enemyMoveEffect;
-    int moveBattleStatflag, moveBattleStatStages;
+    int moveBattleStatFlag, moveBattleStatStages;
     int enemyMoveBattleStatFlag, enemyMoveBattleStatStages;
     u8 battler1Ability;
     u8 battler2Ability;
@@ -4241,7 +4241,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
         battler2Ability = AI_CONTEXT.battlerAbilities[battler2];
         move = AI_CONTEXT.move;
         moveEffect = MOVE_DATA(move).effect;
-        moveBattleStatflag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+        moveBattleStatFlag = MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
 
         if (moveBattleStatFlag != BATTLE_STAT_FLAG_NONE)
         {
@@ -4272,7 +4272,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
                         }
 
 
-                        if (enemyMoveBattleStatFlag & BattleAI_ParallelStatCheck(battleCtx, moveBattleStatflag))
+                        if (enemyMoveBattleStatFlag & BattleAI_ParallelStatCheck(battleCtx, moveBattleStatFlag))
                         {
                             if (enemyMoveBattleStatStages > moveBattleStatStages)
                             {
@@ -4299,7 +4299,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
                                     enemyMoveBattleStatStages *= 2;
                                 }
 
-                                if (enemyMoveBattleStatFlag & BattleAI_ParallelStatCheck(battleCtx, moveBattleStatflag))
+                                if (enemyMoveBattleStatFlag & BattleAI_ParallelStatCheck(battleCtx, moveBattleStatFlag))
                                 {
                                     if (enemyMoveBattleStatStages > moveBattleStatStages)
                                     {
