@@ -4720,85 +4720,94 @@ Expert_PsychUp_End:
     PopOrEnd 
 
 Expert_MirrorCoat:
-    ; If the opponent is asleep, confused, or infatuated, score -1 and terminate.
+    ; If behind substitute, score -10.
     ;
-    ; If the attacker''s HP <= 30%, 96.1% chance of additional score -1.
+    ; If defender has no special attacks whatsoever, score -30.
     ;
-    ; If the attacker''s HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
+    ; If defender knows Disable, Torment, or Encore, score -2 to -4.
     ;
-    ; If the attacker knows specifically Counter, 60.9% chance of score +4.
+    ; Score +1 if the defender is a special attacker.
     ;
-    ; If the opponent''s last-used move was a Status move:
-    ; - If the opponent is Taunted, 60.9% chance of additional score +1.
-    ; - If the opponent does NOT have a type which is considered a Special type, 49% chance of score +4.
+    ; 75% chance to predict defender wake up turn and get score +1.
+    ; Otherwise, score -3 if the defender is asleep.
     ;
-    ; If the opponent''s last-used move was a Damaging move:
-    ; - If the opponent is Taunted, 60.9% chance of additional score +1.
-    ; - If the last-used move was a Physical move, score -1.
-    ; - If the last-used move was a Special move, 60.9% chance of score +1.
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_MirrorCoat_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_MirrorCoat_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_MirrorCoat_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_MirrorCoat_CheckAboveHalfHP
-    IfRandomLessThan 10, Expert_MirrorCoat_CheckAboveHalfHP
+    ; If defender has a status or physical move, check if we have
+    ; used Mirror Coat yet. If not, 66% chance for score +1.
+    ;
+    ; If defender has status move, check if defender is taunted.
+    ; If defender is taunted, score +1. Otherwise, 25% chance for
+    ; score -1.
+    ;
+    ; If enemy chunks or KOs us, check if we have more than 56%
+    ; HP remaining. If not, 87.5% chance for score -2.
+    IfBattlerHasNoSpecialAttack AI_BATTLER_DEFENDER, ScoreMinus30
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScoreMinus10
+    IfBattlerIsSpecialAttacker AI_BATTLER_DEFENDER, Expert_MirrorCoat_Main
+    IfRandomLessThan 8, Expert_MirrorCoat_Main
+    GoTo ScoreMinus3
+
+Expert_MirrorCoat_Main:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DISABLE, Expert_MirrorCoat_TryScoreMinus4
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TORMENT, Expert_MirrorCoat_TryScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, Expert_MirrorCoat_TryScoreMinus4
+    AddToMoveScore 1
+    IfEnemyCanChunkOrKO Expert_MirrorCoat_CheckHP
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_MirrorCoat_CheckSleepTurns
+    IfBattlerHasStatusMove AI_BATTLER_DEFENDER, Expert_MirrorCoat_HasStatus
+    IfBattlerIsPhysicalAttacker AI_BATTLER_DEFENDER, Expert_MirrorCoat_CheckPP
+    IfRandomLessThan 64, Expert_MirrorCoat_End
+    AddToMoveScore 1
+    GoTo Expert_MirrorCoat_End
+
+Expert_MirrorCoat_CheckHP:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 56, Expert_MirrorCoat_TryScoreMinus4
+    IfRandomLessThan 32, Expert_MirrorCoat_End
+    AddToMoveScore -2
+    GoTo Expert_MirrorCoat_End
+
+Expert_MirrorCoat_HasStatus:
+    AddToMoveScore 1
+    IfTargetIsTaunted Expert_MirrorCoat_CheckPP
     AddToMoveScore -1
-
-Expert_MirrorCoat_CheckAboveHalfHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_MirrorCoat_CheckLastUsedMove
-    IfRandomLessThan 100, Expert_MirrorCoat_CheckLastUsedMove
+    IfRandomLessThan 192, Expert_MirrorCoat_CheckPP
     AddToMoveScore -1
+    GoTo Expert_MirrorCoat_CheckPP
 
-Expert_MirrorCoat_CheckLastUsedMove:
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_COUNTER, Expert_MirrorCoat_TryScorePlus4
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
-    IfLoadedEqualTo 0, Expert_MirrorCoat_TryScorePlus1
-    IfTargetIsNotTaunted Expert_MirrorCoat_CheckSpecialMove
-    IfRandomLessThan 100, Expert_MirrorCoat_CheckSpecialMove
+Expert_MirrorCoat_CheckSleepTurns:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_MirrorCoat_SleepTalk
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, ScorePlus1
+    LoadSleepTurns AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, ScoreMinus3
+    IfRandomLessThan 64, ScoreMinus3
     AddToMoveScore 1
-
-Expert_MirrorCoat_CheckSpecialMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_SPECIAL, Expert_MirrorCoat_ScoreMinus1
-    IfRandomLessThan 100, Expert_MirrorCoat_End2
+    IfRandomLessThan 64, ScoreMinus1
     AddToMoveScore 1
-    GoTo Expert_MirrorCoat_End2
+    GoTo Expert_MirrorCoat_End
 
-Expert_MirrorCoat_TryScorePlus1:
-    IfTargetIsNotTaunted Expert_MirrorCoat_CheckOpponentTypes
-    IfRandomLessThan 100, Expert_MirrorCoat_CheckOpponentTypes
+Expert_MirrorCoat_CheckPP:
+    IfCurrentMoveRevealed Expert_MirrorCoat_TryScoreMinus2
+    IfRandomLessThan 85, Expert_MirrorCoat_End
     AddToMoveScore 1
+    GoTo Expert_MirrorCoat_End
 
-Expert_MirrorCoat_CheckOpponentTypes:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedInTable Expert_MirrorCoat_SpecialTypes, Expert_MirrorCoat_End2
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedInTable Expert_MirrorCoat_SpecialTypes, Expert_MirrorCoat_End2
-    IfRandomLessThan 50, Expert_MirrorCoat_End2
+Expert_MirrorCoat_SleepTalk:
+    IfTargetIsTaunted ScoreMinus30
+    IfRandomLessThan 25, Expert_MirrorCoat_End
+    AddToMoveScore 1
+    GoTo Expert_MirrorCoat_End
 
-Expert_MirrorCoat_TryScorePlus4:
-    IfRandomLessThan 100, Expert_MirrorCoat_End
-    AddToMoveScore 4
+Expert_MirrorCoat_TryScoreMinus4:
+    IfRandomLessThan 25, Expert_MirrorCoat_End
+    AddToMoveScore -4
+    GoTo Expert_MirrorCoat_End
+
+Expert_MirrorCoat_TryScoreMinus2:
+    IfRandomLessThan 128, Expert_MirrorCoat_End
+    AddToMoveScore -2
+    GoTo Expert_MirrorCoat_End
 
 Expert_MirrorCoat_End:
-    PopOrEnd 
-
-Expert_MirrorCoat_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_MirrorCoat_End2:
-    PopOrEnd 
-
-Expert_MirrorCoat_SpecialTypes:
-    TableEntry TYPE_FIRE
-    TableEntry TYPE_WATER
-    TableEntry TYPE_GRASS
-    TableEntry TYPE_ELECTRIC
-    TableEntry TYPE_PSYCHIC
-    TableEntry TYPE_ICE
-    TableEntry TYPE_DRAGON
-    TableEntry TYPE_DARK
-    TableEntry TABLE_END
+    PopOrEnd
 
 Expert_ChargeTurnNoInvuln:
     ; If the opponent resists or is immune to the move, score -2 and terminate.
