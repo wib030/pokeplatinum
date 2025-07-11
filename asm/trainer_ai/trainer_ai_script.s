@@ -3756,14 +3756,14 @@ Expert_DestinyBond:
     ;
     ; If the attacker''s HP > 30%, terminate. Otherwise, 60.9% chance of additional score +2.
 	IfDestinyBondFails AI_BATTLER_ATTACKER, Expert_DestinyBond_Minus10
+    IfEnemyCanChunkOrKO Expert_DestinyBond_Yolo
     AddToMoveScore -1
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DestinyBond_End
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_DestinyBond_End
     IfRandomLessThan 128, Expert_DestinyBond_CheckUserMediumHP
     AddToMoveScore 1
 
 Expert_DestinyBond_CheckUserMediumHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_DestinyBond_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 55, Expert_DestinyBond_End
     IfRandomLessThan 128, Expert_DestinyBond_CheckUserLowHP
     AddToMoveScore 1
 
@@ -3775,6 +3775,14 @@ Expert_DestinyBond_CheckUserLowHP:
 Expert_DestinyBond_Minus10:
 	AddToMoveScore -10
     PopOrEnd 
+
+Expert_DestinyBond_Yolo:
+    IfRandomLessThan 100, Expert_DestinyBond_End
+    AddToMoveScore 1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_DestinyBond_End
+    IfRandomLessThan 12, Expert_DestinyBond_End
+    AddToMoveScore 3
+    GoTo Expert_DestinyBond_End
 	
 Expert_DestinyBond_End:
     PopOrEnd
@@ -3818,9 +3826,40 @@ Expert_Reversal_End:
 Expert_HealBell:
     ; If neither the attacker nor any of its party members have a non-volatile status condition,
     ; score -5.
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_HealBell_End
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TAUNT, Expert_HealBell_CheckSpeed
+    GoTo Expert_HealBell_Main
+
+Expert_HealBell_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_HealBell_SlowIntoTaunt
+    GoTo Expert_HealBell_Main
+
+Expert_HealBell_SlowIntoTaunt:
+    IfRandomLessThan 32, Expert_HealBell_Main
+    AddToMoveScore -1
+    GoTo Expert_HealBell_Main
+
+Expert_HealBell_Main:
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_HealBell_CheckStatusThreat
     IfPartyMemberStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_HealBell_End
-    AddToMoveScore -5
+    AddToMoveScore -10
+    GoTo Expert_HealBell_End
+
+Expert_HealBell_CheckStatusThreat:
+    IfHasStatusThreat AI_BATTLER_DEFENDER, Expert_HealBell_VsStatuser
+    IfRandomLessThan 12, Expert_HealBell_End
+    AddToMoveScore 3
+    GoTo Expert_HealBell_End
+
+Expert_HealBell_VsStatuser:
+    AddToMoveScore 1
+    IfRandomLessThan 85, Expert_HealBell_End
+    AddToMoveScore -2
+    GoTo Expert_HealBell_End
+
+Expert_HealBell_PartyStatusBonus:
+    IfRandomLessThan 2, Expert_HealBell_End
+    AddToMoveScore 3
+    GoTo Expert_HealBell_End
 
 Expert_HealBell_End:
     PopOrEnd 
@@ -3888,9 +3927,11 @@ Expert_Curse:
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
     IfLoadedEqualTo TYPE_GHOST, Expert_Curse_GhostCheckHP
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_Curse_ChanceForScoreMinus1
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_Curse_ChanceForScoreMinus1
+    IfBattlerDetersBoosting AI_BATTLER_DEFENDER, ScoreMinus3
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_Curse_ChanceForScoreMinus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 75, Expert_Curse_ChanceForScoreMinus1
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_Curse_ChanceForScoreMinus2
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_Curse_ChanceForScoreMinus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_GYRO_BALL, Expert_Curse_HighChanceScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_TRICK_ROOM, Expert_Curse_HighChanceScorePlus1
     GoTo Expert_Curse_FlipCoinScorePlus1
@@ -3901,7 +3942,7 @@ Expert_Curse_ChanceForScoreMinus1:
     GoTo Expert_Curse_End
 
 Expert_Curse_ChanceForScoreMinus2:
-    IfRandomLessThan 170, Expert_Curse_End
+    IfRandomLessThan 26, Expert_Curse_End
     AddToMoveScore -2
     GoTo Expert_Curse_End
 
@@ -3925,8 +3966,20 @@ Expert_Curse_CheckDefenseStageAnyBoosts:
     GoTo Expert_Curse_End
 
 Expert_Curse_GhostCheckHP:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Curse_GhostLowHealthBonus
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 80, Expert_Curse_End
     AddToMoveScore -1
+    GoTo Expert_Curse_End
+
+Expert_Curse_GhostLowHealthBonus:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 12, ScorePlus10
+    IfRandomLessThan 128, Expert_Curse_End
+    AddToMoveScore 1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 33, Expert_Curse_End
+    IfRandomLessThan 32, Expert_Curse_End
+    AddToMoveScore 1
+    GoTo Expert_Curse_End
+
 
 Expert_Curse_End:
     PopOrEnd 
@@ -4225,16 +4278,18 @@ Expert_Protect_End:
     PopOrEnd 
 
 Expert_Foresight:
-    ; If the defender has a Ghost typing, 47.3% chance of score +2.
+    ; If the defender has a Ghost typing, 98.5% chance of score +2.
     ;
-    ; If the target''s Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
+    ; If the target''s Evasion stat stage is at +2 or higher, 68.75% chance of score +2.
     ;
     ; Otherwise, score -2.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_GHOST, Expert_Foresight_FirstRoll
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_GHOST, Expert_Foresight_FirstRoll
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_Foresight_SecondRoll
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_GHOSTLY, Expert_Foresight_FirstRoll
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Foresight_SecondRoll
     AddToMoveScore -2
     GoTo Expert_Foresight_End
 
@@ -4242,7 +4297,7 @@ Expert_Foresight_FirstRoll:
     IfRandomLessThan 80, Expert_Foresight_End
 
 Expert_Foresight_SecondRoll:
-    IfRandomLessThan 80, Expert_Foresight_End
+    IfRandomLessThan 12, Expert_Foresight_End
     AddToMoveScore 2
 
 Expert_Foresight_End:
