@@ -13815,7 +13815,7 @@ static BOOL BtlCmd_CheckSleepClause(BattleSystem *battleSys, BattleContext *batt
 	
 	for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, battler)); i++)
 	{
-		if (battleCtx->sideConditions[battlerSide].sleepClauseMask & FlagIndex(battleCtx->selectedPartySlot[i]))
+		if (battleCtx->sideConditions[battlerSide].sleepClauseMask & FlagIndex(i))
 		{
 			sleepClauseActive = TRUE;
 			break;

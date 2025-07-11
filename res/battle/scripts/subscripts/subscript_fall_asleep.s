@@ -163,4 +163,7 @@ _337:
 _347:
     // {0} can’t sleep due to sleep clause!
     PrintMessage pl_msg_00000368_01353, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
-    GoTo _330
+    Wait 
+    WaitButtonABTime 60
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
+	End
