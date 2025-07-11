@@ -428,6 +428,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
 static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -606,7 +607,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerDetersBoosting,
     AICmd_LoadSleepTurns,
     AICmd_IfCurrentMoveRevealed,
-    AICmd_IfCanChunkOrKOEnemy
+    AICmd_IfCanChunkOrKOEnemy,
+    AICmd_IfBattlerDetersContactMove
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4448,6 +4450,99 @@ static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* ba
     int jump = AIScript_Read(battleCtx);
 
     if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int battler2;
+    int damage;
+    u8 battler1Side;
+    u32 effectivenessFlags;
+    BOOL detersContact;
+
+    detersContact = FALSE;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.defender;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.attacker;
+        break;
+    }
+
+    battler1Side = Battler_Side(battleSys, battler1);
+
+    if (Battle_BattlerAbilityDetersContactMove(battleSys, battleCtx, battler1, battler2))
+    {
+        // Special routine for advanced AI
+        if ((AI_CONTEXT.thinkingMask & (AI_FLAG_OMNISCIENT | AI_FLAG_PRESCIENT))
+            && battler1 == AI_CONTEXT.defender)
+        {
+            effectivenessFlags = 0;
+
+            moveType = CalcMoveType(battleSys, battleCtx, battler2, battleCtx->battleMons[battler2].heldItem, AI_CONTEXT.move)
+
+            damage = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                AI_CONTEXT.move,
+                battleCtx->sideConditionsMask[battler1Side],
+                battleCtx->fieldConditionsMask,
+                0,
+                moveType,
+                battler1,
+                battler2,
+                1);
+
+            damage = BattleSystem_ApplyTypeChart(battleSys,
+                battleCtx,
+                AI_CONTEXT.move,
+                moveType,
+                battler2,
+                battler1,
+                damage,
+                &effectivenessFlags);
+
+            if ((effectivenessFlags & MOVE_STATUS_IMMUNE)
+                && ((effectivenessFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
+            {
+                damage = 0;
+            }
+
+            // If we have 2HKO or better on current move, ignore contact deterrence
+            if (damage < battleCtx->battleMons[battler1].curHP
+                && damage < battleCtx->battleMons[battler1].maxHP / 2)
+            {
+                detersContact = TRUE;
+            }
+        }
+        else
+        {
+            // We probably want to just ignore this sometimes, so it feels more organic.
+            if (BattleSystem_RandNext(battleSys) % 10)
+            {
+                detersContact = TRUE;
+            }
+        }
+    }
+
+    if (detersContact)
     {
         AIScript_Iter(battleCtx, jump);
     }

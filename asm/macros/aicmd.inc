@@ -759,6 +759,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfBattlerDetersContactMove battler1, jump
+    .long 132
+    .long \battler1
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
