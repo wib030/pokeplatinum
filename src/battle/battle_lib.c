@@ -20737,7 +20737,6 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
     }
 
     moveEffect = MOVE_DATA(move).effect;
-    moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerHeldItem, move);
     moveStatusCondition = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
 
     if (moveEffect == BATTLE_EFFECT_TRANSFER_STATUS)
@@ -20748,6 +20747,8 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
     attackerAbility = BattleMon_Get(battleCtx, attacker, BATTLEMON_ABILITY, NULL);
     attackerHeldItem = BattleMon_Get(battleCtx, attacker, BATTLEMON_HELD_ITEM, NULL);
     attackerHeldItemEffect = BattleSystem_GetItemData(battleCtx, attackerHeldItem, ITEM_PARAM_HOLD_EFFECT);
+
+    moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerHeldItem, move);
 
     // Early exit if the move does not inflict status
     if (moveStatusCondition == MON_CONDITION_NONE)
