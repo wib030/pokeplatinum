@@ -18914,7 +18914,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
         if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
         {
-            if (Battle_TargetAbilityDetersContactMove(battleSys, battleCtx, battler, defender, partyIndicator, partySlot))
+            if (Battle_PartyMonAbilityDetersContactMove(battleSys, battleCtx, battler, defender, partyIndicator, partySlot))
             {
                 moveScore += 10;
             }
@@ -19676,7 +19676,7 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
             }
 
             if (moveEffect == BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
-                if (Battle_TargetAbilityDetersContactMove(battleSys, battleCtx, defender, battler, battler, battler) == TRUE) {
+                if (Battle_PartyMonAbilityDetersContactMove(battleSys, battleCtx, defender, battler, battler, battler) == TRUE) {
                         moveScore /= 4;
                 }
                 else {
@@ -19757,7 +19757,7 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
     return score;
 }
 
-BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int attacker, int partyIndicator, int partySlot)
+BOOL Battle_PartyMonAbilityDetersContactMove(BattleSystem *battleSys, BattleContext *battleCtx, int defender, int attacker, int partyIndicator, int partySlot)
 {
     u8 defenderAbility, defenderGender, defenderType1, defenderType2;
     u8 attackerGender, attackerType1, attackerType2, attackerAbility;
@@ -19813,8 +19813,6 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
         attackerHeldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
         attackerHeldItemEffect = BattleSystem_GetItemData(battleCtx, attackerHeldItem, ITEM_PARAM_HOLD_EFFECT);
     }
-
-    
 
     if (attackerHeldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH) {
         return FALSE;
@@ -19901,8 +19899,11 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
             break;
 
         case ABILITY_STEADFAST:
-            if (battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_SPEED] == 12) {
-                break;
+            if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) == FALSE)
+            {
+                if (battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_SPEED] == 12) {
+                    break;
+                }
             }
 
             result = TRUE;
@@ -19917,8 +19918,11 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
             break;
 
         case ABILITY_COTTON_DOWN:
-            if (battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_SPEED] <= 3) {
-                break;
+            if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, attackerAbility, BATTLE_STAT_FLAG_ATTACK) == FALSE)
+            {
+                if (battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ATTACK] <= 3) {
+                    break;
+                }
             }
 
             result = TRUE;
@@ -19933,9 +19937,177 @@ BOOL Battle_TargetAbilityDetersContactMove(BattleSystem *battleSys, BattleContex
         case ABILITY_SLURP_UP:
             if (attackerHeldItem != ITEM_NONE)
             {
-                result = TRUE;
+                if (BattleSystem_RandNext(battleSys) & 1)
+                {
+                    result = TRUE;
+                }
             }
             break;
+    }
+
+    return result;
+}
+
+BOOL Battle_BattlerAbilityDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx, int defender, int attacker)
+{
+    u8 defenderAbility, defenderGender, defenderType1, defenderType2;
+    u8 attackerGender, attackerType1, attackerType2, attackerAbility;
+    u16 defenderHeldItem;
+    u16 attackerHeldItem;
+    int defenderStatusMask, defenderHeldItemEffect;
+    int attackerStatusMask, attackerHeldItemEffect;
+    BOOL result;
+
+    result = FALSE;
+
+    defenderAbility = battleCtx->battleMons[defender].ability;
+    defenderGender = battleCtx->battleMons[defender].gender;
+    defenderType1 = battleCtx->battleMons[defender].type1;
+    defenderType2 = battleCtx->battleMons[defender].type2;
+    defenderStatusMask = battleCtx->battleMons[defender].status;
+
+    defenderHeldItem = battleCtx->battleMons[defender].heldItem;
+    defenderHeldItemEffect = BattleSystem_GetItemData(battleCtx, defenderHeldItem, ITEM_PARAM_HOLD_EFFECT);
+
+    attackerAbility = battleCtx->battleMons[attacker].ability;
+    attackerGender = battleCtx->battleMons[attacker].gender;
+    attackerType1 = battleCtx->battleMons[attacker].type1;
+    attackerType2 = battleCtx->battleMons[attacker].type2;
+    attackerStatusMask = battleCtx->battleMons[attacker].status;
+
+    attackerHeldItem = battleCtx->battleMons[attacker].heldItem;
+    attackerHeldItemEffect = BattleSystem_GetItemData(battleCtx, attackerHeldItem, ITEM_PARAM_HOLD_EFFECT);
+
+
+    if (attackerHeldItemEffect == HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH) {
+        return FALSE;
+    }
+
+    switch (defenderAbility) {
+    default:
+        break;
+
+    case ABILITY_STATIC:
+        if (attackerStatusMask & MON_CONDITION_ANY) {
+            break;
+        }
+        if (attackerType1 == TYPE_ELECTRIC
+            || attackerType2 == TYPE_ELECTRIC) {
+            break;
+        }
+        if (Battle_AbilityDetersStatus(battleSys, battleCtx, attackerAbility, MON_CONDITION_PARALYSIS)
+            && attackerAbility != ABILITY_MAGIC_BOUNCE) {
+            break;
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_EFFECT_SPORE:
+        if (attackerStatusMask & MON_CONDITION_ANY) {
+            break;
+        }
+        if (attackerType1 == TYPE_GRASS
+            || attackerType2 == TYPE_GRASS) {
+            break;
+        }
+        if (attackerHeldItemEffect == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER) {
+            break;
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_POISON_POINT:
+        if (attackerStatusMask & MON_CONDITION_ANY) {
+            break;
+        }
+        if (attackerType1 == TYPE_POISON
+            || attackerType2 == TYPE_POISON
+            || attackerType1 == TYPE_STEEL
+            || attackerType2 == TYPE_STEEL) {
+            break;
+        }
+        if (Battle_AbilityDetersStatus(battleSys, battleCtx, attackerAbility, MON_CONDITION_POISON)
+            && attackerAbility != ABILITY_MAGIC_BOUNCE) {
+            break;
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_FLAME_BODY:
+        if (attackerStatusMask & MON_CONDITION_ANY) {
+            break;
+        }
+        if (attackerType1 == TYPE_FIRE
+            || attackerType2 == TYPE_FIRE) {
+            break;
+        }
+        if (Battle_AbilityDetersStatus(battleSys, battleCtx, attackerAbility, MON_CONDITION_BURN)
+            && attackerAbility != ABILITY_MAGIC_BOUNCE) {
+            break;
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_FRESH_MILK:
+    case ABILITY_CUTE_CHARM:
+        if (attackerGender == defenderGender
+            || attackerGender == GENDER_NONE
+            || defenderGender == GENDER_NONE) {
+            break;
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_STEADFAST:
+        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) == FALSE)
+        {
+            if (battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_SPEED] == 12) {
+                break;
+            }
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_FREE_SAMPLE:
+        if (Item_IsBerry(battleCtx->battleMons[attacker].heldItem))
+        {
+            result = TRUE;
+        }
+
+        break;
+
+    case ABILITY_COTTON_DOWN:
+        if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, attackerAbility, BATTLE_STAT_FLAG_ATTACK) == FALSE)
+        {
+            if (battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ATTACK] <= 3) {
+                break;
+            }
+        }
+
+        result = TRUE;
+        break;
+
+    case ABILITY_ROUGH_SKIN:
+
+        result = TRUE;
+        break;
+
+    case ABILITY_PICKUP:
+    case ABILITY_SLURP_UP:
+        if (attackerHeldItem != ITEM_NONE)
+        {
+            if (BattleSystem_RandNext(battleSys) & 1)
+            {
+                result = TRUE;
+            }
+        }
+        break;
     }
 
     return result;
