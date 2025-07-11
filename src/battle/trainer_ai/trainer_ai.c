@@ -1843,7 +1843,10 @@ static void AICmd_IfPartyMemberStatus(BattleSystem *battleSys, BattleContext *ba
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
                 && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
                 && (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & statusMask)) {
-            AIScript_Iter(battleCtx, jump);
+            if (Battle_AbilityDetersStatus(battleSys, battleCtx, Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL), statusMask) == FALSE)
+            {
+                AIScript_Iter(battleCtx, jump);
+            }
             return;
         }
     }
@@ -4187,6 +4190,10 @@ static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* batt
                     || Battle_TypeIsImmuneToStatus(battleSys, battleCtx, battler2Type2, moveStatusCondition)
                     || Battle_AbilityDetersStatus(battleSys, battleCtx, battler2Ability, moveStatusCondition))
                 {
+                    hasStatusThreat = FALSE;
+                }
+                else
+                {
                     hasStatusThreat = TRUE;
                     break;
                 }
@@ -4337,7 +4344,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
                         }
                     }
 
-                    if (enemyMoveStatusCondition != MON_CONDITION_FACADE_BOOST)
+                    if (enemyMoveStatusCondition & MON_CONDITION_FACADE_BOOST)
                     {
                         if (Battle_AbilityDetersStatus(battleSys, battleCtx, battler2Ability, enemyMoveStatusCondition) == FALSE)
                         {
