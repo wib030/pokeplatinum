@@ -4365,32 +4365,74 @@ Expert_BatonPass_End:
     PopOrEnd 
 
 Expert_Pursuit:
+    ; If Pursuit kills, score +10.
+    ;
+    ; If defender has Rattled, score -3.
+    ;
+    ; If the defender is trapped, -1 score.
+    ;
+    ;
     ; If it is the attacker''s first turn in battle, 50% chance of additional score +1.
     ;
-    ; If it is NOT the attacker''s first turn in battle and the opponent has a Ghost or Psychic
-    ; typing, 50% chance of additional score +1.
+    ; If the defender can deter contact moves, 50% chance for score -2,
+    ; 50% chance for score -4.
     ;
-    ; If the opponent knows specifically the move U-turn, 50% chance of additional score +1.
+    ; If the defender has a relevant pivoting move, 75% chance for score +1.
+    ;
+    ; If the attacker has an ability that makes Pursuit better, score +1.
+    ; Otherwise, 12.5% chance for score -1.
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, ScorePlus10
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_RATTLED, ScoreMinus3
+    IfTrapped AI_BATTLER_DEFENDER, Expert_Pursuit_TrappedPenalty
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo FALSE, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_PSYCHIC, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_PSYCHIC, Expert_Pursuit_TryScorePlus1
-    GoTo Expert_Pursuit_CheckUturn
+    IfLoadedEqualTo TRUE, Expert_Pursuit_TryScorePlus1
+    IfBattlerDetersContactMove AI_BATTLER_DEFENDER, Expert_Pursuit_DeterContact
+    GoTo Expert_Pursuit_CheckPivot
+
+Expert_Pursuit_TrappedPenalty:
+    IfRandomLessThan 12, Expert_Pursuit_CheckAttackerAbility
+    AddToMoveScore -1
+    GoTo Expert_Pursuit_CheckAttackerAbility
+    
+Expert_Pursuit_DeterContact:
+    AddToMoveScore -2
+    IfRandomLessThan 128, Expert_Pursuit_CheckPivot
+    AddToMoveScore -2
+    GoTo Expert_Pursuit_CheckPivot
 
 Expert_Pursuit_TryScorePlus1:
-    IfRandomLessThan 128, Expert_Pursuit_CheckUturn
+    IfRandomLessThan 128, Expert_Pursuit_CheckPivot
     AddToMoveScore 1
 
-Expert_Pursuit_CheckUturn:
-    IfMoveNotKnown AI_BATTLER_DEFENDER, MOVE_U_TURN, Expert_Pursuit_End
+Expert_Pursuit_CheckPivot:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SWITCH_HIT_NO_ANIM, Expert_Pursuit_PivotMove
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SWITCH_HIT, Expert_Pursuit_PivotMove
+    GoTo Expert_Pursuit_CheckEffectiveness
+
+Expert_Pursuit_PivotMove:
+    IfRandomLessThan 64, Expert_Pursuit_CheckAttackerAbility
+    AddToMoveScore 1
+    GoTo Expert_Pursuit_CheckAttackerAbility
+
+Expert_Pursuit_CheckAttackerAbility:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Pursuit_AttackerAbilities, Expert_Pursuit_AbilityBonus
+    IfRandomLessThan 224, Expert_Pursuit_End
+    AddToMoveScore -1
+    GoTo Expert_Pursuit_End
+
+Expert_Pursuit_AttackerAbilities:
+    TableEntry ABILITY_TECHNICIAN
+    TableEntry ABILITY_POISON_TOUCH
+    TableEntry ABILITY_SHAKEDOWN
+    TableEntry ABILITY_FREE_SAMPLE
+    TableEntry TABLE_END
+
+Expert_Pursuit_AbilityBonus:
     IfRandomLessThan 128, Expert_Pursuit_End
     AddToMoveScore 1
+    GoTo Expert_Pursuit_End
 
 Expert_Pursuit_End:
     PopOrEnd 

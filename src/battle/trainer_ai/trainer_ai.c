@@ -4591,19 +4591,25 @@ static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx)
                     break;
 
                 case BATTLE_EFFECT_FORCE_SWITCH:
-                    if (move == MOVE_ROAR)
+                    if (AI_CONTEXT.move != MOVE_PURSUIT)
                     {
-                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF))
+                        if (move == MOVE_ROAR)
                         {
-                            isTrapped = TRUE;
+                            if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF))
+                            {
+                                isTrapped = TRUE;
+                            }
                         }
                     }
 
                 case BATTLE_EFFECT_FORCE_SWITCH_HIT:
-                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SUCTION_CUPS)
-                        || (battleCtx->battleMons[BATTLER_OPP(battler)].moveEffectsMask & MOVE_EFFECT_INGRAIN))
+                    if (AI_CONTEXT.move != MOVE_PURSUIT)
                     {
-                        isTrapped = TRUE;
+                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SUCTION_CUPS)
+                            || (battleCtx->battleMons[BATTLER_OPP(battler)].moveEffectsMask & MOVE_EFFECT_INGRAIN))
+                        {
+                            isTrapped = TRUE;
+                        }
                     }
                     break;
                 }
