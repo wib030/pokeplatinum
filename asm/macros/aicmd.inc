@@ -754,6 +754,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfCanChunkOrKOEnemy jump
+    .long 131
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

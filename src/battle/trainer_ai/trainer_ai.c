@@ -427,6 +427,7 @@ static void AICmd_IfHasStatusThreat(BattleSystem* battleSys, BattleContext* batt
 static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -604,7 +605,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfHasStatusThreat,
     AICmd_IfBattlerDetersBoosting,
     AICmd_LoadSleepTurns,
-    AICmd_IfCurrentMoveRevealed
+    AICmd_IfCurrentMoveRevealed,
+    AICmd_IfCanChunkOrKOEnemy
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4434,6 +4436,18 @@ static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* 
     int jump = AIScript_Read(battleCtx);
 
     if (MOVE_DATA(AI_CONTEXT.move).pp > battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot])
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
     {
         AIScript_Iter(battleCtx, jump);
     }
