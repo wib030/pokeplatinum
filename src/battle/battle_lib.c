@@ -11370,7 +11370,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 spAttackStage = battleCtx->fieldConditions.futureSightAttackingStatStage[defender];
             }
             break;
-					
+		/*			
 		case BATTLE_EFFECT_SPIKES_MULTI_HIT:
         case BATTLE_EFFECT_MULTI_HIT:
             multiHitChance = BattleSystem_RandNext(battleSys) % 10;
@@ -11695,6 +11695,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 }
             }
             break;
+			*/
         }
     }
 
