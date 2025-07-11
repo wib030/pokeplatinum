@@ -429,6 +429,7 @@ static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleC
 static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -608,7 +609,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadSleepTurns,
     AICmd_IfCurrentMoveRevealed,
     AICmd_IfCanChunkOrKOEnemy,
-    AICmd_IfBattlerDetersContactMove
+    AICmd_IfBattlerDetersContactMove,
+    AICmd_IfTrapped
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4544,6 +4546,76 @@ static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleCont
 
     if (detersContact)
     {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    int i;
+    int moveEffect;
+    u8 invalidMoves;
+    u16 move;
+
+    BOOL isTrapped;
+
+    isTrapped = FALSE;
+
+    invalidMoves = BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL);
+
+    if (Battler_IsTrapped(battleSys, battleCtx, battler))
+    {
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+            if ((invalidMoves & FlagIndex(i)) == FALSE)
+            {
+                move = battleCtx->battleMons[battler].moves[i];
+                moveEffect = MOVE_DATA(move).effect;
+
+                switch (moveEffect)
+                {
+                default:
+                    isTrapped = TRUE;
+                    break;
+
+                case BATTLE_EFFECT_SWITCH_HIT:
+                case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+                case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
+                case BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE:
+                    break;
+
+                case BATTLE_EFFECT_FORCE_SWITCH:
+                    if (move == MOVE_ROAR)
+                    {
+                        if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SOUNDPROOF))
+                        {
+                            isTrapped = TRUE;
+                        }
+                    }
+
+                case BATTLE_EFFECT_FORCE_SWITCH_HIT:
+                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SUCTION_CUPS) == 0
+                        && (battleCtx->battleMons[BATTLER_OPP(battler)].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        isTrapped = TRUE;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    if (isTrapped) {
         AIScript_Iter(battleCtx, jump);
     }
 }
