@@ -4600,12 +4600,8 @@ static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx)
                     }
 
                 case BATTLE_EFFECT_FORCE_SWITCH_HIT:
-                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SUCTION_CUPS) == 0
-                        && (battleCtx->battleMons[BATTLER_OPP(battler)].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE)
-                    {
-                        break;
-                    }
-                    else
+                    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SUCTION_CUPS)
+                        || (battleCtx->battleMons[BATTLER_OPP(battler)].moveEffectsMask & MOVE_EFFECT_INGRAIN))
                     {
                         isTrapped = TRUE;
                     }
