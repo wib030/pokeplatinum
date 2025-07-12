@@ -454,6 +454,7 @@ static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *
 static BOOL AI_CanImprisonTarget(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
 static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
 static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int defender);
+static int AI_CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move);
 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static int AI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
@@ -4474,6 +4475,7 @@ static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleCont
     int battler2;
     int damage;
     u8 battler1Side;
+	u8 moveType;
     u32 effectivenessFlags;
     BOOL detersContact;
 
@@ -4506,7 +4508,7 @@ static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleCont
         {
             effectivenessFlags = 0;
 
-            moveType = CalcMoveType(battleSys, battleCtx, battler2, battleCtx->battleMons[battler2].heldItem, AI_CONTEXT.move)
+            moveType = AI_CalcMoveType(battleSys, battleCtx, battler2, battleCtx->battleMons[battler2].heldItem, AI_CONTEXT.move);
 
             damage = BattleSystem_CalcMoveDamage(battleSys,
                 battleCtx,
@@ -6272,6 +6274,127 @@ static BOOL AI_CanMagicBounceTargetMove(BattleSystem *battleSys, BattleContext *
     }
 
     return result;
+}
+
+/**
+ * @brief Compute the type of a move which has variable typing.
+ * 
+ * This routine is functionally identical to Move_CalcVariableType.
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @param battler   The battler to use for the calculation.
+ * @param item      The attacker's held item. Affects the typing of Natural Gift
+ *                  and Judgment.
+ * @param move      The move being used.
+ * @return The variable-type of the given move.
+ */
+static int AI_CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move)
+{
+    int type;
+
+    switch (move) {
+    case MOVE_NATURAL_GIFT:
+        type = Battler_NaturalGiftType(battleCtx, item);
+        break;
+
+    case MOVE_JUDGMENT:
+        switch (Battler_HeldItemEffect(battleCtx, item)) {
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+            type = TYPE_FIGHTING;
+            break;
+        case HOLD_EFFECT_ARCEUS_FLYING:
+            type = TYPE_FLYING;
+            break;
+        case HOLD_EFFECT_ARCEUS_POISON:
+            type = TYPE_POISON;
+            break;
+        case HOLD_EFFECT_ARCEUS_GROUND:
+            type = TYPE_GROUND;
+            break;
+        case HOLD_EFFECT_ARCEUS_ROCK:
+            type = TYPE_ROCK;
+            break;
+        case HOLD_EFFECT_ARCEUS_BUG:
+            type = TYPE_BUG;
+            break;
+        case HOLD_EFFECT_ARCEUS_GHOST:
+            type = TYPE_GHOST;
+            break;
+        case HOLD_EFFECT_ARCEUS_STEEL:
+            type = TYPE_STEEL;
+            break;
+        case HOLD_EFFECT_ARCEUS_FIRE:
+            type = TYPE_FIRE;
+            break;
+        case HOLD_EFFECT_ARCEUS_WATER:
+            type = TYPE_WATER;
+            break;
+        case HOLD_EFFECT_ARCEUS_GRASS:
+            type = TYPE_GRASS;
+            break;
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+            type = TYPE_ELECTRIC;
+            break;
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+            type = TYPE_PSYCHIC;
+            break;
+        case HOLD_EFFECT_ARCEUS_ICE:
+            type = TYPE_ICE;
+            break;
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+            type = TYPE_DRAGON;
+            break;
+        case HOLD_EFFECT_ARCEUS_DARK:
+            type = TYPE_DARK;
+            break;
+        default:
+            type = TYPE_NORMAL;
+            break;
+        }
+        break;
+
+    case MOVE_HIDDEN_POWER:
+        type = ((battleCtx->battleMons[battler].hpIV & 1) >> 0)
+                | ((battleCtx->battleMons[battler].attackIV & 1) << 1)
+                | ((battleCtx->battleMons[battler].defenseIV & 1) << 2)
+                | ((battleCtx->battleMons[battler].speedIV & 1) << 3)
+                | ((battleCtx->battleMons[battler].spAttackIV & 1) << 4)
+                | ((battleCtx->battleMons[battler].spDefenseIV & 1) << 5);
+        type = (type * 15 / 63) + 1;
+
+        if (type >= TYPE_MYSTERY) {
+            type++;
+        }
+        break;
+
+    case MOVE_WEATHER_BALL:
+        if (NO_CLOUD_NINE
+                && battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER) {
+            if (WEATHER_IS_RAIN) {
+                type = TYPE_WATER;
+            }
+
+            if (WEATHER_IS_SAND) {
+                type = TYPE_ROCK;
+            }
+
+            if (WEATHER_IS_SUN) {
+                type = TYPE_FIRE;
+            }
+
+            if (WEATHER_IS_HAIL) {
+                type = TYPE_ICE;
+            }
+        }
+        break;
+
+    default:
+        type = TYPE_NORMAL;
+        break;
+    }
+
+    return type;
 }
 
 /* @brief Check if any moves are invalid for use by the battler.

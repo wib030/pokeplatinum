@@ -4463,7 +4463,7 @@ Expert_Pursuit_TryScorePlus1:
 Expert_Pursuit_CheckPivot:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SWITCH_HIT_NO_ANIM, Expert_Pursuit_PivotMove
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SWITCH_HIT, Expert_Pursuit_PivotMove
-    GoTo Expert_Pursuit_CheckEffectiveness
+    GoTo Expert_Pursuit_CheckAttackerAbility
 
 Expert_Pursuit_PivotMove:
     IfRandomLessThan 64, Expert_Pursuit_CheckAttackerAbility
