@@ -3284,20 +3284,51 @@ Expert_Reflect:
     ; If the attacker''s HP is >= 90%, 50% of additional score +1.
     ;
     ; If the opponent''s last-used move was a Physical move, 75% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Reflect_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_Reflect_CheckLastUsedMove
-    IfRandomLessThan 128, Expert_Reflect_CheckLastUsedMove
-    AddToMoveScore 1
+    LoadBattlerCritStage AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, ScoreMinus1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Expert_Reflect_CheckDetersDefog
+    IfBattlerIsPhysicalAttacker AI_BATTLER_DEFENDER, Expert_Reflect_TryScorePlus2
+    GoTo Expert_Reflect_Main
 
-Expert_Reflect_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_PHYSICAL, Expert_Reflect_End
-    IfRandomLessThan 64, Expert_Reflect_End
+Expert_Reflect_TryScorePlus2:
+    IfRandomLessThan 24, Expert_Reflect_Main
     AddToMoveScore 1
+    IfRandomLessThan 24, Expert_Reflect_Main
+    AddToMoveScore 1
+    GoTo Expert_Reflect_Main
+
+Expert_Reflect_CheckDetersDefog:
+    AddToMoveScore -1
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Reflect_Main
+    AddToMoveScore 1
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScorePlus3
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScorePlus3
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScorePlus3
+    GoTo Expert_Reflect_Main
+    
+Expert_Reflect_Main:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_SCREENS, Expert_Reflect_CheckGhost
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, ScorePlus1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 88, ScorePlus1
     GoTo Expert_Reflect_End
 
-Expert_Reflect_ScoreMinus2:
-    AddToMoveScore -2
+Expert_Reflect_CheckGhost
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, Expert_Reflect_CheckGhostItemAndAbility
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, Expert_Reflect_CheckGhostItemAndAbility
+    IfRandomLessThan 12, Expert_Reflect_End
+    AddToMoveScore 2
+    GoTo Expert_Reflect_End
+
+Expert_Reflect_CheckGhostItemAndAbility:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NORMAL_HIT_GHOST, ScoreMinus12
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_SCRAPPY, ScoreMinus12
+    GoTo Expert_Reflect_End
 
 Expert_Reflect_End:
     PopOrEnd 
@@ -3477,14 +3508,16 @@ Expert_RechargeTurn_CheckUserHP:
 
 Expert_RechargeTurn_ScoreMinus1:
     AddToMoveScore -1
+    GoTo Expert_RechargeTurn_End
+
+Expert_RechargeTurn_CheckRelentless:
+    AddToMoveScore 1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_RechargeTurn_End
+	AddToMoveScore 2
+    GoTo Expert_RechargeTurn_End
 
 Expert_RechargeTurn_End:
     PopOrEnd
-	
-Expert_RechargeTurn_CheckRelentless:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_RechargeTurn_End
-	AddToMoveScore 5
-    GoTo Expert_RechargeTurn_End
 
 Expert_Disable:
     ; If the attacker is slower than the opponent, score +0 and terminate.
@@ -3507,89 +3540,97 @@ Expert_Disable_End:
     PopOrEnd 
 
 Expert_Counter:
-    ; If the opponent is asleep, confused, or infatuated, score -1 and terminate.
+    ; If behind substitute, score -10.
     ;
-    ; If the attacker''s HP <= 30%, 96.1% chance of additional score -1.
+    ; If defender has no physical attacks whatsoever, score -30.
     ;
-    ; If the attacker''s HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
+    ; If defender knows Disable, Torment, or Encore, score -2 to -4.
     ;
-    ; If the attacker knows specifically Mirror Coat, 60.9% chance of score +4.
+    ; Score +1 if the defender is a physical attacker.
     ;
-    ; If the opponent''s last-used move was a Status move:
-    ; - If the opponent is Taunted, 60.9% chance of additional score +1.
-    ; - If the opponent does NOT have a type which is considered a Physical type, 49% chance of score +4.
+    ; 75% chance to predict defender wake up turn and get score +1.
+    ; Otherwise, score -3 if the defender is asleep.
     ;
-    ; If the opponent''s last-used move was a Damaging move:
-    ; - If the opponent is Taunted, 60.9% chance of additional score +1.
-    ; - If the last-used move was a Special move, score -1.
-    ; - If the last-used move was a Physical move, 60.9% chance of score +1.
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_Counter_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_Counter_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_Counter_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Counter_CheckAboveHalfHP
-    IfRandomLessThan 10, Expert_Counter_CheckAboveHalfHP
+    ; If defender has a status or special move, check if we have
+    ; used Counter yet. If not, 66% chance for score +1.
+    ;
+    ; If defender has status move, check if defender is taunted.
+    ; If defender is taunted, score +1. Otherwise, 25% chance for
+    ; score -1.
+    ;
+    ; If enemy chunks or KOs us, check if we have more than 56%
+    ; HP remaining. If not, 87.5% chance for score -2.
+    IfBattlerHasNoPhysicalAttack AI_BATTLER_DEFENDER, ScoreMinus30
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScoreMinus10
+    IfBattlerIsPhysicalAttacker AI_BATTLER_DEFENDER, Expert_Counter_Main
+    IfRandomLessThan 8, Expert_Counter_Main
+    GoTo ScoreMinus3
+
+Expert_Counter_Main:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DISABLE, Expert_Counter_TryScoreMinus4
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TORMENT, Expert_Counter_TryScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, Expert_Counter_TryScoreMinus4
+    AddToMoveScore 1
+    IfEnemyCanChunkOrKO Expert_Counter_CheckHP
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_Counter_CheckSleepTurns
+    IfBattlerHasStatusMove AI_BATTLER_DEFENDER, Expert_Counter_HasStatus
+    IfBattlerIsPhysicalAttacker AI_BATTLER_DEFENDER, Expert_Counter_CheckPP
+    IfRandomLessThan 64, Expert_Counter_End
+    AddToMoveScore 1
+    GoTo Expert_Counter_End
+
+Expert_Counter_CheckHP:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 56, Expert_Counter_TryScoreMinus4
+    IfRandomLessThan 32, Expert_Counter_End
+    AddToMoveScore -2
+    GoTo Expert_Counter_End
+
+Expert_Counter_HasStatus:
+    AddToMoveScore 1
+    IfTargetIsTaunted Expert_Counter_CheckPP
     AddToMoveScore -1
-
-Expert_Counter_CheckAboveHalfHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Counter_CheckLastUsedMove
-    IfRandomLessThan 100, Expert_Counter_CheckLastUsedMove
+    IfRandomLessThan 192, Expert_Counter_CheckPP
     AddToMoveScore -1
+    GoTo Expert_Counter_CheckPP
 
-Expert_Counter_CheckLastUsedMove:
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_MIRROR_COAT, Expert_Counter_TryScorePlus4
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
-    IfLoadedEqualTo 0, Expert_Counter_TryScorePlus1
-    IfTargetIsNotTaunted Expert_Counter_CheckPhysicalMove
-    IfRandomLessThan 100, Expert_Counter_CheckPhysicalMove
+Expert_Counter_CheckSleepTurns:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_Counter_SleepTalk
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, ScorePlus1
+    LoadSleepTurns AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, ScoreMinus3
+    IfRandomLessThan 64, ScoreMinus3
     AddToMoveScore 1
-
-Expert_Counter_CheckPhysicalMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_PHYSICAL, Expert_Counter_ScoreMinus1
-    IfRandomLessThan 100, Expert_Counter_End2
+    IfRandomLessThan 64, ScoreMinus1
     AddToMoveScore 1
-    GoTo Expert_Counter_End2
+    GoTo Expert_Counter_End
 
-Expert_Counter_TryScorePlus1:
-    IfTargetIsNotTaunted Expert_Counter_CheckOpponentTypes
-    IfRandomLessThan 100, Expert_Counter_CheckOpponentTypes
+Expert_Counter_CheckPP:
+    IfCurrentMoveRevealed Expert_Counter_TryScoreMinus2
+    IfRandomLessThan 85, Expert_Counter_End
     AddToMoveScore 1
+    GoTo Expert_Counter_End
 
-Expert_Counter_CheckOpponentTypes:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedInTable Expert_Counter_PhysicalTypes, Expert_Counter_End2
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedInTable Expert_Counter_PhysicalTypes, Expert_Counter_End2
-    IfRandomLessThan 50, Expert_Counter_End2
+Expert_Counter_SleepTalk:
+    IfTargetIsTaunted ScoreMinus30
+    IfRandomLessThan 25, Expert_Counter_End
+    AddToMoveScore 1
+    GoTo Expert_Counter_End
 
-Expert_Counter_TryScorePlus4:
-    IfRandomLessThan 100, Expert_Counter_End
-    AddToMoveScore 4
+Expert_Counter_TryScoreMinus4:
+    IfRandomLessThan 25, Expert_Counter_End
+    AddToMoveScore -4
+    GoTo Expert_Counter_End
+
+Expert_Counter_TryScoreMinus2:
+    IfRandomLessThan 128, Expert_Counter_End
+    AddToMoveScore -2
+    GoTo Expert_Counter_End
 
 Expert_Counter_End:
-    PopOrEnd 
-
-Expert_Counter_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Counter_End2:
-    PopOrEnd 
-
-Expert_Counter_PhysicalTypes:
-    TableEntry TYPE_NORMAL
-    TableEntry TYPE_FIGHTING
-    TableEntry TYPE_FLYING
-    TableEntry TYPE_POISON
-    TableEntry TYPE_GROUND
-    TableEntry TYPE_ROCK
-    TableEntry TYPE_BUG
-    TableEntry TYPE_GHOST
-    TableEntry TYPE_STEEL
-    TableEntry TABLE_END
+    PopOrEnd
 
 Expert_Encore:
-    ; If the opponent is Disabled, 88.3% chance of score +3.
+    ; If the opponent is Disabled, 95% chance of score +3.
     ;
     ; If the attacker is slower than the opponent, score -2.
     ;
@@ -3603,7 +3644,7 @@ Expert_Encore:
     IfLoadedNotInTable Expert_Encore_EncouragedMoveEffects, Expert_Encore_ScoreMinus2
 
 Expert_Encore_TryScorePlus3:
-    IfRandomLessThan 30, Expert_Encore_End
+    IfRandomLessThan 12, Expert_Encore_End
     AddToMoveScore 3
     GoTo Expert_Encore_End
 
