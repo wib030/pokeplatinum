@@ -3314,7 +3314,7 @@ Expert_Reflect_Main:
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 88, ScorePlus1
     GoTo Expert_Reflect_End
 
-Expert_Reflect_CheckGhost
+Expert_Reflect_CheckGhost:
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
     IfLoadedEqualTo TYPE_GHOST, Expert_Reflect_CheckGhostItemAndAbility
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
