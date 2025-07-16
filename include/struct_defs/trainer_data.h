@@ -97,7 +97,7 @@ typedef struct TrainerMonWithMovesAndItem {
 	u16 nature;
 	u16 isShiny;
 	u16 gender;
-	u16 isGhostly;
+	u16 overrideAbility;
 } TrainerMonWithMovesAndItem;
 
 #endif // POKEPLATINUM_STRUCT_TRAINER_DATA_H

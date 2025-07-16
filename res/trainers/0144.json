@@ -36,7 +36,7 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"isGhostly": 1
+			"overrideAbility": 160
         },
 		{
             "species": "SPECIES_LOPUNNY",
@@ -51,7 +51,7 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"isGhostly": 1
+			"overrideAbility": 160
         },
 		{
             "species": "SPECIES_GARDEVOIR",
@@ -66,7 +66,7 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"isGhostly": 1
+			"overrideAbility": 160
         }
     ]
 }
