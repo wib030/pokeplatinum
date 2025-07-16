@@ -5497,6 +5497,7 @@ enum {
 
     SWITCH_IN_CHECK_STATE_FIELD_WEATHER = SWITCH_IN_CHECK_STATE_START,
     SWITCH_IN_CHECK_STATE_TRACE,
+	SWITCH_IN_CHECK_STATE_IMPOSTER,
 	SWITCH_IN_CHECK_STATE_RANDOM_ABILITY,
 	SWITCH_IN_CHECK_STATE_GHOSTLY,
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
@@ -5514,7 +5515,6 @@ enum {
     SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
 	SWITCH_IN_CHECK_STATE_AIR_BALLOON,
-	SWITCH_IN_CHECK_STATE_IMPOSTER,
 
     SWITCH_IN_CHECK_STATE_DONE,
 };
@@ -5617,6 +5617,73 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             }
 
             if (i == maxBattlers) {
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_IMPOSTER:
+			for (i = 0; i < maxBattlers; i++)
+			{
+                battler = battleCtx->monSpeedOrder[i];
+				
+                if ((Battler_Ability(battleCtx, battler) == ABILITY_IMPOSTER)
+				&& (battleCtx->battleMons[battler].imposterFlag == FALSE))
+				{
+					imposter1Pos = BattleSystem_BattlerSlot(battleSys, battler);
+					
+					switch (BattleSystem_BattlerSlot(battleSys, battler))
+					{
+							case BATTLER_TYPE_SOLO_ENEMY:
+								imposter2Pos = BATTLER_TYPE_SOLO_PLAYER;
+								break;
+								
+							case BATTLER_TYPE_SOLO_PLAYER:
+								imposter2Pos = BATTLER_TYPE_SOLO_ENEMY;
+								break;
+								
+							case BATTLER_TYPE_ENEMY_SIDE_SLOT_1:
+								imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_2;
+								break;
+								
+							case BATTLER_TYPE_ENEMY_SIDE_SLOT_2:
+								imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_1;
+								break;
+								
+							case BATTLER_TYPE_PLAYER_SIDE_SLOT_1:
+								imposter2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_2;
+								break;
+								
+							case BATTLER_TYPE_PLAYER_SIDE_SLOT_2:
+								imposter2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_1;
+								break;
+								
+							default:
+								break;
+					}
+						
+					for (int o = 0; o < maxBattlers; o++)
+					{
+						battlero = battleCtx->monSpeedOrder[o];
+						
+						if ((battler != battlero)
+						&& (Battler_Side(battleSys, battlero) != Battler_Side(battleSys, battler))
+						&& (imposter2Pos == BattleSystem_BattlerSlot(battleSys, battlero)))
+						{
+							battleCtx->defender = battlero;
+							break;
+						}
+					}
+					
+					battleCtx->battleMons[battler].imposterFlag = TRUE;
+					battleCtx->attacker = battler;
+					subscript = subscript_imposter_transform;
+					result = SWITCH_IN_CHECK_RESULT_BREAK;
+					break;
+				}
+            }
+			
+			if (i == maxBattlers)
+			{
                 battleCtx->switchInCheckState++;
             }
             break;
@@ -6293,73 +6360,6 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 					battleCtx->battleMons[battler].airBalloonAnnounced = TRUE;
 					battleCtx->msgBattlerTemp = battler;
 					subscript = subscript_air_balloon;
-					result = SWITCH_IN_CHECK_RESULT_BREAK;
-					break;
-				}
-            }
-			
-			if (i == maxBattlers)
-			{
-                battleCtx->switchInCheckState++;
-            }
-            break;
-			
-		case SWITCH_IN_CHECK_STATE_IMPOSTER:
-			for (i = 0; i < maxBattlers; i++)
-			{
-                battler = battleCtx->monSpeedOrder[i];
-				
-                if ((Battler_Ability(battleCtx, battler) == ABILITY_IMPOSTER)
-				&& (battleCtx->battleMons[battler].imposterFlag == FALSE))
-				{
-					imposter1Pos = BattleSystem_BattlerSlot(battleSys, battler);
-					
-					switch (BattleSystem_BattlerSlot(battleSys, battler))
-					{
-							case BATTLER_TYPE_SOLO_ENEMY:
-								imposter2Pos = BATTLER_TYPE_SOLO_PLAYER;
-								break;
-								
-							case BATTLER_TYPE_SOLO_PLAYER:
-								imposter2Pos = BATTLER_TYPE_SOLO_ENEMY;
-								break;
-								
-							case BATTLER_TYPE_ENEMY_SIDE_SLOT_1:
-								imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_2;
-								break;
-								
-							case BATTLER_TYPE_ENEMY_SIDE_SLOT_2:
-								imposter2Pos = BATTLER_TYPE_PLAYER_SIDE_SLOT_1;
-								break;
-								
-							case BATTLER_TYPE_PLAYER_SIDE_SLOT_1:
-								imposter2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_2;
-								break;
-								
-							case BATTLER_TYPE_PLAYER_SIDE_SLOT_2:
-								imposter2Pos = BATTLER_TYPE_ENEMY_SIDE_SLOT_1;
-								break;
-								
-							default:
-								break;
-					}
-						
-					for (int o = 0; o < maxBattlers; o++)
-					{
-						battlero = battleCtx->monSpeedOrder[o];
-						
-						if ((battler != battlero)
-						&& (Battler_Side(battleSys, battlero) != Battler_Side(battleSys, battler))
-						&& (imposter2Pos == BattleSystem_BattlerSlot(battleSys, battlero)))
-						{
-							battleCtx->defender = battlero;
-							break;
-						}
-					}
-					
-					battleCtx->battleMons[battler].imposterFlag = TRUE;
-					battleCtx->attacker = battler;
-					subscript = subscript_imposter_transform;
 					result = SWITCH_IN_CHECK_RESULT_BREAK;
 					break;
 				}
