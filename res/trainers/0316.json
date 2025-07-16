@@ -35,7 +35,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 44,
-			"nature": 5
+			"nature": 5,
+			"altLead": 1
         },
         {
             "species": "SPECIES_PELIPPER",

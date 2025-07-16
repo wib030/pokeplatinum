@@ -183,6 +183,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
     u32 genderMod, rnd, oldSeed;
     u8 ivs;
     Pokemon *mon;
+	int monIndex, switchedIndex;
 	
     oldSeed = LCRNG_GetSeed();
 
@@ -281,11 +282,24 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 
     case TRDATATYPE_WITH_MOVES_AND_ITEM: {
         TrainerMonWithMovesAndItem *trmon = (TrainerMonWithMovesAndItem *)buf;
+		switchedIndex = 7;
         for (i = 0; i < battleParams->trainerData[battler].partySize; i++) {
-            u16 species = trmon[i].species & 0x3FF;
-            u8 form = (trmon[i].species & 0xFC00) >> 10;
+			monIndex = i;
+			
+			if (switchedIndex == i)
+			{
+				monIndex = 0;
+			}
+			else if (trmon[i].altLead < 7 && (LCRNG_Next() % 100) < 25)
+			{
+				switchedIndex = trmon[i].altLead;
+				monIndex = trmon[i].altLead;
+			}
+			
+            u16 species = trmon[monIndex].species & 0x3FF;
+            u8 form = (trmon[monIndex].species & 0xFC00) >> 10;
 
-            rnd = trmon[i].dv + trmon[i].level + species + battleParams->trainerIDs[battler];
+            rnd = trmon[monIndex].dv + trmon[monIndex].level + species + battleParams->trainerIDs[battler];
             LCRNG_SetSeed(rnd);
 
             for (j = 0; j < battleParams->trainerData[battler].class; j++) {
@@ -293,42 +307,42 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
             }
 			
             rnd = (rnd << 8) + genderMod;
-            ivs = trmon[i].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
+            ivs = trmon[monIndex].dv * MAX_IVS_SINGLE_STAT / MAX_DV;
 			
-			int monLevel = trmon[i].level;
+			int monLevel = trmon[monIndex].level;
 			int otIdSource = OTID_NOT_SHINY;
 			int monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
 			
-			if (trmon[i].isShiny == 1)
+			if (trmon[monIndex].isShiny == 1)
 			{
 				otIdSource = OTID_ALWAYS_SHINY;
 			}
 			
-			if (trmon[i].gender < 2)
+			if (trmon[monIndex].gender < 2)
 			{
 				PokemonPersonalData *monPersonalData = PokemonPersonalData_FromMonSpecies(species, 0);
 				
 				do {
 					monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
-				} while (PokemonPersonalData_GetGenderOf(monPersonalData, species, monPersonality) != trmon[i].gender);
+				} while (PokemonPersonalData_GetGenderOf(monPersonalData, species, monPersonality) != trmon[monIndex].gender);
 					
 				PokemonPersonalData_Free(monPersonalData);
 			}
 			
 			//TRUE is whether or not to enable nature, rnd value decides the nature
             Pokemon_InitWith(mon, species, monLevel, ivs, TRUE, monPersonality, otIdSource, 0);
-            Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
+            Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[monIndex].item);
 			
-			if (trmon[i].nature < 25)
+			if (trmon[monIndex].nature < 25)
 			{
-				Pokemon_SetValue(mon, MON_DATA_NATURE, &trmon[i].nature);
+				Pokemon_SetValue(mon, MON_DATA_NATURE, &trmon[monIndex].nature);
 			}
 			
 			u32 ability1 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_1);
 			u32 ability2 = PokemonPersonalData_GetSpeciesValue(mon, MON_DATA_PERSONAL_ABILITY_2);
 			
 			//This sets the ability to which one we want
-			u16 abilityNum = trmon[i].ability;
+			u16 abilityNum = trmon[monIndex].ability;
 			
 			switch (abilityNum)
 			{
@@ -345,43 +359,43 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 				break;
 			}
 			
-			if (trmon[i].overrideAbility < 256)
+			if (trmon[monIndex].overrideAbility < 256)
 			{
-				Pokemon_SetValue(mon, MON_DATA_ABILITY, &trmon[i].overrideAbility);
+				Pokemon_SetValue(mon, MON_DATA_ABILITY, &trmon[monIndex].overrideAbility);
 			}
 			
             for (j = 0; j < 4; j++) {
-                Pokemon_SetMoveSlot(mon, trmon[i].moves[j], j);
+                Pokemon_SetMoveSlot(mon, trmon[monIndex].moves[j], j);
             }
 			
-			Pokemon_SetValue(mon, MON_DATA_POKEBALL, &trmon[i].ball_type);
-            Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
+			Pokemon_SetValue(mon, MON_DATA_POKEBALL, &trmon[monIndex].ball_type);
+            Pokemon_SetBallSeal(trmon[monIndex].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
-			Pokemon_SetValue(mon, MON_DATA_FRIENDSHIP, &trmon[i].friendship);
+			Pokemon_SetValue(mon, MON_DATA_FRIENDSHIP, &trmon[monIndex].friendship);
 			
-			if (trmon[i].status != 0)
+			if (trmon[monIndex].status != 0)
 			{
-				Pokemon_SetValue(mon, MON_DATA_STATUS_CONDITION, &trmon[i].status);
+				Pokemon_SetValue(mon, MON_DATA_STATUS_CONDITION, &trmon[monIndex].status);
 			}
 			
-			if (trmon[i].ivHP < 32)
+			if (trmon[monIndex].ivHP < 32)
 			{
-				Pokemon_SetValue(mon, MON_DATA_HP_IV, &trmon[i].ivHP);
-				Pokemon_SetValue(mon, MON_DATA_ATK_IV, &trmon[i].ivATK);
-				Pokemon_SetValue(mon, MON_DATA_DEF_IV, &trmon[i].ivDEF);
-				Pokemon_SetValue(mon, MON_DATA_SPEED_IV, &trmon[i].ivSPEED);
-				Pokemon_SetValue(mon, MON_DATA_SPATK_IV, &trmon[i].ivSPATK);
-				Pokemon_SetValue(mon, MON_DATA_SPDEF_IV, &trmon[i].ivSPDEF);
+				Pokemon_SetValue(mon, MON_DATA_HP_IV, &trmon[monIndex].ivHP);
+				Pokemon_SetValue(mon, MON_DATA_ATK_IV, &trmon[monIndex].ivATK);
+				Pokemon_SetValue(mon, MON_DATA_DEF_IV, &trmon[monIndex].ivDEF);
+				Pokemon_SetValue(mon, MON_DATA_SPEED_IV, &trmon[monIndex].ivSPEED);
+				Pokemon_SetValue(mon, MON_DATA_SPATK_IV, &trmon[monIndex].ivSPATK);
+				Pokemon_SetValue(mon, MON_DATA_SPDEF_IV, &trmon[monIndex].ivSPDEF);
 			}
 			
-			if (trmon[i].evHP < 253)
+			if (trmon[monIndex].evHP < 253)
 			{
-				Pokemon_SetValue(mon, MON_DATA_HP_EV, &trmon[i].evHP);
-				Pokemon_SetValue(mon, MON_DATA_ATK_EV, &trmon[i].evATK);
-				Pokemon_SetValue(mon, MON_DATA_DEF_EV, &trmon[i].evDEF);
-				Pokemon_SetValue(mon, MON_DATA_SPEED_EV, &trmon[i].evSPEED);
-				Pokemon_SetValue(mon, MON_DATA_SPATK_EV, &trmon[i].evSPATK);
-				Pokemon_SetValue(mon, MON_DATA_SPDEF_EV, &trmon[i].evSPDEF);
+				Pokemon_SetValue(mon, MON_DATA_HP_EV, &trmon[monIndex].evHP);
+				Pokemon_SetValue(mon, MON_DATA_ATK_EV, &trmon[monIndex].evATK);
+				Pokemon_SetValue(mon, MON_DATA_DEF_EV, &trmon[monIndex].evDEF);
+				Pokemon_SetValue(mon, MON_DATA_SPEED_EV, &trmon[monIndex].evSPEED);
+				Pokemon_SetValue(mon, MON_DATA_SPATK_EV, &trmon[monIndex].evSPATK);
+				Pokemon_SetValue(mon, MON_DATA_SPDEF_EV, &trmon[monIndex].evSPDEF);
 			}
 			
 			Pokemon_CalcLevelAndStats(mon);
