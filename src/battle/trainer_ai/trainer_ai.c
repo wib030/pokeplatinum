@@ -1102,7 +1102,7 @@ static void AICmd_IfStatus(BattleSystem *battleSys, BattleContext *battleCtx)
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].status & mask) {
-        if (Battle_AbilityDetersStatus(battleSys, battleCtx, battleCtx->battleMons[battler].ability, mask) == FALSE)
+        if (Battle_AbilityDetersStatus(battleSys, battleCtx, Battler_Ability(battleCtx, battler), mask) == FALSE)
         {
             AIScript_Iter(battleCtx, jump);
         }
@@ -1133,7 +1133,7 @@ static void AICmd_IfVolatileStatus(BattleSystem *battleSys, BattleContext *battl
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].statusVolatile & mask) {
-        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, battleCtx->battleMons[battler].ability, mask) == FALSE)
+        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, Battler_Ability(battleCtx, battler), mask) == FALSE)
         {
             AIScript_Iter(battleCtx, jump);
         }
@@ -1164,7 +1164,7 @@ static void AICmd_IfMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].moveEffectsMask & mask) {
-        if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, battleCtx->battleMons[battler].ability, mask))
+        if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, Battler_Ability(battleCtx, battler), mask))
         {
             AIScript_Iter(battleCtx, jump);
         }
@@ -1630,7 +1630,8 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED) {
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED
+	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)) {
         AI_CONTEXT.calcTemp = ABILITY_NONE;
     } else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
         // If we already know an opponent's ability, load that ability
@@ -1638,10 +1639,10 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
             AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
         } else {
             // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
-                    || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
-					|| battleCtx->battleMons[battler].ability == ABILITY_THIRSTY
-                    || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP) {
+            if (Battler_Ability(battleCtx, battler) == ABILITY_SHADOW_TAG
+                    || Battler_Ability(battleCtx, battler) == ABILITY_MAGNET_PULL
+					|| Battler_Ability(battleCtx, battler) == ABILITY_THIRSTY
+                    || Battler_Ability(battleCtx, battler) == ABILITY_ARENA_TRAP) {
                 AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].ability;
             } else {
                 // Try to guess the opponent's ability (flip a coin)
@@ -1675,7 +1676,8 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
     u8 battler = AIScript_Battler(battleCtx, inBattler);
     int tmpAbility;
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED) {
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED
+	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)) {
         tmpAbility = ABILITY_NONE;
     } else if (inBattler == AI_BATTLER_DEFENDER || inBattler == AI_BATTLER_DEFENDER_PARTNER) {
         // If we already know an opponent's ability, load that ability
@@ -1684,21 +1686,21 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
             AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
         } else {
             // If the opponent has an ability that announces, we should already know about it (because it self-announces)
-            if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
-                || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
-				|| battleCtx->battleMons[battler].ability == ABILITY_THIRSTY
-                || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP
-                || battleCtx->battleMons[battler].ability == ABILITY_INTIMIDATE
-                || battleCtx->battleMons[battler].ability == ABILITY_TRACE
-                || battleCtx->battleMons[battler].ability == ABILITY_DOWNLOAD
-                || battleCtx->battleMons[battler].ability == ABILITY_ANTICIPATION
-                || battleCtx->battleMons[battler].ability == ABILITY_FOREWARN
-                || battleCtx->battleMons[battler].ability == ABILITY_SLOW_START
-                || battleCtx->battleMons[battler].ability == ABILITY_FRISK
-                || battleCtx->battleMons[battler].ability == ABILITY_MOLD_BREAKER
-                || battleCtx->battleMons[battler].ability == ABILITY_PRESSURE
-				|| battleCtx->battleMons[battler].ability == ABILITY_GENETIC_FREAK
-                || battleCtx->battleMons[battler].ability == ABILITY_RANDOM_SELECT) {
+            if (Battler_Ability(battleCtx, battler) == ABILITY_SHADOW_TAG
+                || Battler_Ability(battleCtx, battler) == ABILITY_MAGNET_PULL
+				|| Battler_Ability(battleCtx, battler) == ABILITY_THIRSTY
+                || Battler_Ability(battleCtx, battler) == ABILITY_ARENA_TRAP
+                || Battler_Ability(battleCtx, battler) == ABILITY_INTIMIDATE
+                || Battler_Ability(battleCtx, battler) == ABILITY_TRACE
+                || Battler_Ability(battleCtx, battler) == ABILITY_DOWNLOAD
+                || Battler_Ability(battleCtx, battler) == ABILITY_ANTICIPATION
+                || Battler_Ability(battleCtx, battler) == ABILITY_FOREWARN
+                || Battler_Ability(battleCtx, battler) == ABILITY_SLOW_START
+                || Battler_Ability(battleCtx, battler) == ABILITY_FRISK
+                || Battler_Ability(battleCtx, battler) == ABILITY_MOLD_BREAKER
+                || Battler_Ability(battleCtx, battler) == ABILITY_PRESSURE
+				|| Battler_Ability(battleCtx, battler) == ABILITY_GENETIC_FREAK
+                || Battler_Ability(battleCtx, battler) == ABILITY_RANDOM_SELECT) {
                 tmpAbility = battleCtx->battleMons[battler].ability;
             } else {
                 // Try to guess the opponent's ability (flip a coin)
@@ -3930,7 +3932,7 @@ static void AICmd_LoadBattlerCritStage(BattleSystem* battleSys, BattleContext* b
     battler1Side = Battler_Side(battleSys, battler1);
     battler1Species = battleCtx->battleMons[battler1].species;
     battler1VolStatus = battleCtx->battleMons[battler1].statusVolatile;
-    battler1Ability = battleCtx->battleMons[battler1].ability;
+    battler1Ability = Battler_Ability(battleCtx, battler1);
 
     item = Battler_HeldItem(battleCtx, battler1);
     itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
@@ -5703,7 +5705,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
         {
             if (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
             {
-                if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                if (Battler_Ability(battleCtx, defender) != ABILITY_MAGIC_GUARD)
                 {
                     if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
                     {
@@ -5714,7 +5716,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
                         tick = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8);
                     }
                 }
-                if (battleCtx->battleMons[defender].ability == ABILITY_LIQUID_OOZE)
+                if (Battler_Ability(battleCtx, defender) == ABILITY_LIQUID_OOZE)
                 {
                     tick = 0;
                 }
@@ -5888,7 +5890,7 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         {
             if (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
             {
-                if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_GUARD)
+                if (Battler_Ability(battleCtx, defender) != ABILITY_MAGIC_GUARD)
                 {
                     if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
                     {
@@ -5899,7 +5901,7 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
                         tick = BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8);
                     }
                 }
-                if (battleCtx->battleMons[defender].ability == ABILITY_LIQUID_OOZE)
+                if (Battler_Ability(battleCtx, defender) == ABILITY_LIQUID_OOZE)
                 {
                     if (battleCtx->battleMons[defender].curHP < BattleSystem_Divide(battleCtx->battleMons[defender].maxHP, 8))
                     {
@@ -6571,8 +6573,8 @@ static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, 
 
     result = FALSE;
 
-    attackerAbility = battleCtx->battleMons[attacker].ability;
-    defenderAbility = battleCtx->battleMons[defender].ability;
+    attackerAbility = Battler_Ability(battleCtx, attacker);
+    defenderAbility = Battler_Ability(battleCtx, defender);
     
     effect = MOVE_DATA(move).effect;
 

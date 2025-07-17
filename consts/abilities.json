@@ -165,7 +165,8 @@
 				"ABILITY_RATTLED",
 				"ABILITY_GHOSTLY",
 				"ABILITY_SLURP_UP",
-				"ABILITY_AWARE"
+				"ABILITY_AWARE",
+				"ABILITY_NEUTRALIZING_GAS"
             ]
         }
     }

@@ -4635,6 +4635,12 @@ int BattleSystem_CountAbility(BattleSystem *battleSys, BattleContext *battleCtx,
     int result = 0;
     int i;
     int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+	
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)
+	&& ability != ABILITY_NEUTRALIZING_GAS)
+	{
+		return 0;
+	}
 
     switch (mode) {
     case COUNT_ALL_BATTLERS_OUR_SIDE:
@@ -4881,7 +4887,20 @@ BOOL BattleSystem_CanWhirlwind(BattleSystem *battleSys, BattleContext *battleCtx
 
 u8 Battler_Ability(BattleContext *battleCtx, int battler)
 {
-    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED)
+	int i;
+	int neutralizingGas = 0;
+	
+	for (i = 0; i < MAX_BATTLERS; i++)
+	{
+		if (battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS && battleCtx->battleMons[i].curHP)
+		{
+			neutralizingGas = 1;
+			break;
+		}
+	}
+	
+    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED
+		|| (neutralizingGas == 1 && battleCtx->battleMons[battler].ability != ABILITY_NEUTRALIZING_GAS))
             && battleCtx->battleMons[battler].ability != ABILITY_MULTITYPE) {
         return ABILITY_NONE;
     } 
@@ -12642,7 +12661,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     attackerSpecies = battleCtx->battleMons[attacker].species;
     attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
     defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
-    attackerAbility = battleCtx->battleMons[attacker].ability;
+    attackerAbility = Battler_Ability(battleCtx, attacker);
 	
 	attackerSide = Battler_Side(battleSys, attacker);
 	defenderSide = Battler_Side(battleSys, defender);
@@ -16017,7 +16036,7 @@ BOOL Battle_BattleMonIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *
                         baseHP = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_HP);
                         baseAtk = PokemonPersonalData_GetValue(personal, MON_DATA_PERSONAL_BASE_ATK);
 
-                        battlerAbility = battleCtx->battleMons[battler].ability;
+                        battlerAbility = Battler_Ability(battleCtx, battler);
 
                         if (battlerAbility == ABILITY_HUGE_POWER || battlerAbility == ABILITY_PURE_POWER)
                         {
@@ -16707,7 +16726,7 @@ BOOL AI_ShouldParalyzeCheck(BattleSystem* battleSys, BattleContext* battleCtx, i
     defenderItem = BattleMon_Get(battleCtx, defender, BATTLEMON_HELD_ITEM, NULL);
     defenderItemEffect = BattleSystem_GetItemData(battleCtx, defenderItem, ITEM_PARAM_HOLD_EFFECT);
 
-    if (battleCtx->battleMons[defender].ability == ABILITY_SPEED_BOOST)
+    if (Battler_Ability(battleCtx, defender) == ABILITY_SPEED_BOOST)
     {
         hasSpeedBoost = TRUE;
     }
@@ -19775,7 +19794,7 @@ BOOL Battle_PartyMonAbilityDetersContactMove(BattleSystem *battleSys, BattleCont
 
     if (partyIndicator == defender)
     {
-        attackerAbility = battleCtx->battleMons[attacker].ability;
+        attackerAbility = Battler_Ability(battleCtx, attacker);
         attackerGender = battleCtx->battleMons[attacker].gender;
         attackerType1 = battleCtx->battleMons[attacker].type1;
         attackerType2 = battleCtx->battleMons[attacker].type2;
@@ -19795,7 +19814,7 @@ BOOL Battle_PartyMonAbilityDetersContactMove(BattleSystem *battleSys, BattleCont
     }
     else
     {
-        defenderAbility = battleCtx->battleMons[defender].ability;
+        defenderAbility = Battler_Ability(battleCtx, defender);
         defenderGender = battleCtx->battleMons[defender].gender;
         defenderType1 = battleCtx->battleMons[defender].type1;
         defenderType2 = battleCtx->battleMons[defender].type2;
@@ -19960,7 +19979,7 @@ BOOL Battle_BattlerAbilityDetersContactMove(BattleSystem* battleSys, BattleConte
 
     result = FALSE;
 
-    defenderAbility = battleCtx->battleMons[defender].ability;
+    defenderAbility = Battler_Ability(battleCtx, defender);
     defenderGender = battleCtx->battleMons[defender].gender;
     defenderType1 = battleCtx->battleMons[defender].type1;
     defenderType2 = battleCtx->battleMons[defender].type2;
@@ -19969,7 +19988,7 @@ BOOL Battle_BattlerAbilityDetersContactMove(BattleSystem* battleSys, BattleConte
     defenderHeldItem = battleCtx->battleMons[defender].heldItem;
     defenderHeldItemEffect = BattleSystem_GetItemData(battleCtx, defenderHeldItem, ITEM_PARAM_HOLD_EFFECT);
 
-    attackerAbility = battleCtx->battleMons[attacker].ability;
+    attackerAbility = Battler_Ability(battleCtx, attacker);
     attackerGender = battleCtx->battleMons[attacker].gender;
     attackerType1 = battleCtx->battleMons[attacker].type1;
     attackerType2 = battleCtx->battleMons[attacker].type2;

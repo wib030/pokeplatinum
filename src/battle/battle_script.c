@@ -9153,7 +9153,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
             break;
 
         case ABILITY_PLUS:
-            if (battleCtx->battleMons[battleCtx->attacker].ability == ABILITY_MINUS) {
+            if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MINUS) {
                 battleCtx->damage = battleCtx->damage * 3 / 2;
             }
             break;
@@ -12326,7 +12326,7 @@ static BOOL BtlCmd_TryRestoreStatusOnSwitch(BattleSystem *battleSys, BattleConte
         int ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
         int status = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
 
-        if (battleCtx->battleMons[battler].ability != ABILITY_NATURAL_CURE
+        if (Battler_Ability(battleCtx, battler) != ABILITY_NATURAL_CURE
                 && Ability_ForbidsStatus(battleCtx, ability, status) == FALSE) {
             BattleScript_Iter(battleCtx, jumpNoStatusRestore);
         }
