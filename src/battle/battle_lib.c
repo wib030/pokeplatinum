@@ -122,6 +122,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].unownEnergyWeakFlag = FALSE;
 	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
 	battleCtx->battleMons[battler].paraProtectionFlag = FALSE;
+	battleCtx->battleMons[battler].neutralizingGasAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -4636,11 +4637,17 @@ int BattleSystem_CountAbility(BattleSystem *battleSys, BattleContext *battleCtx,
     int i;
     int maxBattlers = BattleSystem_MaxBattlers(battleSys);
 	
-	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)
-	&& ability != ABILITY_NEUTRALIZING_GAS)
-	{
-		return 0;
-	}
+	for (i = 0; i < MAX_BATTLERS; i++)
+    {
+        if (battleCtx->battleMons[i].curHP && i != battler)
+        {
+            if (battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS
+			&& ability != ABILITY_NEUTRALIZING_GAS)
+            {
+                return 0;
+            }
+        }
+    }
 
     switch (mode) {
     case COUNT_ALL_BATTLERS_OUR_SIDE:
@@ -4887,32 +4894,41 @@ BOOL BattleSystem_CanWhirlwind(BattleSystem *battleSys, BattleContext *battleCtx
 
 u8 Battler_Ability(BattleContext *battleCtx, int battler)
 {
-	int i;
-	int neutralizingGas = 0;
-	
-	for (i = 0; i < MAX_BATTLERS; i++)
-	{
-		if (battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS && battleCtx->battleMons[i].curHP)
-		{
-			neutralizingGas = 1;
-			break;
-		}
-	}
-	
-    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED
-		|| (neutralizingGas == 1 && battleCtx->battleMons[battler].ability != ABILITY_NEUTRALIZING_GAS))
-            && battleCtx->battleMons[battler].ability != ABILITY_MULTITYPE) {
-        return ABILITY_NONE;
-    } 
+    int i;
+
+    // Early exit for Multitype
+    if (battleCtx->battleMons[battler].ability == ABILITY_MULTITYPE)
+    {
+        return ABILITY_MULTITYPE;
+    }
     
-    if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
-            && battleCtx->battleMons[battler].ability == ABILITY_LEVITATE) {
+    if (battleCtx->battleMons[battler].ability == ABILITY_LEVITATE)
+    {
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        {
+            return ABILITY_NONE;
+        }
+
+        if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
+        {
+            return ABILITY_NONE;
+        }
+    }
+
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED)
+    {
         return ABILITY_NONE;
-    } 
-    
-    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
-            && battleCtx->battleMons[battler].ability == ABILITY_LEVITATE) {
-        return ABILITY_NONE;
+    }
+
+    for (i = 0; i < MAX_BATTLERS; i++)
+    {
+        if (battleCtx->battleMons[i].curHP && i != battler)
+        {
+            if (battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS)
+            {
+                return ABILITY_NONE;
+            }
+        }
     }
     
     return battleCtx->battleMons[battler].ability;
@@ -5515,6 +5531,7 @@ enum {
     SWITCH_IN_CHECK_STATE_START = 0,
 
     SWITCH_IN_CHECK_STATE_FIELD_WEATHER = SWITCH_IN_CHECK_STATE_START,
+	SWITCH_IN_CHECK_STATE_NEUTRALIZING_GAS,
     SWITCH_IN_CHECK_STATE_TRACE,
 	SWITCH_IN_CHECK_STATE_IMPOSTER,
 	SWITCH_IN_CHECK_STATE_RANDOM_ABILITY,
@@ -5611,6 +5628,26 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             }
 
             battleCtx->switchInCheckState++;
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_NEUTRALIZING_GAS:
+            for (i = 0; i < maxBattlers; i++) {
+                battler = battleCtx->monSpeedOrder[i];
+
+                if (battleCtx->battleMons[battler].neutralizingGasAnnounced == FALSE
+                        && battleCtx->battleMons[battler].curHP
+                        && Battler_Ability(battleCtx, battler) == ABILITY_NEUTRALIZING_GAS) {
+                    battleCtx->battleMons[battler].neutralizingGasAnnounced = TRUE;
+                    battleCtx->msgBattlerTemp = battler;
+                    subscript = subscript_neutralizing_gas;
+                    result = TRUE;
+                    break;
+                }
+            }
+
+            if (i == maxBattlers) {
+                battleCtx->switchInCheckState++;
+            }
             break;
 
         case SWITCH_IN_CHECK_STATE_TRACE:
@@ -13460,11 +13497,13 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
 
     if (battleCtx->battleMons[defender1].ability != ABILITY_FORECAST
             && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
+			&& battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
             && battleCtx->battleMons[defender1].curHP
             && battleCtx->battleMons[defender2].curHP
             && battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
             && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
+			&& battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
         // Both targets are eligible; choose randomly
         if (BattleSystem_RandNext(battleSys) & 1) {
@@ -13474,11 +13513,13 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         }
     } else if (battleCtx->battleMons[defender1].ability != ABILITY_FORECAST
             && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
+			&& battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender1].curHP
             && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE) {
         trace = defender1;
     } else if (battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
             && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
+			&& battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender2].curHP
             && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
         trace = defender2;

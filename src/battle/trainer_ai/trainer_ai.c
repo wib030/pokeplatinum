@@ -6660,7 +6660,8 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
         }
     }
 
-    if (battleCtx->battleMons[BATTLER_OPP(battler)].ability == ABILITY_WONDER_GUARD) {
+    if (battleCtx->battleMons[BATTLER_OPP(battler)].ability == ABILITY_WONDER_GUARD
+		&& NO_NEUTRALIZING_GAS) {
         // Check if we have a super-effective move against the opponent
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             move = battleCtx->battleMons[battler].moves[i];
@@ -6909,7 +6910,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                         if (moveStatus != MON_CONDITION_NONE) {
                             if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
-                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, battleCtx->battleMons[defender].ability, moveStatus))
+                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, Battler_Ability(battleCtx, defender), moveStatus))
                                 {
                                     return FALSE;
                                 }
@@ -6932,7 +6933,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     // Generic boosts matter regardless of move power
                     if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler)) {
 
-                        if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE
+                        if (Battler_Ability(battleCtx, defender) != ABILITY_UNAWARE
 						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
 
                             if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
@@ -6951,7 +6952,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         // Attacking stat boosts only matter if we are using a regular damaging move
                         if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
 
-                            if (battleCtx->battleMons[defender].ability != ABILITY_UNAWARE
+                            if (Battler_Ability(battleCtx, defender) != ABILITY_UNAWARE
 							&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
 
                                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
@@ -7211,7 +7212,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                 if (((battleCtx->battleMons[defender].type1 != TYPE_GHOST)
                                                     && (battleCtx->battleMons[defender].type2 != TYPE_GHOST))
                                                     || (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_NORMAL_HIT_GHOST)
-                                                    || (battleCtx->battleMons[battler].ability == ABILITY_SCRAPPY)) {
+                                                    || (Battler_Ability(battleCtx, battler) == ABILITY_SCRAPPY)) {
                                                         return FALSE;
                                                 }
                                             }
@@ -7494,7 +7495,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                 if (moveVolatileStatus & VOLATILE_CONDITION_CONFUSION) {
 
                                                     if ((Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_OWN_TEMPO) == FALSE)
-                                                        && (battleCtx->battleMons[defender].ability != ABILITY_TANGLED_FEET)
+                                                        && (Battler_Ability(battleCtx, defender) != ABILITY_TANGLED_FEET)
                                                         && (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_MAGIC_BOUNCE) == FALSE)) {
                                                         return FALSE;
                                                     }
@@ -7519,7 +7520,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                 if (moveStatus != MON_CONDITION_NONE) {
 
-                                    if (Battle_AbilityDetersStatus(battleSys, battleCtx, battleCtx->battleMons[defender].ability, moveStatus)
+                                    if (Battle_AbilityDetersStatus(battleSys, battleCtx, Battler_Ability(battleCtx, defender), moveStatus)
                                         && (Battler_IgnorableAbility(battleCtx, battler, defender, battleCtx->battleMons[defender].ability) == FALSE)) {
 
                                         if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE) {
@@ -7529,7 +7530,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                                     && battleCtx->battleMons[defender].type1 != TYPE_STEEL
                                                     && battleCtx->battleMons[defender].type2 != TYPE_POISON
                                                     && battleCtx->battleMons[defender].type2 != TYPE_STEEL)
-                                                    || battleCtx->battleMons[battler].ability == ABILITY_CORROSION) {
+                                                    || Battler_Ability(battleCtx, battler) == ABILITY_CORROSION) {
                                                     
                                                     return FALSE;
                                                 }
@@ -7583,8 +7584,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         break;
 
                                     case BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2:
-                                        if (battleCtx->battleMons[defender].ability != ABILITY_DEFIANT
-                                            && battleCtx->battleMons[defender].ability != ABILITY_COMPETITIVE) {
+                                        if (Battler_Ability(battleCtx, defender) != ABILITY_DEFIANT
+                                            && Battler_Ability(battleCtx, defender) != ABILITY_COMPETITIVE) {
                                                 return FALSE;
                                             }
                                         break;
@@ -7613,8 +7614,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                         if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_DEFOGGABLE) {
                                             
-                                            if (battleCtx->battleMons[defender].ability != ABILITY_DEFIANT
-                                                && battleCtx->battleMons[defender].ability != ABILITY_COMPETITIVE) {
+                                            if (Battler_Ability(battleCtx, defender) != ABILITY_DEFIANT
+                                                && Battler_Ability(battleCtx, defender) != ABILITY_COMPETITIVE) {
                                                     return FALSE;
                                             }
                                         }
@@ -7623,7 +7624,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     // Disable
                                     case BATTLE_EFFECT_DISABLE:
 
-                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                        if (Battler_Ability(battleCtx, defender) != ABILITY_MAGIC_BOUNCE) {
                                             if (battleCtx->battleMons[defender].moveEffectsData.disabledTurns == 0) {
 
                                                 // 10% chance to swap out
@@ -7637,7 +7638,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     // Embargo
                                     case BATTLE_EFFECT_PREVENT_ITEM_USE:
                                         
-                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                        if (Battler_Ability(battleCtx, defender) != ABILITY_MAGIC_BOUNCE) {
                                             if (battleCtx->battleMons[defender].moveEffectsData.embargoTurns == 0) {
                                                 if (battleCtx->battleMons[defender].heldItem == ITEM_NONE
                                                     || battleCtx->recycleItem[defender] != ITEM_NONE) {
@@ -7653,7 +7654,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                     // Encore
                                     case BATTLE_EFFECT_ENCORE:
-                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
+                                        if (Battler_Ability(battleCtx, defender) != ABILITY_MAGIC_BOUNCE) {
                                             if (battleCtx->battleMons[defender].moveEffectsData.encoredTurns == 0) {
                                                 return FALSE;
                                             }
@@ -7713,8 +7714,8 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                                     // Roar and Whirlwind
                                     case BATTLE_EFFECT_FORCE_SWITCH:
-                                        if (battleCtx->battleMons[defender].ability != ABILITY_MAGIC_BOUNCE) {
-                                            if (move != MOVE_ROAR || battleCtx->battleMons[defender].ability != ABILITY_SOUNDPROOF) {
+                                        if (Battler_Ability(battleCtx, defender) != ABILITY_MAGIC_BOUNCE) {
+                                            if (move != MOVE_ROAR || Battler_Ability(battleCtx, defender) != ABILITY_SOUNDPROOF) {
                                                 if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, defender, battler) == FALSE) {
                                                     return FALSE;
                                                 }
@@ -8050,7 +8051,7 @@ static BOOL AI_ShouldSwitchYawn(BattleSystem *battleSys, BattleContext *battleCt
     result = FALSE;
 
     defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-    ability = battleCtx->battleMons[battler].ability;
+    ability = Battler_Ability(battleCtx, battler);
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
 
     if (Battle_AbilityDetersStatus(battleSys, battleCtx, ability, MON_CONDITION_SLEEP)
@@ -8103,7 +8104,7 @@ static BOOL AI_ShouldSwitchToxic(BattleSystem *battleSys, BattleContext *battleC
     result = FALSE;
 
     defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-    ability = battleCtx->battleMons[battler].ability;
+    ability = Battler_Ability(battleCtx, battler);
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
 
     if (Battle_AbilityDetersStatus(battleSys, battleCtx, ability, MON_CONDITION_ANY_POISON)
@@ -8151,7 +8152,7 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
     BOOL hasProtect;
 
     defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-    ability = battleCtx->battleMons[battler].ability;
+    ability = Battler_Ability(battleCtx, battler);
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
     side = Battler_Side(battleSys, defender);
 
@@ -8558,7 +8559,7 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
 
 
     ability = battleCtx->battleMons[battler].ability;
-    defenderAbility = battleCtx->battleMons[BATTLER_OPP(battler)].ability;
+    defenderAbility = Battler_Ability(battleCtx, BATTLER_OPP(battler));
     type1 = battleCtx->battleMons[battler].type1;
     type2 = battleCtx->battleMons[battler].type2;
     gender = battleCtx->battleMons[battler].gender;
@@ -8989,7 +8990,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
     u32 desiredFieldCondition, effectiveness;
     int moveSetter, defenderContactAbility, hasNonContactPivot;
 
-    ability = battleCtx->battleMons[battler].ability;
+    ability = Battler_Ability(battleCtx, battler);
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
     moveSetter = 0;
     desiredFieldCondition = 0;
@@ -9204,7 +9205,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     Pokemon *mon;
 
     partyCount = BattleSystem_PartyCount(battleSys, battler);
-    ability = battleCtx->battleMons[battler].ability;
+    ability = Battler_Ability(battleCtx, battler);
     desiredWeatherAbility = ABILITY_NONE;
     abilityFieldCondition = 0;   
     heldItemEffect = Battler_HeldItemEffect(battleCtx, battler);
@@ -9456,17 +9457,16 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
     if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TRAPPED)
             || (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_SHADOW_TAG)
-                && battleCtx->battleMons[battler].ability != ABILITY_SHADOW_TAG)
+                && Battler_Ability(battleCtx, battler) != ABILITY_SHADOW_TAG)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP)
                 && !MON_HAS_TYPE(battler, TYPE_FLYING)
-                && battleCtx->battleMons[battler].ability != ABILITY_LEVITATE
+                && Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
                 && Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
             || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_MAGNET_PULL)
                 && MON_HAS_TYPE(battler, TYPE_STEEL))
 			|| (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_THIRSTY)
                 && MON_HAS_TYPE(battler, TYPE_WATER)))
             && battleCtx->battleMons[battler].heldItem != ITEM_SHED_SHELL) {
-            //&& battleCtx->battleMons[battler].ability != ABILITY_NEUTRALIZING_GAS) {
         return FALSE;
     }
 

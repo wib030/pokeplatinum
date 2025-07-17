@@ -5474,4 +5474,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s status faded\naway.</language>
 	</row>
+	<row id="pl_msg_00000368_01365" index="1365">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Neutralizing gas fills the area!</language>
+	</row>
 </body>
