@@ -19498,6 +19498,14 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             score += 8;
         }
         break;
+		
+	case ABILITY_TRUANT:
+	case ABILITY_SLOW_START:
+		if (NEUTRALIZING_GAS)
+		{
+			score += 20;	
+		}
+		break;
     }
 
     return score;

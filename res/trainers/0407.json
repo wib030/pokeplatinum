@@ -38,18 +38,19 @@
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_SPINDA",
+            "species": "SPECIES_WEEZING",
             "form": 0,
             "level": 54,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_AIR_BALLOON",
             "moves": [
-                "MOVE_ENCORE",
-				"MOVE_ICY_WIND",
-				"MOVE_WISH",
-				"MOVE_ASSIST"
+                "MOVE_SLUDGE_BOMB",
+				"MOVE_FLAMETHROWER",
+				"MOVE_WILL_O_WISP",
+				"MOVE_PROTECT"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ability": 1
         },
 		{
             "species": "SPECIES_GENGAR",

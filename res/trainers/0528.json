@@ -81,19 +81,18 @@
             "ball_seal": 0
         },
 		{
-            "species": "SPECIES_PURUGLY",
+            "species": "SPECIES_SLAKING",
             "form": 0,
             "level": 54,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_SUPER_FANG",
-                "MOVE_FAKE_OUT",
-                "MOVE_U_TURN",
-                "MOVE_ASSIST"
+                "MOVE_STRENGTH",
+                "MOVE_HAMMER_ARM",
+                "MOVE_SLACK_OFF",
+                "MOVE_ROCK_SLIDE"
             ],
             "power": 255,
-            "ball_seal": 0,
-			"ability": 1
+            "ball_seal": 0
         }
     ]
 }
