@@ -123,6 +123,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].randomAbilityAnnounced = FALSE;
 	battleCtx->battleMons[battler].paraProtectionFlag = FALSE;
 	battleCtx->battleMons[battler].neutralizingGasAnnounced = FALSE;
+	battleCtx->battleMons[battler].ghostlyAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -5570,7 +5571,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battler, battlero;
     int maxBattlers;
 	int imposter1Pos, imposter2Pos;
-	int abilityMax = ABILITY_AWARE;
+	int abilityMax = ABILITY_NEUTRALIZING_GAS;
 	int abilityChosen;
 	int randomAbilityActivated = FALSE;
 
