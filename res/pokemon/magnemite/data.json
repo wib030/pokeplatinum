@@ -89,10 +89,7 @@
             "19": "MOVE_SPARK",
 			"23": "MOVE_MIRROR_SHOT",
 			"25": "MOVE_TELEPORT",
-            "27": [ 
-				"MOVE_LOCK_ON",
-				"MOVE_SHOCK_WAVE"
-			],
+            "27": "MOVE_SHOCK_WAVE",
             "29": "MOVE_SCREECH",
 			"31": "MOVE_FLASH_CANNON",
 			"34": "MOVE_ZAP_CANNON",

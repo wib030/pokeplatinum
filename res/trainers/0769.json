@@ -15,7 +15,6 @@
             "level": 34,
             "item": "ITEM_SCOPE_LENS",
             "moves": [
-                "MOVE_LOCK_ON",
                 "MOVE_GUNK_SHOT",
                 "MOVE_BLIZZARD",
                 "MOVE_FIRE_BLAST"

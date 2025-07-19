@@ -98,7 +98,6 @@
 			"32": "MOVE_ZAP_CANNON",
             "34": "MOVE_RECOVER",
             "40": "MOVE_DISCHARGE",
-            "45": "MOVE_LOCK_ON",
             "51": "MOVE_TRI_ATTACK",
             "56": "MOVE_MAGIC_COAT"
         },

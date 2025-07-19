@@ -115,6 +115,7 @@
                 "MOVE_REFLECT"
             ],
             "25": "MOVE_PSYBEAM",
+			"27": "MOVE_LOCK_ON",
             "29": "MOVE_SUBSTITUTE",
             "32": "MOVE_RECYCLE",
             "36": "MOVE_TRICK",

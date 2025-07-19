@@ -16,7 +16,7 @@
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_WATER_GUN",
-				"MOVE_LOCK_ON",
+				"MOVE_AURORA_BEAM",
 				"MOVE_BULLET_SEED",
 				"MOVE_STRING_SHOT"
             ],

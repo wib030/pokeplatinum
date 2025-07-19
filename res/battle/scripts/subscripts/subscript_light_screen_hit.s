@@ -1,0 +1,14 @@
+    .include "macros/btlcmd.inc"
+
+    .data
+
+_000:
+    TryLightScreen _003
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+    UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_LIGHT_SCREEN
+    PlayMoveAnimation BTLSCR_MSG_TEMP
+    Wait
+    Call BATTLE_SUBSCRIPT_ANIMATION_PREPARED_MESSAGE
+
+_003:
+    End 

@@ -158,4 +158,5 @@ static const int sSideEffectSubscripts[] = {
 	[MOVE_SUBSCRIPT_PTR_ATTACK_SWITCH_NO_ANIM]            = subscript_attack_switch_no_anim,
 	[MOVE_SUBSCRIPT_PTR_FORCE_SWITCH_HIT]            	  = subscript_force_target_to_switch_or_flee_hit,
 	[MOVE_SUBSCRIPT_PTR_SPIT_UP]                          = subscript_spit_up,
+	[MOVE_SUBSCRIPT_PTR_LIGHT_SCREEN_HIT]                 = subscript_light_screen_hit,
 };

@@ -162,6 +162,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN_HIT, Basic_CheckAlreadyUnderLightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Basic_CheckOHKOWouldFail
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_HP, Basic_CheckNonStandardDamageOrChargeTurn
@@ -1750,6 +1751,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN_HIT, Expert_LightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurnNoInvuln
@@ -1814,7 +1816,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurnNoInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_SolarBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLY, Expert_ChargeTurnWithInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Expert_Spikes
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Expert_StickyWeb
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Expert_SpitUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_Recovery
@@ -3081,34 +3083,37 @@ Expert_LightScreen:
     ; If the attacker''s HP is >= 90%, 50% of additional score +1.
     ;
     ; If the opponent''s last-used move was a Special move, 75% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_LightScreen_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_LightScreen_CheckLastUsedMove
-    IfRandomLessThan 128, Expert_LightScreen_CheckLastUsedMove
-    AddToMoveScore 1
+    LoadBattlerCritStage AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, ScoreMinus1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Expert_LightScreen_CheckDetersDefog
+    IfBattlerIsSpecialAttacker AI_BATTLER_DEFENDER, Expert_LightScreen_TryScorePlus2
+    GoTo Expert_LightScreen_Main
 
-Expert_LightScreen_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_SPECIAL, Expert_LightScreen_End
-    IfRandomLessThan 64, Expert_LightScreen_End
+Expert_LightScreen_TryScorePlus2:
+    IfRandomLessThan 24, Expert_LightScreen_Main
     AddToMoveScore 1
+    IfRandomLessThan 24, Expert_LightScreen_Main
+    AddToMoveScore 1
+    GoTo Expert_LightScreen_Main
+
+Expert_LightScreen_CheckDetersDefog:
+    AddToMoveScore -1
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_LightScreen_Main
+    AddToMoveScore 1
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScorePlus3
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScorePlus3
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScorePlus3
+    GoTo Expert_LightScreen_Main
+    
+Expert_LightScreen_Main:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, ScorePlus1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 88, ScorePlus1
     GoTo Expert_LightScreen_End
 
-Expert_LightScreen_ScoreMinus2:
-    AddToMoveScore -2
-
 Expert_LightScreen_End:
-    PopOrEnd 
-
-Expert_LightScreen_PreSplitSpecialTypes:
-    TableEntry TYPE_FIRE
-    TableEntry TYPE_WATER
-    TableEntry TYPE_GRASS
-    TableEntry TYPE_ELECTRIC
-    TableEntry TYPE_PSYCHIC
-    TableEntry TYPE_ICE
-    TableEntry TYPE_DRAGON
-    TableEntry TYPE_DARK
-    TableEntry TABLE_END
+    PopOrEnd
 
 Expert_Rest:
     ; If the attacker is faster than its target:
@@ -3331,19 +3336,7 @@ Expert_Reflect_CheckGhostItemAndAbility:
     GoTo Expert_Reflect_End
 
 Expert_Reflect_End:
-    PopOrEnd 
-
-Expert_Reflect_PreSplitPhysicalTypes:
-    TableEntry TYPE_NORMAL
-    TableEntry TYPE_FIGHTING
-    TableEntry TYPE_FLYING
-    TableEntry TYPE_POISON
-    TableEntry TYPE_GROUND
-    TableEntry TYPE_ROCK
-    TableEntry TYPE_BUG
-    TableEntry TYPE_GHOST
-    TableEntry TYPE_STEEL
-    TableEntry TABLE_END
+    PopOrEnd
 
 Expert_StatusPoison:
     ; If the attacker''s HP is < 50% or the defender''s HP is <= 50%, score -1.
@@ -8003,7 +7996,7 @@ Expert_StealthRock:
     ;
     ; 90% chance to add +4 score during the first 3 turns of a battle.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ; If the attacker knows either of the moves Roar, Whirlwind or Dragon Tail (Swift), 33% chance of additional score +1.
     ;
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
@@ -8026,6 +8019,7 @@ Expert_StealthRock_CheckToEncourage:
     IfLoadedLessThan 3, Expert_StealthRock_TryScorePlus4
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StealthRock_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StealthRock_TryScorePlus1
+	IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SWIFT, Expert_StealthRock_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo TRUE, Expert_StealthRock_TryScorePlus1
     IfRandomLessThan 128, Expert_StealthRock_End
@@ -8168,7 +8162,7 @@ Expert_Spikes:
     ; The +score here depends on number of spikes currently up, with first and last layers
     ; valued highest.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ; If the attacker knows either of the moves Roar, Whirlwind or Dragon Tail (Swift), 33% chance of additional score +1.
     ;
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
@@ -8292,6 +8286,7 @@ Expert_Spikes_CheckToEncourage:
     IfLoadedLessThan 3, Expert_Spikes_SpikesScore
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_Spikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_Spikes_TryScorePlus1
+	IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SWIFT, Expert_Spikes_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo TRUE, Expert_Spikes_TryScorePlus1
     IfRandomLessThan 128, Expert_Spikes_End
@@ -8337,7 +8332,7 @@ Expert_ToxicSpikes:
     ; 90% chance to add +score during the first 3 turns of a battle.
     ; The +score here depends on number of toxic spikes currently up, with first layer valued most.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ; If the attacker knows either of the moves Roar, Whirlwind or Dragon Tail (Swift), 33% chance of additional score +1.
     ;
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
@@ -8464,6 +8459,7 @@ Expert_ToxicSpikes_CheckToEncourage:
     IfLoadedLessThan 3, Expert_ToxicSpikes_ToxicSpikesScore
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_ToxicSpikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_ToxicSpikes_TryScorePlus1
+	IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SWIFT, Expert_ToxicSpikes_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo TRUE, Expert_ToxicSpikes_TryScorePlus1
     IfRandomLessThan 128, Expert_ToxicSpikes_End
@@ -8507,7 +8503,7 @@ Expert_StickyWeb:
     ;
     ; 90% chance to add +4 score during the first 3 turns of a battle.
     ;
-    ; If the attacker knows either of the moves Roar or Whirlwind, 33% chance of additional score +1.
+    ; If the attacker knows either of the moves Roar, Whirlwind or Dragon Tail (Swift), 33% chance of additional score +1.
     ;
     ; If the attacker has just switched in, 33% chance of additional score +1.
 
@@ -8530,6 +8526,7 @@ Expert_StickyWeb_CheckToEncourage:
     IfLoadedLessThan 3, Expert_StickyWeb_TryScorePlus4
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StickyWeb_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StickyWeb_TryScorePlus1
+	IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SWIFT, Expert_StickyWeb_TryScorePlus1
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo TRUE, Expert_StickyWeb_TryScorePlus1
     IfRandomLessThan 128, Expert_StickyWeb_End

@@ -99,7 +99,6 @@
             "34": "MOVE_RECOVER",
 			"36": "MOVE_ZAP_CANNON",
             "40": "MOVE_DISCHARGE",
-            "45": "MOVE_LOCK_ON",
             "51": "MOVE_TRI_ATTACK",
             "56": "MOVE_MAGIC_COAT",
             "60": "MOVE_HYPER_BEAM"

@@ -97,8 +97,7 @@
 			"31": "MOVE_DISCHARGE",
 			"34": "MOVE_ZAP_CANNON",
 			"37": "MOVE_EARTH_POWER",
-            "40": "MOVE_STONE_EDGE",
-            "43": "MOVE_LOCK_ON"
+            "40": "MOVE_STONE_EDGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

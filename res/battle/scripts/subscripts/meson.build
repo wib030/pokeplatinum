@@ -359,4 +359,5 @@ subscript_files = files(
 	'subscript_force_target_to_switch_or_flee_hit.s',
 	'subscript_spit_up.s',
 	'subscript_neutralizing_gas.s',
+	'subscript_light_screen_hit.s',
 )

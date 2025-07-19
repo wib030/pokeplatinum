@@ -103,7 +103,6 @@
             "37": "MOVE_IRON_DEFENSE",
 			"43": "MOVE_STONE_EDGE",
 			"49": "MOVE_HAMMER_ARM",
-			"55": "MOVE_LOCK_ON",
 			"61": "MOVE_SUPERPOWER",
 			"67": "MOVE_HYPER_BEAM"
         },
