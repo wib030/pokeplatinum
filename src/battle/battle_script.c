@@ -4810,112 +4810,25 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
         int i;
         int totalMonsGainingExp = 0;
         int totalMonsWithExpShare = 0;
-		int gainingExp = 1;
-		int thisBattlerGaining = 0;
-        int boostLevel, capLevel;
-		
-		Pokemon *cMon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[battleCtx->attacker]);
-		int levelCur = Pokemon_GetValue(cMon, MON_DATA_LEVEL, NULL);
-		
-		TrainerInfo *trInfo = BattleSystem_TrainerInfo(battleSys, 0);
-		int badges = TrainerInfo_BadgeCount(trInfo);
 
         u16 exp = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, MON_DATA_PERSONAL_BASE_EXP);
         exp = exp * battleCtx->battleMons[battleCtx->faintedMon].level / 7;
 
-        // Set level floors and ceilings for xp modification here
-        switch (badges) {
-
-            default:
-                boostLevel = 0;
-                capLevel = 100;
-                break;
-
-            case 0:
-                boostLevel = 7;
-                capLevel = 12;
-                break;
-
-            case 1:
-                boostLevel = 17;
-                capLevel = 21;
-                break;
-
-            case 2:
-                boostLevel = 21;
-                capLevel = 25;
-                break;
-
-            case 3:
-                boostLevel = 25;
-                capLevel = 30;
-                break;
-
-            case 4:
-                boostLevel = 29;
-                capLevel = 35;
-                break;
-
-            case 5:
-                boostLevel = 41;
-                capLevel = 44;
-                break;
-
-            case 6:
-                boostLevel = 47;
-                capLevel = 50;
-                break;
-
-            case 7:
-                boostLevel = 53;
-                capLevel = 57;
-                break;
-
-            case 8:
-                boostLevel = 65;
-                capLevel = 100;
-                break;
-        }
-
         for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, BATTLER_US)); i++) {
-			thisBattlerGaining = 0;
             Pokemon *mon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, i);
-			int levelCurMon = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
 			
             if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL))
 			{
                 if (battleCtx->sideGetExpMask[(battleCtx->faintedMon >> 1) & 1] & FlagIndex(i)) {
                     totalMonsGainingExp++;
-					thisBattlerGaining = 1;
                 }
 
                 u16 item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
                 if (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_EXP_SHARE) {
 					totalMonsWithExpShare++;
-					thisBattlerGaining = 1;
-                }
-            }
-			
-			if (thisBattlerGaining == 1) {
-                if (levelCurMon > capLevel) {
-                    gainingExp = 0;
                 }
             }
         }
-
-        if (levelCur < boostLevel) {
-            exp = exp * 3 / 2;
-        }
-        else {
-            if (levelCur > capLevel) {
-                gainingExp = 0;
-            }
-        }
-
-		if (gainingExp == 0)
-		{
-			exp = 0;
-		}
 
         if (totalMonsWithExpShare)
 		{
@@ -14227,6 +14140,64 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 	
 	u16 move;
     u8 ppCurr, ppUps, ppNew, ppMax;
+	
+	int boostLevel, capLevel;
+	TrainerInfo *trInfo = BattleSystem_TrainerInfo(data->battleSys, 0);
+	int badges = TrainerInfo_BadgeCount(trInfo);
+
+	// Set level floors and ceilings for xp modification here
+	switch (badges) {
+
+		default:
+			boostLevel = 0;
+			capLevel = 100;
+			break;
+
+		case 0:
+			boostLevel = 7;
+			capLevel = 12;
+			break;
+
+		case 1:
+			boostLevel = 17;
+			capLevel = 21;
+			break;
+
+		case 2:
+			boostLevel = 21;
+			capLevel = 25;
+			break;
+
+		case 3:
+			boostLevel = 25;
+			capLevel = 30;
+			break;
+
+		case 4:
+			boostLevel = 29;
+			capLevel = 35;
+			break;
+
+		case 5:
+			boostLevel = 41;
+			capLevel = 44;
+			break;
+
+		case 6:
+			boostLevel = 47;
+			capLevel = 50;
+			break;
+
+		case 7:
+			boostLevel = 53;
+			capLevel = 57;
+			break;
+
+		case 8:
+			boostLevel = 65;
+			capLevel = 100;
+			break;
+	}
 
     msgLoader = BattleSystem_MessageLoader(data->battleSys);
     battleType = BattleSystem_BattleType(data->battleSys);
@@ -14271,7 +14242,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
         u32 totalExp = 0;
         msg.id = 1; // "{0} gained {1} Exp. Points!"
 
-        if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) != 100) {
+        if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) < capLevel) {
             if (data->battleCtx->sideGetExpMask[battler] & FlagIndex(slot)) {
                 totalExp = data->battleCtx->gainedExp;
             }
@@ -14287,6 +14258,12 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
             if (battleType & BATTLE_TYPE_TRAINER) {
                 totalExp = totalExp * 150 / 100;
             }
+			
+			if (Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) < boostLevel)
+			{
+				totalExp = totalExp * 150 / 100;
+				msg.id = 2; // "{0} gained a boosted {1} Exp. Points!"
+			}
 
             if (BattleSystem_PokemonIsOT(data->battleSys, mon) == FALSE) {
                 if (Pokemon_GetValue(mon, MON_DATA_LANGUAGE, NULL) != Unk_020E4C44) {
