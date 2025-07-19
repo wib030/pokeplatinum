@@ -4532,7 +4532,7 @@ static void BattleController_EndFight(BattleSystem *battleSys, BattleContext *ba
 					}
 					
 					// Cap it off to 2/3 max
-					if (ppNew > (ppMax * 2 / 3))
+					if (ppNew >= (ppMax * 2 / 3))
 					{
 						ppNew = (ppMax * 2 / 3);
 					}

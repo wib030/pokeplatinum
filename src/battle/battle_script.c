@@ -14155,42 +14155,42 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 
 		case 0:
 			boostLevel = 7;
-			capLevel = 12;
+			capLevel = 13;
 			break;
 
 		case 1:
 			boostLevel = 17;
-			capLevel = 21;
+			capLevel = 22;
 			break;
 
 		case 2:
 			boostLevel = 21;
-			capLevel = 25;
+			capLevel = 26;
 			break;
 
 		case 3:
 			boostLevel = 25;
-			capLevel = 30;
+			capLevel = 31;
 			break;
 
 		case 4:
 			boostLevel = 29;
-			capLevel = 35;
+			capLevel = 36;
 			break;
 
 		case 5:
 			boostLevel = 41;
-			capLevel = 44;
+			capLevel = 45;
 			break;
 
 		case 6:
 			boostLevel = 47;
-			capLevel = 50;
+			capLevel = 51;
 			break;
 
 		case 7:
 			boostLevel = 53;
-			capLevel = 57;
+			capLevel = 58;
 			break;
 
 		case 8:
@@ -14394,7 +14394,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 					ppNew = ppCurr + 5;
 					
 					// Cap it off to pp max
-					if (ppNew > ppMax)
+					if (ppNew >= ppMax)
 					{
 						ppNew = ppMax;
 					}
