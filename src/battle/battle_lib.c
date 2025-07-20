@@ -166,8 +166,8 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	// Not sure how to change the actual values, so for now this is the solution...
 	if (battleCtx->battleMons[battler].species == SPECIES_AZURILL)
 	{
-		battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_BLISSEY);
-		battleCtx->battleMons[battler].height = sub_02098808(heightWeightData, SPECIES_BLISSEY);
+		battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_WAILMER);
+		battleCtx->battleMons[battler].height = sub_02098808(heightWeightData, SPECIES_WAILMER);
 	}
 	else if (battleCtx->battleMons[battler].species == SPECIES_IGGLYBUFF)
 	{
