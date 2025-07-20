@@ -5478,4 +5478,28 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Neutralizing gas fills the area!</language>
 	</row>
+	<row id="pl_msg_00000368_01366" index="1366">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} tossed and turned\nin it’s sleep!</language>
+	</row>
+	<row id="pl_msg_00000368_01367" index="1367">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} tossed and turned\nin it’s sleep!</language>
+	</row>
+	<row id="pl_msg_00000368_01368" index="1368">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} tossed and turned\nin it’s sleep!</language>
+	</row>
+	<row id="pl_msg_00000368_01369" index="1369">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} slept and\nregained a little HP!</language>
+	</row>
+	<row id="pl_msg_00000368_01370" index="1370">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} slept and\nregained a little HP!</language>
+	</row>
+	<row id="pl_msg_00000368_01371" index="1371">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} slept and\nregained a little HP!</language>
+	</row>
 </body>

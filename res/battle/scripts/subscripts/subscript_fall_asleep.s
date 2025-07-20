@@ -161,6 +161,7 @@ _337:
     End 
 	
 _347:
+	PrintAttackMessage
     // {0} can’t sleep due to sleep clause!
     PrintMessage pl_msg_00000368_01353, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait 

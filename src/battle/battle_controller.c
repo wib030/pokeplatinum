@@ -870,6 +870,8 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
 				battleCtx->battleMons[battler].rivalryFlag = FALSE;
 				battleCtx->battleMons[battler].unownEnergyStrongFlag = FALSE;
 				battleCtx->battleMons[battler].unownEnergyWeakFlag = FALSE;
+				battleCtx->battleMons[battler].sleepHealFlag = FALSE;
+				battleCtx->battleMons[battler].tossTurnFlag = FALSE;
             }
 
             battleCtx->turnStartCheckState++;
@@ -1301,6 +1303,8 @@ enum {
 	MON_COND_CHECK_STATE_CHIP,
     MON_COND_CHECK_STATE_BIND,
     MON_COND_CHECK_STATE_BAD_DREAMS,
+	MON_COND_CHECK_STATE_SLEEP_HEAL,
+	MON_COND_CHECK_STATE_TOSS_AND_TURN,
 	MON_COND_CHECK_STATE_LEFTOVERS,
 	MON_COND_CHECK_STATE_LEECH_SEED,
 	MON_COND_CHECK_STATE_INGRAIN,
@@ -1479,6 +1483,49 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
                 state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+			
+		case MON_COND_CHECK_STATE_SLEEP_HEAL:
+            if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
+			&& battleCtx->battleMons[battler].sleepHealFlag == FALSE
+            && battleCtx->battleMons[battler].curHP) {
+				battleCtx->battleMons[battler].sleepHealFlag = TRUE;
+				
+                LOAD_SUBSEQ(subscript_sleep_heal);
+                battleCtx->battleStatusMask |= SYSCTL_SKIP_SPRITE_BLINK;
+                battleCtx->sideEffectMon = battler;
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+			
+		case MON_COND_CHECK_STATE_TOSS_AND_TURN:
+            if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
+            && Battler_Ability(battleCtx, battler) == ABILITY_TOSS_AND_TURN
+			&& battleCtx->battleMons[battler].tossTurnFlag == FALSE
+            && battleCtx->battleMons[battler].curHP)
+			{
+				battleCtx->battleMons[battler].tossTurnFlag = TRUE;
+				int target = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+				
+				if (target)
+				{
+					battleCtx->attacker = battler;
+					battleCtx->defender = target;
+					
+					LOAD_SUBSEQ(subscript_toss_and_turn);
+					battleCtx->commandNext = battleCtx->command;
+					battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+					state = STATE_BREAK_OUT;
+				}
             }
 
             battleCtx->monConditionCheckState++;

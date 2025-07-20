@@ -360,4 +360,6 @@ subscript_files = files(
 	'subscript_spit_up.s',
 	'subscript_neutralizing_gas.s',
 	'subscript_light_screen_hit.s',
+	'subscript_sleep_heal.s',
+	'subscript_toss_and_turn.s',
 )

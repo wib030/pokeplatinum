@@ -1,0 +1,22 @@
+    .include "macros/btlcmd.inc"
+
+    .data
+
+_000:
+	CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_CUR_HP, 0, _020
+	// {0} tossed and turned in its sleep!
+    PrintMessage pl_msg_00000368_01366, TAG_NICKNAME, BTLSCR_ATTACKER
+    Wait 
+    WaitButtonABTime 30
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+    UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_STRUGGLE
+    PlayMoveAnimationOnMons BTLSCR_MSG_TEMP, BTLSCR_ATTACKER, BTLSCR_DEFENDER
+    Wait
+	TossAndTurnHit
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
+	Call BATTLE_SUBSCRIPT_UPDATE_HP
+	End
+	
+_020:
+	End
+	

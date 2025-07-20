@@ -2552,6 +2552,7 @@ static BOOL BtlCmd_TrySlurpUp(BattleSystem *battleSys, BattleContext *battleCtx)
 static BOOL BtlCmd_UpdateSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckBattlerSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TossAndTurnHit(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2826,7 +2827,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_TrySlurpUp,
 	BtlCmd_UpdateSleepClauseFlag,
 	BtlCmd_CheckBattlerSleepClause,
-	BtlCmd_ClearSleepClauseFlag
+	BtlCmd_ClearSleepClauseFlag,
+	BtlCmd_TossAndTurnHit
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -8109,6 +8111,8 @@ static BOOL BtlCmd_Transform(BattleSystem * battleSys, BattleContext * battleCtx
 	ATTACKING_MON.unownEnergyStrongFlag = FALSE;
 	ATTACKING_MON.unownEnergyWeakFlag = FALSE;
 	ATTACKING_MON.ghostlyAnnounced = FALSE;
+	ATTACKING_MON.sleepHealFlag = FALSE;
+	ATTACKING_MON.tossTurnFlag = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
     ATTACKING_MON.moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     ATTACKING_MON.slowStartAnnounced = FALSE;
@@ -13900,6 +13904,34 @@ static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *
 
     // Flip any bit from 1 to 0 if the flag index is 1 at that bit
 	battleCtx->sideConditions[battlerSide].sleepClauseMask &= ~FlagIndex(battleCtx->selectedPartySlot[battler]);
+    return FALSE;
+}
+
+/**
+ * @brief Set Toss and Turn damage
+ * 
+ * @param battleSys 
+ * @param battleCtx 
+ * @return FALSE 
+ */
+static BOOL BtlCmd_TossAndTurnHit(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    battleCtx->hpCalcTemp = BattleSystem_CalcMoveDamage(battleSys,
+            battleCtx,
+            MOVE_STRUGGLE,
+            battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)],
+            battleCtx->fieldConditionsMask,
+            40,
+            TYPE_MYSTERY,
+            battleCtx->attacker,
+            battleCtx->defender,
+            1);
+			
+    battleCtx->hpCalcTemp = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->hpCalcTemp);
+    battleCtx->hpCalcTemp *= -1;
+	
     return FALSE;
 }
 

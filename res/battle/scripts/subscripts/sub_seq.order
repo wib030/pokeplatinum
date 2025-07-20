@@ -357,3 +357,5 @@ subscript_force_target_to_switch_or_flee_hit
 subscript_spit_up
 subscript_neutralizing_gas
 subscript_light_screen_hit
+subscript_sleep_heal
+subscript_toss_and_turn

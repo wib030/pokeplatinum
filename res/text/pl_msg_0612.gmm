@@ -657,4 +657,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Nullifies other abilities\nwhen in battle.</language>
 	</row>
+	<row id="pl_msg_00000612_00164" index="164">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">User tosses and turns when\nasleep, hitting the foe.</language>
+	</row>
 </body>

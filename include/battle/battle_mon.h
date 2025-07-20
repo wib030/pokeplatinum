@@ -112,6 +112,8 @@ typedef struct BattleMon {
 	u32 paraProtectionFlag : 1;
 	u32 ghostlyAnnounced : 1;
 	u32 neutralizingGasAnnounced : 1;
+	u32 sleepHealFlag : 1;
+	u32 tossTurnFlag : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];
