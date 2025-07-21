@@ -19506,7 +19506,124 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 	case ABILITY_SLOW_START:
 		if (NEUTRALIZING_GAS)
 		{
-			score += 20;	
+			score += 50;
+		}
+		break;
+		
+	case ABILITY_NEUTRALIZING_GAS:
+		// We have a Pokemon with Truant or Slow Start on our side
+		if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, battler, ABILITY_TRUANT)
+		|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, battler, ABILITY_SLOW_START))
+		{
+			score += 50;
+		}
+		
+		switch (defenderAbility)
+		{
+			case ABILITY_HUGE_POWER:
+			case ABILITY_PURE_POWER:
+			case ABILITY_WONDER_GUARD:
+				score += 50;
+				break;
+			
+			case ABILITY_SPEED_BOOST:
+			case ABILITY_SHARPNESS:
+			case ABILITY_TECHNICIAN:
+			case ABILITY_ADAPTABILITY:
+			case ABILITY_SHEER_FORCE:
+			case ABILITY_MULTISCALE:
+			case ABILITY_MAGIC_BOUNCE:
+			case ABILITY_DEFIANT:
+			case ABILITY_COMPETITIVE:
+			case ABILITY_MEGA_LAUNCHER:
+			case ABILITY_STRONG_JAW:
+			case ABILITY_RELENTLESS:
+			case ABILITY_ROCK_STAR:
+			case ABILITY_UNOWN_ENERGY:
+				score += 25;
+				break;
+				
+			case ABILITY_SCRAPPY:
+			case ABILITY_HOTHEADED:
+			case ABILITY_COWARD:
+			case ABILITY_PEST:
+			case ABILITY_SLURP_UP:
+			case ABILITY_AWARE:
+			case ABILITY_RIVALRY:
+			case ABILITY_FORECAST:
+			case ABILITY_STEADFAST:
+				score += 15;
+				break;
+				
+			case ABILITY_SWIFT_SWIM:
+				if (NO_CLOUD_NINE)
+				{
+					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
+					{
+						score += 25;
+					}
+				}
+				break;
+				
+			case ABILITY_CHLOROPHYLL:
+				if (NO_CLOUD_NINE)
+				{
+					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+					{
+						score += 25;
+					}
+				}
+				break;
+			
+			case ABILITY_SLUSH_RUSH:
+				if (NO_CLOUD_NINE)
+				{
+					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING)
+					{
+						score += 25;
+					}
+				}
+				break;
+				
+			case ABILITY_GUTS:
+				if (battleCtx->battleMons[defender].status & MON_CONDITION_ANY)
+				{
+					score += 25;
+				}
+				break;
+				
+			case ABILITY_FLARE_BOOST:
+				if (battleCtx->battleMons[defender].status & MON_CONDITION_BURN)
+				{
+					score += 25;
+				}
+				break;
+				
+			case ABILITY_STURDY:
+			case ABILITY_ROCK_SOLID:
+				if (defenderCurHP == defenderMaxHP)
+				{
+					score += 15;
+				}
+				else
+				{
+					score += 8;
+				}
+				break;
+				
+			default:
+				break;
+		}
+		
+		// The opponent has a Pokemon with Truant or Slow Start on their side
+		if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_TRUANT)
+		|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SLOW_START))
+		{
+			score -= 50;
+			if (score < 0)
+			{
+				score = 0;
+			}
 		}
 		break;
     }
