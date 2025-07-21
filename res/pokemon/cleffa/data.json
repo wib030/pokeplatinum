@@ -35,7 +35,7 @@
         "EGG_GROUP_UNDISCOVERED"
     ],
     "abilities": [
-        "ABILITY_MAGIC_GUARD",
+        "ABILITY_TOSS_AND_TURN",
         "ABILITY_CUTE_CHARM"
     ],
     "great_marsh_flee_rate": 0,
@@ -86,7 +86,8 @@
         "level_up": {
             "1": [
                 "MOVE_POUND",
-                "MOVE_CHARM"
+                "MOVE_CHARM",
+				"MOVE_FURY_ATTACK"
             ],
             "4": "MOVE_ENCORE",
             "7": "MOVE_SING",

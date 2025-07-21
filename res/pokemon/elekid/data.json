@@ -80,7 +80,8 @@
             "1": [
                 "MOVE_QUICK_ATTACK",
 				"MOVE_THUNDER_SHOCK",
-                "MOVE_LEER"
+                "MOVE_LEER",
+				"MOVE_FURY_ATTACK"
             ],
             "8": "MOVE_LOW_KICK",
             "15": "MOVE_SHOCK_WAVE",

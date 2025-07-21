@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_NATURAL_CURE",
-        "ABILITY_SERENE_GRACE"
+        "ABILITY_TOSS_AND_TURN"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -85,7 +85,8 @@
         "level_up": {
             "1": [
                 "MOVE_POUND",
-                "MOVE_CHARM"
+                "MOVE_CHARM",
+				"MOVE_FURY_ATTACK"
             ],
             "5": "MOVE_COPYCAT",
             "9": "MOVE_REFRESH",

@@ -35,7 +35,7 @@
         "EGG_GROUP_UNDISCOVERED"
     ],
     "abilities": [
-        "ABILITY_SUPER_LUCK",
+        "ABILITY_TOSS_AND_TURN",
         "ABILITY_SERENE_GRACE"
     ],
     "great_marsh_flee_rate": 0,
@@ -86,7 +86,8 @@
                 "MOVE_GROWL",
 				"MOVE_POUND",
 				"MOVE_METRONOME",
-                "MOVE_CHARM"
+                "MOVE_CHARM",
+				"MOVE_FURY_ATTACK"
             ],
 			"3": "MOVE_FRENZY_PLANT",
             "10": "MOVE_SWEET_KISS",

@@ -86,7 +86,8 @@
         "level_up": {
             "1": [ 
 				"MOVE_WRAP",
-				"MOVE_CONFUSION"
+				"MOVE_CONFUSION",
+				"MOVE_FURY_ATTACK"
 			],
             "4": "MOVE_GROWL",
             "7": "MOVE_ASTONISH",

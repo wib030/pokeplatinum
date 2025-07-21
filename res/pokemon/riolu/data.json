@@ -87,7 +87,8 @@
                 "MOVE_QUICK_ATTACK",
 				"MOVE_LOW_KICK",
                 "MOVE_FORESIGHT",
-                "MOVE_ENDURE"
+                "MOVE_ENDURE",
+				"MOVE_FURY_ATTACK"
             ],
 			"3": "MOVE_HOWL",
             "6": "MOVE_COUNTER",

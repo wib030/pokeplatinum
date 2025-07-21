@@ -35,7 +35,7 @@
         "EGG_GROUP_UNDISCOVERED"
     ],
     "abilities": [
-        "ABILITY_ROCK_SOLID",
+        "ABILITY_STURDY",
         "ABILITY_NONE"
     ],
     "great_marsh_flee_rate": 0,
@@ -78,7 +78,8 @@
             "1": [
                 "MOVE_FAKE_TEARS",
 				"MOVE_POUND",
-                "MOVE_COPYCAT"
+                "MOVE_COPYCAT",
+				"MOVE_FURY_ATTACK"
             ],
             "6": "MOVE_FLAIL",
             "9": "MOVE_LOW_KICK",

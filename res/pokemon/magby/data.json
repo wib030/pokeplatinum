@@ -78,7 +78,8 @@
             "1": [
                 "MOVE_SMOG",
 				"MOVE_EMBER",
-                "MOVE_LEER"
+                "MOVE_LEER",
+				"MOVE_FURY_ATTACK"
             ],
             "10": "MOVE_SMOKE_SCREEN",
             "16": "MOVE_FAINT_ATTACK",

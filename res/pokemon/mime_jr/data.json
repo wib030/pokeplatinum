@@ -95,7 +95,8 @@
             "1": [
                 "MOVE_TICKLE",
                 "MOVE_BARRIER",
-                "MOVE_CONFUSION"
+                "MOVE_CONFUSION",
+				"MOVE_FURY_ATTACK"
             ],
             "4": "MOVE_COPYCAT",
             "8": "MOVE_MEDITATE",
