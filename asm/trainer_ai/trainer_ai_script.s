@@ -6907,13 +6907,14 @@ Expert_Fling_ScorePlus12_End:
     GoTo Expert_Fling_End
 
 Expert_PsychoShift:
-    ; If the attacker does not have any status condition, score -10.
-    ;
-    ; If the opponent''s HP >= 30%, 50% chance of score +1.
-    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScoreMinus10
-    IfRandomLessThan 128, Expert_PsychoShift_End
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_PsychoShift_End
-    AddToMoveScore 1
+    ; If the attacker does not have any status condition, score -12.
+	
+	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_StatusPoison
+	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Basic_CheckCannotBurn
+	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_PARALYSIS, Expert_StatusParalyze
+	
+    AddToMoveScore -12
+	GoTo Expert_PsychoShift_End
 
 Expert_PsychoShift_End:
     PopOrEnd 
