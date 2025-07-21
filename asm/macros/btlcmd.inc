@@ -1312,9 +1312,5 @@
     .long 237
 	.long \battler
     .endm
-	
-	.macro TossAndTurnHit
-    .long 238
-    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

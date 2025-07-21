@@ -1515,17 +1515,29 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
 				battleCtx->battleMons[battler].tossTurnFlag = TRUE;
 				int target = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
 				
-				if (target)
-				{
-					battleCtx->attacker = battler;
-					battleCtx->defender = target;
-					
-					LOAD_SUBSEQ(subscript_toss_and_turn);
-					battleCtx->commandNext = battleCtx->command;
-					battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+				battleCtx->attacker = battler;
+				battleCtx->defender = target;
+				battleCtx->msgBattlerTemp = battleCtx->defender;
+				
+				battleCtx->hpCalcTemp = BattleSystem_CalcMoveDamage(battleSys,
+						battleCtx,
+						MOVE_STRUGGLE,
+						battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)],
+						battleCtx->fieldConditionsMask,
+						40,
+						TYPE_MYSTERY,
+						battler,
+						battleCtx->defender,
+						1);
+						
+				battleCtx->hpCalcTemp = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->hpCalcTemp);
+				battleCtx->hpCalcTemp *= -1;
+				
+				LOAD_SUBSEQ(subscript_toss_and_turn);
+				battleCtx->commandNext = battleCtx->command;
+				battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
-					state = STATE_BREAK_OUT;
-				}
+				state = STATE_BREAK_OUT;
             }
 
             battleCtx->monConditionCheckState++;
