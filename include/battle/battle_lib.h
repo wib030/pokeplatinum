@@ -2030,4 +2030,14 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
  BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, BattleContext* battleCtx, u8 attacker, u8 defender, u16 move);
 
+/**
+* @brief Check if a battler is stat dropped more than once in a relevant stat.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler    The battler id of the battleMon to check.
+* @return TRUE/FALSE whether the number of relevant stat drops is >= 2.
+*/
+BOOL BattleAI_IsModeratelyStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

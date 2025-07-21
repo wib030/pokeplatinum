@@ -21051,3 +21051,38 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
 
     return result;
 }
+
+BOOL BattleAI_IsModeratelyStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    int stat;
+    u8 numDrops;
+    numDrops = 0;
+
+    for (stat = BATTLE_STAT_HP; stat < NUM_DropABLE_STATS; stat++)
+    {
+        if (battleCtx->battleMons[battler].statDrops[stat] < 6)
+        {
+            if (stat == BATTLE_STAT_ATTACK)
+            {
+                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+                {
+                    numDrops += 6 - battleCtx->battleMons[battler].statDrops[stat];
+                }
+            }
+
+            if (stat == BATTLE_STAT_SP_ATTACK)
+            {
+                if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                {
+                    numDrops += 6 - battleCtx->battleMons[battler].statDrops[stat];
+                }
+            }
+
+            if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE) {
+                numDrops += 6 - battleCtx->battleMons[battler].statDrops[stat];
+            }
+        }
+    }
+
+    return numDrops >= 2;
+}

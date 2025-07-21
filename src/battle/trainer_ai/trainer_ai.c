@@ -430,6 +430,7 @@ static void AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* 
 static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfBattlerStatDropped(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -611,7 +612,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfCurrentMoveRevealed,
     AICmd_IfCanChunkOrKOEnemy,
     AICmd_IfBattlerDetersContactMove,
-    AICmd_IfTrapped
+    AICmd_IfTrapped,
+    AICmd_IfBattlerStatDropped
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4633,6 +4635,24 @@ static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx)
     }
 }
 
+
+static void AICmd_IfBattlerStatDropped(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (BattleAI_IsModeratelyStatDropped(battleSys, battleCtx, battler))
+    {
+        if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler) == FALSE)
+        {
+            AIScript_Iter(battleCtx, jump);
+        }
+    }
+}
 
 /**
  * @brief Push an address for the AI script onto the cursor stack.
@@ -8859,50 +8879,26 @@ static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *batt
  */
 static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int stat, i;
+    int stat;
     u8 numAttackingBoosts;
 	numAttackingBoosts = 0;
-    BOOL hasPhysicalMove, hasSpecialMove;
 
-    hasPhysicalMove = FALSE;
-    hasSpecialMove = FALSE;
-
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-
-        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-            
-            if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
-                hasPhysicalMove = TRUE;
-            }
-        }
-
-        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
-            hasSpecialMove = TRUE;
-        }
-
-        if (hasPhysicalMove && hasSpecialMove) {
-            break;
-        }
-    }
-
-    for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
-
-        if (stat == BATTLE_STAT_ATTACK) {
-
-            if (hasPhysicalMove) {
-
-                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
-
+    for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++)
+    {
+        if (battleCtx->battleMons[battler].statBoosts[stat] > 6)
+        {
+            if (stat == BATTLE_STAT_ATTACK)
+            {
+                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+                {
                     numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
                 }
             }
-        }
 
-        if (stat == BATTLE_STAT_SP_ATTACK) {
+            if (stat == BATTLE_STAT_SP_ATTACK) {
 
-            if (hasSpecialMove) {
-
-                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
+                if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                {
                     numAttackingBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
                 }
             }
@@ -8925,57 +8921,33 @@ static BOOL AI_IsHeavilyAttackingStatBoosted(BattleSystem *battleSys, BattleCont
  */
 static BOOL AI_IsModeratelyBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int stat, i;
+    int stat;
     u8 numBoosts;
 	numBoosts = 0;
-    BOOL hasPhysicalMove, hasSpecialMove;
 
-    hasPhysicalMove = FALSE;
-    hasSpecialMove = FALSE;
-
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-
-        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_PHYSICAL) {
-            
-            if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect != BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING) {
-                hasPhysicalMove = TRUE;
-            }
-        }
-
-        if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).class == CLASS_SPECIAL) {
-            hasSpecialMove = TRUE;
-        }
-
-        if (hasPhysicalMove && hasSpecialMove) {
-            break;
-        }
-    }
-
-    for (stat = BATTLE_STAT_HP; stat < NUM_BOOSTABLE_STATS; stat++) {
-
-        if (stat == BATTLE_STAT_ATTACK) {
-
-            if (hasPhysicalMove) {
-
-                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
-
+    for (stat = BATTLE_STAT_HP; stat < NUM_BOOSTABLE_STATS; stat++)
+    {
+        if (battleCtx->battleMons[battler].statBoosts[stat] > 6)
+        {
+            if (stat == BATTLE_STAT_ATTACK)
+            {
+                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+                {
                     numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
                 }
             }
-        }
 
-        if (stat == BATTLE_STAT_SP_ATTACK) {
-
-            if (hasSpecialMove) {
-
-                if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
+            if (stat == BATTLE_STAT_SP_ATTACK)
+            {
+                if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                {
                     numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
                 }
             }
-        }
 
-        if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE || stat == BATTLE_STAT_EVASION) {
-            numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+            if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE || stat == BATTLE_STAT_EVASION) {
+                numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
+            }
         }
     }
 
