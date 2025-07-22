@@ -7760,6 +7760,20 @@ Expert_MagnetRise:
     ; - Fissure
     ;
     ; If the opponent has a Ground typing, score +1. Otherwise, 50% chance of score +1.
+	
+	; If the attacker is already under the effect, score -12.
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_MAGNET_RISE, ScoreMinus12
+
+    ; If the attacker''s ability is Levitate, score -12.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus12
+
+    ; If either of the attacker''s types are Flying, score -12.
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_FLYING, ScoreMinus12
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_FLYING, ScoreMinus12
+	
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_MagnetRise_End
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_EARTHQUAKE, Expert_MagnetRise_InitialScorePlus1
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_EARTH_POWER, Expert_MagnetRise_InitialScorePlus1
@@ -7778,6 +7792,17 @@ Expert_MagnetRise_CheckOpponentTyping:
 
 Expert_MagnetRise_ScorePlus1:
     AddToMoveScore 1
+	LoadBattlerAbility AI_BATTLER_ATTACKER
+	IfLoadedEqualTo ABILITY_MAGNET_PULL, Expert_MagnetRise_CheckSpeed
+	GoTo Expert_MagnetRise_End
+	
+Expert_MagnetRise_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_MagnetRise_ScorePlus3
+	AddToMoveScore 1
+	GoTo Expert_MagnetRise_End
+    
+Expert_MagnetRise_ScorePlus3:
+    AddToMoveScore 3
 
 Expert_MagnetRise_End:
     PopOrEnd 

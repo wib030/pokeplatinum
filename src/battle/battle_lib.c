@@ -1672,13 +1672,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 	if ((battler1Move == MOVE_MAGNET_RISE)
 	&& (battler1Ability == ABILITY_MAGNET_PULL))
 	{
-        battler1Priority += 1;
+        battler1Priority = 1;
 	}
 	
 	if ((battler2Move == MOVE_MAGNET_RISE)
 	&& (battler2Ability == ABILITY_MAGNET_PULL))
 	{
-        battler2Priority += 1;
+        battler2Priority = 1;
 	}
 
     battleCtx->monSpeedValues[battler1] = battler1Speed;
@@ -2137,7 +2137,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
 
             case MOVE_MAGNET_RISE:
                 if (battler1Ability == ABILITY_MAGNET_PULL) {
-                    battler1Priority += 1;
+                    battler1Priority = 1;
                 }
                 break;
 
@@ -2216,7 +2216,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
 
             case MOVE_MAGNET_RISE:
                 if (battler2Ability == ABILITY_MAGNET_PULL) {
-                    battler2Priority += 1;
+                    battler2Priority = 1;
                 }
                 break;
         }
