@@ -21058,15 +21058,15 @@ BOOL BattleAI_IsModeratelyStatDropped(BattleSystem* battleSys, BattleContext* ba
     u8 numDrops;
     numDrops = 0;
 
-    for (stat = BATTLE_STAT_HP; stat < NUM_DropABLE_STATS; stat++)
+    for (stat = BATTLE_STAT_HP; stat < NUM_BOOSTABLE_STATS; stat++)
     {
-        if (battleCtx->battleMons[battler].statDrops[stat] < 6)
+        if (battleCtx->battleMons[battler].statBoosts[stat] < 6)
         {
             if (stat == BATTLE_STAT_ATTACK)
             {
                 if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
                 {
-                    numDrops += 6 - battleCtx->battleMons[battler].statDrops[stat];
+                    numDrops += 6 - battleCtx->battleMons[battler].statBoosts[stat];
                 }
             }
 
@@ -21074,12 +21074,12 @@ BOOL BattleAI_IsModeratelyStatDropped(BattleSystem* battleSys, BattleContext* ba
             {
                 if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
                 {
-                    numDrops += 6 - battleCtx->battleMons[battler].statDrops[stat];
+                    numDrops += 6 - battleCtx->battleMons[battler].statBoosts[stat];
                 }
             }
 
             if (stat == BATTLE_STAT_DEFENSE || stat == BATTLE_STAT_SP_DEFENSE) {
-                numDrops += 6 - battleCtx->battleMons[battler].statDrops[stat];
+                numDrops += 6 - battleCtx->battleMons[battler].statBoosts[stat];
             }
         }
     }
