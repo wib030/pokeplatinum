@@ -89,7 +89,7 @@
             "42": "MOVE_ROOST",
 			"45": "MOVE_RAZOR_WIND",
             "47": "MOVE_TAILWIND",
-            "57": "MOVE_HEAT_WAVE"
+            "52": "MOVE_HEAT_WAVE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
