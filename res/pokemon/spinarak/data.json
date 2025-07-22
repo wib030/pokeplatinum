@@ -35,7 +35,7 @@
         "EGG_GROUP_BUG"
     ],
     "abilities": [
-        "ABILITY_SWARM",
+        "ABILITY_POISON_POINT",
         "ABILITY_INSOMNIA"
     ],
     "great_marsh_flee_rate": 0,
