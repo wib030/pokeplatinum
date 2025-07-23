@@ -431,6 +431,8 @@ static void AICmd_IfCanChunkOrKOEnemy(BattleSystem* battleSys, BattleContext* ba
 static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerStatDropped(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfCanKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -477,6 +479,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
+static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
@@ -613,7 +616,9 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfCanChunkOrKOEnemy,
     AICmd_IfBattlerDetersContactMove,
     AICmd_IfTrapped,
-    AICmd_IfBattlerStatDropped
+    AICmd_IfBattlerStatDropped,
+	AICmd_IfCanKOEnemy,
+	AICmd_IfEnemyCanKO
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4651,6 +4656,30 @@ static void AICmd_IfBattlerStatDropped(BattleSystem* battleSys, BattleContext* b
         {
             AIScript_Iter(battleCtx, jump);
         }
+    }
+}
+
+static void AICmd_IfCanKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
+    {
+        AIScript_Iter(battleCtx, jump);
     }
 }
 
@@ -9760,6 +9789,67 @@ static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler)
             if (result == TRUE) {
                 AI_CONTEXT.usedItem[battler >> 1] = item;
                 AI_CONTEXT.trainerItems[battler >> 1][i] = 0;
+            }
+        }
+    }
+
+    return result;
+}
+
+static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int k;
+    int moveType, moveDamage, movePower;
+    u8 side;
+    u16 move;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    side = Battler_Side(battleSys, defender);
+
+    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+        effectiveness = 0;
+        move = battleCtx->battleMons[attacker].moves[k];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (AI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
+            movePower = MOVE_DATA(move).power;
+
+            if (movePower > 0) {
+                moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                move,
+                battleCtx->sideConditionsMask[side],
+                battleCtx->fieldConditionsMask,
+                movePower,
+                moveType,
+                attacker,
+                defender,
+                1);
+
+                moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                battleCtx,
+                move,
+                moveType,
+                attacker,
+                defender,
+                moveDamage,
+                &effectiveness);
+
+                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
+                    if (moveDamage >= battleCtx->battleMons[defender].curHP) {
+                        result = TRUE;
+                        break;
+                    }
+                }
             }
         }
     }

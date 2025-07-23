@@ -776,6 +776,16 @@
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
+	
+	.macro IfCanKOEnemy jump
+    .long 135
+    .long (\jump-.) / 4 - 1
+    .endm
+	
+	.macro IfEnemyCanKO jump
+    .long 136
+    .long (\jump-.) / 4 - 1
+    .endm
 
     .equ TABLE_END, 0xFFFFFFFF
 
