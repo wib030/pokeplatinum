@@ -9113,14 +9113,6 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
                 battleCtx->damage *= 2;
             }
             break;
-
-        case HOLD_EFFECT_CUBONE_ATK_UP:
-            if (species == SPECIES_CUBONE
-                || species == SPECIES_MAROWAK) {
-
-                battleCtx->damage *= 2;
-            }
-            break;
     }
 
     // End of use of direct attack stat usage here

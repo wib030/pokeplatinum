@@ -9230,6 +9230,12 @@ static const u16 sPulseMoves[] = {
 	MOVE_WATER_PULSE
 };
 
+const u16 sBoneMoves[] = {
+    MOVE_BONE_CLUB,
+	MOVE_BONEMERANG,
+	MOVE_BONE_RUSH
+};
+
 typedef struct DamageCalcParams {
     u16 species;
     s16 curHP;
@@ -9459,11 +9465,12 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             break;
 
                         case HOLD_EFFECT_CUBONE_ATK_UP:
-                            if (partyMonSpecies == SPECIES_CUBONE
-                                || partyMonSpecies == SPECIES_MAROWAK) {
-
-                                damage *= 2;
-                            }
+                            for (i = 0; i < NELEMS(sBoneMoves); i++) {
+								if (sBoneMoves[i] == move) {
+									damage *= 2;
+									break;
+								}
+							}
                             break;
                         }
 
@@ -10488,11 +10495,12 @@ int BattleSystem_CalcPartyMemberMoveDamage(
             break;
 
         case HOLD_EFFECT_CUBONE_ATK_UP:
-            if (attackerParams.species == SPECIES_CUBONE
-                || attackerParams.species == SPECIES_MAROWAK) {
-
-                attackStat *= 2;
-            }
+            for (i = 0; i < NELEMS(sBoneMoves); i++) {
+				if (sBoneMoves[i] == move) {
+					attackStat *= 2;
+					break;
+				}
+			}
             break;
 
         case HOLD_EFFECT_DIALGA_BOOST:
@@ -11153,11 +11161,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             break;
 
                         case HOLD_EFFECT_CUBONE_ATK_UP:
-                            if (partyMonSpecies == SPECIES_CUBONE
-                                || partyMonSpecies == SPECIES_MAROWAK) {
-
-                                damage *= 2;
-                            }
+                            for (i = 0; i < NELEMS(sBoneMoves); i++) {
+								if (sBoneMoves[i] == move) {
+									damage *= 2;
+									break;
+								}
+							}
                             break;
                         }
 
@@ -12167,11 +12176,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             break;
 
         case HOLD_EFFECT_CUBONE_ATK_UP:
-            if (attackerParams.species == SPECIES_CUBONE
-                || attackerParams.species == SPECIES_MAROWAK) {
-
-                attackStat *= 2;
-            }
+            for (i = 0; i < NELEMS(sBoneMoves); i++) {
+				if (sBoneMoves[i] == move) {
+					attackStat *= 2;
+					break;
+				}
+			}
             break;
 
         case HOLD_EFFECT_DIALGA_BOOST:
@@ -13786,10 +13796,11 @@ static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, 
 			break;
 
 		case HOLD_EFFECT_CUBONE_ATK_UP:
-			if (species == SPECIES_CUBONE
-				|| species == SPECIES_MAROWAK) {
-
-				damage *= 2;
+			for (i = 0; i < NELEMS(sBoneMoves); i++) {
+				if (sBoneMoves[i] == move) {
+					damage *= 2;
+					break;
+				}
 			}
 			break;
 	}
