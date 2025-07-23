@@ -98,7 +98,8 @@
                 "MOVE_LEAF_STORM",
 				"MOVE_WRING_OUT",
                 "MOVE_LEAF_BLADE"
-            ]
+            ],
+			"53": "MOVE_GUNK_SHOT"
         },
         "tutor": [
             "MOVE_GASTRO_ACID",

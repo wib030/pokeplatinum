@@ -1067,6 +1067,11 @@ const u16 EggMove_Table_Script[] = {
     MOVE_MAGIC_COAT,
     MOVE_SNORE,
 	MOVE_AGILITY,
+	MOVE_GUILLOTINE, // Lovely Punch
+	MOVE_STOCKPILE,
+	MOVE_SPIT_UP,
+	MOVE_SWALLOW,
+	MOVE_TORMENT,
     (SPECIES_GLIGAR) + 20000, // Gligar line
     MOVE_METAL_CLAW,
     MOVE_WING_ATTACK, // Dual Wingbeat

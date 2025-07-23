@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_STURDY",
-        "ABILITY_NONE"
+        "ABILITY_STEADFAST",
+        "ABILITY_STURDY"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
