@@ -1914,6 +1914,7 @@ Expert_Main:
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BULLDOZE, Expert_SpeedDownOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Expert_Stockpile
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TORMENT, Expert_Torment
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_DEF_HIT, Expert_StatusDefenseUp
 
     ; All other moves have no additional logic.
     PopOrEnd 
