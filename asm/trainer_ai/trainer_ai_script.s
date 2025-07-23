@@ -6688,7 +6688,13 @@ Expert_UTurn:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, Expert_UTurn_End
+	IfBattlerStatDropped AI_BATTLER_ATTACKER, Expert_UTurn_TryScorePlus1
     IfHasSuperEffectiveMove Expert_UTurn_TryScoreMinus2
+    GoTo Expert_UTurn_CheckPartyDamage
+
+Expert_UTurn_TryScorePlus1:
+    IfRandomLessThan 51, Expert_UTurn_CheckPartyDamage
+    AddToMoveScore 1
     GoTo Expert_UTurn_CheckPartyDamage
 
 Expert_UTurn_TryScoreMinus2:
