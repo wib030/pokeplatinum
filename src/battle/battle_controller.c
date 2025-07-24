@@ -4478,9 +4478,6 @@ static void BattleController_MoveEnd(BattleSystem *battleSys, BattleContext *bat
 
     battleCtx->battlerActions[battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
 	
-	BattleSystem_SortMonActionOrder(battleSys, battleCtx);
-    BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
-	
     if (ATTACKER_SELF_TURN_FLAGS.recalculateSpeed) {
         BattleSystem_SortMonActionOrder(battleSys, battleCtx);
         BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
