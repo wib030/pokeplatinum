@@ -2557,6 +2557,7 @@ static BOOL BtlCmd_TrySlurpUp(BattleSystem *battleSys, BattleContext *battleCtx)
 static BOOL BtlCmd_UpdateSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckBattlerSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_RecalcSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2831,7 +2832,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_TrySlurpUp,
 	BtlCmd_UpdateSleepClauseFlag,
 	BtlCmd_CheckBattlerSleepClause,
-	BtlCmd_ClearSleepClauseFlag
+	BtlCmd_ClearSleepClauseFlag,
+	BtlCmd_RecalcSpeed
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -10909,22 +10911,6 @@ static BOOL BtlCmd_TrickRoom(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
- * @brief Set the recalculateSpeed flag for the attacker on move use.
- *
- * @param battleSys
- * @param battleCtx
- * @return FALSE
- */
-static BOOL BtlCmd_TrickRoom(BattleSystem* battleSys, BattleContext* battleCtx)
-{
-    BattleScript_Iter(battleCtx, 1);
-
-    ATTACKER_SELF_TURN_FLAGS.recalculateSpeed = TRUE;
-
-    return FALSE;
-}
-
-/**
  * @brief GoTo ahead if a given battler has already moved this turn.
  * 
  * Inputs:
@@ -13915,6 +13901,22 @@ static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *
 
     // Flip any bit from 1 to 0 if the flag index is 1 at that bit
 	battleCtx->sideConditions[battlerSide].sleepClauseMask &= ~FlagIndex(battleCtx->selectedPartySlot[battler]);
+    return FALSE;
+}
+
+/**
+ * @brief Set the recalculateSpeed flag for the attacker on move use.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_RecalcSpeed(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    ATTACKER_SELF_TURN_FLAGS.recalculateSpeed = TRUE;
+
     return FALSE;
 }
 
