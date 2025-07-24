@@ -4481,6 +4481,11 @@ static void BattleController_MoveEnd(BattleSystem *battleSys, BattleContext *bat
 	BattleSystem_SortMonActionOrder(battleSys, battleCtx);
     BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
 	
+    if (ATTACKER_SELF_TURN_FLAGS.recalculateSpeed) {
+        BattleSystem_SortMonActionOrder(battleSys, battleCtx);
+        BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
+    }
+
     if (ATTACKER_SELF_TURN_FLAGS.trickRoomActivated) {
         BattleSystem_SortMonActionOrder(battleSys, battleCtx);
         BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);

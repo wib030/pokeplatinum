@@ -10909,6 +10909,22 @@ static BOOL BtlCmd_TrickRoom(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @brief Set the recalculateSpeed flag for the attacker on move use.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TrickRoom(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    ATTACKER_SELF_TURN_FLAGS.recalculateSpeed = TRUE;
+
+    return FALSE;
+}
+
+/**
  * @brief GoTo ahead if a given battler has already moved this turn.
  * 
  * Inputs:
