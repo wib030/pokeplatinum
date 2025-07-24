@@ -10,6 +10,7 @@ _000:
     Wait 
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_SIDE_CONDITIONS_ATTACKER, SIDE_CONDITION_TAILWIND
+	RecalcSpeed
     End 
 
 _018:
