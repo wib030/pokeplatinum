@@ -20,9 +20,9 @@ _000:
 
 _042:
     Call BATTLE_SUBSCRIPT_PLUCK_CHECK
-    CompareVarToValue OPCODE_EQU, BTLSCR_MSG_TEMP, BATTLE_STAT_SPEED, _047
+	CompareVarToValue OPCODE_EQU, BTLVAR_MSG_TEMP, BATTLE_STAT_SPEED, _047
     End
-
+	
 _047:
-    RecalcSpeed
+	RecalcSpeed
     End

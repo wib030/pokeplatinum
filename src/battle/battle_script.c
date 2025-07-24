@@ -13915,7 +13915,10 @@ static BOOL BtlCmd_RecalcSpeed(BattleSystem* battleSys, BattleContext* battleCtx
 {
     BattleScript_Iter(battleCtx, 1);
 
-    ATTACKER_SELF_TURN_FLAGS.recalculateSpeed = TRUE;
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER)
+	{
+	   ATTACKER_SELF_TURN_FLAGS.recalculateSpeed = TRUE;
+	}
 
     return FALSE;
 }
