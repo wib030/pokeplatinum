@@ -5254,7 +5254,7 @@ void BattleSystem_SortMonSpeedOrder(BattleSystem *battleSys, BattleContext *batt
 
 void BattleSystem_DynamicSortMonSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx)
 {
-    int turnOrderMax = battleCtx->battlerSpeedOrder[battleCtx->turnOrderCounter];
+    int turnOrderMax = battleCtx->battlerActionOrder[battleCtx->turnOrderCounter];
 
     if (turnOrderMax > 0)
     {

@@ -2040,4 +2040,8 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 */
 BOOL BattleAI_IsModeratelyStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
+void BattleSystem_DynamicSortMonSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx);
+
+void BattleSystem_DynamicSortMonActionOrder(BattleSystem* battleSys, BattleContext* battleCtx);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
