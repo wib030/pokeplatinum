@@ -2052,6 +2052,11 @@ static void BattleController_TurnEnd(BattleSystem *battleSys, BattleContext *bat
     battleCtx->totalTurns++;
     battleCtx->meFirstTurnOrder++;
 
+    if (ATTACKER_SELF_TURN_FLAGS.recalculateSpeed) {
+        BattleSystem_DynamicSortMonActionOrder(battleSys, battleCtx);
+        BattleSystem_DynamicSortMonSpeedOrder(battleSys, battleCtx);
+    }
+
     BattleContext_Init(battleCtx);
     BattleSystem_SetupNextTurn(battleSys, battleCtx);
 
