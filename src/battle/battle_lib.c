@@ -5249,7 +5249,7 @@ void BattleSystem_SortMonSpeedOrder(BattleSystem *battleSys, BattleContext *batt
 
 void BattleSystem_DynamicSortMonSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx)
 {
-    int turnOrderMax = battleCtx->turnOrderCounter;
+    int turnOrderMax = BattleSystem_MaxBattlers(battleSys) - battleCtx->turnOrderCounter;
 
     for (int i = 0; i < turnOrderMax; i++) {
         battleCtx->monSpeedOrder[i] = i;
@@ -13012,7 +13012,7 @@ void BattleSystem_DynamicSortMonActionOrder(BattleSystem* battleSys, BattleConte
     int i, j;
     int battler1, battler2;
     int ignoreQuickClaw;
-    int turnOrderMax = battleCtx->turnOrderCounter;
+    int turnOrderMax = BattleSystem_MaxBattlers(battleSys) - battleCtx->turnOrderCounter;
 
     for (i = 0; i < turnOrderMax - 1; i++) {
         for (j = i + 1; j < turnOrderMax; j++) {
