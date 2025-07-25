@@ -5251,18 +5251,21 @@ void BattleSystem_DynamicSortMonSpeedOrder(BattleSystem* battleSys, BattleContex
 {
     int turnOrderMax = battleCtx->battlerActionOrder[battleCtx->turnOrderCounter];
 
-    for (int i = 0; i < turnOrderMax; i++) {
-        battleCtx->monSpeedOrder[i] = i;
-    }
+    if (turnOrderMax > 0)
+    {
+        for (int i = 0; i < turnOrderMax; i++) {
+            battleCtx->monSpeedOrder[i] = i;
+        }
 
-    for (int j = 0; j < turnOrderMax - 1; j++) {
-        for (int k = j + 1; k < turnOrderMax; k++) {
-            int mon1 = battleCtx->monSpeedOrder[j];
-            int mon2 = battleCtx->monSpeedOrder[k];
+        for (int j = 0; j < turnOrderMax - 1; j++) {
+            for (int k = j + 1; k < turnOrderMax; k++) {
+                int mon1 = battleCtx->monSpeedOrder[j];
+                int mon2 = battleCtx->monSpeedOrder[k];
 
-            if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, mon1, mon2, TRUE)) {
-                battleCtx->monSpeedOrder[j] = mon2;
-                battleCtx->monSpeedOrder[k] = mon1;
+                if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, mon1, mon2, TRUE)) {
+                    battleCtx->monSpeedOrder[j] = mon2;
+                    battleCtx->monSpeedOrder[k] = mon1;
+                }
             }
         }
     }
@@ -13014,22 +13017,25 @@ void BattleSystem_DynamicSortMonActionOrder(BattleSystem* battleSys, BattleConte
     int ignoreQuickClaw;
     int turnOrderMax = battleCtx->battlerActionOrder[battleCtx->turnOrderCounter];
 
-    for (i = 0; i < turnOrderMax - 1; i++) {
-        for (j = i + 1; j < turnOrderMax; j++) {
-            battler1 = battleCtx->battlerActionOrder[i];
-            battler2 = battleCtx->battlerActionOrder[j];
+    if (turnOrderMax > 0)
+    {
+        for (i = 0; i < turnOrderMax - 1; i++) {
+            for (j = i + 1; j < turnOrderMax; j++) {
+                battler1 = battleCtx->battlerActionOrder[i];
+                battler2 = battleCtx->battlerActionOrder[j];
 
-            if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND]) {
-                if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == PLAYER_INPUT_FIGHT) {
-                    ignoreQuickClaw = FALSE;
-                }
-                else {
-                    ignoreQuickClaw = TRUE;
-                }
+                if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND]) {
+                    if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == PLAYER_INPUT_FIGHT) {
+                        ignoreQuickClaw = FALSE;
+                    }
+                    else {
+                        ignoreQuickClaw = TRUE;
+                    }
 
-                if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler1, battler2, ignoreQuickClaw)) {
-                    battleCtx->battlerActionOrder[i] = battler2;
-                    battleCtx->battlerActionOrder[j] = battler1;
+                    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler1, battler2, ignoreQuickClaw)) {
+                        battleCtx->battlerActionOrder[i] = battler2;
+                        battleCtx->battlerActionOrder[j] = battler1;
+                    }
                 }
             }
         }
