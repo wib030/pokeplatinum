@@ -3118,6 +3118,11 @@ void BattleSystem_CleanupFaintedMon(BattleSystem *battleSys, BattleContext *batt
 
 void BattleSystem_SetupNextTurn(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+    if (ATTACKER_SELF_TURN_FLAGS.recalculateSpeed) {
+        BattleSystem_DynamicSortMonActionOrder(battleSys, battleCtx);
+        BattleSystem_DynamicSortMonSpeedOrder(battleSys, battleCtx);
+    }
+
     for (int i = 0; i < MAX_BATTLERS; i++) {
         MI_CpuClearFast(&battleCtx->turnFlags[i], sizeof(struct TurnFlags));
         MI_CpuClearFast(&battleCtx->moveFailFlags[i], sizeof(struct MoveFailFlags));
@@ -5249,7 +5254,7 @@ void BattleSystem_SortMonSpeedOrder(BattleSystem *battleSys, BattleContext *batt
 
 void BattleSystem_DynamicSortMonSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx)
 {
-    int turnOrderMax = battleCtx->battlerActionOrder[battleCtx->turnOrderCounter];
+    int turnOrderMax = battleCtx->battlerSpeedOrder[battleCtx->turnOrderCounter];
 
     if (turnOrderMax > 0)
     {
