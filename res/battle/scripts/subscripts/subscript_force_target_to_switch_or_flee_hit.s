@@ -4,7 +4,7 @@
 
 _000:
     CheckBlackOut BTLSCR_DEFENDER, _174
-    TryReplaceFaintedMon BTLSCR_ATTACKER, TRUE, _174
+    TryReplaceFaintedMon BTLSCR_DEFENDER, TRUE, _174
     TriggerAbilityOnHit _005
     CallFromVar BTLVAR_SCRIPT_TEMP
 	
@@ -117,5 +117,4 @@ _190:
     PrintBufferedMessage 
     Wait 
     WaitButtonABTime 30
-    UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
     End 
