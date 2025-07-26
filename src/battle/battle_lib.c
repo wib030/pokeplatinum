@@ -16990,19 +16990,18 @@ BOOL AI_ShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int 
     int i, numStatusMoves;
     BOOL result;
 
+    result = FALSE;
+
     // Early exit if enemy mon is already taunted
     if (battleCtx->battleMons[defender].moveEffectsData.tauntedTurns > 0) {
-        result = TRUE;
         return result;
     }
 
     // Early exit for Magic Bounce
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MAGIC_BOUNCE)) {
-        result = FALSE;
         return result;
     }
 
-    result = FALSE;
     numStatusMoves = 0;
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -17138,9 +17137,10 @@ BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleC
     Pokemon *mon;
     BOOL result;
 
+    result = FALSE;
+
     // Early exit if enemy mon is already taunted
     if (battleCtx->battleMons[defender].moveEffectsData.tauntedTurns > 0) {
-        result = TRUE;
         return result;
     }
 
@@ -17148,11 +17148,9 @@ BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleC
 
     // Early exit for Magic Bounce
     if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_MAGIC_BOUNCE)) {
-        result = FALSE;
         return result;
     }
-
-    result = FALSE;
+    
     numStatusMoves = 0;
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -17297,6 +17295,220 @@ BOOL AI_PartyMonShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleC
     }
     else {
         if (numStatusMoves == 1) {
+            if (BattleSystem_RandNext(battleSys) % 8 == 0) {
+                result = TRUE;
+            }
+        }
+    }
+
+    return result;
+}
+
+BOOL AI_ShouldEncoreCheck(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+{
+    u8 speedCompare, defenderItemEffect;
+    u16 move;
+    u32 effectiveness;
+    int moveEffect;
+    int i, numEncoreMoves;
+    BOOL result;
+
+    result = FALSE;
+
+    // Early exit if enemy mon is already taunted
+    if (battleCtx->battleMons[defender].moveEffectsData.encoredTurns > 0) {
+        return result;
+    }
+
+    // Early exit for Magic Bounce
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MAGIC_BOUNCE)) {
+        return result;
+    }
+
+    defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
+
+    // Early exit for choice item
+    if (defenderItemEffect == HOLD_EFFECT_CHOICE_ATK
+        || defenderItemEffect == HOLD_EFFECT_CHOICE_SPEED
+        || defenderItemEffect == HOLD_EFFECT_CHOICE_SPATK)
+    {
+        return result;
+    }
+
+    // Early exit for if defender under move choice locking move effect
+    if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_MOVE_LOCKED)
+    {
+        return result;
+    }
+
+    speedCompare = BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, defender, TRUE);
+
+    if (speedCompare == COMPARE_SPEED_FASTER || speedCompare == COMPARE_SPEED_TIE)
+    {
+        move = battleCtx->movePrevByBattler[defender];
+        
+        if (move == MOVE_NONE)
+        {
+            return result;
+        }
+        else
+        {
+            moveEffect = MOVE_DATA(move).effect;
+
+            if (MOVE_DATA(move).class == CLASS_STATUS)
+            {
+                result = TRUE;
+
+                if (MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect) & BATTLE_STAT_FLAG_ACCURACY)
+                {
+                    result = FALSE;
+                }
+
+                switch (moveEffect)
+                {
+                default:
+                    break;
+
+                case BATTLE_EFFECT_CALL_RANDOM_MOVE:
+                case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+                case BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE:
+                case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+                    result = FALSE;
+                    break;
+
+                case BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT:
+                case BATTLE_EFFECT_HOWL:
+                    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER)
+                    {
+                        result = FALSE;
+                    }
+                    break;
+                }
+            }
+            else
+            {
+                result = FALSE;
+
+                if (MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect) & BATTLE_STAT_FLAG_SPEED)
+                {
+                    result = FALSE;
+                }
+
+                effectiveness = 0;
+
+                BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    MOVE_DATA(move).type,
+                    attacker,
+                    defender,
+                    0,
+                    &effectiveness);
+
+                if ((effectiveness & (MOVE_STATUS_RESISTED | MOVE_STATUS_IMMUNE))
+                    && (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)
+                {
+                    result = TRUE;
+                }
+
+                switch (moveEffect)
+                {
+                default:
+                    break;
+
+                case BATTLE_EFFECT_DISABLE_HIT:
+                    result = TRUE;
+                    break;
+
+                case BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN:
+                    result = FALSE;
+                    break;
+                }
+            }
+        }
+    }
+
+    numEncoreMoves = 0;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        move = battleCtx->battleMons[defender].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        moveEffect = MOVE_DATA(move).effect;
+
+        if (MOVE_DATA(move).class == CLASS_STATUS)
+        {
+            if ((MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect) & BATTLE_STAT_FLAG_ACCURACY) == FALSE)
+            {
+                switch (moveEffect)
+                {
+                default:
+                    numEncoreMoves++;
+                    break;
+
+                case BATTLE_EFFECT_CALL_RANDOM_MOVE:
+                case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+                case BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE:
+                case BATTLE_EFFECT_RANDOM_STAT_UP_2:
+                    break;
+
+                case BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT:
+                case BATTLE_EFFECT_HOWL:
+                    if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) == FALSE)
+                    {
+                        numEncoreMoves++;
+                    }
+                    break;
+                }
+            }
+
+            
+        }
+        else
+        {
+
+            if ((MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect) & BATTLE_STAT_FLAG_SPEED) == FALSE)
+            {
+                effectiveness = 0;
+
+                BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    MOVE_DATA(move).type,
+                    attacker,
+                    defender,
+                    0,
+                    &effectiveness);
+
+                if ((effectiveness & (MOVE_STATUS_RESISTED | MOVE_STATUS_IMMUNE))
+                    && (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)
+                {
+                    numEncoreMoves++;
+                }
+
+                switch (moveEffect)
+                {
+                default:
+                    break;
+
+                case BATTLE_EFFECT_DISABLE_HIT:
+                    numEncoreMoves++;
+                    break;
+                }
+            }
+        }
+    }
+
+
+    if (numEncoreMoves > 1) {
+        result = TRUE;
+    }
+    else {
+        if (numEncoreMoves == 1) {
             if (BattleSystem_RandNext(battleSys) % 8 == 0) {
                 result = TRUE;
             }
