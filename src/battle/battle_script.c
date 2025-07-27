@@ -2558,6 +2558,7 @@ static BOOL BtlCmd_UpdateSleepClauseFlag(BattleSystem *battleSys, BattleContext 
 static BOOL BtlCmd_CheckBattlerSleepClause(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RecalcSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2833,7 +2834,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_UpdateSleepClauseFlag,
 	BtlCmd_CheckBattlerSleepClause,
 	BtlCmd_ClearSleepClauseFlag,
-	BtlCmd_RecalcSpeed
+	BtlCmd_RecalcSpeed,
+	BtlCmd_CheckFlingEffectMon
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13923,6 +13925,19 @@ static BOOL BtlCmd_RecalcSpeed(BattleSystem* battleSys, BattleContext* battleCtx
     return FALSE;
 }
 
+static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    if (battleCtx->sideEffectMon == battleCtx->attacker)
+	{
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
+}
+
 /**
  * @brief Read a 4-byte chunk from the loaded script and increment the cursor.
  * 
@@ -15604,7 +15619,8 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
             }
         }
 
-        if (battleCtx->msgItemTemp == ITEM_MASTER_BALL) {
+        if (battleCtx->msgItemTemp == ITEM_MASTER_BALL
+		|| battleCtx->msgItemTemp == ITEM_CHERISH_BALL) {
             shakes = 4;
         }
     }

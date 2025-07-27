@@ -6902,11 +6902,16 @@ Expert_Fling_DesirableFlingEffects:
 	TableEntry HOLD_EFFECT_DIALGA_BOOST
 	TableEntry HOLD_EFFECT_PALKIA_BOOST
 	TableEntry HOLD_EFFECT_GIRATINA_BOOST
+	TableEntry HOLD_EFFECT_LVLUP_DEF_EV_UP
+	TableEntry HOLD_EFFECT_LVLUP_SPDEF_EV_UP
     TableEntry TABLE_END
 	
 Expert_Fling_InstantFling:
     TableEntry ITEM_BLACKGLASSES
 	TableEntry ITEM_MOOMOO_MILK
+	TableEntry HOLD_EFFECT_LVLUP_ATK_EV_UP
+	TableEntry HOLD_EFFECT_LVLUP_SPATK_EV_UP
+	TableEntry HOLD_EFFECT_LVLUP_SPEED_EV_UP
     TableEntry TABLE_END
 	
 Expert_Fling_ScorePlus12_End:

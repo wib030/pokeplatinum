@@ -1654,6 +1654,32 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 	{
         battler2Speed /= 2;
     }
+
+    battleCtx->monSpeedValues[battler1] = battler1Speed;
+    battleCtx->monSpeedValues[battler2] = battler2Speed;
+
+    if (ignoreQuickClaw == FALSE) {
+        battler1Action = battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND];
+        battler2Action = battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND];
+        battler1MoveSlot = battleCtx->moveSlot[battler1];
+        battler2MoveSlot = battleCtx->moveSlot[battler2];
+
+        if (battler1Action == PLAYER_INPUT_FIGHT) {
+            if (battleCtx->turnFlags[battler1].struggling) {
+                battler1Move = MOVE_STRUGGLE;
+            } else {
+                battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + battler1MoveSlot, NULL);
+            }
+        }
+
+        if (battler2Action == PLAYER_INPUT_FIGHT) {
+            if (battleCtx->turnFlags[battler2].struggling) {
+                battler2Move = MOVE_STRUGGLE;
+            } else {
+                battler2Move = BattleMon_Get(battleCtx, battler2, BATTLEMON_MOVE_1 + battler2MoveSlot, NULL);
+            }
+        }
+    }
 	
 	battler1Priority = MOVE_DATA(battler1Move).priority;
     battler2Priority = MOVE_DATA(battler2Move).priority;
@@ -1681,35 +1707,6 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 	{
         battler2Priority = 1;
 	}
-
-    battleCtx->monSpeedValues[battler1] = battler1Speed;
-    battleCtx->monSpeedValues[battler2] = battler2Speed;
-
-    if (ignoreQuickClaw == FALSE) {
-        battler1Action = battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND];
-        battler2Action = battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND];
-        battler1MoveSlot = battleCtx->moveSlot[battler1];
-        battler2MoveSlot = battleCtx->moveSlot[battler2];
-
-        if (battler1Action == PLAYER_INPUT_FIGHT) {
-            if (battleCtx->turnFlags[battler1].struggling) {
-                battler1Move = MOVE_STRUGGLE;
-            } else {
-                battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + battler1MoveSlot, NULL);
-            }
-        }
-
-        if (battler2Action == PLAYER_INPUT_FIGHT) {
-            if (battleCtx->turnFlags[battler2].struggling) {
-                battler2Move = MOVE_STRUGGLE;
-            } else {
-                battler2Move = BattleMon_Get(battleCtx, battler2, BATTLEMON_MOVE_1 + battler2MoveSlot, NULL);
-            }
-        }
-
-        battler1Priority = MOVE_DATA(battler1Move).priority;
-        battler2Priority = MOVE_DATA(battler2Move).priority;
-    }
 
     if (battler1Priority == battler2Priority) {
         if (battler1QuickClaw && battler2QuickClaw) {
@@ -2121,7 +2118,6 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
     battler1Priority = MOVE_DATA(battler1Move).priority;
     battler2Priority = MOVE_DATA(battler2Move).priority;
 
-    
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + i, NULL);
         battler1MoveType = CalcMoveType(battleSys, battleCtx, battler1, battler1Item, battler1Move);
@@ -8373,41 +8369,48 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     switch (effect) {
     case FLING_EFFECT_HP_RESTORE:
+		battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->flingTemp = effectPower;
         battleCtx->flingScript = subscript_held_item_hp_restore;
         break;
 
     case FLING_EFFECT_HP_PCT_RESTORE:
+		battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP * effectPower, 100);
         battleCtx->flingScript = subscript_held_item_hp_restore;
         break;
 
     case FLING_EFFECT_PRZ_RESTORE:
         if (DEFENDING_MON.status & MON_CONDITION_PARALYSIS) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_prz_restore;
         }
         break;
 
     case FLING_EFFECT_SLP_RESTORE:
         if (DEFENDING_MON.status & MON_CONDITION_SLEEP) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_slp_restore;
         }
         break;
 
     case FLING_EFFECT_PSN_RESTORE:
         if (DEFENDING_MON.status & MON_CONDITION_ANY_POISON) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_psn_restore;
         }
         break;
 
     case FLING_EFFECT_BRN_RESTORE:
         if (DEFENDING_MON.status & MON_CONDITION_BURN) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_brn_restore;
         }
         break;
 
     case FLING_EFFECT_FRZ_RESTORE:
         if (DEFENDING_MON.status & MON_CONDITION_FREEZE) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_frz_restore;
         }
         break;
@@ -8433,6 +8436,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
             BattleMon_AddVal(&DEFENDING_MON, BATTLEMON_CUR_PP_1 + slot, effectPower);
             BattleMon_CopyToParty(battleSys, battleCtx, battleCtx->defender);
             battleCtx->msgMoveTemp = DEFENDING_MON.moves[slot];
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_pp_restore;
         }
 
@@ -8441,6 +8445,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_CNF_RESTORE:
         if (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_cnf_restore;
         }
         break;
@@ -8448,41 +8453,50 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     case FLING_EFFECT_ALL_RESTORE:
         if ((DEFENDING_MON.status & MON_CONDITION_ANY) || (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION)) {
             if (DEFENDING_MON.status & MON_CONDITION_PARALYSIS) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_prz_restore;
             }
 
             if (DEFENDING_MON.status & MON_CONDITION_SLEEP) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_slp_restore;
             }
 
             if (DEFENDING_MON.status & MON_CONDITION_ANY_POISON) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_psn_restore;
             }
 
             if (DEFENDING_MON.status & MON_CONDITION_BURN) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_brn_restore;
             }
 
             if (DEFENDING_MON.status & MON_CONDITION_FREEZE) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_frz_restore;
             }
 
             if (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_cnf_restore;
             }
 
             if ((DEFENDING_MON.status & MON_CONDITION_ANY)
                     && (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION)) {
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_multi_restore;
             }
         }
         break;
 		
 	case FLING_EFFECT_TRICK_ROOM:
+			battleCtx->sideEffectMon = battleCtx->attacker;
             battleCtx->flingScript = subscript_trick_room_start_fling;
         break;
 		
 	case FLING_EFFECT_GRAVITY:
+			battleCtx->sideEffectMon = battleCtx->attacker;
 			battleCtx->flingScript = subscript_gravity_start_fling;
 		break;
 		
@@ -8492,32 +8506,39 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         break;
 		
 	case FLING_EFFECT_HAZE:
+			battleCtx->sideEffectMon = battleCtx->attacker;
 			battleCtx->flingScript = subscript_reset_all_stat_stages;
 		break;
 		
 	case FLING_EFFECT_RAIN:
+			battleCtx->sideEffectMon = battleCtx->attacker;
 			battleCtx->flingScript = subscript_drizzle;
 		break;
 		
 	case FLING_EFFECT_SUN:
+			battleCtx->sideEffectMon = battleCtx->attacker;
 			battleCtx->flingScript = subscript_drought;
 		break;
 		
 	case FLING_EFFECT_SAND:
+			battleCtx->sideEffectMon = battleCtx->attacker;
 			battleCtx->flingScript = subscript_sand_stream;
 		break;
 		
 	case FLING_EFFECT_HAIL:
+			battleCtx->sideEffectMon = battleCtx->attacker;
 			battleCtx->flingScript = subscript_snow_warning;
 		break;
 		
 	case FLING_EFFECT_DEFOG:
+			battleCtx->sideEffectMon = battleCtx->defender;
 			battleCtx->flingScript = subscript_defog;
 		break;
 		
 	case FLING_EFFECT_WAKE_UP_SLAP:
 			if (DEFENDING_MON.status & MON_CONDITION_SLEEP)
 			{
+				battleCtx->sideEffectMon = battleCtx->defender;
 				battleCtx->flingScript = subscript_heal_target_sleep;
 			}
 		break;
@@ -8526,17 +8547,19 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 			if ((DEFENDING_MON.status & MON_CONDITION_SLEEP)
 			&& (battleCtx->battleMons[battleCtx->defender].statusVolatile != VOLATILE_CONDITION_NIGHTMARE))
 			{
+				battleCtx->sideEffectMon = battleCtx->defender;
 				battleCtx->flingScript = subscript_nightmare_start;
 			}
 		break;
 		
 	case FLING_EFFECT_CONFUSION:
-			battleCtx->sideEffectMon = battler;
+			battleCtx->sideEffectMon = battleCtx->defender;
 			battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
 			battleCtx->flingScript = subscript_confuse;
 		break;
 		
 	case FLING_EFFECT_CHIP:
+			battleCtx->sideEffectMon = battleCtx->defender;
 			battleCtx->flingScript = subscript_apply_chip;
 		break;
 		
@@ -8551,21 +8574,25 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 		break;
 		
 	case FLING_EFFECT_INFLICT_CURSE:
+			battleCtx->sideEffectMon = battleCtx->defender;
 			battleCtx->flingScript = subscript_curse_ghost;
 		break;
 		
 	case FLING_EFFECT_INFLICT_INGRAIN:
+			battleCtx->sideEffectMon = battleCtx->defender;
 			battleCtx->flingScript = subscript_ingrain_fling;
 		break;
 		
 	case FLING_EFFECT_USER_ATK_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
+			battleCtx->sideEffectMon = battleCtx->attacker;
             battleCtx->flingScript = subscript_held_item_user_raise_atk;
         }
         break;
 
     case FLING_EFFECT_USER_DEF_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_DEFENSE] < 12) {
+			battleCtx->sideEffectMon = battleCtx->attacker;
             battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
             battleCtx->flingScript = subscript_held_item_user_raise_def;
         }
@@ -8573,6 +8600,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_USER_SPEED_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_SPEED] < 12) {
+			battleCtx->sideEffectMon = battleCtx->attacker;
             battleCtx->msgTemp = BATTLE_STAT_SPEED;
             battleCtx->flingScript = subscript_held_item_user_raise_spe;
         }
@@ -8580,6 +8608,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_USER_SPATK_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
+			battleCtx->sideEffectMon = battleCtx->attacker;
             battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
             battleCtx->flingScript = subscript_held_item_user_raise_spa;
         }
@@ -8587,18 +8616,21 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_USER_SPDEF_UP:
         if (ATTACKING_MON.statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
+			battleCtx->sideEffectMon = battleCtx->attacker;
             battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
             battleCtx->flingScript = subscript_held_item_user_raise_spd;
         }
         break;
 		
 	case FLING_EFFECT_PIVOT:
+		battleCtx->sideEffectMon = battleCtx->attacker;
 		battleCtx->flingScript = subscript_attack_switch_no_anim;
 		break;
 
     case FLING_EFFECT_HP_RESTORE_SPICY:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_SPICY;
+		battleCtx->sideEffectMon = battleCtx->defender;
 
         if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_SPICY) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
@@ -8610,6 +8642,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     case FLING_EFFECT_HP_RESTORE_DRY:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_DRY;
+		battleCtx->sideEffectMon = battleCtx->defender;
 
         if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_DRY) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
@@ -8621,6 +8654,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     case FLING_EFFECT_HP_RESTORE_SWEET:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_SWEET;
+		battleCtx->sideEffectMon = battleCtx->defender;
 
         if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_SWEET) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
@@ -8632,6 +8666,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     case FLING_EFFECT_HP_RESTORE_BITTER:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_BITTER;
+		battleCtx->sideEffectMon = battleCtx->defender;
 
         if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_BITTER) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
@@ -8643,6 +8678,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     case FLING_EFFECT_HP_RESTORE_SOUR:
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_SOUR;
+		battleCtx->sideEffectMon = battleCtx->defender;
 
         if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_SOUR) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
@@ -8655,6 +8691,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         for (int i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
             if (DEFENDING_MON.statBoosts[i] < 6) {
                 DEFENDING_MON.statBoosts[i] = 6;
+				battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->flingScript = subscript_held_item_statdown_restore;
             }
         }
@@ -8663,42 +8700,44 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     case FLING_EFFECT_HEAL_INFATUATION:
         if (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_ATTRACT) {
             battleCtx->msgTemp = MSGCOND_INFATUATION;
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_heal_infatuation;
         }
         break;
 
     case FLING_EFFECT_FLINCH:
-        battleCtx->sideEffectMon = battler;
+        battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
         battleCtx->flingScript = subscript_flinch_mon;
         break;
 
     case FLING_EFFECT_PARALYZE:
-        battleCtx->sideEffectMon = battler;
+        battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
         battleCtx->flingScript = subscript_paralyze;
         break;
 
     case FLING_EFFECT_POISON:
-        battleCtx->sideEffectMon = battler;
+        battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
         battleCtx->flingScript = subscript_poison;
         break;
 
     case FLING_EFFECT_BADLY_POISON:
-        battleCtx->sideEffectMon = battler;
+        battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
         battleCtx->flingScript = subscript_badly_poison;
         break;
 
     case FLING_EFFECT_BURN:
-        battleCtx->sideEffectMon = battler;
+        battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
         battleCtx->flingScript = subscript_burn;
         break;
 
     case FLING_EFFECT_ATK_UP:
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_ATTACK;
             battleCtx->flingScript = subscript_held_item_raise_stat;
         }
@@ -8706,6 +8745,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_DEF_UP:
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_DEFENSE] < 12) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
             battleCtx->flingScript = subscript_held_item_raise_stat;
         }
@@ -8713,6 +8753,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_SPEED_UP:
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_SPEED] < 12) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_SPEED;
             battleCtx->flingScript = subscript_held_item_raise_stat;
         }
@@ -8720,6 +8761,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_SPATK_UP:
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
             battleCtx->flingScript = subscript_held_item_raise_stat;
         }
@@ -8727,6 +8769,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_SPDEF_UP:
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
             battleCtx->flingScript = subscript_held_item_raise_stat;
         }
@@ -8747,6 +8790,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
             } while (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK + stat] == 12);
 
             battleCtx->msgTemp = BATTLE_STAT_ATTACK + stat;
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
         }
 
@@ -8755,11 +8799,13 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
 
     case FLING_EFFECT_CRIT_UP:
         if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_FOCUS_ENERGY) == FALSE) {
+			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->flingScript = subscript_held_item_raise_crit;
         }
         break;
 
     case FLING_EFFECT_TEMP_ACC_UP:
+		battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->flingScript = subscript_held_item_temp_acc_up;
         break;
 
@@ -8775,8 +8821,15 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_NONE && battleCtx->flingScript) {
             ATTACKER_SELF_TURN_FLAGS.statusFlags |= SELF_TURN_FLAG_PLUCK_BERRY;
         }
-
-        battleCtx->msgBattlerTemp = battleCtx->defender;
+		
+		if (battleCtx->sideEffectMon == battleCtx->attacker)
+		{
+			battleCtx->msgBattlerTemp = battleCtx->attacker;
+		}
+		else
+		{
+			battleCtx->msgBattlerTemp = battleCtx->defender;
+		}
     }
 
     return TRUE;
