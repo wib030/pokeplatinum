@@ -9,6 +9,34 @@
     ],
     "double_battle": false,
     "party": [
+		{
+            "species": "SPECIES_WEEZING",
+            "form": 0,
+            "level": 54,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+				"MOVE_WILL_O_WISP",
+				"MOVE_SLUDGE_BOMB",
+				"MOVE_SCREECH",
+				"MOVE_PROTECT"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 13,
+			"ivDEF": 31,
+			"ivSPEED": 30,
+			"ivSPATK": 25,
+			"ivSPDEF": 31,
+			"evHP": 244,
+			"evATK": 0,
+			"evDEF": 16,
+			"evSPEED": 20,
+			"evSPATK": 0,
+			"evSPDEF": 228,
+			"nature": 20,
+			"ability": 1
+        },
         {
             "species": "SPECIES_SKUNTANK",
             "form": 0,
@@ -36,21 +64,6 @@
             ],
             "power": 200,
             "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_WEEZING",
-            "form": 0,
-            "level": 54,
-            "item": "ITEM_AIR_BALLOON",
-            "moves": [
-                "MOVE_SLUDGE_BOMB",
-				"MOVE_FLAMETHROWER",
-				"MOVE_WILL_O_WISP",
-				"MOVE_PROTECT"
-            ],
-            "power": 200,
-            "ball_seal": 0,
-			"ability": 1
         },
 		{
             "species": "SPECIES_GENGAR",
