@@ -87,12 +87,10 @@
         "level_up": {
             "1": [
 				"MOVE_SCRATCH",
+				"MOVE_DEFENSE_CURL",
 				"MOVE_PSYWAVE"
 			],
-            "3": [ 
-				"MOVE_DEFENSE_CURL",
-				"MOVE_FRENZY_PLANT"
-			],
+            "3": "MOVE_FRENZY_PLANT",
             "7": "MOVE_SAND_ATTACK",
             "9": "MOVE_POISON_STING",
             "15": "MOVE_RAPID_SPIN",
