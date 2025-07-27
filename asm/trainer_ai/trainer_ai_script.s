@@ -9765,6 +9765,7 @@ TagStrategy_FollowMe:
     ;    - If the partner''s HP is between 30% and 50%, 75% chance of score +1
     ;    - If the partner''s HP is < 30%, 75% chance of score +2
     ;  - If the attacker''s HP < 30%, 75% chance of score -5
+	IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, ScoreMinus30
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, TagStrategy_FollowMe_SelfHighHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, TagStrategy_FollowMe_SelfMediumHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, TagStrategy_FollowMe_SelfLowHP
@@ -10175,6 +10176,7 @@ TagStrategy_CheckPartnerStormDrainAbsorb:
     GoTo ScorePlus3
 
 TagStrategy_PartnerStatusMove:
+	IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, ScoreMinus30
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_PartnerSkillSwap
     IfMoveEqualTo MOVE_WILL_O_WISP, TagStrategy_PartnerWillOWisp
     IfMoveEqualTo MOVE_THUNDER_WAVE, TagStrategy_PartnerThunderWave
@@ -10440,6 +10442,9 @@ TagStrategy_PartnerAcupressure_End:
 
 TagStrategy_PartnerScoreMinus30:
     AddToMoveScore -30
+    PopOrEnd 
+	
+TagStrategy_PopOrEnd:
     PopOrEnd 
 
 CheckHP_Main:
