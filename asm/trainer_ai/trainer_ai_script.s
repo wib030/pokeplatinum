@@ -6909,9 +6909,9 @@ Expert_Fling_DesirableFlingEffects:
 Expert_Fling_InstantFling:
     TableEntry ITEM_BLACKGLASSES
 	TableEntry ITEM_MOOMOO_MILK
-	TableEntry HOLD_EFFECT_LVLUP_ATK_EV_UP
-	TableEntry HOLD_EFFECT_LVLUP_SPATK_EV_UP
-	TableEntry HOLD_EFFECT_LVLUP_SPEED_EV_UP
+	TableEntry ITEM_POWER_BRACER
+	TableEntry ITEM_POWER_LENS
+	TableEntry ITEM_POWER_ANKLET
     TableEntry TABLE_END
 	
 Expert_Fling_ScorePlus12_End:
