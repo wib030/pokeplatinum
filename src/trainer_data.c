@@ -23,7 +23,7 @@
 #include "unk_0201D15C.h"
 #include "savedata_misc.h"
 
-static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int heapID);
+static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int heapID, const SaveData *save);
 
 void TrainerData_Encounter(BattleParams *battleParams, const SaveData *save, int heapID)
 {
@@ -47,7 +47,7 @@ void TrainerData_Encounter(BattleParams *battleParams, const SaveData *save, int
             Strbuf_Free(trainerName);
         }
 
-        TrainerData_BuildParty(battleParams, i, heapID);
+        TrainerData_BuildParty(battleParams, i, heapID, save);
     }
 
     battleParams->battleType |= trdata.battleType;
@@ -175,7 +175,7 @@ u8 TrainerClass_Gender(int trclass)
  * @param battler       Which battler's party is to be loaded.
  * @param heapID        Heap on which to perform any allocations.
  */
-static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int heapID)
+static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int heapID, const SaveData *save)
 {
     // must make declarations C89-style to match
     void *buf;
@@ -183,7 +183,44 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
     u32 genderMod, rnd, oldSeed;
     u8 ivs;
     Pokemon *mon;
-	int monIndex, switchedIndex;
+	int monIndex, switchedIndex, capLevel;
+	TrainerInfo *trInfo = SaveData_GetTrainerInfo(save);
+	int badges = TrainerInfo_BadgeCount(trInfo);
+	
+	switch (badges)
+	{
+		case 0:
+			capLevel = 13;
+			break;
+
+		case 1:
+			capLevel = 22;
+			break;
+
+		case 2:
+			capLevel = 26;
+			break;
+
+		case 3:
+			capLevel = 31;
+			break;
+
+		case 4:
+			capLevel = 36;
+			break;
+
+		case 5:
+			capLevel = 45;
+			break;
+
+		case 6:
+			capLevel = 51;
+			break;
+
+		default:
+			capLevel = 58;
+			break;
+	}
 	
     oldSeed = LCRNG_GetSeed();
 
@@ -312,6 +349,11 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 			int monLevel = trmon[monIndex].level;
 			int otIdSource = OTID_NOT_SHINY;
 			int monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+			
+			if (trmon[monIndex].copyLevelCap == 1)
+			{
+				monLevel = capLevel;
+			}
 			
 			if (trmon[monIndex].isShiny == 1)
 			{
