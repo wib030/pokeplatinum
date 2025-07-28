@@ -787,6 +787,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfShouldEncore battler, jump
+    .long 137
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

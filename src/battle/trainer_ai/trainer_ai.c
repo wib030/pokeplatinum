@@ -480,6 +480,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
 static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+static void AICmd_IfShouldEncore(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
@@ -618,7 +619,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfTrapped,
     AICmd_IfBattlerStatDropped,
 	AICmd_IfCanKOEnemy,
-	AICmd_IfEnemyCanKO
+	AICmd_IfEnemyCanKO,
+    AICmd_IfShouldEncore
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4679,6 +4681,19 @@ static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx
 
     if (AI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
     {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfShouldEncore(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (AI_ShouldEncoreCheck(battleSys, battleCtx, AI_CONTEXT.attacker, battler)) {
         AIScript_Iter(battleCtx, jump);
     }
 }
