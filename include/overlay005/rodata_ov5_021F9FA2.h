@@ -138,7 +138,7 @@ const u16 EggMove_Table[] = {
     MOVE_ENERGY_BALL,
 	MOVE_POWER_SWAP,
 	MOVE_SHARPEN, // Pregnancy Punch
-	(SPECIES_JIGGLYPUFF) + 20000, // Jigglybuff line
+	(SPECIES_JIGGLYPUFF) + 20000, // Wibblypuff line
     MOVE_PERISH_SONG,
     MOVE_PRESENT,
     MOVE_FAINT_ATTACK,

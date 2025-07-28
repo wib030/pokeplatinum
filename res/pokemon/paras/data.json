@@ -101,7 +101,8 @@
             "33": "MOVE_GIGA_DRAIN",
 			"35": "MOVE_SEED_BOMB",
             "38": "MOVE_AROMATHERAPY",
-            "43": "MOVE_X_SCISSOR"
+            "43": "MOVE_X_SCISSOR",
+			"45": "MOVE_MUD_SPORT"
         },
         "tutor": [
             "MOVE_FURY_CUTTER",

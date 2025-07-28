@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_CHLOROPHYLL",
-        "ABILITY_NONE"
+        "ABILITY_PHOTOSYNTHESIS"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
@@ -86,12 +86,12 @@
                 "MOVE_SUNNY_DAY"
             ],
 			"5": "MOVE_SWEET_SCENT",
-			"23": "MOVE_MAGICAL_LEAF",
-			"29": "MOVE_LUCKY_CHANT",
-			"35": "MOVE_NATURAL_GIFT",
-			"41": "MOVE_MORNING_SUN",
-			"47": "MOVE_GIGA_DRAIN",
-            "53": "MOVE_LEAF_STORM",
+			"13": "MOVE_MAGICAL_LEAF",
+			"15": "MOVE_LUCKY_CHANT",
+			"25": "MOVE_NATURAL_GIFT",
+			"33": "MOVE_MORNING_SUN",
+			"36": "MOVE_GIGA_DRAIN",
+            "43": "MOVE_LEAF_STORM",
             "55": "MOVE_SOLAR_BEAM"
         },
         "tutor": [

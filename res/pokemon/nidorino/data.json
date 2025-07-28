@@ -82,12 +82,12 @@
         "level_up": {
             "1": [
                 "MOVE_LEER",
-                "MOVE_PECK"
+                "MOVE_PECK",
+				"MOVE_POISON_STING"
             ],
-            "7": "MOVE_FOCUS_ENERGY",
-            "9": "MOVE_DOUBLE_KICK",
+            "3": "MOVE_FOCUS_ENERGY",
+            "5": "MOVE_DOUBLE_KICK",
 			"11": "MOVE_MUD_SHOT",
-            "13": "MOVE_POISON_STING",
             "23": "MOVE_HORN_ATTACK",
             "28": "MOVE_HELPING_HAND",
 			"30": "MOVE_HORN_DRILL",

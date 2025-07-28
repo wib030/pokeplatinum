@@ -83,12 +83,12 @@
         "level_up": {
             "1": [
                 "MOVE_GROWL",
-                "MOVE_SCRATCH"
+                "MOVE_SCRATCH",
+				"MOVE_POISON_STING"
             ],
-            "7": "MOVE_TAIL_WHIP",
-            "9": "MOVE_DOUBLE_KICK",
+            "3": "MOVE_TAIL_WHIP",
+            "5": "MOVE_DOUBLE_KICK",
 			"11": "MOVE_MUD_SHOT",
-            "13": "MOVE_POISON_STING",
             "20": "MOVE_FURY_SWIPES",
             "23": "MOVE_BITE",
 			"26": "MOVE_POISON_FANG",
