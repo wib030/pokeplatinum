@@ -3624,115 +3624,34 @@ Expert_Counter_End:
     PopOrEnd
 
 Expert_Encore:
-    ; If the opponent is Disabled, 95% chance of score +3.
+    ; If first turn, try to encore at +1 to +3 score if slower.
     ;
-    ; If the attacker is slower than the opponent, score -2.
+    ; If target is disabled, try to encore at +3 score.
     ;
-    ; If the opponent''s last-used move is not one of a specific set of effects, score -2.
-    ;
-    ; Otherwise, 88.3% chance of score +3.
+    ; Otherwise, follow logic function to encore.
     IfBattlerUnderEffect AI_BATTLER_DEFENDER, CHECK_DISABLE, Expert_Encore_TryScorePlus3
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Encore_ScoreMinus2
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadEffectOfLoadedMove 
-    IfLoadedNotInTable Expert_Encore_EncouragedMoveEffects, Expert_Encore_ScoreMinus2
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_Encore_FirstTurn
+    IfShouldEncore AI_BATTLER_DEFENDER, ScorePlus3
+    AddToMoveScore -3
+    GoTo Expert_Encore_End
 
 Expert_Encore_TryScorePlus3:
     IfRandomLessThan 12, Expert_Encore_End
     AddToMoveScore 3
     GoTo Expert_Encore_End
 
-Expert_Encore_ScoreMinus2:
-    AddToMoveScore -2
+Expert_Encore_FirstTurn:
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, ScoreMinus12
+    AddToMoveScore 1
+    IfRandomLessThan 32, Expert_Encore_End
+    AddToMoveScore 1
+    IfRandomLessThan 32, Expert_Encore_End
+    AddToMoveScore 1
+    GoTo Expert_Encore_End
 
 Expert_Encore_End:
     PopOrEnd 
-
-Expert_Encore_EncouragedMoveEffects:
-    TableEntry BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP
-    TableEntry BATTLE_EFFECT_ATK_UP
-    TableEntry BATTLE_EFFECT_DEF_UP
-    TableEntry BATTLE_EFFECT_SPEED_UP
-    TableEntry BATTLE_EFFECT_SP_ATK_UP
-    TableEntry BATTLE_EFFECT_RESET_STAT_CHANGES
-    TableEntry BATTLE_EFFECT_FORCE_SWITCH
-	TableEntry BATTLE_EFFECT_FORCE_SWITCH_HIT
-    TableEntry BATTLE_EFFECT_CONVERSION
-    TableEntry BATTLE_EFFECT_STATUS_BADLY_POISON
-    TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
-    TableEntry BATTLE_EFFECT_REST
-    TableEntry BATTLE_EFFECT_HALVE_HP
-    TableEntry BATTLE_EFFECT_SP_DEF_UP_2
-    TableEntry BATTLE_EFFECT_STATUS_CONFUSE
-    TableEntry BATTLE_EFFECT_STATUS_POISON
-    TableEntry BATTLE_EFFECT_STATUS_PARALYZE
-    TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
-    TableEntry BATTLE_EFFECT_DO_NOTHING
-    TableEntry BATTLE_EFFECT_ATK_UP_2
-    TableEntry BATTLE_EFFECT_ENCORE
-    TableEntry BATTLE_EFFECT_CONVERSION2
-    TableEntry BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS
-    TableEntry BATTLE_EFFECT_CURE_PARTY_STATUS
-    TableEntry BATTLE_EFFECT_PREVENT_ESCAPE
-    TableEntry BATTLE_EFFECT_STATUS_NIGHTMARE
-    TableEntry BATTLE_EFFECT_PROTECT
-    TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
-    TableEntry BATTLE_EFFECT_IGNORE_EVASION_REMOVE_GHOST_IMMUNE
-    TableEntry BATTLE_EFFECT_ALL_FAINT_3_TURNS
-    TableEntry BATTLE_EFFECT_WEATHER_SANDSTORM
-    TableEntry BATTLE_EFFECT_SURVIVE_WITH_1_HP
-    TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
-    TableEntry BATTLE_EFFECT_INFATUATE
-    TableEntry BATTLE_EFFECT_PREVENT_STATUS
-    TableEntry BATTLE_EFFECT_WEATHER_RAIN
-    TableEntry BATTLE_EFFECT_WEATHER_SUN
-    TableEntry BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP
-    TableEntry BATTLE_EFFECT_COPY_STAT_CHANGES
-    TableEntry BATTLE_EFFECT_HIT_IN_3_TURNS
-    TableEntry BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY
-    TableEntry BATTLE_EFFECT_STOCKPILE
-    TableEntry BATTLE_EFFECT_SPIT_UP
-    TableEntry BATTLE_EFFECT_SWALLOW
-    TableEntry BATTLE_EFFECT_WEATHER_HAIL
-    TableEntry BATTLE_EFFECT_TORMENT
-    TableEntry BATTLE_EFFECT_STATUS_BURN
-    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
-    TableEntry BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER
-    TableEntry BATTLE_EFFECT_SWITCH_HELD_ITEMS
-    TableEntry BATTLE_EFFECT_COPY_ABILITY
-    TableEntry BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL
-    TableEntry BATTLE_EFFECT_RECYCLE
-    TableEntry BATTLE_EFFECT_REMOVE_HELD_ITEM
-    TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
-    TableEntry BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE
-    TableEntry BATTLE_EFFECT_HEAL_STATUS
-    TableEntry BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT
-    TableEntry BATTLE_EFFECT_CONFUSE_ALL
-    TableEntry BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE
-    TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
-    TableEntry BATTLE_EFFECT_ATK_SPD_UP
-    TableEntry BATTLE_EFFECT_CAMOUFLAGE
-    TableEntry BATTLE_EFFECT_GRAVITY
-    TableEntry BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE
-    TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
-    TableEntry BATTLE_EFFECT_NATURAL_GIFT
-    TableEntry BATTLE_EFFECT_REMOVE_PROTECT
-    TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
-    TableEntry BATTLE_EFFECT_FLING
-    TableEntry BATTLE_EFFECT_TRANSFER_STATUS
-    TableEntry BATTLE_EFFECT_PREVENT_HEALING
-    TableEntry BATTLE_EFFECT_SWAP_ATK_DEF
-    TableEntry BATTLE_EFFECT_SUPRESS_ABILITY
-    TableEntry BATTLE_EFFECT_PREVENT_CRITS
-    TableEntry BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES
-    TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
-    TableEntry BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA
-    TableEntry BATTLE_EFFECT_SWAP_STAT_CHANGES
-    TableEntry BATTLE_EFFECT_RESTORE_HP_EVERY_TURN
-    TableEntry BATTLE_EFFECT_GIVE_GROUND_IMMUNITY
-    TableEntry BATTLE_EFFECT_TRICK_ROOM
-    TableEntry TABLE_END
 
 Expert_PainSplit:
     ; If the opponent''s HP < 80%, score -1.
@@ -9467,6 +9386,7 @@ TagStrategy_CheckSpecialScoring:
     IfMoveEqualTo MOVE_GRAVITY, TagStrategy_Gravity
     IfMoveEqualTo MOVE_TRICK_ROOM, TagStrategy_TrickRoom
     IfMoveEqualTo MOVE_FOLLOW_ME, TagStrategy_FollowMe
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, TagStrategy_Protect
     LoadTypeFrom LOAD_MOVE_TYPE
     IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckElectricMove
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckFireMove
@@ -9822,6 +9742,19 @@ TagStrategy_FollowMe_TryScorePlus3:
 
 TagStrategy_FollowMe_End:
     PopOrEnd 
+
+TagStrategy_Protect:
+    ; Bonus chance to protect turn 1 in doubles
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo FALSE, TagStrategy_Protect_End
+    IfRandomLessThan 32, TagStrategy_Protect_End
+    AddToMoveScore 1
+    IfRandomLessThan 32, TagStrategy_Protect_End
+    AddToMoveScore 1
+    GoTo TagStrategy_Protect_End
+
+TagStrategy_Protect_End:
+    PopOrEnd
 
 TagStrategy_PartnerKnowsHelpingHand:
     ; If our partner knows Helping Hand, then damaging moves (aside from flat-damage moves)
