@@ -14,6 +14,8 @@
 #include "item.h"
 #include "unk_02096420.h"
 
+#include "constants/items.h"
+
 #define EV_ITEM_MAX     ( 252 )     // EV cap for doping items
 #define EV_TOTAL_MAX    ( 510 )     // Maximum EV's on a Pokemon across all stats
 
@@ -358,18 +360,26 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
     }
 
     if (Item_Get(v0, 18) != 0) {
-		u32 newNature;
-		u32 currentNature = Pokemon_GetValue(param0, MON_DATA_NATURE, NULL);
-		
-		newNature = currentNature + 1;
-		
-		if (newNature > 24)
-		{
-			newNature = 0;
-		}
-		
-		Pokemon_SetValue(param0, MON_DATA_NATURE, &newNature);
-		Pokemon_CalcLevelAndStats(param0);
+        if (param1 == ITEM_ICE_HEAL)
+        {
+            u32 newNature;
+            u32 currentNature = Pokemon_GetValue(param0, MON_DATA_NATURE, NULL);
+
+            newNature = currentNature + 1;
+
+            if (newNature > 24)
+            {
+                newNature = 0;
+            }
+
+            Pokemon_SetValue(param0, MON_DATA_NATURE, &newNature);
+            Pokemon_CalcLevelAndStats(param0);
+        }
+        else
+        {
+            v1[1] &= (0x20 ^ 0xffffffff);
+            v3 = 1;
+        }
     }
 
     if (Item_Get(v0, 19) != 0) {
