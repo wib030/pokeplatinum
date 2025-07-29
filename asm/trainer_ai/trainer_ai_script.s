@@ -6508,7 +6508,7 @@ Expert_Tailwind_SpeedCompare:
     AddToMoveScore 1
     GoTo Expert_Tailwind_End
 
-Expert_Tailwind_ScoreMinus1:
+Expert_Tailwind_TryScoreMinus1:
     IfRandomLessThan 192, Expert_Tailwind_End
     AddToMoveScore -1
     GoTo Expert_Tailwind_End
