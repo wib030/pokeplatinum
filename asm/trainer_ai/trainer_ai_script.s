@@ -1191,8 +1191,8 @@ Basic_NaturalGiftBerries:
 Basic_CheckTailwind:
     ; If Trick Room is currently active or Tailwind is already active for the attacker''s side
     ; of the field, score -10.
-    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TAILWIND, ScoreMinus10
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus12
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TAILWIND, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckAcupressure:
@@ -6490,27 +6490,28 @@ Expert_Pluck_End:
     PopOrEnd 
 
 Expert_Tailwind:
-    ; 25% chance of flat score +0.
+    ; If attacker can instead score a KO, 95% chance for score -12
     ;
-    ; If the attacker is faster than its opponent, score -1.
+    ; If the attacker is faster than its opponent, 25% chance for score -1.
     ;
-    ; If the attacker''s HP <= 30%, score -1.
-    ;
-    ; If the attacker''s HP > 75%, score +1.
-    ;
-    ; Otherwise, 75% chance of score +1.
-    IfRandomLessThan 64, Expert_Tailwind_End
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_Tailwind_ScoreMinus1
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 31, Expert_Tailwind_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_Tailwind_ScorePlus1
-    IfRandomLessThan 64, Expert_Tailwind_End
+    ; Otherwise, score +1.
+    IfCanKOEnemy Expert_Tailwind_TryEarlyEnd
+    AddToMoveScore 1
+    GoTo Expert_Tailwind_SpeedCompare
 
-Expert_Tailwind_ScorePlus1:
+Expert_Tailwind_TryEarlyEnd:
+    IfRandomLessThan 243, ScoreMinus12
+    GoTo Expert_Tailwind_SpeedCompare
+
+Expert_Tailwind_SpeedCompare:
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_Tailwind_TryScoreMinus1
     AddToMoveScore 1
     GoTo Expert_Tailwind_End
 
 Expert_Tailwind_ScoreMinus1:
+    IfRandomLessThan 192, Expert_Tailwind_End
     AddToMoveScore -1
+    GoTo Expert_Tailwind_End
 
 Expert_Tailwind_End:
     PopOrEnd 
@@ -9389,6 +9390,7 @@ TagStrategy_CheckSpecialScoring:
     IfMoveEqualTo MOVE_TRICK_ROOM, TagStrategy_TrickRoom
     IfMoveEqualTo MOVE_FOLLOW_ME, TagStrategy_FollowMe
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, TagStrategy_Protect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, TagStrategy_Tailwind
     LoadTypeFrom LOAD_MOVE_TYPE
     IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckElectricMove
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckFireMove
@@ -9756,6 +9758,17 @@ TagStrategy_Protect:
     GoTo TagStrategy_Protect_End
 
 TagStrategy_Protect_End:
+    PopOrEnd
+
+TagStrategy_Tailwind:
+    ; If speed boosting is not deterred, 87.5% chance for score +3.
+    IfBattlerDetersBoosting AI_BATTLER_DEFENDER, ScoreMinus3
+    IfBattlerDetersBoosting AI_BATTLER_DEFENDER_PARTNER, ScoreMinus3
+    IfRandomLessThan 32, TagStrategy_Tailwind_End
+    AddToMoveScore 3
+    GoTo TagStrategy_Tailwind_End
+
+TagStrategy_Tailwind_End:
     PopOrEnd
 
 TagStrategy_PartnerKnowsHelpingHand:
