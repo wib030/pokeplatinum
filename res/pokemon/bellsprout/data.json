@@ -53,6 +53,7 @@
             "TM19",
             "TM21",
             "TM22",
+			"TM26",
             "TM27",
             "TM32",
             "TM36",
@@ -83,12 +84,13 @@
             "13": "MOVE_SLEEP_POWDER",
             "15": "MOVE_POISON_POWDER",
             "17": "MOVE_STUN_SPORE",
+			"21": "MOVE_RAZOR_LEAF",
+			"25": "MOVE_GASTRO_ACID",
             "27": "MOVE_KNOCK_OFF",
             "29": "MOVE_SWEET_SCENT",
-            "35": "MOVE_GASTRO_ACID",
-            "39": "MOVE_RAZOR_LEAF",
-            "41": "MOVE_BODY_SLAM",
-            "47": "MOVE_WRING_OUT"
+            "31": "MOVE_BODY_SLAM",
+            "35": "MOVE_WRING_OUT",
+			"45": "MOVE_GUNK_SHOT"
         },
         "tutor": [
             "MOVE_GASTRO_ACID",

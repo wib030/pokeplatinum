@@ -82,23 +82,21 @@
                 "MOVE_SWALLOW",
                 "MOVE_SPIT_UP",
                 "MOVE_VINE_WHIP",
-                "MOVE_SLEEP_POWDER",
 				"MOVE_LEECH_LIFE",
-                "MOVE_RAZOR_LEAF"
+                "MOVE_RAZOR_LEAF",
+				"MOVE_ACID"
             ],
 			"7": "MOVE_GROWTH",
 			"11": "MOVE_WRAP",
-			"15": "MOVE_POISON_POWDER",
-			"17": "MOVE_STUN_SPORE",
-			"23": "MOVE_ACID",
+			"13": "MOVE_SLEEP_POWDER",
+            "15": "MOVE_POISON_POWDER",
+            "17": "MOVE_STUN_SPORE",
+			"25": "MOVE_GASTRO_ACID",
 			"27": "MOVE_KNOCK_OFF",
-			"35": "MOVE_GASTRO_ACID",
-			"41": "MOVE_BODY_SLAM",
-            "47": [
-                "MOVE_LEAF_STORM",
-				"MOVE_WRING_OUT",
-                "MOVE_LEAF_BLADE"
-            ],
+			"31": "MOVE_BODY_SLAM",
+			"35": "MOVE_WRING_OUT",
+			"45": "MOVE_LEAF_BLADE",
+            "47": "MOVE_LEAF_STORM",
 			"53": "MOVE_GUNK_SHOT"
         },
         "tutor": [

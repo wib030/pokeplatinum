@@ -95,6 +95,7 @@
 			"19": "MOVE_DISABLE",
 			"21": "MOVE_BUBBLE",
             "22": "MOVE_SCREECH",
+			"23": "MOVE_MIRACLE_EYE",
 			"25": "MOVE_ZEN_HEADBUTT",
             "34": "MOVE_PSYCH_UP",
 			"36": "MOVE_AMNESIA",

@@ -97,8 +97,8 @@
 			"34": "MOVE_ROCK_BLAST",
             "40": "MOVE_EARTHQUAKE",
             "44": "MOVE_EXPLOSION",
-            "50": "MOVE_DOUBLE_EDGE",
-            "54": "MOVE_STONE_EDGE"
+			"47": "MOVE_STONE_EDGE",
+            "50": "MOVE_DOUBLE_EDGE"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
