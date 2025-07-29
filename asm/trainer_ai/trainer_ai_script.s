@@ -300,6 +300,7 @@ Basic_ScoreMoveEffect:
 
 Basic_CheckCannotSleep:
     ; If the target cannot be put to sleep for any reason, score -10.
+	IfEnemySleepClauseActive ScoreMinus10
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -1922,6 +1923,7 @@ Expert_Main:
 Expert_StatusSleep:
     ; If the attacker knows a move which requires the target to be asleep (Dream Eater or Nightmare
     ; effects), 50% chance of score +1.
+	IfEnemySleepClauseActive ScoreMinus12
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_StatusSleep_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_NIGHTMARE, Expert_StatusSleep_TryScorePlus1
     IfMoveEqualTo MOVE_SLEEP_POWDER, Expert_StatusSleep_PowderMove

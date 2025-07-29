@@ -792,6 +792,11 @@
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
+	
+	.macro IfEnemySleepClauseActive jump
+    .long 138
+    .long (\jump-.) / 4 - 1
+    .endm
 
     .equ TABLE_END, 0xFFFFFFFF
 

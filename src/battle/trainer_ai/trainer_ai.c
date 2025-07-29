@@ -433,6 +433,7 @@ static void AICmd_IfTrapped(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerStatDropped(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCanKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfEnemySleepClauseActive(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -620,7 +621,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerStatDropped,
 	AICmd_IfCanKOEnemy,
 	AICmd_IfEnemyCanKO,
-    AICmd_IfShouldEncore
+    AICmd_IfShouldEncore,
+	AICmd_IfEnemySleepClauseActive
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4695,6 +4697,32 @@ static void AICmd_IfShouldEncore(BattleSystem* battleSys, BattleContext* battleC
 
     if (AI_ShouldEncoreCheck(battleSys, battleCtx, AI_CONTEXT.attacker, battler)) {
         AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfEnemySleepClauseActive(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int jump = AIScript_Read(battleCtx);
+	
+	int i;
+	int sleepClauseActive = FALSE;
+	int battler = AI_CONTEXT.defender;
+	int battlerSide = Battler_Side(battleSys, battler);
+	
+	for (i = 0; i < Party_GetCurrentCount(BattleSystem_Party(battleSys, battler)); i++)
+	{
+		if (battleCtx->sideConditions[battlerSide].sleepClauseMask & FlagIndex(i))
+		{
+			sleepClauseActive = TRUE;
+			break;
+		}
+	}
+	
+    if (sleepClauseActive == TRUE)
+	{
+		AIScript_Iter(battleCtx, jump);
     }
 }
 
