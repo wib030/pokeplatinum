@@ -12760,7 +12760,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
     defendingMon = BattleSystem_PartyPokemon(battleSys, battleCtx->defender, battleCtx->selectedPartySlot[battleCtx->defender]);
     attackingMon = BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->selectedPartySlot[battleCtx->attacker]);
 
-    if (battleSys->trainers[battleCtx->defender].aiMask & AI_FLAG_BASIC) {
+    if (battleSys->trainers[battleCtx->defender].aiMask & AI_FLAG_BASIC
+	|| BattleSystem_BattleType(battleSys) & BATTLE_TYPE_WILD_MON) {
         if (BattleSystem_PartyCount(battleSys, battleCtx->defender) != MAX_PARTY_SIZE) {
             eggPartySlot = BattleSystem_PartyCount(battleSys, battleCtx->defender);
         }
@@ -13555,7 +13556,8 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
         Party_AddPokemon(party, mon);
     }
     else {
-        if (battleSys->trainers[battlerPregnant].aiMask & AI_FLAG_BASIC) {
+        if (battleSys->trainers[battlerPregnant].aiMask & AI_FLAG_BASIC
+		|| BattleSystem_BattleType(battleSys) & BATTLE_TYPE_WILD_MON) {
             // do nothing if we are AI
         }
         else {
