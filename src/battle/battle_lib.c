@@ -21420,3 +21420,28 @@ BOOL BattleAI_IsModeratelyStatDropped(BattleSystem* battleSys, BattleContext* ba
 
     return numDrops >= 2;
 }
+
+BOOL BattleAI_IsMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
+{
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    // Early exit if defender's ability is not Soundproof
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == FALSE)
+    {
+        return result;
+    }
+
+    for (i = 0; i < NELEMS(sSoundMoves); i++)
+    {
+        if (sSoundMoves[i] == move)
+        {
+            result = TRUE;
+            break;
+        }
+    }
+
+    return result;
+}

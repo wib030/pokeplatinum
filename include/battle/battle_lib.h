@@ -2071,4 +2071,15 @@ void BattleSystem_DynamicSortMonSpeedOrder(BattleSystem* battleSys, BattleContex
 */
 void BattleSystem_DynamicSortMonActionOrder(BattleSystem* battleSys, BattleContext* battleCtx);
 
+/**
+* @brief Check if the attacker's move is blocked by the defender's Soundproof ability.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker   Attacking mon's battler ID.
+* @param defender   Defending mon's battler ID.
+* @return TRUE/FALSE whether the move is blocked by Soundproof.
+*/
+BOOL BattleAI_IsMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
