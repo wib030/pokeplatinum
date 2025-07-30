@@ -798,6 +798,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfMoveBlockedBySoundproof jump
+    .long 139
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

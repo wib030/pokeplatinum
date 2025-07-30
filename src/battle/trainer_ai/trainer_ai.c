@@ -434,6 +434,7 @@ static void AICmd_IfBattlerStatDropped(BattleSystem* battleSys, BattleContext* b
 static void AICmd_IfCanKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfEnemySleepClauseActive(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -622,7 +623,8 @@ static const AICommandFunc sAICommandTable[] = {
 	AICmd_IfCanKOEnemy,
 	AICmd_IfEnemyCanKO,
     AICmd_IfShouldEncore,
-	AICmd_IfEnemySleepClauseActive
+	AICmd_IfEnemySleepClauseActive,
+    IfMoveBlockedBySoundproof
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4723,6 +4725,18 @@ static void AICmd_IfEnemySleepClauseActive(BattleSystem* battleSys, BattleContex
     if (sleepClauseActive == TRUE)
 	{
 		AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int jump = AIScript_Read(battleCtx);
+
+    if (BattleAI_IsMoveBlockedBySoundproof(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, AI_CONTEXT.move))
+    {
+        AIScript_Iter(battleCtx, jump);
     }
 }
 
