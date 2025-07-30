@@ -624,7 +624,7 @@ static const AICommandFunc sAICommandTable[] = {
 	AICmd_IfEnemyCanKO,
     AICmd_IfShouldEncore,
 	AICmd_IfEnemySleepClauseActive,
-    IfMoveBlockedBySoundproof
+    AICmd_IfMoveBlockedBySoundproof
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
