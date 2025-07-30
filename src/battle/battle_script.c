@@ -2559,6 +2559,7 @@ static BOOL BtlCmd_CheckBattlerSleepClause(BattleSystem *battleSys, BattleContex
 static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RecalcSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryEggBomb(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2835,7 +2836,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_CheckBattlerSleepClause,
 	BtlCmd_ClearSleepClauseFlag,
 	BtlCmd_RecalcSpeed,
-	BtlCmd_CheckFlingEffectMon
+	BtlCmd_CheckFlingEffectMon,
+	BtlCmd_TryEggBomb
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -13936,6 +13938,38 @@ static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *b
 	{
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
+
+    return FALSE;
+}
+
+static BOOL BtlCmd_TryEggBomb(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+	
+	Party *party = BattleSystem_Party(battleSys, battleCtx->attacker);
+	
+	BOOL eggInParty = FALSE;
+	int eggIndex = 0;
+
+	for (int i = 0; i < Party_GetCurrentCount(party); i++) {
+		Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+
+		if (Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL)) {
+			eggInParty = TRUE;
+			eggIndex = i;
+			break;
+		}
+	}
+	
+	if (eggInParty)
+	{
+		Party_RemovePokemonBySlotIndex(party, eggIndex);
+	}
+	else
+	{
+		BattleScript_Iter(battleCtx, jumpOnFail);
+	}
 
     return FALSE;
 }
