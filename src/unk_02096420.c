@@ -107,10 +107,20 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
         }
     }
 
-    if (Item_Get(v0, 18) != 0) {
-        Heap_FreeToHeap(v0);
-        return 1;
-    }
+	if (Item_Get(v0, 18) != 0) {
+		if (param1 == ITEM_ICE_HEAL)
+		{
+			Heap_FreeToHeap(v0);
+			return 1;
+		}
+		else
+		{
+			if ((v1[0] & 0x20) != 0) {
+				Heap_FreeToHeap(v0);
+				return 1;
+			}
+		}
+	}
 
     if (Item_Get(v0, 19) != 0) {
         if ((v1[0] & 0x40) != 0) {
