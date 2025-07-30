@@ -1986,15 +1986,54 @@ Expert_StatusSleep_End:
     PopOrEnd 
 
 Expert_DrainMove:
-    ; If the target is immune to or resists the move, ~80.5% chance of score -3.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_DrainMove_TryScoreMinus3
+    ; If current move kills, score +3.
+    ;
+    ; If HP is below 50%, score +3. If HP is below 75%, score +1.
+    ;
+    ; If move 4x resisted, score -5. If move is 2x resist, score -3.
+    ;
+    ; If move is super effective, score +2.
+    ;
+    ; If move is neutral or STAB, 47.5% chance for score +1.
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_DrainMove_TryScorePlus3
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_DrainMove_TryScorePlus3
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 75, Expert_DrainMove_TryScorePlus1
+    GoTo Expert_DrainMove_CheckEffectiveness
+
+Expert_DrainMove_CheckEffectiveness:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_LIQUID_OOZE, Expert_DrainMove_TryScoreMinus5
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_DrainMove_TryScoreMinus5
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_DrainMove_TryScoreMinus3
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_DrainMove_TryScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, ScorePlus2
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, ScorePlus2
+    IfRandomLessThan 96, Expert_DrainMove_End
+    AddToMoveScore 1
+    GoTo Expert_DrainMove_End
+
+Expert_DrainMove_TryScorePlus3:
+    AddToMoveScore 1
+    IfRandomLessThan 32, Expert_DrainMove_End
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_DrainMove_End
+    AddToMoveScore 1
+    GoTo Expert_DrainMove_CheckEffectiveness
+
+Expert_DrainMove_TryScorePlus1:
+    IfRandomLessThan 128, Expert_DrainMove_End
+    AddToMoveScore 1
+    GoTo Expert_DrainMove_CheckEffectiveness
+
+Expert_DrainMove_TryScoreMinus5:
+    IfRandomLessThan 16, Expert_DrainMove_End
+    AddToMoveScore -5
     GoTo Expert_DrainMove_End
 
 Expert_DrainMove_TryScoreMinus3:
-    IfRandomLessThan 50, Expert_DrainMove_End
+    IfRandomLessThan 64, Expert_DrainMove_End
     AddToMoveScore -3
+    GoTo Expert_DrainMove_End
 
 Expert_DrainMove_End:
     PopOrEnd 
