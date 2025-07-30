@@ -51,15 +51,15 @@
 	</row>
 	<row id="pl_msg_00000000_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nComet Punch!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nHex!</language>
 	</row>
 	<row id="pl_msg_00000000_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nComet Punch!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nHex!</language>
 	</row>
 	<row id="pl_msg_00000000_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nComet Punch!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nHex!</language>
 	</row>
 	<row id="pl_msg_00000000_00015" index="15">
 		<attribute name="window_context_name">used</attribute>
@@ -243,15 +243,15 @@
 	</row>
 	<row id="pl_msg_00000000_00060" index="60">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBind!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nChilling Spell!</language>
 	</row>
 	<row id="pl_msg_00000000_00061" index="61">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBind!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nChilling Spell!</language>
 	</row>
 	<row id="pl_msg_00000000_00062" index="62">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBind!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nChilling Spell!</language>
 	</row>
 	<row id="pl_msg_00000000_00063" index="63">
 		<attribute name="window_context_name">used</attribute>
@@ -1551,15 +1551,15 @@
 	</row>
 	<row id="pl_msg_00000000_00387" index="387">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSwift!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDragon Tail!</language>
 	</row>
 	<row id="pl_msg_00000000_00388" index="388">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSwift!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDragon Tail!</language>
 	</row>
 	<row id="pl_msg_00000000_00389" index="389">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSwift!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDragon Tail!</language>
 	</row>
 	<row id="pl_msg_00000000_00390" index="390">
 		<attribute name="window_context_name">used</attribute>
@@ -1683,15 +1683,15 @@
 	</row>
 	<row id="pl_msg_00000000_00420" index="420">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBarrage!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nWild Charge!</language>
 	</row>
 	<row id="pl_msg_00000000_00421" index="421">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBarrage!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nWild Charge!</language>
 	</row>
 	<row id="pl_msg_00000000_00422" index="422">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBarrage!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nWild Charge!</language>
 	</row>
 	<row id="pl_msg_00000000_00423" index="423">
 		<attribute name="window_context_name">used</attribute>
@@ -1911,15 +1911,15 @@
 	</row>
 	<row id="pl_msg_00000000_00477" index="477">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSharpen!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPregnancy Punch!</language>
 	</row>
 	<row id="pl_msg_00000000_00478" index="478">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSharpen!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPregnancy Punch!</language>
 	</row>
 	<row id="pl_msg_00000000_00479" index="479">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSharpen!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPregnancy Punch!</language>
 	</row>
 	<row id="pl_msg_00000000_00480" index="480">
 		<attribute name="window_context_name">used</attribute>
@@ -2391,15 +2391,15 @@
 	</row>
 	<row id="pl_msg_00000000_00597" index="597">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nLock-On!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPsyscreen!</language>
 	</row>
 	<row id="pl_msg_00000000_00598" index="598">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLock-On!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPsyscreen!</language>
 	</row>
 	<row id="pl_msg_00000000_00599" index="599">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLock-On!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPsyscreen!</language>
 	</row>
 	<row id="pl_msg_00000000_00600" index="600">
 		<attribute name="window_context_name">used</attribute>

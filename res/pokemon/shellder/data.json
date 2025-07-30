@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_SKILL_LINK",
-        "ABILITY_SLUSH_RUSH"
+        "ABILITY_SWIFT_SWIM"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

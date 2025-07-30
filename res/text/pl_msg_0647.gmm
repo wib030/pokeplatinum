@@ -19,7 +19,7 @@
 	</row>
 	<row id="pl_msg_00000647_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Comet Punch</language>
+		<language name="English">Hex</language>
 	</row>
 	<row id="pl_msg_00000647_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
@@ -83,7 +83,7 @@
 	</row>
 	<row id="pl_msg_00000647_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bind</language>
+		<language name="English">Chilling Spell</language>
 	</row>
 	<row id="pl_msg_00000647_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
@@ -519,7 +519,7 @@
 	</row>
 	<row id="pl_msg_00000647_00129" index="129">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Swift</language>
+		<language name="English">Dragon Tail</language>
 	</row>
 	<row id="pl_msg_00000647_00130" index="130">
 		<attribute name="window_context_name">used</attribute>
@@ -563,7 +563,7 @@
 	</row>
 	<row id="pl_msg_00000647_00140" index="140">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Barrage</language>
+		<language name="English">Wild Charge</language>
 	</row>
 	<row id="pl_msg_00000647_00141" index="141">
 		<attribute name="window_context_name">used</attribute>
@@ -639,7 +639,7 @@
 	</row>
 	<row id="pl_msg_00000647_00159" index="159">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Sharpen</language>
+		<language name="English">Pregnancy Punch</language>
 	</row>
 	<row id="pl_msg_00000647_00160" index="160">
 		<attribute name="window_context_name">used</attribute>
@@ -799,7 +799,7 @@
 	</row>
 	<row id="pl_msg_00000647_00199" index="199">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Lock-On</language>
+		<language name="English">Psyscreen</language>
 	</row>
 	<row id="pl_msg_00000647_00200" index="200">
 		<attribute name="window_context_name">used</attribute>
