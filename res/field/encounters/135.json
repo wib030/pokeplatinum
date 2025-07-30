@@ -2,30 +2,6 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 2,
-            "species": "SPECIES_STARLY"
-        },
-        {
-            "level": 2,
-            "species": "SPECIES_BIDOOF"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_STARLY"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_BIDOOF"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_STARLY"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_BIDOOF"
-        },
-        {
             "level": 4,
             "species": "SPECIES_STARLY"
         },
@@ -34,12 +10,36 @@
             "species": "SPECIES_BIDOOF"
         },
         {
-            "level": 4,
-            "species": "SPECIES_STARLY"
+            "level": 5,
+            "species": "SPECIES_DROWZEE"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_PIDGEY"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_BULBASAUR"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_WOOPER"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_NIDORAN_M"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_NIDORAN_F"
         },
         {
             "level": 4,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_NIDORAN_F"
+        },
+        {
+            "level": 4,
+            "species": "SPECIES_NIDORAN_M"
         },
         {
             "level": 4,
@@ -55,12 +55,12 @@
         "SPECIES_BIDOOF"
     ],
     "morning": [
-        "SPECIES_STARLY",
-        "SPECIES_BIDOOF"
+        "SPECIES_DROWZEE",
+        "SPECIES_PIDGEY"
     ],
     "night": [
-        "SPECIES_STARLY",
-        "SPECIES_BIDOOF"
+        "SPECIES_DROWZEE",
+        "SPECIES_SPEAROW"
     ],
     "radar": [
         "SPECIES_WOBBUFFET",
