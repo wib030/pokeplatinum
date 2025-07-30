@@ -299,13 +299,42 @@ Basic_ScoreMoveEffect:
     PopOrEnd 
 
 Basic_CheckCannotSleep:
-    ; If the target cannot be put to sleep for any reason, score -10.
-	IfEnemySleepClauseActive ScoreMinus10
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
+    ; If the target cannot be put to sleep for any reason, score -12.
+	IfEnemySleepClauseActive ScoreMinus12
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus12
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus12
+    IfFieldConditionsMask FIELD_CONDITION_UPROAR, ScoreMinus12
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_INSOMNIA, ScoreMinus10
-    IfLoadedEqualTo ABILITY_VITAL_SPIRIT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_INSOMNIA, Basic_CheckCannotSleep_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_VITAL_SPIRIT, Basic_CheckCannotSleep_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Basic_CheckCannotSleep_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_EARLY_BIRD, ScoreMinus12
+    IfLoadedEqualTo ABILITY_LEAF_GUARD, Basic_CheckCannotSleep_CheckSun
+    IfLoadedEqualTo ABILITY_HYDRATION, Basic_CheckCannotSleep_CheckRain
+    IfLoadedEqualTo ABILITY_NATURAL_CURE, Basic_CheckCannotSleep_CheckCanSwitch
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScoreMinus12
+    GoTo Basic_CheckCannotSleep_CheckPowderMove
+
+Basic_CheckCannotSleep_CheckMoldBreaker:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, ScoreMinus12
+    GoTo Basic_CheckCannotSleep_CheckPowderMove
+
+Basic_CheckCannotSleep_CheckSun:
+    IfFieldConditionsMask FIELD_CONDITION_SUNNY, ScoreMinus12
+    GoTo Basic_CheckCannotSleep_CheckPowderMove
+
+Basic_CheckCannotSleep_CheckRain:
+    IfFieldConditionsMask FIELD_CONDITION_RAINING, ScoreMinus12
+    GoTo Basic_CheckCannotSleep_CheckPowderMove
+
+Basic_CheckCannotSleep_CheckCanSwitch:
+    IfTrapped AI_BATTLER_DEFENDER, Basic_CheckCannotSleep_CheckPowderMove
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo 0, ScoreMinus12
+    Basic_CheckCannotSleep_CheckPowderMove
+
+Basic_CheckCannotSleep_CheckPowderMove
     IfMoveEqualTo MOVE_SLEEP_POWDER, Basic_CheckCannotSleep_PowderMove
     IfMoveEqualTo MOVE_SPORE, Basic_CheckCannotSleep_PowderMove
     GoTo Basic_CheckCannotSleep_End
@@ -1924,19 +1953,29 @@ Expert_StatusSleep:
     ; If the attacker knows a move which requires the target to be asleep (Dream Eater or Nightmare
     ; effects), 50% chance of score +1.
 	IfEnemySleepClauseActive ScoreMinus12
+    IfMoveBlockedBySoundproof ScoreMinus12
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_SYNCHRONIZE, Expert_StatusSleep_TryScoreMinus3
+    IfLoadedEqualTo ABILITY_GUTS, Expert_StatusSleep_TryScoreMinus3
+    IfLoadedEqualTo ABILITY_MARVEL_SCALE, Expert_StatusSleep_TryScoreMinus3
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_SLP_RESTORE, Expert_StatusSleep_TryScoreMinus3
+    IfLoadedEqualTo HOLD_EFFECT_STATUS_RESTORE, Expert_StatusSleep_TryScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_StatusSleep_TryScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_UPROAR, Expert_StatusSleep_TryScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_DEFENDER_PARTNER, BATTLE_EFFECT_UPROAR, Expert_StatusSleep_TryScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_DOUBLE_POWER_HEAL_SLEEP, Expert_StatusSleep_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_StatusSleep_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_NIGHTMARE, Expert_StatusSleep_TryScorePlus1
-    IfMoveEqualTo MOVE_SLEEP_POWDER, Expert_StatusSleep_PowderMove
-    IfMoveEqualTo MOVE_SPORE, Expert_StatusSleep_PowderMove
     GoTo Expert_StatusSleep_End
 
-Expert_StatusSleep_PowderMove:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
+Expert_StatusSleep_TryScoreMinus3:
+    IfRandomLessThan 8, Expert_StatusSleep_End
+    AddToMoveScore -1
+    IfRandomLessThan 32, Expert_StatusSleep_End
+    AddToMoveScore -1
+    IfRandomLessThan 128, Expert_StatusSleep_End
+    AddToMoveScore -1
     GoTo Expert_StatusSleep_End
 
 Expert_StatusSleep_TryScorePlus1:
