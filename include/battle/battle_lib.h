@@ -2080,6 +2080,6 @@ void BattleSystem_DynamicSortMonActionOrder(BattleSystem* battleSys, BattleConte
 * @param defender   Defending mon's battler ID.
 * @return TRUE/FALSE whether the move is blocked by Soundproof.
 */
-BOOL BattleAI_IsMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
+BOOL BattleAI_IsMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
 
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

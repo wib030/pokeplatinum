@@ -332,9 +332,9 @@ Basic_CheckCannotSleep_CheckCanSwitch:
     IfTrapped AI_BATTLER_DEFENDER, Basic_CheckCannotSleep_CheckPowderMove
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo 0, ScoreMinus12
-    Basic_CheckCannotSleep_CheckPowderMove
+    GoTo Basic_CheckCannotSleep_CheckPowderMove
 
-Basic_CheckCannotSleep_CheckPowderMove
+Basic_CheckCannotSleep_CheckPowderMove:
     IfMoveEqualTo MOVE_SLEEP_POWDER, Basic_CheckCannotSleep_PowderMove
     IfMoveEqualTo MOVE_SPORE, Basic_CheckCannotSleep_PowderMove
     GoTo Basic_CheckCannotSleep_End
