@@ -435,6 +435,7 @@ static void AICmd_IfCanKOEnemy(BattleSystem* battleSys, BattleContext* battleCtx
 static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfEnemySleepClauseActive(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -624,7 +625,8 @@ static const AICommandFunc sAICommandTable[] = {
 	AICmd_IfEnemyCanKO,
     AICmd_IfShouldEncore,
 	AICmd_IfEnemySleepClauseActive,
-    AICmd_IfMoveBlockedBySoundproof
+    AICmd_IfMoveBlockedBySoundproof,
+    AICmd_IfBattlerDetersStatus
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4735,6 +4737,178 @@ static void AICmd_IfMoveBlockedBySoundproof(BattleSystem* battleSys, BattleConte
     int jump = AIScript_Read(battleCtx);
 
     if (BattleAI_IsMoveBlockedBySoundproof(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, AI_CONTEXT.move))
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    u32 mask = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int battler2;
+    u8 battler1Side, battler1Ability;
+    u8 battler2Ability;
+    u8 moveType;
+    u16 move;
+    u32 effectivenessFlags;
+
+    BOOL detersStatusFlag;
+
+    detersStatusFlag = FALSE;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.defender;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.attacker;
+        break;
+    }
+
+    move = AI_CONTEXT.move;
+    moveType = AI_CalcMoveType(battleSys, battleCtx, battler2, battleCtx->battleMons[battler2].heldItem, move);
+    battler2Ability = AI_CONTEXT.battlerAbilities[battler2];
+    battler1Ability = battleCtx->battleMons[battler1].ability;
+    battler1Side = Battler_Side(battleSys, battler1);
+
+    if (battleCtx->sideConditionsMask[battler1Side] & SIDE_CONDITION_SAFEGUARD)
+    {
+        detersStatusFlag = TRUE;
+    }
+
+    if (MON_HAS_TYPE(battler1, TYPE_GRASS) || Battler_HeldItemEffect(battleCtx, battler1) == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
+    {
+        switch (move)
+        {
+        default:
+            break;
+
+        case MOVE_POISON_POWDER:
+        case MOVE_SLEEP_POWDER:
+        case MOVE_STUN_SPORE:
+        case MOVE_SPORE:
+        case MOVE_COTTON_SPORE:
+            detersStatusFlag = TRUE;
+            break;
+        }
+    }
+
+    if (BattleAI_IsMoveBlockedBySoundproof(battleSys, battleCtx, battler2, battler1, move))
+    {
+        detersStatusFlag = TRUE;
+    }
+
+    if (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)
+    {
+        detersStatusFlag = TRUE;
+    }
+
+    if (battler2Ability != ABILITY_MOLD_BREAKER)
+    {
+        if (Battle_AbilityDetersStatus(battleSys, battleCtx, battler1Ability, mask))
+        {
+            detersStatusFlag = TRUE;
+        }
+    }
+
+    if (mask & MON_CONDITION_ANY_POISON)
+    {
+        if (battler2Ability != ABILITY_CORROSION)
+        {
+            if (MON_HAS_TYPE(battler1, TYPE_STEEL) || MON_HAS_TYPE(battler1, TYPE_POISON))
+            {
+                detersStatusFlag = TRUE;
+            }
+        }
+    }
+
+    if (mask & MON_CONDITION_PARALYSIS)
+    {
+        if (move == MOVE_THUNDER_WAVE)
+        {
+            if (MON_HAS_TYPE(battler1, TYPE_GROUND))
+            {
+                detersStatusFlag = TRUE;
+            }
+        }
+
+        if (MON_HAS_TYPE(battler1, TYPE_ELECTRIC))
+        {
+            detersStatusFlag = TRUE;
+        }
+
+        effectivenessFlags = 0;
+
+        BattleSystem_ApplyTypeChart(battleSys,
+            battleCtx,
+            move,
+            moveType,
+            battler2,
+            battler1,
+            0,
+            &effectivenessFlags);
+
+        if (effectivenessFlags & MOVE_STATUS_IMMUNE_ABILITY)
+        {
+            detersStatusFlag = TRUE;
+        }
+    }
+
+    if (mask & MON_CONDITION_BURN)
+    {
+        if (MON_HAS_TYPE(battler1, TYPE_FIRE))
+        {
+            detersStatusFlag = TRUE;
+        }
+
+        effectivenessFlags = 0;
+
+        BattleSystem_ApplyTypeChart(battleSys,
+            battleCtx,
+            move,
+            moveType,
+            battler2,
+            battler1,
+            0,
+            &effectivenessFlags);
+
+        if (effectivenessFlags & MOVE_STATUS_IMMUNE_ABILITY)
+        {
+            detersStatusFlag = TRUE;
+        }
+    }
+
+    if (mask & MON_CONDITION_FREEZE)
+    {
+        if (MON_HAS_TYPE(battler1, TYPE_ICE) || MON_HAS_TYPE(battler1, TYPE_FIRE))
+        {
+            detersStatusFlag = TRUE;
+        }
+    }
+
+    if (mask & MON_CONDITION_SLEEP)
+    {
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_UPROAR)
+        {
+            detersStatusFlag = TRUE;
+        }
+    }
+
+    if (detersStatusFlag)
     {
         AIScript_Iter(battleCtx, jump);
     }
