@@ -436,6 +436,8 @@ static void AICmd_IfEnemyCanKO(BattleSystem* battleSys, BattleContext* battleCtx
 static void AICmd_IfEnemySleepClauseActive(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfShouldEncore(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfBattlerHasInvulnerableMove(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -483,7 +485,6 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
 static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
-static void AICmd_IfShouldEncore(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
@@ -626,7 +627,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfShouldEncore,
 	AICmd_IfEnemySleepClauseActive,
     AICmd_IfMoveBlockedBySoundproof,
-    AICmd_IfBattlerDetersStatus
+    AICmd_IfBattlerDetersStatus,
+    AICmd_IfBattlerHasInvulnerableMove
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -4909,6 +4911,49 @@ static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* 
     }
 
     if (detersStatusFlag)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+
+static void AICmd_IfBattlerHasInvulnerableMove(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler = AIScript_Battler(battleCtx, inBattler);
+    int i;
+    int moveEffect;
+    BOOL hasInvulnerableMove;
+
+    hasInvulnerableMove = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            moveEffect = MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect;
+
+            switch (moveEffect)
+            {
+            default:
+                break;
+
+            case BATTLE_EFFECT_BOUNCE:
+            case BATTLE_EFFECT_DIG:
+            case BATTLE_EFFECT_DIVE:
+            case BATTLE_EFFECT_FLY:
+            case BATTLE_EFFECT_SHADOW_FORCE:
+                hasInvulnerableMove = TRUE;
+                break;
+            }
+        }
+    }
+
+    if (hasInvulnerableMove)
     {
         AIScript_Iter(battleCtx, jump);
     }

@@ -810,6 +810,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfBattlerHasInvulnerableMove battler, jump
+    .long 141
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
