@@ -816,6 +816,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfAbilityInPlay ability, jump
+    .long 142
+    .long \ability
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
