@@ -2039,49 +2039,131 @@ Expert_DrainMove_End:
     PopOrEnd 
 
 Expert_Explosion:
-    ; If the target''s Evasion is at +1 stage or higher, additional score -1 to all further modifiers.
+    ; If defender is behind substitute, score -12.
+    ; If defender has an invulnerable turn move, 95% chance for score -12.
     ;
-    ; If the target''s Evasion is at +3 stages or higher, 50% chance of additional score -1 to all further modifiers.
+    ; If defender has +2 or higher evasion stage, check if it matters. If so, 95% chance for score -12.
+    ; If attacker has -2 or lower accuracy stage, check if it matters. If so, 95% chance for score -12.
     ;
-    ; Apply an additional modifier according to the user''s current HP (as a percentage):
+    ; If the defender knows protect, attempt to juke it randomly based on protect chain.
     ;
-    ; | User HP (%)   | Additional Qualifier | Modifier                 |
-    ; | ------------: | -------------------- | ------------------------ |
-    ; |        >= 80% | Faster than target   | 80.5% chance of score -3 |
-    ; |        >= 80% | Slower than target   | 80.5% chance of score -1 |
-    ; |         > 50% | N/A                  | 80.5% chance of score -1 |
-    ; | <= 50%, > 30% | N/A                  | 50% chance of score +1   |
-    ; |        <= 30% | N/A                  | 80.5% chance of score +1 |
+    ; 10% chance for flat score -1.
     ;
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Explosion_CheckUserHighHP
+    ; If Explosion is not highest damage, score -12.
+    ; If Explosion is highest damage and it kills, score +1.
+    ; If Explosion does not kill, 50% chance for score -1.
+    ;
+    ; If Explosion kills, check the target HP. If the target HP is lower than 20%, score -2.
+    ; If the target HP is between 20% and 33%, 95% chance for score -3. Else, score +1.
+    ;
+    ; If attacker is faster than target, 33% chance for score +1.
+    ; If attacker is slower than target, if the target knows Substitute, 95% chance for score -12.
+    ; Otherwise, 25% chance for score -1.
+    ;
+    ; If attacker is less than 20% HP, 87.5% chance for score +1.
+    ; If attacker is betweem 20% and 66% HP, 66% chance for score +1.
+    ; Otherwise, 75% chance for score -1.
+    ;
+    ; If it is the attacker''s first turn out, 66% chance for score -5 after all other factors.
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_SUBSTITUTE, ScoreMinus12
+    IfBattlerHasInvulnerableMove AI_BATTLER_DEFENDER, Expert_Explosion_TryScoreMinus12
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Explosion_CheckAttackerAcc
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 5, Expert_Explosion_CheckAttackerAcc
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_Explosion_ProtectJuke
+    IfRandomLessThan 230, Expert_Explosion_CheckDamage
     AddToMoveScore -1
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 9, Expert_Explosion_CheckUserHighHP
-    IfRandomLessThan 128, Expert_Explosion_CheckUserHighHP
+    GoTo Expert_Explosion_CheckDamage
+
+Expert_Explosion_TryScoreMinus12:
+    IfRandomLessThan 1, Expert_Explosion_End
     AddToMoveScore -1
-    GoTo Expert_Explosion_CheckUserHighHP
-
-Expert_Explosion_CheckUserHighHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 80, Expert_Explosion_CheckUserMediumHP
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Explosion_CheckUserMediumHP
-    IfRandomLessThan 50, Expert_Explosion_End
-    GoTo ScoreMinus3
-
-Expert_Explosion_CheckUserMediumHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Explosion_TryScoreMinus1
-    IfRandomLessThan 128, Expert_Explosion_CheckUserLowHP
-    AddToMoveScore 1
-    GoTo Expert_Explosion_CheckUserLowHP
-
-Expert_Explosion_CheckUserLowHP:
-    AddToMoveScore 1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Explosion_TryScoreMinus1
-    IfRandomLessThan 25, Expert_Explosion_End
-    AddToMoveScore 2
+    IfRandomLessThan 12, Expert_Explosion_End
+    AddToMoveScore -11
     GoTo Expert_Explosion_End
 
-Expert_Explosion_TryScoreMinus1:
-    IfRandomLessThan 64, Expert_Explosion_End
+Expert_Explosion_CheckAttackerAcc:
+    IfAbilityInPlay ABILITY_NO_GUARD, Expert_Explosion_CheckDamage
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_FORESIGHT, Expert_Explosion_CheckDamage
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LOCK_ON, Expert_Explosion_CheckDamage
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 5, Expert_Explosion_TryScoreMinus12
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_UNAWARE, Expert_Explosion_CheckDamage
+    GoTo Expert_Explosion_TryScoreMinus12
+
+Expert_Explosion_ProtectJuke:
+    LoadProtectChain AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, Expert_Explosion_ProtectJuke_0
+    IfLoadedGreaterThan 0, Expert_Explosion_ProtectJuke_1
+    GoTo Expert_Explosion_CheckDamage
+
+Expert_Explosion_ProtectJuke_0:
+    IfRandomLessThan 128, ScoreMinus12
+    GoTo Expert_Explosion_CheckDamage
+   
+Expert_Explosion_ProtectJuke_1:
+    IfRandomLessThan 85, ScoreMinus12
+    GoTo Expert_Explosion_CheckDamage
+
+Expert_Explosion_CheckDamage:
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus12
+    AddToMoveScore 1
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_Explosion_CheckTargetHP
     AddToMoveScore -1
+    IfRandomLessThan 128, Expert_Explosion_CheckTargetHP
+    AddToMoveScore -1
+    GoTo Expert_Explosion_CheckTargetHP
+
+Expert_Explosion_CheckTargetHP:
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 20, ScoreMinus2
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 33, Expert_Explosion_TryScoreMinus3
+    AddToMoveScore 1
+    GoTo Expert_Explosion_CheckSpeed
+
+Expert_Explosion_TryScoreMinus3:
+    IfRandomLessThan 1, Expert_Explosion_End
+    AddToMoveScore -1
+    IfRandomLessThan 16, Expert_Explosion_End
+    AddToMoveScore -2
+    GoTo Expert_Explosion_End
+
+Expert_Explosion_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_Explosion_SpeedIncentive
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Explosion_TryScoreMinus12
+    IfRandomLessThan 192, Expert_Explosion_CheckUserHP
+    AddToMoveScore -1
+    GoTo Expert_Explosion_CheckUserHP
+
+Expert_Explosion_SpeedIncentive:
+    IfRandomLessThan 170, Expert_Explosion_CheckUserHP
+    AddToMoveScore 1
+    GoTo Expert_Explosion_CheckUserHP
+
+Expert_Explosion_CheckUserHP:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 20, Expert_Explosion_LowHPIncentive
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Explosion_MediumHPIncentive
+    IfRandomLessThan 64, Expert_Explosion_CheckTurnCount
+    AddToMoveScore -1
+    GoTo Expert_Explosion_CheckTurnCount
+
+Expert_Explosion_LowHPIncentive:
+    IfRandomLessThan 32, Expert_Explosion_CheckTurnCount
+    AddToMoveScore 1
+    GoTo Expert_Explosion_CheckTurnCount
+    
+Expert_Explosion_MediumHPIncentive:
+    IfRandomLessThan 85, Expert_Explosion_CheckTurnCount
+    AddToMoveScore 1
+    GoTo Expert_Explosion_CheckTurnCount
+    
+Expert_Explosion_CheckTurnCount:
+    LoadTurnCount
+    IfLoadedEqualTo 0, Expert_Explosion_FirstTurn
+    GoTo Expert_Explosion_End
+
+Expert_Explosion_FirstTurn:
+    IfRandomLessThan 85, Expert_Explosion_End
+    AddToMoveScore -5
     GoTo Expert_Explosion_End
 
 Expert_Explosion_End:
@@ -6519,7 +6601,7 @@ Expert_Feint_CheckProtectChain:
     LoadProtectChain AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, Expert_Feint_NoProtectChain
     IfLoadedEqualTo 1, Expert_Feint_ProtectChain1
-    IfLoadedGreaterThan 2, Expert_Feint_ProtectChain2OrMore
+    IfLoadedGreaterThan 1, Expert_Feint_ProtectChain2OrMore
 
 Expert_Feint_NoProtectChain:
     IfRandomLessThan 128, Expert_Feint_End
