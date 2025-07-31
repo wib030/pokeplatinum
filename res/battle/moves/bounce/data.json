@@ -2,7 +2,7 @@
     "name": "Bounce",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_FLYING",
-    "power": 85,
+    "power": 95,
     "accuracy": 90,
     "pp": 5,
     "effect": {

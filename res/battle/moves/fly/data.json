@@ -2,7 +2,7 @@
     "name": "Fly",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_FLYING",
-    "power": 90,
+    "power": 110,
     "accuracy": 95,
     "pp": 15,
     "effect": {

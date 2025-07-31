@@ -2,8 +2,8 @@
     "name": "Shadow Force",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_GHOST",
-    "power": 120,
-    "accuracy": 100,
+    "power": 130,
+    "accuracy": 95,
     "pp": 5,
     "effect": {
         "type": "BATTLE_EFFECT_SHADOW_FORCE",
