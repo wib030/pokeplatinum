@@ -2170,18 +2170,28 @@ Expert_Explosion_End:
     PopOrEnd 
 
 Expert_DreamEater:
-    ; If the target is immune to or resists the move, always score -1 instead of the above.
+    ; Deincentivize use when not effective.
     ;
-    ; If the target does not resist the move and is asleep, 80.1% chance of score +3.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_DreamEater_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_DreamEater_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_DreamEater_ScoreMinus1
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_DreamEater_TryScorePlus3
+    ; Cheat and peek the sleep turns. If they wake up this turn, check for
+    ; outspeed. If we outspeed, 66% chance for +3 score. If we''re slower, score -12.
+    ; If they don''t wake up this turn, 66% chance for score +3.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, ScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, ScoreMinus1
+    LoadSleepTurns AI_BATTLER_DEFENDER
+    IfLoadedGreaterThan 1, Expert_DreamEater_TryScorePlus3
+    IfLoadedEqualTo 1, Expert_DreamEater_CheckSpeed
+    IfLoadedEqualTo 0, ScoreMinus12
     GoTo Expert_DreamEater_End
 
 Expert_DreamEater_TryScorePlus3:
-    IfRandomLessThan 51, Expert_DreamEater_End
+    IfRandomLessThan 85, Expert_DreamEater_End
     AddToMoveScore 3
+    GoTo Expert_DreamEater_End
+
+Expert_DreamEater_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_DreamEater_TryScorePlus3
+    AddToMoveScore -12
     GoTo Expert_DreamEater_End
 
 Expert_DreamEater_ScoreMinus1:
