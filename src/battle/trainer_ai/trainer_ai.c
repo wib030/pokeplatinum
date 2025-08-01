@@ -2058,7 +2058,37 @@ static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *bat
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (battleCtx->battleMons[battler].statBoosts[stat] == val) {
+    int statBoost;
+
+    statBoost = battleCtx->battleMons[battler].statBoosts[stat];
+
+    if (Battler_Ability(battleCtx, battler) == ABILITY_SIMPLE)
+    {
+        if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
+        {
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            {
+                statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
+            }
+            else
+            {
+                statBoost = BATTLE_STAT_BOOST_MIN;
+            }
+        }
+        else
+        {
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            {
+                statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
+            }
+            else
+            {
+                statBoost = BATTLE_STAT_BOOST_MAX;
+            }
+        }
+    }
+
+    if (statBoost == val) {
         AIScript_Iter(battleCtx, jump);
     }
 }
@@ -2073,7 +2103,37 @@ static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (battleCtx->battleMons[battler].statBoosts[stat] != val) {
+    int statBoost;
+
+    statBoost = battleCtx->battleMons[battler].statBoosts[stat];
+
+    if (Battler_Ability(battleCtx, battler) == ABILITY_SIMPLE)
+    {
+        if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
+        {
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            {
+                statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
+            }
+            else
+            {
+                statBoost = BATTLE_STAT_BOOST_MIN;
+            }
+        }
+        else
+        {
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            {
+                statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
+            }
+            else
+            {
+                statBoost = BATTLE_STAT_BOOST_MAX;
+            }
+        }
+    }
+
+    if (statBoost != val) {
         AIScript_Iter(battleCtx, jump);
     }
 }
