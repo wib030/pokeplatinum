@@ -87,6 +87,12 @@ enum BattlerBootState {
 #define BATTLE_RESULT_PLAYER_FLED   (BATTLE_RESULT_CAPTURED_MON | BATTLE_RESULT_WIN)
 #define BATTLE_RESULT_ENEMY_FLED    (BATTLE_RESULT_CAPTURED_MON | BATTLE_RESULT_LOSE)
 
+#define BATTLE_STAT_BOOST_MAX 12
+#define BATTLE_STAT_BOOST_NEUTRAL 6
+#define BATTLE_STAT_BOOST_MIN 0
+#define BATTLE_STAT_BOOST_SIMPLE_MAX 9
+#define BATTLE_STAT_BOOST_SIMPLE_MIN 3
+
 /*
  * Slot 1 is always on the controller's left; slot 2 is always on their right.
  *
