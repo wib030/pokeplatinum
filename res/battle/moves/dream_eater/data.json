@@ -2,7 +2,7 @@
     "name": "Dream Eater",
     "class": "CLASS_SPECIAL",
     "type": "TYPE_PSYCHIC",
-    "power": 100,
+    "power": 160,
     "accuracy": 100,
     "pp": 15,
     "effect": {
