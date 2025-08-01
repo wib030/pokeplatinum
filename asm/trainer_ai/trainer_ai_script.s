@@ -2185,15 +2185,35 @@ Expert_StatusAttackUp:
     ; If the attacker''s HP is < 40%, additional score -2.
     ;
     ; Otherwise, ~84.4% chance of additional score -2.
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 9, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfBattlerDetersBoosting AI_BATTLER_DEFENDER, Try95ChanceForScoreMinus12
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_StatusAttackUp_CheckBurn
+    IfHasStatusThreat AI_BATTLER_DEFENDER, Try95ChanceForScoreMinus12
+    AddToMoveScore 1
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_StatusAttackUp_CheckUserAtMaxHP
+    AddToMoveScore -1
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 10, Expert_StatusAttackUp_CheckUserAtMaxHP
     IfRandomLessThan 100, Expert_StatusAttackUp_CheckUserHPRange
     AddToMoveScore -1
     GoTo Expert_StatusAttackUp_CheckUserHPRange
 
+Expert_StatusAttackUp_CheckBurn:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_GUTS, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfLoadedEqualTo ABILITY_FLARE_BOOST, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfRandomLessThan 64, Expert_StatusAttackUp_CheckUserAtMaxHP
+    AddToMoveScore -5
+    GoTo Expert_StatusAttackUp_CheckUserAtMaxHP
+
 Expert_StatusAttackUp_CheckUserAtMaxHP:
+    ; Unfinished. Need to add a function to check for sash breaking
     IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Expert_StatusAttackUp_CheckUserHPRange
-    IfRandomLessThan 128, Expert_StatusAttackUp_CheckUserHPRange
-    AddToMoveScore 2
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MULTISCALE, Try95ChanceForScorePlus3
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Try95ChanceForScorePlus3
+    GoTo Expert_StatusAttackUp_CheckUserHPRange
 
 Expert_StatusAttackUp_CheckUserHPRange:
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusAttackUp_End
