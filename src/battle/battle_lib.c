@@ -21355,7 +21355,7 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
                     &effectiveness);
 
                 // Absorb abilities and soundproof still block status moves
-                if ((effectiveness & (MOVE_STATUS_TYPE_IMMUNE_HEAL_ABILITY | MOVE_STATUS_TYPE_IMMUNE_RAISE_STAT_ABILITY | MOVE_STATUS_TYPE_IMMUNE_TYPE_BOOST_ABILITY)) == FALSE
+                if ((effectiveness & MOVE_STATUS_IMMUNE_ABILITY) == FALSE
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
                 {
                     result = TRUE;
