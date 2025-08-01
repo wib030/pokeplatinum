@@ -1976,7 +1976,7 @@ static void AICmd_IfStatStageLessThan(BattleSystem *battleSys, BattleContext *ba
     {
         if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
         {
-            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
             }
@@ -1987,7 +1987,7 @@ static void AICmd_IfStatStageLessThan(BattleSystem *battleSys, BattleContext *ba
         }
         else
         {
-            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
             }
@@ -2021,7 +2021,7 @@ static void AICmd_IfStatStageGreaterThan(BattleSystem *battleSys, BattleContext 
     {
         if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
         {
-            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
             }
@@ -2032,7 +2032,7 @@ static void AICmd_IfStatStageGreaterThan(BattleSystem *battleSys, BattleContext 
         }
         else
         {
-            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
             }
@@ -2066,7 +2066,7 @@ static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *bat
     {
         if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
         {
-            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
             }
@@ -2077,7 +2077,7 @@ static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *bat
         }
         else
         {
-            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
             }
@@ -2111,7 +2111,7 @@ static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *
     {
         if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
         {
-            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
             }
@@ -2122,7 +2122,7 @@ static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *
         }
         else
         {
-            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NEUTRAL)
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
             {
                 statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
             }
