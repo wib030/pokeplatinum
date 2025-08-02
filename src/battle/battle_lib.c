@@ -8300,21 +8300,22 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         break;
 
     case PLUCK_EFFECT_RANDOM_UP2: {
-        int stat;
-        for (stat = 0; stat < 5; stat++) {
-            if (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK + stat] < 12) {
-                break;
-            }
-        }
+        int i;
+		for (i = 0; i < 5; i++) {
+			if (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK + i] < 12) {
+				break;
+			}
+		}
 
-        if (stat != 5) {
-            do {
-                stat = BattleSystem_RandNext(battleSys) % 5;
-            } while (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK + stat] == 12);
+		if (i != 5) {
+			do {
+				i = BattleSystem_RandNext(battleSys) % 5;
+			} while (ATTACKING_MON.statBoosts[BATTLE_STAT_ATTACK + i] == 12);
 
-            battleCtx->msgTemp = BATTLE_STAT_ATTACK + stat;
-            nextSeq = subscript_held_item_sharply_raise_stat;
-        }
+			battleCtx->msgTemp = BATTLE_STAT_ATTACK + i;
+			battleCtx->msgBattlerTemp = battleCtx->attacker;
+			nextSeq = subscript_starf_berry;
+		}
 
         result = TRUE;
         break;
@@ -8739,7 +8740,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
 			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_ATTACK;
-            battleCtx->flingScript = subscript_held_item_raise_stat;
+            battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
         }
         break;
 
@@ -8747,7 +8748,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_DEFENSE] < 12) {
 			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_DEFENSE;
-            battleCtx->flingScript = subscript_held_item_raise_stat;
+            battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
         }
         break;
 
@@ -8755,7 +8756,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_SPEED] < 12) {
 			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_SPEED;
-            battleCtx->flingScript = subscript_held_item_raise_stat;
+            battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
         }
         break;
 
@@ -8763,7 +8764,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_SP_ATTACK] < 12) {
 			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
-            battleCtx->flingScript = subscript_held_item_raise_stat;
+            battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
         }
         break;
 
@@ -8771,28 +8772,27 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         if (DEFENDING_MON.statBoosts[BATTLE_STAT_SP_DEFENSE] < 12) {
 			battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->msgTemp = BATTLE_STAT_SP_DEFENSE;
-            battleCtx->flingScript = subscript_held_item_raise_stat;
+            battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
         }
         break;
 
     case FLING_EFFECT_RANDOM_UP2: {
-        int stat;
+		int i;
+		for (i = 0; i < 5; i++) {
+			if (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK + i] < 12) {
+				break;
+			}
+		}
 
-        for (stat = 0; stat < 5; stat++) {
-            if (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK + stat] < 12) {
-                break;
-            }
-        }
+		if (i != 5) {
+			do {
+				i = BattleSystem_RandNext(battleSys) % 5;
+			} while (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK + i] == 12);
 
-        if (stat != 5) {
-            do {
-                stat = BattleSystem_RandNext(battleSys) % 5;
-            } while (DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK + stat] == 12);
-
-            battleCtx->msgTemp = BATTLE_STAT_ATTACK + stat;
-			battleCtx->sideEffectMon = battleCtx->defender;
-            battleCtx->flingScript = subscript_held_item_sharply_raise_stat;
-        }
+			battleCtx->msgTemp = BATTLE_STAT_ATTACK + i;
+			battleCtx->msgBattlerTemp = battleCtx->defender;
+			battleCtx->flingScript = subscript_starf_berry;
+		}
 
         break;
     }
