@@ -33,7 +33,7 @@
             "item": "ITEM_SHELL_BELL",
             "moves": [
                 "MOVE_ZAP_CANNON",
-				"MOVE_OMINOUS_WIND",
+				"MOVE_COMET_PUNCH",
 				"MOVE_THUNDER_WAVE",
 				"MOVE_HIDDEN_POWER"
             ],
