@@ -6708,24 +6708,46 @@ Expert_MetalBurst:
     ; of additional score +1.
     ;
     ; If the opponent is not Taunted, 60.9% chance of score +1.
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_MetalBurst_ScoreMinus1
+    IfEnemyCanKO ScoreMinus12
+    IfHasStatusThreat AI_BATTLER_DEFENDER, Try90ChanceForScoreMinus12
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STURDY, Expert_MetalBurst_CheckSashBreak
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Expert_MetalBurst_CheckSashBreak
+    IfRandomLessThan 170, Expert_MetalBurst_CheckDefenderCondition
+    AddToMoveScore 1
+    GoTo Expert_MetalBurst_CheckDefenderCondition
+
+Expert_MetalBurst_CheckSashBreak:
+    AddToMoveScore -1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 100, Expert_MetalBurst_CheckDefenderCondition
+    IfCanBreakSashOrSturdy AI_BATTLER_DEFENDER, Try90ChanceForScoreMinus12
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_MetalBurst_CheckDefenderCondition
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_MetalBurst_CheckDefenderCondition
+    AddToMoveScore 1
+    GoTo Expert_MetalBurst_CheckDefenderCondition
+
+Expert_MetalBurst_CheckDefenderCondition:
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_MetalBurst_DefenderSleep
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_FREEZE, Expert_MetalBurst_DefenderFreeze
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_MetalBurst_ScoreMinus1
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_MetalBurst_ScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DOUBLE_POWER_IF_HIT, Expert_MetalBurst_ScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_MetalBurst_ScoreMinus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_MetalBurst_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_MetalBurst_MediumHPTryScoreMinus1
-    IfRandomLessThan 10, Expert_MetalBurst_MediumHPTryScoreMinus1
-    AddToMoveScore -1
+    GoTo Expert_MetalBurst_CheckAttackerHP
 
-Expert_MetalBurst_MediumHPTryScoreMinus1:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_MetalBurst_HighHPTryScorePlus1
-    IfRandomLessThan 100, Expert_MetalBurst_HighHPTryScorePlus1
-    AddToMoveScore -1
+Expert_MetalBurst_DefenderSleep:
+    LoadSleepTurns AI_BATTLER_DEFENDER
+    IfLoadedLessThan 2, Expert_MetalBurst_CheckAttackerHP
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_MetalBurst_CheckAttackerHP
+    GoTo ScoreMinus12
 
-Expert_MetalBurst_HighHPTryScorePlus1:
-    IfRandomLessThan 192, Expert_MetalBurst_CheckLastUsedMove
-    AddToMoveScore 1
+Expert_MetalBurst_DefenderFreeze:
+    IfRandomLessThan 32, Expert_MetalBurst_CheckAttackerHP
+    GoTo ScoreMinus12
 
 Expert_MetalBurst_CheckLastUsedMove:
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
@@ -6739,6 +6761,32 @@ Expert_MetalBurst_TryScorePlus1:
     IfTargetIsNotTaunted Expert_MetalBurst_End
     IfRandomLessThan 100, Expert_MetalBurst_End
     AddToMoveScore 1
+    GoTo Expert_MetalBurst_End
+
+Expert_MetalBurst_VolatileStatusPenalty:
+    IfRandomLessThan 64, Expert_MetalBurst_CheckAttackerHP
+    AddToMoveScore -1
+    GoTo Expert_MetalBurst_CheckAttackerHP
+
+Expert_MetalBurst_CheckAttackerHP:
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_MetalBurst_AttackerHPHigh
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_MetalBurst_AttackerHPLow
+    IfRandomLessThan 128, Expert_MetalBurst_End
+    AddToMoveScore 1
+    GoTo Expert_MetalBurst_End
+
+Expert_MetalBurst_AttackerHPHigh:
+    IfRandomLessThan 64, Expert_MetalBurst_End
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_MetalBurst_End
+    AddToMoveScore 1
+    GoTo Expert_MetalBurst_End
+
+Expert_MetalBurst_AttackerHPLow:
+    AddToMoveScore -1
+    IfRandomLessThan 16, Expert_MetalBurst_End
+    AddToMoveScore -1
+    IfRandomLessThan 16, Expert_MetalBurst_End
     GoTo Expert_MetalBurst_End
 
 Expert_MetalBurst_ScoreMinus1:
