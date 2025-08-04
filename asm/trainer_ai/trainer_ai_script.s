@@ -1652,12 +1652,16 @@ Try95ChanceForScorePlus3:
     IfRandomLessThan 244, ScorePlus3
     PopOrEnd
 
+Try90ChanceForScoreMinus12:
+    IfRandomLessThan 230, ScoreMinus12
+    PopOrEnd
+
 Try95ChanceForScoreMinus12:
     IfRandomLessThan 244, ScoreMinus12
     PopOrEnd
 
-Try90ChanceForScoreMinus12:
-    IfRandomLessThan 230, ScoreMinus12
+Try99ChanceForScoreMinus12:
+    IfRandomLessThan 254, ScoreMinus12
     PopOrEnd
 
 Expert_Main:
@@ -2186,49 +2190,95 @@ Expert_MirrorMove_MoveTable:
     TableEntry TABLE_END
 
 Expert_StatusAttackUp:
-    ; If the attacker is at +3 stat stage or higher, ~60.9% chance of additional score -1.
+    ; If the defender deters boosting, 95% chance for score -12.
     ;
-    ; If the attacker is at 100% HP, 50% chance of additional score +2.
+    ; If the attacker is statused, check if it is burned. If so, try to boost back
+    ; to neutral at +2. If +2 or higher, 87.5% chance for score -5.
+    ;
+    ; If the attacker is poisoned or paralyzed, 75% chance for score -3.
+    ;
+    ; If the attacker is unboosted, score +1.
+    ;
+    ; If the attacker is boosted +3 or more, 75% chance for score -1.
+    ; If the attacker is boosted +4 or more, 97% chance for additional score -1.
+    ;
+    ; If the attacker is at 100% HP, 66% chance of additional score +1.
+    ;
+    ; If defender can chunk or KO attacker, 99% chance for score -12.
     ;
     ; If the attacker''s HP is > 70%, no further score changes.
-    ;
-    ; If the attacker''s HP is < 40%, additional score -2.
-    ;
-    ; Otherwise, ~84.4% chance of additional score -2.
+    ; If the attacker''s HP is < 40%, score -2.
+    ; Otherwise, additional 87.5% chance for score -2.
     IfBattlerDetersBoosting AI_BATTLER_DEFENDER, Try95ChanceForScoreMinus12
     IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_StatusAttackUp_CheckBurn
     IfHasStatusThreat AI_BATTLER_DEFENDER, Try95ChanceForScoreMinus12
     AddToMoveScore 1
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_StatusAttackUp_CheckUserAtMaxHP
     AddToMoveScore -1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 10, Expert_StatusAttackUp_CheckUserAtMaxHP
-    IfRandomLessThan 100, Expert_StatusAttackUp_CheckUserHPRange
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 9, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfRandomLessThan 64, Expert_StatusAttackUp_CheckUserAtMaxHP
     AddToMoveScore -1
-    GoTo Expert_StatusAttackUp_CheckUserHPRange
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 10, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfRandomLessThan 16, Expert_StatusAttackUp_CheckUserAtMaxHP
+    AddToMoveScore -1
+    GoTo Expert_StatusAttackUp_CheckUserAtMaxHP
 
 Expert_StatusAttackUp_CheckBurn:
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_StatusAttackUp_CheckParalysis
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_GUTS, Expert_StatusAttackUp_CheckUserAtMaxHP
     IfLoadedEqualTo ABILITY_FLARE_BOOST, Expert_StatusAttackUp_CheckUserAtMaxHP
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_StatusAttackUp_CheckUserAtMaxHP
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_StatusAttackUp_CheckUserAtMaxHP
-    IfRandomLessThan 64, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfRandomLessThan 32, Expert_StatusAttackUp_CheckUserAtMaxHP
     AddToMoveScore -5
+    GoTo Expert_StatusAttackUp_CheckUserAtMaxHP
+
+Expert_StatusAttackUp_CheckParalysis:
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_PARALYSIS, Expert_StatusAttackUp_CheckPoison
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_GUTS, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfLoadedEqualTo ABILITY_QUICK_FEET, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfRandomLessThan 64, Expert_StatusAttackUp_CheckUserAtMaxHP
+    AddToMoveScore -3
+    GoTo Expert_StatusAttackUp_CheckUserAtMaxHP
+
+Expert_StatusAttackUp_CheckPoison:
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_StatusAttackUp_CheckSleep
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_GUTS, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_StatusAttackUp_CheckUserAtMaxHP
+    IfRandomLessThan 64, Expert_StatusAttackUp_CheckUserAtMaxHP
+    AddToMoveScore -3
+    GoTo Expert_StatusAttackUp_CheckUserAtMaxHP
+
+Expert_StatusAttackUp_CheckSleep:
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_SLEEP, Expert_StatusAttackUp_CheckUserAtMaxHP
+    LoadSleepTurns AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 1, ScoreMinus12
     GoTo Expert_StatusAttackUp_CheckUserAtMaxHP
 
 Expert_StatusAttackUp_CheckUserAtMaxHP:
     ; Unfinished. Need to add a function to check for sash breaking
     IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Expert_StatusAttackUp_CheckUserHPRange
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MULTISCALE, Try95ChanceForScorePlus3
+    IfLoadedEqualTo ABILITY_MULTISCALE, Expert_StatusAttackUp_CheckSashBreaking
+    IfLoadedEqualTo ABILITY_STURDY, Expert_StatusAttackUp_CheckSashBreaking
     LoadHeldItemEffect AI_BATTLER_ATTACKER
-    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Try95ChanceForScorePlus3
+    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Expert_StatusAttackUp_CheckSashBreaking
+    IfRandomLessThan 85, Expert_StatusAttackUp_CheckUserHPRange
+    AddToMoveScore 1
     GoTo Expert_StatusAttackUp_CheckUserHPRange
 
+Expert_StatusAttackUp_CheckSashBreaking:
+    IfCanBreakSashOrSturdy AI_BATTLER_DEFENDER, Expert_StatusAttackUp_CheckUserHPRange
+    GoTo Try95ChanceForScorePlus3
+
 Expert_StatusAttackUp_CheckUserHPRange:
+    IfEnemyCanChunkOrKO Try99ChanceForScoreMinus12
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusAttackUp_End
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_StatusAttackUp_ScoreMinus2
-    IfRandomLessThan 40, Expert_StatusAttackUp_End
+    IfRandomLessThan 32, Expert_StatusAttackUp_End
 
 Expert_StatusAttackUp_ScoreMinus2:
     AddToMoveScore -2
