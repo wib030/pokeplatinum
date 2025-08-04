@@ -4581,6 +4581,11 @@ static void AICmd_LoadSleepTurns(BattleSystem* battleSys, BattleContext* battleC
         }
     }
 
+    if (Battler_Ability(battleCtx, battler) == ABILITY_EARLY_BIRD)
+    {
+        sleepTurns /= 2;
+    }
+
     AI_CONTEXT.calcTemp = sleepTurns;
 
 }
