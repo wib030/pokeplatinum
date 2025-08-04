@@ -21525,7 +21525,7 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
                 moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerItem, move);
                 effectiveness = 0;
 
-                BattleSystem_ApplyTypeChart(battleSys, batttleCtx, move, moveType, attacker, defender, 0, &effectiveness);
+                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, attacker, defender, 0, &effectiveness);
 
                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
