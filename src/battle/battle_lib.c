@@ -21501,14 +21501,14 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
     // Early exit if defender is already sash broken
     if (battleCtx->battleMons[defender].curHP < battleCtx->battleMons[defender].maxHP)
     {
-        return FALSE;
+        return TRUE;
     }
 
     // Early exit if no Focus Sash and no Sturdy ability on defender
     if (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_ENDURE
         && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STURDY) == FALSE)
     {
-        return FALSE;
+        return TRUE;
     }
 
     attackerItem = Battler_HeldItem(battleCtx, attacker);
