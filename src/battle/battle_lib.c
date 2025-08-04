@@ -21445,3 +21445,114 @@ BOOL BattleAI_IsMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* 
 
     return result;
 }
+
+BOOL BattleAI_IsMultiHitMove(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int moveEffect)
+{
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    switch (moveEffect)
+    {
+    default:
+        break;
+
+    case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+    case BATTLE_EFFECT_MULTI_HIT:
+    case BATTLE_EFFECT_MULTI_HIT_TEN:
+    case BATTLE_EFFECT_HIT_THREE_TIMES:
+    case BATTLE_EFFECT_HIT_TWICE:
+        result = TRUE;
+        break;
+
+    case BATTLE_EFFECT_BEAT_UP:
+        Party* party = BattleSystem_Party(battleSys, attacker);
+        Pokemon* mon;
+        for (int i = 0; i < BattleSystem_PartyCount(battleSys, attacker); i++) {
+            mon = Party_GetPokemonBySlotIndex(party, i);
+
+            if (i != battleCtx->selectedPartySlot[attacker]
+                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG)
+            {
+                result = TRUE;
+                break;
+            }
+        }
+        break;
+    }
+
+    return result;
+}
+
+BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int i;
+    int moveEffect;
+    u8 moveType;
+    u16 move, attackerItem;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    // Early exit if defender is already sash broken
+    if (battleCtx->battleMons[defender].curHP < battleCtx->battleMons[defender].maxHP)
+    {
+        return FALSE;
+    }
+
+    // Early exit if no Focus Sash and no Sturdy ability on defender
+    if (Battler_HeldItemEffect(battleCtx, defender) != HOLD_EFFECT_ENDURE
+        && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STURDY) == FALSE)
+    {
+        return FALSE;
+    }
+
+    attackerItem = Battler_HeldItem(battleCtx, attacker);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, attacker, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            move = battleCtx->battleMons[attacker].moves[i];
+            moveEffect = MOVE_DATA(move).effect;
+
+            if (MOVE_DATA(move).power)
+            {
+                moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerItem, move);
+                effectiveness = 0;
+
+                BattleSystem_ApplyTypeChart(battleSys, batttleCtx, move, moveType, attacker, defender, 0, &effectiveness);
+
+                if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+                {
+                    switch (moveEffect)
+                    {
+                    default:
+                        if (BattleAI_IsMultiHitMove(battleSys, battleCtx, attacker, moveEffect))
+                        {
+                            result = TRUE;
+                        }
+                        break;
+
+                    case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+                        if (battleCtx->totalTurns > battleCtx->battleMons[attacker].moveEffectsData.fakeOutTurnNumber)
+                        {
+                            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_INNER_FOCUS) == FALSE)
+                            {
+                                result = TRUE;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}

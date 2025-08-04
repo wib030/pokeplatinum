@@ -2082,4 +2082,27 @@ void BattleSystem_DynamicSortMonActionOrder(BattleSystem* battleSys, BattleConte
 */
 BOOL BattleAI_IsMoveBlockedBySoundproof(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
 
+/**
+* @brief Check if the attacker's move is a multihit move.
+* 
+* Note: This does not factor if the defender mon has a Red Card.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker   Attacking mon's battler ID.
+* @return TRUE/FALSE whether the move is multihit.
+*/
+BOOL BattleAI_IsMultiHitMove(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int moveEffect);
+
+/**
+* @brief Check if the attacker's moves can break the defender's sash or sturdy.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker   Attacking mon's battler ID.
+* @param defender   Defending mon's battler ID.
+* @return TRUE/FALSE whether the attacker has a move that breaks the defender's sash or sturdy.
+*/
+BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
