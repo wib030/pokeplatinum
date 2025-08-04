@@ -759,24 +759,34 @@ Basic_CheckSandstorm:
     PopOrEnd 
 
 Basic_CheckCannotAttract:
-    ; If the target cannot be Infatuated for any reason, score -10.
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, ScoreMinus10
+    ; If the target cannot be Infatuated for any reason, score -12.
+    ;
+    ; If the target can be infatuated, 50% chance for score +1 and 25% chance for score +2.
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, ScoreMinus12
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus10
+    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus12
     LoadGender AI_BATTLER_ATTACKER
     IfLoadedEqualTo GENDER_MALE, Basic_CheckCannotAttract_BothMale
     IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCannotAttract_BothFemale
-    GoTo ScoreMinus10
+    IfLoadedEqualTo GENDER_NONE, ScoreMinus12
+    GoTo ScoreMinus12
 
 Basic_CheckCannotAttract_BothMale:
     LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCannotAttract_Terminate
-    GoTo ScoreMinus10
+    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCannotAttract_CanAttract
+    GoTo ScoreMinus12
 
 Basic_CheckCannotAttract_BothFemale:
     LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCannotAttract_Terminate
-    GoTo ScoreMinus10
+    IfLoadedEqualTo GENDER_MALE, Basic_CheckCannotAttract_CanAttract
+    GoTo ScoreMinus12
+
+Basic_CheckCannotAttract_CanAttract:
+    IfRandomLessThan 128, Basic_CheckCannotAttract_Terminate
+    AddToMoveScore 1
+    IfRandomLessThan 128, Basic_CheckCannotAttract_Terminate
+    AddToMoveScore 1
+    GoTo Basic_CheckCannotAttract_Terminate
 
 Basic_CheckCannotAttract_Terminate:
     PopOrEnd 
