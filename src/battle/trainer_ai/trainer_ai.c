@@ -439,6 +439,7 @@ static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* 
 static void AICmd_IfShouldEncore(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerHasInvulnerableMove(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfAbilityInPlay(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfCanBreakSashOrSturdy(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -630,7 +631,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfMoveBlockedBySoundproof,
     AICmd_IfBattlerDetersStatus,
     AICmd_IfBattlerHasInvulnerableMove,
-    AICmd_IfAbilityInPlay
+    AICmd_IfAbilityInPlay,
+    AICmd_IfCanBreakSashOrSturdy
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -5091,6 +5093,41 @@ static void AICmd_IfAbilityInPlay(BattleSystem* battleSys, BattleContext* battle
     int i;
 
     if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, AI_CONTEXT.attacker, ability) > 0)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfCanBreakSashOrSturdy(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+
+    int i;
+    int battler2;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.defender;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.attacker;
+        break;
+    }
+
+    if (BattleAI_SashOrSturdyGetsBroken(battleSys, battleCtx, battler1, battler2))
     {
         AIScript_Iter(battleCtx, jump);
     }
