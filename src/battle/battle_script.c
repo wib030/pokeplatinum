@@ -13975,6 +13975,33 @@ static BOOL BtlCmd_TryEggBomb(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @brief Calculate the type and base power of Fling.
+ *
+ * Inputs:
+ * 1. The distance to jump if the attacker's item cannot be used with Fling.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpInvalidItem = BattleScript_Read(battleCtx);
+
+    int power = Battler_ItemFlingPower(battleCtx, battleCtx->attacker);
+    if (power) {
+        battleCtx->movePower = power;
+        battleCtx->moveType = Battler_FlingType(battleCtx, battleCtx->attacker);
+    }
+    else {
+        BattleScript_Iter(battleCtx, jumpInvalidItem);
+    }
+
+    return FALSE;
+}
+
+/**
  * @brief Read a 4-byte chunk from the loaded script and increment the cursor.
  * 
  * @param battleCtx 

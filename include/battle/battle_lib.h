@@ -1122,6 +1122,18 @@ s32 Battler_ItemFlingEffect(BattleContext *battleCtx, int battler);
 s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler);
 
 /**
+ * @brief Get the Fling type for a battler's held item.
+ *
+ * Note: this actually just uses the Natural Gift type item
+ * parameter in pl_item_data.csv
+ * 
+ * @param battleCtx
+ * @param battler
+ * @return Type for Fling.
+ */
+s32 Battler_FlingType(BattleContext* battleCtx, int battler);
+
+/**
  * @brief Check if a battler is trapped and cannot switch.
  * 
  * @param battleSys 
