@@ -828,6 +828,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro LoadFlingEffect battler
+    .long 144
+    .long \battler
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
