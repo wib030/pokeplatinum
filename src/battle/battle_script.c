@@ -2560,6 +2560,7 @@ static BOOL BtlCmd_ClearSleepClauseFlag(BattleSystem *battleSys, BattleContext *
 static BOOL BtlCmd_RecalcSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryEggBomb(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2837,7 +2838,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_ClearSleepClauseFlag,
 	BtlCmd_RecalcSpeed,
 	BtlCmd_CheckFlingEffectMon,
-	BtlCmd_TryEggBomb
+	BtlCmd_TryEggBomb,
+    BtlCmd_CalcFlingParams
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
