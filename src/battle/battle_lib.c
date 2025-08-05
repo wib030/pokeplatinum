@@ -7991,9 +7991,9 @@ s32 Battler_ItemFlingEffect(BattleContext *battleCtx, int battler)
 
 s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
 {
-    int power = BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_FLING_POWER);
     u16 item = BattleMon_Get(battleCtx, battler, BATTLEMON_HELD_ITEM, NULL);
     u8 itemEffect = Battler_HeldItemEffect(battleCtx, item);
+    int power = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_FLING_POWER);
 
     switch (itemEffect)
     {
