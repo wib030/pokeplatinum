@@ -13992,9 +13992,50 @@ static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battl
     int jumpInvalidItem = BattleScript_Read(battleCtx);
 
     int power = Battler_ItemFlingPower(battleCtx, battleCtx->attacker);
+    u8 flingType = Battler_FlingType(battleCtx, battleCtx->attacker);
+    u16 item = BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_HELD_ITEM, NULL);
+    u8 itemEffect = Battler_HeldItemEffect(battleCtx, item);
+
+    switch (itemEffect)
+    {
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+        case HOLD_EFFECT_ARCEUS_FLYING:
+        case HOLD_EFFECT_ARCEUS_POISON:
+        case HOLD_EFFECT_ARCEUS_GROUND:
+        case HOLD_EFFECT_ARCEUS_ROCK:
+        case HOLD_EFFECT_ARCEUS_BUG:
+        case HOLD_EFFECT_ARCEUS_GHOST:
+        case HOLD_EFFECT_ARCEUS_STEEL:
+        case HOLD_EFFECT_ARCEUS_FIRE:
+        case HOLD_EFFECT_ARCEUS_WATER:
+        case HOLD_EFFECT_ARCEUS_GRASS:
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        case HOLD_EFFECT_ARCEUS_ICE:
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+        case HOLD_EFFECT_ARCEUS_DARK:
+            // Disallow Multitype ability mons (Arceus) from flinging type plate
+            if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE)
+            {
+                power = 0;
+            }
+            break;
+
+            // Disallow Giratina from flinging Griseous Orb
+        case HOLD_EFFECT_GIRATINA_BOOST:
+            if (BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_SPECIES, NULL) == SPECIES_GIRATINA)
+            {
+                power = 0;
+            }
+            break;
+
+        default:
+            break;
+    }
+
     if (power) {
         battleCtx->movePower = power;
-        battleCtx->moveType = Battler_FlingType(battleCtx, battleCtx->attacker);
+        battleCtx->moveType = flingType;
     }
     else {
         BattleScript_Iter(battleCtx, jumpInvalidItem);
