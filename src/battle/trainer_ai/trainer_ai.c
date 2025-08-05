@@ -1438,7 +1438,7 @@ static void AICmd_LoadTypeFrom(BattleSystem *battleSys, BattleContext *battleCtx
         break;
 
     case LOAD_MOVE_TYPE:
-        AI_CONTEXT.calcTemp = MOVE_DATA(AI_CONTEXT.move).type;
+        AI_CONTEXT.calcTemp = TrainerAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.move);
         break;
 
     case LOAD_ATTACKER_PARTNER_TYPE_1:
@@ -3911,7 +3911,7 @@ static void AICmd_LoadMoveAccuracy(BattleSystem *battleSys, BattleContext *battl
     AIScript_Iter(battleCtx, 1);
     AI_CONTEXT.calcTemp = MOVE_DATA(AI_CONTEXT.move).accuracy;
 
-    moveType = MOVE_DATA(AI_CONTEXT.move).type;
+    moveType = TrainerAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.move);
 
     // Moves with no acc check
     if (AI_CONTEXT.calcTemp == 0) {
@@ -6058,6 +6058,10 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
         result = Battler_NaturalGiftType(battleCtx, battler);
         break;
 
+    case MOVE_FLING:
+        result = Battler_FlingType(battleCtx, battler);
+        break;
+
     case MOVE_JUDGMENT:
         switch (Battler_HeldItemEffect(battleCtx, battler)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
@@ -6125,7 +6129,7 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
             break;
 
         default:
-            result = TYPE_NORMAL;
+            result = MOVE_DATA(move).type;
             break;
         }
         break;
@@ -8904,7 +8908,8 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
         return FALSE;
     }
 
-    moveType = MOVE_DATA(battleCtx->moveHit[battler]).type;
+    moveType = battleCtx->moveHitType[battler];
+
     if (moveType == TYPE_FIRE) {
         checkAbility[0] = ABILITY_FLASH_FIRE;
         checkAbilityCount = 1;

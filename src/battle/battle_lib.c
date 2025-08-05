@@ -3085,7 +3085,7 @@ void BattleSystem_CleanupFaintedMon(BattleSystem *battleSys, BattleContext *batt
     battleCtx->moveProtect[battler] = MOVE_NONE;
     battleCtx->moveHit[battler] = MOVE_NONE;
     battleCtx->moveHitBattler[battler] = BATTLER_NONE;
-    battleCtx->moveHitType[battler] = MOVE_NONE;
+    battleCtx->moveHitType[battler] = TYPE_NORMAL;
     battleCtx->movePrevByBattler[battler] = MOVE_NONE;
     battleCtx->moveCopied[battler] = MOVE_NONE;
     battleCtx->moveCopiedHit[battler][0] = MOVE_NONE;
@@ -13710,6 +13710,10 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int b
         type = Battler_NaturalGiftType(battleCtx, item);
         break;
 
+    case MOVE_FLING:
+        type = Battler_FlingType(battleCtx, item);
+        break;
+
     case MOVE_JUDGMENT:
         switch (Battler_HeldItemEffect(battleCtx, item)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
@@ -13761,7 +13765,7 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int b
             type = TYPE_DARK;
             break;
         default:
-            type = TYPE_NORMAL;
+            type = MOVE_DATA(move).type;
             break;
         }
         break;
@@ -15115,6 +15119,7 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
         type = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_NATURAL_GIFT_TYPE);
         break;
 
+    case MOVE_FLING:
     case MOVE_JUDGMENT:
         switch (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
@@ -15166,7 +15171,7 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
             type = TYPE_DARK;
             break;
         default:
-            type = TYPE_NORMAL;
+            type = MOVE_DATA(move).type;
             break;
         }
         break;
