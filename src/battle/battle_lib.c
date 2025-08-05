@@ -8000,8 +8000,18 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
 
 s32 Battler_FlingType(BattleContext* battleCtx, int battler)
 {
-    u16 item = Battler_HeldItem(battleCtx, battler);
-    return BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
+    u8 flingType;
+    u16 item;
+
+    item = Battler_HeldItem(battleCtx, battler);
+    flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
+    
+    if (flingType >= NUMBER_OF_MON_TYPES)
+    {
+        flingType = TYPE_DARK;
+    }
+
+    return flingType;
 }
 
 static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
