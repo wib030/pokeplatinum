@@ -1131,7 +1131,7 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler);
  * @param battler
  * @return Type for Fling.
  */
-s32 Battler_FlingType(BattleContext* battleCtx, int battler);
+u8 Battler_FlingType(BattleContext* battleCtx, int battler);
 
 /**
  * @brief Check if a battler is trapped and cannot switch.
