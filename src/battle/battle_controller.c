@@ -4087,7 +4087,7 @@ static inline int CalcCurrentMoveType(BattleContext *battleCtx)
         return TYPE_NORMAL;
 	}
 	else if ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
-	&& (soundMove == TRUE))
+	&& soundMove)
 	{
 		return TYPE_ROCK;
     }
