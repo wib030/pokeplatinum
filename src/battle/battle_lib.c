@@ -8008,7 +8008,7 @@ u8 Battler_FlingType(BattleContext* battleCtx, int battler)
     
     if (flingType >= NUMBER_OF_MON_TYPES)
     {
-        flingType = TYPE_DARK;
+        flingType = MOVE_DATA(MOVE_FLING).type;
     }
 
     return flingType;
