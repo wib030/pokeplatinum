@@ -7035,6 +7035,11 @@ Expert_Fling_InstaFlingBoost:
     AddToMoveScore 1
     GoTo Expert_Fling_TryFlingItemBoost
 
+Expert_Fling_CheckFlingEffect:
+    LoadFlingEffect AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo FLING_EFFECT_NONE, Expert_Fling_TryFlingItemBoost
+    GoTo Expert_Fling_Main
+
 Expert_Fling_TryFlingItemBoost:
     IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_CheckFieldEffect
     IfLoadedInTable Expert_Fling_StatusEffects, Expert_Fling_CheckStatus
@@ -7052,6 +7057,7 @@ Expert_Fling_TryFlingItemBoost:
     IfLoadedEqualTo FLING_EFFECT_WAKE_UP_SLAP, Expert_WakeUpSlap
     IfLoadedEqualTo FLING_EFFECT_INFLICT_CURSE, Try50ChanceForScorePlus1
     IfLoadedEqualTo FLING_EFFECT_INFLICT_INGRAIN, Expert_BindingMove
+    GoTo Expert_Fling_Main
 
 Expert_Fling_CheckFieldEffect:
     AddToMoveScore 1
