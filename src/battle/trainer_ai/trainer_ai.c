@@ -8908,7 +8908,15 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
         return FALSE;
     }
 
-    moveType = battleCtx->moveHitType[battler];
+    // Fling won't hit as same type again unless item is restored
+    if (battleCtx->moveHit[battler] == MOVE_FLING)
+    {
+        moveType = Battler_FlingType(battleCtx, battleCtx->moveHitBattler[battler]);
+    }
+    else
+    {
+        moveType = battleCtx->moveHitType[battler];
+    }
 
     if (moveType == TYPE_FIRE) {
         checkAbility[0] = ABILITY_FLASH_FIRE;
