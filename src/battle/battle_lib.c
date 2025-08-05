@@ -7991,11 +7991,52 @@ s32 Battler_ItemFlingEffect(BattleContext *battleCtx, int battler)
 
 s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
 {
-    if (battleCtx->battleMons[battler].moveEffectsData.embargoTurns) {
-        return 0;
+    int power = BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_FLING_POWER);
+    u16 item = BattleMon_Get(battleCtx, battler, BATTLEMON_HELD_ITEM, NULL);
+    u8 itemEffect = Battler_HeldItemEffect(battleCtx, item);
+
+    switch (itemEffect)
+    {
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+        case HOLD_EFFECT_ARCEUS_FLYING:
+        case HOLD_EFFECT_ARCEUS_POISON:
+        case HOLD_EFFECT_ARCEUS_GROUND:
+        case HOLD_EFFECT_ARCEUS_ROCK:
+        case HOLD_EFFECT_ARCEUS_BUG:
+        case HOLD_EFFECT_ARCEUS_GHOST:
+        case HOLD_EFFECT_ARCEUS_STEEL:
+        case HOLD_EFFECT_ARCEUS_FIRE:
+        case HOLD_EFFECT_ARCEUS_WATER:
+        case HOLD_EFFECT_ARCEUS_GRASS:
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        case HOLD_EFFECT_ARCEUS_ICE:
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+        case HOLD_EFFECT_ARCEUS_DARK:
+            // Disallow Multitype ability mons (Arceus) from flinging type plate
+            if (Battler_Ability(battleCtx, battler) == ABILITY_MULTITYPE)
+            {
+                power = 0;
+            }
+            break;
+
+            // Disallow Giratina from flinging Griseous Orb
+        case HOLD_EFFECT_GIRATINA_BOOST:
+            if (BattleMon_Get(battleCtx, battler, BATTLEMON_SPECIES, NULL) == SPECIES_GIRATINA)
+            {
+                power = 0;
+            }
+            break;
+
+        default:
+            break;
     }
 
-    return BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_FLING_POWER);
+    if (battleCtx->battleMons[battler].moveEffectsData.embargoTurns) {
+        power = 0;
+    }
+
+    return power;
 }
 
 u8 Battler_FlingType(BattleContext* battleCtx, int battler)
