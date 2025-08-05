@@ -7076,6 +7076,14 @@ Expert_Fling_CheckStatus:
     IfLoadedEqualTo FLING_EFFECT_POISON, Basic_CheckCannotPoison
     IfLoadedEqualTo FLING_EFFECT_BADLY_POISON, Basic_CheckCannotPoison
     GoTo Expert_Fling_Main
+	
+Expert_Fling_CheckStatBoost:
+	IfLoadedEqualTo FLING_EFFECT_USER_ATK_UP, Expert_StatusAttackUp
+    IfLoadedEqualTo FLING_EFFECT_USER_DEF_UP, Expert_StatusDefenseUp
+    IfLoadedEqualTo FLING_EFFECT_USER_SPEED_UP, Expert_StatusSpeedUp
+    IfLoadedEqualTo FLING_EFFECT_USER_SPATK_UP, Expert_StatusSpAttackUp
+	IfLoadedEqualTo FLING_EFFECT_USER_SPDEF_UP, Expert_StatusSpDefenseUp
+	GoTo Expert_Fling_Main
 
 Expert_Fling_Main:
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Try90ChanceForScoreMinus12

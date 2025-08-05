@@ -5147,7 +5147,7 @@ static void AICmd_LoadFlingEffect(BattleSystem* battleSys, BattleContext* battle
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    u16 battleItem;
+    u16 battlerItem;
 
     battlerItem = BattleMon_Get(battleCtx, battler, BATTLEMON_HELD_ITEM, NULL);
 
