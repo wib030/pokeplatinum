@@ -7998,7 +7998,7 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
     return BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_FLING_POWER);
 }
 
-s32 Battler_FlingType(BattleContext* battleCtx, int battler)
+u8 Battler_FlingType(BattleContext* battleCtx, int battler)
 {
     u8 flingType;
     u16 item;
