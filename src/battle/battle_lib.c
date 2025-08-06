@@ -8045,11 +8045,75 @@ u16 Battler_FlingType(BattleContext* battleCtx, int battler)
     u16 item;
 
     item = Battler_HeldItem(battleCtx, battler);
-    flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
-    
-    if ((flingType >= NUMBER_OF_MON_TYPES) || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
-    {
+
+    switch (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT)) {
+    case HOLD_EFFECT_ARCEUS_FIRE:
+        flingType = TYPE_FIRE;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_WATER:
+        flingType = TYPE_WATER;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_ELECTRIC:
+        flingType = TYPE_ELECTRIC;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_GRASS:
+        flingType = TYPE_GRASS;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_ICE:
+        flingType = TYPE_ICE;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_FIGHTING:
+        flingType = TYPE_FIGHTING;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_POISON:
+        flingType = TYPE_POISON;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_GROUND:
+        flingType = TYPE_GROUND;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_FLYING:
+        flingType = TYPE_FLYING;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        flingType = TYPE_PSYCHIC;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_BUG:
+        flingType = TYPE_BUG;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_ROCK:
+        flingType = TYPE_ROCK;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_GHOST:
+        flingType = TYPE_GHOST;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_DRAGON:
+        flingType = TYPE_DRAGON;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_DARK:
+        flingType = TYPE_DARK;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_STEEL:
+        flingType = TYPE_STEEL;
+        break;
+
+    default:
         flingType = MOVE_DATA(MOVE_FLING).type;
+        break;
     }
 
     return flingType;
@@ -8059,11 +8123,74 @@ u16 Battler_FlingTypeFromItem(BattleContext* battleCtx, int item)
 {
     u16 flingType;
 
-    flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
+    switch (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT)) {
+    case HOLD_EFFECT_ARCEUS_FIRE:
+        flingType = TYPE_FIRE;
+        break;
 
-    if ((flingType >= NUMBER_OF_MON_TYPES) || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
-    {
+    case HOLD_EFFECT_ARCEUS_WATER:
+        flingType = TYPE_WATER;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_ELECTRIC:
+        flingType = TYPE_ELECTRIC;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_GRASS:
+        flingType = TYPE_GRASS;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_ICE:
+        flingType = TYPE_ICE;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_FIGHTING:
+        flingType = TYPE_FIGHTING;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_POISON:
+        flingType = TYPE_POISON;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_GROUND:
+        flingType = TYPE_GROUND;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_FLYING:
+        flingType = TYPE_FLYING;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        flingType = TYPE_PSYCHIC;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_BUG:
+        flingType = TYPE_BUG;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_ROCK:
+        flingType = TYPE_ROCK;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_GHOST:
+        flingType = TYPE_GHOST;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_DRAGON:
+        flingType = TYPE_DRAGON;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_DARK:
+        flingType = TYPE_DARK;
+        break;
+
+    case HOLD_EFFECT_ARCEUS_STEEL:
+        flingType = TYPE_STEEL;
+        break;
+
+    default:
         flingType = MOVE_DATA(MOVE_FLING).type;
+        break;
     }
 
     return flingType;
