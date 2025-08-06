@@ -1131,7 +1131,7 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler);
  * @param battler
  * @return Type for Fling.
  */
-u8 Battler_FlingType(BattleContext* battleCtx, int battler);
+u16 Battler_FlingType(BattleContext* battleCtx, int battler);
 
 /**
  * @brief Get the Fling type for a given held item.
@@ -1143,7 +1143,7 @@ u8 Battler_FlingType(BattleContext* battleCtx, int battler);
  * @param item
  * @return Type for Fling.
  */
-u8 Battler_FlingTypeFromItem(BattleContext* battleCtx, int item);
+u16 Battler_FlingTypeFromItem(BattleContext* battleCtx, int item);
 
 /**
  * @brief Check if a battler is trapped and cannot switch.
