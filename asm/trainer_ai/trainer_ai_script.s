@@ -7086,8 +7086,6 @@ Expert_Fling_CheckStatBoost:
 Expert_Fling_Main:
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Try90ChanceForScoreMinus12
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Try50ChanceForScoreMinus3
-    FlagMoveDamageScore FALSE
-    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Try50ChanceForScoreMinus3
     IfRandomLessThan 16, Expert_Fling_End
     AddToMoveScore 1
     GoTo Expert_Fling_End
