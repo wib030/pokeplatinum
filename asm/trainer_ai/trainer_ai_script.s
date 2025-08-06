@@ -1674,6 +1674,10 @@ Try50ChanceForScorePlus1:
     IfRandomLessThan 128, ScorePlus1
     PopOrEnd
 
+Try75ChanceForScorePlus3:
+    IfRandomLessThan 192, ScorePlus3
+    PopOrEnd
+
 Try95ChanceForScorePlus3:
     IfRandomLessThan 244, ScorePlus3
     PopOrEnd
@@ -7046,8 +7050,6 @@ Expert_Fling_TryFlingItemBoost:
     IfLoadedEqualTo FLING_EFFECT_HAZE, Expert_Haze
     IfLoadedEqualTo FLING_EFFECT_DEFOG, Expert_Defog
     IfLoadedEqualTo FLING_EFFECT_INFATUATION, Basic_CheckCannotAttract
-    ; Add below when there is an expert_flinch
-    ; IfLoadedEqualTo FLING_EFFECT_FLINCH, Expert_Flinch
     IfLoadedEqualTo FLING_EFFECT_LOWER_ACC, Expert_StatusAccuracyDown
     IfLoadedEqualTo FLING_EFFECT_LOWER_EVASION, Expert_StatusEvasionDown
     IfLoadedEqualTo FLING_EFFECT_CONFUSION, Basic_CheckCannotConfuse
@@ -7086,6 +7088,10 @@ Expert_Fling_CheckStatBoost:
 Expert_Fling_Main:
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Try90ChanceForScoreMinus12
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Try50ChanceForScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Try50ChanceForScorePlus1
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Try75ChanceForScorePlus3
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Try50ChanceForScoreMinus3
     IfRandomLessThan 16, Expert_Fling_End
     AddToMoveScore 1
     GoTo Expert_Fling_End
