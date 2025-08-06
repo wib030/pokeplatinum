@@ -1674,6 +1674,18 @@ Try50ChanceForScorePlus1:
     IfRandomLessThan 128, ScorePlus1
     PopOrEnd
 
+Try66ChanceForScorePlus1:
+    IfRandomLessThan 170, ScorePlus1
+    PopOrEnd
+
+Try90ChanceForScorePlus1:
+    IfRandomLessThan 230, ScorePlus1
+    PopOrEnd
+
+Try95ChanceForScorePlus1:
+    IfRandomLessThan 244, ScorePlus1
+    PopOrEnd
+
 Try75ChanceForScorePlus3:
     IfRandomLessThan 192, ScorePlus3
     PopOrEnd
@@ -3710,24 +3722,144 @@ Expert_RechargeTurn_End:
     PopOrEnd
 
 Expert_Disable:
-    ; If the attacker is slower than the opponent, score +0 and terminate.
+    ; If the attacker is slower than the opponent, try to preemptively use Disable.
     ;
-    ; If the opponent''s last-used move was a Status move, 60.9% chance of score -1.
+    ; If the opponent''s last move is in the tables, +3 or +1 depending on the table.
     ;
-    ; If the opponent''s last-used move was a Damaging move, score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Disable_End
+    ; If the move is not in the tables and is a status move, 95% chance for score -1.
+    ;
+    ; 25% Chance for flat score +1 into a damaging move.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Disable_Slower
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
+    IfLoadedEqualTo MOVE_NONE, ScoreMinus12
+    LoadEffectOfLoadedMove
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try75ChanceForScorePlus3
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try66ChanceForScorePlus1
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadPowerOfLoadedMove
+    IfLoadedGreaterThan 100, Try66ChanceForScorePlus1
     IfLoadedEqualTo 0, Expert_Disable_TryScoreMinus1
+    IfRandomLessThan 192, Expert_Disable_End
+    AddToMoveScore 1
+    GoTo Expert_Disable_End
+
+Expert_Disable_Slower:
+    AddToMoveScore 1
+    IfBattlerIsPhysicalAttacker AI_BATTLER_DEFENDER, Try66ChanceForScorePlus1
+    IfBattlerIsSpecialAttacker AI_BATTLER_DEFENDER, Try66ChanceForScorePlus1
+    AddToMoveScore -1
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadEffectOfLoadedMove
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try75ChanceForScorePlus3
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try66ChanceForScorePlus1
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadPowerOfLoadedMove
+    IfLoadedGreaterThan 100, Try66ChanceForScorePlus1
+    IfLoadedEqualTo 0, Expert_Disable_TryScoreMinus1
+    IfRandomLessThan 192, Expert_Disable_End
     AddToMoveScore 1
     GoTo Expert_Disable_End
 
 Expert_Disable_TryScoreMinus1:
-    IfRandomLessThan 100, Expert_Disable_End
+    IfRandomLessThan 12, Expert_Disable_End
     AddToMoveScore -1
 
 Expert_Disable_End:
-    PopOrEnd 
+    PopOrEnd
+
+Expert_Disable_HighPriorityDisable:
+    TableEntry BATTLE_EFFECT_FORCE_SWITCH
+    TableEntry BATTLE_EFFECT_ACC_DOWN_2
+    TableEntry BATTLE_EFFECT_ACC_DOWN
+    TableEntry BATTLE_EFFECT_STATUS_SLEEP
+    TableEntry BATTLE_EFFECT_COUNTER
+    TableEntry BATTLE_EFFECT_MIRROR_COAT
+    TableEntry BATTLE_EFFECT_EVA_UP_2
+    TableEntry BATTLE_EFFECT_EVA_UP
+    TableEntry BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT
+    TableEntry BATTLE_EFFECT_CONTINUE_AND_CONFUSE_SELF
+    TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_RESTORE_HALF_HP
+    TableEntry BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN
+    TableEntry BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_CALL_RANDOM_MOVE
+    TableEntry BATTLE_EFFECT_MULTI_HIT_TEN
+    TableEntry BATTLE_EFFECT_MULTI_HIT
+    TableEntry BATTLE_EFFECT_BEAT_UP
+    TableEntry BATTLE_EFFECT_HIT_THREE_TIMES
+    TableEntry BATTLE_EFFECT_RAISE_DEF_HIT
+    TableEntry BATTLE_EFFECT_PREGNANCY_PUNCH
+    TableEntry BATTLE_EFFECT_EGG_BOMB
+    TableEntry BATTLE_EFFECT_SET_SUBSTITUTE
+    TableEntry BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER
+    TableEntry BATTLE_EFFECT_DECREASE_LAST_MOVE_PP
+    TableEntry BATTLE_EFFECT_SPEED_DOWN_HIT
+    TableEntry BATTLE_EFFECT_INFATUATE_HIT
+    TableEntry BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP
+    TableEntry BATTLE_EFFECT_THAW_AND_BURN_HIT
+    TableEntry BATTLE_EFFECT_HIT_BEFORE_SWITCH
+    TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING
+    TableEntry BATTLE_EFFECT_UPROAR
+    TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
+    TableEntry BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE
+    TableEntry BATTLE_EFFECT_STEAL_STATUS_MOVE
+    TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO
+    TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN
+    TableEntry BATTLE_EFFECT_RAISE_ATTACK_HIT
+    TableEntry BATTLE_EFFECT_CURE_PARTY_STATUS
+    TableEntry BATTLE_EFFECT_HEAL_STATUS
+    TableEntry BATTLE_EFFECT_HOWL
+    TableEntry BATTLE_EFFECT_BULLDOZE
+    TableEntry BATTLE_EFFECT_FORCE_SWITCH_HIT
+    TableEntry BATTLE_EFFECT_RAISE_SP_ATK_HIT
+    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
+    TableEntry BATTLE_EFFECT_METAL_BURST
+    TableEntry BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING
+    TableEntry BATTLE_EFFECT_PROTECT
+    TableEntry BATTLE_EFFECT_RECHARGE_AFTER
+    TableEntry BATTLE_EFFECT_LOWER_SP_DEF_2_HIT
+    TableEntry BATTLE_EFFECT_POISON_MULTI_HIT
+    TableEntry TABLE_END
+
+Expert_Disable_LowPriorityDisable:
+    TableEntry BATTLE_EFFECT_LEVEL_DAMAGE_FLAT
+    TableEntry BATTLE_EFFECT_ATK_UP
+    TableEntry BATTLE_EFFECT_ATK_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP
+    TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_SPDEF_UP
+    TableEntry BATTLE_EFFECT_SPDEF_UP_2
+    TableEntry BATTLE_EFFECT_SPATK_UP
+    TableEntry BATTLE_EFFECT_SPATK_UP_2
+    TableEntry BATTLE_EFFECT_ATK_DEF_UP
+    TableEntry BATTLE_EFFECT_GROWTH
+    TableEntry BATTLE_EFFECT_AVERAGE_HP
+    TableEntry BATTLE_EFFECT_HEAL_IN_3_TURNS
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER
+    TableEntry BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER
+    TableEntry BATTLE_EFFECT_SPIKES_MULTI_HIT
+    TableEntry BATTLE_EFFECT_HIT_TWICE
+    TableEntry BATTLE_EFFECT_PRIORITY_1
+    TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN
+    TableEntry BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS
+    TableEntry BATTLE_EFFECT_RAISE_ALL_STATS_HIT
+    TableEntry BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT
+    TableEntry BATTLE_EFFECT_REMOVE_SCREENS
+    TableEntry BATTLE_EFFECT_CURSE
+    TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT
+    TableEntry BATTLE_EFFECT_DEF_DOWN
+    TableEntry BATTLE_EFFECT_DEF_DOWN_2
+    TableEntry BATTLE_EFFECT_SP_DEF_DOWN
+    TableEntry BATTLE_EFFECT_SP_DEF_DOWN_2
+    TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_ATK_DOWN_2
+    TableEntry BATTLE_EFFECT_SPATK_DOWN
+    TableEntry BATTLE_EFFECT_SPATK_DOWN_2
+    TableEntry TABLE_END
+
 
 Expert_Counter:
     ; If behind substitute, score -10.
@@ -4159,7 +4291,7 @@ Expert_Protect:
     IfFieldConditionsMask FIELD_CONDITION_SUNNY, Expert_Protect_CheckSun
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_Protect_CheckTrickRoom
     IfFieldConditionsMask FIELD_CONDITION_GRAVITY, Expert_Protect_CheckGravity
-    IfWishActive AI_BATTLER_ATTACKER, Expert_Protect_WishTryScorePlus1
+    IfWishActive AI_BATTLER_ATTACKER, Expert_Protect_WishTryScorePlus3
     IfRandomLessThan 32, ScoreMinus2
     GoTo Expert_Protect_CheckStatusConditions
 
@@ -4326,9 +4458,9 @@ Expert_Protect_CheckGravity:
     AddToMoveScore 1
     GoTo Expert_Protect_CheckStatusConditions
 
-Expert_Protect_WishTryScorePlus1:
-    IfRandomLessThan 4, Expert_Protect_CheckStatusConditions
-    AddToMoveScore 12
+Expert_Protect_WishTryScorePlus3:
+    IfRandomLessThan 32, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 3
     GoTo Expert_Protect_CheckStatusConditions
 
 Expert_Protect_CheckStatusConditions:
@@ -4562,7 +4694,7 @@ Expert_BatonPass_TryScorePlus1:
     GoTo Expert_BatonPass_End
 
 Expert_BatonPass_TryScorePlus2:
-    IfRandomLessThan 192, Expert_BatonPass_End
+    IfRandomLessThan 170, Expert_BatonPass_End
     AddToMoveScore 2
     GoTo Expert_BatonPass_End
 
