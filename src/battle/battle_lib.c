@@ -15177,6 +15177,9 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
         break;
 
     case MOVE_FLING:
+        type = Battler_FlingTypeFromItem(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL));
+        break;
+
     case MOVE_JUDGMENT:
         switch (BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
