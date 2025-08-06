@@ -7998,8 +7998,8 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
     switch (itemEffect)
     {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
-        case HOLD_EFFECT_ARCEUS_FLYING:
         case HOLD_EFFECT_ARCEUS_POISON:
+        case HOLD_EFFECT_ARCEUS_FLYING:
         case HOLD_EFFECT_ARCEUS_GROUND:
         case HOLD_EFFECT_ARCEUS_ROCK:
         case HOLD_EFFECT_ARCEUS_BUG:
@@ -8047,6 +8047,20 @@ u8 Battler_FlingType(BattleContext* battleCtx, int battler)
     item = Battler_HeldItem(battleCtx, battler);
     flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
     
+    if (flingType >= NUMBER_OF_MON_TYPES || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
+    {
+        flingType = MOVE_DATA(MOVE_FLING).type;
+    }
+
+    return flingType;
+}
+
+u8 Battler_FlingTypeFromItem(BattleContext* battleCtx, int item)
+{
+    u8 flingType;
+
+    flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
+
     if (flingType >= NUMBER_OF_MON_TYPES || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
     {
         flingType = MOVE_DATA(MOVE_FLING).type;
@@ -9751,6 +9765,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
             case BATTLE_EFFECT_FLING:
                 movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_FLING_POWER);
+                moveType = Battler_FlingTypeFromItem(battleCtx, monHeldItem);
                 break;
 
             case BATTLE_EFFECT_NATURAL_GIFT:
@@ -11452,6 +11467,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
             case BATTLE_EFFECT_FLING:
                 movePower = Battler_ItemFlingPower(battleCtx, attacker);
+                moveType = Battler_FlingType(battleCtx, attacker);
                 break;
 
             case BATTLE_EFFECT_NATURAL_GIFT:
