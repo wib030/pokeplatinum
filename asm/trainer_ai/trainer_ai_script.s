@@ -1216,7 +1216,7 @@ Basic_CheckFling:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
 
     ; If Fling would have 0 base power, score -20.
-    LoadHeldItem AI_BATTLER_DEFENDER
+    LoadHeldItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_NONE, ScoreMinus20
     LoadFlingPower AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, ScoreMinus20
@@ -7098,7 +7098,9 @@ Expert_Fling_Main:
     GoTo Expert_Fling_End
 
 Expert_Fling_End:
-    PopOrEnd 
+    PopOrEnd
+    PopOrEnd
+    PopOrEnd
 
 Expert_Fling_FieldEffects:
     TableEntry FLING_EFFECT_TRICK_ROOM

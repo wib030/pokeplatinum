@@ -8047,7 +8047,7 @@ u8 Battler_FlingType(BattleContext* battleCtx, int battler)
     item = Battler_HeldItem(battleCtx, battler);
     flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
     
-    if (flingType > NUMBER_OF_MON_TYPES || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
+    if ((flingType >= NUMBER_OF_MON_TYPES) || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
     {
         flingType = MOVE_DATA(MOVE_FLING).type;
     }
@@ -8061,7 +8061,7 @@ u8 Battler_FlingTypeFromItem(BattleContext* battleCtx, int item)
 
     flingType = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_TYPE);
 
-    if (flingType > NUMBER_OF_MON_TYPES || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
+    if ((flingType >= NUMBER_OF_MON_TYPES) || BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_NATURAL_GIFT_POWER) != 0)
     {
         flingType = MOVE_DATA(MOVE_FLING).type;
     }
