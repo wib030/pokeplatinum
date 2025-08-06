@@ -7022,9 +7022,9 @@ Expert_Fling:
 Expert_Fling_CheckInstaFling:
     LoadFlingEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo FLING_EFFECT_CHIP, Try95ChanceForScorePlus5
-    IfLoadedInTable Expert_Fling_InstantFlingByItem, Expert_Fling_InstaFlingBoost
     IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_InstaFlingBoost
-    IfLoadedNotEqualTo FLING_EFFECT_NONE, Expert_Fling_TryFlingItemBoost
+	LoadHeldItem AI_BATTLER_ATTACKER
+	IfLoadedInTable Expert_Fling_InstantFlingByItem, Expert_Fling_InstaFlingBoost
     GoTo Expert_Fling_CheckFlingEffect
 
 Expert_Fling_InstaFlingBoost:
@@ -7035,7 +7035,7 @@ Expert_Fling_InstaFlingBoost:
     AddToMoveScore 1
     IfRandomLessThan 128, Expert_Fling_Main
     AddToMoveScore 1
-    GoTo Expert_Fling_TryFlingItemBoost
+    GoTo Expert_Fling_CheckFlingEffect
 
 Expert_Fling_CheckFlingEffect:
     LoadFlingEffect AI_BATTLER_ATTACKER
