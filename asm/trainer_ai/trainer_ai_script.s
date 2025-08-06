@@ -7043,6 +7043,7 @@ Expert_Fling_CheckFlingEffect:
     GoTo Expert_Fling_Main
 
 Expert_Fling_TryFlingItemBoost:
+    LoadFlingEffect AI_BATTLER_ATTACKER
     IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_CheckFieldEffect
     IfLoadedInTable Expert_Fling_StatusEffects, Expert_Fling_CheckStatus
     IfLoadedInTable Expert_Fling_StatBoostEffects, Expert_Fling_CheckStatBoost
