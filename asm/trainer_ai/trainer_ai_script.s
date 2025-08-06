@@ -7011,8 +7011,6 @@ Expert_Fling:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedEqualTo TRUE, Expert_Fling_CheckInstaFling
-    GoTo Expert_Fling_CheckFlingEffect
-    IfRandomLessThan 85, Expert_Fling_Main
     LoadFlingEffect AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo FLING_EFFECT_NONE, Expert_Fling_TryFlingItemBoost
     GoTo Expert_Fling_Main
@@ -7023,7 +7021,7 @@ Expert_Fling_CheckInstaFling:
     IfLoadedInTable Expert_Fling_InstantFlingByItem, Expert_Fling_InstaFlingBoost
     IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_InstaFlingBoost
     IfLoadedNotEqualTo FLING_EFFECT_NONE, Expert_Fling_TryFlingItemBoost
-    GoTo Expert_Fling_Main
+    GoTo Expert_Fling_CheckFlingEffect
 
 Expert_Fling_InstaFlingBoost:
     AddToMoveScore 1
@@ -7043,7 +7041,7 @@ Expert_Fling_CheckFlingEffect:
 Expert_Fling_TryFlingItemBoost:
     IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_CheckFieldEffect
     IfLoadedInTable Expert_Fling_StatusEffects, Expert_Fling_CheckStatus
-    IfLoadedEqualTo Expert_Fling_StatBoostEffects, Expert_Fling_CheckStatBoost
+    IfLoadedInTable Expert_Fling_StatBoostEffects, Expert_Fling_CheckStatBoost
     IfLoadedEqualTo FLING_EFFECT_PIVOT, Expert_Phaze
     IfLoadedEqualTo FLING_EFFECT_HAZE, Expert_Haze
     IfLoadedEqualTo FLING_EFFECT_DEFOG, Expert_Defog
