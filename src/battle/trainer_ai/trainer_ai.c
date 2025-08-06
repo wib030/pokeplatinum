@@ -5835,7 +5835,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             | ((ivs[STAT_SPECIAL_DEFENSE] & 1) << 5);
 
         // power = power * 40 / 63 + 30;
-        power = 0;
         type = (type * 15 / 63) + 1;
 
         if (type >= TYPE_MYSTERY) {
