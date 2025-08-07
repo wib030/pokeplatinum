@@ -458,7 +458,7 @@ static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler);
 static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, BOOL varyDamage);
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
-static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL healInversionFlag);
 static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -6114,7 +6114,7 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
  * @param battler      The battler's ID.
  * @return Calculated healing tick value.
  */
-static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL healInversionFlag)
 {
     int defender1, defender2, defender;
     int i;
@@ -6131,6 +6131,15 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
     if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_HEAL_BLOCK)
     {
        return totalTick;
+    }
+    
+    // Early exit if under effects of Heal Inversion
+    if (healInversionFlag)
+    {
+        if (battleCtx->battleMons[battler].healInversionTurns)
+        {
+            return totalTick;
+        }
     }
 
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
@@ -6191,8 +6200,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
             break;
 
         case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
-            if (battleCtx->battleMons[battler].type1 != TYPE_POISON
-            && battleCtx->battleMons[battler].type2 != TYPE_POISON)
+            if (MON_HAS_TYPE(battler, TYPE_POISON) == FALSE)
             {
                 break;
             }
@@ -6209,6 +6217,19 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
             totalTick += tick;
             tick = 0;
             break;
+    }
+
+    if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, ABILITY_BAD_DREAMS) == 0
+        && (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_NIGHTMARE) == FALSE)
+    {
+        tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 4);
+        if (tick < 1)
+        {
+            tick = 1;
+        }
+        totalTick += tick;
+        tick = 0;
     }
 
     if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM)
@@ -6316,6 +6337,17 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
     if (ability == ABILITY_MAGIC_GUARD)
     {
        return totalTick;
+    }
+
+    if (battleCtx->battleMons[battler].healInversionTurns)
+    {
+        tick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, battler, FALSE);
+        if (tick < 1)
+        {
+            tick = 1;
+        }
+        totalTick += tick;
+        tick = 0;
     }
 
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
@@ -8698,7 +8730,7 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
                     moveDamage = moveDamage * 3 / 2;
                 }
 
-                endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender);
+                endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender, TRUE);
                 endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, defender);
             
                 if (endOfTurnHealingTick <= endOfTurnDamageTick) {
