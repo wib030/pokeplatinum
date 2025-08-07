@@ -3830,10 +3830,10 @@ Expert_Disable_LowPriorityDisable:
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP
     TableEntry BATTLE_EFFECT_DEF_UP_2
-    TableEntry BATTLE_EFFECT_SPDEF_UP
-    TableEntry BATTLE_EFFECT_SPDEF_UP_2
-    TableEntry BATTLE_EFFECT_SPATK_UP
-    TableEntry BATTLE_EFFECT_SPATK_UP_2
+    TableEntry BATTLE_EFFECT_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_2
+    TableEntry BATTLE_EFFECT_SP_ATK_UP
+    TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_GROWTH
     TableEntry BATTLE_EFFECT_AVERAGE_HP
@@ -3856,8 +3856,8 @@ Expert_Disable_LowPriorityDisable:
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN_2
     TableEntry BATTLE_EFFECT_ATK_DOWN
     TableEntry BATTLE_EFFECT_ATK_DOWN_2
-    TableEntry BATTLE_EFFECT_SPATK_DOWN
-    TableEntry BATTLE_EFFECT_SPATK_DOWN_2
+    TableEntry BATTLE_EFFECT_SP_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2
     TableEntry TABLE_END
 
 
