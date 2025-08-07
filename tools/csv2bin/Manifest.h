@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "CsvFile.h"
+#include <iostream>
 
 template <typename T = unsigned, typename C = char>
 C* to_array(C* buf, const T val, off_t offset = 0) {
@@ -110,6 +111,7 @@ public:
         try {
             return constants.at(key);
         } catch (std::out_of_range &e) {
+			std::cout << key << std::endl;
             return std::stoi(key);
         }
     }

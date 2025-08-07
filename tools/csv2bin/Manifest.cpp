@@ -25,11 +25,13 @@ void ColumnSpec::_init(int _width, const fs::path &headerfile, const std::string
             constants = HeaderCache.at({headerfile, prefix});
         } catch (const std::out_of_range &e) {
             std::ifstream handle(headerfile);
-            std::regex pattern("#define +(" + prefix + "\\w+) +(\\d+)$");
+            std::regex pattern("#define +(" + prefix + "\\w+)\\s+(\\d+)\\s*$");
             std::string line;
             std::smatch results;
             while (std::getline(handle, line)) {
+				std::cout << "check line: `" << line << "`" << std::endl;
                 if (std::regex_match(line, results, pattern)) {
+					std::cout << "  hit: `" << results[1] << "`, `" << results[2] << "`" << std::endl;
                     constants[results[1]] = std::stoi(results[2]);
                 }
             }
