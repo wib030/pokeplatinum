@@ -537,21 +537,29 @@ Basic_CheckCanRecoverHP_Terminate:
 Basic_CheckCannotPoison:
     ; If the target is immune to the usual effects of Poison for any reason, score -10.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_STEEL, ScoreMinus10
+    IfLoadedEqualTo TYPE_STEEL, Basic_CheckCannotPoison_CheckCorrosion
     IfLoadedEqualTo TYPE_POISON, ScoreMinus10
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_STEEL, ScoreMinus10
+    IfLoadedEqualTo TYPE_STEEL, Basic_CheckCannotPoison_CheckCorrosion
     IfLoadedEqualTo TYPE_POISON, ScoreMinus10
+    GoTo Basic_CheckCannotPoison_CheckDefenderAbility
 
+Basic_CheckCannotPoison_CheckDefenderAbility:
     ; Check for immunity by ability
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
     IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus10
-
+    IfLoadedEqualTo ABILITY_SHED_SKIN, Try95ChanceForScoreMinus12
     IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Basic_CheckCannotPoison_Hydration
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus10
+    GoTo Basic_CheckCannotPoison_StatusOrSafeguard
+
+Basic_CheckCannotPoison_CheckCorrosion:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_CORROSION, ScoreMinus12
+    GoTo Basic_CheckCannotPoison_CheckDefenderAbility
 
 Basic_CheckCannotPoison_Hydration:
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -562,6 +570,22 @@ Basic_CheckCannotPoison_Hydration:
 Basic_CheckCannotPoison_StatusOrSafeguard:
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
+    GoTo Basic_CheckCannotPoison_CheckPowder
+
+Basic_CheckCannotPoison_CheckPowder:
+    IfMoveEqualTo MOVE_POISON_POWDER, Basic_CheckCannotPoison_Powder
+    GoTo Basic_CheckCannotPoison_End
+
+Basic_CheckCannotPoison_Powder:
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
+    GoTo Basic_CheckCannotPoison_End
+
+Basic_CheckCannotPoison_End:
     PopOrEnd 
 
 Basic_CheckAlreadyUnderLightScreen:
@@ -1188,16 +1212,14 @@ Basic_CheckEmbargo_Terminate:
     PopOrEnd 
 
 Basic_CheckFling:
-    ; If the target is immune to the move due to its typing (?), score -10.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    ; If the target is immune to the move due to its typing (?), score -12.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
 
-    ; If Fling would have 0 base power, score -10.
+    ; If Fling would have 0 base power, score -20.
+    LoadHeldItem AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ITEM_NONE, ScoreMinus20
     LoadFlingPower AI_BATTLER_ATTACKER
-    IfLoadedLessThan 10, ScoreMinus10
-
-    ; If the attacker''s ability is Multitype, score -10.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MULTITYPE, ScoreMinus10
+    IfLoadedEqualTo 0, ScoreMinus20
 
     ; Branch according to possible status effects.
     LoadHeldItemEffect AI_BATTLER_ATTACKER
@@ -1648,8 +1670,40 @@ ScorePlus10:
     AddToMoveScore 10
     PopOrEnd 
 
+Try50ChanceForScorePlus1:
+    IfRandomLessThan 128, ScorePlus1
+    PopOrEnd
+
+Try66ChanceForScorePlus1:
+    IfRandomLessThan 170, ScorePlus1
+    PopOrEnd
+
+Try90ChanceForScorePlus1:
+    IfRandomLessThan 230, ScorePlus1
+    PopOrEnd
+
+Try95ChanceForScorePlus1:
+    IfRandomLessThan 244, ScorePlus1
+    PopOrEnd
+
+Try75ChanceForScorePlus3:
+    IfRandomLessThan 192, ScorePlus3
+    PopOrEnd
+
 Try95ChanceForScorePlus3:
     IfRandomLessThan 244, ScorePlus3
+    PopOrEnd
+
+Try95ChanceForScorePlus5:
+    IfRandomLessThan 244, ScorePlus5
+    PopOrEnd
+
+Try50ChanceForScoreMinus1:
+    IfRandomLessThan 128, ScoreMinus1
+    PopOrEnd
+
+Try50ChanceForScoreMinus3:
+    IfRandomLessThan 128, ScoreMinus3
     PopOrEnd
 
 Try90ChanceForScoreMinus12:
@@ -1736,7 +1790,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_Counter
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Expert_Encore
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AVERAGE_HP, Expert_PainSplit
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, Expert_Nightmare
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_NIGHTMARE, Expert_Nightmare
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_LockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_SleepTalk
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
@@ -3050,10 +3104,8 @@ Expert_Phaze:
     ; - Evasion
     ;
     ; Otherwise, score -3.
-
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
-
     IfMoveEffect AI_BATTLER_DEFENDER, BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_Phaze_TryCheckItem
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_SUCTION_CUPS, Expert_Phaze_TryCheckItem
@@ -3670,24 +3722,144 @@ Expert_RechargeTurn_End:
     PopOrEnd
 
 Expert_Disable:
-    ; If the attacker is slower than the opponent, score +0 and terminate.
+    ; If the attacker is slower than the opponent, try to preemptively use Disable.
     ;
-    ; If the opponent''s last-used move was a Status move, 60.9% chance of score -1.
+    ; If the opponent''s last move is in the tables, +3 or +1 depending on the table.
     ;
-    ; If the opponent''s last-used move was a Damaging move, score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Disable_End
+    ; If the move is not in the tables and is a status move, 95% chance for score -1.
+    ;
+    ; 25% Chance for flat score +1 into a damaging move.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Disable_Slower
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
+    IfLoadedEqualTo MOVE_NONE, ScoreMinus12
+    LoadEffectOfLoadedMove
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try75ChanceForScorePlus3
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try66ChanceForScorePlus1
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadPowerOfLoadedMove
+    IfLoadedGreaterThan 100, Try66ChanceForScorePlus1
     IfLoadedEqualTo 0, Expert_Disable_TryScoreMinus1
+    IfRandomLessThan 192, Expert_Disable_End
+    AddToMoveScore 1
+    GoTo Expert_Disable_End
+
+Expert_Disable_Slower:
+    AddToMoveScore 1
+    IfBattlerIsPhysicalAttacker AI_BATTLER_DEFENDER, Try66ChanceForScorePlus1
+    IfBattlerIsSpecialAttacker AI_BATTLER_DEFENDER, Try66ChanceForScorePlus1
+    AddToMoveScore -1
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadEffectOfLoadedMove
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try75ChanceForScorePlus3
+    IfLoadedInTable Expert_Disable_HighPriorityDisable, Try66ChanceForScorePlus1
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    LoadPowerOfLoadedMove
+    IfLoadedGreaterThan 100, Try66ChanceForScorePlus1
+    IfLoadedEqualTo 0, Expert_Disable_TryScoreMinus1
+    IfRandomLessThan 192, Expert_Disable_End
     AddToMoveScore 1
     GoTo Expert_Disable_End
 
 Expert_Disable_TryScoreMinus1:
-    IfRandomLessThan 100, Expert_Disable_End
+    IfRandomLessThan 12, Expert_Disable_End
     AddToMoveScore -1
 
 Expert_Disable_End:
-    PopOrEnd 
+    PopOrEnd
+
+Expert_Disable_HighPriorityDisable:
+    TableEntry BATTLE_EFFECT_FORCE_SWITCH
+    TableEntry BATTLE_EFFECT_ACC_DOWN_2
+    TableEntry BATTLE_EFFECT_ACC_DOWN
+    TableEntry BATTLE_EFFECT_STATUS_SLEEP
+    TableEntry BATTLE_EFFECT_COUNTER
+    TableEntry BATTLE_EFFECT_MIRROR_COAT
+    TableEntry BATTLE_EFFECT_EVA_UP_2
+    TableEntry BATTLE_EFFECT_EVA_UP
+    TableEntry BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT
+    TableEntry BATTLE_EFFECT_CONTINUE_AND_CONFUSE_SELF
+    TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_RESTORE_HALF_HP
+    TableEntry BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN
+    TableEntry BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_CALL_RANDOM_MOVE
+    TableEntry BATTLE_EFFECT_MULTI_HIT_TEN
+    TableEntry BATTLE_EFFECT_MULTI_HIT
+    TableEntry BATTLE_EFFECT_BEAT_UP
+    TableEntry BATTLE_EFFECT_HIT_THREE_TIMES
+    TableEntry BATTLE_EFFECT_RAISE_DEF_HIT
+    TableEntry BATTLE_EFFECT_PREGNANCY_PUNCH
+    TableEntry BATTLE_EFFECT_EGG_BOMB
+    TableEntry BATTLE_EFFECT_SET_SUBSTITUTE
+    TableEntry BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER
+    TableEntry BATTLE_EFFECT_DECREASE_LAST_MOVE_PP
+    TableEntry BATTLE_EFFECT_SPEED_DOWN_HIT
+    TableEntry BATTLE_EFFECT_INFATUATE_HIT
+    TableEntry BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP
+    TableEntry BATTLE_EFFECT_THAW_AND_BURN_HIT
+    TableEntry BATTLE_EFFECT_HIT_BEFORE_SWITCH
+    TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING
+    TableEntry BATTLE_EFFECT_UPROAR
+    TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
+    TableEntry BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE
+    TableEntry BATTLE_EFFECT_STEAL_STATUS_MOVE
+    TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO
+    TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN
+    TableEntry BATTLE_EFFECT_RAISE_ATTACK_HIT
+    TableEntry BATTLE_EFFECT_CURE_PARTY_STATUS
+    TableEntry BATTLE_EFFECT_HEAL_STATUS
+    TableEntry BATTLE_EFFECT_HOWL
+    TableEntry BATTLE_EFFECT_BULLDOZE
+    TableEntry BATTLE_EFFECT_FORCE_SWITCH_HIT
+    TableEntry BATTLE_EFFECT_RAISE_SP_ATK_HIT
+    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
+    TableEntry BATTLE_EFFECT_METAL_BURST
+    TableEntry BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING
+    TableEntry BATTLE_EFFECT_PROTECT
+    TableEntry BATTLE_EFFECT_RECHARGE_AFTER
+    TableEntry BATTLE_EFFECT_LOWER_SP_DEF_2_HIT
+    TableEntry BATTLE_EFFECT_POISON_MULTI_HIT
+    TableEntry TABLE_END
+
+Expert_Disable_LowPriorityDisable:
+    TableEntry BATTLE_EFFECT_LEVEL_DAMAGE_FLAT
+    TableEntry BATTLE_EFFECT_ATK_UP
+    TableEntry BATTLE_EFFECT_ATK_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP
+    TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_2
+    TableEntry BATTLE_EFFECT_SP_ATK_UP
+    TableEntry BATTLE_EFFECT_SP_ATK_UP_2
+    TableEntry BATTLE_EFFECT_ATK_DEF_UP
+    TableEntry BATTLE_EFFECT_GROWTH
+    TableEntry BATTLE_EFFECT_AVERAGE_HP
+    TableEntry BATTLE_EFFECT_HEAL_IN_3_TURNS
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER
+    TableEntry BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER
+    TableEntry BATTLE_EFFECT_SPIKES_MULTI_HIT
+    TableEntry BATTLE_EFFECT_HIT_TWICE
+    TableEntry BATTLE_EFFECT_PRIORITY_1
+    TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN
+    TableEntry BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS
+    TableEntry BATTLE_EFFECT_RAISE_ALL_STATS_HIT
+    TableEntry BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT
+    TableEntry BATTLE_EFFECT_REMOVE_SCREENS
+    TableEntry BATTLE_EFFECT_CURSE
+    TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT
+    TableEntry BATTLE_EFFECT_DEF_DOWN
+    TableEntry BATTLE_EFFECT_DEF_DOWN_2
+    TableEntry BATTLE_EFFECT_SP_DEF_DOWN
+    TableEntry BATTLE_EFFECT_SP_DEF_DOWN_2
+    TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_ATK_DOWN_2
+    TableEntry BATTLE_EFFECT_SP_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2
+    TableEntry TABLE_END
+
 
 Expert_Counter:
     ; If behind substitute, score -10.
@@ -4119,7 +4291,7 @@ Expert_Protect:
     IfFieldConditionsMask FIELD_CONDITION_SUNNY, Expert_Protect_CheckSun
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_Protect_CheckTrickRoom
     IfFieldConditionsMask FIELD_CONDITION_GRAVITY, Expert_Protect_CheckGravity
-    IfWishActive AI_BATTLER_ATTACKER, Expert_Protect_WishTryScorePlus1
+    IfWishActive AI_BATTLER_ATTACKER, Expert_Protect_WishTryScorePlus3
     IfRandomLessThan 32, ScoreMinus2
     GoTo Expert_Protect_CheckStatusConditions
 
@@ -4286,9 +4458,9 @@ Expert_Protect_CheckGravity:
     AddToMoveScore 1
     GoTo Expert_Protect_CheckStatusConditions
 
-Expert_Protect_WishTryScorePlus1:
-    IfRandomLessThan 4, Expert_Protect_CheckStatusConditions
-    AddToMoveScore 12
+Expert_Protect_WishTryScorePlus3:
+    IfRandomLessThan 32, Expert_Protect_CheckStatusConditions
+    AddToMoveScore 3
     GoTo Expert_Protect_CheckStatusConditions
 
 Expert_Protect_CheckStatusConditions:
@@ -4522,7 +4694,7 @@ Expert_BatonPass_TryScorePlus1:
     GoTo Expert_BatonPass_End
 
 Expert_BatonPass_TryScorePlus2:
-    IfRandomLessThan 192, Expert_BatonPass_End
+    IfRandomLessThan 170, Expert_BatonPass_End
     AddToMoveScore 2
     GoTo Expert_BatonPass_End
 
@@ -6957,90 +7129,140 @@ Expert_Embargo_End:
     PopOrEnd 
 
 Expert_Fling:
-    ; If the opponent resists or is immune to the move and the attacker is holding an item other than
-    ; any of the following, score -1:
-    ; - King''s Rock
-    ; - Razor Fang
-    ; - Poison Barb
-    ; - Toxic Orb
-    ; - Flame Orb
-    ; - Light Ball
+    ; If fling power is 0 or the defender is immune, score - 12.
     ;
-    ; If the attacker''s item would grant Fling < 30 base power, score -2.
+    ; Score +1 to +4 if it is first turn and attacker is holding an item
+    ; that we want to throw right away.
     ;
-    ; If the attacker''s item would grant Fling > 90 base power, 75% chance of score +1, and:
-    ; - If the opponent is weak to the move, additional score +4.
-    ; - Otherwise, 50% chance of additional score +1.
+    ; If there is a special fling effect, score the move according to the
+    ; called move effect.
     ;
-    ; If the attacker''s item would grant Fling > 60 base power, 75% chance of score +1.
+    ; If fling is resisted 4x, 90% chance for score -1.
+    ; If fling is resisted, 50% chance for score -3.
     ;
-    ; Otherwise, 50% chance of score -1.
-	LoadHeldItem AI_BATTLER_ATTACKER
-    IfLoadedInTable Expert_Fling_InstantFling, Expert_Fling_ScorePlus12_End
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Fling_CheckAttackerItem
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Fling_CheckAttackerItem
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Fling_CheckAttackerItem
+    ; If fling is not resisted and is highest damage, 95% chance for score
+    ; +1.
     LoadFlingPower AI_BATTLER_ATTACKER
-    IfLoadedLessThan 30, Expert_Fling_ScoreMinus2
-    IfLoadedGreaterThan 90, Expert_Fling_CheckWeakness
-    IfLoadedGreaterThan 60, Expert_Fling_TryScorePlus1
-    IfRandomLessThan 128, Expert_Fling_End
-    AddToMoveScore -1
-    GoTo Expert_Fling_End
+    IfLoadedEqualTo 0, ScoreMinus12
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo TRUE, Expert_Fling_CheckInstaFling
+    LoadFlingEffect AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo FLING_EFFECT_NONE, Expert_Fling_TryFlingItemBoost
+    GoTo Expert_Fling_Main
 
-Expert_Fling_ScoreMinus2:
-    AddToMoveScore -2
-    GoTo Expert_Fling_End
-
-Expert_Fling_CheckWeakness:
-    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Expert_Fling_ScorePlus4
-    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Expert_Fling_ScorePlus4
-    IfRandomLessThan 128, Expert_Fling_TryScorePlus1
-    AddToMoveScore 1
-    GoTo Expert_Fling_TryScorePlus1
-
-Expert_Fling_ScorePlus4:
-    AddToMoveScore 4
-
-Expert_Fling_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Fling_End
-    AddToMoveScore 1
-    GoTo Expert_Fling_End
-
-Expert_Fling_CheckAttackerItem:
+Expert_Fling_CheckInstaFling:
+    LoadFlingEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo FLING_EFFECT_CHIP, Try95ChanceForScorePlus5
+    IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_InstaFlingBoost
 	LoadHeldItem AI_BATTLER_ATTACKER
-    IfLoadedInTable Expert_Fling_InstantFling, Expert_Fling_ScorePlus12_End
-    LoadHeldItemEffect AI_BATTLER_ATTACKER
-    IfLoadedInTable Expert_Fling_DesirableFlingEffects, Expert_Fling_End
-    AddToMoveScore -1
+	IfLoadedInTable Expert_Fling_InstantFlingByItem, Expert_Fling_InstaFlingBoost
+    GoTo Expert_Fling_CheckFlingEffect
+
+Expert_Fling_InstaFlingBoost:
+    AddToMoveScore 1
+    IfRandomLessThan 12, Expert_Fling_Main
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_Fling_Main
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_Fling_Main
+    AddToMoveScore 1
+    GoTo Expert_Fling_CheckFlingEffect
+
+Expert_Fling_CheckFlingEffect:
+    LoadFlingEffect AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo FLING_EFFECT_NONE, Expert_Fling_TryFlingItemBoost
+    GoTo Expert_Fling_Main
+
+Expert_Fling_TryFlingItemBoost:
+    LoadFlingEffect AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Fling_FieldEffects, Expert_Fling_CheckFieldEffect
+    IfLoadedInTable Expert_Fling_StatusEffects, Expert_Fling_CheckStatus
+    IfLoadedInTable Expert_Fling_StatBoostEffects, Expert_Fling_CheckStatBoost
+    IfLoadedEqualTo FLING_EFFECT_PIVOT, Expert_Phaze
+    IfLoadedEqualTo FLING_EFFECT_HAZE, Expert_Haze
+    IfLoadedEqualTo FLING_EFFECT_DEFOG, Expert_Defog
+    IfLoadedEqualTo FLING_EFFECT_INFATUATION, Basic_CheckCannotAttract
+    IfLoadedEqualTo FLING_EFFECT_LOWER_ACC, Expert_StatusAccuracyDown
+    IfLoadedEqualTo FLING_EFFECT_LOWER_EVASION, Expert_StatusEvasionDown
+    IfLoadedEqualTo FLING_EFFECT_CONFUSION, Basic_CheckCannotConfuse
+    IfLoadedEqualTo FLING_EFFECT_NIGHTMARE, Basic_CheckNightmare
+    IfLoadedEqualTo FLING_EFFECT_WAKE_UP_SLAP, Expert_WakeUpSlap
+    IfLoadedEqualTo FLING_EFFECT_INFLICT_CURSE, Try50ChanceForScorePlus1
+    IfLoadedEqualTo FLING_EFFECT_INFLICT_INGRAIN, Expert_BindingMove
+    GoTo Expert_Fling_Main
+
+Expert_Fling_CheckFieldEffect:
+    AddToMoveScore 1
+    IfLoadedEqualTo FLING_EFFECT_RAIN, Basic_CheckCurrentWeatherIsRain
+    IfLoadedEqualTo FLING_EFFECT_SUN, Basic_CheckCurrentWeatherIsSun
+    IfLoadedEqualTo FLING_EFFECT_HAIL, Basic_CheckHail
+    IfLoadedEqualTo FLING_EFFECT_SAND, Basic_CheckSandstorm
+    IfLoadedEqualTo FLING_EFFECT_TRICK_ROOM, Expert_TrickRoom
+    IfLoadedEqualTo FLING_EFFECT_GRAVITY, Expert_Gravity
+    GoTo Expert_Fling_Main
+
+Expert_Fling_CheckStatus:
+    AddToMoveScore 1
+    IfLoadedEqualTo FLING_EFFECT_PARALYZE, Basic_CheckCannotParalyze
+    IfLoadedEqualTo FLING_EFFECT_BURN, Basic_CheckCannotBurn
+    IfLoadedEqualTo FLING_EFFECT_POISON, Basic_CheckCannotPoison
+    IfLoadedEqualTo FLING_EFFECT_BADLY_POISON, Basic_CheckCannotPoison
+    GoTo Expert_Fling_Main
+	
+Expert_Fling_CheckStatBoost:
+	IfLoadedEqualTo FLING_EFFECT_USER_ATK_UP, Expert_StatusAttackUp
+    IfLoadedEqualTo FLING_EFFECT_USER_DEF_UP, Expert_StatusDefenseUp
+    IfLoadedEqualTo FLING_EFFECT_USER_SPEED_UP, Expert_StatusSpeedUp
+    IfLoadedEqualTo FLING_EFFECT_USER_SPATK_UP, Expert_StatusSpAttackUp
+	IfLoadedEqualTo FLING_EFFECT_USER_SPDEF_UP, Expert_StatusSpDefenseUp
+	GoTo Expert_Fling_Main
+
+Expert_Fling_Main:
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Try90ChanceForScoreMinus12
+    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Try50ChanceForScoreMinus3
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Try50ChanceForScorePlus1
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Try75ChanceForScorePlus3
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Try50ChanceForScoreMinus3
+    IfRandomLessThan 16, Expert_Fling_End
+    AddToMoveScore 1
+    GoTo Expert_Fling_End
 
 Expert_Fling_End:
-    PopOrEnd 
+    PopOrEnd
+    PopOrEnd
+    PopOrEnd
 
-Expert_Fling_DesirableFlingEffects:
-    TableEntry HOLD_EFFECT_SOMETIMES_FLINCH
-    TableEntry HOLD_EFFECT_STRENGTHEN_POISON
-    TableEntry HOLD_EFFECT_PSN_USER
-    TableEntry HOLD_EFFECT_BRN_USER
-    TableEntry HOLD_EFFECT_PIKA_SPATK_UP
-	TableEntry HOLD_EFFECT_DIALGA_BOOST
-	TableEntry HOLD_EFFECT_PALKIA_BOOST
-	TableEntry HOLD_EFFECT_GIRATINA_BOOST
-	TableEntry HOLD_EFFECT_LVLUP_DEF_EV_UP
-	TableEntry HOLD_EFFECT_LVLUP_SPDEF_EV_UP
+Expert_Fling_FieldEffects:
+    TableEntry FLING_EFFECT_TRICK_ROOM
+    TableEntry FLING_EFFECT_GRAVITY
+    TableEntry FLING_EFFECT_RAIN
+    TableEntry FLING_EFFECT_SUN
+    TableEntry FLING_EFFECT_SAND
+    TableEntry FLING_EFFECT_HAIL
     TableEntry TABLE_END
-	
-Expert_Fling_InstantFling:
+
+Expert_Fling_StatusEffects:
+    TableEntry FLING_EFFECT_PARALYZE
+    TableEntry FLING_EFFECT_POISON
+    TableEntry FLING_EFFECT_BADLY_POISON
+    TableEntry FLING_EFFECT_BURN
+    TableEntry TABLE_END
+
+Expert_Fling_StatBoostEffects:
+    TableEntry FLING_EFFECT_USER_ATK_UP
+    TableEntry FLING_EFFECT_USER_DEF_UP
+    TableEntry FLING_EFFECT_USER_SPEED_UP
+    TableEntry FLING_EFFECT_USER_SPATK_UP
+    TableEntry FLING_EFFECT_USER_SPDEF_UP
+    TableEntry TABLE_END
+
+Expert_Fling_InstantFlingByItem:
     TableEntry ITEM_BLACKGLASSES
 	TableEntry ITEM_MOOMOO_MILK
-	TableEntry ITEM_POWER_BRACER
-	TableEntry ITEM_POWER_LENS
-	TableEntry ITEM_POWER_ANKLET
+    TableEntry ITEM_SILK_SCARF
     TableEntry TABLE_END
-	
-Expert_Fling_ScorePlus12_End:
-    AddToMoveScore 12
-    GoTo Expert_Fling_End
 
 Expert_PsychoShift:
     ; If the attacker does not have any status condition, score -12.
@@ -7965,11 +8187,9 @@ Expert_Defog:
     ; Otherwise:
     ; - 80.5% chance of additional score -2.
     ; - If the opponent''s HP <= 70% score -2.
-
 	LoadBattlerAbility AI_BATTLER_DEFENDER
 	IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_Defog_CheckCompetitive
 	IfLoadedEqualTo ABILITY_DEFIANT, Expert_Defog_CheckDefiant
-	
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_Defog_ScreenScrubbing
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_Defog_ScreenScrubbing
     GoTo Expert_Defog_CheckHazardsScore
