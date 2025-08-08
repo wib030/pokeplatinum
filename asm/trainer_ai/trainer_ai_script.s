@@ -691,9 +691,16 @@ Basic_CheckCannotParalyze_ImmuneToStatus:
 
 Basic_CheckCannotSubstitute:
     ; If the attacker''s Substitute would fail, score -8/-10.
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScoreMinus8
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 26, ScoreMinus10
-    PopOrEnd 
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Basic_CheckCannotSubstitute_CheckSpeed
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 26, ScoreMinus12
+     GoTo Basic_CheckCannotSubstitute_End
+
+Basic_CheckCannotSubstitute_CheckSpeed:
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, ScoreMinus12
+    IfRandomLessThan 85, ScoreMinus12
+
+Basic_CheckCannotSubstitute_End:
+    PopOrEnd
 
 Basic_CheckCannotLeechSeed:
     ; If the target is already Seeded or immune to the effects of Leech Seed, score -10.
