@@ -2140,4 +2140,15 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
 */
 int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleCtx* battleCtx, u8 side, int index);
 
+/**
+* @brief Get maximum possible number of hits for a move effect.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker    battleMon ID of the attacking mon.
+* @param moveEffect  The move effect ID to reference.
+* @return Maximum possible hits for the move, defaulting to 1.
+*/
+int BattleSystem_GetMoveMaxHits(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int moveEffect);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

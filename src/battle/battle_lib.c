@@ -21793,3 +21793,50 @@ int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleCtx* batt
 
     return battler;
 }
+
+int BattleSystem_GetMoveMaxHits(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int moveEffect)
+{
+    int i;
+    int maxHits;
+
+    switch (moveEffect)
+    {
+    default:
+        maxHits = 1;
+        break;
+
+    case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+    case BATTLE_EFFECT_MULTI_HIT:
+        maxHits = 5;
+        break;
+    
+    case BATTLE_EFFECT_HIT_THREE_TIMES:
+        maxHits = 3;
+        break;
+    case BATTLE_EFFECT_HIT_TWICE:
+        maxHits = 2;
+        break;
+
+    case BATTLE_EFFECT_MULTI_HIT_TEN:
+        maxHits = 10;
+        break;
+
+    case BATTLE_EFFECT_BEAT_UP:
+        Party* party = BattleSystem_Party(battleSys, attacker);
+        Pokemon* mon;
+        for (int i = 0; i < BattleSystem_PartyCount(battleSys, attacker); i++) {
+            mon = Party_GetPokemonBySlotIndex(party, i);
+
+            if (Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
+                && ((Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE))
+            {
+                maxHits++;
+            }
+        }
+        break;
+    }
+
+    return maxHits;
+}
