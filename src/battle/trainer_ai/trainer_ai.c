@@ -5173,10 +5173,11 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     int numHits, maxHits, statusMoveCount;
     int substituteHP, damage, totalDamage, berryMultiplier;
     int endOfTurnHealingTick, endOfTurnDamageTick, moveEffect;
-    BOOL hasSubstituteIncentive, multiHitFlag;
+    BOOL hasSubstituteIncentive, multiHitFlag, damageOutpaceFlag;
 
     hasSubstituteIncentive = FALSE;
     multiHitFlag = FALSE;
+    damageOutpaceFlag = FALSE;
 
     side = Battler_Side(battleSys, battler);
 
@@ -5188,6 +5189,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
 
     if (endOfTurnHealingTick > endOfTurnDamageTick)
     {
+        damageOutpaceFlag = TRUE;
         hasSubstituteIncentive = TRUE;
     }
 
@@ -5374,7 +5376,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
         }
     }
 
-    if (multiHitFlag)
+    if (multiHitFlag || damageOutpaceFlag)
     {
         hasSubstituteIncentive = FALSE;
     }
