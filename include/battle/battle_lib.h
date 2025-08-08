@@ -2129,4 +2129,15 @@ BOOL BattleAI_IsMultiHitMove(BattleSystem* battleSys, BattleContext* battleCtx, 
 */
 BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
 
+/**
+* @brief Get battleMon ID number of alive battlers by side and slot index.
+*
+* @param battleSys
+* @param battleCtx
+* @param side       The battler side to consider.
+* @param index      The slot that that mon is in on its given side. i.e. 0 or 1.
+* @return battleMon ID of the battler in the given slot on the given side if it is alive.
+*/
+int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleCtx* battleCtx, u8 side, int index);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

@@ -21764,3 +21764,32 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
 
     return result;
 }
+
+int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleCtx* battleCtx, u8 side, int index)
+{
+    int battler;
+
+    // Early exit if index or side are out of bounds
+    if (index > 1 || index < 0 || side > 1 || side < 0)
+    {
+        return BATTLER_NONE;
+    }
+
+    // Early exit if singles and index is out of bounds
+    if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) == FALSE)
+    {
+        if (index > 0)
+        {
+            return BATTLER_NONE;
+        }
+    }
+
+    battler = side + NUM_BATTLE_SIDES * index;
+
+    if (battleCtx->battleMons[battler].curHP == 0)
+    {
+        return BATTLER_NONE;
+    }
+
+    return battler;
+}
