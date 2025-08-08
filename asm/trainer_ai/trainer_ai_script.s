@@ -661,7 +661,7 @@ Basic_CheckCannotParalyze:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus10
     IfMoveEqualTo MOVE_THUNDER_WAVE, Basic_CheckCannotParalyze_ThunderWave
     IfMoveEqualTo MOVE_STUN_SPORE, Basic_CheckCannotParalyze_PowderMove
     GoTo Basic_CheckCannotParalyze_ImmuneToStatus
