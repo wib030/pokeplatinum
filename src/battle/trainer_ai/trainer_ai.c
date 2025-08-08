@@ -441,6 +441,7 @@ static void AICmd_IfBattlerHasInvulnerableMove(BattleSystem* battleSys, BattleCo
 static void AICmd_IfAbilityInPlay(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfCanBreakSashOrSturdy(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadFlingEffect(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -458,7 +459,7 @@ static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler);
 static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, BOOL varyDamage);
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
-static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL healInversionFlag);
+static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem* battleSys, BattleContext* battleCtx, int battler, BOOL considerHealInversionFlag);
 static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 static BOOL AI_CanCurePartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -634,7 +635,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerHasInvulnerableMove,
     AICmd_IfAbilityInPlay,
     AICmd_IfCanBreakSashOrSturdy,
-    AICmd_LoadFlingEffect
+    AICmd_LoadFlingEffect,
+    AICmd_IfHasSubstituteIncentive
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -5154,6 +5156,188 @@ static void AICmd_LoadFlingEffect(BattleSystem* battleSys, BattleContext* battle
     AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, battlerItem, ITEM_PARAM_FLING_EFFECT);
 }
 
+static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler = AIScript_Battler(battleCtx, inBattler);
+
+    u8 side, opponentSide, moveType;
+    u16 move;
+    u32 effectivenessFlags;
+    int battlerOpponent, maxOpponents;
+    int i, j, k;
+    int numHits, maxHits, statusMoveCount;
+    int substituteHP, damage, totalDamage, berryMultiplier;
+    int endOfTurnHealingTick, endOfTurnDamageTick, moveEffect;
+    BOOL hasSubstituteIncentive, multiHitFlag;
+
+    hasSubstituteIncentive = FALSE;
+    multiHitFlag = FALSE;
+
+    side = Battler_Side(battleSys, battler);
+
+    battlerOpponent = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    opponentSide = Battler_Side(battleSys, battlerOpponent);
+
+    endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender, TRUE);
+    endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, defender);
+
+    if (endOfTurnHealingTick > endOfTurnDamageTick)
+    {
+        hasSubstituteIncentive = TRUE;
+    }
+
+    for (j = 0; j < MAX_BATTLERS_PER_SIDE; j++)
+    {
+        battlerOpponent = BattleSystem_AliveBattlerSlotBySide(battleSys, battleCtx, opponentSide, j);
+        statusMoveCount = 0;
+
+        if (battlerOpponent != BATTLER_NONE)
+        {
+            for (i = 0; i < LEARNED_MOVES_MAX; i++)
+            {
+                if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battlerOpponent, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+                {
+                    move = battleCtx->battleMons[battlerOpponent].moves[i];
+                    moveEffect = MOVE_DATA(battleCtx->battleMons[battlerOpponent].moves[i]).effect;
+
+                    if (MOVE_DATA(move).power)
+                    {
+                        if (BattleAI_IsMultiHitMove(battleSys, battleCtx, battlerOpponent, moveEffect))
+                        {
+                            effectivenessFlags = 0;
+                            damage = 0;
+                            totalDamage = 0;
+                            substituteHP = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 4);
+                            moveType = TrainerAI_MoveType(battleSys, battleCtx, battlerOpponent, move);
+                            maxHits = BattleSystem_GetMoveMaxHits(battleSys, battleCtx, battlerOpponent, moveEffect);
+
+                            if (Battler_Ability(battleCtx, battlerOpponent) == ABILITY_SKILL_LINK || maxHits < 5)
+                            {
+                                numHits = maxHits;
+                            }
+                            else
+                            {
+                                numhits = (BattleSystem_RandNext(battleSys) % maxHits);
+
+                                if (numHits < maxHits / 2 + 1)
+                                {
+                                    numhits += maxHits / 2;
+                                }
+                            }
+
+                            damage = BattleSystem_CalcMoveDamage(battleSys,
+                                battleCtx,
+                                move,
+                                battleCtx->sideConditionsMask[side],
+                                battleCtx->fieldConditionsMask,
+                                MOVE_DATA(move).power,
+                                moveType,
+                                battlerOpponent,
+                                battler,
+                                1);
+
+                            totalDamage = BattleSystem_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                move,
+                                moveType,
+                                battlerOpponent,
+                                battler,
+                                damage,
+                                &effectivenessFlags);
+
+                            if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+                            {
+                                totalDamage = 0;
+                            }
+
+                            // Skip the other hits if the move is immune status
+                            if (totalDamage)
+                            {
+                                if (Battle_MapResistBerryEffectToType(Battler_HeldItemEffect(battleCtx, battler)) != TYPE_MYSTERY)
+                                {
+                                    berryMultiplier = 2;
+                                }
+                                else
+                                {
+                                    berryMultiplier = 0;
+                                }
+
+                                for (k = 1; k < numHits; k++)
+                                {
+                                    damage = BattleSystem_CalcMoveDamage(battleSys,
+                                        battleCtx,
+                                        move,
+                                        battleCtx->sideConditionsMask[side],
+                                        battleCtx->fieldConditionsMask,
+                                        MOVE_DATA(move).power,
+                                        moveType,
+                                        battlerOpponent,
+                                        battler,
+                                        1);
+
+                                    damage = BattleSystem_ApplyTypeChart(battleSys,
+                                        battleCtx,
+                                        move,
+                                        moveType,
+                                        battlerOpponent,
+                                        battler,
+                                        damage,
+                                        &effectivenessFlags);
+
+                                    if (berryMultiplier)
+                                    {
+                                        damage *= berryMultiplier;
+                                    }
+
+                                    totalDamage += damage;
+
+                                    if (totalDamage > substituteHP)
+                                    {
+                                        multiHitFlag = TRUE;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (MOVE_DATA(move).range & RANGE_MAGIC_BOUNCE)
+                        {
+                            statusMoveCount++;
+                            if (statusMoveCount > 2)
+                            {
+                                // 75% chance per status move for last two status moves
+                                // to consider battler as having substitute incentive
+                                if (BattleSystem_RandNext(battleSys) % 4)
+                                {
+                                    hasSubstituteIncentive = TRUE;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (multiHitFlag)
+    {
+        hasSubstituteIncentive = FALSE;
+    }
+
+    if (hasSubstituteIncentive)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
 /**
  * @brief Push an address for the AI script onto the cursor stack.
  * 
@@ -6114,7 +6298,7 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
  * @param battler      The battler's ID.
  * @return Calculated healing tick value.
  */
-static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL healInversionFlag)
+static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL considerHealInversionFlag)
 {
     int defender1, defender2, defender;
     int i;
@@ -6134,7 +6318,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
     }
     
     // Early exit if under effects of Heal Inversion
-    if (healInversionFlag)
+    if (considerHealInversionFlag)
     {
         if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns)
         {

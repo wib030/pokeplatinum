@@ -833,6 +833,12 @@
     .long \battler
     .endm
 
+    .macro IfHasSubstituteIncentive battler, jump
+    .long 145
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry
