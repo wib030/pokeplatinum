@@ -5198,6 +5198,53 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
 
         if (battlerOpponent != BATTLER_NONE)
         {
+            if (battleCtx->battleMons[battlerOpponent].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE)
+            {
+                hasSubstituteIncentive = TRUE;
+            }
+
+            if (battleCtx->battleMons[battlerOpponent].status & MON_CONDITION_BURN)
+            {
+                if (Battle_AbilityDetersStatus(battleSys, battleCtx, Battler_Ability(battleCtx, battlerOpponent), MON_CONDITION_BURN == FALSE))
+                {
+                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battlerOpponent))
+                    {
+                        if (BattleSystem_RandNext(battleSys) % 3)
+                        {
+                            hasSubstituteIncentive = TRUE;
+                        }
+                    }
+                }
+            }
+
+            if (battleCtx->battleMons[battlerOpponent].status & MON_CONDITION_SLEEP)
+            {
+                if (Battle_AbilityDetersStatus(battleSys, battleCtx, Battler_Ability(battleCtx, battlerOpponent), MON_CONDITION_SLEEP == FALSE))
+                {
+                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battlerOpponent))
+                    {
+                        if (BattleSystem_RandNext(battleSys) % 12)
+                        {
+                            hasSubstituteIncentive = TRUE;
+                        }
+                    }
+                }
+            }
+
+            if (battleCtx->battleMons[battlerOpponent].status & MON_CONDITION_ANY_POISON)
+            {
+                if (Battle_AbilityDetersStatus(battleSys, battleCtx, Battler_Ability(battleCtx, battlerOpponent), MON_CONDITION_SLEEP == FALSE))
+                {
+                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battlerOpponent))
+                    {
+                        if (BattleSystem_RandNext(battleSys) % 2)
+                        {
+                            hasSubstituteIncentive = TRUE;
+                        }
+                    }
+                }
+            }
+
             for (i = 0; i < LEARNED_MOVES_MAX; i++)
             {
                 if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battlerOpponent, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)

@@ -3669,55 +3669,169 @@ Expert_Substitute:
     ; - If it was Leech Seed and the opponent is currently Seeded, 60.9% chance of score +1.
     ;
     ; Otherwise, no further score modifications.
-    IfMoveNotKnown AI_BATTLER_ATTACKER, MOVE_FOCUS_PUNCH, Expert_Substitute_CheckUserHP
-    IfRandomLessThan 96, Expert_Substitute_CheckUserHP
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_Substitute_BatonPass
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_Substitute_LeechSeed
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_Substitute_Toxic
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_Substitute_FocusPunch
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_FASTER, Expert_Substitute_Slower
+    IfRandomLessThan 64, Expert_Substitute_Main
     AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_BatonPass:
+    IfHPPercentLessThan 50, Expert_Substitute_BatonPass_TryScorePlus2
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Substitute_HighPriorityPinchBerries, Expert_Substitute_BatonPass_TryScorePlus2
+    IfLoadedInTable Expert_Substitute_LowPriorityPinchBerries, Expert_Substitute_BatonPass_TryScorePlus1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_BatonPass_TryScorePlus2:
+    IfRandomLessThan 32, Expert_Substitute_Main
+    AddToMoveScore 1
+    IfRandomLessThan 32, Expert_Substitute_Main
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+    
+Expert_Substitute_BatonPass_TryScorePlus1:
+    IfRandomLessThan 128, Expert_Substitute_Main
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_LeechSeed:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_LIQUID_OOZE, Expert_Substitute_Main
+    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Substitute_LeechSeed_TryScoreMinus1
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_Substitute_LoadProtectChain
+
+Expert_Substitute_LoadProtectChain:
+    LoadProtectChain AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 0, Expert_Substitute_LeechSeed_TryScoreMinus1
+    IfRandomLessThan 64, Expert_Substitute_Main
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_LeechSeed_TryScoreMinus1:
+    IfRandomLessThan 64, Expert_Substitute_Main
+    AddToMoveScore -1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_Toxic:
+    IfBattlerDetersStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Substitute_Main
+    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Substitute_Toxic_TryScoreMinus1
+    IfRandomLessThan 128, Expert_Substitute_Main
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+    
+Expert_Substitute_Toxic_TryScoreMinus1:
+    IfRandomLessThan 64, Expert_Substitute_Main
+    AddToMoveScore -1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_FocusPunch:
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_Substitute_FocusPunch_TryScoreMinus2
+    IfRandomLessThan 85, Expert_Substitute_Main
+    AddToMoveScore 1
+    IfRandomLessThan 85, Expert_Substitute_Main
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_FocusPunch_TryScoreMinus2:
+    IfRandomLessThan 85, Expert_Substitute_Main
+    AddToMoveScore -1
+    IfRandomLessThan 85, Expert_Substitute_Main
+    AddToMoveScore -1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_Slower:
+    IfEnemyCanChunkOrKO Expert_Substitute_Slower_TryScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_Substitute_LoadProtectChain
+    IfRandomLessThan 192, Expert_Substitute_Main
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_Slower_TryScoreMinus3:
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_Substitute_Main
+    IfRandomLessThan 6, Expert_Substitute_Main
+    AddToMoveScore -1
+    IfRandomLessThan 32, Expert_Substitute_Main
+    AddToMoveScore -1
+    IfRandomLessThan 85, Expert_Substitute_Main
+    AddToMoveScore -1
+    GoTo Expert_Substitute_Main
+
+Expert_Substitute_Main:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FORCE_SWITCH, Expert_Substitute_PhazeCheck
+    IfHasSubstituteIncentive AI_BATTLER_ATTACKER, Expert_Substitute_HasIncentive
+    IfRandomLessThan 32, Expert_Substitute_Main2
+    AddToMoveScore -1
+    IfRandomLessThan 64, Expert_Substitute_Main2
+    AddToMoveScore -1
+    GoTo Expert_Substitute_Main2
+
+Expert_Substitute_PhazeCheck:
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_WHIRLWIND, Expert_Substitute_Phaze_TryScoreMinus3
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SOUNDPROOF, Expert_Substitute_Main2
+
+Expert_Substitute_Phaze_TryScoreMinus3:
+    IfRandomLessThan 12, Expert_Substitute_Main2
+    AddToMoveScore -2
+    IfRandomLessThan 128, Expert_Substitute_Main2
+    AddToMoveScore -1
+    GoTo Expert_Substitute_Main2
+
+Expert_Substitute_HasIncentive:
+    IfRandomLessThan 64, Expert_Substitute_Main2
+    AddToMoveScore 1
+    GoTo Expert_Substitute_Main2
+
+Expert_Substitute_Main2:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_ENCORE, Expert_Substitute_CheckSpeed
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TAUNT, Expert_Substitute_CheckSpeed
+    IfRandomLessThan 128, Expert_Substitute_CheckUserHP
+    AddToMoveScore 1
+    GoTo Expert_Substitute_CheckUserHP
+
+Expert_Substitute_CheckSpeed:
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_FASTER, ScoreMinus12
+    IfRandomLessThan 136, ScoreMinus12
+    GoTo Expert_Substitute_CheckUserHP
 
 Expert_Substitute_CheckUserHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Substitute_CheckTargetLastMove
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_Substitute_TryScoreMinus1_FinalRound
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Substitute_TryScoreMinus1_SecondRound
-    IfRandomLessThan 100, Expert_Substitute_TryScoreMinus1_SecondRound
-    AddToMoveScore -1
-
-Expert_Substitute_TryScoreMinus1_SecondRound:
-    IfRandomLessThan 100, Expert_Substitute_TryScoreMinus1_FinalRound
-    AddToMoveScore -1
-
-Expert_Substitute_TryScoreMinus1_FinalRound:
-    IfRandomLessThan 100, Expert_Substitute_CheckTargetLastMove
-    AddToMoveScore -1
-
-Expert_Substitute_CheckTargetLastMove:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Substitute_End
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadEffectOfLoadedMove 
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_SLEEP, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_BURN, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Expert_Substitute_CheckTargetConfused
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_Substitute_CheckTargetSeeded
-    GoTo Expert_Substitute_End
-
-Expert_Substitute_CheckTargetStatus:
-    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_Substitute_TryScorePlus1
-    GoTo Expert_Substitute_End
-
-Expert_Substitute_CheckTargetConfused:
-    IfNotVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_Substitute_TryScorePlus1
-    GoTo Expert_Substitute_End
-
-Expert_Substitute_CheckTargetSeeded:
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Substitute_End
-
-Expert_Substitute_TryScorePlus1:
-    IfRandomLessThan 100, Expert_Substitute_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 74, Expert_Substitute_HighHP
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_Substitute_MediumHP
+    IfRandomLessThan 170, Expert_Substitute_End
     AddToMoveScore 1
+    GoTo Expert_Substitute_End
+
+Expert_Substitute_HighHP:
+    IfRandomLessThan 85, Expert_Substitute_End
+    AddToMoveScore 1
+    GoTo Expert_Substitute_End
+
+Expert_Substitute_MediumHP:
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_Substitute_End
+    AddToMoveScore -2
+    GoTo Expert_Substitute_End
 
 Expert_Substitute_End:
     PopOrEnd 
+
+Expert_Substitute_HighPriorityPinchBerries:
+    TableEntry HOLD_EFFECT_PINCH_ATK_UP
+    TableEntry HOLD_EFFECT_PINCH_SPEED_UP
+    TableEntry HOLD_EFFECT_PINCH_SPATK_UP
+    TableEntry HOLD_EFFECT_PINCH_RANDOM_UP
+    TableEntry HOLD_EFFECT_PINCH_PRIORITY
+    TableEntry TABLE_END
+
+Expert_Substitute_LowPriorityPinchBerries:
+    TableEntry HOLD_EFFECT_PINCH_DEF_UP
+    TableEntry HOLD_EFFECT_PINCH_SPDEF_UP
+    TableEntry HOLD_EFFECT_PINCH_CRITRATE_UP
+    TableEntry HOLD_EFFECT_PINCH_ACC_UP
+    TableEntry TABLE_END
 
 Expert_RechargeTurn:
     ; If the opponent would resist or is immune to the move, score -1.
