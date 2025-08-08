@@ -1491,6 +1491,8 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
 		case MON_COND_CHECK_STATE_SLEEP_HEAL:
             if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
 			&& battleCtx->battleMons[battler].sleepHealFlag == FALSE
+			&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS) == 0
+			&& (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_NIGHTMARE) == FALSE
             && battleCtx->battleMons[battler].curHP) {
 				battleCtx->battleMons[battler].sleepHealFlag = TRUE;
 				

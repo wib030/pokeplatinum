@@ -6136,7 +6136,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
     // Early exit if under effects of Heal Inversion
     if (healInversionFlag)
     {
-        if (battleCtx->battleMons[battler].healInversionTurns)
+        if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns)
         {
             return totalTick;
         }
@@ -6220,7 +6220,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
     }
 
     if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
-        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, ABILITY_BAD_DREAMS) == 0
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_BAD_DREAMS) == 0
         && (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_NIGHTMARE) == FALSE)
     {
         tick = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 4);
@@ -6339,7 +6339,7 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
        return totalTick;
     }
 
-    if (battleCtx->battleMons[battler].healInversionTurns)
+    if (battleCtx->battleMons[battler].moveEffectsData.healInversionTurns)
     {
         tick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, battler, FALSE);
         if (tick < 1)
