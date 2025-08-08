@@ -704,6 +704,7 @@ Basic_CheckCannotLeechSeed:
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    IfLoadedEqualTo ABILITY_LIQUID_OOZE, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckCannotDisable:
@@ -1750,7 +1751,7 @@ Expert_Main:
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH_HIT, Expert_Phaze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_Toxic
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN_HIT, Expert_LightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
@@ -1784,7 +1785,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_VitalThrow
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECHARGE_AFTER, Expert_RechargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_ToxicLeechSeed
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_LeechSeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_Disable
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE_HIT, Expert_Disable
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_Counter
@@ -3256,34 +3257,63 @@ Expert_Recovery_TryScorePlus2:
 Expert_Recovery_End:
     PopOrEnd 
 
-Expert_ToxicLeechSeed:
+Expert_Toxic:
     ; If the attacker has at least one damaging move, apply all of the following which apply:
     ; - If the attacker''s HP <= 50%, 80.5% chance of additional score -3.
     ; - If the defender''s HP <= 50%, 80.5% chance of additional score -3.
-    ;
-    ; If the attacker knows a move that either increases its Special Defense by 1 stage or acts as
-    ; Protect, 76.6% chance of score +2. (Note: no such move exists in Vanilla that only raises
-    ; Special Defense by 1 stage.)
-    IfAttackerHasNoDamagingMoves Expert_ToxicLeechSeed_CheckMoveEffectsKnown
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_ToxicLeechSeed_CheckTargetHP
-    IfRandomLessThan 50, Expert_ToxicLeechSeed_CheckTargetHP
+    IfAttackerHasNoDamagingMoves Expert_Toxic_CheckStatStages
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Toxic_CheckTargetHP
+    IfRandomLessThan 50, Expert_Toxic_CheckTargetHP
     AddToMoveScore -3
 
-Expert_ToxicLeechSeed_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_ToxicLeechSeed_CheckMoveEffectsKnown
-    IfRandomLessThan 50, Expert_ToxicLeechSeed_CheckMoveEffectsKnown
+Expert_Toxic_CheckTargetHP:
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_Toxic_CheckStatStages
+    IfRandomLessThan 50, Expert_Toxic_CheckStatStages
     AddToMoveScore -3
 
-Expert_ToxicLeechSeed_CheckMoveEffectsKnown:
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SP_DEF_UP, Expert_ToxicLeechSeed_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_ToxicLeechSeed_TryScorePlus2
-    GoTo Expert_ToxicLeechSeed_End
+Expert_Toxic_CheckStatStages:
+	IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 7, Expert_Toxic_TryScorePlus2
+	IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 7, Expert_Toxic_TryScorePlus2
+    GoTo Expert_Toxic_CheckDamage
 
-Expert_ToxicLeechSeed_TryScorePlus2:
-    IfRandomLessThan 60, Expert_ToxicLeechSeed_End
+Expert_Toxic_TryScorePlus2:
+    IfRandomLessThan 60, Expert_Toxic_CheckDamage
     AddToMoveScore 2
+	
+Expert_Toxic_CheckDamage:
+	IfCanChunkOrKOEnemy Expert_Toxic_TryScoreMinus3
+	GoTo Expert_Toxic_End
+	
+Expert_Toxic_TryScoreMinus3:
+	IfRandomLessThan 60, Expert_Toxic_End
+    AddToMoveScore -3
 
-Expert_ToxicLeechSeed_End:
+Expert_Toxic_End:
+    PopOrEnd
+	
+Expert_LeechSeed:
+    ; If the attacker has at least one damaging move, apply all of the following which apply:
+    ; - If the attacker''s HP <= 50%, 80.5% chance of additional score -3.
+    ; - If the defender''s HP <= 50%, 80.5% chance of additional score -3.
+	
+    IfAttackerHasNoDamagingMoves Expert_LeechSeed_CheckMoveEffectsKnown
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_LeechSeed_CheckTargetHP
+    IfRandomLessThan 50, Expert_LeechSeed_CheckTargetHP
+    AddToMoveScore -3
+
+Expert_LeechSeed_CheckTargetHP:
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_LeechSeed_CheckMoveEffectsKnown
+    IfRandomLessThan 50, Expert_LeechSeed_CheckMoveEffectsKnown
+    AddToMoveScore -3
+
+Expert_LeechSeed_CheckMoveEffectsKnown:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Expert_LeechSeed_ScoreMinus2
+    GoTo Expert_LeechSeed_End
+
+Expert_LeechSeed_ScoreMinus2:
+    AddToMoveScore -2
+
+Expert_LeechSeed_End:
     PopOrEnd 
 
 Expert_LightScreen:
