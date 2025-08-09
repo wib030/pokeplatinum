@@ -3705,8 +3705,8 @@ Expert_Substitute_LeechSeed:
 
 Expert_Substitute_LoadProtectChain:
     LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedGreaterThan 0, Expert_Substitute_LeechSeed_TryScoreMinus1
-    IfRandomLessThan 64, Expert_Substitute_Main
+    IfLoadedLessThan 1, Expert_Substitute_LeechSeed_TryScoreMinus1
+    IfRandomLessThan 170, Expert_Substitute_Main
     AddToMoveScore 1
     GoTo Expert_Substitute_Main
 
