@@ -5189,9 +5189,14 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
 
     if (endOfTurnHealingTick > endOfTurnDamageTick)
     {
-        damageOutpaceFlag = TRUE;
         hasSubstituteIncentive = TRUE;
     }
+
+    if (endOfTurnHealingTick < endOfTurnDamageTick)
+    {
+        damageOutpaceFlag = TRUE;
+    }
+
 
     for (j = 0; j < MAX_BATTLERS_PER_SIDE; j++)
     {

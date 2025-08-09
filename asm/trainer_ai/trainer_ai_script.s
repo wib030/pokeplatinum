@@ -3762,9 +3762,11 @@ Expert_Substitute_Slower_TryScoreMinus3:
 Expert_Substitute_Main:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FORCE_SWITCH, Expert_Substitute_PhazeCheck
     IfHasSubstituteIncentive AI_BATTLER_ATTACKER, Expert_Substitute_HasIncentive
+    IfRandomLessThan 6, Expert_Substitute_Main2
+    AddToMoveScore -1
     IfRandomLessThan 32, Expert_Substitute_Main2
     AddToMoveScore -1
-    IfRandomLessThan 64, Expert_Substitute_Main2
+    IfRandomLessThan 32, Expert_Substitute_Main2
     AddToMoveScore -1
     GoTo Expert_Substitute_Main2
 
