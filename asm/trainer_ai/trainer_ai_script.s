@@ -3755,6 +3755,11 @@ Expert_Substitute_LeechSeed_TryScorePlus3:
     AddToMoveScore 3
     GoTo Expert_Substitute_Main
 
+Expert_Substitute_LeechSeed_TryScoreMinus3:
+    IfRandomLessThan 28, Expert_Substitute_Main
+    AddToMoveScore -3
+    GoTo Expert_Substitute_Main
+
 Expert_Substitute_Toxic:
     IfBattlerDetersStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Substitute_Main
     IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Substitute_Toxic_TryScoreMinus1
