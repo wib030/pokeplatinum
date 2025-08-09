@@ -704,7 +704,7 @@ Basic_CheckCannotSubstitute_End:
 
 Basic_CheckCannotLeechSeed:
     ; If the target is already Seeded or immune to the effects of Leech Seed, score -10.
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, ScoreMinus10
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, ScoreMinus20
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
@@ -3314,6 +3314,7 @@ Expert_LeechSeed_CheckTargetHP:
     AddToMoveScore -3
 
 Expert_LeechSeed_CheckMoveEffectsKnown:
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, ScoreMinus20
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Expert_LeechSeed_ScoreMinus2
     GoTo Expert_LeechSeed_End
 
@@ -3702,6 +3703,7 @@ Expert_Substitute_LeechSeed:
     IfLoadedEqualTo ABILITY_LIQUID_OOZE, Expert_Substitute_Main
     IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Substitute_LeechSeed_TryScoreMinus1
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_Substitute_LoadProtectChain
+    GoTo Expert_Substitute_Main
 
 Expert_Substitute_LoadProtectChain:
     LoadProtectChain AI_BATTLER_ATTACKER
@@ -4449,7 +4451,7 @@ Expert_Protect:
     GoTo Expert_Protect_CheckStatusConditions
 
 Expert_Protect_StreakBreaker:
-    IfRandomLessThan 12, Expert_Protect_End
+    IfRandomLessThan 8, Expert_Protect_End
     AddToMoveScore -30
     GoTo Expert_Protect_End
 
