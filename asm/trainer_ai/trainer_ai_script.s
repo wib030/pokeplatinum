@@ -3302,6 +3302,7 @@ Expert_LeechSeed:
     ; If the attacker has at least one damaging move, apply all of the following which apply:
     ; - If the attacker''s HP <= 50%, 80.5% chance of additional score -3.
     ; - If the defender''s HP <= 50%, 80.5% chance of additional score -3.
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, ScoreMinus12
     IfAttackerHasNoDamagingMoves Expert_LeechSeed_CheckMoveEffectsKnown
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_LeechSeed_CheckTargetHP
     IfRandomLessThan 50, Expert_LeechSeed_CheckTargetHP
@@ -3736,7 +3737,8 @@ Expert_Substitute_BatonPass_TryScorePlus1:
 Expert_Substitute_LeechSeed:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIQUID_OOZE, Expert_Substitute_Main
-    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Substitute_LeechSeed_TryScoreMinus2
+    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Substitute_LeechSeed_TryScoreMinus3
+    AddToMoveScore 1
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_Substitute_LoadProtectChain
     IfRandomLessThan 40, Expert_Substitute_Main
     AddToMoveScore 1
@@ -3744,14 +3746,14 @@ Expert_Substitute_LeechSeed:
 
 Expert_Substitute_LoadProtectChain:
     LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedLessThan 1, Expert_Substitute_LeechSeed_TryScoreMinus2
-    IfRandomLessThan 85, Expert_Substitute_Main
+    IfLoadedLessThan 1, Expert_Substitute_LeechSeed_TryScoreMinus3
+    IfRandomLessThan 64, Expert_Substitute_Main
     AddToMoveScore 1
     GoTo Expert_Substitute_Main
 
-Expert_Substitute_LeechSeed_TryScoreMinus2:
+Expert_Substitute_LeechSeed_TryScoreMinus3:
     IfRandomLessThan 28, Expert_Substitute_Main
-    AddToMoveScore -2
+    AddToMoveScore -3
     GoTo Expert_Substitute_Main
 
 Expert_Substitute_Toxic:

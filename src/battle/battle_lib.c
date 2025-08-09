@@ -16961,7 +16961,7 @@ BOOL Battle_AbilityDetersVolatileStatus(BattleSystem *battleSys, BattleContext *
     return result;
 }
 
-BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int moveEffect)
+BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, u32 moveEffect)
 {
     BOOL result;
 

@@ -1189,7 +1189,7 @@ static void AICmd_IfMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     if (battleCtx->battleMons[battler].moveEffectsMask & mask) {
-        if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, Battler_Ability(battleCtx, battler), mask))
+        if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, Battler_Ability(battleCtx, battler), mask) == FALSE)
         {
             AIScript_Iter(battleCtx, jump);
         }

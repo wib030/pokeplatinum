@@ -1791,7 +1791,7 @@ BOOL Battle_AbilityDetersVolatileStatus(BattleSystem *battleSys, BattleContext *
 * @param moveEffect         The bitmask of the move effect.
 * @Return   The TRUE / FALSE result of whether the ability deters the given move effect.
 */
-BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, int moveEffect);
+BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx, u8 ability, u32 moveEffect);
 
 /**
 * @brief Determine whether the AI should paralyze the defender based on stats and moves.
