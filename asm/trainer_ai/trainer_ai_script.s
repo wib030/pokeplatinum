@@ -3302,20 +3302,55 @@ Expert_LeechSeed:
     ; If the attacker has at least one damaging move, apply all of the following which apply:
     ; - If the attacker''s HP <= 50%, 80.5% chance of additional score -3.
     ; - If the defender''s HP <= 50%, 80.5% chance of additional score -3.
-	
     IfAttackerHasNoDamagingMoves Expert_LeechSeed_CheckMoveEffectsKnown
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_LeechSeed_CheckTargetHP
     IfRandomLessThan 50, Expert_LeechSeed_CheckTargetHP
     AddToMoveScore -3
 
 Expert_LeechSeed_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_LeechSeed_CheckMoveEffectsKnown
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 32, Expert_LeechSeed_CheckMoveEffectsKnown
     IfRandomLessThan 50, Expert_LeechSeed_CheckMoveEffectsKnown
     AddToMoveScore -3
 
 Expert_LeechSeed_CheckMoveEffectsKnown:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, ScoreMinus20
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Expert_LeechSeed_ScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_LeechSeed_SynergizingMove
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SET_SUBSTITUTE, Expert_LeechSeed_SynergizingMove
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_LeechSeed_CheckPoison
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_LeechSeed_CheckChip
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CURSE, Expert_LeechSeed_CheckChip
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CHIP, Expert_LeechSeed_CheckChip
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_BIND, Expert_LeechSeed_CheckChip
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_LeechSeed_CheckChip
+    GoTo Expert_LeechSeed_End
+
+Expert_LeechSeed_CheckPoison:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_LeechSeed_End
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_LeechSeed_End
+    IfRandomLessThan 64, Expert_LeechSeed_End
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_LeechSeed_End
+    AddToMoveScore 1
+    GoTo Expert_LeechSeed_End
+
+Expert_LeechSeed_CheckChip:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_LeechSeed_End
+    IfRandomLessThan 64, Expert_LeechSeed_End
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_LeechSeed_End
+    AddToMoveScore 1
+    GoTo Expert_LeechSeed_End
+
+Expert_LeechSeed_SynergizingMove:
+    IfRandomLessThan 12, Expert_LeechSeed_End
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_LeechSeed_End
+    AddToMoveScore 1
+    IfRandomLessThan 230, Expert_LeechSeed_End
+    AddToMoveScore 1
     GoTo Expert_LeechSeed_End
 
 Expert_LeechSeed_ScoreMinus2:
@@ -3701,20 +3736,22 @@ Expert_Substitute_BatonPass_TryScorePlus1:
 Expert_Substitute_LeechSeed:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIQUID_OOZE, Expert_Substitute_Main
-    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Substitute_LeechSeed_TryScoreMinus1
+    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED_RECIPIENT, Expert_Substitute_LeechSeed_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_Substitute_LoadProtectChain
+    IfRandomLessThan 40, Expert_Substitute_Main
+    AddToMoveScore 1
     GoTo Expert_Substitute_Main
 
 Expert_Substitute_LoadProtectChain:
     LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedLessThan 1, Expert_Substitute_LeechSeed_TryScoreMinus1
+    IfLoadedLessThan 1, Expert_Substitute_LeechSeed_TryScoreMinus2
     IfRandomLessThan 85, Expert_Substitute_Main
     AddToMoveScore 1
     GoTo Expert_Substitute_Main
 
-Expert_Substitute_LeechSeed_TryScoreMinus1:
-    IfRandomLessThan 64, Expert_Substitute_Main
-    AddToMoveScore -1
+Expert_Substitute_LeechSeed_TryScoreMinus2:
+    IfRandomLessThan 28, Expert_Substitute_Main
+    AddToMoveScore -2
     GoTo Expert_Substitute_Main
 
 Expert_Substitute_Toxic:
