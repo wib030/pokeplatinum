@@ -3747,7 +3747,7 @@ Expert_Substitute_LoadProtectChain:
     LoadProtectChain AI_BATTLER_ATTACKER
     IfLoadedGreaterThan 0, Expert_Substitute_LeechSeed_TryScorePlus3
     IfRandomLessThan 64, Expert_Substitute_Main
-    AddToMoveScore 1
+    AddToMoveScore -1
     GoTo Expert_Substitute_Main
 
 Expert_Substitute_LeechSeed_TryScorePlus3:
@@ -3807,11 +3807,11 @@ Expert_Substitute_Slower_TryScoreMinus3:
 Expert_Substitute_Main:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FORCE_SWITCH, Expert_Substitute_PhazeCheck
     IfHasSubstituteIncentive AI_BATTLER_ATTACKER, Expert_Substitute_HasIncentive
-    IfRandomLessThan 6, Expert_Substitute_Main2
+    IfRandomLessThan 12, Expert_Substitute_Main2
     AddToMoveScore -1
-    IfRandomLessThan 32, Expert_Substitute_Main2
+    IfRandomLessThan 128, Expert_Substitute_Main2
     AddToMoveScore -1
-    IfRandomLessThan 32, Expert_Substitute_Main2
+    IfRandomLessThan 128, Expert_Substitute_Main2
     AddToMoveScore -1
     GoTo Expert_Substitute_Main2
 

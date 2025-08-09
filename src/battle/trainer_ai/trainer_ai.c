@@ -5207,7 +5207,18 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
         {
             if (battleCtx->battleMons[battlerOpponent].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE)
             {
-                hasSubstituteIncentive = TRUE;
+                if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, Battler_Ability(battleCtx, battlerOpponent), battleCtx->battleMons[battlerOpponent].statusVolatile) == FALSE)
+                {
+                    hasSubstituteIncentive = TRUE;
+                }
+            }
+
+            if (battleCtx->battleMons[battlerOpponent].moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+            {
+                if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, Battler_Ability(battleCtx, battlerOpponent), battleCtx->battleMons[battlerOpponent].moveEffectsMask) == FALSE)
+                {
+                    hasSubstituteIncentive = TRUE;
+                }
             }
 
             if (battleCtx->battleMons[battlerOpponent].status & MON_CONDITION_BURN)
