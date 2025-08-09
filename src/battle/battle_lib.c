@@ -21765,7 +21765,7 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
     return result;
 }
 
-int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleCtx* battleCtx, u8 side, int index)
+int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleContext* battleCtx, u8 side, int index)
 {
     int battler;
 

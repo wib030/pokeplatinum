@@ -2138,7 +2138,7 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
 * @param index      The slot that that mon is in on its given side. i.e. 0 or 1.
 * @return battleMon ID of the battler in the given slot on the given side if it is alive.
 */
-int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleCtx* battleCtx, u8 side, int index);
+int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleContext* battleCtx, u8 side, int index);
 
 /**
 * @brief Get maximum possible number of hits for a move effect.

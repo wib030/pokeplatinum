@@ -3679,7 +3679,7 @@ Expert_Substitute:
     GoTo Expert_Substitute_Main
 
 Expert_Substitute_BatonPass:
-    IfHPPercentLessThan 50, Expert_Substitute_BatonPass_TryScorePlus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Substitute_BatonPass_TryScorePlus2
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedInTable Expert_Substitute_HighPriorityPinchBerries, Expert_Substitute_BatonPass_TryScorePlus2
     IfLoadedInTable Expert_Substitute_LowPriorityPinchBerries, Expert_Substitute_BatonPass_TryScorePlus1

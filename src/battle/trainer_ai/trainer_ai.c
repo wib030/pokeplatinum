@@ -5184,8 +5184,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     battlerOpponent = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
     opponentSide = Battler_Side(battleSys, battlerOpponent);
 
-    endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, defender, TRUE);
-    endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, defender);
+    endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, battler, TRUE);
+    endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, battler);
 
     if (endOfTurnHealingTick > endOfTurnDamageTick)
     {
@@ -5271,11 +5271,11 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
                             }
                             else
                             {
-                                numhits = (BattleSystem_RandNext(battleSys) % maxHits);
+                                numHits = (BattleSystem_RandNext(battleSys) % maxHits);
 
                                 if (numHits < maxHits / 2 + 1)
                                 {
-                                    numhits += maxHits / 2;
+                                    numHits += maxHits / 2;
                                 }
                             }
 
@@ -5299,8 +5299,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
                                 damage,
                                 &effectivenessFlags);
 
-                            if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
-                                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+                            if ((effectivenessFlags & MOVE_STATUS_IMMUNE) == FALSE
+                                || (effectivenessFlags & MOVE_STATUS_IGNORE_IMMUNITY))
                             {
                                 totalDamage = 0;
                             }
