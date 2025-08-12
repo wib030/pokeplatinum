@@ -5187,8 +5187,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
         opponent2 = BATTLER_PLAYER_SLOT_2;
     }
     else {
-        opponent1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-        opponent2 = opponent1;
+        opponent1 = BATTLER_PLAYER_SLOT_1;
+        opponent2 = BATTLER_PLAYER_SLOT_1;
     }
 
     battlerOpponent = opponent1;
@@ -6410,8 +6410,8 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
         defender1 = BATTLER_PLAYER_SLOT_1;
         defender2 = BATTLER_PLAYER_SLOT_2;
     } else {
-        defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-        defender2 = defender1;
+        defender1 = BATTLER_PLAYER_SLOT_1;
+        defender2 = BATTLER_PLAYER_SLOT_1;
     }
 
     for (i = 0; i < 2; i++)
@@ -6619,8 +6619,8 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         defender2 = BATTLER_PLAYER_SLOT_2;
     }
     else {
-        defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-        defender2 = defender1;
+        defender1 = BATTLER_PLAYER_SLOT_1;
+        defender2 = BATTLER_PLAYER_SLOT_1;
     }
 
     for (i = 0; i < 2; i++)
@@ -7555,7 +7555,6 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
         defender1 = BATTLER_PLAYER_SLOT_1;
         defender2 = BATTLER_PLAYER_SLOT_1;
     }
-
 
     // Early exit case if taunted into all status moves
     if(battleCtx->battleMons[battler].moveEffectsData.tauntedTurns > 0) {
