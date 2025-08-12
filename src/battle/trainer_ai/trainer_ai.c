@@ -5182,7 +5182,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     side = Battler_Side(battleSys, battler);
 
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
         opponent1 = BATTLER_PLAYER_SLOT_1;
         opponent2 = BATTLER_PLAYER_SLOT_2;
     }
@@ -6406,7 +6406,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
         }
     }
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
         defender1 = BATTLER_PLAYER_SLOT_1;
         defender2 = BATTLER_PLAYER_SLOT_2;
     } else {
@@ -6614,7 +6614,7 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         tick = 0;
     }
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
         defender1 = BATTLER_PLAYER_SLOT_1;
         defender2 = BATTLER_PLAYER_SLOT_2;
     }
