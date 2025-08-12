@@ -3854,6 +3854,8 @@ Expert_Substitute_CheckUserHP:
 Expert_Substitute_HighHP:
     IfRandomLessThan 85, Expert_Substitute_End
     AddToMoveScore 1
+    IfRandomLessThan 85, Expert_Substitute_End
+    AddToMoveScore 1
     GoTo Expert_Substitute_End
 
 Expert_Substitute_MediumHP:
@@ -4787,10 +4789,27 @@ Expert_Endure:
     ; If the attacker''s HP < 12%, score -1.
     ;
     ; If the attacker''s HP < 35%, 72.7% chance of score +1.
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_Endure_CheckPoisonHeal
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_Endure_CheckMagicGuard
     LoadProtectChain AI_BATTLER_ATTACKER
     IfLoadedGreaterThan 0, ScoreMinus12
+    IfEnemyCanKO Expert_Endure_TryScorePlus4
+    GoTo Expert_Endure_Main
+
+Expert_Endure_TryScorePlus4:
+    IfRandomLessThan 1, Expert_Endure_Main
+    AddToMoveScore 1
+    IfRandomLessThan 4, Expert_Endure_Main
+    AddToMoveScore 1
+    IfRandomLessThan 32, Expert_Endure_Main
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_Endure_Main
+    AddToMoveScore 1
+    GoTo Expert_Endure_Main
+
+Expert_Endure_Main:
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_Endure_CheckPoisonHeal
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_Endure_CheckMagicGuard
+    IfFieldConditionsMask FIELD_CONDITION_HAILING, Expert_Endure_CheckHail
+    IfFieldConditionsMask FIELD_CONDITION_SANDSTORM, Expert_Endure_CheckSand
     GoTo Expert_Endure_CheckHP
 
 Expert_Endure_CheckPoisonHeal:
@@ -4806,9 +4825,37 @@ Expert_Endure_CheckMagicGuard:
     AddToMoveScore -12
     GoTo Expert_Endure_End
 
+Expert_Endure_CheckHail:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_ICE, Expert_Endure_CheckHP
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_ICE, Expert_Endure_CheckHP
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Endure_CheckHP
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, Expert_Endure_CheckHP
+    AddToMoveScore -12
+    GoTo Expert_Endure_End
+
+Expert_Endure_CheckSand:
+    LoadTypeFrom LOAD_ATTACKER_TYPE_1
+    IfLoadedEqualTo TYPE_ROCK, Expert_Endure_CheckHP
+    IfLoadedEqualTo TYPE_GROUND, Expert_Endure_CheckHP
+    IfLoadedEqualTo TYPE_STEEL, Expert_Endure_CheckHP
+    LoadTypeFrom LOAD_ATTACKER_TYPE_2
+    IfLoadedEqualTo TYPE_ROCK, Expert_Endure_CheckHP
+    IfLoadedEqualTo TYPE_GROUND, Expert_Endure_CheckHP
+    IfLoadedEqualTo TYPE_STEEL, Expert_Endure_CheckHP
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Endure_CheckHP
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, Expert_Endure_CheckHP
+    AddToMoveScore -12
+    GoTo Expert_Endure_End
+
 Expert_Endure_CheckHP:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 12, Expert_Endure_ScoreMinus1
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 35, Expert_Endure_TryScorePlus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Endure_TryScorePlus1
     GoTo Expert_Endure_End
 
 Expert_Endure_ScoreMinus1:
