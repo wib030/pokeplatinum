@@ -5168,7 +5168,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     u8 side, opponentSide, moveType;
     u16 move;
     u32 effectivenessFlags;
-    int battlerOpponent, maxOpponents;
+    int battlerOpponent, maxOpponents, opponent1, opponent2;
     int i, j, k;
     int numHits, maxHits, statusMoveCount;
     int substituteHP, damage, totalDamage, berryMultiplier;
@@ -5181,7 +5181,17 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
 
     side = Battler_Side(battleSys, battler);
 
-    battlerOpponent = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
+        opponent1 = BATTLER_PLAYER_SLOT_1;
+        opponent2 = BATTLER_PLAYER_SLOT_2;
+    }
+    else {
+        opponent1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+        opponent2 = opponent1;
+    }
+
+    battlerOpponent = opponent1;
     opponentSide = Battler_Side(battleSys, battlerOpponent);
 
     endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, battler, TRUE);
@@ -5202,7 +5212,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     {
         if (j > 0)
         {
-            battlerOpponent = BattleSystem_Partner(battleSys, battlerOpponent);
+            battlerOpponent = opponent2;
         }
 
         statusMoveCount = 0;
@@ -6396,11 +6406,11 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
         }
     }
 
-    defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
-        defender2 = BattleSystem_Partner(battleSys, defender1);
+        defender1 = BATTLER_PLAYER_SLOT_1;
+        defender2 = BATTLER_PLAYER_SLOT_2;
     } else {
+        defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
         defender2 = defender1;
     }
 
@@ -6604,12 +6614,12 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         tick = 0;
     }
 
-    defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
-        defender2 = BattleSystem_Partner(battleSys, defender1);
+        defender1 = BATTLER_PLAYER_SLOT_1;
+        defender2 = BATTLER_PLAYER_SLOT_2;
     }
     else {
+        defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
         defender2 = defender1;
     }
 
