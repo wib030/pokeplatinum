@@ -6396,11 +6396,11 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
         }
     }
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        defender1 = BATTLER_ENEMY_SLOT_1;
-        defender2 = BATTLER_ENEMY_SLOT_2;
+    defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
+        defender2 = BattleSystem_Partner(battleSys, defender1);
     } else {
-        defender1 = BATTLER_ENEMY_SLOT_1;
         defender2 = defender1;
     }
 
@@ -6604,11 +6604,12 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         tick = 0;
     }
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        defender1 = BATTLER_ENEMY_SLOT_1;
-        defender2 = BATTLER_ENEMY_SLOT_2;
-    } else {
-        defender1 = BATTLER_ENEMY_SLOT_1;
+    defender1 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_AI_PARTNER) {
+        defender2 = BattleSystem_Partner(battleSys, defender1);
+    }
+    else {
         defender2 = defender1;
     }
 
