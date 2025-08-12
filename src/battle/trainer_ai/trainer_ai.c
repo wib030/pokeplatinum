@@ -5200,10 +5200,15 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
 
     for (j = 0; j < MAX_BATTLERS_PER_SIDE; j++)
     {
-        battlerOpponent = BattleSystem_AliveBattlerSlotBySide(battleSys, battleCtx, opponentSide, j);
+        if (j > 0)
+        {
+            battlerOpponent = BattleSystem_Partner(battleSys, battlerOpponent);
+        }
+
         statusMoveCount = 0;
 
-        if (battlerOpponent != BATTLER_NONE)
+        if (battlerOpponent != BATTLER_NONE
+            && battleCtx->battleMons[battlerOpponent].curHP)
         {
             if (battleCtx->battleMons[battlerOpponent].statusVolatile & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE)
             {
