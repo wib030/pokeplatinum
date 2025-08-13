@@ -5960,6 +5960,10 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     int power;
     int type;
     int typeTmp;
+	int multiHitChance;
+    int multiHitHits;
+	int multiHitMaxHits;
+	BOOL multiHitMove;
     u32 effectivenessFlags;
     s32 damage;
 
@@ -5968,6 +5972,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     power = 0;
     type = 0;
     effectivenessFlags = 0;
+	multiHitMove = FALSE;
 
     switch (move) {
     case MOVE_NATURAL_GIFT:
@@ -6205,12 +6210,107 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             damage,
             &effectivenessFlags);
     battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
+	
+	switch (MOVE_DATA(move).effect)
+	{
+		case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+        case BATTLE_EFFECT_MULTI_HIT:
+			multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+            multiHitHits = 2;
+
+            if (multiHitChance < 7) // 70% chance for 2 or 3 hits
+			{
+				multiHitHits += multiHitChance & 1; // 2 or 3 hits
+            }
+            else // 30% chance for 4 or 5 hits
+			{
+                multiHitHits += (multiHitChance & 1) + 2; // 4 or 5 hits
+            }
+
+            if (Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+			{
+                multiHitHits = (BattleSystem_RandNext(battleSys) % 3) + 3;
+            }
+            if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_SKILL_LINK)
+			{
+                multiHitHits = 5;
+            }
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, AI_CONTEXT.attacker)] & SIDE_CONDITION_LUCKY_CHANT)
+			{
+                if (multiHitHits < 3)
+				{
+                    multiHitHits = 3;
+                }
+            }
+			multiHitMove = TRUE;
+			break;
+			
+		case BATTLE_EFFECT_MULTI_HIT_TEN:
+			multiHitChance = BattleSystem_RandNext(battleSys) % 10;
+            multiHitHits = 2;
+
+            if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_SKILL_LINK)
+            {
+                multiHitHits = 10;
+            }
+            else
+            {
+                if (Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+                {
+                    multiHitHits = (3 + BattleSystem_RandNext(battleSys) % 3) + (3 + BattleSystem_RandNext(battleSys) % 3); // This is two 345 dice rolls
+                }
+                else
+                {
+                    // restructured this to use less flops (using else for the middle case has less comparisons)
+                    if (multiHitChance < 3)
+                    {
+                        multiHitHits += BattleSystem_RandNext(battleSys) % 2;
+                    }
+                    else
+                    {
+                        if (multiHitChance > 6)
+                        {
+                            multiHitHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
+                        }
+                        else
+                        {
+                            multiHitHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
+                        }
+                    }
+                }
+
+                if (battleCtx->sideConditionsMask[Battler_Side(battleSys, AI_CONTEXT.attacker)] & SIDE_CONDITION_LUCKY_CHANT)
+                {
+                    if (multiHitHits < 3)
+                    {
+                        multiHitHits = 3;
+                    }
+                }
+            }
+			multiHitMove = TRUE;
+			break;
+			
+		case BATTLE_EFFECT_HIT_THREE_TIMES:
+			multiHitHits = 3;
+			multiHitMove = TRUE;
+			break;
+			
+		case BATTLE_EFFECT_HIT_TWICE:
+			multiHitHits = 2;
+			multiHitMove = TRUE;
+			break;
+	}
 
     if (effectivenessFlags & MOVE_STATUS_IMMUNE) {
         damage = 0;
     } else {
         damage = BattleSystem_Divide(damage * variance, 100);
     }
+	
+	if (multiHitMove == TRUE)
+	{
+		damage *= multiHitHits;
+	}
 
     return damage;
 }
