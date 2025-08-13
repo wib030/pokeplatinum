@@ -4832,6 +4832,8 @@ Expert_Endure_CheckHail:
     IfLoadedEqualTo TYPE_ICE, Expert_Endure_CheckHP
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Endure_CheckHP
+	IfLoadedEqualTo ABILITY_SNOW_WARNING, Expert_Endure_CheckHP
+	IfLoadedEqualTo ABILITY_SLUSH_RUSH, Expert_Endure_CheckHP
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, Expert_Endure_CheckHP
     AddToMoveScore -12
@@ -4848,6 +4850,8 @@ Expert_Endure_CheckSand:
     IfLoadedEqualTo TYPE_STEEL, Expert_Endure_CheckHP
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Endure_CheckHP
+	IfLoadedEqualTo ABILITY_SAND_STREAM, Expert_Endure_CheckHP
+	IfLoadedEqualTo ABILITY_SAND_FORCE, Expert_Endure_CheckHP
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, Expert_Endure_CheckHP
     AddToMoveScore -12
