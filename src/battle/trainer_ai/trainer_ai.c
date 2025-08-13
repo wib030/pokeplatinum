@@ -6686,7 +6686,9 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         }
 
         if (heldItemEffect != HOLD_EFFECT_NO_WEATHER_CHIP_POWDER) {
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM)
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM
+				&& ability != ABILITY_SAND_STREAM
+				&& ability != ABILITY_SAND_FORCE)
             {
                 if (battleCtx->battleMons[battler].type1 != TYPE_ROCK
                 && battleCtx->battleMons[battler].type1 != TYPE_GROUND
@@ -6706,7 +6708,9 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
             }
 
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING
-                && ability != ABILITY_ICE_BODY)
+                && ability != ABILITY_ICE_BODY
+				&& ability != ABILITY_SNOW_WARNING
+				&& ability != ABILITY_SLUSH_RUSH)
             {
                 if (battleCtx->battleMons[battler].type1 != TYPE_ICE
                 && battleCtx->battleMons[battler].type2 != TYPE_ICE)
