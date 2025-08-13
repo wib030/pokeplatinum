@@ -10366,6 +10366,12 @@ TagStrategy_FollowMe:
     ;    - If the partner''s HP is < 30%, 75% chance of score +2
     ;  - If the attacker''s HP < 30%, 75% chance of score -5
 	IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, ScoreMinus30
+	LoadProtectChain AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo 0, TagStrategy_FollowMe_CheckHP
+    AddToMoveScore 2
+	GoTo TagStrategy_FollowMe_CheckHP
+	
+TagStrategy_FollowMe_CheckHP:
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, TagStrategy_FollowMe_SelfHighHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, TagStrategy_FollowMe_SelfMediumHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, TagStrategy_FollowMe_SelfLowHP
