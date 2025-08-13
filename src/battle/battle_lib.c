@@ -21856,3 +21856,330 @@ int BattleSystem_GetMoveMaxHits(BattleSystem* battleSys, BattleContext* battleCt
 
     return maxHits;
 }
+
+int BattleSystem_GetMultiHitExpectedMoveHits(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
+{
+    int i, maxRolls;
+    int rand, randTemp;
+    int expectedHits, maxHits;
+    int moveEffect, moveAccuracy;
+
+    moveEffect = MOVE_DATA(move).effect;
+
+    expectedHits = 1;
+    maxHits = BattleSystem_GetMoveMaxHits(battleSys, battleCtx, attacker, moveEffect);
+
+    if (maxHits == 1)
+    {
+        return expectedHits;
+    }
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_SKILL_LINK)
+    {
+        return maxHits;
+    }
+
+    // 50% chance for bo3, 50% chance for bo5
+    maxRolls = (BattleSystem_RandNext(battleSys) % 2) * 2 + 3;
+
+    moveAccuracy = BattleSystem_GetEffectiveMoveAccuracy(battleSys, battleCtx, attacker, defender, move);
+
+    switch (moveEffect)
+    {
+    default:
+        break;
+
+    case BATTLE_EFFECT_MULTI_HIT_TEN:
+        rand = 0;
+
+        for (i = 0; i < maxRolls; i++)
+        {
+            randTemp = BattleSystem_RandNext(battleSys) % 10;
+
+            if (rand < randTemp)
+            {
+                rand = randTemp;
+            }
+        }
+
+        expectedHits = 2;
+
+        if (rand < 3)
+        {
+            expectedHits += (rand % 2);
+        }
+        else
+        {
+            if (rand < 7)
+            {
+                expectedHits += 2 + (BattleSystem_RandNext(battleSys) % 4);
+            }
+            else
+            {
+                expectedHits += 6 + (BattleSystem_RandNext(battleSys) % 3);
+            }
+        }
+
+        if (Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+        {
+            expectedHits = 6 + (BattleSystem_RandNext(battleSys) % 3) + (BattleSystem_RandNext(battleSys) % 3);
+        }
+        break;
+
+    case BATTLE_EFFECT_SPIKES_MULTI_HIT:
+    case BATTLE_EFFECT_MULTI_HIT:
+        rand = 0;
+
+        for (i = 0; i < maxRolls; i++)
+        {
+            randTemp = BattleSystem_RandNext(battleSys) % 10;
+
+            if (rand < randTemp)
+            {
+                rand = randTemp;
+            }
+        }
+
+        expectedHits = 2;
+
+        if (rand < 7)
+        {
+            expectedHits += (rand % 2);
+        }
+        else
+        {
+            expectedHits += 2 + (rand % 2);
+        }
+
+        if (Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_THREE_FOUR_FIVE_DICE)
+        {
+            expectedHits = 3 + (BattleSystem_RandNext(battleSys) % 3);
+        }
+        break;
+
+    case BATTLE_EFFECT_HIT_TWICE:
+    case BATTLE_EFFECT_HIT_THREE_TIMES:
+        if (moveAccuracy >= 100)
+        {
+            expectedHits = maxHits;
+        }
+        for (i = 0; i < maxHits; i++)
+        {
+            rand = 0;
+
+            for (j = 0; i < maxRolls; j++)
+            {
+                randTemp = BattleSystem_RandNext(battleSys) % 100;
+
+                if (rand < randTemp)
+                {
+                    rand = randTemp;
+                }
+            }
+
+            if (rand < moveAccuracy)
+            {
+                expectedHits = i;
+            }
+        }
+        return expectedHits;
+        break;
+
+    case BATTLE_EFFECT_BEAT_UP:
+        expectedHits = maxHits;
+        break;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT)
+    {
+        if (expectedHits < maxHits / 2 + 1)
+        {
+            expectedHits = maxHits / 2 + 1;
+        }
+    }
+
+    return expectedHits;
+}
+
+#include "data/hit_rate_stages.h"
+
+int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
+{
+    u8 moveType;
+    s8 accStages, evaStages;
+    int itemEffect, itemPower;
+    int moveAccuracy;
+
+    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, attacker, ABILITY_NO_GUARD) > 0
+        || MOVE_DATA(move).accuracy == 0)
+    {
+        // 200 special case for no acc check
+        return 200;
+    }
+
+    moveType = CalcMoveType(battleSys, battleCtx, attacker, Battler_HeldItem(battleCtx, attacker), move);
+
+    if (MON_HAS_TYPE(attacker, moveType))
+    {
+        moveAccuracy = MOVE_DATA(move).accuracy * 110 / 100;
+    }
+    else
+    {
+        moveAccuracy = MOVE_DATA(move).accuracy
+    }
+
+    accStages = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ACCURACY] - 6;
+    evaStages = 6 - battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_EVASION];
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_SIMPLE) {
+        accStages *= 2;
+    }
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SIMPLE)) {
+        evaStages *= 2;
+    }
+    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, attacker, ABILITY_AWARE))
+    {
+        accStage = 0;
+        evaStages = 0;
+    }
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE)) {
+        accStages = 0;
+    }
+    if ((Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE)
+        || (battleCtx->moveCur == MOVE_FOCUS_PUNCH)) {
+        evaStages = 0;
+    }
+    if (MON_IS_IDENTIFIED(defender) && evaStages < 0) {
+        evaStages = 0;
+    }
+
+    s8 sumStages = 6 + evaStages + accStages;
+    if (sumStages < 0) {
+        sumStages = 0;
+    }
+    if (sumStages > 12) {
+        sumStages = 12;
+    }
+
+    if (NO_CLOUD_NINE)
+    {
+        if (WEATHER_IS_SUN)
+        {
+            switch (MOVE_DATA(move).effect)
+            {
+            default:
+                break;
+
+            case BATTLE_EFFECT_THUNDER:
+            case BATTLE_EFFECT_HURRICANE:
+                if (MON_HAS_TYPE(attacker, moveType))
+                {
+                    moveAccuracy = 55
+                }
+                else
+                {
+                    moveAccuracy = 50;
+                }
+                break;
+            }
+        }
+
+        if (WEATHER_IS_RAIN)
+        {
+            switch (MOVE_DATA(move).effect)
+            {
+            default:
+                break;
+
+            case BATTLE_EFFECT_THUNDER:
+            case BATTLE_EFFECT_HURRICANE:
+                moveAccuracy = 200;
+                break;
+            }
+        }
+
+        if (WEATHER_IS_SAND)
+        {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SAND_VEIL))
+            {
+                moveAccuracy = moveAccuracy * 80 / 100;
+            }
+
+            if (moveType == TYPE_ROCK)
+            {
+                moveAccuracy = moveAccuracy * 11 / 10;
+            }
+        }
+
+        if (WEATHER_IS_HAIL)
+        {
+            if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SNOW_CLOAK))
+            {
+                moveAccuracy = moveAccuracy * 80 / 100;
+            }
+        }
+
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_DEEP_FOG) {
+            moveAccuracy = moveAccuracy * 6 / 10;
+        }
+    }
+
+    moveAccuracy *= HitRateByStage[sumStages].numerator;
+    moveAccuracy /= HitRateByStage[sumStages].denominator;
+
+    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_ILLUMINATE))
+    {
+        moveAccuracy = moveAccuracy * 12 / 10;
+    }
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_COMPOUND_EYES) {
+        moveAccuracy = moveAccuracy * 13 / 10;
+    }
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_HUSTLE && MOVE_DATA(move).class == CLASS_PHYSICAL) {
+        moveAccuracy = moveAccuracy * 8 / 10;
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_TANGLED_FEET) == TRUE
+        && (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_CONFUSION)) {
+        moveAccuracy /= 2;
+    }
+
+    itemEffect = Battler_HeldItemEffect(battleCtx, defender);
+    itemPower = Battler_HeldItemPower(battleCtx, defender, 0);
+
+    if (itemEffect == HOLD_EFFECT_ACC_REDUCE) {
+        moveAccuracy = moveAccuracy * (100 - itemPower) / 100;
+    }
+
+    itemEffect = Battler_HeldItemEffect(battleCtx, attacker);
+    itemPower = Battler_HeldItemPower(battleCtx, attacker, 0);
+
+    switch (itemEffect)
+    {
+    default:
+        break;
+
+    case HOLD_EFFECT_ACCURACY_UP:
+        moveAccuracy = moveAccuracy * (100 + itemPower) / 100;
+        break;
+
+    case HOLD_EFFECT_ACCURACY_UP_SLOWER:
+        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, defender, FALSE) == COMPARE_SPEED_SLOWER)
+        {
+            moveAccuracy = moveAccuracy * (100 + itemPower) / 100;
+        }
+        break;
+    }
+
+    if (battleCtx->battleMons[attacker].moveEffectsData.micleBerry)
+    {
+        moveAccuracy = moveAccuracy * 12 / 10;
+    }
+
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
+        moveAccuracy = moveAccuracy * 10 / 6;
+    }
+
+    return moveAccuracy;
+}

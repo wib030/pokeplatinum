@@ -2151,4 +2151,28 @@ int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleContext* 
 */
 int BattleSystem_GetMoveMaxHits(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int moveEffect);
 
+/**
+* @brief Get expected number of multihit move hits using best of 3 or best of 5.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker    battleMon ID of the attacking mon.
+* @param defender    battleMon ID of the defending mon.
+* @param move        The move ID to reference.
+* @return Expected number of hits based on simulated bo3 or bo5 rolls.
+*/
+int BattleSystem_GetMultiHitExpectedMoveHits(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
+
+/**
+* @brief Get the effective move accuracy after all modifiers.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker    battleMon ID of the attacking mon.
+* @param defender    battleMon ID of the defending mon.
+* @param move        The move ID to reference.
+* @return The accuracy of the move after all modifiers are factored.
+*/
+int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
