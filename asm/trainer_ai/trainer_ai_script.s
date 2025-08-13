@@ -9679,8 +9679,11 @@ Expert_ChumRush_TryScorePlus2:
     GoTo Expert_ChumRush_End
 	
 Expert_ChumRush_TryScorePlus3:
-	AddToMoveScore 2
-    IfRandomLessThan 85, Expert_ChumRush_End
+    IfRandomLessThan 8, Expert_ChumRush_End
+	AddToMoveScore 1
+    IfRandomLessThan 32, Expert_ChumRush_End
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_ChumRush_End
     AddToMoveScore 1
     GoTo Expert_ChumRush_End
 	
@@ -10391,7 +10394,12 @@ TagStrategy_FollowMe:
 	IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, ScoreMinus30
 	LoadProtectChain AI_BATTLER_ATTACKER_PARTNER
     IfLoadedEqualTo 0, TagStrategy_FollowMe_CheckHP
-    AddToMoveScore 2
+    IfRandomLessThan 12, TagStrategy_FollowMe_CheckHP
+    AddToMoveScore 1
+    IfRandomLessThan 32, TagStrategy_FollowMe_CheckHP
+    AddToMoveScore 1
+    IfRandomLessThan 52, TagStrategy_FollowMe_CheckHP
+    AddToMoveScore 1
 	GoTo TagStrategy_FollowMe_CheckHP
 	
 TagStrategy_FollowMe_CheckHP:
