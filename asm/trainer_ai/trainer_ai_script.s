@@ -1924,6 +1924,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Expert_Stockpile
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TORMENT, Expert_Torment
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_DEF_HIT, Expert_StatusDefenseUp
+	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MULTI_HIT_TEN, Expert_ChumRush
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -9662,6 +9663,28 @@ Expert_Torment_TryScorePlus2:
     GoTo Expert_Torment_End
 
 Expert_Torment_End:
+    PopOrEnd
+	
+Expert_ChumRush:
+	IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_ChumRush_TryScorePlus3
+	IfHPPercentLessThan AI_BATTLER_DEFENDER, 60, Expert_ChumRush_TryScorePlus2
+	IfHPPercentLessThan AI_BATTLER_DEFENDER, 80, Expert_ChumRush_End
+	AddToMoveScore -1
+	GoTo Expert_ChumRush_End
+	
+Expert_ChumRush_TryScorePlus2:
+	AddToMoveScore 1
+    IfRandomLessThan 85, Expert_ChumRush_End
+    AddToMoveScore 1
+    GoTo Expert_ChumRush_End
+	
+Expert_ChumRush_TryScorePlus3:
+	AddToMoveScore 2
+    IfRandomLessThan 85, Expert_ChumRush_End
+    AddToMoveScore 1
+    GoTo Expert_ChumRush_End
+	
+Expert_ChumRush_End:
     PopOrEnd
 
 EvalAttack_Main:
