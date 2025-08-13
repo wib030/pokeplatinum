@@ -21767,12 +21767,35 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
 
 int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleContext* battleCtx, u8 side, int index)
 {
-    int battler;
+    int battler, battleri;
+    int i, maxBattlers;
 
     // Early exit if index or side are out of bounds
     if (index > 1 || index < 0 || side > 1 || side < 0)
     {
         return BATTLER_NONE;
+    }
+
+    battler = BATTLER_NONE;
+
+    maxBattlers = BattleSystem_MaxBattlers(battleSys);
+
+    for (i = 0; i < maxBattlers; i++)
+    {
+        battleri = battleCtx->monSpeedOrder[i];
+
+        if (Battler_Side(battleSys, battleri) == side)
+        {
+            if (battleCtx->battleMons[battleri].curHP)
+            {
+                battler = battleri;
+            }
+
+            if (index == 0)
+            {
+                break;
+            }
+        }
     }
 
     // Early exit if singles and index is out of bounds
@@ -21782,13 +21805,6 @@ int BattleSystem_AliveBattlerSlotBySide(BattleSystem* battleSys, BattleContext* 
         {
             return BATTLER_NONE;
         }
-    }
-
-    battler = side + NUM_BATTLE_SIDES * index;
-
-    if (battleCtx->battleMons[battler].curHP == 0)
-    {
-        return BATTLER_NONE;
     }
 
     return battler;

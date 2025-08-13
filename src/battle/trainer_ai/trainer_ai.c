@@ -5168,7 +5168,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     u8 side, opponentSide, moveType;
     u16 move;
     u32 effectivenessFlags;
-    int battlerOpponent, maxOpponents, opponent1, opponent2;
+    int battlerOpponent;
     int i, j, k;
     int numHits, maxHits, statusMoveCount;
     int substituteHP, damage, totalDamage, berryMultiplier;
@@ -5180,19 +5180,7 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     damageOutpaceFlag = FALSE;
 
     side = Battler_Side(battleSys, battler);
-
-
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        opponent1 = BATTLER_PLAYER_SLOT_1;
-        opponent2 = BATTLER_PLAYER_SLOT_2;
-    }
-    else {
-        opponent1 = BATTLER_PLAYER_SLOT_1;
-        opponent2 = BATTLER_PLAYER_SLOT_1;
-    }
-
-    battlerOpponent = opponent1;
-    opponentSide = Battler_Side(battleSys, battlerOpponent);
+    opponentSide = side ^ 1;
 
     endOfTurnHealingTick = TrainerAI_CalcEndOfTurnHealTick(battleSys, battleCtx, battler, TRUE);
     endOfTurnDamageTick = TrainerAI_CalcEndOfTurnDamageTick(battleSys, battleCtx, battler);
@@ -5207,13 +5195,9 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
         damageOutpaceFlag = TRUE;
     }
 
-
     for (j = 0; j < MAX_BATTLERS_PER_SIDE; j++)
     {
-        if (j > 0)
-        {
-            battlerOpponent = opponent2;
-        }
+        battlerOpponent = BattleSystem_AliveBattlerSlotBySide(battleSys, battleCtx, opponentSide, j);
 
         statusMoveCount = 0;
 
@@ -6382,7 +6366,7 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
 {
     int defender1, defender2, defender;
     int i;
-    u8 heldItemEffect, ability;
+    u8 heldItemEffect, ability, side, defenderSide;
     int tick, totalTick;
 
     totalTick = 0;
@@ -6406,27 +6390,12 @@ static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem *battleSys, BattleContex
         }
     }
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        defender1 = BATTLER_PLAYER_SLOT_1;
-        defender2 = BATTLER_PLAYER_SLOT_2;
-    } else {
-        defender1 = BATTLER_PLAYER_SLOT_1;
-        defender2 = BATTLER_PLAYER_SLOT_1;
-    }
+    side = Battler_Side(battleSys, battler);
+    defenderSide = side ^ 1;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < MAX_BATTLERS_PER_SIDE; i++)
     {
-        if (i = 0)
-        {
-            defender = defender1;
-        }
-        else
-        {
-            if (defender2 == defender1) {
-                break;
-            }
-            defender = defender2;
-        }
+        defender = BattleSystem_AliveBattlerSlotBySide(battleSys, battleCtx, defenderSide, i);
 
         if (battleCtx->battleMons[defender].curHP > 0)
         {
@@ -6588,7 +6557,7 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
 {
     int defender1, defender2, defender;
     int i;
-    u8 heldItemEffect, ability;
+    u8 heldItemEffect, ability, side, defenderSide;
     int tick, totalTick;
 
     totalTick = 0;
@@ -6614,28 +6583,12 @@ static int TrainerAI_CalcEndOfTurnDamageTick(BattleSystem *battleSys, BattleCont
         tick = 0;
     }
 
-    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        defender1 = BATTLER_PLAYER_SLOT_1;
-        defender2 = BATTLER_PLAYER_SLOT_2;
-    }
-    else {
-        defender1 = BATTLER_PLAYER_SLOT_1;
-        defender2 = BATTLER_PLAYER_SLOT_1;
-    }
+    side = Battler_Side(battleSys, battler);
+    defenderSide = side ^ 1;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < MAX_BATTLERS_PER_SIDE; i++)
     {
-        if (i = 0)
-        {
-            defender = defender1;
-        }
-        else
-        {
-            if (defender2 == defender1) {
-                break;
-            }
-            defender = defender2;
-        }
+        defender = BattleSystem_AliveBattlerSlotBySide(battleSys, battleCtx, defenderSide, i);
 
         if (battleCtx->battleMons[defender].curHP > 0)
         {
