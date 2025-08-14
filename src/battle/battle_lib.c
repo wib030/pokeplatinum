@@ -12937,6 +12937,14 @@ static const u8 sCriticalStageModuli[iMax][2] = {
     { 1,    1 },
 };
 
+static const u8 sNeoCriticalStageModuli []= {
+    24,
+    4,
+    2,
+    1,
+    1
+};
+
 /*
 u8 sCriticalStageModuli[iMax][2];
 
@@ -13019,7 +13027,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
         effectiveCritStage = 4;
     }
 
-    if ((BattleSystem_RandNext(battleSys) % sCriticalStageModuli[effectiveCritStage][0]) % sCriticalStageModuli[effectiveCritStage][1] == 0
+    if ((BattleSystem_RandNext(battleSys) % sNeoCriticalStageModuli[effectiveCritStage]) == 0
             && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == FALSE
             && (defenderLuckyChant) == FALSE
             && (defenderMoveEffects & MOVE_EFFECT_NO_CRITICAL) == FALSE) {
@@ -19764,7 +19772,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             case ABILITY_SLUSH_RUSH:
             case ABILITY_ICE_BODY:
             case ABILITY_SNOW_CLOAK:
-                score += 15;
+                score += 25;
                 break;
 
             case ABILITY_MAGIC_GUARD:
@@ -19933,7 +19941,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
     case ABILITY_NORMALIZE:
         if (defenderAbility != ABILITY_NORMALIZE)
         {
-            score += 25;
+            score += 30;
         }
         break;
 
