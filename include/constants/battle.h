@@ -94,6 +94,8 @@ enum BattlerBootState {
 #define BATTLE_STAT_BOOST_SIMPLE_MIN     3
 #define BATTLE_STAT_BOOST_NUM_STAGES     (BATTLE_STAT_BOOST_MAX - BATTLE_STAT_BOOST_NEUTRAL)
 
+#define BATTLE_MAX_ACCURACY              300
+
 /*
  * Slot 1 is always on the controller's left; slot 2 is always on their right.
  *

@@ -22017,8 +22017,8 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
     if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, attacker, ABILITY_NO_GUARD) > 0
         || MOVE_DATA(move).accuracy == 0)
     {
-        // 200 special case for no acc check
-        return 200;
+        // 300 special case for no acc check
+        return BATTLE_MAX_ACCURACY;
     }
 
     moveType = CalcMoveType(battleSys, battleCtx, attacker, Battler_HeldItem(battleCtx, attacker), move);
@@ -22097,7 +22097,7 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
 
             case BATTLE_EFFECT_THUNDER:
             case BATTLE_EFFECT_HURRICANE:
-                moveAccuracy = 200;
+                moveAccuracy = BATTLE_MAX_ACCURACY;
                 break;
             }
         }
@@ -22183,6 +22183,12 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
 
     if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
         moveAccuracy = moveAccuracy * 10 / 6;
+    }
+
+    // 
+    if (moveAccuracy > BATTLE_MAX_ACCURACY)
+    {
+        moveAccuracy = BATTLE_MAX_ACCURACY;
     }
 
     return moveAccuracy;
