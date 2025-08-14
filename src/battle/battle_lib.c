@@ -20161,11 +20161,14 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 		if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_TRUANT)
 		|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SLOW_START))
 		{
-			score -= 50;
-			if (score < 0)
-			{
-				score = 0;
-			}
+            if (score < 50)
+            {
+                score = 0;
+            }
+            else
+            {
+                score -= 50;
+            }
 		}
 		break;
     }
@@ -22185,7 +22188,6 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
         moveAccuracy = moveAccuracy * 10 / 6;
     }
 
-    // 
     if (moveAccuracy > BATTLE_MAX_ACCURACY)
     {
         moveAccuracy = BATTLE_MAX_ACCURACY;
