@@ -19686,11 +19686,6 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         }
     }
 
-    if (snowedInCount < 1 && monAbility == ABILITY_SNOWED_IN)
-    {
-        score += 40;
-    }
-
     if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
     {
         if (monAbility == ABILITY_TIDAL_FORCE)
@@ -19719,7 +19714,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             case ABILITY_HYDRATION:
             case ABILITY_RAIN_DISH:
             case ABILITY_DRY_SKIN:
-                score += 15;
+                score += 25;
                 break;
             }
         }
@@ -19736,7 +19731,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             case ABILITY_LEAF_GUARD:
             case ABILITY_FLOWER_GIFT:
             case ABILITY_SOLAR_POWER:
-                score += 15;
+                score += 25;
                 break;
             }
         }
@@ -19750,7 +19745,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
             case ABILITY_SAND_FORCE:
             case ABILITY_SAND_VEIL:
-                score += 15;
+                score += 25;
                 break;
 
             case ABILITY_MAGIC_GUARD:
@@ -19784,6 +19779,13 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
     default:
         break;
 
+    case ABILITY_SNOWED_IN:
+        if (snowedInCount < 1)
+        {
+            score += 40;
+        }
+        break;
+        
     case ABILITY_INTIMIDATE:
         if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender))
         {
@@ -20043,6 +20045,34 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             score += 8;
         }
         break;
+
+    case ABILITY_DRIZZLE:
+        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) == FALSE)
+        {
+            score += 40;
+        }
+        break;
+
+    case ABILITY_DROUGHT:
+        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE)
+        {
+            score += 40;
+        }
+        break;
+
+    case ABILITY_SAND_STREAM:
+        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) == FALSE)
+        {
+            score += 40;
+        }
+        break;
+
+    case ABILITY_SNOW_WARNING:
+        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) == FALSE)
+        {
+            score += 40;
+        }
+        break;
 		
 	case ABILITY_TRUANT:
 	case ABILITY_SLOW_START:
@@ -20068,7 +20098,6 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 				score += 50;
 				break;
 			
-			case ABILITY_SPEED_BOOST:
 			case ABILITY_SHARPNESS:
 			case ABILITY_TECHNICIAN:
 			case ABILITY_ADAPTABILITY:
@@ -20085,6 +20114,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 				score += 25;
 				break;
 				
+            case ABILITY_SPEED_BOOST:
 			case ABILITY_SCRAPPY:
 			case ABILITY_HOTHEADED:
 			case ABILITY_COWARD:
@@ -20130,14 +20160,14 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 			case ABILITY_GUTS:
 				if (battleCtx->battleMons[defender].status & MON_CONDITION_ANY)
 				{
-					score += 25;
+					score += 33;
 				}
 				break;
 				
 			case ABILITY_FLARE_BOOST:
 				if (battleCtx->battleMons[defender].status & MON_CONDITION_BURN)
 				{
-					score += 25;
+					score += 15;
 				}
 				break;
 				
