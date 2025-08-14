@@ -1710,6 +1710,14 @@ Try50ChanceForScoreMinus1:
     IfRandomLessThan 128, ScoreMinus1
     PopOrEnd
 
+Try95ChanceForScoreMinus1:
+    IfRandomLessThan 244, ScoreMinus1
+    PopOrEnd
+
+Try99ChanceForScoreMinus1:
+    IfRandomLessThan 254, ScoreMinus1
+    PopOrEnd
+
 Try50ChanceForScoreMinus3:
     IfRandomLessThan 128, ScoreMinus3
     PopOrEnd
@@ -3415,6 +3423,11 @@ Expert_Rest:
     ; If the opponent does not know Snatch, 96.1% chance of score +3.
     ;
     ; If the opponent knows Snatch, 77.3% chance of score +3.
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_MIRACLE_EYE, ScoreMinus12
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_HEAL_BLOCK, ScoreMinus12
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_NIGHTMARE, ScoreMinus12
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_BAD_DREAMS, ScoreMinus12
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, ScoreMinus10
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_EARLY_BIRD, Expert_Rest_EarlyBirdSleepTalk
@@ -3457,13 +3470,15 @@ Expert_Rest_TryScorePlus1:
     GoTo Expert_Rest_CheckForSnatch
 
 Expert_Rest_TryScorePlus3:
-    IfRandomLessThan 8, Expert_Rest_CheckForSnatch
+    LoadSleepTurns AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 1, Try95ChanceForScorePlus5
+    IfRandomLessThan 12, Expert_Rest_CheckForSnatch
     AddToMoveScore 3
     GoTo Expert_Rest_CheckForSnatch
 
 Expert_Rest_CheckForSnatch:
-    IfRandomLessThan 8, Expert_Rest_End
-    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, ScoreMinus3
+    IfRandomLessThan 32, Expert_Rest_End
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, ScoreMinus3
     GoTo Expert_Rest_End
 
 Expert_Rest_End:
@@ -3478,8 +3493,8 @@ Expert_OHKOMove_End:
     PopOrEnd 
 
 Expert_SuperFang:
-    ; If the target is at 50% HP or less, score -1.
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_SuperFang_End
+    ; If the target is at 25% HP or less, score -1.
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 25, Expert_SuperFang_End
     AddToMoveScore -1
 
 Expert_SuperFang_End:
@@ -3508,12 +3523,35 @@ Expert_HighCritical:
     ; If the move is super-effective against the target, 50% chance of score +1.
     ;
     ; If the move would deal normal damage against the target, 25% chance of score +1.
+    LoadBattlerCritStage AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 2, Expert_HighCritical_End
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_HighCritical_End
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_HighCritical_End
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_HighCritical_End
-    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Expert_HighCritical_TryScorePlus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Expert_HighCritical_TryScorePlus1
+    LoadMoveClass
+    IfLoadedEqualTo CLASS_PHYSICAL, Expert_HighCritical_CheckDefense
+    ; Special move here
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_HighCritical_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 7, Expert_HighCritical_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 6, Expert_HighCritical_TryScorePlus1
     IfRandomLessThan 128, Expert_HighCritical_End
+
+Expert_HighCritical_CheckDefense:
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_HighCritical_TryScorePlus3
+    LoadAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_UNAWARE, Expert_HighCritical_End
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, 7, Expert_HighCritical_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, 6, Expert_HighCritical_TryScorePlus1
+    GoTo Expert_HighCritical_End
+
+Expert_HighCritical_TryScorePlus3:
+    IfRandomLessThan 16, Expert_HighCritical_End
+    AddToMoveScore 1
+    IfRandomLessThan 16, Expert_HighCritical_End
+    AddToMoveScore 1
+    IfRandomLessThan 16, Expert_HighCritical_End
+    AddToMoveScore 1
+    GoTo Expert_HighCritical_End
 
 Expert_HighCritical_TryScorePlus1:
     IfRandomLessThan 128, Expert_HighCritical_End
@@ -9732,7 +9770,7 @@ EvalAttack_Main:
 
     ; If this move does not out-damage all other moves, score -1.
     FlagMoveDamageScore FALSE
-    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus1
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Try95ChanceForScoreMinus1
 
     ; Explosion, Focus Punch, and Sucker Punch are judged as Risky by this routine.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, EvalAttack_RiskyAttack
@@ -9743,8 +9781,8 @@ EvalAttack_Main:
     GoTo EvalAttack_CheckQuadEffective
 
 EvalAttack_RiskyAttack:
-    ; ~80% chance of score -2.
-    IfRandomLessThan 51, EvalAttack_CheckQuadEffective
+    ; 50% chance of score -2.
+    IfRandomLessThan 128, EvalAttack_CheckQuadEffective
     AddToMoveScore -2
 
 EvalAttack_CheckQuadEffective:
@@ -9763,7 +9801,7 @@ EvalAttack_CheckForKill:
 
     ; Inaccurate moves will receive 2 points less score
     LoadMoveAccuracy
-    IfLoadedNotEqualTo 100, EvalAttack_ScorePlus2_Inaccurate
+    IfLoadedLessThan 100, EvalAttack_ScoreMinus2_Inaccurate
 
     ; Randomly increase the score of a move that kills.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, EvalAttack_TryScorePlus4
@@ -9787,8 +9825,9 @@ EvalAttack_ScorePlus4:
     AddToMoveScore 4
     GoTo EvalAttack_Terminate
 
-EvalAttack_ScorePlus2_Inaccurate:
-    AddToMoveScore 2
+EvalAttack_ScoreMinus2_Inaccurate:
+    IfRandomLessThan 32, EvalAttack_Terminate
+    AddToMoveScore -2
     GoTo EvalAttack_Terminate
 
 EvalAttack_Terminate:
