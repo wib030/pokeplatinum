@@ -16,6 +16,8 @@
 
 #include "constants/items.h"
 
+// item_use_pokemon.c
+
 #define EV_ITEM_MAX     ( 252 )     // EV cap for doping items
 #define EV_TOTAL_MAX    ( 510 )     // Maximum EV's on a Pokemon across all stats
 
