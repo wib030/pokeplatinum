@@ -442,6 +442,7 @@ static void AICmd_IfAbilityInPlay(BattleSystem* battleSys, BattleContext* battle
 static void AICmd_IfCanBreakSashOrSturdy(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadFlingEffect(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_LoadMoveClass(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -636,7 +637,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfAbilityInPlay,
     AICmd_IfCanBreakSashOrSturdy,
     AICmd_LoadFlingEffect,
-    AICmd_IfHasSubstituteIncentive
+    AICmd_IfHasSubstituteIncentive,
+    AICmd_LoadMoveClass
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -5336,6 +5338,13 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
     {
         AIScript_Iter(battleCtx, jump);
     }
+}
+
+static void AICmd_LoadMoveClass(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    AI_CONTEXT.calcTemp = MOVE_DATA(AI_CONTEXT.move).class;
 }
 
 /**
