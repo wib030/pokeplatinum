@@ -21859,7 +21859,7 @@ int BattleSystem_GetMoveMaxHits(BattleSystem* battleSys, BattleContext* battleCt
 
 int BattleSystem_GetMultiHitExpectedMoveHits(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
 {
-    int i, maxRolls;
+    int i, j, maxRolls;
     int rand, randTemp;
     int expectedHits, maxHits;
     int moveEffect, moveAccuracy;
@@ -21956,18 +21956,20 @@ int BattleSystem_GetMultiHitExpectedMoveHits(BattleSystem* battleSys, BattleCont
             expectedHits = 3 + (BattleSystem_RandNext(battleSys) % 3);
         }
         break;
-
+		
     case BATTLE_EFFECT_HIT_TWICE:
     case BATTLE_EFFECT_HIT_THREE_TIMES:
         if (moveAccuracy >= 100)
         {
             expectedHits = maxHits;
+			return expectedHits;
         }
+		
         for (i = 0; i < maxHits; i++)
         {
             rand = 0;
 
-            for (j = 0; i < maxRolls; j++)
+            for (j = 0; j < maxRolls; j++)
             {
                 randTemp = BattleSystem_RandNext(battleSys) % 100;
 
@@ -21982,12 +21984,14 @@ int BattleSystem_GetMultiHitExpectedMoveHits(BattleSystem* battleSys, BattleCont
                 expectedHits = i;
             }
         }
-        return expectedHits;
+		return expectedHits;
         break;
-
+		
+	/* CalcMoveDamage already considers all beat up hits so we don't need this
     case BATTLE_EFFECT_BEAT_UP:
         expectedHits = maxHits;
         break;
+	*/
     }
 
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_LUCKY_CHANT)
@@ -22025,7 +22029,7 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
     }
     else
     {
-        moveAccuracy = MOVE_DATA(move).accuracy
+        moveAccuracy = MOVE_DATA(move).accuracy;
     }
 
     accStages = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ACCURACY] - 6;
@@ -22039,7 +22043,7 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
     }
     if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, attacker, ABILITY_AWARE))
     {
-        accStage = 0;
+        accStages = 0;
         evaStages = 0;
     }
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE)) {
@@ -22074,7 +22078,7 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
             case BATTLE_EFFECT_HURRICANE:
                 if (MON_HAS_TYPE(attacker, moveType))
                 {
-                    moveAccuracy = 55
+                    moveAccuracy = 55;
                 }
                 else
                 {
