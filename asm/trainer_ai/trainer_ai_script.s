@@ -1714,6 +1714,10 @@ Try50ChanceForScoreMinus3:
     IfRandomLessThan 128, ScoreMinus3
     PopOrEnd
 
+Try75ChanceForScoreMinus3:
+    IfRandomLessThan 192, ScoreMinus3
+    PopOrEnd
+
 Try90ChanceForScoreMinus12:
     IfRandomLessThan 230, ScoreMinus12
     PopOrEnd
@@ -9666,27 +9670,57 @@ Expert_Torment_End:
     PopOrEnd
 	
 Expert_ChumRush:
+    IfAbilityInPlay ABILITY_STORM_DRAIN, ScoreMinus12
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SKILL_LINK, Expert_ChumRush_TryScorePlus1
+    IfLoadedEqualTo ABILITY_STRONG_JAW, Expert_ChumRush_TryScorePlus1
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Expert_ChumRush_SuperEffective
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Expert_ChumRush_SuperEffective
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_THREE_FOUR_FIVE_DICE, Expert_ChumRush_TryScorePlus1
+    GoTo Expert_ChumRush_CheckDefenderHP
+
+Expert_ChumRush_TryScorePlus1:
+    IfRandomLessThan 128, Expert_ChumRush_CheckDefenderHP
+    AddToMoveScore 1
+    GoTo Expert_ChumRush_CheckDefenderHP
+
+Expert_ChumRush_SuperEffective:
+    IfRandomLessThan 64, Expert_ChumRush_CheckDefenderHP
+    AddToMoveScore 1
+    IfRandomLessThan 64, Expert_ChumRush_CheckDefenderHP
+    AddToMoveScore 1
+    GoTo Expert_ChumRush_CheckDefenderHP
+
+Expert_ChumRush_CheckDefenderHP:
 	IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_ChumRush_TryScorePlus3
 	IfHPPercentLessThan AI_BATTLER_DEFENDER, 60, Expert_ChumRush_TryScorePlus2
-	IfHPPercentLessThan AI_BATTLER_DEFENDER, 80, Expert_ChumRush_End
+	IfHPPercentLessThan AI_BATTLER_DEFENDER, 80, Expert_ChumRush_CheckDefenderDetersContact
+    IfRandomLessThan 170, Expert_ChumRush_CheckDefenderDetersContact
 	AddToMoveScore -1
-	GoTo Expert_ChumRush_End
+	GoTo Expert_ChumRush_CheckDefenderDetersContact
 	
 Expert_ChumRush_TryScorePlus2:
 	AddToMoveScore 1
-    IfRandomLessThan 85, Expert_ChumRush_End
+    IfRandomLessThan 85, Expert_ChumRush_CheckDefenderDetersContact
     AddToMoveScore 1
-    GoTo Expert_ChumRush_End
+    GoTo Expert_ChumRush_CheckDefenderDetersContact
 	
 Expert_ChumRush_TryScorePlus3:
-    IfRandomLessThan 8, Expert_ChumRush_End
+    IfRandomLessThan 8, Expert_ChumRush_CheckDefenderDetersContact
 	AddToMoveScore 1
-    IfRandomLessThan 32, Expert_ChumRush_End
+    IfRandomLessThan 32, Expert_ChumRush_CheckDefenderDetersContact
     AddToMoveScore 1
-    IfRandomLessThan 64, Expert_ChumRush_End
+    IfRandomLessThan 64, Expert_ChumRush_CheckDefenderDetersContact
+    AddToMoveScore 1
+    GoTo Expert_ChumRush_CheckDefenderDetersContact
+
+Expert_ChumRush_CheckDefenderDetersContact:
+    IfBattlerDetersContactMove AI_BATTLER_DEFENDER, Try75ChanceForScoreMinus3
+    IfRandomLessThan 230, Expert_ChumRush_End
     AddToMoveScore 1
     GoTo Expert_ChumRush_End
-	
+
 Expert_ChumRush_End:
     PopOrEnd
 
