@@ -842,6 +842,12 @@
     .macro LoadMoveClass
     .long 146
     .endm
+	
+	.macro IfBattlerHasBounceableMove battler, jump
+    .long 147
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
 
     .equ TABLE_END, 0xFFFFFFFF
 

@@ -6477,9 +6477,28 @@ Expert_MagicCoat:
     ; If it is the attacker''s first turn in battle, 41.4% chance of score +1.
     ;
     ; If it is not the attacker''s first turn in battle, 88.3% chance of score -1.
+	LoadIsFirstTurnInBattle AI_BATTLER_DEFENDER
+	IfLoadedEqualTo TRUE, Expert_MagicCoat_CheckBounceableMove
+	GoTo Expert_MagicCoat_CheckHP
+	
+Expert_MagicCoat_CheckHP:
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_MagicCoat_CheckUserFirstTurn
     IfRandomLessThan 100, Expert_MagicCoat_CheckUserFirstTurn
     AddToMoveScore -1
+	GoTo Expert_MagicCoat_CheckUserFirstTurn
+	
+Expert_MagicCoat_CheckBounceableMove:
+	IfBattlerHasBounceableMove AI_BATTLER_DEFENDER, Expert_MagicCoat_TryScorePlus2
+	GoTo Expert_MagicCoat_CheckHP
+	
+Expert_MagicCoat_TryScorePlus2:
+    IfRandomLessThan 85, Expert_MagicCoat_CheckHP
+    AddToMoveScore 1
+	IfRandomLessThan 170, Expert_MagicCoat_CheckHP
+    AddToMoveScore 1
+	IfRandomLessThan 250, Expert_MagicCoat_CheckHP
+    AddToMoveScore 1
+	GoTo Expert_MagicCoat_CheckHP
 
 Expert_MagicCoat_CheckUserFirstTurn:
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER

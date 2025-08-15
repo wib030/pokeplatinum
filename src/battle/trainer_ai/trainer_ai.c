@@ -443,6 +443,7 @@ static void AICmd_IfCanBreakSashOrSturdy(BattleSystem* battleSys, BattleContext*
 static void AICmd_LoadFlingEffect(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadMoveClass(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -638,7 +639,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfCanBreakSashOrSturdy,
     AICmd_LoadFlingEffect,
     AICmd_IfHasSubstituteIncentive,
-    AICmd_LoadMoveClass
+    AICmd_LoadMoveClass,
+	AICmd_IfBattlerHasBounceableMove
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -5345,6 +5347,38 @@ static void AICmd_LoadMoveClass(BattleSystem* battleSys, BattleContext* battleCt
     AIScript_Iter(battleCtx, 1);
 
     AI_CONTEXT.calcTemp = MOVE_DATA(AI_CONTEXT.move).class;
+}
+
+static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler = AIScript_Battler(battleCtx, inBattler);
+    int i;
+    int moveEffect;
+    BOOL hasBounceableMove;
+
+    hasBounceableMove = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).flags & MOVE_FLAG_CAN_MAGIC_COAT)
+			{
+				hasBounceableMove = TRUE;
+				break;
+			}
+        }
+    }
+
+    if (hasBounceableMove)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 /**
