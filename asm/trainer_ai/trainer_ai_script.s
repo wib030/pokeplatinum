@@ -6472,44 +6472,102 @@ Expert_Superpower_End:
     PopOrEnd 
 
 Expert_MagicCoat:
-    ; If the opponent''s HP <= 30%, 60.9% chance of additional score -1.
+    ; If the opponent does not have a magic bounceable move, score -12.
     ;
-    ; If it is the attacker''s first turn in battle, 41.4% chance of score +1.
+    ; If the opponent just switched in, 66% chance for score +1,
+    ; 33% chance for additional score +1, and 6.25% chance for additional score +1.
+    ; Otherwise, 60% chance for score -1.
     ;
-    ; If it is not the attacker''s first turn in battle, 88.3% chance of score -1.
+    ; If the attacker can kill on a different move, 94% chance for score -12.
+    ; Otherwise, 33% chance for general score -1.
+    ;
+    ; If attacker is below 62% HP, 66% chance for score -1.
+    ; 
+    ; If it is the user''s first turn out, 50% chance for score +1 and 20%
+    ; chance for score +2. Otherwise, 40% chance for score -1 and 16% chance
+    ; for score -2.
+    ;
+    ; If the defender knows a hazards move that hasn''t been applied to the
+    ; attacker''s side of the field, override previous directive and apply
+    ; 75% chance for score +1, 37.5% chance for score +2.
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus12
+    IfBattlerHasBounceableMove AI_BATTLER_DEFENDER, Expert_MagicCoat_Main
+    GoTo ScoreMinus12
+
+Expert_MagicCoat_Main:
 	LoadIsFirstTurnInBattle AI_BATTLER_DEFENDER
-	IfLoadedEqualTo TRUE, Expert_MagicCoat_CheckBounceableMove
-	GoTo Expert_MagicCoat_CheckHP
-	
-Expert_MagicCoat_CheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_MagicCoat_CheckUserFirstTurn
-    IfRandomLessThan 100, Expert_MagicCoat_CheckUserFirstTurn
+	IfLoadedEqualTo TRUE, Expert_MagicCoat_FirstTurnBonus
+    IfRandomLessThan 16, Expert_MagicCoat_CheckHP
+    IfCanKOEnemy ScoreMinus12
+    IfRandomLessThan 170, Expert_MagicCoat_CheckHP
     AddToMoveScore -1
-	GoTo Expert_MagicCoat_CheckUserFirstTurn
-	
-Expert_MagicCoat_CheckBounceableMove:
-	IfBattlerHasBounceableMove AI_BATTLER_DEFENDER, Expert_MagicCoat_TryScorePlus2
 	GoTo Expert_MagicCoat_CheckHP
-	
-Expert_MagicCoat_TryScorePlus2:
+
+Expert_MagicCoat_FirstTurnBonus:
     IfRandomLessThan 85, Expert_MagicCoat_CheckHP
     AddToMoveScore 1
 	IfRandomLessThan 170, Expert_MagicCoat_CheckHP
     AddToMoveScore 1
-	IfRandomLessThan 250, Expert_MagicCoat_CheckHP
+	IfRandomLessThan 240, Expert_MagicCoat_CheckHP
     AddToMoveScore 1
 	GoTo Expert_MagicCoat_CheckHP
 
+Expert_MagicCoat_CheckHP:
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 61, Expert_MagicCoat_CheckUserFirstTurn
+    IfRandomLessThan 85, Expert_MagicCoat_CheckUserFirstTurn
+    AddToMoveScore -1
+	GoTo Expert_MagicCoat_CheckUserFirstTurn
+
 Expert_MagicCoat_CheckUserFirstTurn:
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedEqualTo FALSE, Expert_MagicCoat_TryScoreMinus1
-    IfRandomLessThan 150, Expert_MagicCoat_End
+    IfLoadedEqualTo FALSE, Expert_MagicCoat_CheckHazards
+    IfRandomLessThan 128, Expert_MagicCoat_End
+    AddToMoveScore 1
+    IfRandomLessThan 153, Expert_MagicCoat_End
     AddToMoveScore 1
     GoTo Expert_MagicCoat_End
-    IfRandomLessThan 50, Expert_MagicCoat_End
 
-Expert_MagicCoat_TryScoreMinus1:
-    IfRandomLessThan 30, Expert_MagicCoat_End
+Expert_MagicCoat_CheckHazards:
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEALTH_ROCK, Expert_MagicCoat_CheckRocks
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SET_SPIKES, Expert_MagicCoat_CheckSpikes
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_TOXIC_SPIKES, Expert_MagicCoat_CheckToxicSpikes
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SET_STICKY_WEB, Expert_MagicCoat_CheckStickyWeb
+    GoTo Expert_MagicCoat_TryScoreMinus2
+
+Expert_MagicCoat_CheckRocks:
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_MagicCoat_TryScoreMinus2
+    GoTo Expert_MagicCoat_HazardsBonus
+
+Expert_MagicCoat_CheckSpikes:
+    LoadSpikesLayers AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES
+    IfLoadedEqualTo 0, Expert_MagicCoat_HazardsBonus
+    IfLoadedEqualTo 3, Expert_MagicCoat_TryScoreMinus2
+    IfRandomLessThan 128, Expert_MagicCoat_End
+    GoTo Expert_MagicCoat_TryScoreMinus2
+
+Expert_MagicCoat_CheckToxicSpikes:
+    LoadSpikesLayers AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES
+    IfLoadedEqualTo 0, Expert_MagicCoat_HazardsBonus
+    IfLoadedEqualTo 2, Expert_MagicCoat_TryScoreMinus2
+    IfRandomLessThan 128, Expert_MagicCoat_End
+    GoTo Expert_MagicCoat_TryScoreMinus2
+
+Expert_MagicCoat_CheckStickyWeb:
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_MagicCoat_TryScoreMinus2
+    GoTo Expert_MagicCoat_HazardsBonus
+
+Expert_MagicCoat_HazardsBonus:
+    IfRandomLessThan 64, Expert_MagicCoat_End
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_MagicCoat_End
+    AddToMoveScore 1
+    GoTo Expert_MagicCoat_End
+
+Expert_MagicCoat_TryScoreMinus2:
+    IfRandomLessThan 153, Expert_MagicCoat_End
+    AddToMoveScore -1
+    IfRandomLessThan 153, Expert_MagicCoat_End
     AddToMoveScore -1
 
 Expert_MagicCoat_End:
