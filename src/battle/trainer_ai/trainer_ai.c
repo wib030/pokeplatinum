@@ -5552,13 +5552,6 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
                                             bounceableMoves++;
                                         }
                                         break;
-
-                                    case BATTLE_EFFECT_TAUNT:
-                                        if (battleCtx->battleMons[battler2].moveEffectsData.tauntedTurns == 0)
-                                        {
-                                            bounceableMoves++;
-                                        }
-                                        break;
                                     }
                                 }
                             }
