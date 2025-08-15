@@ -367,7 +367,7 @@ Basic_CheckLastMon:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo 0, Basic_Explode_Terminate
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo 0, ScoreMinus3
+    IfLoadedNotEqualTo 0, Try50ChanceForScoreMinus3
 
     ; If the target is also on their last Pokemon, score -1 instead of -10.
     GoTo ScoreMinus1
@@ -11221,7 +11221,6 @@ CheckHP_Terminate:
     PopOrEnd 
 
 CheckHP_DiscourageAtHighHP:
-    TableEntry BATTLE_EFFECT_HALVE_DEFENSE
     TableEntry BATTLE_EFFECT_RESTORE_HALF_HP
     TableEntry BATTLE_EFFECT_REST
     TableEntry BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER
@@ -11236,7 +11235,6 @@ CheckHP_DiscourageAtHighHP:
     TableEntry TABLE_END
 
 CheckHP_DiscourageAtMediumHP:
-    TableEntry BATTLE_EFFECT_HALVE_DEFENSE
     TableEntry BATTLE_EFFECT_ATK_UP
     TableEntry BATTLE_EFFECT_DEF_UP
     TableEntry BATTLE_EFFECT_SPEED_UP
