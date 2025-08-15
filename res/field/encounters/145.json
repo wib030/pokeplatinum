@@ -94,7 +94,7 @@
         "SPECIES_BUIZEL",
         "SPECIES_SHELLOS"
     ],
-    "surf_rate": 10,
+    "surf_rate": 5,
     "surf_encounters": [
         {
             "level_max": 30,
