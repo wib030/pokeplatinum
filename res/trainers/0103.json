@@ -1,6 +1,6 @@
 {
     "name": "Gyarald",
-    "class": "TRAINER_CLASS_SWIMMER_FEMALE",
+    "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",

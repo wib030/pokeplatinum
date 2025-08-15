@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_LAIRON",
             "form": 0,
-            "level": 35,
+            "level": 40,
             "item": "ITEM_IRON_BALL",
             "moves": [
                 "MOVE_ROAR",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_STEELIX",
             "form": 0,
-            "level": 35,
+            "level": 40,
             "item": "ITEM_IRON_BALL",
             "moves": [
                 "MOVE_SCREECH",
