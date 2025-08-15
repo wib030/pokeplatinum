@@ -849,6 +849,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro LoadBattlerIgnorableAbility battler
+    .long 148
+    .long \battler
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry

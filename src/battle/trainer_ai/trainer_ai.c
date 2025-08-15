@@ -444,6 +444,7 @@ static void AICmd_LoadFlingEffect(BattleSystem* battleSys, BattleContext* battle
 static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_LoadMoveClass(BattleSystem* battleSys, BattleContext* battleCtx);
 static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AICmd_LoadBattlerIgnorableAbility(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -640,7 +641,8 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadFlingEffect,
     AICmd_IfHasSubstituteIncentive,
     AICmd_LoadMoveClass,
-	AICmd_IfBattlerHasBounceableMove
+	AICmd_IfBattlerHasBounceableMove,
+    AICmd_LoadBattlerIgnorableAbility
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -5397,6 +5399,73 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
     if (hasBounceableMove)
     {
         AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_LoadBattlerIgnorableAbility(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED
+        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)
+        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_MOLD_BREAKER)) {
+        AI_CONTEXT.calcTemp = ABILITY_NONE;
+    }
+    else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
+        // If we already know an opponent's ability, load that ability
+        if (AI_CONTEXT.battlerAbilities[battler]) {
+            AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+        }
+        else {
+            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
+            if (Battler_Ability(battleCtx, battler) == ABILITY_SHADOW_TAG
+                || Battler_Ability(battleCtx, battler) == ABILITY_MAGNET_PULL
+                || Battler_Ability(battleCtx, battler) == ABILITY_THIRSTY
+                || Battler_Ability(battleCtx, battler) == ABILITY_ARENA_TRAP) {
+                AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].ability;
+            }
+            else {
+                // Try to guess the opponent's ability (flip a coin)
+                int ability1 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_1);
+                int ability2 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_2);
+
+                if (Battler_Ability(battleCtx, battler) != ABILITY_NONE)
+                {
+                    if (ability1 && ability2) {
+                        if (BattleSystem_RandNext(battleSys) & 1) {
+                            AI_CONTEXT.calcTemp = ability1;
+                        }
+                        else {
+                            AI_CONTEXT.calcTemp = ability2;
+                        }
+                    }
+                    else if (ability1) {
+                        AI_CONTEXT.calcTemp = ability1;
+                    }
+                    else {
+                        AI_CONTEXT.calcTemp = ability2;
+                    }
+                }
+                else
+                {
+                    AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+                }
+            }
+        }
+    }
+    else {
+        AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+    }
+
+    if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT)
+    {
+        if ((BattleSystem_RandNext(battleSys) % 3) > 0)
+        {
+            AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+        }
     }
 }
 
