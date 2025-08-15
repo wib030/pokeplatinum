@@ -1665,7 +1665,7 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
     } else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
         // If we already know an opponent's ability, load that ability
         if (AI_CONTEXT.battlerAbilities[battler]) {
-            AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
+            AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
         } else {
             // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
             if (Battler_Ability(battleCtx, battler) == ABILITY_SHADOW_TAG
@@ -1678,21 +1678,39 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
                 int ability1 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_1);
                 int ability2 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_2);
 
-                if (ability1 && ability2) {
-                    if (BattleSystem_RandNext(battleSys) & 1) {
+                if (Battler_Ability(battleCtx, battler) != ABILITY_NONE)
+                {
+                    if (ability1 && ability2) {
+                        if (BattleSystem_RandNext(battleSys) & 1) {
+                            AI_CONTEXT.calcTemp = ability1;
+                        }
+                        else {
+                            AI_CONTEXT.calcTemp = ability2;
+                        }
+                    }
+                    else if (ability1) {
                         AI_CONTEXT.calcTemp = ability1;
-                    } else {
+                    }
+                    else {
                         AI_CONTEXT.calcTemp = ability2;
                     }
-                } else if (ability1) {
-                    AI_CONTEXT.calcTemp = ability1;
-                } else {
-                    AI_CONTEXT.calcTemp = ability2;
+                }
+                else
+                {
+                    AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
                 }
             }
         }
     } else {
-        AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].ability;
+        AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+    }
+
+    if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT)
+    {
+        if ((BattleSystem_RandNext(battleSys) % 3) > 0)
+        {
+            AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+        }
     }
 }
 
@@ -5369,6 +5387,7 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
         {
             if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).flags & MOVE_FLAG_CAN_MAGIC_COAT)
 			{
+                // moveEffect = MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect;
 				hasBounceableMove = TRUE;
 				break;
 			}
