@@ -745,6 +745,7 @@ Basic_CheckLockOn:
 Basic_CheckMeanLook:
     ; If the target is already under the effect of Mean Look, score -10.
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_MEAN_LOOK, ScoreMinus10
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_BIND, Try50ChanceForScoreMinus1
     PopOrEnd 
 
 Basic_CheckCurse:
@@ -2761,21 +2762,22 @@ Expert_SpeedDownOnHit:
 	; If the defender has Clear Body or White Smoke, score -3
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the target is immune to or would resist the move, do not apply any further modifiers.
+    ; If the target is immune to or would quad-resist the move, 95%-100% chance for score -12.
     ;
-    ; Treat the exact moves Icy Wind, Rock Tomb, and Mud Shot as Speed-reducing status moves.
-	LoadBattlerAbility AI_BATTLER_DEFENDER
+    ; Treat non-highest-damage moves as Speed-reducing status moves.
+    ;
+    ; If trick room is up, 50% chance for score minus 1.
+	LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
 	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
 	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
-	
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_SpeedDownOnHit_End
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SpeedDownOnHit_End
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_SpeedDownOnHit_End
-    IfMoveEqualTo MOVE_ICY_WIND, Expert_StatusSpeedDown
-    IfMoveEqualTo MOVE_ROCK_TOMB, Expert_StatusSpeedDown
-    IfMoveEqualTo MOVE_MUD_SHOT, Expert_StatusSpeedDown
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Try95ChanceForScoreMinus12
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Expert_StatusSpeedDown_CheckSpeed
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Try50ChanceForScoreMinus1
+    IfRandomLessThan 140, Try95ChanceForScorePlus1
     PopOrEnd 
 
 Expert_SpeedDownOnHit_End:
@@ -2785,22 +2787,28 @@ Expert_StatusSpeedDown:
 	; If the defender has Clear Body or White Smoke, score -3
 	; If the defender has Defiant or Competitive, score -10
 	;
-    ; If the attacker is slower than its target, 72.7% chance of score +2.
+    ; If the attacker is slower than its target, 60% chance for score +1,
+    ; 30% chance for score +2.
     ;
     ; If the attacker is faster than its target, score -3.
-	LoadBattlerAbility AI_BATTLER_DEFENDER
+	LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus3
 	IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus3
 	IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
 	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
-	
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_StatusSpeedDown_TryScorePlus2
+    GoTo Expert_StatusSpeedDown_CheckSpeed
+
+Expert_StatusSpeedDown_CheckSpeed:
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus12
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_FASTER, Expert_StatusSpeedDown_TryScorePlus2
     AddToMoveScore -3
     GoTo Expert_StatusSpeedDown_End
 
 Expert_StatusSpeedDown_TryScorePlus2:
-    IfRandomLessThan 70, Expert_StatusSpeedDown_End
-    AddToMoveScore 2
+    IfRandomLessThan 103, Expert_StatusSpeedDown_End
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_StatusSpeedDown_End
+    AddToMoveScore 1
 
 Expert_StatusSpeedDown_End:
     PopOrEnd 
