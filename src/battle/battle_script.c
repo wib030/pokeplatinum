@@ -15664,6 +15664,14 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
     if (battleCtx->battleMons[battleCtx->defender].status & (MON_CONDITION_POISON | MON_CONDITION_BURN | MON_CONDITION_PARALYSIS | MON_CONDITION_TOXIC)) {
         catchRate = catchRate * 15 / 10;
     }
+	
+	if (battleCtx->battleMons[battleCtx->defender].statusVolatile & VOLATILE_CONDITION_BIND) {
+        catchRate = catchRate * 15 / 10;
+    }
+	
+	if (battleCtx->battleMons[battleCtx->defender].statusVolatile & VOLATILE_CONDITION_ATTRACT) {
+        catchRate = catchRate * 12 / 10;
+    }
 
     int shakes;
     if (catchRate >= 0xFF) {
