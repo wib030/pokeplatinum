@@ -3540,8 +3540,8 @@ Expert_HighCritical_CheckDefense:
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_HighCritical_TryScorePlus3
     LoadAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_UNAWARE, Expert_HighCritical_End
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, 7, Expert_HighCritical_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, 6, Expert_HighCritical_TryScorePlus1
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 7, Expert_HighCritical_TryScorePlus3
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 6, Expert_HighCritical_TryScorePlus1
     GoTo Expert_HighCritical_End
 
 Expert_HighCritical_TryScorePlus3:
