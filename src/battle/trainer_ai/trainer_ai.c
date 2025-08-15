@@ -5376,23 +5376,234 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
     int inBattler = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
 
-    int battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int battler2;
+    int i, bounceableMoves;
     int moveEffect;
+    u8 battler1Ability, battler2Ability, battler2Side;
+    u32 moveStatus, moveMoveEffect, moveSideCondition, moveVolatileStatus;
     BOOL hasBounceableMove;
 
     hasBounceableMove = FALSE;
+    bounceableMoves = 0;
+
+    switch (battler1)
+    {
+    default:
+        battler2 = BattleSystem_RandomOpponent(battleSys, battleCtx, battler1);
+        break;
+
+    case AI_BATTLER_ATTACKER_PARTNER:
+    case AI_BATTLER_ATTACKER:
+        battler2 = AI_CONTEXT.defender;
+        break;
+
+    case AI_BATTLER_DEFENDER_PARTNER:
+    case AI_BATTLER_DEFENDER:
+        battler2 = AI_CONTEXT.attacker;
+        break;
+    }
+
+    battler1Ability = Battler_Ability(battleCtx, battler1);
+    battler2Ability = Battler_Ability(battleCtx, battler2);
+    battler2Side = Battler_Side(battleSys, battler2);
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++)
     {
-        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler1, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
         {
-            if (MOVE_DATA(battleCtx->battleMons[battler].moves[i]).flags & MOVE_FLAG_CAN_MAGIC_COAT)
-			{
-                // moveEffect = MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect;
-				hasBounceableMove = TRUE;
-				break;
-			}
+            if (MOVE_DATA(battleCtx->battleMons[battler1].moves[i]).class == CLASS_STATUS)
+            {
+                if (MOVE_DATA(battleCtx->battleMons[battler1].moves[i]).flags & MOVE_FLAG_CAN_MAGIC_COAT)
+                {
+                    moveEffect = MOVE_DATA(battleCtx->battleMons[battler1].moves[i]).effect;
+
+                    moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+
+                    if (moveStatus != MON_CONDITION_NONE)
+                    {
+                        if ((battleCtx->battleMons[battler2].status & moveStatus) == FALSE)
+                        {
+                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, battler1Ability, moveStatus) == FALSE)
+                            {
+                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, battler2Ability, moveStatus))
+                                {
+                                    if ((BattleSystem_RandNext(battleSys) % 4) == 0)
+                                    {
+                                        bounceableMoves++;
+                                    }
+                                }
+                                else
+                                {
+                                    bounceableMoves++;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
+
+                        if (moveMoveEffect != MOVE_EFFECT_NONE)
+                        {
+                            if ((battleCtx->battleMons[battler2].moveEffectsMask & moveMoveEffect) == FALSE)
+                            {
+                                if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, battler1Ability, moveMoveEffect) == FALSE)
+                                {
+                                    if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, battler2Ability, moveMoveEffect))
+                                    {
+                                        if ((BattleSystem_RandNext(battleSys) % 4) == 0)
+                                        {
+                                            bounceableMoves++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (BattleSystem_RandNext(battleSys) % 4)
+                                        {
+                                            bounceableMoves++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            moveSideCondition = MapBattleEffectToSideCondition(battleCtx, moveEffect);
+
+                            if (moveSideCondition != SIDE_CONDITION_NONE)
+                            {
+                                if ((battleCtx->sideConditionsMask[battler2Side] & moveSideCondition) == FALSE)
+                                {
+                                    bounceableMoves++;
+                                }
+                                else
+                                {
+                                    if (moveSideCondition & (SIDE_CONDITION_SPIKES | SIDE_CONDITION_TOXIC_SPIKES))
+                                    {
+                                        if (moveSideCondition & SIDE_CONDITION_SPIKES)
+                                        {
+                                            if (battleCtx->sideConditions[battler2Side].spikesLayers < 3)
+                                            {
+                                                bounceableMoves++;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (battleCtx->sideConditions[battler2Side].toxicSpikesLayers < 2)
+                                            {
+                                                bounceableMoves++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
+
+                                if (moveVolatileStatus != VOLATILE_CONDITION_NONE)
+                                {
+                                    if ((battleCtx->battleMons[battler2].statusVolatile & moveVolatileStatus) == FALSE)
+                                    {
+                                        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, battler1Ability, moveVolatileStatus) == FALSE)
+                                        {
+                                            if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, battler2Ability, moveVolatileStatus))
+                                            {
+                                                if ((BattleSystem_RandNext(battleSys) % 4) == 0)
+                                                {
+                                                    bounceableMoves++;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (BattleSystem_RandNext(battleSys) % 4)
+                                                {
+                                                    bounceableMoves++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    switch (moveEffect)
+                                    {
+                                    default:
+                                        break;
+
+                                    case BATTLE_EFFECT_ENCORE:
+                                        if (battleCtx->battleMons[battler2].moveEffectsData.encoredTurns == 0)
+                                        {
+                                            bounceableMoves++;
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_DISABLE:
+                                        if (battleCtx->battleMons[battler2].moveEffectsData.disabledTurns == 0)
+                                        {
+                                            bounceableMoves++;
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_TAUNT:
+                                        if (battleCtx->battleMons[battler2].moveEffectsData.tauntedTurns == 0)
+                                        {
+                                            bounceableMoves++;
+                                        }
+                                        break;
+
+                                    case BATTLE_EFFECT_TAUNT:
+                                        if (battleCtx->battleMons[battler2].moveEffectsData.tauntedTurns == 0)
+                                        {
+                                            bounceableMoves++;
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (bounceableMoves)
+    {
+        // 3 or 4 bounceable moves
+        if (bounceableMoves > 2)
+        {
+            hasBounceableMove = TRUE;
+        }
+        else
+        {
+            // 2 bounceable moves
+            if (bounceableMoves > 1)
+            {
+                if (BattleSystem_RandNext(battleSys) % 8)
+                {
+                    hasBounceableMove = TRUE;
+                }
+            }
+            else
+            {
+                // Special case for battler 1's first turn out
+                if (battleCtx->battleMons[battler1].moveEffectsData.fakeOutTurnNumber < battleCtx->totalTurns)
+                {
+                    if (BattleSystem_RandNext(battleSys) % 8)
+                    {
+                        hasBounceableMove = TRUE;
+                    }
+                }
+                else
+                {
+                    if (BattleSystem_RandNext(battleSys) % 3)
+                    {
+                        hasBounceableMove = TRUE;
+                    }
+                }
+            }
         }
     }
 
