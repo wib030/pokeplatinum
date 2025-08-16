@@ -15421,51 +15421,51 @@ int MapBattleEffectToSideCondition(BattleContext *battleCtx, int effect)
 
     switch (effect) {
         
-        case (BATTLE_EFFECT_SET_REFLECT):
+        case BATTLE_EFFECT_SET_REFLECT:
             sideCondition = SIDE_CONDITION_REFLECT;
             break;
 
-        case (BATTLE_EFFECT_SET_LIGHT_SCREEN):
+        case BATTLE_EFFECT_SET_LIGHT_SCREEN:
             sideCondition = SIDE_CONDITION_LIGHT_SCREEN;
             break;
 
-        case (BATTLE_EFFECT_SET_SPIKES):
+        case BATTLE_EFFECT_SET_SPIKES:
             sideCondition = SIDE_CONDITION_SPIKES;
             break;
 
-        case (BATTLE_EFFECT_PREVENT_STATUS):
+        case BATTLE_EFFECT_PREVENT_STATUS:
             sideCondition = SIDE_CONDITION_SAFEGUARD;
             break;
 
-        case (BATTLE_EFFECT_HIT_IN_3_TURNS):
+        case BATTLE_EFFECT_HIT_IN_3_TURNS:
             sideCondition = SIDE_CONDITION_FUTURE_SIGHT;
             break;
 
-        case (BATTLE_EFFECT_HEAL_IN_3_TURNS):
+        case BATTLE_EFFECT_HEAL_IN_3_TURNS:
             sideCondition = SIDE_CONDITION_WISH;
             break;
 
-        case (BATTLE_EFFECT_PREVENT_STAT_REDUCTION):
+        case BATTLE_EFFECT_PREVENT_STAT_REDUCTION:
             sideCondition = SIDE_CONDITION_MIST;
             break;
 
-        case (BATTLE_EFFECT_STEALTH_ROCK):
+        case BATTLE_EFFECT_STEALTH_ROCK:
             sideCondition = SIDE_CONDITION_STEALTH_ROCK;
             break;
 
-        case (BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS):
+        case BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS:
             sideCondition = SIDE_CONDITION_TAILWIND;
             break;
 
-        case (BATTLE_EFFECT_TOXIC_SPIKES):
+        case BATTLE_EFFECT_TOXIC_SPIKES:
             sideCondition = SIDE_CONDITION_TOXIC_SPIKES;
             break;
 
-        case (BATTLE_EFFECT_PREVENT_CRITS):
+        case BATTLE_EFFECT_PREVENT_CRITS:
             sideCondition = SIDE_CONDITION_LUCKY_CHANT;
             break;
 			
-		case (BATTLE_EFFECT_SET_STICKY_WEB):
+		case BATTLE_EFFECT_SET_STICKY_WEB:
             sideCondition = SIDE_CONDITION_STICKY_WEB;
             break;
 
