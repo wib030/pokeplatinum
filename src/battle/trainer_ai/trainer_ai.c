@@ -5377,6 +5377,39 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
     int jump = AIScript_Read(battleCtx);
 
     int battler1 = AIScript_Battler(battleCtx, inBattler);
+    int i;
+    int moveEffect;
+    BOOL hasBounceableMove;
+
+    hasBounceableMove = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler1, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            if (MOVE_DATA(battleCtx->battleMons[battler1].moves[i]).flags & MOVE_FLAG_CAN_MAGIC_COAT)
+            {
+                hasBounceableMove = TRUE;
+                break;
+            }
+        }
+    }
+
+    if (hasBounceableMove)
+    {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/*
+static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int battler1 = AIScript_Battler(battleCtx, inBattler);
 
     int bounceableMoves;
     BOOL hasBounceableMove;
@@ -5429,6 +5462,7 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
         AIScript_Iter(battleCtx, jump);
     }
 }
+*/
 
 static void AICmd_LoadBattlerIgnorableAbility(BattleSystem* battleSys, BattleContext* battleCtx)
 {
@@ -10647,6 +10681,7 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
     return result;
 }
 
+/*
 static int AI_BounceableMovesCounter(BattleSystem* battleSys, BattleContext* battleCtx, int battler1)
 {
     int i, j;
@@ -10829,3 +10864,4 @@ static int AI_BounceableMovesCounter(BattleSystem* battleSys, BattleContext* bat
     
     return bounceableMoves;
 }
+*/
