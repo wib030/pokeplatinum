@@ -5378,7 +5378,8 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
 
     int battler1 = AIScript_Battler(battleCtx, inBattler);
     int battler2;
-    int i, bounceableMoves;
+    int i;
+    int bounceableMoves;
     int moveEffect;
     u8 battler1Ability, battler2Ability, battler2Side;
     u32 moveStatus, moveMoveEffect, moveSideCondition, moveVolatileStatus;
@@ -5422,7 +5423,7 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
 
                     if (moveStatus != MON_CONDITION_NONE)
                     {
-                        if ((battleCtx->battleMons[battler2].status & moveStatus) == FALSE)
+                        if ((battleCtx->battleMons[battler2].status & MON_CONDITION_ANY) == FALSE)
                         {
                             if (Battle_AbilityDetersStatus(battleSys, battleCtx, battler1Ability, moveStatus) == FALSE)
                             {
