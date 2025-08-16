@@ -843,7 +843,7 @@
     .long 146
     .endm
 	
-	.macro IfBattlerHasBounceableMove battler, jump
+	.macro IfBattlerHasBounceableMove battler1, jump
     .long 147
     .long \battler
     .long (\jump-.) / 4 - 1
