@@ -17014,7 +17014,6 @@ BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *batt
             }
             break;
 
-        case MOVE_EFFECT_HEAL_INVERSION:
         case MOVE_EFFECT_HEAL_BLOCK:
             switch (ability) {
                 default:
