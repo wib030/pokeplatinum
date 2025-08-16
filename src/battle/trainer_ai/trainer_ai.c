@@ -5382,7 +5382,7 @@ static void AICmd_IfBattlerHasBounceableMove(BattleSystem* battleSys, BattleCont
     int bounceableMoves;
     int moveEffect;
     u8 battler1Ability, battler2Ability, battler2Side;
-    u32 moveStatus, moveMoveEffect, moveSideCondition, moveVolatileStatus;
+    int moveStatus, moveMoveEffect, moveSideCondition, moveVolatileStatus;
     BOOL hasBounceableMove;
 
     hasBounceableMove = FALSE;
