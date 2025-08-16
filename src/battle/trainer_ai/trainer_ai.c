@@ -10663,7 +10663,7 @@ static int AI_BounceableMovesCounter(BattleSystem* battleSys, BattleContext* bat
     battler1Side = Battler_Side(battleSys, battler1);
     battler2Side = battler1Side ^ 1;
 
-    for (j = 0; j < MAX_BATTLERS; j++)
+    for (j = 0; j < MAX_BATTLERS_PER_SIDE; j++)
     {
         battler2 = BattleSystem_AliveBattlerSlotBySide(battleSys, battleCtx, battler2Side, j);
 
