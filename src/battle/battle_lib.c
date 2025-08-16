@@ -17014,6 +17014,7 @@ BOOL Battle_AbilityDetersMoveEffect(BattleSystem *battleSys, BattleContext *batt
             }
             break;
 
+        case MOVE_EFFECT_MIRACLE_EYE:
         case MOVE_EFFECT_HEAL_BLOCK:
             switch (ability) {
                 default:
