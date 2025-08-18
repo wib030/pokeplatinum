@@ -55,5 +55,9 @@ enum AIActionChoice {
 // flag determining if they roll for damage or not
 #define USE_MAX_DAMAGE  0
 #define ROLL_FOR_DAMAGE 1
+#define USE_MIN_DAMAGE  2
+
+#define DAMAGE_VARIANCE_MAX_ROLL 100
+#define DAMAGE_VARIANCE_MIN_ROLL 85
 
 #endif

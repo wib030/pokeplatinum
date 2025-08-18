@@ -459,7 +459,7 @@ static int AIScript_Read(BattleContext *battleCtx);
 static int AIScript_ReadOffset(BattleContext *battleCtx, int ofs);
 static void AIScript_Iter(BattleContext *battleCtx, int i);
 static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler);
-static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, BOOL varyDamage);
+static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, int varyDamage);
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 static int TrainerAI_CalcEndOfTurnHealTick(BattleSystem* battleSys, BattleContext* battleCtx, int battler, BOOL considerHealInversionFlag);
@@ -2172,14 +2172,18 @@ static void AICmd_IfCurrentMoveKills(BattleSystem *battleSys, BattleContext *bat
 {
     AIScript_Iter(battleCtx, 1);
 
-    BOOL useDamageRoll = AIScript_Read(battleCtx);
+    int useDamageRoll = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
 
     int roll;
-    if (useDamageRoll == TRUE) {
+    if (useDamageRoll == ROLL_FOR_DAMAGE) {
         roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
-    } else {
-        roll = 100;
+    }
+    else if (useDamageRoll == USE_MIN_DAMAGE) {
+        roll = DAMAGE_VARIANCE_MIN_ROLL;
+    }
+    else {
+        roll = DAMAGE_VARIANCE_MAX_ROLL;
     }
 
     int riskyIdx;
@@ -2223,14 +2227,17 @@ static void AICmd_IfCurrentMoveDoesNotKill(BattleSystem *battleSys, BattleContex
 {
     AIScript_Iter(battleCtx, 1);
 
-    BOOL useDamageRoll = AIScript_Read(battleCtx);
+    int useDamageRoll = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
 
     int roll;
-    if (useDamageRoll == TRUE) {
+    if (useDamageRoll == ROLL_FOR_DAMAGE) {
         roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
     } else {
-        roll = 100;
+    else if (useDamageRoll == USE_MIN_DAMAGE) {
+            roll = DAMAGE_VARIANCE_MIN_ROLL;
+    }
+        roll = DAMAGE_VARIANCE_MAX_ROLL;
     }
 
     int riskyIdx;
@@ -2835,7 +2842,7 @@ static void AICmd_IfBattlerDealsMoreDamage(BattleSystem *battleSys, BattleContex
 {
     int i;
     int inBattler;
-    BOOL varyDamage;
+    int varyDamage;
     int jump;
     int battler;
     int roll;
@@ -2866,10 +2873,15 @@ static void AICmd_IfBattlerDealsMoreDamage(BattleSystem *battleSys, BattleContex
         varyDamage);
     battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (varyDamage == TRUE) {
+    if (varyDamage == ROLL_FOR_DAMAGE) {
         roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
-    } else {
-        roll = 100;
+    }
+    else if (varyDamage == USE_MIN_DAMAGE)
+    {
+        roll = DAMAGE_VARIANCE_MIN_ROLL;
+    }
+    else {
+        roll = DAMAGE_VARIANCE_MAX_ROLL;
     }
 
     battlerDamage = TrainerAI_CalcDamage(battleSys,
@@ -6013,7 +6025,7 @@ static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler)
  * @param varyDamage    If TRUE, apply random damage variance to each calculation.
  * @return              The highest damage value among all considered moves.
  */
-static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, int embargoTurns, BOOL varyDamage)
+static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, int embargoTurns, int varyDamage)
 {
     int i, riskyScanIdx, altPowerScanIdx;
     s32 maxDamage;
@@ -6043,10 +6055,14 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 
         if (sAltPowerCalcMoves[altPowerScanIdx] != 0xFFFF
                 || (moves[i] != MOVE_NONE && sRiskyMoves[riskyScanIdx] == 0xFFFF && MOVE_DATA(moves[i]).power > 1)) {
-            if (varyDamage == TRUE) {
+            if (varyDamage == ROLL_FOR_DAMAGE) {
                 damageRoll = AI_CONTEXT.moveDamageRolls[i];
-            } else {
-                damageRoll = 100;
+            }
+            else if (varyDamage == USE_MIN_DAMAGE) {
+                damageRoll = DAMAGE_VARIANCE_MIN_ROLL;
+            }
+            else {
+                damageRoll = DAMAGE_VARIANCE_MAX_ROLL;
             }
 
             damageVals[i] = TrainerAI_CalcDamage(battleSys, battleCtx, moves[i], heldItem, ivs, attacker, ability, embargoTurns, damageRoll);
