@@ -10683,6 +10683,9 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
                 moveDamage,
                 &effectiveness);
 
+                moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
+                moveDamage /= 100;
+
                 if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
                     if (moveDamage >= battleCtx->battleMons[defender].curHP) {
