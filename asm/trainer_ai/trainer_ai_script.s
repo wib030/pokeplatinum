@@ -4243,7 +4243,9 @@ Expert_PainSplit:
     ; If the attacker''s HP > 40%, score -1.
     ;
     ; Otherwise, score -1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 80, Expert_PainSplit_ScoreMinus1
+    FlagMoveDamageScore USE_MAX_DAMAGE
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Try95ChanceForScorePlus3
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_PainSplit_ScoreMinus1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_PainSplit_CheckUserHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_PainSplit_ScoreMinus1
     AddToMoveScore 1
