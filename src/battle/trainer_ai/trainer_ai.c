@@ -2233,10 +2233,11 @@ static void AICmd_IfCurrentMoveDoesNotKill(BattleSystem *battleSys, BattleContex
     int roll;
     if (useDamageRoll == ROLL_FOR_DAMAGE) {
         roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
-    } else {
-		if (useDamageRoll == USE_MIN_DAMAGE) {
-			roll = DAMAGE_VARIANCE_MIN_ROLL;
-		}
+    }
+    else if (useDamageRoll == USE_MIN_DAMAGE) {
+        roll = DAMAGE_VARIANCE_MIN_ROLL;
+    }
+    else {
         roll = DAMAGE_VARIANCE_MAX_ROLL;
     }
 
