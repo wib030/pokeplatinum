@@ -6720,7 +6720,9 @@ Expert_Endeavor:
     ; If the attacker is faster than its opponent:
     ; - If the attacker''s HP > 40%, score -1.
     ; - Otherwise, score +1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 70, Expert_Endeavor_ScoreMinus1
+    FlagMoveDamageScore USE_MAX_DAMAGE
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Try95ChanceForScorePlus3
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_Endeavor_ScoreMinus1
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Endeavor_SlowerCheckHP
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_Endeavor_ScoreMinus1
     AddToMoveScore 1
