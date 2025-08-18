@@ -14626,7 +14626,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     speedMultiplier = 15;
                 }
                 else {
-                    speedMultiplier = 18;
+                    speedMultiplier = 15;
                 }
             }
 
@@ -15044,7 +15044,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                     speedMultiplier = 15;
                 }
                 else {
-                    speedMultiplier = 18;
+                    speedMultiplier = 15;
                 }
             }
 
@@ -17889,7 +17889,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
         }
         else {
 
-            speedMultiplier = 18;
+            speedMultiplier = 15;
         }
 
         for (j = 0; j < LEARNED_MOVES_MAX; j++) {
@@ -18057,7 +18057,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             }
             else {
 
-                speedMultiplier = 18;
+                speedMultiplier = 15;
             }
 
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
