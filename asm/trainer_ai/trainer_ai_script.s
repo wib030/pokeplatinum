@@ -1938,6 +1938,7 @@ Expert_Main:
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TORMENT, Expert_Torment
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_DEF_HIT, Expert_StatusDefenseUp
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MULTI_HIT_TEN, Expert_ChumRush
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_ALL_STATS_HIT, Expert_Omniboost
 
     ; All other moves have no additional logic.
     PopOrEnd 
@@ -7269,7 +7270,6 @@ Expert_MetalBurst:
     ; of additional score +1.
     ;
     ; If the opponent is not Taunted, 60.9% chance of score +1.
-    IfEnemyCanKO ScoreMinus12
     IfHasStatusThreat AI_BATTLER_DEFENDER, Try90ChanceForScoreMinus12
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_STURDY, Expert_MetalBurst_CheckSashBreak
@@ -7283,9 +7283,7 @@ Expert_MetalBurst_CheckSashBreak:
     AddToMoveScore -1
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 100, Expert_MetalBurst_CheckDefenderCondition
     IfCanBreakSashOrSturdy AI_BATTLER_DEFENDER, Try90ChanceForScoreMinus12
-    AddToMoveScore 1
-    IfRandomLessThan 128, Expert_MetalBurst_CheckDefenderCondition
-    AddToMoveScore 1
+    AddToMoveScore 2
     IfRandomLessThan 128, Expert_MetalBurst_CheckDefenderCondition
     AddToMoveScore 1
     GoTo Expert_MetalBurst_CheckDefenderCondition
@@ -7354,6 +7352,7 @@ Expert_MetalBurst_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_MetalBurst_End:
+    IfEnemyCanKO Try90ChanceForScoreMinus12
     PopOrEnd 
 
 Expert_UTurn:
@@ -9857,6 +9856,38 @@ Expert_ChumRush_CheckDefenderDetersContact:
     GoTo Expert_ChumRush_End
 
 Expert_ChumRush_End:
+    PopOrEnd
+
+Expert_Omniboost:
+    IfCanKOEnemy, Expert_Omniboost_CheckDamage
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SERENE_GRACE, Expert_Omniboost_ChanceBoostIncentive
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LUCKY_CHANT, Expert_Omniboost_ChanceBoostIncentive
+    GoTo Expert_Omniboost_Main
+
+Expert_Omniboost_CheckDamage:
+    IfCurrentMoveKills USE_MIN_DAMAGE, Try95ChanceForScorePlus3
+    FlagMoveDamageScore FALSE
+    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus12
+    IfRandomLessThan 12, Expert_Omniboost_Main
+    AddToMoveScore 1
+    GoTo Expert_Omniboost_Main
+
+Expert_Omniboost_ChanceBoostIncentive:
+    IfRandomLessThan 64, Expert_Omniboost_Main
+    AddToMoveScore 1
+    IfRandomLessThan 192, Expert_Omniboost_Main
+    AddToMoveScore 1
+    GoTo Expert_Omniboost_Main
+
+Expert_Omniboost_Main:
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
+    IfHPPercentLessThan 50, Try50ChanceForScoreMinus1
+    IfRandomLessThan 128, Expert_Omniboost_End
+    AddToMoveScore 1
+    GoTo Expert_Omniboost_End
+
+Expert_Omniboost_End:
     PopOrEnd
 
 EvalAttack_Main:
