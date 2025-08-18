@@ -4923,7 +4923,7 @@ Expert_Endure_CheckHP:
     GoTo Expert_Endure_End
 
 Expert_Endure_SturdyHPCheck:
-    IfHPPercentEqualTo 100, ScoreMinus12
+    IfHPPercentEqualTo AI_BATTLER_ATTACKER, 100, ScoreMinus12
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 25, Expert_Endure_ScoreMinus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Endure_TryScorePlus1
     GoTo Expert_Endure_End
@@ -9863,7 +9863,7 @@ Expert_ChumRush_End:
     PopOrEnd
 
 Expert_Omniboost:
-    IfCanKOEnemy, Expert_Omniboost_CheckDamage
+    IfCanKOEnemy Expert_Omniboost_CheckDamage
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_SERENE_GRACE, Expert_Omniboost_ChanceBoostIncentive
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LUCKY_CHANT, Expert_Omniboost_ChanceBoostIncentive
@@ -9886,7 +9886,7 @@ Expert_Omniboost_ChanceBoostIncentive:
 
 Expert_Omniboost_Main:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
-    IfHPPercentLessThan 50, Try50ChanceForScoreMinus1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Try50ChanceForScoreMinus1
     IfRandomLessThan 128, Expert_Omniboost_End
     AddToMoveScore 1
     GoTo Expert_Omniboost_End
