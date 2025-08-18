@@ -4843,16 +4843,20 @@ Expert_Endure:
     LoadProtectChain AI_BATTLER_ATTACKER
     IfLoadedGreaterThan 0, ScoreMinus12
     IfEnemyCanKO Expert_Endure_TryScorePlus4
+    IfRandomLessThan 64, Expert_Endure_Main
+    AddToMoveScore -1
+    IfRandomLessThan 128, Expert_Endure_Main
+    AddToMoveScore -1
     GoTo Expert_Endure_Main
 
 Expert_Endure_TryScorePlus4:
-    IfRandomLessThan 1, Expert_Endure_Main
-    AddToMoveScore 1
-    IfRandomLessThan 4, Expert_Endure_Main
-    AddToMoveScore 1
-    IfRandomLessThan 32, Expert_Endure_Main
+    IfRandomLessThan 12, Expert_Endure_Main
     AddToMoveScore 1
     IfRandomLessThan 64, Expert_Endure_Main
+    AddToMoveScore 1
+    IfRandomLessThan 128, Expert_Endure_Main
+    AddToMoveScore 1
+    IfRandomLessThan 192, Expert_Endure_Main
     AddToMoveScore 1
     GoTo Expert_Endure_Main
 
@@ -4909,12 +4913,20 @@ Expert_Endure_CheckSand:
     GoTo Expert_Endure_End
 
 Expert_Endure_CheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 12, Expert_Endure_ScoreMinus1
+    LoadBattlerIgnorableAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STURDY, Expert_Endure_SturdyHPCheck
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 25, Expert_Endure_ScoreMinus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Endure_TryScorePlus1
     GoTo Expert_Endure_End
 
-Expert_Endure_ScoreMinus1:
-    AddToMoveScore -1
+Expert_Endure_SturdyHPCheck:
+    IfHPPercentEqualTo 100, ScoreMinus12
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 25, Expert_Endure_ScoreMinus10
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Endure_TryScorePlus1
+    GoTo Expert_Endure_End
+
+Expert_Endure_ScoreMinus10:
+    AddToMoveScore -10
     GoTo Expert_Endure_End
 
 Expert_Endure_TryScorePlus1:
