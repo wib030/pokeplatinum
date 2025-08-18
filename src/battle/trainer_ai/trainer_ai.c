@@ -1500,7 +1500,7 @@ static void AICmd_FlagMoveDamageScore(BattleSystem *battleSys, BattleContext *ba
 {
     int i = 0, riskyIdx, altPowerIdx;
     s32 moveDamage[LEARNED_MOVES_MAX];
-    BOOL varyDamage;
+    int varyDamage;
     u8 ivs[STAT_MAX];
 
     AIScript_Iter(battleCtx, 1);
@@ -2761,7 +2761,7 @@ static void AICmd_IfPartyMemberDealsMoreDamage(BattleSystem *battleSys, BattleCo
 {
     // Declare C89-style to match
     int i, j;
-    BOOL varyDamage;
+    int varyDamage;
     int jump;
     int battler;
     s32 activeMonDamage;
@@ -3411,7 +3411,7 @@ static void AICmd_CheckIfHighestDamageWithPartner(BattleSystem *battleSys, Battl
     int i = 0, j, k;
     s32 moveDamage;
     s32 damageVals[LEARNED_MOVES_MAX];
-    BOOL varyDamage;
+    int varyDamage;
     u8 ivs[STAT_MAX];
     int battler;
 
