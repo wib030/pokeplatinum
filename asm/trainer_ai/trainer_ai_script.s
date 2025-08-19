@@ -1471,7 +1471,6 @@ Basic_CheckToxicSpikes:
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
     PopOrEnd 
-    PopOrEnd 
 
 Basic_CheckAquaRing:
     ; If the attacker is already under the effect, score -10.
