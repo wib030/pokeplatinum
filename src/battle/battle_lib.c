@@ -235,8 +235,8 @@ void BattleSystem_LoadScript(BattleContext *battleCtx, int narc, int file)
 
 void BattleSystem_CallScript(BattleContext *battleCtx, int narc, int file)
 {
-    GF_ASSERT(NARC_GetMemberSizeByIndexPair(narc, file) < 400 * 4);
-    GF_ASSERT(battleCtx->scriptStackPointer < 4);
+    GF_ASSERT(NARC_GetMemberSizeByIndexPair(narc, file) < 800 * 8);
+    GF_ASSERT(battleCtx->scriptStackPointer < 8);
 
     battleCtx->scriptStackNarc[battleCtx->scriptStackPointer] = battleCtx->scriptNarc;
     battleCtx->scriptStackFile[battleCtx->scriptStackPointer] = battleCtx->scriptFile;
