@@ -17,7 +17,7 @@ typedef struct AIContext {
     u32 thinkingMask;
 
     u8 stateFlags;
-    u8 thinkingBitShift;
+    u16 thinkingBitShift;
     u8 padding0012;
     u8 padding0013;
     int padding0014; // this does not match with a u32, weird
