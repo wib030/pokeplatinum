@@ -34,8 +34,8 @@ typedef struct AIContext {
 
     u16 trainerItems[MAX_OPPONENTS][MAX_TRAINER_ITEMS];
 
-    u32 scriptStackPointer[16];
-    u16 scriptStackSize;
+    u32 scriptStackPointer[8];
+    u8 scriptStackSize;
 
     u8 trainerItemCounts[MAX_BATTLERS_PER_SIDE];
     u8 attacker;
