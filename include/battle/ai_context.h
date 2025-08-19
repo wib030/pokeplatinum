@@ -7,7 +7,7 @@
 #include "item.h"
 #include "move_table.h"
 typedef struct AIContext {
-    u16 evalStep;
+    u8 evalStep;
     u8 moveSlot;
     u16 move;
 
