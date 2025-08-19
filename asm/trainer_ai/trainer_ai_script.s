@@ -7622,8 +7622,6 @@ Expert_Fling_Main:
 
 Expert_Fling_End:
     PopOrEnd
-    PopOrEnd
-    PopOrEnd
 
 Expert_Fling_FieldEffects:
     TableEntry FLING_EFFECT_TRICK_ROOM
