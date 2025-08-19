@@ -220,7 +220,9 @@ struct BattleContext {
 
     AIContext aiContext; // has the move and item data tables
     u32 *aiScriptTemp;
+    u32* aiScriptTempBasic;
     u32 aiScriptCursor;
+    u32 aiScriptCursorBasic;
 
     u32 battleStatusMask;
     u32 battleStatusMask2;

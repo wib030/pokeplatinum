@@ -645,14 +645,14 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadBattlerIgnorableAbility
 };
 
-void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
+void TrainerAI_Init(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler, u8 initScore)
 {
     // must declare these up here to match
     int i;
     u8 invalidMoves;
 
     // explicit memset
-    u8 *adrs = (u8*)&AI_CONTEXT;
+    u8* adrs = (u8*)&AI_CONTEXT;
     for (i = 0; i < XtOffset(AIContext*, battlerMoves); i++) {
         adrs[i] = 0;
     }
@@ -660,7 +660,8 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
         if (initScore & 1) {
             AI_CONTEXT.moveScore[i] = 100;
-        } else {
+        }
+        else {
             AI_CONTEXT.moveScore[i] = 0;
         }
 
@@ -682,7 +683,14 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
         AI_CONTEXT.moveDamageRolls[i] = 100 - (BattleSystem_RandNext(battleSys) % 16);
     }
 
-    AI_CONTEXT.scriptStackSize = 0;
+    if (AI_CONTEXT.thinkingBitShift == 0)
+    {
+        AI_CONTEXT.scriptStackSizeBasic = 0;
+    }
+    else
+    {
+        AI_CONTEXT.scriptStackSize = 0;
+    }
 
     // roaming Pokemon have special AI; otherwise, copy the AI behavior from the trainer data
     if (battleSys->battleType & BATTLE_TYPE_ROAMER) {
@@ -945,7 +953,14 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
     while (AI_CONTEXT.evalStep != AI_EVAL_STEP_END) {
         switch (AI_CONTEXT.evalStep) {
         case AI_EVAL_STEP_INIT:
-            battleCtx->aiScriptCursor = battleCtx->aiScriptTemp[AI_CONTEXT.thinkingBitShift];
+            if (AI_CONTEXT.thinkingBitShift == 0)
+            {
+                battleCtx->aiScriptCursorBasic = battleCtx->aiScriptTempBasic[AI_CONTEXT.thinkingBitShift];
+            }
+            else
+            {
+                battleCtx->aiScriptCursor = battleCtx->aiScriptTemp[AI_CONTEXT.thinkingBitShift];
+            }
 
             if (battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot] == 0) {
                 AI_CONTEXT.move = MOVE_NONE;
@@ -958,7 +973,14 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
 
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
-                sAICommandTable[battleCtx->aiScriptTemp[battleCtx->aiScriptCursor]](battleSys, battleCtx);
+                if (AI_CONTEXT.thinkingBitShift == 0)
+                {
+                    sAICommandTable[battleCtx->aiScriptTempBasic[battleCtx->aiScriptCursorBasic]](battleSys, battleCtx);
+                }
+                else
+                {
+                    sAICommandTable[battleCtx->aiScriptTemp[battleCtx->aiScriptCursor]](battleSys, battleCtx);
+                }
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
@@ -5551,12 +5573,21 @@ static void AICmd_LoadBattlerIgnorableAbility(BattleSystem* battleSys, BattleCon
  * @param battleCtx 
  * @param offset    Distance to jump ahead after pushing the cursor.
  */
-static void AIScript_PushCursor(BattleSystem *battleSys, BattleContext *battleCtx, int offset)
+static void AIScript_PushCursor(BattleSystem* battleSys, BattleContext* battleCtx, int offset)
 {
-    AI_CONTEXT.scriptStackPointer[AI_CONTEXT.scriptStackSize++] = battleCtx->aiScriptCursor;
-    AIScript_Iter(battleCtx, offset);
+    if (AI_CONTEXT.thinkingBitShift == 0)
+    {
+        AI_CONTEXT.scriptStackPointerBasic[AI_CONTEXT.scriptStackSizeBasic++] = battleCtx->aiScriptCursorBasic;
 
-    GF_ASSERT(AI_CONTEXT.scriptStackSize <= AI_MAX_STACK_SIZE);
+        GF_ASSERT(AI_CONTEXT.scriptStackSizeBasic <= AI_MAX_STACK_SIZE);
+    }
+    else
+    {
+        AI_CONTEXT.scriptStackPointer[AI_CONTEXT.scriptStackSize++] = battleCtx->aiScriptCursor;
+
+        GF_ASSERT(AI_CONTEXT.scriptStackSize <= AI_MAX_STACK_SIZE);
+    }
+    AIScript_Iter(battleCtx, offset);
 }
 
 /**
@@ -5569,10 +5600,21 @@ static void AIScript_PushCursor(BattleSystem *battleSys, BattleContext *battleCt
  */
 static BOOL AIScript_PopCursor(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    if (AI_CONTEXT.scriptStackSize) {
-        AI_CONTEXT.scriptStackSize--;
-        battleCtx->aiScriptCursor = AI_CONTEXT.scriptStackPointer[AI_CONTEXT.scriptStackSize];
-        return TRUE;
+    if (AI_CONTEXT.thinkingBitShift == 0)
+    {
+        if (AI_CONTEXT.scriptStackSizeBasic) {
+            AI_CONTEXT.scriptStackSizeBasic--;
+            battleCtx->aiScriptCursorBasic = AI_CONTEXT.scriptStackPointerBasic[AI_CONTEXT.scriptStackSizeBasic];
+            return TRUE;
+        }
+    }
+    else
+    {
+        if (AI_CONTEXT.scriptStackSize) {
+            AI_CONTEXT.scriptStackSize--;
+            battleCtx->aiScriptCursor = AI_CONTEXT.scriptStackPointer[AI_CONTEXT.scriptStackSize];
+            return TRUE;
+        }
     }
 
     return FALSE;
@@ -5955,8 +5997,18 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
  */
 static int AIScript_Read(BattleContext *battleCtx)
 {
-    int word = battleCtx->aiScriptTemp[battleCtx->aiScriptCursor];
-    battleCtx->aiScriptCursor++;
+    int word;
+    
+    if (AI_CONTEXT.thinkingBitShift == 0)
+    {
+        word = battleCtx->aiScriptTempBasic[battleCtx->aiScriptCursorBasic];
+        battleCtx->aiScriptCursorBasic++;
+    }
+    else
+    {
+        word = battleCtx->aiScriptTemp[battleCtx->aiScriptCursor];
+        battleCtx->aiScriptCursor++;
+    }
 
     return word;
 }
@@ -5968,9 +6020,16 @@ static int AIScript_Read(BattleContext *battleCtx)
  * @param battleCtx 
  * @return Current word for the AI script under the cursor + an offset.
  */
-static int AIScript_ReadOffset(BattleContext *battleCtx, int ofs)
+static int AIScript_ReadOffset(BattleContext* battleCtx, int ofs)
 {
-    return battleCtx->aiScriptTemp[battleCtx->aiScriptCursor + ofs];
+    if (AI_CONTEXT.thinkingBitShift == 0)
+    {
+        return battleCtx->aiScriptTempBasic[battleCtx->aiScriptCursorBasic + ofs];
+    }
+    else
+    {
+        return battleCtx->aiScriptTemp[battleCtx->aiScriptCursor + ofs];
+    }
 }
 
 /**
@@ -5981,7 +6040,14 @@ static int AIScript_ReadOffset(BattleContext *battleCtx, int ofs)
  */
 static void AIScript_Iter(BattleContext *battleCtx, int i)
 {
-    battleCtx->aiScriptCursor += i;
+    if (AI_CONTEXT.thinkingBitShift == 0)
+    {
+        battleCtx->aiScriptCursorBasic += i;
+    }
+    else
+    {
+        battleCtx->aiScriptCursor += i;
+    }
 }
 
 /**
