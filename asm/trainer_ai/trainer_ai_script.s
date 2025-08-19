@@ -60,7 +60,7 @@ Basic_Main:
 
     ; Score the move according to its damage. If the AI does not know any
     ; moves which are eligible for scoring, skip ahead.
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, Basic_CheckSoundproof
 
 Basic_CheckForImmunity:
@@ -114,7 +114,7 @@ Basic_CheckWaterAbsorption2:
     GoTo Basic_NoImmunityAbility
 
 Basic_NoImmunityAbility:
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, Basic_CheckSoundproof
 
 Basic_CheckSoundproof:
@@ -2098,7 +2098,7 @@ Expert_Explosion_ProtectJuke_1:
     GoTo Expert_Explosion_CheckDamage
 
 Expert_Explosion_CheckDamage:
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus12
     AddToMoveScore 1
     IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_Explosion_CheckTargetHP
@@ -2774,7 +2774,7 @@ Expert_SpeedDownOnHit:
 	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus12
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Try95ChanceForScoreMinus12
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Expert_StatusSpeedDown_CheckSpeed
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Try50ChanceForScoreMinus1
     IfRandomLessThan 140, Try95ChanceForScorePlus1
@@ -5597,7 +5597,7 @@ Expert_SolarBeam_NoBoost:
     GoTo Expert_SolarBeam_End
 
 Expert_SolarBeam_DeincentivizeBoost:
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus10
     IfRandomLessThan 12, Expert_SolarBeam_End
     AddToMoveScore -3
@@ -6897,7 +6897,7 @@ Expert_Overheat_CheckEffectiveness:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, ScoreMinus5
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, ScoreMinus3
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 5, ScorePlus2
     IfRandomLessThan 85, Expert_Overheat_End
@@ -7614,7 +7614,7 @@ Expert_Fling_Main:
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Try50ChanceForScoreMinus3
     IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Try50ChanceForScorePlus1
     IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Try75ChanceForScorePlus3
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Try50ChanceForScoreMinus3
     IfRandomLessThan 16, Expert_Fling_End
     AddToMoveScore 1
@@ -9868,7 +9868,7 @@ EvalAttack_Main:
     IfCurrentMoveKills ROLL_FOR_DAMAGE, EvalAttack_CheckForKill
 
     ; If this move does not out-damage all other moves, score -1.
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, Try95ChanceForScoreMinus1
 
     ; Explosion, Focus Punch, and Sucker Punch are judged as Risky by this routine.
@@ -10022,7 +10022,7 @@ DamagePriority_Main:
     IfTargetIsPartner Terminate
 
     ; If the current move is not variable power or is Risky, break.
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedNotEqualTo AI_NO_COMPARISON_MADE, DamagePriority_Terminate
 
     ; ~61% of the time, score +2.
@@ -10083,7 +10083,7 @@ BatonPass_Main:
     IfLoadedEqualTo 0, BatonPass_Terminate
 
     ; If the move deals damage, ignore it for this flag.
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedNotEqualTo AI_NO_COMPARISON_MADE, BatonPass_Terminate
 
     ; If the attacker does not know Baton Pass, 31.25% chance of no score changes.
@@ -10152,7 +10152,7 @@ TagStrategy_Main:
     IfTargetIsPartner TagStrategy_Partner
 
     ; If the move does not deal damage, skip ahead
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_CheckSpecialScoring
 
     ; Flat-damage move effects have a special handler; this includes OHKO moves
@@ -10659,7 +10659,7 @@ TagStrategy_PartnerKnowsHelpingHand:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_PartnerHelpingHand_End
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_10_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedNotEqualTo AI_NO_COMPARISON_MADE, ScorePlus1
 
 TagStrategy_PartnerHelpingHand_End:
@@ -10670,7 +10670,7 @@ TagStrategy_Unused_1:
     PopOrEnd 
 
 TagStrategy_Unused_2:
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, ScoreMinus5
     AddToMoveScore 1
     IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, ScorePlus2
@@ -10891,7 +10891,7 @@ TagStrategy_CheckFire_End:
 
 TagStrategy_Partner:
     IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, TagStrategy_PartnerScoreMinus30
-    FlagMoveDamageScore FALSE
+    FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_PartnerStatusMove
     LoadTypeFrom LOAD_MOVE_TYPE
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckPartnerFireAbsorption
