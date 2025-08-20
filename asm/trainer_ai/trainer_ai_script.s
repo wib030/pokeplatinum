@@ -67,9 +67,7 @@ Basic_CheckForImmunity:
     ; Check for any immunity to the current move based on move type and what
     ; we know the battler''s ability to be (if we do at all).
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_NoImmunityAbility
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_VOLT_ABSORB, Basic_CheckElectricAbsorption
     IfLoadedEqualTo ABILITY_MOTOR_DRIVE, Basic_CheckElectricAbsorption
 	IfLoadedEqualTo ABILITY_LIGHTNING_ROD, Basic_CheckElectricAbsorption
@@ -356,9 +354,7 @@ Basic_CheckCannotExplode:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
 
     ; If the target has Damp and we do not have Mold Breaker, score -10.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckLastMon
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_DAMP, ScoreMinus10
 
 Basic_CheckLastMon:
@@ -518,9 +514,7 @@ Basic_CheckCanForceSwitch:
     ; If the target cannot be forced out for any reason, score -10.
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, ScoreMinus10
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCanForceSwitch_Terminate
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_SUCTION_CUPS, ScoreMinus10
 
 Basic_CheckCanForceSwitch_Terminate:
@@ -596,9 +590,7 @@ Basic_CheckAlreadyUnderLightScreen:
 Basic_CheckOHKOWouldFail:
     ; If the OHKO move would always fail for any reason, score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckOHKOWouldFail_Levels
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_STURDY, ScoreMinus10
 	IfLoadedEqualTo ABILITY_ROCK_SOLID, ScoreMinus10
 
@@ -608,8 +600,7 @@ Basic_CheckOHKOWouldFail_Levels:
 
 Basic_CheckMagnitude:
     ; If the target''s ability is Levitate and the attacker''s ability is not Mold Breaker, score -10.
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckNonStandardDamageOrChargeTurn
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus10
 
 Basic_CheckNonStandardDamageOrChargeTurn:
@@ -667,9 +658,7 @@ Basic_CheckCannotParalyze:
     GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
 Basic_CheckCannotParalyze_ThunderWave:
-    LoadBattlerAbility AI_BATTLER_ATTACKER    
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCannotParalyze_ImmuneToStatus
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MOTOR_DRIVE, ScoreMinus10
     IfLoadedEqualTo ABILITY_VOLT_ABSORB, ScoreMinus10
 	IfLoadedEqualTo ABILITY_LIGHTNING_ROD, ScoreMinus10
@@ -832,9 +821,7 @@ Basic_CheckAlreadyUnderSafeguard:
 Basic_CheckMemento:
     ; If the target''s ability blocks the stat drop and the attacker does not have Mold Breaker,
     ; score -10.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckMemento_CheckStatStages
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
 	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
@@ -1008,9 +995,7 @@ Basic_CheckCanMudSport:
 Basic_CheckTickle:
     ; If the target''s ability is Clear Body or White Smoke and the attacker''s ability is not
     ; Mold Breaker, score -10.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckTickle_CheckStatStages
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
 	IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
@@ -1524,9 +1509,7 @@ Basic_CheckTrickRoom:
 Basic_CheckCaptivate:
     ; If the target''s ability is any of Oblivious, Clear Body, or White Smoke and the attacker''s
     ; ability is not Mold Breaker, score -10.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckGender
-    LoadBattlerAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus10
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
@@ -1602,9 +1585,7 @@ Basic_Taunt:
     GoTo ScoreMinus10
 
 Basic_Taunt_CheckAbility:
-    LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_Taunt_CheckFirstTurn
-    LoadAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     GoTo Basic_Taunt_CheckFirstTurn
 
@@ -9656,9 +9637,8 @@ Expert_Taunt:
 
 Expert_Taunt_CheckAbility:
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Taunt_CheckFirstTurn
 	IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Taunt_CheckFirstTurn
-    LoadAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     GoTo Expert_Taunt_CheckFirstTurn
 
@@ -9758,9 +9738,8 @@ Expert_Torment:
 
 Expert_Torment_CheckAbility:
     LoadAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_Torment_CheckFirstTurn
 	IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, Expert_Torment_CheckFirstTurn
-    LoadAbility AI_BATTLER_DEFENDER
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_BOUNCE, ScoreMinus10
     GoTo Expert_Torment_CheckFirstTurn
 
