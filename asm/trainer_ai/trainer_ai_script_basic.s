@@ -22,12 +22,12 @@
 gTrainerAITableBasic:
 
 FlagTableBasic:
-    LabelDistance Basic_Main,          FlagTableBasic ; AI_FLAG_BASIC
-    LabelDistance TerminateBasic,      FlagTableBasic ; All other flags
+    LabelDistance Basic_Main,          FlagTable ; AI_FLAG_BASIC
+    LabelDistance TerminateBasic,      FlagTable ; All other flags
 
 Basic_Main:
     ; Ignore this flag on partner battlers.
-    IfTargetIsPartner TerminateBasic
+    IfTargetIsPartner Terminate
 
     ; Score the move according to its damage. If the AI does not know any
     ; moves which are eligible for scoring, skip ahead.
@@ -186,7 +186,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STATUS, Basic_CheckAlreadyUnderSafeguard
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROWTH, Basic_CheckHighStatStage_SpAttack
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROWTH, Expert_CheckGrowth
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PASS_STATS_AND_STATUS, Basic_CheckBatonPass
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_10_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Basic_CheckCanRecoverHP
@@ -199,6 +199,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, Basic_CheckFutureSight
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_STICKY_WEB, Basic_CheckStickyWeb
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
@@ -232,7 +233,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CAMOUFLAGE, Basic_CheckCamouflage
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Basic_CheckCannotDisable
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Expert_Disable
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Basic_CheckHealingWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURAL_GIFT, Basic_CheckNaturalGift
@@ -1587,126 +1588,6 @@ Basic_Taunt_CheckFirstTurn:
     GoTo Basic_Taunt_End
 
 Basic_Taunt_End:
-    PopOrEnd
-	
-ScoreMinus1:
-    AddToMoveScore -1
-    PopOrEnd 
-
-ScoreMinus2:
-    AddToMoveScore -2
-    PopOrEnd 
-
-ScoreMinus3:
-    AddToMoveScore -3
-    PopOrEnd 
-
-ScoreMinus5:
-    AddToMoveScore -5
-    PopOrEnd 
-
-ScoreMinus6: ; unused
-    AddToMoveScore -6
-    PopOrEnd 
-
-ScoreMinus8:
-    AddToMoveScore -8
-    PopOrEnd 
-
-ScoreMinus10:
-    AddToMoveScore -10
-    PopOrEnd 
-
-ScoreMinus12:
-    AddToMoveScore -12
-    PopOrEnd
-    
-ScoreMinus20:
-    AddToMoveScore -20
-    PopOrEnd
-
-ScoreMinus30:
-    AddToMoveScore -30
-    PopOrEnd 
-
-ScorePlus1:
-    AddToMoveScore 1
-    PopOrEnd 
-
-ScorePlus2:
-    AddToMoveScore 2
-    PopOrEnd 
-
-ScorePlus3:
-    AddToMoveScore 3
-    PopOrEnd 
-
-ScorePlus5:
-    AddToMoveScore 5
-    PopOrEnd 
-
-ScorePlus10:
-    AddToMoveScore 10
-    PopOrEnd 
-
-Try50ChanceForScorePlus1:
-    IfRandomLessThan 128, ScorePlus1
-    PopOrEnd
-
-Try66ChanceForScorePlus1:
-    IfRandomLessThan 170, ScorePlus1
-    PopOrEnd
-
-Try90ChanceForScorePlus1:
-    IfRandomLessThan 230, ScorePlus1
-    PopOrEnd
-
-Try95ChanceForScorePlus1:
-    IfRandomLessThan 244, ScorePlus1
-    PopOrEnd
-
-Try75ChanceForScorePlus3:
-    IfRandomLessThan 192, ScorePlus3
-    PopOrEnd
-
-Try95ChanceForScorePlus3:
-    IfRandomLessThan 244, ScorePlus3
-    PopOrEnd
-
-Try95ChanceForScorePlus5:
-    IfRandomLessThan 244, ScorePlus5
-    PopOrEnd
-
-Try50ChanceForScoreMinus1:
-    IfRandomLessThan 128, ScoreMinus1
-    PopOrEnd
-
-Try95ChanceForScoreMinus1:
-    IfRandomLessThan 244, ScoreMinus1
-    PopOrEnd
-
-Try99ChanceForScoreMinus1:
-    IfRandomLessThan 254, ScoreMinus1
-    PopOrEnd
-
-Try50ChanceForScoreMinus3:
-    IfRandomLessThan 128, ScoreMinus3
-    PopOrEnd
-
-Try75ChanceForScoreMinus3:
-    IfRandomLessThan 192, ScoreMinus3
-    PopOrEnd
-
-Try90ChanceForScoreMinus12:
-    IfRandomLessThan 230, ScoreMinus12
-    PopOrEnd
-
-Try95ChanceForScoreMinus12:
-    IfRandomLessThan 244, ScoreMinus12
-    PopOrEnd
-
-Try99ChanceForScoreMinus12:
-    IfRandomLessThan 254, ScoreMinus12
     PopOrEnd
 
 TerminateBasic:
