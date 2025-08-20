@@ -8016,19 +8016,6 @@ Expert_LovelyPunch:
     IfLoadedEqualTo GENDER_FEMALE, Expert_CheckCannotAttract_BothFemale
     GoTo ScoreMinus2
 
-Expert_CheckCannotAttract_BothMale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Expert_CheckCannotAttract_Terminate
-    GoTo ScoreMinus2
-
-Expert_CheckCannotAttract_BothFemale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Expert_CheckCannotAttract_Terminate
-    GoTo ScoreMinus2
-
-Expert_CheckCannotAttract_Terminate:
-    PopOrEnd
-
 Expert_FuryCutter:
     ; Cancel chain if highly resisted, otherwise try to maintain chain
     ; Extra chance to start a chain on 4x damage
