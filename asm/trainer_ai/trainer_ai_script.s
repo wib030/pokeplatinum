@@ -18,6 +18,7 @@
     .text
 
     .global gTrainerAITable
+    .global gTrainerAITableBasic
 
 gTrainerAITable:
 
@@ -5889,11 +5890,11 @@ Expert_Fling_TryFlingItemBoost:
     IfLoadedEqualTo FLING_EFFECT_PIVOT, Expert_Phaze
     IfLoadedEqualTo FLING_EFFECT_HAZE, Expert_Haze
     IfLoadedEqualTo FLING_EFFECT_DEFOG, Expert_Defog
-    IfLoadedEqualTo FLING_EFFECT_INFATUATION, Expert_CheckCannotAttract
+    IfLoadedEqualTo FLING_EFFECT_INFATUATION, Basic_CheckCannotAttract
     IfLoadedEqualTo FLING_EFFECT_LOWER_ACC, Expert_StatusAccuracyDown
     IfLoadedEqualTo FLING_EFFECT_LOWER_EVASION, Expert_StatusEvasionDown
-    IfLoadedEqualTo FLING_EFFECT_CONFUSION, Expert_CheckCannotConfuse
-    IfLoadedEqualTo FLING_EFFECT_NIGHTMARE, Expert_CheckNightmare
+    IfLoadedEqualTo FLING_EFFECT_CONFUSION, Basic_CheckCannotConfuse
+    IfLoadedEqualTo FLING_EFFECT_NIGHTMARE, Basic_CheckNightmare
     IfLoadedEqualTo FLING_EFFECT_WAKE_UP_SLAP, Expert_WakeUpSlap
     IfLoadedEqualTo FLING_EFFECT_INFLICT_CURSE, Try50ChanceForScorePlus1
     IfLoadedEqualTo FLING_EFFECT_INFLICT_INGRAIN, Expert_BindingMove
@@ -5901,22 +5902,22 @@ Expert_Fling_TryFlingItemBoost:
 
 Expert_Fling_CheckFieldEffect:
     AddToMoveScore 1
-    IfLoadedEqualTo FLING_EFFECT_RAIN, Expert_CheckCurrentWeatherIsRain
-    IfLoadedEqualTo FLING_EFFECT_SUN, Expert_CheckCurrentWeatherIsSun
-    IfLoadedEqualTo FLING_EFFECT_HAIL, Expert_CheckHail
-    IfLoadedEqualTo FLING_EFFECT_SAND, Expert_CheckSandstorm
+    IfLoadedEqualTo FLING_EFFECT_RAIN, Basic_CheckCurrentWeatherIsRain
+    IfLoadedEqualTo FLING_EFFECT_SUN, Basic_CheckCurrentWeatherIsSun
+    IfLoadedEqualTo FLING_EFFECT_HAIL, Basic_CheckHail
+    IfLoadedEqualTo FLING_EFFECT_SAND, Basic_CheckSandstorm
     IfLoadedEqualTo FLING_EFFECT_TRICK_ROOM, Expert_TrickRoom
     IfLoadedEqualTo FLING_EFFECT_GRAVITY, Expert_Gravity
     GoTo Expert_Fling_Main
 
 Expert_Fling_CheckStatus:
     AddToMoveScore 1
-    IfLoadedEqualTo FLING_EFFECT_PARALYZE, Expert_CheckCannotParalyze
-    IfLoadedEqualTo FLING_EFFECT_BURN, Expert_CheckCannotBurn
-    IfLoadedEqualTo FLING_EFFECT_POISON, Expert_CheckCannotPoison
-    IfLoadedEqualTo FLING_EFFECT_BADLY_POISON, Expert_CheckCannotPoison
+    IfLoadedEqualTo FLING_EFFECT_PARALYZE, Basic_CheckCannotParalyze
+    IfLoadedEqualTo FLING_EFFECT_BURN, Basic_CheckCannotBurn
+    IfLoadedEqualTo FLING_EFFECT_POISON, Basic_CheckCannotPoison
+    IfLoadedEqualTo FLING_EFFECT_BADLY_POISON, Basic_CheckCannotPoison
     GoTo Expert_Fling_Main
-
+	
 Expert_Fling_CheckStatBoost:
 	IfLoadedEqualTo FLING_EFFECT_USER_ATK_UP, Expert_StatusAttackUp
     IfLoadedEqualTo FLING_EFFECT_USER_DEF_UP, Expert_StatusDefenseUp
@@ -5969,203 +5970,11 @@ Expert_Fling_InstantFlingByItem:
     TableEntry ITEM_SILK_SCARF
     TableEntry TABLE_END
 
-
-Expert_CheckCannotParalyze:
-    ; If the target cannot be paralyzed for any reason, score -10.
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
-    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus10
-    IfMoveEqualTo MOVE_THUNDER_WAVE, Expert_CheckCannotParalyze_ThunderWave
-    IfMoveEqualTo MOVE_STUN_SPORE, Expert_CheckCannotParalyze_PowderMove
-    GoTo Expert_CheckCannotParalyze_ImmuneToStatus
-
-Expert_CheckCannotParalyze_ThunderWave:
-    LoadBattlerAbility AI_BATTLER_ATTACKER    
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_CheckCannotParalyze_ImmuneToStatus
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_MOTOR_DRIVE, ScoreMinus10
-    IfLoadedEqualTo ABILITY_VOLT_ABSORB, ScoreMinus10
-	IfLoadedEqualTo ABILITY_LIGHTNING_ROD, ScoreMinus10
-    GoTo Expert_CheckCannotParalyze_ImmuneToStatus
-
-Expert_CheckCannotParalyze_PowderMove:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
-    GoTo Expert_CheckCannotParalyze_ImmuneToStatus
-
-Expert_CheckCannotParalyze_ImmuneToStatus:
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
-    PopOrEnd 
-	
-Expert_CheckCannotBurn:
-    ; If the target cannot be burned for any reason, score -10.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus10
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, ScoreMinus10
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
-    PopOrEnd 
-
-Expert_CheckCannotPoison:
-    ; If the target is immune to the usual effects of Poison for any reason, score -10.
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_STEEL, Expert_CheckCannotPoison_CheckCorrosion
-    IfLoadedEqualTo TYPE_POISON, ScoreMinus10
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_STEEL, Expert_CheckCannotPoison_CheckCorrosion
-    IfLoadedEqualTo TYPE_POISON, ScoreMinus10
-    GoTo Expert_CheckCannotPoison_CheckDefenderAbility
-
-Expert_CheckCannotPoison_CheckDefenderAbility:
-    ; Check for immunity by ability
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus10
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
-    IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus10
-    IfLoadedEqualTo ABILITY_SHED_SKIN, Try95ChanceForScoreMinus12
-    IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Expert_CheckCannotPoison_Hydration
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus10
-    GoTo Expert_CheckCannotPoison_StatusOrSafeguard
-
-Expert_CheckCannotPoison_CheckCorrosion:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_CORROSION, ScoreMinus12
-    GoTo Expert_CheckCannotPoison_CheckDefenderAbility
-
-Expert_CheckCannotPoison_Hydration:
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo ABILITY_HYDRATION, Expert_CheckCannotPoison_StatusOrSafeguard
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_RAINING, ScoreMinus10
-
-Expert_CheckCannotPoison_StatusOrSafeguard:
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
-    GoTo Expert_CheckCannotPoison_CheckPowder
-
-Expert_CheckCannotPoison_CheckPowder:
-    IfMoveEqualTo MOVE_POISON_POWDER, Expert_CheckCannotPoison_Powder
-    PopOrEnd
-
-Expert_CheckCannotPoison_Powder:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus12
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_NO_WEATHER_CHIP_POWDER, ScoreMinus12
-    PopOrEnd
-
-Expert_CheckCurrentWeatherIsRain:
-    ; If the weather is currently Rain, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_RAINING, ScoreMinus8
-    PopOrEnd 
-
-Expert_CheckCurrentWeatherIsSun:
-    ; If the weather is currently Sun, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus8
-    PopOrEnd 
-
-Expert_CheckHail:
-    ; If the current weather is Hail, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_HAILING, ScoreMinus8
-
-    ; If any opposing battler''s ability is Ice Body, score -8.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo ABILITY_ICE_BODY, Expert_CheckHail_End
-    AddToMoveScore -8
-
-    ; If an attacker''s ability is also Ice Body, score +8 (undo the previous modifier).
-    ; This feels like a bug of misintention; the intention here seems to be for an attacker with
-    ; Ice Body to have an incentive to use Hail, but that is not realized. Instead, such an
-    ; attacker can only have a disincentive undone.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_ICE_BODY, Expert_CheckHail_End
-    AddToMoveScore 8
-    
-Expert_CheckHail_End:
-    PopOrEnd
-
-Expert_CheckSandstorm:
-    ; If the current weather is Sand, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, ScoreMinus8
-    PopOrEnd 
-
-Expert_CheckCannotAttract:
-    ; If the target cannot be Infatuated for any reason, score -12.
-    ;
-    ; If the target can be infatuated, 50% chance for score +1 and 25% chance for score +2.
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, ScoreMinus12
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus12
-    LoadGender AI_BATTLER_ATTACKER
-    IfLoadedEqualTo GENDER_MALE, Expert_CheckCannotAttract_BothMale
-    IfLoadedEqualTo GENDER_FEMALE, Expert_CheckCannotAttract_BothFemale
-    IfLoadedEqualTo GENDER_NONE, ScoreMinus12
-    GoTo ScoreMinus12
-
-Expert_CheckCannotAttract_BothMale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Expert_CheckCannotAttract_CanAttract
-    GoTo ScoreMinus12
-
-Expert_CheckCannotAttract_BothFemale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Expert_CheckCannotAttract_CanAttract
-    GoTo ScoreMinus12
-
-Expert_CheckCannotAttract_CanAttract:
-    IfRandomLessThan 128, Expert_CheckCannotAttract_Terminate
-    AddToMoveScore 1
-    IfRandomLessThan 128, Expert_CheckCannotAttract_Terminate
-    AddToMoveScore 1
-    GoTo Expert_CheckCannotAttract_Terminate
-
-Expert_CheckCannotAttract_Terminate:
-    PopOrEnd 
-
-Expert_CheckCannotConfuse:
-    ; If the target is already confused, score -5.
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, ScoreMinus5
-
-    ; If the target otherwise cannot be confused, score -10.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_OWN_TEMPO, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
-    PopOrEnd 
-
-Expert_CheckNightmare:
-    ; If the target is immune to the effect of Nightmare for any reason, score -10.
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_NIGHTMARE, ScoreMinus10
-    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, ScoreMinus10
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
-    PopOrEnd 
-
 Expert_PsychoShift:
     ; If the attacker does not have any status condition, score -12.
 	
 	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_StatusPoison
-	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_CheckCannotBurn
+	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Basic_CheckCannotBurn
 	IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_PARALYSIS, Expert_StatusParalyze
 	
     AddToMoveScore -12
@@ -8018,12 +7827,12 @@ Expert_LovelyPunch:
 
 Expert_CheckCannotAttract_BothMale:
     LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Expert_CheckCannotAttract_Terminate
+    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCannotAttract_Terminate
     GoTo ScoreMinus2
 
 Expert_CheckCannotAttract_BothFemale:
     LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Expert_CheckCannotAttract_Terminate
+    IfLoadedEqualTo GENDER_MALE, Basic_CheckCannotAttract_Terminate
     GoTo ScoreMinus2
 
 Expert_CheckCannotAttract_Terminate:
@@ -10306,8 +10115,6 @@ Terminate:
     .endif
 	
 .ifndef ASM_BATTLE_SCRIPT_INC
-
-.global gTrainerAITableBasic
 
 gTrainerAITableBasic:
 
