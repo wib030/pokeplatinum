@@ -10113,6 +10113,8 @@ Terminate:
     PopOrEnd 
 
     .endif
+	
+.ifndef ASM_BATTLE_SCRIPT_INC
 
 gTrainerAITableBasic:
 
@@ -11683,126 +11685,6 @@ Basic_Taunt_CheckFirstTurn:
     GoTo Basic_Taunt_End
 
 Basic_Taunt_End:
-    PopOrEnd
-
-ScoreMinus1:
-    AddToMoveScore -1
-    PopOrEnd 
-
-ScoreMinus2:
-    AddToMoveScore -2
-    PopOrEnd 
-
-ScoreMinus3:
-    AddToMoveScore -3
-    PopOrEnd 
-
-ScoreMinus5:
-    AddToMoveScore -5
-    PopOrEnd 
-
-ScoreMinus6: ; unused
-    AddToMoveScore -6
-    PopOrEnd 
-
-ScoreMinus8:
-    AddToMoveScore -8
-    PopOrEnd 
-
-ScoreMinus10:
-    AddToMoveScore -10
-    PopOrEnd 
-
-ScoreMinus12:
-    AddToMoveScore -12
-    PopOrEnd
-    
-ScoreMinus20:
-    AddToMoveScore -20
-    PopOrEnd
-
-ScoreMinus30:
-    AddToMoveScore -30
-    PopOrEnd 
-
-ScorePlus1:
-    AddToMoveScore 1
-    PopOrEnd 
-
-ScorePlus2:
-    AddToMoveScore 2
-    PopOrEnd 
-
-ScorePlus3:
-    AddToMoveScore 3
-    PopOrEnd 
-
-ScorePlus5:
-    AddToMoveScore 5
-    PopOrEnd 
-
-ScorePlus10:
-    AddToMoveScore 10
-    PopOrEnd 
-
-Try50ChanceForScorePlus1:
-    IfRandomLessThan 128, ScorePlus1
-    PopOrEnd
-
-Try66ChanceForScorePlus1:
-    IfRandomLessThan 170, ScorePlus1
-    PopOrEnd
-
-Try90ChanceForScorePlus1:
-    IfRandomLessThan 230, ScorePlus1
-    PopOrEnd
-
-Try95ChanceForScorePlus1:
-    IfRandomLessThan 244, ScorePlus1
-    PopOrEnd
-
-Try75ChanceForScorePlus3:
-    IfRandomLessThan 192, ScorePlus3
-    PopOrEnd
-
-Try95ChanceForScorePlus3:
-    IfRandomLessThan 244, ScorePlus3
-    PopOrEnd
-
-Try95ChanceForScorePlus5:
-    IfRandomLessThan 244, ScorePlus5
-    PopOrEnd
-
-Try50ChanceForScoreMinus1:
-    IfRandomLessThan 128, ScoreMinus1
-    PopOrEnd
-
-Try95ChanceForScoreMinus1:
-    IfRandomLessThan 244, ScoreMinus1
-    PopOrEnd
-
-Try99ChanceForScoreMinus1:
-    IfRandomLessThan 254, ScoreMinus1
-    PopOrEnd
-
-Try50ChanceForScoreMinus3:
-    IfRandomLessThan 128, ScoreMinus3
-    PopOrEnd
-
-Try75ChanceForScoreMinus3:
-    IfRandomLessThan 192, ScoreMinus3
-    PopOrEnd
-
-Try90ChanceForScoreMinus12:
-    IfRandomLessThan 230, ScoreMinus12
-    PopOrEnd
-
-Try95ChanceForScoreMinus12:
-    IfRandomLessThan 244, ScoreMinus12
-    PopOrEnd
-
-Try99ChanceForScoreMinus12:
-    IfRandomLessThan 254, ScoreMinus12
     PopOrEnd
 
 TerminateBasic:
