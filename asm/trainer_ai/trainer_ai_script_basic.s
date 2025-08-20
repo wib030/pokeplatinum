@@ -22,8 +22,38 @@
 gTrainerAITableBasic:
 
 FlagTableBasic:
-    LabelDistance Basic_Main,          FlagTableBasic ; AI_FLAG_BASIC
-    LabelDistance TerminateBasic,      FlagTableBasic ; All other flags
+    LabelDistance Basic_Main,     FlagTableBasic ; AI_FLAG_BASIC
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_EVAL_ATTACK
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_EXPERT
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_SETUP_FIRST_TURN
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_RISKY
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_DAMAGE_PRIORITY
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_BATON_PASS
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_TAG_STRATEGY
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_CHECK_HP
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_WEATHER
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_HARRASSMENT
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_11
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_12
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_13
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_14
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_15
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_16
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_17
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_18
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_19
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_20
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_21
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_22
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_23
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_24
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_UNUSED_25
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_JOKE
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_PRESCIENT
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_OMNISCIENT
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_ROAMING_POKEMON
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_SAFARI
+    LabelDistance TerminateBasic, FlagTableBasic ; AI_FLAG_CATCH_TUTORIAL
 
 Basic_Main:
     ; Ignore this flag on partner battlers.
