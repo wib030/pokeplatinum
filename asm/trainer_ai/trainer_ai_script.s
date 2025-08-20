@@ -77,9 +77,10 @@ Basic_CheckForImmunity:
     IfLoadedEqualTo ABILITY_WONDER_GUARD, Basic_CheckWonderGuard
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckGroundAbsorption
     IfLoadedEqualTo ABILITY_DRY_SKIN, Basic_CheckWaterAbsorption2
+    IfLoadedEqualTo ABILITY_SOUNDPROOF, Basic_CheckSoundproof
     LoadHeldItem AI_BATTLER_DEFENDER
     IfLoadedEqualTo ITEM_AIR_BALLOON, Basic_CheckGroundAbsorption
-    GoTo Basic_NoImmunityAbility
+    GoTo Basic_ScoreMoveEffect
 
 Basic_CheckElectricAbsorption:
     LoadTypeFrom LOAD_MOVE_TYPE
@@ -111,29 +112,10 @@ Basic_CheckWaterAbsorption2:
     IfTempEqualTo TYPE_WATER, ScoreMinus12
     GoTo Basic_NoImmunityAbility
 
-Basic_NoImmunityAbility:
-    FlagMoveDamageScore USE_MAX_DAMAGE
-    IfLoadedEqualTo AI_NO_COMPARISON_MADE, Basic_CheckSoundproof
-
 Basic_CheckSoundproof:
     ; Check for immunity to sound-based moves
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo ABILITY_SOUNDPROOF, Basic_ScoreMoveEffect
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_ScoreMoveEffect
-    IfMoveEqualTo MOVE_GROWL, ScoreMinus10
-    IfMoveEqualTo MOVE_ROAR, ScoreMinus10
-    IfMoveEqualTo MOVE_SING, ScoreMinus10
-    IfMoveEqualTo MOVE_SUPERSONIC, ScoreMinus10
-    IfMoveEqualTo MOVE_SCREECH, ScoreMinus10
-    IfMoveEqualTo MOVE_SNORE, ScoreMinus10
-    IfMoveEqualTo MOVE_UPROAR, ScoreMinus10
-    IfMoveEqualTo MOVE_METAL_SOUND, ScoreMinus10
-    IfMoveEqualTo MOVE_GRASS_WHISTLE, ScoreMinus10
-    IfMoveEqualTo MOVE_BUG_BUZZ, ScoreMinus10
-    IfMoveEqualTo MOVE_CHATTER, ScoreMinus10
-    IfMoveEqualTo MOVE_HYPER_VOICE, ScoreMinus10
-    IfMoveEqualTo MOVE_PERISH_SONG, ScoreMinus10
+    IfMoveBlockedBySoundproof ScoreMinus12
+    GoTo Basic_ScoreMoveEffect
 
 Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
