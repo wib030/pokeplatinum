@@ -130,7 +130,6 @@ static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *batt
 static void BattleSystem_RecordCommand(BattleSystem *battleSys, BattleContext *battleCtx);
 
 extern u32 gTrainerAITable[];
-extern u32 gTrainerAITableBasic[];
 
 static u16 sSoundMoves[] = {
     MOVE_GROWL,
@@ -5412,7 +5411,6 @@ static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *batt
     }
 
     battleCtx->aiScriptTemp = gTrainerAITable;
-    battleCtx->aiScriptTempBasic = gTrainerAITableBasic;
 }
 
 static void BattleSystem_RecordCommand (BattleSystem *battleSys, BattleContext *battleCtx)
