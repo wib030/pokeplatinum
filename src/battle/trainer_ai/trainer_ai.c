@@ -337,7 +337,7 @@ static void AICmd_CountAlivePartyBattlers(BattleSystem *battleSys, BattleContext
 static void AICmd_LoadCurrentMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx);
+// static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfMoveEffectivenessEquals(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberNotStatus(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -531,7 +531,7 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_LoadCurrentMove,
     AICmd_LoadCurrentMoveEffect,
     AICmd_LoadBattlerAbility,
-    AICmd_CalcMaxEffectiveness,
+    // AICmd_CalcMaxEffectiveness,
     AICmd_IfMoveEffectivenessEquals,
     AICmd_IfPartyMemberStatus,
     AICmd_IfPartyMemberNotStatus,
@@ -1746,6 +1746,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
     }
 }
 
+/*
 static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -1788,6 +1789,7 @@ static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *b
         }
     }
 }
+*/
 
 static void AICmd_IfMoveEffectivenessEquals(BattleSystem *battleSys, BattleContext *battleCtx)
 {
