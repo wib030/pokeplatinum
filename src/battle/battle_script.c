@@ -14011,10 +14011,10 @@ static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* ba
 {
     BattleScript_Iter(battleCtx, 1);
 
-    extern u32 gTrainerAITable[];
-    int test;
+    extern u32 sizeof_gTrainerAITable;
+    u32 test;
 
-    test = *(&gTrainerAITable + 1) - gTrainerAITable;
+    test = sizeof_gTrainerAITable;
         
     battleCtx->msgTemp = test;
 
