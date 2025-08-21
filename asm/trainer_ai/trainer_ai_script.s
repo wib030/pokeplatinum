@@ -85,32 +85,32 @@ Basic_CheckForImmunity:
 Basic_CheckElectricAbsorption:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_ELECTRIC, ScoreMinus12
-    GoTo Basic_NoImmunityAbility
+    GoTo Basic_ScoreMoveEffect
 
 Basic_CheckWaterAbsorption:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_WATER, ScoreMinus12
-    GoTo Basic_NoImmunityAbility
+    GoTo Basic_ScoreMoveEffect
 
 Basic_CheckFireAbsorption:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_FIRE, ScoreMinus12
-    GoTo Basic_NoImmunityAbility
+    GoTo Basic_ScoreMoveEffect
 
 Basic_CheckWonderGuard:
-    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Basic_NoImmunityAbility
-    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Basic_NoImmunityAbility
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Basic_ScoreMoveEffect
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Basic_ScoreMoveEffect
     GoTo ScoreMinus12
 
 Basic_CheckGroundAbsorption:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_GROUND, ScoreMinus12
-    GoTo Basic_NoImmunityAbility
+    GoTo Basic_ScoreMoveEffect
 
 Basic_CheckWaterAbsorption2:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_WATER, ScoreMinus12
-    GoTo Basic_NoImmunityAbility
+    GoTo Basic_ScoreMoveEffect
 
 Basic_CheckSoundproof:
     ; Check for immunity to sound-based moves
