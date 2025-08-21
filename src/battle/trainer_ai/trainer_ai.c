@@ -334,7 +334,6 @@ static void AICmd_IfTempNotEqualTo(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfSpeedCompareEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfSpeedCompareNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_CountAlivePartyBattlers(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_LoadCurrentMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 // static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -1598,12 +1597,6 @@ static void AICmd_CountAlivePartyBattlers(BattleSystem *battleSys, BattleContext
             AI_CONTEXT.calcTemp++;
         }
     }
-}
-
-static void AICmd_LoadCurrentMove(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    AIScript_Iter(battleCtx, 1);
-    AI_CONTEXT.calcTemp = AI_CONTEXT.move;
 }
 
 static void AICmd_LoadCurrentMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx)
