@@ -11608,11 +11608,11 @@ CatchTutorial_Escape:
 
 Terminate:
     PopOrEnd 
-
-    .global sizeof_gTrainerAITable
-
-sizeof_gTrainerAITable:
-    LabelDistance Basic_Main, Terminate
-    GoTo Terminate
+;
+;   .global sizeof_gTrainerAITable
+;
+; sizeof_gTrainerAITable:
+;    LabelDistance Basic_Main, Terminate
+;    GoTo Terminate
 
     .endif
