@@ -129,6 +129,8 @@ static BOOL BattleController_ToggleSemiInvulnMons(BattleSystem *battleSys, Battl
 static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleSystem_RecordCommand(BattleSystem *battleSys, BattleContext *battleCtx);
 
+extern u32 gTrainerAITable[];
+
 static u16 sSoundMoves[] = {
     MOVE_GROWL,
     MOVE_ROAR,
@@ -5393,9 +5395,7 @@ static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *batt
     u32 battleType = BattleSystem_BattleType(battleSys);
     MI_CpuClear32(&battleCtx->aiContext, sizeof(AIContext));
 
-    extern u32 gTrainerAITable[];
-
-    MI_CpuClear32(&battleCtx->aiScriptTemp, sizeof(gTrainerAITable));
+    MI_CpuClear32(battleCtx->aiScriptTemp, sizeof(gTrainerAITable));
 
     if ((battleType & BATTLE_TYPE_TRAINER) && (battleType & BATTLE_TYPE_NO_AI_ITEMS) == FALSE) {
         for (int battler = 0; battler < MAX_BATTLERS; battler++) {
