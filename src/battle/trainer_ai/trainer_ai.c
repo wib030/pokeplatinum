@@ -350,7 +350,6 @@ static void AICmd_IfCurrentMoveEffectNotEqualTo(BattleSystem *battleSys, BattleC
 static void AICmd_IfStatStageLessThan(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfStatStageGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveKills(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveDoesNotKill(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfMoveKnown(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -548,7 +547,6 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfStatStageLessThan,
     AICmd_IfStatStageGreaterThan,
     AICmd_IfStatStageEqualTo,
-    AICmd_IfStatStageNotEqualTo,
     AICmd_IfCurrentMoveKills,
     AICmd_IfCurrentMoveDoesNotKill,
     AICmd_IfMoveKnown,
@@ -2125,6 +2123,7 @@ static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *bat
     }
 }
 
+/*
 static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -2169,6 +2168,7 @@ static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *
         AIScript_Iter(battleCtx, jump);
     }
 }
+*/
 
 static void AICmd_IfCurrentMoveKills(BattleSystem *battleSys, BattleContext *battleCtx)
 {
