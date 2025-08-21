@@ -17,12 +17,6 @@
 
     .text
 
-    .global sizeof_gTrainerAITable
-
-sizeof_gTrainerAITable:
-    LabelDistance Basic_Main, Terminate
-    GoTo Terminate
-
     .global gTrainerAITable
 gTrainerAITable:
 
@@ -11640,5 +11634,11 @@ CatchTutorial_Escape:
 
 Terminate:
     PopOrEnd 
+
+    .global sizeof_gTrainerAITable
+
+sizeof_gTrainerAITable:
+    LabelDistance Basic_Main, Terminate
+    GoTo Terminate
 
     .endif
