@@ -2562,6 +2562,8 @@ static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *b
 static BOOL BtlCmd_TryEggBomb(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battleCtx);
 static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* battleCtx);
+static BOOL BtlCmd_SplashDebugMessage2(BattleSystem* battleSys, BattleContext* battleCtx);
+static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2841,7 +2843,9 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_CheckFlingEffectMon,
 	BtlCmd_TryEggBomb,
     BtlCmd_CalcFlingParams,
-    BtlCmd_SplashDebugMessage
+    BtlCmd_SplashDebugMessage,
+    BtlCmd_SplashDebugMessage2,
+    BtlCmd_SplashDebugMessage3
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -14018,9 +14022,38 @@ static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* ba
         
     battleCtx->msgTemp = test;
 
+    return FALSE;
+}
+
+static BOOL BtlCmd_SplashDebugMessage2(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    extern u32 sizeof_gTrainerAITable;
+    u32 test;
+
+    test = sizeof_gTrainerAITable / (sizeof(u32) * 4);
+
     test /= 10000;
 
-    battleCtx->calcTemp = test;
+    battleCtx->msgTemp = test;
+
+    return FALSE;
+}
+
+static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    extern u32 sizeof_gTrainerAITable;
+    u32 test;
+
+    test = sizeof_gTrainerAITable / (sizeof(u32) * 4);
+
+    test /= 10000;
+    test /= 10000;
+
+    battleCtx->msgTemp = test;
 
     return FALSE;
 }

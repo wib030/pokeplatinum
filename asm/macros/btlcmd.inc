@@ -1336,4 +1336,12 @@
     .long 242
     .endm
 
+    .macro SplashDebugMessage2
+    .long 243
+    .endm
+
+    .macro SplashDebugMessage3
+    .long 244
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
