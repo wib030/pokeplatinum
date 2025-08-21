@@ -14014,7 +14014,7 @@ static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* ba
     extern u32 sizeof_gTrainerAITable;
     u32 test;
 
-    test = sizeof_gTrainerAITable;
+    test = sizeof_gTrainerAITable  / (sizeof(u32) * 4);
         
     battleCtx->msgTemp = test;
 
