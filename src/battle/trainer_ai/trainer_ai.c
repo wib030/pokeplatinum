@@ -299,9 +299,6 @@ enum AIEvalStep {
 };
 
 static void AICmd_IfRandomLessThan(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfRandomGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfRandomEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfRandomNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_AddToMoveScore(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfHPPercentLessThan(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfHPPercentGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -496,9 +493,6 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
-    AICmd_IfRandomGreaterThan,
-    AICmd_IfRandomEqualTo,
-    AICmd_IfRandomNotEqualTo,
     AICmd_AddToMoveScore,
     AICmd_IfHPPercentLessThan,
     AICmd_IfHPPercentGreaterThan,
@@ -993,42 +987,6 @@ static void AICmd_IfRandomLessThan(BattleSystem *battleSys, BattleContext *battl
     int jump = AIScript_Read(battleCtx);
 
     if ((BattleSystem_RandNext(battleSys) % 256) < val) {
-        AIScript_Iter(battleCtx, jump);
-    }
-}
-
-static void AICmd_IfRandomGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    AIScript_Iter(battleCtx, 1);
-
-    int val = AIScript_Read(battleCtx);
-    int jump = AIScript_Read(battleCtx);
-
-    if ((BattleSystem_RandNext(battleSys) % 256) > val) {
-        AIScript_Iter(battleCtx, jump);
-    }
-}
-
-static void AICmd_IfRandomEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    AIScript_Iter(battleCtx, 1);
-
-    int val = AIScript_Read(battleCtx);
-    int jump = AIScript_Read(battleCtx);
-
-    if ((BattleSystem_RandNext(battleSys) % 256) == val) {
-        AIScript_Iter(battleCtx, jump);
-    }
-}
-
-static void AICmd_IfRandomNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    AIScript_Iter(battleCtx, 1);
-
-    int val = AIScript_Read(battleCtx);
-    int jump = AIScript_Read(battleCtx);
-
-    if ((BattleSystem_RandNext(battleSys) % 256) != val) {
         AIScript_Iter(battleCtx, jump);
     }
 }
