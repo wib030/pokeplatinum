@@ -20,7 +20,8 @@
     .global sizeof_gTrainerAITable
 
 sizeof_gTrainerAITable:
-    LabelDistance gTrainerAITable, Terminate
+    LabelDistance Basic_Main, Terminate
+    GoTo Terminate
 
     .global gTrainerAITable
 gTrainerAITable:
