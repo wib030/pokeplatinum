@@ -5502,4 +5502,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} slept and\nregained a little HP!</language>
 	</row>
+	<row id="pl_msg_00000368_01372" index="1372">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 50, 0, 0}</language>
+	</row>
 </body>

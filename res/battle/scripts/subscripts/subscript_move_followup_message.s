@@ -7,6 +7,24 @@ _000:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_SPLASH, _011
     // But nothing happened!
     PrintMessage pl_msg_00000368_00795, TAG_NONE
+	
+	// Debug message 1
+	SplashDebugMessage
+    PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
+	Wait
+	WaitButtonABTime 30
+	
+	// Debug message 2
+	SplashDebugMessage2
+    PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
+	Wait
+	WaitButtonABTime 30
+	
+	// Debug message 3
+	SplashDebugMessage3
+    PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
+	Wait
+	WaitButtonABTime 30
     GoTo _095
 
 _011:
