@@ -9,22 +9,22 @@ _000:
     PrintMessage pl_msg_00000368_00795, TAG_NONE
 	
 	// Debug message 1
-	SplashDebugMessage
-    PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
-	Wait
-	WaitButtonABTime 30
+	//SplashDebugMessage
+    //PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
+	//Wait
+	//WaitButtonABTime 30
 	
 	// Debug message 2
-	SplashDebugMessage2
-    PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
-	Wait
-	WaitButtonABTime 30
+	//SplashDebugMessage2
+    //PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
+	//Wait
+	//WaitButtonABTime 30
 	
 	// Debug message 3
-	SplashDebugMessage3
-    PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
-	Wait
-	WaitButtonABTime 30
+	//SplashDebugMessage3
+    //PrintMessage pl_msg_00000368_01372, TAG_NUMBER, BTLSCR_MSG_TEMP
+	//Wait
+	//WaitButtonABTime 30
     GoTo _095
 
 _011:
