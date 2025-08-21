@@ -14011,23 +14011,12 @@ static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* ba
 {
     BattleScript_Iter(battleCtx, 1);
 
-    // extern u32 gTrainerAITable[];
-    u32* test;
-    int i, j
+    extern u32 gTrainerAITable[];
+    int test;
 
-    test = gTrainerAITable;
-    j = 0;
-
-    for (i = 0; i < 10000; i++)
-    {
-        if (test)
-        {
-            invert(test++);
-            j++;
-        }
-    }
+    test = *(&gTrainerAITable + 1) - gTrainerAITable;
         
-    battleCtx->msgTemp = j;
+    battleCtx->msgTemp = test;
 
     return FALSE;
 }
