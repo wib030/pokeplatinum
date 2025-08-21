@@ -5395,7 +5395,7 @@ static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *batt
     u32 battleType = BattleSystem_BattleType(battleSys);
     MI_CpuClear32(&battleCtx->aiContext, sizeof(AIContext));
 
-    MI_CpuClear32(battleCtx->aiScriptTemp, sizeof(gTrainerAITable));
+    MI_CpuClear32(*(battleCtx->aiScriptTemp), sizeof(gTrainerAITable));
 
     if ((battleType & BATTLE_TYPE_TRAINER) && (battleType & BATTLE_TYPE_NO_AI_ITEMS) == FALSE) {
         for (int battler = 0; battler < MAX_BATTLERS; battler++) {
