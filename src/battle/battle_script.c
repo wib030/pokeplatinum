@@ -14009,11 +14009,25 @@ static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battl
 
 static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* battleCtx)
 {
-    extern u32 gTrainerAITable[];
-
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->msgTemp = sizeof(gTrainerAITable);
+    // extern u32 gTrainerAITable[];
+    u32* test;
+    int i, j
+
+    test = gTrainerAITable;
+    j = 0;
+
+    for (i = 0; i < 10000; i++)
+    {
+        if (test)
+        {
+            invert(test++);
+            j++;
+        }
+    }
+        
+    battleCtx->msgTemp = j;
 
     return FALSE;
 }
