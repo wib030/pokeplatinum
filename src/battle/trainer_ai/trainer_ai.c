@@ -26,6 +26,8 @@
 #include "party.h"
 #include "battle/ov16_0223DF00.h"
 
+extern u32 gTrainerAITable[];
+
 static const u16 sRiskyMoves[] = {
 	BATTLE_EFFECT_HALVE_DEFENSE,
 	BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP,
@@ -945,7 +947,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
     while (AI_CONTEXT.evalStep != AI_EVAL_STEP_END) {
         switch (AI_CONTEXT.evalStep) {
         case AI_EVAL_STEP_INIT:
-            battleCtx->aiScriptCursor = battleCtx->aiScriptTemp[AI_CONTEXT.thinkingBitShift];
+            battleCtx->aiScriptCursor = gTrainerAITable[AI_CONTEXT.thinkingBitShift];
 
             if (battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot] == 0) {
                 AI_CONTEXT.move = MOVE_NONE;
@@ -958,7 +960,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
 
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
-                sAICommandTable[battleCtx->aiScriptTemp[battleCtx->aiScriptCursor]](battleSys, battleCtx);
+                sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
@@ -5955,7 +5957,7 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
  */
 static int AIScript_Read(BattleContext *battleCtx)
 {
-    int word = battleCtx->aiScriptTemp[battleCtx->aiScriptCursor];
+    int word = gTrainerAITable[battleCtx->aiScriptCursor];
     battleCtx->aiScriptCursor++;
 
     return word;
@@ -5970,7 +5972,7 @@ static int AIScript_Read(BattleContext *battleCtx)
  */
 static int AIScript_ReadOffset(BattleContext *battleCtx, int ofs)
 {
-    return battleCtx->aiScriptTemp[battleCtx->aiScriptCursor + ofs];
+    return gTrainerAITable[battleCtx->aiScriptCursor + ofs];
 }
 
 /**
