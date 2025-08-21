@@ -14018,6 +14018,10 @@ static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* ba
         
     battleCtx->msgTemp = test;
 
+    test /= 10000;
+
+    battleCtx->calcTemp = test;
+
     return FALSE;
 }
 
