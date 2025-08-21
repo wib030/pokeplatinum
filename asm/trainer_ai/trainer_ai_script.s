@@ -20,7 +20,7 @@
     .global sizeof_gTrainerAITable
 
 sizeof_gTrainerAITable:
-    LabelDistance FlagTable, Terminate
+    LabelDistance gTrainerAITable, Terminate
 
     .global gTrainerAITable
 gTrainerAITable:
