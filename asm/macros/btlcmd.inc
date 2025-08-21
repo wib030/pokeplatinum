@@ -1332,4 +1332,8 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro SplashDebugMessage
+    .long 242
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

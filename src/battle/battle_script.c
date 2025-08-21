@@ -2561,6 +2561,7 @@ static BOOL BtlCmd_RecalcSpeed(BattleSystem *battleSys, BattleContext *battleCtx
 static BOOL BtlCmd_CheckFlingEffectMon(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryEggBomb(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battleCtx);
+static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2839,7 +2840,8 @@ static const BtlCmd sBattleCommands[] = {
 	BtlCmd_RecalcSpeed,
 	BtlCmd_CheckFlingEffectMon,
 	BtlCmd_TryEggBomb,
-    BtlCmd_CalcFlingParams
+    BtlCmd_CalcFlingParams,
+    BtlCmd_SplashDebugMessage
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -14001,6 +14003,17 @@ static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battl
     else {
         BattleScript_Iter(battleCtx, jumpInvalidItem);
     }
+
+    return FALSE;
+}
+
+static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    extern u32 gTrainerAITable[];
+
+    BattleScript_Iter(battleCtx, 1);
+
+    battleCtx->msgTemp = sizeof(gTrainerAITable);
 
     return FALSE;
 }
