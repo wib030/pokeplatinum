@@ -945,7 +945,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
     while (AI_CONTEXT.evalStep != AI_EVAL_STEP_END) {
         switch (AI_CONTEXT.evalStep) {
         case AI_EVAL_STEP_INIT:
-            battleCtx->aiScriptCursor = battleCtx->aiScriptTemp[AI_CONTEXT.thinkingBitShift];
+            battleCtx->aiScriptCursor = *(battleCtx->aiScriptTemp)[AI_CONTEXT.thinkingBitShift];
 
             if (battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot] == 0) {
                 AI_CONTEXT.move = MOVE_NONE;
@@ -958,7 +958,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
 
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
-                sAICommandTable[battleCtx->aiScriptTemp[battleCtx->aiScriptCursor]](battleSys, battleCtx);
+                sAICommandTable[*(battleCtx->aiScriptTemp)[battleCtx->aiScriptCursor]](battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
@@ -5955,7 +5955,7 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
  */
 static int AIScript_Read(BattleContext *battleCtx)
 {
-    int word = battleCtx->aiScriptTemp[battleCtx->aiScriptCursor];
+    int word = *(battleCtx->aiScriptTemp)[battleCtx->aiScriptCursor];
     battleCtx->aiScriptCursor++;
 
     return word;
@@ -5970,7 +5970,7 @@ static int AIScript_Read(BattleContext *battleCtx)
  */
 static int AIScript_ReadOffset(BattleContext *battleCtx, int ofs)
 {
-    return battleCtx->aiScriptTemp[battleCtx->aiScriptCursor + ofs];
+    return *(battleCtx->aiScriptTemp)[battleCtx->aiScriptCursor + ofs];
 }
 
 /**

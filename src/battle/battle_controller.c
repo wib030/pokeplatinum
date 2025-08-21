@@ -5395,6 +5395,8 @@ static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *batt
     u32 battleType = BattleSystem_BattleType(battleSys);
     MI_CpuClear32(&battleCtx->aiContext, sizeof(AIContext));
 
+    // MI_CpuClear32(&battleCtx->aiScriptTemp, sizeof(gTrainerAITable));
+
     if ((battleType & BATTLE_TYPE_TRAINER) && (battleType & BATTLE_TYPE_NO_AI_ITEMS) == FALSE) {
         for (int battler = 0; battler < MAX_BATTLERS; battler++) {
             if (battler & BATTLER_THEM) {
@@ -5410,7 +5412,9 @@ static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    battleCtx->aiScriptTemp = gTrainerAITable;
+    // NARC_AllocAndReadWholeMemberByIndexPair(NARC_INDEX_BATTLE__TR_AI__TR_AI_SEQ, 0, HEAP_ID_BATTLE);
+
+    battleCtx->aiScriptTemp = &gTrainerAITable;
 }
 
 static void BattleSystem_RecordCommand (BattleSystem *battleSys, BattleContext *battleCtx)
