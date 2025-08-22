@@ -400,7 +400,6 @@ static void AICmd_IfBattlerHasLowerStat(BattleSystem *battleSys, BattleContext *
 static void AICmd_IfBattlerHasEqualStat(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_CheckIfHighestDamageWithPartner(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerFainted(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIsPhysicalAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIsSpecialAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -594,7 +593,6 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerHasEqualStat,
     AICmd_CheckIfHighestDamageWithPartner,
     AICmd_IfBattlerFainted,
-    AICmd_IfBattlerNotFainted,
     AICmd_LoadAbility,
     AICmd_IfBattlerIsPhysicalAttacker,
     AICmd_IfBattlerIsSpecialAttacker,
@@ -3443,22 +3441,6 @@ static void AICmd_IfBattlerFainted(BattleSystem *battleSys, BattleContext *battl
 
     int battler = AIScript_Battler(battleCtx, inBattler);
     if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
-        AIScript_Iter(battleCtx, jump);
-    }
-}
-
-static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    AIScript_Iter(battleCtx, 1);
-
-    int inBattler = AIScript_Read(battleCtx);
-    int jump = AIScript_Read(battleCtx);
-
-    GF_ASSERT(inBattler != AI_BATTLER_ATTACKER);
-    GF_ASSERT(inBattler != AI_BATTLER_DEFENDER);
-
-    int battler = AIScript_Battler(battleCtx, inBattler);
-    if ((battleCtx->battlersSwitchingMask & FlagIndex(battler)) == FALSE) {
         AIScript_Iter(battleCtx, jump);
     }
 }

@@ -582,241 +582,235 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerNotFainted battler, jump
-    .long 103
-    .long \battler
-    .long (\jump-.) / 4 - 1
-    .endm
-
     .macro LoadAbility battler
-    .long 104
+    .long 105
     .long \battler
     .endm
 
     .macro IfBattlerIsPhysicalAttacker battler, jump
-    .long 105
-    .long \battler
-    .long (\jump-.) / 4 - 1
-    .endm
-
-    .macro IfBattlerIsSpecialAttacker battler, jump
     .long 106
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasStatusMove battler, jump
+    .macro IfBattlerIsSpecialAttacker battler, jump
     .long 107
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasNoPhysicalAttack battler, jump
+    .macro IfBattlerHasStatusMove battler, jump
     .long 108
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasNoSpecialAttack battler, jump
+    .macro IfBattlerHasNoPhysicalAttack battler, jump
     .long 109
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasNoStatusAttack battler, jump
+    .macro IfBattlerHasNoSpecialAttack battler, jump
     .long 110
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfToxicSpikesClearerAliveInParty battler, jump
+    .macro IfBattlerHasNoStatusAttack battler, jump
     .long 111
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro LoadWeight battler
+    .macro IfToxicSpikesClearerAliveInParty battler, jump
     .long 112
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro LoadWeight battler
+    .long 113
     .long \battler
     .endm
 
     .macro IfWishActive battler, jump
-    .long 113
+    .long 114
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfPartyMemberHasBattleEffect battler, move, jump
-    .long 114
+    .long 115
     .long \battler
     .long \move
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfShouldTaunt battler, jump
-    .long 115
+    .long 116
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro LoadMoveAccuracy
-    .long 116
+    .long 117
     .endm
 
     .macro IfSameAbilities battler1, battler2, jump
-    .long 117
+    .long 118
     .long \battler1
     .long \battler2
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfHasBaseAbility battler, jump
-    .long 118
+    .long 119
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 	
 	.macro IfDestinyBondFails battler, jump
-    .long 119
+    .long 120
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfEnemyCanChunkOrKO jump
-    .long 120
+    .long 121
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro LoadBattlerCritStage battler1
-    .long 121
+    .long 122
     .long \battler1
     .endm
 
     .macro IfCanHazeOrPhaze battler1, jump
-    .long 122
-    .long \battler1
-    .long (\jump-.) / 4 - 1
-    .endm
-
-    .macro IfHasStatusThreat battler1, jump
     .long 123
     .long \battler1
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerDetersBoosting battler1, jump
+    .macro IfHasStatusThreat battler1, jump
     .long 124
     .long \battler1
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro LoadSleepTurns battler
+    .macro IfBattlerDetersBoosting battler1, jump
     .long 125
+    .long \battler1
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro LoadSleepTurns battler
+    .long 126
     .long \battler
     .endm
 
     .macro IfCurrentMoveRevealed jump
-    .long 126
-    .long (\jump-.) / 4 - 1
-    .endm
-
-    .macro IfCanChunkOrKOEnemy jump
     .long 127
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerDetersContactMove battler1, jump
+    .macro IfCanChunkOrKOEnemy jump
     .long 128
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerDetersContactMove battler1, jump
+    .long 129
     .long \battler1
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfTrapped battler, jump
-    .long 129
+    .long 130
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfBattlerStatDropped battler, jump
-    .long 130
+    .long 131
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 	
 	.macro IfCanKOEnemy jump
-    .long 131
+    .long 132
     .long (\jump-.) / 4 - 1
     .endm
 	
 	.macro IfEnemyCanKO jump
-    .long 132
+    .long 133
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfShouldEncore battler, jump
-    .long 133
+    .long 134
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 	
 	.macro IfEnemySleepClauseActive jump
-    .long 134
-    .long (\jump-.) / 4 - 1
-    .endm
-
-    .macro IfMoveBlockedBySoundproof jump
     .long 135
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerDetersStatus battler, status, jump
+    .macro IfMoveBlockedBySoundproof jump
     .long 136
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerDetersStatus battler, status, jump
+    .long 137
     .long \battler
     .long \status
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfBattlerHasInvulnerableMove battler, jump
-    .long 137
+    .long 138
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfAbilityInPlay ability, jump
-    .long 138
+    .long 139
     .long \ability
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro IfCanBreakSashOrSturdy battler, jump
-    .long 139
+    .long 140
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro LoadFlingEffect battler
-    .long 140
+    .long 141
     .long \battler
     .endm
 
     .macro IfHasSubstituteIncentive battler, jump
-    .long 141
+    .long 142
     .long \battler
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro LoadMoveClass
-    .long 142
+    .long 143
     .endm
 	
 	.macro IfBattlerHasBounceableMove battler1, jump
-    .long 143
+    .long 144
     .long \battler1
     .long (\jump-.) / 4 - 1
     .endm
 
     .macro LoadBattlerIgnorableAbility battler
-    .long 144
+    .long 145
     .long \battler
     .endm
 
