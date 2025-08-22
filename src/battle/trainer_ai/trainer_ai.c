@@ -527,7 +527,7 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfSpeedCompareEqualTo,
     AICmd_IfSpeedCompareNotEqualTo,
     AICmd_CountAlivePartyBattlers,
-    AICmd_LoadCurrentMove,
+    //AICmd_LoadCurrentMove,
     AICmd_LoadCurrentMoveEffect,
     AICmd_LoadBattlerAbility,
     // AICmd_CalcMaxEffectiveness,
