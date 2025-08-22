@@ -968,7 +968,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
                 sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
-                AI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+                TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
@@ -10824,7 +10824,6 @@ static int AI_FlagMoveDamageScore(BattleSystem* battleSys, BattleContext* battle
 {
     int i = 0, riskyIdx, altPowerIdx;
     s32 moveDamage[LEARNED_MOVES_MAX];
-    int varyDamage;
     u8 ivs[STAT_MAX];
 
     for (riskyIdx = 0; sRiskyMoves[riskyIdx] != 0xFFFF; riskyIdx++) {
@@ -10880,7 +10879,7 @@ static u8 AI_GetBattlerAbility(BattleSystem* battleSys, BattleContext* battleCtx
         || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)) {
         return ABILITY_NONE;
     }
-    else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
+    else if (AI_CONTEXT.attacker != battler && battler != AI_BATTLER_ATTACKER_PARTNER) {
         // If we already know an opponent's ability, load that ability
         if (AI_CONTEXT.battlerAbilities[battler]) {
             return Battler_Ability(battleCtx, battler);
