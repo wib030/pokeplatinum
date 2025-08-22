@@ -488,6 +488,14 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
 static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+static void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx);
+static void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val);
+static int AI_GetRandomNumber(BattleSystem* battleSys);
+static BOOL AI_CurrentMoveKills(BattleSystem* battleSys, BattleContext* battleCtx, int useDamageRoll);
+static int AI_FlagMoveDamageScore(BattleSystem* battleSys, BattleContext* battleCtx, int varyDamage);
+static u8 AI_GetBattlerAbility(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+static u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx);
+static u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler);
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
@@ -755,6 +763,10 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.moveSlot = 0;
     }
 
+    if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
+        TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+    }
+
     if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
         action = AI_ENEMY_ESCAPE;
     } else if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_SAFARI) {
@@ -842,6 +854,12 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             thinkingMask >>= 1;
             AI_CONTEXT.thinkingBitShift++;
             AI_CONTEXT.moveSlot = 0;
+        }
+
+        if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
+            TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+            // if doubles version gets made:
+            // TrainerAI_EvalMoreMoves_ExpertDoubles(battleSys, battleCtx);
         }
 
         if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
@@ -950,6 +968,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
                 sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
+                AI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
@@ -10637,6 +10656,351 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
 
     return result;
 }
+
+
+static void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    u8 abilityTemp;
+    u8 attackerSide, defenderSide;
+
+    if ((AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) == FALSE)
+    {
+        return;
+    }
+
+    switch (MOVE_DATA(AI_CONTEXT.move).effect)
+    {
+    default:
+        break;
+
+    case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+        // Expert_Omniboost_CheckIfKill
+        if (AI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+        {
+            if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
+            {
+                if (AI_GetRandomNumber(battleSys) < 243)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, 3);
+                }
+            }
+            else
+            {
+                if (AI_FlagMoveDamageScore(battleSys, battleCtx, USE_MIN_DAMAGE) == AI_NOT_HIGHEST_DAMAGE)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -12);
+                    break;
+                }
+                else
+                {
+                    if (AI_GetRandomNumber(battleSys) < 243)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+                    }
+                }
+            }
+        }
+
+        abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
+        attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+        // Expert_Omniboost_ChanceBoostCheck
+        if (abilityTemp == ABILITY_SERENE_GRACE
+            || (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT))
+        {
+            if (AI_GetRandomNumber(battleSys) < 192)
+            {
+                AI_AddToMoveScore(battleSys, battleCtx, 1);
+
+                if (AI_GetRandomNumber(battleSys) < 64)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                }
+            }
+        }
+
+        // Expert_Omniboost_Main
+        if (AI_GetMoveEffectiveness(battleSys, battleCtx) == TYPE_MULTI_IMMUNE)
+        {
+            AI_AddToMoveScore(battleSys, battleCtx, -12);
+            break;
+        }
+
+        if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 50)
+        {
+            if (AI_GetRandomNumber(battleSys) < 128)
+            {
+                AI_AddToMoveScore(battleSys, battleCtx, -1);
+                break;
+            }
+        }
+
+        if (AI_GetRandomNumber(battleSys) < 128)
+        {
+            AI_AddToMoveScore(battleSys, battleCtx, 1);
+        }
+
+        // Expert_Omniboost_End
+        break;
+    }
+
+    return;
+}
+
+static void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val)
+{
+    AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] += val;
+
+    if (AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] < 0) {
+        AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
+    }
+
+    return;
+}
+
+static int AI_GetRandomNumber(BattleSystem* battleSys)
+{
+    return (BattleSystem_RandNext(battleSys) % 256);
+}
+
+
+static BOOL AI_CurrentMoveKills(BattleSystem* battleSys, BattleContext* battleCtx, int useDamageRoll)
+{
+    int roll;
+    int riskyIdx;
+    int altPowerIdx;
+    BOOL moveKills;
+
+    moveKills = FALSE;
+
+    if (useDamageRoll == ROLL_FOR_DAMAGE) {
+        roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
+    }
+    else if (useDamageRoll == USE_MIN_DAMAGE) {
+        roll = DAMAGE_VARIANCE_MIN_ROLL;
+    }
+    else {
+        roll = DAMAGE_VARIANCE_MAX_ROLL;
+    }
+
+    for (riskyIdx = 0; sRiskyMoves[riskyIdx] != 0xFFFF; riskyIdx++) {
+        if (MOVE_DATA(AI_CONTEXT.move).effect == sRiskyMoves[riskyIdx]) {
+            break;
+        }
+    }
+
+    for (altPowerIdx = 0; sAltPowerCalcMoves[altPowerIdx] != 0xFFFF; altPowerIdx++) {
+        if (MOVE_DATA(AI_CONTEXT.move).effect == sAltPowerCalcMoves[altPowerIdx]) {
+            break;
+        }
+    }
+
+    if (sAltPowerCalcMoves[altPowerIdx] != 0xFFFF
+        || (MOVE_DATA(AI_CONTEXT.move).power > 1 && sRiskyMoves[riskyIdx] == 0xFFFF)) {
+        u8 ivs[STAT_MAX];
+        for (int stat = STAT_HP; stat < STAT_MAX; stat++) {
+            ivs[stat] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + stat, NULL);
+        }
+
+        u32 damage = TrainerAI_CalcDamage(battleSys,
+            battleCtx,
+            AI_CONTEXT.move,
+            battleCtx->battleMons[AI_CONTEXT.attacker].heldItem,
+            ivs,
+            AI_CONTEXT.attacker,
+            Battler_Ability(battleCtx, AI_CONTEXT.attacker),
+            battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.embargoTurns,
+            roll);
+
+        if (battleCtx->battleMons[AI_CONTEXT.defender].curHP <= damage) {
+            moveKills = TRUE;
+        }
+    }
+
+    return moveKills;
+}
+
+static int AI_FlagMoveDamageScore(BattleSystem* battleSys, BattleContext* battleCtx, int varyDamage)
+{
+    int i = 0, riskyIdx, altPowerIdx;
+    s32 moveDamage[LEARNED_MOVES_MAX];
+    int varyDamage;
+    u8 ivs[STAT_MAX];
+
+    for (riskyIdx = 0; sRiskyMoves[riskyIdx] != 0xFFFF; riskyIdx++) {
+        if (MOVE_DATA(AI_CONTEXT.move).effect == sRiskyMoves[riskyIdx]) {
+            break;
+        }
+    }
+
+    for (altPowerIdx = 0; sAltPowerCalcMoves[altPowerIdx] != 0xFFFF; altPowerIdx++) {
+        if (MOVE_DATA(AI_CONTEXT.move).effect == sAltPowerCalcMoves[altPowerIdx]) {
+            break;
+        }
+    }
+
+    if (sAltPowerCalcMoves[altPowerIdx] != 0xFFFF
+        || (MOVE_DATA(AI_CONTEXT.move).power > 1 && sRiskyMoves[riskyIdx] == 0xFFFF)) {
+        for (i = 0; i < STAT_MAX; i++) {
+            ivs[i] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + i, NULL);
+        }
+
+        TrainerAI_CalcAllDamage(battleSys,
+            battleCtx,
+            AI_CONTEXT.attacker,
+            battleCtx->battleMons[AI_CONTEXT.attacker].moves,
+            moveDamage,
+            battleCtx->battleMons[AI_CONTEXT.attacker].heldItem,
+            ivs,
+            Battler_Ability(battleCtx, AI_CONTEXT.attacker),
+            battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.embargoTurns,
+            varyDamage);
+
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+            if (moveDamage[i] > moveDamage[AI_CONTEXT.moveSlot]) {
+                break;
+            }
+        }
+
+        if (i == LEARNED_MOVES_MAX) {
+            return AI_MOVE_IS_HIGHEST_DAMAGE;
+        }
+        else {
+            return AI_NOT_HIGHEST_DAMAGE;
+        }
+    }
+
+    return AI_NO_COMPARISON_MADE;
+}
+
+static u8 AI_GetBattlerAbility(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED
+        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_NEUTRALIZING_GAS)) {
+        return ABILITY_NONE;
+    }
+    else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
+        // If we already know an opponent's ability, load that ability
+        if (AI_CONTEXT.battlerAbilities[battler]) {
+            return Battler_Ability(battleCtx, battler);
+        }
+        else {
+            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
+            if (Battler_Ability(battleCtx, battler) == ABILITY_SHADOW_TAG
+                || Battler_Ability(battleCtx, battler) == ABILITY_MAGNET_PULL
+                || Battler_Ability(battleCtx, battler) == ABILITY_THIRSTY
+                || Battler_Ability(battleCtx, battler) == ABILITY_ARENA_TRAP) {
+                return battleCtx->battleMons[battler].ability;
+            }
+            else {
+                // Try to guess the opponent's ability (flip a coin)
+                int ability1 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_1);
+                int ability2 = PokemonPersonalData_GetSpeciesValue(battleCtx->battleMons[battler].species, MON_DATA_PERSONAL_ABILITY_2);
+
+                if (Battler_Ability(battleCtx, battler) != ABILITY_NONE)
+                {
+                    if (ability1 && ability2) {
+                        if (BattleSystem_RandNext(battleSys) & 1) {
+                            return ability1;
+                        }
+                        else {
+                            return ability2;
+                        }
+                    }
+                    else if (ability1) {
+                        return ability1;
+                    }
+                    else {
+                        return ability2;
+                    }
+                }
+                else
+                {
+                    return Battler_Ability(battleCtx, battler);
+                }
+            }
+        }
+    }
+    else {
+        return Battler_Ability(battleCtx, battler);
+    }
+
+    if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT)
+    {
+        if ((BattleSystem_RandNext(battleSys) % 3) > 0)
+        {
+            return Battler_Ability(battleCtx, battler);
+        }
+    }
+
+    return ABILITY_NONE;
+}
+
+static u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    u32 damage = TYPE_MULTI_BASE_DAMAGE;
+    u32 effectiveness = 0;
+
+    damage = BattleSystem_ApplyTypeChart(battleSys,
+        battleCtx,
+        AI_CONTEXT.move,
+        TrainerAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.move),
+        AI_CONTEXT.attacker,
+        AI_CONTEXT.defender,
+        damage,
+        &effectiveness);
+
+    if (damage == TYPE_MULTI_STAB_DAMAGE * 2) {
+        damage = TYPE_MULTI_DOUBLE_DAMAGE;
+    }
+    else if (damage == TYPE_MULTI_STAB_DAMAGE * 4) {
+        damage = TYPE_MULTI_QUADRUPLE_DAMAGE;
+    }
+    else if (damage == TYPE_MULTI_STAB_DAMAGE / 2) {
+        damage = TYPE_MULTI_HALF_DAMAGE;
+    }
+    else if (damage == TYPE_MULTI_STAB_DAMAGE / 4) {
+        damage = TYPE_MULTI_QUARTER_DAMAGE;
+    }
+
+    if (effectiveness & MOVE_STATUS_IMMUNE) {
+
+        if ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)
+        {
+            damage = TYPE_MULTI_IMMUNE;
+        }
+    }
+
+    return damage;
+}
+
+static u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler)
+{
+    u32 hpPercent;
+
+    if (battleCtx->battleMons[battler].maxHP == 0)
+    {
+        return 0;
+    }
+    
+    hpPercent = battleCtx->battleMons[battler].curHP * 100 / battleCtx->battleMons[battler].maxHP;
+
+    if (battleCtx->battleMons[battler].maxHP == 1) {
+        if (battleCtx->battleMons[battler].heldItem != ITEM_FOCUS_SASH
+            && battleCtx->battleMons[battler].heldItem != ITEM_FOCUS_BAND) {
+
+            hpPercent = 1;
+        }
+        else
+        {
+            hpPercent = 100;
+        }
+    }
+
+    return hpPercent;
+}
+
 
 /*
 static int AI_BounceableMovesCounter(BattleSystem* battleSys, BattleContext* battleCtx, int battler1)
