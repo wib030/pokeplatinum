@@ -303,6 +303,7 @@ BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, i
 s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
 s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
 int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
+BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 
 
 void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx)
@@ -1184,6 +1185,17 @@ int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int ba
     default:
         result = TYPE_NORMAL;
         break;
+    }
+
+    return result;
+}
+
+BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask)
+{
+    BOOL result = TRUE;
+
+    if (AI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
+        result = FALSE;
     }
 
     return result;

@@ -139,4 +139,16 @@ s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 
  */
 int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
 
+/* @brief Check if a move can be used by an active battler.
+ *
+ * This routine is copied from BattleSystem_CanUseMove in battle_lib
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler       The AI's battler.
+ * @param opMask        The bitmask of the operation to check.
+ * @return  TRUE / FALSE if the current move in current slot can be used.
+ */
+BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
