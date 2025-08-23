@@ -27,6 +27,8 @@
 #include "party.h"
 #include "battle/ov16_0223DF00.h"
 
+#include "data/battle/weight_to_power.h"
+
 static const u16 sRiskyMoves[] = {
     BATTLE_EFFECT_HALVE_DEFENSE,
     BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP,
