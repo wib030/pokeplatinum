@@ -311,83 +311,98 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 {
     u8 abilityTemp;
     u8 attackerSide, defenderSide;
+    int i;
 
     if ((AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) == FALSE)
     {
         return;
     }
 
-    switch (MOVE_DATA(AI_CONTEXT.move).effect)
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
     {
-    default:
-        break;
-
-    case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
-        // Expert_Omniboost_CheckIfKill
-        if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+        if (battleCtx->battleMons[AI_CONTEXT.attacker].moves[i])
         {
-            if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
-            {
-                AI_AddToMoveScore(battleSys, battleCtx, 10);
+            if (battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot] == 0) {
+                AI_CONTEXT.move = MOVE_NONE;
             }
-            else
+            else {
+                AI_CONTEXT.moveSlot = i;
+                AI_CONTEXT.move = battleCtx->battleMons[AI_CONTEXT.attacker].moves[AI_CONTEXT.moveSlot];
+            }
+
+            switch (MOVE_DATA(AI_CONTEXT.move).effect)
             {
-                if (AI_FlagMoveDamageScore(battleSys, battleCtx, USE_MIN_DAMAGE) == AI_NOT_HIGHEST_DAMAGE)
+            default:
+                break;
+
+            case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+                // Expert_Omniboost_CheckIfKill
+                if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+                {
+                    if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 10);
+                    }
+                    else
+                    {
+                        if (AI_FlagMoveDamageScore(battleSys, battleCtx, USE_MIN_DAMAGE) == AI_NOT_HIGHEST_DAMAGE)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -12);
+                            break;
+                        }
+                        else
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 243)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 1);
+                            }
+                        }
+                    }
+                }
+
+                abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
+                attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+                // Expert_Omniboost_ChanceBoostCheck
+                if (abilityTemp == ABILITY_SERENE_GRACE
+                    || (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT))
+                {
+                    if (AI_GetRandomNumber(battleSys) < 192)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+
+                        if (AI_GetRandomNumber(battleSys) < 64)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                    }
+                }
+
+                // Expert_Omniboost_Main
+                if (AI_GetMoveEffectiveness(battleSys, battleCtx) == TYPE_MULTI_IMMUNE)
                 {
                     AI_AddToMoveScore(battleSys, battleCtx, -12);
                     break;
                 }
-                else
+
+                if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 50)
                 {
-                    if (AI_GetRandomNumber(battleSys) < 243)
+                    if (AI_GetRandomNumber(battleSys) < 128)
                     {
-                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        break;
                     }
                 }
-            }
-        }
 
-        abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
-        attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
-
-        // Expert_Omniboost_ChanceBoostCheck
-        if (abilityTemp == ABILITY_SERENE_GRACE
-            || (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT))
-        {
-            if (AI_GetRandomNumber(battleSys) < 192)
-            {
-                AI_AddToMoveScore(battleSys, battleCtx, 1);
-
-                if (AI_GetRandomNumber(battleSys) < 64)
+                if (AI_GetRandomNumber(battleSys) < 128)
                 {
                     AI_AddToMoveScore(battleSys, battleCtx, 1);
                 }
-            }
-        }
 
-        // Expert_Omniboost_Main
-        if (AI_GetMoveEffectiveness(battleSys, battleCtx) == TYPE_MULTI_IMMUNE)
-        {
-            AI_AddToMoveScore(battleSys, battleCtx, -12);
-            break;
-        }
-
-        if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 50)
-        {
-            if (AI_GetRandomNumber(battleSys) < 128)
-            {
-                AI_AddToMoveScore(battleSys, battleCtx, -1);
+                // Expert_Omniboost_End
                 break;
             }
         }
-
-        if (AI_GetRandomNumber(battleSys) < 128)
-        {
-            AI_AddToMoveScore(battleSys, battleCtx, 1);
-        }
-
-        // Expert_Omniboost_End
-        break;
     }
 
     return;

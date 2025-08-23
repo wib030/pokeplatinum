@@ -760,6 +760,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     {
         ExpertAI_EvalMoreMoves_Singles(battleSys, battleCtx);
     }
+    AI_CONTEXT.moveSlot = 0;
 
     if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
         action = AI_ENEMY_ESCAPE;
