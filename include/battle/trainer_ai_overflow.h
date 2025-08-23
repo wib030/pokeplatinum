@@ -89,7 +89,7 @@ u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8
 * @param defender	The AI Context defender.
 * @return TRUE/FALSE whether or not the attacker KOs the defender.
 */
-BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
 
 /**
  * @brief Calculate the damage that will be done by all of an attacker's moves.

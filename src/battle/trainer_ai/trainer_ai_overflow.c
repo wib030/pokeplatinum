@@ -299,7 +299,7 @@ int AI_FlagMoveDamageScore(BattleSystem* battleSys, BattleContext* battleCtx, in
 u8 AI_GetBattlerAbility(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx);
 u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler);
-BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
 s32 ExpertAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
 s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
 int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
@@ -324,7 +324,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 
     case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
         // Expert_Omniboost_CheckIfKill
-        if (AI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+        if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
         {
             if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
             {
@@ -649,7 +649,7 @@ u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8
     return hpPercent;
 }
 
-BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
 {
     BOOL result;
     int k;
