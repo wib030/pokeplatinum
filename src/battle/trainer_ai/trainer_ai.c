@@ -964,7 +964,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
                 sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
-                TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+                // TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
