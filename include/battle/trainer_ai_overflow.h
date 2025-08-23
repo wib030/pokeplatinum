@@ -151,4 +151,17 @@ int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int ba
  */
 BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 
+/* @brief Check if any moves are invalid for use by the battler.
+ *
+ * This routine is copied from BattleSystem_CheckInvalidMoves in battle_lib
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler       The AI's battler.
+ * @param invalidMoves  The bitmask of invalid moves.
+ * @param opMask        The bitmask of the operation to check.
+ * @return  The bitmask of the current move slot to determine validity.
+ */
+int AI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
