@@ -14018,7 +14018,7 @@ static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* ba
     extern u32 sizeof_gTrainerAITable[];
     u32 test;
 
-    //test = sizeof_gTrainerAITable[0]  / (sizeof(u32) * 4);
+    test = sizeof_gTrainerAITable[0]  / (sizeof(u32) * 4);
         
     battleCtx->msgTemp = test;
 
@@ -14032,7 +14032,7 @@ static BOOL BtlCmd_SplashDebugMessage2(BattleSystem* battleSys, BattleContext* b
     extern u32 sizeof_gTrainerAITable[];
     u32 test;
 
-    //test = sizeof_gTrainerAITable[1] / (sizeof(u32) * 4);
+    test = sizeof_gTrainerAITable[1] / (sizeof(u32) * 4);
 
     test /= 10000;
 
@@ -14048,7 +14048,7 @@ static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* b
     extern u32 sizeof_gTrainerAITable[];
     u32 test;
 
-    //test = sizeof_gTrainerAITable[2] / (sizeof(u32) * 4);
+    test = sizeof_gTrainerAITable[2] / (sizeof(u32) * 4);
 
     test /= 10000;
     test /= 10000;

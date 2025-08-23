@@ -143,6 +143,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN_HIT, Basic_CheckAlreadyUnderLightScreen
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Basic_CheckOHKOWouldFail
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
@@ -566,6 +567,17 @@ Basic_CheckCannotPoison_End:
 Basic_CheckAlreadyUnderLightScreen:
     ; If already under the effect of Light Screen, score -8.
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LIGHT_SCREEN, ScoreMinus8
+    PopOrEnd 
+
+Basic_CheckOHKOWouldFail:
+    ; If the OHKO move would always fail for any reason, score -10.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    LoadBattlerIgnorableAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_STURDY, ScoreMinus10
+	IfLoadedEqualTo ABILITY_ROCK_SOLID, ScoreMinus10
+
+Basic_CheckOHKOWouldFail_Levels:
+    IfLevel CHECK_LOWER_THAN_TARGET, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckMagnitude:
@@ -1725,6 +1737,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
 	IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN_HIT, Expert_LightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurnNoInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_HP, Expert_SuperFang
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIND_HIT, Expert_BindingMove
@@ -3439,6 +3452,14 @@ Expert_Rest_CheckForSnatch:
     GoTo Expert_Rest_End
 
 Expert_Rest_End:
+    PopOrEnd 
+
+Expert_OHKOMove:
+    ; 25% chance of score +1.
+    IfRandomLessThan 192, Expert_OHKOMove_End
+    AddToMoveScore 1
+
+Expert_OHKOMove_End:
     PopOrEnd 
 
 Expert_SuperFang:
@@ -9988,6 +10009,7 @@ Risky_RiskyEffects:
     TableEntry BATTLE_EFFECT_STATUS_SLEEP
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE
     TableEntry BATTLE_EFFECT_COPY_MOVE
+    TableEntry BATTLE_EFFECT_ONE_HIT_KO
     TableEntry BATTLE_EFFECT_HIGH_CRITICAL
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_CALL_RANDOM_MOVE
@@ -10092,6 +10114,7 @@ TagStrategy_Main:
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_CheckSpecialScoring
 
     ; Flat-damage move effects have a special handler; this includes OHKO moves
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, TagStrategy_ScoreMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, TagStrategy_ScoreMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_ScoreMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_ScoreMove
@@ -10154,6 +10177,7 @@ TagStrategy_TryScorePlus1:
 
 TagStrategy_CheckBeforeScoring:
     ; Flat-damage move effects have a special handler; this includes OHKO moves
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, TagStrategy_CheckSpecialScoring
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, TagStrategy_CheckSpecialScoring
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_CheckSpecialScoring
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_CheckSpecialScoring
@@ -10588,6 +10612,7 @@ TagStrategy_Tailwind_End:
 TagStrategy_PartnerKnowsHelpingHand:
     ; If our partner knows Helping Hand, then damaging moves (aside from flat-damage moves)
     ; get score +1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, TagStrategy_PartnerHelpingHand_End
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_PartnerHelpingHand_End
@@ -11437,6 +11462,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_STATUS_BADLY_POISON
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
+    TableEntry BATTLE_EFFECT_ONE_HIT_KO
     TableEntry BATTLE_EFFECT_HALVE_HP
     TableEntry BATTLE_EFFECT_HALVE_HP
     TableEntry BATTLE_EFFECT_PREVENT_STAT_REDUCTION
@@ -11608,11 +11634,11 @@ CatchTutorial_Escape:
 
 Terminate:
     PopOrEnd 
-;
-;   .global sizeof_gTrainerAITable
-;
-; sizeof_gTrainerAITable:
-;    LabelDistance Basic_Main, Terminate
-;    GoTo Terminate
+
+    .global sizeof_gTrainerAITable
+
+sizeof_gTrainerAITable:
+    LabelDistance Basic_Main, Terminate
+    GoTo Terminate
 
     .endif

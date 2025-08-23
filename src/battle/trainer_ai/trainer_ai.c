@@ -299,6 +299,9 @@ enum AIEvalStep {
 };
 
 static void AICmd_IfRandomLessThan(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfRandomGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfRandomEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfRandomNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_AddToMoveScore(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfHPPercentLessThan(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfHPPercentGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -334,9 +337,10 @@ static void AICmd_IfTempNotEqualTo(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfSpeedCompareEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfSpeedCompareNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_CountAlivePartyBattlers(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_LoadCurrentMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *battleCtx);
-// static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfMoveEffectivenessEquals(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartyMemberNotStatus(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -346,6 +350,7 @@ static void AICmd_IfCurrentMoveEffectNotEqualTo(BattleSystem *battleSys, BattleC
 static void AICmd_IfStatStageLessThan(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfStatStageGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveKills(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveDoesNotKill(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfMoveKnown(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -492,6 +497,9 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
+    AICmd_IfRandomGreaterThan,
+    AICmd_IfRandomEqualTo,
+    AICmd_IfRandomNotEqualTo,
     AICmd_AddToMoveScore,
     AICmd_IfHPPercentLessThan,
     AICmd_IfHPPercentGreaterThan,
@@ -527,10 +535,10 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfSpeedCompareEqualTo,
     AICmd_IfSpeedCompareNotEqualTo,
     AICmd_CountAlivePartyBattlers,
-    //AICmd_LoadCurrentMove,
+    AICmd_LoadCurrentMove,
     AICmd_LoadCurrentMoveEffect,
     AICmd_LoadBattlerAbility,
-    // AICmd_CalcMaxEffectiveness,
+    AICmd_CalcMaxEffectiveness,
     AICmd_IfMoveEffectivenessEquals,
     AICmd_IfPartyMemberStatus,
     AICmd_IfPartyMemberNotStatus,
@@ -540,6 +548,7 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfStatStageLessThan,
     AICmd_IfStatStageGreaterThan,
     AICmd_IfStatStageEqualTo,
+    AICmd_IfStatStageNotEqualTo,
     AICmd_IfCurrentMoveKills,
     AICmd_IfCurrentMoveDoesNotKill,
     AICmd_IfMoveKnown,
@@ -986,6 +995,42 @@ static void AICmd_IfRandomLessThan(BattleSystem *battleSys, BattleContext *battl
     int jump = AIScript_Read(battleCtx);
 
     if ((BattleSystem_RandNext(battleSys) % 256) < val) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfRandomGreaterThan(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int val = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if ((BattleSystem_RandNext(battleSys) % 256) > val) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfRandomEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int val = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if ((BattleSystem_RandNext(battleSys) % 256) == val) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfRandomNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int val = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if ((BattleSystem_RandNext(battleSys) % 256) != val) {
         AIScript_Iter(battleCtx, jump);
     }
 }
@@ -1599,6 +1644,12 @@ static void AICmd_CountAlivePartyBattlers(BattleSystem *battleSys, BattleContext
     }
 }
 
+static void AICmd_LoadCurrentMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    AI_CONTEXT.calcTemp = AI_CONTEXT.move;
+}
+
 static void AICmd_LoadCurrentMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -1739,7 +1790,6 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
     }
 }
 
-/*
 static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -1782,7 +1832,6 @@ static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *b
         }
     }
 }
-*/
 
 static void AICmd_IfMoveEffectivenessEquals(BattleSystem *battleSys, BattleContext *battleCtx)
 {
@@ -2076,7 +2125,6 @@ static void AICmd_IfStatStageEqualTo(BattleSystem *battleSys, BattleContext *bat
     }
 }
 
-/*
 static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
@@ -2121,7 +2169,6 @@ static void AICmd_IfStatStageNotEqualTo(BattleSystem *battleSys, BattleContext *
         AIScript_Iter(battleCtx, jump);
     }
 }
-*/
 
 static void AICmd_IfCurrentMoveKills(BattleSystem *battleSys, BattleContext *battleCtx)
 {
