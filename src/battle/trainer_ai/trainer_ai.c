@@ -756,6 +756,11 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.moveSlot = 0;
     }
 
+    if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT)
+    {
+        ExpertAI_EvalMoreMoves_Singles(battleSys, battleCtx);
+    }
+
     if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
         action = AI_ENEMY_ESCAPE;
     } else if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_SAFARI) {
@@ -951,7 +956,6 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
                 sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
-				ExpertAI_EvalMoreMoves_Singles(battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
