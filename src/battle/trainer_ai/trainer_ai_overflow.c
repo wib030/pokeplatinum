@@ -328,10 +328,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
         {
             if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
             {
-                if (AI_GetRandomNumber(battleSys) < 243)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, 3);
-                }
+                AI_AddToMoveScore(battleSys, battleCtx, 10);
             }
             else
             {
