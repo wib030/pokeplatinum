@@ -755,10 +755,6 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.thinkingBitShift++;
         AI_CONTEXT.moveSlot = 0;
     }
-	
-	if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
-        TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
-    }
 
     if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
         action = AI_ENEMY_ESCAPE;
@@ -847,12 +843,6 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             thinkingMask >>= 1;
             AI_CONTEXT.thinkingBitShift++;
             AI_CONTEXT.moveSlot = 0;
-        }
-		
-		if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
-            TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
-            // if doubles version gets made:
-            // TrainerAI_EvalMoreMoves_ExpertDoubles(battleSys, battleCtx);
         }
 
         if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
