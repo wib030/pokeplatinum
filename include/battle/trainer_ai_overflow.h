@@ -79,3 +79,5 @@ u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx);
 * @return The given AI Context battler's current HP percent, factoring for Wonder Guard.
 */
 u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler);
+
+#endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
