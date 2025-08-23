@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_GEODUDE"
         },
         {
-            "level": 32,
+            "level": 37,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 30,
+            "level": 35,
             "species": "SPECIES_SANDSLASH"
         },
         {
-            "level": 32,
+            "level": 37,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 32,
+            "level": 37,
             "species": "SPECIES_RIOLU"
         },
         {
-            "level": 33,
+            "level": 38,
             "species": "SPECIES_HIPPOPOTAS"
         },
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_ONIX"
         },
         {
-            "level": 33,
+            "level": 38,
             "species": "SPECIES_ONIX"
         },
         {
-            "level": 30,
+            "level": 35,
             "species": "SPECIES_GEODUDE"
         },
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 30,
+            "level": 35,
             "species": "SPECIES_GEODUDE"
         },
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_GRAVELER"
         }
     ],

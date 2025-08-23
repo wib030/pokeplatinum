@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 32,
+            "level": 37,
             "species": "SPECIES_ONIX"
         },
         {
-            "level": 33,
+            "level": 38,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_SANDSLASH"
         },
         {
-            "level": 33,
+            "level": 38,
             "species": "SPECIES_RIOLU"
         },
         {
-            "level": 33,
+            "level": 38,
             "species": "SPECIES_PRIMEAPE"
         },
         {
-            "level": 34,
+            "level": 39,
             "species": "SPECIES_MAROWAK"
         },
         {
-            "level": 33,
+            "level": 38,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 35,
+            "level": 40,
             "species": "SPECIES_STEELIX"
         },
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_ARON"
         },
         {
-            "level": 32,
+            "level": 37,
             "species": "SPECIES_ARON"
         },
         {
-            "level": 31,
+            "level": 36,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 32,
+            "level": 37,
             "species": "SPECIES_GRAVELER"
         }
     ],
