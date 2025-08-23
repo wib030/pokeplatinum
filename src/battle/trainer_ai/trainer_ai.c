@@ -19,6 +19,7 @@
 #include "battle/battle_context.h"
 #include "battle/battle_controller.h"
 #include "battle/trainer_ai.h"
+#include "battle/trainer_ai_overflow.h"
 #include "battle/battle_lib.h"
 
 #include "flags.h"
