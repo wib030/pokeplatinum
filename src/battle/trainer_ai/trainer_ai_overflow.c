@@ -289,6 +289,16 @@ static const u8 sNegativeHeldItemEffects[] = {
     0xFFFF
 };
 
+void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx);
+void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val);
+int AI_GetRandomNumber(BattleSystem* battleSys);
+BOOL AI_CurrentMoveKills(BattleSystem* battleSys, BattleContext* battleCtx, int useDamageRoll);
+int AI_FlagMoveDamageScore(BattleSystem* battleSys, BattleContext* battleCtx, int varyDamage);
+u8 AI_GetBattlerAbility(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx);
+u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler);
+
+
 void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     u8 abilityTemp;
