@@ -11,7 +11,7 @@
 * @param battleCtx
 * @return Nothing, but the function itself updates the AI move scores.
 */
-void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx);
+void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx);
 
 /**
 * @brief Script to add a value to the AI Context move score.
@@ -106,7 +106,7 @@ BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, i
  * @param varyDamage    If TRUE, apply random damage variance to each calculation.
  * @return              The highest damage value among all considered moves.
  */
-s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
+s32 ExpertAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
 
 /**
  * @brief Damage calculation routine visible to the AI.
@@ -123,7 +123,7 @@ s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, i
  *                      to be a value in the range [85..100].
  * @return Calculated damage value.
  */
-s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
+s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
 
 /**
  * @brief Compute the type of a move. Variable-type moves will have their type
@@ -137,7 +137,7 @@ s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 
  * @param move      The move being used.
  * @return The type of the move.
  */
-int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
+int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
 
 /* @brief Check if a move can be used by an active battler.
  *
@@ -149,7 +149,7 @@ int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int ba
  * @param opMask        The bitmask of the operation to check.
  * @return  TRUE / FALSE if the current move in current slot can be used.
  */
-BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
+BOOL ExpertExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 
 /* @brief Check if any moves are invalid for use by the battler.
  *
@@ -162,6 +162,6 @@ BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battle
  * @param opMask        The bitmask of the operation to check.
  * @return  The bitmask of the current move slot to determine validity.
  */
-int AI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask);
+int ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask);
 
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

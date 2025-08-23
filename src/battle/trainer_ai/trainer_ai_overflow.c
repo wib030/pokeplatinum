@@ -291,7 +291,7 @@ static const u8 sNegativeHeldItemEffects[] = {
     0xFFFF
 };
 
-void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx);
+void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx);
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val);
 int AI_GetRandomNumber(BattleSystem* battleSys);
 BOOL AI_CurrentMoveKills(BattleSystem* battleSys, BattleContext* battleCtx, int useDamageRoll);
@@ -300,14 +300,14 @@ u8 AI_GetBattlerAbility(BattleSystem* battleSys, BattleContext* battleCtx, int b
 u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx);
 u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler);
 BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
-s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
-s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
-int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
-BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
-int AI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
+s32 ExpertAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
+s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
+int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
+BOOL ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
+int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
 
 
-void TrainerAI_EvalMoreMoves_ExpertSingles(BattleSystem* battleSys, BattleContext* battleCtx)
+void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     u8 abilityTemp;
     u8 attackerSide, defenderSide;
@@ -451,7 +451,7 @@ BOOL AI_CurrentMoveKills(BattleSystem* battleSys, BattleContext* battleCtx, int 
             ivs[stat] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + stat, NULL);
         }
 
-        u32 damage = TrainerAI_CalcDamage(battleSys,
+        u32 damage = ExpertAI_CalcDamage(battleSys,
             battleCtx,
             AI_CONTEXT.move,
             battleCtx->battleMons[AI_CONTEXT.attacker].heldItem,
@@ -493,7 +493,7 @@ int AI_FlagMoveDamageScore(BattleSystem* battleSys, BattleContext* battleCtx, in
             ivs[i] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + i, NULL);
         }
 
-        TrainerAI_CalcAllDamage(battleSys,
+        ExpertAI_CalcAllDamage(battleSys,
             battleCtx,
             AI_CONTEXT.attacker,
             battleCtx->battleMons[AI_CONTEXT.attacker].moves,
@@ -593,7 +593,7 @@ u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx)
     damage = BattleSystem_ApplyTypeChart(battleSys,
         battleCtx,
         AI_CONTEXT.move,
-        TrainerAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.move),
+        ExpertAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.move),
         AI_CONTEXT.attacker,
         AI_CONTEXT.defender,
         damage,
@@ -670,9 +670,9 @@ BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, i
             break;
         }
 
-        if (AI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+        if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
 
-            moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
+            moveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, move);
             movePower = MOVE_DATA(move).power;
 
             if (movePower > 0) {
@@ -713,7 +713,7 @@ BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, i
     return result;
 }
 
-s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage)
+s32 ExpertAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage)
 {
     int i, riskyScanIdx, altPowerScanIdx;
     s32 maxDamage;
@@ -753,7 +753,7 @@ s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, i
                 damageRoll = DAMAGE_VARIANCE_MAX_ROLL;
             }
 
-            damageVals[i] = TrainerAI_CalcDamage(battleSys, battleCtx, moves[i], heldItem, ivs, attacker, ability, embargoTurns, damageRoll);
+            damageVals[i] = ExpertAI_CalcDamage(battleSys, battleCtx, moves[i], heldItem, ivs, attacker, ability, embargoTurns, damageRoll);
         }
         else {
             damageVals[i] = 0;
@@ -770,7 +770,7 @@ s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, i
     return maxDamage;
 }
 
-s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance)
+s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance)
 {
     // must declare C89-style to match
     int defendingSide;
@@ -1064,7 +1064,7 @@ s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 
     return damage;
 }
 
-int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move)
+int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move)
 {
     int result;
 
@@ -1191,18 +1191,18 @@ int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int ba
     return result;
 }
 
-BOOL AI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask)
+BOOL ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask)
 {
     BOOL result = TRUE;
 
-    if (AI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
+    if (ExpertAI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
         result = FALSE;
     }
 
     return result;
 }
 
-int AI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask)
+int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask)
 {
     int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
 

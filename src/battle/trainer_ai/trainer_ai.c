@@ -19,7 +19,7 @@
 #include "battle/battle_context.h"
 #include "battle/battle_controller.h"
 #include "battle/trainer_ai.h"
-// #include "battle/trainer_ai_overflow.h"
+#include "battle/trainer_ai_overflow.h"
 #include "battle/battle_lib.h"
 
 #include "flags.h"
@@ -951,7 +951,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
                 sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
-				// TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+				ExpertAI_EvalMoreMoves_Singles(battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
