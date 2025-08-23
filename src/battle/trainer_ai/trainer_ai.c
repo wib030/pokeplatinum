@@ -7218,27 +7218,6 @@ static int AI_CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, in
     return type;
 }
 
-/* @brief Check if a move can be used by an active battler.
- * 
- * This routine is copied from BattleSystem_CanUseMove in battle_lib
- *
- * @param battleSys
- * @param battleCtx
- * @param battler       The AI's battler.
- * @param opMask        The bitmask of the operation to check.
- * @return  TRUE / FALSE if the current move in current slot can be used.
- */
-static BOOL AI_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int moveSlot, int opMask)
-{
-    BOOL result = TRUE;
-
-    if (AI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
-        result = FALSE;
-    }
-
-    return result;
-}
-
 /* @brief Check if any moves are invalid for use by the battler.
  *
  * This routine is copied from BattleSystem_CheckInvalidMoves in battle_lib
