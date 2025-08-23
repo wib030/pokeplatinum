@@ -469,6 +469,7 @@ static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, 
 static int AI_CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move);
 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static int AI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask);
 static BOOL AI_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int moveSlot, int opMask);
 static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
 static BOOL AI_DoNotStatDrop(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int defender);
