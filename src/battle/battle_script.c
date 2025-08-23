@@ -14014,21 +14014,21 @@ static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battl
 static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
-
+	/*
     extern u32 sizeof_gTrainerAITable[];
     u32 test;
 
     test = sizeof_gTrainerAITable[0]  / (sizeof(u32) * 4);
         
     battleCtx->msgTemp = test;
-
+	*/
     return FALSE;
 }
 
 static BOOL BtlCmd_SplashDebugMessage2(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
-
+	/*
     extern u32 sizeof_gTrainerAITable[];
     u32 test;
 
@@ -14037,14 +14037,14 @@ static BOOL BtlCmd_SplashDebugMessage2(BattleSystem* battleSys, BattleContext* b
     test /= 10000;
 
     battleCtx->msgTemp = test;
-
+	*/
     return FALSE;
 }
 
 static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
-
+	/*
     extern u32 sizeof_gTrainerAITable[];
     u32 test;
 
@@ -14054,7 +14054,7 @@ static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* b
     test /= 10000;
 
     battleCtx->msgTemp = test;
-
+	*/
     return FALSE;
 }
 
