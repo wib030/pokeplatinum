@@ -19,6 +19,7 @@
 #include "battle/battle_context.h"
 #include "battle/battle_controller.h"
 #include "battle/trainer_ai.h"
+#include "battle/trainer_ai_overflow.h"
 #include "battle/battle_lib.h"
 
 #include "flags.h"
@@ -754,6 +755,10 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.thinkingBitShift++;
         AI_CONTEXT.moveSlot = 0;
     }
+	
+	if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
+        TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+    }
 
     if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
         action = AI_ENEMY_ESCAPE;
@@ -842,6 +847,12 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             thinkingMask >>= 1;
             AI_CONTEXT.thinkingBitShift++;
             AI_CONTEXT.moveSlot = 0;
+        }
+		
+		if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) {
+            TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
+            // if doubles version gets made:
+            // TrainerAI_EvalMoreMoves_ExpertDoubles(battleSys, battleCtx);
         }
 
         if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
@@ -950,6 +961,7 @@ static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCt
         case AI_EVAL_STEP_EVAL:
             if (AI_CONTEXT.move != MOVE_NONE) {
                 sAICommandTable[gTrainerAITable[battleCtx->aiScriptCursor]](battleSys, battleCtx);
+				TrainerAI_EvalMoreMoves_ExpertSingles(battleSys, battleCtx);
             } else {
                 AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
                 AI_CONTEXT.stateFlags |= AI_STATUS_FLAG_DONE;
