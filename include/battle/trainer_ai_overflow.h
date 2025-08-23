@@ -80,4 +80,63 @@ u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx);
 */
 u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler);
 
+/**
+* @brief Check if the AI Context attacker KOs the AI Context defender
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker	The AI Context attacker.
+* @param defender	The AI Context defender.
+* @return TRUE/FALSE whether or not the attacker KOs the defender.
+*/
+BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+
+/**
+ * @brief Calculate the damage that will be done by all of an attacker's moves.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker      The attacker's battler ID.
+ * @param moves         The attacker's moveset.
+ * @param damageVals    Out-param for all damage values as computed by the routine.
+ * @param heldItem      The attacker's held item.
+ * @param ivs           The attacker's IVs. Used for calculating Hidden Power params.
+ * @param ability       The attacker's ability.
+ * @param embargoTurns  Number of turns that the attacker is still under Embargo.
+ * @param varyDamage    If TRUE, apply random damage variance to each calculation.
+ * @return              The highest damage value among all considered moves.
+ */
+s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage);
+
+/**
+ * @brief Damage calculation routine visible to the AI.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param move          The move being used
+ * @param heldItem      The attacker's held item.
+ * @param ivs           The attacker's IVs. Used for Hidden Power calculation.
+ * @param attacker      The attacker's ID.
+ * @param ability       The attacker's ability.
+ * @param embargoTurns  Number of turns that the attacker is still under Embargo.
+ * @param variance      Variance factor applied to the damage value. This is presumed
+ *                      to be a value in the range [85..100].
+ * @return Calculated damage value.
+ */
+s32 TrainerAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int ability, int embargoTurns, u8 variance);
+
+/**
+ * @brief Compute the type of a move. Variable-type moves will have their type
+ * computed according to the usual routines (i.e., Natural Gift, Judgment,
+ * Hidden Power, and Weather Ball). Moves without a variable typing will be
+ * returned as TYPE_NORMAL.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler   The battler using the move.
+ * @param move      The move being used.
+ * @return The type of the move.
+ */
+int TrainerAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

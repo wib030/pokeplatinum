@@ -487,7 +487,7 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
-static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
+
 
 static const AICommandFunc sAICommandTable[] = {
     AICmd_IfRandomLessThan,
