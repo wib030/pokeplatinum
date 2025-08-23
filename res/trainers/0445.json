@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_HITMONLEE",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_BLAZE_KICK",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_BLAZIKEN",
             "form": 0,
-            "level": 41,
+            "level": 43,
             "item": "ITEM_AMULET_COIN",
             "moves": [
                 "MOVE_BLAZE_KICK",

@@ -12,8 +12,8 @@
         {
             "species": "SPECIES_CLOYSTER",
             "form": 0,
-            "level": 41,
-            "item": "ITEM_NONE",
+            "level": 42,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SPIKE_CANNON",
 				"MOVE_RAPID_SPIN",
@@ -27,7 +27,7 @@
 		{
             "species": "SPECIES_PINECO",
             "form": 0,
-            "level": 41,
+            "level": 45,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_EXPLOSION",

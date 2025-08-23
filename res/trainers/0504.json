@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_JIGGLYPUFF",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_POUND",
@@ -22,7 +22,15 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ability": 1,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 8
         }
     ]
 }

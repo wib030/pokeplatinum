@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_LAVA_PLUME",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_NUZLEAF",
             "form": 0,
-            "level": 41,
+            "level": 45,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_SOLAR_BEAM",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_CHARIZARD",
             "form": 0,
-            "level": 41,
+            "level": 43,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_FIRE_FANG",

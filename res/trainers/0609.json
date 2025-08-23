@@ -21,9 +21,15 @@
                 "MOVE_SHADOW_BALL",
                 "MOVE_FOLLOW_ME"
             ],
-            "power": 255,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30
         },
 		{
             "species": "SPECIES_SMEARGLE",

@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 41,
+            "level": 42,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SKILL_SWAP",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_SHEDINJA",
             "form": 0,
-            "level": 41,
+            "level": 43,
             "item": "ITEM_FOCUS_BAND",
             "moves": [
                 "MOVE_SWORDS_DANCE",
