@@ -647,6 +647,70 @@ u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8
     return hpPercent;
 }
 
+BOOL AI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int k;
+    int moveType, moveDamage, movePower;
+    u8 side;
+    u16 move;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    side = Battler_Side(battleSys, defender);
+
+    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+        effectiveness = 0;
+        move = battleCtx->battleMons[attacker].moves[k];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (AI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, attacker, move);
+            movePower = MOVE_DATA(move).power;
+
+            if (movePower > 0) {
+                moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                    battleCtx,
+                    move,
+                    battleCtx->sideConditionsMask[side],
+                    battleCtx->fieldConditionsMask,
+                    movePower,
+                    moveType,
+                    attacker,
+                    defender,
+                    1);
+
+                moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    moveType,
+                    attacker,
+                    defender,
+                    moveDamage,
+                    &effectiveness);
+
+                moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
+                moveDamage /= 100;
+
+                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                    if (moveDamage >= battleCtx->battleMons[defender].curHP) {
+                        result = TRUE;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
 s32 TrainerAI_CalcAllDamage(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, u16* moves, s32* damageVals, u16 heldItem, u8* ivs, int ability, int embargoTurns, int varyDamage)
 {
     int i, riskyScanIdx, altPowerScanIdx;
