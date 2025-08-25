@@ -237,9 +237,17 @@ static const u8 sPositiveHeldItemEffects[] = {
     HOLD_EFFECT_WEAKEN_SE_GRASS,
     HOLD_EFFECT_WEAKEN_SE_ICE,
     HOLD_EFFECT_WEAKEN_SE_FIGHT,
+    HOLD_EFFECT_WEAKEN_SE_POISON,
     HOLD_EFFECT_WEAKEN_SE_GROUND,
     HOLD_EFFECT_WEAKEN_SE_FLYING,
+    HOLD_EFFECT_WEAKEN_SE_PSYCHIC,
+    HOLD_EFFECT_WEAKEN_SE_BUG,
     HOLD_EFFECT_WEAKEN_SE_ROCK,
+    HOLD_EFFECT_WEAKEN_SE_GHOST,
+    HOLD_EFFECT_WEAKEN_SE_DRAGON,
+    HOLD_EFFECT_WEAKEN_SE_DARK,
+    HOLD_EFFECT_WEAKEN_SE_STEEL,
+    HOLD_EFFECT_WEAKEN_SE_NORMAL,
     HOLD_EFFECT_PINCH_ATK_UP,
     HOLD_EFFECT_PINCH_SPEED_UP,
     HOLD_EFFECT_PINCH_SPATK_UP,
@@ -247,7 +255,6 @@ static const u8 sPositiveHeldItemEffects[] = {
     HOLD_EFFECT_PINCH_PRIORITY,
     HOLD_EFFECT_STATDOWN_RESTORE,
     HOLD_EFFECT_SOMETIMES_PRIORITY,
-    HOLD_EFFECT_CHOICE_ATK,
     HOLD_EFFECT_SOMETIMES_FLINCH,
     HOLD_EFFECT_LATI_SPECIAL,
     HOLD_EFFECT_CLAMPERL_SPATK,
@@ -267,17 +274,22 @@ static const u8 sPositiveHeldItemEffects[] = {
     HOLD_EFFECT_EXTEND_SANDSTORM,
     HOLD_EFFECT_EXTEND_SUN,
     HOLD_EFFECT_EXTEND_RAIN,
-    HOLD_EFFECT_CHOICE_SPEED,
-    HOLD_EFFECT_SWITCH,
-    HOLD_EFFECT_CHOICE_SPATK,
     HOLD_EFFECT_NORMAL_HIT_GHOST,
     HOLD_EFFECT_NO_WEATHER_CHIP_POWDER,
     HOLD_EFFECT_WEAK_RAISE_SPA_ATK,
     HOLD_EFFECT_LEVITATE_POPPED_IF_HIT,
     HOLD_EFFECT_SWITCH_ATTACKER_HIT,
-    HOLD_EFFECT_EVIOLITE,
-    HOLD_EFFECT_LOADED_DICE,
+    HOLD_EFFECT_RAISE_SPD_NO_STATUS,
     HOLD_EFFECT_THREE_FOUR_FIVE_DICE,
+    HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH,
+    HOLD_EFFECT_ACCURACY_UP_SLOWER,
+    HOLD_EFFECT_BOOST_REPEATED,
+    HOLD_EFFECT_FARFETCHD_CRITRATE_UP,
+    HOLD_EFFECT_CHANSEY_CRITRATE_UP,
+    HOLD_EFFECT_ACC_REDUCE,
+    HOLD_EFFECT_POWER_UP_PHYS,
+    HOLD_EFFECT_POWER_UP_SPEC,
+    HOLD_EFFECT_HP_DRAIN_ON_ATK,
     0xFFFF
 };
 
@@ -290,6 +302,31 @@ static const u8 sNegativeHeldItemEffects[] = {
     HOLD_EFFECT_DMG_USER_CONTACT_XFR,
     0xFFFF
 };
+
+static cnost u8 trickBadHeldItemEffects[] = {
+    HOLD_EFFECT_HP_RESTORE_SPICY,
+    HOLD_EFFECT_HP_RESTORE_DRY,
+    HOLD_EFFECT_HP_RESTORE_SWEET,
+    HOLD_EFFECT_HP_RESTORE_BITTER,
+    HOLD_EFFECT_HP_RESTORE_SOUR,
+    HOLD_EFFECT_EVS_UP_SPEED_DOWN,
+    HOLD_EFFECT_CHOICE_ATK,
+    HOLD_EFFECT_CHOICE_SPATK,
+    HOLD_EFFECT_CHOICE_SPEED,
+    HOLD_EFFECT_SPEED_DOWN_GROUNDED,
+    HOLD_EFFECT_PRIORITY_DOWN,
+    HOLD_EFFECT_DMG_USER_CONTACT_XFR,
+    HOLD_EFFECT_LVLUP_ATK_EV_UP,
+    HOLD_EFFECT_LVLUP_DEF_EV_UP,
+    HOLD_EFFECT_LVLUP_SPATK_EV_UP,
+    HOLD_EFFECT_LVLUP_SPDEF_EV_UP,
+    HOLD_EFFECT_LVLUP_SPEED_EV_UP,
+    HOLD_EFFECT_LVLUP_HP_EV_UP,
+    HOLD_EFFECT_PSN_USER,
+    HOLD_EFFECT_BRN_USER,
+    HOLD_EFFECT_HP_RESTORE_PSN_TYPE,
+    0xFFFF
+}
 
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx);
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val);
@@ -305,6 +342,7 @@ s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 m
 int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
 BOOL ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
+BOOL AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
 
 
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
@@ -403,6 +441,118 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                 }
 
                 // Expert_Omniboost_End
+                break;
+
+            // Extra trick code to not use it repeatedly
+            case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
+                u8 attackerItemEffect, defenderItemEffect;
+                BOOL attackerShouldNotTrick;
+
+                attackerShouldNotTrick = FALSE;
+
+                attackerItemEffect = Battler_HeldItemEffect(AI_CONTEXT.attacker);
+                defenderItemEffect = Battler_HeldItemEffect(AI_CONTEXT.defender);
+
+                abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
+
+                for (i = 0; sPositiveHeldItemEffects[i] != 0xFFFF; i++)
+                {
+                    if (sPositiveHeldItemEffects[i] == attackerItemEffect)
+                    {
+                        attackerShouldNotTrick = TRUE;
+                        break;
+                    }
+                }
+                if (attackerShouldNotTrick)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -20);
+                    break;
+                }
+                for (i = 0; trickBadHeldItemEffects[i] != 0xFFFF; i++)
+                {
+                    if (trickBadHeldItemEffects[i] == defenderItemEffect)
+                    {
+                        switch (defenderItemEffect)
+                        {
+                        default:
+                            attackerShouldNotTrick = TRUE;
+                            break;
+
+                        case HOLD_EFFECT_PSN_USER:
+                            if (battleCtx->battleMons[AI_CONTEXT.attacker].status & MON_CONDITION_ANY)
+                            {
+                                break;
+                            }
+                            if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_POISON)
+                                || MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_STEEL))
+                            {
+                                break;
+                            }
+                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, abilityTemp, MON_CONDITION_ANY_POISON))
+                            {
+                                break;
+                            }
+                            attackerShouldNotTrick = TRUE;
+                            break;
+
+                        case HOLD_EFFECT_BRN_USER:
+                            if (battleCtx->battleMons[AI_CONTEXT.attacker].status & MON_CONDITION_ANY)
+                            {
+                                break;
+                            }
+                            if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_FIRE))
+                            {
+                                break;
+                            }
+                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, abilityTemp, MON_CONDITION_BURN))
+                            {
+                                break;
+                            }
+                            attackerShouldNotTrick = TRUE;
+                            break;
+
+                        case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
+                            if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_POISON))
+                            {
+                                break;
+                            }
+                            attackerShouldNotTrick = TRUE;
+                            break;
+                        }
+                    }
+                }
+                if (attackerShouldNotTrick)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -20);
+                    break;
+                }
+
+                if (AICmd_IfCurrentMoveRevealed(battleSys, battleCtx)
+                {
+                    if (battleCtx->movePrevByBattler[AI_CONTEXT.attacker] == AI_CONTEXT.move)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+                    if (AI_GetRandomNumber(battleSys) < 192)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+                }
+
+                if (Battler_HeldItem(AI_CONTEXT.attacker) == ITEM_NONE)
+                {
+                    if (AI_GetRandomNumber(battleSys) < 170)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 5);
+                    }
+                }
+
+                if (AI_GetRandomNumber(battleSys) < 128)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                }
                 break;
             }
         }
@@ -1286,4 +1436,14 @@ int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx
     }
 
     return invalidMoves;
+}
+
+BOOL AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    if (MOVE_DATA(AI_CONTEXT.move).pp > battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot])
+    {
+        return TRUE;
+    }
+
+    return FALSE;
 }

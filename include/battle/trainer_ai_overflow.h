@@ -164,4 +164,12 @@ BOOL ExpertExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx
  */
 int ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask);
 
+/* @brief Check if the current move has been revealed (i.e. used at all this fight).
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return  TRUE / FALSE whether the AI Context current move is at full PP or not.
+ */
+BOOL AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
