@@ -247,7 +247,7 @@ static const u8 sPositiveHeldItemEffects[] = {
     HOLD_EFFECT_WEAKEN_SE_DRAGON,
     HOLD_EFFECT_WEAKEN_SE_DARK,
     HOLD_EFFECT_WEAKEN_SE_STEEL,
-    HOLD_EFFECT_WEAKEN_SE_NORMAL,
+    HOLD_EFFECT_WEAKEN_NORMAL,
     HOLD_EFFECT_PINCH_ATK_UP,
     HOLD_EFFECT_PINCH_SPEED_UP,
     HOLD_EFFECT_PINCH_SPATK_UP,
@@ -303,7 +303,7 @@ static const u8 sNegativeHeldItemEffects[] = {
     0xFFFF
 };
 
-static cnost u8 trickBadHeldItemEffects[] = {
+static const u8 trickBadHeldItemEffects[] = {
     HOLD_EFFECT_HP_RESTORE_SPICY,
     HOLD_EFFECT_HP_RESTORE_DRY,
     HOLD_EFFECT_HP_RESTORE_SWEET,
@@ -326,7 +326,7 @@ static cnost u8 trickBadHeldItemEffects[] = {
     HOLD_EFFECT_BRN_USER,
     HOLD_EFFECT_HP_RESTORE_PSN_TYPE,
     0xFFFF
-}
+};
 
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx);
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val);
@@ -342,8 +342,6 @@ s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 m
 int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
 BOOL ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
-BOOL AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
-
 
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
 {
@@ -450,8 +448,8 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 
                 attackerShouldNotTrick = FALSE;
 
-                attackerItemEffect = Battler_HeldItemEffect(AI_CONTEXT.attacker);
-                defenderItemEffect = Battler_HeldItemEffect(AI_CONTEXT.defender);
+                attackerItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker);
+                defenderItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.defender);
 
                 abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
 
@@ -527,7 +525,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     break;
                 }
 
-                if (AICmd_IfCurrentMoveRevealed(battleSys, battleCtx)
+                if (AICmd_IfCurrentMoveRevealedOverflow(battleSys, battleCtx))
                 {
                     if (battleCtx->movePrevByBattler[AI_CONTEXT.attacker] == AI_CONTEXT.move)
                     {
@@ -541,7 +539,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     }
                 }
 
-                if (Battler_HeldItem(AI_CONTEXT.attacker) == ITEM_NONE)
+                if (Battler_HeldItem(battleCtx, AI_CONTEXT.attacker) == ITEM_NONE)
                 {
                     if (AI_GetRandomNumber(battleSys) < 170)
                     {
@@ -1438,7 +1436,7 @@ int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx
     return invalidMoves;
 }
 
-BOOL AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx)
+BOOL AICmd_IfCurrentMoveRevealedOverflow(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     if (MOVE_DATA(AI_CONTEXT.move).pp > battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot])
     {

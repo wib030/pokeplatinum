@@ -170,6 +170,6 @@ int ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx
  * @param battleCtx
  * @return  TRUE / FALSE whether the AI Context current move is at full PP or not.
  */
-BOOL AICmd_IfCurrentMoveRevealed(BattleSystem* battleSys, BattleContext* battleCtx);
+BOOL AICmd_IfCurrentMoveRevealedOverflow(BattleSystem* battleSys, BattleContext* battleCtx);
 
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
