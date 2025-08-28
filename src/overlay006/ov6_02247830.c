@@ -39,6 +39,29 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     v3[2] = sub_02015030(param0, param4);
     v3[3] = sub_02015030(param0, param5);
 
+    // v3[0] = TAKE IT EASY
+    // v3[1] = BABY
+    // v3[2] = RARE
+    // v3[3] = SWEETS
+    if (param2 == 0x467
+        && param3 == 0x49D
+        && param4 == 0x594
+        && param5 == 0x511)
+    {
+        // use 8 as a special case number
+        return 8;
+    }
+
+    /*
+    if (v3[0] == 0x467
+        && v3[1] == 0x49D
+        && v3[2] == 0x594
+        && v3[3] == 0x511)
+    {
+
+    }
+    */
+
     for (v2 = 0; v2 < 4; v2++) {
         if (v3[v2] < 0) {
             return -1;
@@ -79,6 +102,7 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
 
     ov6_02247830(v4, 3, (v4[3] & 0xf));
 
+    // if bit is greater than or equal to max wallpaper count
     if ((v4[0] & 0xf) >= 8) {
         return -1;
     }
@@ -86,6 +110,7 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     v4[1] ^= v4[0];
     v4[2] ^= v4[0];
 
+    // here == 6 is our EVERYONE HAPPY WI-FI CONNECTION magic word
     if ((((v4[1] << 8) | (v4[2])) == param1) && (((v4[0] & 0xf0) >> 4) == 6) && (v4[3] == (((v4[0] + v4[1]) * v4[2]) & 0xff))) {
         return v4[0] & 0xf;
     }

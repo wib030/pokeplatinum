@@ -6761,6 +6761,11 @@ static BOOL ScrCmd_246 (ScriptContext * ctx)
     return 0;
 }
 
+// Event command Aikotoba kabegami set
+// Screen command Danny wallpaper set (English translation)
+// 
+// Checks and then potentially sets a wallpaper flag based on player's input.
+// Then, updates the field script pointer (seemingly).
 static BOOL ScrCmd_249 (ScriptContext * ctx)
 {
     FieldSystem * fieldSystem = ctx->fieldSystem;
@@ -6771,18 +6776,37 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
     u16 v5 = ScriptContext_GetVar(ctx);
     u16 v6 = ScriptContext_GetVar(ctx);
     u16 v7 = ScriptContext_GetVar(ctx);
-    int v8;
+    int v8; // kabe_no -> wall_no   (wallpaper number)
 
     v8 = ov6_022479D0(v1, v4, v5, v6, v7, 4);
+
+    // 8 is our special number
+    if (v8 == 8)
+    {
+        // do something to add rare candies to the player's inventory
+
+
+        // unclear how to affect the dialogue. not sure what v2 does here.
+        // it could be setting an array word for the field script assembly
+        // i.e., it could be basically like a GoTo or calling another assembly command
+
+
+        // below is just filler code to make this invoke another, existing wallpaper function
+        // this is for testing only and should be removed later when we figure this out more.
+        v8 = 6;
+    }
 
     if ((v8 == -1) || (v8 > 7)) {
         *v2 = 0xff;
         return 0;
     }
 
+    // if the given wallpaper flag bit is not 0
     if (sub_02079CFC(v3, v8)) {
+        // wallpaper is already register, no more work
         *v2 = 0;
     } else {
+        // set the given wallpaper flag bit to 1
         sub_02079CD8(v3, v8);
         *v2 = v8 + 1;
     }
