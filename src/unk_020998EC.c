@@ -17,6 +17,11 @@
 #include "unk_0209747C.h"
 #include "unk_020998EC.h"
 
+#define PMS_WORDID_END (0xffff)
+#define PMS_WORDID_DUP (0xfffe)
+
+#define PMS_WORDNUM_MAX (1495)
+
 static const u16 Unk_020F8420[] = {
 	0x1CC,
 	0x3F,
@@ -253,7 +258,7 @@ static const u16 Unk_020F8420[] = {
 	0x172,
 	0x194,
 	0x195,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F87DC[] = {
@@ -515,7 +520,7 @@ static const u16 Unk_020F87DC[] = {
 	0x91,
 	0x107,
 	0x29,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F8260[] = {
@@ -742,7 +747,7 @@ static const u16 Unk_020F8260[] = {
 	0x36D,
 	0x3BD,
 	0x317,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F85F8[] = {
@@ -987,7 +992,7 @@ static const u16 Unk_020F85F8[] = {
 	0x309,
 	0x2B0,
 	0x39C,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7F8A[] = {
@@ -1129,7 +1134,7 @@ static const u16 Unk_020F7F8A[] = {
 	0x3FF,
 	0x41F,
 	0x3EF,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7384[] = {
@@ -1171,7 +1176,7 @@ static const u16 Unk_020F7384[] = {
 	0x460,
 	0x474,
 	0x455,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F72F8[] = {
@@ -1208,7 +1213,7 @@ static const u16 Unk_020F72F8[] = {
 	0x47D,
 	0x493,
 	0x47A,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7C2C[] = {
@@ -1314,7 +1319,7 @@ static const u16 Unk_020F7C2C[] = {
 	0x4E5,
 	0x4AB,
 	0x4FE,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7CFA[] = {
@@ -1422,7 +1427,7 @@ static const u16 Unk_020F7CFA[] = {
 	0x52F,
 	0x570,
 	0x522,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7478[] = {
@@ -1473,7 +1478,7 @@ static const u16 Unk_020F7478[] = {
 	0x585,
 	0x587,
 	0x592,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F72B6[] = {
@@ -1509,11 +1514,11 @@ static const u16 Unk_020F72B6[] = {
 	0x5B1,
 	0x5BE,
 	0x5BC,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 PMS_CategoryTable_12[] = {
-    1492, 1483, 1478, 1485, 1491, 1473, 1480, 1484, 1482, 1493, 1477, 1476, 1474, 1475, 1490, 1479, 1481, 1494, 1472, 1488, 1489, 1486, 1487, (0xffff)
+    1492, 1483, 1478, 1485, 1491, 1473, 1480, 1484, 1482, 1493, 1477, 1476, 1474, 1475, 1490, 1479, 1481, 1494, 1472, 1488, 1489, 1486, 1487, PMS_WORDID_END
 };
 
 static const u16 Unk_020F7744[] = {
@@ -1557,7 +1562,7 @@ static const u16 Unk_020F7744[] = {
 	0x50C,
 	0x521,
 	0x15B,
-	(0xfffe),
+	PMS_WORDID_DUP,
 	0x2,
 	0x441,
 	0x599,
@@ -1588,7 +1593,7 @@ static const u16 Unk_020F7744[] = {
 	0x1E2,
 	0xB8,
 	0x12A,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F78F4[] = {
@@ -1668,7 +1673,7 @@ static const u16 Unk_020F78F4[] = {
 	0xC,
 	0x4F6,
 	0x4E7,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7DCC[] = {
@@ -1777,7 +1782,7 @@ static const u16 Unk_020F7DCC[] = {
 	0x4B8,
 	0x578,
 	0x9B,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F798E[] = {
@@ -1857,7 +1862,7 @@ static const u16 Unk_020F798E[] = {
 	0x163,
 	0x10D,
 	0x2CF,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7424[] = {
@@ -1902,7 +1907,7 @@ static const u16 Unk_020F7424[] = {
 	0x127,
 	0x336,
 	0x2E5,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F76B8[] = {
@@ -1975,7 +1980,7 @@ static const u16 Unk_020F76B8[] = {
 	0x2C2,
 	0x28A,
 	0x2E8,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F77D4[] = {
@@ -2050,7 +2055,7 @@ static const u16 Unk_020F77D4[] = {
 	0x4CC,
 	0x82,
 	0x358,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7AC8[] = {
@@ -2137,7 +2142,7 @@ static const u16 Unk_020F7AC8[] = {
 	0x320,
 	0x61,
 	0x24F,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F733C[] = {
@@ -2176,7 +2181,7 @@ static const u16 Unk_020F733C[] = {
 	0x5B7,
 	0x54E,
 	0x2,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F71A4[] = {
@@ -2187,7 +2192,7 @@ static const u16 Unk_020F71A4[] = {
 	0x20A,
 	0xBD,
 	0x7C,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F71F2[] = {
@@ -2213,7 +2218,7 @@ static const u16 Unk_020F71F2[] = {
 	0x191,
 	0x192,
 	0x17E,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F75B8[] = {
@@ -2276,7 +2281,7 @@ static const u16 Unk_020F75B8[] = {
 	0x172,
 	0x194,
 	0x195,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7220[] = {
@@ -2396,7 +2401,7 @@ static const u16 Unk_020F7220[] = {
 	0xC6,
 	0x519,
 	0x492,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F73D2[] = {
@@ -2428,7 +2433,7 @@ static const u16 Unk_020F73D2[] = {
 	0x439,
 	0x456,
 	0x4A9,
-	(0xfffe),
+	PMS_WORDID_DUP,
 	0x2,
 	0x4FC,
 	0x596,
@@ -2440,7 +2445,7 @@ static const u16 Unk_020F73D2[] = {
 	0x12B,
 	0x142,
 	0x112,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7250[] = {
@@ -2468,7 +2473,7 @@ static const u16 Unk_020F7250[] = {
 	0x417,
 	0x32B,
 	0x3EA,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7B70[] = {
@@ -2551,7 +2556,7 @@ static const u16 Unk_020F7B70[] = {
 	0x2A6,
 	0x22C,
 	0x2E4,
-	(0xfffe),
+	PMS_WORDID_DUP,
 	0x2,
 	0x24E,
 	0x3D2,
@@ -2565,7 +2570,7 @@ static const u16 Unk_020F7B70[] = {
 	0x420,
 	0x2D4,
 	0x1B0,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F718A[] = {
@@ -2574,7 +2579,7 @@ static const u16 Unk_020F718A[] = {
 	0x435,
 	0x9C,
 	0xD3,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7630[] = {
@@ -2645,7 +2650,7 @@ static const u16 Unk_020F7630[] = {
 	0x1DF,
 	0x3EE,
 	0x408,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F80A0[] = {
@@ -2717,7 +2722,7 @@ static const u16 Unk_020F80A0[] = {
 	0x334,
 	0x10A,
 	0x32E,
-	(0xfffe),
+	PMS_WORDID_DUP,
 	0x2,
 	0x42C,
 	0x59D,
@@ -2872,7 +2877,7 @@ static const u16 Unk_020F80A0[] = {
 	0x3F2,
 	0x2DB,
 	0x530,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7A28[] = {
@@ -2955,7 +2960,7 @@ static const u16 Unk_020F7A28[] = {
 	0x9D,
 	0xF8,
 	0xEC,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F71D0[] = {
@@ -2975,7 +2980,7 @@ static const u16 Unk_020F71D0[] = {
 	0xD9,
 	0x587,
 	0x1E0,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7282[] = {
@@ -3004,7 +3009,7 @@ static const u16 Unk_020F7282[] = {
 	0x348,
 	0x64,
 	0x25,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7544[] = {
@@ -3065,13 +3070,13 @@ static const u16 Unk_020F7544[] = {
 	0x4B5,
 	0x109,
 	0x168,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7184[] = {
 	0x384,
 	0xB2,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F71B4[] = {
@@ -3088,7 +3093,7 @@ static const u16 Unk_020F71B4[] = {
 	0x522,
 	0x4FE,
 	0x47A,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7196[] = {
@@ -3098,12 +3103,12 @@ static const u16 Unk_020F7196[] = {
 	0x39C,
 	0x107,
 	0x29,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 Unk_020F7180[] = {
 	0x508,
-	(0xffff)
+	PMS_WORDID_END
 };
 
 static const u16 * const Unk_020F74D8[] = {
