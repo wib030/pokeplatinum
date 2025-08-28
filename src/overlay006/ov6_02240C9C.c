@@ -3,6 +3,11 @@
 
 #include "inlines.h"
 
+#include "consts/abilities.h"
+#include "constants/species.h"
+#include "constants/items.h"
+#include "consts/gender.h"
+
 #include "trainer_info.h"
 #include "struct_decls/struct_020508D4_decl.h"
 #include "pokemon.h"
@@ -1283,7 +1288,10 @@ static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov
         break;
     case 1:
         v0 = ov6_0224222C(param0, param2, param3, 5, 8, 42, &v1);
-        v0 = ov6_0224222C(param0, param2, param3, 5, 13, 9, &v1);
+        if (v0 == 0)
+        {
+            v0 = ov6_0224222C(param0, param2, param3, 5, 13, 9, &v1);
+        }
 
         if (v0 == 0) {
             v1 = ov6_022419A0();
@@ -1293,7 +1301,10 @@ static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov
         break;
     case 2:
         v0 = ov6_0224222C(param0, param2, param3, 5, 8, 42, &v1);
-        v0 = ov6_0224222C(param0, param2, param3, 5, 13, 9, &v1);
+        if (v0 == 0)
+        {
+            v0 = ov6_0224222C(param0, param2, param3, 5, 13, 9, &v1);
+        }
 
         if (v0 == 0) {
             v1 = ov6_022419EC(param1);
@@ -1306,6 +1317,10 @@ static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov
     }
 
     if (ov6_022422D0(param2, param0, v2)) {
+        return 0;
+    }
+
+    if (FirstMonAbilityPreventsHigherLevel(param2, param0, v2)) {
         return 0;
     }
 
@@ -1632,6 +1647,43 @@ static BOOL ov6_022422D0 (const UnkStruct_ov6_022422D0 * param0, Pokemon * param
     return 0;
 }
 
+static BOOL FirstMonAbilityPreventsHigherLevel(const UnkStruct_ov6_022422D0* param0, Pokemon* param1, const u8 param2)
+{
+    u8 v0;
+
+    if (param0->unk_08) {
+        return 0;
+    }
+
+    if (param0->unk_0D == 0) {
+        switch (param0->unk_0E)
+        {
+        default:
+            break;
+
+        case ABILITY_COWARD:
+        case ABILITY_SHAKEDOWN:
+        case ABILITY_TRUANT:
+        case ABILITY_EARLY_BIRD:
+            v0 = Pokemon_GetValue(param1, MON_DATA_LEVEL, NULL);
+
+            if (v0 <= 1) {
+                return 0;
+            }
+
+            if (param2 >= v0 - 1) {
+                // 5/6 chance
+                if (inline_020564D0(6) > 0) {
+                    return 1;
+                }
+            }
+            break;
+        }
+    }
+
+    return 0;
+}
+
 static void ov6_02242328 (FieldSystem * fieldSystem, const BOOL param1, BattleParams ** param2)
 {
     if (!param1) {
@@ -1732,8 +1784,19 @@ static BOOL ov6_02242514 (const int param0, const UnkStruct_ov6_022422D0 * param
     int v0 = 0;
 
     if (param1->unk_0D == 0) {
-        if (param1->unk_0E == 14) {
+        switch (param1->unk_0E)
+        {
+        default:
+            break;
+
+        case 14:
+        case 35:
+        case 119:
+        case 142:
+        case 143:
+        case 162:
             v0 = 1;
+            break;
         }
     }
 
@@ -1785,8 +1848,23 @@ static u8 ov6_022425D4 (const UnkStruct_ov6_0224222C * param0, const UnkStruct_o
     u8 v1;
 
     if (param1->unk_0D == 0) {
-        if ((param1->unk_0E == 72) || (param1->unk_0E == 55) || (param1->unk_0E == 46)) {
-            if (inline_020564D0(2) == 0) {
+        switch (param1->unk_0E)
+        {
+        default:
+            break;
+
+        case ABILITY_VITAL_SPIRIT:
+        case ABILITY_HUSTLE:
+        case ABILITY_PRESSURE:
+        case ABILITY_INTIMIDATE:
+        case ABILITY_HUGE_POWER:
+        case ABILITY_GUTS:
+        case ABILITY_SCRAPPY:
+        case ABILITY_RECKLESS:
+        case ABILITY_COMPETITIVE:
+        case ABILITY_HOTHEADED:
+            case 
+            if (inline_020564D0(3) == 0) {
                 return param2;
             }
 
@@ -1801,6 +1879,7 @@ static u8 ov6_022425D4 (const UnkStruct_ov6_0224222C * param0, const UnkStruct_o
             }
 
             return v0;
+            break;
         }
     }
 
