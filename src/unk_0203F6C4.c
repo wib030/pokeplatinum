@@ -6777,23 +6777,21 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
     u16 v6 = ScriptContext_GetVar(ctx);
     u16 v7 = ScriptContext_GetVar(ctx);
     int v8; // kabe_no -> wall_no   (wallpaper number)
+	
+	int itemIndex;
+	int itemQuantity;
 
     v8 = ov6_022479D0(v1, v4, v5, v6, v7, 4);
 
     // 8 is our special number
     if (v8 == 8)
     {
-        // do something to add rare candies to the player's inventory
-
-
-        // unclear how to affect the dialogue. not sure what v2 does here.
-        // it could be setting an array word for the field script assembly
-        // i.e., it could be basically like a GoTo or calling another assembly command
-
-
-        // below is just filler code to make this invoke another, existing wallpaper function
-        // this is for testing only and should be removed later when we figure this out more.
-        v8 = 6;
+        // Add item function
+		itemIndex = 50; // Rare Candy item index
+		itemQuantity = 200;
+        sub_0207D570(sub_0207D990(fieldSystem->saveData), itemIndex, itemQuantity, 4);
+        *v2 = 8;
+		return 0;
     }
 
     if ((v8 == -1) || (v8 > 7)) {
