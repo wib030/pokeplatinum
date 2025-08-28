@@ -19,18 +19,18 @@
 #include "unk_0209747C.h"
 
 struct UnkStruct_0209747C_t {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04;
-    u8 unk_05;
-    int unk_08;
-    const PokedexData * unk_0C;
-    const UnkStruct_02014EC4 * unk_10;
-    Sentence unk_14;
-    u16 unk_1C[2];
-    u16 unk_20[2];
+    u8 unk_00; // input mode
+    u8 unk_01; // guidance_type
+    u8 unk_02; // cancel_flag
+    u8 unk_03; // modified_flag
+    u8 unk_04; // game_clear_flag
+    u8 unk_05; // notedit_ignore_flag
+    int unk_08; // win_type window type
+    const PokedexData * unk_0C; // pokedex_savedata
+    const UnkStruct_02014EC4 * unk_10; // pokemon message system word savedata pmsw_savedata
+    Sentence unk_14; // PMS_DATA pms
+    u16 unk_1C[2]; // PMS_WORD word[PMS_INPUT_WORD_MAX]
+    u16 unk_20[2]; // boxpwd_id[ PMS_INPUT_WORD_MAX ]
 };
 
 UnkStruct_0209747C * sub_0209747C (u32 param0, u32 param1, SaveData * param2, u32 param3)
