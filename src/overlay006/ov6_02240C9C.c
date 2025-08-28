@@ -1070,7 +1070,7 @@ static void ov6_02241ABC (FieldSystem * fieldSystem, u8 * param1)
     if (v0 == 1) {
         (*param1) /= 2;
     } else if (v0 == 2) {
-        (*param1) = (*param1) + ((*param1) / 2);
+        (*param1) *= 2;
     }
 }
 
@@ -1080,7 +1080,8 @@ static u8 ov6_02241AE4 (Pokemon * param0, const UnkStruct_ov6_022422D0 * param1)
 
     if (param1->unk_0D == 0) {
         if (param1->unk_0E == 28) {
-            if (inline_020564D0(2) == 0) {
+            // make Synchronize like 87.5% chance to work
+            if (inline_020564D0(8) > 0) {
                 v0 = (u32)Pokemon_GetValue(param0, MON_DATA_PERSONALITY, NULL);
                 v0 = v0 % 25;
                 return (u8)v0;
@@ -1267,7 +1268,13 @@ static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov
             v0 = ov6_0224222C(param0, param2, param3, 12, 13, 9, &v1);
 
             if (v0 == 0) {
-                v1 = ov6_02241904();
+                // Thirsty now makes water mons less likely
+                v0 = TryGetSlotForTypePreventAbility(param0, param2, param3, 12, 11, 156, &v1);
+
+                if (v0 == 0)
+                {
+                    v1 = ov6_02241904();
+                }
             }
         }
 
@@ -1506,12 +1513,55 @@ static BOOL ov6_0224219C (const UnkStruct_ov6_0224222C * param0, const u8 param1
     return 1;
 }
 
+static BOOL PreventMatchingTypeEncounterSlot(const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, u8* encounterSlot)
+{
+    u8 v0[12];
+    u8 v1;
+    u8 v2;
+    u8 v3, v4;
+
+    for (v2 = 0; v2 < 12; v2++) {
+        v0[v2] = 0;
+    }
+
+    v1 = 0;
+
+    for (v2 = 0; v2 < maxEncounters; v2++) {
+        v3 = PokemonPersonalData_GetSpeciesValue(encounterTable[v2].unk_00, 6);
+        v4 = PokemonPersonalData_GetSpeciesValue(encounterTable[v2].unk_00, 7);
+
+        if ((v3 != type) && (v4 != type)) {
+            v0[v1++] = v2;
+        }
+    }
+
+    if ((v1 == 0) || (v1 == maxEncounters)) {
+        return 0;
+    }
+
+    *encounterSlot = v0[LCRNG_Next() % v1];
+    return 1;
+}
+
 static BOOL ov6_0224222C (Pokemon * param0, const UnkStruct_ov6_022422D0 * param1, const UnkStruct_ov6_0224222C * param2, const u8 param3, const u8 param4, const u8 param5, u8 * param6)
 {
     if (param1->unk_0D == 0) {
         if (param1->unk_0E == param5) {
-            if (inline_020564D0(2) == 0) {
+            if (inline_020564D0(3) > 0) {
                 return ov6_0224219C(param2, param3, param4, param6);
+            }
+        }
+    }
+
+    return 0;
+}
+
+static BOOL TryGetSlotForTypePreventAbility(Pokemon* unused, const UnkStruct_ov6_022422D0* encounterFieldParams, const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, const u8 ability, u8* encounterSlot)
+{
+    if (encounterFieldParams->unk_0D == 0) {
+        if (encounterFieldParams->unk_0E == ability) {
+            if (inline_020564D0(3) > 0) {
+                return PreventMatchingTypeEncounterSlot(encounterTable, maxEncounters, type, encounterSlot);
             }
         }
     }
@@ -1566,12 +1616,13 @@ static BOOL ov6_022422D0 (const UnkStruct_ov6_022422D0 * param0, Pokemon * param
         if ((param0->unk_0E == 51) || (param0->unk_0E == 22)) {
             v0 = Pokemon_GetValue(param1, MON_DATA_LEVEL, NULL);
 
-            if (v0 <= 5) {
+            if (v0 <= 3) {
                 return 0;
             }
 
-            if (param2 <= v0 - 5) {
-                if (inline_020564D0(2) == 0) {
+            if (param2 <= v0 - 3) {
+                // intimidate etc. now 87.5% chance
+                if (inline_020564D0(8) > 0) {
                     return 1;
                 }
             }
