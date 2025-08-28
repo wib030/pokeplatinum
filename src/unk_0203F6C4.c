@@ -232,6 +232,12 @@
 #include "overlay009/ov9_02249960.h"
 #include "overlay023/ov23_022521F0.h"
 
+#include "constants/moves.h"
+#include "consts/abilities.h"
+#include "constants/species.h"
+#include "constants/items.h"
+#include "consts/gender.h"
+
 #include <nitro/code16.h>
 
 typedef struct {
@@ -750,6 +756,24 @@ static BOOL sub_02040F0C(ScriptContext * ctx);
 static void sub_02040F28(FieldSystem * fieldSystem, SysTask * param1, UnkStruct_ov5_021F8E3C * param2);
 static void sub_02040F5C(SysTask * param0, void * param1);
 static u32 sub_0204676C(SaveData * param0);
+
+void MakeAndAddEventPokemon (
+	FieldSystem *fieldSystem,
+	TrainerInfo *trInfo,
+	PCBoxes *pcBoxes,
+	Party *party,
+	u16 monSpecies,
+	u8 monLevel,
+	u8 monAbility,
+	u16 monItem,
+	u8 monGender,
+	u8 monNature,
+	u16 monBall,
+	u16 monMoves[],
+	u16 monIVs[],
+	u16 monEVs[],
+	u16 monLocationData,
+	u16 monRecievedType);
 
 static const u8 sConditionTable[6][3] = {
     //   <     ==      >
@@ -6777,22 +6801,78 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
     u16 v6 = ScriptContext_GetVar(ctx);
     u16 v7 = ScriptContext_GetVar(ctx);
     int v8; // kabe_no -> wall_no   (wallpaper number)
-	
 	int itemIndex;
 	int itemQuantity;
+	int monLocationData = MapHeader_GetMapLabelTextID(fieldSystem->unk_1C->unk_00);
+	int monRecievedType = 24; // Best not to change this
+	int i;
+	Party * party;
+
+	party = Party_GetFromSavedata(fieldSystem->saveData);
 
     v8 = ov6_022479D0(v1, v4, v5, v6, v7, 4);
 
-    // 8 is our special number
+    // 8 is our special number for giving rare candies
     if (v8 == 8)
     {
         // Add item function
 		itemIndex = 50; // Rare Candy item index
-		itemQuantity = 200;
+		itemQuantity = 999;
         sub_0207D570(sub_0207D990(fieldSystem->saveData), itemIndex, itemQuantity, 4);
         *v2 = 8;
 		return 0;
     }
+	
+	// 9 is our special number for giving a pokemon
+	if (v8 == 9)
+	{
+		// This example gives a level 100 Modest Gardevoir with perfect IVs.
+		u16 monMoves[] = {
+			MOVE_JUDGMENT,
+			MOVE_MILK_DRINK,
+			MOVE_SPLASH,
+			MOVE_NONE
+		};
+
+		u16 monIVs[] = {
+			31, // HP
+			31, // ATK
+			31, // DEF
+			31, // SPEED
+			31, // SPATK
+			31 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			0, // ATK
+			0, // DEF
+			252, // SPEED
+			252, // SPATK
+			4 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_GARDEVOIR, // Desired species
+			100, // Desired level
+			ABILITY_FRESH_MILK, // Desired ability
+			ITEM_MOOMOO_MILK, // Desired item
+			GENDER_FEMALE, // Desired gender
+			NATURE_MODEST, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monRecievedType); // Recieved type
+		
+		*v2 = 9;
+		return 0;
+	}
 
     if ((v8 == -1) || (v8 > 7)) {
         *v2 = 0xff;
@@ -6810,6 +6890,97 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
     }
 
     return 0;
+}
+
+void MakeAndAddEventPokemon (
+	FieldSystem *fieldSystem,
+	TrainerInfo *trInfo,
+	PCBoxes *pcBoxes,
+	Party *party,
+	u16 monSpecies,
+	u8 monLevel,
+	u8 monAbility,
+	u16 monItem,
+	u8 monGender,
+	u8 monNature,
+	u16 monBall,
+	u16 monMoves[],
+	u16 monIVs[],
+	u16 monEVs[],
+	u16 monLocationData,
+	u16 monRecievedType)
+{
+	BOOL addedToParty;
+	Pokemon * mon;
+	u8 monIVsTemp, monEVsTemp;
+	u8 monGiftFromIndex;
+	u16 monPersonality;
+	u32 currentBox;
+	int i;
+	int partyCount;
+	int otIdSource;
+	
+	otIdSource = OTID_NOT_SHINY;
+	monGiftFromIndex = 0;
+	partyCount = Party_GetCurrentCount(party);
+	currentBox = 18;
+	
+	if (partyCount < 6 || PCBoxes_FirstEmptyBox(pcBoxes) != 18)
+	{
+		currentBox = PCBoxes_FirstEmptyBox(pcBoxes);
+	}
+	
+	PokemonPersonalData *monPersonalData = PokemonPersonalData_FromMonSpecies(monSpecies, 0);
+	do {
+		monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+	} while (PokemonPersonalData_GetGenderOf(monPersonalData, monSpecies, monPersonality) != monGender);
+		
+	PokemonPersonalData_Free(monPersonalData);
+	
+	mon = Pokemon_New(11);
+	
+	Pokemon_InitWith(mon, monSpecies, monLevel, 0, TRUE, monPersonality, otIdSource, 0);
+	Pokemon_SetCatchData(mon, trInfo, 4, monLocationData, monRecievedType, 11);
+	Pokemon_SetValue(mon, 6, &monGiftFromIndex);
+	
+	Pokemon_SetValue(mon, MON_DATA_ABILITY, &monAbility);
+	Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &monItem);
+	Pokemon_SetValue(mon, MON_DATA_NATURE, &monNature);
+	Pokemon_SetValue(mon, MON_DATA_POKEBALL, &monBall);
+	
+	for (i = 0; i < 4; i++) {
+		Pokemon_SetMoveSlot(mon, monMoves[i], i);
+	}
+	
+	for (i = 0; i < STAT_MAX; i++) {
+		monIVsTemp = monIVs[i];
+		Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &monIVsTemp);
+	}
+	
+	for (i = 0; i < STAT_MAX; i++) {
+		monEVsTemp = monEVs[i];
+		Pokemon_SetValue(mon, MON_DATA_HP_EV + i, &monEVsTemp);
+	}
+	
+	Pokemon_CalcLevelAndStats(mon);
+	
+	if (partyCount < 6)
+	{
+		// Add the Pokemon to our party
+		addedToParty = Party_AddPokemon(party, mon);
+		
+		if (addedToParty)
+		{
+			sub_0202F180(fieldSystem->saveData, mon);
+		}
+	}
+	else
+	{
+		// Add the Pokemon to the first available box
+		sub_020798A0(pcBoxes, currentBox, Pokemon_GetBoxPokemon(mon));
+	}
+	
+	Heap_FreeToHeap(mon);
 }
 
 static BOOL ScrCmd_24A (ScriptContext * ctx)
