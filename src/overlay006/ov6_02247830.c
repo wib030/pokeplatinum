@@ -52,13 +52,26 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
         return 8;
     }
 
+    // param2 == OH, YEAH
+    // param3 == YEAH, YEAH
+    // param4 == IMPLANT
+    // param5 == GARDEVOIR
+    if (param2 == 0x4C1
+        && param3 == 0x4E6
+        && param4 == 0x5A1
+        && param5 == 0x11A)
+    {
+        return 9;
+    }
+
     /*
     if (v3[0] == 0x467
         && v3[1] == 0x49D
         && v3[2] == 0x594
         && v3[3] == 0x511)
     {
-
+        // use 8 as a special case number
+        return 8;
     }
     */
 

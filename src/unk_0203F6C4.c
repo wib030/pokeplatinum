@@ -6830,8 +6830,8 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 		u16 monMoves[] = {
 			MOVE_JUDGMENT,
 			MOVE_MILK_DRINK,
-			MOVE_SPLASH,
-			MOVE_NONE
+			MOVE_FLASH,
+			MOVE_BOUNCE
 		};
 
 		u16 monIVs[] = {
