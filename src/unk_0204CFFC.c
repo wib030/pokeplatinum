@@ -89,28 +89,42 @@ BOOL ScrCmd_199 (ScriptContext * param0)
 BOOL ScrCmd_097 (ScriptContext * param0)
 {
     int v0;
-    u8 v1;
+    u8 partyCount;
     BOOL v2;
-    Party * v3;
-    Pokemon * v4;
+    Party * party;
+    Pokemon * mon;
     FieldSystem * fieldSystem = param0->fieldSystem;
-    TrainerInfo * v6 = SaveData_GetTrainerInfo(fieldSystem->saveData);
+    TrainerInfo * trInfo = SaveData_GetTrainerInfo(fieldSystem->saveData);
+	PCBoxes * pcBoxes = SaveData_PCBoxes(fieldSystem->saveData);
+	u32 currentBox;
     u16 v7 = ScriptContext_GetVar(param0);
     u16 v8 = ScriptContext_GetVar(param0);
 
-    v3 = Party_GetFromSavedata(fieldSystem->saveData);
-    v1 = Party_GetCurrentCount(v3);
+    party = Party_GetFromSavedata(fieldSystem->saveData);
+    partyCount = Party_GetCurrentCount(party);
+	currentBox = 18;
+	
+	if (partyCount < 6 || PCBoxes_FirstEmptyBox(pcBoxes) != 18)
+	{
+		currentBox = PCBoxes_FirstEmptyBox(pcBoxes);
+	}
+	
+	mon = Pokemon_New(11);
+	Pokemon_Init(mon);
 
-    if (v1 < 6) {
-        v4 = Pokemon_New(11);
-        Pokemon_Init(v4);
+	v0 = sub_02017070(1, v8);
+	ov5_021E6CF0(mon, v7, 1, trInfo, 3, v0);
 
-        v0 = sub_02017070(1, v8);
-        ov5_021E6CF0(v4, v7, 1, v6, 3, v0);
-
-        v2 = Party_AddPokemon(v3, v4);
-        Heap_FreeToHeap(v4);
+    if (partyCount < 6)
+	{
+        v2 = Party_AddPokemon(party, mon);
     }
+	else
+	{
+		sub_020798A0(pcBoxes, currentBox, Pokemon_GetBoxPokemon(mon));
+	}
+	
+	Heap_FreeToHeap(mon);
 
     return 0;
 }
