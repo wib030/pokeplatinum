@@ -3257,7 +3257,16 @@ static u32 sub_020999E0 (UnkStruct_020998EC * param0, const u16 * param1, u32 pa
 {
     u32 v0;
 
-    if (sub_02097564(param0->unk_00)) {
+	for (v0 = 0; v0 < param2; v0++) {
+		inline_02099980(param0, *param1);
+		*param3++ = *param1++;
+	}
+
+	return param2;
+
+	// commented out code that checks for game completion
+    /*
+	if (sub_02097564(param0->unk_00)) {
         for (v0 = 0; v0 < param2; v0++) {
             inline_02099980(param0, *param1);
             *param3++ = *param1++;
@@ -3267,6 +3276,7 @@ static u32 sub_020999E0 (UnkStruct_020998EC * param0, const u16 * param1, u32 pa
     } else {
         return 0;
     }
+	*/
 }
 
 static u32 sub_02099A30 (UnkStruct_020998EC * param0, const u16 * param1, u32 param2, u16 * param3)
