@@ -6,6 +6,9 @@
 #include "unk_0203A378.h"
 #include "overlay006/ov6_02243218.h"
 
+// this is swarm encounters
+// 22 swarm encounter areas in the table below
+
 static const u32 Unk_ov6_02249090[22] = {
     0x156,
     0x157,

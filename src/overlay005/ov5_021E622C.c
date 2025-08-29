@@ -39,6 +39,8 @@
 
 #include "overlay005/rodata_ov5_021F9FA2.h"
 
+// daycare.c
+
 #define	BIRTH_LEVEL			(5)
 #define PRETERM_ODDS        (10)
 
@@ -1138,7 +1140,8 @@ static const u16 Unk_ov5_021F9F54[] = {
 	303,	// Hinamatsuri
 	401,	// School Entrance Exam Day
 	405,    // Easter 2026
-    414,    // Lyss Birthday
+    414,    // Lyss's Birthday
+    422,    // Holly's Birthday
     430,    // Maisy's Birthday
 	501,	// May Day
 	509,    // Goku & Piccolo Day
@@ -1148,7 +1151,7 @@ static const u16 Unk_ov5_021F9F54[] = {
 	813,	// 2009 World Championship
 	907,	// American Anime Debut
 	928,	// DP Anime Debut (and Red and Blue Release)
-    1009,   // Yellow Release
+    1009,   // Sports Day
     1031,   // Halloween
 	1121,	// Ruby Sapphire Release (and Gold and Silver Relase)
 	1214,	// Crystal Release

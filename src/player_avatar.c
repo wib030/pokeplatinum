@@ -16,22 +16,22 @@
 #include "overlay005/ov5_021F61BC.h"
 
 typedef struct PlayerAvatar {
-    u32 unk_00;
-    u32 unk_04;
-    u32 unk_08;
-    int unk_0C;
-    u32 unk_10;
-    int unk_14;
-    int unk_18;
-    int unk_1C;
-    int gender;
-    int speed;
-    int unk_28;
-    int unk_2C;
-    MapObject * mapObject;
-    UnkStruct_ov101_021D5D90 * unk_34;
-    PlayerData * player;
-    const PlayerData * playerConst;
+    u32 unk_00;                         // move_bit
+    u32 unk_04;                         // request_bit
+    u32 unk_08;                         // set_ac
+    int unk_0C;                         // HEROACTYPE set_ac_type
+    u32 unk_10;                         // se_walk_lr
+    int unk_14;                         // move_value
+    int unk_18;                         // move_state
+    int unk_1C;                         // form
+    int gender;                         // sex
+    int speed;                          // speed
+    int unk_28;                         // input_key_dir_x
+    int unk_2C;                         // input_key_dir_z
+    MapObject * mapObject;              
+    UnkStruct_ov101_021D5D90 * unk_34;  // EOA_PTR joint_eoa
+    PlayerData * player;                // PLAYER_SAVE_DATA *savedata
+    const PlayerData * playerConst;     // PLAYER_SAVE_DATA *save
 } PlayerAvatar;
 
 static PlayerAvatar * PlayerAvatar_Alloc(void);

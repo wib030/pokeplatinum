@@ -860,13 +860,15 @@ static BOOL ov6_022417C8 (FieldSystem * fieldSystem, const u32 param1, const u8 
         }
     }
 
-    v0 = 40;
+    v0 = 30;
 
+    // Very tall grass encounter rate
     if (sub_0205DAD4(param2)) {
-        v0 += 30;
+        v0 += 20;
     } else {
+        // Biking / Bicycle encounter rate
         if (PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) == 0x1) {
-            v0 += 30;
+            v0 -= 23;
         }
     }
 
