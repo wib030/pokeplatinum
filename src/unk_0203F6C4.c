@@ -6914,6 +6914,7 @@ void MakeAndAddEventPokemon (
 	Pokemon * mon;
 	u8 monIVsTemp, monEVsTemp;
 	u8 monGiftFromIndex;
+	u8 personalAbility1, personalAbility2;
 	u16 monPersonality;
 	u32 currentBox;
 	int i;
@@ -6931,9 +6932,29 @@ void MakeAndAddEventPokemon (
 	}
 	
 	PokemonPersonalData *monPersonalData = PokemonPersonalData_FromMonSpecies(monSpecies, 0);
-	do {
-		monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
-	} while (PokemonPersonalData_GetGenderOf(monPersonalData, monSpecies, monPersonality) != monGender);
+	
+	if (monGender != GENDER_NONE)
+	{
+		do {
+			monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+		} while (PokemonPersonalData_GetGenderOf(monPersonalData, monSpecies, monPersonality) != monGender);
+	}
+	
+	personalAbility1 = PokemonPersonalData_GetSpeciesValue(monSpecies, MON_DATA_PERSONAL_ABILITY_1);
+    personalAbility2 = PokemonPersonalData_GetSpeciesValue(monSpecies, MON_DATA_PERSONAL_ABILITY_2);
+	
+	if (monAbility == personalAbility1)
+	{
+		do {
+			monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+		} while (monPersonality & 1);
+	}
+	else if (monAbility == personalAbility2)
+	{
+		do {
+			monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+		} while ((monPersonality & 1) == FALSE);
+	}
 		
 	PokemonPersonalData_Free(monPersonalData);
 	
