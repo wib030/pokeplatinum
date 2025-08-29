@@ -1789,12 +1789,12 @@ static BOOL ov6_02242514 (const int param0, const UnkStruct_ov6_022422D0 * param
         default:
             break;
 
-        case 14:
-        case 35:
-        case 119:
-        case 142:
-        case 143:
-        case 162:
+        case ABILITY_COMPOUND_EYES:
+        case ABILITY_ILLUMINATE:
+        case ABILITY_FRISK:
+        case ABILITY_FREE_SAMPLE:
+        case ABILITY_SHAKEDOWN:
+        case ABILITY_AWARE:
             v0 = 1;
             break;
         }
