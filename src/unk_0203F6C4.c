@@ -6826,15 +6826,15 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 		return 0;
     }
 	
-	// 9 is our special number for giving a pokemon
+	// 9 is our special number for giving a fresh milk gardevoir
 	if (v8 == 9)
 	{
 		// This example gives a level 100 Modest Gardevoir with perfect IVs.
 		u16 monMoves[] = {
-			MOVE_PUNISHMENT,
-			MOVE_MILK_DRINK,
+			MOVE_PUNISHMENT, // Exclusive move
+			MOVE_MILK_DRINK, // Exclusive move
 			MOVE_FLASH,
-			MOVE_BOUNCE
+			MOVE_BOUNCE // Exclusive move
 		};
 
 		u16 monIVs[] = {
@@ -6875,6 +6875,162 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			TRUE); // BOOL, is shiny?
 		
 		*v2 = 9;
+		return 0;
+	}
+	
+	// 10 is our special number for giving a Pregnancy Punch Machamp
+	if (v8 == 10)
+	{
+		// This example gives a level 70 Serious Psychic Machamp with Pregnancy Punch.
+		u16 monMoves[] = {
+			MOVE_SHARPEN, // Pregnancy Punch
+			MOVE_PSYCHIC, // Exclusive move
+			MOVE_MEDITATE,
+			MOVE_CALM_MIND // Exclusive move
+		};
+
+		u16 monIVs[] = { // Hidden power Psychic
+			30, // HP
+			31, // ATK
+			31, // DEF
+			30, // SPEED
+			31, // SPATK
+			31 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			124, // ATK
+			0, // DEF
+			252, // SPEED
+			124, // SPATK
+			8 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_MACHAMP, // Desired species
+			70, // Desired level
+			ABILITY_HEADACHE, // Desired ability
+			ITEM_TWISTEDSPOON, // Desired item
+			GENDER_MALE, // Desired gender
+			NATURE_SERIOUS, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monRecievedType, // Recieved type
+			FALSE); // BOOL, is shiny?
+		
+		*v2 = 10;
+		return 0;
+	}
+	
+	// 11 is our special number for giving a special event Physical Scream Tail ^w^
+	if (v8 == 11)
+	{
+		// This example gives a level 30 Naughty Shiny Scream Tail.
+		u16 monMoves[] = {
+			MOVE_HYPER_FANG, // Exclusive move
+			MOVE_BONEMERANG, // Exclusive move
+			MOVE_ICE_FANG,
+			MOVE_IRON_TAIL
+		};
+
+		u16 monIVs[] = {
+			15, // HP
+			31, // ATK
+			15, // DEF
+			30, // SPEED
+			25, // SPATK
+			15 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			92, // ATK
+			0, // DEF
+			92, // SPEED
+			0, // SPATK
+			0 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_IGGLYBUFF, // Desired species
+			30, // Desired level
+			ABILITY_RIVALRY, // Desired ability
+			ITEM_MUSCLE_BAND, // Desired item
+			GENDER_MALE, // Desired gender
+			NATURE_NAUGHTY, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monRecievedType, // Recieved type
+			TRUE); // BOOL, is shiny?
+		
+		*v2 = 11;
+		return 0;
+	}
+	
+	// 12 is our special number for giving a special event Special Scream Tail ^w^
+	if (v8 == 12)
+	{
+		// This example gives a level 30 Mild Shiny Scream Tail.
+		u16 monMoves[] = {
+			MOVE_FISSURE, // Peat Slide
+			MOVE_UPROAR,
+			MOVE_SUPER_FANG, // Exclusive move
+			MOVE_HEAL_BELL // Exclusive move
+		};
+
+		u16 monIVs[] = {
+			15, // HP
+			25, // ATK
+			15, // DEF
+			30, // SPEED
+			31, // SPATK
+			15 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			0, // ATK
+			0, // DEF
+			92, // SPEED
+			92, // SPATK
+			0 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_IGGLYBUFF, // Desired species
+			30, // Desired level
+			ABILITY_ROCK_STAR, // Desired ability
+			ITEM_AIR_BALLOON, // Desired item
+			GENDER_FEMALE, // Desired gender
+			NATURE_MILD, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monRecievedType, // Recieved type
+			TRUE); // BOOL, is shiny?
+		
+		*v2 = 12;
 		return 0;
 	}
 
