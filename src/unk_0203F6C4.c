@@ -773,7 +773,10 @@ void MakeAndAddEventPokemon (
 	u16 monIVs[],
 	u16 monEVs[],
 	u16 monLocationData,
-	u16 monRecievedType);
+	u16 monRecievedType,
+	BOOL isShiny);
+	
+static inline BOOL Pokemon_InlineIsPersonalityShiny(u32 monOTID, u32 monPersonality);
 
 static const u8 sConditionTable[6][3] = {
     //   <     ==      >
@@ -6868,7 +6871,8 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monIVs, // Desired IVs
 			monEVs, // Desired EVs
 			monLocationData, // Location data
-			monRecievedType); // Recieved type
+			monRecievedType, // Recieved type
+			TRUE); // BOOL, is shiny?
 		
 		*v2 = 9;
 		return 0;
@@ -6908,7 +6912,8 @@ void MakeAndAddEventPokemon (
 	u16 monIVs[],
 	u16 monEVs[],
 	u16 monLocationData,
-	u16 monRecievedType)
+	u16 monRecievedType,
+	BOOL isShiny)
 {
 	BOOL addedToParty;
 	Pokemon * mon;
@@ -6917,6 +6922,7 @@ void MakeAndAddEventPokemon (
 	u8 personalAbility1, personalAbility2;
 	u16 monPersonality;
 	u32 currentBox;
+	u32 monOTID;
 	int i;
 	int partyCount;
 	int otIdSource;
@@ -6925,6 +6931,7 @@ void MakeAndAddEventPokemon (
 	monGiftFromIndex = 0;
 	partyCount = Party_GetCurrentCount(party);
 	currentBox = 18;
+	monOTID = (LCRNG_Next() | (LCRNG_Next() << 16));
 	
 	if (partyCount < 6 || PCBoxes_FirstEmptyBox(pcBoxes) != 18)
 	{
@@ -6964,7 +6971,11 @@ void MakeAndAddEventPokemon (
 	Pokemon_SetCatchData(mon, trInfo, 4, monLocationData, monRecievedType, 11);
 	Pokemon_SetValue(mon, 6, &monGiftFromIndex);
 	
-	Pokemon_SetValue(mon, MON_DATA_ABILITY, &monAbility);
+	if (monAbility != ABILITY_NONE)
+	{
+		Pokemon_SetValue(mon, MON_DATA_ABILITY, &monAbility);
+	}
+	
 	Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &monItem);
 	Pokemon_SetValue(mon, MON_DATA_NATURE, &monNature);
 	Pokemon_SetValue(mon, MON_DATA_POKEBALL, &monBall);
@@ -6981,6 +6992,14 @@ void MakeAndAddEventPokemon (
 	for (i = 0; i < STAT_MAX; i++) {
 		monEVsTemp = monEVs[i];
 		Pokemon_SetValue(mon, MON_DATA_HP_EV + i, &monEVsTemp);
+	}
+	
+	if (isShiny == TRUE) {
+		do {
+			monOTID = (LCRNG_Next() | (LCRNG_Next() << 16));
+		} while (Pokemon_InlineIsPersonalityShiny(monOTID, monPersonality) == FALSE);
+
+		Pokemon_SetValue(mon, MON_DATA_OT_ID, &monOTID);
 	}
 	
 	Pokemon_CalcLevelAndStats(mon);
@@ -7002,6 +7021,10 @@ void MakeAndAddEventPokemon (
 	}
 	
 	Heap_FreeToHeap(mon);
+}
+
+static inline BOOL Pokemon_InlineIsPersonalityShiny(u32 monOTID, u32 monPersonality) {
+    return (((monOTID & 0xFFFF0000) >> 16) ^ (monOTID & 0xFFFF) ^ ((monPersonality & 0xFFFF0000) >> 16) ^ (monPersonality & 0xFFFF)) < 8;
 }
 
 static BOOL ScrCmd_24A (ScriptContext * ctx)
