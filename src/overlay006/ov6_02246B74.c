@@ -20,7 +20,7 @@ typedef struct {
 #define MODIFIER_PLUS_20  6
 
 // January
-static const u16 Unk_ov6_02249522[4] = {
+static const u16 Unk_ov6_02249522[5] = {
     ((1 << 8) | (MODIFIER_MINUS_10 & 0xff)),    // New Year's Day
     ((6 << 8) | (MODIFIER_MINUS_10 & 0xff)), // // Three Kings' Day
     ((11 << 8) | (MODIFIER_PLUS_5 & 0xff)),     // Coming of age day (?) (on average from 2009 - 2011)
@@ -29,7 +29,7 @@ static const u16 Unk_ov6_02249522[4] = {
 };
 
 // February
-static const u16 Unk_ov6_02249502[4] = {
+static const u16 Unk_ov6_02249502[5] = {
     ((2 << 8) | (MODIFIER_MINUS_5 & 0xff)),  // // Groundhog's Day
     ((3 << 8) | (MODIFIER_PLUS_5 & 0xff)),      // Setsubun (modern / average date)
     ((11 << 8) | (MODIFIER_MINUS_5 & 0xff)),    // National Foundation Day
@@ -45,7 +45,7 @@ static const u16 Unk_ov6_022494F4[3] = {
 };
 
 // April
-static const u16 Unk_ov6_0224951A[4] = {
+static const u16 Unk_ov6_0224951A[7] = {
     ((1 << 8) | (MODIFIER_PLUS_5 & 0xff)),      // Anime anniversary
     ((14 << 8) | (MODIFIER_PLUS_5 & 0xff)),  // // Lyss birthday
     ((22 << 8) | (MODIFIER_PLUS_5 & 0xff)),  // // Holly birthday
@@ -69,7 +69,7 @@ static const u16 Unk_ov6_022494E0[1] = {
 };
 
 // July
-static const u16 Unk_ov6_022494E8[3] = {
+static const u16 Unk_ov6_022494E8[4] = {
     ((4 << 8) | (MODIFIER_MINUS_20 & 0xff)), // // Independence Day
     ((7 << 8) | (MODIFIER_PLUS_10 & 0xff)),     // Tanabata
     ((18 << 8) | (MODIFIER_PLUS_5 & 0xff)),     // Marine Day
@@ -77,7 +77,7 @@ static const u16 Unk_ov6_022494E8[3] = {
 };
 
 // August
-static const u16 Unk_ov6_022494FA[4] = {
+static const u16 Unk_ov6_022494FA[5] = {
     ((7 << 8) | (MODIFIER_PLUS_5 & 0xff)),   // // Elegy birthday
     ((13 << 8) | (MODIFIER_MINUS_5 & 0xff)),    // Obon
     ((14 << 8) | (MODIFIER_MINUS_5 & 0xff)),    // Obon
@@ -96,7 +96,7 @@ static const u16 Unk_ov6_0224952A[6] = {
 };
 
 // October
-static const u16 Unk_ov6_022494EE[3] = {
+static const u16 Unk_ov6_022494EE[4] = {
     ((5 << 8) | (MODIFIER_PLUS_5 & 0xff)),
     ((15 << 8) | (MODIFIER_PLUS_5 & 0xff)),     // Gold and Silver (NA) or Blue (Japan)
     ((30 << 8) | (MODIFIER_PLUS_5 & 0xff)),     // Possibly Halloween

@@ -872,13 +872,13 @@ static BOOL ov6_022417C8 (FieldSystem * fieldSystem, const u32 param1, const u8 
         }
         else
         {
-            PlayerData* playerData = PlayerAvatar_PlayerData(playerAvatar);
+            PlayerData* playerData = PlayerAvatar_PlayerData(fieldSystem->playerAvatar);
 
             if (PlayerData_HasRunningShoes(playerData) == 1) {
                 // check if player is running
                 if (sub_0205EC1C(fieldSystem->playerAvatar) == 5)
                 {
-                    v0 -= 15
+                    v0 -= 15;
                 }
                 /*
                 if (sub_020613FC(fieldSystem->playerAvatar, param4) == 1) {
