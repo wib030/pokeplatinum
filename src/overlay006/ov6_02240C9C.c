@@ -870,6 +870,24 @@ static BOOL ov6_022417C8 (FieldSystem * fieldSystem, const u32 param1, const u8 
         if (PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) == 0x1) {
             v0 -= 23;
         }
+        else
+        {
+            PlayerData* playerData = PlayerAvatar_PlayerData(playerAvatar);
+
+            if (PlayerData_HasRunningShoes(playerData) == 1) {
+                // check if player is running
+                if (sub_0205EC1C(fieldSystem->playerAvatar) == 5)
+                {
+                    v0 -= 15
+                }
+                /*
+                if (sub_020613FC(fieldSystem->playerAvatar, param4) == 1) {
+                    v1 = 0x58;
+                    v2 = 5;
+                }
+                */
+            }
+        }
     }
 
     v0 = ov6_02246B74(v0, sub_02055C40(fieldSystem));
