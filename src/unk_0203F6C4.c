@@ -6828,7 +6828,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 	{
 		// This example gives a level 100 Modest Gardevoir with perfect IVs.
 		u16 monMoves[] = {
-			MOVE_JUDGMENT,
+			MOVE_PUNISHMENT,
 			MOVE_MILK_DRINK,
 			MOVE_FLASH,
 			MOVE_BOUNCE

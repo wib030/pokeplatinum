@@ -112,6 +112,8 @@ static u8 ov6_022425D4(const UnkStruct_ov6_0224222C * param0, const UnkStruct_ov
 static void ov6_02242634(FieldSystem * fieldSystem, Pokemon * param1, UnkStruct_ov6_02242634 * param2, UnkStruct_ov6_022422D0 * param3);
 static void ov6_02241A90(Pokemon * param0, u8 * param1);
 static void ov6_02241ABC(FieldSystem * fieldSystem, u8 * param1);
+static BOOL TryGetSlotForTypePreventAbility(Pokemon* unused, const UnkStruct_ov6_022422D0* encounterFieldParams, const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, const u8 ability, u8* encounterSlot);
+static BOOL FirstMonAbilityPreventsHigherLevel(const UnkStruct_ov6_022422D0* param0, Pokemon* param1, const u8 param2);
 
 static const u8 Unk_ov6_02248FDC[] = {
     0x0,
@@ -1863,7 +1865,6 @@ static u8 ov6_022425D4 (const UnkStruct_ov6_0224222C * param0, const UnkStruct_o
         case ABILITY_RECKLESS:
         case ABILITY_COMPETITIVE:
         case ABILITY_HOTHEADED:
-            case 
             if (inline_020564D0(3) == 0) {
                 return param2;
             }
