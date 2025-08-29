@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_LEVITATE",
-        "ABILITY_AWARE"
+        "ABILITY_MEMORY"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

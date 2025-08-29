@@ -8,7 +8,7 @@
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_HOPPIP",
+            "species": "SPECIES_CLAYDOL",
             "form": 0,
             "level": 5,
             "item": "ITEM_HEAT_ROCK",
@@ -36,7 +36,8 @@
 			"friendship": 70,
 			"nature": 0,
 			"isShiny": 0,
-			"gender": 2
+			"gender": 2,
+			"ability": 1
         }
     ]
 }

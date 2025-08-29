@@ -221,7 +221,7 @@ static const u8 sRemovableAbilities[] = {
 	ABILITY_ROCK_SOLID,
 	ABILITY_SUCTION_CUPS,
 	ABILITY_THIRSTY,
-	ABILITY_AWARE,
+	ABILITY_MEMORY,
     0xFFFF
 };
 
@@ -1705,7 +1705,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
                 || Battler_Ability(battleCtx, battler) == ABILITY_MOLD_BREAKER
                 || Battler_Ability(battleCtx, battler) == ABILITY_PRESSURE
 				|| Battler_Ability(battleCtx, battler) == ABILITY_GENETIC_FREAK
-                || Battler_Ability(battleCtx, battler) == ABILITY_RANDOM_SELECT) {
+                || Battler_Ability(battleCtx, battler) == ABILITY_DABBLE) {
                 tmpAbility = battleCtx->battleMons[battler].ability;
             } else {
                 // Try to guess the opponent's ability (flip a coin)
@@ -4330,7 +4330,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
 
     // Early exit for Unaware
     if (battler1Ability == ABILITY_UNAWARE
-	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE))
+	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY))
     {
         AIScript_Iter(battleCtx, jump);
     }
@@ -7759,7 +7759,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                     if (AI_IsModeratelyBoosted(battleSys, battleCtx, battler)) {
 
                         if (Battler_Ability(battleCtx, defender) != ABILITY_UNAWARE
-						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
+						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0) {
 
                             if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
@@ -7778,7 +7778,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                         if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
 
                             if (Battler_Ability(battleCtx, defender) != ABILITY_UNAWARE
-							&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
+							&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0) {
 
                                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE) {
                                 
@@ -9413,7 +9413,7 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
         || defenderAbility == ABILITY_FRESH_MILK
         || defenderAbility == ABILITY_FREE_SAMPLE
         || defenderAbility == ABILITY_SHAKEDOWN
-        || defenderAbility == ABILITY_COTTON_DOWN) {
+        || defenderAbility == ABILITY_TANGLING_COTTON) {
 
         if (defenderAbility == ABILITY_STATIC) {
             
@@ -9455,7 +9455,7 @@ static BOOL AI_TargetHasRelevantContactAbility(BattleSystem *battleSys, BattleCo
                 return FALSE;
             }
         }
-        else if (defenderAbility == ABILITY_COTTON_DOWN) {
+        else if (defenderAbility == ABILITY_TANGLING_COTTON) {
 
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
 

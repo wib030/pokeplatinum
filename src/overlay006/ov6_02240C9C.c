@@ -1797,7 +1797,7 @@ static BOOL ov6_02242514 (const int param0, const UnkStruct_ov6_022422D0 * param
         case ABILITY_FRISK:
         case ABILITY_FREE_SAMPLE:
         case ABILITY_SHAKEDOWN:
-        case ABILITY_AWARE:
+        case ABILITY_MEMORY:
             v0 = 1;
             break;
         }

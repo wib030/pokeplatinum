@@ -5506,4 +5506,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">{STRVAR_1 50, 0, 0}</language>
 	</row>
+	<row id="pl_msg_00000368_01373" index="1373">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} crystallized\nthe battlers in its mind.</language>
+	</row>
+	<row id="pl_msg_00000368_01374" index="1374">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\ncrystallized the battlers in its mind.</language>
+	</row>
+	<row id="pl_msg_00000368_01375" index="1375">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\ncrystallized the battlers in its mind.</language>
+	</row>
 </body>

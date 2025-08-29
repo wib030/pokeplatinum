@@ -221,7 +221,7 @@ static const u8 sRemovableAbilities[] = {
     ABILITY_ROCK_SOLID,
     ABILITY_SUCTION_CUPS,
     ABILITY_THIRSTY,
-    ABILITY_AWARE,
+    ABILITY_MEMORY,
     0xFFFF
 };
 

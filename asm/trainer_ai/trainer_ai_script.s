@@ -2396,7 +2396,7 @@ Expert_StatusSpAttackUp:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus20
     LoadBattlerAbility AI_BATTLER_ATTACKER
-	IfLoadedEqualTo ABILITY_AWARE, ScoreMinus20
+	IfLoadedEqualTo ABILITY_MEMORY, ScoreMinus20
     IfLoadedNotEqualTo ABILITY_SIMPLE, Expert_StatusSpAttackUp_CheckMoves
     AddToMoveScore 1
     GoTo Expert_StatusSpAttackUp_CheckMoves
@@ -5113,7 +5113,7 @@ Expert_BellyDrum:
     LoadAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus10
     LoadHeldItem AI_BATTLER_ATTACKER
-	IfLoadedEqualTo ABILITY_AWARE, ScoreMinus10
+	IfLoadedEqualTo ABILITY_MEMORY, ScoreMinus10
     IfLoadedNotInTable Expert_BellyDrum_DesirableItems, Expert_BellyDrum_Item_TryScoreMinus1
     GoTo Expert_BellyDrum_StatusCheck
 
@@ -6215,7 +6215,7 @@ Expert_SkillSwap_AlwaysGiveAbilities:
     TableEntry ABILITY_SLOW_START
     TableEntry ABILITY_HONEY_GATHER
     TableEntry ABILITY_FRISK
-	TableEntry ABILITY_AWARE
+	TableEntry ABILITY_MEMORY
     TableEntry TABLE_END
     
 Expert_SkillSwap_DesirableAbilities:
@@ -6308,7 +6308,7 @@ Expert_SkillSwap_DesirableAbilities:
     TableEntry ABILITY_FREE_SAMPLE
     TableEntry ABILITY_FLARE_BOOST
     TableEntry ABILITY_CHLOROPLAST
-    TableEntry ABILITY_COTTON_DOWN
+    TableEntry ABILITY_TANGLING_COTTON
     TableEntry ABILITY_PHOTOSYNTHESIS
     TableEntry ABILITY_SHARPNESS
     TableEntry ABILITY_STRANGLE_WEED
@@ -6402,7 +6402,7 @@ Expert_SkillSwap_ForbiddenDefenderAbilities:
     TableEntry ABILITY_SLOW_START
     TableEntry ABILITY_TRUANT
     TableEntry ABILITY_NORMALIZE
-	TableEntry ABILITY_AWARE
+	TableEntry ABILITY_MEMORY
     TableEntry TABLE_END
 
 Expert_Ingrain:
@@ -9630,7 +9630,7 @@ Expert_Stockpile:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus12
 	LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_AWARE, ScoreMinus12
+    IfLoadedEqualTo ABILITY_MEMORY, ScoreMinus12
     LoadBattlerCritStage AI_BATTLER_DEFENDER
     IfLoadedGreaterThan 0, ScoreMinus12
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Stockpile_TryScoreMinus3

@@ -362,4 +362,5 @@ subscript_files = files(
 	'subscript_light_screen_hit.s',
 	'subscript_sleep_heal.s',
 	'subscript_toss_and_turn.s',
+	'subscript_memory_announce.s',
 )

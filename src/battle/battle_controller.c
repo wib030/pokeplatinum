@@ -3126,11 +3126,11 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
         evaStages *= 2;
     }
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE
-	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE)) {
+	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY)) {
         accStages = 0;
     }
     if ((Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE)
-	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE)
+	|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY)
 	|| (battleCtx->moveCur == MOVE_FOCUS_PUNCH)) {
         evaStages = 0;
     }

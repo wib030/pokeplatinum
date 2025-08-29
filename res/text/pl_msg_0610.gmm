@@ -591,7 +591,7 @@
 	</row>
 	<row id="pl_msg_00000610_00147" index="147">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Cotton Down</language>
+		<language name="English">Tangling Cotton</language>
 	</row>
 	<row id="pl_msg_00000610_00148" index="148">
 		<attribute name="window_context_name">used</attribute>
@@ -651,7 +651,7 @@
 	</row>
 	<row id="pl_msg_00000610_00162" index="162">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Aware</language>
+		<language name="English">Memory</language>
 	</row>
 	<row id="pl_msg_00000610_00163" index="163">
 		<attribute name="window_context_name">used</attribute>

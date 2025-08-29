@@ -126,6 +126,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].ghostlyAnnounced = FALSE;
 	battleCtx->battleMons[battler].sleepHealFlag = FALSE;
 	battleCtx->battleMons[battler].tossTurnFlag = FALSE;
+	battleCtx->battleMons[battler].memoryAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -5570,6 +5571,7 @@ enum {
     SWITCH_IN_CHECK_STATE_FRISK,
     SWITCH_IN_CHECK_STATE_SLOW_START,
     SWITCH_IN_CHECK_STATE_MOLD_BREAKER,
+	SWITCH_IN_CHECK_STATE_MEMORY,
     SWITCH_IN_CHECK_STATE_PRESSURE,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
@@ -5776,14 +5778,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 if (battleCtx->battleMons[battler].randomAbilityAnnounced == FALSE
                 && battleCtx->battleMons[battler].curHP
-                && (Battler_Ability(battleCtx, battler) == ABILITY_RANDOM_SELECT || Battler_Ability(battleCtx, battler) == ABILITY_GENETIC_FREAK))
+                && (Battler_Ability(battleCtx, battler) == ABILITY_DABBLE || Battler_Ability(battleCtx, battler) == ABILITY_GENETIC_FREAK))
 				{
 					do
 					{
 						abilityChosen = BattleSystem_RandNext(battleSys) % abilityMax;
 						
 						if ((abilityChosen != ABILITY_NONE)
-						&& (abilityChosen != ABILITY_RANDOM_SELECT)
+						&& (abilityChosen != ABILITY_DABBLE)
 						&& (abilityChosen != ABILITY_GENETIC_FREAK)
 						&& (abilityChosen != ABILITY_TRACE)
 						&& (abilityChosen != ABILITY_MULTITYPE)
@@ -6356,6 +6358,26 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 battleCtx->switchInCheckState++;
             }
             break;
+			
+		case SWITCH_IN_CHECK_STATE_MEMORY:
+            for (i = 0; i < maxBattlers; i++) {
+                battler = battleCtx->monSpeedOrder[i];
+
+                if (battleCtx->battleMons[battler].memoryAnnounced == FALSE
+                        && battleCtx->battleMons[battler].curHP
+                        && Battler_Ability(battleCtx, battler) == ABILITY_MEMORY) {
+                    battleCtx->battleMons[battler].memoryAnnounced = TRUE;
+                    battleCtx->msgBattlerTemp = battler;
+                    subscript = subscript_memory_announce;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+                }
+            }
+
+            if (i == maxBattlers) {
+                battleCtx->switchInCheckState++;
+            }
+            break;
 
         case SWITCH_IN_CHECK_STATE_PRESSURE:
             for (i = 0; i < maxBattlers; i++) {
@@ -6692,8 +6714,8 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			}
 			break;
 			
-	case ABILITY_COTTON_DOWN:
-			if (ATTACKING_MON.curHP
+	case ABILITY_TANGLING_COTTON:
+			if (DEFENDING_MON.curHP
 			&& (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
 			&& (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
@@ -6701,7 +6723,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 			&& ((CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) && (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH)))
 			{
 				*subscript = subscript_cotton_down_activate;
-				battleCtx->sideEffectMon = battleCtx->attacker;
+				battleCtx->sideEffectMon = battleCtx->defender;
 				result = TRUE;
 			}
 			break;
@@ -11036,7 +11058,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         }
     }
 	
-	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE))
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY))
 	{
 		attackStage = 0;
         spAttackStage = 0;
@@ -12697,7 +12719,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 	
-	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE))
+	if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY))
 	{
 		attackStage = 0;
         spAttackStage = 0;
@@ -18657,7 +18679,7 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                     if ((defenderAbility == ABILITY_DEFIANT
                         || defenderAbility == ABILITY_COMPETITIVE)
                         && monAbility != ABILITY_UNAWARE
-						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
+						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0) {
                             moveScore = 0;
                     }
                     else {
@@ -18794,7 +18816,7 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
 
                 if (moveStatFlag != BATTLE_STAT_FLAG_NONE) {
                     if (defenderAbility != ABILITY_UNAWARE
-					&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
+					&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0) {
                         if (moveStatFlag & (BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK)) {
                             moveScore = 40;
                         }
@@ -19085,7 +19107,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                     if ((monAbility == ABILITY_DEFIANT
                         || monAbility == ABILITY_COMPETITIVE)
                         && defenderAbility != ABILITY_UNAWARE
-						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
+						&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0) {
                             moveScore = 0;
                     }
                     else {
@@ -19244,7 +19266,7 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
 
                 if (moveStatFlag != BATTLE_STAT_FLAG_NONE) {
                     if (monAbility != ABILITY_UNAWARE
-					&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0) {
+					&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0) {
                         if (moveStatFlag & (BATTLE_STAT_FLAG_ATTACK | BATTLE_STAT_FLAG_SP_ATTACK)) {
                             moveScore = 40;
                         }
@@ -19394,7 +19416,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             break;
 
         case ABILITY_UNAWARE:
-		case ABILITY_AWARE:
+		case ABILITY_MEMORY:
             if (moveStatFlag != BATTLE_STAT_FLAG_NONE)
             {
                 moveScore += 20;
@@ -19832,7 +19854,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         break;
 
     case ABILITY_UNAWARE:
-	case ABILITY_AWARE:
+	case ABILITY_MEMORY:
         for (i = 0; i < BATTLE_STAT_MAX; i++) {
             if (battleCtx->battleMons[defender].statBoosts[i] > 6)
             {
@@ -20025,7 +20047,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
     case ABILITY_IMPOSTER:
         if (defenderAbility != ABILITY_UNAWARE
-		&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_AWARE) == 0)
+		&& BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, 0, ABILITY_MEMORY) == 0)
         {
             for (i = 0; i < BATTLE_STAT_MAX; i++) {
                 if (battleCtx->battleMons[defender].statBoosts[i] > 6)
@@ -20128,7 +20150,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 			case ABILITY_COWARD:
 			case ABILITY_PEST:
 			case ABILITY_SLURP_UP:
-			case ABILITY_AWARE:
+			case ABILITY_MEMORY:
 			case ABILITY_RIVALRY:
 			case ABILITY_FORECAST:
 			case ABILITY_STEADFAST:
@@ -20687,8 +20709,9 @@ BOOL Battle_PartyMonAbilityDetersContactMove(BattleSystem *battleSys, BattleCont
             }
 
             break;
-
-        case ABILITY_COTTON_DOWN:
+			
+		/*
+        case ABILITY_TANGLING_COTTON:
             if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, attackerAbility, BATTLE_STAT_FLAG_ATTACK) == FALSE)
             {
                 if (battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ATTACK] <= 3) {
@@ -20698,6 +20721,7 @@ BOOL Battle_PartyMonAbilityDetersContactMove(BattleSystem *battleSys, BattleCont
 
             result = TRUE;
             break;
+		*/
 
         case ABILITY_ROUGH_SKIN:
 
@@ -20852,8 +20876,9 @@ BOOL Battle_BattlerAbilityDetersContactMove(BattleSystem* battleSys, BattleConte
         }
 
         break;
-
-    case ABILITY_COTTON_DOWN:
+		
+	/*
+    case ABILITY_TANGLING_COTTON:
         if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, attackerAbility, BATTLE_STAT_FLAG_ATTACK) == FALSE)
         {
             if (battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ATTACK] <= 3) {
@@ -20863,6 +20888,7 @@ BOOL Battle_BattlerAbilityDetersContactMove(BattleSystem* battleSys, BattleConte
 
         result = TRUE;
         break;
+	*/
 
     case ABILITY_ROUGH_SKIN:
 
@@ -22082,7 +22108,7 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SIMPLE)) {
         evaStages *= 2;
     }
-    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, attacker, ABILITY_AWARE))
+    if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, attacker, ABILITY_MEMORY))
     {
         accStages = 0;
         evaStages = 0;
