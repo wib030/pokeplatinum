@@ -113,6 +113,7 @@ static void ov6_02242634(FieldSystem * fieldSystem, Pokemon * param1, UnkStruct_
 static void ov6_02241A90(Pokemon * param0, u8 * param1);
 static void ov6_02241ABC(FieldSystem * fieldSystem, u8 * param1);
 static BOOL TryGetSlotForTypePreventAbility(Pokemon* unused, const UnkStruct_ov6_022422D0* encounterFieldParams, const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, const u8 ability, u8* encounterSlot);
+static BOOL PreventMatchingTypeEncounterSlot(const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, u8* encounterSlot);
 static BOOL FirstMonAbilityPreventsHigherLevel(const UnkStruct_ov6_022422D0* param0, Pokemon* param1, const u8 param2);
 
 static const u8 Unk_ov6_02248FDC[] = {
