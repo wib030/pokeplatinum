@@ -6820,7 +6820,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
     {
         // Add item function
 		itemIndex = 50; // Rare Candy item index
-		itemQuantity = 999;
+		itemQuantity = 200;
         sub_0207D570(sub_0207D990(fieldSystem->saveData), itemIndex, itemQuantity, 4);
         *v2 = 8;
 		return 0;
