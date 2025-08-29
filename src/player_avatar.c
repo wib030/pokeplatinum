@@ -435,6 +435,7 @@ void sub_0205EC18 (PlayerAvatar * playerAvatar, int param1)
     playerAvatar->unk_0C = param1;
 }
 
+// Player_AcmdTypeGet
 int sub_0205EC1C (PlayerAvatar * playerAvatar)
 {
     return playerAvatar->unk_0C;
@@ -442,8 +443,8 @@ int sub_0205EC1C (PlayerAvatar * playerAvatar)
 
 void sub_0205EC20 (PlayerAvatar * playerAvatar, u32 param1, int param2)
 {
-    sub_0205EC10(playerAvatar, param1);
-    sub_0205EC18(playerAvatar, param2);
+    sub_0205EC10(playerAvatar, param1); // player action command code set
+    sub_0205EC18(playerAvatar, param2); // player action command type set
 }
 
 void PlayerData_Init (PlayerData * playerData)

@@ -25,18 +25,20 @@
 #include "overlay005/ov5_021DFB54.h"
 #include "overlay009/ov9_02249960.h"
 
+// player_move.c
+
 typedef BOOL (* UnkFuncPtr_020EDB84)(u8);
 
 typedef struct {
-    UnkFuncPtr_020EDB84 unk_00;
-    u32 unk_04;
+    UnkFuncPtr_020EDB84 unk_00; // BOOL (*check) (MATR)
+    u32 unk_04;                 // type
 } UnkStruct_020EDB84;
 
 typedef struct {
-    s16 unk_00;
-    s16 unk_02;
-    s16 unk_04;
-    s16 unk_06;
+    s16 unk_00;      // gx
+    s16 unk_02;      // gy
+    s16 unk_04;      // gz
+    s16 unk_06;      // dmy
 } UnkStruct_020EDB04;
 
 static int PlayerAvatar_CheckStartMoveInternal(PlayerAvatar * playerAvatar, int param1);
@@ -939,6 +941,7 @@ static void sub_0205FDC8 (PlayerAvatar * playerAvatar, MapObject * param1, int p
                 PlayerData * v3 = PlayerAvatar_PlayerData(playerAvatar);
 
                 if (PlayerData_HasRunningShoes(v3) == 1) {
+                    // check if player is running
                     if (sub_020613FC(playerAvatar, param4) == 1) {
                         v1 = 0x58;
                         v2 = 5;
