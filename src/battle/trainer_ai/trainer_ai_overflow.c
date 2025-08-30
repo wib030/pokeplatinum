@@ -441,8 +441,8 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                 // Expert_Omniboost_End
                 break;
 
-            // Extra endure code to not use it when you have sturdy at full hp
-            case BATTLE_EFFECT_SURVIVE_WITH_1_HP:
+            // Extra trick code to not use it repeatedly
+            case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
                 u8 attackerItemEffect, defenderItemEffect;
                 BOOL attackerShouldNotTrick;
 
@@ -553,14 +553,64 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                 }
                 break;
 
-            // Extra trick code to not use it repeatedly
-            case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
+            // Extra endure code to not use it when you have sturdy at full hp
+            case BATTLE_EFFECT_SURVIVE_WITH_1_HP:
                 if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_STURDY
                     || Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_ENDURE)
                 {
                     if (battleCtx->battleMons[AI_CONTEXT.attacker].curHP == battleCtx->battleMons[AI_CONTEXT.attacker].maxHP)
                     {
                         AI_AddToMoveScore(battleSys, battleCtx, -20);
+                    }
+                }
+                break;
+
+            // Extra AI for Sticky Web. Still a work in progress.
+            case BATTLE_EFFECT_SET_STICKY_WEB:
+                defenderSide = Battler_Side(battleSys, AI_CONTEXT.defender);
+                if (AI_GetBattlerAbility(battleSys, battleCtx, AI_Context.defender) != ABILITY_MAGIC_BOUNCE
+                    || Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_MOLD_BREAKER)
+                {
+                    if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_STICK_WEB)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+                    if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING)
+                        || AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN))
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+                    if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_APPLY_MAGIC_COAT)
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 128)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -20);
+                            break;
+                        }
+                    }
+                    if (AI_GetRandomNumber(battleSys) < 128)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 5);
+                        break;
+                    }
+                }
+                break;
+
+            // Extra AI for Trick Room. Still a work in progress.
+            case BATTLE_EFFECT_TRICK_ROOM:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -20);
+                    break;
+                }
+                if (battleCtx->monSpeedOrder[AI_CONTEXT.attacker] < battleCtx->monSpeedOrder[AI_CONTEXT.defender])
+                {
+                    if (AI_GetRandomNumber(battleSys) < 205)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 5);
+                        break;
                     }
                 }
                 break;
@@ -1456,4 +1506,25 @@ BOOL AICmd_IfCurrentMoveRevealedOverflow(BattleSystem* battleSys, BattleContext*
     }
 
     return FALSE;
+}
+
+BOOL AI_IfMoveEffectKnown(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveEffect)
+{
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (AI_CONTEXT.battlerMoves[battler][i]
+            && MOVE_DATA(AI_CONTEXT.battlerMoves[battler][i]).effect == moveEffect) {
+            break;
+        }
+    }
+
+    if (i < LEARNED_MOVES_MAX) {
+        result = TRUE;
+    }
+
+    return result;
 }

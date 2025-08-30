@@ -172,4 +172,14 @@ int ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx
  */
 BOOL AICmd_IfCurrentMoveRevealedOverflow(BattleSystem* battleSys, BattleContext* battleCtx);
 
+/* @brief Check if the given Move Effect is known by the given Battler.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler    The battlemon ID of the battler to check.
+ * @param moveeffec  The Move Effect to check.
+ * @return  TRUE / FALSE whether the AI Context current move is at full PP or not.
+ */
+BOOL AI_IfMoveEffectKnown(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveEffect);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
