@@ -568,10 +568,10 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
             // Extra AI for Sticky Web. Still a work in progress.
             case BATTLE_EFFECT_SET_STICKY_WEB:
                 defenderSide = Battler_Side(battleSys, AI_CONTEXT.defender);
-                if (AI_GetBattlerAbility(battleSys, battleCtx, AI_Context.defender) != ABILITY_MAGIC_BOUNCE
+                if (AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.defender) != ABILITY_MAGIC_BOUNCE
                     || Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_MOLD_BREAKER)
                 {
-                    if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_STICK_WEB)
+                    if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_STICKY_WEB)
                     {
                         AI_AddToMoveScore(battleSys, battleCtx, -20);
                         break;
@@ -582,7 +582,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         AI_AddToMoveScore(battleSys, battleCtx, -20);
                         break;
                     }
-                    if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_APPLY_MAGIC_COAT)
+                    if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_APPLY_MAGIC_COAT))
                     {
                         if (AI_GetRandomNumber(battleSys) < 128)
                         {
