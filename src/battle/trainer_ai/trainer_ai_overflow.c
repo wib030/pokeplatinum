@@ -441,8 +441,8 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                 // Expert_Omniboost_End
                 break;
 
-            // Extra trick code to not use it repeatedly
-            case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
+            // Extra endure code to not use it when you have sturdy at full hp
+            case BATTLE_EFFECT_SURVIVE_WITH_1_HP:
                 u8 attackerItemEffect, defenderItemEffect;
                 BOOL attackerShouldNotTrick;
 
