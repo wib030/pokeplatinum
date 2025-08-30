@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_BATON_PASS"
     ],
     "double_battle": false,
     "party": [
@@ -15,44 +16,83 @@
             "level": 44,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_TOXIC_SPIKES",
-				"MOVE_STEALTH_ROCK",
-				"MOVE_ENDEAVOR",
-				"MOVE_SUCKER_PUNCH"
+                "MOVE_TOXIC",
+				"MOVE_SPIKES",
+				"MOVE_MUD_SPORT",
+				"MOVE_ENDEAVOR"
             ],
-            "power": 200,
-            "ball_seal": 24,
-			"ball_type": "ITEM_TIMER_BALL"
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_TIMER_BALL",
+			"ivHP": 29,
+			"ivATK": 3,
+			"ivDEF": 31,
+			"ivSPEED": 29,
+			"ivSPATK": 26,
+			"ivSPDEF": 31,
+			"evHP": 216,
+			"evATK": 0,
+			"evDEF": 72,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 92,
+			"nature": 20
+        },
+        {
+            "species": "SPECIES_BRONZONG",
+            "form": 0,
+            "level": 44,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_TOXIC",
+				"MOVE_PROTECT",
+				"MOVE_MIND_READER",
+				"MOVE_CALM_MIND"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_TIMER_BALL",
+			"ivHP": 31,
+			"ivATK": 2,
+			"ivDEF": 30,
+			"ivSPEED": 31,
+			"ivSPATK": 30,
+			"ivSPDEF": 31,
+			"evHP": 196,
+			"evATK": 0,
+			"evDEF": 8,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 176,
+			"nature": 20
         },
         {
             "species": "SPECIES_PROBOPASS",
             "form": 0,
             "level": 44,
-            "item": "ITEM_SMOOTH_ROCK",
+            "item": "ITEM_AIR_BALLOON",
             "moves": [
                 "MOVE_POWER_GEM",
-				"MOVE_STEALTH_ROCK",
-				"MOVE_EARTH_POWER",
-				"MOVE_ZAP_CANNON"
+				"MOVE_TOXIC",
+				"MOVE_ZAP_CANNON",
+				"MOVE_STEALTH_ROCK"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_TIMER_BALL"
-        },
-        {
-            "species": "SPECIES_METAGROSS",
-            "form": 0,
-            "level": 44,
-            "item": "ITEM_SHUCA_BERRY",
-            "moves": [
-                "MOVE_EARTHQUAKE",
-				"MOVE_METEOR_MASH",
-				"MOVE_THUNDER_PUNCH",
-				"MOVE_AGILITY"
-            ],
-            "power": 200,
-            "ball_seal": 0,
-			"ball_type": "ITEM_TIMER_BALL"
+			"ball_type": "ITEM_TIMER_BALL",
+			"ivHP": 31,
+			"ivATK": 0,
+			"ivDEF": 31,
+			"ivSPEED": 24,
+			"ivSPATK": 31,
+			"ivSPDEF": 30,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 128,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 20
         },
 		{
             "species": "SPECIES_EMPOLEON",
@@ -62,42 +102,82 @@
             "moves": [
                 "MOVE_SURF",
 				"MOVE_ICE_BEAM",
-				"MOVE_AGILITY",
-				"MOVE_GRASS_KNOT"
+				"MOVE_GRASS_KNOT",
+				"MOVE_SUBSTITUTE"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_TIMER_BALL"
+			"ball_type": "ITEM_TIMER_BALL",
+			"ivHP": 31,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 30,
+			"evHP": 24,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 216,
+			"evSPATK": 144,
+			"evSPDEF": 0,
+			"nature": 10,
+			"ability": 1
         },
 		{
-            "species": "SPECIES_SCIZOR",
+            "species": "SPECIES_MAWILE",
             "form": 0,
             "level": 44,
-            "item": "ITEM_OCCA_BERRY",
+            "item": "ITEM_SALAC_BERRY",
             "moves": [
-                "MOVE_BUG_BITE",
-				"MOVE_SWORDS_DANCE",
-				"MOVE_ROCK_SMASH",
-				"MOVE_BULLET_PUNCH"
+                "MOVE_DRAGON_RUSH",
+				"MOVE_IRON_HEAD",
+				"MOVE_SUBSTITUTE",
+				"MOVE_BATON_PASS"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_TIMER_BALL"
+			"ball_type": "ITEM_TIMER_BALL",
+			"ivHP": 24,
+			"ivATK": 31,
+			"ivDEF": 30,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 27,
+			"evHP": 0,
+			"evATK": 136,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
 		{
-            "species": "SPECIES_BASTIODON",
+            "species": "SPECIES_AGGRON",
             "form": 0,
             "level": 45,
-            "item": "ITEM_FLAME_ORB",
+            "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
-                "MOVE_SLACK_OFF",
-				"MOVE_TORMENT",
-				"MOVE_PSYCHO_SHIFT",
-				"MOVE_SLAM"
+                "MOVE_EARTHQUAKE",
+				"MOVE_IRON_HEAD",
+				"MOVE_TAUNT",
+				"MOVE_ROCK_POLISH"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 24,
-			"ball_type": "ITEM_TIMER_BALL"
+			"ball_type": "ITEM_TIMER_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 100,
+			"evATK": 152,
+			"evDEF": 0,
+			"evSPEED": 132,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }
