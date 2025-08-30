@@ -7754,7 +7754,7 @@ static BOOL BtlCmd_TrySpite(BattleSystem *battleSys, BattleContext *battleCtx)
         if (moveSlot == LEARNED_MOVES_MAX || DEFENDING_MON.ppCur[moveSlot] == 0) {
             BattleScript_Iter(battleCtx, jumpOnFail);
         } else {
-            int dec = 4;
+            int dec = 4 + BattleSystem_RandNext(battleSys) % 4;
             if (DEFENDING_MON.ppCur[moveSlot] < dec) {
                 dec = DEFENDING_MON.ppCur[moveSlot];
             }

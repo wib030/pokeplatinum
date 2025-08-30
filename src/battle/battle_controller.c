@@ -2858,7 +2858,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
         case CHECK_STATUS_STATE_PARALYSIS:
             if ((ATTACKING_MON.status & MON_CONDITION_PARALYSIS)
 					&& Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_QUICK_FEET) {
-                if ((BattleSystem_RandNext(battleSys) % 4 == 0)
+                if ((BattleSystem_RandNext(battleSys) % 5 == 0)
 				&& (ATTACKING_MON.paraProtectionFlag == FALSE)) {
                     battleCtx->moveFailFlags[battleCtx->attacker].paralyzed = TRUE;
 
