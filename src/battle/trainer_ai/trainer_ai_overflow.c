@@ -552,6 +552,18 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     AI_AddToMoveScore(battleSys, battleCtx, 1);
                 }
                 break;
+
+            // Extra trick code to not use it repeatedly
+            case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
+                if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_STURDY
+                    || Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_ENDURE)
+                {
+                    if (battleCtx->battleMons[AI_CONTEXT.attacker].curHP == battleCtx->battleMons[AI_CONTEXT.attacker].maxHP)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                    }
+                }
+                break;
             }
         }
     }
