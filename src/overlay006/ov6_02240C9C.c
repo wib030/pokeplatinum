@@ -874,8 +874,12 @@ static BOOL ov6_022417C8 (FieldSystem * fieldSystem, const u32 param1, const u8 
         {
             PlayerData* playerData = PlayerAvatar_PlayerData(fieldSystem->playerAvatar);
 
+            // check if player has unlocked running shoes
             if (PlayerData_HasRunningShoes(playerData) == 1) {
-                // check if player is running
+                // check if player is running by checking to see
+                // if their animation frame is set to 4 frame mode.
+                // default frame animation advancement mode is 8 frames
+                // when walking, and becomes 4 when biking or running.
                 if (sub_0205EC1C(fieldSystem->playerAvatar) == 5)
                 {
                     v0 -= 15;
