@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_POISON_POINT",
-        "ABILITY_INSOMNIA"
+        "ABILITY_WEB_MASTER"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

@@ -661,4 +661,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">User tosses and turns when\nasleep, hitting the foe.</language>
 	</row>
+	<row id="pl_msg_00000612_00165" index="165">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Gives full immunity to all\nweb moves and effects.</language>
+	</row>
 </body>

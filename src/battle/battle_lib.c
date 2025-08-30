@@ -3680,6 +3680,11 @@ static u16 sSnowedInMoves[] = {
 	MOVE_ICY_WIND,
 };
 
+static u16 sWebMoves[] = {
+	MOVE_STRING_SHOT,
+	MOVE_SPIDER_WEB,
+};
+
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
 {
     int chartEntry;
@@ -4017,6 +4022,18 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         for (int i = 0; i < NELEMS(sSoundMoves); i++)
 	    {
 		    if (sSoundMoves[i] == move)
+		    {
+			    *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+			    break;
+		    }
+	    }
+    }
+	
+	if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WEB_MASTER) == TRUE) {
+
+        for (int i = 0; i < NELEMS(sWebMoves); i++)
+	    {
+		    if (sWebMoves[i] == move)
 		    {
 			    *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
 			    break;
@@ -4365,6 +4382,18 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
         for (int i = 0; i < NELEMS(sSoundMoves); i++)
 	    {
 		    if (sSoundMoves[i] == move)
+		    {
+			    *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+			    break;
+		    }
+	    }
+    }
+	
+	if (PartyMon_IgnorableAbility(battleCtx, mon, defender, ABILITY_WEB_MASTER) == TRUE) {
+
+        for (int i = 0; i < NELEMS(sWebMoves); i++)
+	    {
+		    if (sWebMoves[i] == move)
 		    {
 			    *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
 			    break;
@@ -5422,6 +5451,15 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == TRUE) {
         for (int i = 0; i < NELEMS(sSoundMoves); i++) {
             if (sSoundMoves[i] == battleCtx->moveCur) {
+                subscript = subscript_blocked_by_soundproof;
+                break;
+            }
+        }
+    }
+	
+	if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WEB_MASTER) == TRUE) {
+        for (int i = 0; i < NELEMS(sWebMoves); i++) {
+            if (sWebMoves[i] == battleCtx->moveCur) {
                 subscript = subscript_blocked_by_soundproof;
                 break;
             }

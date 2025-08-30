@@ -328,6 +328,11 @@ static const u8 trickBadHeldItemEffects[] = {
     0xFFFF
 };
 
+static u16 sWebMoves[] = {
+	MOVE_STRING_SHOT,
+	MOVE_SPIDER_WEB,
+};
+
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx);
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val);
 int AI_GetRandomNumber(BattleSystem* battleSys);
@@ -1524,6 +1529,31 @@ BOOL AI_IfMoveEffectKnown(BattleSystem* battleSys, BattleContext* battleCtx, int
 
     if (i < LEARNED_MOVES_MAX) {
         result = TRUE;
+    }
+
+    return result;
+}
+
+BOOL BattleAI_IsMoveBlockedByWebMaster(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move)
+{
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    // Early exit if defender's ability is not Web Master
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WEB_MASTER) == FALSE)
+    {
+        return result;
+    }
+
+    for (i = 0; i < NELEMS(sWebMoves); i++)
+    {
+        if (sWebMoves[i] == move)
+        {
+            result = TRUE;
+            break;
+        }
     }
 
     return result;

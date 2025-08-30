@@ -182,4 +182,6 @@ BOOL AICmd_IfCurrentMoveRevealedOverflow(BattleSystem* battleSys, BattleContext*
  */
 BOOL AI_IfMoveEffectKnown(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveEffect);
 
+BOOL BattleAI_IsMoveBlockedByWebMaster(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

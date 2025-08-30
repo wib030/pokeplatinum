@@ -167,7 +167,8 @@
 				"ABILITY_SLURP_UP",
 				"ABILITY_MEMORY",
 				"ABILITY_NEUTRALIZING_GAS",
-				"ABILITY_TOSS_AND_TURN"
+				"ABILITY_TOSS_AND_TURN",
+				"ABILITY_WEB_MASTER"
             ]
         }
     }
