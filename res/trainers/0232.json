@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_METANG",
             "form": 0,
-            "level": 42,
+            "level": 43,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_PSYCHIC",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_MAGNETON",
             "form": 0,
-            "level": 42,
+            "level": 43,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_SCREECH",

@@ -12,20 +12,21 @@
         {
             "species": "SPECIES_SHIELDON",
             "form": 0,
-            "level": 42,
-            "item": "ITEM_FOCUS_SASH",
+            "level": 44,
+            "item": "ITEM_NONE",
             "moves": [
                 "MOVE_METAL_BURST",
 				"MOVE_TAUNT"
             ],
             "power": 120,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ability": 1
         },
         {
             "species": "SPECIES_LAIRON",
             "form": 0,
-            "level": 42,
+            "level": 44,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",

@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_WORMADAM",
             "form": 2,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_TOXIC",
@@ -41,7 +41,7 @@
         {
             "species": "SPECIES_BRONZONG",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_TOXIC",
@@ -69,7 +69,7 @@
         {
             "species": "SPECIES_PROBOPASS",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_AIR_BALLOON",
             "moves": [
                 "MOVE_POWER_GEM",
@@ -97,7 +97,7 @@
 		{
             "species": "SPECIES_EMPOLEON",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_PETAYA_BERRY",
             "moves": [
                 "MOVE_SURF",
@@ -126,7 +126,7 @@
 		{
             "species": "SPECIES_MAWILE",
             "form": 0,
-            "level": 44,
+            "level": 45,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_DRAGON_RUSH",
