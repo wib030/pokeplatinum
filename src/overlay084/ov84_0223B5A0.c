@@ -2289,10 +2289,13 @@ static BOOL ov84_0223DBF4 (UnkStruct_ov84_0223B5A0 * param0, u16 param1)
         v0 = MessageLoader_GetNewStrbuf(param0->unk_114, 64);
         ov84_0223BA04(param0, 1);
         param0->unk_488 = 0;
-    } else if (param1 == 69) {
+    } else if (param1 == 69) { // If item is white flute
+		/*
         v0 = MessageLoader_GetNewStrbuf(param0->unk_114, 63);
         ov84_0223BA04(param0, 2);
         param0->unk_488 = 0;
+		*/
+		return 0;
     } else if ((param1 == 77) || (param1 == 76) || (param1 == 79)) {
         v0 = ov84_0223DC9C(param0, param1);
     } else {

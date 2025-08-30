@@ -104,62 +104,63 @@ typedef struct {
 
 void * sub_0203D8AC(FieldSystem * fieldSystem);
 static void sub_020684D0(FieldSystem * fieldSystem, UnkStruct_020684D0 * param1);
-static void sub_02068630(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_020686C8(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068710(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_0206883C(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_020689EC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068A34(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068ACC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068B1C(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068B5C(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068BA8(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068BF8(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068C94(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068CD0(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068CF0(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068D48(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068D80(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068DDC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068E38(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02068FEC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02069080(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02069110(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_02069188(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static void sub_020691E0(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1);
-static BOOL sub_02068870(UnkStruct_02068870 * param0);
-static BOOL sub_02068A18(UnkStruct_02068870 * param0);
-static BOOL sub_02068DBC(UnkStruct_02068870 * param0);
-static BOOL sub_02068E18(UnkStruct_02068870 * param0);
-static BOOL sub_02068E74(UnkStruct_02068870 * param0);
-static BOOL sub_02068EFC(UnkStruct_02068870 * param0);
-static BOOL sub_020686F8(UnkStruct_02068870 * param0);
-static BOOL sub_02068B8C(UnkStruct_02068870 * param0);
-static BOOL sub_02068BDC(UnkStruct_02068870 * param0);
-static BOOL sub_02068750(UnkStruct_02068870 * param0);
-static BOOL sub_02068C38(UnkStruct_02068870 * param0);
-static BOOL sub_02068CA4(UnkStruct_02068870 * param0);
-static BOOL sub_02068D58(UnkStruct_02068870 * param0);
-static BOOL sub_02069120(UnkStruct_02068870 * param0);
-static BOOL sub_020691BC(UnkStruct_02068870 * param0);
-static BOOL sub_02069218(UnkStruct_02068870 * param0);
+static void sub_02068630(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseHealingItemFromMenu
+static void sub_020686C8(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseTownMapFromMenu
+static void sub_02068710(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseExplorerKitFromMenu
+static void sub_0206883C(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseBicycleFromMenu
+static void sub_020689EC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseJournalFromMenu
+static void sub_02068A34(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseTMHMFromMenu
+static void sub_02068ACC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseMailFromMenu
+static void sub_02068B1C(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseBerryFromMenu
+static void sub_02068B5C(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UsePoffinCaseFromMenu
+static void sub_02068BA8(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UsePalPadFromMenu
+static void sub_02068BF8(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UsePokeRadarFromMenu
+static void sub_02068C94(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseSprayDuckFromMenu
+static void sub_02068CD0(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseMulchFromMenu
+static void sub_02068CF0(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseHoneyFromMenu
+static BOOL UseHoneyInField(UnkStruct_02068870 * param0);
+static void sub_02068D48(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseVsSeekerFromMenu
+static void sub_02068D80(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseOldRodFromMenu
+static void sub_02068DDC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseGoodRodFromMenu
+static void sub_02068E38(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseSuperRodFromMenu
+static void sub_02068FEC(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseEvoStoneFromMenu
+static void sub_02069080(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseEscapeRopeFromMenu
+static void sub_02069110(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseAzureFluteFromMenu
+static void sub_02069188(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseVsRecorderFromMenu
+static void sub_020691E0(UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1); // UseGracideaFromMenu
+static BOOL sub_02068870(UnkStruct_02068870 * param0); // UseBicycleInField
+static BOOL sub_02068A18(UnkStruct_02068870 * param0); // UseJournalInField
+static BOOL sub_02068DBC(UnkStruct_02068870 * param0); // UseOldRodInField
+static BOOL sub_02068E18(UnkStruct_02068870 * param0); // UseGoodRodInField
+static BOOL sub_02068E74(UnkStruct_02068870 * param0); // UseSuperRodInField
+static BOOL sub_02068EFC(UnkStruct_02068870 * param0); // UseBagMessageItem
+static BOOL sub_020686F8(UnkStruct_02068870 * param0); // UseTownMapInField
+static BOOL sub_02068B8C(UnkStruct_02068870 * param0); // UsePoffinCaseInField
+static BOOL sub_02068BDC(UnkStruct_02068870 * param0); // UsePalPadInField
+static BOOL sub_02068750(UnkStruct_02068870 * param0); // UseExplorerKitInField
+static BOOL sub_02068C38(UnkStruct_02068870 * param0); // UsePokeRadarInField
+static BOOL sub_02068CA4(UnkStruct_02068870 * param0); // UseSprayDuckInField
+static BOOL sub_02068D58(UnkStruct_02068870 * param0); // UseVsSeekerInField
+static BOOL sub_02069120(UnkStruct_02068870 * param0); // UseAzureFluteInField
+static BOOL sub_020691BC(UnkStruct_02068870 * param0); // UseVsRecorderInField
+static BOOL sub_02069218(UnkStruct_02068870 * param0); // UseGracideaInField
 static void * sub_02068BEC(void * param0);
 static void * sub_02068B9C(void * param0);
 static void * sub_02068708(void * param0);
 static void * sub_02068A28(void * param0);
 static void * sub_020691CC(void * param0);
 static void * sub_02069228(void * param0);
-static u32 sub_02068948(const UnkStruct_020684D0 * param0);
-static u32 sub_0206877C(const UnkStruct_020684D0 * param0);
-static u32 sub_02068B18(const UnkStruct_020684D0 * param0);
-static u32 sub_02068C5C(const UnkStruct_020684D0 * param0);
-static u32 sub_02068CB4(const UnkStruct_020684D0 * param0);
-static u32 sub_02068CE0(const UnkStruct_020684D0 * param0);
-static u32 sub_02068D68(const UnkStruct_020684D0 * param0);
-static u32 sub_02068E94(const UnkStruct_020684D0 * param0);
-static u32 sub_020690C4(const UnkStruct_020684D0 * param0);
-static u32 sub_02069130(const UnkStruct_020684D0 * param0);
-static BOOL sub_02068884(TaskManager * param0);
+static u32 sub_02068948(const UnkStruct_020684D0 * param0); // CanUseBicycle
+static u32 sub_0206877C(const UnkStruct_020684D0 * param0); // CanUseExplorerKit
+static u32 sub_02068B18(const UnkStruct_020684D0 * param0); // CanUseBerry
+static u32 sub_02068C5C(const UnkStruct_020684D0 * param0); // CanUsePokeRadar
+static u32 sub_02068CB4(const UnkStruct_020684D0 * param0); // CanUseSprayDuck
+static u32 sub_02068CE0(const UnkStruct_020684D0 * param0); // CanUseMulch
+static u32 sub_02068D68(const UnkStruct_020684D0 * param0); // CanUseVsSeeker
+static u32 sub_02068E94(const UnkStruct_020684D0 * param0); // CanUseFishingRod
+static u32 sub_020690C4(const UnkStruct_020684D0 * param0); // CanUseEscapeRope
+static u32 sub_02069130(const UnkStruct_020684D0 * param0); // CanUseAzureFlute
+static BOOL sub_02068884(TaskManager * param0); // MountOrUnmountBicycle
 static BOOL sub_02068F48(TaskManager * param0);
 static void sub_020693F8(UnkStruct_02068870 * param0, UnkFuncPtr_02068870 param1);
 static BOOL sub_0206932C(TaskManager * param0);
@@ -182,7 +183,7 @@ static const UnkStruct_020EF79C Unk_020EF79C[] = {
     {sub_02068BF8, sub_02068C38, sub_02068C5C},
     {sub_02068C94, sub_02068CA4, sub_02068CB4},
     {sub_02068CD0, NULL, sub_02068CE0},
-    {sub_02068CF0, NULL, NULL},
+    {sub_02068CF0, UseHoneyInField, NULL},
     {sub_02068D48, sub_02068D58, sub_02068D68},
     {sub_02068D80, sub_02068DBC, sub_02068E94},
     {sub_02068DDC, sub_02068E18, sub_02068E94},
@@ -811,8 +812,27 @@ static void sub_02068CF0 (UnkStruct_02068630 * param0, const UnkStruct_020684D0 
     v1->unk_22C = ov5_021F0488;
     v1->unk_25C = v2;
     v1->state = FIELD_MENU_STATE_10;
+	
+	if (param0->unk_04 != 69) // If the used item is not the White Flute
+	{
+		Bag_SubtractItem(sub_0207D990(fieldSystem->saveData), param0->unk_04, 1, 11);
+	}
+}
 
-    Bag_SubtractItem(sub_0207D990(fieldSystem->saveData), param0->unk_04, 1, 11);
+static BOOL UseHoneyInField (UnkStruct_02068870 * param0)
+{
+	// Init whatever these variables do (Some kind of extra task parameter?)
+	UnkStruct_ov5_021F0468 * taskData;
+	int v3;
+	
+	v3 = ov5_021F0484();
+    taskData = Heap_AllocFromHeapAtEnd(11, v3);
+	
+	memset(taskData, 0, v3);
+	
+	// Start the field task
+	sub_02050904(param0->fieldSystem, ov5_021F0488, taskData);
+    return 0;
 }
 
 static void sub_02068D48 (UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1)
