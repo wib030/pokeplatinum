@@ -68,6 +68,8 @@
 #include "overlay005/ov5_021F08CC.h"
 #include "overlay006/ov6_02247100.h"
 
+// item_use_functions.c
+
 typedef void *(* UnkFuncPtr_02068870)(void *);
 
 typedef struct {
@@ -1207,6 +1209,63 @@ BOOL sub_02069238 (FieldSystem * fieldSystem)
 
     if (v5 == 0) {
         Heap_FreeToHeap(v0);
+    }
+
+    return 1;
+}
+
+BOOL secondRegisteredItemUseCheck(FieldSystem* fieldSystem)
+{
+    UnkStruct_02068870* usageContext;
+    UnkFuncPtr_020EF79C useInField;
+    UnkFuncPtr_02069238 checkUse;
+    u16 item;
+    u16 itemUseFuncID;
+    BOOL usageResult;
+
+    if (sub_0206C0D0(fieldSystem) == 1) {
+        return 0;
+    }
+
+    if (sub_0206AE8C(SaveData_Events(fieldSystem->saveData)) == 1) {
+        return 0;
+    }
+
+    item = (u16)Bag_GetSecondRegisteredItem(sub_0207D990(fieldSystem->saveData));
+    itemUseFuncID = (u16)Item_LoadParam(item, 6, 11);
+    checkUse = (UnkFuncPtr_02069238)sub_020683F4(2, itemUseFuncID);
+    useInField = (UnkFuncPtr_020EF79C)sub_020683F4(1, itemUseFuncID);
+
+    if (useInField == NULL) {
+        return 0;
+    }
+
+    usageContext = Heap_AllocFromHeap(11, sizeof(UnkStruct_02068870));
+    memset(usageContext, 0, sizeof(UnkStruct_02068870));
+
+    usageContext->fieldSystem = fieldSystem;
+    usageContext->unk_28 = item;
+
+    sub_0206842C(fieldSystem, &usageContext->unk_04);
+
+    usageResult = 0;
+
+    if (checkUse == NULL) {
+        usageResult = useInField(usageContext);
+    }
+    else {
+        u32 v6 = checkUse(&usageContext->unk_04);
+
+        if (v6 == 0) {
+            usageResult = useInField(usageContext);
+        }
+        else {
+            sub_020692E4(usageContext, v6);
+        }
+    }
+
+    if (usageResult == 0) {
+        Heap_FreeToHeap(usageContext);
     }
 
     return 1;

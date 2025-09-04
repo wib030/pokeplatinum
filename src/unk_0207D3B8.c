@@ -12,16 +12,26 @@
 #include "item.h"
 #include "unk_0207D3B8.h"
 
+#define ITEM_POCKET_SIZE        165
+#define KEY_ITEM_POCKET_SIZE    50
+#define TMHM_POCKET_SIZE        100
+#define MAIL_POCKET_SIZE        12
+#define MEDICINE_POCKET_SIZE    40
+#define BERRY_POCKET_SIZE       64
+#define POKEBALL_POCKET_SIZE    15
+#define BATTLE_ITEM_POCKET_SIZE 30
+
 typedef struct UnkStruct_0207D3C0_t {
-    BagItem unk_00[165];
-    BagItem unk_294[50];
-    BagItem unk_35C[100];
-    BagItem unk_4EC[12];
-    BagItem unk_51C[40];
-    BagItem unk_5BC[64];
-    BagItem unk_6BC[15];
-    BagItem unk_6F8[30];
-    u32 unk_770;
+    BagItem unk_00[ITEM_POCKET_SIZE];
+    BagItem unk_294[KEY_ITEM_POCKET_SIZE];
+    BagItem unk_35C[TMHM_POCKET_SIZE];
+    BagItem unk_4EC[MAIL_POCKET_SIZE];
+    BagItem unk_51C[MEDICINE_POCKET_SIZE];
+    BagItem unk_5BC[BERRY_POCKET_SIZE];
+    BagItem unk_6BC[POKEBALL_POCKET_SIZE];
+    BagItem unk_6F8[BATTLE_ITEM_POCKET_SIZE];
+    u32 unk_770; // registeredItem
+    u32 registeredItem2;
 } UnkStruct_0207D3C0;
 
 typedef struct {
@@ -71,14 +81,26 @@ void sub_0207D3EC (const UnkStruct_0207D3C0 * param0, UnkStruct_0207D3C0 * param
     MI_CpuCopy8(param0, param1, sizeof(UnkStruct_0207D3C0));
 }
 
+// Bag_GetRegisteredItem
 u32 sub_0207D3FC (const UnkStruct_0207D3C0 * param0)
 {
     return param0->unk_770;
 }
 
+u32 Bag_GetSecondRegisteredItem(const UnkStruct_0207D3C0* bag)
+{
+    return bag->registeredItem2;
+}
+
+// Bag_RegisterItem
 void sub_0207D404 (UnkStruct_0207D3C0 * param0, u32 param1)
 {
     param0->unk_770 = param1;
+}
+
+void Bag_RegisterSecondItem(UnkStruct_0207D3C0* bag, u32 item)
+{
+    bag->registeredItem2 = item;
 }
 
 static u32 sub_0207D40C (UnkStruct_0207D3C0 * param0, u16 param1, BagItem ** param2, u32 * param3, u32 param4)
@@ -88,35 +110,35 @@ static u32 sub_0207D40C (UnkStruct_0207D3C0 * param0, u16 param1, BagItem ** par
     switch (v0) {
     case 7:
         *param2 = param0->unk_294;
-        *param3 = 50;
+        *param3 = KEY_ITEM_POCKET_SIZE;
         break;
     case 0:
         *param2 = param0->unk_00;
-        *param3 = 165;
+        *param3 = ITEM_POCKET_SIZE;
         break;
     case 4:
         *param2 = param0->unk_5BC;
-        *param3 = 64;
+        *param3 = BERRY_POCKET_SIZE;
         break;
     case 1:
         *param2 = param0->unk_51C;
-        *param3 = 40;
+        *param3 = MEDICINE_POCKET_SIZE;
         break;
     case 2:
         *param2 = param0->unk_6BC;
-        *param3 = 15;
+        *param3 = POKEBALL_POCKET_SIZE;
         break;
     case 6:
         *param2 = param0->unk_6F8;
-        *param3 = 30;
+        *param3 = BATTLE_ITEM_POCKET_SIZE;
         break;
     case 5:
         *param2 = param0->unk_4EC;
-        *param3 = 12;
+        *param3 = MAIL_POCKET_SIZE;
         break;
     case 3:
         *param2 = param0->unk_35C;
-        *param3 = 100;
+        *param3 = TMHM_POCKET_SIZE;
         break;
     }
 

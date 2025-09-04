@@ -25,8 +25,8 @@ typedef struct {
     BGL * unk_00;
     Window unk_04[11];
     Window unk_B4[1];
-    UnkStruct_0207CB08 * unk_C4;
-    UnkStruct_0207D3C0 * unk_C8;
+    UnkStruct_0207CB08 * unk_C4;               // BAG_DATA * dat
+    UnkStruct_0207D3C0 * unk_C8;               // MYITEM * myitem
     TrainerInfo * unk_CC;
     Options * unk_D0;
     NARC * unk_D4;

@@ -103,6 +103,7 @@ static void ov5_021D1C30 (UnkStruct_ov5_021D1CAC * param0)
     param0->unk_00_1 = 0;
     param0->unk_00_2 = 0;
     param0->unk_00_3 = 0;
+    param0->registeredItem2 = 0;
     param0->unk_00_4 = 0;
     param0->unk_00_5 = 0;
     param0->unk_00_6 = 0;
@@ -115,6 +116,7 @@ static void ov5_021D1C30 (UnkStruct_ov5_021D1CAC * param0)
     param0->unk_03 = -1;
 }
 
+// FieldInput_Update
 void ov5_021D1CAC (UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSystem, u16 param2, u16 param3)
 {
     int v0;
@@ -137,6 +139,10 @@ void ov5_021D1CAC (UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSystem, u
 
         if (param2 & PAD_BUTTON_Y) {
             param0->unk_00_3 = 1;
+        }
+
+        if (param2 & PAD_BUTTON_SELECT) {
+            param0->registeredItem2 = 1;
         }
 
         if (param2 & PAD_BUTTON_A) {
@@ -344,6 +350,12 @@ int ov5_021D1DA4 (const UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSyst
 
     if (param0->unk_00_3) {
         if (sub_02069238(fieldSystem) == 1) {
+            return 1;
+        }
+    }
+
+    if (param0->registeredItem2) {
+        if (secondRegisteredItemUseCheck(fieldSystem) == 1) {
             return 1;
         }
     }
@@ -580,6 +592,12 @@ int ov5_021D2368 (const UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSyst
 
     if (param0->unk_00_3) {
         if (sub_02069238(fieldSystem) == 1) {
+            return 1;
+        }
+    }
+
+    if (param0->registeredItem2) {
+        if (secondRegisteredItemUseCheck(fieldSystem) == 1) {
             return 1;
         }
     }
