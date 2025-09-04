@@ -1212,6 +1212,65 @@ BOOL sub_02069238 (FieldSystem * fieldSystem)
     return 1;
 }
 
+BOOL QuickUseRowanPad (FieldSystem * fieldSystem)
+{
+    UnkStruct_02068870 * usageContext;
+    UnkFuncPtr_020EF79C useInField;
+    UnkFuncPtr_02069238 checkUse;
+    u16 item = 443; // RowanPad item ID
+    u16 itemUseFuncIdx;
+    BOOL usageResult;
+
+    if (sub_0206C0D0(fieldSystem) == TRUE) {
+        return FALSE;
+    }
+
+    if (sub_0206AE8C(SaveData_Events(fieldSystem->saveData)) == TRUE) {
+        return FALSE;
+    }
+	
+	// If the player does not have a RowanPad in their bag
+	if (sub_0207D688(sub_0207D990(fieldSystem->saveData), item, 1, 11) == FALSE) {
+		return FALSE;
+	}
+
+    itemUseFuncIdx = (u16)Item_LoadParam(item, 6, 11);
+    checkUse = (UnkFuncPtr_02069238)sub_020683F4(2, itemUseFuncIdx);
+    useInField = (UnkFuncPtr_020EF79C)sub_020683F4(1, itemUseFuncIdx);
+
+    if (useInField == NULL) {
+        return FALSE;
+    }
+
+    usageContext = Heap_AllocFromHeap(11, sizeof(UnkStruct_02068870));
+    memset(usageContext, 0, sizeof(UnkStruct_02068870));
+
+    usageContext->fieldSystem = fieldSystem;
+    usageContext->unk_28 = item;
+
+    sub_0206842C(fieldSystem, &usageContext->unk_04);
+
+    usageResult = 0;
+
+    if (checkUse == NULL) {
+        usageResult = useInField(usageContext);
+    } else {
+        u32 usageCheckResult = checkUse(&usageContext->unk_04);
+
+        if (usageCheckResult == 0) {
+            usageResult = useInField(usageContext);
+        } else {
+            sub_020692E4(usageContext, usageCheckResult);
+        }
+    }
+
+    if (usageResult == 0) {
+        Heap_FreeToHeap(usageContext);
+    }
+
+    return TRUE;
+}
+
 static void sub_020692E4 (UnkStruct_02068870 * param0, u32 param1)
 {
     UnkStruct_02068EFC * v0 = Heap_AllocFromHeap(11, sizeof(UnkStruct_02068EFC));

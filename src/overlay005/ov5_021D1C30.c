@@ -142,8 +142,9 @@ void ov5_021D1CAC (UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSystem, u
         if (param2 & PAD_BUTTON_A) {
             param0->unk_00_0 = 1;
         }
-
-        if (param2 & PAD_BUTTON_B) {
+		
+		// Unused? dummy1 parameter used for RowanPad quick implementation
+        if (param2 & PAD_BUTTON_SELECT) {
             param0->unk_00_7 = 1;
         }
 
@@ -344,6 +345,13 @@ int ov5_021D1DA4 (const UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSyst
 
     if (param0->unk_00_3) {
         if (sub_02069238(fieldSystem) == 1) {
+            return 1;
+        }
+    }
+	
+	// Unused? dummy1 for RowanPad usage
+	if (param0->unk_00_7) {
+        if (QuickUseRowanPad(fieldSystem) == TRUE) {
             return 1;
         }
     }
