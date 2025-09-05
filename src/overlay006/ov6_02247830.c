@@ -76,6 +76,30 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
         return 13;
     }
 
+    // param2 == LET'S GO
+    // param3 == RIVALRY
+    // param4 == UNBELIEVABLE
+    // param5 == WIBBLYPUFF
+    if (param2 == 0x4AD
+        && param3 == 0x425
+        && param4 == 0x4B9
+        && param5 == 0xAE)
+    {
+        return 11;
+    }
+
+    // param2 == HOWLING
+    // param3 == WIBBLYPUFF
+    // param4 == ROCK
+    // param5 == MUSIC
+    if (param2 == 0x5B4
+        && param3 == 0xAE
+        && param4 == 0x3C9
+        && param5 == 0x519)
+    {
+        return 12;
+    }
+
     /*
     if (v3[0] == 0x467
         && v3[1] == 0x49D
