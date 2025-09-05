@@ -64,6 +64,18 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
         return 9;
     }
 
+    // param2 == No. 1
+    // param3 == MOVIE
+    // param4 == MEWTWO
+    // param5 == REVENGE
+    if (param2 == 0x453
+        && param3 == 0x510
+        && param4 == 0x96
+        && param5 == 0x307)
+    {
+        return 13;
+    }
+
     /*
     if (v3[0] == 0x467
         && v3[1] == 0x49D

@@ -6871,7 +6871,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monIVs, // Desired IVs
 			monEVs, // Desired EVs
 			monLocationData, // Location data
-			monRecievedType, // Recieved type
+			monReceivedType, // Received type
 			TRUE); // BOOL, is shiny?
 		
 		*v2 = 9;
@@ -6923,7 +6923,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monIVs, // Desired IVs
 			monEVs, // Desired EVs
 			monLocationData, // Location data
-			monRecievedType, // Recieved type
+			monReceivedType, // Received type
 			FALSE); // BOOL, is shiny?
 		
 		*v2 = 10;
@@ -6975,7 +6975,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monIVs, // Desired IVs
 			monEVs, // Desired EVs
 			monLocationData, // Location data
-			monRecievedType, // Recieved type
+			monReceivedType, // Received type
 			TRUE); // BOOL, is shiny?
 		
 		*v2 = 11;
@@ -7027,12 +7027,70 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monIVs, // Desired IVs
 			monEVs, // Desired EVs
 			monLocationData, // Location data
-			monRecievedType, // Recieved type
+			monReceivedType, // Received type
 			TRUE); // BOOL, is shiny?
 		
 		*v2 = 12;
 		return 0;
 	}
+
+    if (v8 == 13)
+    {
+        UnkStruct_02025E5C* playTime = sub_02025E5C(fieldSystem->saveData);
+
+        if (playTime->unk_00 >= 8)
+        {
+            
+
+            // This example gives a level 5 Mild Shiny Scream Tail.
+            u16 monMoves[] = {
+                MOVE_BLAST_BURN, // Fire Chase Exclusive Move
+                MOVE_SELFDESTRUCT,
+                MOVE_VACUUM_WAVE, // Exclusive move
+                MOVE_CONFUSION
+            };
+
+            u16 monIVs[] = {
+                31, // HP
+                31, // ATK
+                31, // DEF
+                31, // SPEED
+                31, // SPATK
+                31 // SPDEF
+            };
+
+            u16 monEVs[] = {
+                6, // HP
+                0, // ATK
+                0, // DEF
+                252, // SPEED
+                252, // SPATK
+                0 // SPDEF
+            };
+
+            MakeAndAddEventPokemon(
+                fieldSystem, // FieldSystem reference
+                v1, // TrainerInfo reference
+                v3, // PCBoxes reference
+                party, // Party reference
+                SPECIES_MEWTWO, // Desired species
+                5, // Desired level
+                ABILITY_PRESSURE, // Desired ability
+                ITEM_MIND_PLATE, // Desired item
+                GENDER_NONE, // Desired gender
+                NATURE_TIMID, // Desired nature
+                ITEM_CHERISH_BALL, // Desired Pokeball
+                monMoves, // Desired moves
+                monIVs, // Desired IVs
+                monEVs, // Desired EVs
+                monLocationData, // Location data
+                monReceivedType, // Received type
+                FALSE); // BOOL, is shiny?
+
+            // change this 12 to mewtwo message index. delete this note when changed.
+            *v2 = 9;
+        }
+    }
 
     if ((v8 == -1) || (v8 > 7)) {
         *v2 = 0xff;
@@ -7082,6 +7140,14 @@ void MakeAndAddEventPokemon (
 	int i;
 	int partyCount;
 	int otIdSource;
+
+    /*
+    
+    // Code to set a string template for a mon nickname. Second arg in SetNickname is template.
+    // Template seems to default to 0 for local boxmons.
+    StringTemplate** nicknameStrTemp = sub_0203F098(fieldSystem, 15);
+    StringTemplate_SetNickname(*nicknameStrTemp, 0, (BoxPokemon*)mon);
+    */
 	
 	otIdSource = OTID_NOT_SHINY;
 	monGiftFromIndex = 0;
