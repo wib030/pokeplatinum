@@ -46,7 +46,7 @@
 #include "struct_defs/struct_0202A93C.h"
 #include "struct_defs/struct_0202D7B0.h"
 #include "struct_defs/struct_0202DF8C.h"
-#include "struct_decls/struct_02025E5C.h"
+#include "struct_defs/struct_02025E5C.h"
 #include "field/field_system.h"
 #include "field/field_system_sub2_t.h"
 #include "struct_defs/struct_0203D8AC.h"
