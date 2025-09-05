@@ -7036,7 +7036,8 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 
     if (v8 == 13)
     {
-        UnkStruct_02025E5C* playTime = sub_02025E5C(fieldSystem->saveData);
+        UnkStruct_02025E5C_t* playTime;
+        playTime = sub_02025E5C(fieldSystem->saveData);
 
         if (playTime->unk_00 >= 8)
         {
