@@ -83,7 +83,7 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     if (param2 == 0x4AD
         && param3 == 0x425
         && param4 == 0x4B9
-        && param5 == 0xAE)
+        && param5 == 0x27)
     {
         return 11;
     }
@@ -93,7 +93,7 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     // param4 == ROCK
     // param5 == MUSIC
     if (param2 == 0x5B4
-        && param3 == 0xAE
+        && param3 == 0x27
         && param4 == 0x3C9
         && param5 == 0x519)
     {
