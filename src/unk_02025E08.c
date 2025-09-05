@@ -59,6 +59,7 @@ u16 * sub_02025E50 (SaveData * param0)
     return &v0->unk_24;
 }
 
+// PlayTime * SaveData_GetPlayTime(SaveData *saveData)
 UnkStruct_02025E5C * sub_02025E5C (SaveData * param0)
 {
     UnkStruct_02025E0C * v0;
