@@ -11,6 +11,7 @@
 #include "strbuf.h"
 #include "struct_decls/struct_0202440C_decl.h"
 #include "struct_decls/struct_02025CCC_decl.h"
+#include "struct_decls/struct_02025E5C_decl.h"
 #include "trainer_info.h"
 #include "struct_decls/struct_02026218_decl.h"
 #include "struct_decls/struct_02026310_decl.h"
