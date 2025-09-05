@@ -6807,7 +6807,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 	int itemIndex;
 	int itemQuantity;
 	int monLocationData = MapHeader_GetMapLabelTextID(fieldSystem->unk_1C->unk_00);
-	int monRecievedType = 24; // Best not to change this
+	int monReceivedType = 24; // Best not to change this
 	int i;
 	Party * party;
 
