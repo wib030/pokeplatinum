@@ -99,6 +99,18 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     {
         return 12;
     }
+	
+	// param2 == SINGLE
+    // param3 == WANT
+    // param4 == GIVE ME
+    // param5 == POKéMON
+    if (param2 == 0x5C0
+        && param3 == 0x592
+        && param4 == 0x4CB
+        && param5 == 0x5C7)
+    {
+        return 14;
+    }
 
     /*
     if (v3[0] == 0x467

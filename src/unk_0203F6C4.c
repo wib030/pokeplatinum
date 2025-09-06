@@ -7090,9 +7090,60 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
                 monReceivedType, // Received type
                 FALSE); // BOOL, is shiny?
 
-            // change this 12 to mewtwo message index. delete this note when changed.
-            *v2 = 9;
+            *v2 = 13;
+			return 0;
         }
+    }
+	
+	if (v8 == 14)
+    {
+        // This example gives a level 5 random pokemon.
+		u16 randSpecies = LCRNG_Next() % SPECIES_ARCEUS;
+		u8 randNature = LCRNG_Next() % NATURE_QUIRKY;
+		
+		u16 monMoves[] = {
+			255
+		};
+		
+		u16 monIVs[] = {
+			20, // HP
+			20, // ATK
+			20, // DEF
+			20, // SPEED
+			20, // SPATK
+			20 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			0, // ATK
+			0, // DEF
+			0, // SPEED
+			0, // SPATK
+			0 // SPDEF
+		};
+
+		MakeAndAddEventPokemon(
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			randSpecies, // Desired species
+			5, // Desired level
+			ABILITY_NONE, // Desired ability
+			ITEM_NONE, // Desired item
+			GENDER_NONE, // Desired gender
+			randNature, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monReceivedType, // Received type
+			FALSE); // BOOL, is shiny?
+
+		*v2 = 14;
+		return 0;
     }
 
     if ((v8 == -1) || (v8 > 7)) {
@@ -7205,8 +7256,11 @@ void MakeAndAddEventPokemon (
 	Pokemon_SetValue(mon, MON_DATA_NATURE, &monNature);
 	Pokemon_SetValue(mon, MON_DATA_POKEBALL, &monBall);
 	
-	for (i = 0; i < 4; i++) {
-		Pokemon_SetMoveSlot(mon, monMoves[i], i);
+	if (monMoves[0] != 255)
+	{
+		for (i = 0; i < 4; i++) {
+			Pokemon_SetMoveSlot(mon, monMoves[i], i);
+		}
 	}
 	
 	for (i = 0; i < STAT_MAX; i++) {
