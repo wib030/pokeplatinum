@@ -21,7 +21,13 @@
                 "MOVE_DRAGON_RUSH"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_GARDEVOIR",
@@ -35,7 +41,13 @@
                 "MOVE_GRUDGE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_GLACEON",
@@ -49,7 +61,13 @@
                 "MOVE_BITE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

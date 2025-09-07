@@ -21,7 +21,13 @@
                 "MOVE_HEAT_WAVE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_FLYGON",
@@ -35,7 +41,13 @@
                 "MOVE_BITE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_GALLADE",
@@ -50,7 +62,13 @@
             ],
             "power": 140,
             "ball_seal": 0,
-			"ability": 1
+			"ability": 1,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }
