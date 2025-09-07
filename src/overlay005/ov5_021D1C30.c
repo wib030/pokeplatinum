@@ -144,7 +144,7 @@ void ov5_021D1CAC (UnkStruct_ov5_021D1CAC * param0, FieldSystem * fieldSystem, u
         }
 		
 		// Unused? dummy1 parameter used for RowanPad quick implementation
-        if (param2 & PAD_BUTTON_SELECT) {
+        if (param2 & PAD_BUTTON_START) {
             param0->unk_00_7 = 1;
         }
 
