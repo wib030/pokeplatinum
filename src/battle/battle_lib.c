@@ -10005,7 +10005,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 }
                 // 70 percentile
                 if (rnd >= 178) {
-                    movePower = 120;
+                    movePower = 150;
                     break;
                 }
                 // 40 percentile
@@ -11704,7 +11704,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 }
                 // 70 percentile
                 if (rnd >= 178) {
-                    movePower = 120;
+                    movePower = 150;
                     break;
                 }
                 // 40 percentile

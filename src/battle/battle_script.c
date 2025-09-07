@@ -8598,7 +8598,7 @@ static BOOL BtlCmd_Present(BattleSystem *battleSys, BattleContext *battleCtx)
     } else if (rnd < (255 * 70 / 100)) {
         battleCtx->movePower = 80;
     } else if (rnd < (255 * 80 / 100)) {
-        battleCtx->movePower = 120;
+        battleCtx->movePower = 150;
     } else {
 		battleCtx->hpCalcTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, 4);
 		if (battleCtx->battleMons[battleCtx->defender].moveEffectsData.healInversionTurns > 0)
