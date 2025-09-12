@@ -622,7 +622,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                 }
                 break;
 
-            // Extra AI for Trick Room. Still a work in progress.
+            // Extra AI for Light Screen.
             case BATTLE_EFFECT_SET_LIGHT_SCREEN:
                 attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
 
@@ -649,9 +649,8 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 
 
                 break;
-            }
-
-            // Extra AI for Trick Room. Still a work in progress.
+				
+			// Extra AI for Reflect.
             case BATTLE_EFFECT_SET_REFLECT:
                 attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
 
