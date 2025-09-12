@@ -347,6 +347,8 @@ s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 m
 int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
 BOOL ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 int ExpertAI_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask);
+BOOL ExpertAI_IsBattlerSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
 {
@@ -618,6 +620,62 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         break;
                     }
                 }
+                break;
+
+            // Extra AI for Trick Room. Still a work in progress.
+            case BATTLE_EFFECT_SET_LIGHT_SCREEN:
+                attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+                if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LIGHT_SCREEN)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -12);
+                    break;
+                }
+
+                if (ExpertAI_IsBattlerSpecialAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
+                {
+                    if (AI_GetRandomNumber(battleSys) < 192)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 3);
+                        break;
+                    }
+                }
+
+                if (AI_GetRandomNumber(battleSys) < 170)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -1);
+                    break;
+                }
+
+
+                break;
+            }
+
+            // Extra AI for Trick Room. Still a work in progress.
+            case BATTLE_EFFECT_SET_REFLECT:
+                attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+                if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_REFLECT)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -12);
+                    break;
+                }
+
+                if (ExpertAI_IsBattlerPhysicalAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
+                {
+                    if (AI_GetRandomNumber(battleSys) < 192)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 3);
+                        break;
+                    }
+                }
+
+                if (AI_GetRandomNumber(battleSys) < 170)
+                {
+                    AI_AddToMoveScore(battleSys, battleCtx, -1);
+                    break;
+                }
+
                 break;
             }
         }
@@ -1554,6 +1612,34 @@ BOOL BattleAI_IsMoveBlockedByWebMaster(BattleSystem* battleSys, BattleContext* b
             result = TRUE;
             break;
         }
+    }
+
+    return result;
+}
+
+BOOL ExpertAI_IsBattlerSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+    {
+        result = TRUE;
+    }
+
+    return result;
+}
+
+BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    BOOL result;
+
+    result = FALSE;
+
+    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+    {
+        result = TRUE;
     }
 
     return result;

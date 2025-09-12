@@ -610,7 +610,7 @@ Basic_CheckCannotConfuse:
 
 Basic_CheckAlreadyUnderReflect:
     ; If already under the effect of Reflect, score -8.
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_REFLECT, ScoreMinus8
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_REFLECT, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckCannotParalyze:

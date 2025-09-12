@@ -184,4 +184,22 @@ BOOL AI_IfMoveEffectKnown(BattleSystem* battleSys, BattleContext* battleCtx, int
 
 BOOL BattleAI_IsMoveBlockedByWebMaster(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
 
+/* @brief Check if the battler is a special attacker
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler    The battlemon ID of the battler to check.
+ * @return  TRUE / FALSE whether the given battler is a special attacker or not.
+ */
+BOOL ExpertAI_IsBattlerSpecialAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
+/* @brief Check if the battler is a physical attacker
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler    The battlemon ID of the battler to check.
+ * @return  TRUE / FALSE whether the given battler is a physical attacker or not.
+ */
+BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
