@@ -97,7 +97,7 @@
             ],
 			"35": "MOVE_ICE_BALL",
 			"38": "MOVE_HAIL",
-			"40": "MOVE_RECOVER",
+			"40": "MOVE_SLACK_OFF",
             "43": "MOVE_BLIZZARD",
             "48": "MOVE_SHEER_COLD"
         },
