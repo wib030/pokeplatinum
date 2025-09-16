@@ -2,51 +2,51 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 32,
+            "level": 42,
             "species": "SPECIES_SNOVER"
         },
         {
-            "level": 33,
+            "level": 43,
             "species": "SPECIES_SWINUB"
         },
         {
-            "level": 33,
+            "level": 43,
             "species": "SPECIES_SNEASEL"
         },
         {
-            "level": 33,
+            "level": 43,
             "species": "SPECIES_STANTLER"
         },
         {
-            "level": 34,
+            "level": 44,
             "species": "SPECIES_SNEASEL"
         },
         {
-            "level": 34,
+            "level": 44,
             "species": "SPECIES_SWINUB"
         },
         {
-            "level": 34,
+            "level": 44,
             "species": "SPECIES_STANTLER"
         },
         {
-            "level": 32,
+            "level": 42,
             "species": "SPECIES_SWINUB"
         },
         {
-            "level": 35,
+            "level": 45,
             "species": "SPECIES_SNEASEL"
         },
         {
-            "level": 35,
+            "level": 45,
             "species": "SPECIES_SNOVER"
         },
         {
-            "level": 35,
+            "level": 45,
             "species": "SPECIES_SNEASEL"
         },
         {
-            "level": 35,
+            "level": 45,
             "species": "SPECIES_SNOVER"
         }
     ],
