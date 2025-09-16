@@ -13,7 +13,7 @@
             "species": "SPECIES_ELECTRODE",
             "form": 0,
             "level": 64,
-            "item": "ITEM_NONE",
+            "item": "ITEM_POWER_BRACER",
             "moves": [
                 "MOVE_ROLLOUT",
                 "MOVE_GYRO_BALL",
@@ -21,13 +21,26 @@
                 "MOVE_MAGNET_RISE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 0,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 252,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 2
         },
 		{
             "species": "SPECIES_GLALIE",
             "form": 0,
             "level": 64,
-            "item": "ITEM_NONE",
+            "item": "ITEM_IRON_BALL",
             "moves": [
                 "MOVE_GYRO_BALL",
                 "MOVE_DOUBLE_TEAM",
@@ -35,7 +48,20 @@
                 "MOVE_DEFENSE_CURL"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 0,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 252,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 2
         }
     ]
 }
