@@ -111,7 +111,8 @@
 			"ivDEF": 30,
 			"ivSPEED": 30,
 			"ivSPATK": 30,
-			"ivSPDEF": 30
+			"ivSPDEF": 30,
+			"nature": 15
         }
     ]
 }

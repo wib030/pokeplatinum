@@ -97,7 +97,14 @@
             ],
             "power": 220,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 24,
+			"ivATK": 26,
+			"ivDEF": 22,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 16,
+			"nature": 10
         }
     ]
 }

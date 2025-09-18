@@ -63,20 +63,20 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     {
         return 9;
     }
-
-    // param2 == SECRET BASE
-    // param3 == EXPLOSION
-    // param4 == WANT
-    // param5 == REVENGE
-    if (param2 == 0x5D6
-        && param3 == 0x289
-        && param4 == 0x592
-        && param5 == 0x307)
+	
+	// param2 == LIQUID OOZE
+    // param3 == ERUPTION
+    // param4 == HERE GOES
+    // param5 == PREGNANCY PUNCH
+    if (param2 == 0x416
+        && param3 == 0x30C
+        && param4 == 0x4AC
+        && param5 == 0x28F)
     {
-        return 13;
+        return 10;
     }
-
-    // param2 == LET'S GO
+	
+	// param2 == LET'S GO
     // param3 == RIVALRY
     // param4 == UNBELIEVABLE
     // param5 == WIBBLYPUFF
@@ -99,6 +99,18 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     {
         return 12;
     }
+
+    // param2 == SECRET BASE
+    // param3 == EXPLOSION
+    // param4 == WANT
+    // param5 == REVENGE
+    if (param2 == 0x5D6
+        && param3 == 0x289
+        && param4 == 0x592
+        && param5 == 0x307)
+    {
+        return 13;
+    }
 	
 	// param2 == SINGLE
     // param3 == WANT
@@ -109,19 +121,80 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
         && param4 == 0x4CB
         && param5 == 0x5C7)
     {
-        return 14;
+        return 15;
     }
 
-    /*
-    if (v3[0] == 0x467
-        && v3[1] == 0x49D
-        && v3[2] == 0x594
-        && v3[3] == 0x511)
+    // param2 == BOO!
+    // param3 == METAGROSS
+    // param4 == KNOCK OFF
+    // param5 == LOL
+    if (param2 == 0x506
+        && param3 == 0x178
+        && param4 == 0x30A
+        && param5 == 0x4ED)
     {
-        // use 8 as a special case number
-        return 8;
+        return 16;
     }
-    */
+	
+	// param2 == LOOKS
+    // param3 == ALL RIGHT
+    // param4 == WANT
+    // param5 == SATISFIED
+    if (param2 == 0x56E
+        && param3 == 0x583
+        && param4 == 0x592
+        && param5 == 0x593)
+    {
+        return 17;
+    }
+	
+	// param2 == FORGIVE ME
+    // param3 == FATHER
+    // param4 == ROCK SMASH
+    // param5 == ADVENTURE
+    if (param2 == 0x4CF
+        && param3 == 0x47E
+        && param4 == 0x2E9
+        && param5 == 0x55B)
+    {
+        return 19;
+    }
+	
+	// param2 == SERIOUS
+    // param3 == WANT
+    // param4 == GRASS
+    // param5 == GHOST
+    if (param2 == 0x46F
+        && param3 == 0x592
+        && param4 == 0x3D0
+        && param5 == 0x3CB)
+    {
+        return 20;
+    }
+	
+	// param2 == GOURMET
+    // param3 == MMM
+    // param4 == TOXIC
+    // param5 == DIET
+    if (param2 == 0x526
+        && param3 == 0x4F9
+        && param4 == 0x24C
+        && param5 == 0x53C)
+    {
+        return 21;
+    }
+	
+	// param2 == TRAINING
+    // param3 == GIRL
+    // param4 == HERE GOES
+    // param5 == BEAT UP
+    if (param2 == 0x532
+        && param3 == 0x488
+        && param4 == 0x4AC
+        && param5 == 0x2EB)
+    {
+        return 22;
+    }
 
     for (v2 = 0; v2 < 4; v2++) {
         if (v3[v2] < 0) {

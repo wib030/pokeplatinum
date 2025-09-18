@@ -6811,6 +6811,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 	int monLocationData = MapHeader_GetMapLabelTextID(fieldSystem->unk_1C->unk_00);
 	int monReceivedType = 24; // Best not to change this
 	int i;
+	int badges = TrainerInfo_BadgeCount(v1);
 	Party * party;
 
 	party = Party_GetFromSavedata(fieldSystem->saveData);
@@ -6883,53 +6884,65 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 	// 10 is our special number for giving a Pregnancy Punch Machamp
 	if (v8 == 10)
 	{
-		// This example gives a level 70 Serious Psychic Machamp with Pregnancy Punch.
-		u16 monMoves[] = {
-			MOVE_SHARPEN, // Pregnancy Punch
-			MOVE_PSYCHIC, // Exclusive move
-			MOVE_MEDITATE,
-			MOVE_CALM_MIND // Exclusive move
-		};
+		UnkStruct_02025E5C* playTime;
+        playTime = sub_02025E5C(fieldSystem->saveData);
 
-		u16 monIVs[] = { // Hidden power Psychic
-			30, // HP
-			31, // ATK
-			31, // DEF
-			30, // SPEED
-			31, // SPATK
-			31 // SPDEF
-		};
+        if (playTime->unk_00 >= 8)
+		{
+			// This example gives a level 70 Serious Psychic Machamp with Pregnancy Punch.
+			u16 monMoves[] = {
+				MOVE_SHARPEN, // Pregnancy Punch
+				MOVE_PSYCHIC, // Exclusive move
+				MOVE_MEDITATE,
+				MOVE_CALM_MIND // Exclusive move
+			};
 
-		u16 monEVs[] = {
-			0, // HP
-			124, // ATK
-			0, // DEF
-			252, // SPEED
-			124, // SPATK
-			8 // SPDEF
-		};
-		
-		MakeAndAddEventPokemon (
-			fieldSystem, // FieldSystem reference
-			v1, // TrainerInfo reference
-			v3, // PCBoxes reference
-			party, // Party reference
-			SPECIES_MACHAMP, // Desired species
-			70, // Desired level
-			ABILITY_HEADACHE, // Desired ability
-			ITEM_TWISTEDSPOON, // Desired item
-			GENDER_MALE, // Desired gender
-			NATURE_SERIOUS, // Desired nature
-			ITEM_CHERISH_BALL, // Desired Pokeball
-			monMoves, // Desired moves
-			monIVs, // Desired IVs
-			monEVs, // Desired EVs
-			monLocationData, // Location data
-			monReceivedType, // Received type
-			FALSE); // BOOL, is shiny?
-		
-		*v2 = 10;
-		return 0;
+			u16 monIVs[] = { // Hidden power Psychic
+				30, // HP
+				31, // ATK
+				31, // DEF
+				30, // SPEED
+				31, // SPATK
+				31 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				124, // ATK
+				0, // DEF
+				252, // SPEED
+				124, // SPATK
+				8 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_MACHAMP, // Desired species
+				70, // Desired level
+				ABILITY_HEADACHE, // Desired ability
+				ITEM_TWISTEDSPOON, // Desired item
+				GENDER_MALE, // Desired gender
+				NATURE_SERIOUS, // Desired nature
+				ITEM_CHERISH_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 10;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required playtime
+			*v2 = 14;
+			return 0;
+		}
 	}
 	
 	// 11 is our special number for giving a special event Physical Scream Tail ^w^
@@ -7043,9 +7056,7 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 
         if (playTime->unk_00 >= 8)
         {
-            
-
-            // This example gives a level 5 Mild Shiny Scream Tail.
+            // This example gives a level 5 Movie Mewtwo.
             u16 monMoves[] = {
                 MOVE_BLAST_BURN, // Fire Chase Exclusive Move
                 MOVE_SELFDESTRUCT,
@@ -7093,13 +7104,20 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
             *v2 = 13;
 			return 0;
         }
+		else
+		{
+			// Returns message saying player doesn't have required playtime
+			*v2 = 14;
+			return 0;
+		}
     }
 	
-	if (v8 == 14)
+	if (v8 == 15)
     {
         // This example gives a level 5 random pokemon.
 		u16 randSpecies = LCRNG_Next() % SPECIES_ARCEUS;
 		u8 randNature = LCRNG_Next() % NATURE_QUIRKY;
+		randSpecies = sub_02076F84(randSpecies);
 		
 		u16 monMoves[] = {
 			255
@@ -7142,9 +7160,359 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monReceivedType, // Received type
 			FALSE); // BOOL, is shiny?
 
-		*v2 = 14;
+		*v2 = 15;
 		return 0;
     }
+	
+	// Lilangryjoe Special Event Metagross
+	if (v8 == 16)
+	{
+		// This example gives a level 55 Adamant Shiny Metagross.
+		u16 monMoves[] = {
+			MOVE_SLAM, // Psyshield Bash, Exclusive move
+			MOVE_METEOR_MASH,
+			MOVE_SUBSTITUTE,
+			MOVE_EXPLOSION
+		};
+
+		u16 monIVs[] = {
+			31, // HP
+			31, // ATK
+			31, // DEF
+			31, // SPEED
+			31, // SPATK
+			31 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			0, // ATK
+			0, // DEF
+			0, // SPEED
+			0, // SPATK
+			0 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_METAGROSS, // Desired species
+			55, // Desired level
+			ABILITY_RATTLED, // Desired ability
+			ITEM_COLBUR_BERRY, // Desired item
+			GENDER_NONE, // Desired gender
+			NATURE_ADAMANT, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monReceivedType, // Received type
+			TRUE); // BOOL, is shiny?
+		
+		*v2 = 16;
+		return 0;
+	}
+	
+	// Lilangryjoe Special Event Squirtle
+	if (v8 == 17)
+	{
+		// This example gives a level 5 Random Nature Squirtle with Freeze-Dry and Stealth Rock.
+		u8 randNature = LCRNG_Next() % NATURE_QUIRKY;
+		
+		u16 monMoves[] = {
+			MOVE_WATER_GUN,
+			MOVE_DEFENSE_CURL,
+			MOVE_CONSTRICT, // Freeze-Dry, Exclusive move
+			MOVE_STEALTH_ROCK // Exclusive move
+		};
+
+		u16 monIVs[] = {
+			31, // HP
+			20, // ATK
+			25, // DEF
+			20, // SPEED
+			20, // SPATK
+			25 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			0, // ATK
+			0, // DEF
+			0, // SPEED
+			0, // SPATK
+			0 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_SQUIRTLE, // Desired species
+			5, // Desired level
+			ABILITY_SHAKEDOWN, // Desired ability
+			ITEM_ORAN_BERRY, // Desired item
+			GENDER_NONE, // Desired gender
+			randNature, // Desired nature
+			ITEM_CHERISH_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monReceivedType, // Received type
+			FALSE); // BOOL, is shiny?
+		
+		*v2 = 17;
+		return 0;
+	}
+	
+	// Roark's Anorith
+	if (v8 == 19)
+	{
+		if (badges >= 1)
+		{
+			// This example gives an Anorith virtually identical to Roark's.
+			u16 monMoves[] = {
+				MOVE_ROCK_TOMB,
+				MOVE_KNOCK_OFF,
+				MOVE_CURSE,
+				MOVE_FURY_CUTTER
+			};
+
+			u16 monIVs[] = {
+				14, // HP
+				20, // ATK
+				14, // DEF
+				14, // SPEED
+				15, // SPATK
+				16 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				0, // ATK
+				0, // DEF
+				0, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_ANORITH, // Desired species
+				13, // Desired level
+				ABILITY_STORM_DRAIN, // Desired ability
+				ITEM_WIDE_LENS, // Desired item
+				GENDER_NONE, // Desired gender
+				NATURE_HARDY, // Desired nature
+				ITEM_PREMIER_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 19;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
+	
+	// Gardenia's Roselia
+	if (v8 == 20)
+	{
+		if (badges >= 2)
+		{
+			// This example gives a Roselia virtually identical to Gardenia's.
+			u16 monMoves[] = {
+				MOVE_MEGA_DRAIN,
+				MOVE_ACID,
+				MOVE_STUN_SPORE,
+				MOVE_HIDDEN_POWER
+			};
+
+			u16 monIVs[] = {
+				17, // HP
+				14, // ATK
+				17, // DEF
+				17, // SPEED
+				22, // SPATK
+				16 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				0, // ATK
+				0, // DEF
+				0, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_ROSELIA, // Desired species
+				22, // Desired level
+				ABILITY_TECHNICIAN, // Desired ability
+				ITEM_MIRACLE_SEED, // Desired item
+				GENDER_NONE, // Desired gender
+				NATURE_HARDY, // Desired nature
+				ITEM_NEST_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 20;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
+	
+	// Fantina's Mismagius
+	if (v8 == 21)
+	{
+		if (badges >= 3)
+		{
+			// This example gives a Mismagius virtually identical to Fantina's.
+			u16 monMoves[] = {
+				MOVE_PAIN_SPLIT,
+				MOVE_OMINOUS_WIND,
+				MOVE_HIDDEN_POWER,
+				MOVE_NASTY_PLOT
+			};
+
+			u16 monIVs[] = {
+				31, // HP
+				31, // ATK
+				30, // DEF
+				30, // SPEED
+				30, // SPATK
+				30 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				0, // ATK
+				0, // DEF
+				0, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_MISMAGIUS, // Desired species
+				26, // Desired level
+				ABILITY_LEVITATE, // Desired ability
+				ITEM_LUM_BERRY, // Desired item
+				GENDER_NONE, // Desired gender
+				NATURE_MODEST, // Desired nature
+				ITEM_LUXURY_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 21;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
+	
+	// Maylene's Lucario
+	if (v8 == 22)
+	{
+		if (badges >= 4)
+		{
+			// This example gives a Lucario virtually identical to Maylene's.
+			u16 monMoves[] = {
+				MOVE_AURA_SPHERE,
+				MOVE_SHADOW_BALL,
+				MOVE_CALM_MIND,
+				MOVE_FLASH_CANNON
+			};
+
+			u16 monIVs[] = {
+				24, // HP
+				26, // ATK
+				22, // DEF
+				31, // SPEED
+				31, // SPATK
+				16 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				0, // ATK
+				0, // DEF
+				0, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_LUCARIO, // Desired species
+				31, // Desired level
+				ABILITY_SCRAPPY, // Desired ability
+				ITEM_EXPERT_BELT, // Desired item
+				GENDER_NONE, // Desired gender
+				NATURE_TIMID, // Desired nature
+				ITEM_ULTRA_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 22;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
 
     if ((v8 == -1) || (v8 > 7)) {
         *v2 = 0xff;
@@ -7226,17 +7594,20 @@ void MakeAndAddEventPokemon (
 	personalAbility1 = PokemonPersonalData_GetSpeciesValue(monSpecies, MON_DATA_PERSONAL_ABILITY_1);
     personalAbility2 = PokemonPersonalData_GetSpeciesValue(monSpecies, MON_DATA_PERSONAL_ABILITY_2);
 	
-	if (monAbility == personalAbility1)
+	if (monAbility != ABILITY_NONE)
 	{
-		do {
-			monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
-		} while (monPersonality & 1);
-	}
-	else if (monAbility == personalAbility2)
-	{
-		do {
-			monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
-		} while ((monPersonality & 1) == FALSE);
+		if (monAbility == personalAbility1)
+		{
+			do {
+				monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+			} while (monPersonality & 1);
+		}
+		else if (monAbility == personalAbility2)
+		{
+			do {
+				monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
+			} while ((monPersonality & 1) == FALSE);
+		}
 	}
 		
 	PokemonPersonalData_Free(monPersonalData);
