@@ -611,6 +611,7 @@ BOOL BattleSystem_UseBagItem(BattleSystem *battleSys, int battler, int partySlot
                 param = BattleMon_Get(battleCtx, battler, BATTLEMON_VOLATILE_STATUS, NULL);
                 param &= ~VOLATILE_CONDITION_NIGHTMARE;
                 BattleMon_Set(battleCtx, battler, BATTLEMON_VOLATILE_STATUS, &param);
+				battleCtx->sideConditions[Battler_Side(battleSys, battler)].sleepClauseMask &= ~FlagIndex(battleCtx->selectedPartySlot[battler]);
             }
 
             result = TRUE;
