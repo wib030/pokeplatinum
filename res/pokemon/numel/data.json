@@ -35,8 +35,8 @@
         "EGG_GROUP_FIELD"
     ],
     "abilities": [
-        "ABILITY_FLASH_FIRE",
-        "ABILITY_SIMPLE"
+        "ABILITY_SIMPLE",
+        "ABILITY_FLASH_FIRE"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
