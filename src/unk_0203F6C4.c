@@ -7115,7 +7115,45 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 	if (v8 == 15)
     {
         // This example gives a level 5 random pokemon.
-		u16 randSpecies = LCRNG_Next() % SPECIES_ARCEUS;
+		u16 randSpecies;
+		
+		do {
+            randSpecies = LCRNG_Next() % SPECIES_ARCEUS;
+        } while (randSpecies == SPECIES_ARTICUNO
+			|| randSpecies == SPECIES_ZAPDOS
+			|| randSpecies == SPECIES_MOLTRES
+			|| randSpecies == SPECIES_MEWTWO
+			|| randSpecies == SPECIES_MEWTWO
+			|| randSpecies == SPECIES_RAIKOU
+			|| randSpecies == SPECIES_ENTEI
+			|| randSpecies == SPECIES_SUICUNE
+			|| randSpecies == SPECIES_LUGIA
+			|| randSpecies == SPECIES_HO_OH
+			|| randSpecies == SPECIES_CELEBI
+			|| randSpecies == SPECIES_REGIROCK
+			|| randSpecies == SPECIES_REGICE
+			|| randSpecies == SPECIES_REGISTEEL
+			|| randSpecies == SPECIES_LATIAS
+			|| randSpecies == SPECIES_LATIOS
+			|| randSpecies == SPECIES_KYOGRE
+			|| randSpecies == SPECIES_GROUDON
+			|| randSpecies == SPECIES_RAYQUAZA
+			|| randSpecies == SPECIES_JIRACHI
+			|| randSpecies == SPECIES_DEOXYS
+			|| randSpecies == SPECIES_UXIE
+			|| randSpecies == SPECIES_MESPRIT
+			|| randSpecies == SPECIES_AZELF
+			|| randSpecies == SPECIES_DIALGA
+			|| randSpecies == SPECIES_PALKIA
+			|| randSpecies == SPECIES_HEATRAN
+			|| randSpecies == SPECIES_REGIGIGAS
+			|| randSpecies == SPECIES_GIRATINA
+			|| randSpecies == SPECIES_CRESSELIA
+			|| randSpecies == SPECIES_MANAPHY
+			|| randSpecies == SPECIES_DARKRAI
+			|| randSpecies == SPECIES_SHAYMIN
+			|| randSpecies == SPECIES_ARCEUS);
+		
 		u8 randNature = LCRNG_Next() % NATURE_QUIRKY;
 		randSpecies = sub_02076F84(randSpecies);
 		
