@@ -2,7 +2,7 @@
     "name": "Sky Attack",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_FLYING",
-    "power": 140,
+    "power": 160,
     "accuracy": 90,
     "pp": 5,
     "effect": {
