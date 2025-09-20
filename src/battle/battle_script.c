@@ -13136,6 +13136,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
             case ITEM_DESTINY_KNOT:
                 maxIVsInherited = STAT_MAX - 1;
+				battlerPregnant = battleCtx->attacker;
                 break;
 
             case ITEM_LAX_INCENSE:
