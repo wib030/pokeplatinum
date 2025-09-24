@@ -15097,14 +15097,14 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
             monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
 
             if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
-                speedMultiplier = 9;
+                speedMultiplier = 7;
             }
             else {
                 if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_TIE) {
-                    speedMultiplier = 15;
+                    speedMultiplier = 8;
                 }
                 else {
-                    speedMultiplier = 15;
+                    speedMultiplier = 13;
                 }
             }
 
@@ -17941,15 +17941,15 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
         // speed bonuses are inverted for defensive score
         if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
 
-            speedMultiplier = 9;
+            speedMultiplier = 7;
         }
         else if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_TIE) {
 
-            speedMultiplier = 10;
+            speedMultiplier = 8;
         }
         else {
 
-            speedMultiplier = 15;
+            speedMultiplier = 13;
         }
 
         for (j = 0; j < LEARNED_MOVES_MAX; j++) {
