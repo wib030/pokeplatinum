@@ -2175,4 +2175,25 @@ int BattleSystem_GetMultiHitExpectedMoveHits(BattleSystem* battleSys, BattleCont
 */
 int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 move);
 
+/**
+* @brief Get the speed order of a battler.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler     battleMon ID of the mon for which we will obtain the speed order.
+* @return The index of the battleMon's speed order.
+*/
+int BattleSystem_GetBattlerSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
+/**
+* @brief Compare the speed orders of two battlers.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler1     battleMon ID of the mon that will be used as a frame of reference.
+* @param battler2     battleMon ID of the mon whose speed order will be compared to battler1's.
+* @return Either COMPARE_SPEED_FASTER or COMPARE_SPEED_SLOWER.
+*/
+int BattleSystem_CompareBattlerSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx, int battler1, int battler2);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

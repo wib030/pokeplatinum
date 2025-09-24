@@ -855,7 +855,6 @@ Basic_CheckCurrentWeatherIsSun:
 Basic_CheckFutureSight:
     ; If either the attacker or the target are currently under the effect of Future Sight, score -12.
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_FUTURE_SIGHT, ScoreMinus12
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_FUTURE_SIGHT, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckFirstTurnInBattle:

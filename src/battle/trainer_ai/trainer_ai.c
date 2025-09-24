@@ -7821,6 +7821,15 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                     return FALSE;
                                 }
 
+                                if (effect == BATTLE_EFFECT_HIT_IN_3_TURNS) {
+                                    side = Battler_Side(battleSys, defender);
+
+                                    if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_FUTURE_SIGHT) == FALSE)
+                                    {
+                                        return FALSE;
+                                    }
+                                }
+
                                 // Check that no immunity abilities or items will activate
                                 if ((effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) == FALSE)
                                 {
@@ -9893,7 +9902,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
 
                     if (pivotMoves > 0) {
 
-                        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler, BATTLER_OPP(battler), TRUE) == COMPARE_SPEED_FASTER) {
+                        if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, battler, BattleSystem_RandomOpponent(battleSys, battleCtx, battler)) == COMPARE_SPEED_FASTER) {
 
                             // Hard switch 2/3 the time if target has negative contact ability
                             if (AI_TargetHasRelevantContactAbility(battleSys, battleCtx, battler)
@@ -9940,7 +9949,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                 // deprioritize a hard switch when we are faster
                 if (pivotMoves > 0) {
             
-                    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler, BATTLER_OPP(battler), TRUE) == COMPARE_SPEED_FASTER) {
+                    if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, battler, BattleSystem_RandomOpponent(battleSys, battleCtx, battler)) == COMPARE_SPEED_FASTER) {
 
                         // Hard switch 2/3 the time if target has negative contact ability
                         if (AI_TargetHasRelevantContactAbility(battleSys, battleCtx, battler)

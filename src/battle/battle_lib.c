@@ -22297,3 +22297,46 @@ int BattleSystem_GetEffectiveMoveAccuracy(BattleSystem* battleSys, BattleContext
 
     return moveAccuracy;
 }
+
+int BattleSystem_GetBattlerSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    int speedOrder;
+    int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+    int i;
+
+    if (battleCtx->battleMons[battler].curHP <= 0)
+    {
+        return maxBattlers;
+    }
+
+    for (i = 0; i < maxBattlers; i++)
+    {
+        speedOrder = battleCtx->monSpeedOrder[i];
+
+        if (battler == speedOrder)
+        {
+            break;
+        }
+    }
+
+    speedOrder = i;
+
+    return speedOrder;
+}
+
+int BattleSystem_CompareBattlerSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx, int battler1, int battler2)
+{
+    int battler1SpeedOrder, battler2SpeedOrder;
+    u8 result = COMPARE_SPEED_FASTER;
+
+    battler1SpeedOrder = BattleSystem_GetBattlerSpeedOrder(BattleSystem * battleSys, BattleContext * battleCtx, int battler1);
+
+    battler2SpeedOrder = BattleSystem_GetBattlerSpeedOrder(BattleSystem * battleSys, BattleContext * battleCtx, int battler2);
+
+    if (battler1SpeedOrder < battler2SpeedOrder)
+    {
+        result = COMPARE_SPEED_SLOWER;
+    }
+
+    return result;
+}
