@@ -22329,9 +22329,9 @@ int BattleSystem_CompareBattlerSpeedOrder(BattleSystem* battleSys, BattleContext
     int battler1SpeedOrder, battler2SpeedOrder;
     u8 result = COMPARE_SPEED_FASTER;
 
-    battler1SpeedOrder = BattleSystem_GetBattlerSpeedOrder(BattleSystem * battleSys, BattleContext * battleCtx, int battler1);
+    battler1SpeedOrder = BattleSystem_GetBattlerSpeedOrder(battleSys, battleCtx, battler1);
 
-    battler2SpeedOrder = BattleSystem_GetBattlerSpeedOrder(BattleSystem * battleSys, BattleContext * battleCtx, int battler2);
+    battler2SpeedOrder = BattleSystem_GetBattlerSpeedOrder(battleSys, battleCtx, battler2);
 
     if (battler1SpeedOrder < battler2SpeedOrder)
     {
