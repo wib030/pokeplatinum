@@ -100,6 +100,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_WHIRLPOOL",
                 "MOVE_CURSE",
                 "MOVE_YAWN",
                 "MOVE_TACKLE",
