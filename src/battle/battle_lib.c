@@ -14899,12 +14899,13 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
         monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
         monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
         monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+        monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
 
         // BattleAI_CalculateDamagingMoveAttackScore(battleSys, battleCtx, defender, battler, i);
 
         if (monSpecies != SPECIES_NONE
             && monSpecies != SPECIES_EGG
-            && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+            && monCurHP
             && (battlersDisregarded & FlagIndex(i)) == FALSE
             && battleCtx->selectedPartySlot[slot1] != i
             && battleCtx->selectedPartySlot[slot2] != i
@@ -14917,7 +14918,6 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
 
             hazardsBonus = 0;
             sackBonus = 0;
-            monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
             monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
             if (monCurHP <= 0) {
                 monCurHP = 1;
