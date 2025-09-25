@@ -9646,6 +9646,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     int defenderWeight;
     u8 defenderFormNum;
     u16 defenderItem;
+    u16 attackerItem;
+    u8 attackerFriendship;
 	
 	u16 fullAttackStat, fullSpAttackStat;
     
@@ -9675,6 +9677,9 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         itemTmp = Battler_HeldItem(battleCtx, attacker);
         attackerParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT);
         attackerParams.heldItemPower = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT_PARAM);
+        attackerItem = Battler_HeldItem(battleCtx, attacker);
+
+        attackerFriendship = battleCtx->battleMons[attacker].friendship;
 
         // defender
 
@@ -9741,6 +9746,9 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         monHeldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
         attackerParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT);
         attackerParams.heldItemPower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+        attackerItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+
+        attackerFriendship = Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL);
 
         // defender
 
@@ -10032,12 +10040,12 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 break;
 
             case BATTLE_EFFECT_FLING:
-                movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_FLING_POWER);
-                moveType = Battler_FlingTypeFromItem(battleCtx, monHeldItem);
+                movePower = BattleSystem_GetItemData(battleCtx, attackerItem, ITEM_PARAM_FLING_POWER);
+                moveType = Battler_FlingTypeFromItem(battleCtx, attackerItem);
                 break;
 
             case BATTLE_EFFECT_NATURAL_GIFT:
-                movePower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_NATURAL_GIFT_POWER);
+                movePower = BattleSystem_GetItemData(battleCtx, attackerItem, ITEM_PARAM_NATURAL_GIFT_POWER);
                 break;
 
             case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
@@ -10105,11 +10113,11 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 break;
 
             case BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP:
-                movePower = Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL) * 2 / 5;
+                movePower = attackerFriendship * 2 / 5;
                 break;
 
             case BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP:
-                movePower = (255 - Pokemon_GetValue(mon, MON_DATA_FRIENDSHIP, NULL)) * 2 / 5;
+                movePower = (255 - attackerFriendship) * 2 / 5;
                 break;
 				
 			case BATTLE_EFFECT_DOUBLE_POWER_STATUS:
