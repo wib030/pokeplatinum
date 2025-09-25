@@ -19449,7 +19449,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 moveVolatileStatus = VOLATILE_CONDITION_NONE;
                 moveEnemyStatDropStatFlag = BATTLE_STAT_FLAG_NONE;
                 
-                moveScore += 3;
+                moveScore += 10;
             }
             break;
 
@@ -19457,21 +19457,21 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 		case ABILITY_MEMORY:
             if (moveStatFlag != BATTLE_STAT_FLAG_NONE)
             {
-                moveScore += 20;
+                moveScore += 30;
             }
             break;
 
         case ABILITY_TIDAL_FORCE:
             if (moveFieldEffect & FIELD_CONDITION_GRAVITY)
             {
-                moveScore += 15;
+                moveScore += 25;
             }
             break;
 
         case ABILITY_SUCTION_CUPS:
             if (moveEffect == BATTLE_EFFECT_FORCE_SWITCH)
             {
-                moveScore += 15;
+                moveScore += 25;
             }
             break;
 
@@ -19543,7 +19543,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         case ABILITY_UNBURDEN:
             if (moveEffect == BATTLE_EFFECT_REMOVE_HELD_ITEM)
             {
-                moveScore += 15;
+                moveScore += 25;
             }
             break;
 
@@ -19558,7 +19558,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 &moveStatusFlags);
             if (moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
             {
-                moveScore += 10;
+                moveScore += 20;
             }
             break;
 
@@ -19609,7 +19609,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         {
             if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, monAbility, moveEnemyStatDropStatFlag))
             {
-                moveScore += 10;
+                moveScore += 25;
             }
         }
         
@@ -19618,7 +19618,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         {
             if (Battle_AbilityDetersStatus(battleSys, battleCtx, monAbility, moveStatus))
             {
-                moveScore += 30;
+                moveScore += 40;
             }
         }
 
@@ -19626,7 +19626,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         {
             if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, monAbility, moveVolatileStatus))
             {
-                moveScore += 15;
+                moveScore += 25;
             }
         }
 
@@ -19634,7 +19634,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         {
             if (Battle_AbilityDetersMoveEffect(battleSys, battleCtx, monAbility, moveMoveEffect))
             {
-                moveScore += 15;
+                moveScore += 25;
             }
         }
 
@@ -19658,7 +19658,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 case ABILITY_HYDRATION:
                 case ABILITY_RAIN_DISH:
                 case ABILITY_DRY_SKIN:
-                    moveScore += 15;
+                    moveScore += 40;
                     break;
                 }
             }
@@ -19675,7 +19675,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 case ABILITY_LEAF_GUARD:
                 case ABILITY_FLOWER_GIFT:
                 case ABILITY_SOLAR_POWER:
-                    moveScore += 15;
+                    moveScore += 40;
                     break;
                 }
             }
@@ -19689,11 +19689,11 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
                 case ABILITY_SAND_FORCE:
                 case ABILITY_SAND_VEIL:
-                    moveScore += 15;
+                    moveScore += 30;
                     break;
 
                 case ABILITY_MAGIC_GUARD:
-                    moveScore += 2;
+                    moveScore += 8;
                     break;
                 }
             }
@@ -19708,11 +19708,11 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 case ABILITY_SLUSH_RUSH:
                 case ABILITY_ICE_BODY:
                 case ABILITY_SNOW_CLOAK:
-                    moveScore += 15;
+                    moveScore += 40;
                     break;
 
                 case ABILITY_MAGIC_GUARD:
-                    moveScore += 2;
+                    moveScore += 8;
                     break;
                 }
             }
@@ -19726,7 +19726,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         case BATTLE_EFFECT_HALVE_DEFENSE:
             if (monAbility == ABILITY_DAMP)
             {
-                moveScore += 10;
+                moveScore += 25;
             }
             break;
         }
@@ -19768,7 +19768,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             || monAbility == ABILITY_AIR_LOCK
             || monAbility == ABILITY_FORECAST)
         {
-            score += 20;
+            score += 50;
         }
 
         if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
@@ -19782,7 +19782,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             case ABILITY_HYDRATION:
             case ABILITY_RAIN_DISH:
             case ABILITY_DRY_SKIN:
-                score += 25;
+                score += 50;
                 break;
             }
         }
@@ -19799,7 +19799,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             case ABILITY_LEAF_GUARD:
             case ABILITY_FLOWER_GIFT:
             case ABILITY_SOLAR_POWER:
-                score += 25;
+                score += 50;
                 break;
             }
         }
@@ -19813,11 +19813,11 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 
             case ABILITY_SAND_FORCE:
             case ABILITY_SAND_VEIL:
-                score += 25;
+                score += 35;
                 break;
 
             case ABILITY_MAGIC_GUARD:
-                score += 2;
+                score += 10;
                 break;
             }
         }
@@ -19832,11 +19832,11 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             case ABILITY_SLUSH_RUSH:
             case ABILITY_ICE_BODY:
             case ABILITY_SNOW_CLOAK:
-                score += 25;
+                score += 40;
                 break;
 
             case ABILITY_MAGIC_GUARD:
-                score += 2;
+                score += 10;
                 break;
             }
         }
@@ -19939,7 +19939,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE
                     && BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
                 {
-                    score += 50;
+                    score += 200;
                 }
             }
         }
@@ -19957,7 +19957,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE
                     && BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
                 {
-                    score += 50;
+                    score += 200;
                 }
             }
         }
@@ -19994,21 +19994,21 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
     case ABILITY_SKILL_LINK:
         if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
         {
-            score += 20;
+            score += 40;
         }
         break;
 
     case ABILITY_NORMALIZE:
         if (defenderAbility != ABILITY_NORMALIZE)
         {
-            score += 30;
+            score += 75;
         }
         break;
 
     case ABILITY_AFTERMATH:
         if (defenderHPPercent <= 25)
         {
-            score += 50;
+            score += 99;
         }
         if (defenderAbility == ABILITY_WONDER_GUARD)
         {
@@ -20019,7 +20019,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
     case ABILITY_MOLD_BREAKER:
         if (defenderAbility == ABILITY_WONDER_GUARD)
         {
-            score += 200;
+            score += 250;
             break;
         }
 
@@ -20117,28 +20117,28 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
     case ABILITY_DRIZZLE:
         if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) == FALSE)
         {
-            score += 40;
+            score += 150;
         }
         break;
 
     case ABILITY_DROUGHT:
         if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) == FALSE)
         {
-            score += 40;
+            score += 150;
         }
         break;
 
     case ABILITY_SAND_STREAM:
         if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) == FALSE)
         {
-            score += 40;
+            score += 150;
         }
         break;
 
     case ABILITY_SNOW_WARNING:
         if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) == FALSE)
         {
-            score += 40;
+            score += 150;
         }
         break;
 		
@@ -20146,7 +20146,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 	case ABILITY_SLOW_START:
 		if (NEUTRALIZING_GAS)
 		{
-			score += 50;
+			score += 100;
 		}
 		break;
 		
@@ -20155,7 +20155,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 		if (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, battler, ABILITY_TRUANT)
 		|| BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, battler, ABILITY_SLOW_START))
 		{
-			score += 50;
+			score += 100;
 		}
 		
 		switch (defenderAbility)
@@ -20163,7 +20163,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 			case ABILITY_HUGE_POWER:
 			case ABILITY_PURE_POWER:
 			case ABILITY_WONDER_GUARD:
-				score += 50;
+				score += 100;
 				break;
 			
 			case ABILITY_SHARPNESS:
@@ -20179,7 +20179,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 			case ABILITY_RELENTLESS:
 			case ABILITY_ROCK_STAR:
 			case ABILITY_UNOWN_ENERGY:
-				score += 25;
+				score += 50;
 				break;
 				
             case ABILITY_SPEED_BOOST:
@@ -20192,7 +20192,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 			case ABILITY_RIVALRY:
 			case ABILITY_FORECAST:
 			case ABILITY_STEADFAST:
-				score += 15;
+				score += 30;
 				break;
 				
 			case ABILITY_SWIFT_SWIM:
@@ -20200,7 +20200,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 				{
 					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
 					{
-						score += 25;
+						score += 75;
 					}
 				}
 				break;
@@ -20210,7 +20210,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 				{
 					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
 					{
-						score += 25;
+						score += 75;
 					}
 				}
 				break;
@@ -20220,7 +20220,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
 				{
 					if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING)
 					{
-						score += 25;
+						score += 75;
 					}
 				}
 				break;
