@@ -9643,6 +9643,9 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 	int tempPower;
 	int HPMult;
     int currentHit;
+    int defenderWeight;
+    u8 defenderFormNum;
+    u16 defenderItem;
 	
 	u16 fullAttackStat, fullSpAttackStat;
     
@@ -9650,46 +9653,124 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
     GF_ASSERT(criticalMul == 1 || criticalMul > 1);
 
-    attackStat = Pokemon_GetValue(mon, MON_DATA_ATK, NULL);
-    defenseStat = BattleMon_Get(battleCtx, defender, BATTLEMON_DEFENSE, NULL);
-    spAttackStat = Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL);
-    spDefenseStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SP_DEFENSE, NULL);
-    speedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
-    defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
+    if (partyIndicator == defender)
+    {
+        attackStat = BattleMon_Get(battleCtx, attacker, BATTLEMON_ATTACK, NULL);
+        spAttackStat = BattleMon_Get(battleCtx, attacker, BATTLEMON_SP_ATTACK, NULL);
+        speedStat = BattleMon_Get(battleCtx, attacker, BATTLEMON_SPEED, NULL);
+        attackStage = BattleMon_Get(battleCtx, attacker, BATTLEMON_ATTACK_STAGE, NULL) - 6;
+        spAttackStage = BattleMon_Get(battleCtx, attacker, BATTLEMON_SP_ATTACK_STAGE, NULL) - 6;
+        attackerLevel = BattleMon_Get(battleCtx, attacker, BATTLEMON_LEVEL, NULL);
 
-    attackStage = 0;
-    defenseStage = BattleMon_Get(battleCtx, defender, BATTLEMON_DEFENSE_STAGE, NULL) - 6;
-    spAttackStage = 0;
-    spDefenseStage = BattleMon_Get(battleCtx, defender, BATTLEMON_SP_DEFENSE_STAGE, NULL) - 6;
-    attackerLevel = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+        attackerParams.species = BattleMon_Get(battleCtx, attacker, BATTLEMON_SPECIES, NULL);
+        attackerParams.curHP = BattleMon_Get(battleCtx, attacker, BATTLEMON_CUR_HP, NULL);
+        attackerParams.maxHP = BattleMon_Get(battleCtx, attacker, BATTLEMON_MAX_HP, NULL);
+        attackerParams.statusMask = BattleMon_Get(battleCtx, attacker, BATTLEMON_STATUS, NULL);
+        attackerParams.ability = Battler_Ability(battleCtx, attacker);
+        attackerParams.gender = BattleMon_Get(battleCtx, attacker, BATTLEMON_GENDER, NULL);
+        attackerParams.type1 = BattleMon_Get(battleCtx, attacker, BATTLEMON_TYPE_1, NULL);
+        attackerParams.type2 = BattleMon_Get(battleCtx, attacker, BATTLEMON_TYPE_2, NULL);
+
+        
+        itemTmp = Battler_HeldItem(battleCtx, attacker);
+        attackerParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT);
+        attackerParams.heldItemPower = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT_PARAM);
+
+        // defender
+
+        defenseStat = Pokemon_GetValue(mon, MON_DATA_DEF, NULL);
+        spDefenseStat = Pokemon_GetValue(mon, MON_DATA_SP_DEF, NULL);
+        defenderSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+
+        defenseStage = 0;
+        spDefenseStage = 0;
+
+        defenderParams.species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+        defenderParams.curHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+        defenderParams.maxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+        defenderParams.statusMask = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
+        defenderParams.ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+        defenderParams.gender = Pokemon_GetValue(mon, MON_DATA_GENDER, NULL);
+        defenderParams.type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+        defenderParams.type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+
+        monHeldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+        defenderParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT);
+        defenderParams.heldItemPower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+
+        defenderFormNum = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
+        defenderItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+
+        HeightWeightData* heightWeightData = Pokedex_HeightWeightData(HEAP_ID_BATTLE);
+        Pokedex_HeightWeightData_Load(heightWeightData, 0, HEAP_ID_BATTLE);
+
+        if (defenderParams.species == SPECIES_AZURILL)
+        {
+            defenderWeight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_WAILMER);
+        }
+        else if ((defenderParams.species == SPECIES_IGGLYBUFF)
+        {
+            defenderWeight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_GARDEVOIR);
+        }
+        else
+        {
+            defenderWeight = Pokedex_HeightWeightData_Weight(heightWeightData, defenderParams.species);
+        }
+
+        Pokedex_HeightWeightData_Release(heightWeightData);
+        Pokedex_HeightWeightData_Free(heightWeightData);
+    }
+    else
+    {
+        attackStat = Pokemon_GetValue(mon, MON_DATA_ATK, NULL);
+        spAttackStat = Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL);
+        speedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+        attackStage = 0;
+        spAttackStage = 0;
+        attackerLevel = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+
+        attackerParams.species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+        attackerParams.curHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+        attackerParams.maxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+        attackerParams.statusMask = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
+        attackerParams.ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+        attackerParams.gender = Pokemon_GetValue(mon, MON_DATA_GENDER, NULL);
+        attackerParams.type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+        attackerParams.type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+
+        monHeldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+        attackerParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT);
+        attackerParams.heldItemPower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
+
+        // defender
+
+        defenseStat = BattleMon_Get(battleCtx, defender, BATTLEMON_DEFENSE, NULL);
+        spDefenseStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SP_DEFENSE, NULL);
+        defenderSpeedStat = BattleMon_Get(battleCtx, defender, BATTLEMON_SPEED, NULL);
+
+        defenseStage = BattleMon_Get(battleCtx, defender, BATTLEMON_DEFENSE_STAGE, NULL) - 6;
+        spDefenseStage = BattleMon_Get(battleCtx, defender, BATTLEMON_SP_DEFENSE_STAGE, NULL) - 6;
+
+        defenderParams.species = BattleMon_Get(battleCtx, defender, BATTLEMON_SPECIES, NULL);
+        defenderParams.curHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+        defenderParams.maxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
+        defenderParams.statusMask = BattleMon_Get(battleCtx, defender, BATTLEMON_STATUS, NULL);
+        defenderParams.ability = Battler_Ability(battleCtx, defender);
+        defenderParams.gender = BattleMon_Get(battleCtx, defender, BATTLEMON_GENDER, NULL);
+        defenderParams.type1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+        defenderParams.type2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+
+        itemTmp = Battler_HeldItem(battleCtx, defender);
+        defenderParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT);
+        defenderParams.heldItemPower = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT_PARAM);
+
+        defenderWeight = battleCtx->battleMons[defender].weight;
+        defenderFormNum = battleCtx->battleMons[defender].formNum;
+        defenderItem = Battler_HeldItem(battleCtx, defender);
+        
+    }
 
     attackerSideConditions = battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)];
-
-    attackerParams.species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
-    defenderParams.species = BattleMon_Get(battleCtx, defender, BATTLEMON_SPECIES, NULL);
-    attackerParams.curHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
-    defenderParams.curHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
-    attackerParams.maxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
-    defenderParams.maxHP = BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
-    // attackerParams.statusMask = BattleMon_Get(battleCtx, attacker, BATTLEMON_STATUS, NULL);
-    attackerParams.statusMask = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
-    defenderParams.statusMask = BattleMon_Get(battleCtx, defender, BATTLEMON_STATUS, NULL);
-    attackerParams.ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
-    defenderParams.ability = Battler_Ability(battleCtx, defender);
-    attackerParams.gender = Pokemon_GetValue(mon, MON_DATA_GENDER, NULL);
-    defenderParams.gender = BattleMon_Get(battleCtx, defender, BATTLEMON_GENDER, NULL);
-    attackerParams.type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
-    defenderParams.type1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
-    attackerParams.type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
-    defenderParams.type2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
-
-    monHeldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
-    attackerParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT);
-    attackerParams.heldItemPower = BattleSystem_GetItemData(battleCtx, monHeldItem, ITEM_PARAM_HOLD_EFFECT_PARAM);
-
-    itemTmp = Battler_HeldItem(battleCtx, defender);
-    defenderParams.heldItemEffect = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT);
-    defenderParams.heldItemPower = BattleSystem_GetItemData(battleCtx, itemTmp, ITEM_PARAM_HOLD_EFFECT_PARAM);
 
     battleType = BattleSystem_BattleType(battleSys);
 
@@ -9743,7 +9824,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         && Pokemon_GetValue(partyMon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG
                         && ((Pokemon_GetValue(partyMon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_INCAPACITATED) == FALSE)) {
                         damage = movePower * ((partyMonLevel * 2 / 5) + 2) * PokemonPersonalData_GetFormValue(partyMonSpecies, partyMonForm, MON_DATA_PERSONAL_BASE_ATK);
-                        damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, battleCtx->battleMons[defender].formNum, MON_DATA_PERSONAL_BASE_DEF));
+                        damage /= (50 * PokemonPersonalData_GetFormValue(defenderParams.species, defenderFormNum, MON_DATA_PERSONAL_BASE_DEF));
 
                         switch (partyMonAbility) {
                         default:
@@ -9960,11 +10041,18 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 break;
 
             case BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP:
-                for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
+                if (partyIndicator == attacker)
+                {
+                    for (i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
 
-                    if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
-                        cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
+                        if (battleCtx->battleMons[defender].statBoosts[i] > 6) {
+                            cumStatBoosts += battleCtx->battleMons[defender].statBoosts[i] - 6;
+                        }
                     }
+                }
+                else
+                {
+                    cumStatBoosts = 0;
                 }
 
                 movePower = 60 + 20 * cumStatBoosts;
@@ -10040,15 +10128,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 break;
 
             case BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT:
-                int monWeight = battleCtx->battleMons[defender].weight;
 
                 if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
                 {
-                    monWeight *= 2;
+                    defenderWeight *= 2;
                 }
 
                 for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
-                    if (sWeightToPower[i][0] >= monWeight) {
+                    if (sWeightToPower[i][0] >= defenderWeight) {
                         break;
                     }
                 }
@@ -10691,7 +10778,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     }
 
     // Defender ignorable ability
-    if (PartyMon_IgnorableAbility(battleCtx, mon, defender, defenderParams.ability) == TRUE) {
+    if ((PartyMon_IgnorableAbility(battleCtx, mon, defender, defenderParams.ability) == TRUE && partyIndicator == attacker)
+        || (PartyMon_IgnorableAbility(battleCtx, mon, attacker, attackerParams.ability) == TRUE && partyIndicator == defender)) {
 
         switch (defenderParams.ability) {
             default:
@@ -12770,23 +12858,23 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     spAttackStage += 6;
     spDefenseStage += 6;
 	
-	if (move == MOVE_KNOCK_OFF && DEFENDING_MON.heldItem != ITEM_NONE)
+	if (move == MOVE_KNOCK_OFF && defenderItem != ITEM_NONE)
 	{
-		movePower = movePower * 15 / 10;
+		movePower = movePower * 3 / 2;
 	}
 
     if (NO_CLOUD_NINE) {
 
         if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
                 && (defenderParams.type1 == TYPE_ROCK || defenderParams.type2 == TYPE_ROCK)) {
-            spDefenseStat = spDefenseStat * 15 / 10;
+            spDefenseStat = spDefenseStat * 3 / 2;
         }
 
         if ((fieldConditions & FIELD_CONDITION_SUNNY)
                 && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_FLOWER_GIFT)
 				&& attackerParams.ability != ABILITY_FLOWER_GIFT) {
-            attackStat = attackStat * 15 / 10;
-			spAttackStat = spAttackStat * 15 / 10;
+            attackStat = attackStat * 3 / 2;
+            spAttackStat = spAttackStat * 3 / 2;
         }
     }
 
