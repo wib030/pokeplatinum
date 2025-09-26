@@ -4086,10 +4086,6 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
         defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
         defenderItem = Battler_HeldItem(battleCtx, defender);
     }
-
-    
-    monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
-    monItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
 	
 	int powderMove = FALSE;
 
@@ -4230,7 +4226,7 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
 				if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
 					// The Ghost-type immunities are listed separately and ignored as a batch
 					if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
-							|| monAbility == ABILITY_SCRAPPY
+							|| attackerAbility == ABILITY_SCRAPPY
 							|| ((attackerItemEffect == HOLD_EFFECT_NORMAL_HIT_GHOST) && (moveType == TYPE_NORMAL))) {
 						break;
 					} else {
@@ -9771,7 +9767,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         {
             defenderWeight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_WAILMER);
         }
-        else if ((defenderParams.species == SPECIES_IGGLYBUFF)
+        else if (defenderParams.species == SPECIES_IGGLYBUFF)
         {
             defenderWeight = Pokedex_HeightWeightData_Weight(heightWeightData, SPECIES_GARDEVOIR);
         }
@@ -12924,7 +12920,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     spAttackStage += 6;
     spDefenseStage += 6;
 	
-	if (move == MOVE_KNOCK_OFF && defenderItem != ITEM_NONE)
+	if (move == MOVE_KNOCK_OFF && DEFENDING_MON.item != ITEM_NONE)
 	{
 		movePower = movePower * 3 / 2;
 	}
