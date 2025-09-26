@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_WATER_ABSORB",
-        "ABILITY_NONE"
+        "ABILITY_CHLOROPHYLL"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
