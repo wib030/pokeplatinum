@@ -12920,7 +12920,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     spAttackStage += 6;
     spDefenseStage += 6;
 	
-	if (move == MOVE_KNOCK_OFF && DEFENDING_MON.item != ITEM_NONE)
+	if (move == MOVE_KNOCK_OFF && DEFENDING_MON.heldItem != ITEM_NONE)
 	{
 		movePower = movePower * 3 / 2;
 	}
