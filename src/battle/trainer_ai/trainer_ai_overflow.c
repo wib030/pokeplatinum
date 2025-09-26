@@ -687,17 +687,29 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* bat
 {
     u8 predictMoveSlot;
     u8 predictMoveSlotsFlags;
-    u8 monsImmune, monsLowDamage;
-    u8 monType1, monType2, monAbility, monSide;
-    u8 currentMoveType, predictMoveType;
-    u8 slot1, slot2;
-    u16 currentMove, predictMove;
+    u8 monsImmune;
+    u8 monsLowDamage;
+    u8 monType1;
+    u8 monType2;
+    u8 monAbility;
+    u8 monSide;
+    u8 currentMoveType;
+    u8 predictMoveType;
+    u8 slot1;
+    u8 slot2;
+    u16 currentMove;
+    u16 predictMove;
     u16 monSpecies;
-    u32 currentMoveStatusFlags, predictMoveStatusFlags;
-    int i, j, partySize;
-    int monCurHP, monMaxHP;
-    int currentMoveDamage, predictMoveDamage, bestPredictMoveDamage;
-
+    u32 currentMoveStatusFlags;
+    u32 predictMoveStatusFlags;
+    int i;
+    int j;
+    int partySize;
+    int monCurHP;
+    int monMaxHP;
+    int currentMoveDamage;
+    int predictMoveDamage;
+    int bestPredictMoveDamage;
     Pokemon* mon;
 
     predictMoveSlot = currentMoveSlot;
