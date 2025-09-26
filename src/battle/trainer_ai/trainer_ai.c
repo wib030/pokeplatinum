@@ -724,6 +724,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     u8 maxScoreMoveSlots[4];
     u8 numMaxScoreMoves;
     u8 action = AI_ENEMY_ATTACK_1;
+    u8 predictAction = AI_ENEMY_ATTACK_1;
     u16 move;
 
     if (battleCtx->totalTurns < 1) {
@@ -790,6 +791,19 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         }
 
         action = maxScoreMoveSlots[BattleSystem_RandNext(battleSys) % numMaxScoreMoves];
+
+        if (battleCtx->totalTurns == battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.fakeOutTurnNumber)
+        {
+            predictAction = ExpertAI_CalculatePredictSwitchAttack_Singles(battleSys, battleCtx, action);
+
+            if (action != predictAction)
+            {
+                if ((BattleSystem_RandNext(battleSys) % 5) < 2)
+                {
+                    action = predictAction;
+                }
+            }
+        }
     }
 
     AI_CONTEXT.selectedTarget[AI_CONTEXT.attacker] = AI_CONTEXT.defender;
