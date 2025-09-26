@@ -683,7 +683,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
     return;
 }
 
-u8 ExpertAI_CalculatePredictSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx, u8 currentMoveSlot)
+u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx, u8 currentMoveSlot)
 {
     u8 predictMoveSlot;
     u8 predictMoveSlotsFlags;
@@ -724,7 +724,8 @@ u8 ExpertAI_CalculatePredictSwitchAttack_Singles(BattleSystem* battleSys, Battle
         battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.embargoTurns,
         DAMAGE_VARIANCE_MIN_ROLL);
     
-    if (battleCtx->battleMons[AI_CONTEXT.defender].curHP == 0)
+    if (battleCtx->battleMons[AI_CONTEXT.defender].curHP == 0
+        && battleCtx->battleMons[AI_CONTEXT.defender].maxHP == 0)
     {
         return currentMoveSlot;
     }
