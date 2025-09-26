@@ -686,6 +686,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     u8 predictMoveSlot;
+    u8 currentMoveSlot;
     u8 predictMoveSlotsFlags;
     u8 monsImmune;
     u8 monsLowDamage;
