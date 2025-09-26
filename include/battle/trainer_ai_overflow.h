@@ -209,6 +209,6 @@ BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* 
  * @param currentMoveSlot    The slot of the current best move.
  * @return  The slot of the best move after considering predicting a switch.
  */
-u8 ExpertAI_CalculatePredictSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx, u8 currentMoveSlot)
+u8 ExpertAI_CalculatePredictSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx, u8 currentMoveSlot);
 
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
