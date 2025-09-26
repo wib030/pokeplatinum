@@ -768,6 +768,8 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     } else if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_SAFARI) {
         action = AI_ENEMY_SAFARI;
     } else {
+        ExpertAI_CalcSwitchAttack_Singles(battleSys, battleCtx);
+
         // Get the move with the highest score; break ties randomly
         numMaxScoreMoves = 1;
         maxScoreMoves[0] = AI_CONTEXT.moveScore[0];
@@ -791,19 +793,6 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         }
 
         action = maxScoreMoveSlots[BattleSystem_RandNext(battleSys) % numMaxScoreMoves];
-
-        if (battleCtx->totalTurns == battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.fakeOutTurnNumber)
-        {
-            predictAction = ExpertAI_CalcSwitchAttack_Singles(battleSys, battleCtx, action);
-
-            if (action != predictAction)
-            {
-                if ((BattleSystem_RandNext(battleSys) % 5) < 2)
-                {
-                    action = predictAction;
-                }
-            }
-        }
     }
 
     AI_CONTEXT.selectedTarget[AI_CONTEXT.attacker] = AI_CONTEXT.defender;

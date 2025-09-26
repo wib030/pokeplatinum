@@ -683,7 +683,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
     return;
 }
 
-u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx, u8 currentMoveSlot)
+void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
 {
     u8 predictMoveSlot;
     u8 predictMoveSlotsFlags;
@@ -697,6 +697,9 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* bat
     u8 predictMoveType;
     u8 slot1;
     u8 slot2;
+    u8 numMaxScoreMoves;
+    u8 maxScoreMoves[4];
+    u8 maxScoreMoveSlots[4];
     u16 currentMove;
     u16 predictMove;
     u16 monSpecies;
@@ -712,14 +715,28 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* bat
     int bestPredictMoveDamage;
     Pokemon* mon;
 
+    for (i = 1; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[AI_CONTEXT.attacker].moves[i]) {    // Attacker has a move in this slot
+            // Append to the list of max-score moves if equal score to the current max
+            if (maxScoreMoves[0] == AI_CONTEXT.moveScore[i]) {
+                maxScoreMoves[numMaxScoreMoves] = AI_CONTEXT.moveScore[i];
+                maxScoreMoveSlots[numMaxScoreMoves++] = i;
+            }
+
+            // Set to be the maximum score if higher score than the current max
+            if (maxScoreMoves[0] < AI_CONTEXT.moveScore[i]) {
+                numMaxScoreMoves = 1;
+                maxScoreMoves[0] = AI_CONTEXT.moveScore[i];
+                maxScoreMoveSlots[0] = i;
+            }
+        }
+    }
+
+    currentMoveSlot = maxScoreMoveSlots[BattleSystem_RandNext(battleSys) % numMaxScoreMoves];
+
     predictMoveSlot = currentMoveSlot;
 
     currentMove = battleCtx->battleMons[AI_CONTEXT.attacker].moves[currentMoveSlot];
-
-    if (currentMove == MOVE_NONE)
-    {
-        return currentMoveSlot;
-    }
 
     u8 ivs[STAT_MAX];
     for (int stat = STAT_HP; stat < STAT_MAX; stat++) {
@@ -739,12 +756,12 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* bat
     if (battleCtx->battleMons[AI_CONTEXT.defender].curHP == 0
         && battleCtx->battleMons[AI_CONTEXT.defender].maxHP == 0)
     {
-        return currentMoveSlot;
+        return;
     }
 
     if ((currentMoveDamage * 100 / battleCtx->battleMons[AI_CONTEXT.defender].maxHP) < (battleCtx->battleMons[AI_CONTEXT.defender].maxHP * 80 / 100))
     {
-        return currentMoveSlot;
+        return;
     }
 
     monsImmune = 0;
@@ -919,7 +936,8 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* bat
 
         if (bestPredictMoveDamage)
         {
-            return predictMoveSlot;
+            AI_CONTEXT.moveScore[predictMoveSlot] = 125;
+            return;
         }
     }
 
@@ -1004,9 +1022,14 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* bat
                 }
             }
         }
+
+        if (bestPredictMoveDamage)
+        {
+            AI_CONTEXT.moveScore[predictMoveSlot] = 125;
+        }
     }
 
-    return predictMoveSlot;
+    return;
 }
 
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val)
