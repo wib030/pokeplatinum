@@ -12,15 +12,30 @@
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
-            "level": 50,
+            "level": 51,
             "item": "ITEM_KINGS_ROCK",
             "moves": [
+				"MOVE_FAKE_OUT",
                 "MOVE_BEAT_UP",
-				"MOVE_FAKE_OUT"
+				"MOVE_ICE_BALL",
+				"MOVE_WATER_SPORT"
             ],
             "power": 255,
             "ball_seal": 0,
 			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 30,
+			"ivSPEED": 31,
+			"ivSPATK": 17,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 196,
+			"evDEF": 0,
+			"evSPEED": 248,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3,
 			"gender": 0
         },
         {
@@ -31,27 +46,54 @@
             "moves": [
                 "MOVE_EARTHQUAKE",
 				"MOVE_STEALTH_ROCK",
-				"MOVE_ICE_BALL",
+				"MOVE_ICE_SHARD",
 				"MOVE_KNOCK_OFF"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 28,
+			"ivSPATK": 8,
+			"ivSPDEF": 30,
+			"evHP": 116,
+			"evATK": 196,
+			"evDEF": 132,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
         {
             "species": "SPECIES_ABOMASNOW",
             "form": 0,
             "level": 50,
-            "item": "ITEM_LIFE_ORB",
+            "item": "ITEM_EXPERT_BELT",
             "moves": [
-                "MOVE_ICE_SHARD",
-				"MOVE_BLIZZARD",
+                "MOVE_BLIZZARD",
 				"MOVE_GIGA_DRAIN",
-				"MOVE_EARTHQUAKE"
+				"MOVE_EARTHQUAKE",
+				"MOVE_GROWTH"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 30,
+			"ivATK": 31,
+			"ivDEF": 30,
+			"ivSPEED": 29,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 204,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 0,
+			"evSPATK": 236,
+			"evSPDEF": 0,
+			"nature": 15,
+			"ability": 1
         },
         {
             "species": "SPECIES_GLACEON",
@@ -61,43 +103,82 @@
             "moves": [
                 "MOVE_ICY_WIND",
 				"MOVE_MUD_SHOT",
-				"MOVE_BLIZZARD",
-				"MOVE_YAWN"
+				"MOVE_CONSTRICT",
+				"MOVE_HIDDEN_POWER"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 31,
+			"ivATK": 2,
+			"ivDEF": 31,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 192,
+			"evSPDEF": 0,
+			"nature": 10
         },
 		{
             "species": "SPECIES_STANTLER",
             "form": 0,
             "level": 50,
-            "item": "ITEM_BRIGHTPOWDER",
+            "item": "ITEM_ICY_ROCK",
             "moves": [
-                "MOVE_MIND_READER",
-				"MOVE_SHEER_COLD",
-				"MOVE_EARTHQUAKE",
-				"MOVE_DISABLE"
+                "MOVE_U_TURN",
+				"MOVE_REFLECT",
+				"MOVE_LIGHT_SCREEN",
+				"MOVE_ROOST"
             ],
             "power": 255,
             "ball_seal": 0,
 			"ball_type": "ITEM_ULTRA_BALL",
-			"isShiny": 1
+			"isShiny": 1,
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 30,
+			"ivSPEED": 31,
+			"ivSPATK": 21,
+			"ivSPDEF": 30,
+			"evHP": 188,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
 		{
             "species": "SPECIES_WALREIN",
             "form": 0,
-            "level": 51,
-            "item": "ITEM_LEFTOVERS",
+            "level": 50,
+            "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_STOCKPILE",
-				"MOVE_SLACK_OFF",
-				"MOVE_SUPER_FANG",
-				"MOVE_WHIRLPOOL"
+				"MOVE_SWALLOW",
+				"MOVE_DOUBLE_HIT",
+				"MOVE_SUPER_FANG"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NET_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 9,
+			"ivSPATK": 22,
+			"ivSPDEF": 31,
+			"evHP": 196,
+			"evATK": 76,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 188,
+			"nature": 8
         }
     ]
 }
