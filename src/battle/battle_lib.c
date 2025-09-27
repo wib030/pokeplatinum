@@ -10620,6 +10620,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 
         case ABILITY_SLOW_START:
             attackStat /= 2;
+			spAttackStat /= 2;
             break;
 
         case ABILITY_HUSTLE:
@@ -12295,6 +12296,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 < 5)
             {
                     attackStat /= 2;
+					spAttackStat /= 2;
             }
             break;
 
