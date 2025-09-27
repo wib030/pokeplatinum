@@ -354,6 +354,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 {
     u8 abilityTemp;
     u8 attackerSide, defenderSide;
+	u8 attackerItemEffect, defenderItemEffect;
     int i;
 
     if ((AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) == FALSE)
@@ -450,7 +451,6 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 
             // Extra trick code to not use it repeatedly
             case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
-                u8 attackerItemEffect, defenderItemEffect;
                 BOOL attackerShouldNotTrick;
 
                 attackerShouldNotTrick = FALSE;
@@ -675,6 +675,24 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     break;
                 }
 
+                break;
+				
+			// Extra AI for Beat Up.
+            case BATTLE_EFFECT_BEAT_UP:
+                attackerItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker);
+				
+				if (attackerItemEffect == HOLD_EFFECT_SOMETIMES_FLINCH)
+				{
+					if (AI_GetRandomNumber(battleSys) < 242)
+					{
+						AI_AddToMoveScore(battleSys, battleCtx, 6);
+					}
+					
+					if (AI_GetRandomNumber(battleSys) < 127)
+					{
+						AI_AddToMoveScore(battleSys, battleCtx, 4);
+					}
+				}
                 break;
             }
         }
