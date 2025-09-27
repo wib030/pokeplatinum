@@ -613,15 +613,30 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
     if (Item_Get(v0, 44) != 0) {
         v1[7] = Item_Get(v0, 53);
         v1[6] = CalculateEVUpdate(v1[5], (v1[0] + v1[1] + v1[2] + v1[3] + v1[4]), v1[7]);
+		
+		if (v1[7] == 1)
+		{
+			int zero = 0;
+			Pokemon_SetValue(param0, 13, &zero);
+			Pokemon_SetValue(param0, 14, &zero);
+			Pokemon_SetValue(param0, 15, &zero);
+			Pokemon_SetValue(param0, 16, &zero);
+			Pokemon_SetValue(param0, 17, &zero);
+			Pokemon_SetValue(param0, 18, &zero);
+			Pokemon_CalcLevelAndStats(param0);
+			v2 = 1;
+		}
+		else
+		{
+			if (v1[6] != -1) {
+				v1[5] = v1[6];
+				Pokemon_SetValue(param0, 18, &v1[5]);
+				Pokemon_CalcLevelAndStats(param0);
+				v2 = 1;
+			}
+		}
 
-        if (v1[6] != -1) {
-            v1[5] = v1[6];
-            Pokemon_SetValue(param0, 18, &v1[5]);
-            Pokemon_CalcLevelAndStats(param0);
-            v2 = 1;
-        }
-
-        if (v1[6] == -1) {
+        if (v1[6] == -1 && v1[7] != 1) {
             if (Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) < 31) {
                 tempIV = Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) + 1;
                 Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, &tempIV);
