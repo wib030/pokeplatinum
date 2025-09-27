@@ -768,7 +768,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     } else if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_SAFARI) {
         action = AI_ENEMY_SAFARI;
     } else {
-        ExpertAI_CalcSwitchAttack_Singles(battleSys, battleCtx);
+        //ExpertAI_CalcSwitchAttack_Singles(battleSys, battleCtx);
 
         // Get the move with the highest score; break ties randomly
         numMaxScoreMoves = 1;
