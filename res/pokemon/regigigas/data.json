@@ -98,11 +98,15 @@
 				"MOVE_IRON_HEAD",
                 "MOVE_FORESIGHT"
             ],
-			"15": "MOVE_PAYBACK",
-            "25": "MOVE_REVENGE",
-            "35": "MOVE_ZEN_HEADBUTT",
-            "45": "MOVE_CRUSH_GRIP",
-            "55": "MOVE_GIGA_IMPACT"
+			"6": "MOVE_PAYBACK",
+            "12": "MOVE_REVENGE",
+			"18": "MOVE_STOMP",
+			"24": "MOVE_PROTECT",
+			"30": "MOVE_BODY_SLAM",
+            "36": "MOVE_ZEN_HEADBUTT",
+            "42": "MOVE_CRUSH_GRIP",
+            "48": "MOVE_GIGA_IMPACT",
+			"54": "MOVE_HAMMER_ARM"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
