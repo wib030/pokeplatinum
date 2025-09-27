@@ -8132,7 +8132,6 @@ static BOOL BtlCmd_Transform(BattleSystem * battleSys, BattleContext * battleCtx
 	ATTACKING_MON.tossTurnFlag = FALSE;
 	ATTACKING_MON.memoryAnnounced = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
-    ATTACKING_MON.moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     ATTACKING_MON.slowStartAnnounced = FALSE;
     ATTACKING_MON.slowStartFinished = FALSE;
 

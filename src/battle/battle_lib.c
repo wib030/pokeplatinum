@@ -1512,7 +1512,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
             break;
 
         case ABILITY_SLOW_START:
-            if (battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.slowStartTurnNumber < 5) {
+            if (battleCtx->totalPartyTurns[Battler_Side(battleSys, battler1)][battleCtx->selectedPartySlot[battler1]] < 5) {
                 battler1Speed /= 2;
             }
             break;
@@ -1544,7 +1544,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 	
 	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_DEEP_SNOW
 	&& (battleCtx->battleMons[battler1].type1 != TYPE_ICE)
-	&& (battleCtx->battleMons[battler1].type2 != TYPE_ICE))
+	&& (battleCtx->battleMons[battler1].type2 != TYPE_ICE)
+	&& BattlerIsGrounded(battleCtx, battler1) == FALSE)
 	{
         battler1Speed /= 2;
     }
@@ -1619,7 +1620,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
             break;
 
         case ABILITY_SLOW_START:
-            if (battleCtx->totalTurns - battleCtx->battleMons[battler2].moveEffectsData.slowStartTurnNumber < 5) {
+            if (battleCtx->totalPartyTurns[Battler_Side(battleSys, battler2)][battleCtx->selectedPartySlot[battler2]] < 5) {
                 battler2Speed /= 2;
             }
             break;
@@ -1651,7 +1652,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 	
 	if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_DEEP_SNOW
 	&& (battleCtx->battleMons[battler2].type1 != TYPE_ICE)
-	&& (battleCtx->battleMons[battler2].type2 != TYPE_ICE))
+	&& (battleCtx->battleMons[battler2].type2 != TYPE_ICE)
+	&& BattlerIsGrounded(battleCtx, battler2) == FALSE)
 	{
         battler2Speed /= 2;
     }
@@ -2012,7 +2014,7 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
         break;
 
     case ABILITY_SLOW_START:
-        if (battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.slowStartTurnNumber < 5) {
+        if (battleCtx->totalPartyTurns[Battler_Side(battleSys, battler1)][battleCtx->selectedPartySlot[battler1]] < 5) {
             battler1Speed /= 2;
         }
         break;
@@ -2037,7 +2039,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
 
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_DEEP_SNOW
         && (battleCtx->battleMons[battler1].type1 != TYPE_ICE)
-        && (battleCtx->battleMons[battler1].type2 != TYPE_ICE))
+        && (battleCtx->battleMons[battler1].type2 != TYPE_ICE)
+		&& BattlerIsGrounded(battleCtx, battler1) == FALSE)
     {
         battler1Speed /= 2;
     }
@@ -2111,7 +2114,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
 
     if (battleCtx->sideConditionsMask[Battler_Side(battleSys, partyIndicator)] & SIDE_CONDITION_DEEP_SNOW
         && (battleCtx->battleMons[partyIndicator].type1 != TYPE_ICE)
-        && (battleCtx->battleMons[partyIndicator].type2 != TYPE_ICE))
+        && (battleCtx->battleMons[partyIndicator].type2 != TYPE_ICE)
+		&& BattlerIsGrounded(battleCtx, partyIndicator) == FALSE)
     {
         battler2Speed /= 2;
     }
@@ -3003,7 +3007,6 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
     }
 
     battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber = battleCtx->totalTurns + 1;
-    battleCtx->battleMons[battler].moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     battleCtx->battleMons[battler].moveEffectsData.truant = (battleCtx->totalTurns + 1) & 1;
     battleCtx->moveProtect[battler] = MOVE_NONE;
     battleCtx->moveHit[battler] = MOVE_NONE;
@@ -3081,7 +3084,6 @@ void BattleSystem_CleanupFaintedMon(BattleSystem *battleSys, BattleContext *batt
     }
 
     battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber = battleCtx->totalTurns + 1;
-    battleCtx->battleMons[battler].moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     battleCtx->battleMons[battler].moveEffectsData.truant = (battleCtx->totalTurns + 1) & 1;
     battleCtx->moveProtect[battler] = MOVE_NONE;
     battleCtx->moveHit[battler] = MOVE_NONE;
@@ -6409,7 +6411,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 if (battleCtx->battleMons[battler].slowStartAnnounced == FALSE
                         && battleCtx->battleMons[battler].curHP
                         && Battler_Ability(battleCtx, battler) == ABILITY_SLOW_START
-                        && battleCtx->totalTurns <= battleCtx->battleMons[battler].moveEffectsData.slowStartTurnNumber) {
+                        && battleCtx->totalPartyTurns[Battler_Side(battleSys, battler)][battleCtx->selectedPartySlot[battler]] < 5) {
                     battleCtx->battleMons[battler].slowStartAnnounced = TRUE;
                     battleCtx->msgBattlerTemp = battler;
                     subscript = subscript_slow_start;
@@ -6417,7 +6419,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     break;
                 }
 
-                if ((battleCtx->battleMons[battler].slowStartFinished == 0) && (battleCtx->battleMons[battler].curHP) && (Battler_Ability(battleCtx, battler) == 112) && ((battleCtx->totalTurns - battleCtx->battleMons[battler].moveEffectsData.slowStartTurnNumber) == 5)) {
+                if ((battleCtx->battleMons[battler].slowStartFinished == 0) && (battleCtx->battleMons[battler].curHP) && (Battler_Ability(battleCtx, battler) == 112) && (battleCtx->totalPartyTurns[Battler_Side(battleSys, battler)][battleCtx->selectedPartySlot[battler]] == 5)) {
                     battleCtx->battleMons[battler].slowStartFinished = 1;
                     battleCtx->msgBattlerTemp = battler;
                     subscript = subscript_slow_start_end;
@@ -12291,12 +12293,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             break;
 
         case ABILITY_SLOW_START:
-            if (BattleContext_Get(battleSys, battleCtx, BATTLECTX_TOTAL_TURNS, NULL)
-                - BattleMon_Get(battleCtx, attacker, BATTLEMON_SLOW_START_TURN_NUMBER, NULL)
-                < 5)
+            if (battleCtx->totalPartyTurns[Battler_Side(battleSys, attacker)][battleCtx->selectedPartySlot[attacker]] < 5)
             {
-                    attackStat /= 2;
-					spAttackStat /= 2;
+                attackStat /= 2;
+				spAttackStat /= 2;
             }
             break;
 

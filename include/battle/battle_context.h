@@ -201,6 +201,7 @@ struct BattleContext {
     u32 battlerStatusFlags[MAX_BATTLERS];
     u32 payDayCount;
     int totalTurns;
+	int totalPartyTurns[NUM_BATTLE_SIDES][MAX_PARTY_SIZE];
     int totalFainted[MAX_BATTLERS];
     int totalDamage[MAX_BATTLERS];
     int meFirstTurnOrder;

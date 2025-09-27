@@ -2033,7 +2033,11 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
 static void BattleController_TurnEnd(BattleSystem *battleSys, BattleContext *battleCtx)
 {
 	int battler;
+	int i;
     int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+	
+	Party * playerParty = BattleSystem_Party(battleSys, BATTLER_US);
+	Party * enemyParty = BattleSystem_Party(battleSys, BATTLER_THEM);
 	
 	for (battler = 0; battler < maxBattlers; battler++)
 	{
@@ -2048,7 +2052,29 @@ static void BattleController_TurnEnd(BattleSystem *battleSys, BattleContext *bat
             || BattleController_ReplaceFainted(battleSys, battleCtx) == TRUE) {
         return;
     }
-
+	
+	for (i = 0; i < Party_GetCurrentCount(playerParty); i++)
+	{
+		for (battler = 0; battler < maxBattlers; battler++)
+		{
+			if (battleCtx->selectedPartySlot[battler] == i && Battler_Side(battleSys, battler) == BATTLER_US)
+			{
+				battleCtx->totalPartyTurns[BATTLE_SIDE_PLAYER][i]++;
+			}
+		}
+	}
+	
+	for (i = 0; i < Party_GetCurrentCount(enemyParty); i++)
+	{
+		for (battler = 0; battler < maxBattlers; battler++)
+		{
+			if (battleCtx->selectedPartySlot[battler] == i && Battler_Side(battleSys, battler) == BATTLER_THEM)
+			{
+				battleCtx->totalPartyTurns[BATTLE_SIDE_ENEMY][i]++;
+			}
+		}
+	}
+	
     battleCtx->totalTurns++;
     battleCtx->meFirstTurnOrder++;
 
