@@ -103,6 +103,7 @@
             "30": "MOVE_SPIKES",
 			"34": "MOVE_SUCKER_PUNCH",
 			"38": "MOVE_PIN_MISSILE",
+			"40": "MOVE_SPIKE_CANNON",
 			"49": "MOVE_COTTON_SPORE",
 			"51": "MOVE_DESTINY_BOND",
             "54": "MOVE_SANDSTORM"
