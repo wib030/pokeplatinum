@@ -743,14 +743,14 @@ u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 cu
 
     battleCtx = BattleSystem_Context(battleSys);
 
-    currentMove = battleCtx->battleMons[battler].moves[currentMoveSlot];
+    currentMove = battleCtx->battleMons[attacker].moves[currentMoveSlot];
 
     if (currentMove == MOVE_NONE)
     {
         return currentMoveSlot;
     }
 
-    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
 
     if (battleCtx->battleMons[defender].curHP == 0
         && battleCtx->battleMons[defender].maxHP == 0)
