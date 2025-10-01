@@ -230,9 +230,9 @@ static void ov16_02264730(BattleSystem * param0);
 static void ov16_0226474C(BattleSystem * param0);
 static u8 ov16_02264768(BattleSystem * param0, u8 param1, u8 param2);
 
-static BOOL BattleDisplay_ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask)
-static int BattleDisplay_ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask)
-static int BattleDisplay_ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move)
+static BOOL BattleDisplay_ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
+static int BattleDisplay_ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask);
+static int BattleDisplay_ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int move);
 static s32 BattleDisplay_ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int defender, int ability, int embargoTurns, u8 variance);
 
 static const u16 Unk_ov16_0226F1AE[] = {
