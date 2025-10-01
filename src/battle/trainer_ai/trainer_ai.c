@@ -4452,7 +4452,7 @@ static void AICmd_IfBattlerDetersBoosting(BattleSystem* battleSys, BattleContext
                         break;
 
                     case BATTLE_EFFECT_TAUNT:
-                        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler1, battler2, TRUE) == COMPARE_SPEED_FASTER
+                        if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, battler1, battler2) == COMPARE_SPEED_FASTER
                             && battler2Ability != ABILITY_MAGIC_BOUNCE)
                         {
                             detersBoosting = TRUE;

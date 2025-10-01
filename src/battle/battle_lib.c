@@ -17569,7 +17569,7 @@ BOOL AI_ShouldTauntCheck(BattleSystem *battleSys, BattleContext *battleCtx, int 
                     break;
 
                 case BATTLE_EFFECT_TAUNT:
-                    speedCompare = BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, defender, TRUE);
+                    speedCompare = BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, attacker, defender);
                     if (speedCompare == COMPARE_SPEED_FASTER || speedCompare == COMPARE_SPEED_TIE) {
                         result = TRUE;
                     }
@@ -17842,7 +17842,7 @@ BOOL AI_ShouldEncoreCheck(BattleSystem* battleSys, BattleContext* battleCtx, int
         return result;
     }
 
-    speedCompare = BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, defender, TRUE);
+    speedCompare = BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, attacker, defender);
 
     if (speedCompare == COMPARE_SPEED_FASTER || speedCompare == COMPARE_SPEED_TIE)
     {
