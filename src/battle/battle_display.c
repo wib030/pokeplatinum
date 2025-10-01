@@ -3148,11 +3148,13 @@ static void ov16_022604C8 (SysTask * param0, void * param1)
     }
 }
 
+// AI Command is selected from Switch, Item Use, or Fight
 static void ov16_02260AB4 (SysTask * param0, void * param1)
 {
     UnkStruct_ov16_0225D5B8 * v0 = (UnkStruct_ov16_0225D5B8 *)param1;
     int v1;
 
+    // command=ClientAICommandSelectAI(tcs->bw,tcs->client_no);
     v1 = TrainerAI_PickCommand(v0->unk_00, v0->unk_09);
 
     ov16_022656D4(v0->unk_00, v0->unk_09, v1);
@@ -3337,6 +3339,7 @@ static void ov16_02260C00 (SysTask * param0, void * param1)
     }
 }
 
+// TCB_WazaSelectAI
 static void ov16_02260DB0 (SysTask * param0, void * param1)
 {
     UnkStruct_ov16_0225D698 * v0 = (UnkStruct_ov16_0225D698 *)param1;
@@ -3360,9 +3363,9 @@ static void ov16_02260DB0 (SysTask * param0, void * param1)
         }
     } else {
         {
-            int v4;
-            int v5[4];
-            int v6;
+            int v4;     // i
+            int v5[4];  // moves[LEARNED_MOVES_MAX]
+            int v6;     // moveCounter
 
             v6 = 0;
 
@@ -5509,12 +5512,23 @@ static void ov16_022636D4 (SysTask * param0, void * param1)
     SysTask_Done(param0);
 }
 
+// void	CT_UISet(BATTLE_WORK *bw,CLIENT_PARAM *cp)
 void ov16_02263730 (BattleSystem * param0, BattlerData * param1)
 {
     u32 v0 = BattleSystem_BattleType(param0);
     u32 v1 = BattleSystem_BattleStatus(param0);
 
     if (v0 & 0x40) {
+        /*
+        if(cp->client_no){
+			cp->ui.UI_CommandSelect=&TCB_CommandSelectAI;
+			cp->ui.UI_WazaSelect=&TCB_WazaSelectAI;
+			cp->ui.UI_DirSelect=&TCB_DirSelectAI;
+			cp->ui.UI_ItemSelect=&TCB_ItemSelectAI;
+			cp->ui.UI_PokemonSelect=&TCB_PokemonSelectAI;
+			cp->ui.UI_YesNoSelect=&TCB_YesNoSelectAI;
+			cp->client_boot=CLIENT_BOOT_AI;
+        */
         if (param1->battler) {
             param1->unk_00.unk_00 = &ov16_02260AB4;
             param1->unk_00.unk_04 = &ov16_02260DB0;
