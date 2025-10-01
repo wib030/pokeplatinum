@@ -10070,37 +10070,37 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM ||
     heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
 
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
 
-        move = battleCtx->battleMons[battler].moves[i];
-        moveEffect = MOVE_DATA(move).effect;
+            move = battleCtx->battleMons[battler].moves[i];
+            moveEffect = MOVE_DATA(move).effect;
 
-        if (moveEffect == BATTLE_EFFECT_WEATHER_SANDSTORM
-            && heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM) {
+            if (moveEffect == BATTLE_EFFECT_WEATHER_SANDSTORM
+                && heldItemEffect == HOLD_EFFECT_EXTEND_SANDSTORM) {
 
-                moveSetter = 1;
-                break;
-        }
-        if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
-            && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
+                    moveSetter = 1;
+                    break;
+            }
+            if (moveEffect == BATTLE_EFFECT_WEATHER_RAIN
+                && heldItemEffect == HOLD_EFFECT_EXTEND_RAIN) {
 
-                moveSetter = 1;
-                break;
-        }
-        if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
-            && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
+                    moveSetter = 1;
+                    break;
+            }
+            if (moveEffect == BATTLE_EFFECT_WEATHER_SUN
+                && heldItemEffect == HOLD_EFFECT_EXTEND_SUN) {
 
-                moveSetter = 1;
-                break;
-        }
-        if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
-            && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
+                    moveSetter = 1;
+                    break;
+            }
+            if (moveEffect == BATTLE_EFFECT_WEATHER_HAIL
+                && heldItemEffect == HOLD_EFFECT_EXTEND_HAIL) {
 
-                moveSetter = 1;
-                break;
+                    moveSetter = 1;
+                    break;
+            }
         }
     }
-}
 
     if (desiredWeatherAbility) {
 

@@ -14819,16 +14819,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
             defendScore += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
-            abilityDefendScore = BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
-
-            if (score > abilityDefendScore)
-            {
-                score -= abilityDefendScore;
-            }
-            else
-            {
-                score = 0;
-            }
+            abilityDefendScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
             if (BattleSystem_ComparePartyMonSpeed(battleSys, battleCtx, defender, battler, battler, i, TRUE) == COMPARE_SPEED_SLOWER) {
                 speedMultiplier = 9;
@@ -15053,6 +15044,43 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
         monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
         monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
 
+        if (NO_CLOUD_NINE)
+        {
+            switch (monAbility)
+            {
+            default:
+                break;
+
+            case ABILITY_DRIZZLE:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
+                {
+                    battlersDisregarded |= FlagIndex(i);
+                }
+                break;
+
+            case ABILITY_SAND_STREAM:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM)
+                {
+                    battlersDisregarded |= FlagIndex(i);
+                }
+                break;
+
+            case ABILITY_DROUGHT:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+                {
+                    battlersDisregarded |= FlagIndex(i);
+                }
+                break;
+
+            case ABILITY_SNOW_WARNING:
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING)
+                {
+                    battlersDisregarded |= FlagIndex(i);
+                }
+                break;
+            }
+        }
+
         // BattleAI_CalculateDamagingMoveAttackScore(battleSys, battleCtx, defender, battler, i);
 
         if (monSpecies != SPECIES_NONE
@@ -15235,16 +15263,7 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             score += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
-            abilityDefendScore = BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
-            
-            if (score > abilityDefendScore)
-            {
-                score -= abilityDefendScore;
-            }
-            else
-            {
-                score = 0;
-            }
+            abilityDefendScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
             monSpeedStat = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
 
@@ -15327,7 +15346,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                 battlersDisregarded |= FlagIndex(i);
             }
 
-            if (picked == i) {
+            if (picked == i
+                && (battlersDisregarded & FlagIndex(i)) == FALSE) {
                 keepPicked = FALSE;
                 attackScore = 0;
                 moveStatFlag = BATTLE_STAT_FLAG_NONE;
@@ -18205,16 +18225,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
         activeScore += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
-        abilityDefendScore = BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
-
-        if (activeScore > abilityDefendScore)
-        {
-            activeScore -= abilityDefendScore;
-        }
-        else
-        {
-            activeScore = 0;
-        }
+        abilityDefendScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
         if (speedMultiplier != 10) {
 
@@ -18270,6 +18281,43 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
             else {
 
                 speedMultiplier = 13;
+            }
+
+            if (NO_CLOUD_NINE)
+            {
+                switch (monAbility)
+                {
+                default:
+                    break;
+
+                case ABILITY_DRIZZLE:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING)
+                    {
+                        battlersDisregarded |= FlagIndex(i);
+                    }
+                    break;
+
+                case ABILITY_SAND_STREAM:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM)
+                    {
+                        battlersDisregarded |= FlagIndex(i);
+                    }
+                    break;
+
+                case ABILITY_DROUGHT:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+                    {
+                        battlersDisregarded |= FlagIndex(i);
+                    }
+                    break;
+
+                case ABILITY_SNOW_WARNING:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING)
+                    {
+                        battlersDisregarded |= FlagIndex(i);
+                    }
+                    break;
+                }
             }
 
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
@@ -18422,20 +18470,11 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
             score += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
-            abilityDefendScore = BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
+            abilityDefendScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
             score += BattleAI_CalculateDamagingMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
 
             score += BattleAI_CalculateStatusMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
-
-            if (score > abilityDefendScore)
-            {
-                score -= abilityDefendScore;
-            }
-            else
-            {
-                score = 0;
-            }
 
             if (speedMultiplier != 10) {
 
@@ -19719,7 +19758,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             {
                 if (defenderAbility != ABILITY_LEVITATE && defenderType1 != TYPE_FLYING && defenderType2 != TYPE_FLYING)
                 {
-                    if (MOVE_DATA(move).class == CLASS_PHYSICAL || (moveType == TYPE_FIRE & MOVE_DATA(move).class != CLASS_STATUS))
+                    if (MOVE_DATA(move).class == CLASS_PHYSICAL || (moveType == TYPE_FIRE && MOVE_DATA(move).class != CLASS_STATUS))
                     {
                         snowedInCount++;
                     }
