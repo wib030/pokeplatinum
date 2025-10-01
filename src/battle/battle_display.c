@@ -6765,12 +6765,14 @@ static BOOL BattleDisplay_ExpertAI_CanUseMove(BattleSystem* battleSys, BattleCon
 {
     BOOL result = TRUE;
 
-    if (ExpertAI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
+    if (BattleDisplay_ExpertAI_CheckInvalidMoves(battleSys, battleCtx, battler, 0, opMask) & FlagIndex(moveSlot)) {
         result = FALSE;
     }
 
     return result;
 }
+
+#include "constants/items.h"
 
 static int BattleDisplay_ExpertAI_CheckInvalidMoves(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int invalidMoves, int opMask)
 {
@@ -6969,6 +6971,8 @@ static int BattleDisplay_ExpertAI_MoveType(BattleSystem* battleSys, BattleContex
 
     return result;
 }
+
+#include "data/battle/weight_to_power.h"
 
 static s32 BattleDisplay_ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 move, u16 heldItem, u8* ivs, int attacker, int defender, int ability, int embargoTurns, u8 variance)
 {
