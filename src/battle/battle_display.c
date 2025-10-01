@@ -144,7 +144,7 @@
 #include "overlay013/ov13_0221FC20.h"
 #include "overlay013/ov13_022264F4.h"
 #include "battle/trainer_ai.h"
-#include "battle/trainer_ai_overflow.h"
+#include "battle/trainer_ai_switch_predict.h"
 #include "battle/ov16_0223B140.h"
 #include "battle/ov16_0223DF00.h"
 #include "battle/battle_lib.h"

@@ -202,13 +202,4 @@ BOOL ExpertAI_IsBattlerSpecialAttacker(BattleSystem* battleSys, BattleContext* b
  */
 BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
-/* @brief Calculate a move to use when predicting player switch.
- *
- * @param battleSys
- * @param attacker			 The attacking battlemon ID, provided in battle_display.c when invoked
- * @param currentMoveSlot    The slot of the current best move.
- * @return  The slot of the best move after considering predicting a switch.
- */
-u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot);
-
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
