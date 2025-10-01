@@ -144,7 +144,6 @@
 #include "overlay013/ov13_0221FC20.h"
 #include "overlay013/ov13_022264F4.h"
 #include "battle/trainer_ai.h"
-#include "battle/trainer_ai_switch_predict.h"
 #include "battle/ov16_0223B140.h"
 #include "battle/ov16_0223DF00.h"
 #include "battle/battle_lib.h"
@@ -154,6 +153,9 @@
 #include "battle/healthbar.h"
 #include "battle/ov16_0226871C.h"
 #include "battle/party_gauge.h"
+
+#include "battle/battle_mon.h"
+#include "battle/common.h"
 
 static void ov16_0225E4E8(SysTask * param0, void * param1);
 static void ov16_0225E894(SysTask * param0, void * param1);
@@ -3354,7 +3356,7 @@ static void ov16_02260DB0 (SysTask * param0, void * param1)
     if ((v3 & (0x1 | 0x100)) || (BattleSystem_BattleStatus(v0->unk_00) & 0x1) || (Battler_Side(v0->unk_00, v0->unk_1D) == 0)) {
         // tp_ret=WazaAIMain(tws->bw,tws->client_no);
         v2 = TrainerAI_Main(v0->unk_00, v0->unk_1D);
-        // v2 = ExpertAI_CalcSwitchAttack_Singles(v0->unk_00, v0->unk_1D, v2);
+        v2 = ExpertAI_CalcSwitchAttack_Singles(v0->unk_00, v0->unk_1D, v2);
 
         switch (v2) {
         case 0xff:
@@ -6407,4 +6409,348 @@ static u8 ov16_02264768 (BattleSystem * param0, u8 param1, u8 param2)
     }
 
     return param2;
+}
+
+static u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot)
+{
+    BattleContext* battleCtx;
+    u8 defender;
+    u8 predictMoveSlot;
+    u8 predictMoveSlotsFlags;
+    u8 monsImmune;
+    u8 monsLowDamage;
+    u8 monType1;
+    u8 monType2;
+    u8 monAbility;
+    u8 monSide;
+    u8 currentMoveType;
+    u8 predictMoveType;
+    u8 numMaxScoreMoves;
+    u8 maxScoreMoves[4];
+    u8 maxScoreMoveSlots[4];
+    u8 ivs[STAT_MAX];
+    u16 currentMove;
+    u16 predictMove;
+    u16 monSpecies;
+    u32 currentMoveStatusFlags;
+    u32 predictMoveStatusFlags;
+    int i;
+    int j;
+    int stat;
+    int partySize;
+    int monCurHP;
+    int monMaxHP;
+    int currentMoveDamage;
+    int predictMoveDamage;
+    int bestPredictMoveDamage;
+    Pokemon* mon;
+
+    if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+        return currentMoveSlot;
+    }
+
+    battleCtx = BattleSystem_Context(battleSys);
+
+    currentMove = battleCtx->battleMons[attacker].moves[currentMoveSlot];
+
+    if (currentMove == MOVE_NONE)
+    {
+        return currentMoveSlot;
+    }
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
+
+    if (battleCtx->battleMons[defender].curHP == 0
+        && battleCtx->battleMons[defender].maxHP == 0)
+    {
+        return currentMoveSlot;
+    }
+
+    predictMoveSlot = currentMoveSlot;
+
+    for (stat = STAT_HP; stat < STAT_MAX; stat++) {
+        ivs[stat] = BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_IV + stat, NULL);
+    }
+	
+	if (MOVE_DATA(currentMove).power)
+	{
+		currentMoveDamage = ExpertAI_CalcDamage(battleSys,
+        battleCtx,
+        currentMove,
+        battleCtx->battleMons[attacker].heldItem,
+        ivs,
+        attacker,
+        Battler_Ability(battleCtx, attacker),
+        battleCtx->battleMons[attacker].moveEffectsData.embargoTurns,
+        85);
+	}
+	else
+	{
+		return currentMoveSlot;
+	}
+
+    if ((currentMoveDamage * 100 / battleCtx->battleMons[defender].maxHP) < (battleCtx->battleMons[defender].maxHP * 80 / 100))
+    {
+        return currentMoveSlot;
+    }
+
+    monsImmune = 0;
+    monsLowDamage = 0;
+    predictMoveSlotsFlags = 0;
+
+    currentMoveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, currentMove);
+
+    partySize = BattleSystem_PartyCount(battleSys, defender);
+    monSide = Battler_Side(battleSys, defender);
+
+    for (i = 0; i < partySize; i++)
+    {
+        mon = BattleSystem_PartyPokemon(battleSys, defender, i);
+        monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+        monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+        monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+        monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+        monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+        monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+
+        // mon must be existent, not an egg, alive, and not currently out
+        if (monSpecies != SPECIES_NONE
+            && monSpecies != SPECIES_EGG
+            && monCurHP
+            && battleCtx->selectedPartySlot[defender] != i)
+        {
+            currentMoveStatusFlags = 0;
+
+            currentMoveDamage = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                battleCtx,
+                currentMove,
+                battleCtx->sideConditionsMask[monSide],
+                battleCtx->fieldConditionsMask,
+                0,
+                currentMoveType,
+                attacker,
+                defender,
+                1,
+                defender,
+                i);
+
+            currentMoveDamage = PartyMon_ApplyTypeChart(battleSys,
+                battleCtx,
+                currentMove,
+                currentMoveType,
+                attacker,
+                defender,
+                currentMoveDamage,
+                defender,
+                i,
+                &currentMoveStatusFlags);
+
+            if ((currentMoveStatusFlags & MOVE_STATUS_IMMUNE)
+                && ((currentMoveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                currentMoveDamage = 0;
+                monsImmune |= FlagIndex(i);
+            }
+
+            if (currentMoveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                currentMoveDamage /= 2;
+            }
+
+            if (currentMoveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                currentMoveDamage = currentMoveDamage * 5 / 4;
+            }
+
+            currentMoveDamage = currentMoveDamage * 100 / monMaxHP;
+
+            if (currentMoveDamage < 20)
+            {
+                monsLowDamage |= FlagIndex(i);
+            }
+        }
+    }
+
+    if (monsImmune)
+    {
+        bestPredictMoveDamage = 0;
+
+        for (i = 0; i < partySize; i++)
+        {
+            if (monsImmune & FlagIndex(i))
+            {
+                mon = BattleSystem_PartyPokemon(battleSys, defender, i);
+                monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+                monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+                monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+                monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+                monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+                monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+
+                for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                {
+                    predictMove = battleCtx->battleMons[attacker].moves[j];
+					
+					if (predictMove == MOVE_NONE)
+					{
+						break;
+					}
+
+                    if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, j, CHECK_INVALID_ALL_BUT_TORMENT)
+                        && predictMove != currentMove)
+                    {
+                        predictMoveDamage = 0;
+                        predictMoveStatusFlags = 0;
+
+                        predictMoveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, predictMove);
+
+                        predictMoveDamage = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                            battleCtx,
+                            predictMove,
+                            battleCtx->sideConditionsMask[monSide],
+                            battleCtx->fieldConditionsMask,
+                            0,
+                            predictMoveType,
+                            attacker,
+                            defender,
+                            1,
+                            defender,
+                            i);
+
+                        if (predictMoveDamage)
+                        {
+                            predictMoveDamage = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                predictMove,
+                                predictMoveType,
+                                attacker,
+                                defender,
+                                predictMoveDamage,
+                                defender,
+                                i,
+                                &predictMoveStatusFlags);
+
+                            if ((predictMoveStatusFlags & MOVE_STATUS_IMMUNE)
+                                && ((predictMoveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                                predictMoveDamage = 0;
+                            }
+
+                            if (predictMoveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                predictMoveDamage /= 2;
+                            }
+
+                            if (predictMoveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                predictMoveDamage = predictMoveDamage * 5 / 4;
+                            }
+
+                            predictMoveDamage = predictMoveDamage * 100 / monMaxHP;
+
+                            if (predictMoveDamage > 45)
+                            {
+                                if (predictMoveDamage > bestPredictMoveDamage)
+                                {
+                                    bestPredictMoveDamage = predictMoveDamage;
+                                    predictMoveSlot = j;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (bestPredictMoveDamage)
+        {
+            return predictMoveSlot;
+        }
+    }
+
+    if (monsLowDamage)
+    {
+        for (i = 0; i < partySize; i++)
+        {
+            if (monsLowDamage & FlagIndex(i))
+            {
+                mon = BattleSystem_PartyPokemon(battleSys, defender, i);
+                monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+                monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+                monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+                monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+                monCurHP = Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL);
+                monMaxHP = Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+
+                for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                {
+                    predictMove = battleCtx->battleMons[attacker].moves[j];
+					
+					if (predictMove == MOVE_NONE)
+					{
+						break;
+					}
+
+                    if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, j, CHECK_INVALID_ALL_BUT_TORMENT)
+                        && predictMove != currentMove)
+                    {
+                        predictMoveDamage = 0;
+                        predictMoveStatusFlags = 0;
+
+                        predictMoveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, predictMove);
+
+                        predictMoveDamage = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
+                            battleCtx,
+                            predictMove,
+                            battleCtx->sideConditionsMask[monSide],
+                            battleCtx->fieldConditionsMask,
+                            0,
+                            predictMoveType,
+                            attacker,
+                            defender,
+                            1,
+                            defender,
+                            i);
+
+                        if (predictMoveDamage)
+                        {
+                            predictMoveDamage = PartyMon_ApplyTypeChart(battleSys,
+                                battleCtx,
+                                predictMove,
+                                predictMoveType,
+                                attacker,
+                                defender,
+                                predictMoveDamage,
+                                defender,
+                                i,
+                                &predictMoveStatusFlags);
+
+                            if ((predictMoveStatusFlags & MOVE_STATUS_IMMUNE)
+                                && ((predictMoveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+                                predictMoveDamage = 0;
+                            }
+
+                            if (predictMoveStatusFlags & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+                                predictMoveDamage /= 2;
+                            }
+
+                            if (predictMoveStatusFlags & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+                                predictMoveDamage = predictMoveDamage * 5 / 4;
+                            }
+
+                            predictMoveDamage = predictMoveDamage * 100 / monMaxHP;
+
+                            if (predictMoveDamage > 57)
+                            {
+                                if (predictMoveDamage > bestPredictMoveDamage)
+                                {
+                                    bestPredictMoveDamage = predictMoveDamage;
+                                    predictMoveSlot = j;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return predictMoveSlot;
 }

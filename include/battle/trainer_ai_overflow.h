@@ -149,7 +149,7 @@ int ExpertAI_MoveType(BattleSystem* battleSys, BattleContext* battleCtx, int bat
  * @param opMask        The bitmask of the operation to check.
  * @return  TRUE / FALSE if the current move in current slot can be used.
  */
-BOOL ExpertExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
+BOOL ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask);
 
 /* @brief Check if any moves are invalid for use by the battler.
  *

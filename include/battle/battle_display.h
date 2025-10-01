@@ -158,4 +158,13 @@ UnkStruct_ov16_0226C378 * ov16_02263B0C(BattlerData * param0);
 void ov16_02263B10(BattlerData * param0);
 void ov16_02263B20(BattlerData * param0, int param1);
 
+/* @brief Calculate a move to use when predicting player switch.
+ *
+ * @param battleSys
+ * @param attacker			 The attacking battlemon ID, provided in battle_display.c when invoked
+ * @param currentMoveSlot    The slot of the current best move.
+ * @return  The slot of the best move after considering predicting a switch.
+ */
+static u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot);
+
 #endif // POKEPLATINUM_OV16_0225CBB8_H
