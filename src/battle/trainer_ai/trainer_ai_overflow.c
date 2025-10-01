@@ -701,10 +701,11 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
     return;
 }
 
-void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* battleCtx)
+u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot)
 {
+    BattleContext* battleCtx;
+    u8 defender;
     u8 predictMoveSlot;
-    u8 currentMoveSlot;
     u8 predictMoveSlotsFlags;
     u8 monsImmune;
     u8 monsLowDamage;
@@ -719,6 +720,7 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
     u8 numMaxScoreMoves;
     u8 maxScoreMoves[4];
     u8 maxScoreMoveSlots[4];
+    u8 ivs[STAT_MAX];
     u16 currentMove;
     u16 predictMove;
     u16 monSpecies;
@@ -726,6 +728,7 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
     u32 predictMoveStatusFlags;
     int i;
     int j;
+    int stat;
     int partySize;
     int monCurHP;
     int monMaxHP;
@@ -734,76 +737,69 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
     int bestPredictMoveDamage;
     Pokemon* mon;
 
-    for (i = 1; i < LEARNED_MOVES_MAX; i++) {
-        if (battleCtx->battleMons[AI_CONTEXT.attacker].moves[i]) {    // Attacker has a move in this slot
-            // Append to the list of max-score moves if equal score to the current max
-            if (maxScoreMoves[0] == AI_CONTEXT.moveScore[i]) {
-                maxScoreMoves[numMaxScoreMoves] = AI_CONTEXT.moveScore[i];
-                maxScoreMoveSlots[numMaxScoreMoves++] = i;
-            }
-
-            // Set to be the maximum score if higher score than the current max
-            if (maxScoreMoves[0] < AI_CONTEXT.moveScore[i]) {
-                numMaxScoreMoves = 1;
-                maxScoreMoves[0] = AI_CONTEXT.moveScore[i];
-                maxScoreMoveSlots[0] = i;
-            }
-        }
+    if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+        return currentMoveSlot;
     }
 
-    currentMoveSlot = maxScoreMoveSlots[BattleSystem_RandNext(battleSys) % numMaxScoreMoves];
+    battleCtx = BattleSystem_Context(battleSys);
+
+    currentMove = battleCtx->battleMons[battler].moves[currentMoveSlot];
+
+    if (currentMove == MOVE_NONE)
+    {
+        return currentMoveSlot;
+    }
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+
+    if (battleCtx->battleMons[defender].curHP == 0
+        && battleCtx->battleMons[defender].maxHP == 0)
+    {
+        return currentMoveSlot;
+    }
 
     predictMoveSlot = currentMoveSlot;
 
-    currentMove = battleCtx->battleMons[AI_CONTEXT.attacker].moves[currentMoveSlot];
-
-    u8 ivs[STAT_MAX];
-    for (int stat = STAT_HP; stat < STAT_MAX; stat++) {
-        ivs[stat] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + stat, NULL);
+    for (stat = STAT_HP; stat < STAT_MAX; stat++) {
+        ivs[stat] = BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_IV + stat, NULL);
     }
 
     currentMoveDamage = ExpertAI_CalcDamage(battleSys,
         battleCtx,
         currentMove,
-        battleCtx->battleMons[AI_CONTEXT.attacker].heldItem,
+        battleCtx->battleMons[attacker].heldItem,
         ivs,
-        AI_CONTEXT.attacker,
-        Battler_Ability(battleCtx, AI_CONTEXT.attacker),
-        battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.embargoTurns,
+        attacker,
+        Battler_Ability(battleCtx, attacker),
+        battleCtx->battleMons[attacker].moveEffectsData.embargoTurns,
         DAMAGE_VARIANCE_MIN_ROLL);
     
-    if (battleCtx->battleMons[AI_CONTEXT.defender].curHP == 0
-        && battleCtx->battleMons[AI_CONTEXT.defender].maxHP == 0)
+    if ((currentMoveDamage * 100 / battleCtx->battleMons[defender].maxHP) < (battleCtx->battleMons[defender].maxHP * 80 / 100))
     {
-        return;
-    }
-
-    if ((currentMoveDamage * 100 / battleCtx->battleMons[AI_CONTEXT.defender].maxHP) < (battleCtx->battleMons[AI_CONTEXT.defender].maxHP * 80 / 100))
-    {
-        return;
+        return currentMoveSlot;
     }
 
     monsImmune = 0;
     monsLowDamage = 0;
     predictMoveSlotsFlags = 0;
     
-    currentMoveType = ExpertAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, currentMove);
+    currentMoveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, currentMove);
 
-    partySize = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
-    monSide = Battler_Side(battleSys, AI_CONTEXT.defender);
+    partySize = BattleSystem_PartyCount(battleSys, defender);
+    monSide = Battler_Side(battleSys, defender);
 
-    slot1 = AI_CONTEXT.defender;
+    slot1 = defender;
     if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
         || (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_2vs2)) {
         slot2 = slot1;
     }
     else {
-        slot2 = BattleSystem_Partner(battleSys, AI_CONTEXT.defender);
+        slot2 = BattleSystem_Partner(battleSys, defender);
     }
 
     for (i = 0; i < partySize; i++)
     {
-        mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+        mon = BattleSystem_PartyPokemon(battleSys, defender, i);
         monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
         monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
         monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
@@ -828,20 +824,20 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
                 battleCtx->fieldConditionsMask,
                 0,
                 currentMoveType,
-                AI_CONTEXT.attacker,
-                AI_CONTEXT.defender,
+                attacker,
+                defender,
                 1,
-                AI_CONTEXT.defender,
+                defender,
                 i);
 
             currentMoveDamage = PartyMon_ApplyTypeChart(battleSys,
                 battleCtx,
                 currentMove,
                 currentMoveType,
-                AI_CONTEXT.attacker,
-                AI_CONTEXT.defender,
+                attacker,
+                defender,
                 currentMoveDamage,
-                AI_CONTEXT.defender,
+                defender,
                 i,
                 &currentMoveStatusFlags);
 
@@ -877,7 +873,7 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
         {
             if (monsImmune & FlagIndex(i))
             {
-                mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+                mon = BattleSystem_PartyPokemon(battleSys, defender, i);
                 monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
                 monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
                 monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
@@ -887,15 +883,15 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
 
                 for (j = 0; j < LEARNED_MOVES_MAX; j++)
                 {
-                    predictMove = battleCtx->battleMons[AI_CONTEXT.attacker].moves[j];
+                    predictMove = battleCtx->battleMons[attacker].moves[j];
 
-                    if (ExpertAI_CanUseMove(battleSys, battleCtx, AI_CONTEXT.attacker, j, CHECK_INVALID_ALL_BUT_TORMENT)
+                    if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, j, CHECK_INVALID_ALL_BUT_TORMENT)
                         && predictMove != currentMove)
                     {
                         predictMoveDamage = 0;
                         predictMoveStatusFlags = 0;
 
-                        predictMoveType = ExpertAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, predictMove);
+                        predictMoveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, predictMove);
 
                         predictMoveDamage = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
                             battleCtx,
@@ -904,10 +900,10 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
                             battleCtx->fieldConditionsMask,
                             0,
                             predictMoveType,
-                            AI_CONTEXT.attacker,
-                            AI_CONTEXT.defender,
+                            attacker,
+                            defender,
                             1,
-                            AI_CONTEXT.defender,
+                            defender,
                             i);
 
                         if (predictMoveDamage)
@@ -916,10 +912,10 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
                                 battleCtx,
                                 predictMove,
                                 predictMoveType,
-                                AI_CONTEXT.attacker,
-                                AI_CONTEXT.defender,
+                                attacker,
+                                defender,
                                 predictMoveDamage,
-                                AI_CONTEXT.defender,
+                                defender,
                                 i,
                                 &predictMoveStatusFlags);
 
@@ -955,8 +951,7 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
 
         if (bestPredictMoveDamage)
         {
-            AI_CONTEXT.moveScore[predictMoveSlot] = 125;
-            return;
+            return predictMoveSlot;
         }
     }
 
@@ -966,7 +961,7 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
         {
             if (monsLowDamage & FlagIndex(i))
             {
-                mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+                mon = BattleSystem_PartyPokemon(battleSys, defender, i);
                 monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
                 monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
                 monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
@@ -976,15 +971,15 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
 
                 for (j = 0; j < LEARNED_MOVES_MAX; j++)
                 {
-                    predictMove = battleCtx->battleMons[AI_CONTEXT.attacker].moves[j];
+                    predictMove = battleCtx->battleMons[attacker].moves[j];
 
-                    if (ExpertAI_CanUseMove(battleSys, battleCtx, AI_CONTEXT.attacker, j, CHECK_INVALID_ALL_BUT_TORMENT)
+                    if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, j, CHECK_INVALID_ALL_BUT_TORMENT)
                         && predictMove != currentMove)
                     {
                         predictMoveDamage = 0;
                         predictMoveStatusFlags = 0;
 
-                        predictMoveType = ExpertAI_MoveType(battleSys, battleCtx, AI_CONTEXT.attacker, predictMove);
+                        predictMoveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, predictMove);
 
                         predictMoveDamage = BattleSystem_CalcPartyMemberMoveDamage(battleSys,
                             battleCtx,
@@ -993,10 +988,10 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
                             battleCtx->fieldConditionsMask,
                             0,
                             predictMoveType,
-                            AI_CONTEXT.attacker,
-                            AI_CONTEXT.defender,
+                            attacker,
+                            defender,
                             1,
-                            AI_CONTEXT.defender,
+                            defender,
                             i);
 
                         if (predictMoveDamage)
@@ -1005,10 +1000,10 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
                                 battleCtx,
                                 predictMove,
                                 predictMoveType,
-                                AI_CONTEXT.attacker,
-                                AI_CONTEXT.defender,
+                                attacker,
+                                defender,
                                 predictMoveDamage,
-                                AI_CONTEXT.defender,
+                                defender,
                                 i,
                                 &predictMoveStatusFlags);
 
@@ -1041,14 +1036,9 @@ void ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, BattleContext* b
                 }
             }
         }
-
-        if (bestPredictMoveDamage)
-        {
-            AI_CONTEXT.moveScore[predictMoveSlot] = 125;
-        }
     }
 
-    return;
+    return predictMoveSlot;
 }
 
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val)

@@ -144,6 +144,7 @@
 #include "overlay013/ov13_0221FC20.h"
 #include "overlay013/ov13_022264F4.h"
 #include "battle/trainer_ai.h"
+#include "battle/trainer_ai_overflow.h"
 #include "battle/ov16_0223B140.h"
 #include "battle/ov16_0223DF00.h"
 #include "battle/battle_lib.h"
@@ -3351,7 +3352,9 @@ static void ov16_02260DB0 (SysTask * param0, void * param1)
     v1 = BattleSystem_Context(v0->unk_00);
 
     if ((v3 & (0x1 | 0x100)) || (BattleSystem_BattleStatus(v0->unk_00) & 0x1) || (Battler_Side(v0->unk_00, v0->unk_1D) == 0)) {
+        // tp_ret=WazaAIMain(tws->bw,tws->client_no);
         v2 = TrainerAI_Main(v0->unk_00, v0->unk_1D);
+        v2 = ExpertAI_CalcSwitchAttack_Singles(v0->unk_00, v0->unk_1D, v2);
 
         switch (v2) {
         case 0xff:
