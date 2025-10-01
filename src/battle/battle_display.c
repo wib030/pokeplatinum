@@ -6666,7 +6666,22 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
 
         if (bestPredictMoveDamage)
         {
-            return predictMoveSlot;
+            if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, attacker, defender) == COMPARE_SPEED_FASTER)
+            {
+                if ((BattleSystem_RandNext(battleSys) % 5) < 2)
+                {
+                    return predictMoveSlot;
+                }
+            }
+            else
+            {
+                if ((BattleSystem_RandNext(battleSys) % 3) == 0)
+                {
+                    return predictMoveSlot;
+                }
+            }
+            
+            return currentMoveSlot;
         }
     }
 
@@ -6758,7 +6773,22 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
         }
     }
 
-    return predictMoveSlot;
+    if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, attacker, defender) == COMPARE_SPEED_FASTER)
+    {
+        if ((BattleSystem_RandNext(battleSys) % 20) < 7)
+        {
+            return predictMoveSlot;
+        }
+    }
+    else
+    {
+        if ((BattleSystem_RandNext(battleSys) % 4) == 0)
+        {
+            return predictMoveSlot;
+        }
+    }
+
+    return currentMoveSlot;
 }
 
 static BOOL BattleDisplay_ExpertAI_CanUseMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int moveSlot, int opMask)
