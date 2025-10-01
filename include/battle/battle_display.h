@@ -165,6 +165,6 @@ void ov16_02263B20(BattlerData * param0, int param1);
  * @param currentMoveSlot    The slot of the current best move.
  * @return  The slot of the best move after considering predicting a switch.
  */
-static u8 ExpertAI_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot);
+u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot);
 
 #endif // POKEPLATINUM_OV16_0225CBB8_H
