@@ -15,27 +15,27 @@
 #define DATA_BUF_SIZE 256
 
 struct BattlerData {
-    UnkStruct_ov16_0225BFFC_sub1 unk_00;
-    CellActorData * unk_18;
-    Sprite * unk_1C;
-    Sprite * unk_20;
-    Window * unk_24;
-    Healthbar healthbar;
-    UnkStruct_ov16_0226C378 unk_7B;
-    BallRotation * unk_84;
-    UnkStruct_ov12_02223764 * unk_88;
-    void * unk_8C;
-    u8 data[DATA_BUF_SIZE];
-    u8 battler;
-    u8 battlerType;
-    u8 bootState;
-    u8 unk_193;
-    SysTask * unk_194;
-    u16 unk_198;
-    int unk_19C;
-    NARC * unk_1A0;
-    u8 unk_1A4;
-    u8 unk_1A5[3];
-};
+    UnkStruct_ov16_0225BFFC_sub1 unk_00;  // user interface
+    CellActorData * unk_18;               // cell actor pointer
+    Sprite * unk_1C;                      // trainer soft sprite
+    Sprite * unk_20;                      // pokemon soft sprite
+    Window * unk_24;                      // gamefreak background layer bitmap - window
+    Healthbar healthbar;                  // gauge
+    UnkStruct_ov16_0226C378 unk_7B;       // cursor_save
+    BallRotation * unk_84;                // BMS pointer (ball mechanic system?)
+    UnkStruct_ov12_02223764 * unk_88;     // OAM Drop System
+    void * unk_8C;                        // time icon
+    u8 data[DATA_BUF_SIZE];               // battler buffer
+    u8 battler;                           // battler
+    u8 battlerType;                       // battler type
+    u8 bootState;                         // battler boot state
+    u8 unk_193;                           // bip flag
+    SysTask * unk_194;                    // server input trainer command button popinter
+    u16 unk_198;                          // server input sec
+    int unk_19C;                          // substitute flag
+    NARC * unk_1A0;                       // narc handle
+    u8 unk_1A4;                           // battler buffer flag
+    u8 unk_1A5[3];                        // dummy
+}; // client_param
 
 #endif // POKEPLATINUM_STRUCT_OV16_0225BFFC_T_H
