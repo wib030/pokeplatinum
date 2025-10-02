@@ -20333,6 +20333,13 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         }
         break;
 		
+	case ABILITY_WEB_MASTER:
+		if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STICKY_WEB)
+		{
+			score += 40;
+		}
+		break;
+		
 	case ABILITY_TRUANT:
 	case ABILITY_SLOW_START:
 		if (NEUTRALIZING_GAS)
