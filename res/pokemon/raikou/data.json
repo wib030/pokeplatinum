@@ -36,7 +36,7 @@
     ],
     "abilities": [
         "ABILITY_PRESSURE",
-        "ABILITY_NONE"
+        "ABILITY_MINUS"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {

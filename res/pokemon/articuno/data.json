@@ -35,7 +35,7 @@
         "EGG_GROUP_UNDISCOVERED"
     ],
     "abilities": [
-        "ABILITY_PRESSURE",
+        "ABILITY_ICE_BODY",
         "ABILITY_SNOW_WARNING"
     ],
     "great_marsh_flee_rate": 0,
