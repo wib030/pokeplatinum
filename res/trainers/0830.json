@@ -21,7 +21,14 @@
                 "MOVE_LAST_RESORT"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
         {
             "species": "SPECIES_SUNFLORA",
@@ -35,7 +42,14 @@
                 "MOVE_EARTH_POWER"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 15
         }
     ]
 }

@@ -22,7 +22,13 @@
             ],
             "power": 140,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_BRELOOM",
@@ -37,7 +43,13 @@
             ],
             "power": 140,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_OCTILLERY",
@@ -52,7 +64,13 @@
             ],
             "power": 140,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

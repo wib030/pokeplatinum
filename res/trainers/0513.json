@@ -23,7 +23,13 @@
             ],
             "power": 200,
             "ball_seal": 0,
-			"ball_type": "ITEM_QUICK_BALL"
+			"ball_type": "ITEM_QUICK_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_FURRET",
@@ -38,7 +44,13 @@
             ],
             "power": 200,
             "ball_seal": 0,
-			"ball_type": "ITEM_QUICK_BALL"
+			"ball_type": "ITEM_QUICK_BALL",
+			"evHP": 128,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_STARAPTOR",
@@ -53,7 +65,13 @@
             ],
             "power": 200,
             "ball_seal": 0,
-			"ball_type": "ITEM_QUICK_BALL"
+			"ball_type": "ITEM_QUICK_BALL",
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

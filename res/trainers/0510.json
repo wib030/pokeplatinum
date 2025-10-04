@@ -32,7 +32,7 @@
                 "MOVE_FLING",
                 "MOVE_DRAGON_DANCE",
                 "MOVE_SUPERPOWER",
-                "MOVE_DIVE"
+                "MOVE_KNOCK_OFF"
             ],
             "power": 160,
             "ball_seal": 0
