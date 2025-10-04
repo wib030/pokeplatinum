@@ -96,6 +96,7 @@
 			"26": "MOVE_WING_ATTACK",
             "28": "MOVE_AGILITY",
 			"30": "MOVE_FOCUS_ENERGY",
+			"32": "MOVE_TAILWIND",
             "36": "MOVE_ROOST",
             "41": "MOVE_DRILL_PECK",
 			"45": "MOVE_HORN_DRILL",

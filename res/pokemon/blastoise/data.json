@@ -108,6 +108,7 @@
             "20": "MOVE_RAPID_SPIN",
 			"22": "MOVE_BUBBLE",
             "24": "MOVE_PROTECT",
+			"25": "MOVE_HEADBUTT",
             "28": "MOVE_WATER_PULSE",
             "39": "MOVE_SKULL_BASH",
 			"40": "MOVE_RECOVER",

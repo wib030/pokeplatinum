@@ -98,6 +98,7 @@
             "20": "MOVE_ACID",
             "22": "MOVE_CRUNCH",
 			"24": "MOVE_HYPNOSIS",
+			"25": "MOVE_HEADBUTT",
             "28": [
                 "MOVE_STOCKPILE",
                 "MOVE_SWALLOW",

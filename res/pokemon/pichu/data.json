@@ -82,7 +82,8 @@
             "5": "MOVE_TAIL_WHIP",
             "10": "MOVE_THUNDER_WAVE",
             "13": "MOVE_SWEET_KISS",
-            "18": "MOVE_NASTY_PLOT"
+            "18": "MOVE_NASTY_PLOT",
+			"23": "MOVE_HEADBUTT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

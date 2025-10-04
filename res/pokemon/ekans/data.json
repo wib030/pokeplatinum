@@ -88,6 +88,7 @@
             "12": "MOVE_GLARE",
             "17": "MOVE_SCREECH",
             "20": "MOVE_ACID",
+			"23": "MOVE_HEADBUTT",
             "25": [
                 "MOVE_STOCKPILE",
                 "MOVE_SWALLOW",

@@ -81,6 +81,8 @@
         ],
         "level_up": {
             "1": [ 
+				"MOVE_WORRY_SEED",
+				"MOVE_STRING_SHOT",
 				"MOVE_SCRATCH",
 				"MOVE_ABSORB"
 			],

@@ -92,6 +92,7 @@
 			"24": "MOVE_WING_ATTACK",
             "26": "MOVE_AGILITY",
 			"29": "MOVE_FOCUS_ENERGY",
+			"30": "MOVE_TAILWIND",
             "32": "MOVE_ROOST",
             "36": "MOVE_DRILL_PECK"
         },

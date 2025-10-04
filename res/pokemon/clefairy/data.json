@@ -99,6 +99,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_GRAVITY",
+				"MOVE_MAGIC_COAT",
                 "MOVE_DOUBLE_SLAP",
                 "MOVE_CHARM"
             ],
@@ -110,6 +112,7 @@
             "20": "MOVE_METRONOME",
             "22": "MOVE_GUILLOTINE",
 			"24": "MOVE_MOONLIGHT",
+			"25": "MOVE_HEADBUTT",
             "26": "MOVE_COSMIC_POWER",
             "28": "MOVE_FOLLOW_ME",
             "30": "MOVE_MINIMIZE",

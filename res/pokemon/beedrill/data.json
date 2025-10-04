@@ -84,7 +84,8 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_TAILWIND",
 				"MOVE_FRENZY_PLANT",
 				"MOVE_POISON_STING"
 			],

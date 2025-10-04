@@ -85,6 +85,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
                 "MOVE_CROSS_POISON",
                 "MOVE_SCREECH",
                 "MOVE_FRENZY_PLANT",
@@ -102,6 +103,7 @@
 			"30": "MOVE_WING_ATTACK",
 			"32": "MOVE_LEECH_LIFE",
             "35": "MOVE_MEAN_LOOK",
+			"37": "MOVE_SUPER_FANG",
             "40": "MOVE_HAZE",
 			"45": "MOVE_BRAVE_BIRD"
         },

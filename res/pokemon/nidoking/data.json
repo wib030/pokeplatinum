@@ -112,6 +112,7 @@
             ],
 			"10": "MOVE_MUD_SHOT",
             "22": "MOVE_HORN_ATTACK",
+			"25": "MOVE_HEADBUTT",
 			"28": "MOVE_HELPING_HAND",
 			"30": "MOVE_HORN_DRILL",
 			"32": "MOVE_GUILLOTINE",
@@ -121,6 +122,7 @@
 			"40": "MOVE_THRASH",
             "42": "MOVE_POISON_JAB",
 			"44": "MOVE_EARTH_POWER",
+			"46": "MOVE_SUPER_FANG",
 			"50": "MOVE_CAPTIVATE",
 			"54": "MOVE_SHEER_COLD",
             "58": "MOVE_MEGAHORN"

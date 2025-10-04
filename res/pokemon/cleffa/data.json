@@ -85,6 +85,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_GRAVITY",
+				"MOVE_MAGIC_COAT",
                 "MOVE_POUND",
                 "MOVE_CHARM",
 				"MOVE_FURY_ATTACK"
@@ -93,7 +95,8 @@
             "7": "MOVE_SING",
             "10": "MOVE_SWEET_KISS",
             "13": "MOVE_COPYCAT",
-            "16": "MOVE_MAGICAL_LEAF"
+            "16": "MOVE_MAGICAL_LEAF",
+			"23": "MOVE_HEADBUTT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

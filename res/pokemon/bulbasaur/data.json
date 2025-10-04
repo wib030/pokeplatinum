@@ -89,6 +89,7 @@
             "15": "MOVE_TAKE_DOWN",
             "19": "MOVE_RAZOR_LEAF",
             "21": "MOVE_SWEET_SCENT",
+			"23": "MOVE_HEADBUTT",
             "25": "MOVE_GROWTH",
             "27": "MOVE_DOUBLE_EDGE",
             "31": "MOVE_WORRY_SEED",

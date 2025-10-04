@@ -89,6 +89,7 @@
             "5": "MOVE_EMBER",
             "10": "MOVE_SMOKE_SCREEN",
             "19": "MOVE_SCARY_FACE",
+			"23": "MOVE_HEADBUTT",
             "25": "MOVE_FIRE_FANG",
             "28": "MOVE_SLASH",
 			"32": "MOVE_DRAGON_RAGE",

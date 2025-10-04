@@ -91,6 +91,7 @@
 			"18": "MOVE_THUNDER_WAVE",
 			"21": "MOVE_FEINT",
 			"23": "MOVE_DOUBLE_TEAM",
+			"24": "MOVE_HEADBUTT",
 			"26": "MOVE_SPARK",
 			"28": "MOVE_ZAP_CANNON",
             "30": "MOVE_AGILITY",

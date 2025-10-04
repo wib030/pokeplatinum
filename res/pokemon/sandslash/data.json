@@ -107,8 +107,10 @@
 				"MOVE_CURSE"
 			],
 			"24": "MOVE_SAND_TOMB",
+			"25": "MOVE_HEADBUTT",
 			"28": "MOVE_SLASH",
 			"30": "MOVE_SPIKES",
+			"35": "MOVE_SUPER_FANG",
 			"37": "MOVE_SANDSTORM",
             "40": "MOVE_GYRO_BALL",
 			"50": "MOVE_EARTHQUAKE",

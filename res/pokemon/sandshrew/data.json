@@ -99,8 +99,10 @@
             "19": "MOVE_FURY_SWIPES",
             "21": "MOVE_ROLLOUT",
             "23": "MOVE_SAND_TOMB",
+			"24": "MOVE_HEADBUTT",
             "31": "MOVE_SLASH",
             "33": "MOVE_GYRO_BALL",
+			"35": "MOVE_SUPER_FANG",
             "37": "MOVE_SANDSTORM"
         },
         "tutor": [

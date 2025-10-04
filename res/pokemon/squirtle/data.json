@@ -88,6 +88,7 @@
             "19": "MOVE_RAPID_SPIN",
 			"21": "MOVE_BUBBLE",
             "22": "MOVE_PROTECT",
+			"23": "MOVE_HEADBUTT",
             "25": "MOVE_WATER_PULSE",
             "31": "MOVE_SKULL_BASH",
             "34": "MOVE_IRON_DEFENSE",

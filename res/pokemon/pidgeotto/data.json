@@ -86,6 +86,7 @@
             "27": "MOVE_FEATHER_DANCE",
             "32": "MOVE_AGILITY",
             "37": "MOVE_AIR_SLASH",
+			"40": "MOVE_SKY_ATTACK",
             "42": "MOVE_ROOST",
 			"45": "MOVE_RAZOR_WIND",
             "47": "MOVE_TAILWIND",

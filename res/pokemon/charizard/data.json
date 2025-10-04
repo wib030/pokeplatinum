@@ -94,6 +94,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
                 "MOVE_DRAGON_CLAW",
                 "MOVE_SHADOW_CLAW",
                 "MOVE_AIR_SLASH",
@@ -106,6 +107,7 @@
             "10": "MOVE_SMOKE_SCREEN",
             "21": "MOVE_SCARY_FACE",
 			"26": "MOVE_SWIFT",
+			"27": "MOVE_HEADBUTT",
             "28": "MOVE_FIRE_FANG",
             "32": "MOVE_SLASH",
 			"34": "MOVE_DRAGON_RAGE",

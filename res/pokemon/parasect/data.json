@@ -83,6 +83,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_WORRY_SEED",
+				"MOVE_STRING_SHOT",
 				"MOVE_CROSS_POISON",
                 "MOVE_NIGHT_SLASH",
 				"MOVE_METAL_CLAW",

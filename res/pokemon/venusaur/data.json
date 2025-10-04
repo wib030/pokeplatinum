@@ -84,7 +84,8 @@
                 "MOVE_TACKLE",
                 "MOVE_GROWL",
                 "MOVE_LEECH_SEED",
-                "MOVE_VINE_WHIP"
+                "MOVE_VINE_WHIP",
+				"MOVE_BLOCK"
             ],
             "3": "MOVE_ACID",
             "9": "MOVE_VINE_WHIP",
@@ -95,6 +96,7 @@
             "15": "MOVE_TAKE_DOWN",
             "20": "MOVE_RAZOR_LEAF",
             "23": "MOVE_SWEET_SCENT",
+			"25": "MOVE_HEADBUTT",
             "28": "MOVE_GROWTH",
             "31": "MOVE_DOUBLE_EDGE",
             "32": "MOVE_PETAL_DANCE",

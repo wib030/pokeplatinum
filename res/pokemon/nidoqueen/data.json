@@ -114,6 +114,7 @@
 			"20": "MOVE_FURY_SWIPES",
 			"22": "MOVE_BITE",
             "24": "MOVE_BODY_SLAM",
+			"25": "MOVE_HEADBUTT",
 			"26": "MOVE_POISON_FANG",
 			"28": "MOVE_HELPING_HAND",
 			"30": "MOVE_MAGNITUDE",
@@ -124,6 +125,7 @@
 			"40": "MOVE_SLACK_OFF",
 			"42": "MOVE_CRUNCH",
             "44": "MOVE_EARTH_POWER",
+			"46": "MOVE_SUPER_FANG",
 			"50": "MOVE_CAPTIVATE",
 			"54": "MOVE_SHEER_COLD",
             "58": "MOVE_SUPERPOWER"

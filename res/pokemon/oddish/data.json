@@ -79,6 +79,7 @@
 			],
 			"3": "MOVE_ACID",
             "5": "MOVE_SWEET_SCENT",
+			"9": "MOVE_WORRY_SEED",
             "13": "MOVE_POISON_POWDER",
             "14": "MOVE_STUN_SPORE",
             "15": "MOVE_SLEEP_POWDER",

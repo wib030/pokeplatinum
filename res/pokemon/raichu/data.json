@@ -96,6 +96,7 @@
 			"21": "MOVE_FEINT",
 			"23": "MOVE_DOUBLE_TEAM",
 			"24": "MOVE_BODY_SLAM",
+			"25": "MOVE_HEADBUTT",
 			"26": "MOVE_SPARK",
 			"29": "MOVE_AGILITY",
 			"31": "MOVE_GUILLOTINE",

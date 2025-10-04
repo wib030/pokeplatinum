@@ -85,6 +85,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
                 "MOVE_BULLET_PUNCH",
                 "MOVE_QUICK_ATTACK",
                 "MOVE_BUG_BITE"

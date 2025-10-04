@@ -89,8 +89,12 @@
             "5": "MOVE_DOUBLE_KICK",
 			"11": "MOVE_MUD_SHOT",
             "23": "MOVE_HORN_ATTACK",
+			"25": "MOVE_HEADBUTT",
             "28": "MOVE_HELPING_HAND",
-			"30": "MOVE_HORN_DRILL",
+			"30": [ 
+				"MOVE_HORN_DRILL",
+				"MOVE_SUPER_FANG"
+			],
             "35": "MOVE_TOXIC_SPIKES",
             "38": "MOVE_FLATTER",
             "43": "MOVE_POISON_JAB",

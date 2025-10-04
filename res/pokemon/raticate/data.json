@@ -100,6 +100,7 @@
             "19": "MOVE_ASSURANCE",
             "20": "MOVE_SCARY_FACE",
             "24": "MOVE_CRUNCH",
+			"25": "MOVE_HEADBUTT",
             "29": "MOVE_SUCKER_PUNCH",
             "34": "MOVE_SUPER_FANG",
             "39": "MOVE_DOUBLE_EDGE",
