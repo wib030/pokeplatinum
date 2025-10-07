@@ -103,6 +103,7 @@
             "17": "MOVE_SCREECH",
             "22": "MOVE_FAINT_ATTACK",
             "25": "MOVE_TAUNT",
+			"26": "MOVE_HEADBUTT",
 			"28": "MOVE_FEINT",
 			"30": "MOVE_SLASH",
             "32": "MOVE_POWER_GEM",

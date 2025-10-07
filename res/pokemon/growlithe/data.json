@@ -87,6 +87,7 @@
             "19": "MOVE_REVERSAL",
             "21": "MOVE_FIRE_FANG",
             "23": "MOVE_TAKE_DOWN",
+			"25": "MOVE_HEADBUTT",
 			"30": "MOVE_AGILITY",
             "34": "MOVE_FLAMETHROWER",
             "39": "MOVE_CRUNCH",

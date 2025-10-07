@@ -72,6 +72,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_STRING_SHOT",
                 "MOVE_TACKLE",
                 "MOVE_DISABLE",
                 "MOVE_FORESIGHT"
@@ -80,6 +81,7 @@
             "5": "MOVE_SUPERSONIC",
             "11": "MOVE_CONFUSION",
             "13": "MOVE_POISON_POWDER",
+			"15": "MOVE_BUG_BITE",
             "23": "MOVE_STUN_SPORE",
             "25": "MOVE_PSYBEAM",
 			"27": "MOVE_LEECH_LIFE",

@@ -95,6 +95,7 @@
             "17": "MOVE_SCREECH",
             "22": "MOVE_FAINT_ATTACK",
             "25": "MOVE_TAUNT",
+			"26": "MOVE_HEADBUTT",
 			"28": "MOVE_FEINT",
             "30": "MOVE_PAY_DAY",
             "33": "MOVE_SLASH",

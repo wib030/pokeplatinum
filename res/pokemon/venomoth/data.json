@@ -80,6 +80,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
+				"MOVE_STRING_SHOT",
                 "MOVE_SILVER_WIND",
 				"MOVE_GUST",
                 "MOVE_DISABLE"
@@ -88,6 +90,7 @@
             "5": "MOVE_SUPERSONIC",
             "11": "MOVE_CONFUSION",
             "13": "MOVE_POISON_POWDER",
+			"15": "MOVE_BUG_BITE",
 			"17": "MOVE_PSYBEAM",
             "23": "MOVE_STUN_SPORE",
 			"25": "MOVE_SIGNAL_BEAM",
