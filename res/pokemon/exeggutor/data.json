@@ -85,6 +85,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
                 "MOVE_SEED_BOMB",
                 "MOVE_TELEPORT",
                 "MOVE_HYPNOSIS",

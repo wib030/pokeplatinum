@@ -85,6 +85,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_PAIN_SPLIT",
                 "MOVE_MUD_SLAP",
                 "MOVE_HARDEN",
                 "MOVE_WATER_PULSE"

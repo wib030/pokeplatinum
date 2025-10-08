@@ -105,6 +105,7 @@
             ],
             "7": "MOVE_EMBER",
             "9": "MOVE_TAUNT",
+			"11": "MOVE_LOW_KICK",
             "14": "MOVE_MACH_PUNCH",
             "17": "MOVE_FURY_SWIPES",
             "21": "MOVE_FLAME_WHEEL",

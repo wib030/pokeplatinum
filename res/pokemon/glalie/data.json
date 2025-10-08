@@ -99,6 +99,7 @@
             "28": "MOVE_RAPID_SPIN",
 			"32": "MOVE_PROTECT",
 			"33": "MOVE_MIRACLE_EYE",
+			"34": "MOVE_SUPER_FANG",
             "35": "MOVE_U_TURN",
 			"36": "MOVE_CONSTRICT",
 			"37": "MOVE_MIND_READER",

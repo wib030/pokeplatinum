@@ -91,6 +91,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
                 "MOVE_NIGHTMARE",
                 "MOVE_BEAT_UP",
                 "MOVE_POUND",

@@ -78,6 +78,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
                 "MOVE_REVENGE",
                 "MOVE_ROLLING_KICK",
 				"MOVE_WATER_SPORT"

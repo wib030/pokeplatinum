@@ -91,6 +91,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
 				"MOVE_SHADOW_CLAW",
                 "MOVE_GROWL",
                 "MOVE_TAIL_WHIP",

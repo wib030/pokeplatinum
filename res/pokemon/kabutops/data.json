@@ -90,6 +90,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
                 "MOVE_FEINT",
 				"MOVE_NIGHT_SLASH",
 				"MOVE_SLASH",

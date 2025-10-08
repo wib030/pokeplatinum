@@ -89,6 +89,7 @@
 			"23": "MOVE_SUCKER_PUNCH",
 			"26": "MOVE_DIVE",
             "29": "MOVE_BATON_PASS",
+			"31": "MOVE_SUPER_FANG",
             "34": "MOVE_CRUNCH",
 			"39": "MOVE_WATERFALL",
 			"48": "MOVE_SHEER_COLD",

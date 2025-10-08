@@ -106,6 +106,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
 				"MOVE_SWIFT",
                 "MOVE_TACKLE",
 				"MOVE_HARDEN",

@@ -98,6 +98,7 @@
             "13": "MOVE_SAND_ATTACK",
 			"16": "MOVE_NEEDLE_ARM",
 			"19": "MOVE_FAINT_ATTACK",
+			"21": "MOVE_LOW_KICK",
             "22": "MOVE_INGRAIN",
 			"26": "MOVE_PAYBACK",
             "30": "MOVE_SPIKES",

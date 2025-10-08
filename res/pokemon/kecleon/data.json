@@ -101,6 +101,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
                 "MOVE_DISABLE",
                 "MOVE_FAKE_OUT",
                 "MOVE_LICK",

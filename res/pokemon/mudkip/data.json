@@ -83,6 +83,7 @@
 			"4": "MOVE_WATER_GUN",
             "9": "MOVE_MUD_SLAP",
 			"12": "MOVE_FORESIGHT",
+			"15": "MOVE_LOW_KICK",
             "17": "MOVE_BIDE",
 			"25": "MOVE_ROCK_THROW",
 			"28": "MOVE_PROTECT",

@@ -107,6 +107,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
                 "MOVE_LEAF_BLADE",
                 "MOVE_NIGHT_SLASH",
 				"MOVE_SLASH",
@@ -123,6 +124,7 @@
             "26": "MOVE_SWORDS_DANCE",
 			"27": "MOVE_MIRACLE_EYE",
             "31": "MOVE_PSYCHO_CUT",
+			"33": "MOVE_PAIN_SPLIT",
             "35": [ 
 				"MOVE_HELPING_HAND",
 				"MOVE_MEAN_LOOK"

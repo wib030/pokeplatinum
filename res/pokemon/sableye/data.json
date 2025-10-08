@@ -92,6 +92,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_PAIN_SPLIT",
+				"MOVE_LOW_KICK",
                 "MOVE_LEER",
 				"MOVE_ASTONISH",
                 "MOVE_SCRATCH",

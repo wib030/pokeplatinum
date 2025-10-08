@@ -93,6 +93,7 @@
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
+			"33": "MOVE_SUPER_FANG",
             "36": "MOVE_HAIL",
 			"35": "MOVE_ICE_BALL",
 			"37": "MOVE_SLACK_OFF",

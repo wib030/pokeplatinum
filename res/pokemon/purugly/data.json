@@ -103,11 +103,13 @@
 			"29": "MOVE_SWAGGER",
 			"32": "MOVE_KNOCK_OFF",
             "37": "MOVE_SLASH",
-			"39": "MOVE_MEAN_LOOK",
+			"39": [ 
+				"MOVE_MEAN_LOOK",
+				"MOVE_SUPER_FANG"
+			],
 			"41": "MOVE_SUCKER_PUNCH",
             "43": "MOVE_BODY_SLAM",
             "45": "MOVE_ATTRACT",
-			"48": "MOVE_SUPER_FANG",
 			"53": "MOVE_LAST_RESORT"
         },
         "tutor": [

@@ -100,6 +100,7 @@
             "23": "MOVE_NATURAL_GIFT",
             "28": "MOVE_SPIKES",
             "32": "MOVE_PAYBACK",
+			"33": "MOVE_PAIN_SPLIT",
 			"34": "MOVE_ZAP_CANNON",
             "36": "MOVE_EXPLOSION",
 			"40": "MOVE_SPIDER_WEB",

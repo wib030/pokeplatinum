@@ -85,7 +85,8 @@
             "HM08"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_LOW_KICK",
 				"MOVE_GROWL",
 				"MOVE_PSYWAVE",
 				"MOVE_FURY_ATTACK",

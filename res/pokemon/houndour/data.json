@@ -95,6 +95,7 @@
             "25": "MOVE_BEAT_UP",
             "28": "MOVE_FIRE_FANG",
             "32": "MOVE_FAINT_ATTACK",
+			"35": "MOVE_SUPER_FANG",
             "37": "MOVE_EMBARGO",
 			"40": "MOVE_PUNISHMENT",
 			"42": "MOVE_DARK_PULSE",

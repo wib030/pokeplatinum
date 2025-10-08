@@ -91,6 +91,7 @@
             ],
 			"5": "MOVE_EMBER",
 			"10": "MOVE_SAND_ATTACK",
+			"12": "MOVE_LOW_KICK",
 			"14": "MOVE_PECK",
             "16": "MOVE_DOUBLE_KICK",
 			"20": "MOVE_FLAME_WHEEL",

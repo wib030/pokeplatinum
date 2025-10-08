@@ -95,6 +95,7 @@
 			"24": "MOVE_GYRO_BALL",
 			"28": "MOVE_BRINE",
             "31": "MOVE_MINIMIZE",
+			"33": "MOVE_PAIN_SPLIT",
 			"37": "MOVE_POWER_GEM",
 			"40": "MOVE_CONFUSE_RAY",
 			"42": "MOVE_PSYCHIC",

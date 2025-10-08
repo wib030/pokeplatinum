@@ -95,6 +95,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_PAIN_SPLIT",
                 "MOVE_REST",
 				"MOVE_POWER_WHIP",
                 "MOVE_CONFUSION"

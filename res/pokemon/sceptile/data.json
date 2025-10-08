@@ -106,6 +106,7 @@
             "5": "MOVE_ABSORB",
             "9": "MOVE_QUICK_ATTACK",
 			"13": "MOVE_MEGA_DRAIN",
+			"15": "MOVE_LOW_KICK",
             "18": "MOVE_PURSUIT",
 			"23": "MOVE_LEAF_BLADE",
 			"25": "MOVE_FALSE_SWIPE",

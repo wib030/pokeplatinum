@@ -88,6 +88,7 @@
             "22": "MOVE_ASSURANCE",
             "24": "MOVE_SCARY_FACE",
             "32": "MOVE_TAUNT",
+			"34": "MOVE_SUPER_FANG",
             "36": "MOVE_EMBARGO",
             "40": "MOVE_TAKE_DOWN",
             "42": "MOVE_SUCKER_PUNCH",

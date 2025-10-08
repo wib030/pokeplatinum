@@ -97,6 +97,7 @@
 			"27": "MOVE_KNOCK_OFF",
             "30": "MOVE_FLAIL",
             "33": "MOVE_BELLY_DRUM",
+			"34": "MOVE_SUPER_FANG",
             "36": "MOVE_DOUBLE_EDGE"
         },
         "tutor": [

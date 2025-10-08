@@ -105,6 +105,7 @@
             "5": "MOVE_QUICK_ATTACK",
             "8": "MOVE_FURY_CUTTER",
 			"12": "MOVE_PURSUIT",
+			"15": "MOVE_LOW_KICK",
             "19": "MOVE_SLASH",
 			"22": "MOVE_REVENGE",
 			"26": "MOVE_CRUSH_CLAW",

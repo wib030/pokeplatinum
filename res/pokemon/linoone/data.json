@@ -103,6 +103,7 @@
 			"25": "MOVE_GUILLOTINE",
 			"28": "MOVE_TAKE_DOWN",
 			"33": "MOVE_KNOCK_OFF",
+			"36": "MOVE_SUPER_FANG",
             "38": "MOVE_FLAIL",
             "43": "MOVE_BELLY_DRUM",
             "48": "MOVE_DOUBLE_EDGE",

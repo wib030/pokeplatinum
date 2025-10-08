@@ -94,6 +94,7 @@
 				"MOVE_ARM_THRUST",
 				"MOVE_BULLET_SEED"
             ],
+			"5": "MOVE_LOW_KICK",
 			"7": "MOVE_FEINT",
             "10": "MOVE_AERIAL_ACE",
 			"19": "MOVE_COUNTER",

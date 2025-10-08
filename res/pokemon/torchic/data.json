@@ -84,6 +84,7 @@
 			"5": "MOVE_EMBER",
 			"7": "MOVE_FOCUS_ENERGY",
 			"10": "MOVE_SAND_ATTACK",
+			"12": "MOVE_LOW_KICK",
 			"14": "MOVE_PECK",
 			"19": "MOVE_FIRE_SPIN",
 			"23": "MOVE_QUICK_ATTACK",

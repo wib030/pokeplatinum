@@ -99,6 +99,7 @@
                 "MOVE_SPIT_UP"
             ],
             "29": "MOVE_REVENGE",
+			"31": "MOVE_PAIN_SPLIT",
             "33": "MOVE_BRINE",
 			"35": "MOVE_SPIKE_CANNON",
             "37": "MOVE_PIN_MISSILE",

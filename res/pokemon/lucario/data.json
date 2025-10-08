@@ -97,6 +97,7 @@
             "1": [
                 "MOVE_DARK_PULSE",
                 "MOVE_QUICK_ATTACK",
+				"MOVE_LOW_KICK",
                 "MOVE_FORESIGHT",
                 "MOVE_DETECT",
                 "MOVE_METAL_CLAW"

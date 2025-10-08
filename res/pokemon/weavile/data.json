@@ -100,6 +100,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_LOW_KICK",
 				"MOVE_SCRATCH",
 				"MOVE_LEER",
 				"MOVE_QUICK_ATTACK",

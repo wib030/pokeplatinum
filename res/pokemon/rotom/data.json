@@ -80,6 +80,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_PAIN_SPLIT",
                 "MOVE_TRICK",
                 "MOVE_ASTONISH",
                 "MOVE_THUNDER_WAVE",

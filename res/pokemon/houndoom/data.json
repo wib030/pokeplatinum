@@ -102,6 +102,7 @@
             "26": "MOVE_BEAT_UP",
             "28": "MOVE_FIRE_FANG",
             "34": "MOVE_FAINT_ATTACK",
+			"36": "MOVE_SUPER_FANG",
 			"38": "MOVE_EMBARGO",
 			"40": "MOVE_MORNING_SUN",
 			"42": "MOVE_PUNISHMENT",

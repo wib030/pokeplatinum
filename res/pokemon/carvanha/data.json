@@ -91,6 +91,7 @@
 			"25": "MOVE_ICE_FANG",
 			"29": "MOVE_SCARY_FACE",
 			"32": "MOVE_CRUNCH",
+			"33": "MOVE_SUPER_FANG",
 			"34": "MOVE_POISON_FANG",
 			"35": "MOVE_DOUBLE_HIT",
             "36": "MOVE_AGILITY",

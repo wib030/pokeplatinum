@@ -100,6 +100,7 @@
             "24": "MOVE_ASSURANCE",
             "28": "MOVE_SCARY_FACE",
 			"32": "MOVE_EMBARGO",
+			"34": "MOVE_SUPER_FANG",
             "36": "MOVE_TAUNT",
 			"40": "MOVE_CRUNCH",
 			"44": "MOVE_YAWN",

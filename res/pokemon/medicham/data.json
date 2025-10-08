@@ -93,9 +93,10 @@
                 "MOVE_FIRE_PUNCH",
                 "MOVE_THUNDER_PUNCH",
                 "MOVE_ICE_PUNCH",
-				"MOVE_CONFUSION",
 				"MOVE_ZEN_HEADBUTT",
-				"MOVE_BIDE"
+				"MOVE_BIDE",
+				"MOVE_LOW_KICK",
+				"MOVE_CONFUSION"
             ],
             "4": "MOVE_MEDITATE",
             "9": "MOVE_DETECT",
@@ -108,6 +109,7 @@
             "29": "MOVE_JUMP_KICK",
 			"31": "MOVE_PSYCH_UP",
 			"33": "MOVE_ACUPRESSURE",
+			"34": "MOVE_PAIN_SPLIT",
 			"36": "MOVE_POWER_TRICK",
 			"38": "MOVE_RECOVER",
             "42": "MOVE_REVERSAL",

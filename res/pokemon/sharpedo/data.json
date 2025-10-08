@@ -107,6 +107,7 @@
 			"29": "MOVE_SCARY_FACE",
             "30": "MOVE_SLASH",
 			"32": "MOVE_CRUNCH",
+			"33": "MOVE_SUPER_FANG",
 			"34": "MOVE_POISON_FANG",
             "40": "MOVE_TAUNT",
 			"42": "MOVE_RECOVER",

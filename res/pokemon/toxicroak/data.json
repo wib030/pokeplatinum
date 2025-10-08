@@ -96,7 +96,8 @@
             "1": [
                 "MOVE_ACUPRESSURE",
                 "MOVE_VACUUM_WAVE",
-                "MOVE_FAKE_OUT"
+                "MOVE_FAKE_OUT",
+				"MOVE_LOW_KICK"
             ],
             "3": "MOVE_MUD_SLAP",
 			"5": "MOVE_KARATE_CHOP",
@@ -113,6 +114,7 @@
 			"34": "MOVE_BULLET_PUNCH",
             "36": "MOVE_NASTY_PLOT",
             "41": "MOVE_POISON_JAB",
+			"43": "MOVE_SUPER_FANG",
 			"45": "MOVE_CLOSE_COMBAT",
             "49": "MOVE_SLUDGE_BOMB",
             "54": "MOVE_GUNK_SHOT"

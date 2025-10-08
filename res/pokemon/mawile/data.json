@@ -93,7 +93,8 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_PAIN_SPLIT",
 				"MOVE_ASTONISH",
 				"MOVE_IRON_HEAD",
 				"MOVE_TAUNT"
@@ -107,6 +108,7 @@
             "25": "MOVE_BATON_PASS",
             "29": "MOVE_CRUNCH",
 			"33": "MOVE_IRON_DEFENSE",
+			"35": "MOVE_SUPER_FANG",
 			"37": "MOVE_SUCKER_PUNCH",
 			"39": "MOVE_DRAGON_RUSH",
 			"40": "MOVE_DRAGON_RAGE",

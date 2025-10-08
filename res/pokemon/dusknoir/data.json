@@ -97,6 +97,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_PAIN_SPLIT",
                 "MOVE_FIRE_PUNCH",
                 "MOVE_ICE_PUNCH",
                 "MOVE_THUNDER_PUNCH",

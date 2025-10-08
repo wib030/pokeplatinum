@@ -88,7 +88,10 @@
             "HM08"
         ],
         "level_up": {
-            "1": "MOVE_ASTONISH",
+            "1": [ 
+				"MOVE_ASTONISH",
+				"MOVE_LOW_KICK"
+			],
             "3": "MOVE_MUD_SLAP",
 			"5": "MOVE_KARATE_CHOP",
             "8": "MOVE_POISON_STING",
@@ -102,6 +105,7 @@
             "31": "MOVE_SUCKER_PUNCH",
             "36": "MOVE_NASTY_PLOT",
             "38": "MOVE_POISON_JAB",
+			"40": "MOVE_SUPER_FANG",
             "43": "MOVE_SLUDGE_BOMB",
             "45": "MOVE_FLATTER"
         },
