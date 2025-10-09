@@ -84,6 +84,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_BLOCK",
                 "MOVE_TOXIC_SPIKES",
 				"MOVE_MIRROR_SHOT",
 				"MOVE_MAGNET_RISE",

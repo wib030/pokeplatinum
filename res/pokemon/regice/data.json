@@ -93,7 +93,8 @@
 				"MOVE_CHARGE_BEAM",
                 "MOVE_EXPLOSION",
 				"MOVE_ICY_WIND",
-                "MOVE_STOMP"
+                "MOVE_STOMP",
+				"MOVE_BLOCK"
             ],
             "7": "MOVE_ICY_WIND",
 			"13": "MOVE_CHARGE_BEAM",

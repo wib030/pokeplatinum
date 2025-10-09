@@ -98,7 +98,10 @@
             "HM08"
         ],
         "level_up": {
-            "1": "MOVE_LICK",
+            "1": [
+				"MOVE_BLOCK",
+				"MOVE_LICK"
+			],
             "5": "MOVE_SUPERSONIC",
             "9": "MOVE_DEFENSE_CURL",
             "13": "MOVE_KNOCK_OFF",

@@ -87,6 +87,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_BLOCK",
 				"MOVE_REFRESH",
 				"MOVE_CONFUSE_RAY",
 				"MOVE_CRUSH_GRIP",

@@ -85,6 +85,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_BLOCK",
 				"MOVE_HEADBUTT",
                 "MOVE_POWDER_SNOW",
                 "MOVE_STEALTH_ROCK",

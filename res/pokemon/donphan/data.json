@@ -80,6 +80,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_BLOCK",
                 "MOVE_FIRE_FANG",
                 "MOVE_THUNDER_FANG",
                 "MOVE_HORN_ATTACK",

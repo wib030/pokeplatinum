@@ -81,7 +81,8 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_BLOCK",
 				"MOVE_POUND",
 				"MOVE_BODY_SLAM",
 				"MOVE_YAWN",

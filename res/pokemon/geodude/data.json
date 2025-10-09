@@ -92,6 +92,7 @@
 			"10": "MOVE_ROLLOUT",
 			"16": "MOVE_MAGNITUDE",
             "18": "MOVE_ROCK_TOMB",
+			"20": "MOVE_BLOCK",
             "24": "MOVE_SELFDESTRUCT",
             "28": "MOVE_STEALTH_ROCK",
 			"30": "MOVE_ROCK_BLAST",

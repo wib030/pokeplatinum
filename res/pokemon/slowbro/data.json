@@ -112,6 +112,7 @@
 			"11": "MOVE_WATER_GUN",
             "15": "MOVE_CONFUSION",
             "20": "MOVE_DISABLE",
+			"21": "MOVE_BLOCK",
             "23": "MOVE_HEADBUTT",
             "29": "MOVE_WATER_PULSE",
             "32": "MOVE_ZEN_HEADBUTT",

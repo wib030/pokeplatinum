@@ -87,6 +87,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_BLOCK",
 				"MOVE_AVALANCHE",
 				"MOVE_DIVE",
 				"MOVE_ANCIENT_POWER",

@@ -92,6 +92,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_BLOCK",
 				"MOVE_MUD_SHOT",
 				"MOVE_HARDEN",
                 "MOVE_POISON_GAS",
