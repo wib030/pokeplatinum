@@ -91,6 +91,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_SKY_ATTACK",
 				"MOVE_PAIN_SPLIT",
                 "MOVE_PECK",
                 "MOVE_LEER"

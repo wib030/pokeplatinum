@@ -75,7 +75,10 @@
             "HM05"
         ],
         "level_up": {
-            "1": "MOVE_PECK",
+            "1": [
+				"MOVE_SKY_ATTACK",
+				"MOVE_PECK"
+			],
             "5": "MOVE_GROWL",
             "9": "MOVE_MIRROR_MOVE",
             "13": "MOVE_SING",

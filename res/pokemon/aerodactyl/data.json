@@ -105,6 +105,7 @@
 			"21": "MOVE_BUBBLE",
             "25": "MOVE_ANCIENT_POWER",
             "33": "MOVE_CRUNCH",
+			"38": "MOVE_SKY_ATTACK",
             "41": "MOVE_TAKE_DOWN",
 			"44": "MOVE_ROCK_SLIDE",
             "46": "MOVE_IRON_HEAD",

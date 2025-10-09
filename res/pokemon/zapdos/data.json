@@ -92,7 +92,10 @@
             "15": "MOVE_DETECT",
             "22": "MOVE_PLUCK",
             "29": "MOVE_ANCIENT_POWER",
-			"34": "MOVE_ZAP_CANNON",
+			"34": [ 
+				"MOVE_ZAP_CANNON",
+				"MOVE_SKY_ATTACK"
+			],
             "36": "MOVE_CHARGE",
 			"40": "MOVE_LIGHT_SCREEN",
             "43": "MOVE_AGILITY",

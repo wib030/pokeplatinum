@@ -98,6 +98,7 @@
 			"30": "MOVE_FOCUS_ENERGY",
 			"32": "MOVE_TAILWIND",
             "36": "MOVE_ROOST",
+			"38": "MOVE_SKY_ATTACK",
             "41": "MOVE_DRILL_PECK",
 			"45": "MOVE_HORN_DRILL",
 			"50": "MOVE_SUCKER_PUNCH",
