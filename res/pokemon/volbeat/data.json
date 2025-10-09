@@ -107,6 +107,7 @@
             "41": "MOVE_BUG_BUZZ",
 			"43": "MOVE_TRICK",
             "45": "MOVE_DISCHARGE",
+			"47": "MOVE_BARRAGE",
 			"54": "MOVE_MUD_SPORT"
         },
         "tutor": [
