@@ -152,6 +152,7 @@
 				"MOVE_LOW_KICK",
 				"MOVE_SUPER_FANG",
 				"MOVE_PAIN_SPLIT",
+				"MOVE_BUG_BITE",
                 "MOVE_POUND",
 				"MOVE_TELEPORT",
                 "MOVE_TRANSFORM"

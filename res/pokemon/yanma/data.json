@@ -84,6 +84,7 @@
             ],
             "6": "MOVE_QUICK_ATTACK",
             "11": "MOVE_DOUBLE_TEAM",
+			"13": "MOVE_BUG_BITE",
             "14": "MOVE_SONIC_BOOM",
             "17": "MOVE_DETECT",
             "22": "MOVE_SUPERSONIC",

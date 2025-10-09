@@ -87,6 +87,7 @@
 			"3": "MOVE_FRENZY_PLANT",
             "5": "MOVE_ENCORE",
 			"9": "MOVE_WRAP",
+			"11": "MOVE_BUG_BITE",
             "14": "MOVE_SAFEGUARD",
             "20": "MOVE_REST",
 			"23": "MOVE_ROCK_THROW",
@@ -94,7 +95,6 @@
 			"31": "MOVE_POWER_TRICK",
 			"35": "MOVE_MUD_SPORT",
 			"38": "MOVE_ROCK_SLIDE",
-            "40": "MOVE_BUG_BITE",
 			"49": "MOVE_STONE_EDGE"
         },
         "tutor": [

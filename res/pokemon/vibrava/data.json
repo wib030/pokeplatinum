@@ -94,6 +94,7 @@
 				"MOVE_MUD_SLAP",
 				"MOVE_SAND_ATTACK"
 			],
+			"9": "MOVE_BUG_BITE",
             "12": "MOVE_SAND_TOMB",
 			"15": "MOVE_ROCK_SLIDE",
 			"17": "MOVE_FAINT_ATTACK",

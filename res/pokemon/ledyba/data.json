@@ -87,6 +87,7 @@
 			],
             "3": "MOVE_GUST",
 			"5": "MOVE_SUPERSONIC",
+			"9": "MOVE_BUG_BITE",
             "12": [
                 "MOVE_LIGHT_SCREEN",
                 "MOVE_REFLECT",

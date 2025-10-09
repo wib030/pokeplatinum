@@ -93,6 +93,7 @@
             ],
             "5": "MOVE_DOUBLE_TEAM",
             "8": "MOVE_CONFUSE_RAY",
+			"10": "MOVE_BUG_BITE",
 			"12": "MOVE_QUICK_ATTACK",
 			"15": "MOVE_SPARK",
             "19": "MOVE_MOONLIGHT",

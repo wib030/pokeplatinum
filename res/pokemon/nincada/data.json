@@ -80,6 +80,7 @@
             ],
 			"3": "MOVE_FRENZY_PLANT",
             "9": "MOVE_SAND_ATTACK",
+			"11": "MOVE_BUG_BITE",
             "13": "MOVE_FURY_SWIPES",
 			"17": "MOVE_MUD_SLAP",
 			"21": "MOVE_METAL_CLAW",

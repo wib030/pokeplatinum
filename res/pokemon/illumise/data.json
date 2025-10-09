@@ -91,6 +91,7 @@
 			],
             "5": "MOVE_SWEET_SCENT",
             "8": "MOVE_CHARM",
+			"10": "MOVE_BUG_BITE",
 			"12": "MOVE_QUICK_ATTACK",
             "19": "MOVE_MOONLIGHT",
             "22": "MOVE_WISH",

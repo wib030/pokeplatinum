@@ -97,6 +97,7 @@
 				"MOVE_PSYWAVE"
             ],
             "5": "MOVE_MUD_SLAP",
+			"9": "MOVE_BUG_BITE",
             "12": "MOVE_SAND_TOMB",
 			"15": "MOVE_ROCK_SLIDE",
 			"17": "MOVE_FAINT_ATTACK",

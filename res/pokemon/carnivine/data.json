@@ -82,6 +82,7 @@
                 "MOVE_THUNDER_FANG",
 				"MOVE_ICE_FANG",
 				"MOVE_FIRE_FANG",
+				"MOVE_BUG_BITE",
                 "MOVE_GROWTH",
 				"MOVE_DEFOG"
             ],

@@ -90,6 +90,7 @@
         "level_up": {
             "1": "MOVE_ANCIENT_POWER",
             "9": "MOVE_LEER",
+			"13": "MOVE_BUG_BITE",
             "17": "MOVE_FIRE_FANG",
             "25": "MOVE_METAL_SOUND",
             "33": "MOVE_CRUNCH",

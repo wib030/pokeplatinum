@@ -86,7 +86,8 @@
             "1": [
 				"MOVE_CONFUSION",
 				"MOVE_GUST",
-				"MOVE_FRENZY_PLANT"
+				"MOVE_FRENZY_PLANT",
+				"MOVE_BUG_BITE"
 			],
             "10": "MOVE_CONFUSION",
             "12": [

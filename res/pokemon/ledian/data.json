@@ -86,7 +86,13 @@
             "HM06"
         ],
         "level_up": {
-			"1": "MOVE_SUPERSONIC",
+			"1": [
+				"MOVE_TACKLE",
+				"MOVE_FRENZY_PLANT"
+			],
+            "3": "MOVE_GUST",
+			"5": "MOVE_SUPERSONIC",
+			"9": "MOVE_BUG_BITE",
             "12": [
                 "MOVE_LIGHT_SCREEN",
                 "MOVE_REFLECT",

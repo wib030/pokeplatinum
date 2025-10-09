@@ -86,6 +86,7 @@
 				"MOVE_TOXIC_SPIKES",
 				"MOVE_GUST",
 				"MOVE_FRENZY_PLANT",
+				"MOVE_BUG_BITE",
 				"MOVE_CONFUSION"
 			],
             "12": "MOVE_CONFUSION",

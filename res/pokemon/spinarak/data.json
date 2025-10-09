@@ -79,6 +79,7 @@
 			"3": "MOVE_FRENZY_PLANT",
             "5": "MOVE_SCARY_FACE",
             "8": "MOVE_WRAP",
+			"13": "MOVE_BUG_BITE",
             "15": "MOVE_NIGHT_SHADE",
             "19": "MOVE_SHADOW_SNEAK",
             "22": "MOVE_FURY_SWIPES",

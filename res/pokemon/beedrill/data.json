@@ -86,6 +86,7 @@
         "level_up": {
             "1": [
 				"MOVE_TAILWIND",
+				"MOVE_BUG_BITE",
 				"MOVE_FRENZY_PLANT",
 				"MOVE_POISON_STING"
 			],

@@ -97,6 +97,7 @@
 			"5": "MOVE_LOW_KICK",
 			"7": "MOVE_FEINT",
             "10": "MOVE_AERIAL_ACE",
+			"13": "MOVE_BUG_BITE",
 			"19": "MOVE_COUNTER",
 			"22": "MOVE_FURY_CUTTER",
             "28": "MOVE_BRICK_BREAK",

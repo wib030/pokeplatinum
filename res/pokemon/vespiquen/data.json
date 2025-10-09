@@ -89,6 +89,7 @@
             "5": "MOVE_FURY_CUTTER",
 			"9": "MOVE_PURSUIT",
 			"13": "MOVE_FURY_SWIPES",
+			"15": "MOVE_BUG_BITE",
             "17": "MOVE_DEFEND_ORDER",
             "25": "MOVE_POWER_GEM",
             "29": "MOVE_HEAL_ORDER",

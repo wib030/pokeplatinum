@@ -78,6 +78,7 @@
 			"3": "MOVE_FRENZY_PLANT",
             "6": "MOVE_QUICK_ATTACK",
             "9": "MOVE_SWEET_SCENT",
+			"13": "MOVE_BUG_BITE",
             "17": "MOVE_BUBBLE_BEAM",
             "22": "MOVE_AGILITY",
             "25": [
