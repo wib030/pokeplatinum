@@ -98,11 +98,11 @@
                 "MOVE_POISON_POWDER"
             ],
 			"10": "MOVE_GROWTH",
+			"11": "MOVE_BUG_BITE",
 			"12": "MOVE_LEECH_SEED",
 			"17": "MOVE_MEGA_DRAIN",
 			"20": "MOVE_FURY_CUTTER",
             "22": "MOVE_SPORE",
-			"24": "MOVE_BUG_BITE",
 			"26": "MOVE_BULLET_SEED",
 			"29": "MOVE_SLASH",
 			"32": "MOVE_LEECH_LIFE",
