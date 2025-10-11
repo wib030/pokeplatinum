@@ -99,6 +99,7 @@
             "13": "MOVE_ROCK_TOMB",
 			"16": "MOVE_PSYBEAM",
 			"19": "MOVE_ANCIENT_POWER",
+			"20": "MOVE_GRAVITY",
 			"22": "MOVE_COSMIC_POWER",
 			"25": "MOVE_POWER_TRICK",
 			"26": "MOVE_SKILL_SWAP",

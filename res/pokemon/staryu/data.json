@@ -93,6 +93,7 @@
 			"20": "MOVE_TELEPORT",
             "22": "MOVE_CAMOUFLAGE",
 			"24": "MOVE_GYRO_BALL",
+			"26": "MOVE_GRAVITY",
 			"28": "MOVE_BRINE",
             "31": "MOVE_MINIMIZE",
 			"33": "MOVE_PAIN_SPLIT",

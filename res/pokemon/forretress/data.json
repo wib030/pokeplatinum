@@ -99,6 +99,7 @@
             "17": "MOVE_RAPID_SPIN",
             "20": "MOVE_BIDE",
             "23": "MOVE_NATURAL_GIFT",
+			"25": "MOVE_GRAVITY",
             "28": "MOVE_SPIKES",
             "32": "MOVE_PAYBACK",
 			"33": "MOVE_PAIN_SPLIT",

@@ -85,7 +85,8 @@
             "TM92"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_GRAVITY",
 				"MOVE_WRAP",
 				"MOVE_WISH",
 				"MOVE_CONFUSION"

@@ -97,6 +97,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_GRAVITY",
 				"MOVE_PAIN_SPLIT",
 				"MOVE_SWIFT",
                 "MOVE_DRAGON_BREATH",

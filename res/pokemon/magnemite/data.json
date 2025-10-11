@@ -87,6 +87,7 @@
 			"13": "MOVE_LIGHT_SCREEN",
             "17": "MOVE_SONIC_BOOM",
             "19": "MOVE_SPARK",
+			"21": "MOVE_GRAVITY",
 			"23": "MOVE_MIRROR_SHOT",
 			"25": "MOVE_TELEPORT",
             "27": "MOVE_SHOCK_WAVE",

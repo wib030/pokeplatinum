@@ -87,6 +87,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_GRAVITY",
                 "MOVE_MAGNET_RISE",
                 "MOVE_TAKE_DOWN",
                 "MOVE_METAL_CLAW",

@@ -80,7 +80,8 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_GRAVITY",
 				"MOVE_TACKLE",
 				"MOVE_HARDEN",
 				"MOVE_ODOR_SLEUTH"

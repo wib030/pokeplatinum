@@ -94,7 +94,8 @@
             "1": [ 
 				"MOVE_TELEPORT",
 				"MOVE_CONFUSION"
-			]
+			],
+			"15": "MOVE_GRAVITY"
         },
         "tutor": [
             "MOVE_THUNDER_PUNCH",

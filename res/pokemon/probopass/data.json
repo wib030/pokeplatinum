@@ -84,11 +84,11 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_GRAVITY",
+				"MOVE_MAGNET_RISE",
 				"MOVE_SPIKES",
-                "MOVE_MAGNET_RISE",
 				"MOVE_PAIN_SPLIT",
 				"MOVE_STEALTH_ROCK",
-                "MOVE_GRAVITY",
 				"MOVE_ODOR_SLEUTH",
 				"MOVE_IRON_DEFENSE"
             ],

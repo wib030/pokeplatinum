@@ -96,6 +96,7 @@
 			"20": "MOVE_MEGA_DRAIN",
             "21": "MOVE_POISON_POWDER",
             "23": "MOVE_SLEEP_POWDER",
+			"25": "MOVE_GRAVITY",
 			"28": "MOVE_PSYBEAM",
             "33": "MOVE_WORRY_SEED",
 			"35": "MOVE_MEAN_LOOK",

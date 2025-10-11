@@ -117,6 +117,7 @@
 			"12": "MOVE_DOUBLE_SLAP",
             "16": "MOVE_SOFTBOILED",
 			"20": "MOVE_DEFENSE_CURL",
+			"21": "MOVE_GRAVITY",
             "23": "MOVE_MINIMIZE",
 			"25": "MOVE_GUILLOTINE",
             "27": "MOVE_FLING",

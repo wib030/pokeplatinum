@@ -106,6 +106,7 @@
             "11": "MOVE_CONFUSE_RAY",
             "19": "MOVE_IRON_DEFENSE",
 			"21": "MOVE_FAINT_ATTACK",
+			"23": "MOVE_GRAVITY",
             "25": "MOVE_SAFEGUARD",
 			"27": "MOVE_COMET_PUNCH",
 			"29": "MOVE_FUTURE_SIGHT",

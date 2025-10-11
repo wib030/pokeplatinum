@@ -90,11 +90,12 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_GRAVITY",
 				"MOVE_MAGNITUDE",
 				"MOVE_CHARGE_BEAM",
-                "MOVE_EXPLOSION",
 				"MOVE_METAL_CLAW",
                 "MOVE_STOMP",
+				"MOVE_EXPLOSION",
 				"MOVE_BLOCK"
             ],
             "7": "MOVE_METAL_CLAW",

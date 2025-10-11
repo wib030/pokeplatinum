@@ -104,6 +104,7 @@
 			"15": "MOVE_FEINT",
 			"17": "MOVE_FORCE_PALM",
             "20": "MOVE_HIDDEN_POWER",
+			"21": "MOVE_GRAVITY",
             "23": "MOVE_CALM_MIND",
 			"25": "MOVE_FORESIGHT",
             "29": "MOVE_JUMP_KICK",

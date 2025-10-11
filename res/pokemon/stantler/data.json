@@ -93,7 +93,8 @@
 			"HM02"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_GRAVITY",
 				"MOVE_PRESENT",
 				"MOVE_HAIL"
 			],

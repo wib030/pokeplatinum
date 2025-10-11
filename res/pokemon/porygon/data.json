@@ -93,6 +93,7 @@
 			"10": "MOVE_TELEPORT",
             "12": "MOVE_AGILITY",
             "18": "MOVE_RECYCLE",
+			"21": "MOVE_GRAVITY",
             "23": "MOVE_MAGNET_RISE",
             "29": "MOVE_SIGNAL_BEAM",
 			"30": "MOVE_SPIKES",

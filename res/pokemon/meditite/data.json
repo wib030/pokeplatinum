@@ -86,7 +86,7 @@
             "HM06"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
 				"MOVE_BIDE",
 				"MOVE_LOW_KICK",
 				"MOVE_CONFUSION"
@@ -97,6 +97,7 @@
 			"15": "MOVE_FEINT",
 			"17": "MOVE_FORCE_PALM",
             "20": "MOVE_HIDDEN_POWER",
+			"21": "MOVE_GRAVITY",
             "23": "MOVE_CALM_MIND",
 			"25": "MOVE_FORESIGHT",
 			"27": "MOVE_GUILLOTINE",

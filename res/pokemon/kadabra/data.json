@@ -97,6 +97,7 @@
             ],
             "16": "MOVE_CONFUSION",
             "18": "MOVE_DISABLE",
+			"20": "MOVE_GRAVITY",
             "21": "MOVE_PSYBEAM",
 			"24": "MOVE_REFLECT",
 			"26": "MOVE_MIRACLE_EYE",
