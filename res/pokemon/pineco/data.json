@@ -82,6 +82,7 @@
             "1": [
                 "MOVE_TACKLE",
 				"MOVE_FRENZY_PLANT",
+				"MOVE_STRING_SHOT",
                 "MOVE_PROTECT"
             ],
             "6": "MOVE_SELFDESTRUCT",

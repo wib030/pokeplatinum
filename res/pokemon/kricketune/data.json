@@ -80,6 +80,7 @@
             "1": [
                 "MOVE_GROWL",
 				"MOVE_FRENZY_PLANT",
+				"MOVE_STRING_SHOT",
                 "MOVE_BIDE"
             ],
 			"10": "MOVE_FOCUS_ENERGY",

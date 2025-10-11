@@ -48,6 +48,7 @@
         "level_up": {
             "1": [ 
 				"MOVE_PROTECT",
+				"MOVE_STRING_SHOT",
 				"MOVE_FRENZY_PLANT"
 			],
             "10": "MOVE_TACKLE",

@@ -87,6 +87,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_STRING_SHOT",
                 "MOVE_VICE_GRIP",
                 "MOVE_FOCUS_ENERGY"
             ],

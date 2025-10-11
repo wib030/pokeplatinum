@@ -49,6 +49,7 @@
             "1": [
                 "MOVE_GROWL",
 				"MOVE_FRENZY_PLANT",
+				"MOVE_STRING_SHOT",
                 "MOVE_BIDE"
             ],
             "16": "MOVE_BUG_BITE",

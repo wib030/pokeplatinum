@@ -91,6 +91,7 @@
                 "MOVE_PROTECT",
 				"MOVE_SELFDESTRUCT",
 				"MOVE_BUG_BITE",
+				"MOVE_STRING_SHOT",
 				"MOVE_TACKLE"
             ],
             "6": "MOVE_SELFDESTRUCT",

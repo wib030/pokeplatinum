@@ -76,6 +76,7 @@
                 "MOVE_TOXIC_SPIKES",
                 "MOVE_SPIKES",
 				"MOVE_SCRATCH",
+				"MOVE_STRING_SHOT",
 				"MOVE_HARDEN"
             ],
 			"3": "MOVE_FRENZY_PLANT",

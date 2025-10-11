@@ -81,6 +81,7 @@
             "1": [
                 "MOVE_SCRATCH",
                 "MOVE_HARDEN",
+				"MOVE_STRING_SHOT",
 				"MOVE_FRENZY_PLANT"
             ],
             "7": "MOVE_WATER_GUN",

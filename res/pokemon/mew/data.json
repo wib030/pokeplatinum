@@ -155,6 +155,7 @@
 				"MOVE_SUPER_FANG",
 				"MOVE_PAIN_SPLIT",
 				"MOVE_BUG_BITE",
+				"MOVE_STRING_SHOT",
 				"MOVE_BLOCK",
                 "MOVE_POUND",
 				"MOVE_TELEPORT",

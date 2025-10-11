@@ -80,6 +80,7 @@
             "1": [
                 "MOVE_TACKLE",
 				"MOVE_FRENZY_PLANT",
+				"MOVE_STRING_SHOT",
                 "MOVE_GUST"
             ],
             "6": "MOVE_QUICK_ATTACK",

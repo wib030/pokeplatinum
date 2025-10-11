@@ -94,6 +94,7 @@
                 "MOVE_SLEEP_POWDER"
             ],
             "15": "MOVE_TAKE_DOWN",
+			"17": "MOVE_STRING_SHOT",
             "20": "MOVE_RAZOR_LEAF",
             "23": "MOVE_SWEET_SCENT",
 			"25": "MOVE_HEADBUTT",

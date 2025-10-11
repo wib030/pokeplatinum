@@ -88,6 +88,7 @@
             "1": [
                 "MOVE_FLASH",
 				"MOVE_FRENZY_PLANT",
+				"MOVE_STRING_SHOT",
                 "MOVE_TACKLE",
 				"MOVE_ENCORE"
             ],

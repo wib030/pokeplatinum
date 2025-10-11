@@ -85,9 +85,12 @@
             "TM90"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_FLASH",
+				"MOVE_FRENZY_PLANT",
+				"MOVE_STRING_SHOT",
 				"MOVE_TACKLE",
-				"MOVE_FRENZY_PLANT"
+				"MOVE_ENCORE"
 			],
             "5": "MOVE_SWEET_SCENT",
             "8": "MOVE_CHARM",

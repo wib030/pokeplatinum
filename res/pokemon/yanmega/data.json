@@ -86,7 +86,11 @@
                 "MOVE_HYPNOSIS",
 				"MOVE_DOUBLE_TEAM",
 				"MOVE_FORESIGHT",
-				"MOVE_TACKLE"
+				"MOVE_QUICK_ATTACK",
+				"MOVE_TACKLE",
+				"MOVE_GUST",
+				"MOVE_STRING_SHOT",
+				"MOVE_FRENZY_PLANT"
             ],
             "6": "MOVE_QUICK_ATTACK",
             "11": "MOVE_DOUBLE_TEAM",

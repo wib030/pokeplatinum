@@ -81,6 +81,9 @@
         "level_up": {
             "1": [
                 "MOVE_SWEET_SCENT",
+				"MOVE_STRING_SHOT",
+				"MOVE_FRENZY_PLANT",
+				"MOVE_GUST",
                 "MOVE_WING_ATTACK",
 				"MOVE_POISON_STING",
 				"MOVE_CONFUSE_RAY",

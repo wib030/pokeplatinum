@@ -84,6 +84,8 @@
             "1": [ 
 				"MOVE_PROTECT",
 				"MOVE_SUCKER_PUNCH",
+				"MOVE_STRING_SHOT",
+				"MOVE_FRENZY_PLANT",
 				"MOVE_BUG_BITE"
 			],
             "10": "MOVE_PROTECT",

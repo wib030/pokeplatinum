@@ -82,6 +82,7 @@
         ],
         "level_up": {
             "1": [ 
+				"MOVE_STRING_SHOT",
 				"MOVE_HYPNOSIS",
 				"MOVE_TOXIC_SPIKES",
 				"MOVE_GUST",

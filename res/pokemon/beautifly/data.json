@@ -80,6 +80,7 @@
         ],
         "level_up": {
             "1": [ 
+				"MOVE_STRING_SHOT",
 				"MOVE_FRENZY_PLANT",
 				"MOVE_BUG_BITE",
 				"MOVE_GUST"

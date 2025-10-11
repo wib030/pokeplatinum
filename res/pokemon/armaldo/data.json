@@ -90,6 +90,8 @@
 				"MOVE_LOW_KICK",
                 "MOVE_SCRATCH",
                 "MOVE_HARDEN",
+				"MOVE_STRING_SHOT",
+				"MOVE_FRENZY_PLANT",
                 "MOVE_WATER_GUN",
 				"MOVE_RAPID_SPIN"
             ],

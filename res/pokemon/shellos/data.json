@@ -79,6 +79,7 @@
             "7": "MOVE_WATER_PULSE",
             "11": "MOVE_MUD_BOMB",
             "16": "MOVE_HIDDEN_POWER",
+			"18": "MOVE_STRING_SHOT",
             "22": "MOVE_RAIN_DANCE",
             "29": "MOVE_BODY_SLAM",
             "37": "MOVE_MUDDY_WATER",

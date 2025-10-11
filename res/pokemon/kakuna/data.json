@@ -46,9 +46,12 @@
     "learnset": {
         "tms": [],
         "level_up": {
-            "1": "MOVE_HARDEN",
+            "1": [
+                "MOVE_HARDEN",
+                "MOVE_STRING_SHOT"
+            ],
 			"3": "MOVE_FRENZY_PLANT",
-            "7": "MOVE_HARDEN",
+            "15": "MOVE_BUG_BITE",
 			"35": "MOVE_MUD_SPORT"
         },
         "tutor": [
