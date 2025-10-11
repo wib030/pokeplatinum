@@ -107,6 +107,7 @@
 			"31": "MOVE_EXTRASENSORY",
 			"32": "MOVE_FISSURE",
 			"33": "MOVE_KINESIS",
+			"35": "MOVE_MAGIC_COAT",
 			"37": "MOVE_EARTH_POWER",
             "40": "MOVE_SANDSTORM",
 			"43": "MOVE_IMPRISON",

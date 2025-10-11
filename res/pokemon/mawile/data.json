@@ -94,7 +94,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
 				"MOVE_ASTONISH",
 				"MOVE_IRON_HEAD",
 				"MOVE_TAUNT"
@@ -118,6 +117,7 @@
                 "MOVE_SPIT_UP"
             ],
 			"45": "MOVE_IRON_HEAD",
+			"48": "MOVE_PAIN_SPLIT",
 			"56": "MOVE_OUTRAGE"
         },
         "tutor": [

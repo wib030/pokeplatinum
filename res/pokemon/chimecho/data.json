@@ -99,6 +99,7 @@
 			"22": "MOVE_EXTRASENSORY",
 			"27": "MOVE_HEAL_BELL",
 			"29": "MOVE_MIRACLE_EYE",
+			"30": "MOVE_MAGIC_COAT",
             "32": "MOVE_TELEPORT",
 			"34": "MOVE_SAFEGUARD",
 			"36": "MOVE_MIND_READER",

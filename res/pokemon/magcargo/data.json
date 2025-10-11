@@ -100,11 +100,11 @@
 			"22": "MOVE_ANCIENT_POWER",
 			"27": "MOVE_IRON_DEFENSE",
 			"29": "MOVE_ROCK_SLIDE",
-			"31": "MOVE_PAIN_SPLIT",
             "34": "MOVE_LAVA_PLUME",
 			"36": "MOVE_AMNESIA",
 			"43": "MOVE_BODY_SLAM",
 			"47": "MOVE_RECOVER",
+			"49": "MOVE_PAIN_SPLIT",
             "54": "MOVE_FLAMETHROWER",
             "58": "MOVE_EARTH_POWER"
         },

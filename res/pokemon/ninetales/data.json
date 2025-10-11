@@ -96,15 +96,13 @@
 			"25": "MOVE_CAPTIVATE",
 			"26": "MOVE_COMET_PUNCH",
 			"28": "MOVE_MIRACLE_EYE",
-			"30": [ 
-				"MOVE_PAIN_SPLIT",
-				"MOVE_ROLE_PLAY"
-			],
+			"30": "MOVE_ROLE_PLAY",
 			"31": "MOVE_EXTRASENSORY",
 			"34": "MOVE_SAFEGUARD",
 			"36": "MOVE_FLAMETHROWER",
 			"39": "MOVE_IMPRISON",
 			"40": "MOVE_MORNING_SUN",
+			"43": "MOVE_PAIN_SPLIT",
             "44": "MOVE_GRUDGE",
 			"46": "MOVE_FIRE_BLAST",
 			"52": "MOVE_SOLAR_BEAM"

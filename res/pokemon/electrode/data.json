@@ -95,6 +95,7 @@
             "34": "MOVE_MAGNET_RISE",
 			"38": "MOVE_ZAP_CANNON",
 			"41": "MOVE_DISCHARGE",
+			"43": "MOVE_MAGIC_COAT",
 			"47": "MOVE_EXPLOSION",
             "54": "MOVE_GYRO_BALL",
             "58": "MOVE_MIRROR_COAT"

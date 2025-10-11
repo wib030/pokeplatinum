@@ -1419,6 +1419,7 @@ const u16 EggMove_Table[] = {
     MOVE_DOUBLE_EDGE,
     MOVE_BLOCK,
 	MOVE_HEAD_SMASH,
+	MOVE_PAIN_SPLIT,
     (SPECIES_SKITTY) + 20000, // Skitty line
     MOVE_HELPING_HAND,
     MOVE_PSYCH_UP,

@@ -102,6 +102,7 @@
             "40": "MOVE_LIGHT_SCREEN",
             "46": "MOVE_BODY_SLAM",
 			"50": "MOVE_AROMATHERAPY",
+			"52": "MOVE_MAGIC_COAT",
             "54": "MOVE_SAFEGUARD",
             "58": "MOVE_SOLAR_BEAM"
         },

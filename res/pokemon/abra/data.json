@@ -95,7 +95,8 @@
 				"MOVE_TELEPORT",
 				"MOVE_CONFUSION"
 			],
-			"15": "MOVE_GRAVITY"
+			"15": "MOVE_GRAVITY",
+			"30": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_THUNDER_PUNCH",

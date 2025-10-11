@@ -108,7 +108,7 @@
             "26": "MOVE_CALM_MIND",
 			"27": "MOVE_MIRACLE_EYE",
             "31": "MOVE_PSYCHIC",
-			"33": "MOVE_PAIN_SPLIT",
+			"34": "MOVE_MAGIC_COAT",
 			"36": "MOVE_MEAN_LOOK",
 			"38": "MOVE_KINESIS",
             "40": [ 
@@ -117,6 +117,7 @@
 			],
 			"42": "MOVE_MIND_READER",
             "44": "MOVE_CAPTIVATE",
+			"46": "MOVE_PAIN_SPLIT",
             "49": "MOVE_HYPNOSIS",
             "53": "MOVE_DREAM_EATER"
         },

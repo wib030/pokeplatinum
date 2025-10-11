@@ -88,7 +88,6 @@
 			],
 			"4": "MOVE_ROCK_THROW",
             "7": "MOVE_BLOCK",
-			"10": "MOVE_PAIN_SPLIT",
             "13": "MOVE_THUNDER_WAVE",
 			"16": "MOVE_REST",
 			"19": "MOVE_SPARK",
@@ -98,7 +97,9 @@
 			"31": "MOVE_DISCHARGE",
 			"34": "MOVE_ZAP_CANNON",
 			"37": "MOVE_EARTH_POWER",
-            "40": "MOVE_STONE_EDGE"
+            "40": "MOVE_STONE_EDGE",
+			"43": "MOVE_PAIN_SPLIT",
+			"48": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

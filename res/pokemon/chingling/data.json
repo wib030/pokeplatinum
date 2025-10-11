@@ -95,7 +95,8 @@
 			"16": "MOVE_LAST_RESORT",
             "19": "MOVE_UPROAR",
 			"21": "MOVE_GRAVITY",
-			"24": "MOVE_MIND_READER"
+			"24": "MOVE_MIND_READER",
+			"30": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_ICY_WIND",

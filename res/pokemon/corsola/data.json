@@ -111,7 +111,8 @@
             "39": "MOVE_SPIKE_CANNON",
             "41": "MOVE_POWER_GEM",
             "45": "MOVE_MIRROR_COAT",
-            "47": "MOVE_EARTH_POWER"
+            "47": "MOVE_EARTH_POWER",
+			"53": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

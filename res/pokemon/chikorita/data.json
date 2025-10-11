@@ -90,6 +90,7 @@
             "31": "MOVE_LIGHT_SCREEN",
             "34": "MOVE_BODY_SLAM",
 			"37": "MOVE_AROMATHERAPY",
+			"38": "MOVE_MAGIC_COAT",
             "39": "MOVE_SAFEGUARD",
 			"42": "MOVE_GIGA_DRAIN",
             "45": "MOVE_SOLAR_BEAM"

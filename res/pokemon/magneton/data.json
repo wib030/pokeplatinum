@@ -103,6 +103,7 @@
 			"36": "MOVE_ZAP_CANNON",
             "40": "MOVE_DISCHARGE",
             "43": "MOVE_MAGNET_RISE",
+			"45": "MOVE_MAGIC_COAT",
             "48": "MOVE_GYRO_BALL"
         },
         "tutor": [

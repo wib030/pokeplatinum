@@ -86,7 +86,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_TRICK_ROOM",
                 "MOVE_CONVERSION_2",
                 "MOVE_TACKLE",
@@ -103,6 +102,7 @@
             "34": "MOVE_RECOVER",
 			"38": "MOVE_ZAP_CANNON",
             "40": "MOVE_DISCHARGE",
+			"44": "MOVE_PAIN_SPLIT",
             "51": "MOVE_TRI_ATTACK",
             "56": "MOVE_MAGIC_COAT",
             "60": "MOVE_HYPER_BEAM"

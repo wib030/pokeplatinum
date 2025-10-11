@@ -123,7 +123,8 @@
             "40": "MOVE_U_TURN",
 			"42": "MOVE_RECOVER",
 			"48": "MOVE_MIND_READER",
-			"50": "MOVE_SUCKER_PUNCH"
+			"50": "MOVE_SUCKER_PUNCH",
+			"52": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

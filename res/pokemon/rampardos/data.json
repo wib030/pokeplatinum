@@ -104,7 +104,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
 				"MOVE_SWIFT",
                 "MOVE_HEADBUTT",
                 "MOVE_LEER"
@@ -126,6 +125,7 @@
 			"33": "MOVE_WORRY_SEED",
             "36": "MOVE_ZEN_HEADBUTT",
             "43": "MOVE_SCREECH",
+			"48": "MOVE_PAIN_SPLIT",
 			"50": "MOVE_SHEER_COLD",
             "52": "MOVE_HEAD_SMASH",
 			"55": "MOVE_LEAF_STORM"

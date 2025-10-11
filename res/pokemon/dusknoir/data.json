@@ -98,7 +98,6 @@
         "level_up": {
             "1": [
 				"MOVE_GRAVITY",
-				"MOVE_PAIN_SPLIT",
                 "MOVE_FIRE_PUNCH",
                 "MOVE_ICE_PUNCH",
                 "MOVE_THUNDER_PUNCH",
@@ -118,6 +117,7 @@
 			"25": "MOVE_WILL_O_WISP",
 			"28": "MOVE_BIND",
             "30": "MOVE_CURSE",
+			"32": "MOVE_PAIN_SPLIT",
             "33": "MOVE_SHADOW_PUNCH",
             "41": "MOVE_PAYBACK",
 			"43": "MOVE_PAIN_SPLIT",

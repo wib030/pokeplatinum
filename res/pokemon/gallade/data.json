@@ -124,7 +124,7 @@
             "26": "MOVE_SWORDS_DANCE",
 			"27": "MOVE_MIRACLE_EYE",
             "31": "MOVE_PSYCHO_CUT",
-			"33": "MOVE_PAIN_SPLIT",
+			"34": "MOVE_MAGIC_COAT",
             "35": [ 
 				"MOVE_HELPING_HAND",
 				"MOVE_MEAN_LOOK"
@@ -133,6 +133,7 @@
             "39": "MOVE_FEINT",
 			"41": "MOVE_RECOVER",
             "44": "MOVE_FALSE_SWIPE",
+			"46": "MOVE_PAIN_SPLIT",
             "49": "MOVE_PROTECT",
             "53": "MOVE_CLOSE_COMBAT"
         },

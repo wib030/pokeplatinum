@@ -92,7 +92,6 @@
         "level_up": {
             "1": [
 				"MOVE_GRAVITY",
-				"MOVE_PAIN_SPLIT",
                 "MOVE_TACKLE",
                 "MOVE_HARDEN",
                 "MOVE_CONFUSION",
@@ -109,12 +108,14 @@
 			"29": "MOVE_PSYCHIC",
 			"33": "MOVE_HEAL_BLOCK",
 			"35": "MOVE_MEAN_LOOK",
+			"36": "MOVE_MAGIC_COAT",
 			"37": "MOVE_STONE_EDGE",
 			"39": "MOVE_MOONLIGHT",
 			"41": [ 
 				"MOVE_FUTURE_SIGHT",
 				"MOVE_MIND_READER"
 			],
+			"43": "MOVE_PAIN_SPLIT",
             "45": "MOVE_EXPLOSION"
         },
         "tutor": [

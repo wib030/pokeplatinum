@@ -95,7 +95,8 @@
 			"35": "MOVE_COMET_PUNCH",
             "41": "MOVE_HYDRO_PUMP",
 			"43": "MOVE_SLUDGE_BOMB",
-            "45": "MOVE_WRING_OUT"
+            "45": "MOVE_WRING_OUT",
+			"47": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_DIVE",

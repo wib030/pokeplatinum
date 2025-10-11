@@ -98,6 +98,7 @@
             ],
             "21": "MOVE_HEADBUTT",
 			"28": "MOVE_ZEN_HEADBUTT",
+			"30": "MOVE_MAGIC_COAT",
 			"35": "MOVE_GRAVITY",
 			"40": "MOVE_MIND_READER",
             "42": "MOVE_PSYCHIC",

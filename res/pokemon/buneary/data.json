@@ -98,6 +98,7 @@
             "30": "MOVE_HEADBUTT",
             "32": "MOVE_AGILITY",
             "38": "MOVE_U_TURN",
+			"40": "MOVE_MAGIC_COAT",
             "44": "MOVE_FLATTER",
 			"48": "MOVE_BOUNCE",
             "52": "MOVE_HEALING_WISH"

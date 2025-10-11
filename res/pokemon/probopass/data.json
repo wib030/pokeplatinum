@@ -87,7 +87,6 @@
 				"MOVE_GRAVITY",
 				"MOVE_MAGNET_RISE",
 				"MOVE_SPIKES",
-				"MOVE_PAIN_SPLIT",
 				"MOVE_STEALTH_ROCK",
 				"MOVE_ODOR_SLEUTH",
 				"MOVE_IRON_DEFENSE"
@@ -106,7 +105,9 @@
 				"MOVE_EARTH_POWER",
 				"MOVE_FLASH_CANNON"
 			],
-            "40": "MOVE_STONE_EDGE"
+            "40": "MOVE_STONE_EDGE",
+			"43": "MOVE_PAIN_SPLIT",
+			"48": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

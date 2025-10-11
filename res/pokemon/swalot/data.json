@@ -101,11 +101,11 @@
                 "MOVE_SWALLOW"
             ],
 			"30": "MOVE_ACID_ARMOR",
-			"33": "MOVE_PAIN_SPLIT",
 			"35": "MOVE_SLUDGE_BOMB",
 			"37": "MOVE_GASTRO_ACID",
 			"40": "MOVE_RECOVER",
             "44": "MOVE_WRING_OUT",
+			"46": "MOVE_PAIN_SPLIT",
             "52": "MOVE_GUNK_SHOT"
         },
         "tutor": [

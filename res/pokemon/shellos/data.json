@@ -72,7 +72,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
 				"MOVE_MUD_SLAP",
 				"MOVE_WATER_GUN"
 			],
@@ -83,6 +82,7 @@
             "22": "MOVE_RAIN_DANCE",
             "29": "MOVE_BODY_SLAM",
             "37": "MOVE_MUDDY_WATER",
+			"42": "MOVE_PAIN_SPLIT",
             "46": "MOVE_RECOVER"
         },
         "tutor": [

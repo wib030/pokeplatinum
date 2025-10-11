@@ -109,6 +109,7 @@
             "37": "MOVE_SHADOW_BALL",
             "41": "MOVE_PERISH_SONG",
 			"43": "MOVE_NASTY_PLOT",
+			"44": "MOVE_MAGIC_COAT",
             "46": "MOVE_GRUDGE",
             "50": "MOVE_POWER_GEM"
         },

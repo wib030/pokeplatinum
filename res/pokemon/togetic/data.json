@@ -111,6 +111,7 @@
             "28": "MOVE_WISH",
             "33": "MOVE_ANCIENT_POWER",
             "37": "MOVE_SAFEGUARD",
+			"39": "MOVE_MAGIC_COAT",
             "42": "MOVE_BATON_PASS",
             "48": "MOVE_MIND_READER",
             "51": "MOVE_LAST_RESORT"

@@ -104,9 +104,6 @@
         "level_up": {
             "1": [
 				"MOVE_GRAVITY",
-				"MOVE_MAGIC_COAT",
-				"MOVE_HEAL_BELL",
-				"MOVE_PAIN_SPLIT",
 				"MOVE_ROLE_PLAY",
                 "MOVE_POUND",
                 "MOVE_SING",
@@ -125,10 +122,13 @@
             "28": "MOVE_FOLLOW_ME",
             "30": "MOVE_MEAN_LOOK",
             "32": "MOVE_GYRO_BALL",
+			"34": "MOVE_HEAL_BELL",
             "36": "MOVE_HYPER_VOICE",
             "40": "MOVE_SUPER_FANG",
             "42": "MOVE_MIND_READER",
-            "46": "MOVE_WISH"
+			"44": "MOVE_PAIN_SPLIT",
+            "46": "MOVE_WISH",
+			"48": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

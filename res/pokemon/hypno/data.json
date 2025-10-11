@@ -106,6 +106,7 @@
             "21": "MOVE_MEDITATE",
             "25": "MOVE_PSYBEAM",
             "28": "MOVE_WAKE_UP_SLAP",
+			"32": "MOVE_MAGIC_COAT",
 			"36": "MOVE_MEAN_LOOK",
 			"38": "MOVE_ZEN_HEADBUTT",
 			"40": "MOVE_FUTURE_SIGHT",

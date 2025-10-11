@@ -81,7 +81,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_INGRAIN",
 				"MOVE_ABSORB",
                 "MOVE_WRAP"
@@ -95,6 +94,7 @@
             "30": "MOVE_STUN_SPORE",
 			"33": "MOVE_NATURAL_GIFT",
             "38": "MOVE_ANCIENT_POWER",
+			"40": "MOVE_PAIN_SPLIT",
             "44": "MOVE_TICKLE",
             "46": "MOVE_WRING_OUT",
             "50": "MOVE_POWER_WHIP"

@@ -104,6 +104,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_MAGIC_COAT",
                 "MOVE_SCRATCH",
 				"MOVE_BITE",
                 "MOVE_FEINT",

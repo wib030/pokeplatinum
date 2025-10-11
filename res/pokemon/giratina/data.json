@@ -97,6 +97,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_MAGIC_COAT",
 				"MOVE_GRAVITY",
 				"MOVE_PAIN_SPLIT",
 				"MOVE_SWIFT",

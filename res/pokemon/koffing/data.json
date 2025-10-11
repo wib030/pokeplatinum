@@ -82,7 +82,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_POISON_GAS",
                 "MOVE_TACKLE"
             ],
@@ -95,6 +94,7 @@
             "29": "MOVE_GYRO_BALL",
 			"34": "MOVE_SLUDGE_BOMB",
             "37": "MOVE_EXPLOSION",
+			"39": "MOVE_PAIN_SPLIT",
             "40": "MOVE_DESTINY_BOND",
             "45": "MOVE_MEMENTO"
         },

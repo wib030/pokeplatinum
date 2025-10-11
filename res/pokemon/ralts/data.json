@@ -100,13 +100,14 @@
 			"28": "MOVE_MIRACLE_EYE",
 			"29": "MOVE_IMPRISON",
 			"30": "MOVE_MIND_READER",
-			"31": "MOVE_PAIN_SPLIT",
+			"31": "MOVE_MAGIC_COAT",
 			"32": "MOVE_FUTURE_SIGHT",
 			"33": "MOVE_MEAN_LOOK",
 			"34": "MOVE_CHARM",
 			"37": "MOVE_HYPNOSIS",
 			"38": "MOVE_KINESIS",
-            "39": "MOVE_DREAM_EATER"
+            "39": "MOVE_DREAM_EATER",
+			"42": "MOVE_PAIN_SPLIT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

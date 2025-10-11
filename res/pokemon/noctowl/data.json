@@ -99,6 +99,7 @@
             "27": "MOVE_TAKE_DOWN",
             "32": "MOVE_AIR_SLASH",
 			"35": "MOVE_MEAN_LOOK",
+			"38": "MOVE_MAGIC_COAT",
 			"43": "MOVE_ROOST",
             "51": "MOVE_DREAM_EATER",
 			"53": "MOVE_KINESIS"

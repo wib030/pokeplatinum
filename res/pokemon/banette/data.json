@@ -91,7 +91,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_KNOCK_OFF",
                 "MOVE_SCREECH",
                 "MOVE_NIGHT_SHADE",
@@ -109,11 +108,13 @@
             "23": "MOVE_WILL_O_WISP",
 			"24": "MOVE_BIND",
 			"26": "MOVE_CURSE",
+			"28": "MOVE_PAIN_SPLIT",
             "30": "MOVE_SHADOW_BALL",
 			"32": "MOVE_PURSUIT",
 			"34": "MOVE_EMBARGO",
             "40": "MOVE_SUCKER_PUNCH",
             "46": "MOVE_SNATCH",
+			"48": "MOVE_MAGIC_COAT",
             "52": "MOVE_GRUDGE",
 			"54": "MOVE_GUNK_SHOT",
 			"56": "MOVE_DESTINY_BOND",

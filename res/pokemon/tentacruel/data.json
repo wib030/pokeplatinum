@@ -100,7 +100,8 @@
 			"41": "MOVE_SLUDGE_BOMB",
 			"45": "MOVE_ACUPRESSURE",
             "48": "MOVE_HYDRO_PUMP",
-            "50": "MOVE_WRING_OUT"
+            "50": "MOVE_WRING_OUT",
+			"52": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_DIVE",

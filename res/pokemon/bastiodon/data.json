@@ -106,6 +106,7 @@
 			"32": "MOVE_PSYCHO_SHIFT",
             "36": "MOVE_ENDURE",
 			"38": "MOVE_SLAM",
+			"40": "MOVE_MAGIC_COAT",
             "43": "MOVE_IRON_HEAD",
 			"45": "MOVE_SLACK_OFF",
 			"53": "MOVE_SHEER_COLD",

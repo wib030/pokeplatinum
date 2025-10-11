@@ -116,6 +116,7 @@
 			"21": "MOVE_BLOCK",
             "25": "MOVE_HEADBUTT",
             "29": "MOVE_WATER_PULSE",
+			"30": "MOVE_MAGIC_COAT",
             "34": "MOVE_ZEN_HEADBUTT",
             "39": [ 
 				"MOVE_NASTY_PLOT",

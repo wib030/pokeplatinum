@@ -91,7 +91,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_DESTINY_BOND",
 				"MOVE_HYPNOSIS",
                 "MOVE_MINIMIZE",
@@ -110,12 +109,14 @@
                 "MOVE_SWALLOW",
                 "MOVE_SPIT_UP"
             ],
+			"28": "MOVE_PAIN_SPLIT",
 			"29": "MOVE_BIND",
 			"32": "MOVE_AMNESIA",
 			"34": "MOVE_MEAN_LOOK",
 			"38": "MOVE_SHADOW_BALL",
 			"40": "MOVE_MOONLIGHT",
 			"44": "MOVE_DEFOG",
+			"46": "MOVE_MAGIC_COAT",
             "51": "MOVE_EXPLOSION"
         },
         "tutor": [

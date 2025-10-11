@@ -117,6 +117,7 @@
             "25": "MOVE_PSYBEAM",
 			"27": "MOVE_LOCK_ON",
             "29": "MOVE_SUBSTITUTE",
+			"31": "MOVE_MAGIC_COAT",
             "32": "MOVE_RECYCLE",
             "36": "MOVE_TRICK",
             "39": "MOVE_PSYCHIC",

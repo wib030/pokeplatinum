@@ -78,7 +78,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_ASTONISH",
 				"MOVE_ABSORB",
                 "MOVE_WRAP"
@@ -92,12 +91,13 @@
 			"28": "MOVE_GIGA_DRAIN",
             "29": "MOVE_AMNESIA",
             "31": "MOVE_GASTRO_ACID",
-            "41": "MOVE_ENERGY_BALL",
-            "46": [
+			"33": [
                 "MOVE_STOCKPILE",
                 "MOVE_SPIT_UP",
                 "MOVE_SWALLOW"
             ],
+			"38": "MOVE_PAIN_SPLIT",
+            "41": "MOVE_ENERGY_BALL",
             "52": "MOVE_WRING_OUT"
         },
         "tutor": [

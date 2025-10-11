@@ -87,7 +87,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
 				"MOVE_KNOCK_OFF",
 				"MOVE_ASTONISH"
 			],
@@ -103,10 +102,12 @@
 			],
 			"24": "MOVE_BIND",
 			"26": "MOVE_CURSE",
+			"28": "MOVE_PAIN_SPLIT",
             "30": "MOVE_SHADOW_BALL",
 			"34": "MOVE_EMBARGO",
             "38": "MOVE_SUCKER_PUNCH",
             "42": "MOVE_SNATCH",
+			"44": "MOVE_MAGIC_COAT",
             "46": "MOVE_GRUDGE",
             "50": "MOVE_TRICK"
         },

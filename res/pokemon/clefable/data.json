@@ -102,8 +102,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_GRAVITY",
-				"MOVE_MAGIC_COAT",
                 "MOVE_DOUBLE_SLAP",
                 "MOVE_CHARM"
             ],
@@ -124,7 +122,8 @@
             "36": "MOVE_HYPER_VOICE",
             "40": "MOVE_GRAVITY",
             "42": "MOVE_WING_ATTACK",
-            "46": "MOVE_HEALING_WISH"
+            "46": "MOVE_HEALING_WISH",
+			"48": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

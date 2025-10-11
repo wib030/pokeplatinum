@@ -96,7 +96,8 @@
 			"37": "MOVE_SAFEGUARD",
 			"41": "MOVE_MEAN_LOOK",
 			"44": "MOVE_HYDRO_PUMP",
-			"47": "MOVE_RAIN_DANCE"
+			"47": "MOVE_RAIN_DANCE",
+			"52": "MOVE_MAGIC_COAT"
         },
         "tutor": [
             "MOVE_DIVE",

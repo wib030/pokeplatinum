@@ -95,6 +95,7 @@
                 "MOVE_TELEPORT",
                 "MOVE_CONFUSION"
             ],
+			"10": "MOVE_MAGIC_COAT",
             "16": "MOVE_CONFUSION",
             "18": "MOVE_DISABLE",
 			"20": "MOVE_GRAVITY",
@@ -106,6 +107,7 @@
 				"MOVE_RECOVER",
 				"MOVE_KINESIS"
 			],
+			"32": "MOVE_MAGIC_COAT",
             "36": "MOVE_ROLE_PLAY",
 			"38": "MOVE_MIND_READER",
             "40": "MOVE_PSYCHIC",

@@ -92,7 +92,6 @@
         "level_up": {
             "1": [
 				"MOVE_SKY_ATTACK",
-				"MOVE_PAIN_SPLIT",
                 "MOVE_PECK",
                 "MOVE_LEER"
             ],
@@ -104,10 +103,12 @@
 			"25": "MOVE_MIRACLE_EYE",
             "27": "MOVE_TAILWIND",
             "30": "MOVE_WISH",
+			"32": "MOVE_MAGIC_COAT",
             "37": "MOVE_PSYCHO_SHIFT",
 			"40": "MOVE_MIND_READER",
             "42": "MOVE_FUTURE_SIGHT",
 			"44": "MOVE_PSYCHIC",
+			"45": "MOVE_PAIN_SPLIT",
             "47": "MOVE_OMINOUS_WIND",
             "49": [
                 "MOVE_POWER_SWAP",

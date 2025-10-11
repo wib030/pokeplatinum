@@ -103,10 +103,11 @@
 			"26": "MOVE_GRAVITY",
 			"28": "MOVE_BRINE",
             "31": "MOVE_MINIMIZE",
-			"33": "MOVE_PAIN_SPLIT",
+			"35": "MOVE_MAGIC_COAT",
 			"37": "MOVE_POWER_GEM",
 			"40": "MOVE_CONFUSE_RAY",
 			"42": "MOVE_PSYCHIC",
+			"43": "MOVE_PAIN_SPLIT",
             "46": "MOVE_LIGHT_SCREEN",
             "49": "MOVE_COSMIC_POWER",
             "53": "MOVE_HYDRO_PUMP"

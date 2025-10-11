@@ -96,6 +96,7 @@
             "15": "MOVE_CONFUSION",
             "25": "MOVE_PSYBEAM",
             "30": "MOVE_MORNING_SUN",
+			"32": "MOVE_MAGIC_COAT",
             "35": "MOVE_POWER_SWAP",
 			"40": [ 
 				"MOVE_PSYCHIC",

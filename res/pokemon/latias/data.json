@@ -113,6 +113,7 @@
             "20": "MOVE_DRAGON_BREATH",
             "24": "MOVE_MIST_BALL",
 			"28": "MOVE_PSYCHO_SHIFT",
+			"30": "MOVE_MAGIC_COAT",
 			"32": "MOVE_RECOVER",
 			"36": "MOVE_KINESIS",
 			"38": "MOVE_MIND_READER",

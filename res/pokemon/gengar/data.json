@@ -97,7 +97,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_PAIN_SPLIT",
                 "MOVE_HYPNOSIS",
 				"MOVE_SHADOW_PUNCH",
 				"MOVE_SPITE",
@@ -108,6 +107,7 @@
             "12": "MOVE_CURSE",
             "15": "MOVE_NIGHT_SHADE",
             "19": "MOVE_CONFUSE_RAY",
+			"21": "MOVE_PAIN_SPLIT",
             "22": "MOVE_SUCKER_PUNCH",
 			"26": "MOVE_COMET_PUNCH",
             "28": "MOVE_PAYBACK",

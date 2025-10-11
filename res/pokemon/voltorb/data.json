@@ -92,6 +92,7 @@
 			"35": "MOVE_ZAP_CANNON",
 			"37": "MOVE_DISCHARGE",
 			"41": "MOVE_EXPLOSION",
+			"43": "MOVE_MAGIC_COAT",
             "46": "MOVE_GYRO_BALL",
             "50": "MOVE_MIRROR_COAT"
         },
