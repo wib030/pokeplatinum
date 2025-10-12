@@ -27,7 +27,8 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"gender": 0
         },
         {
             "species": "SPECIES_FLYGON",
@@ -47,7 +48,8 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"gender": 0
         },
 		{
             "species": "SPECIES_GALLADE",
@@ -68,7 +70,8 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"gender": 0
         }
     ]
 }

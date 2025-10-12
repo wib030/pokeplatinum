@@ -27,7 +27,8 @@
 			"evDEF": 0,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"gender": 1
         },
         {
             "species": "SPECIES_GARDEVOIR",
@@ -47,7 +48,8 @@
 			"evDEF": 0,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"gender": 1
         },
 		{
             "species": "SPECIES_GLACEON",
@@ -67,7 +69,8 @@
 			"evDEF": 0,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0
+			"evSPDEF": 0,
+			"gender": 1
         }
     ]
 }
