@@ -650,8 +650,8 @@ Basic_CheckCannotParalyze_ImmuneToStatus:
 
 Basic_CheckCannotSubstitute:
     ; If the attacker''s Substitute would fail, score -8/-10.
+	IfHPPercentLessThan AI_BATTLER_ATTACKER, 26, ScoreMinus12
     IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Basic_CheckCannotSubstitute_CheckSpeed
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 26, ScoreMinus12
     GoTo Basic_CheckCannotSubstitute_End
 
 Basic_CheckCannotSubstitute_CheckSpeed:
