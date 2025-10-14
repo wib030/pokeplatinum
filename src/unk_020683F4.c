@@ -853,7 +853,7 @@ static u32 sub_02068D68 (const UnkStruct_020684D0 * param0)
         return 0;
     }
 
-    return -1
+    return -1;
 }
 
 static void sub_02068D80 (UnkStruct_02068630 * param0, const UnkStruct_020684D0 * param1)
