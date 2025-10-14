@@ -89,6 +89,7 @@
             "28": "MOVE_WING_ATTACK",
             "33": "MOVE_TAKE_DOWN",
             "34": "MOVE_CLOSE_COMBAT",
+			"37": "MOVE_TAILWIND",
             "41": "MOVE_AGILITY",
             "49": "MOVE_BRAVE_BIRD"
         },

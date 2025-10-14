@@ -118,6 +118,7 @@
             "27": "MOVE_NIGHT_SLASH",
 			"30": "MOVE_U_TURN",
 			"35": "MOVE_SCREECH",
+			"38": "MOVE_TAILWIND",
 			"40": "MOVE_X_SCISSOR",
 			"45": "MOVE_SKY_UPPERCUT",
             "50": "MOVE_SWORDS_DANCE"

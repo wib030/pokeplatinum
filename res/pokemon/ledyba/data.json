@@ -99,6 +99,7 @@
             "22": "MOVE_SILVER_WIND",
             "26": "MOVE_BATON_PASS",
             "29": "MOVE_AGILITY",
+			"30": "MOVE_TAILWIND",
             "33": "MOVE_BUG_BUZZ",
 			"40": "MOVE_DOUBLE_EDGE"
         },

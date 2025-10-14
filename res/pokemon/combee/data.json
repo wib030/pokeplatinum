@@ -52,7 +52,8 @@
 				"MOVE_FRENZY_PLANT",
                 "MOVE_GUST"
             ],
-            "13": "MOVE_BUG_BITE"
+            "13": "MOVE_BUG_BITE",
+			"25": "MOVE_TAILWIND"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -261,6 +261,7 @@ const u16 EggMove_Table_Script[] = {
     MOVE_ZEN_HEADBUTT,
     MOVE_BRAVE_BIRD,
 	MOVE_SHARPEN, // Pregnancy Punch
+	MOVE_TAILWIND,
     (SPECIES_ODDISH) + 20000, // Oddish line
     MOVE_SWORDS_DANCE,
     MOVE_RAZOR_LEAF,

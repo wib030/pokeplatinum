@@ -89,6 +89,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
                 "MOVE_SONIC_BOOM",
                 "MOVE_WING_ATTACK",
                 "MOVE_FAINT_ATTACK",

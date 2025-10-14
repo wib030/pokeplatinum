@@ -90,6 +90,7 @@
             "25": "MOVE_CHARGE",
             "31": "MOVE_DISCHARGE",
             "36": "MOVE_SIGNAL_BEAM",
+			"40": "MOVE_HEAL_BELL",
             "42": "MOVE_LIGHT_SCREEN",
             "47": "MOVE_POWER_GEM",
             "53": "MOVE_THUNDER"

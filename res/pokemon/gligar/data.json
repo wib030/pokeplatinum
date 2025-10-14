@@ -108,6 +108,7 @@
 			"25": "MOVE_KNOCK_OFF",
             "27": "MOVE_SLASH",
 			"30": "MOVE_U_TURN",
+			"33": "MOVE_TAILWIND",
 			"35": "MOVE_SCREECH",
 			"40": "MOVE_X_SCISSOR",
 			"45": "MOVE_SKY_UPPERCUT",

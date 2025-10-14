@@ -99,6 +99,7 @@
             "33": "MOVE_TOXIC",
 			"35": "MOVE_CAPTIVATE",
 			"37": "MOVE_AIR_SLASH",
+			"40": "MOVE_TAILWIND",
 			"41": "MOVE_FISSURE",
             "45": "MOVE_ATTACK_ORDER",
             "49": "MOVE_SWAGGER",

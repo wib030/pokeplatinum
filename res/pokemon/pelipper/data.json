@@ -85,9 +85,9 @@
         "level_up": {
             "1": [
 				"MOVE_SKY_ATTACK",
+				"MOVE_TAILWIND",
                 "MOVE_GROWL",
-                "MOVE_WATER_GUN",
-				"MOVE_TAILWIND"
+                "MOVE_WATER_GUN"
             ],
             "5": "MOVE_SUPERSONIC",
             "8": "MOVE_PLUCK",

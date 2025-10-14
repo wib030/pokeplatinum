@@ -97,6 +97,7 @@
             "22": "MOVE_PLUCK",
             "28": "MOVE_WATER_PULSE",
             "31": "MOVE_TAKE_DOWN",
+			"35": "MOVE_TAILWIND",
             "37": "MOVE_CONFUSE_RAY",
             "40": "MOVE_BOUNCE",
             "46": "MOVE_AQUA_RING",

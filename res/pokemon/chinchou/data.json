@@ -90,6 +90,7 @@
             "23": "MOVE_TAKE_DOWN",
             "28": "MOVE_BUBBLE_BEAM",
             "31": "MOVE_SIGNAL_BEAM",
+			"32": "MOVE_HEAL_BELL",
             "34": "MOVE_DISCHARGE",
             "39": "MOVE_AQUA_RING",
 			"40": "MOVE_ZAP_CANNON",

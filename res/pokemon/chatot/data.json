@@ -87,6 +87,7 @@
             "27": "MOVE_MIMIC",
 			"29": "MOVE_UPROAR",
             "33": "MOVE_ROOST",
+			"35": "MOVE_TAILWIND",
             "37": "MOVE_FEATHER_DANCE",
             "45": "MOVE_HYPER_VOICE",
 			"55": "MOVE_RAZOR_WIND"

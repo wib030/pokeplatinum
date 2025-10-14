@@ -90,7 +90,8 @@
             ],
             "5": "MOVE_COPYCAT",
             "9": "MOVE_REFRESH",
-            "12": "MOVE_SWEET_KISS"
+            "12": "MOVE_SWEET_KISS",
+			"24": "MOVE_HEAL_BELL"
         },
         "tutor": [
             "MOVE_MUD_SLAP",

@@ -96,6 +96,7 @@
             "29": "MOVE_AIR_SLASH",
 			"30": "MOVE_MEAN_LOOK",
 			"32": "MOVE_MAGIC_COAT",
+			"34": "MOVE_TAILWIND",
             "35": "MOVE_ROOST",
             "43": "MOVE_DREAM_EATER"
         },

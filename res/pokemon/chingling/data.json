@@ -94,6 +94,7 @@
 			"13": "MOVE_YAWN",
 			"16": "MOVE_LAST_RESORT",
             "19": "MOVE_UPROAR",
+			"20": "MOVE_HEAL_BELL",
 			"21": "MOVE_GRAVITY",
 			"24": "MOVE_MIND_READER",
 			"30": "MOVE_MAGIC_COAT"

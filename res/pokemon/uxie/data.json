@@ -93,6 +93,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_HEAL_BELL",
 				"MOVE_MAGIC_COAT",
 				"MOVE_PAIN_SPLIT",
                 "MOVE_REST",

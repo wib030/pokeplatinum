@@ -115,8 +115,8 @@
             "32": "MOVE_SWAGGER",
 			"34": "MOVE_RAZOR_WIND",
             "36": "MOVE_EXTRASENSORY",
+			"40": "MOVE_TAILWIND",
 			"44": "MOVE_LEAF_STORM",
-			"50": "MOVE_TAILWIND",
 			"52": "MOVE_EXPLOSION"
         },
         "tutor": [

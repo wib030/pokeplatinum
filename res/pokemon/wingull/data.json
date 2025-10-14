@@ -92,6 +92,7 @@
 			"22": "MOVE_AIR_CUTTER",
 			"26": "MOVE_PURSUIT",
 			"29": "MOVE_AERIAL_ACE",
+			"30": "MOVE_TAILWIND",
 			"31": "MOVE_WING_ATTACK",
             "33": "MOVE_ROOST",
             "36": "MOVE_AGILITY",

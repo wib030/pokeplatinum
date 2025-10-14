@@ -92,6 +92,7 @@
             "25": "MOVE_ENDEAVOR",
 			"30": "MOVE_WING_ATTACK",
             "33": "MOVE_AGILITY",
+			"35": "MOVE_TAILWIND",
             "39": "MOVE_AIR_SLASH",
 			"51": "MOVE_BRAVE_BIRD",
 			"54": "MOVE_REVERSAL"

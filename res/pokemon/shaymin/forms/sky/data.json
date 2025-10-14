@@ -74,7 +74,10 @@
             "TM90"
         ],
         "level_up": {
-            "1": "MOVE_GROWTH",
+            "1": [
+				"MOVE_TAILWIND",
+				"MOVE_GROWTH"
+			],
             "10": "MOVE_MAGICAL_LEAF",
             "19": "MOVE_LEECH_SEED",
             "28": "MOVE_QUICK_ATTACK",

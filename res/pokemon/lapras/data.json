@@ -103,6 +103,7 @@
 			"35": "MOVE_CONSTRICT",
             "37": "MOVE_BRINE",
 			"39": "MOVE_RECOVER",
+			"41": "MOVE_HEAL_BELL",
             "43": "MOVE_SAFEGUARD",
             "47": "MOVE_HYDRO_PUMP",
             "51": "MOVE_SHEER_COLD"

@@ -115,7 +115,10 @@
             "28": "MOVE_FOLLOW_ME",
             "30": "MOVE_MINIMIZE",
             "32": "MOVE_METEOR_MASH",
-			"34": "MOVE_LUCKY_CHANT",
+			"34": [
+				"MOVE_LUCKY_CHANT",
+				"MOVE_HEAL_BELL"
+			],
             "36": "MOVE_HYPER_VOICE",
             "40": "MOVE_GRAVITY",
             "42": "MOVE_WING_ATTACK",

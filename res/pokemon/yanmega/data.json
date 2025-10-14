@@ -101,6 +101,7 @@
             "27": "MOVE_UPROAR",
             "30": "MOVE_PURSUIT",
             "33": "MOVE_ANCIENT_POWER",
+			"35": "MOVE_TAILWIND",
             "38": "MOVE_FISSURE",
 			"41": "MOVE_BUG_BUZZ",
             "43": "MOVE_SLASH",

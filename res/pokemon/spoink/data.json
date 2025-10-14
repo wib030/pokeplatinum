@@ -100,6 +100,7 @@
                 "MOVE_SNORE"
             ],
             "34": "MOVE_PAYBACK",
+			"35": "MOVE_HEAL_BELL",
 			"36": "MOVE_MIND_READER",
 			"38": "MOVE_KINESIS",
             "41": "MOVE_PSYCHIC",

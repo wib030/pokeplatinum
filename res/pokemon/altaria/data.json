@@ -89,6 +89,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
                 "MOVE_PLUCK",
                 "MOVE_RAZOR_WIND",
                 "MOVE_WING_ATTACK",
@@ -105,6 +106,7 @@
 			"26": "MOVE_REFRESH",
             "30": "MOVE_DRAGON_DANCE",
 			"35": "MOVE_DRAGON_BREATH",
+			"37": "MOVE_HEAL_BELL",
             "40": "MOVE_DRAGON_PULSE",
             "46": "MOVE_PERISH_SONG",
             "48": "MOVE_WILL_O_WISP",

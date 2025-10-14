@@ -81,7 +81,8 @@
             "HM05"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_TAILWIND",
 				"MOVE_STRING_SHOT",
 				"MOVE_HYPNOSIS",
 				"MOVE_TOXIC_SPIKES",

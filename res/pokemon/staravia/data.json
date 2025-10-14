@@ -85,6 +85,7 @@
             "23": "MOVE_WHIRLWIND",
             "28": "MOVE_WING_ATTACK",
             "33": "MOVE_TAKE_DOWN",
+			"35": "MOVE_TAILWIND",
             "38": "MOVE_AGILITY",
             "43": "MOVE_BRAVE_BIRD"
         },

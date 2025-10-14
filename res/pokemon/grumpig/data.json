@@ -112,6 +112,7 @@
                 "MOVE_REST",
                 "MOVE_SNORE"
             ],
+			"35": "MOVE_HEAL_BELL",
 			"38": "MOVE_KINESIS",
 			"39": "MOVE_RECOVER",
 			"40": "MOVE_PAYBACK",

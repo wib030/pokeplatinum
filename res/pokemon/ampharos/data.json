@@ -101,7 +101,10 @@
             "30": "MOVE_THUNDER_PUNCH",
             "34": "MOVE_DISCHARGE",
 			"38": "MOVE_ZAP_CANNON",
-			"40": "MOVE_MORNING_SUN",
+			"40": [ 
+				"MOVE_MORNING_SUN",
+				"MOVE_HEAL_BELL"
+			],
             "42": "MOVE_SIGNAL_BEAM",
 			"46": "MOVE_POWER_GEM",
 			"48": "MOVE_DRAGON_RUSH",

@@ -92,6 +92,7 @@
 			"25": "MOVE_PLUCK",
             "27": "MOVE_UPROAR",
             "30": "MOVE_PURSUIT",
+			"31": "MOVE_TAILWIND",
             "33": "MOVE_ANCIENT_POWER",
 			"36": "MOVE_FISSURE",
             "38": "MOVE_HYPNOSIS",

@@ -88,10 +88,10 @@
             "22": "MOVE_PLUCK",
             "27": "MOVE_FEATHER_DANCE",
             "32": "MOVE_AGILITY",
+			"36": "MOVE_TAILWIND",
             "38": "MOVE_AIR_SLASH",
 			"40": "MOVE_SKY_ATTACK",
             "44": "MOVE_ROOST",
-            "50": "MOVE_TAILWIND",
 			"52": "MOVE_RAZOR_WIND",
             "56": "MOVE_HEAT_WAVE"
         },

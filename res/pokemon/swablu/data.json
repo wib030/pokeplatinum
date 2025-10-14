@@ -91,6 +91,8 @@
             "23": "MOVE_TAKE_DOWN",
 			"26": "MOVE_REFRESH",
             "30": "MOVE_MIRROR_MOVE",
+			"33": "MOVE_HEAL_BELL",
+			"35": "MOVE_TAILWIND",
             "38": "MOVE_DRAGON_PULSE",
             "42": "MOVE_PERISH_SONG"
         },

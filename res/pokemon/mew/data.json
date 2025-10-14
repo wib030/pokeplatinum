@@ -148,6 +148,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
+				"MOVE_HEAL_BELL",
 				"MOVE_MAGIC_COAT",
 				"MOVE_GRAVITY",
 				"MOVE_SKY_ATTACK",

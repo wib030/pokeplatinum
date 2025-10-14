@@ -94,6 +94,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
 				"MOVE_SKY_ATTACK",
                 "MOVE_MAGICAL_LEAF",
                 "MOVE_GROWL",
@@ -110,6 +111,7 @@
 			"26": "MOVE_GUILLOTINE",
             "28": "MOVE_WISH",
             "33": "MOVE_ANCIENT_POWER",
+			"35": "MOVE_HEAL_BELL",
             "37": "MOVE_SAFEGUARD",
 			"39": "MOVE_MAGIC_COAT",
             "42": "MOVE_BATON_PASS",

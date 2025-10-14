@@ -109,8 +109,8 @@
             "29": "MOVE_ZEN_HEADBUTT",
 			"31": "MOVE_PUNISHMENT",
             "35": "MOVE_CAPTIVATE",
+			"37": "MOVE_HEAL_BELL",
             "41": "MOVE_GYRO_BALL",
-            "48": "MOVE_HEAL_BELL",
             "55": "MOVE_WAKE_UP_SLAP"
         },
         "tutor": [

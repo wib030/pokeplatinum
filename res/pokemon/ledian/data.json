@@ -87,6 +87,7 @@
         ],
         "level_up": {
 			"1": [
+				"MOVE_TAILWIND",
 				"MOVE_STRING_SHOT",
 				"MOVE_TACKLE",
 				"MOVE_FRENZY_PLANT"
@@ -107,6 +108,7 @@
             "29": "MOVE_BATON_PASS",
 			"30": "MOVE_FISSURE",
             "33": "MOVE_AGILITY",
+			"35": "MOVE_TAILWIND",
             "38": "MOVE_BUG_BUZZ",
 			"40": "MOVE_SPIDER_WEB",
 			"42": "MOVE_AIR_SLASH",

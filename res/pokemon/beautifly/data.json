@@ -79,7 +79,8 @@
             "HM05"
         ],
         "level_up": {
-            "1": [ 
+            "1": [
+				"MOVE_TAILWIND",
 				"MOVE_STRING_SHOT",
 				"MOVE_FRENZY_PLANT",
 				"MOVE_BUG_BITE",

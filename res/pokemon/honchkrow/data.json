@@ -101,6 +101,7 @@
 				"MOVE_ASSURANCE"
 			],
 			"31": "MOVE_TAUNT",
+			"33": "MOVE_TAILWIND",
             "35": [ 
 				"MOVE_NASTY_PLOT",
 				"MOVE_FAINT_ATTACK"

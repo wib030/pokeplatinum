@@ -107,6 +107,7 @@
 			"29": "MOVE_BIND",
 			"30": "MOVE_AMNESIA",
 			"32": "MOVE_MEAN_LOOK",
+			"33": "MOVE_TAILWIND",
             "36": "MOVE_SHADOW_BALL",
 			"44": "MOVE_MAGIC_COAT",
             "48": "MOVE_EXPLOSION"

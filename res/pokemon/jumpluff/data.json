@@ -89,6 +89,7 @@
             "14": "MOVE_STUN_SPORE",
             "16": "MOVE_SLEEP_POWDER",
             "20": "MOVE_BULLET_SEED",
+			"22": "MOVE_TAILWIND",
             "24": "MOVE_LEECH_SEED",
             "28": "MOVE_MEGA_DRAIN",
             "32": "MOVE_COTTON_SPORE",

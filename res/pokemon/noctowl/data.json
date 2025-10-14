@@ -82,6 +82,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_TAILWIND",
                 "MOVE_SKY_ATTACK",
                 "MOVE_FORESIGHT",
                 "MOVE_WING_ATTACK",
@@ -100,6 +101,7 @@
             "32": "MOVE_AIR_SLASH",
 			"35": "MOVE_MEAN_LOOK",
 			"38": "MOVE_MAGIC_COAT",
+			"40": "MOVE_TAILWIND",
 			"43": "MOVE_ROOST",
             "51": "MOVE_DREAM_EATER",
 			"53": "MOVE_KINESIS"
