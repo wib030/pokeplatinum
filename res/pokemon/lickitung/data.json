@@ -102,6 +102,7 @@
             "17": "MOVE_WRAP",
             "21": "MOVE_STOMP",
             "25": "MOVE_DISABLE",
+			"27": "MOVE_WHIRLPOOL",
             "29": "MOVE_SLAM",
             "33": "MOVE_ROLLOUT",
             "37": "MOVE_ME_FIRST",

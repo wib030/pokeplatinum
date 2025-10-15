@@ -118,6 +118,7 @@
 			"22": "MOVE_SLASH",
             "25": "MOVE_SWORDS_DANCE",
 			"29": "MOVE_NIGHT_SLASH",
+			"31": "MOVE_ROLE_PLAY",
 			"33": "MOVE_DETECT",
 			"37": "MOVE_PSYCHO_CUT",
 			"41": "MOVE_ME_FIRST",

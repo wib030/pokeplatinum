@@ -106,6 +106,7 @@
 			"3": "MOVE_FRENZY_PLANT",
             "6": "MOVE_ABSORB",
 			"11": "MOVE_LEER",
+			"15": "MOVE_WHIRLPOOL",
 			"16": "MOVE_MUD_SHOT",
 			"21": "MOVE_SAND_ATTACK",
             "23": "MOVE_ENDURE",

@@ -78,6 +78,7 @@
             "4": "MOVE_HARDEN",
             "7": "MOVE_WATER_PULSE",
             "11": "MOVE_MUD_BOMB",
+			"13": "MOVE_WHIRLPOOL",
             "16": "MOVE_HIDDEN_POWER",
 			"18": "MOVE_STRING_SHOT",
             "22": "MOVE_RAIN_DANCE",

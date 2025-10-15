@@ -104,6 +104,7 @@
                 "MOVE_SNORE",
 				"MOVE_REST"
             ],
+			"30": "MOVE_WHIRLPOOL",
 			"33": "MOVE_SLEEP_TALK",
 			"35": "MOVE_GIGA_IMPACT",
             "36": "MOVE_ROLLOUT",

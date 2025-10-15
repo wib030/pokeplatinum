@@ -93,6 +93,7 @@
             ],
             "5": "MOVE_SAND_ATTACK",
 			"10": "MOVE_QUICK_ATTACK",
+			"13": "MOVE_WHIRLPOOL",
             "15": "MOVE_WATER_GUN",
             "20": "MOVE_HAZE",
             "25": "MOVE_WATER_PULSE",

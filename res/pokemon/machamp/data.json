@@ -100,6 +100,7 @@
 			"23": "MOVE_KNOCK_OFF",
             "25": "MOVE_VITAL_THROW",
 			"27": "MOVE_WAKE_UP_SLAP",
+			"30": "MOVE_ROLE_PLAY",
             "32": "MOVE_SUBMISSION",
 			"34": "MOVE_GUILLOTINE",
 			"36": "MOVE_BULK_UP",

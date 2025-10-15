@@ -102,6 +102,7 @@
 			"25": "MOVE_FORESIGHT",
 			"27": "MOVE_GUILLOTINE",
             "29": "MOVE_JUMP_KICK",
+			"30": "MOVE_ROLE_PLAY",
             "31": "MOVE_PSYCH_UP",
 			"33": "MOVE_ACUPRESSURE",
 			"34": "MOVE_POWER_TRICK",

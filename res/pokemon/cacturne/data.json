@@ -102,6 +102,7 @@
             "22": "MOVE_INGRAIN",
 			"26": "MOVE_PAYBACK",
             "30": "MOVE_SPIKES",
+			"32": "MOVE_ROLE_PLAY",
 			"34": "MOVE_SUCKER_PUNCH",
 			"38": "MOVE_PIN_MISSILE",
 			"40": "MOVE_SPIKE_CANNON",

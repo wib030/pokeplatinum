@@ -91,7 +91,6 @@
         ],
         "level_up": {
             "1": [
-				"MOVE_ROLE_PLAY",
                 "MOVE_FLING",
                 "MOVE_SCRATCH",
                 "MOVE_LOW_KICK",
@@ -109,6 +108,7 @@
             "26": "MOVE_ASSURANCE",
             "28": "MOVE_CROSS_CHOP",
 			"30": "MOVE_PUNISHMENT",
+			"32": "MOVE_ROLE_PLAY",
             "35": "MOVE_THRASH",
             "48": "MOVE_CLOSE_COMBAT",
 			"53": "MOVE_OUTRAGE"

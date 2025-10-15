@@ -116,6 +116,7 @@
             "18": "MOVE_PSYBEAM",
             "21": "MOVE_ANCIENT_POWER",
             "25": "MOVE_SLASH",
+			"28": "MOVE_ROLE_PLAY",
             "30": "MOVE_CAMOUFLAGE",
             "33": "MOVE_SHADOW_CLAW",
 			"35": "MOVE_TOXIC_SPIKES",

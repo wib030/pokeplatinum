@@ -83,6 +83,7 @@
             "5": "MOVE_SMOKE_SCREEN",
             "9": "MOVE_LEER",
             "13": "MOVE_WATER_GUN",
+			"15": "MOVE_WHIRLPOOL",
 			"17": "MOVE_TWISTER",
             "21": "MOVE_BUBBLE_BEAM",
             "23": "MOVE_AGILITY",

@@ -114,6 +114,7 @@
 				"MOVE_DIZZY_PUNCH",
 				"MOVE_GUILLOTINE"
 			],
+			"30": "MOVE_WHIRLPOOL",
             "32": "MOVE_SPIKES",
 			"36": "MOVE_CRUNCH",
 			"38": "MOVE_SUCKER_PUNCH",

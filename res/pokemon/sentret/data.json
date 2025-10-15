@@ -93,6 +93,7 @@
             "13": "MOVE_FURY_SWIPES",
             "16": "MOVE_HELPING_HAND",
             "19": "MOVE_FOLLOW_ME",
+			"21": "MOVE_WHIRLPOOL",
             "25": "MOVE_BODY_SLAM",
             "28": "MOVE_REST",
             "31": "MOVE_SUCKER_PUNCH",

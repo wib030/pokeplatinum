@@ -91,6 +91,7 @@
             ],
             "5": "MOVE_SUPERSONIC",
             "8": "MOVE_PLUCK",
+			"10": "MOVE_WHIRLPOOL",
             "12": "MOVE_MIST",
             "15": "MOVE_WATER_PULSE",
             "19": "MOVE_PURSUIT",

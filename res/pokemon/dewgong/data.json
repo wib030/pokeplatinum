@@ -89,6 +89,7 @@
 			"9": "MOVE_AMNESIA",
             "11": "MOVE_ICY_WIND",
             "13": "MOVE_ENCORE",
+			"15": "MOVE_WHIRLPOOL",
             "17": "MOVE_ICE_SHARD",
 			"19": "MOVE_BUBBLE",
             "21": "MOVE_WISH",

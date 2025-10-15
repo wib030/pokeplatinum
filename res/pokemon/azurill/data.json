@@ -1,5 +1,5 @@
 {
-    "name": "Mega Marill",
+    "name": "Megamarill",
     "base_stats": {
         "hp": 140,
         "attack": 50,
@@ -87,6 +87,7 @@
             "3": "MOVE_TAIL_WHIP",
 			"5": "MOVE_WATER_GUN",
 			"7": "MOVE_FURY_ATTACK",
+			"10": "MOVE_WHIRLPOOL",
             "15": "MOVE_ROLLOUT",
 			"17": "MOVE_BITE",
             "19": "MOVE_BUBBLE_BEAM",

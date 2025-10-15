@@ -96,6 +96,7 @@
             "8": "MOVE_RECOVER",
 			"10": "MOVE_BUBBLE_BEAM",
             "13": "MOVE_REFRESH",
+			"15": "MOVE_WHIRLPOOL",
 			"17": "MOVE_ANCIENT_POWER",
 			"20": "MOVE_RAPID_SPIN",
             "23": "MOVE_LUCKY_CHANT",

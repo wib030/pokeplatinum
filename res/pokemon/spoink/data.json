@@ -94,6 +94,7 @@
             "18": "MOVE_CONFUSE_RAY",
             "21": "MOVE_MAGIC_COAT",
             "26": "MOVE_ZEN_HEADBUTT",
+			"27": "MOVE_ROLE_PLAY",
 			"29": "MOVE_POWER_GEM",
             "33": [
                 "MOVE_REST",

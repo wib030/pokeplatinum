@@ -84,6 +84,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_ROLE_PLAY",
                 "MOVE_WOOD_HAMMER",
                 "MOVE_COPYCAT",
                 "MOVE_ROCK_THROW",

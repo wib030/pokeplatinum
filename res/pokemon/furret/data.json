@@ -104,6 +104,7 @@
             "17": "MOVE_HELPING_HAND",
             "21": "MOVE_FOLLOW_ME",
 			"24": "MOVE_GUILLOTINE",
+			"26": "MOVE_WHIRLPOOL",
             "28": "MOVE_BODY_SLAM",
             "32": "MOVE_REST",
 			"34": "MOVE_SUPER_FANG",

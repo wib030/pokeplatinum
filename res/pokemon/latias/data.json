@@ -101,6 +101,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_WHIRLPOOL",
+				"MOVE_ROLE_PLAY",
 				"MOVE_TAILWIND",
 				"MOVE_HEALING_WISH",
 				"MOVE_HELPING_HAND",

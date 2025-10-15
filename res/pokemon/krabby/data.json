@@ -90,6 +90,7 @@
             "4": "MOVE_HARDEN",
             "8": "MOVE_METAL_CLAW",
             "12": "MOVE_MUD_SHOT",
+			"14": "MOVE_WHIRLPOOL",
             "16": "MOVE_PROTECT",
             "20": "MOVE_BUBBLE_BEAM",
 			"22": "MOVE_BUBBLE",

@@ -116,6 +116,7 @@
             "25": "MOVE_ROCK_BLAST",
 			"27": "MOVE_SWIFT",
             "28": "MOVE_TAKE_DOWN",
+			"30": "MOVE_WHIRLPOOL",
             "33": "MOVE_HORN_DRILL",
             "43": "MOVE_STONE_EDGE",
             "45": "MOVE_EARTHQUAKE",

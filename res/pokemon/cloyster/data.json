@@ -85,6 +85,7 @@
                 "MOVE_PROTECT",
 				"MOVE_TOXIC_SPIKES"
             ],
+			"10": "MOVE_WHIRLPOOL",
 			"13": "MOVE_ICICLE_SPEAR",
 			"15": "MOVE_ICE_SHARD",
 			"20": "MOVE_RAPID_SPIN",

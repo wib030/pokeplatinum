@@ -99,6 +99,8 @@
             "19": "MOVE_REST",
             "24": "MOVE_PAYBACK",
             "29": "MOVE_TAKE_DOWN",
+			"30": "MOVE_WHIRLPOOL",
+			"32": "MOVE_ROLE_PLAY",
 			"35": "MOVE_ZEN_HEADBUTT",
 			"37": "MOVE_EXTREME_SPEED",
             "41": "MOVE_SWAGGER",

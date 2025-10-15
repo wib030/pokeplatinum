@@ -123,6 +123,7 @@
 			"24": "MOVE_BIND",
 			"26": "MOVE_BEAT_UP",
 			"28": "MOVE_GUILLOTINE",
+			"29": "MOVE_WHIRLPOOL",
 			"30": "MOVE_ICE_SHARD",
 			"32": "MOVE_WATER_SPORT",
 			"35": "MOVE_NIGHT_SLASH",

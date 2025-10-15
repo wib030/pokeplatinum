@@ -89,6 +89,7 @@
                 "MOVE_DOUBLE_SLAP",
                 "MOVE_PERISH_SONG"
             ],
+			"13": "MOVE_WHIRLPOOL",
 			"18": "MOVE_RAIN_DANCE",
 			"21": "MOVE_BODY_SLAM",
             "27": "MOVE_SWAGGER",

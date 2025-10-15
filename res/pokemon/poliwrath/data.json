@@ -95,6 +95,7 @@
                 "MOVE_AQUA_JET"
             ],
             "11": "MOVE_WATER_GUN",
+			"13": "MOVE_WHIRLPOOL",
 			"15": "MOVE_DOUBLE_SLAP",
 			"18": "MOVE_RAIN_DANCE",
 			"21": "MOVE_BODY_SLAM",

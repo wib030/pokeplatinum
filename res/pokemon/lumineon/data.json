@@ -87,13 +87,13 @@
 				"MOVE_SILVER_WIND"
 			],
             "13": "MOVE_RAIN_DANCE",
+			"15": "MOVE_WHIRLPOOL",
             "22": "MOVE_WATER_PULSE",
             "26": "MOVE_ATTRACT",
             "29": "MOVE_SAFEGUARD",
             "35": "MOVE_AQUA_RING",
 			"39": "MOVE_RAPID_SPIN",
 			"40": "MOVE_TAILWIND",
-            "42": "MOVE_WHIRLPOOL",
             "48": "MOVE_U_TURN",
             "53": "MOVE_BOUNCE"
         },

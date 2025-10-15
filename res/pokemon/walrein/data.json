@@ -92,7 +92,7 @@
             ],
 			"5": "MOVE_ROLLOUT",
             "9": "MOVE_ENCORE",
-			"11": "MOVE_WHIRLPOOL",
+			"13": "MOVE_WHIRLPOOL",
 			"17": "MOVE_BRINE",
             "21": "MOVE_AURORA_BEAM",
 			"23": "MOVE_BUBBLE",

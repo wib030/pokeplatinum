@@ -93,6 +93,7 @@
             "15": "MOVE_CHARM",
 			"18": "MOVE_PIN_MISSILE",
             "21": "MOVE_REST",
+			"23": "MOVE_WHIRLPOOL",
 			"24": "MOVE_TAKE_DOWN",
 			"27": "MOVE_KNOCK_OFF",
             "30": "MOVE_FLAIL",

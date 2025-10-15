@@ -109,6 +109,7 @@
             "26": "MOVE_ICE_SHARD",
             "31": "MOVE_INGRAIN",
             "36": "MOVE_WOOD_HAMMER",
+			"40": "MOVE_ROLE_PLAY",
 			"44": "MOVE_CONSTRICT",
             "47": "MOVE_BLIZZARD",
             "50": "MOVE_SHEER_COLD"

@@ -92,6 +92,7 @@
             "5": "MOVE_THUNDER_WAVE",
             "15": "MOVE_SWIFT",
             "21": "MOVE_BODY_SLAM",
+			"23": "MOVE_WHIRLPOOL",
             "25": "MOVE_AGILITY",
 			"32": "MOVE_DRAGON_RAGE",
             "44": "MOVE_DRAGON_RUSH",

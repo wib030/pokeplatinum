@@ -112,6 +112,7 @@
             "30": "MOVE_SHADOW_BALL",
 			"32": "MOVE_PURSUIT",
 			"34": "MOVE_EMBARGO",
+			"36": "MOVE_ROLE_PLAY",
             "40": "MOVE_SUCKER_PUNCH",
             "46": "MOVE_SNATCH",
 			"48": "MOVE_MAGIC_COAT",

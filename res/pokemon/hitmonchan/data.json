@@ -97,7 +97,10 @@
                 "MOVE_ICE_PUNCH",
                 "MOVE_FIRE_PUNCH"
             ],
-			"33": "MOVE_GUILLOTINE",
+			"33": [ 
+				"MOVE_GUILLOTINE",
+				"MOVE_ROLE_PLAY"
+			],
             "36": "MOVE_SKY_UPPERCUT",
             "46": "MOVE_DETECT",
             "51": "MOVE_COUNTER",

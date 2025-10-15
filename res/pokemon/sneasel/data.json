@@ -112,6 +112,7 @@
 			"22": "MOVE_METAL_CLAW",
 			"24": "MOVE_BIND",
 			"25": "MOVE_GUILLOTINE",
+			"26": "MOVE_WHIRLPOOL",
 			"28": "MOVE_BEAT_UP",
 			"30": "MOVE_ICE_SHARD",
 			"31": "MOVE_WATER_SPORT",

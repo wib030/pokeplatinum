@@ -106,6 +106,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_ROLE_PLAY",
 				"MOVE_GRAVITY",
                 "MOVE_LEER",
                 "MOVE_WRAP"

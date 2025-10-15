@@ -85,6 +85,7 @@
             "3": "MOVE_SUPERSONIC",
             "5": "MOVE_WRAP",
             "7": "MOVE_ACID",
+			"10": "MOVE_WHIRLPOOL",
 			"13": "MOVE_WATER_PULSE",
             "15": "MOVE_TOXIC_SPIKES",
 			"19": "MOVE_BUBBLE_BEAM",

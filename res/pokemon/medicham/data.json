@@ -108,6 +108,7 @@
             "23": "MOVE_CALM_MIND",
 			"25": "MOVE_FORESIGHT",
             "29": "MOVE_JUMP_KICK",
+			"30": "MOVE_ROLE_PLAY",
 			"31": "MOVE_PSYCH_UP",
 			"33": "MOVE_ACUPRESSURE",
 			"36": "MOVE_POWER_TRICK",

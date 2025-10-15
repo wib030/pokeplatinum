@@ -96,6 +96,7 @@
 				"MOVE_CONFUSION"
 			],
 			"15": "MOVE_GRAVITY",
+			"25": "MOVE_ROLE_PLAY",
 			"30": "MOVE_MAGIC_COAT"
         },
         "tutor": [

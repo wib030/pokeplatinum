@@ -84,6 +84,7 @@
             "4": "MOVE_RAGE",
             "8": "MOVE_FOCUS_ENERGY",
 			"11": "MOVE_AQUA_JET",
+			"13": "MOVE_WHIRLPOOL",
 			"15": "MOVE_ASSURANCE",
             "18": "MOVE_SCREECH",
 			"20": "MOVE_BUBBLE",

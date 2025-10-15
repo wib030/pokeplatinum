@@ -105,6 +105,7 @@
             "21": "MOVE_PSYBEAM",
 			"24": "MOVE_REFLECT",
 			"26": "MOVE_MIRACLE_EYE",
+			"27": "MOVE_ROLE_PLAY",
 			"28": "MOVE_PSYCHO_CUT",
             "30": [
 				"MOVE_RECOVER",

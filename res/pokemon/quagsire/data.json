@@ -93,6 +93,7 @@
 				"MOVE_PSYWAVE"
             ],
             "9": "MOVE_MUD_SHOT",
+			"13": "MOVE_WHIRLPOOL",
             "15": "MOVE_BODY_SLAM",
             "19": "MOVE_MUD_BOMB",
             "24": "MOVE_AMNESIA",

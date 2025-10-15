@@ -84,11 +84,11 @@
 			"4": "MOVE_GROWL",
             "6": "MOVE_WATER_GUN",
 			"11": "MOVE_QUICK_ATTACK",
+			"13": "MOVE_WHIRLPOOL",
             "18": "MOVE_PURSUIT",
 			"19": "MOVE_BUBBLE",
             "24": "MOVE_AQUA_JET",
 			"27": "MOVE_DIVE",
-			"31": "MOVE_WHIRLPOOL",
             "34": "MOVE_AGILITY",
             "45": "MOVE_AQUA_TAIL"
         },

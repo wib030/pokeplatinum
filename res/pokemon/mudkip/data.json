@@ -83,11 +83,11 @@
 			"4": "MOVE_WATER_GUN",
             "9": "MOVE_MUD_SLAP",
 			"12": "MOVE_FORESIGHT",
+			"13": "MOVE_WHIRLPOOL",
 			"15": "MOVE_LOW_KICK",
             "17": "MOVE_BIDE",
 			"25": "MOVE_ROCK_THROW",
 			"28": "MOVE_PROTECT",
-            "33": "MOVE_WHIRLPOOL",
 			"36": "MOVE_TAKE_DOWN",
             "41": "MOVE_HYDRO_PUMP",
             "44": "MOVE_ENDEAVOR"

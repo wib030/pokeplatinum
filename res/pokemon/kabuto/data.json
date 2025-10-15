@@ -91,6 +91,7 @@
 			],
             "5": "MOVE_LEER",
 			"13": "MOVE_ROLLOUT",
+			"15": "MOVE_WHIRLPOOL",
             "16": "MOVE_MUD_SHOT",
             "19": "MOVE_SAND_ATTACK",
             "23": "MOVE_ENDURE",

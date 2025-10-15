@@ -103,6 +103,7 @@
 			"23": "MOVE_DIZZY_PUNCH",
 			"25": "MOVE_GUILLOTINE",
             "28": "MOVE_SUCKER_PUNCH",
+			"30": "MOVE_ROLE_PLAY",
 			"32": "MOVE_TEETER_DANCE",
 			"34": "MOVE_MEAN_LOOK",
             "41": "MOVE_PSYCH_UP",

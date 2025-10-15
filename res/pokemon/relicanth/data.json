@@ -93,6 +93,7 @@
 			"10": "MOVE_MAGNITUDE",
             "15": "MOVE_ROCK_TOMB",
 			"21": "MOVE_ANCIENT_POWER",
+			"23": "MOVE_WHIRLPOOL",
 			"26": "MOVE_DIVE",
             "31": "MOVE_TAKE_DOWN",
 			"35": "MOVE_YAWN",

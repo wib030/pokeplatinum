@@ -89,6 +89,7 @@
             "33": "MOVE_ROOST",
 			"35": "MOVE_TAILWIND",
             "37": "MOVE_FEATHER_DANCE",
+			"40": "MOVE_ROLE_PLAY",
             "45": "MOVE_HYPER_VOICE",
 			"55": "MOVE_RAZOR_WIND"
         },

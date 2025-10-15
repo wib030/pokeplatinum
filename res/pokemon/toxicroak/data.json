@@ -113,6 +113,7 @@
             "31": "MOVE_SUCKER_PUNCH",
 			"34": "MOVE_BULLET_PUNCH",
             "36": "MOVE_NASTY_PLOT",
+			"38": "MOVE_ROLE_PLAY",
             "41": "MOVE_POISON_JAB",
 			"43": "MOVE_SUPER_FANG",
 			"45": "MOVE_CLOSE_COMBAT",

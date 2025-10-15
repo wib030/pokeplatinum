@@ -104,6 +104,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_WHIRLPOOL",
 				"MOVE_SWIFT",
                 "MOVE_SCRATCH",
                 "MOVE_TAIL_WHIP",

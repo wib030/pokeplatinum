@@ -109,6 +109,7 @@
             "36": "MOVE_BLAZE_KICK",
 			"38": "MOVE_FOCUS_ENERGY",
 			"40": "MOVE_SKY_UPPERCUT",
+			"41": "MOVE_ROLE_PLAY",
             "42": "MOVE_SLASH",
             "49": "MOVE_BRAVE_BIRD",
 			"52": "MOVE_FLARE_BLITZ",

@@ -91,6 +91,7 @@
 			"20": "MOVE_JUMP_KICK",
             "21": "MOVE_FOCUS_ENERGY",
             "25": "MOVE_FEINT",
+			"33": "MOVE_ROLE_PLAY",
             "37": "MOVE_FORESIGHT",
             "41": "MOVE_BLAZE_KICK",
 			"43": "MOVE_HI_JUMP_KICK",

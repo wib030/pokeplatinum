@@ -80,6 +80,7 @@
 			"3": "MOVE_WATER_GUN",
             "5": "MOVE_SUPERSONIC",
             "8": "MOVE_HORN_ATTACK",
+			"10": "MOVE_WHIRLPOOL",
 			"13": "MOVE_FLAIL",
             "16": "MOVE_WATER_PULSE",
 			"21": "MOVE_AQUA_RING",

@@ -113,6 +113,7 @@
                 "MOVE_SLEEP_TALK"
             ],
 			"27": "MOVE_ROAR",
+			"30": "MOVE_WHIRLPOOL",
 			"33": "MOVE_EXTRASENSORY",
 			"39": "MOVE_HYPER_VOICE",
             "50": "MOVE_HYPER_BEAM"

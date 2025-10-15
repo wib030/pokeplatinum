@@ -93,6 +93,7 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_WHIRLPOOL",
                 "MOVE_TACKLE",
                 "MOVE_GROWL",
 				"MOVE_AQUA_JET"

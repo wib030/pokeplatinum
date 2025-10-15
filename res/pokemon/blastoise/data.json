@@ -104,6 +104,7 @@
             "4": "MOVE_TAIL_WHIP",
             "7": "MOVE_WATER_GUN",
             "10": "MOVE_WITHDRAW",
+			"14": "MOVE_WHIRLPOOL",
             "16": "MOVE_BITE",
             "20": "MOVE_RAPID_SPIN",
 			"22": "MOVE_BUBBLE",

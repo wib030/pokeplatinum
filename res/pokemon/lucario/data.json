@@ -109,6 +109,7 @@
             "19": "MOVE_BONE_RUSH",
 			"21": "MOVE_ME_FIRST",
             "24": "MOVE_METAL_SOUND",
+			"28": "MOVE_ROLE_PLAY",
 			"30": "MOVE_AURA_SPHERE",
             "33": [ 
 				"MOVE_SWORDS_DANCE",

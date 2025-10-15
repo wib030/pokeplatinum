@@ -93,6 +93,7 @@
             ],
             "6": "MOVE_WRAP",
             "10": "MOVE_PSYBEAM",
+			"12": "MOVE_WHIRLPOOL",
             "14": "MOVE_AURORA_BEAM",
 			"16": "MOVE_STRING_SHOT",
             "18": "MOVE_BUBBLE_BEAM",

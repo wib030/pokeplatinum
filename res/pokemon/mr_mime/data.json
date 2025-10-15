@@ -110,6 +110,7 @@
             "11": "MOVE_DOUBLE_SLAP",
             "15": "MOVE_MIMIC",
 			"18": "MOVE_ENCORE",
+			"20": "MOVE_ROLE_PLAY",
             "22": [
                 "MOVE_LIGHT_SCREEN",
                 "MOVE_REFLECT"
@@ -122,7 +123,6 @@
             "36": "MOVE_TRICK",
             "39": "MOVE_PSYCHIC",
 			"40": "MOVE_MIND_READER",
-            "43": "MOVE_ROLE_PLAY",
             "46": "MOVE_BATON_PASS",
             "50": "MOVE_SAFEGUARD"
         },

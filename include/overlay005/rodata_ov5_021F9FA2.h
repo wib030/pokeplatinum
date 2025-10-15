@@ -292,6 +292,7 @@ const u16 EggMove_Table[] = {
     MOVE_BULLET_PUNCH,
 	MOVE_POWER_TRICK,
 	MOVE_SHARPEN, // Pregnancy Punch
+	MOVE_ROLE_PLAY,
     (SPECIES_BELLSPROUT) + 20000, // Bellsprout line
     MOVE_SWORDS_DANCE,
     MOVE_ENCORE,

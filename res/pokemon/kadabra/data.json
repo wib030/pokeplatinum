@@ -102,13 +102,13 @@
             "21": "MOVE_PSYBEAM",
 			"24": "MOVE_REFLECT",
 			"26": "MOVE_MIRACLE_EYE",
+			"27": "MOVE_ROLE_PLAY",
 			"28": "MOVE_PSYCHO_CUT",
             "30": [
 				"MOVE_RECOVER",
 				"MOVE_KINESIS"
 			],
 			"32": "MOVE_MAGIC_COAT",
-            "36": "MOVE_ROLE_PLAY",
 			"38": "MOVE_MIND_READER",
             "40": "MOVE_PSYCHIC",
             "42": "MOVE_FUTURE_SIGHT",

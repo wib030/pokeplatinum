@@ -107,6 +107,7 @@
             "24": "MOVE_BODY_SLAM",
 			"26": "MOVE_GUILLOTINE",
             "29": "MOVE_ZEN_HEADBUTT",
+			"30": "MOVE_WHIRLPOOL",
 			"31": "MOVE_PUNISHMENT",
             "35": "MOVE_CAPTIVATE",
 			"37": "MOVE_HEAL_BELL",

@@ -101,6 +101,7 @@
             "20": "MOVE_ODOR_SLEUTH",
             "26": "MOVE_BEAT_UP",
             "28": "MOVE_FIRE_FANG",
+			"30": "MOVE_ROLE_PLAY",
             "34": "MOVE_FAINT_ATTACK",
 			"36": "MOVE_SUPER_FANG",
 			"38": "MOVE_EMBARGO",
