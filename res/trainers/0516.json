@@ -21,7 +21,8 @@
                 "MOVE_EARTHQUAKE"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_WEAVILE",
@@ -35,7 +36,8 @@
                 "MOVE_SWORDS_DANCE"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_KABUTOPS",
@@ -49,7 +51,8 @@
                 "MOVE_ROCK_SMASH"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_SLOWBRO",
@@ -63,7 +66,8 @@
                 "MOVE_WATER_PULSE"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

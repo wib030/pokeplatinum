@@ -20,8 +20,22 @@
                 "MOVE_WHIRLWIND",
                 "MOVE_ROOST"
             ],
-            "power": 180,
-            "ball_seal": 12
+            "power": 0,
+            "ball_seal": 12,
+			"ball_type": "ITEM_MASTER_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_GOLEM",
@@ -34,8 +48,22 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_HAMMER_ARM"
             ],
-            "power": 180,
+            "power": 0,
             "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0,
 			"ability": 1
         },
         {
@@ -49,8 +77,22 @@
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_HIDDEN_POWER"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_BLASTOISE",
@@ -63,8 +105,22 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_ICE_BEAM"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_SALAMENCE",
@@ -77,8 +133,22 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_FIRE_BLAST"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_MASTER_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_TOXICROAK",
@@ -91,8 +161,22 @@
                 "MOVE_GUNK_SHOT",
                 "MOVE_SUCKER_PUNCH"
             ],
-            "power": 200,
-            "ball_seal": 12
+            "power": 0,
+            "ball_seal": 12,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }

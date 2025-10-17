@@ -21,7 +21,8 @@
                 "MOVE_PAIN_SPLIT"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_ARCANINE",
@@ -35,7 +36,8 @@
                 "MOVE_DRAGON_PULSE"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

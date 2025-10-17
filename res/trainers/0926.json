@@ -20,8 +20,22 @@
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_SURF"
             ],
-            "power": 255,
-            "ball_seal": 5
+            "power": 0,
+            "ball_seal": 5,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_DRAPION",
@@ -34,8 +48,22 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_REST"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_DODRIO",
@@ -48,8 +76,22 @@
                 "MOVE_KNOCK_OFF",
                 "MOVE_QUICK_ATTACK"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_GARCHOMP",
@@ -62,8 +104,22 @@
                 "MOVE_DRAGON_CLAW",
                 "MOVE_STONE_EDGE"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_ROTOM",
@@ -76,8 +132,22 @@
                 "MOVE_ZAP_CANNON",
                 "MOVE_PAIN_SPLIT"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_ZAPDOS",
@@ -90,8 +160,22 @@
                 "MOVE_ROOST",
                 "MOVE_HEAT_WAVE"
             ],
-            "power": 255,
-            "ball_seal": 5
+            "power": 0,
+            "ball_seal": 5,
+			"ball_type": "ITEM_MASTER_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }

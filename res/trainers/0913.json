@@ -20,8 +20,22 @@
                 "MOVE_ICE_PUNCH",
                 "MOVE_KNOCK_OFF"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
 		{
             "species": "SPECIES_DUSCLOPS",
@@ -34,8 +48,22 @@
                 "MOVE_PAIN_SPLIT",
                 "MOVE_WILL_O_WISP"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 23
         },
 		{
             "species": "SPECIES_STEELIX",
@@ -48,8 +76,22 @@
                 "MOVE_ROCK_SLIDE",
                 "MOVE_REST"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 0,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 2
         },
 		{
             "species": "SPECIES_DRAGONAIR",
@@ -62,8 +104,22 @@
                 "MOVE_DRAGON_RUSH",
                 "MOVE_DRAGON_DANCE"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_CHERISH_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 11
         },
 		{
             "species": "SPECIES_GOLBAT",
@@ -76,8 +132,22 @@
                 "MOVE_SUPER_FANG",
                 "MOVE_BRAVE_BIRD"
             ],
-            "power": 180,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 8
         },
 		{
             "species": "SPECIES_LUCARIO",
@@ -90,8 +160,22 @@
                 "MOVE_SHADOW_BALL",
                 "MOVE_DRAGON_PULSE"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 31,
+			"ivATK": 0,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 14
         }
     ]
 }

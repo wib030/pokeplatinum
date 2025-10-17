@@ -35,7 +35,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 25,
-			"nature": 23
+			"nature": 23,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_CORSOLA",
@@ -63,7 +64,8 @@
 			"evSPATK": 0,
 			"evSPDEF": 69,
 			"nature": 22,
-			"shiny": 1
+			"isShiny": 1,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_MAWILE",
@@ -91,7 +93,8 @@
 			"evSPATK": 0,
 			"evSPDEF": 77,
 			"nature": 8,
-			"ability": 1
+			"ability": 1,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

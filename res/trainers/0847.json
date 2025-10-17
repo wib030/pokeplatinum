@@ -34,7 +34,8 @@
 			"evSPEED": 252,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 13
+			"nature": 13,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_FARFETCHD",
@@ -62,7 +63,8 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"nature": 3,
-			"status": 16
+			"status": 16,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_KECLEON",
@@ -89,7 +91,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 8
+			"nature": 8,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_GRANBULL",
@@ -117,7 +120,8 @@
 			"evSPATK": 0,
 			"evSPDEF": 36,
 			"nature": 7,
-			"ability": 1
+			"ability": 1,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_SUDOWOODO",
@@ -144,7 +148,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 64,
-			"nature": 2
+			"nature": 2,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

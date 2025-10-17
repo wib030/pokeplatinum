@@ -21,7 +21,8 @@
                 "MOVE_HI_JUMP_KICK"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_ROTOM",
@@ -35,7 +36,8 @@
                 "MOVE_PROTECT"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_DUSTOX",
@@ -49,7 +51,8 @@
                 "MOVE_ATTRACT"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_TAUROS",
@@ -64,6 +67,7 @@
             ],
             "power": 140,
             "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
 			"ability": 1
         }
     ]

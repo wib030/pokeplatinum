@@ -21,7 +21,8 @@
                 "MOVE_CONFUSE_RAY"
             ],
             "power": 60,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

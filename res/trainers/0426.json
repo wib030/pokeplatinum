@@ -21,7 +21,8 @@
                 "MOVE_ACID_ARMOR"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_MUK",
@@ -35,7 +36,8 @@
                 "MOVE_FLAMETHROWER"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_SWALOT",
@@ -49,7 +51,8 @@
                 "MOVE_PAIN_SPLIT"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

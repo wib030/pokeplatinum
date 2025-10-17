@@ -20,8 +20,22 @@
 				"MOVE_SLUDGE_BOMB",
 				"MOVE_KNOCK_OFF"
             ],
-            "power": 160,
-            "ball_seal": 5
+            "power": 0,
+            "ball_seal": 5,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_DRAPION",
@@ -34,8 +48,22 @@
 				"MOVE_ACUPRESSURE",
 				"MOVE_REST"
             ],
-            "power": 160,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_DODRIO",
@@ -48,8 +76,22 @@
 				"MOVE_ACUPRESSURE",
 				"MOVE_HI_JUMP_KICK"
             ],
-            "power": 160,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_GABITE",
@@ -62,8 +104,22 @@
 				"MOVE_OUTRAGE",
 				"MOVE_EARTHQUAKE"
             ],
-            "power": 160,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_PURUGLY",
@@ -75,8 +131,22 @@
 				"MOVE_FAKE_OUT",
 				"MOVE_PROTECT"
             ],
-            "power": 180,
+            "power": 0,
             "ball_seal": 5,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 25,
+			"ivATK": 25,
+			"ivDEF": 25,
+			"ivSPEED": 25,
+			"ivSPATK": 25,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0,
 			"ability": 1
         }
     ]

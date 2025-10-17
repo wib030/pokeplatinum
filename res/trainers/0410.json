@@ -21,7 +21,8 @@
                 "MOVE_CRUNCH"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_SABLEYE",
@@ -35,7 +36,8 @@
                 "MOVE_ICY_WIND"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_TAUROS",
@@ -49,7 +51,8 @@
                 "MOVE_RAGE"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

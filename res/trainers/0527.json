@@ -21,7 +21,8 @@
                 "MOVE_X_SCISSOR"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
         {
             "species": "SPECIES_GOLEM",
@@ -36,7 +37,8 @@
             ],
             "power": 200,
             "ball_seal": 0,
-			"ability": 1
+			"ability": 1,
+			"ball_type": "ITEM_ULTRA_BALL"
         },
 		{
             "species": "SPECIES_GYARADOS",
@@ -50,7 +52,8 @@
                 "MOVE_ICY_WIND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

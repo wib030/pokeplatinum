@@ -21,7 +21,8 @@
                 "MOVE_ROOST"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_LANTURN",
@@ -35,7 +36,8 @@
                 "MOVE_STOCKPILE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_TOXICROAK",
@@ -49,7 +51,8 @@
                 "MOVE_SWORDS_DANCE"
             ],
             "power": 140,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

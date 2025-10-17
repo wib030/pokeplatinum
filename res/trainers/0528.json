@@ -5,7 +5,6 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
-		"AI_FLAG_RISKY",
 		"AI_FLAG_EVAL_ATTACK"
     ],
     "double_battle": false,
@@ -23,6 +22,7 @@
             ],
             "power": 0,
             "ball_seal": 0,
+			"ball_type": "ITEM_MASTER_BALL",
 			"ivHP": 30,
 			"ivATK": 30,
 			"ivDEF": 31,
@@ -48,8 +48,22 @@
                 "MOVE_MUDDY_WATER",
                 "MOVE_ICY_WIND"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_DRAPION",
@@ -62,8 +76,22 @@
                 "MOVE_WHIRLWIND",
                 "MOVE_KNOCK_OFF"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_DODRIO",
@@ -76,8 +104,22 @@
                 "MOVE_BRAVE_BIRD",
                 "MOVE_HI_JUMP_KICK"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_QUICK_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_GARCHOMP",
@@ -90,8 +132,22 @@
                 "MOVE_FIRE_BLAST",
                 "MOVE_STEALTH_ROCK"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_ROTOM",
@@ -104,8 +160,22 @@
                 "MOVE_NASTY_PLOT",
                 "MOVE_THUNDER"
             ],
-            "power": 255,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 30,
+			"ivATK": 30,
+			"ivDEF": 30,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
+			"ivSPDEF": 30,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }

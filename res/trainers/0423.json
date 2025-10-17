@@ -21,7 +21,8 @@
                 "MOVE_TRICK"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_WEEDLE",
@@ -34,7 +35,8 @@
                 "MOVE_BUG_BITE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_DIGLETT",
@@ -48,7 +50,8 @@
                 "MOVE_GROWL"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

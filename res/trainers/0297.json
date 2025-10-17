@@ -21,7 +21,8 @@
 				"MOVE_MEMENTO"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_GRIMER",
@@ -35,7 +36,8 @@
 				"MOVE_POISON_GAS"
             ],
             "power": 40,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }

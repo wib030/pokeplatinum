@@ -20,8 +20,22 @@
 				"MOVE_BRINE",
 				"MOVE_CONFUSE_RAY"
             ],
-            "power": 80,
-            "ball_seal": 5
+            "power": 0,
+            "ball_seal": 5,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 10,
+			"ivATK": 10,
+			"ivDEF": 10,
+			"ivSPEED": 10,
+			"ivSPATK": 10,
+			"ivSPDEF": 10,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_SKORUPI",
@@ -34,8 +48,22 @@
 				"MOVE_SAND_ATTACK",
 				"MOVE_KNOCK_OFF"
             ],
-            "power": 80,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 10,
+			"ivATK": 10,
+			"ivDEF": 10,
+			"ivSPEED": 10,
+			"ivSPATK": 10,
+			"ivSPDEF": 10,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_PURUGLY",
@@ -50,6 +78,20 @@
             ],
             "power": 150,
             "ball_seal": 5,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0,
 			"ability": 1
         }
     ]

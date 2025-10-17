@@ -34,7 +34,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 24,
-			"nature": 5
+			"nature": 5,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_FARFETCHD",
@@ -62,7 +63,8 @@
 			"evSPATK": 0,
 			"evSPDEF": 0,
 			"nature": 2,
-			"status": 16
+			"status": 16,
+			"ball_type": "ITEM_GREAT_BALL"
         },
 		{
             "species": "SPECIES_GRANBULL",
@@ -90,7 +92,8 @@
 			"evSPATK": 0,
 			"evSPDEF": 36,
 			"nature": 7,
-			"ability": 1
+			"ability": 1,
+			"ball_type": "ITEM_GREAT_BALL"
         }
     ]
 }
