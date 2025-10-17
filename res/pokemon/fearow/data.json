@@ -1,7 +1,7 @@
 {
     "name": "Fearow",
     "base_stats": {
-        "hp": 95,
+        "hp": 88,
         "attack": 110,
         "defense": 95,
         "speed": 100,
