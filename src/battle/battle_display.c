@@ -3363,6 +3363,11 @@ static void ov16_02260DB0 (SysTask * param0, void * param1)
         v2 = TrainerAI_Main(v0->unk_00, v0->unk_1D);
         v2 = BattleDisplay_CalcSwitchAttack_Singles(v0->unk_00, v0->unk_1D, v2);
 
+        if (BattleDisplay_HasBeatUp(v0->unk_00, v0->unk_1D))
+        {
+            v2 = BattleDisplay_BeatUpOverride(v0->unk_00, v0->unk_1D, v2);
+        }
+
         switch (v2) {
         case 0xff:
             return;
@@ -6785,6 +6790,154 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
         if ((BattleSystem_RandNext(battleSys) % 4) == 0)
         {
             return predictMoveSlot;
+        }
+    }
+
+    return currentMoveSlot;
+}
+
+BOOL BattleDisplay_HasBeatUp(BattleSystem* battleSys, u8 attacker)
+{
+    BattleContext* battleCtx;
+    int i;
+
+    battleCtx = BattleSystem_Context(battleSys);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if (battleCtx->battleMons[attacker].moves[i] == MOVE_BEAT_UP)
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+u8 BattleDisplay_BeatUpOverride(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot)
+{
+    BattleContext* battleCtx;
+    u8 defender, defenderSide;
+    u8 currentMoveType, newMoveType;
+    u16 currentMove, newMove;
+    u32 effectiveness;
+    int currentMoveDamage, newMoveDamage;
+    int heldItemEffect;
+    int i;
+
+    battleCtx = BattleSystem_Context(battleSys);
+
+    currentMove = battleCtx->battleMons[attacker].moves[currentMoveSlot];
+
+    if (currentMove == MOVE_BEAT_UP)
+    {
+        return currentMoveSlot;
+    }
+
+    if (MOVE_DATA(currentMove).class == CLASS_STATUS)
+    {
+        return currentMoveSlot;
+    }
+
+    newMove = MOVE_BEAT_UP;
+    newMoveType = BattleDisplay_ExpertAI_MoveType(battleSys, battleCtx, attacker, newMove);
+
+    defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
+
+    defenderSide = Battler_Side(battleSys, defender);
+
+    currentMoveType = BattleDisplay_ExpertAI_MoveType(battleSys, battleCtx, attacker, currentMove);
+    
+    effectiveness = 0;
+
+    currentMoveDamage = BattleSystem_CalcMoveDamage(battleSys,
+        battleCtx,
+        currentMove,
+        battleCtx->sideConditionsMask[defenderSide],
+        battleCtx->fieldConditionsMask,
+        0,
+        currentMoveType,
+        attacker,
+        defender,
+        1);
+
+    currentMoveDamage = BattleSystem_ApplyTypeChart(battleSys,
+        battleCtx,
+        currentMove,
+        currentMoveType,
+        attacker,
+        defender,
+        currentMoveDamage,
+        &effectiveness);
+
+    if ((effectiveness & MOVE_STATUS_IMMUNE)
+        && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+        currentMoveDamage = 0;
+    }
+
+    if (effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+        currentMoveDamage /= 2;
+    }
+
+    if (effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+        currentMoveDamage = currentMoveDamage * 5 / 4;
+    }
+
+    effectiveness = 0;
+
+    newMoveDamage = BattleSystem_CalcMoveDamage(battleSys,
+        battleCtx,
+        newMove,
+        battleCtx->sideConditionsMask[defenderSide],
+        battleCtx->fieldConditionsMask,
+        0,
+        newMoveType,
+        attacker,
+        defender,
+        1);
+
+    newMoveDamage = BattleSystem_ApplyTypeChart(battleSys,
+        battleCtx,
+        newMove,
+        newMoveType,
+        attacker,
+        defender,
+        newMoveDamage,
+        &effectiveness);
+
+    if ((effectiveness & MOVE_STATUS_IMMUNE)
+        && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
+
+        newMoveDamage = 0;
+    }
+
+    if (effectiveness & MOVE_STATUS_TYPE_RESIST_ABILITY) {
+        newMoveDamage /= 2;
+    }
+
+    if (effectiveness & MOVE_STATUS_TYPE_WEAKNESS_ABILITY) {
+        newMoveDamage = newMoveDamage * 5 / 4;
+    }
+
+    heldItemEffect = BattleSystem_GetItemData(battleCtx, Battler_HeldItem(battleCtx, attacker), ITEM_PARAM_HOLD_EFFECT);
+
+    if (heldItemEffect == HOLD_EFFECT_SOMETIMES_FLINCH)
+    {
+        currentMoveDamage /= 2;
+    }
+
+    if (newMoveDamage >= currentMoveDamage)
+    {
+        for (i = 0; i < LEARNED_MOVES_MAX; i++)
+        {
+            if (BattleDisplay_ExpertAI_CanUseMove(battleSys, battleCtx, attacker, i, CHECK_INVALID_ALL_BUT_TORMENT))
+            {
+                if (battleCtx->battleMons[attacker].moves[i] == newMove)
+                {
+                    return i;
+                }
+            }
         }
     }
 

@@ -167,4 +167,21 @@ void ov16_02263B20(BattlerData * param0, int param1);
  */
 u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot);
 
+/* @brief Calculate a move to use when predicting player switch.
+ *
+ * @param battleSys
+ * @param attacker			 The attacking battlemon ID, provided in battle_display.c when invoked
+ * @return  TRUE / FALSE if the battleMon knows Beat Up.
+ */
+BOOL BattleDisplay_HasBeatUp(BattleSystem* battleSys, u8 attacker);
+
+/* @brief Calculate when to use Beat Up over current move.
+ *
+ * @param battleSys
+ * @param attacker			 The attacking battlemon ID, provided in battle_display.c when invoked
+ * @param currentMoveSlot    The slot of the current best move.
+ * @return  The slot of Beat Up move, if we should use Beat Up instead.
+ */
+u8 BattleDisplay_BeatUpOverride(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot);
+
 #endif // POKEPLATINUM_OV16_0225CBB8_H
