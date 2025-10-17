@@ -9852,7 +9852,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         // Assign power; prefer the input power (used by variable-power moves, e.g. Gyro Ball)
         if (movePower == 1
             || effect == BATTLE_EFFECT_NATURE_POWER
-            || effect == BATTLE_EFFECT_AVERAGE_HP) {
+            || effect == BATTLE_EFFECT_AVERAGE_HP
+            || effect == BATTLE_EFFECT_BEAT_UP) {
             switch (effect) {
             default:
                 break;
@@ -10180,14 +10181,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
 				if (defenderParams.statusMask & MON_CONDITION_ANY)
 				{
 					movePower *= 2;
-				}
-                break;
-				
-			case BATTLE_EFFECT_REMOVE_SCREENS:
-				if ((battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_REFLECT)
-				|| (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_LIGHT_SCREEN))
-				{
-					movePower = movePower * 3 / 2;
 				}
                 break;
 
@@ -10582,6 +10575,14 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         partyIndicator,
                         partySlot);
                 }
+            }
+            break;
+
+        case BATTLE_EFFECT_REMOVE_SCREENS:
+            if ((battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_REFLECT)
+                || (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_LIGHT_SCREEN))
+            {
+                movePower = movePower * 3 / 2;
             }
             break;
         }
@@ -11556,7 +11557,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         // Assign power; prefer the input power (used by variable-power moves, e.g. Gyro Ball)
         if (movePower == 1
             || effect == BATTLE_EFFECT_NATURE_POWER
-            || effect == BATTLE_EFFECT_AVERAGE_HP) {
+            || effect == BATTLE_EFFECT_AVERAGE_HP
+            || effect == BATTLE_EFFECT_BEAT_UP) {
             switch (effect) {
             default:
                 break;
