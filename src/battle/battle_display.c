@@ -157,6 +157,8 @@
 #include "battle/battle_mon.h"
 #include "battle/common.h"
 
+#include "constants/items.h"
+
 static void ov16_0225E4E8(SysTask * param0, void * param1);
 static void ov16_0225E894(SysTask * param0, void * param1);
 static void ov16_0225EA80(SysTask * param0, void * param1);
