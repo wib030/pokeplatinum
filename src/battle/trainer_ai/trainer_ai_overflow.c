@@ -694,6 +694,44 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 					}
 				}
                 break;
+
+            case BATTLE_EFFECT_GROWTH:
+                if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_UNAWARE
+                    || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, AI_CONTEXT.attacker, ABILITY_MEMORY))
+                {
+                    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) != ABILITY_MOLD_BREAKER)
+                    {
+                        break;
+                    }
+                }
+
+                if (NO_CLOUD_NINE)
+                {
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+                    {
+                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATK, 8)
+                            || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 8))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 128)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                break;
+                            }
+                        }
+
+                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATK, 9)
+                            || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 9))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 85)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                break;
             }
         }
     }
@@ -1656,6 +1694,48 @@ BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* 
 
     if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
     {
+        result = TRUE;
+    }
+
+    return result;
+}
+
+BOOL ExpertAI_StatStageLessThan(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int stat, int val)
+{
+    int statBoost;
+    BOOL result;
+
+    result = FALSE;
+
+    statBoost = battleCtx->battleMons[battler].statBoosts[stat];
+
+    if (Battler_Ability(battleCtx, battler) == ABILITY_SIMPLE)
+    {
+        if (statBoost <= BATTLE_STAT_BOOST_NEUTRAL)
+        {
+            if ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
+            {
+                statBoost = BATTLE_STAT_BOOST_NEUTRAL - ((BATTLE_STAT_BOOST_NEUTRAL - statBoost) * 2);
+            }
+            else
+            {
+                statBoost = BATTLE_STAT_BOOST_MIN;
+            }
+        }
+        else
+        {
+            if ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2 < BATTLE_STAT_BOOST_NUM_STAGES)
+            {
+                statBoost = BATTLE_STAT_BOOST_NEUTRAL + ((statBoost - BATTLE_STAT_BOOST_NEUTRAL) * 2);
+            }
+            else
+            {
+                statBoost = BATTLE_STAT_BOOST_MAX;
+            }
+        }
+    }
+
+    if (statBoost < val) {
         result = TRUE;
     }
 

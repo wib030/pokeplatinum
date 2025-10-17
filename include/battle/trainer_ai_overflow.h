@@ -202,4 +202,15 @@ BOOL ExpertAI_IsBattlerSpecialAttacker(BattleSystem* battleSys, BattleContext* b
  */
 BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
+/* @brief Check if the battler's specified stat's stage is less than the specified value
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler    The battlemon ID of the battler to check.
+ * @param stat		 The battle stat to check.
+ * @param val		 The threshold the stat stage must be less than.
+ * @return  TRUE / FALSE whether the given battler's given stat is less than the given value.
+ */
+BOOL ExpertAI_StatStageLessThan(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int stat, int val);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

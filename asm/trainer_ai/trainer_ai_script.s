@@ -9429,7 +9429,7 @@ Expert_HealingWish_End:
     PopOrEnd 
 	
 Expert_CheckGrowth:
-    LoadCurrentWeather 
+    LoadCurrentWeather
     IfLoadedEqualTo AI_WEATHER_HAILING, Expert_CheckGrowth_ScoreMinus2
     IfLoadedEqualTo AI_WEATHER_RAINING, Expert_CheckGrowth_ScoreMinus2
     IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_CheckGrowth_ScoreMinus2
