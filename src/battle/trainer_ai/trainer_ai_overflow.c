@@ -709,7 +709,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                 {
                     if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
                     {
-                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATK, 8)
+                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATTACK, 8)
                             || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 8))
                         {
                             if (AI_GetRandomNumber(battleSys) < 128)
@@ -719,7 +719,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                             }
                         }
 
-                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATK, 9)
+                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATTACK, 9)
                             || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 9))
                         {
                             if (AI_GetRandomNumber(battleSys) < 85)
