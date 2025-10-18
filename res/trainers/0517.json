@@ -22,7 +22,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 0,
+			"evATK": 76,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 52,
+			"evSPDEF": 0,
+			"nature": 14
         },
         {
             "species": "SPECIES_SLOWKING",
@@ -37,13 +44,20 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 132,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 5
         },
 		{
             "species": "SPECIES_ABOMASNOW",
             "form": 0,
             "level": 52,
-            "item": "ITEM_OCCA_BERRY",
+            "item": "ITEM_BIG_ROOT",
             "moves": [
                 "MOVE_GIGA_DRAIN",
                 "MOVE_EARTHQUAKE",
@@ -53,7 +67,14 @@
             "power": 160,
             "ball_seal": 0,
 			"ability": 1,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 0,
+			"evATK": 56,
+			"evDEF": 0,
+			"evSPEED": 204,
+			"evSPATK": 248,
+			"evSPDEF": 0,
+			"nature": 16
         },
 		{
             "species": "SPECIES_NIDOKING",
@@ -68,8 +89,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ability": 1,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 0,
+			"evATK": 48,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 180,
+			"evSPDEF": 0,
+			"nature": 14
         }
     ]
 }

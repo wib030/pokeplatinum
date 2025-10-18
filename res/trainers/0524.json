@@ -22,7 +22,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
         {
             "species": "SPECIES_HIPPOWDON",
@@ -37,22 +44,36 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 228,
+			"evATK": 4,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 148,
+			"nature": 22
         },
         {
             "species": "SPECIES_TORTERRA",
             "form": 0,
             "level": 52,
-            "item": "ITEM_SALAC_BERRY",
+            "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_EARTHQUAKE",
-                "MOVE_LEECH_SEED",
+                "MOVE_ROCK_POLISH",
                 "MOVE_BULLET_SEED",
                 "MOVE_ROCK_BLAST"
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 124,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 3
         }
     ]
 }

@@ -2,51 +2,51 @@
     "land_rate": 5,
     "land_encounters": [
         {
-            "level": 37,
-            "species": "SPECIES_BRONZONG"
+            "level": 50,
+            "species": "SPECIES_KECLEON"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_DRATINI"
         },
         {
-            "level": 36,
+            "level": 48,
             "species": "SPECIES_TRAPINCH"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_MACHOKE"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_HARIYAMA"
         },
         {
-            "level": 36,
+            "level": 48,
             "species": "SPECIES_GIBLE"
         },
         {
-            "level": 37,
-            "species": "SPECIES_GIBLE"
+            "level": 49,
+            "species": "SPECIES_BALTOY"
         },
         {
-            "level": 38,
+            "level": 48,
+            "species": "SPECIES_PRINPLUP"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_PRINPLUP"
+        },
+        {
+            "level": 50,
             "species": "SPECIES_HIPPOPOTAS"
         },
         {
-            "level": 38,
-            "species": "SPECIES_HIPPOPOTAS"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_ABSOL"
-        },
-        {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_ABSOL"
         }
     ],
@@ -99,7 +99,7 @@
         {
             "level_max": 30,
             "level_min": 20,
-            "species": "SPECIES_ZUBAT"
+            "species": "SPECIES_HORSEA"
         },
         {
             "level_max": 30,
@@ -109,7 +109,7 @@
         {
             "level_max": 40,
             "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "species": "SPECIES_SEADRA"
         },
         {
             "level_max": 40,

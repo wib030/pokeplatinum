@@ -2,51 +2,51 @@
     "land_rate": 5,
     "land_encounters": [
         {
-            "level": 36,
+            "level": 48,
             "species": "SPECIES_STANTLER"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_ABOMASNOW"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_WEAVILE"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_ALTARIA"
         },
         {
-            "level": 40,
+            "level": 52,
             "species": "SPECIES_MACHOKE"
         },
         {
-            "level": 40,
+            "level": 52,
             "species": "SPECIES_MEDICHAM"
         },
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_NOSEPASS"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_NOSEPASS"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_ABSOL"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_ABSOL"
         },
         {
-            "level": 40,
+            "level": 52,
             "species": "SPECIES_ABSOL"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_ABSOL"
         }
     ],

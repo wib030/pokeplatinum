@@ -2,52 +2,52 @@
     "land_rate": 5,
     "land_encounters": [
         {
-            "level": 37,
-            "species": "SPECIES_BRONZONG"
+            "level": 50,
+            "species": "SPECIES_ABSOL"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_GOLEM"
         },
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_SHUCKLE"
         },
         {
-            "level": 36,
+            "level": 48,
             "species": "SPECIES_WIGGLYTUFF"
         },
         {
-            "level": 39,
+            "level": 55,
             "species": "SPECIES_MACHAMP"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_HARIYAMA"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 37,
-            "species": "SPECIES_CHIMECHO"
+            "level": 50,
+            "species": "SPECIES_KECLEON"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_PROBOPASS"
         },
         {
-            "level": 40,
-            "species": "SPECIES_PROBOPASS"
+            "level": 52,
+            "species": "SPECIES_DUSCLOPS"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_CROBAT"
         },
         {
-            "level": 41,
-            "species": "SPECIES_CROBAT"
+            "level": 50,
+            "species": "SPECIES_PHIONE"
         }
     ],
     "swarms": [

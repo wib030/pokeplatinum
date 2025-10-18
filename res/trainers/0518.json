@@ -22,7 +22,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 244,
+			"evATK": 12,
+			"evDEF": 4,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 248,
+			"nature": 23
         },
         {
             "species": "SPECIES_CHIMECHO",
@@ -37,7 +44,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 248,
+			"evATK": 0,
+			"evDEF": 132,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 5
         },
         {
             "species": "SPECIES_SKARMORY",
@@ -52,7 +66,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 236,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 148,
+			"nature": 23
         }
     ]
 }

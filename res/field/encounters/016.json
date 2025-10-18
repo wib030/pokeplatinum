@@ -2,51 +2,51 @@
     "land_rate": 5,
     "land_encounters": [
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_SABLEYE"
         },
         {
-            "level": 36,
+            "level": 48,
             "species": "SPECIES_CLEFAIRY"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_MAWILE"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_HARIYAMA"
         },
         {
-            "level": 36,
+            "level": 48,
             "species": "SPECIES_LUNATONE"
         },
         {
-            "level": 37,
+            "level": 49,
             "species": "SPECIES_SOLROCK"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_LARVITAR"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_LARVITAR"
         },
         {
-            "level": 38,
+            "level": 50,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 39,
+            "level": 51,
             "species": "SPECIES_GOLBAT"
         }
     ],

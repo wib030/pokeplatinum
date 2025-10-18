@@ -22,7 +22,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 248,
+			"evATK": 40,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 92,
+			"nature": 8
         },
         {
             "species": "SPECIES_WEAVILE",
@@ -37,7 +44,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 0,
+			"evATK": 132,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_KABUTOPS",
@@ -52,7 +66,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
 		{
             "species": "SPECIES_SLOWBRO",
@@ -67,7 +88,14 @@
             ],
             "power": 160,
             "ball_seal": 0,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 20,
+			"evSPEED": 0,
+			"evSPATK": 8,
+			"evSPDEF": 100,
+			"nature": 20
         }
     ]
 }
