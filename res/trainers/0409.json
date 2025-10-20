@@ -176,7 +176,8 @@
 			"evSPEED": 252,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 13
+			"nature": 13,
+			"ability": 1
         }
     ]
 }
