@@ -30,24 +30,24 @@
 			"ivSPEED": 25,
 			"ivSPATK": 25,
 			"ivSPDEF": 25,
-			"evHP": 0,
-			"evATK": 0,
+			"evHP": 244,
+			"evATK": 16,
 			"evDEF": 0,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 248,
+			"nature": 23
         },
         {
             "species": "SPECIES_GOLEM",
             "form": 0,
             "level": 52,
-            "item": "ITEM_LIFE_ORB",
+            "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_ROCK_POLISH",
                 "MOVE_STONE_EDGE",
                 "MOVE_EARTHQUAKE",
-                "MOVE_HAMMER_ARM"
+                "MOVE_ICE_PUNCH"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -58,14 +58,13 @@
 			"ivSPEED": 25,
 			"ivSPATK": 25,
 			"ivSPDEF": 25,
-			"evHP": 0,
-			"evATK": 0,
+			"evHP": 4,
+			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 0,
+			"evSPEED": 248,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0,
-			"ability": 1
+			"evSPDEF": 4,
+			"nature": 13
         },
         {
             "species": "SPECIES_ROSERADE",
@@ -82,46 +81,46 @@
             "ball_seal": 0,
 			"ball_type": "ITEM_GREAT_BALL",
 			"ivHP": 25,
-			"ivATK": 25,
+			"ivATK": 2,
 			"ivDEF": 25,
-			"ivSPEED": 25,
-			"ivSPATK": 25,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
 			"ivSPDEF": 25,
-			"evHP": 0,
+			"evHP": 8,
 			"evATK": 0,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 252,
+			"evSPATK": 248,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 10
         },
 		{
             "species": "SPECIES_BLASTOISE",
             "form": 0,
             "level": 52,
-            "item": "ITEM_QUICK_CLAW",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_WATER_SPOUT",
                 "MOVE_RECOVER",
-                "MOVE_EARTHQUAKE",
+                "MOVE_RAPID_SPIN",
                 "MOVE_ICE_BEAM"
             ],
             "power": 0,
             "ball_seal": 0,
 			"ball_type": "ITEM_GREAT_BALL",
 			"ivHP": 25,
-			"ivATK": 25,
+			"ivATK": 0,
 			"ivDEF": 25,
 			"ivSPEED": 25,
 			"ivSPATK": 25,
 			"ivSPDEF": 25,
-			"evHP": 0,
+			"evHP": 252,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 28,
 			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPATK": 224,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 7
         },
 		{
             "species": "SPECIES_SALAMENCE",
@@ -144,18 +143,18 @@
 			"ivSPATK": 25,
 			"ivSPDEF": 25,
 			"evHP": 0,
-			"evATK": 0,
+			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 248,
+			"evSPATK": 8,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 14
         },
 		{
             "species": "SPECIES_TOXICROAK",
             "form": 0,
             "level": 52,
-            "item": "ITEM_WIDE_LENS",
+            "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
                 "MOVE_SWORDS_DANCE",
                 "MOVE_CLOSE_COMBAT",
@@ -171,13 +170,13 @@
 			"ivSPEED": 25,
 			"ivSPATK": 25,
 			"ivSPDEF": 25,
-			"evHP": 0,
-			"evATK": 0,
+			"evHP": 4,
+			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 0,
+			"evSPEED": 252,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 13
         }
     ]
 }

@@ -6,7 +6,7 @@
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
 		"AI_FLAG_EVAL_ATTACK",
-		"AI_FLAG_PRESCIENT"
+		"AI_FLAG_OMNISCIENT"
     ],
     "double_battle": false,
     "party": [
