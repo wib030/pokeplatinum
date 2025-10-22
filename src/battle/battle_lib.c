@@ -9946,15 +9946,6 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                                 damage *= 2;
                             }
                             break;
-
-                        case HOLD_EFFECT_CUBONE_ATK_UP:
-                            for (i = 0; i < NELEMS(sBoneMoves); i++) {
-								if (sBoneMoves[i] == move) {
-									damage *= 2;
-									break;
-								}
-							}
-                            break;
                         }
 
                         // End of use of direct attack stat usage here
@@ -10989,7 +10980,7 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         case HOLD_EFFECT_CUBONE_ATK_UP:
             for (i = 0; i < NELEMS(sBoneMoves); i++) {
 				if (sBoneMoves[i] == move) {
-					attackStat *= 2;
+					movePower *= 2;
 					break;
 				}
 			}
@@ -11651,15 +11642,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             if (partyMonSpecies == SPECIES_PIKACHU) {
                                 damage *= 2;
                             }
-                            break;
-
-                        case HOLD_EFFECT_CUBONE_ATK_UP:
-                            for (i = 0; i < NELEMS(sBoneMoves); i++) {
-								if (sBoneMoves[i] == move) {
-									damage *= 2;
-									break;
-								}
-							}
                             break;
                         }
 
@@ -12671,7 +12653,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         case HOLD_EFFECT_CUBONE_ATK_UP:
             for (i = 0; i < NELEMS(sBoneMoves); i++) {
 				if (sBoneMoves[i] == move) {
-					attackStat *= 2;
+					movePower *= 2;
 					break;
 				}
 			}
@@ -14329,15 +14311,6 @@ static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, 
 		case HOLD_EFFECT_PIKA_SPATK_UP:
 			if (species == SPECIES_PIKACHU) {
 				damage *= 2;
-			}
-			break;
-
-		case HOLD_EFFECT_CUBONE_ATK_UP:
-			for (i = 0; i < NELEMS(sBoneMoves); i++) {
-				if (sBoneMoves[i] == move) {
-					damage *= 2;
-					break;
-				}
 			}
 			break;
 	}
