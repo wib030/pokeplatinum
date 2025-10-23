@@ -10310,7 +10310,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                 }
             }
 
-            if (i == BATTLE_STAT_SP_ATTACK)
+            if (i == STAT_SPECIAL_ATTACK)
             {
                 battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
 
@@ -10350,9 +10350,9 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
 
             if (statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
             {
-                if (i == BATTLE_STAT_DEFENSE || i == BATTLE_STAT_SP_DEFENSE)
+                if (i == STAT_DEFENSE || i == STAT_SPECIAL_DEFENSE)
                 {
-                    if (i == BATTLE_STAT_DEFENSE)
+                    if (i == STAT_DEFENSE)
                     {
                         battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
                     }
