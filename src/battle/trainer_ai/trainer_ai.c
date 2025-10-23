@@ -10296,7 +10296,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
-                            if (BATTLE_STAT_FLAG_DEFENSE & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            if (BATTLE_STAT_FLAG_DEFENSE & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
                             {
                                 result = FALSE;
                                 break;
@@ -10347,7 +10347,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
-                            if (BATTLE_STAT_FLAG_SP_DEFENSE & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            if (BATTLE_STAT_FLAG_SP_DEFENSE & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
                             {
                                 result = FALSE;
                                 break;
@@ -10398,7 +10398,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
-                            if (BATTLE_STAT_FLAG_ATTACK & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            if (BATTLE_STAT_FLAG_ATTACK & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
                             {
                                 result = FALSE;
                                 break;
@@ -10447,7 +10447,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
-                            if (BATTLE_STAT_FLAG_SP_ATTACK & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            if (BATTLE_STAT_FLAG_SP_ATTACK & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
                             {
                                 result = FALSE;
                                 break;
