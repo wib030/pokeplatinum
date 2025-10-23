@@ -10261,18 +10261,18 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
         return result;
     }
 
-    for (i = 1; i < STAT_MAX; i++)
+    for (i = BATTLE_STAT_ATTACK; i < BATTLE_STAT_MAX; i++)
     {
         statStage = BATTLE_STAT_BOOST_NEUTRAL;
 
-        if (i != STAT_SPEED)
+        if (i != BATTLE_STAT_SPEED)
         {
-            statStage = BattleMon_Get(battleCtx, battler, BATTLEMON_HP_STAGE + i, NULL);
+            statStage = battleCtx->battleMons[battler].statBoosts[i];
         }
 
         if (statStage < BATTLE_STAT_BOOST_NEUTRAL)
         {
-            if (i == STAT_ATTACK)
+            if (i == BATTLE_STAT_ATTACK)
             {
                 battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
 
@@ -10310,7 +10310,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                 }
             }
 
-            if (i == STAT_SPECIAL_ATTACK)
+            if (i == BATTLE_STAT_SP_ATTACK)
             {
                 battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
 
@@ -10348,11 +10348,11 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                 }
             }
 
-            if (statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
+            if (statStage < (BATTLE_STAT_BOOST_NEUTRAL - 1))
             {
-                if (i == STAT_DEFENSE || i == STAT_SPECIAL_DEFENSE)
+                if (i == BATTLE_STAT_DEFENSE || i == BATTLE_STAT_SP_DEFENSE)
                 {
-                    if (i == STAT_DEFENSE)
+                    if (i == BATTLE_STAT_DEFENSE)
                     {
                         battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
                     }
