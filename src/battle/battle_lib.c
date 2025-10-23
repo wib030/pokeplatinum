@@ -62,7 +62,7 @@ static void BattleAI_ClearKnownItem(BattleContext *battleCtx, u8 battler);
 static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, int defender1, int defender2);
 static BOOL MoveCannotTriggerAnticipation(BattleContext *battleCtx, int move);
 static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int item, int move);
-static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, int HPTracker);
+int CalcChumRushDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int hits);
 
 static const Fraction sStatStageBoosts[];
 
@@ -14201,223 +14201,76 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int b
     return type;
 }
 
-/*
-static int CalcChumRushPower(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, int HPTracker)
+int CalcChumRushDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int hits)
 {
-	int maxHP, hitChance, movePower, HPMult;
-	int species;
-    int form;
-    int level;
-	int damage;
-    u8 ability;
-    u8 type1;
-    u8 type2;
-    u8 inType;
-    u8 itemEffect;
-    u8 itemPower;
-    u16 item;
-    u32 effectiveness;
-	u32 attackerAttackStat, defenderDefenseStat;
+	int totalDamage, curDamage;
+	int movePower;
+	int HPMult;
+	int HPTracker;
+	int maxHP;
+	int i;
+	u8 side;
+	u32 effectiveness;
 	
-	hitChance = BattleSystem_RandNext(battleSys) % 10;
+	HPTracker = battleCtx->battleMons[defender].curHP;
 	maxHP = battleCtx->battleMons[defender].maxHP;
+	totalDamage = 0;
+	side = Battler_Side(battleSys, defender);
 	
-	ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
-	species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
-	form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
-	level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
-	type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
-	type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
-	item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
-	itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
-	itemPower = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT_PARAM);
-	
-    effectiveness = 0;
-    inType = TYPE_WATER;
-	
-	attackerAttackStat = PokemonPersonalData_GetFormValue(species, form, MON_DATA_PERSONAL_BASE_ATK);
-	defenderDefenseStat = battleCtx->battleMons[defender].defense;
-	
-	if ((HPTracker <= (maxHP / 8))
-	|| HPTracker <= 0)
+	for (i = 0; i < hits; i++)
 	{
-		HPMult = 800; // Multiplier cap
-	}
-	else
-	{
-	  HPMult = 100 * maxHP / HPTracker;
-
-	  if (HPMult <= 0)
-	  {
-		HPMult = 100;
-	  }
-	}
-	
-	movePower = 10;
-	movePower = movePower * 2 / 3;
-	movePower = movePower * HPMult / 100;
-	
-	damage = attackerAttackStat;
-	damage *= movePower;
-	damage *= ((level * 2 / 5) + 2);
-	damage /= defenderDefenseStat;
-	damage /= 50;
-	
-	// Abilities that affect the attack stat directly
-	switch (ability) {
-		default:
-			break;
-
-		case ABILITY_HUGE_POWER:
-		case ABILITY_PURE_POWER:
-			damage *= 2;
-			break;
-
-		case ABILITY_FORECAST:
-			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
-				damage /= 2;
-				break;
-			}
-			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-				damage = damage * 3 / 2;
-				break;
-			}
-			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
-				damage = damage * 3 / 2;
-				break;
-			}
-			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
-				damage = damage * 3 / 2;
-				break;
-			}
-			break;
-
-		case ABILITY_SOLAR_POWER:
-			if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
-				damage = damage * 3 / 2;
-			}
-			break;
-
-		case ABILITY_HUSTLE:
-			damage = damage * 3 / 2;
-			break;
-	}
-
-	// Held item effects that directly affect attack stat
-	switch (itemEffect) {
-		default:
-			break;
-
-		case HOLD_EFFECT_PIKA_SPATK_UP:
-			if (species == SPECIES_PIKACHU) {
-				damage *= 2;
-			}
-			break;
-	}
-
-	// End of use of direct attack stat usage here
-	damage += 2;
-
-	// All other abilities
-	switch (ability) {
-		default:
-			break;
-
-		case ABILITY_GUTS:
-			if (Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_ANY) {
-				damage = damage * 3 / 2;
-			}
-			break;
-
-		case ABILITY_RIVALRY:
-			if (battleCtx->battleMons[defender].gender != GENDER_NONE
-			&& Pokemon_GetValue(mon, MON_DATA_GENDER, NULL) == battleCtx->battleMons[defender].gender) {
-				damage = damage * 3 / 2;
-			}
-			break;
-
-		case ABILITY_IRON_FIST:
-			damage = damage * 13 / 10;
-			break;
-
-		case ABILITY_TECHNICIAN:
-			damage = damage * 3 / 2;
-			break;
-
-		case ABILITY_NORMALIZE:
-			inType = TYPE_NORMAL;
-			break;
-	}
-	
-	// All other held item effects
-	switch (itemEffect) {
-		default:
-			break;
-
-		case HOLD_EFFECT_NO_CONTACT_BOOST_PUNCH:
-			damage = damage * 6 / 5;
-			break;
-
-		case HOLD_EFFECT_CHOICE_ATK:
-			damage = damage * 3 / 2;
-			break;
-
-		case HOLD_EFFECT_STRENGTHEN_DARK:
-		case HOLD_EFFECT_ARCEUS_DARK:
-			if (inType == TYPE_DARK) {
-				damage = damage * (100 + itemPower) / 100;
-			}
-			break;
-
-		case HOLD_EFFECT_STRENGTHEN_NORMAL:
-			if (inType == TYPE_NORMAL) {
-				damage = damage * (100 + itemPower) / 100;
-			}
-			break;
-
-		case HOLD_EFFECT_POWER_UP_PHYS:
-			damage = damage * (100 + itemPower) / 100;
-			break;
-	}
-	
-	if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && (type1 == inType || type2 == inType)) {
-		if (ability == ABILITY_ADAPTABILITY) {
-			damage *= 2;
-		} else {
-			damage = damage * 3 / 2;
-		}
-	}
-						
-	effectiveness = BattleSystem_TypeMatchupMultiplier(inType, battleCtx->battleMons[defender].type1, battleCtx->battleMons[defender].type2, MOVE_DOUBLE_HIT);
-	
-	damage = damage * effectiveness / 40;
-	
-	if ((Battler_Ability(battleCtx, defender) == ABILITY_MULTISCALE)
-	&& (battleCtx->battleMons[defender].curHP == battleCtx->battleMons[defender].maxHP))
-	{
-		damage /= 2;
-	}
-	
-	if (Battler_Ability(battleCtx, defender) == ABILITY_UNOWN_ENERGY)
-	{
-		if (inType == TYPE_NORMAL)
+		effectiveness = 0;
+		
+		if ((HPTracker <= (maxHP / 8))
+		|| HPTracker <= 0)
 		{
-			damage *= 2;
+			HPMult = 800; // Multiplier cap
 		}
 		else
 		{
-			damage /= 2;
+		  HPMult = 100 * maxHP / HPTracker;
+
+		  if (HPMult <= 0)
+		  {
+			HPMult = 100;
+		  }
+		}
+		
+		movePower = 10;
+		movePower = movePower * 2 / 3;
+		movePower = movePower * HPMult / 100;
+		
+		curDamage = BattleSystem_CalcMoveDamage(battleSys,
+			battleCtx,
+			MOVE_DOUBLE_HIT, // Chum Rush
+			battleCtx->sideConditionsMask[side],
+			battleCtx->fieldConditionsMask,
+			movePower,
+			TYPE_WATER,
+			attacker,
+			defender,
+			1);
+			
+		curDamage = BattleSystem_ApplyTypeChart(battleSys,
+			battleCtx,
+			MOVE_DOUBLE_HIT, // Chum Rush
+			TYPE_WATER,
+			attacker,
+			defender,
+			curDamage,
+			&effectiveness);
+		
+		HPTracker -= curDamage;
+		totalDamage += curDamage;
+		
+		if (HPTracker <= 0)
+		{
+			return totalDamage;
 		}
 	}
-
-	damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
-	damage *= -1;
 	
-	HPTracker -= damage;
-	
-	return HPTracker;
+	return totalDamage;
 }
-*/
 
 /**
  * @brief Check if the AI knows all of an opponent's moves.

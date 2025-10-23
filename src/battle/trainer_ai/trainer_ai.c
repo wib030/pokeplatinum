@@ -6314,7 +6314,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     }
 	
     if (multiHitHits > 1
-        && damage)
+        && damage
+		&& move != MOVE_DOUBLE_HIT) // Chum Rush hits are calculated seperately
 	{
         if (Battle_MapResistBerryEffectToType(Battler_HeldItemEffect(battleCtx, AI_CONTEXT.defender)) == type)
         {
@@ -6331,6 +6332,12 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         {
             damage *= multiHitHits;
         }
+	}
+	
+	// Special damage calc for Chum Rush
+	if (move == MOVE_DOUBLE_HIT)
+	{
+		damage = CalcChumRushDamage(battleSys, battleCtx, attacker, AI_CONTEXT.defender, multiHitHits);
 	}
 
     return damage;
