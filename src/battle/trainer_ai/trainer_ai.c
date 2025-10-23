@@ -486,6 +486,7 @@ static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *batt
 static BOOL AI_IsModeratelyBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
 static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender);
@@ -10240,6 +10241,155 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
     return FALSE;
 }
 
+static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    BOOL result;
+    u8 ability;
+    u16 move;
+    int i, j;
+    int statStage, battleStatFlag, moveEffect;
+
+    result = FALSE;
+
+    ability = Battler_Ability(battleCtx, battler);
+
+    battleStatFlag = BATTLE_STAT_FLAG_NONE;
+
+    if (ability == ABILITY_UNAWARE
+        || ability == ABILITY_MEMORY)
+    {
+        return result;
+    }
+
+    for (i = 1; i < STAT_MAX; i++)
+    {
+        statStage = BATTLE_STAT_BOOST_NEUTRAL;
+
+        if (i != STAT_SPEED)
+        {
+            statStage = BattleMon_Get(battleCtx, battler, BATTLEMON_HP_STAGE + i, NULL);
+        }
+
+        if (statStage < BATTLE_STAT_BOOST_NEUTRAL)
+        {
+            if (i == STAT_ATTACK)
+            {
+                battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
+
+                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+                {
+                    result = TRUE;
+
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                    {
+                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+                        {
+                            move = battleCtx->battleMons[battler].moves[j];
+                            moveEffect = MOVE_DATE(move).effect;
+
+                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
+                            switch (moveEffect)
+                            {
+                            default:
+                                break;
+
+                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
+                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                result = FALSE;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (i == BATTLE_STAT_SP_ATTACK)
+            {
+                battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
+
+                if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                {
+                    result = TRUE;
+
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                    {
+                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+                        {
+                            move = battleCtx->battleMons[battler].moves[j];
+                            moveEffect = MOVE_DATE(move).effect;
+
+                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
+                            switch (moveEffect)
+                            {
+                            default:
+                                break;
+
+                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
+                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                result = FALSE;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
+            {
+                if (i == BATTLE_STAT_DEFENSE || i == BATTLE_STAT_SP_DEFENSE)
+                {
+                    result = TRUE;
+
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                    {
+                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+                        {
+                            move = battleCtx->battleMons[battler].moves[j];
+                            moveEffect = MOVE_DATE(move).effect;
+
+                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
+                            switch (moveEffect)
+                            {
+                            default:
+                                break;
+
+                            case BATTLE_EFFECT_DEF_SPD_DOWN_HIT:
+                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
+                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                result = FALSE;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
 /**
  * @brief Check if the AI should switch for turn.
  * 
@@ -10338,6 +10488,11 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         }
 
         if (AI_OnlyIneffectiveMoves(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (ShouldSwitchStatDropped(battleSys, battleCtx, battler))
+        {
             return TRUE;
         }
 
