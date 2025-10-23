@@ -10244,12 +10244,15 @@ static BOOL AI_ShouldSwitchWeatherDependent(BattleSystem *battleSys, BattleConte
 static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
 {
     BOOL result;
+    BOOL hasHaze;
     u8 ability;
     u16 move;
     int i, j;
     int statStage, battleStatFlag, moveEffect;
 
     result = FALSE;
+
+    hasHaze = FALSE;
 
     ability = Battler_Ability(battleCtx, battler);
 
@@ -10293,6 +10296,12 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
+                            if (BATTLE_STAT_FLAG_DEFENSE & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
                             switch (moveEffect)
                             {
                             default:
@@ -10302,10 +10311,17 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                             case BATTLE_EFFECT_COPY_STAT_CHANGES:
                             case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
                             case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                hasHaze = TRUE;
                                 result = FALSE;
                                 break;
                             }
                         }
+                    }
+
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 2)
+                        && hasHaze == FALSE)
+                    {
+                        result = TRUE;
                     }
                 }
             }
@@ -10331,6 +10347,12 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
+                            if (BATTLE_STAT_FLAG_SP_DEFENSE & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
                             switch (moveEffect)
                             {
                             default:
@@ -10340,26 +10362,26 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                             case BATTLE_EFFECT_COPY_STAT_CHANGES:
                             case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
                             case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                hasHaze = TRUE;
                                 result = FALSE;
                                 break;
                             }
                         }
                     }
+
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 2)
+                        && hasHaze == FALSE)
+                    {
+                        result = TRUE;
+                    }
                 }
             }
 
-            if (statStage < (BATTLE_STAT_BOOST_NEUTRAL - 1))
+            if (statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
             {
-                if (i == BATTLE_STAT_DEFENSE || i == BATTLE_STAT_SP_DEFENSE)
+                if (i == BATTLE_STAT_DEFENSE)
                 {
-                    if (i == BATTLE_STAT_DEFENSE)
-                    {
-                        battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
-                    }
-                    else
-                    {
-                        battleStatFlag = BATTLE_STAT_FLAG_SP_DEFENSE;
-                    }
+                    battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
 
                     result = TRUE;
 
@@ -10376,6 +10398,12 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                                 break;
                             }
 
+                            if (BATTLE_STAT_FLAG_ATTACK & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
                             switch (moveEffect)
                             {
                             default:
@@ -10386,10 +10414,66 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                             case BATTLE_EFFECT_COPY_STAT_CHANGES:
                             case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
                             case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                hasHaze = TRUE;
                                 result = FALSE;
                                 break;
                             }
                         }
+                    }
+
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 3)
+                        && hasHaze == FALSE)
+                    {
+                        result = TRUE;
+                    }
+                }
+
+                if (i == BATTLE_STAT_SP_DEFENSE)
+                {
+                    battleStatFlag = BATTLE_STAT_FLAG_SP_DEFENSE;
+
+                    result = TRUE;
+
+                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                    {
+                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+                        {
+                            move = battleCtx->battleMons[battler].moves[j];
+                            moveEffect = MOVE_DATA(move).effect;
+
+                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
+                            if (BATTLE_STAT_FLAG_SP_ATTACK & MapBattleEffectToStatDrop(battleCtx, moveEffect))
+                            {
+                                result = FALSE;
+                                break;
+                            }
+
+                            switch (moveEffect)
+                            {
+                            default:
+                                break;
+
+                            case BATTLE_EFFECT_DEF_SPD_DOWN_HIT:
+                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
+                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                                hasHaze = TRUE;
+                                result = FALSE;
+                                break;
+                            }
+                        }
+                    }
+
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 3)
+                        && hasHaze == FALSE)
+                    {
+                        result = TRUE;
                     }
                 }
             }
@@ -10481,7 +10565,10 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
 		
 		if (ShouldSwitchStatDropped(battleSys, battleCtx, battler))
         {
-            return TRUE;
+            if ((BattleSystem_RandNext(battleSys) % 4) < 3)
+            {
+                return TRUE;
+            }
         }
 
         if (BattleAI_ValidateSwitch(battleSys, battler) == FALSE) {
