@@ -10352,6 +10352,15 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
             {
                 if (i == BATTLE_STAT_DEFENSE || i == BATTLE_STAT_SP_DEFENSE)
                 {
+                    if (i == BATTLE_STAT_DEFENSE)
+                    {
+                        battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
+                    }
+                    else
+                    {
+                        battleStatFlag = BATTLE_STAT_FLAG_SP_DEFENSE;
+                    }
+
                     result = TRUE;
 
                     for (j = 0; j < LEARNED_MOVES_MAX; j++)
