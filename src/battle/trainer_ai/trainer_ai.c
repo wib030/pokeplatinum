@@ -10285,7 +10285,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                         if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
                         {
                             move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATE(move).effect;
+                            moveEffect = MOVE_DATA(move).effect;
 
                             if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
                             {
@@ -10323,7 +10323,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                         if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
                         {
                             move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATE(move).effect;
+                            moveEffect = MOVE_DATA(move).effect;
 
                             if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
                             {
@@ -10359,7 +10359,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                         if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
                         {
                             move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATE(move).effect;
+                            moveEffect = MOVE_DATA(move).effect;
 
                             if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
                             {
