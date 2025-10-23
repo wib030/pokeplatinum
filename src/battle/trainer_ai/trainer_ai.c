@@ -10478,6 +10478,11 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         if (AI_ShouldSwitchToxic(battleSys, battleCtx, battler)) {
             return TRUE;
         }
+		
+		if (ShouldSwitchStatDropped(battleSys, battleCtx, battler))
+        {
+            return TRUE;
+        }
 
         if (BattleAI_ValidateSwitch(battleSys, battler) == FALSE) {
             return FALSE;
@@ -10497,11 +10502,6 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         }
 
         if (AI_OnlyIneffectiveMoves(battleSys, battleCtx, battler)) {
-            return TRUE;
-        }
-
-        if (ShouldSwitchStatDropped(battleSys, battleCtx, battler))
-        {
             return TRUE;
         }
 
