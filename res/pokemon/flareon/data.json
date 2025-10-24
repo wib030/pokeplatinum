@@ -96,7 +96,10 @@
             "35": "MOVE_FLAMETHROWER",
 			"40": "MOVE_LAVA_PLUME",
             "45": "MOVE_FLARE_BLITZ",
-            "50": "MOVE_SOLAR_BEAM",
+            "50": [ 
+				"MOVE_SOLAR_BEAM",
+				"MOVE_WEATHER_BALL"
+			],
             "55": "MOVE_LAST_RESORT"
         },
         "tutor": [

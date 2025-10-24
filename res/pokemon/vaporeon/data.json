@@ -101,7 +101,10 @@
             "35": "MOVE_AQUA_RING",
 			"40": "MOVE_MUDDY_WATER",
             "45": "MOVE_U_TURN",
-            "50": "MOVE_HYDRO_PUMP",
+            "50": [ 
+				"MOVE_HYDRO_PUMP",
+				"MOVE_WEATHER_BALL"
+			],
             "55": "MOVE_LAST_RESORT"
         },
         "tutor": [

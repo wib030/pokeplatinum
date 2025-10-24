@@ -100,7 +100,10 @@
             "35": "MOVE_GRASS_WHISTLE",
 			"40": "MOVE_LEAF_BLADE",
             "45": "MOVE_SWORDS_DANCE",
-            "50": "MOVE_GIGA_DRAIN",
+            "50": [ 
+				"MOVE_GIGA_DRAIN",
+				"MOVE_WEATHER_BALL"
+			],
 			"55": "MOVE_LAST_RESORT"
         },
         "tutor": [

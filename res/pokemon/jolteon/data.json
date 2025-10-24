@@ -76,12 +76,14 @@
             "TM83",
             "TM87",
             "TM90",
+			"HM03",
             "HM04",
             "HM06"
         ],
         "level_up": {
             "1": [
 				"MOVE_HEAL_BELL",
+				"MOVE_CHARGE",
                 "MOVE_TAIL_WHIP",
                 "MOVE_BITE",
 				"MOVE_WISH",
@@ -97,9 +99,15 @@
             "30": "MOVE_PIN_MISSILE",
             "35": "MOVE_ZAP_CANNON",
 			"40": "MOVE_DISCHARGE",
+			"43": "MOVE_SPIKES",
             "45": "MOVE_AGILITY",
-            "50": "MOVE_THUNDER",
-            "55": "MOVE_LAST_RESORT"
+            "50": [ 
+				"MOVE_THUNDER",
+				"MOVE_WEATHER_BALL"
+			],
+			"53": "MOVE_SPIKE_CANNON",
+			"56": "MOVE_AURA_SPHERE",
+            "60": "MOVE_LAST_RESORT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
