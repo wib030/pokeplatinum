@@ -35,8 +35,8 @@
         "EGG_GROUP_MINERAL"
     ],
     "abilities": [
-        "ABILITY_SNOW_CLOAK",
-        "ABILITY_SNOW_CLOAK"
+        "ABILITY_SLUSH_RUSH",
+        "ABILITY_SLUSH_RUSH"
     ],
     "great_marsh_flee_rate": 0,
     "sprite": {
