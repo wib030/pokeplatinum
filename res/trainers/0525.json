@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_PRESCIENT"
     ],
     "double_battle": false,
     "party": [
@@ -15,14 +16,21 @@
             "level": 53,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_MAGMA_STORM",
+                "MOVE_BEAT_UP",
                 "MOVE_TOXIC_SPIKES",
-                "MOVE_SPIDER_WEB",
+                "MOVE_MUD_SPORT",
                 "MOVE_STEALTH_ROCK"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 4,
+			"evATK": 4,
+			"evDEF": 252,
+			"evSPEED": 248,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_BRELOOM",
@@ -33,11 +41,18 @@
                 "MOVE_BULLET_SEED",
                 "MOVE_MACH_PUNCH",
                 "MOVE_SWORDS_DANCE",
-                "MOVE_STONE_EDGE"
+                "MOVE_ROCK_TOMB"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 8,
+			"evATK": 248,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
 		{
             "species": "SPECIES_OCTILLERY",
@@ -52,7 +67,14 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 252,
+			"evATK": 4,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 17
         },
 		{
             "species": "SPECIES_KINGDRA",
@@ -67,7 +89,14 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 11
         },
 		{
             "species": "SPECIES_LUVDISC",
@@ -79,13 +108,20 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 15
         },
 		{
             "species": "SPECIES_VICTREEBEL",
             "form": 0,
             "level": 53,
-            "item": "ITEM_BRIGHTPOWDER",
+            "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_EARTHQUAKE",
@@ -94,7 +130,14 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL"
+			"ball_type": "ITEM_NEST_BALL",
+			"evHP": 4,
+			"evATK": 248,
+			"evDEF": 0,
+			"evSPEED": 248,
+			"evSPATK": 8,
+			"evSPDEF": 0,
+			"nature": 1
         }
     ]
 }

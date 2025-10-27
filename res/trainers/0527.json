@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_PRESCIENT"
     ],
     "double_battle": false,
     "party": [
@@ -13,47 +14,86 @@
             "species": "SPECIES_BEEDRILL",
             "form": 0,
             "level": 53,
-            "item": "ITEM_FOCUS_SASH",
+            "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_U_TURN",
                 "MOVE_KNOCK_OFF",
                 "MOVE_POISON_JAB",
-                "MOVE_X_SCISSOR"
+                "MOVE_SPIDER_WEB"
             ],
             "power": 200,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 8,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 248,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_GOLEM",
             "form": 0,
             "level": 53,
-            "item": "ITEM_FOCUS_SASH",
+            "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_ROCK_SLIDE",
-                "MOVE_MAGNITUDE",
-                "MOVE_FIRE_PUNCH",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SUCKER_PUNCH",
                 "MOVE_ROCK_POLISH"
             ],
             "power": 200,
             "ball_seal": 0,
 			"ability": 1,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 20,
+			"evATK": 160,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 76,
+			"nature": 13
         },
 		{
             "species": "SPECIES_GYARADOS",
             "form": 0,
             "level": 53,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
                 "MOVE_DRAGON_DANCE",
-                "MOVE_WATERFALL",
+                "MOVE_AQUA_TAIL",
                 "MOVE_BOUNCE",
-                "MOVE_ICY_WIND"
+                "MOVE_ICE_FANG"
             ],
             "power": 200,
             "ball_seal": 0,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 20,
+			"ivATK": 20,
+			"ivDEF": 20,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 20,
+			"evHP": 152,
+			"evATK": 108,
+			"evDEF": 0,
+			"evSPEED": 248,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }

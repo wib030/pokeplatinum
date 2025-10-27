@@ -22,7 +22,20 @@
                 "MOVE_FAKE_OUT"
             ],
             "power": 255,
-            "ball_seal": 6
+            "ball_seal": 6,
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_PIDGEOT",
@@ -36,7 +49,20 @@
                 "MOVE_ROOST"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_AMPHAROS",
@@ -50,7 +76,20 @@
                 "MOVE_FOCUS_BLAST"
             ],
             "power": 255,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_BANETTE",
@@ -64,7 +103,20 @@
                 "MOVE_WILL_O_WISP"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_VAPOREON",
@@ -78,7 +130,20 @@
                 "MOVE_HAZE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_FLYGON",
@@ -92,7 +157,20 @@
                 "MOVE_OUTRAGE"
             ],
             "power": 255,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ivHP": 0,
+			"ivATK": 0,
+			"ivDEF": 0,
+			"ivSPEED": 0,
+			"ivSPATK": 0,
+			"ivSPDEF": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }
