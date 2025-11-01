@@ -18,7 +18,7 @@
                 "MOVE_FURY_SWIPES",
 				"MOVE_FAKE_OUT",
 				"MOVE_TAUNT",
-				"MOVE_SCREECH"
+				"MOVE_FORCE_PALM"
             ],
             "power": 200,
             "ball_seal": 0,
