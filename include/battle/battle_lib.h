@@ -2196,4 +2196,14 @@ int BattleSystem_GetBattlerSpeedOrder(BattleSystem* battleSys, BattleContext* ba
 */
 int BattleSystem_CompareBattlerSpeedOrder(BattleSystem* battleSys, BattleContext* battleCtx, int battler1, int battler2);
 
+/**
+* @brief Check if a battler has a pivot move.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler     battleMon ID of the mon to check.
+* @return TRUE if battler has a pivot move, otherwise FALSE.
+*/
+BOOL BattleAI_BattlerHasPivotMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

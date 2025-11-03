@@ -22366,3 +22366,56 @@ int BattleSystem_CompareBattlerSpeedOrder(BattleSystem* battleSys, BattleContext
 
     return result;
 }
+
+BOOL BattleAI_BattlerHasPivotMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    u8 moveType;
+    u16 move, item;
+    u32 effectiveness;
+    int moveEffect;
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    item = Battler_HeldItem(battleCtx, battler);
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        move = battleCtx->battleMons[battler].moves[i];
+        moveEffect = MOVE_DATA(move).effect;
+
+        switch (moveEffect)
+        {
+        default:
+            break;
+
+        case BATTLE_EFFECT_FLING:
+            if (item == ITEM_RED_CARD)
+            {
+                result = TRUE;
+            }
+            break;
+
+        case BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE:
+            result = TRUE;
+            break;
+
+        case BATTLE_EFFECT_SWITCH_HIT:
+        case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+            effectiveness = 0;
+            moveType = CalcMoveType(battleSys, battleCtx, battler, item, move);
+
+            BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
+
+            if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                result = TRUE;
+            }
+            break;
+        }
+    }
+
+    return result;
+}
