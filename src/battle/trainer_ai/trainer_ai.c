@@ -9874,7 +9874,6 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
         if (battleCtx->totalTurns >= switchTurn) {
 
             pivotMoves = 0;
-            effectiveness = 0;
             hasNonContactPivot = 0;
 
             for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -9883,7 +9882,10 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                 moveEffect = MOVE_DATA(move).effect;
                 moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
 
-                if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
+                if (moveEffect == BATTLE_EFFECT_SWITCH_HIT
+                    || moveEffect == BATTLE_EFFECT_SWITCH_HIT_NO_ANIM) {
+                    
+                    effectiveness = 0;
 
                     BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
 
