@@ -10266,6 +10266,15 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
         return result;
     }
 
+    if (BattleAI_BattlerHasPivotMove(battleSys, battleCtx, battler))
+    {
+        // 75% chance no hard switch if we have pivot move
+        if (BattleSystem_RandNext(battleSys) % 4)
+        {
+            return result;
+        }
+    }
+
     for (i = BATTLE_STAT_ATTACK; i < BATTLE_STAT_MAX; i++)
     {
         statStage = BATTLE_STAT_BOOST_NEUTRAL;
