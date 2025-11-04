@@ -98,7 +98,8 @@
 			"30": "MOVE_ICE_SHARD",
             "37": "MOVE_SCARY_FACE",
             "43": "MOVE_EARTHQUAKE",
-            "50": "MOVE_GIGA_IMPACT"
+            "50": "MOVE_GIGA_IMPACT",
+			"53": "MOVE_SLACK_OFF"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
