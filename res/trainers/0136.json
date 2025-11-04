@@ -1,6 +1,6 @@
 {
     "name": "Coldbert",
-    "class": "TRAINER_CLASS_SKIER_MALE",
+    "class": "TRAINER_CLASS_SWIMMER_MALE",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
@@ -10,43 +10,44 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ARCANINE",
+            "species": "SPECIES_WALREIN",
             "form": 0,
             "level": 51,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_ICY_ROCK",
             "moves": [
-                "MOVE_EXTREME_SPEED",
-				"MOVE_FLAMETHROWER",
-				"MOVE_THUNDER_FANG",
-				"MOVE_ROAR"
+                "MOVE_HAIL",
+				"MOVE_ICY_WIND",
+				"MOVE_AVALANCHE",
+				"MOVE_BLIZZARD"
+            ],
+            "power": 180,
+            "ball_seal": 0,
+			"ability": 1
+        },
+        {
+            "species": "SPECIES_LAPRAS",
+            "form": 0,
+            "level": 51,
+            "item": "ITEM_NEVERMELTICE",
+            "moves": [
+                "MOVE_CONSTRICT",
+				"MOVE_BLIZZARD",
+				"MOVE_ICE_BEAM",
+				"MOVE_ICE_SHARD"
             ],
             "power": 180,
             "ball_seal": 0
         },
         {
-            "species": "SPECIES_CAMERUPT",
+            "species": "SPECIES_REGICE",
             "form": 0,
             "level": 51,
-            "item": "ITEM_LIFE_ORB",
+            "item": "ITEM_NEVERMELTICE",
             "moves": [
-                "MOVE_BLAST_BURN",
-				"MOVE_MORNING_SUN",
-				"MOVE_LAVA_PLUME",
-				"MOVE_EARTH_POWER"
-            ],
-            "power": 180,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_TYPHLOSION",
-            "form": 0,
-            "level": 51,
-            "item": "ITEM_CHOICE_SPECS",
-            "moves": [
-                "MOVE_LAVA_PLUME",
-				"MOVE_BLAST_BURN",
-				"MOVE_SOLAR_BEAM",
-				"MOVE_FOCUS_BLAST"
+                "MOVE_CONSTRICT",
+				"MOVE_ICE_PUNCH",
+				"MOVE_ICY_WIND",
+				"MOVE_HAIL"
             ],
             "power": 180,
             "ball_seal": 0
