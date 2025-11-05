@@ -9298,6 +9298,8 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
 {
     int i;
     int arceusForm;
+	int antitypeType1;
+	int antitypeType2;
     BOOL result = FALSE;
 
     for (i = 0; i < BattleSystem_MaxBattlers(battleSys); i++) {
@@ -9463,6 +9465,29 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                 result = TRUE;
                 break;
             }
+        }
+		
+		if (battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_GIRATINA
+				&& battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == 0
+                && battleCtx->battleMons[battleCtx->msgBattlerTemp].curHP
+                && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_ANTITYPE) {
+            antitypeType1 = Pokemon_GetAntitypeType1Of(Item_LoadParam(battleCtx->battleMons[battleCtx->msgBattlerTemp].heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_BATTLE));
+			antitypeType2 = Pokemon_GetAntitypeType1Of(Item_LoadParam(battleCtx->battleMons[battleCtx->msgBattlerTemp].heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_BATTLE));
+			
+			if (antitypeType2 == TYPE_NORMAL)
+			{
+				antitypeType2 = antitypeType1;
+			}
+			
+			if (antitypeType1 != TYPE_NORMAL && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != antitypeType1)
+			{
+				battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = antitypeType1;
+                battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = antitypeType2;
+				battleCtx->msgTemp = antitypeType1;
+                *subscript = subscript_form_change;
+                result = TRUE;
+				break;
+			}
         }
     }
 

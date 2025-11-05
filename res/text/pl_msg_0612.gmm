@@ -665,4 +665,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Gives full immunity to all\nweb moves and effects.</language>
 	</row>
+	<row id="pl_msg_00000612_00166" index="166">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Changes type depending\non the held Plate.</language>
+	</row>
 </body>

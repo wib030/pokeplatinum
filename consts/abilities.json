@@ -168,7 +168,8 @@
 				"ABILITY_MEMORY",
 				"ABILITY_NEUTRALIZING_GAS",
 				"ABILITY_TOSS_AND_TURN",
-				"ABILITY_WEB_MASTER"
+				"ABILITY_WEB_MASTER",
+				"ABILITY_ANTITYPE"
             ]
         }
     }

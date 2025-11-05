@@ -891,6 +891,22 @@ void BoxPokemon_SetArceusForm(BoxPokemon *boxMon);
 u8 Pokemon_GetArceusTypeOf(u16 itemHoldEffect);
 
 /**
+ * @brief Get a Pokemon with Antitypes first type given an items hold effect
+ * 
+ * @param itemHoldEffect 
+ * @return The type that will be returned
+ */
+u8 Pokemon_GetAntitypeType1Of(u16 itemHoldEffect);
+
+/**
+ * @brief Get a Pokemon with Antitypes first type given an items hold effect
+ * 
+ * @param itemHoldEffect 
+ * @return The type that will be returned
+ */
+u8 Pokemon_GetAntitypeType2Of(u16 itemHoldEffect);
+
+/**
  * @brief Sets Giratina's form based on its held item. Has no effect if the given Pokemon is not a Giratina
  * 
  * @param mon 

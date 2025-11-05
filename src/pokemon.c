@@ -4155,6 +4155,128 @@ u8 Pokemon_GetArceusTypeOf(u16 itemHoldEffect)
     return type;
 }
 
+u8 Pokemon_GetAntitypeType1Of(u16 itemHoldEffect)
+{
+    u8 type;
+
+    switch (itemHoldEffect) {
+    case HOLD_EFFECT_ARCEUS_FIRE:
+        type = TYPE_FIRE;
+        break;
+    case HOLD_EFFECT_ARCEUS_WATER:
+        type = TYPE_WATER;
+        break;
+    case HOLD_EFFECT_ARCEUS_ELECTRIC:
+        type = TYPE_ELECTRIC;
+        break;
+    case HOLD_EFFECT_ARCEUS_GRASS:
+        type = TYPE_GRASS;
+        break;
+    case HOLD_EFFECT_ARCEUS_ICE:
+        type = TYPE_ICE;
+        break;
+    case HOLD_EFFECT_ARCEUS_FIGHTING:
+        type = TYPE_FIGHTING;
+        break;
+    case HOLD_EFFECT_ARCEUS_POISON:
+        type = TYPE_POISON;
+        break;
+    case HOLD_EFFECT_ARCEUS_GROUND:
+        type = TYPE_GROUND;
+        break;
+    case HOLD_EFFECT_ARCEUS_FLYING:
+        type = TYPE_FLYING;
+        break;
+    case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        type = TYPE_PSYCHIC;
+        break;
+    case HOLD_EFFECT_ARCEUS_BUG:
+        type = TYPE_BUG;
+        break;
+    case HOLD_EFFECT_ARCEUS_ROCK:
+        type = TYPE_ROCK;
+        break;
+    case HOLD_EFFECT_ARCEUS_GHOST:
+        type = TYPE_GHOST;
+        break;
+    case HOLD_EFFECT_ARCEUS_DRAGON:
+        type = TYPE_DRAGON;
+        break;
+    case HOLD_EFFECT_ARCEUS_DARK:
+        type = TYPE_DARK;
+        break;
+    case HOLD_EFFECT_ARCEUS_STEEL:
+        type = TYPE_STEEL;
+        break;
+    default:
+        type = TYPE_NORMAL;
+        break;
+    }
+
+    return type;
+}
+
+u8 Pokemon_GetAntitypeType2Of(u16 itemHoldEffect)
+{
+    u8 type;
+
+    switch (itemHoldEffect) {
+    case HOLD_EFFECT_ARCEUS_FIRE:
+        type = TYPE_FIRE;
+        break;
+    case HOLD_EFFECT_ARCEUS_WATER:
+        type = TYPE_WATER;
+        break;
+    case HOLD_EFFECT_ARCEUS_ELECTRIC:
+        type = TYPE_ELECTRIC;
+        break;
+    case HOLD_EFFECT_ARCEUS_GRASS:
+        type = TYPE_GRASS;
+        break;
+    case HOLD_EFFECT_ARCEUS_ICE:
+        type = TYPE_ICE;
+        break;
+    case HOLD_EFFECT_ARCEUS_FIGHTING:
+        type = TYPE_FIGHTING;
+        break;
+    case HOLD_EFFECT_ARCEUS_POISON:
+        type = TYPE_POISON;
+        break;
+    case HOLD_EFFECT_ARCEUS_GROUND:
+        type = TYPE_GROUND;
+        break;
+    case HOLD_EFFECT_ARCEUS_FLYING:
+        type = TYPE_FLYING;
+        break;
+    case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        type = TYPE_PSYCHIC;
+        break;
+    case HOLD_EFFECT_ARCEUS_BUG:
+        type = TYPE_BUG;
+        break;
+    case HOLD_EFFECT_ARCEUS_ROCK:
+        type = TYPE_ROCK;
+        break;
+    case HOLD_EFFECT_ARCEUS_GHOST:
+        type = TYPE_GHOST;
+        break;
+    case HOLD_EFFECT_ARCEUS_DRAGON:
+        type = TYPE_DRAGON;
+        break;
+    case HOLD_EFFECT_ARCEUS_DARK:
+        type = TYPE_DARK;
+        break;
+    case HOLD_EFFECT_ARCEUS_STEEL:
+        type = TYPE_STEEL;
+        break;
+    default:
+        type = TYPE_NORMAL;
+        break;
+    }
+
+    return type;
+}
+
 int Pokemon_SetGiratinaForm(Pokemon *mon)
 {
     int result = BoxPokemon_SetGiratinaForm(&mon->box);
