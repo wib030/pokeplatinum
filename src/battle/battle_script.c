@@ -11226,13 +11226,40 @@ static BOOL BtlCmd_TryFling(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
     int jumpNoEffect = BattleScript_Read(battleCtx);
+	
+	int attackerItem = BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_HELD_ITEM, NULL);
+	int attackerAbility = Battler_Ability(battleCtx, battleCtx->attacker);
+	int attackerSpecies = BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_SPECIES, NULL);
+	int hasTypePlate = 0;
+	
+	switch (attackerItem)
+	{
+		case ITEM_FIST_PLATE:
+		case ITEM_SKY_PLATE:
+		case ITEM_TOXIC_PLATE:
+		case ITEM_EARTH_PLATE:
+		case ITEM_STONE_PLATE:
+		case ITEM_INSECT_PLATE:
+		case ITEM_SPOOKY_PLATE:
+		case ITEM_IRON_PLATE:
+		case ITEM_FLAME_PLATE:
+		case ITEM_SPLASH_PLATE:
+		case ITEM_MEADOW_PLATE:
+		case ITEM_ZAP_PLATE:
+		case ITEM_MIND_PLATE:
+		case ITEM_ICICLE_PLATE:
+		case ITEM_DRACO_PLATE:
+		case ITEM_DREAD_PLATE:
+			hasTypePlate = 1;
+			break;
+	}
 
-    if (BattleSystem_FlingItem(battleSys, battleCtx, battleCtx->attacker) != TRUE) {
+    if (BattleSystem_FlingItem(battleSys, battleCtx, battleCtx->attacker) != TRUE)
+	{
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
-	
-	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE
-	|| (BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_SPECIES, NULL) == SPECIES_GIRATINA && BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_HELD_ITEM, NULL) == ITEM_GRISEOUS_ORB)) {
+	else if ((attackerAbility == ABILITY_MULTITYPE && hasTypePlate == 1)
+	|| (attackerSpecies == SPECIES_GIRATINA && attackerItem == ITEM_GRISEOUS_ORB)) {
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
 
