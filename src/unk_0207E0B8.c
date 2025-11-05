@@ -2651,13 +2651,7 @@ static int ProcessItemApplication (GameWindowLayout * param0)
     fieldSystem = param0->unk_5A4->unk_1C;
 
     if (param0->unk_5A4->unk_24 == 112) {
-        if (Pokemon_GetValue(v0, MON_DATA_SPECIES, NULL) != 487) {
-            MessageLoader_GetStrbuf(param0->unk_69C, 203, param0->unk_6A8);
-            StringTemplate_SetNickname(param0->unk_6A0, 0, Pokemon_GetBoxPokemon(v0));
-            StringTemplate_SetItemNameWithArticle(param0->unk_6A0, 1, param0->unk_5A4->unk_24);
-            StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, param0->unk_6A8);
-            v2 = 11;
-        } else if (fieldSystem != NULL) {
+		if (fieldSystem != NULL) {
             if (fieldSystem->unk_1C->unk_00 == 466) {
                 MessageLoader_GetStrbuf(param0->unk_69C, 204, param0->unk_6A8);
                 StringTemplate_SetItemName(param0->unk_6A0, 0, param0->unk_5A4->unk_24);
@@ -2665,6 +2659,15 @@ static int ProcessItemApplication (GameWindowLayout * param0)
                 v2 = 11;
             }
         }
+		/*
+        if (Pokemon_GetValue(v0, MON_DATA_SPECIES, NULL) != 487) {
+            MessageLoader_GetStrbuf(param0->unk_69C, 203, param0->unk_6A8);
+            StringTemplate_SetNickname(param0->unk_6A0, 0, Pokemon_GetBoxPokemon(v0));
+            StringTemplate_SetItemNameWithArticle(param0->unk_6A0, 1, param0->unk_5A4->unk_24);
+            StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, param0->unk_6A8);
+            v2 = 11;
+        }
+		*/
     }
 
     if (v2 == -1) {

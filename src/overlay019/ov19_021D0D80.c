@@ -1206,12 +1206,12 @@ static void ov19_021D2308 (UnkStruct_ov19_021D5DF8 * param0, u32 * param1)
     case 3:
         switch (param0->unk_1B8) {
         case UnkEnum_021DFB94_46:
-            if ((ov19_021D5F7C(&param0->unk_00) == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
+            /* if ((ov19_021D5F7C(&param0->unk_00) == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
                 StringTemplate_SetItemName(param0->unk_19C, 0, 112);
                 ov19_021D5408(&param0->unk_00, 45);
                 ov19_021D6594(param0->unk_114, 24);
                 *param1 = 7;
-            } else if (ov19_021D5F7C(&param0->unk_00) != 0) {
+            } else */ if (ov19_021D5F7C(&param0->unk_00) != 0) {
                 ov19_021D5D60(&param0->unk_00, param0);
                 ov19_021D6594(param0->unk_114, 26);
                 ov19_021D6594(param0->unk_114, 20);
@@ -1246,12 +1246,12 @@ static void ov19_021D2308 (UnkStruct_ov19_021D5DF8 * param0, u32 * param1)
                 ov19_021D5408(&param0->unk_00, 24);
                 ov19_021D6594(param0->unk_114, 24);
                 (*param1) = 7;
-            } else if ((param0->unk_00.unk_112 == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
+            } /* else if ((param0->unk_00.unk_112 == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
                 StringTemplate_SetItemName(param0->unk_19C, 0, 112);
                 ov19_021D5408(&param0->unk_00, 45);
                 ov19_021D6594(param0->unk_114, 24);
                 *param1 = 7;
-            } else {
+            } */ else {
                 ov19_021D5D78(&param0->unk_00, param0);
                 ov19_021D6594(param0->unk_114, 26);
                 ov19_021D6594(param0->unk_114, 21);
@@ -2641,9 +2641,9 @@ static void ov19_021D3D44 (UnkStruct_ov19_021D5DF8 * param0, u32 * param1)
             Heap_FreeToHeap(param0->unk_214);
             Overlay_UnloadByID(FS_OVERLAY_ID(overlay84));
 
-            if ((v1 == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
+            /*if ((v1 == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
                 (void)0;
-            } else if (v1 != 0) {
+            } else */ if (v1 != 0) {
                 Bag_SubtractItem(sub_0207D990(param0->unk_11C), v1, 1, 9);
                 ov19_021D5BE8(&param0->unk_00, v1, param0);
                 ov19_021D0F14(param0);
@@ -2665,12 +2665,12 @@ static void ov19_021D3D44 (UnkStruct_ov19_021D5DF8 * param0, u32 * param1)
         if (ov19_021D6600(param0->unk_114, 2)) {
             if (v1 == 0) {
                 ov19_021D0EC0(param0);
-            } else if ((v1 == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
+            } /* else if ((v1 == 112) && (BoxPokemon_GetValue(param0->unk_00.unk_4C.unk_00, MON_DATA_SPECIES, NULL) != 487)) {
                 StringTemplate_SetItemName(param0->unk_19C, 0, v1);
                 ov19_021D5408(&param0->unk_00, 45);
                 ov19_021D6594(param0->unk_114, 24);
                 (*param1)++;
-            } else {
+            } */ else {
                 StringTemplate_SetItemName(param0->unk_19C, 0, v1);
                 ov19_021D5408(&param0->unk_00, 16);
                 ov19_021D6594(param0->unk_114, 24);
