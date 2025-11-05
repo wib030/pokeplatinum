@@ -159,7 +159,7 @@
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_OVERHEAT",
-				"MOVE_ZEN_HEADBUTT",
+				"MOVE_PSYCHIC",
 				"MOVE_REFLECT",
 				"MOVE_CALM_MIND"
             ],
