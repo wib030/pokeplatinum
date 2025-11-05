@@ -4983,10 +4983,14 @@ u8 Battler_Ability(BattleContext *battleCtx, int battler)
 {
     int i;
 
-    // Early exit for Multitype
+    // Early exit for Multitype and Antitype
     if (battleCtx->battleMons[battler].ability == ABILITY_MULTITYPE)
     {
         return ABILITY_MULTITYPE;
+    }
+	else if (battleCtx->battleMons[battler].ability == ABILITY_ANTITYPE)
+    {
+        return ABILITY_ANTITYPE;
     }
     
     if (battleCtx->battleMons[battler].ability == ABILITY_LEVITATE)
@@ -5883,6 +5887,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 						&& (abilityChosen != ABILITY_GENETIC_FREAK)
 						&& (abilityChosen != ABILITY_TRACE)
 						&& (abilityChosen != ABILITY_MULTITYPE)
+						&& (abilityChosen != ABILITY_ANTITYPE)
 						&& (abilityChosen != ABILITY_IMPOSTER)
 						&& (abilityChosen != ABILITY_FLOWER_GIFT)
 						&& (abilityChosen != ABILITY_WONDER_GUARD)
@@ -8129,8 +8134,8 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
         case HOLD_EFFECT_ARCEUS_ICE:
         case HOLD_EFFECT_ARCEUS_DRAGON:
         case HOLD_EFFECT_ARCEUS_DARK:
-            // Disallow Multitype ability mons (Arceus) from flinging type plate
-            if (Battler_Ability(battleCtx, battler) == ABILITY_MULTITYPE)
+            // Disallow Multitype and Antitype ability mons from flinging type plate
+            if (Battler_Ability(battleCtx, battler) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battler) == ABILITY_ANTITYPE)
             {
                 power = 0;
             }
@@ -14052,12 +14057,14 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
             && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
 			&& battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
+			&& battleCtx->battleMons[defender1].ability != ABILITY_ANTITYPE
             && battleCtx->battleMons[defender1].curHP
             && battleCtx->battleMons[defender2].curHP
             && battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
             && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
 			&& battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS
-            && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
+            && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE
+			&& battleCtx->battleMons[defender2].ability != ABILITY_ANTITYPE) {
         // Both targets are eligible; choose randomly
         if (BattleSystem_RandNext(battleSys) & 1) {
             trace = defender2;
@@ -14068,13 +14075,15 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
             && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
 			&& battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender1].curHP
-            && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE) {
+            && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
+			&& battleCtx->battleMons[defender1].ability != ABILITY_ANTITYPE) {
         trace = defender1;
     } else if (battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
             && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
 			&& battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS
             && battleCtx->battleMons[defender2].curHP
-            && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
+            && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE
+			&& battleCtx->battleMons[defender2].ability != ABILITY_ANTITYPE) {
         trace = defender2;
     }
 

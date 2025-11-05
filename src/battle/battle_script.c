@@ -6695,7 +6695,7 @@ static BOOL BtlCmd_TryConversion(BattleSystem *battleSys, BattleContext *battleC
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ANTITYPE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
@@ -7526,7 +7526,7 @@ static BOOL BtlCmd_TryConversion2(BattleSystem *battleSys, BattleContext *battle
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ANTITYPE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
@@ -7870,6 +7870,9 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_MULTITYPE) {
         // Either battler has Multitype.
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ANTITYPE || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_ANTITYPE) {
+        // Either battler has Antitype.
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (DEFENDING_MON.heldItem == ITEM_GRISEOUS_ORB) {
         // The defender is holding a Griseous Orb.
@@ -11056,7 +11059,7 @@ static BOOL BtlCmd_TryCamouflage(BattleSystem *battleSys, BattleContext *battleC
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ANTITYPE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
@@ -11258,7 +11261,7 @@ static BOOL BtlCmd_TryFling(BattleSystem *battleSys, BattleContext *battleCtx)
 	{
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
-	else if ((attackerAbility == ABILITY_MULTITYPE && hasTypePlate == 1)
+	else if (((attackerAbility == ABILITY_MULTITYPE || attackerAbility == ABILITY_ANTITYPE) && hasTypePlate == 1)
 	|| (attackerSpecies == SPECIES_GIRATINA && attackerItem == ITEM_GRISEOUS_ORB)) {
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }

@@ -1097,9 +1097,20 @@ static u32 BoxPokemon_GetDataInternal (BoxPokemon *boxMon, enum PokemonDataParam
         break;
 
     case MON_DATA_TYPE_1:
+        if (monDataBlockA->species == SPECIES_ARCEUS && monDataBlockA->ability == ABILITY_MULTITYPE) {
+            result = Pokemon_GetArceusTypeOf(Item_LoadParam(monDataBlockA->heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_SYSTEM));
+        } else if (monDataBlockA->species == SPECIES_GIRATINA && monDataBlockA->ability == ABILITY_ANTITYPE) {
+            result = Pokemon_GetAntitypeType1Of(Item_LoadParam(monDataBlockA->heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_SYSTEM));
+        } else {
+            result = PokemonPersonalData_GetFormValue(monDataBlockA->species, monDataBlockB->form, MON_DATA_PERSONAL_TYPE_1 + (param - MON_DATA_TYPE_1));
+        }
+        break;
+		
     case MON_DATA_TYPE_2:
         if (monDataBlockA->species == SPECIES_ARCEUS && monDataBlockA->ability == ABILITY_MULTITYPE) {
             result = Pokemon_GetArceusTypeOf(Item_LoadParam(monDataBlockA->heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_SYSTEM));
+        } else if (monDataBlockA->species == SPECIES_GIRATINA && monDataBlockA->ability == ABILITY_ANTITYPE) {
+            result = Pokemon_GetAntitypeType2Of(Item_LoadParam(monDataBlockA->heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_SYSTEM));
         } else {
             result = PokemonPersonalData_GetFormValue(monDataBlockA->species, monDataBlockB->form, MON_DATA_PERSONAL_TYPE_1 + (param - MON_DATA_TYPE_1));
         }
