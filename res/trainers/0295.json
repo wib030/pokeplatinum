@@ -36,7 +36,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 5,
+			"ability": 1
         },
         {
             "species": "SPECIES_SKORUPI",
@@ -64,7 +65,7 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 23
         },
 		{
             "species": "SPECIES_PURUGLY",

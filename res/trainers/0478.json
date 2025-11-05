@@ -22,7 +22,8 @@
                 "MOVE_HYDRO_PUMP"
             ],
             "power": 200,
-            "ball_seal": 6
+            "ball_seal": 6,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
         {
             "species": "SPECIES_PIDGEOT",
@@ -50,7 +51,8 @@
                 "MOVE_FOCUS_BLAST"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_BANETTE",
@@ -64,7 +66,8 @@
                 "MOVE_WILL_O_WISP"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
 		{
             "species": "SPECIES_LEAFEON",
@@ -78,7 +81,8 @@
                 "MOVE_KNOCK_OFF"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_VIBRAVA",
@@ -92,7 +96,8 @@
                 "MOVE_EARTHQUAKE"
             ],
             "power": 200,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_ULTRA_BALL"
         }
     ]
 }

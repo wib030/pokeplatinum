@@ -30,13 +30,14 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
+			"evHP": 236,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 252,
 			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPATK": 20,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 5,
+			"ability": 1
         },
 		{
             "species": "SPECIES_DRAPION",
@@ -58,13 +59,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evHP": 180,
+			"evATK": 8,
+			"evDEF": 84,
+			"evSPEED": 4,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 232,
+			"nature": 23
         },
 		{
             "species": "SPECIES_DODRIO",
@@ -86,13 +87,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evHP": 4,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 13
         },
 		{
             "species": "SPECIES_GARCHOMP",
@@ -115,12 +116,12 @@
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
 			"evHP": 0,
-			"evATK": 0,
+			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 252,
+			"evSPATK": 4,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 14
         },
 		{
             "species": "SPECIES_ROTOM",
@@ -142,13 +143,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
+			"evHP": 248,
 			"evATK": 0,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 192,
+			"evSPATK": 68,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 15
         },
 		{
             "species": "SPECIES_ZAPDOS",

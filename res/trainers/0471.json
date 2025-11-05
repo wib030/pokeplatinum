@@ -21,7 +21,8 @@
                 "MOVE_FIRE_PUNCH"
             ],
             "power": 150,
-            "ball_seal": 6
+            "ball_seal": 6,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
         {
             "species": "SPECIES_SHUPPET",
@@ -35,7 +36,8 @@
                 "MOVE_DESTINY_BOND"
             ],
             "power": 150,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL"
         },
         {
             "species": "SPECIES_FLAAFFY",
@@ -49,7 +51,8 @@
                 "MOVE_LIGHT_SCREEN"
             ],
             "power": 150,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_GREAT_BALL"
         },
         {
             "species": "SPECIES_PIDGEOTTO",
@@ -77,7 +80,8 @@
                 "MOVE_DIG"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL"
         }
     ]
 }

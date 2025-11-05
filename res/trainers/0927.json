@@ -28,13 +28,14 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
+			"evHP": 236,
+			"evATK": 24,
+			"evDEF": 152,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 96,
+			"nature": 8,
+			"ability": 1
         },
 		{
             "species": "SPECIES_RATICATE",
@@ -56,13 +57,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
+			"evHP": 4,
+			"evATK": 248,
 			"evDEF": 0,
-			"evSPEED": 0,
+			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 4,
+			"nature": 3
         },
 		{
             "species": "SPECIES_BRONZONG",
@@ -84,13 +85,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
+			"evHP": 220,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 252,
 			"evSPEED": 0,
-			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPATK": 32,
+			"evSPDEF": 4,
+			"nature": 5
         },
 		{
             "species": "SPECIES_GENGAR",
@@ -112,13 +113,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
+			"evHP": 8,
 			"evATK": 0,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 248,
+			"evSPATK": 252,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 10
         },
 		{
             "species": "SPECIES_SCIZOR",
@@ -140,13 +141,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
+			"evHP": 248,
+			"evATK": 248,
 			"evDEF": 0,
-			"evSPEED": 0,
+			"evSPEED": 12,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 3
         },
 		{
             "species": "SPECIES_MOLTRES",

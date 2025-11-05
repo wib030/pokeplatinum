@@ -36,7 +36,8 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 8,
+			"ability": 1
         },
         {
             "species": "SPECIES_RATICATE",
@@ -64,7 +65,7 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 3
         },
 		{
             "species": "SPECIES_SPINDA",
@@ -92,7 +93,7 @@
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 8
         }
     ]
 }

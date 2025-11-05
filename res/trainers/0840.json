@@ -22,7 +22,8 @@
 				"MOVE_BLOCK"
             ],
             "power": 255,
-            "ball_seal": 3
+            "ball_seal": 3,
+			"ball_type": "ITEM_PREMIER_BALL"
         },
 		{
             "species": "SPECIES_MOLTRES",
@@ -36,7 +37,8 @@
                 "MOVE_RAZOR_WIND"
             ],
             "power": 255,
-            "ball_seal": 13
+            "ball_seal": 13,
+			"ball_type": "ITEM_MASTER_BALL"
         },
 		{
             "species": "SPECIES_SUICUNE",
@@ -50,7 +52,8 @@
                 "MOVE_CALM_MIND"
             ],
             "power": 255,
-            "ball_seal": 8
+            "ball_seal": 8,
+			"ball_type": "ITEM_MASTER_BALL"
         },
 		{
             "species": "SPECIES_GIRATINA",
@@ -64,7 +67,8 @@
                 "MOVE_SHADOW_FORCE"
             ],
             "power": 255,
-            "ball_seal": 25
+            "ball_seal": 25,
+			"ball_type": "ITEM_MASTER_BALL"
         },
 		{
             "species": "SPECIES_JIRACHI",
@@ -78,7 +82,8 @@
                 "MOVE_THUNDER_PUNCH"
             ],
             "power": 255,
-            "ball_seal": 10
+            "ball_seal": 10,
+			"ball_type": "ITEM_MASTER_BALL"
         },
 		{
             "species": "SPECIES_ARCEUS",
@@ -92,7 +97,8 @@
                 "MOVE_EARTH_POWER"
             ],
             "power": 255,
-            "ball_seal": 6
+            "ball_seal": 6,
+			"ball_type": "ITEM_MASTER_BALL"
         }
     ]
 }

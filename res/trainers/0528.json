@@ -42,9 +42,9 @@
             "species": "SPECIES_TENTACRUEL",
             "form": 0,
             "level": 54,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_MAGIC_COAT",
                 "MOVE_ACUPRESSURE",
                 "MOVE_MUDDY_WATER",
                 "MOVE_ICY_WIND"
@@ -58,23 +58,24 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
+			"evHP": 236,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 252,
 			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPATK": 20,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 5,
+			"ability": 1
         },
         {
             "species": "SPECIES_DRAPION",
             "form": 0,
             "level": 54,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
                 "MOVE_ACUPRESSURE",
-                "MOVE_TOXIC_SPIKES",
-                "MOVE_WHIRLWIND",
+                "MOVE_POISON_FANG",
+                "MOVE_EARTHQUAKE",
                 "MOVE_KNOCK_OFF"
             ],
             "power": 0,
@@ -86,21 +87,21 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evHP": 180,
+			"evATK": 8,
+			"evDEF": 84,
+			"evSPEED": 4,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 232,
+			"nature": 23
         },
         {
             "species": "SPECIES_DODRIO",
             "form": 0,
             "level": 54,
-            "item": "ITEM_SALAC_BERRY",
+            "item": "ITEM_SILK_SCARF",
             "moves": [
-                "MOVE_FLAIL",
+                "MOVE_SWORDS_DANCE",
                 "MOVE_QUICK_ATTACK",
                 "MOVE_BRAVE_BIRD",
                 "MOVE_HI_JUMP_KICK"
@@ -114,19 +115,19 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evHP": 4,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 13
         },
 		{
             "species": "SPECIES_GARCHOMP",
             "form": 0,
             "level": 54,
-            "item": "ITEM_YACHE_BERRY",
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",
                 "MOVE_OUTRAGE",
@@ -143,23 +144,23 @@
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
 			"evHP": 0,
-			"evATK": 0,
+			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 252,
+			"evSPATK": 4,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 14
         },
 		{
             "species": "SPECIES_ROTOM",
             "form": 1,
             "level": 54,
-            "item": "ITEM_WIDE_LENS",
+            "item": "ITEM_LIGHT_CLAY",
             "moves": [
                 "MOVE_OVERHEAT",
-                "MOVE_WILL_O_WISP",
-                "MOVE_NASTY_PLOT",
-                "MOVE_THUNDER"
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN",
+                "MOVE_THUNDERBOLT"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -170,13 +171,13 @@
 			"ivSPEED": 30,
 			"ivSPATK": 30,
 			"ivSPDEF": 30,
-			"evHP": 0,
+			"evHP": 248,
 			"evATK": 0,
 			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evSPEED": 192,
+			"evSPATK": 68,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 15
         }
     ]
 }

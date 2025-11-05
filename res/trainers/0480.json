@@ -22,7 +22,15 @@
                 "MOVE_FAKE_OUT"
             ],
             "power": 255,
-            "ball_seal": 6
+            "ball_seal": 6,
+			"ball_type": "ITEM_PREMIER_BALL",
+			"evHP": 4,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 14
         },
         {
             "species": "SPECIES_PIDGEOT",
@@ -36,7 +44,14 @@
                 "MOVE_U_TURN"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 14
         },
         {
             "species": "SPECIES_AMPHAROS",
@@ -50,7 +65,15 @@
                 "MOVE_TOXIC"
             ],
             "power": 255,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_GREAT_BALL",
+			"evHP": 248,
+			"evATK": 0,
+			"evDEF": 8,
+			"evSPEED": 0,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 15
         },
         {
             "species": "SPECIES_BANETTE",
@@ -64,7 +87,15 @@
                 "MOVE_KNOCK_OFF"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_DUSK_BALL",
+			"evHP": 128,
+			"evATK": 124,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
 		{
             "species": "SPECIES_VAPOREON",
@@ -78,7 +109,15 @@
                 "MOVE_SURF"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL",
+			"evHP": 244,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 4,
+			"evSPDEF": 8,
+			"nature": 5
         },
 		{
             "species": "SPECIES_FLYGON",
@@ -92,7 +131,15 @@
                 "MOVE_FIRE_BLAST"
             ],
             "power": 255,
-            "ball_seal": 21
+            "ball_seal": 21,
+			"ball_type": "ITEM_ULTRA_BALL",
+			"evHP": 76,
+			"evATK": 180,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }
