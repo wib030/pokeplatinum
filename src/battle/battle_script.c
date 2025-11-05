@@ -11230,6 +11230,11 @@ static BOOL BtlCmd_TryFling(BattleSystem *battleSys, BattleContext *battleCtx)
     if (BattleSystem_FlingItem(battleSys, battleCtx, battleCtx->attacker) != TRUE) {
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
+	
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE
+	|| (BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_SPECIES, NULL) == SPECIES_GIRATINA && BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_HELD_ITEM, NULL) == ITEM_GRISEOUS_ORB)) {
+        BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
 
     return FALSE;
 }
