@@ -2295,7 +2295,6 @@ static u16 sSoundMoves[] = {
 
 static u16 sMetronomeEncouragedMoves[] = {
 	MOVE_SHARPEN, // Pregnancy Punch
-	MOVE_ATTRACT,
 };
 
 static const Fraction sStatStageBoosts[] = {
