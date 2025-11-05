@@ -131,7 +131,7 @@
             "item": "ITEM_OCCA_BERRY",
             "moves": [
                 "MOVE_BULLET_PUNCH",
-				"MOVE_U_TURN",
+				"MOVE_BUG_BITE",
 				"MOVE_ROOST",
 				"MOVE_SWORDS_DANCE"
             ],
