@@ -121,7 +121,8 @@
 			"37": "MOVE_AURA_SPHERE",
 			"42": "MOVE_SHADOW_CLAW",
             "46": "MOVE_SHADOW_FORCE",
-			"50": "MOVE_SHADOW_BALL"
+			"50": "MOVE_SHADOW_BALL",
+			"56": "MOVE_JUDGMENT"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
