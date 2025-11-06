@@ -2,11 +2,11 @@
     "name": "Mewtwo",
     "base_stats": {
         "hp": 106,
-        "attack": 110,
-        "defense": 90,
+        "attack": 120,
+        "defense": 80,
         "speed": 130,
-        "special_attack": 204,
-        "special_defense": 90
+        "special_attack": 184,
+        "special_defense": 100
     },
     "types": [
         "TYPE_PSYCHIC",
