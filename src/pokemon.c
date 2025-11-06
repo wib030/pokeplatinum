@@ -4172,55 +4172,55 @@ u8 Pokemon_GetAntitypeType1Of(u16 itemHoldEffect)
 
     switch (itemHoldEffect) {
     case HOLD_EFFECT_ARCEUS_FIRE:
-        type = TYPE_FIRE;
-        break;
-    case HOLD_EFFECT_ARCEUS_WATER:
         type = TYPE_WATER;
         break;
-    case HOLD_EFFECT_ARCEUS_ELECTRIC:
+    case HOLD_EFFECT_ARCEUS_WATER:
         type = TYPE_ELECTRIC;
         break;
-    case HOLD_EFFECT_ARCEUS_GRASS:
-        type = TYPE_GRASS;
-        break;
-    case HOLD_EFFECT_ARCEUS_ICE:
-        type = TYPE_ICE;
-        break;
-    case HOLD_EFFECT_ARCEUS_FIGHTING:
-        type = TYPE_FIGHTING;
-        break;
-    case HOLD_EFFECT_ARCEUS_POISON:
-        type = TYPE_POISON;
-        break;
-    case HOLD_EFFECT_ARCEUS_GROUND:
+    case HOLD_EFFECT_ARCEUS_ELECTRIC:
         type = TYPE_GROUND;
         break;
-    case HOLD_EFFECT_ARCEUS_FLYING:
-        type = TYPE_FLYING;
-        break;
-    case HOLD_EFFECT_ARCEUS_PSYCHIC:
-        type = TYPE_PSYCHIC;
-        break;
-    case HOLD_EFFECT_ARCEUS_BUG:
+    case HOLD_EFFECT_ARCEUS_GRASS:
         type = TYPE_BUG;
         break;
+    case HOLD_EFFECT_ARCEUS_ICE:
+        type = TYPE_FIGHTING;
+        break;
+    case HOLD_EFFECT_ARCEUS_FIGHTING:
+        type = TYPE_FLYING;
+        break;
+    case HOLD_EFFECT_ARCEUS_POISON:
+        type = TYPE_PSYCHIC;
+        break;
+    case HOLD_EFFECT_ARCEUS_GROUND:
+        type = TYPE_WATER;
+        break;
+    case HOLD_EFFECT_ARCEUS_FLYING:
+        type = TYPE_ELECTRIC;
+        break;
+    case HOLD_EFFECT_ARCEUS_PSYCHIC:
+        type = TYPE_GHOST;
+        break;
+    case HOLD_EFFECT_ARCEUS_BUG:
+        type = TYPE_FLYING;
+        break;
     case HOLD_EFFECT_ARCEUS_ROCK:
-        type = TYPE_ROCK;
+        type = TYPE_FIGHTING;
         break;
     case HOLD_EFFECT_ARCEUS_GHOST:
         type = TYPE_GHOST;
         break;
     case HOLD_EFFECT_ARCEUS_DRAGON:
-        type = TYPE_DRAGON;
+        type = TYPE_ICE;
         break;
     case HOLD_EFFECT_ARCEUS_DARK:
-        type = TYPE_DARK;
+        type = TYPE_FIGHTING;
         break;
     case HOLD_EFFECT_ARCEUS_STEEL:
-        type = TYPE_STEEL;
+        type = TYPE_FIRE;
         break;
     default:
-        type = TYPE_NORMAL;
+        type = TYPE_MYSTERY;
         break;
     }
 
@@ -4233,55 +4233,45 @@ u8 Pokemon_GetAntitypeType2Of(u16 itemHoldEffect)
 
     switch (itemHoldEffect) {
     case HOLD_EFFECT_ARCEUS_FIRE:
-        type = TYPE_FIRE;
-        break;
-    case HOLD_EFFECT_ARCEUS_WATER:
-        type = TYPE_WATER;
-        break;
-    case HOLD_EFFECT_ARCEUS_ELECTRIC:
-        type = TYPE_ELECTRIC;
-        break;
-    case HOLD_EFFECT_ARCEUS_GRASS:
-        type = TYPE_GRASS;
-        break;
-    case HOLD_EFFECT_ARCEUS_ICE:
-        type = TYPE_ICE;
-        break;
-    case HOLD_EFFECT_ARCEUS_FIGHTING:
-        type = TYPE_FIGHTING;
-        break;
-    case HOLD_EFFECT_ARCEUS_POISON:
-        type = TYPE_POISON;
-        break;
-    case HOLD_EFFECT_ARCEUS_GROUND:
-        type = TYPE_GROUND;
-        break;
-    case HOLD_EFFECT_ARCEUS_FLYING:
-        type = TYPE_FLYING;
-        break;
-    case HOLD_EFFECT_ARCEUS_PSYCHIC:
-        type = TYPE_PSYCHIC;
-        break;
-    case HOLD_EFFECT_ARCEUS_BUG:
-        type = TYPE_BUG;
-        break;
-    case HOLD_EFFECT_ARCEUS_ROCK:
-        type = TYPE_ROCK;
-        break;
-    case HOLD_EFFECT_ARCEUS_GHOST:
-        type = TYPE_GHOST;
-        break;
-    case HOLD_EFFECT_ARCEUS_DRAGON:
+	case HOLD_EFFECT_ARCEUS_WATER:
+	case HOLD_EFFECT_ARCEUS_ELECTRIC:
         type = TYPE_DRAGON;
         break;
-    case HOLD_EFFECT_ARCEUS_DARK:
-        type = TYPE_DARK;
-        break;
-    case HOLD_EFFECT_ARCEUS_STEEL:
+		
+    case HOLD_EFFECT_ARCEUS_GRASS:
+	case HOLD_EFFECT_ARCEUS_ICE:
+	case HOLD_EFFECT_ARCEUS_POISON:
+	case HOLD_EFFECT_ARCEUS_FLYING:
+	case HOLD_EFFECT_ARCEUS_BUG:
+	case HOLD_EFFECT_ARCEUS_DRAGON:
         type = TYPE_STEEL;
         break;
-    default:
+    
+    case HOLD_EFFECT_ARCEUS_FIGHTING:
+        type = TYPE_GHOST;
+        break;
+    
+    case HOLD_EFFECT_ARCEUS_GROUND:
+        type = TYPE_FLYING;
+        break;
+    
+    case HOLD_EFFECT_ARCEUS_PSYCHIC:
+	case HOLD_EFFECT_ARCEUS_DARK:
+        type = TYPE_DARK;
+        break;
+    
+    case HOLD_EFFECT_ARCEUS_ROCK:
+        type = TYPE_GROUND;
+        break;
+    case HOLD_EFFECT_ARCEUS_GHOST:
         type = TYPE_NORMAL;
+        break;
+    
+    case HOLD_EFFECT_ARCEUS_STEEL:
+        type = TYPE_WATER;
+        break;
+    default:
+        type = TYPE_MYSTERY;
         break;
     }
 

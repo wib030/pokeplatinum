@@ -9479,12 +9479,19 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
             antitypeType1 = Pokemon_GetAntitypeType1Of(Item_LoadParam(battleCtx->battleMons[battleCtx->msgBattlerTemp].heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_BATTLE));
 			antitypeType2 = Pokemon_GetAntitypeType1Of(Item_LoadParam(battleCtx->battleMons[battleCtx->msgBattlerTemp].heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_BATTLE));
 			
-			if (antitypeType2 == TYPE_NORMAL)
+			int matchesType = 0;
+			
+			if (antitypeType2 == TYPE_MYSTERY)
 			{
 				antitypeType2 = antitypeType1;
 			}
 			
-			if (antitypeType1 != TYPE_NORMAL && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != antitypeType1)
+			if (battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 == antitypeType1 && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 == antitypeType2)
+			{
+				matchesType = 1;
+			}
+			
+			if (antitypeType1 != TYPE_MYSTERY && matchesType == 0)
 			{
 				battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = antitypeType1;
                 battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = antitypeType2;
