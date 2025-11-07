@@ -116,6 +116,7 @@
 			"35": "MOVE_CURSE",
 			"37": "MOVE_SWIFT",
 			"40": "MOVE_MEMENTO",
+			"41": "MOVE_ROCK_BLAST",
             "43": "MOVE_DOUBLE_EDGE",
 			"45": "MOVE_PAIN_SPLIT",
 			"53": "MOVE_HEAD_SMASH"
