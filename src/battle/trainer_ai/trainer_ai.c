@@ -855,6 +855,12 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             AI_CONTEXT.moveSlot = 0;
         }
 
+        if (AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT)
+        {
+            ExpertAI_EvalMoreMoves_Doubles(battleSys, battleCtx);
+        }
+        AI_CONTEXT.moveSlot = 0;
+
         if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_ESCAPE) {
             actionForBattler[battler] = AI_ENEMY_ESCAPE;
         } else if (AI_CONTEXT.stateFlags & AI_STATUS_FLAG_SAFARI) {

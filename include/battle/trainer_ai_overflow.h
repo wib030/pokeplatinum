@@ -6,12 +6,23 @@
 
 /**
 * @brief Workaround function to make the trainer AI evaluate moves beyond its filesize limit.
+*		 for singles.
 *
 * @param battleSys
 * @param battleCtx
 * @return Nothing, but the function itself updates the AI move scores.
 */
 void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* battleCtx);
+
+/**
+* @brief Workaround function to make the trainer AI evaluate moves beyond its filesize limit
+*		 for doubles.
+*
+* @param battleSys
+* @param battleCtx
+* @return Nothing, but the function itself updates the AI move scores.
+*/
+void ExpertAI_EvalMoreMoves_Doubles(BattleSystem* battleSys, BattleContext* battleCtx);
 
 /**
 * @brief Script to add a value to the AI Context move score.
@@ -212,5 +223,14 @@ BOOL ExpertAI_IsBattlerPhysicalAttacker(BattleSystem* battleSys, BattleContext* 
  * @return  TRUE / FALSE whether the given battler's given stat is less than the given value.
  */
 BOOL ExpertAI_StatStageLessThan(BattleSystem* battleSys, BattleContext* battleCtx, int battler, int stat, int val);
+
+/* @brief Check if the battler is meaningfully stat dropped.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler    The battlemon ID of the battler to check.
+ * @return  TRUE / FALSE whether the battler is meaningfully stat dropped.
+ */
+BOOL ExpertAI_IsStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

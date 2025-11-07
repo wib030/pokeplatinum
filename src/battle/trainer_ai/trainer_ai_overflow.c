@@ -366,377 +366,480 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
     {
         if (battleCtx->battleMons[AI_CONTEXT.attacker].moves[i])
         {
-            if (battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[AI_CONTEXT.moveSlot] == 0) {
-                AI_CONTEXT.move = MOVE_NONE;
-            }
-            else {
+            if (ExpertAI_CanUseMove(battleSys, battleCtx, AI_CONTEXT.attacker, i, CHECK_INVALID_ALL))
+            {
                 AI_CONTEXT.moveSlot = i;
                 AI_CONTEXT.move = battleCtx->battleMons[AI_CONTEXT.attacker].moves[AI_CONTEXT.moveSlot];
             }
-
-            switch (MOVE_DATA(AI_CONTEXT.move).effect)
+            else
             {
-            default:
-                break;
+                AI_CONTEXT.move = MOVE_NONE;
+            }
 
-            case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
-                // Expert_Omniboost_CheckIfKill
-                if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+            if (AI_CONTEXT.move != MOVE_NONE)
+            {
+                switch (MOVE_DATA(AI_CONTEXT.move).effect)
                 {
-                    if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
+                default:
+                    break;
+
+                case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+                    // Expert_Omniboost_CheckIfKill
+                    if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
                     {
-                        if (AI_GetRandomNumber(battleSys) < 205)
+                        if (AI_CurrentMoveKills(battleSys, battleCtx, USE_MIN_DAMAGE))
                         {
-                            AI_AddToMoveScore(battleSys, battleCtx, 6);
-                        }
-                    }
-                    else
-                    {
-                        if (AI_FlagMoveDamageScore(battleSys, battleCtx, USE_MIN_DAMAGE) == AI_NOT_HIGHEST_DAMAGE)
-                        {
-                            AI_AddToMoveScore(battleSys, battleCtx, -12);
-                            break;
+                            if (AI_GetRandomNumber(battleSys) < 205)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 6);
+                            }
                         }
                         else
                         {
-                            if (AI_GetRandomNumber(battleSys) < 243)
+                            if (AI_FlagMoveDamageScore(battleSys, battleCtx, USE_MIN_DAMAGE) == AI_NOT_HIGHEST_DAMAGE)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -12);
+                                break;
+                            }
+                            else
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 243)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                            }
+                        }
+                    }
+
+                    abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
+                    attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+                    // Expert_Omniboost_ChanceBoostCheck
+                    if (abilityTemp == ABILITY_SERENE_GRACE
+                        || (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+
+                            if (AI_GetRandomNumber(battleSys) < 64)
                             {
                                 AI_AddToMoveScore(battleSys, battleCtx, 1);
                             }
                         }
                     }
-                }
 
-                abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
-                attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
-
-                // Expert_Omniboost_ChanceBoostCheck
-                if (abilityTemp == ABILITY_SERENE_GRACE
-                    || (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LUCKY_CHANT))
-                {
-                    if (AI_GetRandomNumber(battleSys) < 192)
+                    // Expert_Omniboost_Main
+                    if (AI_GetMoveEffectiveness(battleSys, battleCtx) == TYPE_MULTI_IMMUNE)
                     {
-                        AI_AddToMoveScore(battleSys, battleCtx, 1);
-
-                        if (AI_GetRandomNumber(battleSys) < 64)
-                        {
-                            AI_AddToMoveScore(battleSys, battleCtx, 1);
-                        }
-                    }
-                }
-
-                // Expert_Omniboost_Main
-                if (AI_GetMoveEffectiveness(battleSys, battleCtx) == TYPE_MULTI_IMMUNE)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -12);
-                    break;
-                }
-
-                if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 50)
-                {
-                    if (AI_GetRandomNumber(battleSys) < 128)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        AI_AddToMoveScore(battleSys, battleCtx, -12);
                         break;
                     }
-                }
 
-                if (AI_GetRandomNumber(battleSys) < 128)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, 1);
-                }
-
-                // Expert_Omniboost_End
-                break;
-
-            // Extra trick code to not use it repeatedly
-            case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
-                BOOL attackerShouldNotTrick;
-
-                attackerShouldNotTrick = FALSE;
-
-                attackerItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker);
-                defenderItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.defender);
-
-                abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
-
-                for (i = 0; sPositiveHeldItemEffects[i] != 0xFFFF; i++)
-                {
-                    if (sPositiveHeldItemEffects[i] == attackerItemEffect)
-                    {
-                        attackerShouldNotTrick = TRUE;
-                        break;
-                    }
-                }
-                if (attackerShouldNotTrick)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -20);
-                    break;
-                }
-                for (i = 0; trickBadHeldItemEffects[i] != 0xFFFF; i++)
-                {
-                    if (trickBadHeldItemEffects[i] == defenderItemEffect)
-                    {
-                        switch (defenderItemEffect)
-                        {
-                        default:
-                            attackerShouldNotTrick = TRUE;
-                            break;
-
-                        case HOLD_EFFECT_PSN_USER:
-                            if (battleCtx->battleMons[AI_CONTEXT.attacker].status & MON_CONDITION_ANY)
-                            {
-                                break;
-                            }
-                            if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_POISON)
-                                || MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_STEEL))
-                            {
-                                break;
-                            }
-                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, abilityTemp, MON_CONDITION_ANY_POISON))
-                            {
-                                break;
-                            }
-                            attackerShouldNotTrick = TRUE;
-                            break;
-
-                        case HOLD_EFFECT_BRN_USER:
-                            if (battleCtx->battleMons[AI_CONTEXT.attacker].status & MON_CONDITION_ANY)
-                            {
-                                break;
-                            }
-                            if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_FIRE))
-                            {
-                                break;
-                            }
-                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, abilityTemp, MON_CONDITION_BURN))
-                            {
-                                break;
-                            }
-                            attackerShouldNotTrick = TRUE;
-                            break;
-
-                        case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
-                            if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_POISON))
-                            {
-                                break;
-                            }
-                            attackerShouldNotTrick = TRUE;
-                            break;
-                        }
-                    }
-                }
-                if (attackerShouldNotTrick)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -20);
-                    break;
-                }
-
-                if (AICmd_IfCurrentMoveRevealedOverflow(battleSys, battleCtx))
-                {
-                    if (battleCtx->movePrevByBattler[AI_CONTEXT.attacker] == AI_CONTEXT.move)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, -20);
-                        break;
-                    }
-                    if (AI_GetRandomNumber(battleSys) < 192)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, -20);
-                        break;
-                    }
-                }
-
-                if (Battler_HeldItem(battleCtx, AI_CONTEXT.attacker) == ITEM_NONE)
-                {
-                    if (AI_GetRandomNumber(battleSys) < 170)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, 5);
-                    }
-                }
-
-                if (AI_GetRandomNumber(battleSys) < 128)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, 1);
-                }
-                break;
-
-            // Extra endure code to not use it when you have sturdy at full hp
-            case BATTLE_EFFECT_SURVIVE_WITH_1_HP:
-                if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_STURDY
-                    || Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_ENDURE)
-                {
-                    if (battleCtx->battleMons[AI_CONTEXT.attacker].curHP == battleCtx->battleMons[AI_CONTEXT.attacker].maxHP)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, -20);
-                    }
-                }
-                break;
-
-            // Extra AI for Sticky Web. Still a work in progress.
-            case BATTLE_EFFECT_SET_STICKY_WEB:
-                defenderSide = Battler_Side(battleSys, AI_CONTEXT.defender);
-                if (AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.defender) != ABILITY_MAGIC_BOUNCE
-                    || Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_MOLD_BREAKER)
-                {
-                    if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_STICKY_WEB)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, -20);
-                        break;
-                    }
-                    if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING)
-                        || AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN))
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, -20);
-                        break;
-                    }
-                    if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_APPLY_MAGIC_COAT))
+                    if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 50)
                     {
                         if (AI_GetRandomNumber(battleSys) < 128)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -1);
+                            break;
+                        }
+                    }
+
+                    if (AI_GetRandomNumber(battleSys) < 128)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+                    }
+
+                    // Expert_Omniboost_End
+                    break;
+
+                    // Extra trick code to not use it repeatedly
+                case BATTLE_EFFECT_SWITCH_HELD_ITEMS:
+                    BOOL attackerShouldNotTrick;
+
+                    attackerShouldNotTrick = FALSE;
+
+                    attackerItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker);
+                    defenderItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.defender);
+
+                    abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.attacker);
+
+                    for (i = 0; sPositiveHeldItemEffects[i] != 0xFFFF; i++)
+                    {
+                        if (sPositiveHeldItemEffects[i] == attackerItemEffect)
+                        {
+                            attackerShouldNotTrick = TRUE;
+                            break;
+                        }
+                    }
+                    if (attackerShouldNotTrick)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+                    for (i = 0; trickBadHeldItemEffects[i] != 0xFFFF; i++)
+                    {
+                        if (trickBadHeldItemEffects[i] == defenderItemEffect)
+                        {
+                            switch (defenderItemEffect)
+                            {
+                            default:
+                                attackerShouldNotTrick = TRUE;
+                                break;
+
+                            case HOLD_EFFECT_PSN_USER:
+                                if (battleCtx->battleMons[AI_CONTEXT.attacker].status & MON_CONDITION_ANY)
+                                {
+                                    break;
+                                }
+                                if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_POISON)
+                                    || MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_STEEL))
+                                {
+                                    break;
+                                }
+                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, abilityTemp, MON_CONDITION_ANY_POISON))
+                                {
+                                    break;
+                                }
+                                attackerShouldNotTrick = TRUE;
+                                break;
+
+                            case HOLD_EFFECT_BRN_USER:
+                                if (battleCtx->battleMons[AI_CONTEXT.attacker].status & MON_CONDITION_ANY)
+                                {
+                                    break;
+                                }
+                                if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_FIRE))
+                                {
+                                    break;
+                                }
+                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, abilityTemp, MON_CONDITION_BURN))
+                                {
+                                    break;
+                                }
+                                attackerShouldNotTrick = TRUE;
+                                break;
+
+                            case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
+                                if (MON_HAS_TYPE(AI_CONTEXT.attacker, TYPE_POISON))
+                                {
+                                    break;
+                                }
+                                attackerShouldNotTrick = TRUE;
+                                break;
+                            }
+                        }
+                    }
+                    if (attackerShouldNotTrick)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+
+                    if (AICmd_IfCurrentMoveRevealedOverflow(battleSys, battleCtx))
+                    {
+                        if (battleCtx->movePrevByBattler[AI_CONTEXT.attacker] == AI_CONTEXT.move)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -20);
+                            break;
+                        }
+                        if (AI_GetRandomNumber(battleSys) < 192)
                         {
                             AI_AddToMoveScore(battleSys, battleCtx, -20);
                             break;
                         }
                     }
+
+                    if (Battler_HeldItem(battleCtx, AI_CONTEXT.attacker) == ITEM_NONE)
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 170)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 5);
+                        }
+                    }
+
                     if (AI_GetRandomNumber(battleSys) < 128)
                     {
-                        AI_AddToMoveScore(battleSys, battleCtx, 5);
-                        break;
+                        AI_AddToMoveScore(battleSys, battleCtx, 1);
                     }
-                }
-                break;
-
-            // Extra AI for Trick Room. Still a work in progress.
-            case BATTLE_EFFECT_TRICK_ROOM:
-                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -20);
                     break;
-                }
-                if (battleCtx->monSpeedOrder[AI_CONTEXT.attacker] < battleCtx->monSpeedOrder[AI_CONTEXT.defender])
-                {
-                    if (AI_GetRandomNumber(battleSys) < 205)
+
+                    // Extra endure code to not use it when you have sturdy at full hp
+                case BATTLE_EFFECT_SURVIVE_WITH_1_HP:
+                    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_STURDY
+                        || Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker) == HOLD_EFFECT_ENDURE)
                     {
-                        AI_AddToMoveScore(battleSys, battleCtx, 5);
-                        break;
+                        if (battleCtx->battleMons[AI_CONTEXT.attacker].curHP == battleCtx->battleMons[AI_CONTEXT.attacker].maxHP)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        }
                     }
-                }
-                break;
-
-            // Extra AI for Light Screen.
-            case BATTLE_EFFECT_SET_LIGHT_SCREEN:
-                attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
-
-                if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LIGHT_SCREEN)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -12);
                     break;
-                }
 
-                if (ExpertAI_IsBattlerSpecialAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
-                {
-                    if (AI_GetRandomNumber(battleSys) < 192)
+                    // Extra AI for Sticky Web. Still a work in progress.
+                case BATTLE_EFFECT_SET_STICKY_WEB:
+                    defenderSide = Battler_Side(battleSys, AI_CONTEXT.defender);
+                    if (AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.defender) != ABILITY_MAGIC_BOUNCE
+                        || Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_MOLD_BREAKER)
                     {
-                        AI_AddToMoveScore(battleSys, battleCtx, 3);
-                        break;
-                    }
-                }
-
-                if (AI_GetRandomNumber(battleSys) < 170)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -1);
-                    break;
-                }
-
-
-                break;
-				
-			// Extra AI for Reflect.
-            case BATTLE_EFFECT_SET_REFLECT:
-                attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
-
-                if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_REFLECT)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -12);
-                    break;
-                }
-
-                if (ExpertAI_IsBattlerPhysicalAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
-                {
-                    if (AI_GetRandomNumber(battleSys) < 192)
-                    {
-                        AI_AddToMoveScore(battleSys, battleCtx, 3);
-                        break;
-                    }
-                }
-
-                if (AI_GetRandomNumber(battleSys) < 170)
-                {
-                    AI_AddToMoveScore(battleSys, battleCtx, -1);
-                    break;
-                }
-
-                break;
-				
-			// Extra AI for Beat Up.
-            case BATTLE_EFFECT_BEAT_UP:
-                attackerItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker);
-				
-				if (attackerItemEffect == HOLD_EFFECT_SOMETIMES_FLINCH)
-				{
-					if (AI_GetRandomNumber(battleSys) < 242)
-					{
-						AI_AddToMoveScore(battleSys, battleCtx, 6);
-					}
-					
-					if (AI_GetRandomNumber(battleSys) < 127)
-					{
-						AI_AddToMoveScore(battleSys, battleCtx, 4);
-					}
-				}
-                break;
-
-            case BATTLE_EFFECT_GROWTH:
-                if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_UNAWARE
-                    || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, AI_CONTEXT.attacker, ABILITY_MEMORY))
-                {
-                    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) != ABILITY_MOLD_BREAKER)
-                    {
-                        break;
-                    }
-                }
-
-                if (NO_CLOUD_NINE)
-                {
-                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
-                    {
-                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATTACK, 8)
-                            || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 8))
+                        if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_STICKY_WEB)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -20);
+                            break;
+                        }
+                        if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING)
+                            || AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN))
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -20);
+                            break;
+                        }
+                        if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_APPLY_MAGIC_COAT))
                         {
                             if (AI_GetRandomNumber(battleSys) < 128)
                             {
-                                AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                AI_AddToMoveScore(battleSys, battleCtx, -20);
                                 break;
                             }
                         }
-
-                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATTACK, 9)
-                            || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 9))
+                        if (AI_GetRandomNumber(battleSys) < 128)
                         {
-                            if (AI_GetRandomNumber(battleSys) < 85)
+                            AI_AddToMoveScore(battleSys, battleCtx, 5);
+                            break;
+                        }
+                    }
+                    break;
+
+                    // Extra AI for Trick Room. Still a work in progress.
+                case BATTLE_EFFECT_TRICK_ROOM:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+                    if (battleCtx->monSpeedOrder[AI_CONTEXT.attacker] < battleCtx->monSpeedOrder[AI_CONTEXT.defender])
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 205)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 5);
+                            break;
+                        }
+                    }
+                    break;
+
+                    // Extra AI for Light Screen.
+                case BATTLE_EFFECT_SET_LIGHT_SCREEN:
+                    attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+                    if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_LIGHT_SCREEN)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -12);
+                        break;
+                    }
+
+                    if (ExpertAI_IsBattlerSpecialAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 3);
+                            break;
+                        }
+                    }
+
+                    if (AI_GetRandomNumber(battleSys) < 170)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        break;
+                    }
+
+
+                    break;
+
+                    // Extra AI for Reflect.
+                case BATTLE_EFFECT_SET_REFLECT:
+                    attackerSide = Battler_Side(battleSys, AI_CONTEXT.attacker);
+
+                    if (battleCtx->sideConditionsMask[attackerSide] & SIDE_CONDITION_REFLECT)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -12);
+                        break;
+                    }
+
+                    if (ExpertAI_IsBattlerPhysicalAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 3);
+                            break;
+                        }
+                    }
+
+                    if (AI_GetRandomNumber(battleSys) < 170)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        break;
+                    }
+
+                    break;
+
+                    // Extra AI for Beat Up.
+                case BATTLE_EFFECT_BEAT_UP:
+                    attackerItemEffect = Battler_HeldItemEffect(battleCtx, AI_CONTEXT.attacker);
+
+                    if (attackerItemEffect == HOLD_EFFECT_SOMETIMES_FLINCH)
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 242)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 6);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 127)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 4);
+                        }
+                    }
+                    break;
+
+                case BATTLE_EFFECT_GROWTH:
+                    if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_UNAWARE
+                        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, AI_CONTEXT.attacker, ABILITY_MEMORY))
+                    {
+                        if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) != ABILITY_MOLD_BREAKER)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (NO_CLOUD_NINE)
+                    {
+                        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY)
+                        {
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATTACK, 8)
+                                || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 8))
                             {
-                                AI_AddToMoveScore(battleSys, battleCtx, 1);
-                                break;
+                                if (AI_GetRandomNumber(battleSys) < 128)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                    break;
+                                }
+                            }
+
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_ATTACK, 9)
+                                || ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 9))
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 85)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                    break;
+                                }
                             }
                         }
                     }
-                }
 
-                break;
+                    break;
+
+                case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
+                    if (AI_GetMoveEffectiveness(battleSys, battleCtx) == TYPE_MULTI_IMMUNE)
+                    {
+                        break;
+                    }
+                case BATTLE_EFFECT_SWITCH_HIT:
+                    if (ExpertAI_IsStatDropped(battleSys, battleCtx, AI_CONTEXT.attacker))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 250)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 2);
+                        }
+                    }
+                    break;
+
+                case BATTLE_EFFECT_DEF_DOWN_2:
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_STAT_DEFENSE, BATTLE_STAT_BOOST_NEUTRAL))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -2);
+                        }
+                    }
+                    else
+                    {
+                        abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.defender);
+
+                        if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, abilityTemp, BATTLE_STAT_FLAG_DEFENSE) == FALSE)
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 170)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 3);
+                            }
+                        }
+                    }
+                    break;
+                }
             }
         }
     }
 
     return;
+}
+
+void ExpertAI_EvalMoreMoves_Doubles(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    u8 abilityTemp;
+    u8 attackerSide, defenderSide;
+    u8 attackerItemEffect, defenderItemEffect;
+    int i;
+
+    if ((AI_CONTEXT.thinkingMask & AI_FLAG_EXPERT) == FALSE)
+    {
+        return;
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if (battleCtx->battleMons[AI_CONTEXT.attacker].moves[i])
+        {
+            if (ExpertAI_CanUseMove(battleSys, battleCtx, AI_CONTEXT.attacker, i, CHECK_INVALID_ALL))
+            {
+                AI_CONTEXT.moveSlot = i;
+                AI_CONTEXT.move = battleCtx->battleMons[AI_CONTEXT.attacker].moves[AI_CONTEXT.moveSlot];
+            }
+            else
+            {
+                AI_CONTEXT.move = MOVE_NONE;
+            }
+
+            if (AI_CONTEXT.move != MOVE_NONE)
+            {
+                switch (MOVE_DATA(AI_CONTEXT.move).effect)
+                {
+                default:
+                    break;
+
+
+                case BATTLE_EFFECT_DEF_DOWN_2:
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_STAT_DEFENSE, BATTLE_STAT_BOOST_NEUTRAL))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -2);
+                        }
+                    }
+                    else
+                    {
+                        abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.defender);
+
+                        if (Battle_AbilityDetersStatDrop(battleSys, battleCtx, abilityTemp, BATTLE_STAT_FLAG_DEFENSE) == FALSE)
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 170)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 3);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void AI_AddToMoveScore(BattleSystem* battleSys, BattleContext* battleCtx, int val)
@@ -1737,6 +1840,109 @@ BOOL ExpertAI_StatStageLessThan(BattleSystem* battleSys, BattleContext* battleCt
 
     if (statBoost < val) {
         result = TRUE;
+    }
+
+    return result;
+}
+
+BOOL ExpertAI_IsStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    BOOL result;
+    BOOL hasHaze;
+    u8 ability;
+    u16 move;
+    int i, j;
+    int statStage, battleStatFlag, moveEffect;
+
+    result = FALSE;
+
+    hasHaze = FALSE;
+
+    ability = Battler_Ability(battleCtx, battler);
+
+    battleStatFlag = BATTLE_STAT_FLAG_NONE;
+
+    if (ability == ABILITY_UNAWARE
+        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, battler, ABILITY_MEMORY))
+    {
+        return result;
+    }
+
+    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+    {
+        if (ExpertAI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+        {
+            move = battleCtx->battleMons[battler].moves[j];
+            moveEffect = MOVE_DATA(move).effect;
+
+            switch (moveEffect)
+            {
+            default:
+                break;
+
+            case BATTLE_EFFECT_RESET_STAT_CHANGES:
+            case BATTLE_EFFECT_COPY_STAT_CHANGES:
+            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                hasHaze = TRUE;
+                break;
+            }
+        }
+    }
+
+    for (i = BATTLE_STAT_ATTACK; i < BATTLE_STAT_MAX; i++)
+    {
+        if (i != BATTLE_STAT_SPEED)
+        {
+            statStage = battleCtx->battleMons[battler].statBoosts[i];
+
+            if (statStage < BATTLE_STAT_BOOST_NEUTRAL)
+            {
+                if (i == BATTLE_STAT_ATTACK)
+                {
+                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+                    {
+                        if (hasHaze == FALSE)
+                        {
+                            result = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if (i == BATTLE_STAT_SP_ATTACK)
+                {
+                    if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                    {
+                        if (hasHaze == FALSE)
+                        {
+                            result = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if (i == BATTLE_STAT_DEFENSE)
+                {
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
+                        && hasHaze == FALSE)
+                    {
+                        result = TRUE;
+                        break;
+                    }
+                }
+
+                if (i == BATTLE_STAT_SP_DEFENSE)
+                {
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
+                        && hasHaze == FALSE)
+                    {
+                        result = TRUE;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     return result;
