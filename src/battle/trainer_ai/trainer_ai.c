@@ -10251,6 +10251,7 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
     u16 move;
     int i, j;
     int statStage, battleStatFlag, moveEffect;
+    int moveBattleStatDropFlagsMask, moveBattleStatBoostFlagsMask;
 
     result = FALSE;
 
@@ -10260,8 +10261,11 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
 
     battleStatFlag = BATTLE_STAT_FLAG_NONE;
 
+    moveBattleStatDropFlagsMask = BATTLE_STAT_FLAG_NONE;
+    moveBattleStatBoostFlagsMask = BATTLE_STAT_FLAG_NONE;
+
     if (ability == ABILITY_UNAWARE
-        || ability == ABILITY_MEMORY)
+        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS, battler, ABILITY_MEMORY))
     {
         return result;
     }
@@ -10275,167 +10279,90 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
         }
     }
 
+    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+    {
+        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+        {
+            move = battleCtx->battleMons[battler].moves[j];
+            moveEffect = MOVE_DATA(move).effect;
+
+            moveBattleStatDropFlagsMask |= MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect);
+            moveBattleStatBoostFlagsMask |= MapBattleEffectToSelfStatBoost(battleCtx, moveEffect);
+
+            switch (moveEffect)
+            {
+            default:
+                break;
+
+            case BATTLE_EFFECT_RESET_STAT_CHANGES:
+            case BATTLE_EFFECT_COPY_STAT_CHANGES:
+            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
+            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
+                hasHaze = TRUE;
+                break;
+            }
+        }
+    }
+
     for (i = BATTLE_STAT_ATTACK; i < BATTLE_STAT_MAX; i++)
     {
-        statStage = BATTLE_STAT_BOOST_NEUTRAL;
-
         if (i != BATTLE_STAT_SPEED)
         {
             statStage = battleCtx->battleMons[battler].statBoosts[i];
-        }
 
-        if (statStage < BATTLE_STAT_BOOST_NEUTRAL)
-        {
-            if (i == BATTLE_STAT_ATTACK)
+            if (statStage < BATTLE_STAT_BOOST_NEUTRAL)
             {
-                battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
-
-                if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
+                if (i == BATTLE_STAT_ATTACK)
                 {
-                    result = TRUE;
-
-                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, battler))
                     {
-                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+                        battleStatFlag = BATTLE_STAT_FLAG_ATTACK;
+
+                        if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
+                            && hasHaze == FALSE)
                         {
-                            move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATA(move).effect;
-
-                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
+                            if ((BATTLE_STAT_FLAG_DEFENSE & moveBattleStatDropFlagsMask) == FALSE
+                                && (battleStatFlag & moveBattleStatBoostFlagsMask) == FALSE)
                             {
-                                result = FALSE;
-                                break;
-                            }
-
-                            if (BATTLE_STAT_FLAG_DEFENSE & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
-                            {
-                                result = FALSE;
-                                break;
-                            }
-
-                            switch (moveEffect)
-                            {
-                            default:
-                                break;
-
-                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
-                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
-                                hasHaze = TRUE;
-                                result = FALSE;
+                                result = TRUE;
                                 break;
                             }
                         }
                     }
-
-                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 2)
-                        && hasHaze == FALSE)
-                    {
-                        result = TRUE;
-                    }
                 }
-            }
 
-            if (i == BATTLE_STAT_SP_ATTACK)
-            {
-                battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
-
-                if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
+                if (i == BATTLE_STAT_SP_ATTACK)
                 {
-                    result = TRUE;
-
-                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
+                    if (Battle_BattleMonIsSpecialAttacker(battleSys, battleCtx, battler))
                     {
-                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
+                        battleStatFlag = BATTLE_STAT_FLAG_SP_ATTACK;
+
+                        if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
+                            && hasHaze == FALSE)
                         {
-                            move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATA(move).effect;
-
-                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
+                            if ((BATTLE_STAT_FLAG_SP_DEFENSE & moveBattleStatDropFlagsMask) == FALSE
+                                && (battleStatFlag & moveBattleStatBoostFlagsMask) == FALSE)
                             {
-                                result = FALSE;
-                                break;
-                            }
-
-                            if (BATTLE_STAT_FLAG_SP_DEFENSE & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
-                            {
-                                result = FALSE;
-                                break;
-                            }
-
-                            switch (moveEffect)
-                            {
-                            default:
-                                break;
-
-                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
-                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
-                                hasHaze = TRUE;
-                                result = FALSE;
+                                result = TRUE;
                                 break;
                             }
                         }
                     }
-
-                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 2)
-                        && hasHaze == FALSE)
-                    {
-                        result = TRUE;
-                    }
                 }
-            }
 
-            if (statStage < BATTLE_STAT_BOOST_NEUTRAL - 1)
-            {
                 if (i == BATTLE_STAT_DEFENSE)
                 {
                     battleStatFlag = BATTLE_STAT_FLAG_DEFENSE;
 
-                    result = TRUE;
-
-                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
-                    {
-                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
-                        {
-                            move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATA(move).effect;
-
-                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
-                            {
-                                result = FALSE;
-                                break;
-                            }
-
-                            if (BATTLE_STAT_FLAG_ATTACK & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
-                            {
-                                result = FALSE;
-                                break;
-                            }
-
-                            switch (moveEffect)
-                            {
-                            default:
-                                break;
-
-                            case BATTLE_EFFECT_DEF_SPD_DOWN_HIT:
-                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
-                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
-                                hasHaze = TRUE;
-                                result = FALSE;
-                                break;
-                            }
-                        }
-                    }
-
-                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 3)
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 2)
                         && hasHaze == FALSE)
                     {
-                        result = TRUE;
+                        if ((BATTLE_STAT_FLAG_ATTACK & moveBattleStatDropFlagsMask) == FALSE
+                            && (battleStatFlag & moveBattleStatBoostFlagsMask) == FALSE)
+                        {
+                            result = TRUE;
+                            break;
+                        }
                     }
                 }
 
@@ -10443,48 +10370,15 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
                 {
                     battleStatFlag = BATTLE_STAT_FLAG_SP_DEFENSE;
 
-                    result = TRUE;
-
-                    for (j = 0; j < LEARNED_MOVES_MAX; j++)
-                    {
-                        if (AI_CanUseMove(battleSys, battleCtx, battler, j, CHECK_INVALID_ALL_BUT_TORMENT))
-                        {
-                            move = battleCtx->battleMons[battler].moves[j];
-                            moveEffect = MOVE_DATA(move).effect;
-
-                            if (battleStatFlag & MapBattleEffectToSelfStatBoost(battleCtx, moveEffect))
-                            {
-                                result = FALSE;
-                                break;
-                            }
-
-                            if (BATTLE_STAT_FLAG_SP_ATTACK & MapBattleEffectToStatDrop(battleSys, battleCtx, moveEffect))
-                            {
-                                result = FALSE;
-                                break;
-                            }
-
-                            switch (moveEffect)
-                            {
-                            default:
-                                break;
-
-                            case BATTLE_EFFECT_DEF_SPD_DOWN_HIT:
-                            case BATTLE_EFFECT_RESET_STAT_CHANGES:
-                            case BATTLE_EFFECT_COPY_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES:
-                            case BATTLE_EFFECT_SWAP_STAT_CHANGES:
-                                hasHaze = TRUE;
-                                result = FALSE;
-                                break;
-                            }
-                        }
-                    }
-
-                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 3)
+                    if ((statStage < BATTLE_STAT_BOOST_NEUTRAL - 2)
                         && hasHaze == FALSE)
                     {
-                        result = TRUE;
+                        if ((BATTLE_STAT_FLAG_SP_ATTACK & moveBattleStatDropFlagsMask) == FALSE
+                            && (battleStatFlag & moveBattleStatBoostFlagsMask) == FALSE)
+                        {
+                            result = TRUE;
+                            break;
+                        }
                     }
                 }
             }
