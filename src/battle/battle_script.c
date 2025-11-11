@@ -3865,14 +3865,39 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
             battleCtx->defender,
             battleCtx->criticalMul);
 	
-	if (battleCtx->criticalMul == 2)
-	{
-		battleCtx->damage = battleCtx->damage * 4 / 3;
-	}
-	else if (battleCtx->criticalMul == 3)
-	{
-		battleCtx->damage *= 2;
-	}
+    if (battleCtx->criticalMul > 1)
+    {
+        switch (battleCtx->criticalMul)
+        {
+        default:
+            battleCtx->damage = battleCtx->damage * 4 / 3;
+            break;
+
+        case 3:
+            battleCtx->damage = battleCtx->damage * 3 / 2;
+            break;
+
+        case 4:
+            battleCtx->damage = battleCtx->damage * 2;
+            break;
+
+        case 5:
+            battleCtx->damage = battleCtx->damage * 5 / 2;
+            break;
+
+        case 6:
+            battleCtx->damage = battleCtx->damage * 3;
+            break;
+
+        case 7:
+            battleCtx->damage = battleCtx->damage * 7 / 2;
+            break;
+
+        case 8:
+            battleCtx->damage = battleCtx->damage * 4;
+            break;
+        }
+    }
 	
 	if ((battleCtx->moveCur == MOVE_FLING)
 	&& (Battler_ItemFlingEffect(battleCtx, battleCtx->attacker) == FLING_EFFECT_WAKE_UP_SLAP)
@@ -9164,11 +9189,6 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->damage = battleCtx->damage * 13 / 10;
             break;
 
-        case ABILITY_SNIPER:
-            if (battleCtx->criticalMul == 2) {
-                battleCtx->criticalMul = 3;
-            }
-
         case ABILITY_TECHNICIAN:
             battleCtx->damage = battleCtx->damage * 3 / 2;
             break;
@@ -9221,14 +9241,39 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
 	
 	battleCtx->damage = battleCtx->damage * effectiveness / 40;
 
-	if (battleCtx->criticalMul == 2)
-	{
-		battleCtx->damage = battleCtx->damage * 4 / 3;
-	}
-	else if (battleCtx->criticalMul == 3)
-	{
-		battleCtx->damage *= 2;
-	}
+    if (battleCtx->criticalMul > 1)
+    {
+        switch (battleCtx->criticalMul)
+        {
+        default:
+            battleCtx->damage = battleCtx->damage * 4 / 3;
+            break;
+
+        case 3:
+            battleCtx->damage = battleCtx->damage * 3 / 2;
+            break;
+
+        case 4:
+            battleCtx->damage = battleCtx->damage * 2;
+            break;
+
+        case 5:
+            battleCtx->damage = battleCtx->damage * 5 / 2;
+            break;
+
+        case 6:
+            battleCtx->damage = battleCtx->damage * 3;
+            break;
+
+        case 7:
+            battleCtx->damage = battleCtx->damage * 7 / 2;
+            break;
+
+        case 8:
+            battleCtx->damage = battleCtx->damage * 4;
+            break;
+        }
+    }
 
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
         battleCtx->damage = battleCtx->damage * 3 / 2;

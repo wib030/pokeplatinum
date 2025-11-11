@@ -13170,13 +13170,16 @@ static const u8 sCriticalStageModuli[iMax][2] = {
     { 1,    1 },
 };
 
-static const u8 sNeoCriticalStageModuli []= {
-    24,
-    4,
-    2,
+static const u8 sNeoCriticalStageModuli[] = {
+    24,       // base
+    6,        // x4
+    2,        // x3
+    1,        // x2
+    1,        // capped
     1,
-    1
+    1,
 };
+
 
 /*
 u8 sCriticalStageModuli[iMax][2];
@@ -13223,7 +13226,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
 		{
 			if (sPunchingMoves[i] == battleCtx->moveCur)
 			{
-				punchingMove = 1;
+				punchingMove = 4;
 			}
 		}
 	}
@@ -13253,11 +13256,11 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
             + (battleCtx->battleMons[attacker].meditateCritBoostFlag != FALSE)
 			+ attackerLuckyChant
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
-			+ (4 * (punchingMove == 1))
+			+ punchingMove
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD));
 
-    if (effectiveCritStage > 4) {
-        effectiveCritStage = 4;
+    if (effectiveCritStage > 7) {
+        effectiveCritStage = 7;
     }
 
     if ((BattleSystem_RandNext(battleSys) % sNeoCriticalStageModuli[effectiveCritStage]) == 0
@@ -13267,8 +13270,18 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
         criticalMul = 2;
     }
 
-    if (criticalMul == 2 && Battler_Ability(battleCtx, attacker) == ABILITY_SNIPER) {
-        criticalMul = 3;
+    if (effectiveCritStage > 3 && criticalMul > 1)
+    {
+        criticalMul = effectiveCritStage - 1;
+    }
+
+    if (criticalMul > 1 && Battler_Ability(battleCtx, attacker) == ABILITY_SNIPER) {
+        criticalMul += 2; // 4 to 8
+    }
+
+    if (criticalMul > 8)
+    {
+        criticalMul = 8;
     }
 
     return criticalMul;
@@ -13302,7 +13315,7 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
 		{
 			if (sPunchingMoves[i] == battleCtx->moveCur)
 			{
-				punchingMove = 1;
+				punchingMove = 4;
 			}
 		}
 	}
@@ -13329,11 +13342,11 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
             + (attackerAbility == ABILITY_SUPER_LUCK)
 			+ attackerLuckyChant
             + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && attackerSpecies == SPECIES_CHANSEY))
-			+ (4 * (punchingMove == 1))
+			+ punchingMove
             + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && attackerSpecies == SPECIES_FARFETCHD)));
 
-    if (effectiveCritStage > 4) {
-        effectiveCritStage = 4;
+    if (effectiveCritStage > 7) {
+        effectiveCritStage = 7;
     }
 
     if ((BattleSystem_RandNext(battleSys) % sCriticalStageModuli[effectiveCritStage][0]) % sCriticalStageModuli[effectiveCritStage][1] == 0
@@ -13343,8 +13356,18 @@ int BattleSystem_PartyMonCalcCriticalMulti(BattleSystem *battleSys, BattleContex
         criticalMul = 2;
     }
 
-    if (criticalMul == 2 && Battler_Ability(battleCtx, attacker) == ABILITY_SNIPER) {
-        criticalMul = 3;
+    if (effectiveCritStage > 3 && criticalMul > 1)
+    {
+        criticalMul = effectiveCritStage - 1;
+    }
+
+    if (criticalMul > 1 && attackerAbility == ABILITY_SNIPER) {
+        criticalMul += 2; // 4 to 8
+    }
+
+    if (criticalMul > 8)
+    {
+        criticalMul = 8;
     }
 
     return criticalMul;
