@@ -120,7 +120,7 @@
     "evolutions": [
         [
             "EVO_LEVEL_UP",
-            14,
+            13,
             "SPECIES_MONFERNO"
         ]
     ],
