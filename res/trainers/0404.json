@@ -10,6 +10,35 @@
     ],
     "double_battle": false,
     "party": [
+		{
+            "species": "SPECIES_LUCARIO",
+            "form": 0,
+            "level": 55,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_NASTY_PLOT",
+				"MOVE_AURA_SPHERE",
+				"MOVE_DARK_PULSE",
+				"MOVE_AGILITY"
+            ],
+            "power": 0,
+            "ball_seal": 0,
+			"ball_type": "ITEM_NEST_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 8,
+			"evDEF": 0,
+			"evSPEED": 248,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 14,
+			"altLead": 1
+        },
         {
             "species": "SPECIES_DUSKNOIR",
             "form": 0,
@@ -18,7 +47,7 @@
             "moves": [
                 "MOVE_DRAIN_PUNCH",
 				"MOVE_SHADOW_PUNCH",
-				"MOVE_TOXIC_SPIKES",
+				"MOVE_WILL_O_WISP",
 				"MOVE_ICE_PUNCH"
             ],
             "power": 0,
@@ -31,23 +60,23 @@
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
 			"evHP": 252,
-			"evATK": 0,
-			"evDEF": 60,
+			"evATK": 4,
+			"evDEF": 64,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 132,
+			"evSPDEF": 188,
 			"nature": 23
         },
         {
             "species": "SPECIES_WEAVILE",
             "form": 0,
             "level": 55,
-            "item": "ITEM_FOCUS_SASH",
+            "item": "ITEM_LIECHI_BERRY",
             "moves": [
-                "MOVE_FAKE_OUT",
+                "MOVE_ENDURE",
 				"MOVE_ICE_BALL",
 				"MOVE_KNOCK_OFF",
-				"MOVE_BRICK_BREAK"
+				"MOVE_LOW_KICK"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -59,23 +88,23 @@
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
 			"evHP": 0,
-			"evATK": 196,
-			"evDEF": 0,
-			"evSPEED": 248,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0,
+			"evSPDEF": 4,
 			"nature": 13
         },
         {
             "species": "SPECIES_STEELIX",
             "form": 0,
             "level": 55,
-            "item": "ITEM_CHOICE_BAND",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_EARTHQUAKE",
 				"MOVE_STONE_EDGE",
-				"MOVE_IRON_TAIL",
-				"MOVE_EXPLOSION"
+				"MOVE_GYRO_BALL",
+				"MOVE_CURSE"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -86,13 +115,13 @@
 			"ivSPEED": 0,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 180,
-			"evATK": 24,
+			"evHP": 228,
+			"evATK": 28,
 			"evDEF": 0,
 			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 252,
-			"nature": 2
+			"nature": 22
         },
         {
             "species": "SPECIES_DRAGONITE",
@@ -115,10 +144,10 @@
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
 			"evHP": 0,
-			"evATK": 192,
+			"evATK": 252,
 			"evDEF": 0,
 			"evSPEED": 252,
-			"evSPATK": 0,
+			"evSPATK": 4,
 			"evSPDEF": 0,
 			"nature": 11
         },
@@ -131,7 +160,7 @@
                 "MOVE_POISON_FANG",
 				"MOVE_SUPER_FANG",
 				"MOVE_ROOST",
-				"MOVE_BRAVE_BIRD"
+				"MOVE_DEFOG"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -142,41 +171,13 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 232,
+			"evHP": 244,
 			"evATK": 0,
-			"evDEF": 172,
+			"evDEF": 176,
 			"evSPEED": 16,
 			"evSPATK": 0,
-			"evSPDEF": 24,
+			"evSPDEF": 68,
 			"nature": 8
-        },
-		{
-            "species": "SPECIES_LUCARIO",
-            "form": 0,
-            "level": 55,
-            "item": "ITEM_LIFE_ORB",
-            "moves": [
-                "MOVE_NASTY_PLOT",
-				"MOVE_AURA_SPHERE",
-				"MOVE_DARK_PULSE",
-				"MOVE_EXTREME_SPEED"
-            ],
-            "power": 0,
-            "ball_seal": 0,
-			"ball_type": "ITEM_NEST_BALL",
-			"ivHP": 31,
-			"ivATK": 31,
-			"ivDEF": 31,
-			"ivSPEED": 31,
-			"ivSPATK": 31,
-			"ivSPDEF": 31,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 248,
-			"evSPATK": 200,
-			"evSPDEF": 0,
-			"nature": 14
         }
     ]
 }
