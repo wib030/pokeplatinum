@@ -3363,9 +3363,12 @@ static void ov16_02260DB0 (SysTask * param0, void * param1)
     if ((v3 & (0x1 | 0x100)) || (BattleSystem_BattleStatus(v0->unk_00) & 0x1) || (Battler_Side(v0->unk_00, v0->unk_1D) == 0)) {
         // tp_ret=WazaAIMain(tws->bw,tws->client_no);
         v2 = TrainerAI_Main(v0->unk_00, v0->unk_1D);
-        v2 = BattleDisplay_CalcSwitchAttack_Singles(v0->unk_00, v0->unk_1D, v2);
+        if (BattleDisplay_ShouldPredictSwitch(v0->unk_00, v0->unk_1D))
+        {
+            v2 = BattleDisplay_CalcSwitchAttack_Singles(v0->unk_00, v0->unk_1D, v2);
+        }
 
-        if (BattleDisplay_HasBeatUp(v0->unk_00, v0->unk_1D))
+        if (BattleDisplay_HasBeatUp(v0->unk_00, v0->unk_1D)) // We may not need this anymore now that the damage calc is fixed
         {
             v2 = BattleDisplay_BeatUpOverride(v0->unk_00, v0->unk_1D, v2);
         }
@@ -6421,6 +6424,33 @@ static u8 ov16_02264768 (BattleSystem * param0, u8 param1, u8 param2)
     }
 
     return param2;
+}
+
+BOOL BattleDisplay_ShouldPredictSwitch(BattleSystem* battleSys, u8 attacker)
+{
+    BattleContext* battleCtx;
+    int turnsActive;
+
+    battleCtx = BattleSystem_Context(battleSys);
+
+    turnsActive = battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.fakeOutTurnNumber;
+
+    if (turnsActive < 2) // within first two turns out
+    {
+        if (turnsActive > 0) // second turn out
+        {
+            if (BattleSystem_RandNext(battleSys) & 1)
+            {
+                return TRUE;
+            }
+        }
+        else // first turn out
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, u8 currentMoveSlot)

@@ -158,6 +158,14 @@ UnkStruct_ov16_0226C378 * ov16_02263B0C(BattlerData * param0);
 void ov16_02263B10(BattlerData * param0);
 void ov16_02263B20(BattlerData * param0, int param1);
 
+/* @brief Check if we should run our switch prediction code.
+ *
+ * @param battleSys
+ * @param attacker			 The attacking battlemon ID, provided in battle_display.c when invoked
+ * @return  TRUE/FALSE whether we should run our switch prediction, based on the mon's active turn count.
+ */
+BOOL BattleDisplay_ShouldPredictSwitch(BattleSystem* battleSys, u8 attacker);
+
 /* @brief Calculate a move to use when predicting player switch.
  *
  * @param battleSys
