@@ -6433,7 +6433,7 @@ BOOL BattleDisplay_ShouldPredictSwitch(BattleSystem* battleSys, u8 attacker)
 
     battleCtx = BattleSystem_Context(battleSys);
 
-    turnsActive = battleCtx->totalTurns - battleCtx->battleMons[battler1].moveEffectsData.fakeOutTurnNumber;
+    turnsActive = battleCtx->totalTurns - battleCtx->battleMons[attacker].moveEffectsData.fakeOutTurnNumber;
 
     if (turnsActive < 2) // within first two turns out
     {
