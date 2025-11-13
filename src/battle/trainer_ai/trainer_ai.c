@@ -4598,8 +4598,8 @@ static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleCont
                 battleCtx->fieldConditionsMask,
                 0,
                 moveType,
-                battler1,
                 battler2,
+                battler1,
                 1);
 
             damage = BattleSystem_ApplyTypeChart(battleSys,
