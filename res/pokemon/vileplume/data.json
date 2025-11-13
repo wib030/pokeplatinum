@@ -93,6 +93,7 @@
 			"31": "MOVE_NATURAL_GIFT",
 			"33": "MOVE_MOONLIGHT",
 			"36": "MOVE_GIGA_DRAIN",
+			"50": "MOVE_WEATHER_BALL",
             "53": "MOVE_PETAL_DANCE",
             "55": "MOVE_SOLAR_BEAM"
         },

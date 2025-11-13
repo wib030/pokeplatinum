@@ -93,6 +93,7 @@
 			"33": "MOVE_MORNING_SUN",
 			"36": "MOVE_GIGA_DRAIN",
             "43": "MOVE_LEAF_STORM",
+			"50": "MOVE_WEATHER_BALL",
             "55": "MOVE_SOLAR_BEAM"
         },
         "tutor": [
