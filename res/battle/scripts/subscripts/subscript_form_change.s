@@ -72,8 +72,8 @@ _036:
     PlaySound BTLSCR_MSG_BATTLER_TEMP, 1984
     SetMosaic BTLSCR_MSG_BATTLER_TEMP, 0, 1
     Wait 
-    // {0} transformed into the {1} type!
-	PrintMessage pl_msg_00000368_00178, TAG_NICKNAME_TYPE, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_TEMP
+    // {0} transformed to counter the {1} type!
+	PrintMessage pl_msg_00000368_01378, TAG_NICKNAME_TYPE, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_TEMP
     Wait 
     WaitButtonABTime 30
     CompareMonDataToValue OPCODE_FLAG_NOT, BTLSCR_MSG_BATTLER_TEMP, BATTLEMON_VOLATILE_STATUS, VOLATILE_CONDITION_SUBSTITUTE, _058

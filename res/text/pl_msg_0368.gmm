@@ -5526,4 +5526,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The sticky web disappeared from\naround the enemy team’s feet!</language>
 	</row>
+	<row id="pl_msg_00000368_01378" index="1378">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} transformed\nto counter the {STRVAR_1 15, 1, 0} type!</language>
+	</row>
+	<row id="pl_msg_00000368_01379" index="1379">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} transformed\nto counter the {STRVAR_1 15, 1, 0} type!</language>
+	</row>
+	<row id="pl_msg_00000368_01380" index="1380">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} transformed\nto counter the {STRVAR_1 15, 1, 0} type!</language>
+	</row>
 </body>

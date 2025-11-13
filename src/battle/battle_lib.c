@@ -9495,7 +9495,7 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
 			{
 				battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = antitypeType1;
                 battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = antitypeType2;
-				battleCtx->msgTemp = antitypeType1;
+				battleCtx->msgTemp = Pokemon_GetArceusTypeOf(Item_LoadParam(battleCtx->battleMons[battleCtx->msgBattlerTemp].heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_BATTLE));
                 *subscript = subscript_form_change;
                 result = TRUE;
 				break;
