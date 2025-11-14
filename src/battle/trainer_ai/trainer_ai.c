@@ -830,12 +830,12 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.defender = battler;
         if ((battler & 1) != (AI_CONTEXT.attacker & 1)) {
             TrainerAI_RecordLastMove(battleSys, battleCtx);
+
+            if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
+                TrainerAI_RecordRandomMove(battleSys, battleCtx);
+            }
         }
 		
-		if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
-			TrainerAI_RecordRandomMove(battleSys, battleCtx);
-		}
-
         AI_CONTEXT.thinkingBitShift = 0;
         AI_CONTEXT.moveSlot = 0;
         thinkingMask = AI_CONTEXT.thinkingMask;
@@ -5703,32 +5703,35 @@ static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *b
  */
 static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    u8 partySlot, ability;
+    u8 partySlot, ability, battler;
     u16 move, heldItem;
-    int i, j, partyMax;
+    int i, j, battler, partyMax;
     Pokemon *mon;
+    
+    for (battler = 0; battler < MAX_BATTLERS; battler++)
+    {
+        partyMax = BattleSystem_PartyCount(battleSys, battler);
 
-    partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.defender);
+        for (i = 0; i < partyMax; i++) {
+            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
 
-    for (i = 0; i < partyMax; i++) {
-        mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+            heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+            ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
-        heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
-        ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+            AI_CONTEXT.battlerPartyAbilities[battler][i] = ability;
+            AI_CONTEXT.battlerPartyHeldItems[battler][i] = heldItem;
 
-        AI_CONTEXT.battlerPartyAbilities[AI_CONTEXT.defender][i] = ability;
-        AI_CONTEXT.battlerPartyHeldItems[AI_CONTEXT.defender][i] = heldItem;
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
-        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-            move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                if (move != MOVE_NONE) {
 
-            if (move != MOVE_NONE) {
-
-                AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
-            }
-            else {
-                break;
+                    AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                }
+                else {
+                    break;
+                }
             }
         }
     }
@@ -5747,155 +5750,142 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
 {
     u8 partySlot, ability, moveType, side;
     u16 move, heldItem;
-    int i, j, partyMax;
+    int i, j, battler, partyMax;
     int moveClass, effect, movePower;
     Pokemon *mon;
 
-    partyMax = BattleSystem_PartyCount(battleSys, AI_CONTEXT.attacker);
+    for (battler = 0; battler < MAX_BATTLERS; battler++)
+    {
+        partyMax = BattleSystem_PartyCount(battleSys, battler);
 
-    side = Battler_Side(battleSys, AI_CONTEXT.defender);
+        for (i = 0; i < partyMax; i++) {
+            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
 
-    for (i = 0; i < partyMax; i++) {
-        mon = BattleSystem_PartyPokemon(battleSys, AI_CONTEXT.defender, i);
+            heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+            ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
 
-        heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
-        ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+            AI_CONTEXT.battlerPartyAbilities[battler][i] = ability;
+            AI_CONTEXT.battlerPartyHeldItems[battler][i] = heldItem;
 
-        AI_CONTEXT.battlerPartyAbilities[AI_CONTEXT.defender][i] = ability;
-        AI_CONTEXT.battlerPartyHeldItems[AI_CONTEXT.defender][i] = heldItem;
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
-        for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-            move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-
-            if (move == MOVE_NONE) {
-                break;
-            }
-
-            moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
-            moveClass = MOVE_DATA(move).class;
-            effect = MOVE_DATA(move).effect;
-            movePower = MOVE_DATA(move).power;
-
-            if (movePower == 1) {
-                movePower = BattleSystem_CalcMoveDamage(battleSys,
-                battleCtx,
-                move,
-                battleCtx->sideConditionsMask[side],
-                battleCtx->fieldConditionsMask,
-                movePower,
-                moveType,
-                AI_CONTEXT.defender,
-                AI_CONTEXT.attacker,
-                1);
-            }
-            
-
-            //movePower = 
-
-            if (moveClass != CLASS_STATUS) {
-
-                if (moveType == battleCtx->battleMons[AI_CONTEXT.defender].type1
-                || moveType == battleCtx->battleMons[AI_CONTEXT.defender].type2) {
-
-                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                if (move == MOVE_NONE) {
+                    break;
                 }
 
-                if (MOVE_DATA(move).priority > 0) {
-                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
-                }
+                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+                moveClass = MOVE_DATA(move).class;
+                effect = MOVE_DATA(move).effect;
 
-                if (ability == ABILITY_TECHNICIAN
-                && move)
+                if (moveClass != CLASS_STATUS) {
 
-                switch (effect) {
+                    if (moveType == battleCtx->battleMons[battler].type1
+                        || moveType == battleCtx->battleMons[battler].type2) {
+
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                    }
+
+                    if (MOVE_DATA(move).priority > 0) {
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                    }
+
+                    if (ability == ABILITY_TECHNICIAN
+                        && MOVE_DATA(move).priority)
+                    {
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                    }
+
+                    switch (effect) {
                     default:
                         break;
 
-                    // True damage moves
+                        // True damage moves
                     case BATTLE_EFFECT_LEVEL_DAMAGE_FLAT:
                     case BATTLE_EFFECT_40_DAMAGE_FLAT:
                     case BATTLE_EFFECT_10_DAMAGE_FLAT:
                     case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
                     case BATTLE_EFFECT_HALVE_HP:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Trapping moves
+                        // Trapping moves
                     case BATTLE_EFFECT_HIT_BEFORE_SWITCH:
                     case BATTLE_EFFECT_BIND_HIT:
                     case BATTLE_EFFECT_WHIRLPOOL:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Hazard-setting hit
+                        // Hazard-setting hit
                     case BATTLE_EFFECT_SPIKES_MULTI_HIT:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Hazards clearing
+                        // Hazards clearing
                     case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Fling
+                        // Fling
                     case BATTLE_EFFECT_FLING:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Knock Off
+                        // Knock Off
                     case BATTLE_EFFECT_REMOVE_HELD_ITEM:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Speed Drop
+                        // Speed Drop
                     case BATTLE_EFFECT_LOWER_SPEED_HIT:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Explosion and Self Destruct
+                        // Explosion and Self Destruct
                     case BATTLE_EFFECT_HALVE_DEFENSE:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
+                    }
+
                 }
+                else {
 
-            }
-            else {
+                    if (MapBattleEffectToStatusCondition(battleCtx, effect) != MON_CONDITION_NONE
+                        || MapBattleEffectToVolatileStatus(battleCtx, effect) != VOLATILE_CONDITION_NONE
+                        || MapBattleEffectToSideCondition(battleCtx, effect) != SIDE_CONDITION_NONE
+                        || MapBattleEffectToFieldCondition(battleCtx, effect) != FIELD_CONDITION_NONE) {
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                    }
 
-                if (MapBattleEffectToStatusCondition(battleCtx, effect) != MON_CONDITION_NONE
-                    || MapBattleEffectToVolatileStatus(battleCtx, effect) != VOLATILE_CONDITION_NONE
-                    || MapBattleEffectToSideCondition(battleCtx, effect) != SIDE_CONDITION_NONE
-                    || MapBattleEffectToFieldCondition(battleCtx, effect) != FIELD_CONDITION_NONE) {
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
-                }
-
-                switch (effect) {
+                    switch (effect) {
                     default:
                         break;
 
-                    // Healing moves
+                        // Healing moves
                     case BATTLE_EFFECT_RESTORE_HALF_HP:
                     case BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN:
                     case BATTLE_EFFECT_SWALLOW:
                     case BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE:
                     case BATTLE_EFFECT_HEAL_IN_3_TURNS:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Baton pass
+                        // Baton pass
                     case BATTLE_EFFECT_PASS_STATS_AND_STATUS:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Defog
+                        // Defog
                     case BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
 
-                    // Encore
+                        // Encore
                     case BATTLE_EFFECT_ENCORE:
-                        AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][i][j] = move;
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
+                    }
                 }
             }
         }
