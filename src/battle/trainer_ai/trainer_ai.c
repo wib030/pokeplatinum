@@ -5889,6 +5889,11 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                     case BATTLE_EFFECT_ENCORE:
                         AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
+
+                        // Taunt
+                    case BATTLE_EFFECT_TAUNT:
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                        break;
                     }
                 }
             }
