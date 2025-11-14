@@ -5729,12 +5729,10 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
 
                 if (move != MOVE_NONE) {
 
-                    /*
                     if (move == MOVE_DESTINY_BOND)
                     {
                         break;
                     }
-                    */
 
                     AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                 }
