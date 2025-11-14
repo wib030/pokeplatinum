@@ -5705,7 +5705,7 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
 {
     u8 partySlot, ability, battler;
     u16 move, heldItem;
-    int i, j, battler, partyMax;
+    int i, j, partyMax;
     Pokemon *mon;
     
     for (battler = 0; battler < MAX_BATTLERS; battler++)
