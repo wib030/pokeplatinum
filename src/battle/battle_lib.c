@@ -2913,6 +2913,7 @@ void BattleContext_InitCounters(BattleSystem *battleSys, BattleContext *battleCt
         battleCtx->moveHitBattler[i] = BATTLER_NONE;
         battleCtx->switchedPartySlot[i] = 6;
         battleCtx->speedRand[i] = BattleSystem_RandNext(battleSys);
+        battleCtx->battleMons[i].moveEffectsData.destinyBondSuccessTurns = 0;
     }
 
     battleCtx->prizeMoneyMul = 1;
@@ -3009,6 +3010,7 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
     battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber = battleCtx->totalTurns + 1;
     battleCtx->battleMons[battler].moveEffectsData.truant = (battleCtx->totalTurns + 1) & 1;
     battleCtx->moveProtect[battler] = MOVE_NONE;
+    battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns = 0;
     battleCtx->moveHit[battler] = MOVE_NONE;
     battleCtx->moveHitBattler[battler] = BATTLER_NONE;
     battleCtx->moveHitType[battler] = MOVE_NONE;
@@ -3086,6 +3088,7 @@ void BattleSystem_CleanupFaintedMon(BattleSystem *battleSys, BattleContext *batt
     battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber = battleCtx->totalTurns + 1;
     battleCtx->battleMons[battler].moveEffectsData.truant = (battleCtx->totalTurns + 1) & 1;
     battleCtx->moveProtect[battler] = MOVE_NONE;
+    battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns = 0;
     battleCtx->moveHit[battler] = MOVE_NONE;
     battleCtx->moveHitBattler[battler] = BATTLER_NONE;
     battleCtx->moveHitType[battler] = TYPE_NORMAL;
