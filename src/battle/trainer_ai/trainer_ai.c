@@ -5703,7 +5703,7 @@ static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *b
  */
 static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    u8 partySlot, ability, battler;
+    u8 partySlot, ability;
     u16 move, heldItem;
     int i, j, battler, partyMax, maxBattlers;
     Pokemon *mon;
