@@ -5675,16 +5675,13 @@ static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *b
 
                 if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == MOVE_NONE) {
 
-                    if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
 
-                        AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                    AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+
+                    if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
                         AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
                         break;
                     }
-
-                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
-                    AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
-                    break;
                 }
             }
         }
