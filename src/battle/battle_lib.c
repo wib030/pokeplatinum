@@ -131,6 +131,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
     battleCtx->battleMons[battler].isShiny = Pokemon_IsShiny(mon);
+    battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns = 0;
 
     if (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_NO_ABILITIES) {
         battleCtx->battleMons[battler].ability = ABILITY_NONE;
