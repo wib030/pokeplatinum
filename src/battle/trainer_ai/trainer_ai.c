@@ -5596,17 +5596,13 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
                 }
 
                 if (AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] == MOVE_NONE) {
+                    
+                    AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
 
                     if (AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] == MOVE_NONE) {
-
-                        AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
                         AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
                         break;
                     }
-
-                    AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
-                    AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
-                    break;
                 }
             }
         }
@@ -5728,11 +5724,6 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
                 if (move != MOVE_NONE) {
-
-                    if (move == MOVE_DESTINY_BOND)
-                    {
-                        break;
-                    }
 
                     AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                 }
