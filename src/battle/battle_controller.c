@@ -2045,6 +2045,10 @@ static void BattleController_TurnEnd(BattleSystem *battleSys, BattleContext *bat
 		{
 			battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns = 0;
 		}
+        else
+        {
+            battleCtx->battleMons[battler].moveEffectsData.destinyBondSuccessTurns = 1;
+        }
 	}
 	
     if (BattleController_AnyExpPayout(battleCtx, battleCtx->command, battleCtx->command) == TRUE
