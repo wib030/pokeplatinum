@@ -1573,7 +1573,7 @@ static s32 UpdateGauge (s32 max, s32 cur, s32 diff, s32 * temp, u8 size, u16 fil
         {
             if (HPBarRate < 1)
             {
-                HPBarRate = 1;
+                HPBarRate = 2;
             }
         }
     }
