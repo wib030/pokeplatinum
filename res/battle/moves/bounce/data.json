@@ -4,7 +4,7 @@
     "type": "TYPE_FLYING",
     "power": 95,
     "accuracy": 90,
-    "pp": 5,
+    "pp": 10,
     "effect": {
         "type": "BATTLE_EFFECT_BOUNCE",
         "chance": 30
