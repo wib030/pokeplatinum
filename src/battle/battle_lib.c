@@ -19522,7 +19522,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             {
                 if (MOVE_DATA(move).range & RANGE_MAGIC_BOUNCE)
                 {
-                    moveScore += 20;
+                    moveScore += 30;
                 }
             }
             break;
@@ -19982,7 +19982,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         for (i = 0; i < BATTLE_STAT_MAX; i++) {
             if (battleCtx->battleMons[defender].statBoosts[i] > 6)
             {
-                score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 5;
+                score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 20;
             }
             else
             {
@@ -19990,7 +19990,7 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 {
                     if (score > (battleCtx->battleMons[defender].statBoosts[i] - 6) * 4)
                     {
-                        score -= (battleCtx->battleMons[defender].statBoosts[i] - 6) * 4;
+                        score -= (battleCtx->battleMons[defender].statBoosts[i] - 6) * 10;
                     }
                 }
             }
@@ -20013,6 +20013,23 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
         }
         break;
 
+    case ABILITY_ARENA_TRAP:
+        if (BattlerIsGrounded(battleCtx, defender))
+        {
+            score += 50;
+
+            if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE)
+            {
+                score += 50;
+            }
+
+            if (BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
+            {
+                score += 25;
+            }
+        }
+        break;
+
     case ABILITY_MAGNET_PULL:
         if (defenderType1 == TYPE_STEEL
             || defenderType2 == TYPE_STEEL)
@@ -20022,10 +20039,16 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 && defenderAbility != ABILITY_MAGNET_PULL
                 && defenderItemEffect != HOLD_EFFECT_SWITCH)
             {
-                if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE
-                    && BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
+                score += 125;
+
+                if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE)
                 {
-                    score += 200;
+                    score += 100;
+                }
+
+                if (BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
+                {
+                    score += 25;
                 }
             }
         }
@@ -20040,10 +20063,16 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 && defenderAbility != ABILITY_THIRSTY
                 && defenderItemEffect != HOLD_EFFECT_SWITCH)
             {
-                if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE
-                    && BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
+                score += 125;
+
+                if (BattleAI_BattleMonCanPivot(battleSys, battleCtx, defender) == FALSE)
                 {
-                    score += 200;
+                    score += 100;
+                }
+
+                if (BattleAI_BattleMonCanPhaze(battleSys, battleCtx, defender) == FALSE)
+                {
+                    score += 25;
                 }
             }
         }
@@ -20178,15 +20207,15 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 {
                     if (i == BATTLE_STAT_ATTACK || i == BATTLE_STAT_SP_ATTACK)
                     {
-                        score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 8;
+                        score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 20;
                     }
                     else if (i == BATTLE_STAT_SPEED)
                     {
-                        score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 5;
+                        score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 15;
                     }
                     else
                     {
-                        score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 3;
+                        score += (battleCtx->battleMons[defender].statBoosts[i] - 6) * 10;
                     }
                 }
             }
