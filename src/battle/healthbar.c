@@ -1558,7 +1558,7 @@ static s32 UpdateGauge (s32 param0, s32 param1, s32 param2, s32 * param3, u8 par
 	
     if (HPBarRate == 0)
     {
-        HPBarRate = 8 * param2 * param1 / (param0 * param0);
+        HPBarRate = 8 * diffPos * param1 / (param0 * param0);
 
         if (HPBarRate > 8)
         {
