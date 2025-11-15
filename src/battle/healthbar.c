@@ -1514,16 +1514,18 @@ static s32 UpdateGauge (s32 param0, s32 param1, s32 param2, s32 * param3, u8 par
     s32 v1;
     u8 v2;
     s32 v3;
-	u16 fillRatio;
 	u16 diffPos;
+    u8 HPBarRate;
 	
 	if (param2 > 0)
 	{
 		diffPos = param2;
+        HPBarRate = 2;
 	}
 	else
 	{
 		diffPos = param2 * -1;
+        HPBarRate = 0;
 	}
 
     v2 = param4 * 8;
@@ -1554,19 +1556,22 @@ static s32 UpdateGauge (s32 param0, s32 param1, s32 param2, s32 * param3, u8 par
         }
     }
 	
-	
-	if (diffPos >= param0 / 2)
-	{
-		fillRatio = param5 * 4;
-	}
-	else if (diffPos >= param0 / 3)
-	{
-		fillRatio = param5 * 3;
-	}
-	else
-	{
-		fillRatio = param5 * 2;
-	}
+    if (HPBarRate == 0)
+    {
+        HPBarRate = 8 * param2 * param1 / (param0 * param0);
+
+        if (HPBarRate > 8)
+        {
+            HPBarRate = 8;
+        }
+        else
+        {
+            if (HPBarRate < 1)
+            {
+                HPBarRate = 1;
+            }
+        }
+    }
 
     if (param0 < v2) {
         v3 = param0 * 0x100 / v2;
@@ -1594,13 +1599,13 @@ static s32 UpdateGauge (s32 param0, s32 param1, s32 param2, s32 * param3, u8 par
         }
     } else {
         if (param2 < 0) {
-            *param3 += fillRatio;
+            *param3 += HPBarRate;
 
             if (*param3 > v0) {
                 *param3 = v0;
             }
         } else {
-            *param3 -= fillRatio;
+            *param3 -= HPBarRate;
 
             if (*param3 < v0) {
                 *param3 = v0;
