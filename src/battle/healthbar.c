@@ -1508,58 +1508,63 @@ static void DrawGauge (Healthbar * param0, u8 param1)
     }
 }
 
-static s32 UpdateGauge (s32 param0, s32 param1, s32 param2, s32 * param3, u8 param4, u16 param5)
+static s32 UpdateGauge (s32 max, s32 cur, s32 diff, s32 * temp, u8 size, u16 fillOffset)
 {
-    s32 v0;
-    s32 v1;
-    u8 v2;
-    s32 v3;
+    s32 updated, final, ratio;
+    u8 corrected;
 	u16 diffPos;
     u8 HPBarRate;
 	
-	if (param2 > 0)
+	if (diff > 0)
 	{
-		diffPos = param2;
-        HPBarRate = 2;
+		diffPos = diff;
+        HPBarRate = 0;
 	}
 	else
 	{
-		diffPos = param2 * -1;
-        HPBarRate = 0;
+		diffPos = diff * -1;
+		if (diffPos >= max / 2)
+		{
+			HPBarRate = 3;
+		}
+		else
+		{
+			HPBarRate = 2;
+		}
 	}
 
-    v2 = param4 * 8;
+    corrected = size * 8;
 
-    if (*param3 == -2147483648) {
-        if (param0 < v2) {
-            *param3 = param1 << 8;
+    if (*temp == -2147483648) {
+        if (max < corrected) {
+            *temp = cur << 8;
         } else {
-            *param3 = param1;
+            *temp = cur;
         }
     }
 
-    v0 = param1 - param2;
+    updated = cur - diff;
 
-    if (v0 < 0) {
-        v0 = 0;
-    } else if (v0 > param0) {
-        v0 = param0;
+    if (updated < 0) {
+        updated = 0;
+    } else if (updated > max) {
+        updated = max;
     }
 
-    if (param0 < v2) {
-        if ((v0 == (*param3 >> 8)) && ((*param3 & 0xff) == 0)) {
+    if (max < corrected) {
+        if ((updated == (*temp >> 8)) && ((*temp & 0xff) == 0)) {
             return -1;
         }
     } else {
-        if (v0 == *param3) {
+        if (updated == *temp) {
             return -1;
         }
     }
 	
     if (HPBarRate == 0)
     {
-        HPBarRate = 8 * diffPos * param1 / (param0 * param0);
-
+        HPBarRate = 8 * diffPos * cur / (max * max);
+		
         if (HPBarRate > 8)
         {
             HPBarRate = 8;
@@ -1573,49 +1578,49 @@ static s32 UpdateGauge (s32 param0, s32 param1, s32 param2, s32 * param3, u8 par
         }
     }
 
-    if (param0 < v2) {
-        v3 = param0 * 0x100 / v2;
+    if (max < corrected) {
+        ratio = max * 0x100 / corrected;
 
-        if (param2 < 0) {
-            *param3 += v3;
-            v1 = *param3 >> 8;
+        if (diff < 0) {
+            *temp += ratio;
+            final = *temp >> 8;
 
-            if (v1 >= v0) {
-                *param3 = v0 << 8;
-                v1 = v0;
+            if (final >= updated) {
+                *temp = updated << 8;
+                final = updated;
             }
         } else {
-            *param3 -= v3;
-            v1 = *param3 >> 8;
+            *temp -= ratio;
+            final = *temp >> 8;
 
-            if ((*param3 & 0xff) > 0) {
-                v1++;
+            if ((*temp & 0xff) > 0) {
+                final++;
             }
 
-            if (v1 <= v0) {
-                *param3 = v0 << 8;
-                v1 = v0;
+            if (final <= updated) {
+                *temp = updated << 8;
+                final = updated;
             }
         }
     } else {
-        if (param2 < 0) {
-            *param3 += HPBarRate;
+        if (diff < 0) {
+            *temp += HPBarRate;
 
-            if (*param3 > v0) {
-                *param3 = v0;
+            if (*temp > updated) {
+                *temp = updated;
             }
         } else {
-            *param3 -= HPBarRate;
+            *temp -= HPBarRate;
 
-            if (*param3 < v0) {
-                *param3 = v0;
+            if (*temp < updated) {
+                *temp = updated;
             }
         }
 
-        v1 = *param3;
+        final = *temp;
     }
 
-    return v1;
+    return final;
 }
 
 static u8 ov16_02268194 (s32 param0, s32 param1, s32 param2, s32 * param3, u8 * param4, u8 param5)
