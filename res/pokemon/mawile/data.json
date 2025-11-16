@@ -118,13 +118,16 @@
             ],
 			"45": "MOVE_IRON_HEAD",
 			"48": "MOVE_PAIN_SPLIT",
-			"56": "MOVE_OUTRAGE"
+			"52": "MOVE_SUPERPOWER",
+			"56": "MOVE_OUTRAGE",
+			"60": "MOVE_HEAD_SMASH"
         },
         "tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
             "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
+			"MOVE_SUPERPOWER",
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
