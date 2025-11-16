@@ -10,12 +10,12 @@
             "species": "SPECIES_EEVEE"
         },
         {
-            "level": 51,
-            "species": "SPECIES_ABSOL"
+            "level": 52,
+            "species": "SPECIES_CLAYDOL"
         },
         {
             "level": 50,
-            "species": "SPECIES_DRATINI"
+            "species": "SPECIES_MAROWAK"
         },
         {
             "level": 50,
@@ -30,8 +30,8 @@
             "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 48,
-            "species": "SPECIES_CHIMECHO"
+            "level": 49,
+            "species": "SPECIES_HAUNTER"
         },
         {
             "level": 51,
@@ -43,11 +43,11 @@
         },
         {
             "level": 51,
-            "species": "SPECIES_ABSOL"
+            "species": "SPECIES_GENGAR"
         },
         {
-            "level": 50,
-            "species": "SPECIES_ABSOL"
+            "level": 53,
+            "species": "SPECIES_DUSKNOIR"
         }
     ],
     "swarms": [
@@ -55,12 +55,12 @@
         "SPECIES_ABSOL"
     ],
     "morning": [
-        "SPECIES_SUDOWOODO",
-        "SPECIES_EXPLOUD"
+        "SPECIES_CLAYDOL",
+        "SPECIES_MAROWAK"
     ],
     "night": [
-        "SPECIES_SUDOWOODO",
-        "SPECIES_EXPLOUD"
+        "SPECIES_CLAYDOL",
+        "SPECIES_MAROWAK"
     ],
     "radar": [
         "SPECIES_ABSOL",
