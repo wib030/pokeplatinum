@@ -5551,7 +5551,8 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
 
     if (move != MOVE_STRUGGLE
-    && move != MOVE_NONE) {
+    && move != MOVE_NONE
+	&& move != MOVE_DESTINY_BOND) {
         // Here we want to just learn every instance of a given pivot move
         // on the opponent's team if they use that pivot move because the 
         // active mon data is switched before the AI gets to run this code
@@ -5629,7 +5630,8 @@ static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *b
     move = AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][randMove];
 
     if (move != MOVE_STRUGGLE
-    && move != MOVE_NONE) {
+    && move != MOVE_NONE
+	&& move != MOVE_DESTINY_BOND) {
         // Here we want to just learn every instance of a given pivot move
         // on the opponent's team if they use that pivot move because the 
         // active mon data is switched before the AI gets to run this code
@@ -5720,8 +5722,8 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
 
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-                if (move != MOVE_NONE) {
-
+                if (move != MOVE_NONE && move != MOVE_DESTINY_BOND) {
+					
                     AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                 }
                 else {
@@ -5768,7 +5770,7 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
 
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-                if (move == MOVE_NONE) {
+                if (move == MOVE_NONE || move == MOVE_DESTINY_BOND) {
                     break;
                 }
 
