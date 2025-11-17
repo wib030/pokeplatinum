@@ -773,6 +773,70 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         }
                     }
                     break;
+
+                case BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER:
+                    if (battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.destinyBondSuccessTurns > 0)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -10);
+                        break;
+                    }
+                    if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 100)
+                        {
+                            break;
+                        }
+
+                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+
+                        if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) > 50)
+                        {
+                            break;
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 12)
+                        {
+                            break;
+                        }
+
+                        AI_AddToMoveScore(battleSys, battleCtx, 3);
+                    }
+                    else
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -1);
+
+                        if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) > 70)
+                        {
+                            break;
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 32)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) > 53)
+                        {
+                            break;
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 64)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) > 30)
+                        {
+                            break;
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 128)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 2);
+                        }
+
+                    }
+                    break;
                 }
             }
         }
@@ -1148,6 +1212,70 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
                 if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
                     if (moveDamage >= battleCtx->battleMons[defender].curHP) {
+                        result = TRUE;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+BOOL AI_AttackerChunksOrKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int k;
+    int moveType, moveDamage, movePower;
+    u8 side;
+    u16 move;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    side = Battler_Side(battleSys, defender);
+
+    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+        effectiveness = 0;
+        move = battleCtx->battleMons[attacker].moves[k];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+
+            moveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, move);
+            movePower = MOVE_DATA(move).power;
+
+            if (movePower > 0) {
+                moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                    battleCtx,
+                    move,
+                    battleCtx->sideConditionsMask[side],
+                    battleCtx->fieldConditionsMask,
+                    movePower,
+                    moveType,
+                    attacker,
+                    defender,
+                    1);
+
+                moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    moveType,
+                    attacker,
+                    defender,
+                    moveDamage,
+                    &effectiveness);
+
+                moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
+                moveDamage /= 100;
+
+                if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                    if (moveDamage >= battleCtx->battleMons[defender].curHP / 2) {
                         result = TRUE;
                         break;
                     }

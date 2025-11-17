@@ -103,6 +103,17 @@ u32 AI_GetBattlerHPPercent(BattleSystem* battleSys, BattleContext* battleCtx, u8
 BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
 
 /**
+* @brief Check if the AI Context attacker chunks or KOs the AI Context defender
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker	The AI Context attacker.
+* @param defender	The AI Context defender.
+* @return TRUE/FALSE whether or not the attacker deals at least 50% max HP damage to the defender.
+*/
+BOOL AI_AttackerChunksOrKOsDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+
+/**
  * @brief Calculate the damage that will be done by all of an attacker's moves.
  *
  * @param battleSys
