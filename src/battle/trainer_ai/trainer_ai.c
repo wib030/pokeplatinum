@@ -6009,11 +6009,11 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
             if (varyDamage == ROLL_FOR_DAMAGE) {
                 damageRoll = AI_CONTEXT.moveDamageRolls[i];
             }
-            else if (varyDamage == USE_MIN_DAMAGE) {
-                damageRoll = DAMAGE_VARIANCE_MIN_ROLL;
+            else if (varyDamage == USE_MAX_DAMAGE) {
+                damageRoll = DAMAGE_VARIANCE_MAX_ROLL;
             }
             else {
-                damageRoll = DAMAGE_VARIANCE_MAX_ROLL;
+                damageRoll = DAMAGE_VARIANCE_MIN_ROLL;
             }
 
             damageVals[i] = TrainerAI_CalcDamage(battleSys, battleCtx, moves[i], heldItem, ivs, attacker, ability, embargoTurns, damageRoll);
