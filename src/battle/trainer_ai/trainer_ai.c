@@ -446,7 +446,7 @@ static void AICmd_LoadBattlerIgnorableAbility(BattleSystem* battleSys, BattleCon
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCtx);
-static void TrainerAI_InitAllInfo(BattleSystem* battleSys, battleContext* battleCtx);
+static void TrainerAI_InitAllInfo(BattleSystem* battleSys, BattleContext* battleCtx);
 static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -745,7 +745,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
 	
 	if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
         if (((battleCtx->totalTurns % 2) == 0)
-            && battleCtx->totalTurns < 11
+            && battleCtx->totalTurns < 11)
         {
             TrainerAI_RecordRandomMove(battleSys, battleCtx);
         }
@@ -851,7 +851,7 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
 
             if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
                 if (((battleCtx->totalTurns % 2) == 0)
-                    && battleCtx->totalTurns < 11
+                    && battleCtx->totalTurns < 11)
                 {
                     TrainerAI_RecordRandomMove(battleSys, battleCtx);
                 }
