@@ -446,6 +446,7 @@ static void AICmd_LoadBattlerIgnorableAbility(BattleSystem* battleSys, BattleCon
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_EvalMoves(BattleSystem *battleSys, BattleContext *battleCtx);
+static void TrainerAI_InitAllInfo(BattleSystem* battleSys, battleContext* battleCtx);
 static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -729,6 +730,8 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     u16 move;
 
     if (battleCtx->totalTurns < 1) {
+        TrainerAI_InitAllInfo(battleSys, battleCtx);
+
         if (AI_CONTEXT.thinkingMask & AI_FLAG_OMNISCIENT) {
             TrainerAI_RevealAllInfo(battleSys, battleCtx);
         }
@@ -741,7 +744,11 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
     TrainerAI_RecordLastMove(battleSys, battleCtx);
 	
 	if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
-		TrainerAI_RecordRandomMove(battleSys, battleCtx);
+        if (((battleCtx->totalTurns % 2) == 0)
+            && battleCtx->totalTurns < 11
+        {
+            TrainerAI_RecordRandomMove(battleSys, battleCtx);
+        }
 	}
 
     while (AI_CONTEXT.thinkingMask) {
@@ -824,6 +831,10 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             continue;
         }
 
+        if (battleCtx->totalTurns < 1) {
+            TrainerAI_InitAllInfo(battleSys, battleCtx);
+        }
+
         TrainerAI_Init(battleSys, battleCtx, AI_CONTEXT.attacker, 0xf);
 
         // Record the last moves of enemy battlers
@@ -831,8 +842,19 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
         if ((battler & 1) != (AI_CONTEXT.attacker & 1)) {
             TrainerAI_RecordLastMove(battleSys, battleCtx);
 
+            if (battleCtx->totalTurns < 1) {
+
+                if (AI_CONTEXT.thinkingMask & AI_FLAG_OMNISCIENT) {
+                    TrainerAI_RevealAllInfo(battleSys, battleCtx);
+                }
+            }
+
             if (AI_CONTEXT.thinkingMask & AI_FLAG_PRESCIENT) {
-                TrainerAI_RecordRandomMove(battleSys, battleCtx);
+                if (((battleCtx->totalTurns % 2) == 0)
+                    && battleCtx->totalTurns < 11
+                {
+                    TrainerAI_RecordRandomMove(battleSys, battleCtx);
+                }
             }
         }
 		
@@ -5535,6 +5557,38 @@ static BOOL AIScript_PopCursor(BattleSystem *battleSys, BattleContext *battleCtx
 }
 
 /**
+ * @brief Initialize AI Context battler info arrays.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void TrainerAI_InitAllInfo(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    int i, j, k;
+
+    for (i = 0; i < MAX_BATTLERS; i++)
+    {
+        battleCtx->aiContext.battlerAbilities[i] = ABILITY_NONE;
+        battleCtx->aiContext.battlerHeldItems[i] = ITEM_NONE;
+
+        for (j = 0; j < LEARNED_MOVES_MAX; j++)
+        {
+            battleCtx->aiContext.battlerMoves[i][j] = MOVE_NONE;
+        }
+
+        for (k = 0; k < MAX_PARTY_SIZE; k++)
+        {
+            for (j = 0; j < LEARNED_MOVES_MAX; j++)
+            {
+                AI_CONTEXT.battlerPartyMoves[i][k][j] = MOVE_NONE;
+                AI_CONTEXT.battlerPartyAbilities[i][k] = ABILITY_NONE;
+                AI_CONTEXT.battlerPartyHeldItems[i][k] = ITEM_NONE;
+            }
+        }
+    }
+}
+
+/**
  * @brief Record the last move used by an active battler, if it is not
  * already known.
  * 
@@ -5558,8 +5612,11 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
 
         for (j = 0; j < LEARNED_MOVES_MAX; j++) {
 
-            AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
-            AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+            if (battleCtx->battleMons[AI_CONTEXT.defender].moves[j] == move)
+            {
+                AI_CONTEXT.battlerMoves[AI_CONTEXT.defender][j] = move;
+                AI_CONTEXT.battlerPartyMoves[AI_CONTEXT.defender][partySlot][j] = move;
+            }
         }
     }
 }
