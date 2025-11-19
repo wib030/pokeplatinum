@@ -5605,7 +5605,8 @@ static void TrainerAI_RecordLastMove(BattleSystem *battleSys, BattleContext *bat
     move = battleCtx->movePrevByBattler[AI_CONTEXT.defender];
 
     if (move != MOVE_STRUGGLE
-    && move != MOVE_NONE)
+    && move != MOVE_NONE
+	&& move != MOVE_DESTINY_BOND)
     {
         partySlot = battleCtx->selectedPartySlot[AI_CONTEXT.defender];
 
@@ -5657,7 +5658,8 @@ static void TrainerAI_RecordRandomMove(BattleSystem *battleSys, BattleContext *b
             move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + randMove, NULL);
 
             if (move != MOVE_STRUGGLE
-                && move != MOVE_NONE)
+                && move != MOVE_NONE
+                && move != MOVE_DESTINY_BOND)
             {
                 if (BattleSystem_RandNext(battleSys) & 1)
                 {
@@ -5705,7 +5707,7 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
 
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-                if (move != MOVE_NONE) {
+                if (move != MOVE_NONE && move != MOVE_DESTINY_BOND) {
 					
                     AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                 }
