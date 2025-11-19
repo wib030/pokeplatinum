@@ -20414,7 +20414,7 @@ BOOL BattleAI_BattleMonHasPriorityMove(BattleSystem *battleSys, BattleContext *b
             move = battleCtx->battleMons[battler].moveEffectsData.encoredMove;
         }
         else {
-            move = battleCtx->aiContext.battlerMoves[battler][i];
+            move = battleCtx->battleMons[battler].moves[i];
         }
 
         if (move == MOVE_NONE) {
@@ -20452,6 +20452,8 @@ BOOL BattleAI_PartyMonHasPriorityMove(BattleSystem* battleSys, BattleContext* ba
     result = FALSE;
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
 
         if (move == MOVE_NONE) {
             break;
