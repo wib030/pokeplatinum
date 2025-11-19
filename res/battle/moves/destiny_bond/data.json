@@ -13,7 +13,7 @@
     "priority": 0,
     "flags": [],
     "contest": {
-        "effect": 9,
+        "effect": 16,
         "type": "CONTEST_TYPE_SMART"
     }
 }
