@@ -5759,14 +5759,14 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                     break;
                 }
 
-                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+                moveType = MOVE_DATA(move).type;
                 moveClass = MOVE_DATA(move).class;
                 effect = MOVE_DATA(move).effect;
 
                 if (moveClass != CLASS_STATUS) {
 
-                    if (moveType == battleCtx->battleMons[battler].type1
-                        || moveType == battleCtx->battleMons[battler].type2) {
+                    if (moveType == Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL)
+                        || moveType == Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL)) {
 
                         AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                     }
@@ -5834,6 +5834,10 @@ static void TrainerAI_RevealBasicInfo(BattleSystem *battleSys, BattleContext *ba
                     case BATTLE_EFFECT_SWITCH_HIT:
                     case BATTLE_EFFECT_SWITCH_HIT_NO_ANIM:
                     case BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE:
+                        AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+                        break;
+
+                    case BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS:
                         AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
                         break;
                     }
