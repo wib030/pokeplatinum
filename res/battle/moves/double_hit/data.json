@@ -4,7 +4,7 @@
     "type": "TYPE_WATER",
     "power": 10,
     "accuracy": 85,
-    "pp": 15,
+    "pp": 10,
     "effect": {
         "type": "BATTLE_EFFECT_MULTI_HIT_TEN",
         "chance": 0
