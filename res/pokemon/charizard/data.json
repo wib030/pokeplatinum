@@ -2,7 +2,7 @@
     "name": "Charizard",
     "base_stats": {
         "hp": 98,
-        "attack": 104,
+        "attack": 99,
         "defense": 78,
         "speed": 102,
         "special_attack": 124,
