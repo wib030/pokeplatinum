@@ -6,7 +6,7 @@
         "defense": 80,
         "speed": 105,
         "special_attack": 50,
-        "special_defense": 50
+        "special_defense": 60
     },
     "types": [
         "TYPE_FIGHTING",
