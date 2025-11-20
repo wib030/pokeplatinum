@@ -2,11 +2,11 @@
     "name": "Exeggutor",
     "base_stats": {
         "hp": 95,
-        "attack": 95,
+        "attack": 115,
         "defense": 85,
         "speed": 65,
         "special_attack": 135,
-        "special_defense": 65
+        "special_defense": 85
     },
     "types": [
         "TYPE_GRASS",

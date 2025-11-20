@@ -94,6 +94,7 @@
             "35": "MOVE_AQUA_RING",
 			"39": "MOVE_RAPID_SPIN",
 			"40": "MOVE_TAILWIND",
+			"42": "MOVE_BATON_PASS",
             "48": "MOVE_U_TURN",
             "53": "MOVE_BOUNCE"
         },
