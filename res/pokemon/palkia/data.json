@@ -5,8 +5,8 @@
         "attack": 120,
         "defense": 100,
         "speed": 100,
-        "special_attack": 150,
-        "special_defense": 120
+        "special_attack": 160,
+        "special_defense": 130
     },
     "types": [
         "TYPE_WATER",
