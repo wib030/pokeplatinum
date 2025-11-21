@@ -115,6 +115,7 @@
 			"31": "MOVE_WORRY_SEED",
             "33": "MOVE_ZEN_HEADBUTT",
             "37": "MOVE_SCREECH",
+			"40": "MOVE_ROCK_BLAST",
             "43": "MOVE_HEAD_SMASH"
         },
         "tutor": [
