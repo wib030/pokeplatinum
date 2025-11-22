@@ -1,5 +1,5 @@
 {
-    "name": "Hater",
+    "name": "Water Hater",
     "class": "TRAINER_CLASS_SAILOR",
     "items": [],
     "ai_flags": [
@@ -52,7 +52,14 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_REPEAT_BALL"
+			"ball_type": "ITEM_REPEAT_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }

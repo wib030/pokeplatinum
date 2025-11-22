@@ -17,9 +17,16 @@
             "moves": [
                 "MOVE_U_TURN"
             ],
-            "power": 180,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+            "power": 255,
+            "ball_seal": 16,
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_STARAPTOR",
@@ -29,9 +36,16 @@
             "moves": [
                 "MOVE_U_TURN"
             ],
-            "power": 180,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+            "power": 255,
+            "ball_seal": 16,
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_STARAPTOR",
@@ -41,9 +55,16 @@
             "moves": [
                 "MOVE_U_TURN"
             ],
-            "power": 180,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+            "power": 255,
+            "ball_seal": 16,
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 128,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
 		{
             "species": "SPECIES_CHIMECHO",
@@ -56,9 +77,16 @@
 				"MOVE_RECOVER",
 				"MOVE_FUTURE_SIGHT"
             ],
-            "power": 180,
-            "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+            "power": 255,
+            "ball_seal": 16,
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252,
+			"nature": 20
         }
     ]
 }

@@ -37,7 +37,13 @@
             ],
             "power": 254,
             "ball_seal": 0,
-			"ball_type": "ITEM_NET_BALL"
+			"ball_type": "ITEM_NET_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_HOUNDOOM",
@@ -52,7 +58,13 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_NET_BALL"
+			"ball_type": "ITEM_NET_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 252,
+			"evSPDEF": 0
         }
     ]
 }
