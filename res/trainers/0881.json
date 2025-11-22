@@ -14,7 +14,7 @@
         {
             "species": "SPECIES_EMPOLEON",
             "form": 0,
-            "level": 44,
+            "level": 41,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
@@ -43,10 +43,10 @@
 		{
             "species": "SPECIES_MACHAMP",
             "form": 0,
-            "level": 44,
+            "level": 41,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
-                "MOVE_DYNAMIC_PUNCH",
+                "MOVE_SUPERPOWER",
 				"MOVE_FIRE_BLAST",
 				"MOVE_KNOCK_OFF",
 				"MOVE_ENCORE"
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_DELIBIRD",
             "form": 0,
-            "level": 44,
+            "level": 41,
             "item": "ITEM_STICKY_BARB",
             "moves": [
                 "MOVE_PRESENT",
@@ -101,7 +101,7 @@
 		{
             "species": "SPECIES_STEELIX",
             "form": 0,
-            "level": 44,
+            "level": 41,
             "item": "ITEM_AGUAV_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -124,7 +124,7 @@
 		{
             "species": "SPECIES_GENGAR",
             "form": 0,
-            "level": 44,
+            "level": 41,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_SHADOW_BALL",
@@ -153,7 +153,7 @@
 		{
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 44,
+            "level": 41,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_CHARGE_BEAM",

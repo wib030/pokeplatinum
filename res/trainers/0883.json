@@ -15,7 +15,7 @@
         {
             "species": "SPECIES_GOLEM",
             "form": 0,
-            "level": 50,
+            "level": 47,
             "item": "ITEM_CUSTAP_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -38,7 +38,7 @@
 		{
             "species": "SPECIES_CLOYSTER",
             "form": 0,
-            "level": 50,
+            "level": 47,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_ICICLE_SPEAR",
@@ -61,7 +61,7 @@
 		{
             "species": "SPECIES_HYPNO",
             "form": 0,
-            "level": 50,
+            "level": 47,
             "item": "ITEM_ZOOM_LENS",
             "moves": [
                 "MOVE_MIRACLE_EYE",
@@ -90,7 +90,7 @@
 		{
             "species": "SPECIES_SMEARGLE",
             "form": 0,
-            "level": 50,
+            "level": 47,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_SPORE",
@@ -119,7 +119,7 @@
 		{
             "species": "SPECIES_BRELOOM",
             "form": 0,
-            "level": 50,
+            "level": 47,
             "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_BULLET_SEED",
@@ -142,7 +142,7 @@
 		{
             "species": "SPECIES_MAWILE",
             "form": 0,
-            "level": 50,
+            "level": 47,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
                 "MOVE_IRON_HEAD",

@@ -11,9 +11,9 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_EMPOLEON",
+            "species": "SPECIES_PRINPLUP",
             "form": 0,
-            "level": 35,
+            "level": 32,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
@@ -40,12 +40,12 @@
 			"nature": 5
         },
 		{
-            "species": "SPECIES_MACHAMP",
+            "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 35,
+            "level": 32,
             "item": "ITEM_QUICK_CLAW",
             "moves": [
-                "MOVE_DYNAMIC_PUNCH",
+                "MOVE_SUPERPOWER",
 				"MOVE_FIRE_BLAST",
 				"MOVE_KNOCK_OFF",
 				"MOVE_ENCORE"
@@ -71,7 +71,7 @@
 		{
             "species": "SPECIES_DELIBIRD",
             "form": 0,
-            "level": 35,
+            "level": 32,
             "item": "ITEM_STICKY_BARB",
             "moves": [
                 "MOVE_PRESENT",
@@ -100,7 +100,7 @@
 		{
             "species": "SPECIES_STEELIX",
             "form": 0,
-            "level": 35,
+            "level": 32,
             "item": "ITEM_AGUAV_BERRY",
             "moves": [
                 "MOVE_EARTHQUAKE",
@@ -121,9 +121,9 @@
 			"nature": 3
         },
 		{
-            "species": "SPECIES_GENGAR",
+            "species": "SPECIES_HAUNTER",
             "form": 0,
-            "level": 35,
+            "level": 32,
             "item": "ITEM_BRIGHTPOWDER",
             "moves": [
                 "MOVE_SHADOW_BALL",
@@ -152,7 +152,7 @@
 		{
             "species": "SPECIES_AMPHAROS",
             "form": 0,
-            "level": 35,
+            "level": 32,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_CHARGE_BEAM",

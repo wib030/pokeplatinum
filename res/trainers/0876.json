@@ -13,7 +13,7 @@
         {
             "species": "SPECIES_DUGTRIO",
             "form": 0,
-            "level": 32,
+            "level": 30,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_EARTH_POWER",
@@ -42,7 +42,7 @@
 		{
             "species": "SPECIES_METANG",
             "form": 0,
-            "level": 32,
+            "level": 30,
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_IRON_HEAD",
@@ -72,7 +72,7 @@
 		{
             "species": "SPECIES_QWILFISH",
             "form": 0,
-            "level": 32,
+            "level": 30,
             "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
                 "MOVE_AQUA_JET",
@@ -101,7 +101,7 @@
 		{
             "species": "SPECIES_CLEFABLE",
             "form": 0,
-            "level": 32,
+            "level": 30,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SEISMIC_TOSS",
@@ -130,7 +130,7 @@
 		{
             "species": "SPECIES_KECLEON",
             "form": 0,
-            "level": 32,
+            "level": 30,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_SEISMIC_TOSS",
@@ -159,7 +159,7 @@
 		{
             "species": "SPECIES_TOGEKISS",
             "form": 0,
-            "level": 32,
+            "level": 30,
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_AIR_SLASH",

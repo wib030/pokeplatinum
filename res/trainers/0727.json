@@ -1,6 +1,6 @@
 {
     "name": "Sunyshore.c",
-    "class": "TRAINER_CLASS_RICH_BOY",
+    "class": "TRAINER_CLASS_LADY",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
