@@ -1561,24 +1561,29 @@ static s32 UpdateGauge (s32 max, s32 cur, s32 diff, s32 * temp, u8 size, u16 fil
         }
     }
 	
-    if (HPBarRate == 0)
-    {
-        HPBarRate = 8 * diffPos * cur / (max * max);
-		
-        if (HPBarRate > 8)
-        {
-            HPBarRate = 8;
-        }
-        else
-        {
-            if (HPBarRate < 1)
-            {
-                HPBarRate = 1;
-            }
-        }
-    }
-	
-	HPBarRate *= fillOffset;
+	if (fillOffset > 1)
+	{
+		HPBarRate = fillOffset;
+	}
+	else
+	{
+		if (HPBarRate == 0)
+		{
+			HPBarRate = 8 * diffPos * cur / (max * max);
+			
+			if (HPBarRate > 8)
+			{
+				HPBarRate = 8;
+			}
+			else
+			{
+				if (HPBarRate < 1)
+				{
+					HPBarRate = 1;
+				}
+			}
+		}
+	}
 
     if (max < corrected) {
         ratio = max * 0x100 / corrected;
