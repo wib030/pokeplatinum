@@ -84,6 +84,7 @@
             "1": [
 				"MOVE_WEATHER_BALL",
 				"MOVE_TAILWIND",
+				"MOVE_HEAL_BELL",
                 "MOVE_WING_ATTACK",
 				"MOVE_RAZOR_WIND",
                 "MOVE_POWDER_SNOW"
