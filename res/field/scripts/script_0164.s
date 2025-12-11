@@ -71,7 +71,7 @@ _00A9:
     CompareVarToValue 0x800C, 0
     GoToIf 1, _00D9
     ScrCmd_02C 7
-    ScrCmd_014 0x7E3
+    ScrCmd_02C 13
     ScrCmd_035
     Call _00E4
     ScrCmd_061
