@@ -223,9 +223,29 @@ static void sub_02084E58 (GameWindowLayout * param0, u16 param1, u32 param2)
 {
     Pokemon * v0;
     Strbuf* v1;
+	int monNature, monHP_EV, monATK_EV, monDEF_EV, monSpATK_EV, monSpDEF_EV, monSpeed_EV;
+	BOOL noEVs = FALSE;
 
     v0 = Party_GetPokemonBySlotIndex(param0->unk_5A4->unk_00, param0->unk_B11);
     StringTemplate_SetNickname(param0->unk_6A0, 0, Pokemon_GetBoxPokemon(v0));
+	monNature = Pokemon_GetNature(v0);
+	
+	monHP_EV = Pokemon_GetValue(v0, MON_DATA_HP_EV, NULL);
+	monATK_EV = Pokemon_GetValue(v0, MON_DATA_ATK_EV, NULL);
+	monDEF_EV = Pokemon_GetValue(v0, MON_DATA_DEF_EV, NULL);
+	monSpATK_EV = Pokemon_GetValue(v0, MON_DATA_SPATK_EV, NULL);
+	monSpDEF_EV = Pokemon_GetValue(v0, MON_DATA_SPDEF_EV, NULL);
+	monSpeed_EV = Pokemon_GetValue(v0, MON_DATA_SPEED_EV, NULL);
+	
+	if (monHP_EV == 0
+	&& monATK_EV == 0
+	&& monDEF_EV == 0
+	&& monSpATK_EV == 0
+	&& monSpDEF_EV == 0
+	&& monSpeed_EV == 0)
+	{
+		noEVs = TRUE;
+	}
 
     switch (sub_02084B70(param1)) {
     case 4:
@@ -244,7 +264,7 @@ static void sub_02084E58 (GameWindowLayout * param0, u16 param1, u32 param2)
         Strbuf_Free(v1);
         break;
     case 6:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 68);
+		v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 205 + monNature); // v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 68);
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
@@ -269,38 +289,85 @@ static void sub_02084E58 (GameWindowLayout * param0, u16 param1, u32 param2)
         Strbuf_Free(v1);
         break;
     case 12:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
-        StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 0);
+		if (noEVs == TRUE)
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 230);
+		}
+		else
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
+			StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 0);
+		}
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
     case 13:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
-        StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 1);
+		if (noEVs == TRUE)
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 230);
+		}
+		else
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
+			StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 1);
+		}
+		
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
     case 14:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
-        StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 2);
+		if (noEVs == TRUE)
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 230);
+		}
+		else
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
+			StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 2);
+		}
+		
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
     case 15:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
-        StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 3);
+		if (noEVs == TRUE)
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 230);
+		}
+		else
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
+			StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 3);
+		}
+		
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
     case 16:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
-        StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 4);
+		if (noEVs == TRUE)
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 230);
+		}
+		else
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
+			StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 4);
+		}
+		
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
     case 17:
-        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
-        StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 5);
+		if (noEVs == TRUE)
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 230);
+		}
+		else
+		{
+			v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 75);
+			StringTemplate_SetPokemonStatName(param0->unk_6A0, 1, 5);
+		}
+		
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
         Strbuf_Free(v1);
         break;
