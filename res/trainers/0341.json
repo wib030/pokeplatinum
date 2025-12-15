@@ -20,8 +20,15 @@
 				"MOVE_THUNDER_WAVE",
 				"MOVE_SELFDESTRUCT"
             ],
-            "power": 160,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
 		{
             "species": "SPECIES_ROTOM",

@@ -21,7 +21,13 @@
 				"MOVE_YAWN"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 100,
+			"evATK": 100,
+			"evDEF": 100,
+			"evSPEED": 100,
+			"evSPATK": 0,
+			"evSPDEF": 100
         },
         {
             "species": "SPECIES_RAICHU",
@@ -35,7 +41,20 @@
 				"MOVE_KNOCK_OFF"
             ],
             "power": 160,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"ivHP": 15,
+			"ivATK": 31,
+			"ivDEF": 15,
+			"ivSPEED": 20,
+			"ivSPATK": 20,
+			"ivSPDEF": 15,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 128,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 1
         },
         {
             "species": "SPECIES_ROTOM",

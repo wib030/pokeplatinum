@@ -78,7 +78,7 @@
             "moves": [
                 "MOVE_LEAF_STORM",
 				"MOVE_DISCHARGE",
-				"MOVE_HIDDEN_POWER",
+				"MOVE_BIND",
 				"MOVE_NASTY_PLOT"
             ],
             "power": 0,
