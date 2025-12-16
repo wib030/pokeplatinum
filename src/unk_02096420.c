@@ -201,7 +201,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
                     return 1;
                 }
             } else if (v1[6] < 0) {
-                if (v1[0] > 0) {
+                if (v1[0] > 0
+					|| Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) > 0) {
                     Heap_FreeToHeap(v0);
                     return 1;
                 }
@@ -224,7 +225,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
                 return 1;
             }
         } else if (v1[6] < 0) {
-            if (v1[1] > 0) {
+            if (v1[1] > 0
+				|| Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) > 0) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -246,7 +248,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
                 return 1;
             }
         } else if (v1[6] < 0) {
-            if (v1[2] > 0) {
+            if (v1[2] > 0
+				|| Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) > 0) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -268,7 +271,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
                 return 1;
             }
         } else if (v1[6] < 0) {
-            if (v1[3] > 0) {
+            if (v1[3] > 0
+				|| Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) > 0) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -290,7 +294,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
                 return 1;
             }
         } else if (v1[6] < 0) {
-            if (v1[4] > 0) {
+            if (v1[4] > 0
+				|| Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) > 0) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -312,7 +317,8 @@ u8 CheckItemEffectsOnPokemon (Pokemon * param0, u16 param1, u16 param2, u32 para
                 return 1;
             }
         } else if (v1[6] < 0) {
-            if (v1[5] > 0) {
+            if (v1[5] > 0
+				|| Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) > 0) {
                 Heap_FreeToHeap(v0);
                 return 1;
             }
@@ -496,12 +502,24 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
             }
 
             if (v1[6] == -1) {
-                if (Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) < 31) {
-					tempIV = Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) + 1;
-                    Pokemon_SetValue(param0, MON_DATA_HP_IV, &tempIV); 
-                    Pokemon_CalcLevelAndStats(param0);
-                    v2 = 1;
-                }
+				if (v1[7] > 0)
+				{
+					if (Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) < 31) {
+						tempIV = Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) + 1;
+						Pokemon_SetValue(param0, MON_DATA_HP_IV, &tempIV); 
+						Pokemon_CalcLevelAndStats(param0);
+						v2 = 1;
+					}
+				}
+				else if (v1[7] < 0)
+				{
+					if (Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) > 0) {
+						tempIV = Pokemon_GetValue(param0, MON_DATA_HP_IV, NULL) - 1;
+						Pokemon_SetValue(param0, MON_DATA_HP_IV, &tempIV); 
+						Pokemon_CalcLevelAndStats(param0);
+						v2 = 1;
+					}
+				}
             }
 
             if (v1[7] > 0) {
@@ -522,12 +540,24 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
         }
 
         if (v1[6] == -1) {
-            if (Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) < 31) {
-                tempIV = Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) + 1;
-                Pokemon_SetValue(param0, MON_DATA_ATK_IV, &tempIV);
-                Pokemon_CalcLevelAndStats(param0);
-                v2 = 1;
-            }
+			if (v1[7] > 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) < 31) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) + 1;
+					Pokemon_SetValue(param0, MON_DATA_ATK_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
+			else if (v1[7] < 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) > 0) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_ATK_IV, NULL) - 1;
+					Pokemon_SetValue(param0, MON_DATA_ATK_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
         }
 
         if (v1[7] > 0) {
@@ -547,12 +577,24 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
         }
 
         if (v1[6] == -1) {
-            if (Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) < 31) {
-                tempIV = Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) + 1;
-                Pokemon_SetValue(param0, MON_DATA_DEF_IV, &tempIV);
-                Pokemon_CalcLevelAndStats(param0);
-                v2 = 1;
-            }
+			if (v1[7] > 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) < 31) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) + 1;
+					Pokemon_SetValue(param0, MON_DATA_DEF_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
+			else if (v1[7] < 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) > 0) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_DEF_IV, NULL) - 1;
+					Pokemon_SetValue(param0, MON_DATA_DEF_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
         }
 
         if (v1[7] > 0) {
@@ -572,12 +614,24 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
         }
 
         if (v1[6] == -1) {
-            if (Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) < 31) {
-                tempIV = Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) + 1;
-                Pokemon_SetValue(param0, MON_DATA_SPEED_IV, &tempIV);
-                Pokemon_CalcLevelAndStats(param0);
-                v2 = 1;
-            }
+			if (v1[7] > 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) < 31) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) + 1;
+					Pokemon_SetValue(param0, MON_DATA_SPEED_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
+			else if (v1[7] < 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) > 0) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_SPEED_IV, NULL) - 1;
+					Pokemon_SetValue(param0, MON_DATA_SPEED_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
         }
 
         if (v1[7] > 0) {
@@ -597,12 +651,24 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
         }
 
         if (v1[6] == -1) {
-            if (Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) < 31) {
-                tempIV = Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) + 1;
-                Pokemon_SetValue(param0, MON_DATA_SPATK_IV, &tempIV);
-                Pokemon_CalcLevelAndStats(param0);
-                v2 = 1;
-            }
+			if (v1[7] > 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) < 31) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) + 1;
+					Pokemon_SetValue(param0, MON_DATA_SPATK_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
+			else if (v1[7] < 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) > 0) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_SPATK_IV, NULL) - 1;
+					Pokemon_SetValue(param0, MON_DATA_SPATK_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
         }
 
         if (v1[7] > 0) {
@@ -637,12 +703,24 @@ u8 ApplyItemEffectsToPokemon (Pokemon * param0, u16 param1, u16 param2, u16 para
 		}
 
         if (v1[6] == -1 && v1[7] != 1) {
-            if (Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) < 31) {
-                tempIV = Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) + 1;
-                Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, &tempIV);
-                Pokemon_CalcLevelAndStats(param0);
-                v2 = 1;
-            }
+			if (v1[7] > 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) < 31) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) + 1;
+					Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
+			else if (v1[7] < 0)
+			{
+				if (Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) > 0) {
+					tempIV = Pokemon_GetValue(param0, MON_DATA_SPDEF_IV, NULL) - 1;
+					Pokemon_SetValue(param0, MON_DATA_SPDEF_IV, &tempIV);
+					Pokemon_CalcLevelAndStats(param0);
+					v2 = 1;
+				}
+			}
         }
 
         if (v1[7] > 0) {
