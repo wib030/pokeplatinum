@@ -74,6 +74,9 @@ typedef struct PokemonSummaryAppData {
     u32 pokerus : 2;
 
     u32 ribbons[4];
+	
+	u16 curHPBar;
+    u16 maxHPBar;
 } PokemonSummaryAppData;
 
 typedef struct PokemonSummaryAppSpriteData {
@@ -134,6 +137,8 @@ typedef struct PokemonSummaryApp {
     u8 ribbonState;
     u8 ribbonMax;
     u8 ribbonNum;
+	
+	u8 statPage;
 } PokemonSummaryApp;
 
 #endif // POKEPLATINUM_STRUCT_POKEMON_SUMMARY_APP_H

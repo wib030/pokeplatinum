@@ -102,6 +102,7 @@ static void sub_0208D948(PokemonSummaryApp * param0);
 static void sub_0208D9D0(PokemonSummaryApp * param0);
 static void sub_0208DA84(PokemonSummaryApp * param0);
 static void sub_0208DB10(PokemonSummaryApp * param0, s8 param1);
+static void ChangeSummaryMonNoCry(PokemonSummaryApp * summary, s8 delta);
 static s8 sub_0208DBC4(PokemonSummaryApp * param0, s8 param1);
 static s8 sub_0208DC1C(PokemonSummaryApp * param0, s8 param1);
 static s8 sub_0208DC84(PokemonSummaryApp * param0, s8 param1);
@@ -564,6 +565,32 @@ static int sub_0208CA00 (PokemonSummaryApp * param0)
         param0->data->returnMode = 1;
         return 18;
     }
+	
+	if (gCoreSys.pressedKeys & PAD_BUTTON_R && param0->page == 2) {
+		switch (param0->statPage)
+		{	
+			case 1:
+				param0->statPage = 2;
+				break;
+				
+			case 2:
+				param0->statPage = 3;
+				break;
+				
+			case 3:
+				param0->statPage = 0;
+				break;
+			
+			default:
+				param0->statPage = 1;
+				break;
+		}
+		Sound_PlayEffect(1501);
+		
+		// Update the mon to display stats
+		ChangeSummaryMonNoCry(param0, 0);
+        return 2;
+    }
 
     if (gCoreSys.pressedKeys & PAD_BUTTON_A) {
         if ((param0->data->mode == 3) && (param0->page == 4)) {
@@ -1021,10 +1048,12 @@ static void sub_0208D200 (PokemonSummaryApp * param0, Pokemon * param1, PokemonS
     u16 v1;
     u8 v2;
     BOOL v3;
+	int form;
 
     v3 = Pokemon_EnterDecryptionContext(param1);
 
     param2->species = (u16)Pokemon_GetValue(param1, MON_DATA_SPECIES, NULL);
+	form = Pokemon_GetValue(param1, MON_DATA_FORM, NULL);
 
     v0 = Pokemon_GetBoxPokemon(param1);
 
@@ -1064,14 +1093,53 @@ static void sub_0208D200 (PokemonSummaryApp * param0, Pokemon * param1, PokemonS
     } else {
         param2->nextLevelExp = Pokemon_GetSpeciesBaseExpAt(param2->species, param2->level + 1);
     }
-
-    param2->curHP = (u16)Pokemon_GetValue(param1, MON_DATA_CURRENT_HP, NULL);
-    param2->maxHP = (u16)Pokemon_GetValue(param1, MON_DATA_MAX_HP, NULL);
-    param2->attack = (u16)Pokemon_GetValue(param1, MON_DATA_ATK, NULL);
-    param2->defense = (u16)Pokemon_GetValue(param1, MON_DATA_DEF, NULL);
-    param2->spAttack = (u16)Pokemon_GetValue(param1, MON_DATA_SP_ATK, NULL);
-    param2->spDefense = (u16)Pokemon_GetValue(param1, MON_DATA_SP_DEF, NULL);
-    param2->speed = (u16)Pokemon_GetValue(param1, MON_DATA_SPEED, NULL);
+	
+	switch (param0->statPage)
+	{	
+		case 1:
+			param2->curHP = (u16)Pokemon_GetValue(param1, MON_DATA_HP_IV, NULL);
+			param2->maxHP = (u16)Pokemon_GetValue(param1, MON_DATA_HP_IV, NULL);
+			param2->attack = (u16)Pokemon_GetValue(param1, MON_DATA_ATK_IV, NULL);
+			param2->defense = (u16)Pokemon_GetValue(param1, MON_DATA_DEF_IV, NULL);
+			param2->spAttack = (u16)Pokemon_GetValue(param1, MON_DATA_SPATK_IV, NULL);
+			param2->spDefense = (u16)Pokemon_GetValue(param1, MON_DATA_SPDEF_IV, NULL);
+			param2->speed = (u16)Pokemon_GetValue(param1, MON_DATA_SPEED_IV, NULL);
+			break;
+			
+		case 2:
+			param2->curHP = (u16)Pokemon_GetValue(param1, MON_DATA_HP_EV, NULL);
+			param2->maxHP = (u16)Pokemon_GetValue(param1, MON_DATA_HP_EV, NULL);
+			param2->attack = (u16)Pokemon_GetValue(param1, MON_DATA_ATK_EV, NULL);
+			param2->defense = (u16)Pokemon_GetValue(param1, MON_DATA_DEF_EV, NULL);
+			param2->spAttack = (u16)Pokemon_GetValue(param1, MON_DATA_SPATK_EV, NULL);
+			param2->spDefense = (u16)Pokemon_GetValue(param1, MON_DATA_SPDEF_EV, NULL);
+			param2->speed = (u16)Pokemon_GetValue(param1, MON_DATA_SPEED_EV, NULL);
+			break;
+			
+		case 3:
+			param2->curHP = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_HP);
+			param2->maxHP = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_HP);
+			param2->attack = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_ATK);
+			param2->defense = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_DEF);
+			param2->spAttack = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_SP_ATK);
+			param2->spDefense = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_SP_DEF);
+			param2->speed = (u16)PokemonPersonalData_GetFormValue(param2->species, form, MON_DATA_PERSONAL_BASE_SPEED);
+			break;
+		
+		default:
+			param2->curHP = (u16)Pokemon_GetValue(param1, MON_DATA_CURRENT_HP, NULL);
+			param2->maxHP = (u16)Pokemon_GetValue(param1, MON_DATA_MAX_HP, NULL);
+			param2->attack = (u16)Pokemon_GetValue(param1, MON_DATA_ATK, NULL);
+			param2->defense = (u16)Pokemon_GetValue(param1, MON_DATA_DEF, NULL);
+			param2->spAttack = (u16)Pokemon_GetValue(param1, MON_DATA_SP_ATK, NULL);
+			param2->spDefense = (u16)Pokemon_GetValue(param1, MON_DATA_SP_DEF, NULL);
+			param2->speed = (u16)Pokemon_GetValue(param1, MON_DATA_SPEED, NULL);
+			break;
+	}
+	
+	param2->curHPBar = (u16)Pokemon_GetValue(param1, MON_DATA_CURRENT_HP, NULL);
+	param2->maxHPBar = (u16)Pokemon_GetValue(param1, MON_DATA_MAX_HP, NULL);
+	
     param2->ability = (u8)Pokemon_GetValue(param1, MON_DATA_ABILITY, NULL);
     param2->nature = Pokemon_GetNature(param1);
 
@@ -1098,7 +1166,7 @@ static void sub_0208D200 (PokemonSummaryApp * param0, Pokemon * param1, PokemonS
     }
 
     param2->markings = Pokemon_GetValue(param1, MON_DATA_MARKS, NULL);
-    param2->form = Pokemon_GetValue(param1, MON_DATA_FORM, NULL);
+    param2->form = form;
     param2->status = PokemonSummary_StatusIconAnimIdx(param1);
 
     if (Pokemon_CanSpreadPokerus(param1) == 1) {
@@ -1368,7 +1436,7 @@ static void sub_0208D9D0 (PokemonSummaryApp * param0)
     u8 v2;
     u8 v3;
 
-    switch (HealthBar_Color(param0->monData.curHP, param0->monData.maxHP, 48)) {
+    switch (HealthBar_Color(param0->monData.curHPBar, param0->monData.maxHPBar, 48)) {
     case 4:
     case 3:
     case 0:
@@ -1382,7 +1450,7 @@ static void sub_0208D9D0 (PokemonSummaryApp * param0)
         break;
     }
 
-    v2 = App_PixelCount(param0->monData.curHP, param0->monData.maxHP, 48);
+    v2 = App_PixelCount(param0->monData.curHPBar, param0->monData.maxHPBar, 48);
 
     for (v3 = 0; v3 < 6; v3++) {
         if (v2 >= 8) {
@@ -1477,6 +1545,69 @@ static void sub_0208DB10 (PokemonSummaryApp * param0, s8 param1)
     sub_0208F34C(param0);
     sub_0208F574(param0);
     sub_020904C4(param0);
+}
+
+static void ChangeSummaryMonNoCry(PokemonSummaryApp * summary, s8 delta)
+{
+	// Get index of summary mon
+    s8 monIndex = sub_0208DBC4(summary, delta);
+
+    if (monIndex == -1) {
+        return;
+    }
+
+    summary->data->pos = (u8)monIndex;
+	
+	// Set mon data
+    sub_0208D1A4(summary);
+	
+	// Print nickname/gender
+    sub_0208FEA4(summary);
+	
+	// Print level
+    sub_0208FF3C(summary);
+	
+	// Print item name
+    sub_0208FFE0(summary);
+	
+	// Draw HP bar
+    sub_0208D9D0(summary);
+	
+	// Update A button sprite
+    sub_0208F6DC(summary, NULL);
+	
+	// Update page tab sprites
+    sub_0208ECF4(summary);
+	
+	// Set page arrow pos
+    sub_0208EDC4(summary);
+	
+	// Set mon type icons
+    sub_0208F16C(summary);
+	
+	// Update type icons
+    sub_0208EF58(summary);
+	
+	// Update ribbon sprites
+    sub_0208FA04(summary);
+	
+	// Set mon icon
+    sub_0208F71C(summary);
+	
+	// Set caught ball gfx
+    sub_0208EE3C(summary);
+	
+	// Update status icon
+    sub_0208EE9C(summary);
+	
+	// Init sheen sprites
+    sub_0208F34C(summary);
+	
+	// Update misc mon data sprites
+    sub_0208F574(summary);
+	
+	// Draw extra windows
+    sub_020904C4(summary);
 }
 
 static s8 sub_0208DBC4 (PokemonSummaryApp * param0, s8 param1)

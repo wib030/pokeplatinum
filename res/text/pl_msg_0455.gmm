@@ -440,7 +440,7 @@
 	</row>
 	<row id="pl_msg_00000455_00109" index="109">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">POKéMON SKILLS</language>
+		<language name="English">STATS (R Toggle)</language>
 	</row>
 	<row id="pl_msg_00000455_00110" index="110">
 		<attribute name="window_context_name">used</attribute>
