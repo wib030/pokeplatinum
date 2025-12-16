@@ -67,6 +67,8 @@
 #include "overlay005/ov5_021D2F14.h"
 #include "overlay007/ov7_0224CD28.h"
 
+#include "constants/items.h"
+
 static u8 ov7_0224CE90(FieldSystem * fieldSystem);
 static u8 ov7_0224D250(FieldSystem * fieldSystem, UnkStruct_ov7_0224D008 * param1);
 static void ov7_0224D008(UnkStruct_ov7_0224D008 * param0);
@@ -1220,6 +1222,8 @@ static u8 ov7_0224E5B0 (UnkStruct_ov7_0224D008 * param0)
 
 static u8 ov7_0224E6B8 (UnkStruct_ov7_0224D008 * param0)
 {
+	int rowanBallNum;
+	
     if (FieldMessage_FinishedPrinting(param0->unk_2A4) == 0) {
         return 10;
     }
@@ -1229,9 +1233,24 @@ static u8 ov7_0224E6B8 (UnkStruct_ov7_0224D008 * param0)
             sub_0206B3B4(param0->unk_288);
         }
 
-        if (((param0->unk_2A9 == 0) || (param0->unk_2A9 == 3)) && (param0->unk_2AA == 4) && (param0->unk_2AC >= 10)) {
-            if (sub_0207D570(param0->unk_274, 12, 1, 11) == 1) {
-                Strbuf* v0 = MessageLoader_GetNewStrbuf(param0->unk_88, 10);
+        if (((param0->unk_2A9 == 0) || (param0->unk_2A9 == 3)) && (param0->unk_2AA == ITEM_POKE_BALL || param0->unk_2AA == ITEM_GREAT_BALL || param0->unk_2AA == ITEM_ULTRA_BALL || param0->unk_2AA == ITEM_SAFARI_BALL || param0->unk_2AA == ITEM_NET_BALL || param0->unk_2AA == ITEM_DIVE_BALL || param0->unk_2AA == ITEM_NEST_BALL || param0->unk_2AA == ITEM_REPEAT_BALL || param0->unk_2AA == ITEM_TIMER_BALL || param0->unk_2AA == ITEM_LUXURY_BALL || param0->unk_2AA == ITEM_PREMIER_BALL || param0->unk_2AA == ITEM_DUSK_BALL || param0->unk_2AA == ITEM_HEAL_BALL || param0->unk_2AA == ITEM_QUICK_BALL) && (param0->unk_2AC >= 10)) {
+			rowanBallNum = param0->unk_2AC / 10;
+			
+			if (rowanBallNum < 1)
+			{
+				rowanBallNum = 1;
+			}
+			
+            if (sub_0207D570(param0->unk_274, ITEM_PREMIER_BALL, rowanBallNum, 11) == 1) {
+				Strbuf* v0;
+				if (rowanBallNum > 1)
+				{
+					v0 = MessageLoader_GetNewStrbuf(param0->unk_88, 39);
+				}
+				else
+				{
+					v0 = MessageLoader_GetNewStrbuf(param0->unk_88, 10);
+				}
 
                 StringTemplate_Format(param0->unk_8C, param0->unk_298, v0);
                 Strbuf_Free(v0);

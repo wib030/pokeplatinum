@@ -158,4 +158,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">{STRVAR_1 53, 0, 0} BP</language>
 	</row>
+	<row id="pl_msg_00000543_00039" index="39">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">You also get some Premier Balls\nas an added bonus.</language>
+	</row>
 </body>
