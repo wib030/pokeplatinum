@@ -519,6 +519,11 @@ Basic_CheckCannotPoison:
     IfLoadedEqualTo TYPE_POISON, ScoreMinus10
     GoTo Basic_CheckCannotPoison_CheckDefenderAbility
 
+Basic_CheckCannotPoison_CheckCorrosion:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_CORROSION, ScoreMinus12
+    GoTo Basic_CheckCannotPoison_CheckDefenderAbility
+
 Basic_CheckCannotPoison_CheckDefenderAbility:
     ; Check for immunity by ability
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -530,11 +535,6 @@ Basic_CheckCannotPoison_CheckDefenderAbility:
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus10
     GoTo Basic_CheckCannotPoison_StatusOrSafeguard
-
-Basic_CheckCannotPoison_CheckCorrosion:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_CORROSION, ScoreMinus12
-    GoTo Basic_CheckCannotPoison_CheckDefenderAbility
 
 Basic_CheckCannotPoison_Hydration:
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -619,12 +619,13 @@ Basic_CheckCannotParalyze:
     IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
+    IfMoveEqualTo MOVE_STUN_SPORE, Basic_CheckCannotParalyze_PowderMove
+    IfMoveEqualTo MOVE_THUNDER_WAVE, Basic_CheckCannotParalyze_ThunderWave
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
     IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus10
-    IfMoveEqualTo MOVE_THUNDER_WAVE, Basic_CheckCannotParalyze_ThunderWave
-    IfMoveEqualTo MOVE_STUN_SPORE, Basic_CheckCannotParalyze_PowderMove
+    IfLoadedEqualTo ABILITY_GUTS, Try95ChanceForScoreMinus12
     GoTo Basic_CheckCannotParalyze_ImmuneToStatus
 
 Basic_CheckCannotParalyze_ThunderWave:
@@ -909,15 +910,17 @@ Basic_CheckTorment:
 
 Basic_CheckCannotBurn:
     ; If the target cannot be burned for any reason, score -10.
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus10
+    IfLoadedEqualTo ABILITY_FLARE_BOOST, ScoreMinus10
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_FIRE, ScoreMinus10
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_FIRE, ScoreMinus10
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckHelpingHand:
@@ -1186,90 +1189,14 @@ Basic_CheckFling:
 
     ; Branch according to possible status effects.
     LoadHeldItemEffect AI_BATTLER_ATTACKER
-    IfLoadedInTable Basic_FlingItems_Poison, Basic_FlingPoison
-    IfLoadedInTable Basic_FlingItems_Burn, Basic_FlingBurn
-    IfLoadedInTable Basic_FlingItems_Paralyze, Basic_FlingParalyze
-    PopOrEnd 
-
-Basic_FlingPoison:
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Basic_FlingPoison_AttackerChecks
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Basic_FlingPoison_AttackerChecks
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_POISON_HEAL, Basic_FlingPoison_AttackerChecks
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_POISON, Basic_FlingPoison_AttackerChecks
-    IfLoadedEqualTo TYPE_STEEL, Basic_FlingPoison_AttackerChecks
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_POISON, Basic_FlingPoison_AttackerChecks
-    IfLoadedEqualTo TYPE_STEEL, Basic_FlingPoison_AttackerChecks
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_IMMUNITY, Basic_FlingPoison_AttackerChecks
-    IfLoadedEqualTo ABILITY_POISON_HEAL, Basic_FlingPoison_AttackerChecks
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Basic_FlingPoison_AttackerChecks
-    PopOrEnd 
-
-Basic_FlingPoison_AttackerChecks:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SAFEGUARD, ScoreMinus5
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScoreMinus5
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_POISON, ScoreMinus5
-    IfLoadedEqualTo TYPE_STEEL, ScoreMinus5
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_POISON, ScoreMinus5
-    IfLoadedEqualTo TYPE_STEEL, ScoreMinus5
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus5
-    IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus5
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus5
-    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
-    AddToMoveScore 3
-    PopOrEnd 
-
-Basic_FlingBurn:
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Basic_FlingBurn_AttackerChecks
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Basic_FlingBurn_AttackerChecks
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, Basic_FlingBurn_AttackerChecks
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, Basic_FlingBurn_AttackerChecks
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Basic_FlingBurn_AttackerChecks
-    IfLoadedEqualTo ABILITY_WATER_VEIL, Basic_FlingBurn_AttackerChecks
-    PopOrEnd 
-
-Basic_FlingBurn_AttackerChecks:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SAFEGUARD, ScoreMinus5
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScoreMinus5
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, ScoreMinus5
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, ScoreMinus5
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus5
-    IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus5
-    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
-    AddToMoveScore 3
-    PopOrEnd 
-
-Basic_FlingParalyze:
-    ; If the target cannot be Paralyzed, score -5.
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus5
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus5
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus5
-    PopOrEnd 
+    IfLoadedInTable Basic_FlingItems_Poison, Basic_CheckCannotPoison
+    IfLoadedEqualTo HOLD_EFFECT_BRN_USER, Basic_CheckCannotBurn
+    IfLoadedEqualTo HOLD_EFFECT_PIKA_SPATK_UP, Basic_CheckCannotParalyze
+    PopOrEnd
 
 Basic_FlingItems_Poison:
     TableEntry HOLD_EFFECT_PSN_USER
     TableEntry HOLD_EFFECT_STRENGTHEN_POISON
-    TableEntry TABLE_END
-
-Basic_FlingItems_Burn:
-    TableEntry HOLD_EFFECT_BRN_USER
-    TableEntry TABLE_END
-
-Basic_FlingItems_Paralyze:
-    TableEntry HOLD_EFFECT_PIKA_SPATK_UP
     TableEntry TABLE_END
 
 Basic_CheckCanPsychoShift:
