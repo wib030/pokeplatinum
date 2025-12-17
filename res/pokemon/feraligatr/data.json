@@ -116,6 +116,7 @@
 			"47": "MOVE_DOUBLE_HIT",
 			"48": "MOVE_WATERFALL",
             "50": "MOVE_THRASH",
+			"52": "MOVE_DRAGON_DANCE",
 			"54": "MOVE_SHEER_COLD",
             "56": "MOVE_SUPERPOWER",
             "58": "MOVE_HYDRO_PUMP"
