@@ -2206,4 +2206,16 @@ int BattleSystem_CompareBattlerSpeedOrder(BattleSystem* battleSys, BattleContext
 */
 BOOL BattleAI_BattlerHasPivotMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
+/**
+* @brief Check if a battler's type deters the given status condition from the given move.
+*
+* @param battleSys
+* @param battleCtx
+* @param battler            battleMon ID of the mon to check.
+* @param move               The move being used. This is needed for special cases, like Thunder Wave.
+* @param statusCondition    The status condition mask to check.
+* @return TRUE/FALSE whether the battler's typing deters the given status from the given move.
+*/
+BOOL BattleAI_BattlerTypeDetersStatusMove(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler, u16 move, u32 statusCondition);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

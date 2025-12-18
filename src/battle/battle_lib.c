@@ -22517,3 +22517,68 @@ BOOL BattleAI_BattlerHasPivotMove(BattleSystem* battleSys, BattleContext* battle
 
     return result;
 }
+
+BOOL BattleAI_BattlerTypeDetersStatusMove(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler, u16 move, u32 statusCondition)
+{
+    int i;
+
+    if (MON_HAS_TYPE(battler, TYPE_GRASS)
+        || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_NO_WEATHER_CHIP_POWDER)
+    {
+        for (i = 0; i < NELEMS(sPowderMoves); i++)
+        {
+            if (sPowderMoves[i] == move)
+            {
+                return TRUE;
+            }
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_PARALYSIS)
+    {
+        if (MON_HAS_TYPE(battler, TYPE_ELECTRIC))
+        {
+            return TRUE;
+        }
+
+        if (move == MOVE_THUNDER_WAVE)
+        {
+            if (MON_HAS_TYPE(battler, TYPE_GROUND))
+            {
+                return TRUE;
+            }
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_ANY_POISON)
+    {
+        if (MON_HAS_TYPE(battler, TYPE_POISON))
+        {
+            return  TRUE;
+        }
+
+        if (MON_HAS_TYPE(battler, TYPE_STEEL)
+            && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_CORROSION) == 0)
+        {
+            return TRUE;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_BURN)
+    {
+        if (MON_HAS_TYPE(battler, TYPE_FIRE))
+        {
+            return TRUE;
+        }
+    }
+
+    if (statusCondition & MON_CONDITION_FREEZE)
+    {
+        if (MON_HAS_TYPE(battler, TYPE_ICE))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
