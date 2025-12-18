@@ -244,4 +244,14 @@ BOOL ExpertAI_StatStageLessThan(BattleSystem* battleSys, BattleContext* battleCt
  */
 BOOL ExpertAI_IsStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
+/* @brief Check if the battler knows the given move effect.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler		The battlemon ID of the battler to check.
+ * @param moveEffect	The move effect to check for.
+ * @return  TRUE / FALSE whether the battler knows a move with the given move effect.
+ */
+BOOL ExpertAI_MoveEffectKnownByBattler(BattleSystem* battleSys, BattleContext* battleCtx, int battler, u16 moveEffect);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

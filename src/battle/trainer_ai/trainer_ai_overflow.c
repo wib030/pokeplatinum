@@ -2075,3 +2075,27 @@ BOOL ExpertAI_IsStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, i
 
     return result;
 }
+
+BOOL ExpertAI_MoveEffectKnownByBattler(BattleSystem* battleSys, BattleContext* battleCtx, int battler, u16 moveEffect)
+{
+    BOOL result;
+    int i;
+
+    result = FALSE;
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if (AI_CONTEXT.battlerMoves[battler][i] == MOVE_NONE)
+        {
+            break;
+        }
+        
+        if (moveEffect == MOVE_DATA(AI_CONTEXT.battlerMoves[battler][i]).effect)
+        {
+            result = TRUE;
+            break;
+        }
+    }
+
+    return result;
+}
