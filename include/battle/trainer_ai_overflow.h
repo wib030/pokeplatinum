@@ -254,4 +254,14 @@ BOOL ExpertAI_IsStatDropped(BattleSystem* battleSys, BattleContext* battleCtx, i
  */
 BOOL ExpertAI_MoveEffectKnownByBattler(BattleSystem* battleSys, BattleContext* battleCtx, int battler, u16 moveEffect);
 
+/* @brief Check if the attacker battlemon can status the defender battlemon.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker		The battlemon ID of the attacker.
+ * @param defender		The battlemon ID of the defender.
+ * @return  TRUE / FALSE whether the attacker can status the defender.
+ */
+BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

@@ -2099,3 +2099,89 @@ BOOL ExpertAI_MoveEffectKnownByBattler(BattleSystem* battleSys, BattleContext* b
 
     return result;
 }
+
+BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+{
+    BOOL result;
+    int i;
+    u8 defenderAbility, defenderSide;
+    u16 move, moveEffect;
+    u32 moveStatusCondition, moveVolatileStatus;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    // early exit for magic bounce
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MAGIC_BOUNCE)
+        && Battler_Ability(battleCtx, attacker) != ABILITY_MAGIC_BOUNCE)
+    {
+        return result;
+    }
+
+    defenderAbility = Battler_Ability(battleCtx, defender);
+    defenderSide = Battler_Side(battleSys, defender);
+    moveStatusCondition = MON_CONDITION_NONE;
+    moveVolatileStatus = VOLATILE_CONDITION_NONE;
+    effectiveness = 0;
+
+    if (battleCtx->sideConditionsMask[defenderSide] & SIDE_CONDITION_SAFEGUARD)
+    {
+        return result;
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, attacker, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            move = battleCtx->aiContext.battlerMoves[attacker][i];
+
+            if (move == MOVE_NONE) {
+                break;
+            }
+
+            if (MOVE_DATA(move).class == CLASS_STATUS
+                || MOVE_DATA(move).effectChance > 20)
+            {
+                moveEffect = MOVE_DATA(move).effect;
+                moveStatusCondition = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
+                moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
+
+                BattleSystem_ApplyTypeChart(battleSys,
+                    battleCtx,
+                    move,
+                    ExpertAI_MoveType(battleSys, battleCtx, attacker, move),
+                    attacker,
+                    defender,
+                    TYPE_MULTI_BASE_DAMAGE,
+                    &effectiveness);
+
+                if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
+                    || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
+                {
+                    if (moveStatusCondition & MON_CONDITION_ANY)
+                    {
+                        if (BattleAI_BattlerTypeDetersStatusMove(battleSys, battleCtx, defender, move, moveStatusCondition) == FALSE)
+                        {
+                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, moveStatusCondition) == FALSE)
+                            {
+                                result = TRUE;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (moveVolatileStatus & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE)
+                    {
+                        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, defenderAbility, moveVolatileStatus) == FALSE)
+                        {
+                            result = TRUE;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}
