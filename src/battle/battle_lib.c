@@ -8115,7 +8115,7 @@ s32 Battler_ItemFlingEffect(BattleContext *battleCtx, int battler)
 s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
 {
     u16 item = BattleMon_Get(battleCtx, battler, BATTLEMON_HELD_ITEM, NULL);
-    u8 itemEffect = Battler_HeldItemEffect(battleCtx, item);
+    u8 itemEffect = Battler_HeldItemEffect(battleCtx, battler);
     int power = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_FLING_POWER);
 
     switch (itemEffect)
@@ -14161,15 +14161,15 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int b
 
     switch (move) {
     case MOVE_NATURAL_GIFT:
-        type = Battler_NaturalGiftType(battleCtx, item);
+        type = Battler_NaturalGiftType(battleCtx, battler);
         break;
 
     case MOVE_FLING:
-        type = Battler_FlingType(battleCtx, item);
+        type = Battler_FlingType(battleCtx, battler);
         break;
 
     case MOVE_JUDGMENT:
-        switch (Battler_HeldItemEffect(battleCtx, item)) {
+        switch (Battler_HeldItemEffect(battleCtx, battler)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
             type = TYPE_FIGHTING;
             break;

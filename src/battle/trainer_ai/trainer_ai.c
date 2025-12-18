@@ -7129,11 +7129,15 @@ static int AI_CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, in
 
     switch (move) {
     case MOVE_NATURAL_GIFT:
-        type = Battler_NaturalGiftType(battleCtx, item);
+        type = Battler_NaturalGiftType(battleCtx, battler);
+        break;
+		
+	case MOVE_FLING:
+        type = Battler_FlingType(battleCtx, battler);
         break;
 
     case MOVE_JUDGMENT:
-        switch (Battler_HeldItemEffect(battleCtx, item)) {
+        switch (Battler_HeldItemEffect(battleCtx, battler)) {
         case HOLD_EFFECT_ARCEUS_FIGHTING:
             type = TYPE_FIGHTING;
             break;
