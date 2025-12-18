@@ -5708,6 +5708,11 @@ static void TrainerAI_RevealAllInfo(BattleSystem *battleSys, BattleContext *batt
                 if (move != MOVE_NONE) {
 					
                     AI_CONTEXT.battlerPartyMoves[battler][i][j] = move;
+
+                    if (i == battleCtx->selectedPartySlot[battler])
+                    {
+                        AI_CONTEXT.battlerMoves[battler][j] = move;
+                    }
                 }
                 else {
                     break;
