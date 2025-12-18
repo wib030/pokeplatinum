@@ -2164,8 +2164,19 @@ BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* 
                         {
                             if (Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, moveStatusCondition) == FALSE)
                             {
-                                result = TRUE;
-                                break;
+                                if (moveStatusCondition & MON_CONDITION_BURN)
+                                {
+                                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender))
+                                    {
+                                        result = TRUE;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    result = TRUE;
+                                    break;
+                                }
                             }
                         }
                     }
