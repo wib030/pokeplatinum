@@ -13,7 +13,7 @@
             "species": "SPECIES_SHARPEDO",
             "form": 0,
             "level": 57,
-            "item": "ITEM_QUICK_CLAW",
+            "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_AQUA_JET",
 				"MOVE_CRUNCH",
@@ -22,7 +22,14 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 100,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_MACHAMP",
@@ -38,7 +45,15 @@
             "power": 180,
             "ball_seal": 0,
 			"ability": 1,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"friendship": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         }
     ]
 }

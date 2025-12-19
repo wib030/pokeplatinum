@@ -22,7 +22,13 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 252,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_POLIWRATH",
@@ -37,22 +43,33 @@
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
-        {
-            "species": "SPECIES_SEAKING",
+		{
+            "species": "SPECIES_LUVDISC",
             "form": 0,
             "level": 57,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_CHOICE_SPECS",
             "moves": [
-                "MOVE_HORN_DRILL",
-				"MOVE_WATERFALL",
-				"MOVE_DRILL_PECK",
-				"MOVE_ICY_WIND"
+                "MOVE_WATER_SPOUT"
             ],
             "power": 180,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 10
         }
     ]
 }

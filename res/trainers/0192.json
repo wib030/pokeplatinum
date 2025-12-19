@@ -14,13 +14,19 @@
             "species": "SPECIES_UNOWN",
             "form": 1,
             "level": 57,
-            "item": "ITEM_CHOICE_SPECS",
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_METRONOME"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_UNOWN",
@@ -30,21 +36,33 @@
             "moves": [
                 "MOVE_METRONOME"
             ],
-            "power": 254,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_UNOWN",
             "form": 13,
             "level": 57,
-            "item": "ITEM_CHOICE_SPECS",
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_METRONOME"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_UNOWN",
@@ -54,9 +72,15 @@
             "moves": [
                 "MOVE_METRONOME"
             ],
-            "power": 254,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_UNOWN",
@@ -68,19 +92,31 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_UNOWN",
             "form": 27,
             "level": 57,
-            "item": "ITEM_CHOICE_SPECS",
+            "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_METRONOME"
             ],
-            "power": 254,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

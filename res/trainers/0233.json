@@ -49,7 +49,13 @@
 				"MOVE_BATON_PASS"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_MANTINE",
@@ -76,8 +82,15 @@
 				"MOVE_HEAT_WAVE",
 				"MOVE_EXTRASENSORY"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 255,
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 10
         }
     ]
 }

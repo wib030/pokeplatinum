@@ -20,9 +20,22 @@
 				"MOVE_ICY_WIND",
 				"MOVE_REST"
             ],
-            "power": 180,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 27,
+			"ivATK": 9,
+			"ivDEF": 28,
+			"ivSPEED": 14,
+			"ivSPATK": 31,
+			"ivSPDEF": 9,
+			"evHP": 63,
+			"evATK": 67,
+			"evDEF": 76,
+			"evSPEED": 100,
+			"evSPATK": 112,
+			"evSPDEF": 90,
+			"nature": 16
         },
         {
             "species": "SPECIES_OMASTAR",
@@ -35,21 +48,50 @@
 				"MOVE_POWER_GEM",
 				"MOVE_EARTH_POWER"
             ],
-            "power": 180,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 16,
+			"ivATK": 2,
+			"ivDEF": 26,
+			"ivSPEED": 19,
+			"ivSPATK": 26,
+			"ivSPDEF": 19,
+			"evHP": 103,
+			"evATK": 55,
+			"evDEF": 98,
+			"evSPEED": 75,
+			"evSPATK": 108,
+			"evSPDEF": 69,
+			"nature": 10
         },
         {
-            "species": "SPECIES_LUVDISC",
+            "species": "SPECIES_SEAKING",
             "form": 0,
             "level": 57,
-            "item": "ITEM_CHOICE_SPECS",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_WATER_SPOUT"
+                "MOVE_HORN_DRILL",
+				"MOVE_WATERFALL",
+				"MOVE_DRILL_PECK",
+				"MOVE_ICY_WIND"
             ],
-            "power": 180,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"ivHP": 21,
+			"ivATK": 29,
+			"ivDEF": 13,
+			"ivSPEED": 30,
+			"ivSPATK": 1,
+			"ivSPDEF": 14,
+			"evHP": 150,
+			"evATK": 109,
+			"evDEF": 87,
+			"evSPEED": 100,
+			"evSPATK": 34,
+			"evSPDEF": 28,
+			"nature": 1
         }
     ]
 }

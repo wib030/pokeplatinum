@@ -6,39 +6,16 @@
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
 		"AI_FLAG_EVAL_ATTACK",
-		"AI_FLAG_JOKE"
+		"AI_FLAG_JOKE",
+		"AI_FLAG_OMNISCIENT"
     ],
     "double_battle": false,
     "party": [
 		{
-            "species": "SPECIES_MACHOP",
-            "form": 0,
-            "level": 59,
-            "item": "ITEM_FOCUS_SASH",
-            "moves": [
-                "MOVE_COUNTER",
-                "MOVE_ENCORE",
-				"MOVE_KNOCK_OFF",
-				"MOVE_CLOSE_COMBAT"
-            ],
-            "power": 255,
-            "ball_seal": 7,
-			"ball_type": "ITEM_ULTRA_BALL",
-			"evHP": 252,
-			"evATK": 248,
-			"evDEF": 8,
-			"evSPEED": 0,
-			"evSPATK": 0,
-			"evSPDEF": 4,
-			"gender": 0,
-			"ability": 1,
-			"nature": 3
-        },
-		{
             "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 61,
-            "item": "ITEM_BLACKGLASSES",
+            "level": 63,
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
                 "MOVE_CLOSE_COMBAT",
                 "MOVE_KNOCK_OFF",
@@ -46,7 +23,7 @@
 				"MOVE_ICE_PUNCH"
             ],
             "power": 255,
-            "ball_seal": 7,
+            "ball_seal": 0,
 			"ball_type": "ITEM_ULTRA_BALL",
 			"evHP": 0,
 			"evATK": 252,
@@ -66,7 +43,7 @@
             "moves": [
                 "MOVE_SHARPEN",
                 "MOVE_SCARY_FACE",
-				"MOVE_LEER",
+				"MOVE_FORESIGHT",
 				"MOVE_ATTRACT"
             ],
             "power": 255,

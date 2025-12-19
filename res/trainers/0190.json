@@ -20,9 +20,15 @@
 				"MOVE_GROWL",
 				"MOVE_REST"
             ],
-            "power": 180,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 4,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252
         },
         {
             "species": "SPECIES_WAILORD",
@@ -35,10 +41,16 @@
 				"MOVE_DEFENSE_CURL",
 				"MOVE_GROWL"
             ],
-            "power": 180,
+            "power": 255,
             "ball_seal": 0,
 			"ball_type": "ITEM_DIVE_BALL",
-			"ability": 1
+			"ability": 1,
+			"evHP": 4,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252
         },
 		{
             "species": "SPECIES_BLISSEY",
@@ -51,9 +63,16 @@
 				"MOVE_REST",
 				"MOVE_MINIMIZE"
             ],
-            "power": 180,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 5
         },
 		{
             "species": "SPECIES_BRONZONG",
@@ -66,9 +85,15 @@
 				"MOVE_IRON_DEFENSE",
 				"MOVE_CALM_MIND"
             ],
-            "power": 180,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 4,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252
         },
 		{
             "species": "SPECIES_MILTANK",
@@ -81,9 +106,15 @@
 				"MOVE_CAPTIVATE",
 				"MOVE_MILK_DRINK"
             ],
-            "power": 180,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 4,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252
         },
 		{
             "species": "SPECIES_SNORLAX",
@@ -96,9 +127,15 @@
 				"MOVE_BLOCK",
 				"MOVE_REST"
             ],
-            "power": 180,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 4,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252
         }
     ]
 }
