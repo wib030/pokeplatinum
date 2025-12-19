@@ -183,44 +183,7 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
     u32 genderMod, rnd, oldSeed;
     u8 ivs;
     Pokemon *mon;
-	int monIndex, switchedIndex, capLevel;
-	TrainerInfo *trInfo = SaveData_GetTrainerInfo(save);
-	int badges = TrainerInfo_BadgeCount(trInfo);
-	
-	switch (badges)
-	{
-		case 0:
-			capLevel = 13;
-			break;
-
-		case 1:
-			capLevel = 22;
-			break;
-
-		case 2:
-			capLevel = 26;
-			break;
-
-		case 3:
-			capLevel = 31;
-			break;
-
-		case 4:
-			capLevel = 36;
-			break;
-
-		case 5:
-			capLevel = 45;
-			break;
-
-		case 6:
-			capLevel = 51;
-			break;
-
-		default:
-			capLevel = 58;
-			break;
-	}
+	int monIndex, switchedIndex;
 	
     oldSeed = LCRNG_GetSeed();
 
@@ -349,11 +312,6 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
 			int monLevel = trmon[monIndex].level;
 			int otIdSource = OTID_NOT_SHINY;
 			int monPersonality = (LCRNG_Next() | (LCRNG_Next() << 16));
-			
-			if (trmon[monIndex].copyLevelCap == 1)
-			{
-				monLevel = capLevel;
-			}
 			
 			if (trmon[monIndex].isShiny == 1)
 			{

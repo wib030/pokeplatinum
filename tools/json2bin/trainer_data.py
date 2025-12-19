@@ -81,7 +81,6 @@ def parse_party_mon(mon: dict, has_moves: bool, has_items: bool) -> bytes:
     binary_mon.extend(j2b.parse_int(mon.get('gender', 2), 2))
     binary_mon.extend(j2b.parse_int(mon.get('overrideAbility', 256), 2))
     binary_mon.extend(j2b.parse_int(mon.get('altLead', 7), 2))
-    binary_mon.extend(j2b.parse_int(mon.get('copyLevelCap', 0), 2))
     return binary_mon
 
 
