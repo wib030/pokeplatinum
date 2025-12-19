@@ -14382,10 +14382,10 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 	int boostLevel, capLevel;
 	TrainerInfo *trInfo = BattleSystem_TrainerInfo(data->battleSys, 0);
 	int badges = TrainerInfo_BadgeCount(trInfo);
+	int mainStoryCleared = TrainerInfo_IsMainStoryCleared(trInfo);
 
 	// Set level floors and ceilings for xp modification here
 	switch (badges) {
-
 		default:
 			boostLevel = 0;
 			capLevel = 100;
@@ -14433,7 +14433,15 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 
 		case 8:
 			boostLevel = 65;
-			capLevel = 100;
+			
+			if (mainStoryCleared == 0)
+			{
+				capLevel = 68;
+			}
+			else
+			{
+				capLevel = 100;
+			}
 			break;
 	}
 
