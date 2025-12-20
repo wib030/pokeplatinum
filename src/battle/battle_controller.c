@@ -3531,15 +3531,15 @@ static void BattleController_BeforeMove(BattleSystem *battleSys, BattleContext *
 		battleCtx->beforeMoveCheckState++;
 	
 	case BEFORE_MOVE_STATE_COLOR_CHANGE:
+		u8 moveType = CalcMoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur);
+		
         if (DEFENDING_MON.curHP
 		&& (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE)
 		&& (battleCtx->defender != battleCtx->attacker)
         && (battleCtx->moveCur != MOVE_STRUGGLE)
-		&& ((battleCtx->battleMons[battleCtx->defender].type1 != MOVE_DATA(battleCtx->moveCur).type)
-		|| (battleCtx->battleMons[battleCtx->defender].type2 != MOVE_DATA(battleCtx->moveCur).type)))
+		&& ((battleCtx->battleMons[battleCtx->defender].type1 != moveType)
+		|| (battleCtx->battleMons[battleCtx->defender].type2 != moveType)))
 		{
-			u8 moveType = CalcMoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur);
-			
 			battleCtx->battleMons[battleCtx->defender].type1 = moveType;
 			battleCtx->battleMons[battleCtx->defender].type2 = moveType;
 			LOAD_SUBSEQ(subscript_color_change_before);

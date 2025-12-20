@@ -2566,6 +2566,7 @@ static BOOL BtlCmd_CalcFlingParams(BattleSystem* battleSys, BattleContext* battl
 static BOOL BtlCmd_SplashDebugMessage(BattleSystem* battleSys, BattleContext* battleCtx);
 static BOOL BtlCmd_SplashDebugMessage2(BattleSystem* battleSys, BattleContext* battleCtx);
 static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* battleCtx);
+static BOOL BtlCmd_CalcColorChangeType(BattleSystem* battleSys, BattleContext* battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2847,7 +2848,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CalcFlingParams,
     BtlCmd_SplashDebugMessage,
     BtlCmd_SplashDebugMessage2,
-    BtlCmd_SplashDebugMessage3
+    BtlCmd_SplashDebugMessage3,
+	BtlCmd_CalcColorChangeType
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -14140,6 +14142,57 @@ static BOOL BtlCmd_SplashDebugMessage3(BattleSystem* battleSys, BattleContext* b
 
     battleCtx->msgTemp = test;
 	*/
+    return FALSE;
+}
+
+static BOOL BtlCmd_CalcColorChangeType(BattleSystem* battleSys, BattleContext* battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+	int jumpOnFail = BattleScript_Read(battleCtx);
+	
+	int moveType;
+    int soundMove = FALSE;
+	int move = battleCtx->msgMoveTemp;
+	
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
+	{
+		for (int i = 0; i < NELEMS(sSoundMoves); i++)
+		{
+			if (sSoundMoves[i] == move)
+			{
+				soundMove = TRUE;
+				break;
+			}
+		}
+	}
+	
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE)
+	{
+        moveType = TYPE_NORMAL;
+    }
+	else if ((Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_ROCK_STAR)
+	&& (soundMove == TRUE))
+	{
+		moveType = TYPE_ROCK;
+    }
+	else
+	{
+        moveType = MOVE_DATA(move).type;
+    }
+	
+	if (battleCtx->battleMons[battleCtx->defender].type1 != moveType
+	&& battleCtx->battleMons[battleCtx->defender].type2 != moveType)
+	{	
+		battleCtx->battleMons[battleCtx->defender].type1 = moveType;
+		battleCtx->battleMons[battleCtx->defender].type2 = moveType;
+		
+		battleCtx->msgTemp = moveType;
+	}
+	else
+	{
+		BattleScript_Iter(battleCtx, jumpOnFail);
+	}
+	
     return FALSE;
 }
 

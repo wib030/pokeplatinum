@@ -1343,5 +1343,10 @@
     .macro SplashDebugMessage3
     .long 244
     .endm
+	
+	.macro CalcColorChangeType jump_if_fail
+    .long 245
+	.long (\jump_if_fail-.) / 4 - 1
+    .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC
