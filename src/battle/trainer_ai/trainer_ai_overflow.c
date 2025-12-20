@@ -981,6 +981,23 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         }
                     }
                     break;
+
+                case BATTLE_EFFECT_PREGNANCY_PUNCH:
+                    if (AI_GetMoveEffectiveness(battleSys, battleCtx) > TYPE_MULTI_IMMUNE)
+                    {
+                        if (battleCtx->totalTurns == battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.fakeOutTurnNumber)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 10);
+                        }
+                        else
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 128)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 3);
+                            }
+                        }
+                    }
+                    break;
                 }
             }
         }
