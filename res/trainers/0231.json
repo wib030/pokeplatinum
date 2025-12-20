@@ -6,7 +6,8 @@
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
 		"AI_FLAG_BATON_PASS",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_PRESCIENT"
     ],
     "double_battle": false,
     "party": [
@@ -20,7 +21,14 @@
 				"MOVE_SUBSTITUTE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_ARIADOS",
@@ -34,7 +42,14 @@
 				"MOVE_TOXIC"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
         {
             "species": "SPECIES_SCIZOR",
@@ -48,7 +63,14 @@
 				"MOVE_WING_ATTACK"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_MASQUERAIN",
@@ -62,7 +84,14 @@
 				"MOVE_ICY_WIND"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_BEEDRILL",
@@ -76,7 +105,14 @@
 				"MOVE_KNOCK_OFF"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         },
 		{
             "species": "SPECIES_HERACROSS",
@@ -90,7 +126,14 @@
 				"MOVE_SWORDS_DANCE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 0
         }
     ]
 }

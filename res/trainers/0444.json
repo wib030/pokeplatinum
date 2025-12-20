@@ -39,7 +39,7 @@
             "species": "SPECIES_MACHAMP",
             "form": 0,
             "level": 65,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_SHARPEN",
                 "MOVE_SCARY_FACE",
@@ -49,15 +49,14 @@
             "power": 255,
             "ball_seal": 7,
 			"ball_type": "ITEM_ULTRA_BALL",
-			"evHP": 252,
+			"evHP": 128,
 			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 0,
+			"evSPEED": 128,
 			"evSPATK": 0,
-			"evSPDEF": 4,
+			"evSPDEF": 0,
 			"gender": 0,
-			"ability": 1,
-			"nature": 3
+			"nature": 13
         }
     ]
 }

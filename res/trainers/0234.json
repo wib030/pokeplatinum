@@ -21,7 +21,13 @@
 				"MOVE_PSYCHIC"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_BRONZONG",
@@ -35,7 +41,13 @@
 				"MOVE_TOXIC"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_CHIMECHO",
@@ -49,7 +61,13 @@
 				"MOVE_CALM_MIND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }

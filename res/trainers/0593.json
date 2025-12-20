@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_PRESCIENT"
     ],
     "double_battle": false,
     "party": [
@@ -21,7 +22,14 @@
                 "MOVE_OUTRAGE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 252,
+			"evATK": 136,
+			"evDEF": 4,
+			"evSPEED": 116,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 3
         },
         {
             "species": "SPECIES_CHARIZARD",
@@ -35,7 +43,14 @@
                 "MOVE_DRACO_METEOR"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 248,
+			"evSPATK": 8,
+			"evSPDEF": 0,
+			"nature": 11
         },
         {
             "species": "SPECIES_AMPHAROS",
@@ -63,7 +78,14 @@
                 "MOVE_THUNDER_PUNCH"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 4,
+			"evSPDEF": 0,
+			"nature": 14
         },
 		{
             "species": "SPECIES_ALTARIA",
@@ -77,7 +99,14 @@
                 "MOVE_HEAL_BELL"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 244,
+			"evATK": 0,
+			"evDEF": 12,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 252,
+			"nature": 20
         },
 		{
             "species": "SPECIES_SALAMENCE",
@@ -91,7 +120,14 @@
                 "MOVE_FIRE_BLAST"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 4,
+			"evSPDEF": 0,
+			"nature": 1
         }
     ]
 }

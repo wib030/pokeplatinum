@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_PRESCIENT"
     ],
     "double_battle": false,
     "party": [
@@ -18,11 +19,19 @@
                 "MOVE_SPIKES",
 				"MOVE_SUCKER_PUNCH",
 				"MOVE_GIGA_DRAIN",
-				"MOVE_DESTINY_BOND"
+				"MOVE_ENCORE"
             ],
             "power": 255,
             "ball_seal": 7,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ball_seal": 0,
+			"evHP": 124,
+			"evATK": 132,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 17
         },
         {
             "species": "SPECIES_CRAWDAUNT",
@@ -37,7 +46,14 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"evHP": 4,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
         {
             "species": "SPECIES_FEAROW",
@@ -45,14 +61,21 @@
             "level": 59,
             "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_HORN_DRILL",
-				"MOVE_BRAVE_BIRD",
-				"MOVE_SUCKER_PUNCH",
+                "MOVE_BRAVE_BIRD",
+				"MOVE_PURSUIT",
+				"MOVE_U_TURN",
 				"MOVE_ROOST"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"evHP": 204,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 124,
+			"evSPATK": 0,
+			"evSPDEF": 180,
+			"nature": 23
         },
 		{
             "species": "SPECIES_LUXRAY",
@@ -62,12 +85,19 @@
             "moves": [
                 "MOVE_VOLT_TACKLE",
 				"MOVE_CRUNCH",
-				"MOVE_FACADE",
+				"MOVE_ZAP_CANNON",
 				"MOVE_ICE_FANG"
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"evHP": 0,
+			"evATK": 52,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 4,
+			"evSPDEF": 0,
+			"nature": 14
         },
 		{
             "species": "SPECIES_HOUNDOOM",
@@ -82,7 +112,14 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"evHP": 0,
+			"evATK": 4,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 0,
+			"nature": 11
         },
 		{
             "species": "SPECIES_ABSOL",
@@ -91,13 +128,20 @@
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_SWORDS_DANCE",
-				"MOVE_ZEN_HEADBUTT",
+				"MOVE_SUPERPOWER",
 				"MOVE_SHEER_COLD",
-				"MOVE_CRUNCH"
+				"MOVE_KNOCK_OFF"
             ],
             "power": 255,
             "ball_seal": 7,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }

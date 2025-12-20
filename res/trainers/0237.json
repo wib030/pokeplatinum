@@ -21,7 +21,13 @@
 				"MOVE_OMINOUS_WIND"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
         {
             "species": "SPECIES_FLYGON",
@@ -35,7 +41,13 @@
 				"MOVE_ROCK_SLIDE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_INFERNAPE",
@@ -49,7 +61,13 @@
 				"MOVE_ROCK_SLIDE"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         },
 		{
             "species": "SPECIES_ROTOM",
@@ -63,7 +81,13 @@
 				"MOVE_ZAP_CANNON"
             ],
             "power": 200,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0
         }
     ]
 }
