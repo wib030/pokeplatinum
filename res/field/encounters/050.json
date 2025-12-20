@@ -11,11 +11,11 @@
         },
         {
             "level": 57,
-            "species": "SPECIES_CRADILY"
+            "species": "SPECIES_SABLEYE"
         },
         {
             "level": 59,
-            "species": "SPECIES_ARMALDO"
+            "species": "SPECIES_AZURILL"
         },
         {
             "level": 58,
@@ -27,15 +27,15 @@
         },
         {
             "level": 60,
-            "species": "SPECIES_PHIONE"
+            "species": "SPECIES_GALLADE"
         },
         {
             "level": 59,
-            "species": "SPECIES_RIOLU"
+            "species": "SPECIES_GARDEVOIR"
         },
         {
             "level": 60,
-            "species": "SPECIES_AERODACTYL"
+            "species": "SPECIES_PHIONE"
         },
         {
             "level": 59,
@@ -55,12 +55,12 @@
         "SPECIES_AZUMARILL"
     ],
     "morning": [
-        "SPECIES_CRADILY",
-        "SPECIES_ARMALDO"
+        "SPECIES_SABLEYE",
+        "SPECIES_AZURILL"
     ],
     "night": [
-        "SPECIES_CRADILY",
-        "SPECIES_ARMALDO"
+        "SPECIES_SABLEYE",
+        "SPECIES_AZURILL"
     ],
     "radar": [
         "SPECIES_DEWGONG",
