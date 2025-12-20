@@ -480,7 +480,7 @@ int Battler_SlotForMove(BattleMon *mon, u16 move);
  * @param[out] moveStatusMask   
  * @return Damage value after applying the type-chart and related multipliers
  */
-int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask);
+int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask, BOOL considerColorChange);
 
 /**
  * @brief Same as above but for a party Pokemon.
@@ -497,7 +497,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
  * @param[out] moveStatusMask   
  * @return Damage value after applying the type-chart and related multipliers
  */
-int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partyIndicator, int partySlot, u32 *moveStatusMask);
+int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partyIndicator, int partySlot, u32 *moveStatusMask, BOOL considerColorChange);
 
 /**
  * @brief Calculate the effectiveness mask of the given move.
@@ -1338,7 +1338,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     u8 inType,
     u8 attacker,
     u8 defender,
-    u8 criticalMul);
+    u8 criticalMul,
+	BOOL considerColorChange);
 
 /**
  * @brief Calculate the base damage for a move using the general damage formula if it were cast by a
@@ -1373,7 +1374,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     u8 defender,
     u8 criticalMul,
     u8 partyIndicator,
-    int partySlot);
+    int partySlot,
+	BOOL considerColorChange);
 
 
 /**

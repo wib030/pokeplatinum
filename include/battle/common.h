@@ -42,7 +42,8 @@
     0,\
     battleCtx->attacker,\
     battleCtx->attacker,\
-    1))
+    1,\
+	FALSE))
 
 #define MON_IS_UPROARING(mon)   (battleCtx->fieldConditionsMask & (FlagIndex(mon) << FIELD_CONDITION_UPROAR_SHIFT))
 #define MON_IS_IDENTIFIED(mon)  ((battleCtx->battleMons[mon].statusVolatile & VOLATILE_CONDITION_FORESIGHT) \

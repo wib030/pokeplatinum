@@ -2166,7 +2166,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
                                     battler2,
                                     1,
                                     partyIndicator,
-                                    partySlot);
+                                    partySlot,
+									TRUE);
 
                 battler1MoveScore = PartyMon_ApplyTypeChart(battleSys,
                                     battleCtx,
@@ -2177,7 +2178,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
                                     battler1MoveScore,
                                     partyIndicator,
                                     partySlot,
-                                    &moveStatusFlags);
+                                    &moveStatusFlags,
+									TRUE);
 
                 if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                     && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -2239,7 +2241,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
                                     battler1,
                                     1,
                                     partyIndicator,
-                                    partySlot);
+                                    partySlot,
+									TRUE);
 
                 battler2MoveScore = PartyMon_ApplyTypeChart(battleSys,
                                     battleCtx,
@@ -2250,7 +2253,8 @@ u8 BattleSystem_ComparePartyMonSpeed(BattleSystem* battleSys, BattleContext* bat
                                     battler2MoveScore,
                                     partyIndicator,
                                     partySlot,
-                                    &moveStatusFlags);
+                                    &moveStatusFlags,
+									TRUE);
 
                 if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                     && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -3689,7 +3693,7 @@ static u16 sWebMoves[] = {
 	MOVE_SPIDER_WEB,
 };
 
-int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
+int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask, BOOL considerColorChange)
 {
     int chartEntry;
     int totalMul;
@@ -3701,6 +3705,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     u8 defenderItemPower;
 	int powderMove = FALSE;
     totalMul = 1;
+	int defenderType1, defenderType2;
 
     if (move == MOVE_STRUGGLE) {
         return damage;
@@ -3761,6 +3766,15 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     movePower = MOVE_DATA(move).power;
+	
+	defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
+	defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+	
+	if (considerColorChange == TRUE && Battler_Ability(battleCtx, defender) == ABILITY_COLOR_CHANGE)
+	{
+		defenderType1 = moveType;
+		defenderType2 = moveType;
+	}
 
     if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && MON_HAS_TYPE(attacker, moveType)) {
         if (Battler_Ability(battleCtx, attacker) == ABILITY_ADAPTABILITY) {
@@ -3808,7 +3822,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 				}
 
 				if (sFreezeDryTypeChart[chartEntry][0] == moveType) {
-					if (sFreezeDryTypeChart[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+					if (sFreezeDryTypeChart[chartEntry][1] == defenderType1
 							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
 						damage = ApplyTypeMultiplier(battleCtx, attacker, sFreezeDryTypeChart[chartEntry][2], damage, movePower, moveStatusMask);
 
@@ -3817,8 +3831,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 						}
 					}
 
-					if (sFreezeDryTypeChart[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-							&& BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+					if (sFreezeDryTypeChart[chartEntry][1] == defenderType2
+							&& defenderType1 != defenderType2
 							&& BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
 						damage = ApplyTypeMultiplier(battleCtx, attacker, sFreezeDryTypeChart[chartEntry][2], damage, movePower, moveStatusMask);
 
@@ -3860,7 +3874,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
                     }
                     else
                     {
-                        if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+                        if (sTypeMatchupMultipliers[chartEntry][1] == defenderType1
                             && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
                             damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
@@ -3869,8 +3883,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
                             }
                         }
 
-                        if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-                            && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                        if (sTypeMatchupMultipliers[chartEntry][1] == defenderType2
+                            && defenderType1 != defenderType2
                             && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
                             damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
@@ -4048,7 +4062,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     return damage;
 }
 
-int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partyIndicator, int partySlot, u32 *moveStatusMask)
+int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, int partyIndicator, int partySlot, u32 *moveStatusMask, BOOL considerColorChange)
 {
     int chartEntry;
     int totalMul;
@@ -4090,6 +4104,12 @@ int PartyMon_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, i
         defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
         defenderItem = Battler_HeldItem(battleCtx, defender);
     }
+	
+	if (considerColorChange == TRUE && defenderAbility == ABILITY_COLOR_CHANGE)
+	{
+		defenderType1 = moveType;
+		defenderType2 = moveType;
+	}
 	
 	int powderMove = FALSE;
 
@@ -6249,7 +6269,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                                 if (move) {
                                     effectiveness = 0;
-                                    battleCtx->damage = BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, NULL, j, battler, battleCtx->damage, &effectiveness);
+                                    battleCtx->damage = BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, NULL, j, battler, battleCtx->damage, &effectiveness, FALSE);
 
                                     if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE
                                             && MoveCannotTriggerAnticipation(battleCtx, move) == FALSE
@@ -9697,7 +9717,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
     u8 defender,
     u8 criticalMul,
     u8 partyIndicator,
-    int partySlot)
+    int partySlot,
+	BOOL considerColorChange)
 {
     // vars have to all be declared C89-style to match
     int i;
@@ -9872,6 +9893,12 @@ int BattleSystem_CalcPartyMemberMoveDamage(
         defenderItem = Battler_HeldItem(battleCtx, defender);
         
     }
+	
+	if (considerColorChange == TRUE && defenderParams.ability == ABILITY_COLOR_CHANGE)
+	{
+		defenderParams.type1 = moveType;
+		defenderParams.type2 = moveType;
+	}
 
     attackerSideConditions = battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)];
 
@@ -10174,7 +10201,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                     defender,
                     criticalMul,
                     partyIndicator,
-                    partySlot);
+                    partySlot,
+					considerColorChange);
 
                 return damage;
                 break;
@@ -10299,7 +10327,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
                 else
                 {
@@ -10316,7 +10345,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             movePower,
                             attacker,
                             partySlot,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -10335,7 +10365,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
             }
             break;
@@ -10428,7 +10459,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
                 else
                 {
@@ -10445,7 +10477,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             tempPower,
                             attacker,
                             partySlot,
-                            &effectiveness);
+                            &effectiveness,
+							FALSE);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -10464,7 +10497,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
 
                 if (HPTracker <= currentHit)
@@ -10507,7 +10541,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
                 else
                 {
@@ -10524,7 +10559,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             movePower,
                             attacker,
                             partySlot,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -10543,7 +10579,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
             }
 
@@ -10567,7 +10604,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
                 else
                 {
@@ -10584,7 +10622,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                             movePower,
                             attacker,
                             partySlot,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -10603,7 +10642,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                         defender,
                         criticalMul,
                         partyIndicator,
-                        partySlot);
+                        partySlot,
+						considerColorChange);
                 }
             }
             break;
@@ -11236,7 +11276,8 @@ int BattleSystem_CalcPartyMemberMoveDamage(
                 movePower,
                 attacker,
                 partySlot,
-                &effectiveness);
+                &effectiveness,
+				FALSE);
 
             if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
             {
@@ -11492,7 +11533,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     u8 inType,
     u8 attacker,
     u8 defender,
-    u8 criticalMul)
+    u8 criticalMul,
+	BOOL considerColorChange)
 {
     // vars have to all be declared C89-style to match
     int i;
@@ -11560,6 +11602,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     defenderParams.type1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
     attackerParams.type2 = BattleMon_Get(battleCtx, attacker, BATTLEMON_TYPE_2, NULL);
     defenderParams.type2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
+	
+	if (considerColorChange == TRUE && defenderParams.ability == ABILITY_COLOR_CHANGE)
+	{
+		defenderParams.type1 = MOVE_DATA(move).type;
+		defenderParams.type2 = MOVE_DATA(move).type;
+	}
 
     attackerSideConditions = battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)];
 
@@ -11774,7 +11822,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             damage,
                             attacker,
                             i,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if ((effectiveness & MOVE_STATUS_IMMUNE)
                             && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
@@ -11866,7 +11915,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                     inType,
                     attacker,
                     defender,
-                    criticalMul);
+                    criticalMul,
+					FALSE);
 
                 return damage;
                 break;
@@ -11991,7 +12041,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						considerColorChange);
                 }
                 else
                 {
@@ -12006,7 +12057,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             attacker,
                             defender,
                             movePower,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -12023,7 +12075,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						FALSE);
                 }
             }
             break;
@@ -12116,7 +12169,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						considerColorChange);
                 }
                 else
                 {
@@ -12131,7 +12185,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             attacker,
                             defender,
                             tempPower,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -12148,7 +12203,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						FALSE);
                 }
 
                 if (HPTracker <= currentHit)
@@ -12189,7 +12245,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						considerColorChange);
                 }
                 else
                 {
@@ -12204,7 +12261,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             attacker,
                             defender,
                             movePower,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -12221,7 +12279,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						FALSE);
                 }
             }
             break;
@@ -12242,7 +12301,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						considerColorChange);
                 }
                 else
                 {
@@ -12257,7 +12317,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                             attacker,
                             defender,
                             movePower,
-                            &effectiveness);
+                            &effectiveness,
+							considerColorChange);
 
                         if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE)
                         {
@@ -12274,7 +12335,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                         inType,
                         attacker,
                         defender,
-                        criticalMul);
+                        criticalMul,
+						FALSE);
                 }
             }
             break;
@@ -14315,7 +14377,8 @@ int CalcChumRushDamage(BattleSystem *battleSys, BattleContext *battleCtx, int at
 			TYPE_WATER,
 			attacker,
 			defender,
-			1);
+			1,
+			TRUE);
 			
 		curDamage = BattleSystem_ApplyTypeChart(battleSys,
 			battleCtx,
@@ -14324,7 +14387,8 @@ int CalcChumRushDamage(BattleSystem *battleSys, BattleContext *battleCtx, int at
 			attacker,
 			defender,
 			curDamage,
-			&effectiveness);
+			&effectiveness,
+			TRUE);
 		
 		HPTracker -= curDamage;
 		totalDamage += curDamage;
@@ -14545,7 +14609,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 defender,
                                 1,
                                 battler,
-                                i);
+                                i,
+								TRUE);
 
                     moveScore = PartyMon_ApplyTypeChart(battleSys,
                                 battleCtx,
@@ -14556,7 +14621,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 moveScore,
                                 battler,
                                 i,
-                                &moveStatusFlags);
+                                &moveStatusFlags,
+								TRUE);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -14634,7 +14700,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 battler,
                                 1,
                                 battler,
-                                i);
+                                i,
+								TRUE);
 
                     moveStatusFlags = 0;
                     moveScore = PartyMon_ApplyTypeChart(battleSys,
@@ -14646,7 +14713,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 moveScore,
                                 battler,
                                 i,
-                                &moveStatusFlags);
+                                &moveStatusFlags,
+								TRUE);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -14825,7 +14893,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             defender,
                             1,
                             battler,
-                            i);
+                            i,
+							TRUE);
 
                     moveStatusFlags = 0;
                     score = PartyMon_ApplyTypeChart(battleSys,
@@ -14837,7 +14906,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                                 score,
                                 battler,
                                 i,
-                                &moveStatusFlags);
+                                &moveStatusFlags,
+								TRUE);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
@@ -15075,7 +15145,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                             battler,
                             1,
                             battler,
-                            i);
+                            i,
+							TRUE);
                         
                     moveStatusFlags = 0;
                     moveScore = PartyMon_ApplyTypeChart(battleSys,
@@ -15087,7 +15158,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                 moveScore,
                                 battler,
                                 i,
-                                &moveStatusFlags);
+                                &moveStatusFlags,
+								TRUE);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -15271,7 +15343,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     defender,
                                     1,
                                     battler,
-                                    i);
+                                    i,
+									TRUE);
 
                         moveScore = PartyMon_ApplyTypeChart(battleSys,
                                     battleCtx,
@@ -15282,7 +15355,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     moveScore,
                                     battler,
                                     i,
-                                    &moveStatusFlags);
+                                    &moveStatusFlags,
+									TRUE);
 
                         if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                             && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -15382,7 +15456,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     defender,
                                     1,
                                     battler,
-                                    i);
+                                    i,
+									TRUE);
 
                     moveStatusFlags = 0;
                     score = PartyMon_ApplyTypeChart(battleSys,
@@ -15394,7 +15469,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                                     score,
                                     battler,
                                     i,
-                                    &moveStatusFlags);
+                                    &moveStatusFlags,
+									TRUE);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                          && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) 
@@ -16330,7 +16406,8 @@ static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleCo
             moveType,
             attacker,
             defender,
-            1);
+            1,
+			FALSE);
 
             moveDamage = BattleSystem_ApplyTypeChart(battleSys,
             battleCtx,
@@ -16339,7 +16416,8 @@ static BOOL Battle_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleCo
             attacker,
             defender,
             moveDamage,
-            &effectiveness);
+            &effectiveness,
+			FALSE);
 
             if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                 || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
@@ -17798,7 +17876,8 @@ BOOL AI_ShouldEncoreCheck(BattleSystem* battleSys, BattleContext* battleCtx, int
                     attacker,
                     defender,
                     0,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 if ((effectiveness & (MOVE_STATUS_RESISTED | MOVE_STATUS_IMMUNE))
                     && (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)
@@ -17877,7 +17956,8 @@ BOOL AI_ShouldEncoreCheck(BattleSystem* battleSys, BattleContext* battleCtx, int
                     attacker,
                     defender,
                     0,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 if ((effectiveness & (MOVE_STATUS_RESISTED | MOVE_STATUS_IMMUNE))
                     && (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)
@@ -18052,7 +18132,8 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     moveType,
                     defender,
                     battler,
-                    1);
+                    1,
+					TRUE);
                         
                 moveStatusFlags = 0;
                 moveScore = BattleSystem_ApplyTypeChart(battleSys,
@@ -18062,7 +18143,8 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                     defender,
                     battler,
                     moveScore,
-                    &moveStatusFlags);
+                    &moveStatusFlags,
+					TRUE);
 
                 if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                     && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -18250,7 +18332,8 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                             battler,
                             1,
                             battler,
-                            i);
+                            i,
+							TRUE);
                         
                     moveStatusFlags = 0;
                     moveScore = PartyMon_ApplyTypeChart(battleSys,
@@ -18262,7 +18345,8 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
                                 moveScore,
                                 battler,
                                 i,
-                                &moveStatusFlags);
+                                &moveStatusFlags,
+								TRUE);
 
                     if ((moveStatusFlags & MOVE_STATUS_IMMUNE)
                         && ((moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -18630,7 +18714,8 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                         0,
                         partyIndicator,
                         partySlot,
-                        &moveStatusFlags);
+                        &moveStatusFlags,
+						TRUE);
 
             moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
             moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
@@ -18873,7 +18958,8 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                                                             0,
                                                             partyIndicator,
                                                             partySlot,
-                                                            &moveStatusFlags);
+                                                            &moveStatusFlags,
+															TRUE);
 
                                     if ((((moveStatusFlags & MOVE_STATUS_IMMUNE)
                                         && (moveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
@@ -18905,7 +18991,8 @@ int BattleAI_CalculateStatusMoveAttackScore(BattleSystem *battleSys, BattleConte
                                                         0,
                                                         partyIndicator,
                                                         partySlot,
-                                                        &moveStatusFlags);
+                                                        &moveStatusFlags,
+														TRUE);
 
                                 if (moveStatusFlags & MOVE_STATUS_WEAK) {
                                     moveScore += 50;
@@ -19057,7 +19144,8 @@ int BattleAI_CalculateStatusMoveDefendScore(BattleSystem *battleSys, BattleConte
                         0,
                         partyIndicator,
                         partySlot,
-                        &moveStatusFlags);
+                        &moveStatusFlags,
+						TRUE);
             moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
             moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
             moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
@@ -19496,7 +19584,8 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
             0,
             partyIndicator,
             partySlot,
-            &moveStatusFlags);
+            &moveStatusFlags,
+			TRUE);
         moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
         moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
         moveVolatileStatus = MapBattleEffectToVolatileStatus(battleCtx, moveEffect);
@@ -19640,7 +19729,8 @@ int BattleAI_CalculateAbilityDefendScore(BattleSystem* battleSys, BattleContext*
                 defender,
                 defender,
                 0,
-                &moveStatusFlags);
+                &moveStatusFlags,
+				TRUE);
             if (moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
             {
                 moveScore += 20;
@@ -20535,7 +20625,8 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
                         battler,
                         1,
                         battler,
-                        i);
+                        i,
+						TRUE);
                         
             moveStatusFlags = 0;
             moveScore = PartyMon_ApplyTypeChart(battleSys,
@@ -20547,7 +20638,8 @@ int BattleAI_CalculateDamagingMoveAttackScore(BattleSystem *battleSys, BattleCon
                         moveScore,
                         battler,
                         i,
-                        &moveStatusFlags);
+                        &moveStatusFlags,
+						TRUE);
 
             moveMoveEffect = MapBattleEffectToMoveEffect(battleCtx, moveEffect);
             moveStatus = MapBattleEffectToStatusCondition(battleCtx, moveEffect);
@@ -21789,7 +21881,8 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
                     attacker,
                     defender,
                     0,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 // Absorb abilities and soundproof still block status moves
                 if ((effectiveness & MOVE_STATUS_IMMUNE_ABILITY) == FALSE
@@ -21810,7 +21903,8 @@ BOOL BattleAI_BattleMonMoveInflictsUnwantedStatus(BattleSystem* battleSys, Battl
                 attacker,
                 defender,
                 0,
-                &effectiveness);
+                &effectiveness,
+				TRUE);
 
             if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
                 || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
@@ -21962,7 +22056,7 @@ BOOL BattleAI_SashOrSturdyGetsBroken(BattleSystem* battleSys, BattleContext* bat
                 moveType = CalcMoveType(battleSys, battleCtx, attacker, attackerItem, move);
                 effectiveness = 0;
 
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, attacker, defender, 0, &effectiveness);
+                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, attacker, defender, 0, &effectiveness, TRUE);
 
                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))
@@ -22504,7 +22598,7 @@ BOOL BattleAI_BattlerHasPivotMove(BattleSystem* battleSys, BattleContext* battle
             effectiveness = 0;
             moveType = CalcMoveType(battleSys, battleCtx, battler, item, move);
 
-            BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
+            BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness, TRUE);
 
             if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
                 || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {

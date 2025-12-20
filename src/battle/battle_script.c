@@ -3863,7 +3863,8 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
             moveType,
             battleCtx->attacker,
             battleCtx->defender,
-            battleCtx->criticalMul);
+            battleCtx->criticalMul,
+			FALSE);
 	
     if (battleCtx->criticalMul > 1)
     {
@@ -10069,7 +10070,8 @@ static BOOL BtlCmd_ApplyTypeEffectiveness(BattleSystem *battleSys, BattleContext
             battleCtx->attacker,
             battleCtx->defender,
             battleCtx->damage,
-            &battleCtx->moveStatusFlags);
+            &battleCtx->moveStatusFlags,
+			FALSE);
 
     return FALSE;
 }

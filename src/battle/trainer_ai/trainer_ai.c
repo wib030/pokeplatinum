@@ -1799,7 +1799,8 @@ static void AICmd_CalcMaxEffectiveness(BattleSystem *battleSys, BattleContext *b
                 AI_CONTEXT.attacker,
                 AI_CONTEXT.defender,
                 damage,
-                &effectiveness);
+                &effectiveness,
+				TRUE);
 
             if (damage == TYPE_MULTI_STAB_DAMAGE * 2) {
                 damage = TYPE_MULTI_DOUBLE_DAMAGE;
@@ -1839,7 +1840,8 @@ static void AICmd_IfMoveEffectivenessEquals(BattleSystem *battleSys, BattleConte
         AI_CONTEXT.attacker,
         AI_CONTEXT.defender,
         damage,
-        &effectiveness);
+        &effectiveness,
+		TRUE);
 
     if (damage == TYPE_MULTI_STAB_DAMAGE * 2) {
         damage = TYPE_MULTI_DOUBLE_DAMAGE;
@@ -4622,7 +4624,8 @@ static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleCont
                 moveType,
                 battler2,
                 battler1,
-                1);
+                1,
+				TRUE);
 
             damage = BattleSystem_ApplyTypeChart(battleSys,
                 battleCtx,
@@ -4631,7 +4634,8 @@ static void AICmd_IfBattlerDetersContactMove(BattleSystem* battleSys, BattleCont
                 battler2,
                 battler1,
                 damage,
-                &effectivenessFlags);
+                &effectivenessFlags,
+				TRUE);
 
             if ((effectivenessFlags & MOVE_STATUS_IMMUNE)
                 && ((effectivenessFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
@@ -4946,7 +4950,8 @@ static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* 
             battler2,
             battler1,
             0,
-            &effectivenessFlags);
+            &effectivenessFlags,
+			TRUE);
 
         if (effectivenessFlags & MOVE_STATUS_IMMUNE_ABILITY)
         {
@@ -4970,7 +4975,8 @@ static void AICmd_IfBattlerDetersStatus(BattleSystem* battleSys, BattleContext* 
             battler2,
             battler1,
             0,
-            &effectivenessFlags);
+            &effectivenessFlags,
+			TRUE);
 
         if (effectivenessFlags & MOVE_STATUS_IMMUNE_ABILITY)
         {
@@ -5254,7 +5260,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
                                 moveType,
                                 battlerOpponent,
                                 battler,
-                                1);
+                                1,
+								TRUE);
 
                             totalDamage = BattleSystem_ApplyTypeChart(battleSys,
                                 battleCtx,
@@ -5263,7 +5270,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
                                 battlerOpponent,
                                 battler,
                                 damage,
-                                &effectivenessFlags);
+                                &effectivenessFlags,
+								TRUE);
 
                             if ((effectivenessFlags & MOVE_STATUS_IMMUNE) == FALSE
                                 || (effectivenessFlags & MOVE_STATUS_IGNORE_IMMUNITY))
@@ -5294,7 +5302,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
                                         moveType,
                                         battlerOpponent,
                                         battler,
-                                        1);
+                                        1,
+										TRUE);
 
                                     damage = BattleSystem_ApplyTypeChart(battleSys,
                                         battleCtx,
@@ -5303,7 +5312,8 @@ static void AICmd_IfHasSubstituteIncentive(BattleSystem* battleSys, BattleContex
                                         battlerOpponent,
                                         battler,
                                         damage,
-                                        &effectivenessFlags);
+                                        &effectivenessFlags,
+										TRUE);
 
                                     if (berryMultiplier)
                                     {
@@ -6288,7 +6298,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
                 type,
                 attacker,
                 AI_CONTEXT.defender,
-                1);
+                1,
+				TRUE);
     } else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
     }
@@ -6300,7 +6311,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             attacker,
             AI_CONTEXT.defender,
             damage,
-            &effectivenessFlags);
+            &effectivenessFlags,
+			TRUE);
     battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
 
     if (BattleAI_IsMultiHitMove(battleSys, battleCtx, attacker, MOVE_DATA(move).effect))
@@ -7379,7 +7391,8 @@ static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContex
                 moveType,
                 attacker,
                 defender,
-                1);
+                1,
+				TRUE);
 
                 moveDamage = BattleSystem_ApplyTypeChart(battleSys,
                 battleCtx,
@@ -7388,7 +7401,8 @@ static BOOL AI_AttackerChunksOrKOsDefender(BattleSystem *battleSys, BattleContex
                 attacker,
                 defender,
                 moveDamage,
-                &effectiveness);
+                &effectiveness,
+				TRUE);
 
                 if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)){
@@ -7512,7 +7526,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
 
             if (move) {
                 effectiveness = 0;
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
+                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness, FALSE);
 
                 if (moveClass == CLASS_STATUS
                     || moveEffect == BATTLE_EFFECT_BIND_HIT
@@ -7713,7 +7727,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
 
                     effectiveness = 0;
                     if (battleCtx->battleMons[defender].curHP) {
-                        BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
+                        BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness, TRUE);
                     }
 
                     if (MOVE_DATA(move).power) {
@@ -7767,7 +7781,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                 if (move) {
 
                     if (battleCtx->battleMons[defender].curHP) {
-                        BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
+                        BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness, TRUE);
                     }
 
                     // Generic boosts matter regardless of move power
@@ -8275,7 +8289,7 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                         for (k = 0; k < LEARNED_MOVES_MAX; k++) {
                                             sleepTalkMove = battleCtx->battleMons[battler].moves[k];
                                             effectiveness = 0;
-                                            BattleSystem_ApplyTypeChart(battleSys, battleCtx, sleepTalkMove, type, battler, defender, 0, &effectiveness);
+                                            BattleSystem_ApplyTypeChart(battleSys, battleCtx, sleepTalkMove, type, battler, defender, 0, &effectiveness, TRUE);
 
                                             // If we have a move that hits neutral, don't switch
                                             if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
@@ -9068,7 +9082,8 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
                     moveType,
                     battler,
                     defender,
-                    1);
+                    1,
+					TRUE);
 
                 moveDamage = BattleSystem_ApplyTypeChart(battleSys,
                     battleCtx,
@@ -9077,7 +9092,8 @@ static BOOL AI_ShouldSwitchLeechSeed(BattleSystem *battleSys, BattleContext *bat
                     battler,
                     defender,
                     moveDamage,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 if ((effectiveness & MOVE_STATUS_IMMUNE)
                 && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE))
@@ -9149,7 +9165,7 @@ static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *bat
 
             if (move) {
                 effectiveness = 0;
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
+                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness, TRUE);
 
                 // If the defending mon is weak to our move, return TRUE 90-100% of the time.
                 if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
@@ -9176,7 +9192,7 @@ static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *bat
 
             if (move) {
                 effectiveness = 0;
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness);
+                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender, 0, &effectiveness, TRUE);
 
                 // If the defending mon is weak to our move, return TRUE 90-100% of the time.
                 if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
@@ -9891,7 +9907,7 @@ static BOOL AI_ShouldSwitchWeatherSetter(BattleSystem *battleSys, BattleContext 
                     
                     effectiveness = 0;
 
-                    BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
+                    BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness, TRUE);
 
                     // Only count pivot moves that actually hit.
                     // i.e., ignore Volt Switch vs. Ground and Volt Absorb / Lightning Rod / Motor Drive
@@ -10796,7 +10812,8 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
                 moveType,
                 attacker,
                 defender,
-                1);
+                1,
+				TRUE);
 
                 moveDamage = BattleSystem_ApplyTypeChart(battleSys,
                 battleCtx,
@@ -10805,7 +10822,8 @@ static BOOL AI_AttackerKOsDefender(BattleSystem *battleSys, BattleContext *battl
                 attacker,
                 defender,
                 moveDamage,
-                &effectiveness);
+                &effectiveness,
+				TRUE);
 
                 moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
                 moveDamage /= 100;

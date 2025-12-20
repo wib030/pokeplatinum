@@ -1268,7 +1268,8 @@ u32 AI_GetMoveEffectiveness(BattleSystem* battleSys, BattleContext* battleCtx)
         AI_CONTEXT.attacker,
         AI_CONTEXT.defender,
         damage,
-        &effectiveness);
+        &effectiveness,
+		TRUE);
 
     if (damage == TYPE_MULTI_STAB_DAMAGE * 2) {
         damage = TYPE_MULTI_DOUBLE_DAMAGE;
@@ -1356,7 +1357,8 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
                     moveType,
                     attacker,
                     defender,
-                    1);
+                    1,
+					TRUE);
 
                 moveDamage = BattleSystem_ApplyTypeChart(battleSys,
                     battleCtx,
@@ -1365,7 +1367,8 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
                     attacker,
                     defender,
                     moveDamage,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
                 moveDamage /= 100;
@@ -1420,7 +1423,8 @@ BOOL AI_AttackerChunksOrKOsDefender(BattleSystem* battleSys, BattleContext* batt
                     moveType,
                     attacker,
                     defender,
-                    1);
+                    1,
+					TRUE);
 
                 moveDamage = BattleSystem_ApplyTypeChart(battleSys,
                     battleCtx,
@@ -1429,7 +1433,8 @@ BOOL AI_AttackerChunksOrKOsDefender(BattleSystem* battleSys, BattleContext* batt
                     attacker,
                     defender,
                     moveDamage,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
                 moveDamage /= 100;
@@ -1748,7 +1753,8 @@ s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 m
             type,
             attacker,
             AI_CONTEXT.defender,
-            1);
+            1,
+			TRUE);
     }
     else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
@@ -1761,7 +1767,8 @@ s32 ExpertAI_CalcDamage(BattleSystem* battleSys, BattleContext* battleCtx, u16 m
         attacker,
         AI_CONTEXT.defender,
         damage,
-        &effectivenessFlags);
+        &effectivenessFlags,
+		TRUE);
     battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
 
     if (BattleAI_IsMultiHitMove(battleSys, battleCtx, attacker, MOVE_DATA(move).effect))
@@ -2314,7 +2321,8 @@ BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* 
                     attacker,
                     defender,
                     TYPE_MULTI_BASE_DAMAGE,
-                    &effectiveness);
+                    &effectiveness,
+					TRUE);
 
                 if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY))

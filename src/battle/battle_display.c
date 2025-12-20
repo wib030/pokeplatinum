@@ -6575,7 +6575,8 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
                 defender,
                 1,
                 defender,
-                i);
+                i,
+				TRUE);
 
             currentMoveDamage = PartyMon_ApplyTypeChart(battleSys,
                 battleCtx,
@@ -6586,7 +6587,8 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
                 currentMoveDamage,
                 defender,
                 i,
-                &currentMoveStatusFlags);
+                &currentMoveStatusFlags,
+				TRUE);
 
             if ((currentMoveStatusFlags & MOVE_STATUS_IMMUNE)
                 && ((currentMoveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -6656,7 +6658,8 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
                             defender,
                             1,
                             defender,
-                            i);
+                            i,
+							TRUE);
 
                         if (predictMoveDamage)
                         {
@@ -6669,7 +6672,8 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
                                 predictMoveDamage,
                                 defender,
                                 i,
-                                &predictMoveStatusFlags);
+                                &predictMoveStatusFlags,
+								TRUE);
 
                             if ((predictMoveStatusFlags & MOVE_STATUS_IMMUNE)
                                 && ((predictMoveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -6764,7 +6768,8 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
                             defender,
                             1,
                             defender,
-                            i);
+                            i,
+							TRUE);
 
                         if (predictMoveDamage)
                         {
@@ -6777,7 +6782,8 @@ u8 BattleDisplay_CalcSwitchAttack_Singles(BattleSystem* battleSys, u8 attacker, 
                                 predictMoveDamage,
                                 defender,
                                 i,
-                                &predictMoveStatusFlags);
+                                &predictMoveStatusFlags,
+								TRUE);
 
                             if ((predictMoveStatusFlags & MOVE_STATUS_IMMUNE)
                                 && ((predictMoveStatusFlags & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -6891,7 +6897,8 @@ u8 BattleDisplay_BeatUpOverride(BattleSystem* battleSys, u8 attacker, u8 current
         currentMoveType,
         attacker,
         defender,
-        1);
+        1,
+		TRUE);
 
     currentMoveDamage = BattleSystem_ApplyTypeChart(battleSys,
         battleCtx,
@@ -6900,7 +6907,8 @@ u8 BattleDisplay_BeatUpOverride(BattleSystem* battleSys, u8 attacker, u8 current
         attacker,
         defender,
         currentMoveDamage,
-        &effectiveness);
+        &effectiveness,
+		TRUE);
 
     if ((effectiveness & MOVE_STATUS_IMMUNE)
         && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -6927,7 +6935,8 @@ u8 BattleDisplay_BeatUpOverride(BattleSystem* battleSys, u8 attacker, u8 current
         newMoveType,
         attacker,
         defender,
-        1);
+        1,
+		TRUE);
 
     newMoveDamage = BattleSystem_ApplyTypeChart(battleSys,
         battleCtx,
@@ -6936,7 +6945,8 @@ u8 BattleDisplay_BeatUpOverride(BattleSystem* battleSys, u8 attacker, u8 current
         attacker,
         defender,
         newMoveDamage,
-        &effectiveness);
+        &effectiveness,
+		TRUE);
 
     if ((effectiveness & MOVE_STATUS_IMMUNE)
         && ((effectiveness & MOVE_STATUS_IGNORE_IMMUNITY) == FALSE)) {
@@ -7432,7 +7442,8 @@ static s32 BattleDisplay_ExpertAI_CalcDamage(BattleSystem* battleSys, BattleCont
             type,
             attacker,
             defender,
-            1);
+            1,
+			TRUE);
     }
     else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
@@ -7445,7 +7456,8 @@ static s32 BattleDisplay_ExpertAI_CalcDamage(BattleSystem* battleSys, BattleCont
         attacker,
         defender,
         damage,
-        &effectivenessFlags);
+        &effectivenessFlags,
+		TRUE);
     battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
 
     if (BattleAI_IsMultiHitMove(battleSys, battleCtx, attacker, MOVE_DATA(move).effect))

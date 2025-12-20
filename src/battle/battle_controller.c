@@ -1528,7 +1528,8 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
 						TYPE_MYSTERY,
 						battler,
 						battleCtx->defender,
-						1);
+						1,
+						FALSE);
 						
 				battleCtx->hpCalcTemp = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->hpCalcTemp);
 				battleCtx->hpCalcTemp *= -1;
@@ -1926,7 +1927,8 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                                                                             0, moveType,
                                                                             futureSightAttacker,
                                                                             battler,
-                                                                            1) * -1;
+                                                                            1,
+																			FALSE) * -1;
                 }
                 // Future sight user is not still out on enemy side
                 else {
@@ -1942,7 +1944,8 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
                                                                             battler,
                                                                             1,
                                                                             futureSightAttacker,
-                                                                            futureSightSelectedPartySlot) * -1;
+                                                                            futureSightSelectedPartySlot,
+																			FALSE) * -1;
                 }
 
                 battleCtx->fieldConditions.futureSightDamage[battler] = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->fieldConditions.futureSightDamage[battler]);
@@ -2598,7 +2601,8 @@ static int BattleController_CheckTypeChart(BattleSystem *battleSys, BattleContex
                 battleCtx->attacker,
                 battleCtx->defender,
                 battleCtx->damage,
-                &battleCtx->moveStatusFlags);
+                &battleCtx->moveStatusFlags,
+				FALSE);
 
         if (battleCtx->moveStatusFlags & MOVE_STATUS_INEFFECTIVE) {
             battleCtx->moveFailFlags[battleCtx->attacker].noEffect = TRUE;
