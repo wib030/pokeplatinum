@@ -11062,13 +11062,10 @@ TagStrategy_PartnerAcupressure:
     ; Else if our partner''s HP is 91% or higher, 68.75% chance of score +2, 31.25% chance of no score change
     ;
     ; Else 31.25% chance of score +2, 68.75% chance of no score change
+    IfVolatileStatus AI_BATTLER_ATTACKER_PARTNER, VOLATILE_CONDITION_SUBSTITUTE, TagStrategy_PartnerScoreMinus30
     IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_ATTACK, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_DEFENSE, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SPEED, 12, TagStrategy_PartnerScoreMinus30
     IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SP_ATTACK, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SP_DEFENSE, 12, TagStrategy_PartnerScoreMinus30
     IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_EVASION, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_ACCURACY, 12, TagStrategy_PartnerScoreMinus30
     GoTo TagStrategy_PartnerAcupressure_CheckHP
 
 TagStrategy_PartnerAcupressure_CheckHP:
