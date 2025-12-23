@@ -12365,20 +12365,34 @@ static BOOL BtlCmd_CheckSubstitute(BattleSystem *battleSys, BattleContext *battl
     BattleScript_Iter(battleCtx, 1);
     int inBattler = BattleScript_Read(battleCtx);
     int jumpSubActive = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    if (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT)
+    {
+        BattleScript_Iter(battleCtx, jumpSubActive);
+    }
+
+    if (battler == battleCtx->defender
+        && battler == battleCtx->attacker)  // early exit for self-targeting moves (acupressure)
+    {
+        return FALSE;
+    }
 	
-	int soundMove = FALSE;
+	int notSoundMove = TRUE;
 	for (int i = 0; i < NELEMS(sSoundMoves); i++)
 	{
 		if (sSoundMoves[i] == battleCtx->moveCur)
 		{
-			soundMove = TRUE;
+            notSoundMove = FALSE;
 		}
 	}
-
-    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
-    if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) && soundMove == FALSE)
-    || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT)) {
-        BattleScript_Iter(battleCtx, jumpSubActive);
+    
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
+    {
+        if (notSoundMove)
+        {
+            BattleScript_Iter(battleCtx, jumpSubActive);
+        }
     }
 
     return FALSE;
