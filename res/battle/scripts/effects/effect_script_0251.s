@@ -3,6 +3,7 @@
     .data
 
 _000:
+    CheckSubstitute BTLSCR_DEFENDER, _019
     CompareMonDataToValue OPCODE_FLAG_SET, BTLSCR_DEFENDER, BATTLEMON_MOVE_EFFECTS_MASK, MOVE_EFFECT_AQUA_RING, _019
     UpdateMonData OPCODE_FLAG_ON, BTLSCR_DEFENDER, BATTLEMON_MOVE_EFFECTS_MASK, MOVE_EFFECT_AQUA_RING
     // {0} surrounded itself with a veil of water!
