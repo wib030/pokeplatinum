@@ -3914,7 +3914,7 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
     }
 
     if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_BOOST_REPEATED) {
-        battleCtx->damage = battleCtx->damage * (10 + ATTACKING_MON.moveEffectsData.metronomeTurns) / 10;
+        battleCtx->damage = battleCtx->damage * (5 + ATTACKING_MON.moveEffectsData.metronomeTurns) / 5;
     }
 
     if (ATTACKING_MON.moveEffectsData.meFirst) {

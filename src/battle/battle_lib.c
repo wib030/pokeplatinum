@@ -9184,7 +9184,7 @@ void BattleSystem_UpdateMetronomeCount(BattleSystem *battleSys, BattleContext *b
                 && (battleCtx->battleStatusMask & SYSCTL_LAST_OF_MULTI_TURN) == FALSE
                 && (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_MOVE_LOCKED) == FALSE) {
             if (battleCtx->metronomeMove[battleCtx->attacker] == battleCtx->moveTemp) {
-                if (ATTACKING_MON.moveEffectsData.metronomeTurns < 10) {
+                if (ATTACKING_MON.moveEffectsData.metronomeTurns < 5) {
                     ATTACKING_MON.moveEffectsData.metronomeTurns++;
                 }
             } else {
