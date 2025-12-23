@@ -1131,13 +1131,19 @@ Basic_CheckTailwind:
 
 Basic_CheckAcupressure:
     ; If any of the attacker''s stat stages are already at +6, score -10.
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 12, ScoreMinus10
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Basic_CheckAcupressure_SecondStat
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, Basic_CheckAcupressure_SecondStat
+    IfRandomLessThan 128, Try50ChanceForScorePlus1
+    GoTo Basic_CheckAcupressure_End
+
+Basic_CheckAcupressure_SecondStat:
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Try95ChanceForScoreMinus12
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, Try95ChanceForScoreMinus12
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 12, Try95ChanceForScoreMinus12
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 12, Try95ChanceForScoreMinus12
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Try95ChanceForScoreMinus12
+
+Basic_CheckAcupressure_End:
     PopOrEnd
 
 Basic_CheckMetalBurst:
@@ -7067,22 +7073,19 @@ Expert_Tailwind_End:
     PopOrEnd 
 
 Expert_Acupressure:
-    ; If the attacker''s HP <= 50%, score -1.
+    ; If the attacker''s HP < 44%, 75% chance for score -3.
     ;
-    ; If the attacker''s HP > 90%, 75% chance of score +1.
+    ; If the attacker''s HP > 66%, 75% chance of score +1.
     ;
-    ; Otherwise, 37.5% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_Acupressure_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_Acupressure_TryScorePlus1
-    IfRandomLessThan 128, Expert_Acupressure_End
+    ; Otherwise, 50% chance of score +1.
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 44, Try75ChanceForScoreMinus3
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 66, Expert_Acupressure_TryScorePlus1
+    IfRandomLessThan 128, ScorePlus1
+    GoTo Expert_Acupressure_End
 
 Expert_Acupressure_TryScorePlus1:
     IfRandomLessThan 64, Expert_Acupressure_End
     AddToMoveScore 1
-    GoTo Expert_Acupressure_End
-
-Expert_Acupressure_ScoreMinus1:
-    AddToMoveScore -1
 
 Expert_Acupressure_End:
     PopOrEnd 
