@@ -1730,6 +1730,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
 				|| Battler_Ability(battleCtx, battler) == ABILITY_THIRSTY
                 || Battler_Ability(battleCtx, battler) == ABILITY_ARENA_TRAP
                 || Battler_Ability(battleCtx, battler) == ABILITY_INTIMIDATE
+				|| Battler_Ability(battleCtx, battler) == ABILITY_PEAL_AWAY
                 || Battler_Ability(battleCtx, battler) == ABILITY_TRACE
                 || Battler_Ability(battleCtx, battler) == ABILITY_DOWNLOAD
                 || Battler_Ability(battleCtx, battler) == ABILITY_ANTICIPATION

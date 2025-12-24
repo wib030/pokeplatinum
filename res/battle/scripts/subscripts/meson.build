@@ -363,4 +363,5 @@ subscript_files = files(
 	'subscript_sleep_heal.s',
 	'subscript_toss_and_turn.s',
 	'subscript_memory_announce.s',
+	'subscript_peal_away.s',
 )

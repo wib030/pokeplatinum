@@ -1,0 +1,32 @@
+    .include "macros/btlcmd.inc"
+
+    .data
+
+_000:
+	// {0}’s {1} activated!
+    PrintMessage pl_msg_00000368_01279, TAG_NICKNAME_ABILITY, BTLSCR_ATTACKER, BTLSCR_ATTACKER
+    Wait 
+    WaitButtonABTime 30
+    TryPartyStatusRefresh
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+	UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_HEAL_BELL
+    PlayMoveAnimationOnMons BTLSCR_MSG_TEMP, BTLSCR_ATTACKER, BTLSCR_ATTACKER
+	Wait
+	UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
+    // A bell chimed!
+    PrintMessage pl_msg_00000368_00821, TAG_NONE
+
+_013:
+    Wait 
+    WaitButtonABTime 30
+	
+_047:
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_CALC_TEMP, 0x00000004, _057
+    SetHealthbarStatus BTLSCR_ATTACKER, BATTLE_ANIMATION_NONE
+
+_057:
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_CALC_TEMP, 0x00000008, _065
+    SetHealthbarStatus BTLSCR_ATTACKER_PARTNER, BATTLE_ANIMATION_NONE
+
+_065:
+    End 

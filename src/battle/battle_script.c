@@ -7849,23 +7849,53 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
             battleCtx->calcTemp |= NO_PARTNER_SLOT_2;
         }
     } else {
-        ATTACKING_MON.status = MON_CONDITION_NONE;
-        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
-		battleCtx->sideConditions[battlerSide].sleepClauseMask &= 0;
+		if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PEAL_AWAY && battleCtx->moveCur != MOVE_AROMATHERAPY)
+		{
+			ATTACKING_MON.status = MON_CONDITION_NONE;
+			ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+			battleCtx->sideConditions[battlerSide].sleepClauseMask &= 0;
 
-        if (battleType & BATTLE_TYPE_DOUBLES) {
-            int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
+			if (battleType & BATTLE_TYPE_DOUBLES) {
+				int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
 
-            if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
-                battleCtx->battleMons[partner].status = MON_CONDITION_NONE;
-                battleCtx->battleMons[partner].statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
-            }
-        } else {
-            battleCtx->calcTemp |= NO_PARTNER_SLOT_2;
-        }
+				if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
+					if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, partner, ABILITY_SOUNDPROOF) == FALSE) {
+						battleCtx->battleMons[partner].status = MON_CONDITION_NONE;
+						battleCtx->battleMons[partner].statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+					} else {
+						battleCtx->msgBattlerTemp = partner;
+						battleCtx->calcTemp |= (SOUNDPROOF_SLOT_2 | NO_PARTNER_SLOT_2);
+					}
+				}
+			} else {
+				battleCtx->calcTemp |= NO_PARTNER_SLOT_2;
+			}
+		}
+		else
+		{
+			ATTACKING_MON.status = MON_CONDITION_NONE;
+			ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+			battleCtx->sideConditions[battlerSide].sleepClauseMask &= 0;
+
+			if (battleType & BATTLE_TYPE_DOUBLES) {
+				int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
+
+				if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
+					battleCtx->battleMons[partner].status = MON_CONDITION_NONE;
+					battleCtx->battleMons[partner].statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+				}
+			} else {
+				battleCtx->calcTemp |= NO_PARTNER_SLOT_2;
+			}
+		}
     }
-
-    BattleIO_RefreshPartyStatus(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveCur);
+	
+	if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PEAL_AWAY && battleCtx->moveCur != MOVE_AROMATHERAPY && battleCtx->moveCur != MOVE_HEAL_BELL) {
+		BattleIO_RefreshPartyStatus(battleSys, battleCtx, battleCtx->attacker, MOVE_HEAL_BELL);
+	} else {
+		BattleIO_RefreshPartyStatus(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveCur);
+	}
+	
     return FALSE;
 }
 
@@ -8164,6 +8194,7 @@ static BOOL BtlCmd_Transform(BattleSystem * battleSys, BattleContext * battleCtx
 	ATTACKING_MON.sleepHealFlag = FALSE;
 	ATTACKING_MON.tossTurnFlag = FALSE;
 	ATTACKING_MON.memoryAnnounced = FALSE;
+	ATTACKING_MON.pealAwayAnnounced = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
     ATTACKING_MON.slowStartAnnounced = FALSE;
     ATTACKING_MON.slowStartFinished = FALSE;

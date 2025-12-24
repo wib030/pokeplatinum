@@ -127,6 +127,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 	battleCtx->battleMons[battler].sleepHealFlag = FALSE;
 	battleCtx->battleMons[battler].tossTurnFlag = FALSE;
 	battleCtx->battleMons[battler].memoryAnnounced = FALSE;
+	battleCtx->battleMons[battler].pealAwayAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -5685,6 +5686,7 @@ enum {
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
 	SWITCH_IN_CHECK_STATE_FORECAST,
     SWITCH_IN_CHECK_STATE_INTIMIDATE,
+	SWITCH_IN_CHECK_STATE_PEAL_AWAY,
     SWITCH_IN_CHECK_STATE_DOWNLOAD,
     SWITCH_IN_CHECK_STATE_ANTICIPATION,
     SWITCH_IN_CHECK_STATE_FOREWARN,
@@ -6193,6 +6195,26 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     battleCtx->battleMons[battler].intimidateAnnounced = TRUE;
                     battleCtx->msgBattlerTemp = battler;
                     subscript = subscript_intimidate;
+                    result = TRUE;
+                    break;
+                }
+            }
+
+            if (i == maxBattlers) {
+                battleCtx->switchInCheckState++;
+            }
+            break;
+			
+		case SWITCH_IN_CHECK_STATE_PEAL_AWAY:
+            for (i = 0; i < maxBattlers; i++) {
+                battler = battleCtx->monSpeedOrder[i];
+
+                if (battleCtx->battleMons[battler].pealAwayAnnounced == FALSE
+                        && battleCtx->battleMons[battler].curHP
+                        && Battler_Ability(battleCtx, battler) == ABILITY_PEAL_AWAY) {
+                    battleCtx->battleMons[battler].pealAwayAnnounced = TRUE;
+                    battleCtx->attacker = battler;
+                    subscript = subscript_peal_away;
                     result = TRUE;
                     break;
                 }

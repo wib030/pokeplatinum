@@ -669,4 +669,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Changes type depending\non the held Plate.</language>
 	</row>
+	<row id="pl_msg_00000612_00167" index="167">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The user chimes a healing\nbell on switch-in.</language>
+	</row>
 </body>
