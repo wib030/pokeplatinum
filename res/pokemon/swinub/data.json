@@ -90,6 +90,11 @@
             "21": "MOVE_ICY_WIND",
             "24": "MOVE_ICE_SHARD",
             "28": "MOVE_TAKE_DOWN",
+			"30": [ 
+				"MOVE_ICICLE_SPEAR",
+				"MOVE_ROCK_BLAST"
+			],
+			"32": "MOVE_CONSTRICT",
 			"35": "MOVE_MIST",
             "37": "MOVE_EARTHQUAKE",
 			"40": "MOVE_FLAIL",

@@ -99,6 +99,11 @@
             "21": "MOVE_ICY_WIND",
             "24": "MOVE_ICE_SHARD",
             "28": "MOVE_TAKE_DOWN",
+			"32": [ 
+				"MOVE_ICICLE_SPEAR",
+				"MOVE_ROCK_BLAST"
+			],
+			"34": "MOVE_CONSTRICT",
 			"37": "MOVE_MIST",
 			"41": "MOVE_THRASH",
 			"44": "MOVE_ICE_BALL",
