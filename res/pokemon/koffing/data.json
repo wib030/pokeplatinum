@@ -78,7 +78,8 @@
             "TM82",
             "TM83",
             "TM87",
-            "TM90"
+            "TM90",
+            "HM05"
         ],
         "level_up": {
             "1": [
@@ -89,14 +90,23 @@
             "7": "MOVE_SMOKE_SCREEN",
             "12": "MOVE_ASSURANCE",
 			"18": "MOVE_SLUDGE",
+			"21": "MOVE_SCARY_FACE",
             "23": "MOVE_SELFDESTRUCT",
+			"25": "MOVE_BODY_SLAM",
             "26": "MOVE_HAZE",
             "29": "MOVE_GYRO_BALL",
+			"31": "MOVE_HEAT_WAVE",
 			"34": "MOVE_SLUDGE_BOMB",
+			"35": [ 
+				"MOVE_STOCKPILE",
+				"MOVE_SPIT_UP",
+				"MOVE_SWALLOW"
+			],
             "37": "MOVE_EXPLOSION",
 			"39": "MOVE_PAIN_SPLIT",
             "40": "MOVE_DESTINY_BOND",
-            "45": "MOVE_MEMENTO"
+            "45": "MOVE_MEMENTO",
+			"48": "MOVE_GUNK_SHOT"
         },
         "tutor": [
             "MOVE_ROLLOUT",
