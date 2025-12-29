@@ -18616,7 +18616,8 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
 			&& (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
 			&& (battleCtx->battleMons[battleCtx->defender].moveEffectsData.embargoTurns == 0)
 			&& (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
-			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken))
+			&& (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+			&& BattleSystem_RandNext(battleSys) % 10 < 3)
 			{
 				*subscript = subscript_embargo_start_ability;
 				result = TRUE;
