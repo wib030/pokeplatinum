@@ -102,6 +102,7 @@
             "15": "MOVE_FIRE_SPIN",
             "22": "MOVE_CONFUSE_RAY",
 			"25": "MOVE_FLAME_WHEEL",
+			"27": "MOVE_BLAST_BURN",
             "29": "MOVE_FIRE_PUNCH",
 			"33": "MOVE_KNOCK_OFF",
             "37": "MOVE_LAVA_PLUME",
@@ -109,6 +110,7 @@
             "42": "MOVE_SUNNY_DAY",
 			"46": "MOVE_TELEPORT",
 			"49": "MOVE_FLAMETHROWER",
+			"53": "MOVE_ERUPTION",
             "56": "MOVE_FIRE_BLAST",
             "61": "MOVE_HYPER_BEAM"
         },
