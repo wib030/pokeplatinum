@@ -89,6 +89,7 @@
 			"16": "MOVE_CHARGE_BEAM",
             "22": "MOVE_SHOCK_WAVE",
             "26": "MOVE_SELFDESTRUCT",
+			"28": "MOVE_RAPID_SPIN",
 			"29": "MOVE_LIGHT_SCREEN",
 			"30": "MOVE_SPIKES",
 			"32": "MOVE_TELEPORT",
