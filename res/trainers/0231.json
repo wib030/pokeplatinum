@@ -18,17 +18,19 @@
             "item": "ITEM_LIECHI_BERRY",
             "moves": [
                 "MOVE_BATON_PASS",
-				"MOVE_SUBSTITUTE"
+				"MOVE_SUBSTITUTE",
+				"MOVE_BUG_BITE",
+				"MOVE_PROTECT"
             ],
             "power": 255,
             "ball_seal": 0,
-			"evHP": 0,
+			"evHP": 236,
 			"evATK": 0,
 			"evDEF": 0,
-			"evSPEED": 0,
+			"evSPEED": 248,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 13
         },
         {
             "species": "SPECIES_ARIADOS",
@@ -38,18 +40,19 @@
             "moves": [
                 "MOVE_SPIDER_WEB",
 				"MOVE_SPIKES",
-				"MOVE_MUD_SPORT",
-				"MOVE_TOXIC"
+				"MOVE_BATON_PASS",
+				"MOVE_POISON_FANG"
             ],
             "power": 255,
             "ball_seal": 0,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
+			"evHP": 244,
+			"evATK": 4,
+			"evDEF": 80,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 180,
+			"nature": 23,
+			"ability": 1
         },
         {
             "species": "SPECIES_SCIZOR",
@@ -60,38 +63,38 @@
                 "MOVE_SWORDS_DANCE",
 				"MOVE_IRON_HEAD",
 				"MOVE_BUG_BITE",
-				"MOVE_WING_ATTACK"
+				"MOVE_CLOSE_COMBAT"
             ],
             "power": 255,
             "ball_seal": 0,
 			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evATK": 252,
+			"evDEF": 4,
+			"evSPEED": 248,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 4,
+			"nature": 13
         },
 		{
             "species": "SPECIES_MASQUERAIN",
             "form": 0,
             "level": 61,
-            "item": "ITEM_WIDE_LENS",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_HYDRO_PUMP",
 				"MOVE_RAZOR_WIND",
 				"MOVE_FISSURE",
-				"MOVE_ICY_WIND"
+				"MOVE_MUD_SPORT"
             ],
             "power": 255,
             "ball_seal": 0,
-			"evHP": 0,
+			"evHP": 240,
 			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
-			"evSPATK": 0,
+			"evDEF": 4,
+			"evSPEED": 124,
+			"evSPATK": 140,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 15
         },
 		{
             "species": "SPECIES_BEEDRILL",
@@ -107,18 +110,18 @@
             "power": 255,
             "ball_seal": 0,
 			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 0,
-			"nature": 0
+			"evSPDEF": 4,
+			"nature": 13
         },
 		{
             "species": "SPECIES_HERACROSS",
             "form": 0,
             "level": 62,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_MEGAHORN",
 				"MOVE_CLOSE_COMBAT",
@@ -127,13 +130,13 @@
             ],
             "power": 255,
             "ball_seal": 0,
-			"evHP": 0,
-			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 0,
+			"evHP": 4,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
 			"evSPATK": 0,
 			"evSPDEF": 0,
-			"nature": 0
+			"nature": 13
         }
     ]
 }
