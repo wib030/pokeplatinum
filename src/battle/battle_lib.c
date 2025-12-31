@@ -14969,8 +14969,8 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
     u8 monType1, monType2, monAbility, monItemEffect;
     u8 battlerType1, battlerType2, battlerAbility, side, oppSide;
     u16 monSpecies, monSpeedStat, monItem, defenderItem;
-    u16 move;
-    int moveType, movePower, moveEffect, moveStatFlag;
+    u16 move, batonPassMove;
+    int moveType, movePower, moveEffect, batonPassMoveEffect, moveStatFlag;
     u8 battlersDisregarded;
     u16 attackScoreType1, attackScoreType2, defendScoreType1, defendScoreType2;
     u8 picked = 6;
@@ -15400,6 +15400,31 @@ int BattleAI_HotSwitchIn(BattleSystem *battleSys, int battler)
                         if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_YAWN) {
                             if (moveEffect == BATTLE_EFFECT_HIT_BEFORE_SWITCH) {
                                 moveScore += 150;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (moveEffect == BATTLE_EFFECT_PASS_STATS_AND_STATUS)
+                        {
+                            if (monAbility == ABILITY_SPEED_BOOST)
+                            {
+                                for (int batonPassCounter = 0; batonPassCounter < LEARNED_MOVES_MAX; batonPassCounter++)
+                                {
+                                    batonPassMove = Pokemon_GetValue(mon, MON_DATA_MOVE1 + batonPassCounter, NULL);
+
+                                    if (batonPassMove == MOVE_NONE)
+                                    {
+                                        break;
+                                    }
+
+                                    batonPassMoveEffect = MOVE_DATA(batonPassMove).effect;
+
+                                    if (batonPassMoveEffect == BATTLE_EFFECT_PROTECT)
+                                    {
+                                        moveScore += 175;
+                                    }
+                                }
                             }
                         }
                     }
