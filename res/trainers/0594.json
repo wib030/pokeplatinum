@@ -50,7 +50,14 @@
                 "MOVE_PURSUIT"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 4,
+			"evSPEED": 248,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 13
         },
 		{
             "species": "SPECIES_MASQUERAIN",
@@ -64,7 +71,14 @@
                 "MOVE_GIGA_DRAIN"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 240,
+			"evATK": 0,
+			"evDEF": 4,
+			"evSPEED": 124,
+			"evSPATK": 140,
+			"evSPDEF": 0,
+			"nature": 15
         },
 		{
             "species": "SPECIES_BEEDRILL",
@@ -78,7 +92,14 @@
                 "MOVE_POISON_JAB"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 0,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 4,
+			"nature": 13
         },
 		{
             "species": "SPECIES_HERACROSS",
@@ -92,7 +113,14 @@
                 "MOVE_STONE_EDGE"
             ],
             "power": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+			"evHP": 4,
+			"evATK": 248,
+			"evDEF": 4,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }
