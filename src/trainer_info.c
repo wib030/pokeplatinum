@@ -34,6 +34,7 @@ void TrainerInfo_Init(TrainerInfo *info)
 {
     memset(info, 0, sizeof(TrainerInfo));
     info->regionCode = GAME_LANGUAGE;
+	info->levelCap = 5;
 
     TrainerInfo_SetGameCode(info, GAME_VERSION);
 }
@@ -231,4 +232,14 @@ BOOL TrainerInfo_Equals(const TrainerInfo *info1, const TrainerInfo *info2)
 {
     return GF_strncmp(info1->name, info2->name, TRAINER_NAME_LEN) == 0
             && info1->id == info2->id;
+}
+
+void TrainerInfo_SetLevelCap(TrainerInfo *info, int levelCap)
+{
+    info->levelCap = levelCap;
+}
+
+int TrainerInfo_GetLevelCap(TrainerInfo *info)
+{
+    return info->levelCap;
 }
