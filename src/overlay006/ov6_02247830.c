@@ -195,6 +195,54 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     {
         return 22;
     }
+	
+	// param2 == UNBELIEVABLE
+    // param3 == STRENGTH
+    // param4 == HERE GOES
+    // param5 == WAVE CRASH
+    if (param2 == 0x4B9
+        && param3 == 0x236
+        && param4 == 0x4AC
+        && param5 == 0x381)
+    {
+        return 23;
+    }
+	
+	// param2 == BOO-HOO
+    // param3 == OLD MAN
+    // param4 == DIFFICULT
+    // param5 == BOY
+    if (param2 == 0x4BE
+        && param3 == 0x486
+        && param4 == 0x59F
+        && param5 == 0x47F)
+    {
+        return 24;
+    }
+	
+	// param2 == EASY WIN
+    // param3 == MOVE
+    // param4 == COME ON
+    // param5 == BEAT UP
+    if (param2 == 0x475
+        && param3 == 0x476
+        && param4 == 0x459
+        && param5 == 0x2EB)
+    {
+        return 25;
+    }
+	
+	// param2 == GOURMET
+    // param3 == FRIEND
+    // param4 == LEGEND
+    // param5 == BATTLE
+    if (param2 == 0x526
+        && param3 == 0x494
+        && param4 == 0x46A
+        && param5 == 0x46B)
+    {
+        return 26;
+    }
 
     for (v2 = 0; v2 < 4; v2++) {
         if (v3[v2] < 0) {

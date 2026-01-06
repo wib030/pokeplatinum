@@ -7551,6 +7551,250 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			return 0;
 		}
 	}
+	
+	// Wake's Relicanth
+	if (v8 == 23)
+	{
+		if (badges >= 5)
+		{
+			// This example gives a Relicanth virtually identical to Wake's.
+			u16 monMoves[] = {
+				MOVE_MAGNITUDE, // Bulldoze
+				MOVE_AQUA_TAIL, // Wave Crash
+				MOVE_STONE_EDGE,
+				MOVE_ROCK_POLISH
+			};
+
+			u16 monIVs[] = {
+				30, // HP
+				31, // ATK
+				31, // DEF
+				31, // SPEED
+				6, // SPATK
+				27 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				64, // ATK
+				0, // DEF
+				252, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_RELICANTH, // Desired species
+				36, // Desired level
+				ABILITY_SWIFT_SWIM, // Desired ability
+				ITEM_WEAKNESS_POLICY, // Desired item
+				GENDER_MALE, // Desired gender
+				NATURE_JOLLY, // Desired nature
+				ITEM_DIVE_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 23;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
+	
+	// Byron's Aggron
+	if (v8 == 24)
+	{
+		if (badges >= 6)
+		{
+			// This example gives a Aggron virtually identical to Byron's.
+			u16 monMoves[] = {
+				MOVE_EARTHQUAKE,
+				MOVE_IRON_HEAD,
+				MOVE_TAUNT,
+				MOVE_ROCK_POLISH
+			};
+
+			u16 monIVs[] = {
+				31, // HP
+				31, // ATK
+				31, // DEF
+				31, // SPEED
+				31, // SPATK
+				31 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				100, // HP
+				152, // ATK
+				0, // DEF
+				132, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_AGGRON, // Desired species
+				45, // Desired level
+				ABILITY_FILTER, // Desired ability
+				ITEM_WEAKNESS_POLICY, // Desired item
+				GENDER_MALE, // Desired gender
+				NATURE_JOLLY, // Desired nature
+				ITEM_TIMER_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 24;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
+	
+	// Candice's Weavile
+	if (v8 == 25)
+	{
+		if (badges >= 7)
+		{
+			// This example gives a Weavile virtually identical to Candice's.
+			u16 monMoves[] = {
+				MOVE_FAKE_OUT,
+				MOVE_BEAT_UP,
+				MOVE_ICE_BALL, // Icicile Crash
+				MOVE_WATER_SPORT // Low Sweep
+			};
+
+			u16 monIVs[] = {
+				31, // HP
+				31, // ATK
+				30, // DEF
+				31, // SPEED
+				17, // SPATK
+				31 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				0, // HP
+				196, // ATK
+				0, // DEF
+				248, // SPEED
+				0, // SPATK
+				0 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_WEAVILE, // Desired species
+				51, // Desired level
+				ABILITY_SHAKEDOWN, // Desired ability
+				ITEM_KINGS_ROCK, // Desired item
+				GENDER_MALE, // Desired gender
+				NATURE_ADAMANT, // Desired nature
+				ITEM_ULTRA_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 25;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
+	
+	// Volkner's Electivire
+	if (v8 == 26)
+	{
+		if (badges >= 8)
+		{
+			// This example gives an Electivire virtually identical to Volkner's.
+			u16 monMoves[] = {
+				MOVE_DRAIN_PUNCH,
+				MOVE_THUNDER_PUNCH,
+				MOVE_ICE_PUNCH,
+				MOVE_BULK_UP
+			};
+
+			u16 monIVs[] = {
+				31, // HP
+				31, // ATK
+				31, // DEF
+				31, // SPEED
+				31, // SPATK
+				31 // SPDEF
+			};
+
+			u16 monEVs[] = {
+				248, // HP
+				8, // ATK
+				0, // DEF
+				16, // SPEED
+				0, // SPATK
+				236 // SPDEF
+			};
+			
+			MakeAndAddEventPokemon (
+				fieldSystem, // FieldSystem reference
+				v1, // TrainerInfo reference
+				v3, // PCBoxes reference
+				party, // Party reference
+				SPECIES_ELECTIVIRE, // Desired species
+				58, // Desired level
+				ABILITY_MOTOR_DRIVE, // Desired ability
+				ITEM_WEAKNESS_POLICY, // Desired item
+				GENDER_MALE, // Desired gender
+				NATURE_ADAMANT, // Desired nature
+				ITEM_QUICK_BALL, // Desired Pokeball
+				monMoves, // Desired moves
+				monIVs, // Desired IVs
+				monEVs, // Desired EVs
+				monLocationData, // Location data
+				monReceivedType, // Received type
+				FALSE); // BOOL, is shiny?
+			
+			*v2 = 26;
+			return 0;
+		}
+		else
+		{
+			// Returns message saying player doesn't have required badges
+			*v2 = 18;
+			return 0;
+		}
+	}
 
     if ((v8 == -1) || (v8 > 7)) {
         *v2 = 0xff;

@@ -181,7 +181,8 @@
 			"evSPEED": 16,
 			"evSPATK": 0,
 			"evSPDEF": 236,
-			"nature": 3
+			"nature": 3,
+			"gender": 0
         }
     ]
 }
