@@ -17,7 +17,6 @@ typedef struct TrainerInfo {
     u8 isMainStoryCleared : 1;
     u8 hasNationalDex : 1;
     u8 : 6;
-	int levelCap;
 } TrainerInfo;
 
 /**
@@ -306,21 +305,5 @@ BOOL TrainerInfo_HasNationalDex(TrainerInfo *info);
  * @return TRUE if the trainer states are deemed equal; FALSE if not.
  */
 BOOL TrainerInfo_Equals(const TrainerInfo *info1, const TrainerInfo *info2);
-
-/**
- * @brief Set the level cap of the player.
- * 
- * @param info  The trainer info.
- * @param levelCap The value to set the level cap to.
- */
-void TrainerInfo_SetLevelCap(TrainerInfo *info, int levelCap);
-
-/**
- * @brief Get the value of the players current level cap.
- * 
- * @param info  The trainer info.
- * @return int value of the current level cap.
- */
-int TrainerInfo_GetLevelCap(TrainerInfo *info);
 
 #endif // POKEPLATINUM_TRAINER_INFO_H

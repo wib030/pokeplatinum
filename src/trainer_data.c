@@ -184,64 +184,8 @@ static void TrainerData_BuildParty(BattleParams *battleParams, int battler, int 
     u8 ivs;
     Pokemon *mon;
 	int monIndex, switchedIndex;
-	int capLevel;
-	TrainerInfo * trInfo = SaveData_GetTrainerInfo(save);
 	
     oldSeed = LCRNG_GetSeed();
-	
-	// Set the players level cap each battle
-	int badges = TrainerInfo_BadgeCount(trInfo);
-	int mainStoryCleared = TrainerInfo_IsMainStoryCleared(trInfo);
-
-	// Set level floors here
-	switch (badges) {
-		default:
-			capLevel = 100;
-			break;
-
-		case 0:
-			capLevel = 13;
-			break;
-
-		case 1:
-			capLevel = 22;
-			break;
-
-		case 2:
-			capLevel = 26;
-			break;
-
-		case 3:
-			capLevel = 31;
-			break;
-
-		case 4:
-			capLevel = 36;
-			break;
-
-		case 5:
-			capLevel = 45;
-			break;
-
-		case 6:
-			capLevel = 51;
-			break;
-
-		case 7:
-			capLevel = 58;
-			break;
-
-		case 8:
-			if (mainStoryCleared == 0)
-			{
-				capLevel = 68;
-			}
-			else
-			{
-				capLevel = 100;
-			}
-			break;
-	}
 
     // alloc enough space to support the maximum possible data size
     Party_InitWithCapacity(battleParams->parties[battler], MAX_PARTY_SIZE);
