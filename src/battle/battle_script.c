@@ -14536,7 +14536,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 			
 			if (mainStoryCleared == 0)
 			{
-				capLevel = 68;
+				capLevel = 66;
 			}
 			else
 			{
