@@ -18,7 +18,7 @@
             "moves": [
                 "MOVE_SPORE",
 				"MOVE_STEALTH_ROCK",
-				"MOVE_LEECH_SEED",
+				"MOVE_MUD_SPORT",
 				"MOVE_MEMENTO"
             ],
             "power": 0,
@@ -34,7 +34,7 @@
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 4,
+			"evSPDEF": 0,
 			"nature": 10
         },
         {
@@ -43,7 +43,7 @@
             "level": 63,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
-                "MOVE_WATERFALL",
+                "MOVE_AQUA_TAIL",
 				"MOVE_AQUA_JET",
 				"MOVE_KNOCK_OFF",
 				"MOVE_ICE_PUNCH"
@@ -56,13 +56,13 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 0,
+			"evHP": 252,
 			"evATK": 252,
 			"evDEF": 0,
-			"evSPEED": 252,
+			"evSPEED": 0,
 			"evSPATK": 0,
 			"evSPDEF": 4,
-			"nature": 13
+			"nature": 3
         },
         {
             "species": "SPECIES_WIGGLYTUFF",
@@ -70,8 +70,8 @@
             "level": 63,
             "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_SEISMIC_TOSS",
-				"MOVE_TOXIC",
+                "MOVE_U_TURN",
+				"MOVE_WISH",
 				"MOVE_SOFTBOILED",
 				"MOVE_SUPER_FANG"
             ],
@@ -83,13 +83,13 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 252,
+			"evHP": 244,
 			"evATK": 0,
 			"evDEF": 252,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 4,
-			"nature": 5
+			"evSPDEF": 12,
+			"nature": 8
         },
         {
             "species": "SPECIES_GLACEON",
@@ -98,25 +98,25 @@
             "item": "ITEM_CHOICE_SCARF",
             "moves": [
                 "MOVE_ICY_WIND",
-				"MOVE_ICE_BEAM",
+				"MOVE_CONSTRICT",
 				"MOVE_MUD_SHOT",
-				"MOVE_SHADOW_BALL"
+				"MOVE_HIDDEN_POWER"
             ],
             "power": 0,
             "ball_seal": 0,
 			"ivHP": 31,
-			"ivATK": 31,
+			"ivATK": 2,
 			"ivDEF": 31,
-			"ivSPEED": 31,
-			"ivSPATK": 31,
+			"ivSPEED": 30,
+			"ivSPATK": 30,
 			"ivSPDEF": 31,
-			"evHP": 0,
+			"evHP": 4,
 			"evATK": 0,
-			"evDEF": 0,
-			"evSPEED": 252,
+			"evDEF": 4,
+			"evSPEED": 248,
 			"evSPATK": 252,
-			"evSPDEF": 4,
-			"nature": 10
+			"evSPDEF": 0,
+			"nature": 15
         },
         {
             "species": "SPECIES_NIDOKING",
@@ -124,10 +124,10 @@
             "level": 63,
             "item": "ITEM_LIFE_ORB",
             "moves": [
-                "MOVE_EARTHQUAKE",
+                "MOVE_EARTH_POWER",
 				"MOVE_FIRE_BLAST",
-				"MOVE_POISON_JAB",
-				"MOVE_THUNDER"
+				"MOVE_SUPERPOWER",
+				"MOVE_THUNDERBOLT"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -137,24 +137,24 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 0,
-			"evATK": 0,
+			"evHP": 4,
+			"evATK": 24,
 			"evDEF": 0,
 			"evSPEED": 252,
-			"evSPATK": 252,
-			"evSPDEF": 4,
+			"evSPATK": 228,
+			"evSPDEF": 0,
 			"nature": 14
         },
 		{
             "species": "SPECIES_LOPUNNY",
             "form": 0,
             "level": 63,
-            "item": "ITEM_EXPERT_BELT",
+            "item": "ITEM_SILK_SCARF",
             "moves": [
                 "MOVE_FAKE_OUT",
 				"MOVE_HI_JUMP_KICK",
 				"MOVE_ICE_PUNCH",
-				"MOVE_LAST_RESORT"
+				"MOVE_RETURN"
             ],
             "power": 0,
             "ball_seal": 11,
@@ -166,11 +166,12 @@
 			"ivSPDEF": 31,
 			"evHP": 0,
 			"evATK": 252,
-			"evDEF": 0,
-			"evSPEED": 252,
+			"evDEF": 4,
+			"evSPEED": 248,
 			"evSPATK": 0,
 			"evSPDEF": 4,
-			"nature": 13
+			"nature": 13,
+			"friendship": 255
         }
     ]
 }

@@ -14,12 +14,12 @@
             "species": "SPECIES_DUSKNOIR",
             "form": 0,
             "level": 62,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_CUSTAP_BERRY",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
 				"MOVE_DRAIN_PUNCH",
 				"MOVE_SHADOW_PUNCH",
-				"MOVE_WILL_O_WISP"
+				"MOVE_CURSE"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -30,11 +30,11 @@
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
 			"evHP": 252,
-			"evATK": 252,
+			"evATK": 248,
 			"evDEF": 4,
 			"evSPEED": 0,
 			"evSPATK": 0,
-			"evSPDEF": 0,
+			"evSPDEF": 4,
 			"nature": 3
         },
         {
@@ -58,11 +58,12 @@
 			"ivSPDEF": 31,
 			"evHP": 0,
 			"evATK": 252,
-			"evDEF": 0,
+			"evDEF": 4,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 4,
-			"nature": 13
+			"evSPDEF": 0,
+			"nature": 13,
+			"ability": 1
         },
         {
             "species": "SPECIES_AMPHAROS",
@@ -70,10 +71,10 @@
             "level": 62,
             "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_DISCHARGE",
-				"MOVE_MORNING_SUN",
-				"MOVE_DRAGON_PULSE",
-				"MOVE_TOXIC"
+                "MOVE_ZAP_CANNON",
+				"MOVE_DRACO_METEOR",
+				"MOVE_THUNDER_WAVE",
+				"MOVE_MORNING_SUN"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -83,13 +84,13 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 252,
+			"evHP": 244,
 			"evATK": 0,
-			"evDEF": 0,
+			"evDEF": 168,
 			"evSPEED": 0,
-			"evSPATK": 252,
-			"evSPDEF": 4,
-			"nature": 15
+			"evSPATK": 56,
+			"evSPDEF": 40,
+			"nature": 5
         },
         {
             "species": "SPECIES_HARIYAMA",
@@ -110,24 +111,24 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 0,
+			"evHP": 4,
 			"evATK": 252,
 			"evDEF": 0,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 4,
+			"evSPDEF": 0,
 			"nature": 13
         },
         {
-            "species": "SPECIES_AZUMARILL",
+            "species": "SPECIES_TYRANITAR",
             "form": 0,
             "level": 62,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
-                "MOVE_BELLY_DRUM",
-				"MOVE_AQUA_JET",
-				"MOVE_SUCKER_PUNCH",
-				"MOVE_SUPERPOWER"
+                "MOVE_STONE_EDGE",
+				"MOVE_KNOCK_OFF",
+				"MOVE_ICE_PUNCH",
+				"MOVE_DRAGON_DANCE"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -139,22 +140,23 @@
 			"ivSPDEF": 31,
 			"evHP": 0,
 			"evATK": 252,
-			"evDEF": 0,
+			"evDEF": 4,
 			"evSPEED": 252,
 			"evSPATK": 0,
-			"evSPDEF": 4,
-			"nature": 3
+			"evSPDEF": 0,
+			"nature": 13,
+			"ability": 1
         },
 		{
-            "species": "SPECIES_ZANGOOSE",
+            "species": "SPECIES_AZURILL",
             "form": 0,
             "level": 62,
-            "item": "ITEM_FLAME_ORB",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_FACADE",
-				"MOVE_KNOCK_OFF",
-				"MOVE_CLOSE_COMBAT",
-				"MOVE_SWORDS_DANCE"
+                "MOVE_WHIRLPOOL",
+				"MOVE_PERISH_SONG",
+				"MOVE_PROTECT",
+				"MOVE_MILK_DRINK"
             ],
             "power": 0,
             "ball_seal": 0,
@@ -164,13 +166,13 @@
 			"ivSPEED": 31,
 			"ivSPATK": 31,
 			"ivSPDEF": 31,
-			"evHP": 0,
-			"evATK": 252,
-			"evDEF": 0,
-			"evSPEED": 252,
+			"evHP": 236,
+			"evATK": 0,
+			"evDEF": 20,
+			"evSPEED": 4,
 			"evSPATK": 0,
-			"evSPDEF": 4,
-			"nature": 13
+			"evSPDEF": 248,
+			"nature": 5
         }
     ]
 }
