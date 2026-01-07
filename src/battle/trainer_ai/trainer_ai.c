@@ -8349,6 +8349,15 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
                                 
                                 if (moveVolatileStatus != VOLATILE_CONDITION_NONE) {
 
+                                    if ((moveVolatileStatus & VOLATILE_CONDITION_CURSE)
+                                        && MON_HAS_TYPE(battler, TYPE_GHOST))
+                                    {
+                                        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, Battler_Ability(battleCtx, defender), moveVolatileStatus) == FALSE)
+                                        {
+                                            return FALSE;
+                                        }
+                                    }
+
                                     if ((battleCtx->battleMons[defender].statusVolatile & moveVolatileStatus) == FALSE) {
 
                                         if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
