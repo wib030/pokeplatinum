@@ -2752,9 +2752,9 @@ BOOL ExpertAI_BattlerHasHealingMove(BattleSystem* battleSys, BattleContext* batt
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++)
     {
-        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, attacker, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
         {
-            move = battleCtx->aiContext.battlerMoves[attacker][i];
+            move = battleCtx->aiContext.battlerMoves[battler][i];
 
             if (move == MOVE_NONE) {
                 break;
