@@ -264,4 +264,13 @@ BOOL ExpertAI_MoveEffectKnownByBattler(BattleSystem* battleSys, BattleContext* b
  */
 BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
 
+/* @brief Check if the battler has a healing move they can use.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler		The battlemon ID of the battler.
+ * @return  TRUE / FALSE whether the battler has a healing move they can use.
+ */
+BOOL ExpertAI_BattlerHasHealingMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H

@@ -2509,3 +2509,39 @@ BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* 
 
     return result;
 }
+
+BOOL ExpertAI_BattlerHasHealingMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    BOOL result;
+    int i;
+    u16 move, moveEffect;
+
+    result = FALSE;
+
+    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_PREVENT_HEALING)
+    {
+        return result;
+    }
+
+    for (i = 0; i < LEARNED_MOVES_MAX; i++)
+    {
+        if ((BattleSystem_CheckInvalidMoves(battleSys, battleCtx, attacker, 0, CHECK_INVALID_ALL) & FlagIndex(i)) == FALSE)
+        {
+            move = battleCtx->aiContext.battlerMoves[attacker][i];
+
+            if (move == MOVE_NONE) {
+                break;
+            }
+
+            moveEffect = MOVE_DATA(move).effect;
+
+            if (BattleEffect_IsHealingMove(battleCtx, moveEffect))
+            {
+                result = TRUE;
+                break;
+            }
+        }
+    }
+
+    return result;
+}
