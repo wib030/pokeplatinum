@@ -1126,6 +1126,233 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     }
                     break;
 
+                case BATTLE_EFFECT_SP_ATK_SP_DEF_UP:
+                    abilityTemp = AI_GetBattlerAbility(battleSys, battleCtx, AI_CONTEXT.defender);
+
+                    if (abilityTemp == ABILITY_UNAWARE
+                        || abilityTemp == ABILITY_MEMORY)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -10);
+                        break;
+                    }
+
+                    if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 255)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -10);
+                            break;
+                        }
+                    }
+
+                    if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+                    {
+                        if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 8))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 128)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 10))
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 205)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 12))
+                                {
+                                    if (AI_GetRandomNumber(battleSys) < 250)
+                                    {
+                                        AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender) == COMPARE_SPEED_SLOWER)
+                    {
+                        if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_TAUNT))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 250)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_ENCORE))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 250)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_SP_DEF_UP_2))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 250)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -10);
+                            break;
+                        }
+                    }
+
+                    // Try to calm mind boost if we can heal and the opponent is a special attacker
+                    if (ExpertAI_BattlerHasHealingMove(battleSys, battleCtx, AI_CONTEXT.attacker))
+                    {
+                        if (ExpertAI_IsBattlerSpecialAttacker(battleSys, battleCtx, AI_CONTEXT.defender))
+                        {
+                            if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) > 44)
+                            {
+                                if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker) == FALSE)
+                                {
+                                    if (AI_GetRandomNumber(battleSys) < 250)
+                                    {
+                                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                    }
+
+                                    if (AI_GetRandomNumber(battleSys) < 128)
+                                    {
+                                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (BattleAI_BattleMonCanHazeOrPhaze(battleSys, battleCtx, AI_CONTEXT.defender))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 250)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -10);
+                            break;
+                        }
+                    }
+
+                    if (ExpertAI_AttackerCanStatusDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 243)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -10);
+                            break;
+                        }
+                    }
+
+                    if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 63)
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 85)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        }
+                    }
+
+                    if (AI_GetBattlerHPPercent(battleSys, battleCtx, AI_CONTEXT.attacker) < 45)
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 230)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -3);
+                        }
+                    }
+
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 7))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 64)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                        break;
+                    }
+
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 8))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 170)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 85)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                        break;
+                    }
+
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_ATTACK, 10))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 52)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                            break;
+                        }
+                    }
+
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_DEFENSE, 7))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 170)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 52)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                        break;
+                    }
+
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_DEFENSE, 8))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 85)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 42)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                        break;
+                    }
+
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SP_DEFENSE, 10))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 16)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                            break;
+                        }
+                    }
+                    break;
+
                 case BATTLE_EFFECT_PREGNANCY_PUNCH:
                     if (AI_GetMoveEffectiveness(battleSys, battleCtx) > TYPE_MULTI_IMMUNE)
                     {
