@@ -18055,7 +18055,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
     u8 slot1, slot2;
     u32 moveStatusFlags;
     int partySize;
-    int score, maxScore, moveScore, activeScore, abilityDefendScore, tolerance;
+    int score, maxScore, moveScore, activeScore, tolerance;
     int hpPercent, monCurHP, monMaxHP;
     int hazardsBonus, sackBonus, speedMultiplier;
 	int moveMoveEffect, moveVolatileStatus, moveStatus;
@@ -18248,7 +18248,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
         activeScore += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
-        abilityDefendScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
+        activeScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
         if (speedMultiplier != 10) {
 
@@ -18495,7 +18495,7 @@ BOOL BattleAI_ValidateSwitch(BattleSystem *battleSys, int battler)
 
             score += BattleAI_CalculateStatusMoveDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
-            abilityDefendScore += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
+            score += BattleAI_CalculateAbilityDefendScore(battleSys, battleCtx, defender, battler, battler, i);
 
             score += BattleAI_CalculateDamagingMoveAttackScore(battleSys, battleCtx, defender, battler, battler, i);
 
