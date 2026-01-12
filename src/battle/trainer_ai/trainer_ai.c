@@ -10428,10 +10428,10 @@ static BOOL ShouldSwitchStatDropped(BattleSystem* battleSys, BattleContext* batt
  */
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i, alivePartyMons;
+    int i, j, alivePartyMons;
     u8 aiSlot1, aiSlot2;
 	u16 move;
-    int moveType;
+    int moveType, defender;
     u32 effectiveness;
     int start, end;
     Pokemon *mon;
@@ -10550,35 +10550,58 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return FALSE;
         }
 		
-		// If our currently active mon has a super-effective move, early exit
-		mon = BattleSystem_PartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
+        defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
 
-		for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-			move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+        for (j = 0; j < MAX_BATTLERS_PER_SIDE; j++)
+        {
+            if (j == 1)
+            {
+                if (battleSys->battleType & BATTLE_TYPE_DOUBLES)
+                {
+                    defender = BattleSystem_Partner(battleSys, defender);
+                }
+                else
+                {
+                    break;
+                }
+            }
 
-			if (move == MOVE_NONE) {
-				break;
-			}
+            // If our currently active mon has a super-effective move, early exit
+            for (i = 0; i < LEARNED_MOVES_MAX; i++)
+            {
+                if (AI_CanUseMove(battleSys, battleCtx, battler, i, CHECK_INVALID_ALL_BUT_TORMENT))
+                {
+                    move = battleCtx->battleMons[battler].moves[i];
 
-			moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+                    if (move == MOVE_NONE) {
+                        break;
+                    }
 
-			if (move) {
-				effectiveness = 0;
-				BattleSystem_CalcEffectiveness(battleCtx,
-					move,
-					moveType,
-					Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-					Battler_Ability(battleCtx, battler),
-					Battler_HeldItemEffect(battleCtx, battler),
-					BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL),
-					BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL),
-					&effectiveness);
+                    moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
 
-				if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
-					return FALSE;
-				}
-			}
-		}
+                    if (move)
+                    {
+                        effectiveness = 0;
+                        BattleSystem_CalcEffectiveness(battleCtx,
+                            move,
+                            moveType,
+                            Battler_Ability(battleCtx, battler),
+                            Battler_Ability(battleCtx, defender),
+                            Battler_HeldItemEffect(battleCtx, defender),
+                            BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
+                            BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),
+                            &effectiveness);
+
+                        if ((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                        {
+                            if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                                return FALSE;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         // 33% of the time, switch to a party member with an immunity to the last move that hit
         // this battler which also has a super-effective move against an opposing Pokemon.
