@@ -10430,6 +10430,9 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
 {
     int i, alivePartyMons;
     u8 aiSlot1, aiSlot2;
+	u16 move;
+    int moveType;
+    u32 effectiveness;
     int start, end;
     Pokemon *mon;
 
@@ -10546,6 +10549,36 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
         if (AI_IsHeavilyAttackingStatBoosted(battleSys, battleCtx, battler)) {
             return FALSE;
         }
+		
+		// If our currently active mon has a super-effective move, early exit
+		mon = BattleSystem_PartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
+
+		for (i = 0; i < LEARNED_MOVES_MAX; i++) {
+			move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
+
+			if (move == MOVE_NONE) {
+				break;
+			}
+
+			moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
+			if (move) {
+				effectiveness = 0;
+				BattleSystem_CalcEffectiveness(battleCtx,
+					move,
+					moveType,
+					Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
+					Battler_Ability(battleCtx, battler),
+					Battler_HeldItemEffect(battleCtx, battler),
+					BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL),
+					BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL),
+					&effectiveness);
+
+				if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+					return FALSE;
+				}
+			}
+		}
 
         // 33% of the time, switch to a party member with an immunity to the last move that hit
         // this battler which also has a super-effective move against an opposing Pokemon.
