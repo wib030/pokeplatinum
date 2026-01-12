@@ -4547,7 +4547,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
     } else {
         chartEntry = 0;
 		
-		if (freezeDryUsed == 1)
+		if (freezeDryUsed)
 		{
 			while (sFreezeDryTypeChart[chartEntry][0] != 0xFF) {
 				if (sFreezeDryTypeChart[chartEntry][0] == 0xFE) {
