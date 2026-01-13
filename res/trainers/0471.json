@@ -20,9 +20,22 @@
                 "MOVE_MACH_PUNCH",
                 "MOVE_FIRE_PUNCH"
             ],
-            "power": 150,
+            "power": 0,
             "ball_seal": 6,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 7,
+			"ivATK": 21,
+			"ivDEF": 18,
+			"ivSPEED": 20,
+			"ivSPATK": 5,
+			"ivSPDEF": 12,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 18
         },
         {
             "species": "SPECIES_SHUPPET",
@@ -35,9 +48,22 @@
                 "MOVE_WILL_O_WISP",
                 "MOVE_DESTINY_BOND"
             ],
-            "power": 150,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 11,
+			"ivATK": 19,
+			"ivDEF": 5,
+			"ivSPEED": 30,
+			"ivSPATK": 10,
+			"ivSPDEF": 13,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 8
         },
         {
             "species": "SPECIES_FLAAFFY",
@@ -50,9 +76,22 @@
                 "MOVE_REFLECT",
                 "MOVE_LIGHT_SCREEN"
             ],
-            "power": 150,
+            "power": 0,
             "ball_seal": 21,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 27,
+			"ivATK": 5,
+			"ivDEF": 26,
+			"ivSPEED": 18,
+			"ivSPATK": 30,
+			"ivSPDEF": 2,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 22
         },
         {
             "species": "SPECIES_PIDGEOTTO",
@@ -65,8 +104,21 @@
                 "MOVE_TWISTER",
                 "MOVE_OMINOUS_WIND"
             ],
-            "power": 150,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 30,
+			"ivATK": 27,
+			"ivDEF": 31,
+			"ivSPEED": 23,
+			"ivSPATK": 31,
+			"ivSPDEF": 24,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 12
         },
 		{
             "species": "SPECIES_EEVEE",
@@ -79,9 +131,22 @@
                 "MOVE_RETURN",
                 "MOVE_DIG"
             ],
-            "power": 255,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 24,
+			"ivATK": 30,
+			"ivDEF": 25,
+			"ivSPEED": 23,
+			"ivSPATK": 27,
+			"ivSPDEF": 25,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 17
         }
     ]
 }

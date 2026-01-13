@@ -1,9 +1,7 @@
 {
     "name": "Cradily",
     "class": "TRAINER_CLASS_LASS",
-    "items": [
-        "ITEM_DIRE_HIT"
-    ],
+    "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",
         "AI_FLAG_EXPERT",

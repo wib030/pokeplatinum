@@ -20,7 +20,20 @@
             ],
             "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 7,
+			"ivATK": 21,
+			"ivDEF": 18,
+			"ivSPEED": 20,
+			"ivSPATK": 5,
+			"ivSPDEF": 12,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 18
         }
     ]
 }

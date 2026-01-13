@@ -19,13 +19,26 @@
 				"MOVE_SAND_ATTACK",
 				"MOVE_FORESIGHT"
             ],
-            "power": 30,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 30,
+			"ivATK": 27,
+			"ivDEF": 31,
+			"ivSPEED": 23,
+			"ivSPATK": 31,
+			"ivSPDEF": 24,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 12
         },
         {
             "species": "SPECIES_TURTWIG",
             "form": 0,
-            "level": 9,
+            "level": 11,
             "item": "ITEM_NONE",
             "moves": [
                 "MOVE_TACKLE",
@@ -33,9 +46,22 @@
 				"MOVE_ABSORB",
 				"MOVE_FRENZY_PLANT"
             ],
-            "power": 30,
+            "power": 0,
             "ball_seal": 6,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 7,
+			"ivATK": 21,
+			"ivDEF": 18,
+			"ivSPEED": 20,
+			"ivSPATK": 5,
+			"ivSPDEF": 12,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 18
         }
     ]
 }

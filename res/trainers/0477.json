@@ -21,9 +21,22 @@
                 "MOVE_OVERHEAT",
                 "MOVE_U_TURN"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 6,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 17,
+			"ivATK": 31,
+			"ivDEF": 25,
+			"ivSPEED": 31,
+			"ivSPATK": 25,
+			"ivSPDEF": 17,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 14
         },
         {
             "species": "SPECIES_PIDGEOT",
@@ -36,8 +49,21 @@
                 "MOVE_HEAT_WAVE",
                 "MOVE_ROOST"
             ],
-            "power": 200,
-            "ball_seal": 0
+            "power": 0,
+            "ball_seal": 0,
+			"ivHP": 30,
+			"ivATK": 27,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 14
         },
         {
             "species": "SPECIES_AMPHAROS",
@@ -50,9 +76,22 @@
                 "MOVE_ZAP_CANNON",
                 "MOVE_FOCUS_BLAST"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 21,
-			"ball_type": "ITEM_GREAT_BALL"
+			"ball_type": "ITEM_GREAT_BALL",
+			"ivHP": 31,
+			"ivATK": 5,
+			"ivDEF": 31,
+			"ivSPEED": 26,
+			"ivSPATK": 31,
+			"ivSPDEF": 26,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 15
         },
         {
             "species": "SPECIES_BANETTE",
@@ -65,9 +104,22 @@
                 "MOVE_SHADOW_CLAW",
                 "MOVE_WILL_O_WISP"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_DUSK_BALL"
+			"ball_type": "ITEM_DUSK_BALL",
+			"ivHP": 21,
+			"ivATK": 31,
+			"ivDEF": 15,
+			"ivSPEED": 31,
+			"ivSPATK": 15,
+			"ivSPDEF": 23,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         },
 		{
             "species": "SPECIES_VAPOREON",
@@ -80,9 +132,22 @@
                 "MOVE_HAZE",
                 "MOVE_SURF"
             ],
-            "power": 255,
+            "power": 0,
             "ball_seal": 0,
-			"ball_type": "ITEM_PREMIER_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"ivHP": 31,
+			"ivATK": 31,
+			"ivDEF": 31,
+			"ivSPEED": 31,
+			"ivSPATK": 31,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 5
         },
 		{
             "species": "SPECIES_VIBRAVA",
@@ -95,9 +160,22 @@
                 "MOVE_OUTRAGE",
                 "MOVE_EARTHQUAKE"
             ],
-            "power": 200,
+            "power": 0,
             "ball_seal": 21,
-			"ball_type": "ITEM_ULTRA_BALL"
+			"ball_type": "ITEM_ULTRA_BALL",
+			"ivHP": 23,
+			"ivATK": 31,
+			"ivDEF": 26,
+			"ivSPEED": 31,
+			"ivSPATK": 23,
+			"ivSPDEF": 31,
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 13
         }
     ]
 }

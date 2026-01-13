@@ -15,7 +15,7 @@
             "moves": [
 				"MOVE_GRASS_KNOT",
 				"MOVE_CONFUSION",
-				"MOVE_ENCORE",
+				"MOVE_TACKLE",
 				"MOVE_SUNNY_DAY"
             ],
             "power": 0,
