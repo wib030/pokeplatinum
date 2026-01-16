@@ -10,9 +10,12 @@
 #include "heap.h"
 #include "unk_02027B70.h"
 #include "berry_data.h"
-
+// berry_patches.c
 static void sub_02027C50(UnkStruct_02027854 * param0);
 static int sub_02027C7C(const UnkStruct_02027BF4 * param0, int param1, int param2);
+
+#define MAX_YIELD_RATING 5;
+#define MAX_MOISTURE_RATING 100;
 
 void sub_02027B70 (UnkStruct_02027854 * param0)
 {
@@ -176,8 +179,8 @@ void sub_02027D40 (UnkStruct_02027854 * param0, int param1, const UnkStruct_0202
     param0[param1].unk_04 = 0;
     param0[param1].unk_06 = 0;
     param0[param1].unk_08 = 0;
-    param0[param1].unk_0A = 100;
-    param0[param1].unk_0B = 5;
+    param0[param1].unk_0A = MAX_MOISTURE_RATING;
+    param0[param1].unk_0B = MAX_YIELD_RATING;
     param0[param1].unk_0D = 1;
 }
 
@@ -244,7 +247,7 @@ static void sub_02027DD4 (UnkStruct_02027854 * param0, const UnkStruct_02027BF4 
     case 5:
         param0->unk_08 = 0;
         param0->unk_01 = 2;
-        param0->unk_0B = 5;
+        param0->unk_0B = MAX_YIELD_RATING;
         param0->unk_06++;
 
         if (param0->unk_06 == sub_02027CDC(param0)) {
