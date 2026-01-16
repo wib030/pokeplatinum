@@ -1,7 +1,11 @@
 {
     "name": "Days",
     "class": "TRAINER_CLASS_SWIMMER_FEMALE",
-    "items": [],
+    "items": [
+        "ITEM_FULL_RESTORE",
+		"ITEM_FULL_RESTORE",
+		"ITEM_FULL_RESTORE"
+    ],
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
