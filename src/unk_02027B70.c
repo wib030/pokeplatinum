@@ -87,19 +87,19 @@ static void sub_02027C50 (UnkStruct_02027854 * param0)
 
 static int sub_02027C68 (UnkStruct_02027854 * param0, const UnkStruct_02027BF4 * param1)
 {
-    return param1[param0->unk_00 - 1].unk_02 * param0->unk_0B;
+    return param1[param0->unk_00 - 1].unk_02 * param0->unk_0B * 2;
 }
 
 static int sub_02027C7C (const UnkStruct_02027BF4 * param0, int param1, int param2)
 {
     int v0;
 
-    v0 = param0[param1 - 1].unk_00 * 60;
+    v0 = param0[param1 - 1].unk_00 * 60 / 8;
 
     if (param2 == 1) {
         v0 = (v0 * 3) / 4;
     } else if (param2 == 2) {
-        v0 = v0 + (v0 / 2);
+        v0 = v0 + (5 * v0 / 4);
     }
 
     return v0;
@@ -308,7 +308,8 @@ void sub_02027EAC (UnkStruct_02027854 * param0, const UnkStruct_02027BF4 * param
             continue;
         }
 
-        if (param2 >= sub_02027C7C(param1, v2->unk_00, v2->unk_0C) * sub_02027CEC(v2)) {
+        int maxPatchLifetime = sub_02027C7C(param1, v2->unk_00, v2->unk_0C) * sub_02027CEC(v2) * 168;
+        if (param2 >= maxPatchLifetime) {
             sub_02027C50(v2);
             continue;
         }
