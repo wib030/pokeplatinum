@@ -1,7 +1,9 @@
 {
     "name": "Kylie",
     "class": "TRAINER_CLASS_LADY",
-    "items": [],
+    "items": [
+        "ITEM_FULL_RESTORE"
+    ],
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
