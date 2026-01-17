@@ -250,6 +250,7 @@ const u16 VeilstoneDeptStoreStock_3F_DOWN[] = {
 };
 
 const u16 CelesticMartSpecialties[] = {
+	ITEM_DESTINY_KNOT,
 	ITEM_FLUFFY_TAIL,
 	ITEM_BLUE_FLUTE,
 	ITEM_YELLOW_FLUTE,
