@@ -15876,20 +15876,18 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
             break;
 			
 		case ITEM_PREMIER_BALL:
-			if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MILTANK) {
-				ballMod = 40;
-			}
-			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_TAUROS) {
-				ballMod = 40;
-			}
-			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MACHOP) {
-				ballMod = 40;
-			}
-			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MACHOKE) {
-				ballMod = 40;
-			}
-			else if (battleCtx->battleMons[battleCtx->defender].species == SPECIES_MACHAMP) {
-				ballMod = 40;
+			switch (battleCtx->battleMons[battleCtx->defender].species)
+			{
+				case SPECIES_MACHOP:
+				case SPECIES_MACHOKE:
+				case SPECIES_MACHAMP:
+					ballMod = 40;
+					break;
+					
+				case SPECIES_MILTANK:
+				case SPECIES_TAUROS:
+					ballMod = 50;
+					break;
 			}
 			break;
         }
