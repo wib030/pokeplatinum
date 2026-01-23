@@ -315,8 +315,8 @@ const u16 VeilstoneDeptStoreStock_B1F_DOWN_LEFT[] = {
 };
 
 const u16 CelesticMartSpecialties_Two[] = {
-	ITEM_GREAT_BALL,
-	ITEM_ULTRA_BALL,
+	ITEM_LOADED_DICE,
+	ITEM_RED_CARD,
 	ITEM_OLD_GATEAU,
 	ITEM_FRESH_WATER,
 	ITEM_LEMONADE,
@@ -325,9 +325,6 @@ const u16 CelesticMartSpecialties_Two[] = {
 	ITEM_ENERGYPOWDER,
 	ITEM_ENERGY_ROOT,
 	ITEM_REVIVAL_HERB,
-	ITEM_DUSK_BALL,
-	ITEM_QUICK_BALL,
-	ITEM_TIMER_BALL,
 	0xffff
 };
 
