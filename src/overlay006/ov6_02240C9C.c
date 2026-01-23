@@ -1155,135 +1155,138 @@ static u8 ov6_02241B40 (const UnkStruct_ov6_0224222C * param0, const UnkStruct_o
     return v2 + v1;
 }
 
-static void ov6_02241BAC (const u16 param0, const u8 param1, const int param2, const u32 param3, const UnkStruct_ov6_022422D0 * param4, Pokemon * param5, BattleParams * param6)
+// Creates a mon with a personality that will make it shiny, and complies with Cute Charm/Synchronize.
+// It only has to check one or the other, not both, because only one ability can be in effect at a time.
+static void CreateWildMonShinyWithGenderOrNature (const u16 species, const u8 level, const int partySlot, const u32 param3, const UnkStruct_ov6_022422D0 * encounterFieldParams, Pokemon * firstPartyMon, BattleParams * battleParams)
 {
     BOOL v0;
-    u32 v1;
-    BOOL v2;
-    u8 v3;
-    u8 v4;
-    Pokemon * v5;
+    u32 newEncounterPersonality;
+    BOOL abilityInEffect;
+    u8 firstMonGender;
+    u8 firstMonNature;
+    Pokemon * newEncounter;
 
-    v5 = Pokemon_New(11);
-    Pokemon_Init(v5);
+    newEncounter = Pokemon_New(11);
+    Pokemon_Init(newEncounter);
 
-    v2 = 0;
+    abilityInEffect = 0;
+	
+	// First mon in player party is not an egg
+    if (encounterFieldParams->unk_0D == 0) {
+		// First mon in player party has cute charm ability
+        if (encounterFieldParams->unk_0E == ABILITY_CUTE_CHARM) {
+            u32 speciesGenderRatio;
 
-    if (param4->unk_0D == 0) {
-        if (param4->unk_0E == 56) {
-            u32 v6;
+            speciesGenderRatio = PokemonPersonalData_GetSpeciesValue(species, 18);
 
-            v6 = PokemonPersonalData_GetSpeciesValue(param0, 18);
-
-            switch (v6) {
+            switch (speciesGenderRatio) {
             case 0:
             case 254:
             case 255:
                 break;
             default:
                 if (inline_020564D0(3) > 0) {
-                    v3 = Pokemon_GetValue(param5, MON_DATA_GENDER, NULL);
-                    v2 = 1;
+                    firstMonGender = Pokemon_GetValue(firstPartyMon, MON_DATA_GENDER, NULL);
+                    abilityInEffect = 1;
                 }
             }
-        } else if (param4->unk_0E == 28) {
+		// First mon in player party has synchronize ability
+        } else if (encounterFieldParams->unk_0E == ABILITY_SYNCHRONIZE) {
             if (inline_020564D0(2) == 0) {
-                v4 = Pokemon_GetNature(param5);
-                v2 = 1;
+                firstMonNature = Pokemon_GetNature(firstPartyMon);
+                abilityInEffect = 1;
             }
         }
     }
 
-    v1 = Pokemon_FindShinyPersonality(param3);
+    newEncounterPersonality = Pokemon_FindShinyPersonality(param3);
 
-    if (v2) {
-        u8 v7, v8;
+    if (abilityInEffect) {
+        u8 newEncounterGender, newEncounterNature;
 
         do {
-            if (param4->unk_0E == 56) {
-                v7 = Pokemon_GetGenderOf(param0, v1);
-                GF_ASSERT(v7 != 2);
+            if (encounterFieldParams->unk_0E == 56) {
+                newEncounterGender = Pokemon_GetGenderOf(species, newEncounterPersonality);
+                GF_ASSERT(newEncounterGender != GENDER_NONE);
 
-                if (v7 != v3) {
+                if (newEncounterGender != firstMonGender) {
                     break;
                 } else {
-                    v1 = Pokemon_FindShinyPersonality(param3);
+                    newEncounterPersonality = Pokemon_FindShinyPersonality(param3);
                 }
-            } else if (param4->unk_0E == 28) {
-                v8 = Pokemon_GetNatureOf(v1);
+            } else if (encounterFieldParams->unk_0E == 28) {
+                newEncounterNature = Pokemon_GetNatureOf(newEncounterPersonality);
 
-                if (v8 == v4) {
+                if (newEncounterNature == firstMonNature) {
                     break;
                 } else {
-                    v1 = Pokemon_FindShinyPersonality(param3);
+                    newEncounterPersonality = Pokemon_FindShinyPersonality(param3);
                 }
             }
         } while (TRUE);
     }
 
-    Pokemon_InitWith(v5, param0, param1, 32, 1, v1, 1, param4->unk_00);
-    v0 = ov6_02242514(param2, param4, v5, param6);
+    Pokemon_InitWith(newEncounter, species, level, 32, 1, newEncounterPersonality, 1, encounterFieldParams->unk_00);
+    v0 = ov6_02242514(partySlot, encounterFieldParams, newEncounter, battleParams);
 
     GF_ASSERT(v0);
-    Heap_FreeToHeap(v5);
+    Heap_FreeToHeap(newEncounter);
 }
 
-static void ov6_02241CC0 (u16 param0, u8 param1, const int param2, const UnkStruct_ov6_022422D0 * param3, Pokemon * param4, BattleParams * param5)
+static void CreateWildMon (u16 species, u8 level, const int partyDest, const UnkStruct_ov6_022422D0 * encounterFieldParams, Pokemon * firstPartyMon, BattleParams * battleParams)
 {
-    u8 v0;
-    u8 v1;
+    u8 hasRandomGender;
+    u8 gender;
     BOOL v2;
-    Pokemon * v3;
+    Pokemon * newEncounter;
 
-    v3 = Pokemon_New(11);
-    Pokemon_Init(v3);
-    v0 = 1;
+    newEncounter = Pokemon_New(11);
+    Pokemon_Init(newEncounter);
+    hasRandomGender = 1;
 
-    {
-        u32 v4;
+    u32 speciesGenderRatio;
 
-        v4 = PokemonPersonalData_GetSpeciesValue(param0, 18);
+	speciesGenderRatio = PokemonPersonalData_GetSpeciesValue(species, 18);
 
-        switch (v4) {
-        case 0:
-        case 254:
-        case 255:
-            v0 = 0;
-        }
-    }
+	switch (speciesGenderRatio) {
+	case 0:
+	case 254:
+	case 255:
+		hasRandomGender = 0;
+	}
 
-    if (v0) {
-        if (param3->unk_0D == 0) {
-            if (param3->unk_0E == 56) {
+    if (hasRandomGender) {
+        if (encounterFieldParams->unk_0D == 0) {
+            if (encounterFieldParams->unk_0E == 56) {
                 if (inline_020564D0(3) > 0) {
-                    v1 = Pokemon_GetValue(param4, MON_DATA_GENDER, NULL);
+                    gender = Pokemon_GetValue(firstPartyMon, MON_DATA_GENDER, NULL);
 
-                    if (v1 == 1) {
-                        v1 = 0;
-                    } else if (v1 == 0) {
-                        v1 = 1;
+                    if (gender == GENDER_FEMALE) {
+                        gender = GENDER_MALE;
+                    } else if (gender == GENDER_MALE) {
+                        gender = GENDER_FEMALE;
                     } else {
                         GF_ASSERT(FALSE);
                     }
 
-                    sub_02074088(v3, param0, param1, 32, v1, ov6_02241AE4(param4, param3), 0);
-                    Pokemon_SetValue(v3, 7, &param3->unk_00);
+                    sub_02074088(newEncounter, species, level, 32, gender, ov6_02241AE4(firstPartyMon, encounterFieldParams), 0);
+                    Pokemon_SetValue(newEncounter, 7, &encounterFieldParams->unk_00);
 
-                    v2 = ov6_02242514(param2, param3, v3, param5);
+                    v2 = ov6_02242514(partyDest, encounterFieldParams, newEncounter, battleParams);
                     GF_ASSERT(v2);
-                    Heap_FreeToHeap(v3);
+                    Heap_FreeToHeap(newEncounter);
                     return;
                 }
             }
         }
     }
 
-    sub_02074044(v3, param0, param1, 32, ov6_02241AE4(param4, param3));
-    Pokemon_SetValue(v3, 7, &param3->unk_00);
-    v2 = ov6_02242514(param2, param3, v3, param5);
+    sub_02074044(newEncounter, species, level, 32, ov6_02241AE4(firstPartyMon, encounterFieldParams));
+    Pokemon_SetValue(newEncounter, 7, &encounterFieldParams->unk_00);
+    v2 = ov6_02242514(partyDest, encounterFieldParams, newEncounter, battleParams);
 
     GF_ASSERT(v2);
-    Heap_FreeToHeap(v3);
+    Heap_FreeToHeap(newEncounter);
 }
 
 static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov6_022422D0 * param2, const UnkStruct_ov6_0224222C * param3, const u8 param4, const int param5, BattleParams * param6)
@@ -1355,7 +1358,7 @@ static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov
         return 0;
     }
 
-    ov6_02241CC0(param3[v1].unk_00, v2, param5, param2, param0, param6);
+    CreateWildMon(param3[v1].unk_00, v2, param5, param2, param0, param6);
     return 1;
 }
 
@@ -1367,9 +1370,9 @@ static BOOL ov6_02241F2C (const int param0, const int param1, const int param2, 
     v0 = param1;
 
     if (param3) {
-        ov6_02241BAC(param0, v0, param2, param4, param5, param6, param7);
+        CreateWildMonShinyWithGenderOrNature(param0, v0, param2, param4, param5, param6, param7);
     } else {
-        ov6_02241CC0(param0, v0, param2, param5, param6, param7);
+        CreateWildMon(param0, v0, param2, param5, param6, param7);
     }
 
     return 1;
@@ -1408,7 +1411,7 @@ static BOOL ov6_02241F7C (FieldSystem * fieldSystem, Pokemon * param1, const Unk
         }
     }
 
-    ov6_02241CC0(v3, v2, param4, param2, param1, param5);
+    CreateWildMon(v3, v2, param4, param2, param1, param5);
     return 1;
 }
 
@@ -1448,7 +1451,7 @@ void ov6_02242034 (FieldSystem * fieldSystem, BattleParams * param1)
 
     ov5_021F0040(fieldSystem);
     param1->unk_164 |= 0x2;
-    ov6_02241CC0(v1, v3, 1, &v2, v0, param1);
+    CreateWildMon(v1, v3, 1, &v2, v0, param1);
 
     return;
 }
@@ -1467,7 +1470,7 @@ void ov6_022420D4 (FieldSystem * fieldSystem, u16 param1, u8 param2, BattleParam
         ov6_02242634(fieldSystem, v0, NULL, &v1);
     }
 
-    ov6_02241CC0(param1, param2, 1, &v1, v0, param3);
+    CreateWildMon(param1, param2, 1, &v1, v0, param3);
     return;
 }
 
