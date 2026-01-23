@@ -7,7 +7,7 @@
 typedef struct RadarChain RadarChain;
 
 #define NUM_GRASS_PATCHES 4
-#define RADAR_BATTERY_STEPS 50
+#define RADAR_BATTERY_STEPS 10
 
 enum PatchShakeType {
     PATCH_SHAKE_SOFT = 0,
