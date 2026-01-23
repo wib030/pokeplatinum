@@ -1793,18 +1793,6 @@ static int GetRadarPerfectIVs(int chainCount, BOOL shiny)
 {
 	int perfectIVCount = 0;
 	
-	switch (chainCount)
-	{
-		case 9: // 10th mon in chain
-		case 19: // 20th mon in chain
-		case 29: // 30th mon in chain
-		case 39: // 40th mon in chain
-		case 49: // 50th mon in chain
-		case 59: // 60th mon in chain
-			perfectIVCount += 2;
-			break;
-	}
-	
 	if (chainCount >= 10)
 	{
 		perfectIVCount++;
