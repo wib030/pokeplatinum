@@ -378,8 +378,8 @@ static u8 sub_0206994C (FieldSystem *fieldSystem) {
 
 static BOOL CheckPatchContinueChain (const u8 patchRing, const int battleResult) {
     u8 *rates;
-    u8 ratesNormal[4] = {88, 68, 48, 28};
-    u8 ratesBoosted[4] = {98, 78, 58, 38};
+    u8 ratesNormal[4] = {98, 88, 68, 48};
+    u8 ratesBoosted[4] = {99, 98, 78, 58};
 
     if (battleResult == BATTLE_RESULT_WIN) {  // If the battle resulted in fainting the mon, use the regular rates
         rates = ratesNormal;
