@@ -901,6 +901,7 @@ void ov5_021E6CF0 (Pokemon * param0, u16 param1, u8 param2, TrainerInfo * param3
     else {
         birthLevel = BIRTH_LEVEL;
     }
+	Pokemon_SetValue(param0, MON_DATA_LEVEL, &birthLevel);
     Pokemon_InitWith(param0, param1, birthLevel, 32, 0, 0, 0, 0);
 
     v0 = 0;
