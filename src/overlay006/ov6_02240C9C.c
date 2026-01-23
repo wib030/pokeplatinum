@@ -1805,32 +1805,32 @@ static int GetRadarPerfectIVs(int chainCount, BOOL shiny)
 			break;
 	}
 	
-	if (chainCount > 10)
+	if (chainCount >= 10)
 	{
 		perfectIVCount++;
 	}
 	
-	if (chainCount > 20)
+	if (chainCount >= 20)
 	{
 		perfectIVCount++;
 	}
 	
-	if (chainCount > 30)
+	if (chainCount >= 30)
 	{
 		perfectIVCount++;
 	}
 	
-	if (chainCount > 40)
+	if (chainCount >= 40)
 	{
 		perfectIVCount++;
 	}
 	
-	if (chainCount > 50)
+	if (chainCount >= 50)
 	{
 		perfectIVCount++;
 	}
 	
-	if (chainCount > 60)
+	if (chainCount >= 60)
 	{
 		perfectIVCount++;
 	}
