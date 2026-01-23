@@ -13126,6 +13126,7 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
             inheritedIVs[i] = 32;
             lockedDefenderIVs[i] = 0;
             lockedAttackerIVs[i] = 0;
+			monIVs[i] = 0;
         }
 
         personalityRand = BattleSystem_RandNext(battleSys);
@@ -13449,11 +13450,14 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
         // inherit IVs
         for (i = 0; i < STAT_MAX; i++) {
-            monIVs[i] = inheritedIVs[i];
-
-            monIVsTemp = monIVs[i];
-            Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &monIVsTemp);
-            BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &monIVsTemp);
+			if (inheritedIVs[i] < 32)
+			{
+				monIVs[i] = inheritedIVs[i];
+				monIVsTemp = monIVs[i];
+				
+				Pokemon_SetValue(mon, MON_DATA_HP_IV + i, &monIVsTemp);
+				BoxPokemon_SetValue(boxMon, MON_DATA_HP_IV + i, &monIVsTemp);
+			}
         }
 		
 		// Egg Moves
