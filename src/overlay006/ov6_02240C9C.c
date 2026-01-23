@@ -100,7 +100,7 @@ static BOOL ov6_02241790(FieldSystem * fieldSystem, Pokemon * param1, BattlePara
 static BOOL ov6_022417AC(FieldSystem * fieldSystem, Pokemon * param1, BattleParams * param2, UnkStruct_ov6_0224222C * param3, const UnkStruct_ov6_022422D0 * param4, const int param5);
 static BOOL ov6_02241DC4(Pokemon * param0, const int param1, const UnkStruct_ov6_022422D0 * param2, const UnkStruct_ov6_0224222C * param3, const u8 param4, const int param5, BattleParams * param6);
 static BOOL ov6_02241F7C(FieldSystem * fieldSystem, Pokemon * param1, const UnkStruct_ov6_022422D0 * param2, const UnkStruct_ov6_0224222C * param3, const int param4, BattleParams * param5, const int param6, const int param7);
-static BOOL ov6_02241F2C(const int param0, const int param1, const int param2, const BOOL param3, const u32 param4, const UnkStruct_ov6_022422D0 * param5, Pokemon * param6, BattleParams * param7);
+static BOOL CreateWildMon_FromRadarKeepChain(const int param0, const int param1, const int param2, const BOOL param3, const u32 param4, const UnkStruct_ov6_022422D0 * param5, Pokemon * param6, BattleParams * param7, int chainCount);
 static u8 ov6_0224226C(const BOOL param0, const u8 param1, const UnkStruct_ov6_022422D0 * param2, const u32 param3, Pokemon * param4);
 static void ov6_02242328(FieldSystem * fieldSystem, const BOOL param1, BattleParams ** param2);
 static void ov6_02242354(FieldSystem * fieldSystem, const BOOL param1, const BOOL param2, UnkStruct_ov6_0224222C * param3);
@@ -115,6 +115,7 @@ static void ov6_02241ABC(FieldSystem * fieldSystem, u8 * param1);
 static BOOL TryGetSlotForTypePreventAbility(Pokemon* unused, const UnkStruct_ov6_022422D0* encounterFieldParams, const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, const u8 ability, u8* encounterSlot);
 static BOOL PreventMatchingTypeEncounterSlot(const UnkStruct_ov6_0224222C* encounterTable, const u8 maxEncounters, const u8 type, u8* encounterSlot);
 static BOOL FirstMonAbilityPreventsHigherLevel(const UnkStruct_ov6_022422D0* param0, Pokemon* param1, const u8 param2);
+static int GetRadarPerfectIVs(int chainCount, BOOL shiny);
 
 static const u8 Unk_ov6_02248FDC[] = {
     0x0,
@@ -778,7 +779,7 @@ static BOOL ov6_02241674 (FieldSystem * fieldSystem, Pokemon * param1, BattlePar
             TrainerInfo * v3;
 
             v3 = SaveData_GetTrainerInfo(FieldSystem_SaveData(fieldSystem));
-            v0 = ov6_02241F2C(v1, v2, 1, param6->unk_08, TrainerInfo_ID(v3), param5, param1, param2);
+            v0 = CreateWildMon_FromRadarKeepChain(v1, v2, 1, param6->unk_08, TrainerInfo_ID(v3), param5, param1, param2, GetChainCount(fieldSystem));
         } else {
             v0 = ov6_02241F7C(fieldSystem, param1, param5, param4, 1, param2, v1, v2);
         }
@@ -1157,7 +1158,7 @@ static u8 ov6_02241B40 (const UnkStruct_ov6_0224222C * param0, const UnkStruct_o
 
 // Creates a mon with a personality that will make it shiny, and complies with Cute Charm/Synchronize.
 // It only has to check one or the other, not both, because only one ability can be in effect at a time.
-static void CreateWildMonShinyWithGenderOrNature (const u16 species, const u8 level, const int partySlot, const u32 param3, const UnkStruct_ov6_022422D0 * encounterFieldParams, Pokemon * firstPartyMon, BattleParams * battleParams)
+static void CreateWildMonShinyWithGenderOrNature (const u16 species, const u8 level, const int partySlot, const u32 param3, const UnkStruct_ov6_022422D0 * encounterFieldParams, Pokemon * firstPartyMon, BattleParams * battleParams, int chainCount)
 {
     BOOL v0;
     u32 newEncounterPersonality;
@@ -1165,6 +1166,13 @@ static void CreateWildMonShinyWithGenderOrNature (const u16 species, const u8 le
     u8 firstMonGender;
     u8 firstMonNature;
     Pokemon * newEncounter;
+	
+	BOOL tempBool;
+	int tempInt;
+	int maxIV = 31;
+	int rollFailCount;
+	int i;
+	int perfectIVCount;
 
     newEncounter = Pokemon_New(11);
     Pokemon_Init(newEncounter);
@@ -1227,18 +1235,55 @@ static void CreateWildMonShinyWithGenderOrNature (const u16 species, const u8 le
     }
 
     Pokemon_InitWith(newEncounter, species, level, 32, 1, newEncounterPersonality, 1, encounterFieldParams->unk_00);
+	
+	perfectIVCount = GetRadarPerfectIVs(chainCount, TRUE);
+	
+	if (perfectIVCount > 0)
+	{
+		for (i = 0; i < perfectIVCount; i++)
+		{
+			tempBool = FALSE;
+			rollFailCount = 0;
+			
+			while (tempBool == FALSE)
+			{
+				tempInt = inline_020564D0(6);
+				
+				if (Pokemon_GetValue(newEncounter, MON_DATA_HP_IV + tempInt, NULL) != 31)
+				{
+					Pokemon_SetValue(newEncounter, MON_DATA_HP_IV + tempInt, &maxIV);
+					tempBool = TRUE;
+				}
+				
+				rollFailCount++;
+				
+				if (rollFailCount > 64)
+				{
+					tempBool = TRUE;
+				}
+			}
+		}
+	}
+	
     v0 = ov6_02242514(partySlot, encounterFieldParams, newEncounter, battleParams);
-
+	
     GF_ASSERT(v0);
     Heap_FreeToHeap(newEncounter);
 }
 
-static void CreateWildMon (u16 species, u8 level, const int partyDest, const UnkStruct_ov6_022422D0 * encounterFieldParams, Pokemon * firstPartyMon, BattleParams * battleParams)
+static void CreateWildMon (u16 species, u8 level, const int partyDest, const UnkStruct_ov6_022422D0 * encounterFieldParams, Pokemon * firstPartyMon, BattleParams * battleParams, int chainCount)
 {
     u8 hasRandomGender;
     u8 gender;
     BOOL v2;
     Pokemon * newEncounter;
+	
+	BOOL tempBool;
+	int tempInt;
+	int maxIV = 31;
+	int rollFailCount;
+	int i;
+	int perfectIVCount;
 
     newEncounter = Pokemon_New(11);
     Pokemon_Init(newEncounter);
@@ -1283,6 +1328,36 @@ static void CreateWildMon (u16 species, u8 level, const int partyDest, const Unk
 
     sub_02074044(newEncounter, species, level, 32, ov6_02241AE4(firstPartyMon, encounterFieldParams));
     Pokemon_SetValue(newEncounter, 7, &encounterFieldParams->unk_00);
+	
+	perfectIVCount = GetRadarPerfectIVs(chainCount, FALSE);
+	
+	if (perfectIVCount > 0)
+	{
+		for (i = 0; i < perfectIVCount; i++)
+		{
+			tempBool = FALSE;
+			rollFailCount = 0;
+			
+			while (tempBool == FALSE)
+			{
+				tempInt = inline_020564D0(6);
+				
+				if (Pokemon_GetValue(newEncounter, MON_DATA_HP_IV + tempInt, NULL) != 31)
+				{
+					Pokemon_SetValue(newEncounter, MON_DATA_HP_IV + tempInt, &maxIV);
+					tempBool = TRUE;
+				}
+				
+				rollFailCount++;
+				
+				if (rollFailCount > 64)
+				{
+					tempBool = TRUE;
+				}
+			}
+		}
+	}
+	
     v2 = ov6_02242514(partyDest, encounterFieldParams, newEncounter, battleParams);
 
     GF_ASSERT(v2);
@@ -1358,11 +1433,11 @@ static BOOL ov6_02241DC4 (Pokemon * param0, const int param1, const UnkStruct_ov
         return 0;
     }
 
-    CreateWildMon(param3[v1].unk_00, v2, param5, param2, param0, param6);
+    CreateWildMon(param3[v1].unk_00, v2, param5, param2, param0, param6, 0);
     return 1;
 }
 
-static BOOL ov6_02241F2C (const int param0, const int param1, const int param2, const BOOL param3, const u32 param4, const UnkStruct_ov6_022422D0 * param5, Pokemon * param6, BattleParams * param7)
+static BOOL CreateWildMon_FromRadarKeepChain (const int param0, const int param1, const int param2, const BOOL param3, const u32 param4, const UnkStruct_ov6_022422D0 * param5, Pokemon * param6, BattleParams * param7, int chainCount)
 {
     u8 v0 = 0;
 
@@ -1370,9 +1445,9 @@ static BOOL ov6_02241F2C (const int param0, const int param1, const int param2, 
     v0 = param1;
 
     if (param3) {
-        CreateWildMonShinyWithGenderOrNature(param0, v0, param2, param4, param5, param6, param7);
+        CreateWildMonShinyWithGenderOrNature(param0, v0, param2, param4, param5, param6, param7, chainCount);
     } else {
-        CreateWildMon(param0, v0, param2, param5, param6, param7);
+        CreateWildMon(param0, v0, param2, param5, param6, param7, chainCount);
     }
 
     return 1;
@@ -1411,7 +1486,7 @@ static BOOL ov6_02241F7C (FieldSystem * fieldSystem, Pokemon * param1, const Unk
         }
     }
 
-    CreateWildMon(v3, v2, param4, param2, param1, param5);
+    CreateWildMon(v3, v2, param4, param2, param1, param5, 0);
     return 1;
 }
 
@@ -1451,7 +1526,7 @@ void ov6_02242034 (FieldSystem * fieldSystem, BattleParams * param1)
 
     ov5_021F0040(fieldSystem);
     param1->unk_164 |= 0x2;
-    CreateWildMon(v1, v3, 1, &v2, v0, param1);
+    CreateWildMon(v1, v3, 1, &v2, v0, param1, 0);
 
     return;
 }
@@ -1470,7 +1545,7 @@ void ov6_022420D4 (FieldSystem * fieldSystem, u16 param1, u8 param2, BattleParam
         ov6_02242634(fieldSystem, v0, NULL, &v1);
     }
 
-    CreateWildMon(param1, param2, 1, &v1, v0, param3);
+    CreateWildMon(param1, param2, 1, &v1, v0, param3, 0);
     return;
 }
 
@@ -1712,6 +1787,65 @@ static BOOL FirstMonAbilityPreventsHigherLevel(const UnkStruct_ov6_022422D0* par
     }
 
     return 0;
+}
+
+static int GetRadarPerfectIVs(int chainCount, BOOL shiny)
+{
+	int perfectIVCount = 0;
+	
+	switch (chainCount)
+	{
+		case 9: // 10th mon in chain
+		case 19: // 20th mon in chain
+		case 29: // 30th mon in chain
+		case 39: // 40th mon in chain
+		case 49: // 50th mon in chain
+		case 59: // 60th mon in chain
+			perfectIVCount += 2;
+			break;
+	}
+	
+	if (chainCount > 10)
+	{
+		perfectIVCount++;
+	}
+	
+	if (chainCount > 20)
+	{
+		perfectIVCount++;
+	}
+	
+	if (chainCount > 30)
+	{
+		perfectIVCount++;
+	}
+	
+	if (chainCount > 40)
+	{
+		perfectIVCount++;
+	}
+	
+	if (chainCount > 50)
+	{
+		perfectIVCount++;
+	}
+	
+	if (chainCount > 60)
+	{
+		perfectIVCount++;
+	}
+	
+	if (shiny == TRUE)
+	{
+		perfectIVCount++;
+	}
+	
+	if (perfectIVCount > 6)
+	{
+		perfectIVCount = 6;
+	}
+	
+	return perfectIVCount;
 }
 
 static void ov6_02242328 (FieldSystem * fieldSystem, const BOOL param1, BattleParams ** param2)
