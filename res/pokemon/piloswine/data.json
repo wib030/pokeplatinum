@@ -125,6 +125,11 @@
             "EVO_KNOW_MOVE",
             "MOVE_ANCIENT_POWER",
             "SPECIES_MAMOSWINE"
+        ],
+		[
+            "EVO_LEVEL_UP",
+            44,
+            "SPECIES_PILOSWINE"
         ]
     ],
     "footprint": {
