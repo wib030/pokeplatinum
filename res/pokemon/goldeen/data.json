@@ -105,7 +105,7 @@
     "evolutions": [
         [
             "EVO_LEVEL_UP",
-            33,
+            28,
             "SPECIES_SEAKING"
         ]
     ],

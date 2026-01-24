@@ -78,7 +78,6 @@
         "level_up": {
             "1": [
                 "MOVE_YAWN",
-                "MOVE_WATER_GUN",
                 "MOVE_SMOKE_SCREEN",
                 "MOVE_LEER",
                 "MOVE_WATER_GUN"
@@ -94,7 +93,8 @@
             "31": "MOVE_BRINE",
 			"45": "MOVE_DRAGON_PULSE",
             "52": "MOVE_DRAGON_DANCE",
-			"54": "MOVE_HYDRO_PUMP"
+			"54": "MOVE_HYDRO_PUMP",
+			"60": "MOVE_DRACO_METEOR"
         },
         "tutor": [
             "MOVE_DIVE",
