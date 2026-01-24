@@ -102,6 +102,7 @@
             "29": "MOVE_X_SCISSOR",
 			"33": "MOVE_SUBMISSION",
 			"35": "MOVE_KNOCK_OFF",
+			"37": "MOVE_LEECH_LIFE",
 			"40": "MOVE_SWORDS_DANCE",
             "43": "MOVE_THRASH",
 			"45": "MOVE_SPIDER_WEB",
