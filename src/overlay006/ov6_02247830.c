@@ -243,6 +243,18 @@ static int ov6_02247890 (const UnkStruct_02014FB0 * param0, u16 param1, u16 para
     {
         return 26;
     }
+	
+	// param2 == MESSED UP
+    // param3 == SNORT
+    // param4 == INCREDIBLE
+    // param5 == STENCH
+    if (param2 == 0x595
+        && param3 == 0x4EE
+        && param4 == 0x57E
+        && param5 == 0x3D7)
+    {
+        return 27;
+    }
 
     for (v2 = 0; v2 < 4; v2++) {
         if (v3[v2] < 0) {

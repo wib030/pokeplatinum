@@ -776,7 +776,11 @@ void MakeAndAddEventPokemon (
 	u16 monEVs[],
 	u16 monLocationData,
 	u16 monRecievedType,
-	BOOL isShiny);
+	BOOL isShiny,
+	BOOL hasNickname,
+	int nicknameTextIndex);
+	
+static Strbuf* GetEventMonNicknameStrbuf(u32 heapID, u32 messageIndex);
 	
 static inline BOOL Pokemon_InlineIsPersonalityShiny(u32 monOTID, u32 monPersonality);
 
@@ -6875,7 +6879,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monEVs, // Desired EVs
 			monLocationData, // Location data
 			monReceivedType, // Received type
-			TRUE); // BOOL, is shiny?
+			TRUE, // BOOL, is shiny?
+			FALSE, // BOOL, has nickname
+			0); // int, nickname text file index (pl_msg_0370)
 		
 		*v2 = 9;
 		return 0;
@@ -6932,7 +6938,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 10;
 			return 0;
@@ -6991,7 +6999,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monEVs, // Desired EVs
 			monLocationData, // Location data
 			monReceivedType, // Received type
-			TRUE); // BOOL, is shiny?
+			TRUE, // BOOL, is shiny?
+			FALSE, // BOOL, has nickname
+			0); // int, nickname text file index (pl_msg_0370)
 		
 		*v2 = 11;
 		return 0;
@@ -7043,7 +7053,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monEVs, // Desired EVs
 			monLocationData, // Location data
 			monReceivedType, // Received type
-			TRUE); // BOOL, is shiny?
+			TRUE, // BOOL, is shiny?
+			FALSE, // BOOL, has nickname
+			0); // int, nickname text file index (pl_msg_0370)
 		
 		*v2 = 12;
 		return 0;
@@ -7099,7 +7111,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
                 monEVs, // Desired EVs
                 monLocationData, // Location data
                 monReceivedType, // Received type
-                FALSE); // BOOL, is shiny?
+                FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 
             *v2 = 13;
 			return 0;
@@ -7196,7 +7210,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monEVs, // Desired EVs
 			monLocationData, // Location data
 			monReceivedType, // Received type
-			FALSE); // BOOL, is shiny?
+			FALSE, // BOOL, is shiny?
+			FALSE, // BOOL, has nickname
+			0); // int, nickname text file index (pl_msg_0370)
 
 		*v2 = 15;
 		return 0;
@@ -7248,7 +7264,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monEVs, // Desired EVs
 			monLocationData, // Location data
 			monReceivedType, // Received type
-			TRUE); // BOOL, is shiny?
+			TRUE, // BOOL, is shiny?
+			FALSE, // BOOL, has nickname
+			0); // int, nickname text file index (pl_msg_0370)
 		
 		*v2 = 16;
 		return 0;
@@ -7302,7 +7320,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			monEVs, // Desired EVs
 			monLocationData, // Location data
 			monReceivedType, // Received type
-			FALSE); // BOOL, is shiny?
+			FALSE, // BOOL, is shiny?
+			FALSE, // BOOL, has nickname
+			0); // int, nickname text file index (pl_msg_0370)
 		
 		*v2 = 17;
 		return 0;
@@ -7356,7 +7376,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 19;
 			return 0;
@@ -7417,7 +7439,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 20;
 			return 0;
@@ -7478,7 +7502,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 21;
 			return 0;
@@ -7539,7 +7565,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 22;
 			return 0;
@@ -7600,7 +7628,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 23;
 			return 0;
@@ -7661,7 +7691,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 24;
 			return 0;
@@ -7722,7 +7754,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 25;
 			return 0;
@@ -7783,7 +7817,9 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 				monEVs, // Desired EVs
 				monLocationData, // Location data
 				monReceivedType, // Received type
-				FALSE); // BOOL, is shiny?
+				FALSE, // BOOL, is shiny?
+				FALSE, // BOOL, has nickname
+				0); // int, nickname text file index (pl_msg_0370)
 			
 			*v2 = 26;
 			return 0;
@@ -7794,6 +7830,60 @@ static BOOL ScrCmd_249 (ScriptContext * ctx)
 			*v2 = 18;
 			return 0;
 		}
+	}
+	
+	// Frog Special Event Swinub
+	if (v8 == 27)
+	{
+		// This example gives a Swinub with Stench, and some unique moves
+		u16 monMoves[] = {
+			MOVE_PSYWAVE, // Plow
+			MOVE_FLARE_BLITZ,
+			MOVE_GASTRO_ACID,
+			MOVE_SPIT_UP
+		};
+
+		u16 monIVs[] = {
+			31, // HP
+			31, // ATK
+			31, // DEF
+			31, // SPEED
+			31, // SPATK
+			31 // SPDEF
+		};
+
+		u16 monEVs[] = {
+			0, // HP
+			80, // ATK
+			0, // DEF
+			80, // SPEED
+			0, // SPATK
+			0 // SPDEF
+		};
+		
+		MakeAndAddEventPokemon (
+			fieldSystem, // FieldSystem reference
+			v1, // TrainerInfo reference
+			v3, // PCBoxes reference
+			party, // Party reference
+			SPECIES_SWINUB, // Desired species
+			5, // Desired level
+			ABILITY_STENCH, // Desired ability
+			ITEM_TOXIC_ORB, // Desired item
+			GENDER_NONE, // Desired gender
+			NATURE_ADAMANT, // Desired nature
+			ITEM_POKE_BALL, // Desired Pokeball
+			monMoves, // Desired moves
+			monIVs, // Desired IVs
+			monEVs, // Desired EVs
+			monLocationData, // Location data
+			monReceivedType, // Received type
+			FALSE, // BOOL, is shiny?
+			TRUE, // BOOL, has nickname
+			8); // int, nickname text file index (pl_msg_0370)
+		
+		*v2 = 27;
+		return 0;
 	}
 
     if ((v8 == -1) || (v8 > 7)) {
@@ -7831,7 +7921,9 @@ void MakeAndAddEventPokemon (
 	u16 monEVs[],
 	u16 monLocationData,
 	u16 monRecievedType,
-	BOOL isShiny)
+	BOOL isShiny,
+	BOOL hasNickname,
+	int nicknameTextIndex)
 {
 	BOOL addedToParty;
 	Pokemon * mon;
@@ -7844,14 +7936,7 @@ void MakeAndAddEventPokemon (
 	int i;
 	int partyCount;
 	int otIdSource;
-
-    /*
-    
-    // Code to set a string template for a mon nickname. Second arg in SetNickname is template.
-    // Template seems to default to 0 for local boxmons.
-    StringTemplate** nicknameStrTemp = sub_0203F098(fieldSystem, 15);
-    StringTemplate_SetNickname(*nicknameStrTemp, 0, (BoxPokemon*)mon);
-    */
+	Strbuf *nicknameString;
 	
 	otIdSource = OTID_NOT_SHINY;
 	monGiftFromIndex = 0;
@@ -7936,6 +8021,15 @@ void MakeAndAddEventPokemon (
 	
 	Pokemon_CalcLevelAndStats(mon);
 	
+	if (hasNickname == TRUE)
+	{
+		nicknameString = GetEventMonNicknameStrbuf(11, nicknameTextIndex);
+		
+		Pokemon_SetValue(mon, MON_DATA_NICKNAME_STRBUF, nicknameString);
+		Strbuf_Free(nicknameString);
+		Pokemon_SetValue(mon, MON_DATA_HAS_NICKNAME, &hasNickname);
+	}
+	
 	if (partyCount < 6)
 	{
 		// Add the Pokemon to our party
@@ -7953,6 +8047,16 @@ void MakeAndAddEventPokemon (
 	}
 	
 	Heap_FreeToHeap(mon);
+}
+
+static Strbuf* GetEventMonNicknameStrbuf(u32 heapID, u32 messageIndex)
+{
+	Strbuf* string;
+    MessageLoader * messageLoader = MessageLoader_Init(0, 26, 370, heapID);
+
+    string = MessageLoader_GetNewStrbuf(messageLoader, messageIndex);
+    MessageLoader_Free(messageLoader);
+    return string;
 }
 
 static inline BOOL Pokemon_InlineIsPersonalityShiny(u32 monOTID, u32 monPersonality) {
