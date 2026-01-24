@@ -402,8 +402,22 @@ static void sub_0207B180 (UnkStruct_0207AE68 * param0)
         break;
     case 11:
         if ((sub_0200598C() == 0) && (sub_020160F4(param0->unk_44, 0) == 1) && (sub_02007C24(param0->unk_1C[1]) == 0)) {
+			int currentAbility = Pokemon_GetValue(param0->unk_28, MON_DATA_ABILITY, NULL);
+			int monForm = Pokemon_GetValue(param0->unk_28, MON_DATA_FORM, NULL);
+			int monSpecies = Pokemon_GetValue(param0->unk_28, MON_DATA_SPECIES, NULL);
+			int monAbility1 = PokemonPersonalData_GetFormValue(monSpecies, monForm, MON_DATA_PERSONAL_ABILITY_1);
+			int monAbility2 = PokemonPersonalData_GetFormValue(monSpecies, monForm, MON_DATA_PERSONAL_ABILITY_2);
+			
             Pokemon_SetValue(param0->unk_28, 5, (u8 *)&param0->unk_62);
             Pokemon_CalcAbility(param0->unk_28);
+			
+			// If the evolving Pokemons Ability is unusual for its species, then retain it after evolution
+			// (Only applicable for event mons)
+			if (currentAbility != ABILITY_NONE && currentAbility != monAbility1 && currentAbility != monAbility2)
+			{
+				Pokemon_SetValue(param0->unk_28, MON_DATA_ABILITY, &currentAbility);
+			}
+			
             Pokemon_CalcLevelAndStats(param0->unk_28);
             StringTemplate_SetNickname(param0->unk_0C, 0, Pokemon_GetBoxPokemon(param0->unk_28));
             StringTemplate_SetSpeciesName(param0->unk_0C, 1, Pokemon_GetBoxPokemon(param0->unk_28));
