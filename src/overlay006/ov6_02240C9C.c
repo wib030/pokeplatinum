@@ -1792,36 +1792,8 @@ static BOOL FirstMonAbilityPreventsHigherLevel(const UnkStruct_ov6_022422D0* par
 static int GetRadarPerfectIVs(int chainCount, BOOL shiny)
 {
 	int perfectIVCount = 0;
-	
-	if (chainCount >= 10)
-	{
-		perfectIVCount++;
-	}
-	
-	if (chainCount >= 20)
-	{
-		perfectIVCount++;
-	}
-	
-	if (chainCount >= 30)
-	{
-		perfectIVCount++;
-	}
-	
-	if (chainCount >= 40)
-	{
-		perfectIVCount++;
-	}
-	
-	if (chainCount >= 50)
-	{
-		perfectIVCount++;
-	}
-	
-	if (chainCount >= 60)
-	{
-		perfectIVCount++;
-	}
+
+    perfectIVCount = chainCount / 10;
 	
 	if (shiny == TRUE)
 	{
