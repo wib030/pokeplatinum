@@ -449,9 +449,16 @@ static BOOL CheckPatchShiny (const int chainCount) {
         return FALSE;
     }
 
-    int rate = 8200 - (chainCount * 200);
-    if (rate < 200) {
-        rate = 200;
+    int rate = 8192 - (chainCount * 256);
+    if (rate < 256) {
+        rate = 64;
+    }
+
+    // easter egg where if you exploit the base game's underflow bug and chain
+    // 160 or more (205 or more in base game) encounters in a row, everything will become shiny.
+    if (rate > 8192)
+    {
+        rate = 1;
     }
 
     if (!inline_020564D0(rate)) {
