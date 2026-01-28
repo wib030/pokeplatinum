@@ -2795,3 +2795,128 @@ BOOL ExpertAI_BattlerHasHealingMove(BattleSystem* battleSys, BattleContext* batt
 
     return result;
 }
+
+BOOL AI_CurrentMoveDamageDealsPercent(BattleSystem* battleSys, BattleContext* battleCtx, int useDamageRoll, u8 threshold)
+{
+    int roll;
+    int riskyIdx;
+    int altPowerIdx;
+    BOOL moveMeetsThreshold;
+
+    moveMeetsThreshold = FALSE;
+
+    if (useDamageRoll == ROLL_FOR_DAMAGE) {
+        roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
+    }
+    else if (useDamageRoll == USE_MIN_DAMAGE) {
+        roll = DAMAGE_VARIANCE_MIN_ROLL;
+    }
+    else {
+        roll = DAMAGE_VARIANCE_MAX_ROLL;
+    }
+
+    for (riskyIdx = 0; sRiskyMoves[riskyIdx] != 0xFFFF; riskyIdx++) {
+        if (MOVE_DATA(AI_CONTEXT.move).effect == sRiskyMoves[riskyIdx]) {
+            break;
+        }
+    }
+
+    for (altPowerIdx = 0; sAltPowerCalcMoves[altPowerIdx] != 0xFFFF; altPowerIdx++) {
+        if (MOVE_DATA(AI_CONTEXT.move).effect == sAltPowerCalcMoves[altPowerIdx]) {
+            break;
+        }
+    }
+
+    if (sAltPowerCalcMoves[altPowerIdx] != 0xFFFF
+        || (MOVE_DATA(AI_CONTEXT.move).power > 1 && sRiskyMoves[riskyIdx] == 0xFFFF)) {
+        u8 ivs[STAT_MAX];
+        for (int stat = STAT_HP; stat < STAT_MAX; stat++) {
+            ivs[stat] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + stat, NULL);
+        }
+
+        u32 damage = ExpertAI_CalcDamage(battleSys,
+            battleCtx,
+            AI_CONTEXT.move,
+            battleCtx->battleMons[AI_CONTEXT.attacker].heldItem,
+            ivs,
+            AI_CONTEXT.attacker,
+            Battler_Ability(battleCtx, AI_CONTEXT.attacker),
+            battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.embargoTurns,
+            roll);
+
+        if (damage >= (battleCtx->battleMons[AI_CONTEXT.defender].maxHP * threshold / 100)) {
+            moveMeetsThreshold = TRUE;
+        }
+    }
+
+    return moveMeetsThreshold;
+}
+
+BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 excludedMove)
+{
+    BOOL result;
+    int k;
+    int moveType, moveDamage, movePower;
+    u8 side;
+    u16 move;
+    u32 effectiveness;
+
+    result = FALSE;
+
+    side = Battler_Side(battleSys, defender);
+
+    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+        effectiveness = 0;
+        move = battleCtx->battleMons[attacker].moves[k];
+
+        if (move == MOVE_NONE) {
+            break;
+        }
+
+        if (move != excludedMove)
+        {
+            if (ExpertAI_CanUseMove(battleSys, battleCtx, attacker, k, CHECK_INVALID_ALL_BUT_TORMENT)) {
+
+                moveType = ExpertAI_MoveType(battleSys, battleCtx, attacker, move);
+                movePower = MOVE_DATA(move).power;
+
+                if (movePower > 0) {
+                    moveDamage = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        move,
+                        battleCtx->sideConditionsMask[side],
+                        battleCtx->fieldConditionsMask,
+                        movePower,
+                        moveType,
+                        attacker,
+                        defender,
+                        1,
+                        TRUE);
+
+                    moveDamage = BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        move,
+                        moveType,
+                        attacker,
+                        defender,
+                        moveDamage,
+                        &effectiveness,
+                        TRUE);
+
+                    moveDamage *= DAMAGE_VARIANCE_MIN_ROLL;
+                    moveDamage /= 100;
+
+                    if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
+                        || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+                        if (moveDamage >= battleCtx->battleMons[defender].curHP) {
+                            result = TRUE;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}

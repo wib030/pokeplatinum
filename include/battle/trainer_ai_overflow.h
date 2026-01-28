@@ -273,4 +273,25 @@ BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* 
  */
 BOOL ExpertAI_BattlerHasHealingMove(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
 
+/* @brief Check if the current move deals at least a given percent of the defender's max HP
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param useDamageRoll		Flag whether to roll for damage, use min damage, or use max damage
+ * @param threshold			The threshold, as a percent, that must be met or exceeded
+ * @return  TRUE / FALSE whether the current move deals at least enough damage to meet the threshold.
+ */
+BOOL AI_CurrentMoveDamageDealsPercent(BattleSystem* battleSys, BattleContext* battleCtx, int useDamageRoll, u8 threshold);
+
+/* @brief Check if the attacker KOs the defender with a move other than the one specified.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker			The BattleMon ID of the attacker
+ * @param defender			The BattleMon ID of the defender
+ * @param excludedMove		The move to exclude from consideration
+ * @return  TRUE / FALSE whether the attacker KOs the defender with a move other than the excluded move.
+ */
+BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 excludedMove);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
