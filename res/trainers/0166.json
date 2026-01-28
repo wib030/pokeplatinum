@@ -5,7 +5,8 @@
     "ai_flags": [
         "AI_FLAG_BASIC",
 		"AI_FLAG_EXPERT",
-		"AI_FLAG_EVAL_ATTACK"
+		"AI_FLAG_EVAL_ATTACK",
+		"AI_FLAG_JOKE"
     ],
     "double_battle": false,
     "party": [
@@ -17,33 +18,71 @@
             "moves": [
                 "MOVE_FLY"
             ],
-            "power": 200,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 4
+        },
+		{
+            "species": "SPECIES_LATIOS",
+            "form": 0,
+            "level": 60,
+            "item": "ITEM_CHOICE_SCARF",
+            "moves": [
+                "MOVE_FLY"
+            ],
+            "power": 255,
+            "ball_seal": 0,
+			"ball_type": "ITEM_PREMIER_BALL",
+			"evHP": 0,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 0,
+			"evSPDEF": 0,
+			"nature": 4
         },
         {
             "species": "SPECIES_SUDOWOODO",
             "form": 0,
             "level": 60,
-            "item": "ITEM_FOCUS_SASH",
+            "item": "ITEM_SACRED_ASH",
             "moves": [
                 "MOVE_EXPLOSION"
             ],
-            "power": 200,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 91,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 1
         },
 		{
             "species": "SPECIES_SUDOWOODO",
             "form": 0,
             "level": 60,
-            "item": "ITEM_FOCUS_SASH",
+            "item": "ITEM_CHARCOAL",
             "moves": [
                 "MOVE_EXPLOSION"
             ],
-            "power": 200,
+            "power": 255,
             "ball_seal": 0,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_PREMIER_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 9,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 11
         }
     ]
 }
