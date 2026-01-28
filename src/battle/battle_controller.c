@@ -2230,7 +2230,7 @@ static void BattleController_FleeCommand(BattleSystem *battleSys, BattleContext 
 
     if (Battler_Side(battleSys, battleCtx->attacker)
             && (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_LINK) == FALSE) {
-        if (ATTACKING_MON.statusVolatile & (VOLATILE_CONDITION_BIND | VOLATILE_CONDITION_MEAN_LOOK)) {
+        if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_TRAPPED) {
             LOAD_SUBSEQ(subscript_enemy_escape_failed);
             battleCtx->scriptCursor = 0;
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
