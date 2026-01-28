@@ -1807,7 +1807,7 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
 {
     BOOL result;
     int k;
-    int moveType, moveDamage, movePower;
+    int moveType, moveDamage, movePower, numHits, subHP;
     u8 side;
     u16 move;
     u32 effectiveness;
@@ -1830,6 +1830,16 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
             movePower = MOVE_DATA(move).power;
 
             if (movePower > 0) {
+
+                if (BattleAI_IsMultiHitMove(battleSys, battleCtx, attacker, MOVE_DATA(move).effect))
+                {
+                    numHits = BattleSystem_GetMultiHitExpectedMoveHits(battleSys, battleCtx, attacker, defender, move);
+                }
+                else
+                {
+                    numHits = 1;
+                }
+
                 moveDamage = BattleSystem_CalcMoveDamage(battleSys,
                     battleCtx,
                     move,
@@ -1857,6 +1867,43 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
 
                 if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                    if (battleCtx->battleMons[defender].volatileStatus & VOLATILE_CONDITION_SUBSTITUTE)
+                    {
+                        // soundproof is already considered by immune status check above
+                        if (BattleAI_IsSoundMove(battleSys, battleCtx, move) == FALSE)
+                        {
+                            subHP = battleCtx->battleMons[defender].moveEffectsData.substituteHP;
+
+                            if (numHits > 1)
+                            {
+                                if (subHP >= moveDamage * numHits)
+                                {
+                                    moveDamage = 0;
+                                }
+                                else
+                                {
+                                    while (numHits > 1)
+                                    {
+                                        if (subHP <= 0)
+                                        {
+                                            break;
+                                        }
+
+                                        subHP -= moveDamage;
+                                        numHits--;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                moveDamage = 0;
+                            }
+                        }
+                    }
+
+                    moveDamage = moveDamage * numHits;
+
                     if (moveDamage >= battleCtx->battleMons[defender].curHP) {
                         result = TRUE;
                         break;
