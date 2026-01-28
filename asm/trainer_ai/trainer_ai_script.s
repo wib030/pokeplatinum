@@ -3382,26 +3382,6 @@ Expert_SuperFang_End:
     PopOrEnd 
 
 Expert_BindingMove:
-    ; Offload Whirlpool, Fire Spin, and Sand Tomb to overflow
-    ;
-    ; If opponent is already bound, 99% chance for score -1
-    ; 
-    ; If the opponent is not bound:
-    ; 92% chance for score +1
-    ; If Perish Song is known, 95% chance for additional score +3
-    ; 50% chance for additional score +1
-    LoadTypeFrom LOAD_MOVE_TYPE
-    IfLoadedEqualTo TYPE_WATER, Expert_BindingMove_End
-    IfLoadedEqualTo TYPE_FIRE, Expert_BindingMove_End
-    IfLoadedEqualTo TYPE_GROUND, Expert_BindingMove_End
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_BIND, Try99ChanceForScoreMinus1
-    IfRandomLessThan 20, Expert_BindingMove_End
-    AddToMoveScore 1
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_ALL_FAINT_3_TURNS, Try95ChanceForScorePlus3
-    IfRandomLessThan 128, Expert_BindingMove_End
-    AddToMoveScore 1
-
-Expert_BindingMove_End:
     PopOrEnd 
 
 Expert_HighCritical:
