@@ -22967,13 +22967,15 @@ BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, Battl
             attackerSpeed *= 2;
         }
         break;
-
+		
+	/* Do we have access to the attackers move here?
     case ABILITY_COWARD:
         if (MOVE_DATA(attackerMove).power == 0)
         {
             attackerSpeed *= 2;
         }
         break;
+	*/
     }
 
     if ((battleCtx->battleMons[attacker].status & MON_CONDITION_PARALYSIS)
@@ -23021,13 +23023,15 @@ BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, Battl
             defenderSpeed *= 2;
         }
         break;
-
+		
+	/* Do we have access to the defenders move here?
     case ABILITY_COWARD:
         if (MOVE_DATA(defenderMove).power == 0)
         {
             defenderSpeed *= 2;
         }
         break;
+	*/
     }
 
 
@@ -23049,7 +23053,7 @@ BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, Battl
         defenderSpeed /= 2;
     }
 
-    if (battleCtx->battleMons[defender].curHp) {
+    if (battleCtx->battleMons[defender].curHP) {
         if (defenderSpeed > attackerSpeed) {
             result = COMPARE_SPEED_SLOWER;
         }
