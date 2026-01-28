@@ -1392,6 +1392,84 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         }
                     }
                     break;
+
+                case BATTLE_EFFECT_BIND_HIT:
+
+                    // ignore magma storm and just treat that like a normal move
+                    // that deals better damage against high HP stat mons
+                    if (MOVE_DATA(AI_CONTEXT.move).power > 40)
+                    {
+                        if (battleCtx->battleMons[AI_CONTEXT.defender].statusVolatile & VOLATILE_CONDITION_BIND)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if (PokemonPersonalData_GetFormValue(battleCtx->battleMons[AI_CONTEXT.defender].species, battleCtx->battleMons[AI_CONTEXT.defender].formNum, MON_DATA_PERSONAL_BASE_HP) > 99)
+                            {
+                                if ((battleCtx->battleMons[AI_CONTEXT.defender].curHP * 100 / battleCtx->battleMons[AI_CONTEXT.defender].maxHP) > 60)
+                                {
+                                    if (AI_GetRandomNumber(battleSys) < 170)
+                                    {
+                                        AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // if another move KOs, don't bother using a weak trapping move
+                    if (ExpertAI_AttackerKOsDefenderWithOtherMove(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, AI_CONTEXT.move))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 250)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -12);
+                            break;
+                        }
+                    }
+
+                    if (battleCtx->battleMons[AI_CONTEXT.defender].statusVolatile & VOLATILE_CONDITION_BIND)
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 255)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -1);
+                        }
+                    }
+                    else
+                    {
+                        // boost if we know perish song and they are not yet trapped and they can be trapped
+                        if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_EFFECT_ALL_FAINT_3_TURNS))
+                        {
+                            if ((BattleSystem_GetItemData(battleCtx, Battler_HeldItem(battleCtx, AI_CONTEXT.defender), ITEM_PARAM_HOLD_EFFECT) != HOLD_EFFECT_SWITCH)
+                                && battleCtx->battleMons[AI_CONTEXT.defender].type1 != TYPE_GHOST
+                                && battleCtx->battleMons[AI_CONTEXT.defender].type2 != TYPE_GHOST)
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 250)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 3);
+                                }
+                            }
+                        }
+                    }
+
+                    // if we have 4HKO or better, we can click our move like a regular attack
+                    if (AI_CurrentMoveDamageDealsPercent(battleSys, battleCtx, USE_MIN_DAMAGE, 25))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 142)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        if (Battler_IgnorableAbility(battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, ABILITY_MAGIC_GUARD))
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -2);
+                        }
+                    }
+                    
+                    break;
                 }
             }
         }
