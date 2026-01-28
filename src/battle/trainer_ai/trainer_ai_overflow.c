@@ -1360,6 +1360,50 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         break;
                     }
 
+                    if (BattleAI_BattleMonCanHazeOrPhaze(battleSys, battleCtx, defender))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 255)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -10);
+                            break;
+                        }
+                    }
+
+                    if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -12);
+                        break;
+                    }
+
+                    if (ExpertAI_AttackerKOsDefender(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 243)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -2);
+                        }
+                    }
+
+                    if (ExpertAI_AttackerCanStatusDefender(battleSys, battleCtx, defender, attacker))
+                    {
+                        if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_EFFECT_PASS_STATS_AND_STATUS) == FALSE)
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 243)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_SPEED_UP_2))
+                    {
+                        if (AI_GetRandomNumber(battleSys) < 243)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -10);
+                            break;
+                        }
+                    }
+
                     if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender) == COMPARE_SPEED_SLOWER)
                     {
                         if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_TAUNT))
@@ -1371,7 +1415,125 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                             }
                         }
 
-                        // WIP: add speed compare after boost function here-ish
+                        if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_SPEED_UP_2))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 243)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+                        }
+
+                        if (BattleAI_AttackerOutspeedsDefenderAfterBoost(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, 2))
+                        {
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SPEED, BATTLE_STAT_BOOST_NEUTRAL))
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 250)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 3);
+                                    break;
+                                }
+                            }
+
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SPEED, 8))
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 230)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                                
+                                if (AI_GetRandomNumber(battleSys) < 230)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                                break;
+                            }
+
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SPEED, 10))
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 170)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+
+                                if (AI_GetRandomNumber(battleSys) < 64)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                                break;
+                            }
+
+                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SPEED, 12))
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 85)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+
+                                if (AI_GetRandomNumber(battleSys) < 25)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_ENCORE))
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+
+                            if (BattleAI_AttackerOutspeedsDefenderAfterBoost(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, 4))
+                            {
+                                if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, defender, attacker))
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                    break;
+                                }
+
+                                if (AI_GetRandomNumber(battleSys) < 192)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                                if (AI_GetRandomNumber(battleSys) < 64)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, 1);
+                                }
+                            }
+                            else
+                            {
+                                if (AI_GetRandomNumber(battleSys) < 242)
+                                {
+                                    AI_AddToMoveScore(battleSys, battleCtx, -3);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (battleCtx->battleMons[AI_CONTEXT.attacker].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
+                    {
+
+                        if (AI_GetRandomNumber(battleSys) < 26)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 26)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_EFFECT_PASS_STATS_AND_STATUS))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 128)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, 1);
+                            }
+                        }
+                        
                     }
 
                     break;
