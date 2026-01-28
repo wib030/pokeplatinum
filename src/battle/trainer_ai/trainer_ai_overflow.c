@@ -1437,6 +1437,16 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     }
                     else
                     {
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 85)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+
                         // boost if we know perish song and they are not yet trapped and they can be trapped
                         if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_EFFECT_ALL_FAINT_3_TURNS))
                         {
