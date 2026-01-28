@@ -23061,3 +23061,22 @@ BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, Battl
 
     return result;
 }
+
+BOOL BattleAI_IsSoundMove(BattleSystem* battleSys, BattleContext* battleCtx, u16 move)
+{
+    int i;
+    BOOL result;
+
+    result = FALSE;
+
+    for (i = 0; i < NELEMS(sSoundMoves); i++)
+    {
+        if (sSoundMoves[i] == move)
+        {
+            result = TRUE;
+            break;
+        }
+    }
+
+    return result;
+}

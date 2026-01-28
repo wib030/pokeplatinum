@@ -2232,4 +2232,14 @@ BOOL BattleAI_BattlerTypeDetersStatusMove(BattleSystem* battleSys, BattleContext
 */
 BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, int boost);
 
+/**
+* @brief Check if the given move is a sound move.
+*
+* @param battleSys
+* @param battleCtx
+* @param move           The ID of the move to check
+* @return TRUE/FALSE whether the move is a sound move.
+*/
+BOOL BattleAI_IsSoundMove(BattleSystem* battleSys, BattleContext* battleCtx, u16 move);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H
