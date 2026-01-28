@@ -82,6 +82,8 @@
         ],
         "level_up": {
             "1": [
+				"MOVE_FOLLOW_ME",
+				"MOVE_HELPING_HAND",
 				"MOVE_LOW_KICK",
                 "MOVE_SMOG",
                 "MOVE_LEER",
