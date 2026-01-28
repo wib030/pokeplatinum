@@ -97,28 +97,28 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
+            "level_max": 60,
+            "level_min": 50,
             "species": "SPECIES_TENTACOOL"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
+            "level_max": 60,
+            "level_min": 50,
             "species": "SPECIES_WINGULL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 70,
+            "level_min": 60,
             "species": "SPECIES_TENTACRUEL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 70,
+            "level_min": 60,
             "species": "SPECIES_TENTACRUEL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 70,
+            "level_min": 60,
             "species": "SPECIES_PELIPPER"
         }
     ],

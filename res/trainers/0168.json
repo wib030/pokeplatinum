@@ -22,7 +22,13 @@
             ],
             "power": 200,
             "ball_seal": 4,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 0,
+			"evATK": 0,
+			"evDEF": 0,
+			"evSPEED": 252,
+			"evSPATK": 252,
+			"evSPDEF": 4
         },
         {
             "species": "SPECIES_VAPOREON",
@@ -37,7 +43,13 @@
             ],
             "power": 200,
             "ball_seal": 4,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 252,
+			"evDEF": 0,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4
         },
         {
             "species": "SPECIES_SHARPEDO",
@@ -52,7 +64,13 @@
             ],
             "power": 200,
             "ball_seal": 4,
-			"ball_type": "ITEM_DIVE_BALL"
+			"ball_type": "ITEM_DIVE_BALL",
+			"evHP": 252,
+			"evATK": 0,
+			"evDEF": 252,
+			"evSPEED": 0,
+			"evSPATK": 0,
+			"evSPDEF": 4
         }
     ]
 }

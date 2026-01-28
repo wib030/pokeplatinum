@@ -2,52 +2,52 @@
     "land_rate": 20,
     "land_encounters": [
         {
-            "level": 29,
-            "species": "SPECIES_FLOATZEL"
+            "level": 60,
+            "species": "SPECIES_WOBUFFET"
         },
         {
-            "level": 28,
+            "level": 58,
             "species": "SPECIES_GIRAFARIG"
         },
         {
-            "level": 28,
+            "level": 61,
+            "species": "SPECIES_VICTREEBEL"
+        },
+        {
+            "level": 59,
             "species": "SPECIES_ROSELIA"
         },
         {
-            "level": 29,
-            "species": "SPECIES_ROSELIA"
-        },
-        {
-            "level": 31,
+            "level": 61,
             "species": "SPECIES_SUDOWOODO"
         },
         {
-            "level": 30,
-            "species": "SPECIES_SUDOWOODO"
+            "level": 60,
+            "species": "SPECIES_JUMPLUFF"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GIRAFARIG"
+            "level": 59,
+            "species": "SPECIES_STARAPTOR"
         },
         {
-            "level": 29,
-            "species": "SPECIES_SUDOWOODO"
+            "level": 59,
+            "species": "SPECIES_VIGOROTH"
         },
         {
-            "level": 31,
+            "level": 60,
             "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 30,
-            "species": "SPECIES_ROSELIA"
+            "level": 58,
+            "species": "SPECIES_CHINCHOU"
         },
         {
-            "level": 31,
-            "species": "SPECIES_FLOATZEL"
+            "level": 60,
+            "species": "SPECIES_SLAKING"
         },
         {
-            "level": 30,
-            "species": "SPECIES_ROSELIA"
+            "level": 61,
+            "species": "SPECIES_AMPHAROS"
         }
     ],
     "swarms": [
@@ -55,12 +55,12 @@
         "SPECIES_FARFETCHD"
     ],
     "morning": [
-        "SPECIES_ROSELIA",
+        "SPECIES_VICTREEBEL",
         "SPECIES_ROSELIA"
     ],
     "night": [
-        "SPECIES_FLOATZEL",
-        "SPECIES_ROSELIA"
+        "SPECIES_VICTREEBEL",
+        "SPECIES_GLOOM"
     ],
     "radar": [
         "SPECIES_NIDORINO",
@@ -97,28 +97,28 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
+            "level_max": 60,
+            "level_min": 50,
             "species": "SPECIES_TENTACOOL"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
+            "level_max": 60,
+            "level_min": 50,
             "species": "SPECIES_WINGULL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 70,
+            "level_min": 60,
             "species": "SPECIES_TENTACRUEL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 70,
+            "level_min": 60,
             "species": "SPECIES_TENTACRUEL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
+            "level_max": 70,
+            "level_min": 60,
             "species": "SPECIES_PELIPPER"
         }
     ],
