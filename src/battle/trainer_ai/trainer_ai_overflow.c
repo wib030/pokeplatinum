@@ -2858,22 +2858,26 @@ BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* 
                 {
                     if (moveStatusCondition & MON_CONDITION_ANY)
                     {
-                        if (BattleAI_BattlerTypeDetersStatusMove(battleSys, battleCtx, defender, move, moveStatusCondition) == FALSE)
+                        if ((battleCtx->battleMons[defender].status & MON_CONDITION_ANY) == FALSE
+                            && (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) == FALSE)
                         {
-                            if (Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, moveStatusCondition) == FALSE)
+                            if (BattleAI_BattlerTypeDetersStatusMove(battleSys, battleCtx, defender, move, moveStatusCondition) == FALSE)
                             {
-                                if (moveStatusCondition & MON_CONDITION_BURN)
+                                if (Battle_AbilityDetersStatus(battleSys, battleCtx, defenderAbility, moveStatusCondition) == FALSE)
                                 {
-                                    if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender))
+                                    if (moveStatusCondition & MON_CONDITION_BURN)
+                                    {
+                                        if (Battle_BattleMonIsPhysicalAttacker(battleSys, battleCtx, defender))
+                                        {
+                                            result = TRUE;
+                                            break;
+                                        }
+                                    }
+                                    else
                                     {
                                         result = TRUE;
                                         break;
                                     }
-                                }
-                                else
-                                {
-                                    result = TRUE;
-                                    break;
                                 }
                             }
                         }
@@ -2881,10 +2885,13 @@ BOOL ExpertAI_AttackerCanStatusDefender(BattleSystem* battleSys, BattleContext* 
 
                     if (moveVolatileStatus & VOLATILE_CONDITION_INFLICTABLE_NEGATIVE)
                     {
-                        if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, defenderAbility, moveVolatileStatus) == FALSE)
+                        if ((battleCtx->battleMons[defender].statusVolatile & moveVolatileStatus) == FALSE)
                         {
-                            result = TRUE;
-                            break;
+                            if (Battle_AbilityDetersVolatileStatus(battleSys, battleCtx, defenderAbility, moveVolatileStatus) == FALSE)
+                            {
+                                result = TRUE;
+                                break;
+                            }
                         }
                     }
                 }
@@ -2991,7 +2998,7 @@ BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleCo
 {
     BOOL result;
     int k;
-    int moveType, moveDamage, movePower;
+    int moveType, moveDamage, movePower, numHits, subHP;
     u8 side;
     u16 move;
     u32 effectiveness;
@@ -3016,6 +3023,16 @@ BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleCo
                 movePower = MOVE_DATA(move).power;
 
                 if (movePower > 0) {
+
+                    if (BattleAI_IsMultiHitMove(battleSys, battleCtx, attacker, MOVE_DATA(move).effect))
+                    {
+                        numHits = BattleSystem_GetMultiHitExpectedMoveHits(battleSys, battleCtx, attacker, defender, move);
+                    }
+                    else
+                    {
+                        numHits = 1;
+                    }
+
                     moveDamage = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         move,
@@ -3043,6 +3060,43 @@ BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleCo
 
                     if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                         || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
+
+                        if (battleCtx->battleMons[defender].volatileStatus & VOLATILE_CONDITION_SUBSTITUTE)
+                        {
+                            // soundproof is already considered by immune status check above
+                            if (BattleAI_IsSoundMove(battleSys, battleCtx, move) == FALSE)
+                            {
+                                subHP = battleCtx->battleMons[defender].moveEffectsData.substituteHP;
+
+                                if (numHits > 1)
+                                {
+                                    if (subHP >= moveDamage * numHits)
+                                    {
+                                        moveDamage = 0;
+                                    }
+                                    else
+                                    {
+                                        while (numHits > 1)
+                                        {
+                                            if (subHP <= 0)
+                                            {
+                                                break;
+                                            }
+
+                                            subHP -= moveDamage;
+                                            numHits--;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    moveDamage = 0;
+                                }
+                            }
+                        }
+
+                        moveDamage = moveDamage * numHits;
+
                         if (moveDamage >= battleCtx->battleMons[defender].curHP) {
                             result = TRUE;
                             break;
