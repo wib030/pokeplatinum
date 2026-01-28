@@ -1353,6 +1353,29 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     }
                     break;
 
+                case BATTLE_EFFECT_SPEED_UP_2:
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -20);
+                        break;
+                    }
+
+                    if (BattleSystem_CompareBattlerSpeedOrder(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender) == COMPARE_SPEED_SLOWER)
+                    {
+                        if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.defender, BATTLE_EFFECT_TAUNT))
+                        {
+                            if (AI_GetRandomNumber(battleSys) < 250)
+                            {
+                                AI_AddToMoveScore(battleSys, battleCtx, -10);
+                                break;
+                            }
+                        }
+
+                        // WIP: add speed compare after boost function here-ish
+                    }
+
+                    break;
+
                 case BATTLE_EFFECT_PREGNANCY_PUNCH:
                     if (AI_GetMoveEffectiveness(battleSys, battleCtx) > TYPE_MULTI_IMMUNE)
                     {
