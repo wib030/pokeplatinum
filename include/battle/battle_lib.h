@@ -2220,4 +2220,16 @@ BOOL BattleAI_BattlerHasPivotMove(BattleSystem* battleSys, BattleContext* battle
 */
 BOOL BattleAI_BattlerTypeDetersStatusMove(BattleSystem* battleSys, BattleContext* battleCtx, u8 battler, u16 move, u32 statusCondition);
 
+/**
+* @brief Check if the attacker will outspeed defender after the given boost.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker           battleMon ID of the mon using the speed boosting move.
+* @param defender           battleMon ID of the mon to compare the attacker's new speed to.
+* @param boost              The value of the speed boost, e.g. -1, +1, +2, etc.
+* @return TRUE/FALSE whether the attacker will outspeed the defender after the given boost or not.
+*/
+BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, int boost);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

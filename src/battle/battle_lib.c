@@ -22724,3 +22724,336 @@ BOOL BattleAI_BattlerTypeDetersStatusMove(BattleSystem* battleSys, BattleContext
 
     return FALSE;
 }
+
+BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, int boost)
+{
+    u8 result = COMPARE_SPEED_FASTER;
+    u8 attackerItemEffect, attackerItemParam;
+    u8 defenderItemEffect, defenderItemParam;
+    u8 attackerAbility, defenderAbility;
+    u32 attackerSpeed, defenderSpeed;
+    int attackerSpeedStage, defenderSpeedStage;
+
+    attackerSpeedStage = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_SPEED] + boost;
+    defenderSpeedStage = battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_SPEED];
+
+    if (attackerSpeedStage < 0)
+    {
+        attackerSpeedStage = 0;
+    }
+
+    if (attackerSpeedStage > 12)
+    {
+        attackerSpeedStage = 12;
+    }
+
+    attackerSpeedStage = CompareSpeed_ApplySimple(battleCtx, attacker, attackerSpeedStage);
+    defenderSpeedStage = CompareSpeed_ApplySimple(battleCtx, defender, defenderSpeedStage);
+
+    attackerAbility = Battler_Ability(battleCtx, attacker);
+    defenderAbility = Battler_Ability(battleCtx, defender);
+    attackerItemEffect = Battler_HeldItemEffect(battleCtx, attacker);
+    attackerItemParam = Battler_HeldItemPower(battleCtx, attacker, ITEM_POWER_CHECK_ALL);
+    defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
+    defenderItemParam = Battler_HeldItemPower(battleCtx, defender, ITEM_POWER_CHECK_ALL);
+
+    if (attackerAbility == ABILITY_SPEED_BOOST) {
+        if (attackerSpeedStage < 12) {
+            boost++;
+        }
+    }
+
+    if (defenderAbility == ABILITY_SPEED_BOOST) {
+        if (attackerSpeedStage > 0 && defenderSpeedStage < 12) {
+            boost--;
+        }
+    }
+
+    attackerSpeed = battleCtx->battleMons[attacker].speed * sStatStageBoosts[attackerSpeedStage].numerator / sStatStageBoosts[attackerSpeedStage].denominator;
+    defenderSpeed = battleCtx->battleMons[defender].speed * sStatStageBoosts[defenderSpeedStage].numerator / sStatStageBoosts[defenderSpeedStage].denominator;
+
+    if (attackerItemEffect == HOLD_EFFECT_CHOICE_SPEED) {
+        attackerSpeed = attackerSpeed * 3 / 2;
+    }
+
+    switch (attackerItemEffect)
+    {
+    default:
+        break;
+
+    case HOLD_EFFECT_CHOICE_SPEED:
+        attackerSpeed = attackerSpeed * 3 / 2;
+        break;
+
+    case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+    case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+    case HOLD_EFFECT_LVLUP_HP_EV_UP:
+    case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+    case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        attackerSpeed /= 2;
+        break;
+
+    case HOLD_EFFECT_DITTO_SPEED_UP:
+        if (battleCtx->battleMons[attacker].species == SPECIES_DITTO) {
+            attackerSpeed *= 2;
+        }
+        break;
+    }
+
+    switch (defenderItemEffect)
+    {
+    default:
+        break;
+
+    case HOLD_EFFECT_CHOICE_SPEED:
+        defenderSpeed = defenderSpeed * 3 / 2;
+        break;
+
+    case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+    case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+    case HOLD_EFFECT_LVLUP_HP_EV_UP:
+    case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+    case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        defenderSpeed /= 2;
+        break;
+
+    case HOLD_EFFECT_DITTO_SPEED_UP:
+        if (battleCtx->battleMons[defender].species == SPECIES_DITTO) {
+            defenderSpeed *= 2;
+        }
+        break;
+    }
+
+
+    if (ANY_WEATHER) {
+        // Rain
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_SWIFT_SWIM:
+                attackerSpeed = attackerSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 3 / 4;
+                break;
+            }
+            switch (defenderAbility) {
+            default:
+                break;
+
+            case ABILITY_SWIFT_SWIM:
+                defenderSpeed = defenderSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                defenderSpeed = defenderSpeed * 3 / 4;
+                break;
+            }
+        }
+
+        // Hail
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_SLUSH_RUSH:
+                attackerSpeed = attackerSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 3 / 4;
+                break;
+            }
+            switch (defenderAbility) {
+            default:
+                break;
+
+            case ABILITY_SLUSH_RUSH:
+                defenderSpeed = defenderSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                defenderSpeed = defenderSpeed * 3 / 4;
+                break;
+            }
+        }
+
+        // Sun
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_CHLOROPLAST:
+            case ABILITY_CHLOROPHYLL:
+                attackerSpeed = attackerSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 11 / 10;
+                break;
+            }
+            switch (defenderAbility) {
+            default:
+                break;
+
+            case ABILITY_CHLOROPLAST:
+            case ABILITY_CHLOROPHYLL:
+                defenderSpeed = defenderSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                defenderSpeed = defenderSpeed * 11 / 10;
+                break;
+            }
+        }
+
+        // Sand
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 3 / 4;
+                break;
+            }
+            switch (defenderAbility) {
+            default:
+                break;
+
+            case ABILITY_FORECAST:
+                defenderSpeed = defenderSpeed * 3 / 4;
+                break;
+            }
+        }
+    }
+
+
+    switch (attackerAbility) {
+    default:
+        break;
+
+    case ABILITY_QUICK_FEET:
+        if (battleCtx->battleMons[attacker].status & MON_CONDITION_ANY) {
+            if (battleCtx->battleMons[attacker].status & MON_CONDITION_PARALYSIS) {
+                attackerSpeed *= 2;
+            }
+            else {
+                attackerSpeed = attackerSpeed * 3 / 2;
+            }
+        }
+        break;
+
+    case ABILITY_SLOW_START:
+        if (battleCtx->totalPartyTurns[Battler_Side(battleSys, attacker)][battleCtx->selectedPartySlot[attacker]] < 5) {
+            attackerSpeed /= 2;
+        }
+        break;
+
+    case ABILITY_UNBURDEN:
+        if (battleCtx->battleMons[attacker].moveEffectsData.canUnburden
+            && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
+            attackerSpeed *= 2;
+        }
+        break;
+
+    case ABILITY_COWARD:
+        if (MOVE_DATA(attackerMove).power == 0)
+        {
+            attackerSpeed *= 2;
+        }
+        break;
+    }
+
+    if ((battleCtx->battleMons[attacker].status & MON_CONDITION_PARALYSIS)
+        && attackerAbility != ABILITY_QUICK_FEET) {
+
+        attackerSpeed /= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_TAILWIND) {
+        attackerSpeed *= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_DEEP_SNOW
+        && (battleCtx->battleMons[attacker].type1 != TYPE_ICE)
+        && (battleCtx->battleMons[attacker].type2 != TYPE_ICE)
+        && BattlerIsGrounded(battleCtx, attacker) == TRUE)
+    {
+        attackerSpeed /= 2;
+    }
+
+    switch (defenderAbility) {
+    default:
+        break;
+
+    case ABILITY_QUICK_FEET:
+        if (battleCtx->battleMons[defender].status & MON_CONDITION_ANY) {
+            if (battleCtx->battleMons[defender].status & MON_CONDITION_PARALYSIS) {
+                defenderSpeed *= 2;
+            }
+            else {
+                defenderSpeed = defenderSpeed * 3 / 2;
+            }
+        }
+        break;
+
+    case ABILITY_SLOW_START:
+        if (battleCtx->totalPartyTurns[Battler_Side(battleSys, defender)][battleCtx->selectedPartySlot[defender]] < 5) {
+            defenderSpeed /= 2;
+        }
+        break;
+
+    case ABILITY_UNBURDEN:
+        if (battleCtx->battleMons[defender].moveEffectsData.canUnburden
+            && battleCtx->battleMons[defender].heldItem == ITEM_NONE) {
+            defenderSpeed *= 2;
+        }
+        break;
+
+    case ABILITY_COWARD:
+        if (MOVE_DATA(defenderMove).power == 0)
+        {
+            defenderSpeed *= 2;
+        }
+        break;
+    }
+
+
+    if ((battleCtx->battleMons[defender].status & MON_CONDITION_PARALYSIS)
+        && defenderAbility != ABILITY_QUICK_FEET) {
+
+        defenderSpeed /= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_TAILWIND) {
+        defenderSpeed *= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_DEEP_SNOW
+        && (battleCtx->battleMons[defender].type1 != TYPE_ICE)
+        && (battleCtx->battleMons[defender].type2 != TYPE_ICE)
+        && BattlerIsGrounded(battleCtx, defender) == TRUE)
+    {
+        defenderSpeed /= 2;
+    }
+
+    if (battleCtx->battleMons[defender].curHp) {
+        if (defenderSpeed > attackerSpeed) {
+            result = COMPARE_SPEED_SLOWER;
+        }
+    }
+
+    return result;
+}
