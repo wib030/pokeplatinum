@@ -616,7 +616,7 @@ Basic_CheckAlreadyUnderReflect:
 
 Basic_CheckCannotParalyze:
     ; If the target cannot be paralyzed for any reason, score -10.
-    IfStatus AI_CONTEXT_DEFENDER, MON_CONDITION_ANY, ScoreMinus12
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus12
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus12
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
