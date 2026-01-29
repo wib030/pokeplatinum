@@ -1318,15 +1318,16 @@ void BattleSystem_SwitchSlots(BattleSystem *battleSys, BattleContext *battleCtx,
  * 
  * @param battleSys 
  * @param battleCtx 
- * @param move              The move being calculated
- * @param sideConditions    State of the side conditions mask at the time of calculation
- * @param fieldConditions   State of the field conditions mask at the time of calculation
- * @param inPower           Input power for variable base-power moves
- * @param inType            Input type for variable type moves (e.g. Hidden Power)
+ * @param move                  The move being calculated
+ * @param sideConditions        State of the side conditions mask at the time of calculation
+ * @param fieldConditions       State of the field conditions mask at the time of calculation
+ * @param inPower               Input power for variable base-power moves
+ * @param inType                Input type for variable type moves (e.g. Hidden Power)
  * @param attacker
  * @param defender 
- * @param criticalMul       Critical multiplier; must always be >= 1, 1 == no crit,
- *                          2+ signifies a crit
+ * @param criticalMul           Critical multiplier; must always be >= 1, 1 == no crit,
+ *                              2+ signifies a crit
+ * @param considerColorChange   Flag for whether or not to consider Color Change ability
  * @return The computed base damage for the move
  */
 int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
