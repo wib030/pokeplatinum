@@ -1360,7 +1360,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         break;
                     }
 
-                    if (BattleAI_BattleMonCanHazeOrPhaze(battleSys, battleCtx, defender))
+                    if (BattleAI_BattleMonCanHazeOrPhaze(battleSys, battleCtx, AI_CONTEXT.defender))
                     {
                         if (AI_GetRandomNumber(battleSys) < 255)
                         {
@@ -1383,7 +1383,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         }
                     }
 
-                    if (ExpertAI_AttackerCanStatusDefender(battleSys, battleCtx, defender, attacker))
+                    if (ExpertAI_AttackerCanStatusDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
                     {
                         if (ExpertAI_MoveEffectKnownByBattler(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_EFFECT_PASS_STATS_AND_STATUS) == FALSE)
                         {
@@ -1487,7 +1487,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
 
                             if (BattleAI_AttackerOutspeedsDefenderAfterBoost(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, 4))
                             {
-                                if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, defender, attacker))
+                                if (AI_AttackerChunksOrKOsDefender(battleSys, battleCtx, AI_CONTEXT.defender, AI_CONTEXT.attacker))
                                 {
                                     AI_AddToMoveScore(battleSys, battleCtx, -10);
                                     break;
@@ -2030,7 +2030,7 @@ BOOL ExpertAI_AttackerKOsDefender(BattleSystem* battleSys, BattleContext* battle
                 if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                     || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
 
-                    if (battleCtx->battleMons[defender].volatileStatus & VOLATILE_CONDITION_SUBSTITUTE)
+                    if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
                     {
                         // soundproof is already considered by immune status check above
                         if (BattleAI_IsSoundMove(battleSys, battleCtx, move) == FALSE)
@@ -3223,7 +3223,7 @@ BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleCo
                     if (((effectiveness & MOVE_STATUS_IMMUNE) == FALSE)
                         || (effectiveness & MOVE_STATUS_IGNORE_IMMUNITY)) {
 
-                        if (battleCtx->battleMons[defender].volatileStatus & VOLATILE_CONDITION_SUBSTITUTE)
+                        if (battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
                         {
                             // soundproof is already considered by immune status check above
                             if (BattleAI_IsSoundMove(battleSys, battleCtx, move) == FALSE)
