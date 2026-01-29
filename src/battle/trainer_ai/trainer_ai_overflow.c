@@ -1360,6 +1360,12 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         break;
                     }
 
+                    if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SPEED, 12) == FALSE)
+                    {
+                        AI_AddToMoveScore(battleSys, battleCtx, -12);
+                        break;
+                    }
+
                     if (BattleAI_BattleMonCanHazeOrPhaze(battleSys, battleCtx, AI_CONTEXT.defender))
                     {
                         if (AI_GetRandomNumber(battleSys) < 255)
@@ -1462,8 +1468,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                                 }
                                 break;
                             }
-
-                            if (ExpertAI_StatStageLessThan(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_STAT_SPEED, 12))
+                            else
                             {
                                 if (AI_GetRandomNumber(battleSys) < 85)
                                 {
