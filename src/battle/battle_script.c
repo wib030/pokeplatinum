@@ -13114,6 +13114,16 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 		
         defenderHeldItem = Pokemon_GetValue(defendingMon, MON_DATA_HELD_ITEM, NULL);
         attackerHeldItem = Pokemon_GetValue(attackingMon, MON_DATA_HELD_ITEM, NULL);
+		
+		// Special attacker pregnancy when holding destiny knot
+		if (attackerHeldItem == ITEM_DESTINY_KNOT)
+		{
+			battlerPregnant = battleCtx->attacker;
+			pregnantMon = attackingMon;
+			
+			monSpecies = defenderEggSpecies;
+            monEggSpecies = defenderEggSpecies;
+		}
 
         attackerPersonality = Pokemon_GetValue(attackingMon, MON_DATA_PERSONALITY, NULL);
         defenderPersonality = Pokemon_GetValue(defendingMon, MON_DATA_PERSONALITY, NULL);
@@ -13267,7 +13277,6 @@ static BOOL BtlCmd_PregnancyPunch(BattleSystem *battleSys, BattleContext *battle
 
             case ITEM_DESTINY_KNOT:
                 maxIVsInherited = STAT_MAX - 1;
-				battlerPregnant = battleCtx->attacker;
                 break;
 
             case ITEM_LAX_INCENSE:
