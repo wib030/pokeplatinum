@@ -1612,13 +1612,16 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                         // boost if we know perish song and they are not yet trapped and they can be trapped
                         if (AI_IfMoveEffectKnown(battleSys, battleCtx, AI_CONTEXT.attacker, BATTLE_EFFECT_ALL_FAINT_3_TURNS))
                         {
-                            if ((BattleSystem_GetItemData(battleCtx, Battler_HeldItem(battleCtx, AI_CONTEXT.defender), ITEM_PARAM_HOLD_EFFECT) != HOLD_EFFECT_SWITCH)
-                                && battleCtx->battleMons[AI_CONTEXT.defender].type1 != TYPE_GHOST
-                                && battleCtx->battleMons[AI_CONTEXT.defender].type2 != TYPE_GHOST)
+                            if (ExpertAI_CountAlivePartyBattlers(battleSys, battleCtx, AI_CONTEXT.defender) > 0)
                             {
-                                if (AI_GetRandomNumber(battleSys) < 250)
+                                if ((BattleSystem_GetItemData(battleCtx, Battler_HeldItem(battleCtx, AI_CONTEXT.defender), ITEM_PARAM_HOLD_EFFECT) != HOLD_EFFECT_SWITCH)
+                                    && battleCtx->battleMons[AI_CONTEXT.defender].type1 != TYPE_GHOST
+                                    && battleCtx->battleMons[AI_CONTEXT.defender].type2 != TYPE_GHOST)
                                 {
-                                    AI_AddToMoveScore(battleSys, battleCtx, 3);
+                                    if (AI_GetRandomNumber(battleSys) < 250)
+                                    {
+                                        AI_AddToMoveScore(battleSys, battleCtx, 3);
+                                    }
                                 }
                             }
                         }
@@ -3266,6 +3269,38 @@ BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleCo
                     }
                 }
             }
+        }
+    }
+
+    return result;
+}
+
+int ExpertAI_CountAlivePartyBattlers(BattleSystem* battleSys, BattleContext* battleCtx, int battler)
+{
+    int result;
+
+    result = 0;
+
+    Party* party = BattleSystem_Party(battleSys, battler);
+    u8 battlerSlot, partnerSlot;
+
+    if (battleSys->battleType & BATTLE_TYPE_DOUBLES) {
+        battlerSlot = battleCtx->selectedPartySlot[battler];
+        partnerSlot = battleCtx->selectedPartySlot[BattleSystem_Partner(battleSys, battler)];
+    }
+    else {
+        battlerSlot = partnerSlot = battleCtx->selectedPartySlot[battler];
+    }
+
+    for (int i = 0; i < BattleSystem_PartyCount(battleSys, battler); i++) {
+        Pokemon* mon = Party_GetPokemonBySlotIndex(party, i);
+
+        if (i != battlerSlot
+            && i != partnerSlot
+            && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) != 0
+            && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+            result++;
         }
     }
 

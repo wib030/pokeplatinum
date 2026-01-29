@@ -294,4 +294,13 @@ BOOL AI_CurrentMoveDamageDealsPercent(BattleSystem* battleSys, BattleContext* ba
  */
 BOOL ExpertAI_AttackerKOsDefenderWithOtherMove(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender, u16 excludedMove);
 
+/* @brief Count alive party members for the given battler.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler		The BattleMon ID of the battler to count the party members of.
+ * @return  The number of alive party members of the given battler.
+ */
+int ExpertAI_CountAlivePartyBattlers(BattleSystem* battleSys, BattleContext* battleCtx, int battler);
+
 #endif // POKEPLATINUM_BATTLE_TRAINER_AI_OVERFLOW_H
