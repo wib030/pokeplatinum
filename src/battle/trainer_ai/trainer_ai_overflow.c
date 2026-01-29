@@ -1517,6 +1517,19 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                             }
                         }
                     }
+                    else
+                    {
+                        if (BattleAI_AttackerHasSpeedControlOverDefenderTeam(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, -12);
+                            break;
+                        }
+
+                        if (AI_GetRandomNumber(battleSys) < 192)
+                        {
+                            AI_AddToMoveScore(battleSys, battleCtx, 1);
+                        }
+                    }
 
                     if (battleCtx->battleMons[AI_CONTEXT.attacker].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
                     {
