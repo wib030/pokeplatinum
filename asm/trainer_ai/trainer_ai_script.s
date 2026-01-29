@@ -4328,7 +4328,7 @@ Expert_Curse_GhostCheckHP:
     GoTo Expert_Curse_End
 
 Expert_Curse_GhostLowHealthBonus:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 12, ScorePlus10
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 25, Try95ChanceForScorePlus5
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_Curse_End
     AddToMoveScore 1
     IfRandomLessThan 100, Expert_Curse_End
