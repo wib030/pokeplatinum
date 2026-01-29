@@ -530,6 +530,7 @@ Basic_CheckCannotPoison_CheckDefenderAbility:
     IfLoadedEqualTo ABILITY_IMMUNITY, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
     IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus10
+    IfLoadedEqualTo ABILITY_COLOR_CHANGE, ScoreMinus10
     IfLoadedEqualTo ABILITY_SHED_SKIN, Try95ChanceForScoreMinus12
     IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Basic_CheckCannotPoison_Hydration
     LoadCurrentWeather 
