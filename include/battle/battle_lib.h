@@ -2243,4 +2243,15 @@ BOOL BattleAI_AttackerOutspeedsDefenderAfterBoost(BattleSystem* battleSys, Battl
 */
 BOOL BattleAI_IsSoundMove(BattleSystem* battleSys, BattleContext* battleCtx, u16 move);
 
+/**
+* @brief Check if the attacker outspeed the defender's entire team.
+*
+* @param battleSys
+* @param battleCtx
+* @param attacker       The BattleMon ID of the Pokemon to check the speed of
+* @param defender       The BattleMon ID of the Pokemon whose team should be checked against
+* @return TRUE/FALSE whether or not the attacker outspeeds the defender's entire team.
+*/
+BOOL BattleAI_AttackerHasSpeedControlOverDefenderTeam(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender);
+
 #endif // POKEPLATINUM_BATTLE_BATTLE_LIB_H

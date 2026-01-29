@@ -23070,3 +23070,395 @@ BOOL BattleAI_IsSoundMove(BattleSystem* battleSys, BattleContext* battleCtx, u16
 
     return result;
 }
+
+BOOL BattleAI_AttackerHasSpeedControlOverDefenderTeam(BattleSystem* battleSys, BattleContext* battleCtx, int attacker, int defender)
+{
+    u8 result = TRUE;
+    u8 attackerItemEffect, attackerItemParam;
+    u8 monItemEffect, monType1, monType2;
+    u8 attackerAbility, monAbility;
+    u16 monSpecies;
+    u32 attackerSpeed, monSpeed, monStatusMask;
+    int attackerSpeedStage;
+    int i, partySize;
+    Pokemon* mon;
+
+    attackerSpeedStage = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_SPEED];
+
+    if (attackerSpeedStage < 0)
+    {
+        attackerSpeedStage = 0;
+    }
+
+    if (attackerSpeedStage > 12)
+    {
+        attackerSpeedStage = 12;
+    }
+
+    attackerSpeedStage = CompareSpeed_ApplySimple(battleCtx, attacker, attackerSpeedStage);
+
+    attackerAbility = Battler_Ability(battleCtx, attacker);
+    attackerItemEffect = Battler_HeldItemEffect(battleCtx, attacker);
+    attackerItemParam = Battler_HeldItemPower(battleCtx, attacker, ITEM_POWER_CHECK_ALL);
+
+    attackerSpeed = battleCtx->battleMons[attacker].speed * sStatStageBoosts[attackerSpeedStage].numerator / sStatStageBoosts[attackerSpeedStage].denominator;
+
+    if (attackerItemEffect == HOLD_EFFECT_CHOICE_SPEED) {
+        attackerSpeed = attackerSpeed * 3 / 2;
+    }
+
+    switch (attackerItemEffect)
+    {
+    default:
+        break;
+
+    case HOLD_EFFECT_CHOICE_SPEED:
+        attackerSpeed = attackerSpeed * 3 / 2;
+        break;
+
+    case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+    case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+    case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+    case HOLD_EFFECT_LVLUP_HP_EV_UP:
+    case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+    case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+        attackerSpeed /= 2;
+        break;
+
+    case HOLD_EFFECT_DITTO_SPEED_UP:
+        if (battleCtx->battleMons[attacker].species == SPECIES_DITTO) {
+            attackerSpeed *= 2;
+        }
+        break;
+    }
+
+    if (ANY_WEATHER) {
+        // Rain
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_SWIFT_SWIM:
+                attackerSpeed = attackerSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 3 / 4;
+                break;
+            }
+        }
+
+        // Hail
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_SLUSH_RUSH:
+                attackerSpeed = attackerSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 3 / 4;
+                break;
+            }
+        }
+
+        // Sun
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_CHLOROPLAST:
+            case ABILITY_CHLOROPHYLL:
+                attackerSpeed = attackerSpeed * 5 / 3;
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 11 / 10;
+                break;
+            }
+        }
+
+        // Sand
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+            switch (attackerAbility) {
+            default:
+                break;
+
+            case ABILITY_FORECAST:
+                attackerSpeed = attackerSpeed * 3 / 4;
+                break;
+            }
+        }
+    }
+
+
+    switch (attackerAbility) {
+    default:
+        break;
+
+    case ABILITY_QUICK_FEET:
+        if (battleCtx->battleMons[attacker].status & MON_CONDITION_ANY) {
+            if (battleCtx->battleMons[attacker].status & MON_CONDITION_PARALYSIS) {
+                attackerSpeed *= 2;
+            }
+            else {
+                attackerSpeed = attackerSpeed * 3 / 2;
+            }
+        }
+        break;
+
+    case ABILITY_SLOW_START:
+        if (battleCtx->totalPartyTurns[Battler_Side(battleSys, attacker)][battleCtx->selectedPartySlot[attacker]] < 5) {
+            attackerSpeed /= 2;
+        }
+        break;
+
+    case ABILITY_UNBURDEN:
+        if (battleCtx->battleMons[attacker].moveEffectsData.canUnburden
+            && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
+            attackerSpeed *= 2;
+        }
+        break;
+
+    case ABILITY_COWARD:
+        attackerSpeed *= 2;
+        break;
+    }
+
+    if ((battleCtx->battleMons[attacker].status & MON_CONDITION_PARALYSIS)
+        && attackerAbility != ABILITY_QUICK_FEET) {
+
+        attackerSpeed /= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_TAILWIND) {
+        attackerSpeed *= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, attacker)] & SIDE_CONDITION_DEEP_SNOW
+        && (battleCtx->battleMons[attacker].type1 != TYPE_ICE)
+        && (battleCtx->battleMons[attacker].type2 != TYPE_ICE)
+        && BattlerIsGrounded(battleCtx, attacker))
+    {
+        attackerSpeed /= 2;
+    }
+
+    // now we have our attacker's speed, so we compare it to the speed
+    // of the mons in the enemy team
+    partySize = BattleSystem_PartyCount(battleSys, defender);
+
+    slot1 = defender;
+    if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
+        || (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_2vs2)) {
+        slot2 = slot1;
+    }
+    else {
+        slot2 = BattleSystem_Partner(battleSys, defender);
+    }
+
+    for (i = 0; i < partySize; i++)
+    {
+        mon = BattleSystem_PartyPokemon(battleSys, defender, i);
+        monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+        
+        if (monSpecies != SPECIES_NONE
+            && monSpecies != SPECIES_EGG
+            && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+            && battleCtx->selectedPartySlot[slot1] != i
+            && battleCtx->selectedPartySlot[slot2] != i)
+        {
+            monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+            monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+            monAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+            monItemEffect = BattleSystem_GetItemData(battleCtx, Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL), ITEM_PARAM_HOLD_EFFECT);
+            monSpeed = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+            monStatusMask = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
+
+            switch (monItemEffect)
+            {
+            default:
+                break;
+
+            case HOLD_EFFECT_CHOICE_SPEED:
+                monSpeed = monSpeed * 3 / 2;
+                break;
+
+            case HOLD_EFFECT_LVLUP_ATK_EV_UP:
+            case HOLD_EFFECT_LVLUP_DEF_EV_UP:
+            case HOLD_EFFECT_LVLUP_SPATK_EV_UP:
+            case HOLD_EFFECT_LVLUP_SPDEF_EV_UP:
+            case HOLD_EFFECT_LVLUP_SPEED_EV_UP:
+            case HOLD_EFFECT_LVLUP_HP_EV_UP:
+            case HOLD_EFFECT_EVS_UP_SPEED_DOWN:
+            case HOLD_EFFECT_SPEED_DOWN_GROUNDED:
+                monSpeed /= 2;
+                break;
+
+            case HOLD_EFFECT_DITTO_SPEED_UP:
+                if (monSpecies == SPECIES_DITTO) {
+                    monSpeed *= 2;
+                }
+                break;
+            }
+
+            if (ANY_WEATHER) {
+                // Rain
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_RAINING) {
+                    switch (monAbility) {
+                    default:
+                        break;
+
+                    case ABILITY_SWIFT_SWIM:
+                        monSpeed = monSpeed * 5 / 3;
+                        break;
+
+                    case ABILITY_FORECAST:
+                        monSpeed = monSpeed * 3 / 4;
+                        break;
+                    }
+                }
+
+                // Hail
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_HAILING) {
+                    switch (monAbility) {
+                    default:
+                        break;
+
+                    case ABILITY_SLUSH_RUSH:
+                        monSpeed = monSpeed * 5 / 3;
+                        break;
+
+                    case ABILITY_FORECAST:
+                        monSpeed = monSpeed * 3 / 4;
+                        break;
+                    }
+                }
+
+                // Sun
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY) {
+                    switch (monAbility) {
+                    default:
+                        break;
+
+                    case ABILITY_CHLOROPLAST:
+                    case ABILITY_CHLOROPHYLL:
+                        monSpeed = monSpeed * 5 / 3;
+                        break;
+
+                    case ABILITY_FORECAST:
+                        monSpeed = monSpeed * 11 / 10;
+                        break;
+                    }
+                }
+
+                // Sand
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_SANDSTORM) {
+                    switch (monAbility) {
+                    default:
+                        break;
+
+                    case ABILITY_FORECAST:
+                        monSpeed = monSpeed * 3 / 4;
+                        break;
+                    }
+                }
+            }
+
+            switch (monAbility) {
+            default:
+                break;
+
+            case ABILITY_QUICK_FEET:
+                if (monStatusMask & MON_CONDITION_ANY) {
+                    if (monStatusMask & MON_CONDITION_PARALYSIS) {
+                        monSpeed *= 2;
+                    }
+                    else {
+                        monSpeed = monSpeed * 3 / 2;
+                    }
+                }
+                break;
+
+            case ABILITY_SLOW_START:
+                if (battleCtx->totalPartyTurns[Battler_Side(battleSys, defender)][battleCtx->selectedPartySlot[defender]] < 5) {
+                    monSpeed /= 2;
+                }
+                break;
+
+            case ABILITY_UNBURDEN:
+                monSpeed *= 2;
+                break;
+
+            case ABILITY_COWARD:
+                monSpeed *= 2;
+                break;
+            }
+
+            if ((monStatusMask & MON_CONDITION_PARALYSIS)
+                && monAbility != ABILITY_QUICK_FEET) {
+
+                monSpeed /= 2;
+            }
+
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_TAILWIND) {
+                monSpeed *= 2;
+            }
+
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_STICKY_WEB) {
+                if (monAbility != ABILITY_WEB_MASTER
+                    && monAbility != ABILITY_CLEAR_BODY)
+                {
+                    if ((monAbility != ABILITY_LEVITATE
+                        && monType1 != TYPE_FLYING
+                        && monType2 != TYPE_FLYING
+                        && monItemEffect != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+                        || monItemEffect HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                    {
+                            monSpeed = monSpeed * 2 / 3;
+                    }
+                }
+            }
+
+            if (battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)] & SIDE_CONDITION_DEEP_SNOW)
+            {
+                if (monType1 != TYPE_ICE
+                    && monType2 != TYPE_ICE)
+                {
+                    if ((monAbility != ABILITY_LEVITATE
+                        && monType1 != TYPE_FLYING
+                        && monType2 != TYPE_FLYING
+                        && monItemEffect != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
+                        || monItemEffect HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                    {
+                        monSpeed /= 2;
+                    }
+                }
+            }
+
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM)
+            {
+                if (monSpeed < attackerSpeed)
+                {
+                    result = FALSE;
+                    break;
+                }
+            }
+            else
+            {
+                if (monSpeed > attackerSpeed)
+                {
+                    result = FALSE;
+                    break;
+                }
+            }
+        }
+    }
+
+    return result;
+}
