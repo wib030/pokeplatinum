@@ -23078,6 +23078,7 @@ BOOL BattleAI_AttackerHasSpeedControlOverDefenderTeam(BattleSystem* battleSys, B
     u8 monItemEffect, monType1, monType2;
     u8 attackerAbility, monAbility;
     u16 monSpecies;
+	u8 slot1, slot2;
     u32 attackerSpeed, monSpeed, monStatusMask;
     int attackerSpeedStage;
     int i, partySize;
@@ -23418,7 +23419,7 @@ BOOL BattleAI_AttackerHasSpeedControlOverDefenderTeam(BattleSystem* battleSys, B
                         && monType1 != TYPE_FLYING
                         && monType2 != TYPE_FLYING
                         && monItemEffect != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
-                        || monItemEffect HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                        || monItemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED)
                     {
                             monSpeed = monSpeed * 2 / 3;
                     }
@@ -23434,7 +23435,7 @@ BOOL BattleAI_AttackerHasSpeedControlOverDefenderTeam(BattleSystem* battleSys, B
                         && monType1 != TYPE_FLYING
                         && monType2 != TYPE_FLYING
                         && monItemEffect != HOLD_EFFECT_LEVITATE_POPPED_IF_HIT)
-                        || monItemEffect HOLD_EFFECT_SPEED_DOWN_GROUNDED)
+                        || monItemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED)
                     {
                         monSpeed /= 2;
                     }

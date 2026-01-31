@@ -1519,7 +1519,7 @@ void ExpertAI_EvalMoreMoves_Singles(BattleSystem* battleSys, BattleContext* batt
                     }
                     else
                     {
-                        if (BattleAI_AttackerHasSpeedControlOverDefenderTeam(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender)
+                        if (BattleAI_AttackerHasSpeedControlOverDefenderTeam(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender))
                         {
                             AI_AddToMoveScore(battleSys, battleCtx, -12);
                             break;
